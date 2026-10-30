@@ -69,3 +69,13 @@ describe('arrêt brutal puis relance', () => {
     expect(runs).toEqual(['interrupted', 'succeeded']);
   });
 });
+
+describe('mode fixture', () => {
+  it('refusé sans CURATION_ONLY_SOURCES : le même fichier serait servi à toutes les sources', async () => {
+    const result = await startCollect({ DATABASE_URL: t.url, CURATION_FIXTURE: FIXTURE_PATH, CURATION_ONLY_SOURCES: '' }).done;
+    expect(result.code).toBe(1);
+    expect(result.stderr).toContain('CURATION_ONLY_SOURCES');
+    expect(await scalar(t.database, 'select count(*) from source_document')).toBe(0);
+    expect(await scalar(t.database, 'select count(*) from run')).toBe(0);
+  });
+});

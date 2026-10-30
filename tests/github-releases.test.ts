@@ -17,6 +17,11 @@ describe('releasesUrl', () => {
 });
 
 describe('parseReleases', () => {
+  it("refuse une réponse dont une release appartient à un autre dépôt que la source", () => {
+    expect(parseReleases(readFixture(), { owner: 'anthropics', repo: 'claude-code' })).toHaveLength(5);
+    expect(() => parseReleases(readFixture(), { owner: 'openai', repo: 'codex' })).toThrow(SourceFormatError);
+  });
+
   it('transforme les 5 releases réelles en documents avec provenance et dates', () => {
     const docs = parseReleases(readFixture());
     expect(docs).toHaveLength(5);

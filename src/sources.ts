@@ -20,6 +20,8 @@ interface BaseSource {
   name: string;
   allowedHosts: string[];
   fetchIntervalMinutes: number | null;
+  /** Taille maximale de la réponse pour cette source ; la valeur générale (CURATION_MAX_RESPONSE_BYTES) sinon. */
+  maxResponseBytes?: number;
 }
 
 export interface GithubReleasesSource extends BaseSource {
@@ -35,7 +37,13 @@ export interface FeedSource extends BaseSource {
 
 export type SourceDefinition = GithubReleasesSource | FeedSource;
 
-const githubReleases = (owner: string, repo: string, perPage: number, product: Omit<ProductRef, 'repositoryUrl'>): GithubReleasesSource => ({
+const githubReleases = (
+  owner: string,
+  repo: string,
+  perPage: number,
+  product: Omit<ProductRef, 'repositoryUrl'>,
+  extra: Partial<Pick<GithubReleasesSource, 'maxResponseBytes'>> = {},
+): GithubReleasesSource => ({
   id: `github-releases:${owner}/${repo}`,
   kind: 'github_releases',
   name: `${product.name} — releases GitHub officielles`,
@@ -43,6 +51,7 @@ const githubReleases = (owner: string, repo: string, perPage: number, product: O
   product: { ...product, repositoryUrl: `https://github.com/${owner}/${repo}` },
   allowedHosts: ['api.github.com'],
   fetchIntervalMinutes: 360,
+  ...extra,
 });
 
 export const SOURCES: SourceDefinition[] = [
@@ -52,8 +61,16 @@ export const SOURCES: SourceDefinition[] = [
     publisher: 'Anthropic',
     category: 'assistant de code',
   }),
-  // Dépôts qui publient surtout des préversions : on remonte plus loin pour retrouver les versions stables.
-  githubReleases('openai', 'codex', 20, { key: 'openai/codex', name: 'Codex CLI', publisher: 'OpenAI', category: 'assistant de code' }),
+  // Codex CLI joint environ 350 fichiers à chaque release : 10 releases pèsent environ 6,8 Mo (mesuré le 2026-10-30),
+  // d'où une limite propre à cette source (12 Mio) au lieu de remonter plus loin.
+  githubReleases(
+    'openai',
+    'codex',
+    10,
+    { key: 'openai/codex', name: 'Codex CLI', publisher: 'OpenAI', category: 'assistant de code' },
+    { maxResponseBytes: 12 * 1024 * 1024 },
+  ),
+  // Dépôt qui publie surtout des préversions (une « nightly » presque chaque jour) : on remonte plus loin pour retrouver les versions stables.
   githubReleases('google-gemini', 'gemini-cli', 20, {
     key: 'google/gemini-cli',
     name: 'Gemini CLI',
@@ -64,7 +81,7 @@ export const SOURCES: SourceDefinition[] = [
     id: 'feed:openai-news',
     kind: 'feed',
     name: 'OpenAI News — flux RSS officiel',
-    config: { url: 'https://openai.com/news/rss.xml', maxItems: 20 },
+    config: { url: 'https://openai.com/news/rss.xml', maxItems: 20, linkHosts: ['openai.com'] },
     allowedHosts: ['openai.com'],
     fetchIntervalMinutes: 360,
   },
@@ -72,9 +89,11 @@ export const SOURCES: SourceDefinition[] = [
     id: 'feed:github-changelog',
     kind: 'feed',
     name: 'GitHub Changelog — flux RSS officiel',
-    config: { url: 'https://github.blog/changelog/feed/', maxItems: 20 },
+    config: { url: 'https://github.blog/changelog/feed/', maxItems: 20, linkHosts: ['github.blog'] },
     allowedHosts: ['github.blog'],
-    fetchIntervalMinutes: 360,
+    // Le flux ne garde que ses 10 dernières entrées (9 publiées en 25 minutes le 2026-10-28) : intervalle visé d'une heure,
+    // appliqué par la planification (P5) ; d'ici là, le signal « trou possible » de l'exécution est la seule protection.
+    fetchIntervalMinutes: 60,
   },
 ];
 

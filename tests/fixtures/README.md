@@ -7,4 +7,9 @@ Ajoutées en P2, capturées le 2026-10-30 vers 01:32 UTC, mêmes principes :
 - `feed-openai-news.xml` : flux RSS officiel d'OpenAI News réduit à ses 25 premières entrées (le flux complet en contient 1 337) ;
 - `feed-github-changelog.xml` : flux RSS officiel du GitHub Changelog, complet (10 entrées).
 
+Limites connues de ces fixtures :
+- la réduction aux champs utilisés retire les fichiers joints : la réponse réelle de Codex CLI pèse environ 550 Ko par release (≈ 350 fichiers joints), ce que la fixture ne montre pas — c'est l'essai réel du 2026-10-30 qui a révélé le dépassement de la limite de 2 Mio (d'où une limite propre à cette source) ;
+- les tests servent la fixture Claude Code (`per_page=5`) à l'URL configurée (`per_page=10`) : la réponse est réelle, la taille de page ne correspond pas ;
+- les réponses complètes et les en-têtes des fixtures de P2 n'ont pas été conservés ; ceux de l'essai réel de P2 le sont dans `communication/linkedin/03-catalogue/preuves/brut/`.
+
 Les tests les utilisent pour être reproductibles sans réseau. Une collecte qui la lit (variable `CURATION_FIXTURE`) est tracée en mode « fixture » et ne doit jamais être présentée comme une collecte réelle.

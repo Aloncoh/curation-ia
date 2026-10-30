@@ -61,9 +61,14 @@ export async function buildExport(db: Db, generatedAt: string) {
       announced_at: item.announcedAt,
       first_seen_at: item.firstSeenAt,
       status: item.status,
+      created_in_mode: modeOf(item.createdByRunId),
       sources: data.itemDocuments
         .filter((link) => link.newsItemId === item.id)
-        .map((link) => ({ role: link.role, url: documentById.get(link.documentId)?.url ?? null, source_id: documentById.get(link.documentId)?.sourceId ?? null })),
+        .map((link) => ({
+          role: link.role,
+          url: documentById.get(link.documentId)?.normalizedUrl ?? null,
+          source_id: documentById.get(link.documentId)?.sourceId ?? null,
+        })),
       targets: data.targets
         .filter((target) => target.newsItemId === item.id)
         .map((target) => ({
@@ -97,6 +102,7 @@ export async function buildExport(db: Db, generatedAt: string) {
     }),
     recent_runs: data.recentRuns.map((run) => ({
       id: run.id,
+      source_id: run.sourceId,
       mode: run.mode,
       status: run.status,
       started_at: run.startedAt,

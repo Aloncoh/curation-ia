@@ -24,3 +24,23 @@
 - Tests : **90 réussis** (`npm test`), vérification des types OK ; les tests multi-processus et de verrou réussis 5 fois de suite ; répartition observée lors de la dernière exécution : 152 / 148 jobs entre les deux processus, aucun en double.
 - **Essai réel le 2026-10-30 à 01:26 UTC** sur l'API GitHub : 1re collecte 5 nouveaux documents (v2.1.309 à v2.1.314), 2e collecte 0 nouveau / 5 inchangés, pause respectée, aucun doublon (requête SQL), 1 capture par document ([preuves](communication/linkedin/02-collecte/preuves/brut/)).
 - Non fait en réel (couvert par les tests sur fixtures) : arrêt brutal d'un collecteur réel, panne de la vraie source.
+
+## 2026-10-30 — P2 Produits, versions et sources (en cours : maquette à valider)
+
+- Plan validé par l'utilisateur ; mascotte fournie par l'utilisateur, rangée dans `assets/brand/` (planche d'origine et 4 découpages, droits d'usage à confirmer).
+- Sources : releases GitHub de Claude Code, Codex CLI, Gemini CLI ; flux RSS OpenAI News et GitHub Changelog. Lecteur RSS/Atom `@rowanmanning/feed-parser` 2.1.5, champs lus directement dans le XML.
+- Catalogue déterministe (migrations 0001 et 0002) : produits, versions, actualités, sources principale et secondaires ; règles et options écartées dans l'[ADR 0003](docs/decisions/0003-identite-produits-versions-actualites.md).
+- Relecture adversariale du code (3 relecteurs, chaque constat contre-vérifié, puis un critique de complétude) : 27 constats, 25 confirmés, 1 incertain, 1 réfuté ; 7 manques de complétude. Contre-relecture des corrections et de la maquette : 17 constats démontrés. Tous traités par un correctif testé, sauf 6 documentés (règles et limites dans l'ADR 0003, notes des fixtures, contrainte d'intervalle reportée en P5). Principaux correctifs :
+  - une release recréée avec un nouvel identifiant créait une seconde actualité → au plus une actualité par version, garantie par un index unique ;
+  - double décodage des entités dans le lecteur de flux (un texte « &lt;img…&gt; » devenait une balise) → lecture directe du XML, un seul décodage ; flux Atom « text »/« xhtml » échappés ;
+  - le mode fixture servait le même fichier à toutes les sources (fausses versions de Codex et Gemini) → une seule source exigée, contrôle du dépôt des releases, réservation des jobs limitée aux sources demandées ;
+  - liens d'entrée limités en https aux hôtes de la source, titres sans caractères de contrôle ni d'inversion de sens, plafond de 3 000 entrées par flux, catégories propres à l'entrée ;
+  - rattrapage des documents non rattachés, tag corrigé, date inconnue complétée, produit suivant la configuration ;
+  - seconde collecte juste après un échec : la source reportée est signalée (et le code de sortie vaut 1) ; base au schéma d'un jalon précédent détectée avant toute collecte ; « trou possible » signalé ;
+  - maquette : versions et dates de collecte issues des seules collectes réelles, extraits fidèles (SNAKE_CASE, chemins, entités), focus clavier conservé, lien d'évitement, aucun débordement à 375 px.
+- Les nouveaux tests du catalogue ont été vérifiés en échec sur le code d'avant la relecture (5 sur 5) ; les relecteurs ont fait de même par mutation pour les autres. Tests : **150 réussis** (108 au début de la séance), vérification des types OK.
+- Essai préliminaire sur une copie de la base : Codex CLI en échec « réponse trop volumineuse » (≈ 350 fichiers joints par release ; 11 Mo pour 20 releases, mesuré) → limite propre à cette source (12 Mio, 10 releases). Les fixtures réduites ne le montraient pas.
+- **Essai réel le 2026-10-30 à 02:25 UTC** sur la base de P1 : migrations 0001–0002 appliquées ; 1re collecte : 5 sources réussies, 65 nouveaux documents + 5 documents de P1 rattachés, 44 actualités (14 versions, 30 annonces) ; 2e collecte : 0 nouveau document, 0 nouvelle actualité, 70 inchangés. Réponse réelle de Codex CLI : 5 571 996 octets. Vérifications SQL : aucun doublon, chaque release rattachée à exactement une version, au plus une actualité par version, 70 captures toutes issues de collectes réelles ([preuves](communication/linkedin/03-catalogue/preuves/brut/)).
+- Maquette statique (`maquette/`, `npm run maquette`) : fil, fiche détail, états de chargement, vide, erreur et fin, sur téléphone et ordinateur, avec les 44 actualités réelles ; vérifiée dans un navigateur (clavier, titres, noms accessibles, 375 px, mode sombre). Pas d'audit axe-core automatisé (prévu pour le site en P4).
+- Non fait : validation de la maquette par l'utilisateur (critère de sortie) ; commit des changements de P2.
+

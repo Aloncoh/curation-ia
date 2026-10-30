@@ -56,7 +56,7 @@ Après la V1, dans cet ordre : tests avec de vrais utilisateurs et fonctions par
 
 Phases de lancement : amorçage (analyses IA seules, sans simuler de communauté), transition, croisière — voir le brief, §1.
 
-**Identité visuelle.** Mascotte fournie par l'utilisateur le 2026-10-30 : un personnage en peluche violet lavande en forme d'étoile à cinq branches, au visage noir avec deux yeux ovales lumineux ; variantes « salut » et « yeux souriants ». Usage prévu, à préciser en P2 : identité du site et états vide, chargement et erreur. Elle n'est jamais présentée comme un membre ni comme un avis humain. Pas d'identité visuelle d'Anthropic.
+**Identité visuelle.** Mascotte fournie par l'utilisateur le 2026-10-30 : un personnage en peluche violet lavande en forme d'étoile à cinq branches, au visage noir avec deux yeux ovales lumineux ; variantes « salut » et « yeux souriants ». Usage prévu : identité du site et états vide, chargement et erreur ; proposition concrète dans la maquette de P2 (`maquette/`, fichiers et variantes dans `assets/brand/`), en attente de validation. Elle n'est jamais présentée comme un membre ni comme un avis humain. Pas d'identité visuelle d'Anthropic.
 
 ## 7. Exigences et critères d'acceptation
 

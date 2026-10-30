@@ -1,7 +1,7 @@
 # Comprendre le projet CURATION AI
 
 > Document de compréhension et de présentation, mis à jour au fil des jalons.
-> **Dernière mise à jour : 2026-10-30, fin de P1.** **Construit et vérifié : la collecte fiable** (section 4 bis). Le reste décrit la conception validée ; chaque partie passe de « prévu » à « réalisé » avec ses preuves (dossier [`linkedin/`](linkedin/)).
+> **Dernière mise à jour : 2026-10-30, P2 en cours.** **Construit et vérifié : la collecte fiable** (section 4 bis) **et le catalogue produits, versions, actualités sur 5 sources officielles** (section 4 ter), avec une **maquette** du fil à valider. Le reste décrit la conception validée ; chaque partie passe de « prévu » à « réalisé » avec ses preuves (dossier [`linkedin/`](linkedin/)).
 
 ## Sommaire
 
@@ -38,7 +38,7 @@ Le fil s'alimente sans rédaction manuelle : une tâche planifiée collecte les 
 
 **La ligne éditoriale.** Le cœur du site, ce sont les assistants et agents de code et leur écosystème ; s'y ajoute une sélection des grandes nouveautés des modèles et des applications IA. Chaque publication répond à trois questions : *que permet concrètement la nouveauté ? pour qui ? quelles sont ses limites connues ?* Le site publie peu, mais en profondeur.
 
-## 3. Ce que verra un visiteur _(prévu)_
+## 3. Ce que verra un visiteur _(prévu ; maquette en P2)_
 
 | Étape | Ce que le visiteur fait | Jalon |
 |---|---|---|
@@ -48,6 +48,8 @@ Le fil s'alimente sans rédaction manuelle : une tâche planifiée collecte les 
 | Rétention | reçoit une newsletter, sur inscription volontaire | P9 |
 
 Au lancement, il n'y a pas de communauté : le site doit être utile avec les seules analyses documentaires, sans jamais simuler de membres, de votes ou d'avis.
+
+**La maquette (P2).** Avant de construire le vrai site (P4), une maquette statique montre le fil et la page de détail, sur téléphone et ordinateur, avec de vraies actualités collectées ([`maquette/index.html`](../maquette/index.html), générée par `npm run maquette`). Elle est construite autour de la mascotte fournie par le porteur du projet ([`assets/brand/`](../assets/brand/)) : le « visage » sombre de la mascotte devient la tuile de chaque carte, où le numéro de version s'affiche en lettres claires comme ses yeux ; la mascotte elle-même accueille le visiteur et illustre les états de chargement, de liste vide, d'erreur et de fin de fil. Ce qu'elle montre honnêtement : aucune analyse n'existe encore, donc chaque champ d'analyse affiche « Non renseigné » et chaque carte porte « Collecté, pas encore analysé » ; un bandeau rappelle que rien n'est publié. Les titres et extraits restent en langue originale, cités et liés à leur source.
 
 ## 4. La chaîne de traitement _(prévu)_
 
@@ -113,6 +115,34 @@ flowchart LR
 - **Un essai réel** le 2026-10-30 à 01:26 UTC : 5 versions réelles collectées (v2.1.309 à v2.1.314, cette dernière publiée la nuit même), seconde collecte sans doublon, pause respectée. Journal et vérifications SQL dans [`linkedin/02-collecte/preuves/`](linkedin/02-collecte/preuves/).
 
 **Limites assumées.** Une seule source pour l'instant (c'est le rôle de P2 d'en ajouter). La politique de durée de conservation des captures sera fixée avant la mise en ligne. L'arrêt brutal et la panne de source n'ont été provoqués qu'en test, pas sur la vraie source.
+
+## 4 ter. Produits, versions et actualités _(P2, en cours de validation)_
+
+**Ce que fait le programme.** La collecte couvre maintenant 5 sources officielles : les pages de versions (« releases ») GitHub de Claude Code, Codex CLI et Gemini CLI, et les flux RSS d'OpenAI News et du GitHub Changelog. Chaque document collecté est ensuite rangé, sans IA, dans un petit catalogue :
+
+| Notion | Ce que c'est | Comment on le reconnaît |
+|---|---|---|
+| **Produit** | un outil suivi (ex. Codex CLI) | une clé fixe déclarée dans la configuration (`openai/codex`), jamais devinée à partir d'un nom |
+| **Version** | une version d'un produit (ex. 0.166.0) | le produit + le numéro lu dans l'étiquette de la release (`rust-v0.166.0` → `0.166.0`) |
+| **Actualité** | une ligne du fil | une version stable publiée, ou une annonce d'un flux |
+
+**Les règles, en clair.**
+- **Préversions** : Codex et Gemini publient surtout des versions d'essai (17 et 18 sur 20). Elles sont gardées dans l'historique des versions, mais ne deviennent une actualité que si elles passent en version stable : sinon le fil serait noyé.
+- **Pas de doublon** : une même annonce collectée deux fois, republiée avec une nouvelle date, ou une release supprimée puis recréée sur GitHub ne donne jamais deux actualités. La base elle-même l'interdit (règles d'unicité), pas seulement le programme.
+- **Annonces des flux** : elles ne disent pas de quel produit elles parlent ; elles restent « sans produit » jusqu'à la qualification par l'IA (P3).
+- **Liens vérifiés** : une entrée de flux n'est acceptée que si son lien pointe en https vers le site officiel de la source ; sinon elle est refusée et le refus est compté dans la trace.
+- **Trou possible** : certains flux ne gardent que leurs 10 dernières entrées. Si toutes les entrées reçues sont nouvelles, le programme le signale : des annonces ont pu passer entre deux collectes.
+
+**Comment c'est vérifié.**
+- **150 tests automatiques** (108 avant ce jalon), sur de vraies réponses enregistrées : doublons, préversions, release recréée, tag corrigé, flux en panne de six façons différentes (les données restent identiques), liens refusés, contenus piégés.
+- **Deux relectures par des agents** chargés de chercher des failles. La première : 27 constats, dont 25 confirmés par un second agent, plus 7 manques relevés par un critique de complétude. La seconde, sur les corrections et la maquette : 17 constats démontrés. Tous ont été corrigés et couverts par un test, ou documentés quand il s'agissait d'une limite assumée. Exemples : un texte comme « &lt;img&gt; » dans un flux devenait une vraie balise après un double décodage ; une démonstration hors ligne fabriquait de fausses versions de Codex à partir des données de Claude Code ; une seconde collecte lancée juste après une panne sautait la source en panne sans le dire. Les nouveaux tests ont été vérifiés en échec sur l'ancien code.
+- Le détail des règles et des options écartées est dans [l'ADR 0003](../docs/decisions/0003-identite-produits-versions-actualites.md).
+
+**L'essai réel (2026-10-30, 02:25 UTC).** Sur la base de P1, mise à jour : 1re collecte, les 5 sources réussissent, 65 nouveaux documents, et les 5 versions de Claude Code collectées en P1 sont rattachées au catalogue ; 44 actualités (14 versions, 30 annonces), 3 produits, 40 versions dont 26 préversions. 2e collecte : 0 nouveau document, 0 nouvelle actualité. Les vérifications par requête SQL confirment l'absence de doublon et que chaque release est rattachée à exactement une version. Journal, requêtes, extrait de l'export et captures de la maquette : [`linkedin/03-catalogue/preuves/brut/`](linkedin/03-catalogue/preuves/brut/).
+
+**Ce que l'essai réel a appris.** Un premier essai sur une copie de la base a montré que la réponse de GitHub pour Codex CLI dépassait la limite de taille (environ 350 fichiers joints par version, 11 Mo pour 20 versions) : les données de test, réduites, ne le montraient pas. Codex a désormais sa propre limite (12 Mio, pour 10 versions) ; sa réponse réelle pesait 5,3 Mio lors de l'essai.
+
+**Limites assumées.** Les annonces des flux ne sont pas encore rattachées à un produit (P3). Une entrée de flux dont l'adresse change réapparaît comme nouvelle. La fréquence de collecte de chaque source ne sera appliquée qu'avec la planification (P5) ; d'ici là, le programme signale un « trou possible ».
 
 ## 5. Site, workflow, agent : qui décide quoi
 
@@ -246,7 +276,7 @@ _Hypothèses, à remplacer par des mesures en P3 :_ par publication, rédaction 
 |---|---|---|
 | P0 | cadrage : public, périmètre, architecture, stack, tarifs vérifiés et coûts IA estimés | **réalisé le 2026-10-30** |
 | P1 | collecte fiable d'une source officielle (5 documents réels, sans doublon, export JSON) | **réalisé le 2026-10-30** |
-| P2 | produits et versions, autres sources officielles du même type, maquette du parcours | V1, prévu |
+| P2 | produits et versions, autres sources officielles du même type, maquette du parcours | **en cours** : code, tests et relectures faits ; maquette à valider |
 | P3 | première analyse IA structurée, citée et révisable ; coûts réels mesurés | V1, prévu |
 | P4 | API, fil et page de détail | V1, prévu |
 | P5 | publication automatique planifiée, quotas, commandes de pilotage, mise en ligne | **fin de la V1**, prévu |

@@ -1,0 +1,63 @@
+# Essai réel P2 — 2026-10-30T02:25:15Z (UTC) — Node v24.16.0
+# Code : commit 341eb3b + modifications non commitées de P2 (38 fichiers)
+
+$ npm run status   # base de P1, avant migration
+Base pas à jour (2 migration(s) en attente). Lancez d'abord : npm run db:migrate
+(code de sortie : 1)
+
+$ npm run db:migrate
+Base à jour : file:data/curation.db
+(code de sortie : 0)
+
+$ npm run collect   # 1re collecte réelle, 5 sources
+2026-10-30T02:25:16Z
+Collecte en mode réel.
+✓ Claude Code — releases GitHub officielles : 5 nouveau(x), 5 inchangé(s), 0 modifié(s) avec nouvelle capture, 10 nouvelle(s) actualité(s) [exécution fb59c350-0e74-4889-9837-ee1e2dc7afa6]
+✓ Codex CLI — releases GitHub officielles : 10 nouveau(x), 0 inchangé(s), 0 modifié(s) avec nouvelle capture, 2 nouvelle(s) actualité(s) [exécution 4657165f-5355-4d40-b6f2-3c043e4308a9]
+✓ Gemini CLI — releases GitHub officielles : 20 nouveau(x), 0 inchangé(s), 0 modifié(s) avec nouvelle capture, 2 nouvelle(s) actualité(s) [exécution 1b25826e-82a0-479e-b63f-ac510d073684]
+✓ OpenAI News — flux RSS officiel : 20 nouveau(x), 0 inchangé(s), 0 modifié(s) avec nouvelle capture, 20 nouvelle(s) actualité(s) [exécution ba92efe9-f4b6-47c5-b347-f6ef367c7d5c]
+✓ GitHub Changelog — flux RSS officiel : 10 nouveau(x), 0 inchangé(s), 0 modifié(s) avec nouvelle capture, 10 nouvelle(s) actualité(s) [exécution ff85f4af-e524-4064-9613-b28f22fd1d14]
+(code de sortie : 0)
+
+$ npm run collect   # 2e collecte réelle, nouveau processus
+2026-10-30T02:25:19Z
+Collecte en mode réel.
+✓ Claude Code — releases GitHub officielles : 0 nouveau(x), 10 inchangé(s), 0 modifié(s) avec nouvelle capture, 0 nouvelle(s) actualité(s) [exécution 449b841b-d6af-42f7-8084-75e3ddb94ef4]
+✓ Codex CLI — releases GitHub officielles : 0 nouveau(x), 10 inchangé(s), 0 modifié(s) avec nouvelle capture, 0 nouvelle(s) actualité(s) [exécution e1392fff-c1bd-415f-af70-e43d7645dc80]
+✓ Gemini CLI — releases GitHub officielles : 0 nouveau(x), 20 inchangé(s), 0 modifié(s) avec nouvelle capture, 0 nouvelle(s) actualité(s) [exécution bbd9ed91-d211-4c92-80c3-456d1640c94e]
+✓ OpenAI News — flux RSS officiel : 0 nouveau(x), 20 inchangé(s), 0 modifié(s) avec nouvelle capture, 0 nouvelle(s) actualité(s) [exécution 3bee8f4d-d4b0-4058-a90f-1436461c85d0]
+✓ GitHub Changelog — flux RSS officiel : 0 nouveau(x), 10 inchangé(s), 0 modifié(s) avec nouvelle capture, 0 nouvelle(s) actualité(s) [exécution d774932e-005b-4544-8a04-82e7943b410a]
+(code de sortie : 0)
+
+$ npm run status
+Base : file:data/curation.db
+Pause : non
+Documents : 70 — captures : 70
+Produits : 3 — versions : 40 (dont 26 préversion(s)) — actualités : 14 version(s), 30 annonce(s)
+Jobs : succeeded 12
+Sources :
+  · Claude Code — releases GitHub officielles [ok] dernier succès : 2026-10-30T02:25:20.469Z
+  · Codex CLI — releases GitHub officielles [ok] dernier succès : 2026-10-30T02:25:20.715Z
+  · Gemini CLI — releases GitHub officielles [ok] dernier succès : 2026-10-30T02:25:20.809Z
+  · OpenAI News — flux RSS officiel [ok] dernier succès : 2026-10-30T02:25:21.004Z
+  · GitHub Changelog — flux RSS officiel [ok] dernier succès : 2026-10-30T02:25:21.343Z
+Dernières exécutions :
+  · 2026-10-30T02:25:21.006Z feed:github-changelog succeeded (live) +0 =10 ~0 actualités +0
+  · 2026-10-30T02:25:20.811Z feed:openai-news succeeded (live) +0 =20 ~0 actualités +0
+  · 2026-10-30T02:25:20.716Z github-releases:google-gemini/gemini-cli succeeded (live) +0 =20 ~0 actualités +0
+  · 2026-10-30T02:25:20.470Z github-releases:openai/codex succeeded (live) +0 =10 ~0 actualités +0
+  · 2026-10-30T02:25:20.348Z github-releases:anthropics/claude-code succeeded (live) +0 =10 ~0 actualités +0
+  · 2026-10-30T02:25:19.457Z feed:github-changelog succeeded (live) +10 =0 ~0 actualités +10
+  · 2026-10-30T02:25:19.234Z feed:openai-news succeeded (live) +20 =0 ~0 actualités +20
+  · 2026-10-30T02:25:18.800Z github-releases:google-gemini/gemini-cli succeeded (live) +20 =0 ~0 actualités +2
+  · 2026-10-30T02:25:16.875Z github-releases:openai/codex succeeded (live) +10 =0 ~0 actualités +2
+  · 2026-10-30T02:25:16.436Z github-releases:anthropics/claude-code succeeded (live) +5 =5 ~0 actualités +10
+(code de sortie : 0)
+
+$ npm run export
+Export écrit : exports/source-documents.json (70 document(s), 10 exécution(s) récentes)
+(code de sortie : 0)
+
+$ npm run maquette
+Maquette : maquette/donnees.js (44 actualité(s) issues de collectes réelles, 0 écartée(s) car non réelles, 3 produit(s))
+(code de sortie : 0)

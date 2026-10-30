@@ -153,7 +153,10 @@ export const productVersions = sqliteTable(
     sourceDocumentId: integer('source_document_id').references(() => sourceDocuments.id),
     createdAt: text('created_at').notNull(),
   },
-  (t) => [uniqueIndex('product_version_uq').on(t.productId, t.version)],
+  (t) => [
+    uniqueIndex('product_version_uq').on(t.productId, t.version),
+    index('product_version_source_document_idx').on(t.sourceDocumentId),
+  ],
 );
 
 /** Actualité du fil : une annonce ou un événement, appuyé sur un ou plusieurs documents. */
@@ -176,12 +179,14 @@ export const newsItemDocuments = sqliteTable(
   {
     newsItemId: integer('news_item_id').notNull().references(() => newsItems.id),
     documentId: integer('document_id').notNull().references(() => sourceDocuments.id),
-    /** primary | supporting */
+    /** primary (source principale) | supporting (autre document de la même annonce, par ex. release recréée) */
     role: text('role').notNull(),
   },
   (t) => [
     primaryKey({ columns: [t.newsItemId, t.documentId] }),
     uniqueIndex('news_item_primary_document_uq').on(t.documentId).where(sql`role = 'primary'`),
+    // Recherche par document (rattrapage, actualité d'un document) sans parcourir toute la table.
+    index('news_item_document_document_idx').on(t.documentId),
   ],
 );
 
@@ -193,7 +198,11 @@ export const newsItemTargets = sqliteTable(
     productId: integer('product_id').notNull().references(() => products.id),
     productVersionId: integer('product_version_id').references(() => productVersions.id),
   },
-  (t) => [primaryKey({ columns: [t.newsItemId, t.productId] })],
+  (t) => [
+    primaryKey({ columns: [t.newsItemId, t.productId] }),
+    // Au plus une actualité par version de produit (ADR 0003).
+    uniqueIndex('news_item_target_version_uq').on(t.productVersionId).where(sql`product_version_id is not null`),
+  ],
 );
 
 /** Réglages de pilotage (ex. pause). */

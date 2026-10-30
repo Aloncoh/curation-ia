@@ -16,10 +16,11 @@ Doublons à éviter : trois skills de relecture de code (`engineering:code-revie
 |---|---|---|
 | `product-management:write-spec` | P0 | consignes lues ; structure des questions de cadrage et de SPEC.md |
 | `engineering:system-design` | P0 | consignes lues ; structure de la synthèse d'architecture |
-| `engineering:architecture` | P0, P1 | consignes lues ; format des ADR 0001 et 0002 |
+| `engineering:architecture` | P0, P1 | consignes lues ; format des ADR 0001 et 0002 (ADR 0003 en P2 : même structure reprise de l'ADR 0002, skill non rechargé) |
 | `claude-api` | P0 | chargé ; référence officielle des modèles et des tarifs |
 | `engineering:testing-strategy` | P1 | consignes lues ; choix des tests du collecteur |
-| `workflow-authoring` | P0, P1 | chargé ; recherches et relectures par agents contre-vérifiés |
+| `workflow-authoring` | P0, P1, P2 | chargé ; recherches et relectures par agents contre-vérifiés (P2 : relecture adversariale à 3 axes + complétude, puis contre-relecture des corrections) |
+| `frontend-design` | P2 | chargé ; démarche de conception de la maquette (jetons tirés de la mascotte, élément signature, typographie, états) |
 
 ## Prévu, pas encore utilisé
 
@@ -29,5 +30,4 @@ Doublons à éviter : trois skills de relecture de code (`engineering:code-revie
 | `engineering:documentation` | README et documents techniques à partir de P4 |
 | `engineering:code-review`, `engineering:debug` | relectures et diagnostics ciblés |
 | `engineering:deploy-checklist` | mise en ligne (P5) |
-| un skill de design d'interface (à choisir parmi ceux installés) | maquette autour de la mascotte (P2), sans identité visuelle d'Anthropic |
 | `anthropic-skills:skill-creator`, `anthropic-skills:mcp-builder` | seulement si un besoin concret apparaît |

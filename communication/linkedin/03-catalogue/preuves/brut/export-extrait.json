@@ -1,0 +1,703 @@
+{
+  "note_extrait": "Extrait de exports/source-documents.json produit par l'essai réel du 2026-10-30 : sources, produits avec leurs versions, 12 premières actualités, exécutions récentes, et 3 documents sans leur contenu (longueur et empreinte seulement).",
+  "generated_at": "2026-10-30T02:25:22.083Z",
+  "sources": [
+    {
+      "id": "feed:github-changelog",
+      "name": "GitHub Changelog — flux RSS officiel",
+      "kind": "feed",
+      "status": "ok",
+      "last_success_at": "2026-10-30T02:25:21.343Z",
+      "last_error": null
+    },
+    {
+      "id": "feed:openai-news",
+      "name": "OpenAI News — flux RSS officiel",
+      "kind": "feed",
+      "status": "ok",
+      "last_success_at": "2026-10-30T02:25:21.004Z",
+      "last_error": null
+    },
+    {
+      "id": "github-releases:anthropics/claude-code",
+      "name": "Claude Code — releases GitHub officielles",
+      "kind": "github_releases",
+      "status": "ok",
+      "last_success_at": "2026-10-30T02:25:20.469Z",
+      "last_error": null
+    },
+    {
+      "id": "github-releases:google-gemini/gemini-cli",
+      "name": "Gemini CLI — releases GitHub officielles",
+      "kind": "github_releases",
+      "status": "ok",
+      "last_success_at": "2026-10-30T02:25:20.809Z",
+      "last_error": null
+    },
+    {
+      "id": "github-releases:openai/codex",
+      "name": "Codex CLI — releases GitHub officielles",
+      "kind": "github_releases",
+      "status": "ok",
+      "last_success_at": "2026-10-30T02:25:20.715Z",
+      "last_error": null
+    }
+  ],
+  "products": [
+    {
+      "key": "anthropic/claude-code",
+      "name": "Claude Code",
+      "publisher": "Anthropic",
+      "category": "assistant de code",
+      "repository_url": "https://github.com/anthropics/claude-code",
+      "versions": [
+        {
+          "version": "2.1.314",
+          "is_prerelease": false,
+          "released_at": "2026-10-30T01:06:26.000Z"
+        },
+        {
+          "version": "2.1.312",
+          "is_prerelease": false,
+          "released_at": "2026-10-27T20:24:20.000Z"
+        },
+        {
+          "version": "2.1.311",
+          "is_prerelease": false,
+          "released_at": "2026-10-26T21:51:23.000Z"
+        },
+        {
+          "version": "2.1.310",
+          "is_prerelease": false,
+          "released_at": "2026-10-23T23:39:00.000Z"
+        },
+        {
+          "version": "2.1.309",
+          "is_prerelease": false,
+          "released_at": "2026-10-22T22:18:57.000Z"
+        },
+        {
+          "version": "2.1.308",
+          "is_prerelease": false,
+          "released_at": "2026-10-22T04:34:55.000Z"
+        },
+        {
+          "version": "2.1.307",
+          "is_prerelease": false,
+          "released_at": "2026-10-21T22:17:02.000Z"
+        },
+        {
+          "version": "2.1.306",
+          "is_prerelease": false,
+          "released_at": "2026-10-21T03:16:31.000Z"
+        },
+        {
+          "version": "2.1.305",
+          "is_prerelease": false,
+          "released_at": "2026-10-20T20:46:50.000Z"
+        },
+        {
+          "version": "2.1.304",
+          "is_prerelease": false,
+          "released_at": "2026-10-19T21:34:39.000Z"
+        }
+      ]
+    },
+    {
+      "key": "google/gemini-cli",
+      "name": "Gemini CLI",
+      "publisher": "Google",
+      "category": "assistant de code",
+      "repository_url": "https://github.com/google-gemini/gemini-cli",
+      "versions": [
+        {
+          "version": "0.67.0-nightly.20261030.gb633c0703",
+          "is_prerelease": true,
+          "released_at": "2026-10-30T01:22:17.000Z"
+        },
+        {
+          "version": "0.67.0-nightly.20261028.gfa5c17365",
+          "is_prerelease": true,
+          "released_at": "2026-10-28T01:22:20.000Z"
+        },
+        {
+          "version": "0.66.0",
+          "is_prerelease": false,
+          "released_at": "2026-10-27T20:26:28.000Z"
+        },
+        {
+          "version": "0.67.0-preview.0",
+          "is_prerelease": true,
+          "released_at": "2026-10-27T20:07:49.000Z"
+        },
+        {
+          "version": "0.67.0-nightly.20261027.g363a13119",
+          "is_prerelease": true,
+          "released_at": "2026-10-27T01:15:46.000Z"
+        },
+        {
+          "version": "0.67.0-nightly.20261025.gcd1b45c2d",
+          "is_prerelease": true,
+          "released_at": "2026-10-25T01:31:55.000Z"
+        },
+        {
+          "version": "0.67.0-nightly.20261024.gcd1b45c2d",
+          "is_prerelease": true,
+          "released_at": "2026-10-24T01:15:53.000Z"
+        },
+        {
+          "version": "0.67.0-nightly.20261023.ga713410ab",
+          "is_prerelease": true,
+          "released_at": "2026-10-23T01:35:10.000Z"
+        },
+        {
+          "version": "0.67.0-nightly.20261022.g09d81bf11",
+          "is_prerelease": true,
+          "released_at": "2026-10-22T01:23:52.000Z"
+        },
+        {
+          "version": "0.67.0-nightly.20261021.gd00859d6b",
+          "is_prerelease": true,
+          "released_at": "2026-10-21T01:33:29.000Z"
+        },
+        {
+          "version": "0.65.0",
+          "is_prerelease": false,
+          "released_at": "2026-10-20T21:17:57.000Z"
+        },
+        {
+          "version": "0.66.0-preview.0",
+          "is_prerelease": true,
+          "released_at": "2026-10-20T21:04:34.000Z"
+        },
+        {
+          "version": "0.66.0-nightly.20261020.g76e4d7c04",
+          "is_prerelease": true,
+          "released_at": "2026-10-20T01:33:51.000Z"
+        },
+        {
+          "version": "0.66.0-nightly.20261019.ged96faedf",
+          "is_prerelease": true,
+          "released_at": "2026-10-19T01:34:29.000Z"
+        },
+        {
+          "version": "0.66.0-nightly.20261018.ged96faedf",
+          "is_prerelease": true,
+          "released_at": "2026-10-18T01:34:41.000Z"
+        },
+        {
+          "version": "0.66.0-nightly.20261017.ged96faedf",
+          "is_prerelease": true,
+          "released_at": "2026-10-17T01:31:42.000Z"
+        },
+        {
+          "version": "0.66.0-nightly.20261016.gdebf42324",
+          "is_prerelease": true,
+          "released_at": "2026-10-16T01:32:08.000Z"
+        },
+        {
+          "version": "0.65.0-nightly.20261014.g42c518220",
+          "is_prerelease": true,
+          "released_at": "2026-10-14T01:29:12.000Z"
+        },
+        {
+          "version": "0.65.0-preview.0",
+          "is_prerelease": true,
+          "released_at": "2026-10-13T20:27:55.000Z"
+        },
+        {
+          "version": "0.65.0-nightly.20261013.g51617c1bc",
+          "is_prerelease": true,
+          "released_at": "2026-10-13T01:36:45.000Z"
+        }
+      ]
+    },
+    {
+      "key": "openai/codex",
+      "name": "Codex CLI",
+      "publisher": "OpenAI",
+      "category": "assistant de code",
+      "repository_url": "https://github.com/openai/codex",
+      "versions": [
+        {
+          "version": "0.166.0",
+          "is_prerelease": false,
+          "released_at": "2026-10-29T19:47:53.000Z"
+        },
+        {
+          "version": "0.166.0-alpha.6",
+          "is_prerelease": true,
+          "released_at": "2026-10-29T01:41:25.000Z"
+        },
+        {
+          "version": "0.166.0-alpha.5.1",
+          "is_prerelease": true,
+          "released_at": "2026-10-28T19:17:02.000Z"
+        },
+        {
+          "version": "0.166.0-alpha.5",
+          "is_prerelease": true,
+          "released_at": "2026-10-28T04:43:10.000Z"
+        },
+        {
+          "version": "0.166.0-alpha.4",
+          "is_prerelease": true,
+          "released_at": "2026-10-28T01:22:03.000Z"
+        },
+        {
+          "version": "0.165.0",
+          "is_prerelease": false,
+          "released_at": "2026-10-27T20:09:38.000Z"
+        },
+        {
+          "version": "0.166.0-alpha.3",
+          "is_prerelease": true,
+          "released_at": "2026-10-27T19:23:16.000Z"
+        },
+        {
+          "version": "0.166.0-alpha.2",
+          "is_prerelease": true,
+          "released_at": "2026-10-27T11:54:48.000Z"
+        },
+        {
+          "version": "0.165.0-alpha.1.2",
+          "is_prerelease": true,
+          "released_at": "2026-10-27T04:57:39.000Z"
+        },
+        {
+          "version": "0.166.0-alpha.1",
+          "is_prerelease": true,
+          "released_at": "2026-10-27T01:33:18.000Z"
+        }
+      ]
+    }
+  ],
+  "news_items": [
+    {
+      "id": 1,
+      "kind": "version",
+      "title": "Claude Code 2.1.314",
+      "announced_at": "2026-10-30T01:06:26.000Z",
+      "first_seen_at": "2026-10-30T01:26:38.899Z",
+      "status": "collected",
+      "created_in_mode": "live",
+      "sources": [
+        {
+          "role": "primary",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.314",
+          "source_id": "github-releases:anthropics/claude-code"
+        }
+      ],
+      "targets": [
+        {
+          "product": "anthropic/claude-code",
+          "version": "2.1.314"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "kind": "version",
+      "title": "Codex CLI 0.166.0",
+      "announced_at": "2026-10-29T19:47:53.000Z",
+      "first_seen_at": "2026-10-30T02:25:18.791Z",
+      "status": "collected",
+      "created_in_mode": "live",
+      "sources": [
+        {
+          "role": "primary",
+          "url": "https://github.com/openai/codex/releases/tag/rust-v0.166.0",
+          "source_id": "github-releases:openai/codex"
+        }
+      ],
+      "targets": [
+        {
+          "product": "openai/codex",
+          "version": "0.166.0"
+        }
+      ]
+    },
+    {
+      "id": 35,
+      "kind": "annonce",
+      "title": "Webhook IP ranges added to the Meta API",
+      "announced_at": "2026-10-29T17:14:38.000Z",
+      "first_seen_at": "2026-10-30T02:25:19.782Z",
+      "status": "collected",
+      "created_in_mode": "live",
+      "sources": [
+        {
+          "role": "primary",
+          "url": "https://github.blog/changelog/2026-10-29-webhook-ip-ranges-added-to-the-meta-api",
+          "source_id": "feed:github-changelog"
+        }
+      ],
+      "targets": []
+    },
+    {
+      "id": 15,
+      "kind": "annonce",
+      "title": "An updated Model Spec for more capable and beneficial AI",
+      "announced_at": "2026-10-29T17:00:00.000Z",
+      "first_seen_at": "2026-10-30T02:25:19.448Z",
+      "status": "collected",
+      "created_in_mode": "live",
+      "sources": [
+        {
+          "role": "primary",
+          "url": "https://openai.com/index/updated-model-spec",
+          "source_id": "feed:openai-news"
+        }
+      ],
+      "targets": []
+    },
+    {
+      "id": 16,
+      "kind": "annonce",
+      "title": "How we detect frontier model misalignment",
+      "announced_at": "2026-10-29T09:00:00.000Z",
+      "first_seen_at": "2026-10-30T02:25:19.448Z",
+      "status": "collected",
+      "created_in_mode": "live",
+      "sources": [
+        {
+          "role": "primary",
+          "url": "https://openai.com/index/how-we-detect-frontier-model-misalignment",
+          "source_id": "feed:openai-news"
+        }
+      ],
+      "targets": []
+    },
+    {
+      "id": 17,
+      "kind": "annonce",
+      "title": "How Ropes & Gray is developing AI for transactional diligence",
+      "announced_at": "2026-10-29T07:00:00.000Z",
+      "first_seen_at": "2026-10-30T02:25:19.448Z",
+      "status": "collected",
+      "created_in_mode": "live",
+      "sources": [
+        {
+          "role": "primary",
+          "url": "https://openai.com/index/ropes-gray-ai-diligence",
+          "source_id": "feed:openai-news"
+        }
+      ],
+      "targets": []
+    },
+    {
+      "id": 36,
+      "kind": "annonce",
+      "title": "Route and orchestrate models with GitHub Copilot Fusion",
+      "announced_at": "2026-10-28T16:00:00.000Z",
+      "first_seen_at": "2026-10-30T02:25:19.782Z",
+      "status": "collected",
+      "created_in_mode": "live",
+      "sources": [
+        {
+          "role": "primary",
+          "url": "https://github.blog/changelog/2026-10-28-route-and-orchestrate-models-with-github-copilot-fusion",
+          "source_id": "feed:github-changelog"
+        }
+      ],
+      "targets": []
+    },
+    {
+      "id": 37,
+      "kind": "annonce",
+      "title": "GitHub Copilot app, Universe releases",
+      "announced_at": "2026-10-28T15:55:00.000Z",
+      "first_seen_at": "2026-10-30T02:25:19.782Z",
+      "status": "collected",
+      "created_in_mode": "live",
+      "sources": [
+        {
+          "role": "primary",
+          "url": "https://github.blog/changelog/2026-10-28-github-copilot-app-universe-releases",
+          "source_id": "feed:github-changelog"
+        }
+      ],
+      "targets": []
+    },
+    {
+      "id": 38,
+      "kind": "annonce",
+      "title": "GitHub Enterprise now includes access to GitHub Copilot",
+      "announced_at": "2026-10-28T15:50:00.000Z",
+      "first_seen_at": "2026-10-30T02:25:19.782Z",
+      "status": "collected",
+      "created_in_mode": "live",
+      "sources": [
+        {
+          "role": "primary",
+          "url": "https://github.blog/changelog/2026-10-28-github-enterprise-now-includes-access-to-github-copilot",
+          "source_id": "feed:github-changelog"
+        }
+      ],
+      "targets": []
+    },
+    {
+      "id": 39,
+      "kind": "annonce",
+      "title": "Security extension for the GitHub Copilot app",
+      "announced_at": "2026-10-28T15:45:00.000Z",
+      "first_seen_at": "2026-10-30T02:25:19.782Z",
+      "status": "collected",
+      "created_in_mode": "live",
+      "sources": [
+        {
+          "role": "primary",
+          "url": "https://github.blog/changelog/2026-10-28-security-extension-for-the-github-copilot-app",
+          "source_id": "feed:github-changelog"
+        }
+      ],
+      "targets": []
+    },
+    {
+      "id": 40,
+      "kind": "annonce",
+      "title": "GitHub intelligence puts your code, context, and history to work",
+      "announced_at": "2026-10-28T15:40:00.000Z",
+      "first_seen_at": "2026-10-30T02:25:19.782Z",
+      "status": "collected",
+      "created_in_mode": "live",
+      "sources": [
+        {
+          "role": "primary",
+          "url": "https://github.blog/changelog/2026-10-28-github-intelligence-puts-your-code-context-and-history-to-work",
+          "source_id": "feed:github-changelog"
+        }
+      ],
+      "targets": []
+    },
+    {
+      "id": 41,
+      "kind": "annonce",
+      "title": "Build shared workflows for your team with Copilot Automations",
+      "announced_at": "2026-10-28T15:35:00.000Z",
+      "first_seen_at": "2026-10-30T02:25:19.782Z",
+      "status": "collected",
+      "created_in_mode": "live",
+      "sources": [
+        {
+          "role": "primary",
+          "url": "https://github.blog/changelog/2026-10-28-build-shared-workflows-for-your-team-with-copilot-automations",
+          "source_id": "feed:github-changelog"
+        }
+      ],
+      "targets": []
+    }
+  ],
+  "news_items_total": 44,
+  "documents_total": 70,
+  "documents_extrait": [
+    {
+      "source_id": "github-releases:google-gemini/gemini-cli",
+      "external_id": "428557825",
+      "title": "Release v0.67.0-nightly.20261030.gb633c0703",
+      "version": "v0.67.0-nightly.20261030.gb633c0703",
+      "url": "https://github.com/google-gemini/gemini-cli/releases/tag/v0.67.0-nightly.20261030.gb633c0703",
+      "normalized_url": "https://github.com/google-gemini/gemini-cli/releases/tag/v0.67.0-nightly.20261030.gb633c0703",
+      "announced_at": "2026-10-30T01:22:17.000Z",
+      "first_collected_at": "2026-10-30T02:25:19.218Z",
+      "last_seen_at": "2026-10-30T02:25:20.803Z",
+      "first_capture_mode": "live",
+      "snapshots": [
+        {
+          "seq": 1,
+          "captured_at": "2026-10-30T02:25:19.218Z",
+          "collected_in_mode": "live",
+          "content_hash": "ea37910b91953c09665f80c801c6aaaf68ffa466f0c7b26c3556bcb6ad5aafde",
+          "content_length": 3051,
+          "run_id": "1b25826e-82a0-479e-b63f-ac510d073684"
+        }
+      ]
+    },
+    {
+      "source_id": "github-releases:anthropics/claude-code",
+      "external_id": "428518421",
+      "title": "v2.1.314",
+      "version": "v2.1.314",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.314",
+      "normalized_url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.314",
+      "announced_at": "2026-10-30T01:06:26.000Z",
+      "first_collected_at": "2026-10-30T01:26:38.899Z",
+      "last_seen_at": "2026-10-30T02:25:20.462Z",
+      "first_capture_mode": "live",
+      "snapshots": [
+        {
+          "seq": 1,
+          "captured_at": "2026-10-30T01:26:38.899Z",
+          "collected_in_mode": "live",
+          "content_hash": "507ed105989aeef86d23d87d9625d04099e41592df2965c7a6d21f676d26e4c1",
+          "content_length": 17217,
+          "run_id": "6ab7e3b4-8a0f-4b1b-ba77-4f6665351c4c"
+        }
+      ]
+    },
+    {
+      "source_id": "github-releases:openai/codex",
+      "external_id": "428320524",
+      "title": "0.166.0",
+      "version": "rust-v0.166.0",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.166.0",
+      "normalized_url": "https://github.com/openai/codex/releases/tag/rust-v0.166.0",
+      "announced_at": "2026-10-29T19:47:53.000Z",
+      "first_collected_at": "2026-10-30T02:25:18.791Z",
+      "last_seen_at": "2026-10-30T02:25:20.711Z",
+      "first_capture_mode": "live",
+      "snapshots": [
+        {
+          "seq": 1,
+          "captured_at": "2026-10-30T02:25:18.791Z",
+          "collected_in_mode": "live",
+          "content_hash": "7a17d2345cd441aa0145c93fd34dec719eaf2b7169c936e37e5aeba1e9c1d265",
+          "content_length": 22502,
+          "run_id": "4657165f-5355-4d40-b6f2-3c043e4308a9"
+        }
+      ]
+    }
+  ],
+  "recent_runs": [
+    {
+      "id": "d774932e-005b-4544-8a04-82e7943b410a",
+      "source_id": "feed:github-changelog",
+      "mode": "live",
+      "status": "succeeded",
+      "started_at": "2026-10-30T02:25:21.006Z",
+      "finished_at": "2026-10-30T02:25:21.343Z",
+      "new_documents": 0,
+      "unchanged_documents": 10,
+      "changed_documents": 0,
+      "new_news_items": 0,
+      "error_kind": null,
+      "error_message": null
+    },
+    {
+      "id": "3bee8f4d-d4b0-4058-a90f-1436461c85d0",
+      "source_id": "feed:openai-news",
+      "mode": "live",
+      "status": "succeeded",
+      "started_at": "2026-10-30T02:25:20.811Z",
+      "finished_at": "2026-10-30T02:25:21.004Z",
+      "new_documents": 0,
+      "unchanged_documents": 20,
+      "changed_documents": 0,
+      "new_news_items": 0,
+      "error_kind": null,
+      "error_message": null
+    },
+    {
+      "id": "bbd9ed91-d211-4c92-80c3-456d1640c94e",
+      "source_id": "github-releases:google-gemini/gemini-cli",
+      "mode": "live",
+      "status": "succeeded",
+      "started_at": "2026-10-30T02:25:20.716Z",
+      "finished_at": "2026-10-30T02:25:20.809Z",
+      "new_documents": 0,
+      "unchanged_documents": 20,
+      "changed_documents": 0,
+      "new_news_items": 0,
+      "error_kind": null,
+      "error_message": null
+    },
+    {
+      "id": "e1392fff-c1bd-415f-af70-e43d7645dc80",
+      "source_id": "github-releases:openai/codex",
+      "mode": "live",
+      "status": "succeeded",
+      "started_at": "2026-10-30T02:25:20.470Z",
+      "finished_at": "2026-10-30T02:25:20.715Z",
+      "new_documents": 0,
+      "unchanged_documents": 10,
+      "changed_documents": 0,
+      "new_news_items": 0,
+      "error_kind": null,
+      "error_message": null
+    },
+    {
+      "id": "449b841b-d6af-42f7-8084-75e3ddb94ef4",
+      "source_id": "github-releases:anthropics/claude-code",
+      "mode": "live",
+      "status": "succeeded",
+      "started_at": "2026-10-30T02:25:20.348Z",
+      "finished_at": "2026-10-30T02:25:20.469Z",
+      "new_documents": 0,
+      "unchanged_documents": 10,
+      "changed_documents": 0,
+      "new_news_items": 0,
+      "error_kind": null,
+      "error_message": null
+    },
+    {
+      "id": "ff85f4af-e524-4064-9613-b28f22fd1d14",
+      "source_id": "feed:github-changelog",
+      "mode": "live",
+      "status": "succeeded",
+      "started_at": "2026-10-30T02:25:19.457Z",
+      "finished_at": "2026-10-30T02:25:19.791Z",
+      "new_documents": 10,
+      "unchanged_documents": 0,
+      "changed_documents": 0,
+      "new_news_items": 10,
+      "error_kind": null,
+      "error_message": null
+    },
+    {
+      "id": "ba92efe9-f4b6-47c5-b347-f6ef367c7d5c",
+      "source_id": "feed:openai-news",
+      "mode": "live",
+      "status": "succeeded",
+      "started_at": "2026-10-30T02:25:19.234Z",
+      "finished_at": "2026-10-30T02:25:19.455Z",
+      "new_documents": 20,
+      "unchanged_documents": 0,
+      "changed_documents": 0,
+      "new_news_items": 20,
+      "error_kind": null,
+      "error_message": null
+    },
+    {
+      "id": "1b25826e-82a0-479e-b63f-ac510d073684",
+      "source_id": "github-releases:google-gemini/gemini-cli",
+      "mode": "live",
+      "status": "succeeded",
+      "started_at": "2026-10-30T02:25:18.800Z",
+      "finished_at": "2026-10-30T02:25:19.232Z",
+      "new_documents": 20,
+      "unchanged_documents": 0,
+      "changed_documents": 0,
+      "new_news_items": 2,
+      "error_kind": null,
+      "error_message": null
+    },
+    {
+      "id": "4657165f-5355-4d40-b6f2-3c043e4308a9",
+      "source_id": "github-releases:openai/codex",
+      "mode": "live",
+      "status": "succeeded",
+      "started_at": "2026-10-30T02:25:16.875Z",
+      "finished_at": "2026-10-30T02:25:18.798Z",
+      "new_documents": 10,
+      "unchanged_documents": 0,
+      "changed_documents": 0,
+      "new_news_items": 2,
+      "error_kind": null,
+      "error_message": null
+    },
+    {
+      "id": "fb59c350-0e74-4889-9837-ee1e2dc7afa6",
+      "source_id": "github-releases:anthropics/claude-code",
+      "mode": "live",
+      "status": "succeeded",
+      "started_at": "2026-10-30T02:25:16.436Z",
+      "finished_at": "2026-10-30T02:25:16.873Z",
+      "new_documents": 5,
+      "unchanged_documents": 5,
+      "changed_documents": 0,
+      "new_news_items": 10,
+      "error_kind": null,
+      "error_message": null
+    }
+  ]
+}

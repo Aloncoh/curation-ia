@@ -1,0 +1,163 @@
+# npx vitest run --reporter=verbose — 2026-10-30T02:25:52Z (UTC)
+
+ RUN  v5.0.5 /Users/aloncohen/CURATION AI
+
+ ✓ tests/safe-fetch.test.ts > isForbiddenAddress > refuse 127.0.0.1 1ms
+ ✓ tests/safe-fetch.test.ts > isForbiddenAddress > refuse 10.1.2.3 0ms
+ ✓ tests/safe-fetch.test.ts > isForbiddenAddress > refuse 172.16.5.4 0ms
+ ✓ tests/safe-fetch.test.ts > isForbiddenAddress > refuse 192.168.1.1 0ms
+ ✓ tests/safe-fetch.test.ts > isForbiddenAddress > refuse 169.254.169.254 0ms
+ ✓ tests/safe-fetch.test.ts > isForbiddenAddress > refuse 0.0.0.0 0ms
+ ✓ tests/safe-fetch.test.ts > isForbiddenAddress > refuse 100.64.0.1 0ms
+ ✓ tests/safe-fetch.test.ts > isForbiddenAddress > refuse 224.0.0.1 0ms
+ ✓ tests/safe-fetch.test.ts > isForbiddenAddress > refuse ::1 2ms
+ ✓ tests/safe-fetch.test.ts > isForbiddenAddress > refuse :: 1ms
+ ✓ tests/safe-fetch.test.ts > isForbiddenAddress > refuse fe80::1 0ms
+ ✓ tests/safe-fetch.test.ts > isForbiddenAddress > refuse fc00::1 0ms
+ ✓ tests/safe-fetch.test.ts > isForbiddenAddress > refuse ::ffff:127.0.0.1 0ms
+ ✓ tests/safe-fetch.test.ts > isForbiddenAddress > refuse ::ffff:10.0.0.1 0ms
+ ✓ tests/safe-fetch.test.ts > isForbiddenAddress > refuse 0:0:0:0:0:ffff:7f00:1 0ms
+ ✓ tests/safe-fetch.test.ts > isForbiddenAddress > refuse ::127.0.0.1 0ms
+ ✓ tests/safe-fetch.test.ts > isForbiddenAddress > refuse ::a9fe:a9fe 0ms
+ ✓ tests/safe-fetch.test.ts > isForbiddenAddress > refuse 64:ff9b:1::a9fe:a9fe 0ms
+ ✓ tests/safe-fetch.test.ts > isForbiddenAddress > refuse 2002:7f00:1:: 0ms
+ ✓ tests/safe-fetch.test.ts > isForbiddenAddress > refuse 2001:0:4136:e378:8000:63bf:3fff:fdd2 0ms
+ ✓ tests/safe-fetch.test.ts > isForbiddenAddress > refuse fec0::1 0ms
+ ✓ tests/safe-fetch.test.ts > isForbiddenAddress > refuse pas-une-ip 0ms
+ ✓ tests/safe-fetch.test.ts > isForbiddenAddress > accepte l’adresse publique 140.82.112.6 0ms
+ ✓ tests/safe-fetch.test.ts > isForbiddenAddress > accepte l’adresse publique 8.8.8.8 0ms
+ ✓ tests/safe-fetch.test.ts > isForbiddenAddress > accepte l’adresse publique 2606:4700:4700::1111 0ms
+ ✓ tests/safe-fetch.test.ts > assertAllowedUrl > refuse http://api.github.com/repos/a/b/releases 0ms
+ ✓ tests/safe-fetch.test.ts > assertAllowedUrl > refuse https://evil.example/repos/a/b/releases 0ms
+ ✓ tests/safe-fetch.test.ts > assertAllowedUrl > refuse https://api.github.com:8443/repos/a/b/releases 0ms
+ ✓ tests/safe-fetch.test.ts > assertAllowedUrl > refuse https://user:secret@api.github.com/repos/a/b/releases 0ms
+ ✓ tests/safe-fetch.test.ts > assertAllowedUrl > accepte un hôte de la liste blanche en HTTPS 0ms
+ ✓ tests/safe-fetch.test.ts > safeGet > se connecte à l'adresse validée et renvoie le corps 0ms
+ ✓ tests/safe-fetch.test.ts > safeGet > refuse un hôte hors liste blanche sans aucune requête DNS ni réseau 0ms
+ ✓ tests/safe-fetch.test.ts > safeGet > refuse si une adresse résolue est interne, sans se connecter 0ms
+ ✓ tests/safe-fetch.test.ts > safeGet > refuse les redirections 0ms
+ ✓ tests/safe-fetch.test.ts > safeGet > signale un statut HTTP en erreur 0ms
+ ✓ tests/safe-fetch.test.ts > safeGet > abandonne après le délai maximum 31ms
+ ✓ tests/safe-fetch.test.ts > safeGet > le délai maximum couvre aussi une résolution DNS qui ne répond pas 53ms
+ ✓ tests/safe-fetch.test.ts > safeGet > classe une panne de résolution DNS ou de connexion comme erreur réseau 0ms
+ ✓ tests/safe-fetch.test.ts > transport HTTPS réel : options de connexion > épingle la connexion à l'adresse validée, vérifie le certificat et n'utilise ni agent partagé ni proxy 0ms
+ ✓ tests/safe-fetch.test.ts > transport HTTPS réel : options de connexion > la résolution épinglée renvoie toujours l'adresse validée, sans nouvelle requête DNS 0ms
+ ✓ tests/safe-fetch.test.ts > readLimited > lit un corps dans la limite 1ms
+ ✓ tests/safe-fetch.test.ts > readLimited > refuse un corps qui dépasse la taille maximale en cours de lecture 0ms
+ ✓ tests/safe-fetch.test.ts > readLimited > refuse immédiatement une taille annoncée trop grande 0ms
+ ✓ tests/collect.test.ts > collecte > première collecte : 5 documents et 5 captures, avec provenance, dates, contenu et traces 49ms
+ ✓ tests/collect.test.ts > collecte > conserve l'URL d'origine et calcule une URL normalisée distincte 25ms
+ ✓ tests/feeds.test.ts > parseFeedItems > OpenAI News : garde les 20 entrées les plus récentes, identifiées par leur lien 44ms
+ ✓ tests/feeds.test.ts > parseFeedItems > GitHub Changelog : identité par le lien même quand le guid diffère, guid et catégories de l’entrée conservés 4ms
+ ✓ tests/feeds.test.ts > parseFeedItems > refuse et compte les entrées sans lien autorisé ; ignore les doublons ; met les entrées sans date en dernier 3ms
+ ✓ tests/feeds.test.ts > parseFeedItems > entités décodées une seule fois : un texte inerte de la source ne devient jamais une balise 1ms
+ ✓ tests/feeds.test.ts > parseFeedItems > titres nettoyés : sans caractères de contrôle ni inversion de sens, longueur plafonnée 2ms
+ ✓ tests/feeds.test.ts > parseFeedItems > catégories en texte brut : entités du CDATA décodées (fixture réelle du GitHub Changelog) 7ms
+ ✓ tests/feeds.test.ts > parseFeedItems > RSS : un atom:link placé avant <link> ne masque pas le lien de l’entrée 0ms
+ ✓ tests/feeds.test.ts > parseFeedItems > Atom : lien relatif résolu contre xml:base ; contenu « text » et « xhtml » échappé, « html » tel quel 12ms
+ ✓ tests/feeds.test.ts > parseFeedItems > les catégories du canal ne sont jamais attribuées aux entrées 3ms
+ ✓ tests/feeds.test.ts > parseFeedItems > refuse un flux de plus de 3000 entrées avant de l’analyser 4ms
+ ✓ tests/feeds.test.ts > parseFeedItems > limite le nombre d’entrées gardées 7ms
+ ✓ tests/feeds.test.ts > parseFeedItems > refuse une page HTML 1ms
+ ✓ tests/feeds.test.ts > parseFeedItems > refuse du texte 0ms
+ ✓ tests/feeds.test.ts > parseFeedItems > refuse un flux sans entrée 0ms
+ ✓ tests/feeds.test.ts > parseFeedItems > refuse un flux sans lien autorisé 0ms
+ ✓ tests/queue.test.ts > file de jobs > un seul job actif par source, même demandé deux fois 27ms
+ ✓ tests/queue.test.ts > file de jobs > la pause empêche la réservation dans la même instruction, même appelée directement 23ms
+ ✓ tests/queue.test.ts > file de jobs > bail perdu : le worker dépossédé ne peut ni terminer ni faire échouer le job 18ms
+ ✓ tests/queue.test.ts > file de jobs > un job ayant épuisé ses tentatives passe en échec et ne bloque plus sa source 12ms
+ ✓ tests/queue.test.ts > file de jobs > job repris juste après l'expiration du bail : l'exécution précédente est marquée « interrompue », même si la récupération ne l'a pas vue 31ms
+ ✓ tests/maquette.test.ts > extraits en texte brut > HTML : balises et scripts retirés, entités décodées 5ms
+ ✓ tests/maquette.test.ts > extraits en texte brut > Markdown : titres, liens, images, listes et mise en forme retirés 0ms
+ ✓ tests/maquette.test.ts > extraits en texte brut > fidèle au texte : identifiants SNAKE_CASE, chemins ~/ et entités HTML courantes conservés 0ms
+ ✓ tests/maquette.test.ts > extraits en texte brut > coupe sur un mot avec des points de suspension ; null si vide 0ms
+ ✓ tests/maquette.test.ts > données de la maquette > n'affiche jamais une capture de fixture comme une collecte réelle 64ms
+ ✓ tests/collect.test.ts > collecte > seconde collecte après redémarrage : aucun nouveau document ni capture 58ms
+ ✓ tests/collect.test.ts > collecte > contenu modifié : une seule nouvelle capture, l'ancienne est conservée 39ms
+ ✓ tests/collect.test.ts > collecte > date de publication ou statut de prerelease modifiés sans changement de contenu : fiche document mise à jour, aucune capture 18ms
+ ✓ tests/collect.test.ts > collecte > source en erreur (http_status) : exécution échouée avec motif et étape en échec, données intactes 16ms
+ ✓ tests/maquette.test.ts > données de la maquette > collecte réelle puis relecture de fixture sur la même base : ni versions ni date de collecte venues de la fixture 65ms
+ ✓ tests/maquette.test.ts > données de la maquette > collecte réelle : actualités datées, rattachées à leur produit et à leur version, avec un extrait en texte brut 42ms
+ ✓ tests/maquette.test.ts > données de la maquette > une annonce de flux n'a ni produit ni version 42ms
+ ✓ tests/normalize.test.ts > normalizeUrl > retire fragment, paramètres de suivi, port par défaut et « / » final, et trie les paramètres 12ms
+ ✓ tests/normalize.test.ts > normalizeUrl > laisse intacte une URL déjà canonique 0ms
+ ✓ tests/normalize.test.ts > normalizeDate > convertit en ISO 8601 UTC 2ms
+ ✓ tests/normalize.test.ts > normalizeDate > renvoie null plutôt que d'inventer une date 1ms
+ ✓ tests/normalize.test.ts > normalizeText et contentHash > uniformise fins de ligne et espaces de fin 0ms
+ ✓ tests/normalize.test.ts > normalizeText et contentHash > donne la même empreinte pour le même contenu et une autre pour un contenu modifié 2ms
+ ✓ tests/collect.test.ts > collecte > source en erreur (timeout) : exécution échouée avec motif et étape en échec, données intactes 33ms
+ ✓ tests/collect.test.ts > collecte > source en erreur (redirect) : exécution échouée avec motif et étape en échec, données intactes 27ms
+ ✓ tests/collect.test.ts > collecte > source en erreur (too_large) : exécution échouée avec motif et étape en échec, données intactes 18ms
+ ✓ tests/collect.test.ts > collecte > source en erreur (forbidden_address) : exécution échouée avec motif et étape en échec, données intactes 24ms
+ ✓ tests/collect.test.ts > collecte > source en erreur (network) : exécution échouée avec motif et étape en échec, données intactes 19ms
+ ✓ tests/export.test.ts > export JSON > expose documents, captures et exécutions dans un format lisible 27ms
+ ✓ tests/catalog.test.ts > catalogue : produits, versions, actualités > collecte multi-sources : chaque produit, version et actualité créé une seule fois 249ms
+ ✓ tests/catalog.test.ts > catalogue : produits, versions, actualités > deux annonces distinctes sur le même produit : deux actualités, un seul produit 14ms
+ ✓ tests/catalog.test.ts > catalogue : produits, versions, actualités > préversion : version enregistrée sans actualité, puis actualité créée quand elle devient stable 50ms
+ ✓ tests/config.test.ts > configuration > valeurs par défaut prudentes 2ms
+ ✓ tests/config.test.ts > configuration > refuse zéro tentative, un bail nul ou une valeur non entière 0ms
+ ✓ tests/config.test.ts > configuration > ignore le point d'arrêt de test hors mode fixture 0ms
+ ✓ tests/config.test.ts > configuration > supprime les espaces autour de l'URL de base 0ms
+ ✓ tests/config.test.ts > protection des secrets > masque un jeton ou des identifiants dans un message d’erreur 0ms
+ ✓ tests/config.test.ts > protection des secrets > décrit l'URL de base sans jeton 0ms
+ ✓ tests/collect.test.ts > collecte > source en erreur (invalid_response) : exécution échouée avec motif et étape en échec, données intactes 19ms
+ ✓ tests/collect.test.ts > collecte > source en erreur (invalid_response) : exécution échouée avec motif et étape en échec, données intactes 14ms
+ ✓ tests/collect.test.ts > collecte > tentatives épuisées : le job passe en échec définitif 8ms
+ ✓ tests/collect.test.ts > collecte > pause : aucun job pris et aucun appel à la source, jusqu'à la reprise 12ms
+ ✓ tests/collect.test.ts > collecte > le collecteur réel refuse un hôte absent de la liste blanche de la source, sans requête réseau 7ms
+ ✓ tests/catalog.test.ts > catalogue : produits, versions, actualités > entrée de flux republiée avec une nouvelle date : pas de nouvelle actualité, date d'origine conservée 45ms
+ ✓ tests/catalog.test.ts > catalogue : produits, versions, actualités > guid modifié mais même lien : même document, aucune nouvelle actualité 20ms
+ ✓ tests/github-releases.test.ts > releasesUrl > construit l'URL de l'API officielle 1ms
+ ✓ tests/github-releases.test.ts > releasesUrl > refuse un dépôt ou une pagination invalides 0ms
+ ✓ tests/github-releases.test.ts > parseReleases > refuse une réponse dont une release appartient à un autre dépôt que la source 3ms
+ ✓ tests/github-releases.test.ts > parseReleases > transforme les 5 releases réelles en documents avec provenance et dates 1ms
+ ✓ tests/github-releases.test.ts > parseReleases > garde null quand la date de publication est inconnue, et utilise le tag si le titre manque 0ms
+ ✓ tests/github-releases.test.ts > parseReleases > ignore les brouillons 0ms
+ ✓ tests/github-releases.test.ts > parseReleases > refuse une réponse qui n’est pas du JSON 0ms
+ ✓ tests/github-releases.test.ts > parseReleases > refuse une réponse au format inattendu 0ms
+ ✓ tests/catalog.test.ts > catalogue : produits, versions, actualités > flux en panne (page HTML à la place du flux) : exécution échouée avec motif, données et catalogue intacts 103ms
+ ✓ tests/catalog.test.ts > catalogue : produits, versions, actualités > flux en panne (flux sans entrée) : exécution échouée avec motif, données et catalogue intacts 80ms
+ ✓ tests/catalog.test.ts > catalogue : produits, versions, actualités > flux en panne (HTTP 503) : exécution échouée avec motif, données et catalogue intacts 67ms
+ ✓ tests/catalog.test.ts > catalogue : produits, versions, actualités > flux en panne (délai dépassé) : exécution échouée avec motif, données et catalogue intacts 60ms
+ ✓ tests/catalog.test.ts > catalogue : produits, versions, actualités > flux en panne (redirection) : exécution échouée avec motif, données et catalogue intacts 58ms
+ ✓ tests/catalog.test.ts > catalogue : produits, versions, actualités > flux en panne (réponse trop volumineuse) : exécution échouée avec motif, données et catalogue intacts 57ms
+ ✓ tests/catalog.test.ts > catalogue : produits, versions, actualités > release recréée avec un nouvel identifiant (même tag) : une seule actualité, le nouveau document en source secondaire 12ms
+ ✓ tests/catalog.test.ts > catalogue : produits, versions, actualités > autre document au même numéro de version (préversion) : la version stable et son document ne sont pas écrasés 8ms
+ ✓ tests/catalog.test.ts > catalogue : produits, versions, actualités > rattrapage : des documents déjà en base sans catalogue (base antérieure à la migration 0001) sont rattachés même absents de la réponse 19ms
+ ✓ tests/catalog.test.ts > catalogue : produits, versions, actualités > entrée d'abord sans date puis datée : la date inconnue de l'actualité est complétée, jamais une date connue 13ms
+ ✓ tests/catalog.test.ts > catalogue : produits, versions, actualités > toutes les entrées reçues sont nouvelles après une collecte réussie : trou possible signalé 18ms
+ ✓ tests/catalog.test.ts > catalogue : produits, versions, actualités > chaque source reçoit sa limite de taille (Codex CLI : 12 Mio, les autres : valeur générale) 37ms
+ ✓ tests/catalog.test.ts > catalogue : produits, versions, actualités > tag corrigé sur la même release : la version change de numéro, une seule version par document, titre mis à jour 12ms
+ ✓ tests/catalog.test.ts > catalogue : produits, versions, actualités > seconde collecte juste après un échec : la source reportée est signalée, pas passée sous silence 52ms
+ ✓ tests/catalog.test.ts > catalogue : produits, versions, actualités > base au schéma d’un jalon précédent : migrations en attente détectées 2ms
+ ✓ tests/catalog.test.ts > catalogue : produits, versions, actualités > préversion recréée en version stable avec un nouvel identifiant : la version passe stable, une seule actualité ; plus rien à rattraper ensuite 16ms
+ ✓ tests/catalog.test.ts > catalogue : produits, versions, actualités > release stable repassée en préversion, puis date corrigée : la version suit son document, l’actualité est conservée 11ms
+ ✓ tests/catalog.test.ts > catalogue : produits, versions, actualités > réponse vide après une collecte réussie : pas de « trou possible » 10ms
+ ✓ tests/catalog.test.ts > catalogue : produits, versions, actualités > collecte restreinte à une source : le job en attente d’une autre source n’est pas touché 9ms
+ ✓ tests/catalog.test.ts > catalogue : produits, versions, actualités > produit renommé dans la configuration : la fiche produit suit la configuration 11ms
+ ✓ tests/catalog.test.ts > normalizeVersion > v2.1.314 → 2.1.314 2ms
+ ✓ tests/catalog.test.ts > normalizeVersion > rust-v0.166.0 → 0.166.0 2ms
+ ✓ tests/catalog.test.ts > normalizeVersion > rust-v0.166.0-alpha.6 → 0.166.0-alpha.6 2ms
+ ✓ tests/catalog.test.ts > normalizeVersion > v0.67.0-nightly.20261030.gb633c0703 → 0.67.0-nightly.20261030.gb633c0703 2ms
+ ✓ tests/catalog.test.ts > normalizeVersion > release-2026 → release-2026 2ms
+ ✓ tests/catalog.test.ts > normalizeVersion > v1.2.3.4 → 1.2.3.4 2ms
+ ✓ tests/catalog.test.ts > normalizeVersion > release-1.2.3.4 → 1.2.3.4 2ms
+ ✓ tests/catalog.test.ts > normalizeVersion > v1.2.3-rc.1+build.5 → 1.2.3-rc.1+build.5 2ms
+ ✓ tests/catalog.test.ts > normalizeVersion > v1.2.3+build.5 → 1.2.3+build.5 2ms
+ ✓ tests/catalog.test.ts > normalizeVersion > 1.2.3.4.5 → 1.2.3.4.5 2ms
+ ✓ tests/busy.test.ts > verrou plus long que le délai d’attente > une réservation de job est bien enregistrée et visible des autres connexions 906ms
+ ✓ tests/busy.test.ts > verrou plus long que le délai d’attente > une transaction est bien validée et ne laisse aucun verrou 900ms
+ ✓ tests/crash-restart.test.ts > arrêt brutal puis relance > processus tué en pleine collecte puis relancé : ni perte ni doublon, exécution marquée interrompue 2158ms
+stdout | tests/concurrency.test.ts > concurrence entre processus > 300 jobs réservés par deux processus en parallèle : aucun job réservé deux fois
+Répartition : worker-a 154 jobs, worker-b 146 jobs
+
+ ✓ tests/concurrency.test.ts > concurrence entre processus > deux collecteurs lancés en même temps : un seul traite le job 2128ms
+ ✓ tests/concurrency.test.ts > concurrence entre processus > 300 jobs réservés par deux processus en parallèle : aucun job réservé deux fois 1771ms
+ ✓ tests/crash-restart.test.ts > arrêt brutal puis relance > processus tué pendant l'enregistrement : rien n'est à moitié écrit, la relance enregistre tout une seule fois 2320ms
+ ✓ tests/crash-restart.test.ts > mode fixture > refusé sans CURATION_ONLY_SOURCES : le même fichier serait servi à toutes les sources 264ms
+
+ Test Files  13 passed (13)
+      Tests  150 passed (150)
+   Start at  04:25:52
+   Duration  5.62s (tests 61%, import 36%, transform 3%)
+

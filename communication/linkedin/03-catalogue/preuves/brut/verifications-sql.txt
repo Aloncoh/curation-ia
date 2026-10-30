@@ -1,0 +1,133 @@
+verification                                                
+------------------------------------------------------------
+1. Documents en double (source, identifiant externe) — atten
+du : aucune ligne                                           
+verification                                                
+------------------------------------------------------------
+2. Releases rattachées à un nombre de versions différent de 
+1 — attendu : 0                                             
+releases_mal_rattachees
+-----------------------
+0                      
+verification                                                
+------------------------------------------------------------
+3. Versions avec plus d'une actualité — attendu : aucune lig
+ne                                                          
+verification                                                
+------------------------------------------------------------
+4. Actualités sans exactement une source principale — attend
+u : 0                                                       
+n
+-
+0
+verification                                                
+------------------------------------------------------------
+5. Actualités « version » dont la version ne vient pas de le
+ur document — attendu : 0                                   
+n
+-
+0
+verification                    
+--------------------------------
+6. Captures par mode de collecte
+mode  captures
+----  --------
+live  70      
+verification                                   
+-----------------------------------------------
+7. Par source : documents, captures, actualités
+source                                    documents  captures  actualites  status  last_success_at         
+----------------------------------------  ---------  --------  ----------  ------  ------------------------
+feed:github-changelog                     10         10        10          ok      2026-10-30T02:25:21.343Z
+feed:openai-news                          20         20        20          ok      2026-10-30T02:25:21.004Z
+github-releases:anthropics/claude-code    10         10        10          ok      2026-10-30T02:25:20.469Z
+github-releases:google-gemini/gemini-cli  20         20        2           ok      2026-10-30T02:25:20.809Z
+github-releases:openai/codex              10         10        2           ok      2026-10-30T02:25:20.715Z
+verification                                    
+------------------------------------------------
+8. Par produit : versions stables et préversions
+key                    stables  preversions  plus_ancienne             plus_recente            
+---------------------  -------  -----------  ------------------------  ------------------------
+anthropic/claude-code  10       0            2026-10-19T21:34:39.000Z  2026-10-30T01:06:26.000Z
+google/gemini-cli      2        18           2026-10-13T01:36:45.000Z  2026-10-30T01:22:17.000Z
+openai/codex           2        8            2026-10-27T01:33:18.000Z  2026-10-29T19:47:53.000Z
+verification                             
+-----------------------------------------
+9. Exécutions (les plus récentes d'abord)
+started_at                source_id                                 mode  status     nouveaux  inchanges  modifies  actualites  error_kind
+------------------------  ----------------------------------------  ----  ---------  --------  ---------  --------  ----------  ----------
+2026-10-30T02:25:21.006Z  feed:github-changelog                     live  succeeded  0         10         0         0                     
+2026-10-30T02:25:20.811Z  feed:openai-news                          live  succeeded  0         20         0         0                     
+2026-10-30T02:25:20.716Z  github-releases:google-gemini/gemini-cli  live  succeeded  0         20         0         0                     
+2026-10-30T02:25:20.470Z  github-releases:openai/codex              live  succeeded  0         10         0         0                     
+2026-10-30T02:25:20.348Z  github-releases:anthropics/claude-code    live  succeeded  0         10         0         0                     
+2026-10-30T02:25:19.457Z  feed:github-changelog                     live  succeeded  10        0          0         10                    
+2026-10-30T02:25:19.234Z  feed:openai-news                          live  succeeded  20        0          0         20                    
+2026-10-30T02:25:18.800Z  github-releases:google-gemini/gemini-cli  live  succeeded  20        0          0         2                     
+2026-10-30T02:25:16.875Z  github-releases:openai/codex              live  succeeded  10        0          0         2                     
+2026-10-30T02:25:16.436Z  github-releases:anthropics/claude-code    live  succeeded  5         5          0         10                    
+2026-10-30T01:26:39.297Z  github-releases:anthropics/claude-code    live  succeeded  0         5          0         0                     
+2026-10-30T01:26:38.481Z  github-releases:anthropics/claude-code    live  succeeded  5         0          0         0                     
+verification                                                
+------------------------------------------------------------
+10. Étapes « parse » : entrées refusées, et « store » : trou
+ possible, rattrapage                                       
+source_id                                 name   refusees       trou_possible  rattrapes
+----------------------------------------  -----  -------------  -------------  ---------
+feed:github-changelog                     store                 0              0        
+feed:github-changelog                     parse  {}                                     
+feed:openai-news                          store                 0              0        
+feed:openai-news                          parse  {"doublon":1}                          
+github-releases:google-gemini/gemini-cli  store                 0              0        
+github-releases:google-gemini/gemini-cli  parse  {}                                     
+github-releases:openai/codex              store                 0              0        
+github-releases:openai/codex              parse  {}                                     
+github-releases:anthropics/claude-code    store                 0              0        
+github-releases:anthropics/claude-code    parse  {}                                     
+feed:github-changelog                     store                 0              0        
+feed:github-changelog                     parse  {}                                     
+feed:openai-news                          store                 0              0        
+feed:openai-news                          parse  {"doublon":1}                          
+github-releases:google-gemini/gemini-cli  store                 0              0        
+github-releases:google-gemini/gemini-cli  parse  {}                                     
+github-releases:openai/codex              store                 0              0        
+github-releases:openai/codex              parse  {}                                     
+github-releases:anthropics/claude-code    store                 0              0        
+github-releases:anthropics/claude-code    parse  {}                                     
+verification                                                
+------------------------------------------------------------
+11. Étapes « fetch » : URL, statut HTTP et taille réelle des
+ réponses                                                   
+started_at                url                                                           http  octets   mode
+------------------------  ------------------------------------------------------------  ----  -------  ----
+2026-10-30T02:25:21.006Z  https://github.blog/changelog/feed/                           200   66745    live
+
+2026-10-30T02:25:20.811Z  https://openai.com/news/rss.xml                               200   814291   live
+
+2026-10-30T02:25:20.716Z  https://api.github.com/repos/google-gemini/gemini-cli/releas  200   173175   live
+                          es?per_page=20                                                                   
+
+2026-10-30T02:25:20.470Z  https://api.github.com/repos/openai/codex/releases?per_page=  200   5571996  live
+                          10                                                                               
+
+2026-10-30T02:25:20.348Z  https://api.github.com/repos/anthropics/claude-code/releases  200   246814   live
+                          ?per_page=10                                                                     
+
+2026-10-30T02:25:19.457Z  https://github.blog/changelog/feed/                           200   66745    live
+
+2026-10-30T02:25:19.234Z  https://openai.com/news/rss.xml                               200   814291   live
+
+2026-10-30T02:25:18.800Z  https://api.github.com/repos/google-gemini/gemini-cli/releas  200   173175   live
+                          es?per_page=20                                                                   
+
+2026-10-30T02:25:16.875Z  https://api.github.com/repos/openai/codex/releases?per_page=  200   5571996  live
+                          10                                                                               
+
+2026-10-30T02:25:16.436Z  https://api.github.com/repos/anthropics/claude-code/releases  200   246814   live
+                          ?per_page=10                                                                     
+
+2026-10-30T01:26:39.297Z  https://api.github.com/repos/anthropics/claude-code/releases  200   137393   live
+                          ?per_page=5                                                                      
+
+2026-10-30T01:26:38.481Z  https://api.github.com/repos/anthropics/claude-code/releases  200   137393   live
+                          ?per_page=5                                                                      

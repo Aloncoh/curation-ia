@@ -5,8 +5,8 @@
 import { randomUUID } from 'node:crypto';
 import { eq } from 'drizzle-orm';
 import { linkDocuments } from '../catalog/link.ts';
-import { FEED_HEADERS, parseFeedItems } from '../collect/feeds.ts';
-import { GITHUB_API_HEADERS, parseReleases, releasesUrl, SourceFormatError, type CollectedDocument } from '../collect/github-releases.ts';
+import { FEED_HEADERS, parseFeedItems, type ParsedFeed } from '../collect/feeds.ts';
+import { GITHUB_API_HEADERS, parseReleases, releasesUrl, SourceFormatError } from '../collect/github-releases.ts';
 import type { SourceFetcher } from '../collect/fetchers.ts';
 import { SafeFetchError } from '../collect/safe-fetch.ts';
 import { storeDocuments, type StoreCounts } from '../collect/store.ts';
@@ -34,6 +34,8 @@ export interface CollectOptions {
 
 export interface RunSummary extends StoreCounts {
   newNewsItems: number;
+  /** Toutes les entrées reçues étaient nouvelles alors que la source avait déjà été collectée : des entrées ont pu être manquées. */
+  possibleGap: boolean;
   runId: string;
   sourceId: string;
   sourceName: string;
@@ -42,20 +44,31 @@ export interface RunSummary extends StoreCounts {
   errorMessage: string | null;
 }
 
+/** Source sans exécution pendant cette collecte : nouvelle tentative programmée plus tard, ou job tenu par un autre worker. */
+export interface SkippedSource {
+  sourceId: string;
+  sourceName: string;
+  reason: 'retry_scheduled' | 'leased_elsewhere';
+  availableAt: string | null;
+  lastError: string | null;
+}
+
 export interface CollectSummary {
   paused: boolean;
   enqueued: number;
   runs: RunSummary[];
+  skipped: SkippedSource[];
 }
 
-const EMPTY_COUNTS = { newDocuments: 0, unchangedDocuments: 0, changedDocuments: 0, newNewsItems: 0 };
+const EMPTY_COUNTS = { newDocuments: 0, unchangedDocuments: 0, changedDocuments: 0, newNewsItems: 0, possibleGap: false };
 
 /** Ce qui change d'un type de source à l'autre : l'adresse interrogée, les en-têtes et la lecture de la réponse. */
-function adapterFor(definition: SourceDefinition): { url: string; headers: Record<string, string>; parse: (body: string) => CollectedDocument[] } {
+function adapterFor(definition: SourceDefinition): { url: string; headers: Record<string, string>; parse: (body: string) => ParsedFeed } {
   if (definition.kind === 'github_releases') {
-    return { url: releasesUrl(definition.config), headers: GITHUB_API_HEADERS, parse: parseReleases };
+    const parse = (body: string) => ({ documents: parseReleases(body, definition.config), rejected: {} });
+    return { url: releasesUrl(definition.config), headers: GITHUB_API_HEADERS, parse };
   }
-  return { url: definition.config.url, headers: FEED_HEADERS, parse: (body) => parseFeedItems(body, definition.config.maxItems) };
+  return { url: definition.config.url, headers: FEED_HEADERS, parse: (body) => parseFeedItems(body, definition.config) };
 }
 const LEASE_LOST_MESSAGE =
   "Bail perdu avant la fin : le job a été repris par un autre worker ou clos par la récupération (documents enregistrés de façon idempotente)";
@@ -73,7 +86,7 @@ export async function runCollect(options: CollectOptions): Promise<CollectSummar
   const definitions = options.definitions ?? SOURCES;
 
   await syncSources(database, definitions, now());
-  if (await isPaused(database.db)) return { paused: true, enqueued: 0, runs: [] };
+  if (await isPaused(database.db)) return { paused: true, enqueued: 0, runs: [], skipped: [] };
 
   const enqueued = await enqueueCollectJobs(database.client, definitions.map((def) => def.id), now(), options.maxAttempts);
   const summaries: RunSummary[] = [];
@@ -81,11 +94,35 @@ export async function runCollect(options: CollectOptions): Promise<CollectSummar
   for (;;) {
     await recoverExpiredLeases(database.client, now());
     // La réservation échoue d'elle-même si la pause est active (condition dans la même instruction SQL).
-    const job = await claimNextJob(database.client, workerId, now(), options.leaseMs);
+    const job = await claimNextJob(database.client, workerId, now(), options.leaseMs, definitions.map((def) => def.id));
     if (!job) break;
     summaries.push(await processJob(options, job, findDefinition(job.sourceId, definitions), now));
   }
-  return { paused: await isPaused(database.db), enqueued, runs: summaries };
+  const paused = await isPaused(database.db);
+  const skipped = paused ? [] : await skippedSources(database, definitions, summaries);
+  return { paused, enqueued, runs: summaries, skipped };
+}
+
+/** Sources demandées qui n'ont pas eu d'exécution : jamais passées sous silence (ex. seconde collecte juste après un échec). */
+async function skippedSources(database: Database, definitions: SourceDefinition[], runs: RunSummary[]): Promise<SkippedSource[]> {
+  const done = new Set(runs.map((run) => run.sourceId));
+  const skipped: SkippedSource[] = [];
+  for (const def of definitions.filter((candidate) => !done.has(candidate.id))) {
+    const result = await database.client.execute({
+      sql: "select status, available_at, last_error from job where kind = 'collect' and source_id = ? and status in ('pending', 'leased') order by id desc limit 1",
+      args: [def.id],
+    });
+    const job = result.rows[0];
+    if (!job) continue;
+    skipped.push({
+      sourceId: def.id,
+      sourceName: def.name,
+      reason: job.status === 'leased' ? 'leased_elsewhere' : 'retry_scheduled',
+      availableAt: job.status === 'pending' ? String(job.available_at) : null,
+      lastError: job.last_error === null ? null : String(job.last_error),
+    });
+  }
+  return skipped;
 }
 
 async function processJob(
@@ -123,12 +160,12 @@ async function processJob(
     if (!definition) throw new Error(`Source inconnue dans la configuration : ${job.sourceId}`);
     const adapter = adapterFor(definition);
 
-    const fetched = await options.fetcher(adapter.url, adapter.headers, definition.allowedHosts);
+    const fetched = await options.fetcher(adapter.url, adapter.headers, definition.allowedHosts, { maxBytes: definition.maxResponseBytes });
     await recordStep('succeeded', { url: adapter.url, httpStatus: fetched.status, bytes: fetched.bytes, mode: options.mode });
 
     stepName = 'parse';
-    const documents = adapter.parse(fetched.body);
-    await recordStep('succeeded', { documents: documents.length });
+    const { documents, rejected } = adapter.parse(fetched.body);
+    await recordStep('succeeded', { documents: documents.length, rejected });
 
     // Fin réussie : documents, produits, versions, actualités, étape, job, exécution et source dans une seule transaction.
     stepName = 'store';
@@ -137,7 +174,10 @@ async function processJob(
     const outcome = await withBusyRetry(client, () =>
       db.transaction(async (tx) => {
         const collectedAt = now();
+        const [previous] = await tx.select({ lastSuccessAt: sources.lastSuccessAt }).from(sources).where(eq(sources.id, job.sourceId));
         const { counts, stored } = await storeDocuments(tx, job.sourceId, documents, collectedAt, runId);
+        // Fenêtre de la source dépassée depuis la dernière collecte réussie : signalé, jamais masqué.
+        const possibleGap = Boolean(previous?.lastSuccessAt) && documents.length > 0 && counts.newDocuments === documents.length;
         const links = await linkDocuments(tx, definition, stored, collectedAt, runId);
         if (options.hooks?.insideStoreTransaction) await options.hooks.insideStoreTransaction();
         const finishedAt = now();
@@ -148,7 +188,7 @@ async function processJob(
           status: 'succeeded',
           startedAt: storeStart,
           finishedAt,
-          detail: { ...counts, ...links },
+          detail: { ...counts, ...links, possibleGap },
         });
         const kept = await completeJob(tx, job.id, workerId, finishedAt);
         await finishRun(tx, runId, {
@@ -160,7 +200,7 @@ async function processJob(
           errorMessage: kept ? null : LEASE_LOST_MESSAGE,
         });
         if (kept) await tx.update(sources).set({ status: 'ok', lastSuccessAt: finishedAt }).where(eq(sources.id, job.sourceId));
-        return { counts, links, kept };
+        return { counts, links, kept, possibleGap };
       }),
     );
     return {
@@ -170,6 +210,7 @@ async function processJob(
       status: outcome.kept ? 'succeeded' : 'interrupted',
       ...outcome.counts,
       newNewsItems: outcome.links.newNewsItems,
+      possibleGap: outcome.possibleGap,
       errorKind: outcome.kept ? null : 'lease_lost',
       errorMessage: outcome.kept ? null : LEASE_LOST_MESSAGE,
     };

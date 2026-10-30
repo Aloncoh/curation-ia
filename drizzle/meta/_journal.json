@@ -15,6 +15,13 @@
       "when": 1793324091306,
       "tag": "0001_catalog",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1793327069889,
+      "tag": "0002_catalog_integrity",
+      "breakpoints": true
     }
   ]
 }

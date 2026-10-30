@@ -10,8 +10,8 @@
 | **P1** Collecte fiable | 5 releases réelles de Claude Code stockées avec provenance + export JSON lisible | voir le plan ci-dessous | P0 | **réalisé le 2026-10-30** (V1) |
 | **P2** Produits et sources | produits et versions reliés aux documents ; autres dépôts GitHub officiels et un flux officiel d'annonces de modèles et d'applications ; maquette du parcours construite autour de la mascotte | doublons exacts et annonces distinctes gérés par des tests ; maquette validée | P1 | V1 |
 | **P3** Analyse IA | une annonce réelle devient un brouillon d'analyse structuré, cité et révisable ; coût réel mesuré | critères 7.3 de SPEC ; coût par analyse mesuré et comparé à l'estimation | P2, budget validé, crédits API activés avec accord | V1 |
-| **P4** Site | API, fil, page de détail, historique des versions | critères 7.4 de SPEC | P3 | V1 |
-| **P5** Chaîne autonome en ligne | publication automatique planifiée (GitHub Actions), quotas et plafond, commandes lancer / état / pause / coûts, déploiement (Vercel, Turso), domaine | démonstration V1 (SPEC §10) | P4, accord sur hébergement et domaine | **fin de la V1** |
+| **P4** Site | API, fil, page de détail, historique des versions | critères 7.4 de SPEC ; contenus collectés affichés en texte brut ou assainis côté serveur par liste blanche, testés avec `<img onerror>` et `javascript:` (ADR 0003) | P3 | V1 |
+| **P5** Chaîne autonome en ligne | publication automatique planifiée (GitHub Actions) respectant l'intervalle de chaque source (GitHub Changelog : au moins toutes les heures), quotas et plafond, commandes lancer / état / pause / coûts, déploiement (Vercel, Turso), domaine | démonstration V1 (SPEC §10) | P4, accord sur hébergement et domaine | **fin de la V1** |
 | **P6** Sources et contrôles avancés | plusieurs types de sources, regroupement, évaluation sur corpus, agent si utile | seuils d'évaluation de SPEC §10 | V1 | après V1 |
 | **P7** Pilotage et classement | interface d'administration ; score de découverte et formule de classement documentée | à préciser | P6 | après V1 |
 | **P8** Communauté | comptes, favoris, votes, commentaires, retours de test ; modération, anti-abus, confidentialité | à préciser avant ouverture | V1 | après V1 |
@@ -28,7 +28,9 @@ Environ **6 à 9 séances de travail** de 2 à 4 heures pour P2 à P5 (P2 : 1–
 
 ---
 
-## P2 — Produits, versions et sources _(plan proposé)_
+## P2 — Produits, versions et sources _(en cours — tout est fait sauf la validation de la maquette ; résultats dans PROGRESS.md)_
+
+État des critères de sortie au 2026-10-30 : tests verts (150) ✅ ; essai réel sur les 5 sources, seconde collecte sans doublon ✅ ; chaque release réelle rattachée à exactement une version (vérifié par requête SQL) ✅ ; maquette validée par l'utilisateur ⏳. Écarts par rapport au plan : Codex CLI limité à 10 releases avec une limite de taille propre (≈ 350 fichiers joints par release) ; mode fixture restreint à une seule source ; migration 0002 (index d'intégrité du catalogue).
 
 **Résultat attendu.** Les documents collectés sont rattachés à des produits et à des versions identifiés ; plusieurs sources officielles sont collectées ; chaque annonce devient une « actualité » sans doublon ; une maquette du parcours (fil et page de détail) est construite autour de la mascotte. Toujours sans IA.
 

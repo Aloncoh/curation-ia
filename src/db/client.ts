@@ -33,3 +33,15 @@ export async function isInitialized(client: Client): Promise<boolean> {
   const result = await client.execute("select name from sqlite_master where type = 'table' and name = 'source'");
   return result.rows.length > 0;
 }
+
+/**
+ * Nombre de migrations du dossier drizzle/ pas encore appliquées à la base (même règle que le migrateur Drizzle :
+ * une migration est appliquée si sa date est antérieure ou égale à la dernière date enregistrée).
+ */
+export async function pendingMigrations(client: Client, journal: { entries: { when: number }[] }): Promise<number> {
+  const table = await client.execute("select name from sqlite_master where type = 'table' and name = '__drizzle_migrations'");
+  if (table.rows.length === 0) return journal.entries.length;
+  const result = await client.execute('select max(created_at) as last from __drizzle_migrations');
+  const last = Number(result.rows[0]?.last ?? 0);
+  return journal.entries.filter((entry) => entry.when > last).length;
+}

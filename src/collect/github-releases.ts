@@ -1,6 +1,6 @@
 // Source « releases GitHub » : API REST officielle, documentée et versionnée.
 import { z } from 'zod';
-import { contentHash, normalizeDate, normalizeText, normalizeUrl } from './normalize.ts';
+import { cleanTitle, contentHash, normalizeDate, normalizeText, normalizeUrl } from './normalize.ts';
 
 export interface GithubReleasesConfig {
   owner: string;
@@ -36,11 +36,13 @@ export const GITHUB_API_HEADERS: Record<string, string> = {
 };
 
 const NAME_PATTERN = /^[A-Za-z0-9_.-]+$/;
-const SEMVER_AT_END = /(\d+\.\d+\.\d+(?:[-+][0-9A-Za-z.-]+)?)$/;
+// Numéro à 3 ou 4 composantes en fin de tag, précédé du début du tag ou d'un séparateur (jamais d'un chiffre),
+// avec suffixe de préversion et métadonnées de build facultatifs.
+const VERSION_AT_END = /(?:^|[^0-9.])v?(\d+(?:\.\d+){2,3}(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?)$/;
 
 /** Numéro de version lisible à partir d'un tag (« rust-v0.166.0 » → « 0.166.0 ») ; le tag tel quel sinon. */
 export function normalizeVersion(tag: string): string {
-  return SEMVER_AT_END.exec(tag)?.[1] ?? tag;
+  return VERSION_AT_END.exec(tag)?.[1] ?? tag;
 }
 
 export function releasesUrl(config: GithubReleasesConfig): string {
@@ -67,8 +69,12 @@ const releaseSchema = z.object({
 
 const releasesSchema = z.array(releaseSchema);
 
-/** Transforme la réponse de l'API en documents normalisés. Le contenu collecté reste une donnée, jamais une instruction. */
-export function parseReleases(body: string): CollectedDocument[] {
+/**
+ * Transforme la réponse de l'API en documents normalisés. Le contenu collecté reste une donnée, jamais une instruction.
+ * Avec `repository`, une release dont la page n'appartient pas à ce dépôt rend toute la réponse invalide
+ * (protège contre une réponse ou une fixture servie à la mauvaise source).
+ */
+export function parseReleases(body: string, repository?: Pick<GithubReleasesConfig, 'owner' | 'repo'>): CollectedDocument[] {
   let json: unknown;
   try {
     json = JSON.parse(body);
@@ -79,10 +85,15 @@ export function parseReleases(body: string): CollectedDocument[] {
   if (!parsed.success) {
     throw new SourceFormatError(`Réponse inattendue de l'API GitHub : ${z.prettifyError(parsed.error)}`);
   }
+  if (repository) {
+    const prefix = `https://github.com/${repository.owner}/${repository.repo}/releases/`.toLowerCase();
+    const foreign = parsed.data.find((release) => !release.html_url.toLowerCase().startsWith(prefix));
+    if (foreign) throw new SourceFormatError(`Release d'un autre dépôt que ${repository.owner}/${repository.repo} : ${foreign.html_url}`);
+  }
   return parsed.data
     .filter((release) => !release.draft)
     .map((release) => {
-      const title = normalizeText(release.name || release.tag_name);
+      const title = cleanTitle(release.name || release.tag_name);
       const content = normalizeText(release.body ?? '');
       return {
         externalId: String(release.id),

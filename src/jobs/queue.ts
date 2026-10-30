@@ -61,11 +61,19 @@ export async function recoverExpiredLeases(client: Client, now: string): Promise
 
 /**
  * Réserve le prochain job disponible en une seule instruction SQL : deux workers ne peuvent pas obtenir le même,
- * et aucun job n'est réservé si la pause est active au même instant.
+ * et aucun job n'est réservé si la pause est active au même instant. Avec `sourceIds`, seuls les jobs de ces
+ * sources sont réservés (une collecte restreinte ne touche jamais au job en attente d'une autre source).
  */
-export async function claimNextJob(client: Client, workerId: string, now: string, leaseMs: number): Promise<ClaimedJob | null> {
+export async function claimNextJob(
+  client: Client,
+  workerId: string,
+  now: string,
+  leaseMs: number,
+  sourceIds?: readonly string[],
+): Promise<ClaimedJob | null> {
+  const onlySources = sourceIds ? ' and source_id in (select value from json_each(:sources))' : '';
   const available = `kind = 'collect' and attempts < max_attempts
-    and ((status = 'pending' and available_at <= :now) or (status = 'leased' and lease_until < :now))`;
+    and ((status = 'pending' and available_at <= :now) or (status = 'leased' and lease_until < :now))${onlySources}`;
   const notPaused = `not exists (select 1 from setting where key = 'paused' and value = 'true')`;
   const result = await withBusyRetry(client, () =>
     client.execute({
@@ -76,7 +84,7 @@ export async function claimNextJob(client: Client, workerId: string, now: string
               and ${available}
               and ${notPaused}
             returning id, source_id, attempts, max_attempts`,
-      args: { owner: workerId, leaseUntil: addMs(now, leaseMs), now },
+      args: { owner: workerId, leaseUntil: addMs(now, leaseMs), now, ...(sourceIds ? { sources: JSON.stringify(sourceIds) } : {}) },
     }),
   );
   const row = result.rows[0];

@@ -11,6 +11,7 @@
     "collect": "node src/cli/collect.ts",
     "status": "node src/cli/status.ts",
     "export": "node src/cli/export.ts",
+    "maquette": "node src/cli/maquette.ts",
     "pause": "node src/cli/pause.ts",
     "resume": "node src/cli/resume.ts",
     "db:migrate": "node src/cli/migrate.ts",
