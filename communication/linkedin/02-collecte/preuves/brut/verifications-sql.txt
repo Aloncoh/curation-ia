@@ -1,0 +1,45 @@
+-- Documents collectés (provenance et dates)
+select external_id, version, announced_at, first_collected_at, normalized_url from source_document order by announced_at desc
+┌─────────┬─────────────┬────────────┬────────────────────────────┬────────────────────────────┬───────────────────────────────────────────────────────────────────┐
+│ (index) │ external_id │ version    │ announced_at               │ first_collected_at         │ normalized_url                                                    │
+├─────────┼─────────────┼────────────┼────────────────────────────┼────────────────────────────┼───────────────────────────────────────────────────────────────────┤
+│ 0       │ '428518421' │ 'v2.1.314' │ '2026-10-30T01:06:26.000Z' │ '2026-10-30T01:26:38.899Z' │ 'https://github.com/anthropics/claude-code/releases/tag/v2.1.314' │
+│ 1       │ '425846009' │ 'v2.1.312' │ '2026-10-27T20:24:20.000Z' │ '2026-10-30T01:26:38.899Z' │ 'https://github.com/anthropics/claude-code/releases/tag/v2.1.312' │
+│ 2       │ '424682562' │ 'v2.1.311' │ '2026-10-26T21:51:23.000Z' │ '2026-10-30T01:26:38.899Z' │ 'https://github.com/anthropics/claude-code/releases/tag/v2.1.311' │
+│ 3       │ '422315867' │ 'v2.1.310' │ '2026-10-23T23:39:00.000Z' │ '2026-10-30T01:26:38.899Z' │ 'https://github.com/anthropics/claude-code/releases/tag/v2.1.310' │
+│ 4       │ '421170674' │ 'v2.1.309' │ '2026-10-22T22:18:57.000Z' │ '2026-10-30T01:26:38.899Z' │ 'https://github.com/anthropics/claude-code/releases/tag/v2.1.309' │
+└─────────┴─────────────┴────────────┴────────────────────────────┴────────────────────────────┴───────────────────────────────────────────────────────────────────┘
+-- Doublons de documents (attendu : aucune ligne)
+select source_id, external_id, count(*) as n from source_document group by source_id, external_id having count(*) > 1
+┌─────────┐
+│ (index) │
+├─────────┤
+└─────────┘
+-- Captures par document (attendu : 1 chacune)
+select d.version, count(s.id) as captures, substr(min(s.content_hash),1,16) as empreinte_debut from source_document d join document_snapshot s on s.document_id = d.id group by d.id order by d.version desc
+┌─────────┬────────────┬──────────┬────────────────────┐
+│ (index) │ version    │ captures │ empreinte_debut    │
+├─────────┼────────────┼──────────┼────────────────────┤
+│ 0       │ 'v2.1.314' │ 1        │ '507ed105989aeef8' │
+│ 1       │ 'v2.1.312' │ 1        │ '2c7d405b62839bc2' │
+│ 2       │ 'v2.1.311' │ 1        │ '72ee5fbf687db73a' │
+│ 3       │ 'v2.1.310' │ 1        │ '8b0d4aabb7b0a89e' │
+│ 4       │ 'v2.1.309' │ 1        │ 'c96616478549875c' │
+└─────────┴────────────┴──────────┴────────────────────┘
+-- Exécutions
+select mode, status, new_documents, unchanged_documents, changed_documents, started_at from run order by started_at
+┌─────────┬────────┬─────────────┬───────────────┬─────────────────────┬───────────────────┬────────────────────────────┐
+│ (index) │ mode   │ status      │ new_documents │ unchanged_documents │ changed_documents │ started_at                 │
+├─────────┼────────┼─────────────┼───────────────┼─────────────────────┼───────────────────┼────────────────────────────┤
+│ 0       │ 'live' │ 'succeeded' │ 5             │ 0                   │ 0                 │ '2026-10-30T01:26:38.481Z' │
+│ 1       │ 'live' │ 'succeeded' │ 0             │ 5                   │ 0                 │ '2026-10-30T01:26:39.297Z' │
+└─────────┴────────┴─────────────┴───────────────┴─────────────────────┴───────────────────┴────────────────────────────┘
+-- Étapes de la première exécution
+select seq, name, status, duration_ms, detail from run_step where run_id = (select id from run order by started_at limit 1) order by seq
+┌─────────┬─────┬─────────┬─────────────┬─────────────┬───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ (index) │ seq │ name    │ status      │ duration_ms │ detail                                                                                                                            │
+├─────────┼─────┼─────────┼─────────────┼─────────────┼───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ 0       │ 1   │ 'fetch' │ 'succeeded' │ 406         │ '{"url":"https://api.github.com/repos/anthropics/claude-code/releases?per_page=5","httpStatus":200,"bytes":137393,"mode":"live"}' │
+│ 1       │ 2   │ 'parse' │ 'succeeded' │ 7           │ '{"documents":5}'                                                                                                                 │
+│ 2       │ 3   │ 'store' │ 'succeeded' │ 8           │ '{"newDocuments":5,"unchangedDocuments":0,"changedDocuments":0}'                                                                  │
+└─────────┴─────┴─────────┴─────────────┴─────────────┴───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘

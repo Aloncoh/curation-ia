@@ -1,0 +1,99 @@
+# npm test — 2026-10-30T01:27:10Z (UTC)
+typecheck : OK (TypeScript 7.0.2)
+ RUN  v5.0.5 /Users/aloncohen/CURATION AI
+ ✓ tests/normalize.test.ts > normalizeUrl > retire fragment, paramètres de suivi, port par défaut et « / » final, et trie les paramètres 10ms
+ ✓ tests/normalize.test.ts > normalizeUrl > laisse intacte une URL déjà canonique 0ms
+ ✓ tests/normalize.test.ts > normalizeDate > convertit en ISO 8601 UTC 3ms
+ ✓ tests/normalize.test.ts > normalizeDate > renvoie null plutôt que d'inventer une date 0ms
+ ✓ tests/normalize.test.ts > normalizeText et contentHash > uniformise fins de ligne et espaces de fin 0ms
+ ✓ tests/normalize.test.ts > normalizeText et contentHash > donne la même empreinte pour le même contenu et une autre pour un contenu modifié 2ms
+ ✓ tests/safe-fetch.test.ts > isForbiddenAddress > refuse 127.0.0.1 3ms
+ ✓ tests/safe-fetch.test.ts > isForbiddenAddress > refuse 10.1.2.3 1ms
+ ✓ tests/safe-fetch.test.ts > isForbiddenAddress > refuse 172.16.5.4 0ms
+ ✓ tests/safe-fetch.test.ts > isForbiddenAddress > refuse 192.168.1.1 0ms
+ ✓ tests/safe-fetch.test.ts > isForbiddenAddress > refuse 169.254.169.254 0ms
+ ✓ tests/safe-fetch.test.ts > isForbiddenAddress > refuse 0.0.0.0 0ms
+ ✓ tests/safe-fetch.test.ts > isForbiddenAddress > refuse 100.64.0.1 0ms
+ ✓ tests/safe-fetch.test.ts > isForbiddenAddress > refuse 224.0.0.1 0ms
+ ✓ tests/safe-fetch.test.ts > isForbiddenAddress > refuse ::1 3ms
+ ✓ tests/safe-fetch.test.ts > isForbiddenAddress > refuse :: 2ms
+ ✓ tests/safe-fetch.test.ts > isForbiddenAddress > refuse fe80::1 0ms
+ ✓ tests/safe-fetch.test.ts > isForbiddenAddress > refuse fc00::1 0ms
+ ✓ tests/safe-fetch.test.ts > isForbiddenAddress > refuse ::ffff:127.0.0.1 0ms
+ ✓ tests/safe-fetch.test.ts > isForbiddenAddress > refuse ::ffff:10.0.0.1 0ms
+ ✓ tests/safe-fetch.test.ts > isForbiddenAddress > refuse 0:0:0:0:0:ffff:7f00:1 0ms
+ ✓ tests/safe-fetch.test.ts > isForbiddenAddress > refuse ::127.0.0.1 0ms
+ ✓ tests/safe-fetch.test.ts > isForbiddenAddress > refuse ::a9fe:a9fe 0ms
+ ✓ tests/safe-fetch.test.ts > isForbiddenAddress > refuse 64:ff9b:1::a9fe:a9fe 0ms
+ ✓ tests/safe-fetch.test.ts > isForbiddenAddress > refuse 2002:7f00:1:: 0ms
+ ✓ tests/safe-fetch.test.ts > isForbiddenAddress > refuse 2001:0:4136:e378:8000:63bf:3fff:fdd2 0ms
+ ✓ tests/safe-fetch.test.ts > isForbiddenAddress > refuse fec0::1 0ms
+ ✓ tests/safe-fetch.test.ts > isForbiddenAddress > refuse pas-une-ip 0ms
+ ✓ tests/safe-fetch.test.ts > isForbiddenAddress > accepte l’adresse publique 140.82.112.6 0ms
+ ✓ tests/safe-fetch.test.ts > isForbiddenAddress > accepte l’adresse publique 8.8.8.8 0ms
+ ✓ tests/safe-fetch.test.ts > isForbiddenAddress > accepte l’adresse publique 2606:4700:4700::1111 0ms
+ ✓ tests/safe-fetch.test.ts > assertAllowedUrl > refuse http://api.github.com/repos/a/b/releases 0ms
+ ✓ tests/safe-fetch.test.ts > assertAllowedUrl > refuse https://evil.example/repos/a/b/releases 0ms
+ ✓ tests/safe-fetch.test.ts > assertAllowedUrl > refuse https://api.github.com:8443/repos/a/b/releases 0ms
+ ✓ tests/safe-fetch.test.ts > assertAllowedUrl > refuse https://user:secret@api.github.com/repos/a/b/releases 0ms
+ ✓ tests/safe-fetch.test.ts > assertAllowedUrl > accepte un hôte de la liste blanche en HTTPS 2ms
+ ✓ tests/safe-fetch.test.ts > safeGet > se connecte à l'adresse validée et renvoie le corps 2ms
+ ✓ tests/safe-fetch.test.ts > safeGet > refuse un hôte hors liste blanche sans aucune requête DNS ni réseau 0ms
+ ✓ tests/safe-fetch.test.ts > safeGet > refuse si une adresse résolue est interne, sans se connecter 0ms
+ ✓ tests/safe-fetch.test.ts > safeGet > refuse les redirections 1ms
+ ✓ tests/safe-fetch.test.ts > safeGet > signale un statut HTTP en erreur 0ms
+ ✓ tests/safe-fetch.test.ts > safeGet > abandonne après le délai maximum 31ms
+ ✓ tests/safe-fetch.test.ts > safeGet > le délai maximum couvre aussi une résolution DNS qui ne répond pas 51ms
+ ✓ tests/safe-fetch.test.ts > safeGet > classe une panne de résolution DNS ou de connexion comme erreur réseau 0ms
+ ✓ tests/safe-fetch.test.ts > transport HTTPS réel : options de connexion > épingle la connexion à l'adresse validée, vérifie le certificat et n'utilise ni agent partagé ni proxy 1ms
+ ✓ tests/safe-fetch.test.ts > transport HTTPS réel : options de connexion > la résolution épinglée renvoie toujours l'adresse validée, sans nouvelle requête DNS 0ms
+ ✓ tests/safe-fetch.test.ts > readLimited > lit un corps dans la limite 1ms
+ ✓ tests/safe-fetch.test.ts > readLimited > refuse un corps qui dépasse la taille maximale en cours de lecture 1ms
+ ✓ tests/safe-fetch.test.ts > readLimited > refuse immédiatement une taille annoncée trop grande 0ms
+ ✓ tests/config.test.ts > configuration > valeurs par défaut prudentes 2ms
+ ✓ tests/config.test.ts > configuration > refuse zéro tentative, un bail nul ou une valeur non entière 2ms
+ ✓ tests/config.test.ts > configuration > ignore le point d'arrêt de test hors mode fixture 0ms
+ ✓ tests/config.test.ts > configuration > supprime les espaces autour de l'URL de base 0ms
+ ✓ tests/config.test.ts > protection des secrets > masque un jeton ou des identifiants dans un message d’erreur 5ms
+ ✓ tests/config.test.ts > protection des secrets > décrit l'URL de base sans jeton 3ms
+ ✓ tests/github-releases.test.ts > releasesUrl > construit l'URL de l'API officielle 2ms
+ ✓ tests/github-releases.test.ts > releasesUrl > refuse un dépôt ou une pagination invalides 2ms
+ ✓ tests/github-releases.test.ts > parseReleases > transforme les 5 releases réelles en documents avec provenance et dates 6ms
+ ✓ tests/github-releases.test.ts > parseReleases > garde null quand la date de publication est inconnue, et utilise le tag si le titre manque 0ms
+ ✓ tests/github-releases.test.ts > parseReleases > ignore les brouillons 1ms
+ ✓ tests/github-releases.test.ts > parseReleases > refuse une réponse qui n’est pas du JSON 0ms
+ ✓ tests/github-releases.test.ts > parseReleases > refuse une réponse au format inattendu 1ms
+ ✓ tests/export.test.ts > export JSON > expose documents, captures et exécutions dans un format lisible 33ms
+ ✓ tests/queue.test.ts > file de jobs > un seul job actif par source, même demandé deux fois 8ms
+ ✓ tests/queue.test.ts > file de jobs > la pause empêche la réservation dans la même instruction, même appelée directement 6ms
+ ✓ tests/queue.test.ts > file de jobs > bail perdu : le worker dépossédé ne peut ni terminer ni faire échouer le job 6ms
+ ✓ tests/queue.test.ts > file de jobs > un job ayant épuisé ses tentatives passe en échec et ne bloque plus sa source 6ms
+ ✓ tests/queue.test.ts > file de jobs > job repris juste après l'expiration du bail : l'exécution précédente est marquée « interrompue », même si la récupération ne l'a pas vue 15ms
+ ✓ tests/collect.test.ts > collecte > première collecte : 5 documents et 5 captures, avec provenance, dates, contenu et traces 29ms
+ ✓ tests/collect.test.ts > collecte > conserve l'URL d'origine et calcule une URL normalisée distincte 13ms
+ ✓ tests/collect.test.ts > collecte > seconde collecte après redémarrage : aucun nouveau document ni capture 17ms
+ ✓ tests/collect.test.ts > collecte > contenu modifié : une seule nouvelle capture, l'ancienne est conservée 17ms
+ ✓ tests/collect.test.ts > collecte > date de publication ou statut de prerelease modifiés sans changement de contenu : fiche document mise à jour, aucune capture 11ms
+ ✓ tests/collect.test.ts > collecte > source en erreur (http_status) : exécution échouée avec motif et étape en échec, données intactes 9ms
+ ✓ tests/collect.test.ts > collecte > source en erreur (timeout) : exécution échouée avec motif et étape en échec, données intactes 10ms
+ ✓ tests/collect.test.ts > collecte > source en erreur (redirect) : exécution échouée avec motif et étape en échec, données intactes 22ms
+ ✓ tests/collect.test.ts > collecte > source en erreur (too_large) : exécution échouée avec motif et étape en échec, données intactes 8ms
+ ✓ tests/collect.test.ts > collecte > source en erreur (forbidden_address) : exécution échouée avec motif et étape en échec, données intactes 11ms
+ ✓ tests/collect.test.ts > collecte > source en erreur (network) : exécution échouée avec motif et étape en échec, données intactes 9ms
+ ✓ tests/collect.test.ts > collecte > source en erreur (invalid_response) : exécution échouée avec motif et étape en échec, données intactes 14ms
+ ✓ tests/collect.test.ts > collecte > source en erreur (invalid_response) : exécution échouée avec motif et étape en échec, données intactes 21ms
+ ✓ tests/collect.test.ts > collecte > tentatives épuisées : le job passe en échec définitif 8ms
+ ✓ tests/collect.test.ts > collecte > pause : aucun job pris et aucun appel à la source, jusqu'à la reprise 15ms
+ ✓ tests/collect.test.ts > collecte > le collecteur réel refuse un hôte absent de la liste blanche de la source, sans requête réseau 12ms
+ ✓ tests/busy.test.ts > verrou plus long que le délai d’attente > une réservation de job est bien enregistrée et visible des autres connexions 899ms
+ ✓ tests/busy.test.ts > verrou plus long que le délai d’attente > une transaction est bien validée et ne laisse aucun verrou 908ms
+ ✓ tests/crash-restart.test.ts > arrêt brutal puis relance > processus tué en pleine collecte puis relancé : ni perte ni doublon, exécution marquée interrompue 1930ms
+stdout | tests/concurrency.test.ts > concurrence entre processus > 300 jobs réservés par deux processus en parallèle : aucun job réservé deux fois
+Répartition : worker-a 152 jobs, worker-b 148 jobs
+ ✓ tests/concurrency.test.ts > concurrence entre processus > deux collecteurs lancés en même temps : un seul traite le job 1907ms
+ ✓ tests/concurrency.test.ts > concurrence entre processus > 300 jobs réservés par deux processus en parallèle : aucun job réservé deux fois 1815ms
+ ✓ tests/crash-restart.test.ts > arrêt brutal puis relance > processus tué pendant l'enregistrement : rien n'est à moitié écrit, la relance enregistre tout une seule fois 2329ms
+ Test Files  10 passed (10)
+      Tests  90 passed (90)
+   Start at  03:27:11
+   Duration  4.93s (tests 71%, import 27%, transform 1%)

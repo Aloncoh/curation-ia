@@ -1,0 +1,1348 @@
+[
+ {
+  "dimension": "data-layer",
+  "research": {
+   "dimension": "Data layer for local development and later hosting (node:sqlite, SQLite concurrency, PGlite, PostgreSQL SKIP LOCKED, Drizzle ORM/Kit, @libsql/client)",
+   "items": [
+    {
+     "id": "N1",
+     "topic": "node:sqlite stability (Node 24)",
+     "claim": "The Node 24 docs mark the built-in node:sqlite module as Stability 1.2, Release candidate. It moved to release candidate in v24.15.0. It is not Stability 2 (Stable).",
+     "value": "Stability 1.2 - Release candidate (since v24.15.0)",
+     "source_url": "https://nodejs.org/docs/latest-v24.x/api/sqlite.html",
+     "official": true,
+     "short_quote": "Stability: 1.2 - Release candidate.",
+     "caveats": "Release candidate is still in the experimental family (1.x), not Stable (2). The installed Node is v24.16.0, which is later than v24.15.0, so the RC status applies."
+    },
+    {
+     "id": "N2",
+     "topic": "node:sqlite flag requirement",
+     "claim": "No command-line flag is needed. Since v23.4.0 and v22.13.0 the module is no longer behind --experimental-sqlite.",
+     "value": "No flag needed (flag removed in v22.13.0 / v23.4.0)",
+     "source_url": "https://nodejs.org/docs/latest-v24.x/api/sqlite.html",
+     "official": true,
+     "short_quote": "no longer behind `--experimental-sqlite` but still experimental",
+     "caveats": "Checked locally on Node v24.16.0: require('node:sqlite') loaded with no flag and printed no ExperimentalWarning."
+    },
+    {
+     "id": "N3",
+     "topic": "Meaning of Stability 1.2",
+     "claim": "Node defines Release candidate (1.2) as a stage where no further breaking changes are expected, though they can still happen in response to user feedback. Experimental features may also emit a warning.",
+     "value": "Breaking changes not anticipated but still possible",
+     "source_url": "https://nodejs.org/docs/latest-v24.x/api/documentation.html",
+     "official": true,
+     "short_quote": "No further breaking changes are anticipated but may still occur.",
+     "caveats": "Stable (2) is defined separately, with npm-ecosystem compatibility as a high priority. So node:sqlite carries somewhat more API-change risk than a Stable module."
+    },
+    {
+     "id": "N4",
+     "topic": "node:sqlite busy timeout option",
+     "claim": "The DatabaseSync constructor takes a `timeout` option, the SQLite busy timeout in milliseconds. It defaults to 0, so without it a locked database returns an error immediately. Other options include readOnly, enableForeignKeyConstraints, readBigInts, defensive and limits.",
+     "value": "timeout default 0 ms (must be set explicitly, e.g. { timeout: 5000 })",
+     "source_url": "https://nodejs.org/docs/latest-v24.x/api/sqlite.html",
+     "official": true,
+     "short_quote": "maximum amount of time that SQLite will wait for a database lock",
+     "caveats": "The page I read has no WAL or multi-process guidance; WAL must be enabled with PRAGMA journal_mode=WAL. The fetch covered the first 100,000 of 102,251 characters, so the last ~2k characters (the end of the page) were not read."
+    },
+    {
+     "id": "X1",
+     "topic": "Locally installed SQLite versions",
+     "claim": "On this Mac, Node v24.16.0 bundles SQLite 3.53.0 (process.versions.sqlite and SELECT sqlite_version()). The system sqlite3 CLI is 3.45.3.",
+     "value": "node:sqlite = SQLite 3.53.0; sqlite3 CLI = 3.45.3",
+     "source_url": "local-command: node -p process.versions.sqlite ; sqlite3 --version (run 2026-10-30)",
+     "official": false,
+     "short_quote": "",
+     "caveats": "Measured locally, not taken from a web page. This matters for the WAL-reset bug (see S5): 3.53.0 is fixed, while 3.45.3 is in the affected range and is not one of the listed backports (3.44.6, 3.50.7)."
+    },
+    {
+     "id": "S1",
+     "topic": "SQLite WAL: concurrent readers",
+     "claim": "In WAL mode readers and a writer run at the same time. Readers do not block writers, and the writer does not disturb readers' snapshots. Exceptions that can still return SQLITE_BUSY: another connection in exclusive locking mode, WAL cleanup when the last connection closes, and crash recovery.",
+     "value": "Many concurrent readers plus one writer at the same time",
+     "source_url": "https://www.sqlite.org/wal.html",
+     "official": true,
+     "short_quote": "readers do not block writers",
+     "caveats": "Readers see a consistent snapshot taken when their read transaction starts (see S11)."
+    },
+    {
+     "id": "S2",
+     "topic": "SQLite WAL: single writer",
+     "claim": "WAL still allows only one writer at a time across all connections and processes.",
+     "value": "Exactly one writer at a time",
+     "source_url": "https://www.sqlite.org/wal.html",
+     "official": true,
+     "short_quote": "there can only be one writer at a time",
+     "caveats": "Write locking covers the whole database, not individual rows. Other writers wait (with busy_timeout) or get SQLITE_BUSY."
+    },
+    {
+     "id": "S3",
+     "topic": "SQLite WAL: same host only",
+     "claim": "Every process using a WAL database must run on the same host. WAL does not work over a network filesystem, because the wal-index is an mmapped shared-memory file in the database's directory.",
+     "value": "Same machine, local filesystem only",
+     "source_url": "https://www.sqlite.org/wal.html",
+     "official": true,
+     "short_quote": "WAL does not work over a network filesystem.",
+     "caveats": "For the later hosted deployment, a SQLite file cannot be shared by workers on different machines or on network volumes. Use a hosted DB (Turso/libSQL or Postgres) for that."
+    },
+    {
+     "id": "S4",
+     "topic": "SQLite WAL persistence",
+     "claim": "Unlike the other journal modes, PRAGMA journal_mode=WAL is persistent: the database stays in WAL mode when reopened. The -wal file must stay with the database if the database is copied or moved.",
+     "value": "WAL mode is persistent across connections",
+     "source_url": "https://www.sqlite.org/wal.html",
+     "official": true,
+     "short_quote": "PRAGMA journal_mode=WAL is persistent.",
+     "caveats": "If the .db file is moved or copied without its -wal file, committed transactions can be lost."
+    },
+    {
+     "id": "S5",
+     "topic": "SQLite WAL-reset bug",
+     "claim": "A rare WAL corruption bug can hit when two or more connections, in separate threads or processes, write or checkpoint at the same instant. It is present from 3.7.0 through 3.51.2, fixed in 3.51.3 and later, with backports to 3.44.6 and 3.50.7.",
+     "value": "Affected: 3.7.0 to 3.51.2; fixed: >=3.51.3, 3.44.6, 3.50.7",
+     "source_url": "https://www.sqlite.org/wal.html",
+     "official": true,
+     "short_quote": "It is unlikely to occur in common use.",
+     "caveats": "This is exactly the two-writer-process scenario of the P1 test. Node 24.16.0's bundled 3.53.0 and better-sqlite3 13.0.2+ (3.53.4) are fixed. The local sqlite3 CLI 3.45.3 is not, so use it only for read-only inspection while collectors run. I did not check which SQLite base @libsql/client's local engine bundles."
+    },
+    {
+     "id": "S6",
+     "topic": "SQLite BEGIN IMMEDIATE",
+     "claim": "BEGIN IMMEDIATE starts a write transaction right away, without waiting for a write statement. If another write transaction is already active it can fail with SQLITE_BUSY, so a conflict shows up at BEGIN and not partway through the transaction.",
+     "value": "Takes the write lock at BEGIN; may return SQLITE_BUSY",
+     "source_url": "https://www.sqlite.org/lang_transaction.html",
+     "official": true,
+     "short_quote": "start a new write immediately, without waiting for a write statement",
+     "caveats": "With busy_timeout set, the wait-and-retry applies before SQLITE_BUSY is returned."
+    },
+    {
+     "id": "S7",
+     "topic": "SQLite DEFERRED upgrade failure",
+     "claim": "A DEFERRED transaction that begins with a SELECT holds a read transaction. A later write tries to upgrade it, and fails with SQLITE_BUSY if another connection has modified or is modifying the database. The reader keeps seeing its historic snapshot.",
+     "value": "Read-then-write in DEFERRED mode can fail with SQLITE_BUSY",
+     "source_url": "https://www.sqlite.org/lang_transaction.html",
+     "official": true,
+     "short_quote": "the write statement will fail with SQLITE_BUSY",
+     "caveats": "This is why a 'SELECT pending job, then UPDATE it' claim must use BEGIN IMMEDIATE (or a single UPDATE ... RETURNING statement), not the default DEFERRED transaction."
+    },
+    {
+     "id": "S8",
+     "topic": "SQLite EXCLUSIVE vs IMMEDIATE in WAL",
+     "claim": "In WAL mode, EXCLUSIVE and IMMEDIATE transactions behave the same. EXCLUSIVE blocks readers only in non-WAL modes.",
+     "value": "EXCLUSIVE == IMMEDIATE under WAL",
+     "source_url": "https://www.sqlite.org/lang_transaction.html",
+     "official": true,
+     "short_quote": "EXCLUSIVE and IMMEDIATE are the same in WAL mode",
+     "caveats": ""
+    },
+    {
+     "id": "S9",
+     "topic": "SQLite busy_timeout behavior",
+     "claim": "sqlite3_busy_timeout installs a handler that sleeps repeatedly while a table is locked, until at least the given milliseconds of sleep have accumulated. It then returns SQLITE_BUSY. A value of 0 or less turns off all busy handlers. A connection has only one busy handler. PRAGMA busy_timeout is the SQL equivalent.",
+     "value": "Sleep-and-retry up to N ms, then SQLITE_BUSY; <=0 disables",
+     "source_url": "https://www.sqlite.org/c3ref/busy_timeout.html",
+     "official": true,
+     "short_quote": "the handler returns 0 which causes sqlite3_step() to return SQLITE_BUSY",
+     "caveats": "The docs say nothing about fairness, and there is no FIFO queue. In a local test (X2), a process looping tightly on BEGIN IMMEDIATE starved the other process, which got 'database is locked' after its 5 s timeout. Application code must still catch SQLITE_BUSY and retry."
+    },
+    {
+     "id": "S10",
+     "topic": "SQLite busy handler not always invoked",
+     "claim": "Having a busy handler does not guarantee it runs on lock contention. When a reader trying to promote to writer would deadlock with another writer, SQLite returns SQLITE_BUSY without calling the handler.",
+     "value": "busy_timeout does not cover the read-to-write upgrade deadlock",
+     "source_url": "https://www.sqlite.org/c3ref/busy_handler.html",
+     "official": true,
+     "short_quote": "does not guarantee that it will be invoked",
+     "caveats": "Using BEGIN IMMEDIATE for every write transaction avoids this case (S6, S7)."
+    },
+    {
+     "id": "S11",
+     "topic": "SQLite isolation level",
+     "claim": "Transactions on separate connections get serializable isolation, achieved by allowing a single writer at a time. In WAL mode readers get snapshot isolation.",
+     "value": "Serializable (single writer); WAL readers get snapshot isolation",
+     "source_url": "https://www.sqlite.org/isolation.html",
+     "official": true,
+     "short_quote": "There can only be a single writer at a time to an SQLite database.",
+     "caveats": "The exception is shared-cache connections with read_uncommitted, which do not apply here. Locking is database-wide: the pages I read describe no row-level lock or FOR UPDATE / SKIP LOCKED equivalent, but I did not verify that such syntax is absent."
+    },
+    {
+     "id": "S12",
+     "topic": "Is a two-process job-claim pattern on SQLite safe?",
+     "claim": "Yes, under these conditions. Both processes are on the same host and local filesystem (S3), the DB is in WAL mode, and each claim runs as one atomic write: either BEGIN IMMEDIATE followed by SELECT+UPDATE+COMMIT, or a single UPDATE jobs SET status='leased', owner=?, lease_until=? WHERE id=(SELECT ... LIMIT 1) RETURNING id. Serializable single-writer isolation means two processes cannot both claim the same row. busy_timeout should be set, and code must still retry on SQLITE_BUSY.",
+     "value": "Safe with WAL + BEGIN IMMEDIATE (or single UPDATE...RETURNING) + busy_timeout + retry on SQLITE_BUSY",
+     "source_url": "https://www.sqlite.org/lang_transaction.html",
+     "official": true,
+     "short_quote": "",
+     "caveats": "This is my inference from sqlite.org/isolation.html, lang_transaction.html, wal.html and c3ref/busy_timeout.html; no sqlite.org page states it about job queues in these words. The 'lock' is database-wide, so claims are serialized, not parallel. Lease expiry (lease_until) is needed to recover jobs from crashed workers. Use a SQLite build >= 3.51.3 (S5)."
+    },
+    {
+     "id": "X2",
+     "topic": "Local two-process claim test (node:sqlite, WAL)",
+     "claim": "Two Node 24.16.0 processes on one WAL file each ran BEGIN IMMEDIATE + UPDATE ... RETURNING + COMMIT with timeout 5000 and a 1 ms pause per claim, over 3000 pending jobs. Result: A claimed 1487, B claimed 1513, sum 3000, 3000 distinct rows, 0 pending, 0 double-claims. A variant with no pause between claims starved one process, which threw 'database is locked' (errcode 5).",
+     "value": "0 duplicate claims; starvation possible under tight-loop contention",
+     "source_url": "local-test: /private/tmp/claude-501/-Users-aloncohen-CURATION-AI/9d2eb248-8083-4285-ab18-5d0d8904dc4a/scratchpad/claimtest/worker2.mjs (run 2026-10-30)",
+     "official": false,
+     "short_quote": "",
+     "caveats": "An empirical scratch test, not documentation. The real P1 collector does network I/O between claims, so contention will be far lighter. Retry on SQLITE_BUSY is still required."
+    },
+    {
+     "id": "S13",
+     "topic": "SQLite UPDATE ... RETURNING",
+     "claim": "RETURNING has been supported since SQLite 3.35.0 (2021-03-12) on top-level INSERT, UPDATE and DELETE, including UPSERT. Limitations: output row order is arbitrary, it cannot be used as a subquery or inside triggers, aggregates and window functions are not allowed, and it reports only directly modified rows.",
+     "value": "Yes, since 3.35.0",
+     "source_url": "https://www.sqlite.org/lang_returning.html",
+     "official": true,
+     "short_quote": "supported by SQLite since version 3.35.0 (2021-03-12)",
+     "caveats": "Checked locally: UPDATE ... WHERE id=(SELECT ... LIMIT 1) RETURNING id works in node:sqlite (SQLite 3.53.0)."
+    },
+    {
+     "id": "B1",
+     "topic": "better-sqlite3 busy timeout and transactions",
+     "claim": "better-sqlite3's options.timeout is how long to wait on a locked database before throwing SQLITE_BUSY, with a default of 5000 ms (node:sqlite defaults to 0). Transaction functions have .deferred, .immediate and .exclusive variants; .immediate uses BEGIN IMMEDIATE.",
+     "value": "timeout default 5000 ms; db.transaction(fn).immediate()",
+     "source_url": "https://github.com/WiseLibs/better-sqlite3/blob/master/docs/api.md",
+     "official": true,
+     "short_quote": "before throwing a `SQLITE_BUSY` error (default: `5000`)",
+     "caveats": "Read from the master branch docs, not pinned to tag v13.0.3. package.json engines is node >=22."
+    },
+    {
+     "id": "B2",
+     "topic": "better-sqlite3 bundled SQLite and concurrency note",
+     "claim": "better-sqlite3 v13.0.2 updated its bundled SQLite to 3.53.4; v13.0.3 only changed an Ubuntu arm build. The README recommends WAL and says a full RDBMS such as PostgreSQL is better for heavy concurrent writes.",
+     "value": "v13.0.2+ bundles SQLite 3.53.4 (WAL-reset bug fixed)",
+     "source_url": "https://github.com/WiseLibs/better-sqlite3/releases",
+     "official": true,
+     "short_quote": "Update SQLite to version 3.53.4",
+     "caveats": "It is a native addon. I did not verify that a darwin-arm64 prebuilt binary exists for Node 24 for 13.0.3; without one it compiles from source, which needs Xcode command-line tools."
+    },
+    {
+     "id": "P1",
+     "topic": "PGlite single connection",
+     "claim": "PGlite's README states one limitation: it is single user and single connection. The Emscripten build cannot fork processes and runs strictly in single-process mode.",
+     "value": "Single user / single connection per instance",
+     "source_url": "https://github.com/electric-sql/pglite",
+     "official": true,
+     "short_quote": "PGlite is single user/connection.",
+     "caveats": "pglite.dev/docs/multi-tab-worker likewise says 'PGlite is single connection only' and uses leader election to proxy browser tabs to one instance."
+    },
+    {
+     "id": "P2",
+     "topic": "PGlite exclusive connection (docs)",
+     "claim": "The pglite.dev docs say PGlite has a single exclusive connection to the database.",
+     "value": "One exclusive connection",
+     "source_url": "https://pglite.dev/docs/",
+     "official": true,
+     "short_quote": "PGlite only has a single exclusive connection to the database",
+     "caveats": ""
+    },
+    {
+     "id": "P3",
+     "topic": "PGlite filesystem persistence in Node",
+     "claim": "In Node, PGlite persists to the native filesystem when given a directory path: new PGlite('./path/to/pgdata'), or { fs: new NodeFS('./path/') }. dataDir accepts file:// (Node/Bun), idb:// (browser) or memory://. new PGlite() with no argument is in-memory.",
+     "value": "Yes: new PGlite('./path/to/pgdata') or NodeFS",
+     "source_url": "https://pglite.dev/docs/filesystems",
+     "official": true,
+     "short_quote": "Set the `dataDir` to a directory on your filesystem",
+     "caveats": "The filesystems and API pages do not mention locking or concurrent access to a dataDir. A relaxedDurability option exists; its docs mention only IndexedDB."
+    },
+    {
+     "id": "P4",
+     "topic": "PGlite: two processes on the same data directory",
+     "claim": "Not supported. In issue #489 (13 Jan 2025) the PGlite maintainer said only one PGlite instance can operate on a data directory at a time. Postgres relies on a forking postmaster and shared memory, which PGlite lacks. The reporter's second instance was Drizzle Kit/Studio opening the same dir, and it did not see the app's writes.",
+     "value": "No - one instance per dataDir at a time",
+     "source_url": "https://github.com/electric-sql/pglite/issues/489",
+     "official": true,
+     "short_quote": "only possible to have a single instance of PGlite operate on the datadir at a time",
+     "caveats": "This is a maintainer comment in the package's own GitHub issues, not the docs. The docs (pglite.dev) neither repeat nor lift the limit, and mention no lock file, so a second process may fail silently or corrupt data rather than get a clear error. A future mmap-based fix was described as 'only a plan'. PGlite therefore cannot pass the P1 two-collector-process test on a shared dataDir."
+    },
+    {
+     "id": "P5",
+     "topic": "PGlite multi-connection via pglite-socket",
+     "claim": "pglite-socket exposes one PGlite instance as a TCP Postgres server. A multiplexer in the server allows several simultaneous connections, but this differs from normal Postgres and not every use case is guaranteed to work. SSL is not supported.",
+     "value": "Multiplexed connections possible via socket server, with caveats",
+     "source_url": "https://pglite.dev/docs/pglite-socket",
+     "official": true,
+     "short_quote": "not all use cases are guaranteed to work",
+     "caveats": "This gives several clients one serialized instance, not real Postgres concurrency, and it adds a long-running server process. It is a workaround, not a fit for testing FOR UPDATE SKIP LOCKED behavior."
+    },
+    {
+     "id": "PG1",
+     "topic": "PostgreSQL FOR UPDATE SKIP LOCKED",
+     "claim": "With SKIP LOCKED, selected rows that cannot be locked immediately are skipped instead of waited on. NOWAIT raises an error instead. Both apply to row-level locks only; the table-level ROW SHARE lock is still taken normally. SKIP LOCKED cannot be combined with FETCH ... WITH TIES.",
+     "value": "Locked rows are skipped, not waited on",
+     "source_url": "https://www.postgresql.org/docs/current/sql-select.html",
+     "official": true,
+     "short_quote": "any selected rows that cannot be immediately locked are skipped",
+     "caveats": "The 'current' docs page is PostgreSQL 18 (18.6). The hosted provider's Postgres major version must be checked separately."
+    },
+    {
+     "id": "PG2",
+     "topic": "PostgreSQL SKIP LOCKED intended use",
+     "claim": "Skipping locked rows gives an inconsistent view of the data, so it is not suitable for general-purpose work. It is meant to avoid lock contention when multiple consumers read a queue-like table, which is the job-leasing case.",
+     "value": "Designed for multi-consumer queue tables",
+     "source_url": "https://www.postgresql.org/docs/current/sql-select.html",
+     "official": true,
+     "short_quote": "avoid lock contention with multiple consumers accessing a queue-like table",
+     "caveats": "The typical pattern is SELECT ... WHERE status='pending' ORDER BY id LIMIT 1 FOR UPDATE SKIP LOCKED inside a transaction, then UPDATE. This SQL differs from the SQLite claim (S12), so the claim query is dialect-specific code."
+    },
+    {
+     "id": "D1",
+     "topic": "Drizzle: officially documented SQLite drivers",
+     "claim": "Drizzle's SQLite getting-started page documents three native drivers: libsql (default; drizzle-orm/libsql with /node, /web, /http, /ws, /wasm variants), node:sqlite (drizzle-orm/node-sqlite) and better-sqlite3 (drizzle-orm/better-sqlite3). The Connect list also covers Turso Cloud, Turso Database, SQLite Cloud, Cloudflare D1, Bun SQLite, Cloudflare Durable Objects, Expo SQLite, OP SQLite, React Native SQLite and Drizzle Proxy.",
+     "value": "libsql, node:sqlite, better-sqlite3, bun:sqlite, Turso, D1, Expo, OP SQLite, Durable Objects, proxy",
+     "source_url": "https://orm.drizzle.team/docs/get-started-sqlite",
+     "official": true,
+     "short_quote": "",
+     "caveats": "The docs site now targets Drizzle v1 (installs use the @rc tag); see D2."
+    },
+    {
+     "id": "D2",
+     "topic": "Drizzle node:sqlite driver availability by version",
+     "claim": "Drizzle's node:sqlite page imports from 'drizzle-orm/node-sqlite' and installs drizzle-orm@rc / drizzle-kit@rc. The npm 'latest' drizzle-orm 0.45.4 has no node-sqlite export (unpkg returns 404 for node-sqlite/index.js). It exists in 1.0.0-rc.5 (rc tag, published 2026-10-21). libsql and pglite drivers exist in both.",
+     "value": "node-sqlite driver only in drizzle-orm 1.0.0-rc.x, not in 0.45.4",
+     "source_url": "https://orm.drizzle.team/docs/connect-node-sqlite",
+     "official": true,
+     "short_quote": "",
+     "caveats": "The version check came from the npm registry (npm view exports, dist-tags: latest=0.45.4, rc=1.0.0-rc.5; drizzle-kit latest=0.31.11) and unpkg HEAD checks, not the docs page. Choosing node:sqlite therefore stacks two pre-release layers: Node RC (N1) and Drizzle RC. With 0.45.4, use better-sqlite3 or libsql."
+    },
+    {
+     "id": "D3",
+     "topic": "Drizzle: officially documented Postgres drivers",
+     "claim": "Drizzle's PostgreSQL page lists node-postgres (drizzle-orm/node-postgres) and postgres.js (drizzle-orm/postgres-js), plus PlanetScale Postgres, Neon, Vercel Postgres, Prisma Postgres, Supabase, Xata, PGlite, Nile, Bun SQL, Effect Postgres, Netlify Database, Appwrite Postgres, AWS Data API Postgres and Drizzle Proxy.",
+     "value": "node-postgres, postgres.js, Neon, PGlite, Supabase, Vercel, Xata, Nile, Bun SQL, AWS Data API, etc.",
+     "source_url": "https://orm.drizzle.team/docs/get-started-postgresql",
+     "official": true,
+     "short_quote": "",
+     "caveats": "Import paths for Neon, PGlite and Supabase are confirmed on their own pages (D4-D6). drizzle-orm 0.45.4 exports include neon-http, neon-serverless, pglite, supabase and vercel-postgres."
+    },
+    {
+     "id": "D4",
+     "topic": "Drizzle + Neon (HTTP vs WebSocket)",
+     "claim": "Neon has two drivers, both on @neondatabase/serverless: drizzle-orm/neon-http, best for single non-interactive queries, and drizzle-orm/neon-serverless (WebSocket), which supports sessions and interactive transactions and can replace pg. On Node, the WebSocket driver needs the ws (and bufferutil) packages.",
+     "value": "neon-http (no interactive tx) vs neon-serverless (interactive tx)",
+     "source_url": "https://orm.drizzle.team/docs/connect-neon",
+     "official": true,
+     "short_quote": "session or interactive transaction support",
+     "caveats": "A job-leasing worker that runs SELECT ... FOR UPDATE SKIP LOCKED and then UPDATE in one transaction needs an interactive-transaction driver (neon-serverless or node-postgres), not neon-http."
+    },
+    {
+     "id": "D5",
+     "topic": "Drizzle + Supabase",
+     "claim": "Drizzle connects to Supabase through postgres.js (drizzle-orm/postgres-js). With the Supabase pooler in Transaction mode, prepared statements must be disabled (prepare: false). The page recommends the pooler for serverless and a direct connection for long-running servers.",
+     "value": "postgres.js; prepare:false in Transaction pool mode",
+     "source_url": "https://orm.drizzle.team/docs/connect-supabase",
+     "official": true,
+     "short_quote": "ensure to turn off prepare, as prepared statements are not supported",
+     "caveats": "Session-level features such as advisory locks behave differently behind a transaction-mode pooler. That is my inference, not stated on the page."
+    },
+    {
+     "id": "D6",
+     "topic": "Drizzle + PGlite",
+     "claim": "Drizzle's PGlite driver is drizzle-orm/pglite. drizzle({ connection: { dataDir: './my-pglite-data' } }) persists to a directory. With no dir it is in-memory, and an existing PGlite instance can be passed as { client }.",
+     "value": "drizzle-orm/pglite with dataDir",
+     "source_url": "https://orm.drizzle.team/docs/connect-pglite",
+     "official": true,
+     "short_quote": "",
+     "caveats": "The one-instance-per-dataDir limit (P4) also applies to drizzle-kit migrate/studio while the app holds the dir."
+    },
+    {
+     "id": "D7",
+     "topic": "drizzle-kit commands",
+     "claim": "Drizzle Kit commands: generate (SQL migration files from the TS schema), migrate (apply generated migrations), push (apply the schema directly with no files), pull (introspect DB into a TS schema), check (detect migration collisions or race conditions), up (upgrade migration snapshots), studio (DB browser) and export (print schema DDL). The config must include at least dialect and schema.",
+     "value": "generate, migrate, push, pull, check, up, studio, export",
+     "source_url": "https://orm.drizzle.team/docs/kit-overview",
+     "official": true,
+     "short_quote": "",
+     "caveats": "This is the v1-era docs page. The v1 upgrade removed drizzle-kit drop (D10)."
+    },
+    {
+     "id": "D8",
+     "topic": "Drizzle migration workflows",
+     "claim": "The migrations page lists six workflows: pull (DB-first), push (best for rapid prototyping), generate + drizzle-kit migrate, generate + runtime migrate() at app start (e.g. import { migrate } from 'drizzle-orm/node-postgres/migrator'), generate + an external tool (Atlas, Liquibase, Bytebase), and export.",
+     "value": "Generate SQL: drizzle-kit generate; apply: drizzle-kit migrate or runtime migrate()",
+     "source_url": "https://orm.drizzle.team/docs/migrations",
+     "official": true,
+     "short_quote": "the best approach for rapid prototyping",
+     "caveats": "The quote refers to push. Generate+migrate keeps reviewable SQL files, which suits a durable DB with provenance."
+    },
+    {
+     "id": "D9",
+     "topic": "drizzle.config.ts dialects and defaults",
+     "claim": "Allowed dialect values: postgresql, mysql, sqlite, turso, singlestore, mssql, cockroach. Special driver values: aws-data-api, pglite (and d1-http). The default migrations table is __drizzle_migrations in the drizzle schema, and the default out folder is 'drizzle'. The SQLite getting-started guide uses dialect 'sqlite' with url from DB_FILE_NAME=file:local.db (libsql).",
+     "value": "dialect: sqlite | turso | postgresql | ...; out: drizzle",
+     "source_url": "https://orm.drizzle.team/docs/drizzle-config-file",
+     "official": true,
+     "short_quote": "",
+     "caveats": "The file: prefix example comes from https://orm.drizzle.team/docs/get-started/sqlite-new. I did not see SQLite/Turso dbCredentials examples on the config page."
+    },
+    {
+     "id": "D10",
+     "topic": "Drizzle schema reuse across dialects (switching cost)",
+     "claim": "Drizzle schemas are dialect-specific. There is no common table object; you choose the dialect and import its builders (sqliteTable from drizzle-orm/sqlite-core, pgTable from drizzle-orm/pg-core). A schema written with sqliteTable cannot be reused unchanged for Postgres; the schema file must be rewritten and migrations regenerated for the new dialect.",
+     "value": "No - schema must be rewritten (pgTable/pg-core), migrations regenerated",
+     "source_url": "https://orm.drizzle.team/docs/sql-schema-declaration",
+     "official": true,
+     "short_quote": "there is no such thing as a common table object in drizzle",
+     "caveats": "The page does not quantify the switching cost or say that query code ports unchanged. That queries using the shared builder API mostly carry over is my inference. Dialect-specific SQL (the job claim, upserts, JSON functions) needs separate code."
+    },
+    {
+     "id": "D11",
+     "topic": "Drizzle SQLite column types vs Postgres",
+     "claim": "Drizzle's SQLite dialect offers integer, real, text, blob and numeric. Booleans are integer({ mode: 'boolean' }) stored as 0/1, timestamps are integer({ mode: 'timestamp' | 'timestamp_ms' }), and JSON is text({ mode: 'json' }), recommended over blob. Postgres has native boolean/timestamp/jsonb types, so these columns change on a switch.",
+     "value": "SQLite: boolean/timestamp/json emulated via integer/text modes",
+     "source_url": "https://orm.drizzle.team/docs/column-types/sqlite",
+     "official": true,
+     "short_quote": "SQLite does not have native `boolean` data type",
+     "caveats": "Existing data also needs converting (epoch integers to timestamptz, JSON text to jsonb) when migrating data to Postgres. That is my inference."
+    },
+    {
+     "id": "D12",
+     "topic": "Drizzle v0 to v1 upgrade path",
+     "claim": "Upgrading to Drizzle v1 means installing drizzle-orm@rc / drizzle-kit@rc and running drizzle-kit up. That converts the migrations folder: journal.json is removed, and each migration gets its own folder with migration.sql and snapshot.json. drizzle-kit drop is removed, and Relational Queries move to v2.",
+     "value": "drizzle-kit up converts migration folder; RQB v2",
+     "source_url": "https://orm.drizzle.team/docs/upgrade-v1",
+     "official": true,
+     "short_quote": "",
+     "caveats": "Starting on 0.45.4 now means a later migration-format conversion. Starting on 1.0.0-rc.5 means depending on a release candidate. The page does not say when v1 goes stable."
+    },
+    {
+     "id": "L1",
+     "topic": "@libsql/client with a local file",
+     "claim": "@libsql/client works against a plain local SQLite file with createClient({ url: 'file:local.db' }); the official 'local' example uses exactly this. Drizzle's default SQLite driver is libsql, with a file: URL.",
+     "value": "Yes - url: 'file:local.db'",
+     "source_url": "https://github.com/tursodatabase/libsql-client-ts/blob/main/packages/libsql-client/README.md",
+     "official": true,
+     "short_quote": "Uses libsql with a local SQLite file.",
+     "caveats": "Read from the main-branch README/examples, not pinned to 0.18.0. I did not test two processes writing one file through @libsql/client, or which SQLite base version its engine has (see S5)."
+    },
+    {
+     "id": "L2",
+     "topic": "@libsql/client same code against remote Turso",
+     "claim": "The same createClient call targets a remote Turso database. Only the config changes: url = TURSO_DATABASE_URL and authToken = TURSO_AUTH_TOKEN. The official local and remote examples run identical batch/execute code. Embedded replicas combine a local file: url with syncUrl, authToken and syncInterval.",
+     "value": "Yes - same code, change url (+ authToken) via env vars",
+     "source_url": "https://github.com/tursodatabase/libsql-client-ts/tree/main/examples/remote",
+     "official": true,
+     "short_quote": "Connects to a remote database. Requires environment variables for URL and auth token.",
+     "caveats": "That quote is 12 words, from the README examples table. A Turso account and database are needed, so check pricing before creating one; nothing was created."
+    },
+    {
+     "id": "L3",
+     "topic": "Turso URL formats and transaction modes",
+     "claim": "Turso's SDK reference: local uses file:path.db (no authToken) or :memory:; remote uses libsql://[databaseName]-[organizationSlug].turso.io with an authToken. Transaction modes: 'write' = BEGIN IMMEDIATE (write transactions cannot run in parallel), 'read' = read-only, 'deferred' = BEGIN DEFERRED (the upgrade can fail if another write is running). batch() runs statements in an implicit transaction. Interactive transactions lock the DB for writing, with a 5-second timeout.",
+     "value": "file: / libsql:// + authToken; tx modes write|read|deferred",
+     "source_url": "https://docs.turso.tech/sdk/ts/reference",
+     "official": false,
+     "short_quote": "",
+     "caveats": "docs.turso.tech is the vendor's own documentation, but it is not on the task's official-source list, so it is marked official=false. Its 'write' mode maps to BEGIN IMMEDIATE, which fits the S12 claim pattern."
+    },
+    {
+     "id": "L4",
+     "topic": "@libsql/client limits (web subpath, concurrent writes)",
+     "claim": "The @libsql/client/web subpath does not support local file URLs. @libsql/client does not support concurrent writes. The README points to @tursodatabase/serverless as the driver that will later support concurrent writes, and recommends @libsql/client for a battle-tested driver with ORM integration today.",
+     "value": "No file: on /web; no concurrent writes",
+     "source_url": "https://github.com/tursodatabase/libsql-client-ts/blob/main/packages/libsql-client/README.md",
+     "official": true,
+     "short_quote": "will be the driver to later support concurrent writes",
+     "caveats": "The /web and concurrent-writes statements come from https://docs.turso.tech/sdk/ts/reference (vendor docs, not on the official list). The README quote is official. A single writer at a time is consistent with SQLite semantics (S2)."
+    }
+   ],
+   "open_questions": [
+    "Which SQLite base version does @libsql/client 0.18.0's local libSQL engine bundle, is it patched for the WAL-reset bug (S5), and does it honor busy timeout across two OS processes? Not checked or tested.",
+    "PGlite 0.5.13: has the one-instance-per-dataDir limit (issue #489, Jan 2025) been lifted, and does a second process get a clear error or risk silent corruption? The docs say nothing about locking.",
+    "Drizzle version choice: stable 0.45.4 (no node-sqlite driver, old migration folder format) or 1.0.0-rc.5 (node-sqlite, new format, release candidate)? The docs site already assumes @rc.",
+    "Does better-sqlite3 13.0.3 ship a darwin-arm64 prebuilt binary for Node 24 (no compile step), and are Xcode command-line tools present if it does not?",
+    "Is the absence of SELECT ... FOR UPDATE / SKIP LOCKED in SQLite documented anywhere? It was not verified; the design only assumes the claim query must be dialect-specific (SQLite: BEGIN IMMEDIATE + UPDATE ... RETURNING; Postgres: FOR UPDATE SKIP LOCKED).",
+    "Hosting target (Turso/libSQL vs Neon vs Supabase Postgres): pricing, free-tier limits and whether the scheduled worker host allows long-lived connections were not researched. Any account creation or paid plan needs explicit user validation.",
+    "Does the chosen deployment platform support a durable local SQLite file at all? WAL needs one host and a local filesystem (S3). If not, the hosted phase forces Turso or Postgres, and switching to Postgres means rewriting the schema (D10, D11)."
+   ]
+  },
+  "verification": {
+   "dimension": "data-layer",
+   "verdicts": [
+    {
+     "id": "N1",
+     "status": "confirmed",
+     "source_url": "https://nodejs.org/docs/latest-v24.x/api/sqlite.html",
+     "note": "Page header shows 'Stability: 1.2 - Release candidate.' Module History has 'v24.15.0 | SQLite is now a release candidate.' The latest-v24 docs page is now for Node v24.22.2. The installed v24.16.0 is still after v24.15.0, so RC applies."
+    },
+    {
+     "id": "N2",
+     "status": "confirmed",
+     "source_url": "https://nodejs.org/docs/latest-v24.x/api/sqlite.html",
+     "note": "History row v23.4.0, v22.13.0 reads 'no longer behind `--experimental-sqlite` but still experimental'. I re-checked locally: Node v24.16.0 ran new DatabaseSync(':memory:') with no flag, printed no warning and returned sqlite_version 3.53.0."
+    },
+    {
+     "id": "N3",
+     "status": "confirmed",
+     "source_url": "https://nodejs.org/docs/latest-v24.x/api/documentation.html",
+     "note": "1.2 text matches: 'No further breaking changes are anticipated but may still occur in response to user feedback'. Experimental features 'may also emit a warning' (may, not will). Stable (2) is defined as 'Compatibility with the npm ecosystem is a high priority.'"
+    },
+    {
+     "id": "N4",
+     "status": "confirmed",
+     "source_url": "https://nodejs.org/docs/latest-v24.x/api/sqlite.html",
+     "note": "timeout is the busy timeout in ms, 'Default: 0'. It was added in v24.0.0. Other options: open, readOnly, enableForeignKeyConstraints, enableDoubleQuotedStringLiterals, allowExtension, readBigInts, returnArrays, allowBareNamedParameters, allowUnknownNamedParameters, defensive (default true since v24.14.0) and limits. I read the remaining 2,251 characters (offset 100000). They cover only authorizer constants, with no WAL or multi-process text, so the claim that the page has no WAL guidance holds for the whole page."
+    },
+    {
+     "id": "X1",
+     "status": "confirmed",
+     "source_url": "local-command: node -p process.versions.sqlite ; sqlite3 --version (re-run 2026-10-30)",
+     "note": "Re-run gives the same result: node v24.16.0, process.versions.sqlite = 3.53.0, sqlite3 CLI = '3.45.3 2024-04-15'. This is a local measurement, not documentation. 3.45.3 falls inside the WAL-reset range on wal.html (3.7.0 to 3.51.2) and is not one of the listed backports (3.44.6, 3.50.7)."
+    },
+    {
+     "id": "S1",
+     "status": "confirmed",
+     "source_url": "https://www.sqlite.org/wal.html",
+     "note": "Page text: 'readers do not block writers and a writer does not block readers. Reading and writing can proceed concurrently.' The three SQLITE_BUSY exceptions (exclusive locking mode, last connection cleaning up, crash recovery) are listed in the page's 'obscure cases' section."
+    },
+    {
+     "id": "S2",
+     "status": "confirmed",
+     "source_url": "https://www.sqlite.org/wal.html",
+     "note": "Page text: 'since there is only one WAL file, there can only be one writer at a time.' isolation.html says the same: 'There can only be a single writer at a time to an SQLite database.'"
+    },
+    {
+     "id": "S3",
+     "status": "confirmed",
+     "source_url": "https://www.sqlite.org/wal.html",
+     "note": "Page text: 'All processes using a database must be on the same host computer; WAL does not work over a network filesystem.' Section 7 says the wal-index 'is implemented using an ordinary file that is mmapped' and that it is created 'by mmapping a file in the same directory as the database itself.'"
+    },
+    {
+     "id": "S4",
+     "status": "confirmed",
+     "source_url": "https://www.sqlite.org/wal.html",
+     "note": "Page text: 'Unlike the other journaling modes, PRAGMA journal_mode=WAL is persistent.' Section 4 says the WAL file 'should be kept with the database if the database is copied or moved'. If the two are separated, committed transactions 'might be lost, or the database file might become corrupted.'"
+    },
+    {
+     "id": "S5",
+     "status": "confirmed",
+     "source_url": "https://www.sqlite.org/wal.html",
+     "note": "Affected 3.7.0 (2010-07-21) through 3.51.2 (2026-01-09). Fixed in 3.51.3 (2026-03-13), with backports 3.44.6 and 3.50.7. It requires two or more connections 'in separate threads or processes' that 'write or checkpoint at the same instant'. Page text: 'It is unlikely to occur in common use.' better-sqlite3 13.0.2 bundles 3.53.4 (releases page) and node:sqlite bundles 3.53.0 (local), so both are fixed."
+    },
+    {
+     "id": "S6",
+     "status": "confirmed",
+     "source_url": "https://www.sqlite.org/lang_transaction.html",
+     "note": "Page text: 'IMMEDIATE causes the database connection to start a new write immediately, without waiting for a write statement. The BEGIN IMMEDIATE might fail with SQLITE_BUSY if another write transaction is already active'. The busy_timeout interaction is my inference from c3ref/busy_timeout.html."
+    },
+    {
+     "id": "S7",
+     "status": "confirmed",
+     "source_url": "https://www.sqlite.org/lang_transaction.html",
+     "note": "Page text: 'If some other database connection has already modified the database or is already in the process of modifying the database, then upgrading to a write transaction is not possible and the write statement will fail with SQLITE_BUSY.' The reader 'will continue to see an historic snapshot'."
+    },
+    {
+     "id": "S8",
+     "status": "confirmed",
+     "source_url": "https://www.sqlite.org/lang_transaction.html",
+     "note": "Page text: 'EXCLUSIVE and IMMEDIATE are the same in WAL mode, but in other journaling modes, EXCLUSIVE prevents other database connections from reading'."
+    },
+    {
+     "id": "S9",
+     "status": "confirmed",
+     "source_url": "https://www.sqlite.org/c3ref/busy_timeout.html",
+     "note": "Page text: 'The handler will sleep multiple times until at least \"ms\" milliseconds of sleeping have accumulated'. After that it returns 0 and sqlite3_step() returns SQLITE_BUSY. A value <= 0 'turns off all busy handlers'. There is a single busy handler per connection, and the page points to PRAGMA busy_timeout. It says nothing about fairness or ordering."
+    },
+    {
+     "id": "S10",
+     "status": "confirmed",
+     "source_url": "https://www.sqlite.org/c3ref/busy_handler.html",
+     "note": "Page text: 'The presence of a busy handler does not guarantee that it will be invoked when there is lock contention.' The page's example uses rollback-journal lock names: one process promotes a read lock to a reserved lock while another holds reserved and wants exclusive. SQLite then returns SQLITE_BUSY to the first process. 'Reader promoting to writer' is a fair paraphrase. Setting busy_timeout or PRAGMA busy_timeout replaces any earlier handler."
+    },
+    {
+     "id": "S11",
+     "status": "confirmed",
+     "source_url": "https://www.sqlite.org/isolation.html",
+     "note": "Page text: 'all transactions in SQLite show \"serializable\" isolation. SQLite implements serializable transactions by actually serializing the writes.' In WAL mode it 'exhibits \"snapshot isolation\"'. The only exception is shared cache with read_uncommitted."
+    },
+    {
+     "id": "S12",
+     "status": "unverifiable",
+     "source_url": "https://www.sqlite.org/lang_transaction.html",
+     "note": "No sqlite.org page states this conclusion about job queues, so it stays an inference. Every premise is confirmed: single writer and serialized writes (isolation.html, wal.html), BEGIN IMMEDIATE takes the write lock at BEGIN (lang_transaction.html), RETURNING on top-level UPDATE (lang_returning.html), and busy_timeout semantics. I reproduced both variants locally with two Node v24.16.0 processes on one WAL file and 3000 jobs. (a) BEGIN IMMEDIATE + UPDATE...RETURNING + COMMIT: A=1500, B=1500, 3000 distinct leased rows, 0 pending. (b) Autocommit single UPDATE...WHERE id=(SELECT...LIMIT 1) RETURNING id: A=1541, B=1459, sum 3000, and the per-owner counts in the table matched each process's own count. Neither run showed a double claim. Strong support, but not a documented guarantee."
+    },
+    {
+     "id": "X2",
+     "status": "confirmed",
+     "source_url": "local-test: /private/tmp/claude-501/-Users-aloncohen-CURATION-AI/9d2eb248-8083-4285-ab18-5d0d8904dc4a/scratchpad/fc_verify/worker2.mjs (copy of claimtest/worker2.mjs, re-run 2026-10-30)",
+     "note": "Re-ran the same setup.mjs and worker2.mjs: A claimed 1500, B claimed 1500, 0 busy retries, 3000 distinct leased rows, 0 pending. The exact split varies between runs. With an owner column, 'no double claim' is shown by the per-process counts summing to exactly 3000 rows. I did not re-run the tight-loop starvation variant. This is a local experiment, not documentation."
+    },
+    {
+     "id": "S13",
+     "status": "confirmed",
+     "source_url": "https://www.sqlite.org/lang_returning.html",
+     "note": "Page text: 'supported by SQLite since version 3.35.0 (2021-03-12)'. The clause works on top-level DELETE, INSERT and UPDATE, and for UPSERT it reports both inserted and updated rows. Listed limits: arbitrary row order, cannot be used as a subquery, not in triggers, no top-level aggregates or window functions, and only directly modified rows. Further limits: no RETURNING on UPDATE or DELETE of virtual tables, it may reference only the modified table, and a subquery inside RETURNING that references the modified table is unreliable. The WHERE-clause subquery is not affected."
+    },
+    {
+     "id": "B1",
+     "status": "confirmed",
+     "source_url": "https://github.com/WiseLibs/better-sqlite3/blob/master/docs/api.md",
+     "note": "timeout is the ms to wait on a locked database before SQLITE_BUSY is thrown, default 5000. Doc text: 'Transactions also come with deferred, immediate, and exclusive versions'. .immediate issues 'BEGIN IMMEDIATE'. npm view better-sqlite3@13.0.3 engines gives node >=22. The docs were read from master."
+    },
+    {
+     "id": "B2",
+     "status": "confirmed",
+     "source_url": "https://github.com/WiseLibs/better-sqlite3/releases",
+     "note": "v13.0.2 (29 Jul) is 'Update SQLite to version 3.53.4'. v13.0.3 (05 Aug) only switches the build to Ubuntu 22.04-arm. The README recommends the WAL pragma 'for performance reasons'. For heavy concurrent writes it says to 'probably use a full-fledged RDBMS such as PostgreSQL.' On the open caveat: v13.0.0 moved to N-API so prebuilt binaries work across Node versions, and the README says prebuilt binaries exist for major platforms. I did not check a darwin-arm64 binary directly."
+    },
+    {
+     "id": "P1",
+     "status": "confirmed",
+     "source_url": "https://github.com/electric-sql/pglite",
+     "note": "README Limitations: 'PGlite is single user/connection.' Emscripten builds 'cannot fork new processes', so PGlite 'operates strictly in a single-process mode.' The multi-tab-worker page says 'PGlite is single connection only'."
+    },
+    {
+     "id": "P2",
+     "status": "confirmed",
+     "source_url": "https://pglite.dev/docs/",
+     "note": "Page text: 'As PGlite only has a single exclusive connection to the database'. The page does not mention multiple processes or data-directory locking."
+    },
+    {
+     "id": "P3",
+     "status": "confirmed",
+     "source_url": "https://pglite.dev/docs/filesystems",
+     "note": "The filesystems page shows new PGlite('./path/to/datadir/') and new NodeFS(...). In-memory is the default. It lists memory://, idb:// and opfs-ahp://. The file:// prefix ('or unprefixed', Node and Bun) is on https://pglite.dev/docs/api, not on the filesystems page. Neither page mentions locking or concurrent access. relaxedDurability is described on the API page as useful mainly for IndexedDB."
+    },
+    {
+     "id": "P4",
+     "status": "confirmed",
+     "source_url": "https://github.com/electric-sql/pglite/issues/489",
+     "note": "Issue #489, 'Multiple PGLite Instances from the same data dir not staying in sync', opened 4 Jan 2025 by duttaoindril. Maintainer samwillis wrote on 13 Jan 2025 that only a single instance can operate on the datadir at a time, because Postgres normally relies on forking and shared memory. A mmap plan was 'only a plan', expected later in 2025, and the issue was closed as completed the same day. The second instance was Drizzle Kit/Studio's PGlite driver on the same dir. Current docs neither repeat nor lift the limit."
+    },
+    {
+     "id": "P5",
+     "status": "confirmed",
+     "source_url": "https://pglite.dev/docs/pglite-socket",
+     "note": "Docs say multiple simultaneous connections work 'through a multiplexer implemented in the server', which 'is different from a normal Postgres installation', so 'not all use cases are guaranteed to work.' 'SSL connections are NOT supported' (set PGSSLMODE=disable)."
+    },
+    {
+     "id": "PG1",
+     "status": "confirmed",
+     "source_url": "https://www.postgresql.org/docs/current/sql-select.html",
+     "note": "This is the PostgreSQL 18.6 page. Text: 'With SKIP LOCKED, any selected rows that cannot be immediately locked are skipped.' NOWAIT reports an error instead. Both apply only to row-level locks, and the ROW SHARE table-level lock 'is still taken in the ordinary way'. The WITH TIES text says 'SKIP LOCKED is not allowed'."
+    },
+    {
+     "id": "PG2",
+     "status": "confirmed",
+     "source_url": "https://www.postgresql.org/docs/current/sql-select.html",
+     "note": "Page text: 'Skipping locked rows provides an inconsistent view of the data, so this is not suitable for general purpose work, but can be used to avoid lock contention with multiple consumers accessing a queue-like table.'"
+    },
+    {
+     "id": "D1",
+     "status": "confirmed",
+     "source_url": "https://orm.drizzle.team/docs/get-started-sqlite",
+     "note": "The page body documents three drivers: libsql (default, with /node, /web, /http, /ws, /wasm variants), node:sqlite (drizzle-orm/node-sqlite) and better-sqlite3. All installs use drizzle-orm@rc and drizzle-kit@rc. Bun SQLite appears only as a sidebar Connect page. The sidebar also lists Turso Database Serverless and Turso Database Sync, which the claim omits."
+    },
+    {
+     "id": "D2",
+     "status": "confirmed",
+     "source_url": "https://orm.drizzle.team/docs/connect-node-sqlite",
+     "note": "The page imports from 'drizzle-orm/node-sqlite' and installs drizzle-orm@rc and drizzle-kit@rc, with no Node version requirement stated. I re-checked the npm registry: latest=0.45.4 (published 2026-10-08), rc=1.0.0-rc.5 (2026-10-21), drizzle-kit latest=0.31.11 and rc=1.0.0-rc.5. 0.45.4 exports have no ./node-sqlite (libsql, pglite, better-sqlite3, bun-sqlite and neon-* are present). rc.5 uses a './*' wildcard export. unpkg returns 404 for 0.45.4/node-sqlite/index.js and 200 for 1.0.0-rc.5."
+    },
+    {
+     "id": "D3",
+     "status": "confirmed",
+     "source_url": "https://orm.drizzle.team/docs/get-started-postgresql",
+     "note": "The body gives only node-postgres ('drizzle-orm/node-postgres') and postgres.js ('drizzle-orm/postgres-js'). The sidebar lists PlanetScale Postgres, Neon, Vercel Postgres, Prisma Postgres, Supabase, Xata, PGlite, Nile, Bun SQL, Effect Postgres, Netlify Database, Appwrite Postgres and AWS Data API Postgres. Drizzle Proxy is listed separately."
+    },
+    {
+     "id": "D4",
+     "status": "confirmed",
+     "source_url": "https://orm.drizzle.team/docs/connect-neon",
+     "note": "drizzle-orm/neon-http: 'Querying over HTTP is faster for single, non-interactive transactions.' drizzle-orm/neon-serverless (WebSocket) is for session or interactive transactions and is a drop-in for pg. Both use @neondatabase/serverless. In Node, install ws and bufferutil and set ws in the config."
+    },
+    {
+     "id": "D5",
+     "status": "confirmed",
+     "source_url": "https://orm.drizzle.team/docs/connect-supabase",
+     "note": "Uses 'drizzle-orm/postgres-js'. Page text: 'ensure to turn off prepare, as prepared statements are not supported' in Transaction pool mode. The code uses { prepare: false }, with a comment that says 'Disable prefetch'. Pooler for serverless, direct connection for long-running servers. The advisory-lock remark remains the author's inference."
+    },
+    {
+     "id": "D6",
+     "status": "confirmed",
+     "source_url": "https://orm.drizzle.team/docs/connect-pglite",
+     "note": "Import 'drizzle-orm/pglite'. Directory: drizzle({ connection: { dataDir: 'path-to-dir' } }), or the shorthand drizzle('path-to-dir'). drizzle() with no arguments is in-memory, and drizzle({ client }) takes an existing PGlite instance. The example path in the docs is 'path-to-dir', not './my-pglite-data'."
+    },
+    {
+     "id": "D7",
+     "status": "confirmed",
+     "source_url": "https://orm.drizzle.team/docs/kit-overview",
+     "note": "Eight commands are listed: generate, migrate, push, pull, check, up, studio, export. No drop. Page text: 'It's required to at least provide SQL dialect and schema path'."
+    },
+    {
+     "id": "D8",
+     "status": "confirmed",
+     "source_url": "https://orm.drizzle.team/docs/migrations",
+     "note": "The six options match the claim. Push: 'That's the best approach for rapid prototyping'. The runtime example imports migrate from 'drizzle-orm/node-postgres/migrator'. The external tools named are Bytebase, Liquibase and Atlas."
+    },
+    {
+     "id": "D9",
+     "status": "confirmed",
+     "source_url": "https://orm.drizzle.team/docs/drizzle-config-file",
+     "note": "dialect: postgresql, mysql, sqlite, turso, singlestore, mssql, cockroach. driver: aws-data-api, pglite. d1-http appears once in the dbCredentials section. Defaults: migrations { table: '__drizzle_migrations', schema: 'drizzle' } and out 'drizzle'. The page has no SQLite or Turso dbCredentials example. The get-started/sqlite-new page confirms DB_FILE_NAME=file:local.db, dialect 'sqlite' and libsql."
+    },
+    {
+     "id": "D10",
+     "status": "confirmed",
+     "source_url": "https://orm.drizzle.team/docs/sql-schema-declaration",
+     "note": "Page text: 'there is no such thing as a common table object in drizzle', and you must choose a dialect. Its only example uses pgTable from drizzle-orm/pg-core. sqliteTable from 'drizzle-orm/sqlite-core' is confirmed on the column-types/sqlite page. Nothing on cross-dialect reuse, so the switching-cost conclusion is inference."
+    },
+    {
+     "id": "D11",
+     "status": "confirmed",
+     "source_url": "https://orm.drizzle.team/docs/column-types/sqlite",
+     "note": "Page text: 'SQLite does not have native boolean data type'. Integer modes are 'number, boolean, timestamp, timestamp_ms'. text({mode:'json'}) is recommended over blob json because SQLite JSON functions work on text. https://orm.drizzle.team/docs/column-types/pg documents native boolean, timestamp (timestamptz alias), json and jsonb."
+    },
+    {
+     "id": "D12",
+     "status": "confirmed",
+     "source_url": "https://orm.drizzle.team/docs/upgrade-v1",
+     "note": "Install @rc, then run drizzle-kit up. journal.json is removed, each migration gets its own folder, snapshots become DDL snapshots, drizzle-kit drop is removed, commutativity checks are added, and RQB moves to v2. The upgrade page does not name the files. https://orm.drizzle.team/docs/drizzle-kit-generate does: a timestamped folder containing migration.sql and snapshot.json. No v1 stable date is given; the page only links a roadmap shown at 98%."
+    },
+    {
+     "id": "L1",
+     "status": "confirmed",
+     "source_url": "https://github.com/tursodatabase/libsql-client-ts/blob/main/packages/libsql-client/README.md",
+     "note": "README examples table: local 'Uses libsql with a local SQLite file.' The raw examples/local/index.mjs calls createClient({ url: \"file:local.db\" }). @libsql/client 0.18.0 depends on libsql ^0.5.28. The SQLite base version of that engine is still unverified."
+    },
+    {
+     "id": "L2",
+     "status": "confirmed",
+     "source_url": "https://github.com/tursodatabase/libsql-client-ts/tree/main/examples/remote",
+     "note": "The raw remote/index.mjs uses createClient({ url: process.env.TURSO_DATABASE_URL, authToken: process.env.TURSO_AUTH_TOKEN }). Its batch(...,'write') and execute code is byte-for-byte the same as local/index.mjs. The quote comes from the packages/libsql-client README examples table, not from the examples/remote page. The embedded-replica README example has url 'file:local.db', syncUrl, authToken and syncInterval: 60000."
+    },
+    {
+     "id": "L3",
+     "status": "corrected",
+     "corrected_value": "file:path.db or :memory: locally, with no authToken needed. Remote is libsql://[databaseName]-[organizationSlug].turso.io plus authToken (shown as syncUrl for embedded replicas). Modes: write = BEGIN IMMEDIATE, read = BEGIN TRANSACTION READONLY, deferred = BEGIN DEFERRED (starts read, switches to write on first write). batch() runs in an implicit transaction. Interactive transactions lock writes, with a 5 s timeout.",
+     "source_url": "https://docs.turso.tech/sdk/ts/reference",
+     "note": "official=false (vendor docs, not on the list). Most of the claim holds. Two corrections: (1) 'can't operate in parallel' is said about writes on replicas forwarded to the primary, not about write transactions in general. (2) This page does not say a deferred upgrade can fail. That fact comes from sqlite.org/lang_transaction.html (S7)."
+    },
+    {
+     "id": "L4",
+     "status": "confirmed",
+     "source_url": "https://github.com/tursodatabase/libsql-client-ts/blob/main/packages/libsql-client/README.md",
+     "note": "README line 50: @tursodatabase/serverless 'will be the driver to later support concurrent writes', and 'Use @libsql/client if you need a battle-tested driver today with ORM integration.' docs.turso.tech/sdk/ts/reference (official=false) says '@libsql/client/web does not support local file URLs'. Its comparison table lists concurrent writes for @libsql/client as 'Not supported'."
+    }
+   ],
+   "missing_items": [
+    {
+     "topic": "SQLite WAL checkpoint starvation",
+     "claim": "A checkpoint can reset the WAL only when no reader is using it. If at least one reader is always active, the WAL file grows without bound. Fixes are reader gaps or manual RESTART/TRUNCATE checkpoints. This matters when a long-running web app reads while the collector writes.",
+     "value": "Constant overlapping readers -> unbounded WAL growth",
+     "source_url": "https://www.sqlite.org/wal.html"
+    },
+    {
+     "topic": "SQLite WAL directory permissions",
+     "claim": "Opening a WAL database needs write access to the -shm file or, if it does not exist, to the database's directory. Read-only use works only if -shm and -wal already exist, can be created, or the DB is opened immutable.",
+     "value": "Writable DB directory required (or existing -shm/-wal)",
+     "source_url": "https://www.sqlite.org/wal.html"
+    },
+    {
+     "topic": "SQLite appropriate uses (hosting)",
+     "claim": "SQLite allows unlimited simultaneous readers but only one writer at any instant. Avoid it when one database is accessed directly and simultaneously from many computers over a network. Network-filesystem locking is often buggy.",
+     "value": "One writer; use client/server DB for multi-machine access",
+     "source_url": "https://www.sqlite.org/whentouse.html"
+    },
+    {
+     "topic": "Drizzle SQLite transaction behavior (needed to implement S12 via Drizzle)",
+     "claim": "Drizzle's SQLite db.transaction(fn, config) takes SQLiteTransactionConfig { behavior?: 'deferred' | 'immediate' | 'exclusive' }. Use behavior: 'immediate' for the job-claim transaction; otherwise a plain BEGIN (deferred) is used.",
+     "value": "db.transaction(fn, { behavior: 'immediate' })",
+     "source_url": "https://orm.drizzle.team/docs/sqlite/transactions"
+    },
+    {
+     "topic": "Drizzle Postgres row locking (FOR UPDATE SKIP LOCKED)",
+     "claim": "The Drizzle Postgres select builder has .for(strength, config). strength is 'update' | 'no key update' | 'share' | 'key share', and config is { noWait: true } or { skipLocked: true }, not both. The Drizzle select docs page does not document it; this comes from the package source on the main branch.",
+     "value": ".for('update', { skipLocked: true })",
+     "source_url": "https://github.com/drizzle-team/drizzle-orm/blob/main/drizzle-orm/src/pg-core/query-builders/select.types.ts"
+    },
+    {
+     "topic": "PostgreSQL advisory locks (alternative job lock; pooler interaction)",
+     "claim": "Advisory locks can be taken at session level, held until released or the session ends, or at transaction level, released automatically at transaction end. It is 'up to the application to use them correctly'. Session-level locks are the kind affected by transaction-mode poolers (see D5 caveat).",
+     "value": "Session-level vs transaction-level advisory locks",
+     "source_url": "https://www.postgresql.org/docs/current/explicit-locking.html"
+    },
+    {
+     "topic": "Node v24 docs version drift",
+     "claim": "The latest-v24 docs now describe Node v24.22.2, while v24.16.0 is installed. In the v24 line, node:sqlite added the timeout option in v24.0.0, the defensive option in v24.12.0 (on by default since v24.14.0), and RC status in v24.15.0. No later status change appears in the module history.",
+     "value": "Docs at v24.22.2; installed v24.16.0",
+     "source_url": "https://nodejs.org/docs/latest-v24.x/api/sqlite.html"
+    },
+    {
+     "topic": "better-sqlite3 v13 prebuilt binaries",
+     "claim": "v13.0.0 is the first version on N-API, so prebuilt binaries should work across Node.js and Electron versions. It dropped prebuild-install. The README says prebuilt binaries exist for major platforms/architectures. This lowers, but does not remove, the risk of compiling from source on darwin-arm64.",
+     "value": "N-API prebuilds since v13.0.0",
+     "source_url": "https://github.com/WiseLibs/better-sqlite3/releases"
+    },
+    {
+     "topic": "Local reproduction: autocommit single-statement claim",
+     "claim": "Two Node v24.16.0 processes on one WAL file each ran an autocommit UPDATE jobs SET ... WHERE id=(SELECT id ... LIMIT 1) RETURNING id, with no explicit BEGIN and timeout 5000, over 3000 jobs. Result: A=1541, B=1459, sum 3000, per-owner row counts equal to each process's own count, 0 pending, 0 busy retries.",
+     "value": "0 double claims without explicit BEGIN IMMEDIATE (single run)",
+     "source_url": "local-test: /private/tmp/claude-501/-Users-aloncohen-CURATION-AI/9d2eb248-8083-4285-ab18-5d0d8904dc4a/scratchpad/fc_verify/worker_auto.mjs (run 2026-10-30)"
+    },
+    {
+     "topic": "drizzle-kit generate output layout (v1)",
+     "claim": "drizzle-kit generate writes one timestamped folder per migration (e.g. 20242409125510_name) containing migration.sql and snapshot.json. --name replaces the random suffix.",
+     "value": "drizzle/<timestamp>_<name>/{migration.sql,snapshot.json}",
+     "source_url": "https://orm.drizzle.team/docs/drizzle-kit-generate"
+    }
+   ]
+  }
+ },
+ {
+  "dimension": "platform",
+  "research": {
+   "dimension": "runtime, framework and integration facts",
+   "items": [
+    {
+     "id": "node-1",
+     "topic": "Node 24 type stripping",
+     "claim": "Node 24 runs .ts files directly by default when they contain only erasable TypeScript syntax. It replaces types with whitespace and does no type checking.",
+     "value": "Enabled by default since v23.6.0. Stable (Stability 2) since v24.12.0. The experimental warning was removed in v24.3.0. It can be turned off with --no-strip-types.",
+     "source_url": "https://nodejs.org/docs/latest-v24.x/api/typescript.html",
+     "official": true,
+     "short_quote": "By default Node.js will execute TypeScript files that contains only erasable TypeScript syntax.",
+     "caveats": "Read from the latest-v24.x docs (also fetched as raw typescript.md). Since this is stable only from 24.12.0 on, Node 24.16.0 qualifies. Type checking still needs a separate tsc run."
+    },
+    {
+     "id": "node-2",
+     "topic": "Node 24 type stripping: unsupported syntax",
+     "claim": "Without --experimental-transform-types, syntax that has to be transformed into JavaScript throws an error: enum declarations, namespaces with runtime code, parameter properties and import aliases. Decorators cause a parser error. Type-only namespaces are fine.",
+     "value": "Errors: enum, runtime namespace, parameter properties, import aliases (ERR_UNSUPPORTED_TYPESCRIPT_SYNTAX). Decorators: parser error. TS docs recommend tsconfig 'erasableSyntaxOnly': true and 'verbatimModuleSyntax': true, with TS 5.8 or newer.",
+     "source_url": "https://nodejs.org/docs/latest-v24.x/api/typescript.html",
+     "official": true,
+     "short_quote": "features that involve _replacing_ TypeScript syntax with new JavaScript syntax will error",
+     "caveats": "The --experimental-transform-types flag is 'Stability: 1.2 - Release candidate' in the v24 CLI docs (https://nodejs.org/docs/latest-v24.x/api/cli.html). If we avoid enums and parameter properties, we don't need it."
+    },
+    {
+     "id": "node-3",
+     "topic": "Node 24 type stripping: other limitations",
+     "claim": "Node ignores tsconfig.json, so 'paths' aliases don't work; the closest substitute is '#' subpath imports. Import specifiers must include the file extension ('./file.ts'). Type imports need the 'type' keyword. .tsx files are unsupported. Node refuses to run TypeScript files under node_modules.",
+     "value": "No tsconfig, no paths. Extensions mandatory. 'import type' required. No .tsx. No TS inside node_modules. The REPL and --check don't accept TS syntax.",
+     "source_url": "https://nodejs.org/docs/latest-v24.x/api/typescript.html",
+     "official": true,
+     "short_quote": "Node.js ignores `tsconfig.json` files",
+     "caveats": "For the Next.js app, Next/Turbopack compiles TS/TSX, so these limits matter only for scripts and workers run directly with node (for example the collector). The docs name tsx as the option for full TS support."
+    },
+    {
+     "id": "ts7-1",
+     "topic": "TypeScript 7 release status",
+     "claim": "Microsoft announced TypeScript 7.0, the native Go port, as a full release on July 8, 2026. It installs as the regular 'typescript' npm package and provides tsc.",
+     "value": "Released 2026-07-08 (Beta 2026-04-21, RC 2026-06-18). Install with npm install -D typescript. The TypeScript 7.1 Beta followed on 2026-10-20.",
+     "source_url": "https://devblogs.microsoft.com/typescript/announcing-typescript-7-0/",
+     "official": true,
+     "short_quote": "announce the availability of TypeScript 7, a 10x faster native port",
+     "caveats": "The post does not use the term 'GA'. The Beta and RC dates come from search-result summaries of the devblogs posts."
+    },
+    {
+     "id": "ts7-2",
+     "topic": "TypeScript 7: no programmatic or language-service API in 7.0",
+     "claim": "TypeScript 7.0 ships without a programmatic API. Tools that need compiler access, such as typescript-eslint, have to run TypeScript 6.0 side by side through the @typescript/typescript6 compatibility package, which provides a 'tsc6' executable.",
+     "value": "7.0 has no API. The new, different API is planned for 7.1. Side-by-side setup: npm alias \"typescript\": \"npm:@typescript/typescript6@^6.0.2\", or the tsc6 binary.",
+     "source_url": "https://devblogs.microsoft.com/typescript/announcing-typescript-7-0/",
+     "official": true,
+     "short_quote": "it does not ship with an API",
+     "caveats": "The 7.1 Beta post (https://devblogs.microsoft.com/typescript/announcing-typescript-7-1-beta/) introduces typescript/sync and typescript/async API entry points, but 7.1 stable has no date yet (RC expected about a month after 2026-10-20)."
+    },
+    {
+     "id": "ts7-3",
+     "topic": "TypeScript 7: framework caveats and changed defaults",
+     "claim": "The TS 7 announcement says Vue, MDX, Astro and Svelte workflows probably can't use TS 7 yet, and Angular needs a combination of 7 and 6. Defaults changed: strict is true, module is esnext, target es5 and downlevelIteration were removed, rootDir defaults to ./ and types defaults to [].",
+     "value": "strict:true by default. module:esnext by default. No es5 target. types:[] by default. Next.js is not mentioned in the post.",
+     "source_url": "https://devblogs.microsoft.com/typescript/announcing-typescript-7-0/",
+     "official": true,
+     "short_quote": "workflows that use Vue, MDX, Astro, Svelte, and others will likely not yet",
+     "caveats": "Because types defaults to [], @types/node may have to be listed explicitly in tsconfig 'types'. That is my inference, not tested. Editor support comes through a dedicated VS Code extension for now."
+    },
+    {
+     "id": "ts7-4",
+     "topic": "typescript-eslint vs TypeScript 7",
+     "claim": "typescript-eslint officially supports TypeScript >=4.8.4 <6.1.0. That excludes TS 7, and the page doesn't mention TS 7.",
+     "value": ">=4.8.4 <6.1.0",
+     "source_url": "https://typescript-eslint.io/users/dependency-versions",
+     "official": true,
+     "short_quote": "The version range of TypeScript currently supported is `>=4.8.4 <6.1.0`.",
+     "caveats": "typescript-eslint.io is that project's own official site. Using typescript-eslint with TS 7 means the @typescript/typescript6 side-by-side setup, or using a linter without type information (for example Biome, which Next.js offers)."
+    },
+    {
+     "id": "next-1",
+     "topic": "Next.js 16 and TypeScript 7",
+     "claim": "Next.js officially supports TypeScript 7 for type checking in next build. By default, next build runs the project-local tsc CLI instead of the TS JavaScript compiler API, so you only install typescript@^7 and change no config.",
+     "value": "experimental.useTypeScriptCli is on by default (marked Experimental). Setting it to false while on TS 7 makes next build exit. Introduced in Next.js 16.3 (published 2026-08-03).",
+     "source_url": "https://nextjs.org/docs/app/api-reference/config/next-config-js/useTypeScriptCli",
+     "official": true,
+     "short_quote": "enables TypeScript 7 while its JavaScript API is unavailable",
+     "caveats": "Documented limits: diagnostics come straight from tsc with no Next.js-specific error rewriting; the whole tsconfig project gets checked, tests included; the flag 'is experimental and its behavior may change'. The Next.js IDE plugin goes through the TS language service, which TS 7.0 lacks, so plugin support in the editor on TS 7 isn't documented. Also confirmed at https://nextjs.org/docs/app/api-reference/config/typescript and https://nextjs.org/blog/next-16-3. I did not check the 16.4.x changelog specifically."
+    },
+    {
+     "id": "next-2",
+     "topic": "Next.js 16 minimum Node and TypeScript",
+     "claim": "Next.js 16 requires at least Node.js 20.9.0 and dropped Node 18. The minimum TypeScript version is 5.1.0.",
+     "value": "Node >= 20.9.0. TypeScript >= 5.1.0. Browsers: Chrome/Edge/Firefox 111+, Safari 16.4+.",
+     "source_url": "https://nextjs.org/docs/app/guides/upgrading/version-16",
+     "official": true,
+     "short_quote": "Minimum version now `20.9.0` (LTS); Node.js 18 no longer supported",
+     "caveats": "The installation page (https://nextjs.org/docs/app/getting-started/installation, updated 2026-10-02) also says 'Minimum Node.js version: 20.9'. Node 24.16.0 meets this."
+    },
+    {
+     "id": "next-3",
+     "topic": "Next.js 16 changes relevant to setup",
+     "claim": "Next.js 16 uses Turbopack by default for dev and build. It removed 'next lint' (next build no longer lints). The middleware file is renamed to proxy.ts, which runs on the nodejs runtime. Synchronous access to params, cookies and headers was removed.",
+     "value": "Turbopack default. next lint removed (run ESLint or Biome directly). middleware becomes proxy (nodejs runtime only). Async-only request APIs.",
+     "source_url": "https://nextjs.org/docs/app/guides/upgrading/version-16",
+     "official": true,
+     "short_quote": "The `next lint` command has been removed.",
+     "caveats": "next dev and next build now use separate output directories and a lockfile, so they can run at the same time."
+    },
+    {
+     "id": "next-4",
+     "topic": "Self-hosting with output: 'standalone'",
+     "claim": "Setting output: 'standalone' in next.config makes next build create .next/standalone with a minimal server.js and only the node_modules it needs. You start it with node .next/standalone/server.js. It does not copy public/ or .next/static, so you copy those yourself. The PORT and HOSTNAME env vars set the listen address.",
+     "value": "cp -r public .next/standalone/ && cp -r .next/static .next/standalone/.next/ ; PORT=8080 HOSTNAME=0.0.0.0 node .next/standalone/server.js",
+     "source_url": "https://nextjs.org/docs/app/api-reference/config/next-config-js/output",
+     "official": true,
+     "short_quote": "This minimal server does not copy the `public` or `.next/static` folders",
+     "caveats": "File tracing (@vercel/nft) can miss files; outputFileTracingIncludes covers native assets. Traces are skipped for Edge routes and fully static pages."
+    },
+    {
+     "id": "next-5",
+     "topic": "Self-hosting guidance (no Vercel)",
+     "claim": "For self-hosting, the docs recommend putting a reverse proxy such as nginx in front of the Next.js server. With next start, image optimization, proxy, after() and Cache Components all work without extra configuration. The ISR/data cache lives on each instance's local disk by default, so multiple instances need a shared cacheHandler.",
+     "value": "Single instance with persistent disk works automatically. Multi-instance needs a shared cache handler, the same NEXT_SERVER_ACTIONS_ENCRYPTION_KEY and a deploymentId. Disable proxy buffering for streaming (X-Accel-Buffering: no).",
+     "source_url": "https://nextjs.org/docs/app/guides/self-hosting",
+     "official": true,
+     "short_quote": "recommended to use a reverse proxy (like nginx) in front of your Next.js server",
+     "caveats": "Page updated 2026-10-15. For graceful shutdown, send SIGINT/SIGTERM and allow a 10-30 second drain."
+    },
+    {
+     "id": "next-6",
+     "topic": "Route Handlers for a small JSON API",
+     "claim": "Route Handlers are app/**/route.ts files that export functions named after HTTP methods and use the Web Request/Response APIs, for example return Response.json(data). Supported methods are GET, POST, PUT, PATCH, DELETE, HEAD and OPTIONS. Other methods get a 405.",
+     "value": "export async function GET(request: Request) { return Response.json({...}) }. They are not cached by default; GET can opt in with export const dynamic = 'force-static'. A route.ts can't sit at the same segment as a page.tsx. Typed params come from RouteContext<'/path/[id]'>.",
+     "source_url": "https://nextjs.org/docs/app/getting-started/route-handlers",
+     "official": true,
+     "short_quote": "Route Handlers are not cached by default.",
+     "caveats": "When cacheComponents is enabled, a GET handler that touches no request or uncached data can be prerendered at build time. A DB query stops prerendering, so it runs at request time."
+    },
+    {
+     "id": "next-7",
+     "topic": "Native DB drivers inside Next.js server code",
+     "claim": "Next.js leaves a built-in list of packages unbundled and loads them with native require. better-sqlite3, @libsql/client, libsql, pg and sqlite3 are on the list. @electric-sql/pglite is not.",
+     "value": "serverExternalPackages defaults include better-sqlite3, @libsql/client, libsql, pg, sqlite3. Add others with serverExternalPackages: [...].",
+     "source_url": "https://nextjs.org/docs/app/api-reference/config/next-config-js/serverExternalPackages",
+     "official": true,
+     "short_quote": "Opt-out specific dependencies from the Server Components bundling",
+     "caveats": "This page was last updated 2025-12-05, so the list may have changed since. Whether PGlite needs adding to serverExternalPackages or outputFileTracingIncludes under standalone output is not verified."
+    },
+    {
+     "id": "gh-1",
+     "topic": "GitHub REST: List releases",
+     "claim": "GET /repos/{owner}/{repo}/releases lists published releases, newest first, 30 per page by default and at most 100 per page. Draft releases are visible only to users with push access. Plain Git tags without a release are not included.",
+     "value": "GET /repos/{owner}/{repo}/releases?per_page=100&page=1 ; headers Accept: application/vnd.github+json, X-GitHub-Api-Version: 2022-11-28",
+     "source_url": "https://docs.github.com/en/rest/releases/releases?apiVersion=2022-11-28#list-releases",
+     "official": true,
+     "short_quote": "Information about published releases are available to everyone.",
+     "caveats": "The page doesn't say in so many words that a token is optional. 'Available to everyone' together with the unauthenticated rate limit implies that public repos work without a token. The 'newest first' ordering is not quoted from the fetched text."
+    },
+    {
+     "id": "gh-2",
+     "topic": "GitHub REST: unauthenticated primary rate limit",
+     "claim": "Unauthenticated REST requests are limited to 60 per hour per originating IP. A personal access token raises this to 5,000 per hour, and GITHUB_TOKEN inside Actions gets 1,000 per hour per repository.",
+     "value": "60/h unauthenticated (per IP). 5,000/h with a PAT. 1,000/h per repo with GITHUB_TOKEN. Headers: x-ratelimit-limit/remaining/used/reset/resource.",
+     "source_url": "https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api",
+     "official": true,
+     "short_quote": "The primary rate limit for unauthenticated requests is 60 requests per hour.",
+     "caveats": "Secondary limits also apply: at most 100 concurrent requests, and 900 points per minute per REST endpoint. When remaining=0, wait until x-ratelimit-reset; when retry-after is present, honor it."
+    },
+    {
+     "id": "gh-3",
+     "topic": "GitHub REST: User-Agent and conditional requests",
+     "claim": "Every REST request must include a valid User-Agent header; the docs suggest the app name or a GitHub username. Sending the saved ETag back in If-None-Match gets a 304 when nothing changed, and that 304 does not count against the primary rate limit.",
+     "value": "User-Agent required (a missing or invalid one is rejected with 403). Use If-None-Match with the ETag. A 304 doesn't count, but only for authorized requests. Make requests serially, not concurrently.",
+     "source_url": "https://docs.github.com/en/rest/using-the-rest-api/best-practices-for-using-the-rest-api",
+     "official": true,
+     "short_quote": "Making a conditional request does not count against your primary rate limit",
+     "caveats": "The User-Agent rule comes from https://docs.github.com/en/rest/using-the-rest-api/getting-started-with-the-rest-api. The best-practices page says the 304 exemption applies to authorized requests, so unauthenticated conditional requests may still count. The docs also say to prefer webhooks over polling."
+    },
+    {
+     "id": "gh-4",
+     "topic": "Public releases.atom feed: documentation status",
+     "claim": "I found no docs.github.com page that documents the https://github.com/{owner}/{repo}/releases.atom feed. The Feeds REST page covers only timeline, user and security-advisory feeds. 'Managing releases' mentions a 'releases feed' but gives no URL or format.",
+     "value": "Not documented (undocumented web endpoint).",
+     "source_url": "https://docs.github.com/en/rest/activity/feeds",
+     "official": true,
+     "short_quote": "You can then view your published or draft releases in the releases feed",
+     "caveats": "The quote is from https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository. Since the feed is undocumented, GitHub could change it without notice, and no rate limits are published for it."
+    },
+    {
+     "id": "gh-5",
+     "topic": "releases.atom live observation (not documentation)",
+     "claim": "A single GET of https://github.com/anthropics/claude-code/releases.atom on 2026-10-30 returned HTTP 200 as application/atom+xml with a weak ETag, Cache-Control 'max-age=0, private, must-revalidate', no x-ratelimit-* headers, and 10 <entry> elements. The newest entry id was tag:github.com,2008:Repository/937253475/v2.1.312.",
+     "value": "200; application/atom+xml; ETag W/\"...\"; 10 entries; feed updated 2026-10-27T20:23:56Z",
+     "source_url": "https://github.com/anthropics/claude-code/releases.atom",
+     "official": false,
+     "short_quote": "",
+     "caveats": "This is my own observation, not a documented guarantee. The feed seems to carry only the latest 10 releases, so the collector should backfill through the REST API if it needs older history. I did not test whether If-None-Match returns 304 on this feed. The Atom entry id is a stable natural key for idempotent upserts (inference)."
+    },
+    {
+     "id": "gh-6",
+     "topic": "GitHub terms on automated access",
+     "claim": "GitHub's Acceptable Use Policies say scraping means automated extraction by bot or crawler, and that API collection is not scraping. Section 7 lists permitted uses of collected information only for researchers (open-access publications) and archivists. It bans spam and selling personal info, and bans excessive automated bulk activity that places undue burden on servers.",
+     "value": "API use falls under ToS Section H: abuse or excessively frequent API requests can lead to suspension, and sharing tokens to get around rate limits is forbidden. ToS D.9 has extra terms for automated collection used to train a commercial AI system.",
+     "source_url": "https://docs.github.com/en/site-policy/acceptable-use-policies/github-acceptable-use-policies",
+     "official": true,
+     "short_quote": "Scraping does not refer to the collection of information through our API.",
+     "caveats": "ToS: https://docs.github.com/en/site-policy/github-terms/github-terms-of-service (verified against the raw github/docs source). It is unclear whether polling releases.atom counts as 'scraping' and whether a news-curation app falls outside the researcher/archivist list. The official REST API under Section H is the clearly covered path. This is not legal advice."
+    },
+    {
+     "id": "gha-1",
+     "topic": "GitHub Actions: workflow_dispatch",
+     "claim": "Adding on: workflow_dispatch to a workflow enables manual runs. The 'Run workflow' button appears only when the workflow file is on the default branch. Inputs can be defined, up to 25 top-level properties and 65,535 characters of payload.",
+     "value": "on: workflow_dispatch: (optional inputs:). Can also be triggered with gh workflow run or the API.",
+     "source_url": "https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows",
+     "official": true,
+     "short_quote": "",
+     "caveats": "After the first run it can be dispatched to other branches or tags through the API or CLI."
+    },
+    {
+     "id": "gha-2",
+     "topic": "GitHub Actions: schedule (cron)",
+     "claim": "on: schedule uses five-field POSIX cron, in UTC by default, with an optional IANA 'timezone'. The minimum interval is every 5 minutes. Scheduled runs can be delayed under high load, especially at the top of the hour, and some queued jobs can be dropped. They run only on the default branch.",
+     "value": "Minimum: */5 * * * *. UTC default. In public repos, schedules are auto-disabled after 60 days without repository activity.",
+     "source_url": "https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows",
+     "official": true,
+     "short_quote": "The shortest interval you can run scheduled workflows is once every 5 minutes.",
+     "caveats": "Because of the delays and possible drops, the collector has to be idempotent and tolerate missed or overlapping runs (ties into the lease test). Choosing an off-the-hour minute avoids peak load (inference from the docs' note)."
+    },
+    {
+     "id": "gha-3",
+     "topic": "GitHub Actions: disable and enable a workflow",
+     "claim": "In the UI: Actions tab, select the workflow, open the ... menu, choose 'Disable workflow'; for a disabled workflow, click 'Enable workflow'. With the CLI: gh workflow disable WORKFLOW and gh workflow enable WORKFLOW, where WORKFLOW is a name, ID or file name.",
+     "value": "gh workflow disable collect.yml ; gh workflow enable collect.yml",
+     "source_url": "https://docs.github.com/en/actions/how-tos/manage-workflow-runs/disable-and-enable-workflows",
+     "official": true,
+     "short_quote": "",
+     "caveats": "Scheduled workflows in forked public repos are disabled by default."
+    },
+    {
+     "id": "gha-4",
+     "topic": "GitHub Actions: job time limits",
+     "claim": "Each job on a GitHub-hosted runner can run for at most 6 hours of execution time and is terminated after that. A whole workflow run is capped at 35 days, including waiting and approval.",
+     "value": "6 h per job (hosted). 5 days per job (self-hosted). 35 days per workflow run. Free plan: 20 concurrent jobs.",
+     "source_url": "https://docs.github.com/en/actions/reference/limits",
+     "official": true,
+     "short_quote": "Each job in a workflow can run for up to 6 hours of execution time.",
+     "caveats": "Billing (https://docs.github.com/en/billing/concepts/product-billing/github-actions): standard hosted runners are free in public repos. Private repos on GitHub Free get $12/month of included compute, and with no payment method usage is blocked once that runs out, so there is no surprise charge. The ~2,000 minutes equivalent is a calculation, not a figure the page states."
+    },
+    {
+     "id": "ssrf-1",
+     "topic": "OWASP SSRF: allow-lists and IP validation",
+     "claim": "OWASP recommends allow-lists over deny-lists and building the request with a fixed scheme, port and path. When a deny-list is unavoidable, block loopback, RFC1918, link-local (169.254.0.0/16, fe80::/10), IPv6 ULA fc00::/7, multicast and the metadata IP 169.254.169.254, and validate IPs with a vetted library.",
+     "value": "Allow-list the hosts (for P1: github.com only). Block private, loopback, link-local and metadata ranges when validating.",
+     "source_url": "https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html",
+     "official": true,
+     "short_quote": "Deny-lists are bypass-prone. Prefer allow-lists.",
+     "caveats": "The cheat sheet is hosted at cheatsheetseries.owasp.org (OWASP's official cheat-sheet site)."
+    },
+    {
+     "id": "ssrf-2",
+     "topic": "OWASP SSRF: redirects, DNS rebinding, parsing, egress",
+     "claim": "OWASP says to turn off automatic redirect following and to validate the resolved IPs and then bind the connection to the validated address, because domain allow-listing alone does not stop DNS rebinding. It also warns against parser-differential URLs and recommends network-layer egress controls and IMDSv2.",
+     "value": "redirect off (or re-validate each hop). Resolve, validate, connect to that exact IP. Apply the same checks to retries. Egress firewall.",
+     "source_url": "https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html",
+     "official": true,
+     "short_quote": "Domain allowlisting alone does not prevent DNS rebinding.",
+     "caveats": "The page doesn't explicitly cover not relaying raw responses back to users."
+    },
+    {
+     "id": "ssrf-3",
+     "topic": "request-filtering-agent: fetch/undici support",
+     "claim": "request-filtering-agent is an http(s).Agent subclass. Its README warns that Node's built-in fetch (undici) doesn't support http.Agent, so it doesn't protect native fetch. It works with node:http/https, node-fetch, axios, got and @cypress/request.",
+     "value": "Native fetch: NOT supported (tracked in issue #23). By default it blocks private, link-local, reserved and meta (0.0.0.0, ::) addresses after DNS lookup, which defeats nip.io-style rebinding.",
+     "source_url": "https://github.com/azu/request-filtering-agent",
+     "official": true,
+     "short_quote": "Node.js's built-in `fetch` does not support `http.Agent`.",
+     "caveats": "The README's support table only goes up to Node 22 (v3.x: Node 20 and 22), so Node 24 isn't listed. The README says nothing about redirect handling. denyIPAddressList is a plain string compare and 'not a security boundary', so keep allowPrivateIPAddress=false. Read from the raw README on GitHub."
+    },
+    {
+     "id": "sdk-1",
+     "topic": "@anthropic-ai/sdk runtime requirements",
+     "claim": "The official TypeScript SDK README says it supports TypeScript >= 5.0 and Node.js 20 LTS or later (non-EOL), plus Deno, Bun, Cloudflare Workers, Vercel Edge and Nitro. Browser use is off by default unless dangerouslyAllowBrowser is set.",
+     "value": "Node >= 20 LTS (non-EOL). TypeScript >= 5.0. package.json version 1.3.0 on main.",
+     "source_url": "https://github.com/anthropics/anthropic-sdk-typescript",
+     "official": true,
+     "short_quote": "Node.js 20 LTS or later ([non-EOL](https://endoflife.date/nodejs)) versions.",
+     "caveats": "The README doesn't say whether TS 7 is supported for type-checking the SDK's types ('TypeScript >= 5.0 is supported'). The API key must stay server-side (Next.js server or worker only)."
+    },
+    {
+     "id": "sdk-2",
+     "topic": "@anthropic-ai/sdk structured outputs with Zod",
+     "claim": "The SDK has a structured-output parse helper: client.messages.parse() with output_config.format set to zodOutputFormat(schema), imported from '@anthropic-ai/sdk/helpers/zod'. It validates the response with Zod and returns it as message.parsed_output. A JSON Schema helper (jsonSchemaOutputFormat) also exists, and Standard Schema support is in beta.",
+     "value": "import { zodOutputFormat } from '@anthropic-ai/sdk/helpers/zod'; client.messages.parse({..., output_config: { format: zodOutputFormat(Schema) } }) and read .parsed_output. Optional peer dependency zod ^3.25.0 || ^4.0.0.",
+     "source_url": "https://github.com/anthropics/anthropic-sdk-typescript/blob/main/helpers.md",
+     "official": true,
+     "short_quote": "The response will be validated and parsed using Zod.",
+     "caveats": "The README points to helpers.md for structured outputs. I read helpers.md and package.json in the official repo (main branch); that may differ slightly from the published 1.3.0 tarball. Credits, pricing, and whether Claude Max includes any API usage are outside this dimension and were not checked here."
+    }
+   ],
+   "open_questions": [
+    "Does polling the undocumented github.com/{owner}/{repo}/releases.atom feed count as 'scraping' under GitHub's Acceptable Use Policies, given that the permitted-use list names only researchers and archivists? The REST API under ToS Section H is the clearly covered alternative. Decide whether P1 uses the Atom feed, the REST API, or both (Atom as the primary source, REST to backfill beyond the 10 most recent entries).",
+    "The 304-does-not-count rule for conditional requests is stated for authorized requests. Do unauthenticated If-None-Match requests on the REST API, or on releases.atom, avoid the 60/h limit? Not tested.",
+    "request-filtering-agent does not work with Node's native fetch and does not list Node 24 in its support table. For SSRF protection, do we use node:https with this agent, or a hand-rolled undici dispatcher with a custom DNS lookup and IP validation? The undici approach was not verified against official undici docs.",
+    "TypeScript 7 plus typescript-eslint (which supports <6.1.0): do we skip type-aware ESLint (Biome or untyped ESLint), or run TS 6 side by side via @typescript/typescript6? Also, does the Next.js IDE plugin work in the editor under TS 7, given that 7.0 has no language-service API?",
+    "Compatibility of tsx 4.23.15, vitest 5.0.5 and drizzle-kit 0.31.11 with TypeScript 7 and with TS 7's new defaults (types: [] and strict) was not verified against their official docs.",
+    "Is @electric-sql/pglite traced correctly by Next.js output: 'standalone'? It is not in the serverExternalPackages default list, so it may need serverExternalPackages or outputFileTracingIncludes. Not verified.",
+    "Anthropic API credits and Claude Max: whether a Max subscription includes any Claude API credits, and how API billing is activated and capped, is outside this dimension and must be checked separately on official Anthropic pages before any spend."
+   ]
+  },
+  "verification": {
+   "dimension": "platform: runtime, framework and integration facts (Node 24, TypeScript 7, Next.js 16, GitHub REST/Atom/ToS, GitHub Actions, OWASP SSRF, request-filtering-agent, @anthropic-ai/sdk)",
+   "verdicts": [
+    {
+     "id": "node-1",
+     "status": "confirmed",
+     "source_url": "https://nodejs.org/docs/latest-v24.x/api/typescript.html",
+     "note": "The history table matches: v23.6.0 enabled it by default, v24.3.0 removed the warning, v24.12.0 made it stable. The page header reads 'Stability: 2 - Stable'. The short quote is verbatim in the raw typescript.md (v24.x branch). One precision: per cli.html, v24.12.0 renamed the opt-out flag from --no-experimental-strip-types to --no-strip-types, so on 24.16.0 the documented name is --no-strip-types. The latest-v24.x docs now render v24.22.2, which is newer than the user's 24.16.0."
+    },
+    {
+     "id": "node-2",
+     "status": "confirmed",
+     "source_url": "https://nodejs.org/docs/latest-v24.x/api/typescript.html",
+     "note": "The page lists enum, namespaces with runtime code, parameter properties and import aliases. It says they 'will error' without --experimental-transform-types and gives ERR_UNSUPPORTED_TYPESCRIPT_SYNTAX in the namespace example. Decorators give a parser error and type-only namespaces are supported. Attribution fix: the tsconfig recommendation comes from Node's own TypeScript page, not the TS docs. It recommends TS 5.8 or newer with erasableSyntaxOnly, verbatimModuleSyntax, target esnext, module nodenext and rewriteRelativeImportExtensions, plus optional noEmit. cli.html (v24) confirms --experimental-transform-types is 'Stability: 1.2 - Release candidate', added in v22.7.0."
+    },
+    {
+     "id": "node-3",
+     "status": "confirmed",
+     "source_url": "https://nodejs.org/docs/latest-v24.x/api/typescript.html",
+     "note": "All points are verbatim on the page. tsconfig.json is ignored and 'paths' errors; the closest substitute is subpath imports starting with '#'. Extensions are mandatory in import, import() and require(). The 'type' keyword is required. '.tsx files are unsupported.' TypeScript files under node_modules are refused. TS syntax is unsupported in the REPL, --check and inspect (the claim left out inspect). The page gives tsx as an example of a third-party package for full TS support."
+    },
+    {
+     "id": "ts7-1",
+     "status": "confirmed",
+     "source_url": "https://devblogs.microsoft.com/typescript/announcing-typescript-7-0/",
+     "note": "The post is dated July 8, 2026 (Daniel Rosenwasser) and the quote is verbatim. Install is npm install -D typescript. I checked the Beta and RC dates on the posts themselves: Beta April 21, 2026 (https://devblogs.microsoft.com/typescript/announcing-typescript-7-0-beta/) and RC June 18, 2026 (https://devblogs.microsoft.com/typescript/announcing-typescript-7-0-rc/). The 7.1 Beta post is dated October 20, 2026. Correct that the post doesn't say 'GA'."
+    },
+    {
+     "id": "ts7-2",
+     "status": "confirmed",
+     "source_url": "https://devblogs.microsoft.com/typescript/announcing-typescript-7-0/",
+     "note": "The post says 7.0 'does not ship with an API' and that 7.1 is expected to ship a new and different one. @typescript/typescript6 provides tsc6 and re-exports the 6.0 API. The alias \"typescript\": \"npm:@typescript/typescript6@^6.0.2\" appears together with \"@typescript/native\": \"npm:typescript@^7.0.2\". The 7.1 Beta post (https://devblogs.microsoft.com/typescript/announcing-typescript-7-1-beta/) adds typescript/sync and typescript/async, plus typescript/fs and typescript/ast entry points. It says an RC follows 'in about a month', with final shortly after. It does not say typescript-eslint works with 7.1."
+    },
+    {
+     "id": "ts7-3",
+     "status": "confirmed",
+     "source_url": "https://devblogs.microsoft.com/typescript/announcing-typescript-7-0/",
+     "note": "The post names Vue, MDX, Astro and Svelte as 'will likely not yet' workflows. For Angular it suggests TS 7 for CLI checks and 6.0 for editor support. The changed defaults are confirmed: strict true, module esnext, rootDir ./, types []. target es5 and downlevelIteration are 'no longer supported'. The target default is now the stable ES version just before esnext. Next.js is not mentioned. Editor support comes through the TypeScriptTeam.native-preview VS Code extension, with built-in VS Code support announced as coming."
+    },
+    {
+     "id": "ts7-4",
+     "status": "confirmed",
+     "source_url": "https://typescript-eslint.io/users/dependency-versions",
+     "note": "The quote is verbatim: supported range '>=4.8.4 <6.1.0'. The page doesn't mention TS 7, tsgo or @typescript/typescript6. It also lists Node '^18.18.0 || ^20.9.0 || >=21.1.0' and ESLint '^8.57.0 || ^9.0.0 || ^10.0.0'. typescript-eslint.io is the project's own site."
+    },
+    {
+     "id": "next-1",
+     "status": "confirmed",
+     "source_url": "https://nextjs.org/docs/app/api-reference/config/next-config-js/useTypeScriptCli",
+     "note": "The page (Experimental badge, lastUpdated 2026-08-03) says next build runs the project-local tsc by default and that this 'enables TypeScript 7 while its JavaScript API is unavailable'. Opting out on TS 7 makes next build exit. https://nextjs.org/docs/app/api-reference/config/typescript says 'no additional configuration is required' and that the flag is experimental and may change. https://nextjs.org/blog/next-16-3 (August 3rd 2026) introduces TS 7 type checking. The npm registry shows next 16.3.0 published 2026-08-03. The Next.js 16.4 post (https://nextjs.org/blog/next-16-4) changes nothing about TS 7. The IDE plugin still runs through 'Use Workspace Version', and its TS 7 behavior is not documented."
+    },
+    {
+     "id": "next-2",
+     "status": "confirmed",
+     "source_url": "https://nextjs.org/docs/app/guides/upgrading/version-16",
+     "note": "Table, verbatim: 'Minimum version now `20.9.0` (LTS); Node.js 18 no longer supported'. TypeScript minimum is 5.1.0. Browsers: Chrome, Edge and Firefox 111+, Safari 16.4+. The installation page (lastUpdated 2026-10-02) says 'Minimum Node.js version: 20.9'. The npm registry shows next@16.4.3 with engines node >=20.9.0."
+    },
+    {
+     "id": "next-3",
+     "status": "confirmed",
+     "source_url": "https://nextjs.org/docs/app/guides/upgrading/version-16",
+     "note": "Confirmed: Turbopack is the default for dev and build, 'The `next lint` command has been removed.', next build no longer lints, and synchronous access to cookies, headers, draftMode, params and searchParams is fully removed. Two precisions. First, the middleware filename is deprecated, not removed. proxy runs only on nodejs and edge is not supported there, so edge middleware should stay as middleware. Second, the caveat is slightly off. dev writes to a separate .next/dev directory, which is what lets dev and build run at the same time. The lockfile does the opposite: it prevents several next dev or next build instances on the same project."
+    },
+    {
+     "id": "next-4",
+     "status": "confirmed",
+     "source_url": "https://nextjs.org/docs/app/api-reference/config/next-config-js/output",
+     "note": "Verbatim on the page (lastUpdated 2026-09-18): .next/standalone 'can then be deployed on its own without installing node_modules'. It shows the minimal server.js, the cp commands and node .next/standalone/server.js. The page's example is 'PORT=8080 HOSTNAME=0.0.0.0 node server.js'. Precision: the page says outputFileTracingIncludes/Excludes don't affect Edge routes or fully static pages, which is not the same as 'traces are skipped'. It gives node_modules/sharp and aws-crt as examples of native assets to include."
+    },
+    {
+     "id": "next-5",
+     "status": "confirmed",
+     "source_url": "https://nextjs.org/docs/app/guides/self-hosting",
+     "note": "lastUpdated 2026-10-15. The reverse-proxy quote is verbatim. With next start, image optimization and proxy work with zero configuration, after() is fully supported and Cache Components work by default. The cache defaults to in-memory (50 MB) plus each instance's local disk, and that 'works automatically' for one instance with persistent disk. For multiple instances the page lists a shared cacheHandler with cacheMaxMemorySize 0, the same NEXT_SERVER_ACTIONS_ENCRYPTION_KEY, and deploymentId or generateBuildId. Tag invalidation across instances needs refreshTags(). The encryption key is set at next build time and embedded in the build output. Shutdown: SIGINT or SIGTERM, with a 10-30 second drain recommended. For streaming, X-Accel-Buffering: no."
+    },
+    {
+     "id": "next-6",
+     "status": "confirmed",
+     "source_url": "https://nextjs.org/docs/app/getting-started/route-handlers",
+     "note": "lastUpdated 2026-08-27. The page confirms the method list and the 405 response, plus the verbatim quote 'Route Handlers are not cached by default.' GET can opt in with dynamic = 'force-static'. A route.js cannot sit at the same segment as page.js. The page has a RouteContext<'/users/[id]'> example. With Cache Components, prerendering stops on DB queries or request data. This matters now: per https://nextjs.org/blog/next-16-4, create-next-app enables Cache Components by default from 16.4."
+    },
+    {
+     "id": "next-7",
+     "status": "confirmed",
+     "source_url": "https://nextjs.org/docs/app/api-reference/config/next-config-js/serverExternalPackages",
+     "note": "The docs page (lastUpdated 2025-12-05) lists better-sqlite3, @libsql/client, libsql, pg and sqlite3, and not @electric-sql/pglite. I checked the current list at https://raw.githubusercontent.com/vercel/next.js/canary/packages/next/src/lib/server-external-packages.jsonc: those 5 are still present and pglite is still absent. Whether PGlite works with standalone tracing is still untested."
+    },
+    {
+     "id": "gh-1",
+     "status": "corrected",
+     "corrected_value": "GET /repos/{owner}/{repo}/releases returns published releases (drafts only for users with push access), not plain Git tags. per_page defaults to 30, max 100; page defaults to 1. The page does NOT state any ordering. It DOES say: 'This endpoint can be used without authentication or the aforementioned permissions if only public resources are requested.' A fine-grained token needs Contents: read.",
+     "source_url": "https://docs.github.com/en/rest/releases/releases?apiVersion=2022-11-28#list-releases",
+     "note": "The 'newest first' ordering is unsupported: the List releases section states no order. Only 'Get the latest release' mentions sorting by created_at, which is the commit date. The caveat that the token is only implicitly optional is wrong: the page says outright that the endpoint can be used without authentication for public resources. Documented responses are 200 and 404."
+    },
+    {
+     "id": "gh-2",
+     "status": "confirmed",
+     "source_url": "https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api",
+     "note": "Quote verbatim: 60 per hour, tied to the originating IP. 5,000 per hour personal. GITHUB_TOKEN gets 1,000 per hour per repository, or 15,000 on Enterprise Cloud. Secondary limits: 100 concurrent requests, 900 points per minute for REST, 90 seconds of CPU per 60 seconds, 80 content-creating requests per minute. A primary-limit hit returns 403 or 429 with remaining=0, and you wait for x-ratelimit-reset. Honor retry-after, otherwise wait at least 1 minute and back off exponentially. Continuing while limited can get the integration banned."
+    },
+    {
+     "id": "gh-3",
+     "status": "confirmed",
+     "source_url": "https://docs.github.com/en/rest/using-the-rest-api/best-practices-for-using-the-rest-api",
+     "note": "The best-practices page confirms the 304 exemption, but only when a 304 comes back and the request was correctly authorized with an Authorization header. Requests should be serial, not concurrent. Webhooks are preferred over polling, and x-poll-interval should be honored. The exact User-Agent wording at https://docs.github.com/en/rest/using-the-rest-api/getting-started-with-the-rest-api: 'Requests with no User-Agent header will be rejected.' An invalid one gets 403 Forbidden. The suggested value is a GitHub username or app name."
+    },
+    {
+     "id": "gh-4",
+     "status": "confirmed",
+     "source_url": "https://docs.github.com/en/rest/activity/feeds",
+     "note": "The Feeds page lists only timeline, user, current-user and security-advisory feeds; there is no per-repo releases.atom, tags.atom or commits.atom. The quote is verbatim on https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository with no URL or format. A search restricted to docs.github.com for 'releases.atom' returned no GitHub Docs pages, only third-party pages."
+    },
+    {
+     "id": "gh-5",
+     "status": "confirmed",
+     "source_url": "https://github.com/anthropics/claude-code/releases.atom",
+     "note": "I re-fetched once on 2026-10-30 (own observation, official=false). It returned HTTP/2 200 as application/atom+xml with ETag W/\"c7bc5941bc10bba2052ed7a6a5b74db6\", Cache-Control 'max-age=0, private, must-revalidate' and no x-ratelimit-* headers. There were 10 <entry> elements, the feed was updated 2026-10-27T20:23:56Z, and the newest id was tag:github.com,2008:Repository/937253475/v2.1.312. NEW: a second GET with If-None-Match set to that ETag returned 304, which answers the open question in the caveat. This is still not a documented guarantee."
+    },
+    {
+     "id": "gh-6",
+     "status": "confirmed",
+     "source_url": "https://docs.github.com/en/site-policy/acceptable-use-policies/github-acceptable-use-policies",
+     "note": "Section 7 has the scraping definition, the quote 'Scraping does not refer to the collection of information through our API.', the researchers (open-access) and archivists uses, and the ban on spam and selling personal info. Section 4 bans 'excessive automated bulk activity' and 'undue burden on our servers'. ToS (https://docs.github.com/en/site-policy/github-terms/github-terms-of-service, effective April 27, 2026), Section H: abuse or excessively frequent API requests can lead to suspension, and sharing tokens to exceed rate limits is forbidden. D.9 'Access Reciprocity' applies to automated collection used to train a Commercial AI System: the collector waives restrictions on GitHub accessing its own public data. Academic research and services under 700M MAU are exempt. It doesn't apply to curation without training. D.8: the ToS don't restrict lawful access to public repository contents. Not legal advice."
+    },
+    {
+     "id": "gha-1",
+     "status": "confirmed",
+     "source_url": "https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows",
+     "note": "The 'Run workflow' button appears only if the workflow file is on the default branch. inputs allow up to 25 top-level properties and a 65,535-character payload. After at least one run you can dispatch to any branch or tag through the API or GitHub CLI; the page's example is gh workflow run run-tests.yml -f ..."
+    },
+    {
+     "id": "gha-2",
+     "status": "confirmed",
+     "source_url": "https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows",
+     "note": "POSIX cron, UTC by default, with an optional IANA 'timezone' key. The quote is verbatim. Runs can be delayed under high load, especially at the top of each hour, and some queued jobs may be dropped; the page suggests another minute. Scheduled runs use the default branch only. In public repos, schedules are disabled after 60 days without repo activity. Extra fact: if a user with write access edits the cron of a deactivated workflow, it is reactivated and that user becomes the actor."
+    },
+    {
+     "id": "gha-3",
+     "status": "confirmed",
+     "source_url": "https://docs.github.com/en/actions/how-tos/manage-workflow-runs/disable-and-enable-workflows",
+     "note": "UI: Actions tab, select the workflow, kebab menu 'Show workflow options', then 'Disable workflow'; for a disabled workflow, 'Enable workflow'. CLI: gh workflow disable/enable WORKFLOW, where WORKFLOW is a name, ID or file name; without it the CLI shows an interactive menu. The REST API can do the same. Scheduled workflows in forks of public repos are disabled by default."
+    },
+    {
+     "id": "gha-4",
+     "status": "confirmed",
+     "source_url": "https://docs.github.com/en/actions/reference/limits",
+     "note": "Confirmed: 6 h per hosted job, 5 days per self-hosted job, 35 days per workflow run including waiting and approval, Free plan 20 concurrent jobs (5 macOS). Also a 24 h queue limit before auto-cancel. Billing (https://docs.github.com/en/billing/concepts/product-billing/github-actions): standard runners are free in public repos. GitHub Free private repos get $12 USD/month 'expressed as a monetary amount, not a fixed number of minutes'. Without a payment method, 'usage is blocked once you consume the included compute usage.' Linux 2-core costs $0.006/min. ~2,000 min is a calculation the page doesn't state."
+    },
+    {
+     "id": "ssrf-1",
+     "status": "corrected",
+     "corrected_value": "OWASP: 'Deny-lists are bypass-prone. Prefer allow-lists.' Build requests from the allow-list entry with an application-controlled scheme, port and path. When a deny-list is the last resort, the table lists 127.0.0.0/8, 0.0.0.0/8, ::1/128, 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, fc00::/7, fe80::/10, 224.0.0.0/4 and ff00::/8. For metadata it lists 169.254.169.254, metadata.google.internal and metadata.amazonaws.com. Use vetted IP libraries (JS example: ip-address).",
+     "source_url": "https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html",
+     "note": "Refuted detail: the deny-list table does not include the IPv4 link-local range 169.254.0.0/16. It names only the metadata IP 169.254.169.254, and link-local appears only as IPv6 fe80::/10. The table also lists 0.0.0.0/8, which the claim left out. I checked against the raw source at https://raw.githubusercontent.com/OWASP/CheatSheetSeries/master/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.md. Blocking all of 169.254.0.0/16 is still sensible, but that is our choice, not OWASP's text."
+    },
+    {
+     "id": "ssrf-2",
+     "status": "corrected",
+     "corrected_value": "OWASP: disable redirect following in the web client; it offers no 'or re-validate each hop' alternative. Domain allow-listing alone doesn't stop DNS rebinding. Validate the resolved IPs and connect only to validated addresses, keeping the original hostname for Host, SNI and certificate checks. A second unchecked DNS lookup can bypass the checks. Apply the same policy to retries and fallbacks. Reject URLs where parsers disagree. Use network segregation and firewalls. Migrate to IMDSv2.",
+     "source_url": "https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html",
+     "note": "Everything else is confirmed, including the verbatim quote. The only inaccuracy is the value's '(or re-validate each hop)', which OWASP does not say. Correct that the page doesn't explicitly cover withholding raw responses from users."
+    },
+    {
+     "id": "ssrf-3",
+     "status": "confirmed",
+     "source_url": "https://github.com/azu/request-filtering-agent",
+     "note": "The raw README is verbatim: it is an http(s).Agent class, and it says 'Node.js's built-in `fetch` does not support `http.Agent`.' It links issue #23 and lists http/https, node-fetch, node-http-proxy, axios, got and @cypress/request. It blocks non-unicast addresses (private, link-local, reserved) using ipaddr.js. allowPrivateIPAddress and allowMetaIPAddress default to false. The nip.io example is shown. denyIPAddressList is 'not a security boundary' (when allowPrivateIPAddress is true). The support table stops at Node 22, and the README says nothing on redirects. I also checked: the GitHub API shows issue #23 still open (last updated 2024-02-10), and npm metadata for 3.2.1 shows engines node >=20.0.0 and the sole dependency ipaddr.js."
+    },
+    {
+     "id": "sdk-1",
+     "status": "confirmed",
+     "source_url": "https://github.com/anthropics/anthropic-sdk-typescript",
+     "note": "The raw README (main) says 'TypeScript >= 5.0 is supported.' and quotes Node.js 20 LTS or later (non-EOL). It also lists Deno 1.28+, Bun 1.0+, Cloudflare Workers, Vercel Edge and Nitro 2.6+. Browsers are off unless dangerouslyAllowBrowser is true. package.json on main is 1.3.0 with no engines field. npm 'latest' is 1.3.0, published 2026-10-23. TS 7 is not mentioned."
+    },
+    {
+     "id": "sdk-2",
+     "status": "confirmed",
+     "source_url": "https://github.com/anthropics/anthropic-sdk-typescript/blob/main/helpers.md",
+     "note": "helpers.md is verbatim: zodOutputFormat from '@anthropic-ai/sdk/helpers/zod' with client.messages.parse({ output_config: { format } }), and the result is read from message.parsed_output. jsonSchemaOutputFormat comes from helpers/json-schema. Standard Schema is beta: betaStandardSchemaOutputFormat with client.beta.messages.parse. The quote is verbatim. The optional peer dependency is zod '^3.25.0 || ^4.0.0'. The published 1.3.0 package on npm exports './helpers/*', so the helpers/zod import resolves in the tarball, not only on main."
+    }
+   ],
+   "missing_items": [
+    {
+     "topic": "Node 24 patch level / security",
+     "claim": "Node 24.16.0 (2026-05-21) is behind the current v24 LTS line. Releases flagged as security came after it, so the project should pin the latest 24.x.",
+     "value": "Security releases: v24.17.0 (2026-06-17), v24.18.1 (2026-07-28), v24.22.1 (2026-10-20). Latest: v24.22.2 (2026-10-27, LTS 'Krypton').",
+     "source_url": "https://nodejs.org/dist/index.json"
+    },
+    {
+     "topic": "Node 24 type-stripping flag name",
+     "claim": "In v24.12.0 the opt-out flag was renamed from --no-experimental-strip-types to --no-strip-types. In v24 docs, --experimental-transform-types is Stability 1.2 (Release candidate) and implies --enable-source-maps.",
+     "value": "--no-strip-types (since v24.12.0)",
+     "source_url": "https://nodejs.org/docs/latest-v24.x/api/cli.html"
+    },
+    {
+     "topic": "GitHub REST API versioning",
+     "claim": "A newer REST API version, 2026-03-10, exists. Requests without X-GitHub-Api-Version still default to 2022-11-28, which is supported until March 10, 2028. After a version's window ends, requests that name it get 410 Gone.",
+     "value": "Versions: 2026-03-10 (current) and 2022-11-28 (default, EOS 2028-03-10)",
+     "source_url": "https://docs.github.com/en/rest/about-the-rest-api/api-versions"
+    },
+    {
+     "topic": "GitHub polling guidance",
+     "claim": "GitHub says to subscribe to webhooks instead of polling. If you must poll, wait at least the x-poll-interval seconds. Follow redirects (on a 301, update the stored URL), and don't parse or predict API URLs.",
+     "value": "Prefer webhooks; honor x-poll-interval; follow 301/302/307",
+     "source_url": "https://docs.github.com/en/rest/using-the-rest-api/best-practices-for-using-the-rest-api"
+    },
+    {
+     "topic": "releases.atom conditional GET (observation)",
+     "claim": "Sending the feed's weak ETag back in If-None-Match returned HTTP 304 on 2026-10-30. Cheap change detection seems to work on the Atom feed, but it is undocumented (official=false).",
+     "value": "If-None-Match: W/\"c7bc5941bc10bba2052ed7a6a5b74db6\" -> 304",
+     "source_url": "https://github.com/anthropics/claude-code/releases.atom"
+    },
+    {
+     "topic": "Next.js 16.4 defaults",
+     "claim": "From Next.js 16.4 (October 6th 2026), create-next-app enables Cache Components by default, and Cache Components 'will become the default in Next.js 17'. The recommended create-next-app settings also enable experimental agent feedback, which requires Next.js telemetry. Nothing is sent until the user clicks Send feedback.",
+     "value": "cacheComponents on by default for new apps; agentFeedback on with recommended settings",
+     "source_url": "https://nextjs.org/blog/next-16-4"
+    },
+    {
+     "topic": "Next.js server actions key in self-hosting",
+     "claim": "NEXT_SERVER_ACTIONS_ENCRYPTION_KEY must be base64 with a 16, 24 or 32-byte AES key. It is passed at next build time and embedded in the build output, so all instances must come from the same build or key. Separately, revalidateTag only affects the local instance unless the cache handler implements refreshTags().",
+     "value": "NEXT_SERVER_ACTIONS_ENCRYPTION_KEY=... next build",
+     "source_url": "https://nextjs.org/docs/app/guides/self-hosting"
+    },
+    {
+     "topic": "next.config.ts and Node native TS",
+     "claim": "Next.js detects Node's native TypeScript resolver through process.features.typescript, which is on by default from Node v22.18.0. next.config.ts can then use native ESM, including top-level await. The docs recommend next.config.mts for CommonJS projects.",
+     "value": "Node >=22.18: native resolver on by default for next.config.ts",
+     "source_url": "https://nextjs.org/docs/app/api-reference/config/typescript"
+    },
+    {
+     "topic": "GitHub ToS on public content",
+     "claim": "ToS D.8: unless the Terms say otherwise, they don't restrict lawful access to or use of public repository contents by third parties. D.9 Access Reciprocity is triggered only by automated collection used to develop or train a Commercial AI System; academic research and services under 700M MAU are exempt.",
+     "value": "ToS effective April 27, 2026",
+     "source_url": "https://docs.github.com/en/site-policy/github-terms/github-terms-of-service"
+    },
+    {
+     "topic": "GitHub Actions queue and billing details",
+     "claim": "A job is auto-cancelled after 24 h in the queue. Linux 2-core hosted runners cost $0.006 USD/min once the included $12/month (GitHub Free, private repos) is used up. Email alerts go out at 90% and 100% of included usage. Public-repo standard runners are free.",
+     "value": "Queue 24 h; $0.006/min Linux 2-core; alerts at 90%/100%",
+     "source_url": "https://docs.github.com/en/billing/concepts/product-billing/github-actions"
+    },
+    {
+     "topic": "TypeScript 7.1 API timeline",
+     "claim": "The TypeScript 7.1 Beta (2026-10-20, npm install -D typescript@beta) adds typescript/sync, typescript/async, typescript/fs and typescript/ast entry points. The post says an RC comes in about a month, with the final release shortly after. It doesn't say when typescript-eslint will support it.",
+     "value": "7.1 RC expected ~late Nov 2026",
+     "source_url": "https://devblogs.microsoft.com/typescript/announcing-typescript-7-1-beta/"
+    }
+   ]
+  }
+ }
+]

@@ -1,0 +1,13 @@
+node_modules/
+.env
+.env.*
+!.env.example
+data/
+exports/
+coverage/
+.npm-cache/
+.DS_Store
+*.db
+*.db-shm
+*.db-wal
+*.db-journal

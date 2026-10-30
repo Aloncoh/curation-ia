@@ -1,0 +1,158 @@
+{
+  "generated_at": "2026-10-30T01:26:40.643Z",
+  "note": "Documents bruts collectés depuis des sources officielles. Ce ne sont pas encore des fiches ni des analyses. Une capture en mode « fixture » provient d'un fichier de test, pas d'une collecte réelle.",
+  "sources": [
+    {
+      "id": "github-releases:anthropics/claude-code",
+      "name": "Claude Code — releases GitHub officielles",
+      "kind": "github_releases",
+      "status": "ok",
+      "last_success_at": "2026-10-30T01:26:39.402Z",
+      "last_error": null
+    }
+  ],
+  "documents": [
+    {
+      "source_id": "github-releases:anthropics/claude-code",
+      "external_id": "428518421",
+      "title": "v2.1.314",
+      "version": "v2.1.314",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.314",
+      "normalized_url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.314",
+      "announced_at": "2026-10-30T01:06:26.000Z",
+      "first_collected_at": "2026-10-30T01:26:38.899Z",
+      "last_seen_at": "2026-10-30T01:26:39.400Z",
+      "first_capture_mode": "live",
+      "snapshots": [
+        {
+          "seq": 1,
+          "captured_at": "2026-10-30T01:26:38.899Z",
+          "collected_in_mode": "live",
+          "content_hash": "507ed105989aeef86d23d87d9625d04099e41592df2965c7a6d21f676d26e4c1",
+          "content_length": 17217,
+          "run_id": "6ab7e3b4-8a0f-4b1b-ba77-4f6665351c4c",
+          "content_preview": "## What's changed\n\n- Added `permissions.blockWritesOutsideWorkingDirectories`: Write, Edit and NotebookEdit refuse paths outside the working directories in every permission mode\n- Added an optional `groups` list to Claude apps gateway upstreams: only developers in the listed IdP  […]"
+        }
+      ]
+    },
+    {
+      "source_id": "github-releases:anthropics/claude-code",
+      "external_id": "425846009",
+      "title": "v2.1.312",
+      "version": "v2.1.312",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.312",
+      "normalized_url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.312",
+      "announced_at": "2026-10-27T20:24:20.000Z",
+      "first_collected_at": "2026-10-30T01:26:38.899Z",
+      "last_seen_at": "2026-10-30T01:26:39.400Z",
+      "first_capture_mode": "live",
+      "snapshots": [
+        {
+          "seq": 1,
+          "captured_at": "2026-10-30T01:26:38.899Z",
+          "collected_in_mode": "live",
+          "content_hash": "2c7d405b62839bc24d34243396eb79500600a32c4a29c95f254cc9ea443799aa",
+          "content_length": 5760,
+          "run_id": "6ab7e3b4-8a0f-4b1b-ba77-4f6665351c4c",
+          "content_preview": "## What's changed\n\n- Added `oidc.user_id_claim` to the Claude apps gateway, to identify people by an id_token claim other than `sub`, such as Microsoft Entra ID's `oid`\n- Added click to send: in fullscreen, clicking the \"to send now\" hint under a queued message sends it right awa […]"
+        }
+      ]
+    },
+    {
+      "source_id": "github-releases:anthropics/claude-code",
+      "external_id": "424682562",
+      "title": "v2.1.311",
+      "version": "v2.1.311",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.311",
+      "normalized_url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.311",
+      "announced_at": "2026-10-26T21:51:23.000Z",
+      "first_collected_at": "2026-10-30T01:26:38.899Z",
+      "last_seen_at": "2026-10-30T01:26:39.400Z",
+      "first_capture_mode": "live",
+      "snapshots": [
+        {
+          "seq": 1,
+          "captured_at": "2026-10-30T01:26:38.899Z",
+          "collected_in_mode": "live",
+          "content_hash": "72ee5fbf687db73a07b4a1097f63e91a5c52a6eadababe5ae3b41701ce4c8a63",
+          "content_length": 13092,
+          "run_id": "6ab7e3b4-8a0f-4b1b-ba77-4f6665351c4c",
+          "content_preview": "## What's changed\n\n- Added `--hold-idle-file` and `--max-hold-min` to `self-hosted-runner`, to keep an idle session while your host reports processes it left running\n- Added a tip for the Explanatory output style, shown when you ask Claude for explanations\n- Fixed long freezes at […]"
+        }
+      ]
+    },
+    {
+      "source_id": "github-releases:anthropics/claude-code",
+      "external_id": "422315867",
+      "title": "v2.1.310",
+      "version": "v2.1.310",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.310",
+      "normalized_url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.310",
+      "announced_at": "2026-10-23T23:39:00.000Z",
+      "first_collected_at": "2026-10-30T01:26:38.899Z",
+      "last_seen_at": "2026-10-30T01:26:39.400Z",
+      "first_capture_mode": "live",
+      "snapshots": [
+        {
+          "seq": 1,
+          "captured_at": "2026-10-30T01:26:38.899Z",
+          "collected_in_mode": "live",
+          "content_hash": "8b0d4aabb7b0a89e835ea72639728a6e01b8b2923de123d65a60b06daf414e58",
+          "content_length": 3902,
+          "run_id": "6ab7e3b4-8a0f-4b1b-ba77-4f6665351c4c",
+          "content_preview": "## What's changed\n\n- Added the Monitor tool and plugin monitors on Bedrock, Vertex, and Foundry, and when telemetry or nonessential traffic is disabled; long foreground sleeps are now blocked there too\n- Fixed requests failing behind some gateways and compatible servers that reje […]"
+        }
+      ]
+    },
+    {
+      "source_id": "github-releases:anthropics/claude-code",
+      "external_id": "421170674",
+      "title": "v2.1.309",
+      "version": "v2.1.309",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.309",
+      "normalized_url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.309",
+      "announced_at": "2026-10-22T22:18:57.000Z",
+      "first_collected_at": "2026-10-30T01:26:38.899Z",
+      "last_seen_at": "2026-10-30T01:26:39.400Z",
+      "first_capture_mode": "live",
+      "snapshots": [
+        {
+          "seq": 1,
+          "captured_at": "2026-10-30T01:26:38.899Z",
+          "collected_in_mode": "live",
+          "content_hash": "c96616478549875cb91a65f75d0d6596255f5320a2126af0e64e2239529c3ab5",
+          "content_length": 11646,
+          "run_id": "6ab7e3b4-8a0f-4b1b-ba77-4f6665351c4c",
+          "content_preview": "## What's changed\n\n- Fixed sandboxed Bash commands on macOS and Linux running the shell's startup files outside the sandbox before each command\n- Fixed macOS sandbox `denyWrite` glob patterns not applying at a path's real location when the pattern's folder is reached through a sy […]"
+        }
+      ]
+    }
+  ],
+  "recent_runs": [
+    {
+      "id": "be0ac77e-c4f6-4972-bc68-58a8e716e723",
+      "mode": "live",
+      "status": "succeeded",
+      "started_at": "2026-10-30T01:26:39.297Z",
+      "finished_at": "2026-10-30T01:26:39.402Z",
+      "new_documents": 0,
+      "unchanged_documents": 5,
+      "changed_documents": 0,
+      "error_kind": null,
+      "error_message": null
+    },
+    {
+      "id": "6ab7e3b4-8a0f-4b1b-ba77-4f6665351c4c",
+      "mode": "live",
+      "status": "succeeded",
+      "started_at": "2026-10-30T01:26:38.481Z",
+      "finished_at": "2026-10-30T01:26:38.905Z",
+      "new_documents": 5,
+      "unchanged_documents": 0,
+      "changed_documents": 0,
+      "error_kind": null,
+      "error_message": null
+    }
+  ],
+  "note_preuve": "Copie de exports/source-documents.json produite par npm run export ; le contenu des notes de version est réduit à un extrait de 280 caractères (texte d'Anthropic, non reproduit en entier)."
+}
