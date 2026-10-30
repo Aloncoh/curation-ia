@@ -1,19 +1,22 @@
 # Architecture
 
-> État au 2026-10-30 (P2 en cours). Ce qui est **construit** est distingué de ce qui est **prévu**. Vue produit et vulgarisée : [communication/COMPRENDRE_LE_PROJET.md](../communication/COMPRENDRE_LE_PROJET.md).
+> État au 2026-10-30 (P2 en cours : maquette sociale à valider). Ce qui est **construit** est distingué de ce qui est **prévu**. Vue produit et vulgarisée : [communication/COMPRENDRE_LE_PROJET.md](../communication/COMPRENDRE_LE_PROJET.md).
 
 ## Vue d'ensemble
 
 ```mermaid
 flowchart LR
   subgraph Construit["Construit (P1–P2)"]
-    CLI["Commandes npm<br/>collect · status · export · maquette · pause · resume"] --> W["Worker de collecte<br/>src/worker/collect.ts"]
+    CLI["Commandes npm<br/>collect · status · export · maquette · maquette:reel · pause · resume"] --> W["Worker de collecte<br/>src/worker/collect.ts"]
     W --> SF["Récupération sécurisée<br/>src/collect/safe-fetch.ts"]
     SF --> GH[(API REST GitHub<br/>3 dépôts)]
     SF --> RSS[(Flux RSS officiels<br/>openai.com · github.blog)]
     W --> CAT["Catalogue<br/>src/catalog/link.ts"]
     CAT --> DB[(SQLite local<br/>data/curation.db)]
-    DB --> MAQ["Maquette statique<br/>maquette/"]
+    DB --> MAQ["Maquette statique<br/>maquette/ : fil, profil, Reels"]
+    EX["Exemples rédigés<br/>src/maquette/exemples.ts"] --> VERIF["Contrôle des citations<br/>mot pour mot"]
+    DB --> VERIF
+    VERIF --> MAQ
   end
   subgraph Prevu["Prévu"]
     LLM[(API Claude)] -.P3.- W
@@ -38,7 +41,10 @@ Un seul dépôt, un seul langage (TypeScript), deux points d'entrée à terme : 
 | `src/collect/normalize.ts` | URL canoniques, dates ISO UTC, texte normalisé, empreinte SHA-256 |
 | `src/collect/store.ts` | enregistrement idempotent dans une transaction : nouveau, inchangé, ou nouvelle capture |
 | `src/catalog/link.ts` | produits, versions et actualités, dans la même transaction ; rattrapage des documents non rattachés ([ADR 0003](decisions/0003-identite-produits-versions-actualites.md)) |
-| `src/maquette/data.ts` | données de la maquette : actualités de collectes réelles, extraits en texte brut |
+| `src/maquette/data.ts` | données de la maquette : actualités de collectes réelles, extraits en texte brut ; exemples rattachés à leur actualité et contrôle mot pour mot (mots entiers) de chaque passage cité dans la dernière capture du document, qui doit venir d'une collecte réelle, et des nombres écrits en chiffres (`verifierExemple`) |
+| `src/maquette/exemples.ts` | 4 exemples de publications rédigés par Claude Code pour la maquette (pas par l'agent du site), compte éditorial proposé, comptes envisagés |
+| `src/maquette/reel.ts` | Reel d'exemple : segments repris des champs vérifiés, mise en page du texte, sous-titres WebVTT (fonctions pures) |
+| `src/cli/maquette-reel.ts` | rendu du Reel (macOS : `say`, ffprobe, ffmpeg) vers `maquette/medias/` ; refuse un exemple « à vérifier » |
 | `src/jobs/queue.ts` | file de jobs : création unique, réservation atomique, bail, reprises, échec définitif |
 | `src/jobs/runs.ts` | traces d'exécution et d'étapes |
 | `src/worker/collect.ts` | orchestration : sources → pause → jobs → récupération → validation → enregistrement → traces |
@@ -96,7 +102,35 @@ stateDiagram-v2
 | `news_item_document` | documents d'une actualité : source principale (`primary`) ou secondaire (`supporting`) | un document est la source principale d'au plus une actualité |
 | `news_item_target` | produit et version concernés par une actualité | au plus une actualité par version |
 
-Dates : chaînes ISO 8601 en UTC, toujours au même format, donc comparables comme du texte. Le reste du modèle cible (analyses, contributions, votes) est décrit dans le brief et SPEC ; il sera construit à partir de P3.
+Dates : chaînes ISO 8601 en UTC, toujours au même format, donc comparables comme du texte.
+
+## Modèle cible de la V1 (prévu, P3–P4)
+
+[ADR 0004](decisions/0004-reseau-social-publications-comptes-preuves.md) : l'actualité reste l'événement dédoublonné ; le fil montre des **publications** signées par un **compte**.
+
+```mermaid
+erDiagram
+  ACCOUNT ||--o{ POST : signe
+  NEWS_ITEM ||--o| POST : "présentée par (une par compte éditorial)"
+  POST ||--|{ POST_REVISION : "révisions datées"
+  POST_REVISION }o--|| AI_ANALYSIS : affiche
+  AI_ANALYSIS ||--o{ CLAIM : affirme
+  CLAIM }o--|{ DOCUMENT_SNAPSHOT : "cite mot pour mot"
+  POST ||--|{ POST_SOURCE : "sources citées"
+  POST ||--o{ MEDIA_ASSET : "illustrée par"
+  AI_ANALYSIS }o--|| RUN : "produite par"
+  POST }o--|| RUN : "publiée par"
+```
+
+| Table (prévue) | Contenu | Contraintes clés |
+|---|---|---|
+| `account` | compte public : identifiant, nom, avatar, biographie, spécialité, type `agent` ou `human` | badge « Agent IA » dérivé du type ; un seul compte éditorial principal en V1 |
+| `post` | publication : compte, actualité, niveau de preuve (`documentary_analysis`, `external_demo`, `platform_test`), statut, dates | au plus une publication par (compte, actualité) ; `platform_test` impossible sans test exécuté rattaché |
+| `post_revision` | contenu affiché : accroche, nouveauté, ce que ça permet, pour qui, limites, détails, textes du média, analyse et exécution d'origine | une mise à jour crée une révision, jamais une nouvelle publication |
+| `post_source` | documents et captures cités par la publication | au moins une source |
+| `media_asset` | média : origine (`generated`, `platform_recording`, `external_embed`, `licensed_reuse`), texte alternatif, licence et attribution | V1 : `generated` seulement, mention « Illustration — ne prouve pas le fonctionnement » |
+
+La maquette de P2 préfigure ce modèle sans l'implémenter : les exemples de `src/maquette/exemples.ts` ont la forme d'une révision de publication (champs cités, diapositives qui ne reprennent que des champs vérifiés), et le contrôle des citations de `verifierExemple` est celui que le vérificateur de P3 appliquera. Le reste du modèle cible (contributions, réactions, abonnements, messagerie) arrive à partir de P9 ; il est décrit dans SPEC et le brief.
 
 ## Garanties et limites connues (P1–P2)
 

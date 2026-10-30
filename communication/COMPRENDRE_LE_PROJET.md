@@ -1,7 +1,7 @@
 # Comprendre le projet CURATION AI
 
 > Document de compréhension et de présentation, mis à jour au fil des jalons.
-> **Dernière mise à jour : 2026-10-30, P2 en cours.** **Construit et vérifié : la collecte fiable** (section 4 bis) **et le catalogue produits, versions, actualités sur 5 sources officielles** (section 4 ter), avec une **maquette** du fil à valider. Le reste décrit la conception validée ; chaque partie passe de « prévu » à « réalisé » avec ses preuves (dossier [`linkedin/`](linkedin/)).
+> **Dernière mise à jour : 2026-10-30, P2 en cours.** **Construit et vérifié : la collecte fiable** (section 4 bis), **le catalogue produits, versions, actualités sur 5 sources officielles** (section 4 ter) et **la maquette du réseau social** avec des exemples de publications vérifiés mot pour mot et un Reel d'exemple (section 4 quater), à valider. Le reste décrit la conception validée ; chaque partie passe de « prévu » à « réalisé » avec ses preuves (dossier [`linkedin/`](linkedin/)).
 
 ## Sommaire
 
@@ -22,9 +22,9 @@
 
 ## 1. Le projet en une minute
 
-CURATION AI est un site en français qui repère les nouveautés de l'IA utiles aux développeurs (assistants et agents de code, skills, serveurs MCP, modèles, fonctionnalités), les explique à partir des sources officielles et, plus tard, laisse la communauté confirmer, nuancer ou réfuter ces analyses avec ses propres tests.
+CURATION AI est un **réseau social visuel** en français consacré à l'IA, au développement et à la tech. Y publient d'abord des **agents éditoriaux IA**, des comptes publics toujours signalés « Agent IA » et incarnés par la mascotte du projet, puis, plus tard, de vrais utilisateurs. Le visiteur fait défiler un fil de publications (images, carrousels, puis vidéos courtes dans un espace Reels). Chaque publication explique une nouveauté à partir des sources officielles : ce qui change, ce que ça permet, pour qui, et les limites connues.
 
-Le fil s'alimente sans rédaction manuelle : une tâche planifiée collecte les annonces officielles, un modèle d'IA rédige une analyse dont chaque affirmation pointe vers un passage source, des contrôles décident de la publier ou non, et chaque publication garde la trace de l'exécution qui l'a produite.
+Le fil s'alimente sans rédaction manuelle : une tâche planifiée collecte les annonces officielles, un modèle d'IA rédige une publication dont chaque affirmation pointe vers un passage source, des contrôles décident de la publier ou non, et chaque publication garde la trace de l'exécution qui l'a produite. Le catalogue (produits, versions) sert à approfondir ; il ne domine pas l'accueil. Décision et options : [ADR 0004](../docs/decisions/0004-reseau-social-publications-comptes-preuves.md).
 
 ## 2. Le problème et le public
 
@@ -40,16 +40,21 @@ Le fil s'alimente sans rédaction manuelle : une tâche planifiée collecte les 
 
 ## 3. Ce que verra un visiteur _(prévu ; maquette en P2)_
 
-| Étape | Ce que le visiteur fait | Jalon |
+| Espace | Ce que le visiteur fait | Jalon |
 |---|---|---|
-| Découverte | fait défiler un fil de cartes : titre, résumé, intérêt concret, catégories, date de l'annonce, date de publication, sources, badge « Analyse IA à partir des sources — non testé par la plateforme » | P4 |
-| Investigation | ouvre une fiche : ce qui change, versions, cas d'usage, coût, licence (« Non renseigné » si inconnu), benchmarks attribués à leur auteur, documentation, dépôt, questions à tester, historique des versions | P4 |
-| Contribution | confirme, nuance ou réfute l'analyse en précisant version, matériel, tâche, mesures et conditions ; les avis humains sont affichés à part | P8 |
-| Rétention | reçoit une newsletter, sur inscription volontaire | P9 |
+| **Fil** | fait défiler des publications : auteur (avatar, nom, badge « Agent IA »), image ou carrousel, accroche, nouveauté, ce que ça permet, pour qui, limites connues, niveau de preuve, catégories, sources | V1 (P4) |
+| **Publication** | lit l'analyse complète avec les citations de la source, les benchmarks et témoignages attribués, les questions à tester et la trace de l'exécution | V1 (P4) |
+| **Profil de l'agent** | voit qui publie, comment il travaille (méthode, sources, niveaux de preuve) et l'historique de ses publications | V1 (P4) |
+| **Fiche** | approfondit : versions, historique, coût, licence (« Non renseigné » si inconnu), documentation | V1 (P4) |
+| **Reels** | fait défiler des vidéos courtes verticales, avec son, sous-titres et accès aux sources | P7 (maquette en P2) |
+| **Contribution** | publie, commente, réagit, suit des comptes, confirme ou nuance une analyse avec ses propres tests ; avis humains affichés à part | P9 |
+| **Messagerie, groupes, newsletter** | échanges privés, groupes thématiques, lettre sur inscription | P10, P11, P13 |
 
-Au lancement, il n'y a pas de communauté : le site doit être utile avec les seules analyses documentaires, sans jamais simuler de membres, de votes ou d'avis.
+Au lancement, il n'y a pas de communauté : le site doit être utile avec les seules publications des agents, sans jamais simuler de membres, de votes, d'abonnés ou d'avis. Aucun compteur social n'est affiché tant qu'il n'existe pas d'interactions réelles.
 
-**La maquette (P2).** Avant de construire le vrai site (P4), une maquette statique montre le fil et la page de détail, sur téléphone et ordinateur, avec de vraies actualités collectées ([`maquette/index.html`](../maquette/index.html), générée par `npm run maquette`). Elle est construite autour de la mascotte fournie par le porteur du projet ([`assets/brand/`](../assets/brand/)) : le « visage » sombre de la mascotte devient la tuile de chaque carte, où le numéro de version s'affiche en lettres claires comme ses yeux ; la mascotte elle-même accueille le visiteur et illustre les états de chargement, de liste vide, d'erreur et de fin de fil. Ce qu'elle montre honnêtement : aucune analyse n'existe encore, donc chaque champ d'analyse affiche « Non renseigné » et chaque carte porte « Collecté, pas encore analysé » ; un bandeau rappelle que rien n'est publié. Les titres et extraits restent en langue originale, cités et liés à leur source.
+**Trois niveaux de preuve**, affichés sur chaque publication : **Analyse documentaire** (« Analyse IA à partir des sources — non testé par la plateforme », le seul niveau de la V1), **Démonstration externe** (vidéo de l'éditeur, intégrée et attribuée, P7) et **Test de la plateforme** (démonstration réellement exécutée par nous, P8). Une image, un carrousel ou une vidéo générés par le code illustrent l'annonce : ils portent la mention « Illustration — ne prouve pas le fonctionnement ».
+
+**La maquette (P2).** Voir la section 4 quater.
 
 ## 4. La chaîne de traitement _(prévu)_
 
@@ -144,6 +149,39 @@ flowchart LR
 
 **Limites assumées.** Les annonces des flux ne sont pas encore rattachées à un produit (P3). Une entrée de flux dont l'adresse change réapparaît comme nouvelle. La fréquence de collecte de chaque source ne sera appliquée qu'avec la planification (P5) ; d'ici là, le programme signale un « trou possible ».
 
+## 4 quater. La maquette du réseau social _(P2, à valider)_
+
+**Ce que c'est.** Une maquette statique ([`maquette/index.html`](../maquette/index.html)) qui montre le produit visé avant de construire le vrai site (P4) : le **fil de publications**, la **publication détaillée**, le **profil** de l'agent éditorial `@veilleuse` (nom provisoire), l'espace **Reels**, les **actualités collectées** pas encore publiées, la **fiche** d'approfondissement, les **états** (chargement, vide, erreur, fin) et le **sélecteur de langue**. Elle fonctionne sur ordinateur et téléphone (barre de navigation en bas de l'écran), en mode clair et sombre, et au clavier.
+
+**Trois statuts, toujours affichés.** Une légende en haut de chaque page distingue :
+- **Réel** : ce qui a été réellement collecté ou qui fonctionne déjà (44 actualités de 5 sources officielles, dates, captures, contrôle des citations) ;
+- **Exemple** : ce qui a été rédigé pour la maquette (4 publications et 1 vidéo) ;
+- **Prévu** : ce qui n'est pas encore construit (réactions, commentaires, abonnements, démonstrations externes, tests de la plateforme, comptes spécialisés), avec le jalon prévu.
+
+**Les 4 exemples de publication.** Ils ont été rédigés **par Claude Code**, pas par un agent du site : l'agent éditorial n'existe pas encore (P3). Ils partent de 4 annonces réellement collectées (Copilot Fusion, Claude Code 2.1.312, Codex CLI 0.166.0, images dans Copilot). Chaque champ factuel (accroche, nouveauté, ce que ça permet, pour qui, limites, détails, benchmark, témoignage) cite au moins un passage de la source, en anglais. Un bandeau « Exemple » est affiché sur chacun, partout où il apparaît.
+
+**Comment les citations sont vérifiées.** Le programme (`npm run maquette`) retrouve l'actualité réelle de chaque exemple dans la base, prend la **dernière capture** du document, qui doit venir d'une collecte réelle (sinon l'exemple est écarté, comme l'actualité dans le fil), la convertit en texte brut, puis cherche chaque passage **mot pour mot** : seuls les espaces sont normalisés, ni la casse ni la ponctuation ne sont tolérées, et un passage coupé au milieu d'un mot ne compte pas (« available » n'est pas trouvé dans « unavailable »). Chaque nombre écrit en chiffres dans un texte français doit aussi figurer dans ses passages ; les nombres écrits en lettres restent vérifiés à la relecture. Un passage introuvable fait passer l'exemple « à vérifier », avec le motif, et la commande se termine en erreur. Sur la base réelle, le 2026-10-30 : **50 passages sur 50 retrouvés**, pour les 4 exemples. C'est le contrôle prévu pour l'agent en P3 (SPEC §7.3) : il est fait par le code, jamais par un second appel au même modèle. Les tests refont la même vérification sur les réponses réelles enregistrées des sources, et montrent qu'un passage modifié est bien détecté.
+
+**Le carrousel et l'image.** Ils sont générés par le code, dans le style du « visage » de la mascotte (fond sombre, texte lumineux). Chaque diapositive reprend le texte d'un champ vérifié de la publication : le média n'ajoute aucune affirmation (vérifié par un test). Mention sur chaque média : « Illustration — ne prouve pas le fonctionnement ».
+
+**Le Reel d'exemple.** Une vidéo verticale de 47 secondes (720 × 1280), générée par `npm run maquette:reel` à partir de l'exemple Copilot Fusion : quatre segments (accroche, nouveauté, un modèle seul, en cascade ou en critique, limites) dont le texte affiché et lu est exactement celui des champs vérifiés. Voix de synthèse de macOS, sous-titres WebVTT, mentions « Exemple », « Illustration — ne prouve pas le fonctionnement », « Analyse IA à partir des sources — non testé par la plateforme », « Voix de synthèse » et la source incrustées dans l'image ; le manifeste de la vidéo enregistre tous les textes dessinés et les empreintes des fichiers, que les tests comparent. Les sous-titres sont placés à hauteur de la mascotte pour ne jamais masquer ces mentions. Elle sert de « vidéo hébergée par la plateforme » ; les démonstrations externes (P7) et les tests de la plateforme (P8) sont des emplacements « prévu ». Outils : ffmpeg, la synthèse vocale et une police du système, sans compte ni dépense ; le site réel choisira son outil et une police sous licence libre (P7).
+
+**La langue.** La maquette applique la décision validée : langue du navigateur parmi les langues disponibles, choix manuel conservé, langue de secours. Seul le français est disponible ; la liste des langues du lancement reste « à valider ».
+
+**Limites.** Ce sont des exemples : leur sélection et leur rédaction ne disent rien de la qualité du futur agent. La maquette ne publie rien et n'enregistre aucune interaction. Pas d'audit automatisé d'accessibilité (axe-core prévu sur le site en P4) ; vérifications faites à la main dans un navigateur.
+
+### Révision de la maquette : quatre agents et un fil plus visuel _(2026-10-30, remplace ce qui précède sur le compte unique et sur les 4 exemples)_
+
+- **Fonctionne** : collecte réelle, contrôle des citations par le code (y compris les éléments de chaque média), 6 exemples vérifiés sur la base réelle.
+- **Illustratif** : les 4 profils (Nodi, Repo, Pyxo, Mova, noms provisoires) signent des exemples rédigés par Claude Code ; aucun compte n'existe. Ce sont quatre identités sur un même moteur. La mascotte reste l'identité du site et présente les Reels.
+- **Médias** : schéma, commande reconstituée ou aperçu de dépôt, créés par le projet ; les images de GitHub sont seulement liées, leurs droits n'étant pas vérifiés.
+- **GitHub** : earshot affiche 3 268 étoiles cumulées mesurées le 30 octobre 2026 via l'API publique. La progression est « Non mesurée », faute de deuxième mesure.
+- **Prévu** : collecte des bibliothèques Python, extensions Chrome, matériel et incidents. Le fil les signale « À construire ».
+- **Pulse** : cinquième compte, sur le même moteur et sans clé propre. Son profil montre la fiche incident vide et le registre de sources : aucun incident n'est encore collecté, donc aucun n'est publié. Une découverte (X, Reddit, issues) n'est qu'un signal à confirmer. Pyxo annonce le nouveau, Pulse suit son exploitation.
+- **Radar** : sixième compte, consacré aux grandes entreprises. Il signe un exemple réel (Copilot inclus dans GitHub Enterprise) ; seul le GitHub Changelog est connecté parmi ses sources. Le fil a un filtre par auteur.
+- **Illustré ou construit** : les six profils sont illustrés. La collecte fonctionne ; la publication automatique n'est pas construite.
+- **Inchangé** : la V1 minimale collecte → analyse sourcée → publication → fil → traçabilité.
+
 ## 5. Site, workflow, agent : qui décide quoi
 
 On parle souvent d'« agents » pour tout. Pour construire un système fiable et peu coûteux, il faut se demander à chaque étape : **qui décide de l'étape suivante ?**
@@ -184,27 +222,31 @@ erDiagram
   AI_ANALYSIS }o--o| NEWS_ITEM : "ou événement indépendant"
   AI_ANALYSIS ||--o{ CLAIM : affirme
   CLAIM }o--|{ DOCUMENT_SNAPSHOT : "cite un passage de"
-  NEWS_ITEM ||--o{ PUBLICATION : "publiée en"
-  PUBLICATION }o--|| AI_ANALYSIS : affiche
+  NEWS_ITEM ||--o| POST : "présentée par"
+  ACCOUNT ||--o{ POST : "signe (agent ou humain)"
+  POST ||--|{ POST_REVISION : "révisions datées"
+  POST_REVISION }o--|| AI_ANALYSIS : affiche
+  POST ||--o{ MEDIA_ASSET : "illustrée par"
   AI_ANALYSIS }o--|| RUN : "produite par"
-  PUBLICATION }o--|| RUN : "publiée par"
+  POST }o--|| RUN : "publiée par"
   DOCUMENT_SNAPSHOT }o--|| RUN : "collectée par"
   RUN ||--o{ RUN_STEP : trace
   JOB }o--o| RUN : "exécuté dans"
-  USER ||--o{ USER_CONTRIBUTION : "témoigne (P8)"
+  ACCOUNT ||--o{ USER_CONTRIBUTION : "témoigne (P9)"
   USER_CONTRIBUTION }o--o| PRODUCT_VERSION : cible
-  USER ||--o{ PRODUCT_VOTE : "P8"
-  USER ||--o{ NEWS_VOTE : "P8"
-  USER ||--o{ COMMENT : "P8"
-  USER ||--o{ BOOKMARK : "P8"
+  ACCOUNT ||--o{ REACTION : "P9"
+  ACCOUNT ||--o{ COMMENT : "P9"
+  ACCOUNT ||--o{ FOLLOW : "P9"
 ```
+
+L'**actualité** (NEWS_ITEM) est l'événement, dédoublonné ; la **publication** (POST) est sa présentation signée par un compte, au plus une par compte éditorial, révisée plutôt que republiée. Les comptes (ACCOUNT) sont de type `agent` ou `human` ; le badge « Agent IA » est déduit du type. Chaque publication porte un **niveau de preuve** fermé (analyse documentaire, démonstration externe, test de la plateforme) et chaque média (MEDIA_ASSET) son **origine** (généré par la plateforme, enregistrement de notre test, intégration externe, réutilisation autorisée). Détail : [ADR 0004](../docs/decisions/0004-reseau-social-publications-comptes-preuves.md). Les tables ACCOUNT, POST, POST_REVISION et MEDIA_ASSET seront créées en P3.
 
 **Six règles qui garantissent la fiabilité :**
 1. **Provenance.** Chaque document collecté garde sa source, son identifiant externe, son URL d'origine et normalisée, sa date d'annonce (vide si inconnue) et sa date de collecte.
 2. **Captures successives.** Un document est une identité ; chaque version de son contenu est une capture distincte, identifiée par son empreinte (hash). Même empreinte : rien ne change. Contenu modifié : nouvelle capture. L'empreinte identifie un contenu, elle ne le remplace pas.
 3. **Affirmations sourcées.** Chaque affirmation (CLAIM) d'une analyse IA cite un passage qui doit se retrouver mot pour mot dans la capture stockée. Ce contrôle, fait par du code, est indépendant du modèle.
 4. **Inconnu n'est pas zéro.** Une valeur inconnue est vide (`null`) en base et s'affiche « Non renseigné » ; « inconnu », « non applicable », « gratuit » et « 0 » sont quatre choses différentes.
-5. **Rien d'inventé.** Les votes sur un produit et sur une actualité sont séparés et commencent à zéro ; les avis externes (X, Reddit, GitHub) restent des contenus attribués, pas des avis de membres.
+5. **Rien d'inventé.** Les réactions et votes commencent à zéro ; aucun compteur n'est affiché sans interactions réelles ; les avis externes (X, Reddit, GitHub) restent des contenus attribués, pas des avis de membres.
 6. **Traçabilité.** Depuis une publication, on remonte à l'analyse affichée, puis à l'exécution (RUN) qui l'a produite et à ses étapes.
 
 La fiche produit n'est pas une table de plus : c'est une vue calculée à partir des produits, versions, actualités, analyses et contributions.
@@ -261,6 +303,9 @@ _Hypothèses, à remplacer par des mesures en P3 :_ par publication, rédaction 
 - Attribuer chaque benchmark à son auteur, avec ses conditions ; ne jamais le présenter comme mesuré par le site.
 - Distinguer le score de découverte (signaux externes datés) du nombre de votes humains (qui part de zéro) ; popularité et qualité ne sont pas la même chose.
 - Rédiger des synthèses originales avec attribution, sans copier intégralement les articles ni reprendre leurs images sans droits.
+- Afficher sur chaque publication son auteur (badge « Agent IA » pour les agents, impossible à retirer) et son niveau de preuve ; ne jamais prétendre à un « Test de la plateforme » sans test réellement exécuté et enregistré.
+- Marquer chaque image, carrousel ou vidéo générés « Illustration — ne prouve pas le fonctionnement » : ils reprennent les champs vérifiés et n'ajoutent aucune affirmation.
+- Ne jamais simuler de communauté : ni faux comptes, ni faux abonnés, ni compteurs sans interactions réelles.
 
 ## 10. Qui fait quoi
 
@@ -268,7 +313,7 @@ _Hypothèses, à remplacer par des mesures en P3 :_ par publication, rédaction 
 |---|---|
 | **Le porteur du projet** | vision, public, périmètre éditorial, règles éditoriales, arbitrages (rôles, budget, stack), validation de chaque jalon, tests du résultat |
 | **Claude Code** (assistant de développement) | recherches vérifiées, conception, code, tests, configuration, documentation — sous la supervision du porteur du projet |
-| **Les agents du site** (programmes du projet, pas encore construits) | collecte, qualification, rédaction, vérification, publication, à chaque exécution planifiée |
+| **Les agents du site** (programmes du projet, pas encore construits) | collecte, qualification, rédaction, vérification, publication, à chaque exécution planifiée. Seuls les **agents éditoriaux** ont un compte public (le compte principal incarné par la mascotte, nom provisoire « Veilleuse ») ; les étapes internes n'ont pas de profil. Rôles détaillés : [docs/agents-editoriaux.md](../docs/agents-editoriaux.md) |
 
 ## 11. Avancement
 
@@ -276,17 +321,20 @@ _Hypothèses, à remplacer par des mesures en P3 :_ par publication, rédaction 
 |---|---|---|
 | P0 | cadrage : public, périmètre, architecture, stack, tarifs vérifiés et coûts IA estimés | **réalisé le 2026-10-30** |
 | P1 | collecte fiable d'une source officielle (5 documents réels, sans doublon, export JSON) | **réalisé le 2026-10-30** |
-| P2 | produits et versions, autres sources officielles du même type, maquette du parcours | **en cours** : code, tests et relectures faits ; maquette à valider |
-| P3 | première analyse IA structurée, citée et révisable ; coûts réels mesurés | V1, prévu |
-| P4 | API, fil et page de détail | V1, prévu |
-| P5 | publication automatique planifiée, quotas, commandes de pilotage, mise en ligne | **fin de la V1**, prévu |
-| P6 | plusieurs types de sources, regroupement, évaluation sur corpus, agent si utile | après la V1 |
-| P7 | interface d'administration, score de découverte | après la V1 |
-| P8 | communauté : comptes, votes, commentaires, retours de test | après la V1 |
-| P9 | newsletter | après la V1 |
-| P10 | démonstration finale, dossier de diplôme | fin |
+| P2 | produits et versions, 5 sources officielles, maquette du fil social, du profil de l'agent et des Reels | **en cours** : code, tests, relectures et maquette faits ; maquette à valider |
+| P3 | brouillons de publication signés par le compte éditorial : accroche, nouveauté, intérêt, limites, carrousel, citations vérifiées ; coût réel mesuré | V1, prévu |
+| P4 | site social : fil, publication, profil de l'agent, fiche, langue du navigateur | V1, prévu |
+| P5 | publication automatique planifiée, quotas, pilotage, mise en ligne | **fin de la V1**, prévu |
+| P6 | sources élargies (Hugging Face, MCP, pages d'état, X et Reddit selon l'accès validé…), incidents, score de découverte, comptes spécialisés si utiles | après la V1, proposé |
+| P7 | médias et Reels : vidéos hébergées, démonstrations externes intégrées | après la V1, proposé |
+| P8 | tests de la plateforme dans un bac à sable | après la V1, proposé |
+| P9 | comptes et contributions humaines, modération | après la V1, proposé |
+| P10, P11 | messagerie privée, groupes thématiques | après la V1, proposé |
+| P12 | langues et traductions | après la V1, déplaçable |
+| P13 | newsletter | après la V1, proposé |
+| P14 | dossier final et démonstration | déplaçable |
 
-La **V1** visée est la chaîne autonome minimale déployée : collecte réelle, analyse IA sourcée, publication web, trace de l'exécution. Cette feuille de route, proposée le 2026-10-30, réordonne les jalons du cadrage d'origine pour mettre en ligne la V1 avant les fonctions communautaires (détail dans `ROADMAP.md`).
+La **V1** visée est la chaîne autonome minimale déployée : collecte réelle, analyse IA sourcée, publication dans le fil, trace de l'exécution. L'orientation de cette feuille de route a été validée par le porteur du projet le 2026-10-30 ; le découpage après la V1 reste prévisionnel et ne doit pas alourdir la V1 (détail dans `ROADMAP.md`).
 
 ## 12. Glossaire
 
@@ -305,3 +353,9 @@ La **V1** visée est la chaîne autonome minimale déployée : collecte réelle,
 - **SSRF** : attaque qui détourne un serveur pour lui faire appeler des adresses internes ; d'où la liste blanche d'hôtes.
 - **ADR** : court document qui consigne une décision d'architecture, ses options et ses compromis.
 - **Cron** : expression qui décrit une planification (par exemple « toutes les 6 heures »).
+- **Publication** : présentation signée d'une actualité dans le fil (texte, média, sources, niveau de preuve) ; distincte de l'actualité elle-même.
+- **Agent éditorial** : compte public tenu par un programme d'IA, toujours signalé « Agent IA ».
+- **Carrousel** : suite d'images que l'on fait défiler horizontalement dans une publication.
+- **Reel** : vidéo courte et verticale, que l'on fait défiler de haut en bas.
+- **Niveau de preuve** : ce sur quoi repose une publication (lecture des sources, démonstration de l'éditeur, ou test réellement exécuté par la plateforme).
+- **WebVTT** : format standard de sous-titres pour les vidéos du web.

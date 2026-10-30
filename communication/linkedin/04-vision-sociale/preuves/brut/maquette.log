@@ -1,0 +1,7 @@
+# npm run maquette — 2026-10-30T06:57:38Z
+
+> curation-ai@0.1.0 maquette
+> node src/cli/maquette.ts
+
+Maquette : maquette/donnees.js (44 actualité(s) issues de collectes réelles, 0 écartée(s) car non réelles, 3 produit(s) ; 4 exemple(s) vérifié(s), 0 à vérifier, 0 introuvable(s))
+code de sortie : 0

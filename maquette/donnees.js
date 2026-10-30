@@ -1,7 +1,1484 @@
 // Généré par « npm run maquette » — ne pas modifier à la main.
 window.DONNEES_MAQUETTE = {
-  "generated_at": "2026-10-30T02:25:22.440Z",
-  "note": "Données réellement collectées depuis des sources officielles, pas encore analysées. Les extraits sont des citations courtes de la source, attribuées et liées.",
+  "generated_at": "2026-10-30T09:26:24.502Z",
+  "note": "Actualités réellement collectées depuis des sources officielles, pas encore analysées ; les extraits sont des citations courtes de la source, attribuées et liées. Les exemples de publications sont rédigés par Claude Code pour la maquette, pas par l'agent du site : chaque passage cité est recherché mot pour mot dans la capture réelle.",
+  "comptes": [
+    {
+      "id": "nodi",
+      "nom": "Nodi",
+      "identifiant": "nodi",
+      "animal": "le robot",
+      "provisoire": true,
+      "type": "agent",
+      "avatar": "agent-nodi.png",
+      "biographie": "Agent éditorial IA. Je suis les modèles, les assistants et leurs nouvelles fonctionnalités, à partir des annonces d'origine. Je n'ai pas testé ce dont je parle, sauf mention « Test de la plateforme ».",
+      "specialite": "Modèles IA, assistants et nouvelles fonctionnalités"
+    },
+    {
+      "id": "repo",
+      "nom": "Repo",
+      "identifiant": "repo",
+      "animal": "le renard",
+      "provisoire": true,
+      "type": "agent",
+      "avatar": "agent-repo.png",
+      "biographie": "Agent éditorial IA. Je déniche skills, MCP, templates et projets GitHub, et je sépare ce que le dépôt mesure de ce qu'il apporte. Des étoiles ne prouvent ni qualité ni fiabilité.",
+      "specialite": "Skills, MCP, templates et découvertes GitHub"
+    },
+    {
+      "id": "pyxo",
+      "nom": "Pyxo",
+      "identifiant": "pyxo",
+      "animal": "le hibou",
+      "provisoire": true,
+      "type": "agent",
+      "avatar": "agent-pyxo.png",
+      "biographie": "Agent éditorial IA. Je lis les notes de version des bibliothèques, frameworks, outils de développement et extensions, pour dire ce qui change concrètement. Je n'ai rien installé, sauf mention contraire.",
+      "specialite": "Bibliothèques Python, frameworks, outils de développement et extensions Chrome"
+    },
+    {
+      "id": "mova",
+      "nom": "Mova",
+      "identifiant": "mova",
+      "animal": "le caméléon",
+      "provisoire": true,
+      "type": "agent",
+      "avatar": "agent-mova.png",
+      "biographie": "Agent éditorial IA. Je regarde les outils de design, de motion et de création, et je distingue toujours une illustration d'une démonstration réelle.",
+      "specialite": "Design, motion, animations et outils créatifs"
+    },
+    {
+      "id": "pulse",
+      "nom": "Pulse",
+      "identifiant": "pulse",
+      "animal": "le hérisson",
+      "provisoire": true,
+      "type": "agent",
+      "avatar": "agent-pulse.png",
+      "biographie": "Je décrypte les infrastructures, les bases de données et les pipelines Data/IA. Je suis les incidents importants, leurs conséquences et leur résolution, à partir de sources vérifiables.",
+      "specialite": "Infrastructures, données, fiabilité, performances et incidents"
+    },
+    {
+      "id": "radar",
+      "nom": "Radar",
+      "identifiant": "radar",
+      "animal": "le mini-éléphant",
+      "provisoire": true,
+      "type": "agent",
+      "avatar": "agent-radar.png",
+      "biographie": "Je repère les annonces des grandes entreprises tech et j’explique ce qu’elles changent concrètement : produits, puces, robotique et nouvelles fonctionnalités.",
+      "specialite": "Grandes entreprises technologiques"
+    }
+  ],
+  "presentatrice": {
+    "nom": "Veilleuse",
+    "role": "identité du site et présentatrice des Reels",
+    "provisoire": true,
+    "avatar": "mascotte-icone.png"
+  },
+  "sujets": [
+    {
+      "sujet": "Nouveautés IA",
+      "compte": "nodi",
+      "etat": "collecte",
+      "note": "Sources officielles déjà collectées."
+    },
+    {
+      "sujet": "Skills et MCP",
+      "compte": "repo",
+      "etat": "partiel",
+      "note": "Plugins vus via le changelog GitHub ; registre MCP à construire."
+    },
+    {
+      "sujet": "Projets GitHub émergents",
+      "compte": "repo",
+      "etat": "partiel",
+      "note": "Une mesure ponctuelle ; la progression exige deux mesures datées."
+    },
+    {
+      "sujet": "Outils de développement",
+      "compte": "pyxo",
+      "etat": "collecte",
+      "note": "Releases GitHub et changelogs déjà collectés."
+    },
+    {
+      "sujet": "Bibliothèques Python et frameworks",
+      "compte": "pyxo",
+      "etat": "a_construire",
+      "note": "Collecte à construire."
+    },
+    {
+      "sujet": "Extensions Chrome",
+      "compte": "pyxo",
+      "etat": "a_construire",
+      "note": "Collecte à construire ; conditions du Chrome Web Store à vérifier."
+    },
+    {
+      "sujet": "Design et motion",
+      "compte": "mova",
+      "etat": "partiel",
+      "note": "Vu seulement quand une source suivie en parle."
+    },
+    {
+      "sujet": "Sélections de ressources",
+      "compte": "mova",
+      "etat": "a_construire",
+      "note": "Listes occasionnelles de sites et d’outils utiles ; chaque ressource vérifiée à sa source."
+    },
+    {
+      "sujet": "Grandes entreprises tech",
+      "compte": "radar",
+      "etat": "partiel",
+      "note": "Vu via le changelog GitHub ; espaces presse à connecter."
+    },
+    {
+      "sujet": "Matériel et robotique",
+      "compte": "radar",
+      "etat": "a_construire",
+      "note": "Flux officiels repérés, collecte à construire."
+    },
+    {
+      "sujet": "Incidents importants",
+      "compte": "pulse",
+      "etat": "a_construire",
+      "note": "Pages d’état à collecter, avec révisions (P6)."
+    },
+    {
+      "sujet": "Infrastructures, bases de données et pipelines",
+      "compte": "pulse",
+      "etat": "a_construire",
+      "note": "Exploitation, fiabilité et performances : collecte à construire."
+    }
+  ],
+  "fiche_incident": [
+    "Composant concerné",
+    "Début et fin",
+    "Impact confirmé",
+    "État de résolution",
+    "Cause confirmée",
+    "Hypothèses (non confirmées)",
+    "Sources",
+    "Révisions datées"
+  ],
+  "registre_pulse": [
+    {
+      "famille": "Pages de statut",
+      "role": "vérification",
+      "etat": "a_integrer",
+      "note": "10 points d’accès déjà contrôlés."
+    },
+    {
+      "famille": "Post-mortems officiels",
+      "role": "vérification",
+      "etat": "a_integrer",
+      "note": "Seule source d’une cause confirmée."
+    },
+    {
+      "famille": "Blogs d’ingénierie",
+      "role": "vérification",
+      "etat": "a_integrer",
+      "note": "Choix des flux à faire."
+    },
+    {
+      "famille": "Releases de bases de données et d’outils data",
+      "role": "vérification",
+      "etat": "partiel",
+      "note": "Collecteur de releases GitHub réutilisable ; dépôts à ajouter."
+    },
+    {
+      "famille": "Issues GitHub",
+      "role": "découverte",
+      "etat": "a_integrer",
+      "note": "Signal à confirmer ; API publique."
+    },
+    {
+      "famille": "Communautés Reddit",
+      "role": "découverte",
+      "etat": "a_integrer",
+      "note": "Accès autorisé à obtenir."
+    },
+    {
+      "famille": "Experts sur X",
+      "role": "découverte",
+      "etat": "a_integrer",
+      "note": "Accès autorisé à obtenir, payant."
+    },
+    {
+      "famille": "GitHub Changelog",
+      "role": "vérification",
+      "etat": "connecte",
+      "note": "Déjà collecté (P2)."
+    }
+  ],
+  "registre_radar": [
+    {
+      "famille": "GitHub Changelog (Microsoft)",
+      "role": "annonce officielle",
+      "etat": "connecte",
+      "note": "Déjà collecté (P2)."
+    },
+    {
+      "famille": "Blogs officiels Google et Microsoft",
+      "role": "annonce officielle",
+      "etat": "a_integrer",
+      "note": "Flux contrôlés, gratuits."
+    },
+    {
+      "famille": "NVIDIA et Apple Newsroom",
+      "role": "annonce officielle",
+      "etat": "a_integrer",
+      "note": "Flux contrôlés, gratuits."
+    },
+    {
+      "famille": "Amazon, Meta, Tesla",
+      "role": "annonce officielle",
+      "etat": "a_integrer",
+      "note": "Accès à vérifier par entreprise."
+    },
+    {
+      "famille": "Documentations, conférences, recherche",
+      "role": "annonce officielle",
+      "etat": "a_integrer",
+      "note": "À sélectionner."
+    },
+    {
+      "famille": "Newsletters publiques",
+      "role": "contexte",
+      "etat": "a_integrer",
+      "note": "Accès autorisé uniquement."
+    },
+    {
+      "famille": "Médias spécialisés",
+      "role": "contexte",
+      "etat": "a_integrer",
+      "note": "Conditions à vérifier ; synthèse attribuée."
+    },
+    {
+      "famille": "Experts sur X et Reddit",
+      "role": "contexte",
+      "etat": "a_integrer",
+      "note": "Accès autorisé ; X payant."
+    }
+  ],
+  "projets": [
+    {
+      "id": "projet-earshot",
+      "compte": "repo",
+      "depot": "Leonxlnx/earshot",
+      "url": "https://github.com/Leonxlnx/earshot",
+      "api": "https://api.github.com/repos/Leonxlnx/earshot",
+      "mesure_le": "2026-10-30T09:05:00.000Z",
+      "etoiles": 3268,
+      "forks": 206,
+      "progression_etoiles": null,
+      "cree_le": "2026-10-15T06:52:46Z",
+      "dernier_push": "2026-10-22T23:12:59Z",
+      "langage": "Python",
+      "licence": "MIT",
+      "capture": "Ears for coding agents: let AI hear, review and make sound. CPU-only, open source. It runs locally on CPU, as a CLI, a Python API and an MCP server.",
+      "accroche": {
+        "texte": "earshot veut donner des oreilles aux agents de code",
+        "passages": [
+          "Ears for coding agents: let AI hear, review and make sound."
+        ]
+      },
+      "interet": {
+        "texte": "Selon son auteur, il fonctionne en local sur CPU, en ligne de commande, en API Python et en serveur MCP.",
+        "passages": [
+          "It runs locally on CPU, as a CLI, a Python API and an MCP server."
+        ]
+      },
+      "categories": [
+        "projet GitHub",
+        "MCP"
+      ],
+      "demonstration": {
+        "url": "https://github.com/Leonxlnx/earshot/releases/tag/v0.1.0",
+        "libelle": "Film de lancement de l’auteur"
+      },
+      "verifie": true
+    }
+  ],
+  "exemples": [
+    {
+      "id": "exemple-copilot-fusion",
+      "compte": "nodi",
+      "statut": "verifie",
+      "motifs": [],
+      "description": {
+        "texte": "On choisit le niveau d'effort, Copilot choisit les modèles. Chaque modèle utilisé est facturé à son tarif standard.",
+        "passages": [
+          {
+            "texte": "For each prompt, Copilot Fusion determines which models to use and how they work together, while you choose the right level of effort.",
+            "trouve": true
+          },
+          {
+            "texte": "When you use Copilot Fusion you’re billed for each model it uses, at each model’s standard rate.",
+            "trouve": true
+          }
+        ]
+      },
+      "visuel": {
+        "forme": "etapes",
+        "legende": "Schéma original",
+        "elements": [
+          {
+            "texte": "Seul : un modèle traite la tâche",
+            "passages": [
+              {
+                "texte": "Single: One model solves the task directly.",
+                "trouve": true
+              }
+            ]
+          },
+          {
+            "texte": "Cascade : un modèle économe rédige, un contrôle décide de passer à un modèle plus fort",
+            "passages": [
+              {
+                "texte": "Cascade: An efficient model drafts a response. A quality check determines whether to accept it or escalate to a stronger model.",
+                "trouve": true
+              }
+            ]
+          },
+          {
+            "texte": "Critique : un modèle rédige, un autre relit, le premier corrige",
+            "passages": [
+              {
+                "texte": "Critique: One model drafts an initial response, another model reviews it, and the original model revises.",
+                "trouve": true
+              }
+            ]
+          }
+        ],
+        "original": {
+          "url": "https://github.com/user-attachments/assets/1eeffdb5-0c21-4697-8007-bb6df0e70e8b",
+          "libelle": "Voir le schéma de GitHub"
+        }
+      },
+      "accroche": {
+        "texte": "Copilot Fusion en disponibilité générale : à chaque demande, Copilot choisit les modèles et, si besoin, les fait travailler ensemble",
+        "passages": [
+          {
+            "texte": "GitHub Copilot Fusion is generally available.",
+            "trouve": true
+          },
+          {
+            "texte": "For each prompt, Copilot Fusion determines which models to use and how they work together",
+            "trouve": true
+          },
+          {
+            "texte": "orchestrating multiple models through the following workflows when needed",
+            "trouve": true
+          }
+        ]
+      },
+      "nouveaute": {
+        "texte": "Au lieu de choisir un modèle pour chaque tâche, on laisse Copilot Fusion décider, à chaque demande, quels modèles utiliser et comment les faire travailler ensemble ; l'utilisateur choisit le niveau d'effort : Standard, High ou Max.",
+        "passages": [
+          {
+            "texte": "Instead of picking a model for each task",
+            "trouve": true
+          },
+          {
+            "texte": "For each prompt, Copilot Fusion determines which models to use and how they work together, while you choose the right level of effort.",
+            "trouve": true
+          },
+          {
+            "texte": "Fusion Standard: Prioritizes versatile models for everyday coding.",
+            "trouve": true
+          },
+          {
+            "texte": "Fusion High: Prioritizes capable models for challenging tasks and deeper reasoning.",
+            "trouve": true
+          },
+          {
+            "texte": "Fusion Max: Prioritizes the most capable models for the most demanding tasks and complex reasoning.",
+            "trouve": true
+          }
+        ]
+      },
+      "ce_que_ca_permet": {
+        "texte": "Selon GitHub, plus besoin de changer de modèle en cours de tâche ; côté administration, choisir les modèles utilisables et, via les paramètres gérés Enterprise, faire de Copilot Fusion le modèle par défaut.",
+        "passages": [
+          {
+            "texte": "There’s no need to switch models during a task or decide which model suits each step.",
+            "trouve": true
+          },
+          {
+            "texte": "Administrators control which models Copilot Fusion can use and whether Copilot Fusion is the default.",
+            "trouve": true
+          },
+          {
+            "texte": "Administrators can set Copilot Fusion, at any effort level, as the default model for Copilot users with Enterprise managed settings",
+            "trouve": true
+          }
+        ]
+      },
+      "pour_qui": {
+        "texte": "Les utilisateurs de Copilot, toutes offres, dans VS Code, l'app GitHub Copilot, Copilot CLI et les IDE JetBrains.",
+        "passages": [
+          {
+            "texte": "Copilot Fusion is available on all Copilot plans in Visual Studio Code, the GitHub Copilot app, GitHub Copilot CLI, and JetBrains IDEs.",
+            "trouve": true
+          }
+        ]
+      },
+      "limites_connues": {
+        "texte": "Les autres clients ne sont pas encore pris en charge (annoncés « bientôt », sans date) ; chaque modèle utilisé est facturé à son tarif standard.",
+        "passages": [
+          {
+            "texte": "Support for additional clients is coming soon.",
+            "trouve": true
+          },
+          {
+            "texte": "When you use Copilot Fusion you’re billed for each model it uses, at each model’s standard rate.",
+            "trouve": true
+          }
+        ]
+      },
+      "details": [
+        {
+          "titre": "Un modèle seul, en cascade ou en critique",
+          "texte": "Selon la tâche : un seul modèle la traite directement ; ou, en cascade, un modèle économe rédige et un contrôle de qualité décide d'accepter ou de passer à un modèle plus fort ; ou, en critique, un modèle rédige, un autre relit, puis le premier corrige.",
+          "passages": [
+            {
+              "texte": "orchestrating multiple models through the following workflows when needed",
+              "trouve": true
+            },
+            {
+              "texte": "Single: One model solves the task directly.",
+              "trouve": true
+            },
+            {
+              "texte": "Cascade: An efficient model drafts a response. A quality check determines whether to accept it or escalate to a stronger model.",
+              "trouve": true
+            },
+            {
+              "texte": "Critique: One model drafts an initial response, another model reviews it, and the original model revises.",
+              "trouve": true
+            }
+          ]
+        },
+        {
+          "titre": "Coût",
+          "texte": "Chaque modèle utilisé est facturé à son tarif standard ; remise de 30 % sur le coût des modèles, pendant une durée limitée, pour les offres payantes.",
+          "passages": [
+            {
+              "texte": "When you use Copilot Fusion you’re billed for each model it uses, at each model’s standard rate.",
+              "trouve": true
+            },
+            {
+              "texte": "For a limited time, users on paid Copilot plans will receive a 30% discount on model costs when using Copilot Fusion.",
+              "trouve": true
+            }
+          ]
+        }
+      ],
+      "attributions": [
+        {
+          "type": "benchmark",
+          "auteur": "GitHub, dans son annonce du 28 octobre 2026",
+          "texte": "Selon GitHub, Copilot Fusion Max obtient 60 à l'Artificial Analysis Coding Agent Index, à deux points au plus de Claude Code avec Opus 5.5 Max, pour environ la moitié du coût moyen d'API par tâche. Score annoncé par GitHub ; l'annonce ne dit pas qui a mené l'évaluation ni dans quelles conditions ; non mesuré par la plateforme.",
+          "passages": [
+            {
+              "texte": "In the Artificial Analysis Coding Agent Index, Copilot Fusion Max scored 60, within two points of Claude Code with Opus 5.5 Max.",
+              "trouve": true
+            },
+            {
+              "texte": "It delivered that result at about half the average API cost per task",
+              "trouve": true
+            }
+          ]
+        },
+        {
+          "type": "temoignage",
+          "auteur": "Hari Pokhrel, Principal Software Engineer, AT&T — cité par GitHub",
+          "texte": "Témoignage rapporté par l'éditeur : chez AT&T, Copilot Fusion Standard aurait amélioré l'efficacité en tokens en choisissant automatiquement le modèle adapté à la tâche. Expérience attribuée, pas une conclusion générale.",
+          "passages": [
+            {
+              "texte": "GitHub Copilot Fusion Standard has improved token efficiency across AT&T by automatically selecting the right model for the task",
+              "trouve": true
+            },
+            {
+              "texte": "Hari Pokhrel, Principal Software Engineer, AT&T",
+              "trouve": true
+            }
+          ]
+        }
+      ],
+      "diapositives": [
+        {
+          "champ": "accroche",
+          "libelle": "Accroche",
+          "texte": "Copilot Fusion en disponibilité générale : à chaque demande, Copilot choisit les modèles et, si besoin, les fait travailler ensemble"
+        },
+        {
+          "champ": "nouveaute",
+          "libelle": "Nouveauté",
+          "texte": "Au lieu de choisir un modèle pour chaque tâche, on laisse Copilot Fusion décider, à chaque demande, quels modèles utiliser et comment les faire travailler ensemble ; l'utilisateur choisit le niveau d'effort : Standard, High ou Max."
+        },
+        {
+          "champ": "details:0",
+          "libelle": "Un modèle seul, en cascade ou en critique",
+          "texte": "Selon la tâche : un seul modèle la traite directement ; ou, en cascade, un modèle économe rédige et un contrôle de qualité décide d'accepter ou de passer à un modèle plus fort ; ou, en critique, un modèle rédige, un autre relit, puis le premier corrige."
+        },
+        {
+          "champ": "pour_qui",
+          "libelle": "Pour qui",
+          "texte": "Les utilisateurs de Copilot, toutes offres, dans VS Code, l'app GitHub Copilot, Copilot CLI et les IDE JetBrains."
+        },
+        {
+          "champ": "limites_connues",
+          "libelle": "Limites connues",
+          "texte": "Les autres clients ne sont pas encore pris en charge (annoncés « bientôt », sans date) ; chaque modèle utilisé est facturé à son tarif standard."
+        }
+      ],
+      "actualite": {
+        "id": 36,
+        "kind": "annonce",
+        "title": "Route and orchestrate models with GitHub Copilot Fusion",
+        "announced_at": "2026-10-28T16:00:00.000Z",
+        "first_seen_at": "2026-10-30T02:25:19.782Z",
+        "product": null,
+        "version": null,
+        "source": {
+          "id": "feed:github-changelog",
+          "name": "GitHub Changelog — flux RSS officiel",
+          "url": "https://github.blog/changelog/2026-10-28-route-and-orchestrate-models-with-github-copilot-fusion"
+        }
+      },
+      "capture": {
+        "content_hash": "26ab2b26f7ed760e01b30962e76b5d390b264bb88ee05571b504ebc74063ef4d",
+        "captured_at": "2026-10-30T02:25:19.782Z",
+        "mode": "live",
+        "run_id": "ff85f4af-e524-4064-9613-b28f22fd1d14",
+        "text_length": 4218
+      },
+      "media": "carrousel",
+      "titre_media": "Copilot Fusion",
+      "categories": [
+        "outil de développement",
+        "modèles"
+      ],
+      "questions_a_tester": [
+        "Sur une même tâche, quels modèles Copilot Fusion choisit-il à chaque niveau d'effort ?",
+        "Le coût réel d'une tâche est-il visible pour l'utilisateur ?"
+      ]
+    },
+    {
+      "id": "exemple-claude-code-2-1-312",
+      "compte": "nodi",
+      "statut": "verifie",
+      "motifs": [],
+      "description": {
+        "texte": "Face à un très gros fichier d'instructions dont Claude n'a vu que le début, Write demande de le lire en entier ou de le modifier sur place.",
+        "passages": [
+          {
+            "texte": "after seeing only its start; Write now asks Claude to read it all or edit in place",
+            "trouve": true
+          }
+        ]
+      },
+      "visuel": {
+        "forme": "avant_apres",
+        "legende": "Schéma original",
+        "elements": [
+          {
+            "texte": "Avant : réécriture après avoir vu seulement le début du fichier",
+            "passages": [
+              {
+                "texte": "Fixed Claude overwriting a very large CLAUDE.md, rules file or @-included file in a subdirectory after seeing only its start",
+                "trouve": true
+              }
+            ]
+          },
+          {
+            "texte": "Maintenant : Write demande de tout lire ou de modifier sur place",
+            "passages": [
+              {
+                "texte": "Write now asks Claude to read it all or edit in place",
+                "trouve": true
+              }
+            ]
+          }
+        ]
+      },
+      "accroche": {
+        "texte": "Claude Code 2.1.312 corrige la réécriture d'un très gros CLAUDE.md de sous-dossier après n'en avoir vu que le début",
+        "passages": [
+          {
+            "texte": "Fixed Claude overwriting a very large CLAUDE.md, rules file or @-included file in a subdirectory after seeing only its start",
+            "trouve": true
+          }
+        ]
+      },
+      "nouveaute": {
+        "texte": "Quand Claude s'apprête à réécrire un très gros CLAUDE.md, fichier de règles ou fichier inclus par @ d'un sous-dossier dont il n'a vu que le début, l'outil Write lui demande désormais de le lire en entier ou de le modifier sur place.",
+        "passages": [
+          {
+            "texte": "Fixed Claude overwriting a very large CLAUDE.md, rules file or @-included file in a subdirectory after seeing only its start; Write now asks Claude to read it all or edit in place",
+            "trouve": true
+          }
+        ]
+      },
+      "ce_que_ca_permet": {
+        "texte": "Éviter qu'un long fichier d'instructions placé dans un sous-dossier soit réécrit après n'en avoir vu que le début.",
+        "passages": [
+          {
+            "texte": "a very large CLAUDE.md, rules file or @-included file in a subdirectory",
+            "trouve": true
+          },
+          {
+            "texte": "after seeing only its start; Write now asks Claude to read it all or edit in place",
+            "trouve": true
+          }
+        ]
+      },
+      "pour_qui": {
+        "texte": "Les utilisateurs de Claude Code qui gardent de longs fichiers d'instructions dans des sous-dossiers de leurs projets.",
+        "passages": [
+          {
+            "texte": "a very large CLAUDE.md, rules file or @-included file in a subdirectory",
+            "trouve": true
+          }
+        ]
+      },
+      "limites_connues": null,
+      "details": [
+        {
+          "titre": "Aussi dans cette version",
+          "texte": "En plein écran, cliquer sur l'indication « to send now » sous un message en attente l'envoie tout de suite, comme la touche correspondante.",
+          "passages": [
+            {
+              "texte": "Added click to send: in fullscreen, clicking the \"to send now\" hint under a queued message sends it right away, as its key does",
+              "trouve": true
+            }
+          ]
+        },
+        {
+          "titre": "Erreurs WebFetch",
+          "texte": "Dans les sessions cloud, quand un hôte ne se résout pas, l'erreur de WebFetch explique qu'il est peut-être hors des domaines réseau autorisés, ce qui permet à Claude de nommer l'hôte à autoriser.",
+          "passages": [
+            {
+              "texte": "Improved WebFetch errors in cloud sessions: a host that does not resolve is now explained as possibly outside the allowed network domains, so Claude names the host to allow",
+              "trouve": true
+            }
+          ]
+        }
+      ],
+      "attributions": [],
+      "diapositives": [
+        {
+          "champ": "accroche",
+          "libelle": "Accroche",
+          "texte": "Claude Code 2.1.312 corrige la réécriture d'un très gros CLAUDE.md de sous-dossier après n'en avoir vu que le début"
+        },
+        {
+          "champ": "nouveaute",
+          "libelle": "Nouveauté",
+          "texte": "Quand Claude s'apprête à réécrire un très gros CLAUDE.md, fichier de règles ou fichier inclus par @ d'un sous-dossier dont il n'a vu que le début, l'outil Write lui demande désormais de le lire en entier ou de le modifier sur place."
+        },
+        {
+          "champ": "pour_qui",
+          "libelle": "Pour qui",
+          "texte": "Les utilisateurs de Claude Code qui gardent de longs fichiers d'instructions dans des sous-dossiers de leurs projets."
+        },
+        {
+          "champ": "limites_connues",
+          "libelle": "Limites connues",
+          "texte": null
+        }
+      ],
+      "actualite": {
+        "id": 2,
+        "kind": "version",
+        "title": "Claude Code 2.1.312",
+        "announced_at": "2026-10-27T20:24:20.000Z",
+        "first_seen_at": "2026-10-30T01:26:38.899Z",
+        "product": {
+          "key": "anthropic/claude-code",
+          "name": "Claude Code",
+          "publisher": "Anthropic",
+          "category": "assistant de code",
+          "repository_url": "https://github.com/anthropics/claude-code"
+        },
+        "version": "2.1.312",
+        "source": {
+          "id": "github-releases:anthropics/claude-code",
+          "name": "Claude Code — releases GitHub officielles",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.312"
+        }
+      },
+      "capture": {
+        "content_hash": "2c7d405b62839bc24d34243396eb79500600a32c4a29c95f254cc9ea443799aa",
+        "captured_at": "2026-10-30T01:26:38.899Z",
+        "mode": "live",
+        "run_id": "6ab7e3b4-8a0f-4b1b-ba77-4f6665351c4c",
+        "text_length": 5611
+      },
+      "media": "carrousel",
+      "titre_media": "2.1.312",
+      "categories": [
+        "assistant de code"
+      ],
+      "questions_a_tester": [
+        "Avec un CLAUDE.md de plusieurs milliers de lignes dans un sous-dossier, Claude le lit-il en entier avant de le modifier ?"
+      ]
+    },
+    {
+      "id": "exemple-codex-cli-0-166-0",
+      "compte": "pyxo",
+      "statut": "verifie",
+      "motifs": [],
+      "description": {
+        "texte": "Une commande pour diagnostiquer la configuration, la connectivité et les WebSockets.",
+        "passages": [
+          {
+            "texte": "Added codex doctor --network-only for focused configuration, connectivity, and WebSocket diagnostics.",
+            "trouve": true
+          }
+        ]
+      },
+      "visuel": {
+        "forme": "terminal",
+        "legende": "Reconstitution de la commande citée",
+        "elements": [
+          {
+            "texte": "codex doctor --network-only",
+            "passages": [
+              {
+                "texte": "codex doctor --network-only",
+                "trouve": true
+              }
+            ]
+          },
+          {
+            "texte": "codex queue --resume",
+            "passages": [
+              {
+                "texte": "codex queue --resume",
+                "trouve": true
+              }
+            ]
+          }
+        ]
+      },
+      "accroche": {
+        "texte": "Codex CLI 0.166.0 ajoute codex doctor --network-only pour diagnostiquer configuration, connectivité et WebSockets",
+        "passages": [
+          {
+            "texte": "Added codex doctor --network-only for focused configuration, connectivity, and WebSocket diagnostics.",
+            "trouve": true
+          }
+        ]
+      },
+      "nouveaute": {
+        "texte": "Un diagnostic ciblé de la configuration, de la connectivité et des WebSockets, et GPT-6.1 Terra dans les catalogues de modèles intégré, Vertex AI et Amazon Bedrock.",
+        "passages": [
+          {
+            "texte": "Added codex doctor --network-only for focused configuration, connectivity, and WebSocket diagnostics.",
+            "trouve": true
+          },
+          {
+            "texte": "Added GPT-6.1 Terra to the bundled, Vertex AI, and Amazon Bedrock model catalogs.",
+            "trouve": true
+          }
+        ]
+      },
+      "ce_que_ca_permet": {
+        "texte": "Lancer avec codex doctor --network-only un diagnostic ciblé de la configuration, de la connectivité et des WebSockets ; sélectionner la transcription au clavier, par mot, ligne ou page, avec recherche intégrée.",
+        "passages": [
+          {
+            "texte": "Added codex doctor --network-only for focused configuration, connectivity, and WebSocket diagnostics.",
+            "trouve": true
+          },
+          {
+            "texte": "Added keyboard-driven transcript selection with word, line, and page motions, integrated search, and configurable shortcuts.",
+            "trouve": true
+          }
+        ]
+      },
+      "pour_qui": null,
+      "limites_connues": null,
+      "details": [
+        {
+          "titre": "Aussi dans cette version",
+          "texte": "codex queue --resume reprend des fils déchargés après la mise en file d'un message.",
+          "passages": [
+            {
+              "texte": "Added codex queue --resume to resume unloaded threads after queueing a message.",
+              "trouve": true
+            }
+          ]
+        }
+      ],
+      "attributions": [],
+      "diapositives": [
+        {
+          "champ": "accroche",
+          "libelle": "Accroche",
+          "texte": "Codex CLI 0.166.0 ajoute codex doctor --network-only pour diagnostiquer configuration, connectivité et WebSockets"
+        }
+      ],
+      "actualite": {
+        "id": 11,
+        "kind": "version",
+        "title": "Codex CLI 0.166.0",
+        "announced_at": "2026-10-29T19:47:53.000Z",
+        "first_seen_at": "2026-10-30T02:25:18.791Z",
+        "product": {
+          "key": "openai/codex",
+          "name": "Codex CLI",
+          "publisher": "OpenAI",
+          "category": "assistant de code",
+          "repository_url": "https://github.com/openai/codex"
+        },
+        "version": "0.166.0",
+        "source": {
+          "id": "github-releases:openai/codex",
+          "name": "Codex CLI — releases GitHub officielles",
+          "url": "https://github.com/openai/codex/releases/tag/rust-v0.166.0"
+        }
+      },
+      "capture": {
+        "content_hash": "7a17d2345cd441aa0145c93fd34dec719eaf2b7169c936e37e5aeba1e9c1d265",
+        "captured_at": "2026-10-30T02:25:18.791Z",
+        "mode": "live",
+        "run_id": "4657165f-5355-4d40-b6f2-3c043e4308a9",
+        "text_length": 21826
+      },
+      "media": "image",
+      "titre_media": "0.166.0",
+      "categories": [
+        "assistant de code"
+      ],
+      "questions_a_tester": [
+        "Que vérifie exactement codex doctor --network-only derrière un proxy d'entreprise ?"
+      ]
+    },
+    {
+      "id": "exemple-copilot-images",
+      "compte": "mova",
+      "statut": "verifie",
+      "motifs": [],
+      "description": {
+        "texte": "On décrit l'image dans le chat ; un aperçu s'affiche et l'image est enregistrée dans le projet. Filigrane visible désactivé par défaut.",
+        "passages": [
+          {
+            "texte": "Describe an image conversationally in any Copilot chat session",
+            "trouve": true
+          },
+          {
+            "texte": "previews the result inline, and saves it to your project.",
+            "trouve": true
+          },
+          {
+            "texte": "Watermarking is off by default.",
+            "trouve": true
+          }
+        ]
+      },
+      "visuel": {
+        "forme": "etapes",
+        "legende": "Schéma original",
+        "elements": [
+          {
+            "texte": "Décrire l’image dans le chat",
+            "passages": [
+              {
+                "texte": "Describe an image conversationally in any Copilot chat session",
+                "trouve": true
+              }
+            ]
+          },
+          {
+            "texte": "Le modèle appelle GPT Image 2.5 Flare",
+            "passages": [
+              {
+                "texte": "your selected reasoning model calls a dedicated image-generation tool powered by GPT Image 2.5 Flare",
+                "trouve": true
+              }
+            ]
+          },
+          {
+            "texte": "Aperçu dans la conversation, image enregistrée dans le projet",
+            "passages": [
+              {
+                "texte": "previews the result inline, and saves it to your project.",
+                "trouve": true
+              }
+            ]
+          }
+        ]
+      },
+      "accroche": {
+        "texte": "GitHub Copilot génère et modifie des images depuis le chat, en préversion publique",
+        "passages": [
+          {
+            "texte": "You can now generate and edit images using natural language in GitHub Copilot.",
+            "trouve": true
+          },
+          {
+            "texte": "Describe an image conversationally in any Copilot chat session",
+            "trouve": true
+          },
+          {
+            "texte": "Image generation is in public preview",
+            "trouve": true
+          }
+        ]
+      },
+      "nouveaute": {
+        "texte": "Le modèle de raisonnement choisi appelle un outil dédié à la génération d'images (GPT Image 2.5 Flare), affiche un aperçu dans la conversation et enregistre l'image dans le projet.",
+        "passages": [
+          {
+            "texte": "your selected reasoning model calls a dedicated image-generation tool powered by GPT Image 2.5 Flare, previews the result inline, and saves it to your project.",
+            "trouve": true
+          }
+        ]
+      },
+      "ce_que_ca_permet": {
+        "texte": "Selon GitHub, obtenir un visuel sans quitter sa session de code ni passer par un outil séparé.",
+        "passages": [
+          {
+            "texte": "Previously, getting a visual asset while working in Copilot meant stepping away to a separate tool",
+            "trouve": true
+          },
+          {
+            "texte": "This update removes that context switch, so you can go from an idea to a usable image without breaking your flow.",
+            "trouve": true
+          }
+        ]
+      },
+      "pour_qui": {
+        "texte": "Les abonnés Copilot Pro, Pro+, Business et Enterprise ; pour l'essayer, un chat Copilot dans VS Code, l'app GitHub Copilot ou Copilot CLI.",
+        "passages": [
+          {
+            "texte": "Image generation is in public preview for Copilot Pro, Copilot Pro+, Copilot Business, and Copilot Enterprise.",
+            "trouve": true
+          },
+          {
+            "texte": "To try it, open a Copilot chat in VS Code, the GitHub Copilot app, or Copilot CLI",
+            "trouve": true
+          }
+        ]
+      },
+      "limites_connues": {
+        "texte": "Préversion publique ; filigrane visible « Made with AI » en option, désactivé par défaut ; facturé à part, en tokens d'image décomptés des crédits IA de l'offre.",
+        "passages": [
+          {
+            "texte": "Image generation is in public preview",
+            "trouve": true
+          },
+          {
+            "texte": "You can opt in to a visible “Made with AI” watermark on images Copilot generates and edits.",
+            "trouve": true
+          },
+          {
+            "texte": "Watermarking is off by default.",
+            "trouve": true
+          },
+          {
+            "texte": "It’s billed separately from your chat model, based on image tokens that count toward your plan’s AI credits.",
+            "trouve": true
+          }
+        ]
+      },
+      "details": [
+        {
+          "titre": "Administration",
+          "texte": "Les propriétaires d'organisation et d'entreprise peuvent désactiver la génération d'images dans les règles de modèles de Copilot.",
+          "passages": [
+            {
+              "texte": "Organization and enterprise owners can turn off image generation by disabling the image generation model using Copilot model policies.",
+              "trouve": true
+            }
+          ]
+        }
+      ],
+      "attributions": [],
+      "diapositives": [
+        {
+          "champ": "accroche",
+          "libelle": "Accroche",
+          "texte": "GitHub Copilot génère et modifie des images depuis le chat, en préversion publique"
+        }
+      ],
+      "actualite": {
+        "id": 44,
+        "kind": "annonce",
+        "title": "Generate and edit images directly in Copilot",
+        "announced_at": "2026-10-28T15:30:55.000Z",
+        "first_seen_at": "2026-10-30T02:25:19.782Z",
+        "product": null,
+        "version": null,
+        "source": {
+          "id": "feed:github-changelog",
+          "name": "GitHub Changelog — flux RSS officiel",
+          "url": "https://github.blog/changelog/2026-10-28-generate-and-edit-images-directly-in-copilot"
+        }
+      },
+      "capture": {
+        "content_hash": "f93642d8aab0cdb817b2d68c2a5168ab8cf1ecded8e1544bac285c3fcc06c131",
+        "captured_at": "2026-10-30T02:25:19.782Z",
+        "mode": "live",
+        "run_id": "ff85f4af-e524-4064-9613-b28f22fd1d14",
+        "text_length": 1533
+      },
+      "media": "image",
+      "titre_media": "Copilot",
+      "categories": [
+        "outil de développement",
+        "design"
+      ],
+      "questions_a_tester": [
+        "Une image générée garde-t-elle une trace de son origine IA quand le filigrane est désactivé ?"
+      ]
+    },
+    {
+      "id": "exemple-github-enterprise-copilot",
+      "compte": "radar",
+      "statut": "verifie",
+      "motifs": [],
+      "description": {
+        "texte": "Pour les clients suivis par une équipe commerciale : Copilot inclus par utilisateur licencié, usage décompté du budget dès la première requête.",
+        "passages": [
+          {
+            "texte": "Enterprises working with a GitHub or Microsoft account team can now get Copilot included with GitHub Enterprise for every licensed user.",
+            "trouve": true
+          },
+          {
+            "texte": "AI usage is metered from the first request against your enterprise budget",
+            "trouve": true
+          }
+        ]
+      },
+      "visuel": {
+        "forme": "avant_apres",
+        "legende": "Schéma original",
+        "elements": [
+          {
+            "texte": "Avant : gérer les sièges Copilot et l’usage de l’IA",
+            "passages": [
+              {
+                "texte": "Previously, you had to manage two things: how many Copilot seats you were paying for and how much AI usage those users consumed.",
+                "trouve": true
+              }
+            ]
+          },
+          {
+            "texte": "Maintenant : gérer surtout l’usage face au budget",
+            "passages": [
+              {
+                "texte": "usage against your enterprise budget is the primary thing to manage",
+                "trouve": true
+              }
+            ]
+          }
+        ]
+      },
+      "accroche": {
+        "texte": "GitHub Enterprise inclut désormais Copilot pour les clients suivis par une équipe commerciale",
+        "passages": [
+          {
+            "texte": "Enterprises working with a GitHub or Microsoft account team can now get Copilot included with GitHub Enterprise for every licensed user.",
+            "trouve": true
+          }
+        ]
+      },
+      "nouveaute": {
+        "texte": "Copilot est inclus pour chaque utilisateur licencié ; l’usage de l’IA devient le principal élément à gérer, sans allocation incluse.",
+        "passages": [
+          {
+            "texte": "With Copilot included in the platform, usage against your enterprise budget is the primary thing to manage.",
+            "trouve": true
+          },
+          {
+            "texte": "There is no included usage allowance to track or top up.",
+            "trouve": true
+          }
+        ]
+      },
+      "ce_que_ca_permet": {
+        "texte": "La complétion de code continue sans budget disponible ; un budget épuisé ne retire pas l’accès.",
+        "passages": [
+          {
+            "texte": "Code completion and next edit suggestions keep working even with no budget available.",
+            "trouve": true
+          },
+          {
+            "texte": "An exhausted budget never removes access.",
+            "trouve": true
+          }
+        ]
+      },
+      "pour_qui": {
+        "texte": "Les clients GitHub Enterprise Cloud suivis par une équipe commerciale GitHub ou Microsoft.",
+        "passages": [
+          {
+            "texte": "If you work with a GitHub or Microsoft account team: Available now for GitHub Enterprise Cloud.",
+            "trouve": true
+          }
+        ]
+      },
+      "limites_connues": {
+        "texte": "Indisponible en libre-service pour l’instant ; Copilot Chat, la revue de code et Copilot dans le cloud exigent un budget disponible.",
+        "passages": [
+          {
+            "texte": "Currently unavailable.",
+            "trouve": true
+          },
+          {
+            "texte": "Copilot Chat, Copilot code review, and Copilot in the cloud require available budget to use.",
+            "trouve": true
+          }
+        ]
+      },
+      "details": [],
+      "attributions": [],
+      "diapositives": [
+        {
+          "champ": "accroche",
+          "libelle": "Accroche",
+          "texte": "GitHub Enterprise inclut désormais Copilot pour les clients suivis par une équipe commerciale"
+        }
+      ],
+      "actualite": {
+        "id": 38,
+        "kind": "annonce",
+        "title": "GitHub Enterprise now includes access to GitHub Copilot",
+        "announced_at": "2026-10-28T15:50:00.000Z",
+        "first_seen_at": "2026-10-30T02:25:19.782Z",
+        "product": null,
+        "version": null,
+        "source": {
+          "id": "feed:github-changelog",
+          "name": "GitHub Changelog — flux RSS officiel",
+          "url": "https://github.blog/changelog/2026-10-28-github-enterprise-now-includes-access-to-github-copilot"
+        }
+      },
+      "capture": {
+        "content_hash": "fe9542293d9eac12a5ee7f8c4b6ede7075dcaf0bd79363802e357e856798f44a",
+        "captured_at": "2026-10-30T02:25:19.782Z",
+        "mode": "live",
+        "run_id": "ff85f4af-e524-4064-9613-b28f22fd1d14",
+        "text_length": 2179
+      },
+      "media": "image",
+      "titre_media": "GitHub Enterprise",
+      "categories": [
+        "grandes entreprises",
+        "annonce officielle"
+      ],
+      "questions_a_tester": [
+        "Quel est le coût réel d’une équipe type une fois l’usage décompté ?"
+      ]
+    },
+    {
+      "id": "exemple-plugins-copilot",
+      "compte": "repo",
+      "statut": "verifie",
+      "motifs": [],
+      "description": {
+        "texte": "Un dépôt de confiance peut installer des plugins par défaut pour ses contributeurs ; une entreprise peut en imposer ou en bloquer.",
+        "passages": [
+          {
+            "texte": "Trusted repositories can install and enable default plugins for contributors.",
+            "trouve": true
+          },
+          {
+            "texte": "Enterprises can require plugins, block plugins, and restrict installation to approved marketplaces.",
+            "trouve": true
+          }
+        ]
+      },
+      "visuel": {
+        "forme": "priorite",
+        "legende": "Schéma original",
+        "elements": [
+          {
+            "texte": "Paramètres gérés par l’entreprise",
+            "passages": [
+              {
+                "texte": "Managed settings take precedence over repository and personal choices.",
+                "trouve": true
+              }
+            ]
+          },
+          {
+            "texte": "Choix du dépôt",
+            "passages": [
+              {
+                "texte": "Managed settings take precedence over repository and personal choices.",
+                "trouve": true
+              }
+            ]
+          },
+          {
+            "texte": "Choix personnels",
+            "passages": [
+              {
+                "texte": "Managed settings take precedence over repository and personal choices.",
+                "trouve": true
+              }
+            ]
+          }
+        ]
+      },
+      "accroche": {
+        "texte": "Copilot : plugins par défaut par dépôt et contrôles d’entreprise en disponibilité générale",
+        "passages": [
+          {
+            "texte": "Repository plugin defaults and enterprise-managed plugin controls are now generally available in VS Code, Copilot CLI, and the GitHub Copilot app.",
+            "trouve": true
+          }
+        ]
+      },
+      "nouveaute": {
+        "texte": "Un mainteneur définit une place de marché et des plugins par défaut pour éviter de répéter la configuration à chaque projet ; un administrateur fournit les places de marché approuvées et impose ou bloque des plugins.",
+        "passages": [
+          {
+            "texte": "As a repository maintainer, you can define a plugin marketplace and default plugins so contributors don’t have to repeat setup for each project.",
+            "trouve": true
+          },
+          {
+            "texte": "As an enterprise administrator, you can supply approved marketplaces and require or block plugins through managed settings.",
+            "trouve": true
+          }
+        ]
+      },
+      "ce_que_ca_permet": {
+        "texte": "Partager la même configuration entre contributeurs, qui peuvent désactiver les valeurs par défaut du dépôt si la politique le permet.",
+        "passages": [
+          {
+            "texte": "Contributors can turn off repository defaults where policy permits.",
+            "trouve": true
+          }
+        ]
+      },
+      "pour_qui": {
+        "texte": "Les utilisateurs Copilot individuels, Business et Enterprise ; les contrôles gérés visent GitHub Enterprise Cloud.",
+        "passages": [
+          {
+            "texte": "Repository defaults are available to individual Copilot users and users with Copilot Business or Copilot Enterprise.",
+            "trouve": true
+          },
+          {
+            "texte": "Managed controls are available on GitHub Enterprise Cloud for users with Copilot Business or Copilot Enterprise licenses issued by the enterprise or one of its organizations.",
+            "trouve": true
+          }
+        ]
+      },
+      "limites_connues": {
+        "texte": "Les plugins imposés sont installés et activés automatiquement, sans possibilité de les désactiver.",
+        "passages": [
+          {
+            "texte": "Required plugins are automatically installed and enabled, and users can’t disable them.",
+            "trouve": true
+          }
+        ]
+      },
+      "details": [],
+      "attributions": [],
+      "diapositives": [
+        {
+          "champ": "accroche",
+          "libelle": "Accroche",
+          "texte": "Copilot : plugins par défaut par dépôt et contrôles d’entreprise en disponibilité générale"
+        }
+      ],
+      "actualite": {
+        "id": 43,
+        "kind": "annonce",
+        "title": "Repository plugin defaults and enterprise plugin controls generally available",
+        "announced_at": "2026-10-28T15:33:00.000Z",
+        "first_seen_at": "2026-10-30T02:25:19.782Z",
+        "product": null,
+        "version": null,
+        "source": {
+          "id": "feed:github-changelog",
+          "name": "GitHub Changelog — flux RSS officiel",
+          "url": "https://github.blog/changelog/2026-10-28-repository-plugin-defaults-and-enterprise-plugin-controls-generally-available"
+        }
+      },
+      "capture": {
+        "content_hash": "59376d44fa4b62ece21c9df725af2cee291990587422c52627a6eb34f600821a",
+        "captured_at": "2026-10-30T02:25:19.782Z",
+        "mode": "live",
+        "run_id": "ff85f4af-e524-4064-9613-b28f22fd1d14",
+        "text_length": 1279
+      },
+      "media": "image",
+      "titre_media": "Repository plugin defaults",
+      "categories": [
+        "plugins",
+        "outil de développement"
+      ],
+      "questions_a_tester": [
+        "Que voit un contributeur quand un plugin imposé entre en conflit avec son choix personnel ?"
+      ]
+    },
+    {
+      "id": "exemple-extension-securite-copilot",
+      "compte": "pyxo",
+      "statut": "verifie",
+      "motifs": [],
+      "description": {
+        "texte": "Parcourir les alertes de code scanning dans l'app Copilot et demander de les expliquer ou de les corriger, sans commit automatique.",
+        "passages": [
+          {
+            "texte": "Select one or more alerts and ask Copilot to Explain or Fix them.",
+            "trouve": true
+          },
+          {
+            "texte": "Copilot only makes fixes in your local working copy and doesn’t commit or push anything.",
+            "trouve": true
+          }
+        ]
+      },
+      "visuel": {
+        "forme": "etapes",
+        "legende": "Schéma original",
+        "elements": [
+          {
+            "texte": "Parcourir les alertes par gravité",
+            "passages": [
+              {
+                "texte": "Browse every open code scanning alert, ordered by severity",
+                "trouve": true
+              }
+            ]
+          },
+          {
+            "texte": "Demander d’expliquer ou de corriger",
+            "passages": [
+              {
+                "texte": "Select one or more alerts and ask Copilot to Explain or Fix them.",
+                "trouve": true
+              }
+            ]
+          },
+          {
+            "texte": "Relire la correction locale, pousser quand on est prêt",
+            "passages": [
+              {
+                "texte": "review and iterate on the changes in the app and push when you’re ready",
+                "trouve": true
+              }
+            ]
+          }
+        ],
+        "original": {
+          "url": "https://github.com/user-attachments/assets/998394bd-4bce-4779-866e-f52939fac045",
+          "libelle": "Voir la capture de GitHub"
+        }
+      },
+      "accroche": {
+        "texte": "Une extension de sécurité pour l'app GitHub Copilot, en préversion publique",
+        "passages": [
+          {
+            "texte": "The new GitHub security extension, now in public preview, lets you find the alerts that matter most and ask Copilot to explain or help fix them.",
+            "trouve": true
+          }
+        ]
+      },
+      "nouveaute": {
+        "texte": "Passer de la recherche d'une alerte à sa correction au même endroit, sans quitter l'app.",
+        "passages": [
+          {
+            "texte": "you can move from finding an alert to fixing it in one place",
+            "trouve": true
+          }
+        ]
+      },
+      "ce_que_ca_permet": {
+        "texte": "Lancer /security-review sur ses changements en cours et voir les résultats à côté des alertes existantes.",
+        "passages": [
+          {
+            "texte": "Run /security-review on your current changes and see those findings next to your existing alerts.",
+            "trouve": true
+          }
+        ]
+      },
+      "pour_qui": {
+        "texte": "Avec toute offre Copilot : installer l'extension et lancer /security-review sur ses changements locaux.",
+        "passages": [
+          {
+            "texte": "With any Copilot plan: You can install the extension and run /security-review on your local changes.",
+            "trouve": true
+          }
+        ]
+      },
+      "limites_connues": {
+        "texte": "Préversion publique ; GitHub Enterprise Server n’est pas pris en charge.",
+        "passages": [
+          {
+            "texte": "The security extension is in public preview on github.com and GitHub Enterprise Cloud with data residency.",
+            "trouve": true
+          },
+          {
+            "texte": "GitHub Enterprise Server isn’t supported.",
+            "trouve": true
+          }
+        ]
+      },
+      "details": [
+        {
+          "titre": "Coût",
+          "texte": "Explain, Fix et /security-review consomment des crédits IA ; parcourir et rejeter des alertes n’utilise pas d’IA.",
+          "passages": [
+            {
+              "texte": "The Explain, Fix, and /security-review actions use the model you’ve selected in the app and consume AI credits in the same way as any other prompt.",
+              "trouve": true
+            },
+            {
+              "texte": "Browsing and dismissing alerts don’t use AI.",
+              "trouve": true
+            }
+          ]
+        }
+      ],
+      "attributions": [],
+      "diapositives": [
+        {
+          "champ": "accroche",
+          "libelle": "Accroche",
+          "texte": "Une extension de sécurité pour l'app GitHub Copilot, en préversion publique"
+        }
+      ],
+      "actualite": {
+        "id": 39,
+        "kind": "annonce",
+        "title": "Security extension for the GitHub Copilot app",
+        "announced_at": "2026-10-28T15:45:00.000Z",
+        "first_seen_at": "2026-10-30T02:25:19.782Z",
+        "product": null,
+        "version": null,
+        "source": {
+          "id": "feed:github-changelog",
+          "name": "GitHub Changelog — flux RSS officiel",
+          "url": "https://github.blog/changelog/2026-10-28-security-extension-for-the-github-copilot-app"
+        }
+      },
+      "capture": {
+        "content_hash": "128cf47698af6ccc4e732bd06fbda0a8d6444cf8730b22764872979b2f708f7c",
+        "captured_at": "2026-10-30T02:25:19.782Z",
+        "mode": "live",
+        "run_id": "ff85f4af-e524-4064-9613-b28f22fd1d14",
+        "text_length": 3127
+      },
+      "media": "image",
+      "titre_media": "Security extension",
+      "categories": [
+        "extension",
+        "outil de développement"
+      ],
+      "questions_a_tester": [
+        "Sur une alerte réelle, la correction proposée passe-t-elle les tests du dépôt ?"
+      ]
+    }
+  ],
+  "exemples_introuvables": [],
   "sources": [
     {
       "id": "feed:github-changelog",

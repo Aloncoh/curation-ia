@@ -1,8 +1,26 @@
 // Données de la maquette (P2) : actualités réellement collectées, avec un court extrait en texte brut.
 // Seules les actualités dont la capture vient d'une collecte réelle sont gardées ; les champs d'analyse
 // (intérêt, limites, coût…) n'existent pas encore et restent absents : la maquette affiche « Non renseigné ».
-import type { Client } from '@libsql/client';
+// S'y ajoutent les exemples de publications (exemples.ts), rattachés à leur actualité réelle et dont chaque
+// passage cité est recherché mot pour mot dans la dernière capture du document, qui doit venir d'une collecte réelle.
+import type { Client, Transaction } from '@libsql/client';
 import { decodeHtmlEntities } from '../collect/normalize.ts';
+import {
+  COMPTES,
+  EXEMPLES,
+  FICHE_INCIDENT,
+  LIBELLES_DETAILS,
+  PRESENTATRICE,
+  PROJETS,
+  REGISTRE_PULSE,
+  REGISTRE_RADAR,
+  SUJETS,
+  type Attribution,
+  type ChampCite,
+  type DetailCite,
+  type Diapositive,
+  type ExemplePublication,
+} from './exemples.ts';
 
 export interface MaquetteNewsItem {
   id: number;
@@ -19,9 +37,72 @@ export interface MaquetteNewsItem {
   capture: { content_hash: string; captured_at: string; mode: string };
 }
 
+/** Passage cité, tel qu'écrit dans exemples.ts, et résultat de sa recherche dans la capture. */
+export interface PassageVerifie {
+  texte: string;
+  trouve: boolean;
+}
+
+export interface ChampVerifie {
+  texte: string;
+  passages: PassageVerifie[];
+}
+
+/** Diapositive du média généré : le texte d'un champ de l'exemple, `null` si ce champ n'est pas renseigné. */
+export interface DiapositiveResolue {
+  champ: Diapositive;
+  libelle: string;
+  texte: string | null;
+}
+
+export interface MaquetteExemple {
+  id: string;
+  /** `a_verifier` dès qu'un contrôle échoue (motifs ci-dessous) : jamais présenté comme vérifié. */
+  statut: 'verifie' | 'a_verifier';
+  motifs: string[];
+  actualite: Pick<MaquetteNewsItem, 'id' | 'kind' | 'title' | 'announced_at' | 'first_seen_at' | 'product' | 'version' | 'source'>;
+  /** Capture dans laquelle les passages ont été cherchés : la dernière du document, issue d'une collecte réelle. */
+  capture: { content_hash: string; captured_at: string; mode: 'live'; run_id: string; text_length: number };
+  compte: ExemplePublication['compte'];
+  media: ExemplePublication['media'];
+  titre_media: string;
+  description: ChampVerifie;
+  visuel: Omit<ExemplePublication['visuel'], 'elements'> & { elements: ChampVerifie[] };
+  accroche: ChampVerifie;
+  nouveaute: ChampVerifie;
+  ce_que_ca_permet: ChampVerifie | null;
+  pour_qui: ChampVerifie | null;
+  limites_connues: ChampVerifie | null;
+  details: (ChampVerifie & { titre: string })[];
+  attributions: (ChampVerifie & Pick<Attribution, 'type' | 'auteur'>)[];
+  diapositives: DiapositiveResolue[];
+  categories: string[];
+  questions_a_tester: string[];
+}
+
+export interface ExempleIntrouvable {
+  id: string;
+  source_id: string;
+  url: string;
+  motif: string;
+}
+
 export interface MaquetteData {
   generated_at: string;
   note: string;
+  /** Comptes éditoriaux proposés (noms provisoires) : aucun n'existe encore en base. */
+  comptes: typeof COMPTES;
+  presentatrice: typeof PRESENTATRICE;
+  sujets: typeof SUJETS;
+  fiche_incident: typeof FICHE_INCIDENT;
+  registre_pulse: typeof REGISTRE_PULSE;
+  registre_radar: typeof REGISTRE_RADAR;
+  /** Projets GitHub mesurés ponctuellement ; `verifie` : tous les passages figurent dans leur capture. */
+  projets: ((typeof PROJETS)[number] & { verifie: boolean })[];
+  /** Exemples rédigés par Claude Code pour la maquette, pas par l'agent du site : ce ne sont pas des publications. */
+  exemples: MaquetteExemple[];
+  /** Exemples dont le document n'a pas (ou plus) de capture issue d'une collecte réelle : écartés de la maquette. */
+  exemples_introuvables: ExempleIntrouvable[];
   sources: { id: string; name: string; kind: string; status: string; last_success_at: string | null; last_error: string | null }[];
   products: {
     key: string;
@@ -74,6 +155,216 @@ export function excerpt(content: string, format: string, maxLength = 240): strin
 
 const str = (value: unknown): string | null => (value === null || value === undefined ? null : String(value));
 
+/** Espaces normalisés (SPEC §7.3) : toute suite d'espaces, tabulations ou retours à la ligne devient une espace. */
+export const normaliserEspaces = (text: string): string => text.replace(/\s+/g, ' ').trim();
+
+export const LIBELLES: Record<Exclude<Diapositive, `details:${number}`>, string> = {
+  accroche: 'Accroche',
+  nouveaute: 'Nouveauté',
+  ce_que_ca_permet: 'Ce que ça permet',
+  pour_qui: 'Pour qui',
+  limites_connues: 'Limites connues',
+};
+
+const LETTRE_OU_CHIFFRE = /[\p{L}\p{N}]/u;
+const CHIFFRE = /\p{N}/u;
+const SEPARATEUR = /^[.,]$/;
+
+/**
+ * Le passage figure-t-il mot pour mot dans le texte ? Sous-chaîne exacte, bornée à des mots entiers : une occurrence
+ * qui commence ou finit au milieu d'un mot ne compte pas (« available » n'est pas trouvé dans « unavailable »,
+ * « scored 6 » pas dans « scored 60 »), ni au milieu d'un nombre (« Opus 5 » pas dans « Opus 5.5 », « $1. » pas
+ * dans « $1.50 »).
+ */
+export function contientMotPourMot(texte: string, passage: string): boolean {
+  if (!passage) return false;
+  const lie = (a: string | undefined, b: string | undefined) => a !== undefined && b !== undefined && LETTRE_OU_CHIFFRE.test(a) && LETTRE_OU_CHIFFRE.test(b);
+  const chiffre = (c: string | undefined) => c !== undefined && CHIFFRE.test(c);
+  const separateur = (c: string | undefined) => c !== undefined && SEPARATEUR.test(c);
+  for (let i = texte.indexOf(passage); i !== -1; i = texte.indexOf(passage, i + 1)) {
+    const fin = i + passage.length;
+    const coupeAuDebut =
+      lie(texte[i - 1], passage[0]) || (separateur(texte[i - 1]) && chiffre(texte[i - 2]) && chiffre(passage[0]));
+    const coupeALaFin =
+      lie(passage.at(-1), texte[fin]) ||
+      (chiffre(passage.at(-1)) && separateur(texte[fin]) && chiffre(texte[fin + 1])) ||
+      (separateur(passage.at(-1)) && chiffre(passage.at(-2)) && chiffre(texte[fin]));
+    if (!coupeAuDebut && !coupeALaFin) return true;
+  }
+  return false;
+}
+
+/**
+ * Nombres écrits en chiffres dans un texte (« 30 », « 2.1.312 », « 5,5 » ramené à « 5.5 » : virgule décimale française).
+ * Les nombres écrits en lettres (« deux niveaux ») ne sont pas contrôlés : ils restent du ressort de la relecture.
+ */
+const nombresDe = (texte: string): string[] => (texte.match(/\p{N}+(?:[.,]\p{N}+)*/gu) ?? []).map((n) => n.replace(/,(?=\p{N})/gu, '.'));
+
+/**
+ * Contrôle un exemple contre le texte brut de sa capture : chaque passage doit s'y trouver mot pour mot
+ * (espaces normalisés, mots entiers), chaque champ factuel renseigné doit citer au moins un passage, chaque nombre
+ * écrit en chiffres dans un texte doit figurer dans ses passages (ou être la version de l'actualité), chaque libellé de
+ * détail doit appartenir à LIBELLES_DETAILS, et chaque diapositive doit reprendre
+ * un champ existant de l'exemple (le média n'ajoute aucune affirmation).
+ */
+export function verifierExemple(
+  exemple: ExemplePublication,
+  texteCapture: string,
+  version: string | null = null,
+): Pick<MaquetteExemple, 'statut' | 'motifs' | 'description' | 'visuel' | 'accroche' | 'nouveaute' | 'ce_que_ca_permet' | 'pour_qui' | 'limites_connues' | 'details' | 'attributions' | 'diapositives'> {
+  const capture = normaliserEspaces(texteCapture);
+  const motifs = new Set<string>();
+  const verifier = (champ: ChampCite): ChampVerifie => {
+    if (champ.passages.length === 0) motifs.add('champ factuel sans citation');
+    const passages = champ.passages.map((texte) => {
+      const passage = normaliserEspaces(texte);
+      const trouve = contientMotPourMot(capture, passage);
+      if (!trouve) motifs.add('citation introuvable');
+      return { texte, trouve };
+    });
+    const cite = champ.passages.join(' ');
+    if (nombresDe(champ.texte).some((n) => n !== version && !nombresDe(cite).includes(n))) motifs.add('nombre absent des citations');
+    return { texte: champ.texte, passages };
+  };
+  const optionnel = (champ: ChampCite | null) => (champ ? verifier(champ) : null);
+
+  const description = verifier(exemple.description);
+  const visuel = { ...exemple.visuel, elements: exemple.visuel.elements.map(verifier) };
+  const champs = {
+    accroche: verifier(exemple.accroche),
+    nouveaute: verifier(exemple.nouveaute),
+    ce_que_ca_permet: optionnel(exemple.ce_que_ca_permet),
+    pour_qui: optionnel(exemple.pour_qui),
+    limites_connues: optionnel(exemple.limites_connues),
+  };
+  const details = exemple.details.map((detail: DetailCite) => {
+    if (!(LIBELLES_DETAILS as readonly string[]).includes(detail.titre)) motifs.add('libellé de détail non prévu');
+    return { titre: detail.titre, ...verifier(detail) };
+  });
+  const attributions = exemple.attributions.map((attribution) => ({
+    type: attribution.type,
+    auteur: attribution.auteur,
+    ...verifier(attribution),
+  }));
+
+  const diapositives = exemple.diapositives.map((champ): DiapositiveResolue => {
+    if (champ.startsWith('details:')) {
+      const detail = details[Number(champ.slice('details:'.length))];
+      if (!detail) {
+        motifs.add('diapositive sans champ correspondant');
+        return { champ, libelle: champ, texte: null };
+      }
+      return { champ, libelle: detail.titre, texte: detail.texte };
+    }
+    const cle = champ as keyof typeof LIBELLES;
+    return { champ, libelle: LIBELLES[cle], texte: champs[cle]?.texte ?? null };
+  });
+
+  return { statut: motifs.size === 0 ? 'verifie' : 'a_verifier', motifs: [...motifs], description, visuel, ...champs, details, attributions, diapositives };
+}
+
+/** Un projet n'est vérifié que si chaque passage figure mot pour mot dans sa capture. */
+export function verifierProjet<T extends { capture: string; accroche: ChampCite; interet: ChampCite }>(projet: T): T & { verifie: boolean } {
+  const passages = [...projet.accroche.passages, ...projet.interet.passages];
+  return { ...projet, verifie: passages.length > 0 && passages.every((p) => contientMotPourMot(normaliserEspaces(projet.capture), normaliserEspaces(p))) };
+}
+
+/** Rattache chaque exemple à son actualité et à la dernière capture de son document (issue d'une collecte réelle, sinon l'exemple est écarté), puis le contrôle. */
+async function exemplesDeLaMaquette(
+  tx: Transaction,
+  exemples: ExemplePublication[],
+): Promise<{ exemples: MaquetteExemple[]; introuvables: ExempleIntrouvable[] }> {
+  const trouves: MaquetteExemple[] = [];
+  const introuvables: ExempleIntrouvable[] = [];
+  for (const exemple of exemples) {
+    const absent = (motif: string) => introuvables.push({ id: exemple.id, source_id: exemple.source_id, url: exemple.url, motif });
+    const documents = await tx.execute({
+      sql: `
+        select n.id, n.kind, n.title, n.announced_at, n.first_seen_at, d.id as document_id, d.normalized_url as url,
+               s.id as source_id, s.name as source_name,
+               p.key as product_key, p.name as product_name, p.publisher, p.category, p.repository_url, v.version
+        from source_document d
+        join source s on s.id = d.source_id
+        join news_item_document nd on nd.document_id = d.id and nd.role = 'primary'
+        join news_item n on n.id = nd.news_item_id
+        left join news_item_target t on t.news_item_id = n.id
+        left join product p on p.id = t.product_id
+        left join product_version v on v.id = t.product_version_id
+        where d.source_id = ? and d.normalized_url = ?
+        order by n.id desc limit 1`,
+      args: [exemple.source_id, exemple.url],
+    });
+    const row = documents.rows[0];
+    if (!row) {
+      absent('actualité absente de la base');
+      continue;
+    }
+    const snapshots = await tx.execute({
+      sql: `
+        select c.content, c.content_format, c.content_hash, c.captured_at, c.run_id, r.mode
+        from document_snapshot c left join run r on r.id = c.run_id
+        where c.document_id = ?
+        order by c.seq desc limit 1`,
+      args: [row.document_id ?? null],
+    });
+    // Même règle que le fil : la dernière capture du document, qui doit venir d'une collecte réelle. Une relecture
+    // de fixture plus récente écarte l'exemple (comme elle écarte l'actualité du fil) au lieu de le laisser vérifié
+    // contre un contenu plus ancien.
+    const snapshot = snapshots.rows[0];
+    if (!snapshot || snapshot.mode !== 'live') {
+      absent('dernière capture non issue d’une collecte réelle');
+      continue;
+    }
+    const texte = toPlainText(String(snapshot.content), String(snapshot.content_format));
+    const verification = verifierExemple(exemple, texte, str(row.version));
+    // Le titre du média nomme l'actualité (titre, version ou produit) : il ne doit rien affirmer d'autre.
+    const nomme = [row.title, row.version, row.product_name].some((t) => t != null && contientMotPourMot(String(t), exemple.titre_media));
+    if (!nomme) {
+      verification.motifs.push('titre du média absent de l’actualité');
+      verification.statut = 'a_verifier';
+    }
+    if (exemple.visuel.original && !String(snapshot.content).includes(exemple.visuel.original.url)) {
+      verification.motifs.push('média original absent de la capture');
+      verification.statut = 'a_verifier';
+    }
+    trouves.push({
+      id: exemple.id,
+      compte: exemple.compte,
+      ...verification,
+      actualite: {
+        id: Number(row.id),
+        kind: row.kind === 'version' ? 'version' : 'annonce',
+        title: String(row.title),
+        announced_at: str(row.announced_at),
+        first_seen_at: String(row.first_seen_at),
+        product: row.product_key
+          ? {
+              key: String(row.product_key),
+              name: String(row.product_name),
+              publisher: String(row.publisher),
+              category: str(row.category),
+              repository_url: str(row.repository_url),
+            }
+          : null,
+        version: str(row.version),
+        source: { id: String(row.source_id), name: String(row.source_name), url: String(row.url) },
+      },
+      capture: {
+        content_hash: String(snapshot.content_hash),
+        captured_at: String(snapshot.captured_at),
+        mode: 'live',
+        run_id: String(snapshot.run_id),
+        text_length: texte.length,
+      },
+      media: exemple.media,
+      titre_media: exemple.titre_media,
+      categories: exemple.categories,
+      questions_a_tester: exemple.questions_a_tester,
+    });
+  }
+  return { exemples: trouves, introuvables };
+}
+
 function categoriesOf(metadata: unknown): string[] {
   if (typeof metadata !== 'string') return [];
   try {
@@ -84,7 +375,11 @@ function categoriesOf(metadata: unknown): string[] {
   }
 }
 
-export async function buildMaquetteData(client: Client, generatedAt: string): Promise<MaquetteData> {
+export async function buildMaquetteData(
+  client: Client,
+  generatedAt: string,
+  exemples: ExemplePublication[] = EXEMPLES,
+): Promise<MaquetteData> {
   const tx = await client.transaction('read');
   try {
     const items = await tx.execute(`
@@ -150,10 +445,22 @@ export async function buildMaquetteData(client: Client, generatedAt: string): Pr
         capture: { content_hash: String(row.content_hash), captured_at: String(row.captured_at), mode: String(row.mode) },
       });
     }
+    const exemplesVerifies = await exemplesDeLaMaquette(tx, exemples);
 
     return {
       generated_at: generatedAt,
-      note: 'Données réellement collectées depuis des sources officielles, pas encore analysées. Les extraits sont des citations courtes de la source, attribuées et liées.',
+      note:
+        'Actualités réellement collectées depuis des sources officielles, pas encore analysées ; les extraits sont des citations courtes de la source, attribuées et liées. ' +
+        "Les exemples de publications sont rédigés par Claude Code pour la maquette, pas par l'agent du site : chaque passage cité est recherché mot pour mot dans la capture réelle.",
+      comptes: COMPTES,
+      presentatrice: PRESENTATRICE,
+      sujets: SUJETS,
+      fiche_incident: FICHE_INCIDENT,
+      registre_pulse: REGISTRE_PULSE,
+      registre_radar: REGISTRE_RADAR,
+      projets: PROJETS.map(verifierProjet),
+      exemples: exemplesVerifies.exemples,
+      exemples_introuvables: exemplesVerifies.introuvables,
       sources: sourceRows.rows.map((row) => ({
         id: String(row.id),
         name: String(row.name),

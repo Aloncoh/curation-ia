@@ -1,38 +1,46 @@
 # État du projet
 
-_Mis à jour le 2026-10-30 (P2 : tout est fait sauf la validation de la maquette)._
+_Mis à jour le 2026-10-30 : quatre comptes et fil visuel ajoutés à la maquette._
 
-- **Phase** : P1 terminé. **P2 en cours** : code, tests, relectures, essai réel et maquette faits ; **reste la validation de la maquette par l'utilisateur** (critère de sortie), puis le commit.
-- **Dépôt** : dernier commit `P2 (en cours)` (341eb3b) ; tout P2 est commité (`3a13b0f`).
-- **Base locale** `data/curation.db` : migrations 0000–0002 appliquées ; essai réel de P2 (5 sources, 70 documents, 44 actualités). Copie d'avant migration dans le dossier temporaire de la séance (non conservée).
-- **Blocages** : aucun. **Dépenses** : 0 €. Aucun compte créé.
+- **Phase** : **P2 terminé, maquette validée par l'utilisateur le 2026-10-30.** Prochain jalon : P3, plan à valider.
+- **Dépôt** : travail de P2 commité sur la branche `p2-maquette-sociale`.
+- **Tests** : 187 réussis, types OK. **Blocages** : aucun. **Dépenses** : 0 €. Aucun compte créé.
 
-## P2 — fait (détail dans PROGRESS.md)
+## Ce qui est prêt à montrer
 
-- 5 sources réelles collectées sans doublon (seconde collecte : 0 nouveau) ; catalogue produits / versions / actualités ([ADR 0003](docs/decisions/0003-identite-produits-versions-actualites.md)).
-- Deux relectures par agents, tous les constats traités ; **150 tests** réussis, types OK.
-- Maquette : `maquette/index.html` (données : `npm run maquette`), autour de la mascotte (`assets/brand/`). Preuves et captures : `communication/linkedin/03-catalogue/preuves/brut/`.
-- Documents à jour : README, docs/architecture.md, docs/skills.md, ROADMAP (critère P4 d'assainissement, intervalle des sources en P5), COMPRENDRE_LE_PROJET.md, brouillon LinkedIn 03.
+- Maquette : `maquette/index.html` (configuration `maquette` de `.claude/launch.json`, puis `/maquette/index.html`) : fil, publication détaillée, profil `@veilleuse`, Reels, actualités collectées, fiche, états, langue ; ordinateur et téléphone, clair et sombre.
+- 7 exemples + earshot (projet GitHub mesuré), comptes Nodi, Repo, Pyxo, Mova, Pulse (sans publication : aucun incident collecté), Radar ; filtre par auteur ; les 4 exemples d'origine : **50 passages sur 50** retrouvés mot pour mot (mots entiers) dans les captures réelles ; Reel d'exemple de 47,3 s (`maquette/medias/`).
+- `docs/sources.md` : 5 sources actives, environ 90 candidates, 203 constats contre-vérifiés (166 confirmés, 35 corrigés, 2 invérifiables).
+- Relecture adversariale (5 angles) : 28 constats confirmés, tous corrigés ; contre-relecture : 15 points mineurs de plus, tous traités (détail dans PROGRESS.md).
+
+## Décisions de l'utilisateur (2026-10-30, à respecter)
+
+- Orientation de la feuille de route révisée validée ; P6–P14 prévisionnels, sans alourdir la V1.
+- Langue : celle du navigateur parmi les langues disponibles, choix manuel, langue de secours (construit en P4).
+- Quatre comptes éditoriaux provisoires sur un même moteur ; « Veilleuse » : mascotte du site et présentatrice. Exemples toujours signalés comme tels.
 
 ## En attente de l'utilisateur
 
-1. **Validation de la maquette** (fil, fiche détail, états ; téléphone et ordinateur) — ou liste de changements souhaités.
-2. **Droits d'usage de la mascotte** (avant toute publication, P5) et, si possible, une version haute définition ou vectorielle.
-3. Changements de maquette : l'utilisateur les donnera après la remise à zéro de la conversation.
-4. Budget plafond (IA, hébergement, domaine) et plafond de coût par exécution — avant P3.
+1. Validation du plan de P3.
+2. Fusion de `p2-maquette-sociale` dans `main`.
+3. Langues disponibles au lancement (proposition : français seul) et nom définitif du compte éditorial — avant P4.
+4. Droits d'usage de la mascotte ; budget plafond et fréquence maximale de publication — avant P3.
+5. Décisions sur les sources et médias (X, Reddit, sources aux conditions restrictives, hébergement vidéo, traduction, bacs à sable, points juridiques) : options chiffrées dans `docs/sources.md` §8.1 — avant P6/P7, pas maintenant.
+6. Proposition : préciser SPEC §7.3 « sous-chaîne exacte » en « sous-chaîne exacte, bornée à des mots entiers » (déjà appliqué par le code, plus strict).
+
+## Prochaine action
+
+Soumettre puis exécuter le plan de P3 : aucun crédit API activé sans accord.
 
 ## Repères techniques
 
-- Installation sur ce poste : le cache npm `~/.npm` appartient à un autre utilisateur → `npm install --cache <dossier temporaire>`.
-- Le hook GateGuard (plugin ECC) refuse la première création ou modification de chaque fichier : donner les informations demandées puis relancer.
-- L'outil d'édition a converti des séquences `\u…` en caractères invisibles dans une expression régulière : préférer les classes Unicode (`\p{…}`) et vérifier l'absence de caractères de contrôle littéraux.
-- Voir la maquette dans le navigateur intégré : configuration `maquette` de `.claude/launch.json` (serveur local 127.0.0.1:4173), puis `/maquette/index.html`. Dans un navigateur classique, ouvrir directement `maquette/index.html` devrait suffire (non vérifié : seul le navigateur intégré, via ce serveur local, a servi aux essais).
-- `npm audit` : 4 alertes « moderate » sur `esbuild` embarqué par `drizzle-kit` (outil de développement, non livré).
+- Cache npm `~/.npm` d'un autre utilisateur → `npm install --cache <dossier temporaire>`.
+- Le hook GateGuard refuse la première commande Bash et la première modification de chaque fichier par séance : donner les informations demandées puis relancer.
+- Les agents d'un workflow de recherche peuvent utiliser le navigateur intégré : vérifier la maquette dans un onglet à soi (`tabs_create`) et toujours passer son `tabId`.
+- `npm run maquette` sort en code 1 si un exemple est « à vérifier » ou introuvable ; `npm run maquette:reel` (macOS, ffmpeg dans `~/.local/bin`) ; les tests échouent si `maquette/donnees.js` ou la vidéo sont périmés.
 
 ## Reprise
 
 ```bash
 cd "/Users/aloncohen/CURATION AI" && git log --oneline | head -3 && git status --short && npm test
 ```
-
-Puis suivre la procédure de reprise de CLAUDE.md : redemander la validation de la maquette (et le commit s'il n'a pas été fait) avant de préparer le plan de P3.

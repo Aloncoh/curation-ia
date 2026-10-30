@@ -12,6 +12,7 @@
     "status": "node src/cli/status.ts",
     "export": "node src/cli/export.ts",
     "maquette": "node src/cli/maquette.ts",
+    "maquette:reel": "node src/cli/maquette-reel.ts",
     "pause": "node src/cli/pause.ts",
     "resume": "node src/cli/resume.ts",
     "db:migrate": "node src/cli/migrate.ts",

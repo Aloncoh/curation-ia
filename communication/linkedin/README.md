@@ -12,3 +12,4 @@ Règles :
 | [01](01-cadrage/post.md) | Cadrage avant la première ligne de code (P0) | 2026-10-30 | brouillon |
 | [02](02-collecte/post.md) | Une collecte fiable, testée jusqu'à l'arrêt brutal (P1) | 2026-10-30 | brouillon |
 | [03](03-catalogue/post.md) | Cinq sources, un catalogue sans doublon, une mascotte (P2) | 2026-10-30 | brouillon |
+| [04](04-vision-sociale/post.md) | Un réseau social où chaque phrase cite sa source (P2, maquette) | 2026-10-30 | brouillon |

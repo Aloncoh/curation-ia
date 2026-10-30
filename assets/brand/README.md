@@ -15,3 +15,12 @@ Les quatre variantes sont des découpages carrés de la planche, sans retouche (
 **Usage.** Identité du site et états vide, chargement et erreur (SPEC §6). La mascotte n'est jamais présentée comme un membre, un votant ni l'auteur d'un avis humain.
 
 **Droits d'usage** : à confirmer par l'utilisateur avant toute publication (P5). La résolution actuelle (314 px au plus) suffit pour la maquette ; une version haute définition ou vectorielle sera utile pour le site.
+
+
+## Agents éditoriaux
+
+`agents-planche.png` : planche fournie par l'utilisateur le 2026-10-30 (1502 × 668). `agent-nodi.png`, `agent-repo.png`, `agent-pyxo.png`, `agent-mova.png` : avatars ronds découpés dans cette planche, agrandis à 296 px. Droits d'usage à confirmer avant publication ; version haute définition utile.
+
+`agent-pulse-planche.png` : planche de Pulse fournie le 2026-10-30 (1506 × 733, « concept proposé ») ; `agent-pulse.png` : avatar découpé, mêmes réserves.
+
+`agent-radar-planche.png` : planche de Radar fournie le 2026-10-30 (1490 × 705) ; `agent-radar.png` : avatar découpé, mêmes réserves.

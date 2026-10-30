@@ -1,0 +1,97 @@
+{
+  "id": "reel-copilot-fusion",
+  "exemple_id": "exemple-copilot-fusion",
+  "statut": "Exemple de maquette : ce n’est pas une publication et aucun agent du site ne l’a produit.",
+  "origine": "generated",
+  "mention": "Illustration — ne prouve pas le fonctionnement",
+  "mention_analyse": "Analyse IA à partir des sources — non testé par la plateforme",
+  "niveau_de_preuve": "documentary_analysis",
+  "genere_le": "2026-10-30T06:56:17.829Z",
+  "duree_secondes": 47.257,
+  "format": {
+    "largeur": 720,
+    "hauteur": 1280,
+    "images_par_seconde": 30
+  },
+  "fichiers": {
+    "video": "reel-copilot-fusion.mp4",
+    "sous_titres": "reel-copilot-fusion.vtt",
+    "affiche": "reel-copilot-fusion.jpg"
+  },
+  "empreintes_sha256": {
+    "video": "11bcad6b7d5931e50682607291883d4602bc177789b16e7b0e63fb9d380735c5",
+    "sous_titres": "bb83bab7aed52a8a2b7a35138eb957a80e0bb916a47f8906a91fec53a19994d3"
+  },
+  "textes_dessines": {
+    "entete": "EXEMPLE — MAQUETTE",
+    "titre": "Copilot Fusion",
+    "mentions": [
+      "Illustration — ne prouve pas le fonctionnement",
+      "Analyse IA à partir des sources — non testé par la plateforme"
+    ],
+    "source": "Voix de synthèse — Source : GitHub Changelog, 28 octobre 2026",
+    "segments": [
+      {
+        "libelle": "Accroche",
+        "corps": "Copilot Fusion en disponibilité générale : à chaque demande, Copilot choisit les modèles et, si besoin, les fait travailler ensemble"
+      },
+      {
+        "libelle": "Nouveauté",
+        "corps": "Au lieu de choisir un modèle pour chaque tâche, on laisse Copilot Fusion décider, à chaque demande, quels modèles utiliser et comment les faire travailler ensemble ; l'utilisateur choisit le niveau d'effort : Standard, High ou Max."
+      },
+      {
+        "libelle": "Un modèle seul, en cascade ou en critique",
+        "corps": "Selon la tâche : un seul modèle la traite directement ; ou, en cascade, un modèle économe rédige et un contrôle de qualité décide d'accepter ou de passer à un modèle plus fort ; ou, en critique, un modèle rédige, un autre relit, puis le premier corrige."
+      },
+      {
+        "libelle": "Limites connues",
+        "corps": "Les autres clients ne sont pas encore pris en charge (annoncés « bientôt », sans date) ; chaque modèle utilisé est facturé à son tarif standard."
+      }
+    ]
+  },
+  "source": {
+    "nom": "GitHub Changelog — flux RSS officiel",
+    "url": "https://github.blog/changelog/2026-10-28-route-and-orchestrate-models-with-github-copilot-fusion",
+    "date_annonce": "2026-10-28T16:00:00.000Z",
+    "capture": {
+      "content_hash": "26ab2b26f7ed760e01b30962e76b5d390b264bb88ee05571b504ebc74063ef4d",
+      "captured_at": "2026-10-30T02:25:19.782Z",
+      "run_id": "ff85f4af-e524-4064-9613-b28f22fd1d14"
+    }
+  },
+  "segments": [
+    {
+      "champ": "accroche",
+      "libelle": "Accroche",
+      "texte": "Copilot Fusion en disponibilité générale : à chaque demande, Copilot choisit les modèles et, si besoin, les fait travailler ensemble",
+      "debut": 0,
+      "fin": 8.733
+    },
+    {
+      "champ": "nouveaute",
+      "libelle": "Nouveauté",
+      "texte": "Au lieu de choisir un modèle pour chaque tâche, on laisse Copilot Fusion décider, à chaque demande, quels modèles utiliser et comment les faire travailler ensemble ; l'utilisateur choisit le niveau d'effort : Standard, High ou Max.",
+      "debut": 8.733,
+      "fin": 22.3
+    },
+    {
+      "champ": "details:0",
+      "libelle": "Un modèle seul, en cascade ou en critique",
+      "texte": "Selon la tâche : un seul modèle la traite directement ; ou, en cascade, un modèle économe rédige et un contrôle de qualité décide d'accepter ou de passer à un modèle plus fort ; ou, en critique, un modèle rédige, un autre relit, puis le premier corrige.",
+      "debut": 22.3,
+      "fin": 38.4
+    },
+    {
+      "champ": "limites_connues",
+      "libelle": "Limites connues",
+      "texte": "Les autres clients ne sont pas encore pris en charge (annoncés « bientôt », sans date) ; chaque modèle utilisé est facturé à son tarif standard.",
+      "debut": 38.4,
+      "fin": 47.233
+    }
+  ],
+  "outils": {
+    "rendu": "ffmpeg version 9.0.2",
+    "voix": "synthèse vocale macOS « Flo (Français (France)) »",
+    "police": "Arial Rounded MT Bold (police système macOS, maquette seulement)"
+  }
+}

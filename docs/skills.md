@@ -19,8 +19,8 @@ Doublons à éviter : trois skills de relecture de code (`engineering:code-revie
 | `engineering:architecture` | P0, P1 | consignes lues ; format des ADR 0001 et 0002 (ADR 0003 en P2 : même structure reprise de l'ADR 0002, skill non rechargé) |
 | `claude-api` | P0 | chargé ; référence officielle des modèles et des tarifs |
 | `engineering:testing-strategy` | P1 | consignes lues ; choix des tests du collecteur |
-| `workflow-authoring` | P0, P1, P2 | chargé ; recherches et relectures par agents contre-vérifiés (P2 : relecture adversariale à 3 axes + complétude, puis contre-relecture des corrections) |
-| `frontend-design` | P2 | chargé ; démarche de conception de la maquette (jetons tirés de la mascotte, élément signature, typographie, états) |
+| `workflow-authoring` | P0, P1, P2 | chargé ; recherches et relectures par agents contre-vérifiés (P2 : relecture adversariale à 3 axes + complétude, puis contre-relecture des corrections ; reprise du 2026-10-30 : contre-vérification des 6 thèmes de recherche sur les sources, relecture adversariale à 5 angles de la maquette sociale) |
+| `frontend-design` | P2 | chargé lors de la première maquette ; démarche de conception (jetons tirés de la mascotte, élément signature, typographie, états). Non rechargé pour la maquette sociale : mêmes jetons et mêmes principes repris |
 
 ## Prévu, pas encore utilisé
 
