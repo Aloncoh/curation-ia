@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { buildExport } from '../src/export/export.ts';
 import { runCollect } from '../src/worker/collect.ts';
-import { createTestDb, fakeFetcher, readFixture, type TestDb } from './helpers/db.ts';
+import { CLAUDE_CODE, createTestDb, fakeFetcher, readFixture, type TestDb } from './helpers/db.ts';
 
 let t: TestDb;
 beforeEach(async () => {
@@ -19,6 +19,7 @@ describe('export JSON', () => {
       leaseMs: 60_000,
       maxAttempts: 3,
       retryBackoffMs: 60_000,
+      definitions: [CLAUDE_CODE],
     });
     const data = await buildExport(t.database.db, '2026-10-30T00:00:00.000Z');
     const parsed = JSON.parse(JSON.stringify(data)) as typeof data;

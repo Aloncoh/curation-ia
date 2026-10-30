@@ -4,9 +4,9 @@ import { attachRun, claimNextJob, completeJob, enqueueCollectJobs, failJob, reco
 import { insertRun } from '../src/jobs/runs.ts';
 import { SOURCES, syncSources } from '../src/sources.ts';
 import { runCollect } from '../src/worker/collect.ts';
-import { createTestDb, fakeFetcher, readFixture, scalar, type TestDb } from './helpers/db.ts';
+import { CLAUDE_CODE, createTestDb, fakeFetcher, readFixture, scalar, type TestDb } from './helpers/db.ts';
 
-const SOURCE = SOURCES[0]!.id;
+const SOURCE = CLAUDE_CODE.id;
 const BASE = Date.parse('2026-10-30T10:00:00.000Z');
 const at = (offsetMs: number) => new Date(BASE + offsetMs).toISOString();
 
@@ -71,6 +71,7 @@ describe('file de jobs', () => {
       leaseMs: 60_000,
       maxAttempts: 3,
       retryBackoffMs: 1_000,
+      definitions: [CLAUDE_CODE],
       clock,
     });
 

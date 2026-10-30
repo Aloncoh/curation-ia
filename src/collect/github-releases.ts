@@ -16,7 +16,7 @@ export interface CollectedDocument {
   version: string | null;
   announcedAt: string | null;
   content: string;
-  contentFormat: 'markdown';
+  contentFormat: 'markdown' | 'html';
   contentHash: string;
   metadata: Record<string, unknown>;
 }
@@ -36,6 +36,12 @@ export const GITHUB_API_HEADERS: Record<string, string> = {
 };
 
 const NAME_PATTERN = /^[A-Za-z0-9_.-]+$/;
+const SEMVER_AT_END = /(\d+\.\d+\.\d+(?:[-+][0-9A-Za-z.-]+)?)$/;
+
+/** Numéro de version lisible à partir d'un tag (« rust-v0.166.0 » → « 0.166.0 ») ; le tag tel quel sinon. */
+export function normalizeVersion(tag: string): string {
+  return SEMVER_AT_END.exec(tag)?.[1] ?? tag;
+}
 
 export function releasesUrl(config: GithubReleasesConfig): string {
   if (!NAME_PATTERN.test(config.owner) || !NAME_PATTERN.test(config.repo)) {

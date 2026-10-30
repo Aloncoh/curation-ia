@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title><![CDATA[OpenAI News]]></title>
+        <description><![CDATA[The OpenAI blog]]></description>
+        <link>https://openai.com/news</link>
+        <image>
+            <url>https://openai.com/apple-icon.png</url>
+            <title>OpenAI News</title>
+            <link>https://openai.com/news</link>
+        </image>
+        <generator>OpenAI</generator>
+        <lastBuildDate>Fri, 30 Oct 2026 01:12:05 GMT</lastBuildDate>
+        <atom:link href="https://openai.com/news/rss.xml" rel="self" type="application/rss+xml"/>
+        <language><![CDATA[en-US]]></language>
+        <item>
+            <title><![CDATA[An updated Model Spec for more capable and beneficial AI]]></title>
+            <description><![CDATA[OpenAI’s updated Model Spec outlines five core values to guide more capable AI toward sound judgment, human agency, and faithfulness to human intent.]]></description>
+            <link>https://openai.com/index/updated-model-spec</link>
+            <guid isPermaLink="true">https://openai.com/index/updated-model-spec</guid>
+            <category><![CDATA[Safety]]></category>
+            <pubDate>Thu, 29 Oct 2026 17:00:00 GMT</pubDate>
+        </item>
+<item>
+            <title><![CDATA[How we detect frontier model misalignment]]></title>
+            <description><![CDATA[OpenAI uses layered monitoring to detect frontier model misalignment and unauthorized agent behavior so responders can intervene before incidents escalate.]]></description>
+            <link>https://openai.com/index/how-we-detect-frontier-model-misalignment</link>
+            <guid isPermaLink="true">https://openai.com/index/how-we-detect-frontier-model-misalignment</guid>
+            <category><![CDATA[Security]]></category>
+            <pubDate>Thu, 29 Oct 2026 09:00:00 GMT</pubDate>
+        </item>
+<item>
+            <title><![CDATA[How Ropes & Gray is developing AI for transactional diligence]]></title>
+            <description><![CDATA[Ropes & Gray is developing AI for transactional diligence with OpenAI. Lawyers review grouped documents, summaries, and reports before advising clients.]]></description>
+            <link>https://openai.com/index/ropes-gray-ai-diligence</link>
+            <guid isPermaLink="true">https://openai.com/index/ropes-gray-ai-diligence</guid>
+            <pubDate>Thu, 29 Oct 2026 07:00:00 GMT</pubDate>
+        </item>
+<item>
+            <title><![CDATA[OpenAI and ServiceNow expand partnership across enterprise workflows]]></title>
+            <description><![CDATA[OpenAI and ServiceNow expand their partnership to bring OpenAI models and agents into ServiceNow and ServiceNow workflows into ChatGPT and Codex.]]></description>
+            <link>https://openai.com/index/openai-servicenow-partnership-expansion</link>
+            <guid isPermaLink="true">https://openai.com/index/openai-servicenow-partnership-expansion</guid>
+            <category><![CDATA[Company]]></category>
+            <pubDate>Wed, 28 Oct 2026 13:15:00 GMT</pubDate>
+        </item>
+<item>
+            <title><![CDATA[The future of the firm]]></title>
+            <description><![CDATA[How AI might enter the org chart—beneath, beside, and between us.]]></description>
+            <link>https://openai.com/index/the-future-of-the-firm</link>
+            <guid isPermaLink="true">https://openai.com/index/the-future-of-the-firm</guid>
+            <category><![CDATA[Intelligence Age]]></category>
+            <pubDate>Wed, 28 Oct 2026 10:00:00 GMT</pubDate>
+        </item>
+<item>
+            <title><![CDATA[Legora is building the agentic operating system for legal work]]></title>
+            <description><![CDATA[See how Legora uses OpenAI models, ChatGPT, and Codex to accelerate legal workflows, expand contract analysis, and free lawyers to focus on higher-value work.]]></description>
+            <link>https://openai.com/index/legora</link>
+            <guid isPermaLink="true">https://openai.com/index/legora</guid>
+            <pubDate>Wed, 28 Oct 2026 09:30:00 GMT</pubDate>
+        </item>
+<item>
+            <title><![CDATA[Retell uses OpenAI models to help power 100M monthly calls]]></title>
+            <description><![CDATA[GPT-6 Astra tops Retell’s voice agent benchmark, while Codex helps it reach a $1.6M annual revenue run rate per employee.]]></description>
+            <link>https://openai.com/index/retell-ai</link>
+            <guid isPermaLink="true">https://openai.com/index/retell-ai</guid>
+            <pubDate>Tue, 27 Oct 2026 15:00:00 GMT</pubDate>
+        </item>
+<item>
+            <title><![CDATA[OpenAI expands partnership with Oracle to bring its apps to ChatGPT]]></title>
+            <description><![CDATA[OpenAI and Oracle are expanding their partnership to bring business applications and AI agents into ChatGPT and power new Oracle offerings.]]></description>
+            <link>https://openai.com/index/oracle-apps-in-chatgpt</link>
+            <guid isPermaLink="true">https://openai.com/index/oracle-apps-in-chatgpt</guid>
+            <category><![CDATA[Company]]></category>
+            <pubDate>Tue, 27 Oct 2026 07:00:00 GMT</pubDate>
+        </item>
+<item>
+            <title><![CDATA[How Check Point accelerates vulnerability research with Daybreak]]></title>
+            <description><![CDATA[With OpenAI Daybreak, Check Point speeds up the research behind new security protections, enabling its analysts to turn vulnerability intelligence into customer defenses faster.]]></description>
+            <link>https://openai.com/index/check-point-daybreak</link>
+            <guid isPermaLink="true">https://openai.com/index/check-point-daybreak</guid>
+            <pubDate>Tue, 27 Oct 2026 00:00:00 GMT</pubDate>
+        </item>
+<item>
+            <title><![CDATA[Greptile takes bug detection beyond code review with GPT-6 Astra]]></title>
+            <description><![CDATA[How Greptile uses GPT-6 Astra to test user workflows, Daybreak to strengthen security, and Codex to reduce rework.]]></description>
+            <link>https://openai.com/index/greptile-code-review-codex-astra</link>
+            <guid isPermaLink="true">https://openai.com/index/greptile-code-review-codex-astra</guid>
+            <category><![CDATA[Startup]]></category>
+            <pubDate>Mon, 26 Oct 2026 22:00:00 GMT</pubDate>
+        </item>
+<item>
+            <title><![CDATA[Working with academic communities to build scientific understanding]]></title>
+            <description><![CDATA[OpenAI shares model results on the Kakeya conjecture, Exponential Time Hypothesis, and quantum chromodynamics—and how researchers can verify and build on them.]]></description>
+            <link>https://openai.com/index/building-scientific-understanding-with-academic-communities</link>
+            <guid isPermaLink="true">https://openai.com/index/building-scientific-understanding-with-academic-communities</guid>
+            <category><![CDATA[Research]]></category>
+            <pubDate>Mon, 26 Oct 2026 14:30:00 GMT</pubDate>
+        </item>
+<item>
+            <title><![CDATA[GPT-6.1 Sol helps CodeRabbit strengthen security across complex codebases]]></title>
+            <description><![CDATA[CodeRabbit uses GPT-6.1 Sol to investigate security risks across complex codebases. Its security agent helps developers review findings and proposed fixes.]]></description>
+            <link>https://openai.com/index/gpt-6-1-sol-coderabbit-code-security</link>
+            <guid isPermaLink="true">https://openai.com/index/gpt-6-1-sol-coderabbit-code-security</guid>
+            <category><![CDATA[Security]]></category>
+            <pubDate>Mon, 26 Oct 2026 13:45:00 GMT</pubDate>
+        </item>
+<item>
+            <title><![CDATA[ChatGPT’s expanding world of work]]></title>
+            <description><![CDATA[Explore OpenAI Signals data on 165 work activities across nearly 100 countries, revealing how people use ChatGPT for work and how usage changes over time.]]></description>
+            <link>https://openai.com/index/chatgpt-expanding-world-of-work</link>
+            <guid isPermaLink="true">https://openai.com/index/chatgpt-expanding-world-of-work</guid>
+            <category><![CDATA[Research]]></category>
+            <pubDate>Mon, 26 Oct 2026 10:00:00 GMT</pubDate>
+        </item>
+<item>
+            <title><![CDATA[How Fanatics and OpenAI streamline the fan experience]]></title>
+            <description><![CDATA[Fanatics uses OpenAI to help fans complete their game-day outfits with Shop the Look. Testing across roughly 30,000 MLB products showed 10% higher engagement.]]></description>
+            <link>https://openai.com/index/fanatics-streamline-fan-experience</link>
+            <guid isPermaLink="true">https://openai.com/index/fanatics-streamline-fan-experience</guid>
+            <pubDate>Mon, 26 Oct 2026 07:00:00 GMT</pubDate>
+        </item>
+<item>
+            <title><![CDATA[How Ultrafast cut incident investigation from hours to minutes at OpenAI]]></title>
+            <description><![CDATA[See how OpenAI engineers use Codex Ultrafast to investigate incidents in minutes. Explore faster security analysis, code refactoring, and daily workflows.]]></description>
+            <link>https://openai.com/index/openai-cut-incident-investigation</link>
+            <guid isPermaLink="true">https://openai.com/index/openai-cut-incident-investigation</guid>
+            <category><![CDATA[OpenAI on OpenAI]]></category>
+            <pubDate>Mon, 26 Oct 2026 07:00:00 GMT</pubDate>
+        </item>
+<item>
+            <title><![CDATA[Introducing GPT-6.1 Terra]]></title>
+            <description><![CDATA[Bringing fast and capable computer use to everyone]]></description>
+            <link>https://openai.com/index/introducing-gpt-6-1-terra</link>
+            <guid isPermaLink="true">https://openai.com/index/introducing-gpt-6-1-terra</guid>
+            <category><![CDATA[Product]]></category>
+            <pubDate>Mon, 26 Oct 2026 00:00:00 GMT</pubDate>
+        </item>
+<item>
+            <title><![CDATA[Rapidly scaling online storage to serve over 1 billion ChatGPT users (Part II)]]></title>
+            <description><![CDATA[Learn how OpenAI scaled Habitat with reliable multi-tenancy, global caching, and Azure Cosmos DB to deliver 12× faster reads for ChatGPT.]]></description>
+            <link>https://openai.com/index/scaling-storage-one-billion-users-part-two</link>
+            <guid isPermaLink="true">https://openai.com/index/scaling-storage-one-billion-users-part-two</guid>
+            <category><![CDATA[Engineering]]></category>
+            <pubDate>Fri, 23 Oct 2026 17:00:00 GMT</pubDate>
+        </item>
+<item>
+            <title><![CDATA[Securing our frontier model training environment]]></title>
+            <description><![CDATA[OpenAI explains how we strengthened containment for frontier model training and evaluation, including offline environments and high-compute red-teaming.]]></description>
+            <link>https://openai.com/index/securing-our-frontier-model-training-environment</link>
+            <guid isPermaLink="true">https://openai.com/index/securing-our-frontier-model-training-environment</guid>
+            <category><![CDATA[Security]]></category>
+            <pubDate>Fri, 23 Oct 2026 10:00:00 GMT</pubDate>
+        </item>
+<item>
+            <title><![CDATA[Anima helps clinics cut call waits by 75% with GPT-6 and GPT-Live]]></title>
+            <description><![CDATA[Anima expands what care teams can do with OpenAI models, giving them more capacity to respond to patients.]]></description>
+            <link>https://openai.com/index/anima</link>
+            <guid isPermaLink="true">https://openai.com/index/anima</guid>
+            <category><![CDATA[Startup]]></category>
+            <pubDate>Fri, 23 Oct 2026 00:00:00 GMT</pubDate>
+        </item>
+<item>
+            <title><![CDATA[OpenAI and Poland’s NASK partner to advance AI safety and security]]></title>
+            <description><![CDATA[OpenAI and Poland’s NASK are partnering on AI safety, security, and technical research to strengthen safeguards and support a more resilient digital ecosystem.]]></description>
+            <link>https://openai.com/index/openai-nask-ai-safety-security-partnership</link>
+            <guid isPermaLink="true">https://openai.com/index/openai-nask-ai-safety-security-partnership</guid>
+            <category><![CDATA[Global Affairs]]></category>
+            <pubDate>Fri, 23 Oct 2026 00:00:00 GMT</pubDate>
+        </item>
+<item>
+            <title><![CDATA[Build more responsive apps with the Decisions API]]></title>
+            <description><![CDATA[Fast, focused, low-cost decisions for any application.]]></description>
+            <link>https://openai.com/index/decisions-api</link>
+            <guid isPermaLink="true">https://openai.com/index/decisions-api</guid>
+            <category><![CDATA[Product]]></category>
+            <pubDate>Thu, 22 Oct 2026 19:00:00 GMT</pubDate>
+        </item>
+<item>
+            <title><![CDATA[What FDE means at OpenAI]]></title>
+            <description><![CDATA[What forward deployed engineering means at OpenAI]]></description>
+            <link>https://openai.com/index/forward-deployed-engineering-means</link>
+            <guid isPermaLink="true">https://openai.com/index/forward-deployed-engineering-means</guid>
+            <category><![CDATA[AI Adoption]]></category>
+            <pubDate>Thu, 22 Oct 2026 06:00:00 GMT</pubDate>
+        </item>
+<item>
+            <title><![CDATA[Uber brings ChatGPT Work to all employees with OpenAI]]></title>
+            <description><![CDATA[Uber is rolling out ChatGPT Work to more than 30,000 employees, helping teams research, analyze data, create presentations, and complete complex workflows.]]></description>
+            <link>https://openai.com/index/uber-chatgpt-work-rollout</link>
+            <guid isPermaLink="true">https://openai.com/index/uber-chatgpt-work-rollout</guid>
+            <category><![CDATA[Company]]></category>
+            <pubDate>Thu, 22 Oct 2026 00:00:00 GMT</pubDate>
+        </item>
+<item>
+            <title><![CDATA[How AT&T is rethinking in-house legal work with OpenAI]]></title>
+            <description><![CDATA[AT&T is working with OpenAI to make legal knowledge easier to access. Learn how its LegalEdge team is rethinking intake and scaling legal judgment.]]></description>
+            <link>https://openai.com/index/att-legal</link>
+            <guid isPermaLink="true">https://openai.com/index/att-legal</guid>
+            <pubDate>Wed, 21 Oct 2026 17:00:00 GMT</pubDate>
+        </item>
+<item>
+            <title><![CDATA[Broad access through consistent standards]]></title>
+            <description><![CDATA[How OpenAI works with distribution partners to uphold consistent safeguards, support responsible access, and clarify expectations in our Usage Policies.]]></description>
+            <link>https://openai.com/index/broad-access-through-consistent-standards</link>
+            <guid isPermaLink="true">https://openai.com/index/broad-access-through-consistent-standards</guid>
+            <category><![CDATA[Safety]]></category>
+            <pubDate>Wed, 21 Oct 2026 21:00:00 GMT</pubDate>
+        </item>
+</channel>
+</rss>

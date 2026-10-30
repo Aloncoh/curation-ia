@@ -10,7 +10,7 @@ afterEach(() => t.cleanup());
 
 describe('concurrence entre processus', () => {
   it('deux collecteurs lancés en même temps : un seul traite le job', async () => {
-    const env = { DATABASE_URL: t.url, CURATION_FIXTURE: FIXTURE_PATH, CURATION_FIXTURE_DELAY_MS: '1500' };
+    const env = { DATABASE_URL: t.url, CURATION_FIXTURE: FIXTURE_PATH, CURATION_ONLY_SOURCES: 'github-releases:anthropics/claude-code', CURATION_FIXTURE_DELAY_MS: '1500' };
     const [a, b] = await Promise.all([startCollect(env).done, startCollect(env).done]);
 
     expect(a.code).toBe(0);

@@ -13,6 +13,12 @@ await runCommand(async ({ config, database }) => {
   const fixtureSnapshots = await client.execute(
     "select count(*) as n from document_snapshot s join run r on r.id = s.run_id where r.mode = 'fixture'",
   );
+  const catalog = await client.execute(
+    `select (select count(*) from product) as products, (select count(*) from product_version) as versions,
+            (select count(*) from product_version where is_prerelease = 1) as prereleases,
+            (select count(*) from news_item where kind = 'version') as version_items,
+            (select count(*) from news_item where kind = 'annonce') as announcement_items`,
+  );
   const jobRows = await db.select({ status: jobs.status, n: count }).from(jobs).groupBy(jobs.status);
   const sourceRows = await db.select().from(sources);
   const lastRuns = await db.select().from(runs).orderBy(desc(runs.startedAt)).limit(5);
@@ -23,6 +29,11 @@ await runCommand(async ({ config, database }) => {
   console.log(
     `Documents : ${documents?.n ?? 0} — captures : ${snapshots?.n ?? 0}` +
       (fromFixture > 0 ? ` (dont ${fromFixture} issue(s) d'une fixture, pas d'une collecte réelle)` : ''),
+  );
+  const c = catalog.rows[0];
+  console.log(
+    `Produits : ${c?.products ?? 0} — versions : ${c?.versions ?? 0} (dont ${c?.prereleases ?? 0} préversion(s)) — ` +
+      `actualités : ${c?.version_items ?? 0} version(s), ${c?.announcement_items ?? 0} annonce(s)`,
   );
   console.log(`Jobs : ${jobRows.map((row) => `${row.status} ${row.n}`).join(', ') || 'aucun'}`);
   console.log('Sources :');

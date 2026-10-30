@@ -17,6 +17,8 @@ export interface AppConfig {
   fixtureDelayMs: number;
   /** Tests uniquement, et seulement en mode fixture : attente à l'intérieur de la transaction d'enregistrement. */
   testHoldInStoreMs: number;
+  /** Restreint la collecte à ces sources (identifiants séparés par des virgules) ; toutes si absent. */
+  onlySources: string[] | null;
 }
 
 function intFromEnv(env: NodeJS.ProcessEnv, name: string, fallback: number, min: number): number {
@@ -43,6 +45,10 @@ export function loadConfig(env: NodeJS.ProcessEnv = process.env): AppConfig {
     fixturePath,
     fixtureDelayMs: intFromEnv(env, 'CURATION_FIXTURE_DELAY_MS', 0, 0),
     testHoldInStoreMs: fixturePath ? intFromEnv(env, 'CURATION_TEST_HOLD_IN_STORE_MS', 0, 0) : 0,
+    onlySources:
+      env.CURATION_ONLY_SOURCES?.split(',')
+        .map((id) => id.trim())
+        .filter(Boolean) || null,
   };
 }
 

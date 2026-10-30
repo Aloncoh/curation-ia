@@ -11,14 +11,21 @@ export interface StoreCounts {
   changedDocuments: number;
 }
 
+export interface StoredDocument {
+  documentId: number;
+  outcome: 'new' | 'unchanged' | 'changed';
+  doc: CollectedDocument;
+}
+
 export async function storeDocuments(
   tx: Executor,
   sourceId: string,
   documents: CollectedDocument[],
   collectedAt: string,
   runId: string,
-): Promise<StoreCounts> {
+): Promise<{ counts: StoreCounts; stored: StoredDocument[] }> {
   const counts: StoreCounts = { newDocuments: 0, unchangedDocuments: 0, changedDocuments: 0 };
+  const stored: StoredDocument[] = [];
   for (const doc of documents) {
     // Champs descriptifs : toujours remis à jour, même si le contenu (et donc la capture) ne change pas.
     const descriptive = {
@@ -44,6 +51,7 @@ export async function storeDocuments(
         .returning({ id: sourceDocuments.id });
       documentId = created!.id;
       counts.newDocuments++;
+      stored.push({ documentId, outcome: 'new', doc });
     } else {
       documentId = existing.id;
       await tx.update(sourceDocuments).set(descriptive).where(eq(sourceDocuments.id, documentId));
@@ -55,11 +63,13 @@ export async function storeDocuments(
         .limit(1);
       if (latest && latest.contentHash === doc.contentHash) {
         counts.unchangedDocuments++;
+        stored.push({ documentId, outcome: 'unchanged', doc });
         continue;
       }
       // Contenu modifié : nouvelle capture, l'ancienne est conservée.
       nextSeq = (latest?.seq ?? 0) + 1;
       counts.changedDocuments++;
+      stored.push({ documentId, outcome: 'changed', doc });
     }
 
     await tx.insert(documentSnapshots).values({
@@ -73,5 +83,5 @@ export async function storeDocuments(
       runId,
     });
   }
-  return counts;
+  return { counts, stored };
 }

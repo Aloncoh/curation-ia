@@ -5,8 +5,7 @@ import { SafeFetchError } from '../src/collect/safe-fetch.ts';
 import { setPaused } from '../src/control/settings.ts';
 import type { Database } from '../src/db/client.ts';
 import { runCollect } from '../src/worker/collect.ts';
-import { SOURCES } from '../src/sources.ts';
-import { createTestDb, fakeFetcher, readFixture, scalar, type TestDb } from './helpers/db.ts';
+import { CLAUDE_CODE, createTestDb, fakeFetcher, readFixture, scalar, type TestDb } from './helpers/db.ts';
 
 let t: TestDb;
 beforeEach(async () => {
@@ -23,6 +22,7 @@ const collect = (database: Database, fetcher: SourceFetcher, overrides: { maxAtt
     leaseMs: 60_000,
     maxAttempts: overrides.maxAttempts ?? 3,
     retryBackoffMs: 60_000,
+    definitions: [CLAUDE_CODE],
   });
 
 const counts = async (database: Database) => ({
@@ -179,7 +179,7 @@ describe('collecte', () => {
   });
 
   it('le collecteur réel refuse un hôte absent de la liste blanche de la source, sans requête réseau', async () => {
-    const restricted = SOURCES.map((def) => ({ ...def, allowedHosts: ['example.org'] }));
+    const restricted = [{ ...CLAUDE_CODE, allowedHosts: ['example.org'] }];
     const summary = await runCollect({
       database: t.database,
       fetcher: createLiveFetcher({ timeoutMs: 1_000, maxBytes: 1_024, userAgent: 'test' }),

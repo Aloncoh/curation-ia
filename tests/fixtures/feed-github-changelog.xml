@@ -1,0 +1,500 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Archive: 2026 - GitHub Changelog</title>
+	<atom:link href="https://github.blog/changelog/feed/" rel="self" type="application/rss+xml" />
+	<link>https://github.blog/changelog/</link>
+	<description>Updates, ideas, and inspiration from GitHub to help developers build and design software.</description>
+	<lastBuildDate>Thu, 29 Oct 2026 18:59:51 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=7.1.4</generator>
+
+<image>
+	<url>https://github.blog/wp-content/uploads/2019/01/cropped-github-favicon-512.png?fit=32%2C32</url>
+	<title>Archive: 2026 - GitHub Changelog</title>
+	<link>https://github.blog/changelog/</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+<site xmlns="com-wordpress:feed-additions:1">153214340</site>	<item>
+		<title>Webhook IP ranges added to the Meta API</title>
+		<link>https://github.blog/changelog/2026-10-29-webhook-ip-ranges-added-to-the-meta-api</link>
+		
+		<dc:creator><![CDATA[Allison]]></dc:creator>
+		<pubDate>Thu, 29 Oct 2026 17:14:38 +0000</pubDate>
+				<guid isPermaLink="false">https://github.blog/changelog/2026-10-29-webhook-ip-ranges-added-to-the-meta-api</guid>
+
+					<description><![CDATA[<p>We&#8217;re adding IP ranges for GitHub webhook deliveries on github.com. The Meta API now includes these additional ranges in the hooks field. If you maintain a static network allowlist for&#8230;</p>
+<p>The post <a href="https://github.blog/changelog/2026-10-29-webhook-ip-ranges-added-to-the-meta-api">Webhook IP ranges added to the Meta API</a> appeared first on <a href="https://github.blog">The GitHub Blog</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body><p>We&rsquo;re adding IP ranges for GitHub webhook deliveries on github.com. The Meta API now includes these additional ranges in the <code>hooks</code> field.</p>
+<p>If you maintain a static network allowlist for incoming webhook deliveries, add these CIDR prefixes alongside your existing webhook IP ranges to avoid rejecting deliveries:</p>
+<ul>
+<li><code>9.234.98.160/28</code></li>
+<li><code>9.234.98.176/28</code></li>
+<li><code>9.234.106.48/28</code></li>
+</ul>
+<p>If you already keep your allowlist up to date using the Meta API, no changes are needed for these additions.</p>
+<p>These ranges apply to webhook deliveries on github.com across all plans, including GitHub Enterprise Cloud.</p>
+<p>You can retrieve the current webhook IP ranges using the <a href="https://docs.github.com/rest/meta/meta#get-github-meta-information">Meta API</a> and follow the <a href="https://docs.github.com/webhooks/using-webhooks/best-practices-for-using-webhooks">webhook delivery best practices</a>.</p>
+</body></html>
+<p>The post <a href="https://github.blog/changelog/2026-10-29-webhook-ip-ranges-added-to-the-meta-api">Webhook IP ranges added to the Meta API</a> appeared first on <a href="https://github.blog">The GitHub Blog</a>.</p>
+]]></content:encoded>
+					
+		
+		
+		<category domain="changelog-type"><![CDATA[Improvement]]></category>
+<category domain="changelog-label"><![CDATA[ecosystem &amp; accessibility]]></category>
+<post-id xmlns="com-wordpress:feed-additions:1">99913</post-id>	</item>
+		<item>
+		<title>Route and orchestrate models with GitHub Copilot Fusion</title>
+		<link>https://github.blog/changelog/2026-10-28-route-and-orchestrate-models-with-github-copilot-fusion</link>
+		
+		<dc:creator><![CDATA[Allison]]></dc:creator>
+		<pubDate>Wed, 28 Oct 2026 16:00:00 +0000</pubDate>
+				<guid isPermaLink="false">https://github.blog/changelog/2026-11-26-route-and-orchestrate-models-with-github-copilot-fusion</guid>
+
+					<description><![CDATA[<p>GitHub Copilot Fusion is generally available. Instead of picking a model for each task, choose Copilot Fusion and let Copilot intelligently route and orchestrate which models it uses for you.&#8230;</p>
+<p>The post <a href="https://github.blog/changelog/2026-10-28-route-and-orchestrate-models-with-github-copilot-fusion">Route and orchestrate models with GitHub Copilot Fusion</a> appeared first on <a href="https://github.blog">The GitHub Blog</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body><p>GitHub Copilot Fusion is generally available. Instead of picking a model for each task, choose Copilot Fusion and let Copilot intelligently route and orchestrate which models it uses for you.</p>
+<p>Copilot Fusion brings together <a href="https://github.blog/ai-and-ml/github-copilot/project-hydrafusion-frontier-quality-via-multi-model-orchestration/">Project HydraFusion&rsquo;s</a> multi-model orchestration and <a href="https://docs.github.com/copilot/concepts/models/auto-model-selection">Copilot auto model selection&rsquo;s</a> fine-tuned model selection, leveraging the benefits of both to balance performance and cost efficiency.</p>
+<p>Since Project HydraFusion launched, we&rsquo;ve improved its performance. In the Artificial Analysis Coding Agent Index, Copilot Fusion Max scored 60, within two points of Claude Code with Opus 5.5 Max. It delivered that result at about half the average API cost per task, using about half as many tokens and taking about 40% less time per task.</p>
+<h2 id="smarter-choices-for-developers" id="smarter-choices-for-developers" ><a class="heading-link" href="#smarter-choices-for-developers">Smarter choices for developers<span class="heading-hash pl-2 text-italic text-bold" aria-hidden="true"></span></a></h2>
+<p>When you select Copilot Fusion in the model picker, you aren&rsquo;t selecting a specific model. You&rsquo;re choosing a system that routes and orchestrates models for each task. There&rsquo;s no need to switch models during a task or decide which model suits each step. For each prompt, Copilot Fusion determines which models to use and how they work together, while you choose the right level of effort.</p>
+<p>To use it, select <strong>Copilot Fusion</strong> in the model picker, then choose the effort level.</p>
+<ul>
+<li><strong>Fusion Standard:</strong> Prioritizes versatile models for everyday coding.</li>
+<li><strong>Fusion High:</strong> Prioritizes capable models for challenging tasks and deeper reasoning. </li>
+<li><strong>Fusion Max:</strong> Prioritizes the most capable models for the most demanding tasks and complex reasoning.</li>
+</ul>
+<p>Watch as Copilot Fusion analyzes each task and selects a model to complete it, orchestrating multiple models through the following workflows when needed.</p>
+<ul>
+<li><strong>Single:</strong> One model solves the task directly.  </li>
+<li><strong>Cascade:</strong> An efficient model drafts a response. A quality check determines whether to accept it or escalate to a stronger model. </li>
+<li><strong>Critique:</strong> One model drafts an initial response, another model reviews it, and the original model revises.</li>
+</ul>
+<p><img decoding="async" src="https://github.com/user-attachments/assets/1eeffdb5-0c21-4697-8007-bb6df0e70e8b" alt="Diagram titled 'Three execution patterns in Copilot Fusion,' comparing three workflows: Single, where a a primary model uses tools to request an answer; Cascade, where a primary model makes a first pass before a judge model either accepts its result as the answer or escalates to a repair model for a fresh-start answer; and Critique, where a primary model drafts an answer and a read-only critic either approves it as-is or requests a revision by the primary model."></p>
+<h2 id="more-control-for-administrators" id="more-control-for-administrators" ><a class="heading-link" href="#more-control-for-administrators">More control for administrators<span class="heading-hash pl-2 text-italic text-bold" aria-hidden="true"></span></a></h2>
+<p>Administrators control which models Copilot Fusion can use and whether Copilot Fusion is the default.</p>
+<ul>
+<li>Copilot Fusion only uses the models that are enabled in your enterprise and organization <strong>model policies</strong>. Enterprise administrators can view what models Copilot Fusion picks from, independently set each model&rsquo;s effective policy state, and disable models for Copilot Fusion without disabling the model for everyone. See <a href="https://docs.github.com/copilot/how-tos/administer-copilot/manage-for-enterprise/manage-availability-of-default-models#configuring-models-available-for-copilot-fusion">Manage availability of default models</a>.</li>
+<li>Administrators can set Copilot Fusion, at any effort level, as the <strong>default model</strong> for Copilot users with Enterprise managed settings. To configure settings, see <a href="https://docs.github.com/copilot/reference/enterprise-administrators/enterprise-managed-settings#fusiontier">Enterprise managed settings</a>.</li>
+</ul>
+<blockquote class="gh-changelog-quote"><p>&ldquo;GitHub Copilot Fusion Standard has improved token efficiency across AT&amp;T by automatically selecting the right model for the task, reducing unnecessary spend and preserving capacity for higher-value work. Previously, developers would often choose a more powerful model for a complex task and forget to switch back for everyday activities. Copilot Fusion eliminates that friction, optimizing model selection without requiring developers to manage it themselves. We&rsquo;ve also seen its decision-making improve over time, giving developers greater confidence to focus on their work while Copilot handles model selection.&rdquo;<br>
+<cite>Hari Pokhrel, Principal Software Engineer, AT&amp;T</cite></p></blockquote>
+<h2 id="billing" id="billing" ><a class="heading-link" href="#billing">Billing<span class="heading-hash pl-2 text-italic text-bold" aria-hidden="true"></span></a></h2>
+<p>When you use Copilot Fusion you&rsquo;re billed for each model it uses, at each model&rsquo;s standard rate. For a limited time, users on paid Copilot plans will receive a 30% discount on model costs when using Copilot Fusion.</p>
+<h2 id="get-started" id="get-started" ><a class="heading-link" href="#get-started">Get started<span class="heading-hash pl-2 text-italic text-bold" aria-hidden="true"></span></a></h2>
+<p>Copilot Fusion is available on all Copilot plans in Visual Studio Code, the GitHub Copilot app, GitHub Copilot CLI, and JetBrains IDEs. Support for additional clients is coming soon.</p>
+<p>Update your client to try it out. Open the model picker, select <strong>Copilot Fusion</strong>, and choose an effort level.</p>
+<blockquote><p>
+  Note for research preview participants: if you previously enabled auto, HydraFusion, or HydraFusion Max, your selections will automatically transition to the corresponding Copilot Fusion effort levels.
+</p></blockquote>
+<p>To learn more, see our documentation on <a href="https://docs.github.com/copilot/concepts/models/copilot-fusion?utm_source=changelog-docs-link-fusion&amp;utm_medium=changelog&amp;utm_campaign=universe-2026">GitHub Copilot Fusion</a> and share your feedback in the <a href="https://github.com/orgs/community/discussions/211017?utm_source=changelog-community-discussion-fusion&amp;utm_medium=changelog&amp;utm_campaign=universe-2026">GitHub Community</a>.</p>
+</body></html>
+<p>The post <a href="https://github.blog/changelog/2026-10-28-route-and-orchestrate-models-with-github-copilot-fusion">Route and orchestrate models with GitHub Copilot Fusion</a> appeared first on <a href="https://github.blog">The GitHub Blog</a>.</p>
+]]></content:encoded>
+					
+		
+		
+		<category domain="changelog-type"><![CDATA[Release]]></category>
+<category domain="changelog-label"><![CDATA[copilot]]></category>
+<category domain="changelog-label"><![CDATA[enterprise management tools]]></category>
+<category domain="changelog-label"><![CDATA[universe26]]></category>
+<post-id xmlns="com-wordpress:feed-additions:1">99793</post-id>	</item>
+		<item>
+		<title>GitHub Copilot app, Universe releases</title>
+		<link>https://github.blog/changelog/2026-10-28-github-copilot-app-universe-releases</link>
+		
+		<dc:creator><![CDATA[Allison]]></dc:creator>
+		<pubDate>Wed, 28 Oct 2026 15:55:00 +0000</pubDate>
+				<guid isPermaLink="false">https://github.blog/changelog/2026-11-26-github-copilot-app-universe-releases</guid>
+
+					<description><![CDATA[<p>Work doesn&#8217;t always fit in a single repository or session. A feature can span several repositories. A launch plan can pull in specs, designs, and assets without touching a repository&#8230;</p>
+<p>The post <a href="https://github.blog/changelog/2026-10-28-github-copilot-app-universe-releases">GitHub Copilot app, Universe releases</a> appeared first on <a href="https://github.blog">The GitHub Blog</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body><p>Work doesn&rsquo;t always fit in a single repository or session. A feature can span several repositories. A launch plan can pull in specs, designs, and assets without touching a repository at all. Projects in the GitHub Copilot app give that work one home, with its context, agents, and results together. Copilot coordinates the work in the background and checks in when it needs you.</p>
+<h3 id="give-copilot-a-goal" id="give-copilot-a-goal" ><a class="heading-link" href="#give-copilot-a-goal">Give Copilot a goal<span class="heading-hash pl-2 text-italic text-bold" aria-hidden="true"></span></a></h3>
+<p>Start a project, describe what you want to get done, and add the context Copilot needs (e.g., repositories, design mocks, Slack threads, or notes from a design meeting). Choose the models and tools for the job. Copilot runs as many agents as the work needs and brings back results (e.g., pull requests) for your review.</p>
+<p>Use project automations for repeatable tasks, such as creating a new promo video whenever a feature lands.</p>
+<p>For a focused task in a single repository, you can still start a session directly from that repository.</p>
+<p>Copilot Projects are now in public preview. You can learn more in the <a href="https://docs.github.com/copilot/how-tos/github-copilot-app/working-with-projects?utm_source=agent-first-app-changelog-projects-docs&amp;utm_medium=changelog&amp;utm_campaign=universe-2026">projects documentation</a>.</p>
+<p><img decoding="async" src="https://github.com/user-attachments/assets/37b3573f-d42f-439f-a136-9613293cf984" alt='Copilot desktop app screen showing new left navigation with "Projects" view'></p>
+<h3 id="handle-the-work-around-your-code" id="handle-the-work-around-your-code" ><a class="heading-link" href="#handle-the-work-around-your-code">Handle the work around your code<span class="heading-hash pl-2 text-italic text-bold" aria-hidden="true"></span></a></h3>
+<p>Use context from connected tools such as Slack and Figma to research a request, draft a specification, or work through a design alongside your code.</p>
+<p>You can also generate and edit images using natural language in chat.</p>
+<p><img decoding="async" src="https://github.com/user-attachments/assets/e9610089-b2d9-4e7e-92a0-d541c924a569" alt="Copilot generating an image of Mona from a natural-language prompt"></p>
+<h3 id="let-copilot-work-with-your-desktop-apps" id="let-copilot-work-with-your-desktop-apps" ><a class="heading-link" href="#let-copilot-work-with-your-desktop-apps">Let Copilot work with your desktop apps<span class="heading-hash pl-2 text-italic text-bold" aria-hidden="true"></span></a></h3>
+<p>Ask Copilot to work through tasks in your desktop apps, such as an expense-report workflow. Computer use&mdash;in public preview on macOS and Windows&mdash;lets Copilot read app content, click controls, enter or edit text, and navigate across apps, including those without an API, command-line interface, or MCP integration.</p>
+<p>Copilot asks for your approval before controlling an app, and your organization can disable the feature through managed settings. To get started, open <strong>Settings</strong> &gt; <strong>Computer Use</strong> and turn on <strong>Enable Computer Use</strong>. On macOS, grant the required Accessibility and Screen Recording permissions.</p>
+<p><video loop controls autoplay muted width="100%" aria-label="Copilot uses computer-use tools to navigate an expense-report workflow in Safari." src="https://github.com/user-attachments/assets/866a9adf-4b90-4aef-9f92-b21dae47c551"><br>
+</video></p>
+<p>For more information, see the <a href="https://docs.github.com/copilot/how-tos/github-copilot-app/computer-use?utm_source=agent-first-app-changelog-computer-use-docs&amp;utm_medium=changelog&amp;utm_campaign=universe-2026">computer use documentation</a>.</p>
+<h3 id="get-started" id="get-started" ><a class="heading-link" href="#get-started">Get started<span class="heading-hash pl-2 text-italic text-bold" aria-hidden="true"></span></a></h3>
+<p>Download or update the <a href="https://github.com/features/ai/github-app?utm_source=agent-first-app-changelog-app-download&amp;utm_medium=changelog&amp;utm_campaign=universe-2026">GitHub Copilot app</a> and join the discussion in <a href="https://github.com/orgs/community/discussions/211001?utm_source=agent-first-app-changelog-community-discussion&amp;utm_medium=changelog&amp;utm_campaign=universe-2026">GitHub Community</a>.</p>
+</body></html>
+<p>The post <a href="https://github.blog/changelog/2026-10-28-github-copilot-app-universe-releases">GitHub Copilot app, Universe releases</a> appeared first on <a href="https://github.blog">The GitHub Blog</a>.</p>
+]]></content:encoded>
+					
+		
+		
+		<category domain="changelog-type"><![CDATA[Release]]></category>
+<category domain="changelog-label"><![CDATA[copilot]]></category>
+<category domain="changelog-label"><![CDATA[universe26]]></category>
+<post-id xmlns="com-wordpress:feed-additions:1">99830</post-id>	</item>
+		<item>
+		<title>GitHub Enterprise now includes access to GitHub Copilot</title>
+		<link>https://github.blog/changelog/2026-10-28-github-enterprise-now-includes-access-to-github-copilot</link>
+		
+		<dc:creator><![CDATA[Allison]]></dc:creator>
+		<pubDate>Wed, 28 Oct 2026 15:50:00 +0000</pubDate>
+				<guid isPermaLink="false">https://github.blog/changelog/2026-11-26-github-enterprise-now-includes-access-to-github-copilot</guid>
+
+					<description><![CDATA[<p>Enterprises working with a GitHub or Microsoft account team can now get Copilot included with GitHub Enterprise for every licensed user. Previously, you had to manage two things: how many&#8230;</p>
+<p>The post <a href="https://github.blog/changelog/2026-10-28-github-enterprise-now-includes-access-to-github-copilot">GitHub Enterprise now includes access to GitHub Copilot</a> appeared first on <a href="https://github.blog">The GitHub Blog</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body><p>Enterprises working with a GitHub or Microsoft account team can now get Copilot included with GitHub Enterprise for every licensed user. Previously, you had to manage two things: how many Copilot seats you were paying for and how much AI usage those users consumed. With Copilot included in the platform, usage against your enterprise budget is the primary thing to manage.</p>
+<p>Self-serve availability is coming in stages, and current self-serve subscriptions are unaffected. Copilot Business and Copilot Enterprise remain available.</p>
+<p>Users in your enterprise account who do not hold a GitHub Enterprise license get the same Copilot access through Copilot Standalone, at $10 per user per month.</p>
+<p>Copilot access through GitHub Enterprise and Copilot Standalone has the same features and models as Copilot Enterprise but does not include monthly AI credits per seat.</p>
+<h2 id="what-you-manage" id="what-you-manage" ><a class="heading-link" href="#what-you-manage">What you manage<span class="heading-hash pl-2 text-italic text-bold" aria-hidden="true"></span></a></h2>
+<p>AI usage is metered from the first request against your enterprise budget, using the policies, alerts, and attribution you already have. There is no included usage allowance to track or top up. To learn more, review our documentation on <a href="https://docs.github.com/copilot/concepts/billing-and-usage/organizations-and-enterprises/billing?utm_source=ghec-changelog-billing-docs&amp;utm_medium=changelog&amp;utm_campaign=universe-2026">Copilot billing for enterprises</a>.</p>
+<ul>
+<li>Code completion and next edit suggestions keep working even with no budget available.</li>
+<li>Copilot Chat, Copilot code review, and Copilot in the cloud require available budget to use.</li>
+<li>An exhausted budget never removes access. The seat and the features that don&rsquo;t need budget stay.</li>
+</ul>
+<h2 id="availability" id="availability" ><a class="heading-link" href="#availability">Availability<span class="heading-hash pl-2 text-italic text-bold" aria-hidden="true"></span></a></h2>
+<ul>
+<li><strong>If you work with a GitHub or Microsoft account team:</strong> Available now for GitHub Enterprise Cloud. Talk to your sales team about setting up a new enterprise account on this model or transitioning an existing enterprise account.</li>
+<li><strong>If you manage your own subscription:</strong> Currently unavailable. We are opening this to self-serve customers in stages and will share dates in the coming weeks. Your current subscription is unaffected.</li>
+<li><strong>Copilot Business and Copilot Enterprise:</strong> Both remain available to purchase for new and existing enterprises.</li>
+</ul>
+<p>To learn more, check out our updated documentation on <a href="https://docs.github.com/copilot/get-started/whats-changing-with-github-enterprise-and-copilot?utm_source=ghec-changelog-enterprise-access-docs&amp;utm_medium=changelog&amp;utm_campaign=universe-2026">Copilot access</a>.</p>
+<p>Join the discussion within <a href="https://github.com/orgs/community/discussions/211016?utm_source=ghec-bundle-changelog-community-discussion&amp;utm_medium=changelog&amp;utm_campaign=universe-2026">GitHub Community</a>.</p>
+</body></html>
+<p>The post <a href="https://github.blog/changelog/2026-10-28-github-enterprise-now-includes-access-to-github-copilot">GitHub Enterprise now includes access to GitHub Copilot</a> appeared first on <a href="https://github.blog">The GitHub Blog</a>.</p>
+]]></content:encoded>
+					
+		
+		
+		<category domain="changelog-type"><![CDATA[Release]]></category>
+<category domain="changelog-label"><![CDATA[copilot]]></category>
+<category domain="changelog-label"><![CDATA[universe26]]></category>
+<post-id xmlns="com-wordpress:feed-additions:1">99869</post-id>	</item>
+		<item>
+		<title>Security extension for the GitHub Copilot app</title>
+		<link>https://github.blog/changelog/2026-10-28-security-extension-for-the-github-copilot-app</link>
+		
+		<dc:creator><![CDATA[Allison]]></dc:creator>
+		<pubDate>Wed, 28 Oct 2026 15:45:00 +0000</pubDate>
+				<guid isPermaLink="false">https://github.blog/changelog/2026-11-26-security-extension-for-the-github-copilot-app</guid>
+
+					<description><![CDATA[<p>You can now work through your repository&#8217;s GitHub code scanning alerts without leaving the GitHub Copilot app. The new GitHub security extension, now in public preview, lets you find the&#8230;</p>
+<p>The post <a href="https://github.blog/changelog/2026-10-28-security-extension-for-the-github-copilot-app">Security extension for the GitHub Copilot app</a> appeared first on <a href="https://github.blog">The GitHub Blog</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body><p>You can now work through your repository&rsquo;s GitHub code scanning alerts without leaving the GitHub Copilot app. The new GitHub security extension, now in public preview, lets you find the alerts that matter most and ask Copilot to explain or help fix them.</p>
+<p>Until now, fixing a code scanning alert meant switching between the alert on github.com and the code in your editor. With the security extension, you can move from finding an alert to fixing it in one place.</p>
+<h3 id="fix-the-alerts-already-in-your-code" id="fix-the-alerts-already-in-your-code" ><a class="heading-link" href="#fix-the-alerts-already-in-your-code">Fix the alerts already in your code<span class="heading-hash pl-2 text-italic text-bold" aria-hidden="true"></span></a></h3>
+<p>If you already run code scanning on your repository, the security extension shows its open code scanning alerts:</p>
+<ul>
+<li>Browse every open code scanning alert, ordered by severity, and use search and filters to narrow the list.</li>
+<li>Open an alert to see its details and the affected code. You can open the full alert page on github.com when you need more context.</li>
+<li>Select one or more alerts and ask Copilot to <strong>Explain</strong> or <strong>Fix</strong> them. Copilot only makes fixes in your local working copy and doesn&rsquo;t commit or push anything. This way you can review and iterate on the changes in the app and push when you&rsquo;re ready.</li>
+<li>See linked pull requests on an alert so you know whether someone is already working on a fix.</li>
+<li>Dismiss alerts you don&rsquo;t plan to fix. If your organization uses delegated alert dismissal, the extension sends your dismissal for approval.</li>
+</ul>
+<p><img decoding="async" src="https://github.com/user-attachments/assets/998394bd-4bce-4779-866e-f52939fac045" alt="The code scanning findings list in the Security extension, showing alerts by severity with Fix and Explain buttons on a selected alert"></p>
+<h3 id="catch-new-issues-before-you-open-a-pull-request" id="catch-new-issues-before-you-open-a-pull-request" ><a class="heading-link" href="#catch-new-issues-before-you-open-a-pull-request">Catch new issues before you open a pull request<span class="heading-hash pl-2 text-italic text-bold" aria-hidden="true"></span></a></h3>
+<ul>
+<li>Run <code>/security-review</code> on your current changes and see those findings next to your existing alerts.</li>
+<li>The extension tells you when your code has changed since the last review so you know when to run it again.</li>
+</ul>
+<p>You can also ask Copilot about your alerts in chat. Copilot uses the security extension&rsquo;s tools in the same way as any other tool, following your tool permission settings.</p>
+<h3 id="get-started" id="get-started" ><a class="heading-link" href="#get-started">Get started<span class="heading-hash pl-2 text-italic text-bold" aria-hidden="true"></span></a></h3>
+<p>To install the security extension:</p>
+<ul>
+<li>In your terminal run <code>copilot plugin install github-security@awesome-copilot</code>.</li>
+<li>In the GitHub Copilot app, click <strong>Customize</strong>, search for <code>github-security</code>, then click <strong>+ Install</strong>.</li>
+</ul>
+<p>The extension is automatically enabled, and you can open the Security canvas from a session for your repository.</p>
+<p>The <strong>Explain</strong>, <strong>Fix</strong>, and <code>/security-review</code> actions use the model you&rsquo;ve selected in the app and consume AI credits in the same way as any other prompt. Browsing and dismissing alerts don&rsquo;t use AI.</p>
+<p>The security extension is in public preview on github.com and GitHub Enterprise Cloud with data residency. GitHub Enterprise Server isn&rsquo;t supported.</p>
+<ul>
+<li><strong>With any Copilot plan:</strong> You can install the extension and run <code>/security-review</code> on your local changes. For Copilot Business and Copilot Enterprise, an administrator needs to enable the GitHub Copilot app policy, and can use enterprise managed settings to control which plugins developers can install.</li>
+<li><strong>With code scanning:</strong> You can see, fix, and dismiss existing alerts for repositories where code scanning is enabled and you have permission to view the alerts. Private repositories need GitHub Code Security for this.</li>
+</ul>
+<p>Learn more in the <a href="https://docs.github.com/copilot/how-tos/github-copilot-app/view-and-fix-security-alerts?utm_source=app-security-extension-changelog-docs&amp;utm_medium=changelog&amp;utm_campaign=universe-2026">security extension documentation</a> and join the discussion in <a href="https://github.com/orgs/community/discussions/210997?utm_source=app-security-extension-changelog-community-discussion&amp;utm_medium=changelog&amp;utm_campaign=universe-2026">GitHub Community</a>.</p>
+</body></html>
+<p>The post <a href="https://github.blog/changelog/2026-10-28-security-extension-for-the-github-copilot-app">Security extension for the GitHub Copilot app</a> appeared first on <a href="https://github.blog">The GitHub Blog</a>.</p>
+]]></content:encoded>
+					
+		
+		
+		<category domain="changelog-type"><![CDATA[Release]]></category>
+<category domain="changelog-label"><![CDATA[application security]]></category>
+<category domain="changelog-label"><![CDATA[copilot]]></category>
+<category domain="changelog-label"><![CDATA[universe26]]></category>
+<post-id xmlns="com-wordpress:feed-additions:1">99796</post-id>	</item>
+		<item>
+		<title>GitHub intelligence puts your code, context, and history to work</title>
+		<link>https://github.blog/changelog/2026-10-28-github-intelligence-puts-your-code-context-and-history-to-work</link>
+		
+		<dc:creator><![CDATA[Allison]]></dc:creator>
+		<pubDate>Wed, 28 Oct 2026 15:40:00 +0000</pubDate>
+				<guid isPermaLink="false">https://github.blog/changelog/2026-11-26-github-intelligence-puts-your-code-context-and-history-to-work</guid>
+
+					<description><![CDATA[<p>Agents should understand more than your codebase&#8212;they should understand how your team works. Your preferences, repository conventions, skills, and custom instructions guide how changes should be made, while code in&#8230;</p>
+<p>The post <a href="https://github.blog/changelog/2026-10-28-github-intelligence-puts-your-code-context-and-history-to-work">GitHub intelligence puts your code, context, and history to work</a> appeared first on <a href="https://github.blog">The GitHub Blog</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body><p>Agents should understand more than your codebase&mdash;they should understand how your team works. Your preferences, repository conventions, skills, and custom instructions guide how changes should be made, while code in related repositories can show how the pieces fit together. Without that context, agents spend time rediscovering knowledge and can miss your team&rsquo;s conventions.</p>
+<p>GitHub intelligence is the context and learning layer sourced from the graph of GitHub data. It makes this data useful to agents, helping them remember how you work, keep that guidance current, and find the code and development history relevant to the next task. The goal is for agents to build on what you and your team already know, rather than treating every session as a fresh start.</p>
+<p>That is the advantage of building where your team&rsquo;s work already lives. A repository memory can capture why an edge case matters and which test covers it. GitHub intelligence allows agents to use that context, with controls over what they can access.</p>
+<p>Three capabilities bring this into your workflow:</p>
+<ul>
+<li>Memory carries knowledge between sessions</li>
+<li>Dreaming keeps the context current</li>
+<li>Code search reaches beyond your checkout.</li>
+</ul>
+<p>Availability and settings vary by capability.</p>
+<h3 id="memory-pick-up-where-you-left-off" id="memory-pick-up-where-you-left-off" ><a class="heading-link" href="#memory-pick-up-where-you-left-off">Memory: Pick up where you left off<span class="heading-hash pl-2 text-italic text-bold" aria-hidden="true"></span></a></h3>
+<p><a href="https://docs.github.com/copilot/concepts/prompting-and-context/copilot-memory?utm_source=gh-intelligence-changelog-memory-docs&amp;utm_medium=changelog&amp;utm_campaign=universe-2026">GitHub Copilot Memory</a> is now generally available on paid Copilot plans. Copilot can remember personal preferences and repository conventions across sessions and clients. Memories can be created in the Copilot app, Copilot CLI, VS Code, Copilot cloud agent, Copilot code review, Slack, Teams, and GitHub Mobile.</p>
+<p>You can tell Copilot, <code>Remember to start my pull request descriptions with a TL;DR</code>, and it can reuse that preference across Copilot experiences. Repository memories can capture the right test command or how your team expects Copilot to check its work, so you spend less time repeating guidance in each session. Copilot sessions autonomously generate and curate memories, learning from every interaction.</p>
+<p>Among the Copilot CLI sessions reviewed during the public preview where the agent used memory, 93% showed better adherence to developer preferences and 42% showed more efficient workflows attributed to the memories included in the session context.</p>
+<p>You can interact with memories in the Copilot app, Copilot CLI, and VS Code, or manage personal memories in your Copilot settings, where you can <a href="https://github.com/settings/copilot/memory?utm_source=gh-intelligence-changelog-memory-settings&amp;utm_medium=changelog&amp;utm_campaign=universe-2026">view or delete saved preferences</a>.</p>
+<h3 id="dreaming-continuous-context-improvement" id="dreaming-continuous-context-improvement" ><a class="heading-link" href="#dreaming-continuous-context-improvement">Dreaming: Continuous context improvement<span class="heading-hash pl-2 text-italic text-bold" aria-hidden="true"></span></a></h3>
+<p>Copilot dreaming, now in public preview, reflects on past work to improve future agentic sessions.</p>
+<p>Three dream types are currently available:</p>
+<ul>
+<li><strong>Personal memory curation</strong> customizes Copilot to your personal preferences by updating memories based on your agent conversations.</li>
+<li><strong>Repository customization</strong> manages repository-scoped memories and proposes updates and improvements to existing skills and custom instruction files.</li>
+<li><strong>Code review customization</strong> turns recurring accepted code-review feedback into guidance for Copilot code review.</li>
+</ul>
+<p>Dreaming can add, update, and remove personal and repository memories. Changes to checked-in skills and instructions are proposed in pull requests for your team to review.</p>
+<p>Dreaming is opt-in.</p>
+<ul>
+<li><strong>Individual subscribers:</strong> Enable personal curation in your Copilot settings and repository dreams in each repository&rsquo;s settings. See <a href="https://docs.github.com/copilot/how-tos/use-copilot-agents/copilot-memory/manage-for-yourself?utm_source=gh-intelligence-changelog-dreaming-individuals-docs&amp;utm_medium=changelog&amp;utm_campaign=universe-2026#enabling-copilot-dreaming-for-your-personal-account">personal and repository setup</a>.</li>
+<li><strong>Organizations and enterprises:</strong> Administrators <a href="https://docs.github.com/copilot/how-tos/use-copilot-agents/copilot-memory/manage-as-administrator?utm_source=gh-intelligence-changelog-dreaming-admin-docs&amp;utm_medium=changelog&amp;utm_campaign=universe-2026#enabling-copilot-dreaming">enable dreaming through Copilot policies</a>. Enterprise administrators can delegate that choice to organization administrators. Repository dreams cover the repositories allowed by Copilot Memory&rsquo;s repository access settings. Users must also enable personal dreaming in their own Copilot settings.</li>
+</ul>
+<p>Dream runs consume AI credits. See the <a href="https://docs.github.com/copilot/concepts/prompting-and-context/copilot-dreaming?utm_source=gh-intelligence-changelog-dreaming-billing-docs&amp;utm_medium=changelog&amp;utm_campaign=universe-2026#availability-and-prerequisites">dreaming documentation for prerequisites, setup, and costs</a>.</p>
+<h3 id="code-search-reach-beyond-your-checkout" id="code-search-reach-beyond-your-checkout" ><a class="heading-link" href="#code-search-reach-beyond-your-checkout">Code Search: Reach beyond your checkout<span class="heading-hash pl-2 text-italic text-bold" aria-hidden="true"></span></a></h3>
+<p>Software projects rarely live in a single repository. <a href="https://docs.github.com/search-github/github-code-search/about-github-code-search?utm_source=gh-intelligence-changelog-code-search-docs&amp;utm_medium=changelog&amp;utm_campaign=universe-2026">GitHub code search</a> helps Copilot find relevant code, configuration, schemas, and documentation across related projects and dependencies without needing a local clone. Copilot can search for exact text and symbols, match patterns with regular expressions, and narrow results by repository, path, or language. <a href="https://docs.github.com/copilot/concepts/prompting-and-context/repository-indexing?utm_source=gh-intelligence-changelog-semantic-search-docs&amp;utm_medium=changelog&amp;utm_campaign=universe-2026#semantic-code-search-in-copilot-chat">Semantic search</a> can also find code by what it does, such as retrying a failed payment, even when you don&rsquo;t know the file, function name, or repository it lives in.</p>
+<p>For example, you&rsquo;re fixing failed payments, but retry behavior spans a payments service, a shared library, and background workers. Use <code>/research</code> to ask Copilot, <code>How do these components retry failed charges, and where could retries overlap?</code> Copilot can inspect implementations and callers across those repositories to help you understand how the system fits together before changing it.</p>
+<p>That unlocks workflows that would otherwise require you to assemble the context yourself:</p>
+<ul>
+<li><strong>Plan a migration:</strong> Use <code>/research</code> to identify implementations and callers across repositories, plan the changes each service needs, and check which projects still use the old API.</li>
+<li><strong>Investigate a bug:</strong> Trace related implementations across services and shared libraries, bring specific code references into the investigation, and use that context to propose a coordinated fix.</li>
+<li><strong>Follow organizational standards:</strong> Find existing patterns across your organization and use them to guide changes in an unfamiliar codebase.</li>
+</ul>
+<p>Whether the task calls for an exact symbol, a regular expression in file contents or paths, or a natural-language description, Copilot can search across repositories in your organization to find relevant context. You spend less time cloning projects, tracking down files, and copying code into the conversation. In addition, Copilot gets the context it needs to make the right changes.</p>
+<h3 id="try-it-today" id="try-it-today" ><a class="heading-link" href="#try-it-today">Try it today<span class="heading-hash pl-2 text-italic text-bold" aria-hidden="true"></span></a></h3>
+<p>Your team shouldn&rsquo;t have to teach every agent the same lessons. GitHub intelligence helps agents carry those lessons forward, find the context they need, and put more of each session toward the work you actually want done.</p>
+<p>Join the discussion within <a href="https://github.com/orgs/community/discussions/211003?utm_source=gh-intelligence-changelog-community-discussion&amp;utm_medium=changelog&amp;utm_campaign=universe-2026">GitHub Community</a>.</p>
+</body></html>
+<p>The post <a href="https://github.blog/changelog/2026-10-28-github-intelligence-puts-your-code-context-and-history-to-work">GitHub intelligence puts your code, context, and history to work</a> appeared first on <a href="https://github.blog">The GitHub Blog</a>.</p>
+]]></content:encoded>
+					
+		
+		
+		<category domain="changelog-type"><![CDATA[Release]]></category>
+<category domain="changelog-label"><![CDATA[copilot]]></category>
+<category domain="changelog-label"><![CDATA[universe26]]></category>
+<post-id xmlns="com-wordpress:feed-additions:1">99834</post-id>	</item>
+		<item>
+		<title>Build shared workflows for your team with Copilot Automations</title>
+		<link>https://github.blog/changelog/2026-10-28-build-shared-workflows-for-your-team-with-copilot-automations</link>
+		
+		<dc:creator><![CDATA[Allison]]></dc:creator>
+		<pubDate>Wed, 28 Oct 2026 15:35:00 +0000</pubDate>
+				<guid isPermaLink="false">https://github.blog/changelog/2026-11-26-build-shared-workflows-for-your-team-with-copilot-automations</guid>
+
+					<description><![CDATA[<p>Shared Copilot Automations are rolling out, enabling teams to build and maintain AI-powered workflows together. With Copilot Automations, you can combine prompts, triggers, and tools to design workflows around the&#8230;</p>
+<p>The post <a href="https://github.blog/changelog/2026-10-28-build-shared-workflows-for-your-team-with-copilot-automations">Build shared workflows for your team with Copilot Automations</a> appeared first on <a href="https://github.blog">The GitHub Blog</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body><p>Shared Copilot Automations are rolling out, enabling teams to build and maintain AI-powered workflows together.</p>
+<p>With Copilot Automations, you can combine prompts, triggers, and tools to design workflows around the way your team works. Copilot runs autonomously in the cloud, using only the tools you&rsquo;ve allowed. For example, you could create automations to:</p>
+<ul>
+<li>Reproduce bugs as soon as an issue is opened.</li>
+<li>Capture screenshots of the changes when a pull request is marked as ready.</li>
+<li>Automatically investigate production incidents as soon as they&rsquo;re detected in your monitoring tool.</li>
+</ul>
+<p>Until now, automations have been personal, meaning only you could see and edit them, and they used your identity and AI credits. That works well for automating your own work, like drafting your standup updates, but not for workflows your whole team relies on. Shared automations let your team build and maintain those workflows together.</p>
+<h2 id="how-shared-automations-work" id="how-shared-automations-work" ><a class="heading-link" href="#how-shared-automations-work">How shared automations work<span class="heading-hash pl-2 text-italic text-bold" aria-hidden="true"></span></a></h2>
+<ul>
+<li><strong>Visible to your team</strong>: Everyone with read access to the repository can see a shared automation, and anyone with write access can edit it.</li>
+<li><strong>Billed to the repository owner</strong>: AI credits are billed to the organization or user that owns the repository, rather than to the person who created the automation.</li>
+<li><strong>Act as Copilot</strong>: Actions on GitHub are attributed to Copilot, rather than to any one user.</li>
+<li><strong>Built to last</strong>: Shared automations belong to the repository, so they keep running if the person who created them leaves the team. Change history lets your team see how the tools, triggers, and prompt have evolved.</li>
+</ul>
+<p>For shared automations to run in an organization-owned repository, an administrator must enable the &ldquo;Allow use of Copilot cloud agent billed to the organization&rdquo; policy.</p>
+<h2 id="create-a-shared-automation" id="create-a-shared-automation" ><a class="heading-link" href="#create-a-shared-automation">Create a shared automation<span class="heading-hash pl-2 text-italic text-bold" aria-hidden="true"></span></a></h2>
+<p>When you create an automation on github.com, the GitHub Copilot app , or Visual Studio Code, choose <strong>Shared</strong> under <strong>Type</strong>. You can&rsquo;t change an automation&rsquo;s type after you create it. To learn more, see <a href="https://docs.github.com/copilot/concepts/agent-capabilities/agent-powered-workflows-and-operations/about-automations?utm_source=shared-workflows-changelog-docs&amp;utm_medium=changelog&amp;utm_campaign=universe-2026#personal-and-shared-automations">personal and shared automations</a>.</p>
+<p>Shared Copilot Automations are rolling out to users on Copilot Pro, Pro+, Max, Business, and Enterprise plans. Availability may vary as the rollout progresses. Once available, you can create automations in any repository where you have write access.</p>
+<p>Join the discussion within <a href="https://github.com/orgs/community/discussions/211004?utm_source=shared-workflows-changelog-community-discussion&amp;utm_medium=changelog&amp;utm_campaign=universe-2026">GitHub Community</a>.</p>
+</body></html>
+<p>The post <a href="https://github.blog/changelog/2026-10-28-build-shared-workflows-for-your-team-with-copilot-automations">Build shared workflows for your team with Copilot Automations</a> appeared first on <a href="https://github.blog">The GitHub Blog</a>.</p>
+]]></content:encoded>
+					
+		
+		
+		<category domain="changelog-type"><![CDATA[Improvement]]></category>
+<category domain="changelog-label"><![CDATA[copilot]]></category>
+<category domain="changelog-label"><![CDATA[universe26]]></category>
+<post-id xmlns="com-wordpress:feed-additions:1">99838</post-id>	</item>
+		<item>
+		<title>GitHub Copilot in VS Code, Universe releases</title>
+		<link>https://github.blog/changelog/2026-10-28-github-copilot-in-vs-code-universe-releases</link>
+		
+		<dc:creator><![CDATA[Allison]]></dc:creator>
+		<pubDate>Wed, 28 Oct 2026 15:33:00 +0000</pubDate>
+				<guid isPermaLink="false">https://github.blog/changelog/2026-10-27-github-copilot-in-vs-code-universe-releases</guid>
+
+					<description><![CDATA[<p>This year, we focused on giving you more choice in how you work with GitHub Copilot in Visual Studio Code: which models you use, where your agents run, and how&#8230;</p>
+<p>The post <a href="https://github.blog/changelog/2026-10-28-github-copilot-in-vs-code-universe-releases">GitHub Copilot in VS Code, Universe releases</a> appeared first on <a href="https://github.blog">The GitHub Blog</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body><p>This year, we focused on giving you more choice in how you work with GitHub Copilot in Visual Studio Code: which models you use, where your agents run, and how you stay involved.</p>
+<p>Keep work moving without staying at your desk or in one tool. With GitHub Copilot in Visual Studio Code, start a cloud agent session from your phone at standup, steer it from VS Code at your desk, and check on it from github.com at lunch. Session continuity lets you pick up the same session across these clients while your agent keeps working in the cloud.</p>
+<h3 id="start-and-follow-cloud-sessions-across-copilot-clients" id="start-and-follow-cloud-sessions-across-copilot-clients" ><a class="heading-link" href="#start-and-follow-cloud-sessions-across-copilot-clients">Start and follow cloud sessions across Copilot clients<span class="heading-hash pl-2 text-italic text-bold" aria-hidden="true"></span></a></h3>
+<p>Hand off work without keeping your computer on. Start a cloud agent session from the Agents window in VS Code. The work runs on GitHub&rsquo;s infrastructure, so closing your laptop doesn&rsquo;t stop it.</p>
+<p>Find and continue the same session in VS Code, the GitHub Copilot app, GitHub Mobile, github.com, or Copilot CLI. Sessions started in a Slack or Microsoft Teams DM can also be continued in these clients.</p>
+<p><video loop controls autoplay muted width="100%" src="https://github.com/user-attachments/assets/b17fc155-f9a6-468f-b00b-97845acaac95"><br>
+</video></p>
+<h3 id="keep-agents-working-on-your-own-machines" id="keep-agents-working-on-your-own-machines" ><a class="heading-link" href="#keep-agents-working-on-your-own-machines">Keep agents working on your own machines<span class="heading-hash pl-2 text-italic text-bold" aria-hidden="true"></span></a></h3>
+<p>Move on to another task or project without worrying about losing your session. The new <a href="https://code.visualstudio.com/docs/agents/concepts/agent-host">Agent Host</a> isolates your Copilot sessions from individual VS Code windows, so work continues in the background after you close the project folder or window.</p>
+<p>You can also run agents on a separate machine while you use your primary development machine for other work. The power and flexibility of VS Code&rsquo;s Remote SSH and dev tunnels extends to the Agents window. The remote agent works with the same code, tools, and dependencies, and can keep running when you disconnect or quit VS Code locally. The remote machine and its Agent Host must remain running.</p>
+<p><img decoding="async" src="https://github.com/user-attachments/assets/20f5756c-3edf-472a-85ba-0a0e4083985b" alt="Screenshot of VS Code showing a drop-down menu with the Remote option expanded, displaying Tunnels and SSH."></p>
+<h3 id="move-between-the-editor-and-agents-windows" id="move-between-the-editor-and-agents-windows" ><a class="heading-link" href="#move-between-the-editor-and-agents-windows">Move between the editor and Agents windows<span class="heading-hash pl-2 text-italic text-bold" aria-hidden="true"></span></a></h3>
+<p>Switch between the editor and the Agents window without starting over. Both views stay in sync with the same live Copilot session.</p>
+<p><video loop controls autoplay muted width="100%" src="https://github.com/user-attachments/assets/e2f34e59-a797-41c1-a319-a49d127ff241"><br>
+</video></p>
+<h3 id="control-agents-on-your-machine-from-your-phone" id="control-agents-on-your-machine-from-your-phone" ><a class="heading-link" href="#control-agents-on-your-machine-from-your-phone">Control agents on your machine from your phone<span class="heading-hash pl-2 text-italic text-bold" aria-hidden="true"></span></a></h3>
+<p>Check progress, give direction, or start a new task on your development machine from GitHub Mobile. Your phone provides the controls, and the agent does the work on your development machine. To get started, open a terminal on that machine and run the VS Code CLI command <code>code agent host --github-environment</code> from your project folder. Keep the machine and its Agent Host running while you use it from your phone.</p>
+<p><video loop controls autoplay muted width="100%" src="https://github.com/user-attachments/assets/c1743f1b-3fb3-47aa-99ad-0d53a9733a09"><br>
+</video></p>
+<h3 id="get-a-more-consistent-github-copilot" id="get-a-more-consistent-github-copilot" ><a class="heading-link" href="#get-a-more-consistent-github-copilot">Get a more consistent GitHub Copilot<span class="heading-hash pl-2 text-italic text-bold" aria-hidden="true"></span></a></h3>
+<p>Get more consistent agent behavior across VS Code, Copilot CLI, and the GitHub Copilot app. The Copilot harness, built on the Microsoft Copilot SDK, is now the default for new sessions in both the editor and the Agents window.</p>
+<p><img decoding="async" src="https://github.com/user-attachments/assets/5aac81b9-be0f-4e6e-8c77-c4a097e294f3" alt="Screenshot showing Copilot selected in the harness picker with a hover description of its Copilot SDK and Agent Host integration."></p>
+<h3 id="install-github-copilot-cli-with-vs-code" id="install-github-copilot-cli-with-vs-code" ><a class="heading-link" href="#install-github-copilot-cli-with-vs-code">Install GitHub Copilot CLI with VS Code<span class="heading-hash pl-2 text-italic text-bold" aria-hidden="true"></span></a></h3>
+<p>Bring Copilot to your terminal with less setup. Install GitHub Copilot CLI through the VS Code installer on Windows, when adding VS Code to your path on macOS, or by running <code>copilot</code> on Linux.</p>
+<p><img decoding="async" src="https://github.com/user-attachments/assets/880bfc64-8225-41b3-a908-653078039ef5" alt="VS Code Insiders Windows installer setup window, with the Install GitHub Copilot CLI option checked."></p>
+<h3 id="compare-model-results" id="compare-model-results" ><a class="heading-link" href="#compare-model-results">Compare model results<span class="heading-hash pl-2 text-italic text-bold" aria-hidden="true"></span></a></h3>
+<p>Explore different approaches to the same coding task. Run models and harnesses in parallel in the Agents window, then review their results side by side. You can ask a Judge model to recommend a solution and choose <strong>Synthesize</strong> to combine ideas from the other attempts. This is in preview.</p>
+<p><video loop controls autoplay muted width="100%" src="https://github.com/user-attachments/assets/79c63fbb-e233-4c3f-9edb-3e57f7cff63e"><br>
+</video></p>
+<h3 id="let-your-agent-use-your-desktop-apps" id="let-your-agent-use-your-desktop-apps" ><a class="heading-link" href="#let-your-agent-use-your-desktop-apps">Let your agent use your desktop apps<span class="heading-hash pl-2 text-italic text-bold" aria-hidden="true"></span></a></h3>
+<p>Give your agent tasks that need more than code or terminal commands. With computer use, Copilot can read and interact with desktop apps, including clicking controls and editing text.</p>
+<p>On macOS or Windows, open <a href="https://code.visualstudio.com/docs/configure/settings#_settings-editor">VS Code Settings</a>, search for <code>chat.agentHost.computerUse.enabled</code>, and enable it. Restart VS Code, then run <code>/computer on</code> in a Copilot session running on your computer.</p>
+<p>Each application requires your approval. Computer use shares its setup with Copilot CLI and the GitHub Copilot app, so on macOS you grant the required system permissions once. Organizations can disable computer use through policy.</p>
+<p>This is an experimental feature.</p>
+<p><video loop controls autoplay muted width="100%" src="https://github.com/user-attachments/assets/c830395d-6e2b-4554-90ce-f40ae6067857"><br>
+</video></p>
+<h3 id="build-your-own-client" id="build-your-own-client" ><a class="heading-link" href="#build-your-own-client">Build your own client<span class="heading-hash pl-2 text-italic text-bold" aria-hidden="true"></span></a></h3>
+<p>Bring session continuity to your own app. Build a client that connects to an Agent Host and works with the same live sessions as VS Code.</p>
+<p>The open <a href="https://microsoft.github.io/agent-host-protocol/">Agent Host Protocol (AHP)</a> lets connected clients stay in sync and catch up after reconnecting. Run <code>code agent host</code>, then connect with a client library for TypeScript, Rust, Go, Kotlin, or Swift.</p>
+<p><img decoding="async" src="https://github.com/user-attachments/assets/f839f535-231e-48f0-aa4d-80504aeaa57b" alt="Animated diagram showing VS Code and a custom app connected to the same Agent Host through the Agent Host Protocol (AHP), sharing live sessions. When the app reconnects, it catches up on missed updates."></p>
+<h3 id="discover-marketplace-customizations" id="discover-marketplace-customizations" ><a class="heading-link" href="#discover-marketplace-customizations">Discover marketplace customizations<span class="heading-hash pl-2 text-italic text-bold" aria-hidden="true"></span></a></h3>
+<p>Create, discover, and manage agent customizations from one place in VS Code. Open <strong>Customizations</strong> in the Agents window sidebar or run <strong>Chat: Open Customizations</strong>. Its &ldquo;Browse&rdquo; page brings together skills, MCP servers, plugins, and other customizations from available sources.</p>
+<p>The Customization Marketplace is in preview and enabled by default. Business and Enterprise administrators need to allow <strong>Editor preview features</strong>. Learn more about the <a href="https://code.visualstudio.com/docs/agent-customization/overview">Agent Customizations editor and marketplace</a>.</p>
+<h3 id="strengthen-existing-plugin-and-marketplace-controls" id="strengthen-existing-plugin-and-marketplace-controls" ><a class="heading-link" href="#strengthen-existing-plugin-and-marketplace-controls">Strengthen existing plugin and marketplace controls<span class="heading-hash pl-2 text-italic text-bold" aria-hidden="true"></span></a></h3>
+<p>Make existing plugin and marketplace controls more reliable. In VS Code, administrators can use policies to require or block named plugins, add marketplaces, and restrict installation to approved sources. Enterprise-managed strict marketplace settings can also turn off built-in marketplaces. Policy-managed plugin toggles are locked in <strong>Customize</strong> &gt; <strong>Plugins</strong>. For controls across Copilot clients, administrators can use <a href="https://docs.github.com/copilot/reference/enterprise-administrators/enterprise-managed-settings?utm_source=vscode-changelog-enterprise-settings-docs&amp;utm_medium=changelog&amp;utm_campaign=universe-2026">enterprise-managed settings</a>.</p>
+<p>At the repository level, <code>.github/copilot/settings.json</code> can register plugin marketplaces and enable default plugins. These are defaults, not enforcement: contributors can turn plugins off unless enterprise policy requires them. Learn more about <a href="https://code.visualstudio.com/docs/agent-customization/agent-plugins">plugin marketplaces and workspace recommendations</a>.</p>
+<h3 id="connect-services-with-copilot-connectors" id="connect-services-with-copilot-connectors" ><a class="heading-link" href="#connect-services-with-copilot-connectors">Connect services with Copilot connectors<span class="heading-hash pl-2 text-italic text-bold" aria-hidden="true"></span></a></h3>
+<p>Bring context from services such as Slack, Notion, and Microsoft Learn into agent sessions without installing or managing an MCP server. Connect once from &ldquo;Browse&rdquo; and reuse the connection across supported Copilot clients signed in with the same account.</p>
+<p>Connectors are in preview, available on all Copilot plans, and work with the Copilot harness. Business and Enterprise administrators need to allow <strong>Editor preview features</strong>. Learn more about <a href="https://code.visualstudio.com/docs/agent-customization/copilot-connectors">Copilot connectors in VS Code</a>.</p>
+<h3 id="learn-more" id="learn-more" ><a class="heading-link" href="#learn-more">Learn more<span class="heading-hash pl-2 text-italic text-bold" aria-hidden="true"></span></a></h3>
+<p>Learn more in the <a href="https://code.visualstudio.com/updates/v1_144">VS Code release notes</a>, the <a href="https://code.visualstudio.com/blogs/2026/08/26/agent-host-architecture">Agent Host deep dive</a>, and <a href="https://docs.github.com/copilot/concepts/agents/computer-use?utm_source=vscode-changelog-computer-use-docs&amp;utm_medium=changelog&amp;utm_campaign=universe-2026">About computer use in GitHub Copilot</a>.</p>
+<p>Happy coding! &#128153;</p>
+</body></html>
+<p>The post <a href="https://github.blog/changelog/2026-10-28-github-copilot-in-vs-code-universe-releases">GitHub Copilot in VS Code, Universe releases</a> appeared first on <a href="https://github.blog">The GitHub Blog</a>.</p>
+]]></content:encoded>
+					
+		
+		
+		<category domain="changelog-type"><![CDATA[Release]]></category>
+<category domain="changelog-label"><![CDATA[copilot]]></category>
+<category domain="changelog-label"><![CDATA[universe26]]></category>
+<category domain="changelog-label"><![CDATA[vs code]]></category>
+<post-id xmlns="com-wordpress:feed-additions:1">99764</post-id>	</item>
+		<item>
+		<title>Repository plugin defaults and enterprise plugin controls generally available</title>
+		<link>https://github.blog/changelog/2026-10-28-repository-plugin-defaults-and-enterprise-plugin-controls-generally-available</link>
+		
+		<dc:creator><![CDATA[Allison]]></dc:creator>
+		<pubDate>Wed, 28 Oct 2026 15:33:00 +0000</pubDate>
+				<guid isPermaLink="false">https://github.blog/changelog/2026-11-28-repository-plugin-defaults-and-enterprise-plugin-controls-generally-available</guid>
+
+					<description><![CDATA[<p>Repository plugin defaults and enterprise-managed plugin controls are now generally available in VS Code, Copilot CLI, and the GitHub Copilot app. Trusted repositories can install and enable default plugins for&#8230;</p>
+<p>The post <a href="https://github.blog/changelog/2026-10-28-repository-plugin-defaults-and-enterprise-plugin-controls-generally-available">Repository plugin defaults and enterprise plugin controls generally available</a> appeared first on <a href="https://github.blog">The GitHub Blog</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body><p>Repository plugin defaults and enterprise-managed plugin controls are now generally available in VS Code, Copilot CLI, and the GitHub Copilot app. Trusted repositories can install and enable default plugins for contributors. Enterprises can require plugins, block plugins, and restrict installation to approved marketplaces.</p>
+<p>As a repository maintainer, you can define a plugin marketplace and default plugins so contributors don&rsquo;t have to repeat setup for each project. Contributors can turn off repository defaults where policy permits.</p>
+<p>As an enterprise administrator, you can supply approved marketplaces and require or block plugins through managed settings. Required plugins are automatically installed and enabled, and users can&rsquo;t disable them. Managed settings take precedence over repository and personal choices.</p>
+<p>Repository defaults are available to individual Copilot users and users with Copilot Business or Copilot Enterprise.</p>
+<p>Managed controls are available on GitHub Enterprise Cloud for users with Copilot Business or Copilot Enterprise licenses issued by the enterprise or one of its organizations.</p>
+<p>Learn more about <a href="https://docs.github.com/copilot/concepts/customizations/plugins">plugins for GitHub Copilot</a>.</p>
+</body></html>
+<p>The post <a href="https://github.blog/changelog/2026-10-28-repository-plugin-defaults-and-enterprise-plugin-controls-generally-available">Repository plugin defaults and enterprise plugin controls generally available</a> appeared first on <a href="https://github.blog">The GitHub Blog</a>.</p>
+]]></content:encoded>
+					
+		
+		
+		<category domain="changelog-type"><![CDATA[Improvement]]></category>
+<category domain="changelog-label"><![CDATA[copilot]]></category>
+<category domain="changelog-label"><![CDATA[universe26]]></category>
+<post-id xmlns="com-wordpress:feed-additions:1">99915</post-id>	</item>
+		<item>
+		<title>Generate and edit images directly in Copilot</title>
+		<link>https://github.blog/changelog/2026-10-28-generate-and-edit-images-directly-in-copilot</link>
+		
+		<dc:creator><![CDATA[Allison]]></dc:creator>
+		<pubDate>Wed, 28 Oct 2026 15:30:55 +0000</pubDate>
+				<guid isPermaLink="false">https://github.blog/changelog/2026-10-26-generate-and-edit-images-directly-in-copilot</guid>
+
+					<description><![CDATA[<p>You can now generate and edit images using natural language in GitHub Copilot. When you ask for an image, your selected reasoning model calls a dedicated image-generation tool powered by&#8230;</p>
+<p>The post <a href="https://github.blog/changelog/2026-10-28-generate-and-edit-images-directly-in-copilot">Generate and edit images directly in Copilot</a> appeared first on <a href="https://github.blog">The GitHub Blog</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body><p>You can now generate and edit images using natural language in GitHub Copilot. When you ask for an image, your selected reasoning model calls a dedicated image-generation tool powered by GPT Image 2.5 Flare, previews the result inline, and saves it to your project.</p>
+<p>Previously, getting a visual asset while working in Copilot meant stepping away to a separate tool, describing what you needed again, generating it there, and manually bringing it back into your project. This update removes that context switch, so you can go from an idea to a usable image without breaking your flow.</p>
+<ul>
+<li>Describe an image conversationally in any Copilot chat session, whether you&rsquo;re starting a new request or in the middle of a coding task.</li>
+<li>Copilot previews the generated image inline and saves it directly to your workspace.</li>
+<li>Organization and enterprise owners can turn off image generation by disabling the image generation model using <a href="https://docs.github.com/copilot/concepts/enterprise/policies?utm_source=image-generation-changelog-policy-docs&amp;utm_medium=changelog&amp;utm_campaign=universe-2026">Copilot model policies</a>.</li>
+<li>You can opt in to a visible &ldquo;Made with AI&rdquo; watermark on images Copilot generates and edits. Watermarking is off by default. </li>
+</ul>
+<p>To try it, open a Copilot chat in VS Code, the GitHub Copilot app, or Copilot CLI and describe the image you want.</p>
+<p>Image generation is in public preview for Copilot Pro, Copilot Pro+, Copilot Business, and Copilot Enterprise. It&rsquo;s billed separately from your chat model, based on image tokens that count toward your plan&rsquo;s AI credits.</p>
+<p>Join the discussion within <a href="https://github.com/orgs/community/discussions/211015?utm_source=image-generation-changelog-community-discussion&amp;utm_medium=changelog&amp;utm_campaign=universe-2026">GitHub Community</a>.</p>
+</body></html>
+<p>The post <a href="https://github.blog/changelog/2026-10-28-generate-and-edit-images-directly-in-copilot">Generate and edit images directly in Copilot</a> appeared first on <a href="https://github.blog">The GitHub Blog</a>.</p>
+]]></content:encoded>
+					
+		
+		
+		<category domain="changelog-type"><![CDATA[Release]]></category>
+<category domain="changelog-label"><![CDATA[copilot]]></category>
+<category domain="changelog-label"><![CDATA[universe26]]></category>
+<post-id xmlns="com-wordpress:feed-additions:1">99733</post-id>	</item>
+	</channel>
+</rss>

@@ -1,6 +1,7 @@
 // npm run collect — lance une collecte sur les sources actives.
 import { setTimeout as sleep } from 'node:timers/promises';
 import { createFixtureFetcher, createLiveFetcher } from '../collect/fetchers.ts';
+import { selectSources } from '../sources.ts';
 import { runCollect } from '../worker/collect.ts';
 import { runCommand, workerId } from './shared.ts';
 
@@ -20,6 +21,7 @@ await runCommand(async ({ config, database }) => {
     leaseMs: config.leaseMs,
     maxAttempts: config.maxAttempts,
     retryBackoffMs: config.retryBackoffMs,
+    definitions: selectSources(config.onlySources),
     hooks: hold > 0 ? { insideStoreTransaction: () => sleep(hold) } : undefined,
   });
 
@@ -30,7 +32,7 @@ await runCommand(async ({ config, database }) => {
       const note = run.status === 'interrupted' ? ` — ${run.errorMessage}` : '';
       console.log(
         `✓ ${run.sourceName} : ${run.newDocuments} nouveau(x), ${run.unchangedDocuments} inchangé(s), ` +
-          `${run.changedDocuments} modifié(s) avec nouvelle capture${note} [exécution ${run.runId}]`,
+          `${run.changedDocuments} modifié(s) avec nouvelle capture, ${run.newNewsItems} nouvelle(s) actualité(s)${note} [exécution ${run.runId}]`,
       );
     }
   }

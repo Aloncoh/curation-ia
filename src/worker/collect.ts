@@ -4,7 +4,9 @@
 // un arrêt brutal entre deux étapes ne laisse jamais de trace incohérente.
 import { randomUUID } from 'node:crypto';
 import { eq } from 'drizzle-orm';
-import { GITHUB_API_HEADERS, parseReleases, releasesUrl, SourceFormatError } from '../collect/github-releases.ts';
+import { linkDocuments } from '../catalog/link.ts';
+import { FEED_HEADERS, parseFeedItems } from '../collect/feeds.ts';
+import { GITHUB_API_HEADERS, parseReleases, releasesUrl, SourceFormatError, type CollectedDocument } from '../collect/github-releases.ts';
 import type { SourceFetcher } from '../collect/fetchers.ts';
 import { SafeFetchError } from '../collect/safe-fetch.ts';
 import { storeDocuments, type StoreCounts } from '../collect/store.ts';
@@ -31,6 +33,7 @@ export interface CollectOptions {
 }
 
 export interface RunSummary extends StoreCounts {
+  newNewsItems: number;
   runId: string;
   sourceId: string;
   sourceName: string;
@@ -45,7 +48,15 @@ export interface CollectSummary {
   runs: RunSummary[];
 }
 
-const EMPTY_COUNTS: StoreCounts = { newDocuments: 0, unchangedDocuments: 0, changedDocuments: 0 };
+const EMPTY_COUNTS = { newDocuments: 0, unchangedDocuments: 0, changedDocuments: 0, newNewsItems: 0 };
+
+/** Ce qui change d'un type de source à l'autre : l'adresse interrogée, les en-têtes et la lecture de la réponse. */
+function adapterFor(definition: SourceDefinition): { url: string; headers: Record<string, string>; parse: (body: string) => CollectedDocument[] } {
+  if (definition.kind === 'github_releases') {
+    return { url: releasesUrl(definition.config), headers: GITHUB_API_HEADERS, parse: parseReleases };
+  }
+  return { url: definition.config.url, headers: FEED_HEADERS, parse: (body) => parseFeedItems(body, definition.config.maxItems) };
+}
 const LEASE_LOST_MESSAGE =
   "Bail perdu avant la fin : le job a été repris par un autre worker ou clos par la récupération (documents enregistrés de façon idempotente)";
 
@@ -110,36 +121,46 @@ async function processJob(
 
   try {
     if (!definition) throw new Error(`Source inconnue dans la configuration : ${job.sourceId}`);
-    const url = releasesUrl(definition.config);
+    const adapter = adapterFor(definition);
 
-    const fetched = await options.fetcher(url, GITHUB_API_HEADERS, definition.allowedHosts);
-    await recordStep('succeeded', { url, httpStatus: fetched.status, bytes: fetched.bytes, mode: options.mode });
+    const fetched = await options.fetcher(adapter.url, adapter.headers, definition.allowedHosts);
+    await recordStep('succeeded', { url: adapter.url, httpStatus: fetched.status, bytes: fetched.bytes, mode: options.mode });
 
     stepName = 'parse';
-    const documents = parseReleases(fetched.body);
+    const documents = adapter.parse(fetched.body);
     await recordStep('succeeded', { documents: documents.length });
 
-    // Fin réussie : documents, étape, job, exécution et source dans une seule transaction.
+    // Fin réussie : documents, produits, versions, actualités, étape, job, exécution et source dans une seule transaction.
     stepName = 'store';
     const storeSeq = ++seq;
     const storeStart = stepStart;
     const outcome = await withBusyRetry(client, () =>
       db.transaction(async (tx) => {
         const collectedAt = now();
-        const counts = await storeDocuments(tx, job.sourceId, documents, collectedAt, runId);
+        const { counts, stored } = await storeDocuments(tx, job.sourceId, documents, collectedAt, runId);
+        const links = await linkDocuments(tx, definition, stored, collectedAt, runId);
         if (options.hooks?.insideStoreTransaction) await options.hooks.insideStoreTransaction();
         const finishedAt = now();
-        await insertStep(tx, { runId, seq: storeSeq, name: 'store', status: 'succeeded', startedAt: storeStart, finishedAt, detail: { ...counts } });
+        await insertStep(tx, {
+          runId,
+          seq: storeSeq,
+          name: 'store',
+          status: 'succeeded',
+          startedAt: storeStart,
+          finishedAt,
+          detail: { ...counts, ...links },
+        });
         const kept = await completeJob(tx, job.id, workerId, finishedAt);
         await finishRun(tx, runId, {
           status: kept ? 'succeeded' : 'interrupted',
           finishedAt,
           ...counts,
+          newNewsItems: links.newNewsItems,
           errorKind: kept ? null : 'lease_lost',
           errorMessage: kept ? null : LEASE_LOST_MESSAGE,
         });
         if (kept) await tx.update(sources).set({ status: 'ok', lastSuccessAt: finishedAt }).where(eq(sources.id, job.sourceId));
-        return { counts, kept };
+        return { counts, links, kept };
       }),
     );
     return {
@@ -148,6 +169,7 @@ async function processJob(
       sourceName,
       status: outcome.kept ? 'succeeded' : 'interrupted',
       ...outcome.counts,
+      newNewsItems: outcome.links.newNewsItems,
       errorKind: outcome.kept ? null : 'lease_lost',
       errorMessage: outcome.kept ? null : LEASE_LOST_MESSAGE,
     };

@@ -1,6 +1,6 @@
 // Schéma de la base. Les dates sont des chaînes ISO 8601 en UTC (toujours au même format, donc comparables).
 import { sql } from 'drizzle-orm';
-import { index, integer, sqliteTable, text, uniqueIndex } from 'drizzle-orm/sqlite-core';
+import { index, integer, primaryKey, sqliteTable, text, uniqueIndex } from 'drizzle-orm/sqlite-core';
 
 /** Source configurée (ex. les releases GitHub d'un dépôt officiel). */
 export const sources = sqliteTable('source', {
@@ -99,6 +99,7 @@ export const runs = sqliteTable('run', {
   newDocuments: integer('new_documents').notNull().default(0),
   unchangedDocuments: integer('unchanged_documents').notNull().default(0),
   changedDocuments: integer('changed_documents').notNull().default(0),
+  newNewsItems: integer('new_news_items').notNull().default(0),
   errorKind: text('error_kind'),
   errorMessage: text('error_message'),
 });
@@ -119,6 +120,80 @@ export const runSteps = sqliteTable(
     detail: text('detail', { mode: 'json' }).$type<Record<string, unknown>>(),
   },
   (t) => [uniqueIndex('run_step_run_seq_uq').on(t.runId, t.seq)],
+);
+
+/**
+ * Produit suivi. Identité stable : la clé canonique « éditeur/produit » déclarée dans la configuration de la source
+ * (jamais déduite d'un nom proche). Voir docs/decisions/0003.
+ */
+export const products = sqliteTable(
+  'product',
+  {
+    id: integer('id').primaryKey({ autoIncrement: true }),
+    key: text('key').notNull(),
+    name: text('name').notNull(),
+    publisher: text('publisher').notNull(),
+    category: text('category'),
+    repositoryUrl: text('repository_url'),
+    createdAt: text('created_at').notNull(),
+  },
+  (t) => [uniqueIndex('product_key_uq').on(t.key)],
+);
+
+/** Version identifiable d'un produit, rattachée au document qui l'annonce. */
+export const productVersions = sqliteTable(
+  'product_version',
+  {
+    id: integer('id').primaryKey({ autoIncrement: true }),
+    productId: integer('product_id').notNull().references(() => products.id),
+    version: text('version').notNull(),
+    isPrerelease: integer('is_prerelease', { mode: 'boolean' }).notNull(),
+    /** Date de publication selon la source ; null si inconnue. */
+    releasedAt: text('released_at'),
+    sourceDocumentId: integer('source_document_id').references(() => sourceDocuments.id),
+    createdAt: text('created_at').notNull(),
+  },
+  (t) => [uniqueIndex('product_version_uq').on(t.productId, t.version)],
+);
+
+/** Actualité du fil : une annonce ou un événement, appuyé sur un ou plusieurs documents. */
+export const newsItems = sqliteTable('news_item', {
+  id: integer('id').primaryKey({ autoIncrement: true }),
+  /** version | annonce */
+  kind: text('kind').notNull(),
+  title: text('title').notNull(),
+  /** Date de l'événement selon la source, fixée à la création : une republication ne la change pas. */
+  announcedAt: text('announced_at'),
+  firstSeenAt: text('first_seen_at').notNull(),
+  /** collected (P2) ; brouillon, à vérifier, publié… à partir de P3 */
+  status: text('status').notNull(),
+  createdByRunId: text('created_by_run_id').references(() => runs.id),
+});
+
+/** Documents sur lesquels s'appuie une actualité. Un document est la source principale d'au plus une actualité. */
+export const newsItemDocuments = sqliteTable(
+  'news_item_document',
+  {
+    newsItemId: integer('news_item_id').notNull().references(() => newsItems.id),
+    documentId: integer('document_id').notNull().references(() => sourceDocuments.id),
+    /** primary | supporting */
+    role: text('role').notNull(),
+  },
+  (t) => [
+    primaryKey({ columns: [t.newsItemId, t.documentId] }),
+    uniqueIndex('news_item_primary_document_uq').on(t.documentId).where(sql`role = 'primary'`),
+  ],
+);
+
+/** Produits (et versions, si connues) concernés par une actualité. */
+export const newsItemTargets = sqliteTable(
+  'news_item_target',
+  {
+    newsItemId: integer('news_item_id').notNull().references(() => newsItems.id),
+    productId: integer('product_id').notNull().references(() => products.id),
+    productVersionId: integer('product_version_id').references(() => productVersions.id),
+  },
+  (t) => [primaryKey({ columns: [t.newsItemId, t.productId] })],
 );
 
 /** Réglages de pilotage (ex. pause). */

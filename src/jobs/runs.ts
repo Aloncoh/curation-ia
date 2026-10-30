@@ -49,6 +49,7 @@ export async function finishRun(
     newDocuments?: number;
     unchangedDocuments?: number;
     changedDocuments?: number;
+    newNewsItems?: number;
     errorKind?: string | null;
     errorMessage?: string | null;
   },

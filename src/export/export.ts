@@ -2,7 +2,17 @@
 // dernières exécutions. Lu dans une seule transaction pour donner un état cohérent.
 import { asc, desc } from 'drizzle-orm';
 import type { Db } from '../db/client.ts';
-import { documentSnapshots, runs, sources, sourceDocuments } from '../db/schema.ts';
+import {
+  documentSnapshots,
+  newsItemDocuments,
+  newsItems,
+  newsItemTargets,
+  products,
+  productVersions,
+  runs,
+  sources,
+  sourceDocuments,
+} from '../db/schema.ts';
 
 export async function buildExport(db: Db, generatedAt: string) {
   const data = await db.transaction(async (tx) => ({
@@ -11,7 +21,15 @@ export async function buildExport(db: Db, generatedAt: string) {
     snapshots: await tx.select().from(documentSnapshots).orderBy(asc(documentSnapshots.documentId), asc(documentSnapshots.seq)),
     allRuns: await tx.select({ id: runs.id, mode: runs.mode }).from(runs),
     recentRuns: await tx.select().from(runs).orderBy(desc(runs.startedAt)).limit(10),
+    allProducts: await tx.select().from(products).orderBy(asc(products.key)),
+    versions: await tx.select().from(productVersions).orderBy(desc(productVersions.releasedAt)),
+    items: await tx.select().from(newsItems).orderBy(desc(newsItems.announcedAt), asc(newsItems.id)),
+    itemDocuments: await tx.select().from(newsItemDocuments),
+    targets: await tx.select().from(newsItemTargets),
   }));
+  const documentById = new Map(data.documents.map((doc) => [doc.id, doc]));
+  const productById = new Map(data.allProducts.map((product) => [product.id, product]));
+  const versionById = new Map(data.versions.map((version) => [version.id, version]));
   const modeOfRun = new Map(data.allRuns.map((run) => [run.id, run.mode]));
   const modeOf = (runId: string | null) => (runId ? (modeOfRun.get(runId) ?? 'inconnu') : 'inconnu');
 
@@ -25,6 +43,33 @@ export async function buildExport(db: Db, generatedAt: string) {
       status: source.status,
       last_success_at: source.lastSuccessAt,
       last_error: source.lastError,
+    })),
+    products: data.allProducts.map((product) => ({
+      key: product.key,
+      name: product.name,
+      publisher: product.publisher,
+      category: product.category,
+      repository_url: product.repositoryUrl,
+      versions: data.versions
+        .filter((version) => version.productId === product.id)
+        .map((version) => ({ version: version.version, is_prerelease: version.isPrerelease, released_at: version.releasedAt })),
+    })),
+    news_items: data.items.map((item) => ({
+      id: item.id,
+      kind: item.kind,
+      title: item.title,
+      announced_at: item.announcedAt,
+      first_seen_at: item.firstSeenAt,
+      status: item.status,
+      sources: data.itemDocuments
+        .filter((link) => link.newsItemId === item.id)
+        .map((link) => ({ role: link.role, url: documentById.get(link.documentId)?.url ?? null, source_id: documentById.get(link.documentId)?.sourceId ?? null })),
+      targets: data.targets
+        .filter((target) => target.newsItemId === item.id)
+        .map((target) => ({
+          product: productById.get(target.productId)?.key ?? null,
+          version: target.productVersionId ? (versionById.get(target.productVersionId)?.version ?? null) : null,
+        })),
     })),
     documents: data.documents.map((doc) => {
       const docSnapshots = data.snapshots.filter((snapshot) => snapshot.documentId === doc.id);
@@ -59,6 +104,7 @@ export async function buildExport(db: Db, generatedAt: string) {
       new_documents: run.newDocuments,
       unchanged_documents: run.unchangedDocuments,
       changed_documents: run.changedDocuments,
+      new_news_items: run.newNewsItems,
       error_kind: run.errorKind,
       error_message: run.errorMessage,
     })),

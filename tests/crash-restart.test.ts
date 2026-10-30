@@ -11,7 +11,7 @@ afterEach(() => t.cleanup());
 
 describe('arrêt brutal puis relance', () => {
   it('processus tué en pleine collecte puis relancé : ni perte ni doublon, exécution marquée interrompue', async () => {
-    const env = { DATABASE_URL: t.url, CURATION_FIXTURE: FIXTURE_PATH, CURATION_LEASE_MS: '1000' };
+    const env = { DATABASE_URL: t.url, CURATION_FIXTURE: FIXTURE_PATH, CURATION_ONLY_SOURCES: 'github-releases:anthropics/claude-code', CURATION_LEASE_MS: '1000' };
     const first = startCollect({ ...env, CURATION_FIXTURE_DELAY_MS: '5000' });
 
     // Attendre que le premier processus ait réservé le job et démarré son exécution, puis le tuer.
@@ -41,7 +41,7 @@ describe('arrêt brutal puis relance', () => {
   });
 
   it("processus tué pendant l'enregistrement : rien n'est à moitié écrit, la relance enregistre tout une seule fois", async () => {
-    const env = { DATABASE_URL: t.url, CURATION_FIXTURE: FIXTURE_PATH, CURATION_LEASE_MS: '1000' };
+    const env = { DATABASE_URL: t.url, CURATION_FIXTURE: FIXTURE_PATH, CURATION_ONLY_SOURCES: 'github-releases:anthropics/claude-code', CURATION_LEASE_MS: '1000' };
     // Le premier collecteur attend 5 s à l'intérieur de la transaction, après avoir écrit les documents.
     const first = startCollect({ ...env, CURATION_TEST_HOLD_IN_STORE_MS: '5000' });
 

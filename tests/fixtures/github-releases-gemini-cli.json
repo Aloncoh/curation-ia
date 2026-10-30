@@ -1,0 +1,222 @@
+[
+  {
+    "id": 428557825,
+    "tag_name": "v0.67.0-nightly.20261030.gb633c0703",
+    "name": "Release v0.67.0-nightly.20261030.gb633c0703",
+    "html_url": "https://github.com/google-gemini/gemini-cli/releases/tag/v0.67.0-nightly.20261030.gb633c0703",
+    "body": "## What's Changed\n* docs(readme): clarify Gemini CLI scope, limitations, and tool landscape by @LyalinDotCom in https://github.com/google-gemini/gemini-cli/pull/29995\n* fix(cli): bound inline history re-render after terminal width changes by @jvargassanchez-dot in https://github.com/google-gemini/gemini-cli/pull/29904\n* fix(ui): handle surrogate pairs when truncating in sanitizeForDisplay by @diegogodinezr in https://github.com/google-gemini/gemini-cli/pull/29993\n* fix(core): make isWithinRoot case-insensitive on Windows by @duvanka-prasad in https://github.com/google-gemini/gemini-cli/pull/29999\n* fix(core): recognize dotted Gemini 3 models in supportsMultimodalFunctionResponse by @jesussamuel-byte in https://github.com/google-gemini/gemini-cli/pull/29982\n* feat(cli): add extension validation command and evaluation tests by @tadipavan in https://github.com/google-gemini/gemini-cli/pull/29980\n* fix(core): normalize leading slashes in file search query for @ autocomplete by @urielefrenvirtusa in https://github.com/google-gemini/gemini-cli/pull/29987\n* fix(vscode-ide-companion): register all extension disposables in context.subscriptions by @jvargassanchez-dot in https://github.com/google-gemini/gemini-cli/pull/29994\n* fix(core): list Auto in /model when dynamicModelConfiguration is enabled and preview access is disabled by @villahernandez-coder in https://github.com/google-gemini/gemini-cli/pull/29998\n* fix(core,cli): fix instances of incorrect \\n escape behavior by @ugorla-dev in https://github.com/google-gemini/gemini-cli/pull/29989\n* fix(core): use PowerShell CIM fallback for Windows IDE process lookup by @tadipavan in https://github.com/google-gemini/gemini-cli/pull/30006\n* fix(cli): surface 429 rate limit cool-down and countdown in loading indicator by @urielefrenvirtusa in https://github.com/google-gemini/gemini-cli/pull/30012\n* fix(cli): anchor .git suffix removal to end of repo URL by @diegogodinezr in https://github.com/google-gemini/gemini-cli/pull/30013\n* fix(ci,sdk): run SDK tests in PR CI and fix AgentLoopContext mock in session.test.ts by @duvanka-prasad in https://github.com/google-gemini/gemini-cli/pull/30023\n* fix(core): prevent $-pattern corruption in LLM prompt templates by @duvanka-prasad in https://github.com/google-gemini/gemini-cli/pull/30035\n* fix(cli): Fixes unexpected truncation and toggle behavior in Expandab… by @tadipavan in https://github.com/google-gemini/gemini-cli/pull/29965\n* refactor(cli): decouple ToolGroupMessage from internal type guards and payload structures by @ugorla-dev in https://github.com/google-gemini/gemini-cli/pull/30041\n* fix(core): gate background log stream initialization on execution lifecycle transition by @jesussamuel-byte in https://github.com/google-gemini/gemini-cli/pull/30031\n\n## New Contributors\n* @tadipavan made their first contribution in https://github.com/google-gemini/gemini-cli/pull/29980\n\n**Full Changelog**: https://github.com/google-gemini/gemini-cli/compare/v0.67.0-nightly.20261028.gfa5c17365...v0.67.0-nightly.20261030.gb633c0703",
+    "draft": false,
+    "prerelease": true,
+    "created_at": "2026-10-30T01:14:43Z",
+    "published_at": "2026-10-30T01:22:17Z"
+  },
+  {
+    "id": 426163846,
+    "tag_name": "v0.67.0-nightly.20261028.gfa5c17365",
+    "name": "Release v0.67.0-nightly.20261028.gfa5c17365",
+    "html_url": "https://github.com/google-gemini/gemini-cli/releases/tag/v0.67.0-nightly.20261028.gfa5c17365",
+    "body": "## What's Changed\n* fix(core): allow trusted system paths on Android (Termux) for ripgrep resolution (#21836) by @amelidev in https://github.com/google-gemini/gemini-cli/pull/29884\n* fix(core): normalize CRLF line endings before diffing in getDiffContextSnippet by @jesussamuel-byte in https://github.com/google-gemini/gemini-cli/pull/29966\n* fix(cli): handle terminals that render ambiguous-width characters as wide by @elberthc-byte in https://github.com/google-gemini/gemini-cli/pull/29905\n* fix(cli): prevent duplicate history and double telemetry in confirm_action flow by @duvanka-prasad in https://github.com/google-gemini/gemini-cli/pull/29974\n* Changelog for v0.67.0-preview.0 by @gemini-cli-robot in https://github.com/google-gemini/gemini-cli/pull/29990\n* Changelog for v0.66.0 by @gemini-cli-robot in https://github.com/google-gemini/gemini-cli/pull/29992\n\n\n**Full Changelog**: https://github.com/google-gemini/gemini-cli/compare/v0.67.0-nightly.20261027.g363a13119...v0.67.0-nightly.20261028.gfa5c17365",
+    "draft": false,
+    "prerelease": true,
+    "created_at": "2026-10-28T01:15:13Z",
+    "published_at": "2026-10-28T01:22:20Z"
+  },
+  {
+    "id": 425931766,
+    "tag_name": "v0.67.0-preview.0",
+    "name": "Release v0.67.0-preview.0",
+    "html_url": "https://github.com/google-gemini/gemini-cli/releases/tag/v0.67.0-preview.0",
+    "body": "## What's Changed\n* Changelog for v0.65.0 by @gemini-cli-robot in https://github.com/google-gemini/gemini-cli/pull/29853\n* chore(release): bump version to 0.67.0-nightly.20261020.gb041de017 by @gemini-cli-robot in https://github.com/google-gemini/gemini-cli/pull/29854\n* Changelog for v0.66.0-preview.0 by @gemini-cli-robot in https://github.com/google-gemini/gemini-cli/pull/29852\n* feat(cli): bridge the IDE companion into container sandboxes over exec stdio by @elberthc-byte in https://github.com/google-gemini/gemini-cli/pull/29858\n* fix(core): prevent duplicate agent loading when workspace is home directory (#27692) by @urielefrenvirtusa in https://github.com/google-gemini/gemini-cli/pull/29847\n* fix(ide): exclude IDE settings and GEMINI.md files from open file con text by @villahernandez-coder in https://github.com/google-gemini/gemini-cli/pull/29848\n* fix(core): scope untrusted flag checks to external output and remember approved flags by @luisfelipe-alt in https://github.com/google-gemini/gemini-cli/pull/29833\n* fix(a2a-server): mount express.json() before A2A SDK route registration by @jesussamuel-byte in https://github.com/google-gemini/gemini-cli/pull/29850\n* fix(core): adhere to RFC 9110 token rules when splitting custom headers by @diegogodinezr in https://github.com/google-gemini/gemini-cli/pull/29865\n* fix(core): respect read-only files and hard links in atomic writeTextFile by @elberthc-byte in https://github.com/google-gemini/gemini-cli/pull/29749\n* fix(a2a-server,core): preserve extended token usage metadata and align per-turn reporting by @jvargassanchez-dot in https://github.com/google-gemini/gemini-cli/pull/29834\n* fix(core): ensure all model turns with function calls receive thought signatures by @amelidev in https://github.com/google-gemini/gemini-cli/pull/29828\n* fix(cli): handle termination signals and prevent tool execution after cancellation in non-interactive mode by @urielefrenvirtusa in https://github.com/google-gemini/gemini-cli/pull/29849\n* fix(cli): preserve ${VAR} placeholders during deprecated settings migration by @villahernandez-coder in https://github.com/google-gemini/gemini-cli/pull/29867\n* fix(cli): stop continuation stream processing and auto-nudge after request cancellation by @jesussamuel-byte in https://github.com/google-gemini/gemini-cli/pull/29868\n* fix(cli): correct Thai and Lao SARA AM display width by @elberthc-byte in https://github.com/google-gemini/gemini-cli/pull/29883\n* fix(core): resolve relative file paths against active IDE workspace root by @villahernandez-coder in https://github.com/google-gemini/gemini-cli/pull/29838\n* feat(cli): add models command and --list-models flag for model discovery by @urielefrenvirtusa in https://github.com/google-gemini/gemini-cli/pull/29880\n* fix(cli): convert Claude hook timeout from seconds to milliseconds during migration by @villahernandez-coder in https://github.com/google-gemini/gemini-cli/pull/29899\n* fix(core): classify project spending cap errors as terminal quota errors by @jesussamuel-byte in https://github.com/google-gemini/gemini-cli/pull/29961\n* fix(acp): include MCP server and tool metadata in permission requests by @duvanka-prasad in https://github.com/google-gemini/gemini-cli/pull/29910\n* fix(cli): prevent parent command name insertion on /chat list autocomplete by @urielefrenvirtusa in https://github.com/google-gemini/gemini-cli/pull/29967\n* fix(cli): validate finite numbers in numeric settings editor by @diegogodinezr in https://github.com/google-gemini/gemini-cli/pull/29968\n* fix(core): allow trusted system paths on Android (Termux) for ripgrep resolution (#21836) by @amelidev in https://github.com/google-gemini/gemini-cli/pull/29884\n* fix(core): normalize CRLF line endings before diffing in getDiffContextSnippet by @jesussamuel-byte in https://github.com/google-gemini/gemini-cli/pull/29966\n* fix(cli): handle terminals that render ambiguous-width characters as wide by @elberthc-byte in https://github.com/google-gemini/gemini-cli/pull/29905\n* fix(cli): prevent duplicate history and double telemetry in confirm_action flow by @duvanka-prasad in https://github.com/google-gemini/gemini-cli/pull/29974\n\n## New Contributors\n* @duvanka-prasad made their first contribution in https://github.com/google-gemini/gemini-cli/pull/29910\n\n**Full Changelog**: https://github.com/google-gemini/gemini-cli/compare/v0.66.0-preview.0...v0.67.0-preview.0",
+    "draft": false,
+    "prerelease": true,
+    "created_at": "2026-10-27T20:01:45Z",
+    "published_at": "2026-10-27T20:07:49Z"
+  },
+  {
+    "id": 424935284,
+    "tag_name": "v0.67.0-nightly.20261027.g363a13119",
+    "name": "Release v0.67.0-nightly.20261027.g363a13119",
+    "html_url": "https://github.com/google-gemini/gemini-cli/releases/tag/v0.67.0-nightly.20261027.g363a13119",
+    "body": "## What's Changed\n* fix(core): classify project spending cap errors as terminal quota errors by @jesussamuel-byte in https://github.com/google-gemini/gemini-cli/pull/29961\n* fix(acp): include MCP server and tool metadata in permission requests by @duvanka-prasad in https://github.com/google-gemini/gemini-cli/pull/29910\n* fix(cli): prevent parent command name insertion on /chat list autocomplete by @urielefrenvirtusa in https://github.com/google-gemini/gemini-cli/pull/29967\n* fix(cli): validate finite numbers in numeric settings editor by @diegogodinezr in https://github.com/google-gemini/gemini-cli/pull/29968\n\n## New Contributors\n* @duvanka-prasad made their first contribution in https://github.com/google-gemini/gemini-cli/pull/29910\n\n**Full Changelog**: https://github.com/google-gemini/gemini-cli/compare/v0.67.0-nightly.20261025.gcd1b45c2d...v0.67.0-nightly.20261027.g363a13119",
+    "draft": false,
+    "prerelease": true,
+    "created_at": "2026-10-27T01:09:48Z",
+    "published_at": "2026-10-27T01:15:46Z"
+  },
+  {
+    "id": 425948678,
+    "tag_name": "v0.66.0",
+    "name": "Release v0.66.0",
+    "html_url": "https://github.com/google-gemini/gemini-cli/releases/tag/v0.66.0",
+    "body": "## What's Changed\n* Update ROADMAP.md to no longer reference outdated 2025 roadmap by @DavidAPierce in https://github.com/google-gemini/gemini-cli/pull/29723\n* Changelog for v0.65.0-preview.0 by @gemini-cli-robot in https://github.com/google-gemini/gemini-cli/pull/29739\n* chore(release): bump version to 0.66.0-nightly.20261013.g204db94ae by @gemini-cli-robot in https://github.com/google-gemini/gemini-cli/pull/29740\n* Changelog for v0.64.0 by @gemini-cli-robot in https://github.com/google-gemini/gemini-cli/pull/29741\n* fix(ui): implement synchronized output and isolate spinner rendering by @diegogodinezr in https://github.com/google-gemini/gemini-cli/pull/29725\n* fix(ui): fix debug console height calculation and terminalBuffer flickering by @ugorla-dev in https://github.com/google-gemini/gemini-cli/pull/29695\n* fix(cli): prevent right-hand border bleed in scrollable tool containers by @villahernandez-coder in https://github.com/google-gemini/gemini-cli/pull/29742\n* refactor(core,cli): emit tool call groups from the scheduler and drop the UI lookahead by @jesussamuel-byte in https://github.com/google-gemini/gemini-cli/pull/29736\n* fix(core): format and quote Windows diff command arguments in openDiff by @jvargassanchez-dot in https://github.com/google-gemini/gemini-cli/pull/29753\n* fix(cli): round before selecting units in formatDuration by @diegogodinezr in https://github.com/google-gemini/gemini-cli/pull/29766\n* fix(core): disable interactive credential and SSH prompts in getSafeGitEnv by @villahernandez-coder in https://github.com/google-gemini/gemini-cli/pull/29760\n* fix(cli): resolve settings placeholders after loading .env files by @elberthc-byte in https://github.com/google-gemini/gemini-cli/pull/29750\n* fix(core): harden SKILL.md frontmatter parsing for single-line descriptions by @jesussamuel-byte in https://github.com/google-gemini/gemini-cli/pull/29769\n* Add Banner about Gemini CLI not being optimized for Gemini 4 by @srithreepo in https://github.com/google-gemini/gemini-cli/pull/29774\n* Update README to remove obsolete content by @srithreepo in https://github.com/google-gemini/gemini-cli/pull/29775\n* fix(ci): remove unsupported members permission in unassign-inactive-assignees workflow by @ugorla-dev in https://github.com/google-gemini/gemini-cli/pull/29770\n* fix(cli): reset slash-command conflict dedupe when conflicts reappear by @jvargassanchez-dot in https://github.com/google-gemini/gemini-cli/pull/29768\n* fix(cli): verify active binary update to prevent PATH shadowing false success by @urielefrenvirtusa in https://github.com/google-gemini/gemini-cli/pull/29757\n* fix(cli): support 'keys' array in keybindings.json by @urielefrenvirtusa in https://github.com/google-gemini/gemini-cli/pull/29773\n* fix(cli): forward termination signals from bootstrap parent to child process by @villahernandez-coder in https://github.com/google-gemini/gemini-cli/pull/29790\n* fix(ui): preserve terminal scrollback during viewport refreshes by @diegogodinezr in https://github.com/google-gemini/gemini-cli/pull/29792\n* fix(cli): decode streamed Node HTTP activity chunks with StringDecoder by @jesussamuel-byte in https://github.com/google-gemini/gemini-cli/pull/29827\n* chore: migrate gsutil usage to gcloud storage by @gurusai-voleti in https://github.com/google-gemini/gemini-cli/pull/29839\n* fix(core): preserve user-level ~/.gitconfig in shell and git environments by @jesussamuel-byte in https://github.com/google-gemini/gemini-cli/pull/29832\n* fix(core): prevent false positive matches in isAuthenticationError by @urielefrenvirtusa in https://github.com/google-gemini/gemini-cli/pull/29835\n* fix(core): support opt-in private network endpoints for MCP OAuth flows by @luisfelipe-alt in https://github.com/google-gemini/gemini-cli/pull/29844\n\n## New Contributors\n* @gurusai-voleti made their first contribution in https://github.com/google-gemini/gemini-cli/pull/29839\n\n**Full Changelog**: https://github.com/google-gemini/gemini-cli/compare/v0.65.0...v0.66.0",
+    "draft": false,
+    "prerelease": false,
+    "created_at": "2026-10-27T20:19:20Z",
+    "published_at": "2026-10-27T20:26:28Z"
+  },
+  {
+    "id": 423085116,
+    "tag_name": "v0.67.0-nightly.20261025.gcd1b45c2d",
+    "name": "Release v0.67.0-nightly.20261025.gcd1b45c2d",
+    "html_url": "https://github.com/google-gemini/gemini-cli/releases/tag/v0.67.0-nightly.20261025.gcd1b45c2d",
+    "body": "**Full Changelog**: https://github.com/google-gemini/gemini-cli/compare/v0.67.0-nightly.20261024.gcd1b45c2d...v0.67.0-nightly.20261025.gcd1b45c2d",
+    "draft": false,
+    "prerelease": true,
+    "created_at": "2026-10-25T01:24:02Z",
+    "published_at": "2026-10-25T01:31:55Z"
+  },
+  {
+    "id": 422439862,
+    "tag_name": "v0.67.0-nightly.20261024.gcd1b45c2d",
+    "name": "Release v0.67.0-nightly.20261024.gcd1b45c2d",
+    "html_url": "https://github.com/google-gemini/gemini-cli/releases/tag/v0.67.0-nightly.20261024.gcd1b45c2d",
+    "body": "## What's Changed\n* fix(cli): stop continuation stream processing and auto-nudge after request cancellation by @jesussamuel-byte in https://github.com/google-gemini/gemini-cli/pull/29868\n* fix(cli): correct Thai and Lao SARA AM display width by @elberthc-byte in https://github.com/google-gemini/gemini-cli/pull/29883\n* fix(core): resolve relative file paths against active IDE workspace root by @villahernandez-coder in https://github.com/google-gemini/gemini-cli/pull/29838\n* feat(cli): add models command and --list-models flag for model discovery by @urielefrenvirtusa in https://github.com/google-gemini/gemini-cli/pull/29880\n* fix(cli): convert Claude hook timeout from seconds to milliseconds during migration by @villahernandez-coder in https://github.com/google-gemini/gemini-cli/pull/29899\n\n\n**Full Changelog**: https://github.com/google-gemini/gemini-cli/compare/v0.67.0-nightly.20261023.ga713410ab...v0.67.0-nightly.20261024.gcd1b45c2d",
+    "draft": false,
+    "prerelease": true,
+    "created_at": "2026-10-24T01:10:06Z",
+    "published_at": "2026-10-24T01:15:53Z"
+  },
+  {
+    "id": 421364633,
+    "tag_name": "v0.67.0-nightly.20261023.ga713410ab",
+    "name": "Release v0.67.0-nightly.20261023.ga713410ab",
+    "html_url": "https://github.com/google-gemini/gemini-cli/releases/tag/v0.67.0-nightly.20261023.ga713410ab",
+    "body": "## What's Changed\n* fix(a2a-server,core): preserve extended token usage metadata and align per-turn reporting by @jvargassanchez-dot in https://github.com/google-gemini/gemini-cli/pull/29834\n* fix(core): ensure all model turns with function calls receive thought signatures by @amelidev in https://github.com/google-gemini/gemini-cli/pull/29828\n* fix(cli): handle termination signals and prevent tool execution after cancellation in non-interactive mode by @urielefrenvirtusa in https://github.com/google-gemini/gemini-cli/pull/29849\n* fix(cli): preserve ${VAR} placeholders during deprecated settings migration by @villahernandez-coder in https://github.com/google-gemini/gemini-cli/pull/29867\n\n\n**Full Changelog**: https://github.com/google-gemini/gemini-cli/compare/v0.67.0-nightly.20261022.g09d81bf11...v0.67.0-nightly.20261023.ga713410ab",
+    "draft": false,
+    "prerelease": true,
+    "created_at": "2026-10-23T01:26:25Z",
+    "published_at": "2026-10-23T01:35:10Z"
+  },
+  {
+    "id": 420213775,
+    "tag_name": "v0.67.0-nightly.20261022.g09d81bf11",
+    "name": "Release v0.67.0-nightly.20261022.g09d81bf11",
+    "html_url": "https://github.com/google-gemini/gemini-cli/releases/tag/v0.67.0-nightly.20261022.g09d81bf11",
+    "body": "## What's Changed\n* Changelog for v0.66.0-preview.0 by @gemini-cli-robot in https://github.com/google-gemini/gemini-cli/pull/29852\n* feat(cli): bridge the IDE companion into container sandboxes over exec stdio by @elberthc-byte in https://github.com/google-gemini/gemini-cli/pull/29858\n* fix(core): prevent duplicate agent loading when workspace is home directory (#27692) by @urielefrenvirtusa in https://github.com/google-gemini/gemini-cli/pull/29847\n* fix(ide): exclude IDE settings and GEMINI.md files from open file con text by @villahernandez-coder in https://github.com/google-gemini/gemini-cli/pull/29848\n* fix(core): scope untrusted flag checks to external output and remember approved flags by @luisfelipe-alt in https://github.com/google-gemini/gemini-cli/pull/29833\n* fix(a2a-server): mount express.json() before A2A SDK route registration by @jesussamuel-byte in https://github.com/google-gemini/gemini-cli/pull/29850\n* fix(core): adhere to RFC 9110 token rules when splitting custom headers by @diegogodinezr in https://github.com/google-gemini/gemini-cli/pull/29865\n* fix(core): respect read-only files and hard links in atomic writeTextFile by @elberthc-byte in https://github.com/google-gemini/gemini-cli/pull/29749\n\n\n**Full Changelog**: https://github.com/google-gemini/gemini-cli/compare/v0.67.0-nightly.20261021.gd00859d6b...v0.67.0-nightly.20261022.g09d81bf11",
+    "draft": false,
+    "prerelease": true,
+    "created_at": "2026-10-22T01:17:00Z",
+    "published_at": "2026-10-22T01:23:52Z"
+  },
+  {
+    "id": 419049529,
+    "tag_name": "v0.67.0-nightly.20261021.gd00859d6b",
+    "name": "Release v0.67.0-nightly.20261021.gd00859d6b",
+    "html_url": "https://github.com/google-gemini/gemini-cli/releases/tag/v0.67.0-nightly.20261021.gd00859d6b",
+    "body": "## What's Changed\n* chore: migrate gsutil usage to gcloud storage by @gurusai-voleti in https://github.com/google-gemini/gemini-cli/pull/29839\n* fix(core): preserve user-level ~/.gitconfig in shell and git environments by @jesussamuel-byte in https://github.com/google-gemini/gemini-cli/pull/29832\n* fix(core): prevent false positive matches in isAuthenticationError by @urielefrenvirtusa in https://github.com/google-gemini/gemini-cli/pull/29835\n* fix(core): support opt-in private network endpoints for MCP OAuth flows by @luisfelipe-alt in https://github.com/google-gemini/gemini-cli/pull/29844\n* Changelog for v0.65.0 by @gemini-cli-robot in https://github.com/google-gemini/gemini-cli/pull/29853\n* chore(release): bump version to 0.67.0-nightly.20261020.gb041de017 by @gemini-cli-robot in https://github.com/google-gemini/gemini-cli/pull/29854\n\n## New Contributors\n* @gurusai-voleti made their first contribution in https://github.com/google-gemini/gemini-cli/pull/29839\n\n**Full Changelog**: https://github.com/google-gemini/gemini-cli/compare/v0.66.0-nightly.20261020.g76e4d7c04...v0.67.0-nightly.20261021.gd00859d6b",
+    "draft": false,
+    "prerelease": true,
+    "created_at": "2026-10-21T01:24:20Z",
+    "published_at": "2026-10-21T01:33:29Z"
+  },
+  {
+    "id": 418875857,
+    "tag_name": "v0.66.0-preview.0",
+    "name": "Release v0.66.0-preview.0",
+    "html_url": "https://github.com/google-gemini/gemini-cli/releases/tag/v0.66.0-preview.0",
+    "body": "## What's Changed\n* Update ROADMAP.md to no longer reference outdated 2025 roadmap by @DavidAPierce in https://github.com/google-gemini/gemini-cli/pull/29723\n* Changelog for v0.65.0-preview.0 by @gemini-cli-robot in https://github.com/google-gemini/gemini-cli/pull/29739\n* chore(release): bump version to 0.66.0-nightly.20261013.g204db94ae by @gemini-cli-robot in https://github.com/google-gemini/gemini-cli/pull/29740\n* Changelog for v0.64.0 by @gemini-cli-robot in https://github.com/google-gemini/gemini-cli/pull/29741\n* fix(ui): implement synchronized output and isolate spinner rendering by @diegogodinezr in https://github.com/google-gemini/gemini-cli/pull/29725\n* fix(ui): fix debug console height calculation and terminalBuffer flickering by @ugorla-dev in https://github.com/google-gemini/gemini-cli/pull/29695\n* fix(cli): prevent right-hand border bleed in scrollable tool containers by @villahernandez-coder in https://github.com/google-gemini/gemini-cli/pull/29742\n* refactor(core,cli): emit tool call groups from the scheduler and drop the UI lookahead by @jesussamuel-byte in https://github.com/google-gemini/gemini-cli/pull/29736\n* fix(core): format and quote Windows diff command arguments in openDiff by @jvargassanchez-dot in https://github.com/google-gemini/gemini-cli/pull/29753\n* fix(cli): round before selecting units in formatDuration by @diegogodinezr in https://github.com/google-gemini/gemini-cli/pull/29766\n* fix(core): disable interactive credential and SSH prompts in getSafeGitEnv by @villahernandez-coder in https://github.com/google-gemini/gemini-cli/pull/29760\n* fix(cli): resolve settings placeholders after loading .env files by @elberthc-byte in https://github.com/google-gemini/gemini-cli/pull/29750\n* fix(core): harden SKILL.md frontmatter parsing for single-line descriptions by @jesussamuel-byte in https://github.com/google-gemini/gemini-cli/pull/29769\n* Add Banner about Gemini CLI not being optimized for Gemini 4 by @srithreepo in https://github.com/google-gemini/gemini-cli/pull/29774\n* Update README to remove obsolete content by @srithreepo in https://github.com/google-gemini/gemini-cli/pull/29775\n* fix(ci): remove unsupported members permission in unassign-inactive-assignees workflow by @ugorla-dev in https://github.com/google-gemini/gemini-cli/pull/29770\n* fix(cli): reset slash-command conflict dedupe when conflicts reappear by @jvargassanchez-dot in https://github.com/google-gemini/gemini-cli/pull/29768\n* fix(cli): verify active binary update to prevent PATH shadowing false success by @urielefrenvirtusa in https://github.com/google-gemini/gemini-cli/pull/29757\n* fix(cli): support 'keys' array in keybindings.json by @urielefrenvirtusa in https://github.com/google-gemini/gemini-cli/pull/29773\n* fix(cli): forward termination signals from bootstrap parent to child process by @villahernandez-coder in https://github.com/google-gemini/gemini-cli/pull/29790\n* fix(ui): preserve terminal scrollback during viewport refreshes by @diegogodinezr in https://github.com/google-gemini/gemini-cli/pull/29792\n* fix(cli): decode streamed Node HTTP activity chunks with StringDecoder by @jesussamuel-byte in https://github.com/google-gemini/gemini-cli/pull/29827\n* chore: migrate gsutil usage to gcloud storage by @gurusai-voleti in https://github.com/google-gemini/gemini-cli/pull/29839\n* fix(core): preserve user-level ~/.gitconfig in shell and git environments by @jesussamuel-byte in https://github.com/google-gemini/gemini-cli/pull/29832\n* fix(core): prevent false positive matches in isAuthenticationError by @urielefrenvirtusa in https://github.com/google-gemini/gemini-cli/pull/29835\n* fix(core): support opt-in private network endpoints for MCP OAuth flows by @luisfelipe-alt in https://github.com/google-gemini/gemini-cli/pull/29844\n\n## New Contributors\n* @gurusai-voleti made their first contribution in https://github.com/google-gemini/gemini-cli/pull/29839\n\n**Full Changelog**: https://github.com/google-gemini/gemini-cli/compare/v0.65.0-preview.0...v0.66.0-preview.0",
+    "draft": false,
+    "prerelease": true,
+    "created_at": "2026-10-20T20:56:06Z",
+    "published_at": "2026-10-20T21:04:34Z"
+  },
+  {
+    "id": 417913136,
+    "tag_name": "v0.66.0-nightly.20261020.g76e4d7c04",
+    "name": "Release v0.66.0-nightly.20261020.g76e4d7c04",
+    "html_url": "https://github.com/google-gemini/gemini-cli/releases/tag/v0.66.0-nightly.20261020.g76e4d7c04",
+    "body": "## What's Changed\n* fix(ui): preserve terminal scrollback during viewport refreshes by @diegogodinezr in https://github.com/google-gemini/gemini-cli/pull/29792\n* fix(cli): decode streamed Node HTTP activity chunks with StringDecoder by @jesussamuel-byte in https://github.com/google-gemini/gemini-cli/pull/29827\n\n\n**Full Changelog**: https://github.com/google-gemini/gemini-cli/compare/v0.66.0-nightly.20261019.ged96faedf...v0.66.0-nightly.20261020.g76e4d7c04",
+    "draft": false,
+    "prerelease": true,
+    "created_at": "2026-10-20T01:24:46Z",
+    "published_at": "2026-10-20T01:33:51Z"
+  },
+  {
+    "id": 418887417,
+    "tag_name": "v0.65.0",
+    "name": "Release v0.65.0",
+    "html_url": "https://github.com/google-gemini/gemini-cli/releases/tag/v0.65.0",
+    "body": "## What's Changed\n* fix(cli): enforce read-only workspace settings in untrusted folders by @jvargassanchez-dot in https://github.com/google-gemini/gemini-cli/pull/29583\n* fix(core): avoid duplicate tool response turns when resuming sessions by @diegogodinezr in https://github.com/google-gemini/gemini-cli/pull/29618\n* fix(core): prevent deletion of resumed session history on quick exit (#29198) by @villahernandez-coder in https://github.com/google-gemini/gemini-cli/pull/29584\n* Changelog for v0.64.0-preview.0 by @gemini-cli-robot in https://github.com/google-gemini/gemini-cli/pull/29656\n* Changelog for v0.63.0 by @gemini-cli-robot in https://github.com/google-gemini/gemini-cli/pull/29659\n* fix(core): align OAuth callback iss parameter validation with RFC 9207 metadata by @luisfelipe-alt in https://github.com/google-gemini/gemini-cli/pull/29616\n* fix(cli): prevent unnecessary terminal clears and scroll resets when expanding with Ctrl+O by @jesussamuel-byte in https://github.com/google-gemini/gemini-cli/pull/29640\n* chore(release): bump version to 0.65.0-nightly.20261006.gfb972b2f8 by @gemini-cli-robot in https://github.com/google-gemini/gemini-cli/pull/29657\n* fix(ci): add missing loop in unassign-inactive-assignees workflow by @ugorla-dev in https://github.com/google-gemini/gemini-cli/pull/29609\n* fix(core): enforce terminal user turn invariant and normalize request contents by @luisfelipe-alt in https://github.com/google-gemini/gemini-cli/pull/29612\n* `feat(telemetry): support custom OTLP headers in telemetry configuration` by @jesussamuel-byte in https://github.com/google-gemini/gemini-cli/pull/29641\n* fix(auth): prevent infinite verification and OAuth retry loops by @villahernandez-coder in https://github.com/google-gemini/gemini-cli/pull/29655\n* fix(cli): handle JSON parse and response stream errors in fetchJson by @jesussamuel-byte in https://github.com/google-gemini/gemini-cli/pull/29658\n* fix(core): preserve line terminators in truncateString by @diegogodinezr in https://github.com/google-gemini/gemini-cli/pull/29673\n* fix(vscode-ide-companion): make IdeServer.stop() resolve while MCP sessions are open by @elberthc-byte in https://github.com/google-gemini/gemini-cli/pull/29674\n* fix(core): retain ask_user question text in the tool result display by @elberthc-byte in https://github.com/google-gemini/gemini-cli/pull/29677\n* fix(core): eliminate false positives on untrusted command flags and compound loops by @DavidAPierce in https://github.com/google-gemini/gemini-cli/pull/29672\n* fix(cli): clear cached credentials when re-selecting Google login by @urielefrenvirtusa in https://github.com/google-gemini/gemini-cli/pull/29643\n* fix(cli): resolve hang on Enter keypress in interactive mode (#23297) by @elberthc-byte in https://github.com/google-gemini/gemini-cli/pull/29476\n* perf(core): optimize ignore filtering and enable subtree pruning (#29077) by @amelidev in https://github.com/google-gemini/gemini-cli/pull/29582\n* fix(a2a-server): isolate tool rejection to active call in sequential batches by @jvargassanchez-dot in https://github.com/google-gemini/gemini-cli/pull/29683\n* fix(cli): skip eager recursive file reading for @<directory> references by @jvargassanchez-dot in https://github.com/google-gemini/gemini-cli/pull/29617\n* fix(cli): keep loading other extensions when one fails the allowlist check by @jesussamuel-byte in https://github.com/google-gemini/gemini-cli/pull/29720\n* fix(cli): correct reverse search highlight index for expanding unicode characters by @diegogodinezr in https://github.com/google-gemini/gemini-cli/pull/29699\n* fix(core): treat whitespace-only UTF-16 and UTF-32 files as empty by @jesussamuel-byte in https://github.com/google-gemini/gemini-cli/pull/29722\n* fix(cli): restore debounced static UI refresh on terminal width changes by @jvargassanchez-dot in https://github.com/google-gemini/gemini-cli/pull/29644\n* fix(cli): prevent session poisoning on rapid Ctrl-C interruption by @villahernandez-coder in https://github.com/google-gemini/gemini-cli/pull/29728\n\n\n**Full Changelog**: https://github.com/google-gemini/gemini-cli/compare/v0.64.0...v0.65.0",
+    "draft": false,
+    "prerelease": false,
+    "created_at": "2026-10-20T21:09:33Z",
+    "published_at": "2026-10-20T21:17:57Z"
+  },
+  {
+    "id": 416822470,
+    "tag_name": "v0.66.0-nightly.20261019.ged96faedf",
+    "name": "Release v0.66.0-nightly.20261019.ged96faedf",
+    "html_url": "https://github.com/google-gemini/gemini-cli/releases/tag/v0.66.0-nightly.20261019.ged96faedf",
+    "body": "**Full Changelog**: https://github.com/google-gemini/gemini-cli/compare/v0.66.0-nightly.20261018.ged96faedf...v0.66.0-nightly.20261019.ged96faedf",
+    "draft": false,
+    "prerelease": true,
+    "created_at": "2026-10-19T01:26:24Z",
+    "published_at": "2026-10-19T01:34:29Z"
+  },
+  {
+    "id": 416172373,
+    "tag_name": "v0.66.0-nightly.20261018.ged96faedf",
+    "name": "Release v0.66.0-nightly.20261018.ged96faedf",
+    "html_url": "https://github.com/google-gemini/gemini-cli/releases/tag/v0.66.0-nightly.20261018.ged96faedf",
+    "body": "**Full Changelog**: https://github.com/google-gemini/gemini-cli/compare/v0.66.0-nightly.20261017.ged96faedf...v0.66.0-nightly.20261018.ged96faedf",
+    "draft": false,
+    "prerelease": true,
+    "created_at": "2026-10-18T01:26:26Z",
+    "published_at": "2026-10-18T01:34:41Z"
+  },
+  {
+    "id": 415515571,
+    "tag_name": "v0.66.0-nightly.20261017.ged96faedf",
+    "name": "Release v0.66.0-nightly.20261017.ged96faedf",
+    "html_url": "https://github.com/google-gemini/gemini-cli/releases/tag/v0.66.0-nightly.20261017.ged96faedf",
+    "body": "## What's Changed\n* Add Banner about Gemini CLI not being optimized for Gemini 4 by @srithreepo in https://github.com/google-gemini/gemini-cli/pull/29774\n* Update README to remove obsolete content by @srithreepo in https://github.com/google-gemini/gemini-cli/pull/29775\n* fix(ci): remove unsupported members permission in unassign-inactive-assignees workflow by @ugorla-dev in https://github.com/google-gemini/gemini-cli/pull/29770\n* fix(cli): reset slash-command conflict dedupe when conflicts reappear by @jvargassanchez-dot in https://github.com/google-gemini/gemini-cli/pull/29768\n* fix(cli): verify active binary update to prevent PATH shadowing false success by @urielefrenvirtusa in https://github.com/google-gemini/gemini-cli/pull/29757\n* fix(cli): support 'keys' array in keybindings.json by @urielefrenvirtusa in https://github.com/google-gemini/gemini-cli/pull/29773\n* fix(cli): forward termination signals from bootstrap parent to child process by @villahernandez-coder in https://github.com/google-gemini/gemini-cli/pull/29790\n\n\n**Full Changelog**: https://github.com/google-gemini/gemini-cli/compare/v0.66.0-nightly.20261016.gdebf42324...v0.66.0-nightly.20261017.ged96faedf",
+    "draft": false,
+    "prerelease": true,
+    "created_at": "2026-10-17T01:23:18Z",
+    "published_at": "2026-10-17T01:31:42Z"
+  },
+  {
+    "id": 414439127,
+    "tag_name": "v0.66.0-nightly.20261016.gdebf42324",
+    "name": "Release v0.66.0-nightly.20261016.gdebf42324",
+    "html_url": "https://github.com/google-gemini/gemini-cli/releases/tag/v0.66.0-nightly.20261016.gdebf42324",
+    "body": "## What's Changed\n* chore(release): bump version to 0.66.0-nightly.20261013.g204db94ae by @gemini-cli-robot in https://github.com/google-gemini/gemini-cli/pull/29740\n* Changelog for v0.64.0 by @gemini-cli-robot in https://github.com/google-gemini/gemini-cli/pull/29741\n* fix(ui): implement synchronized output and isolate spinner rendering by @diegogodinezr in https://github.com/google-gemini/gemini-cli/pull/29725\n* fix(ui): fix debug console height calculation and terminalBuffer flickering by @ugorla-dev in https://github.com/google-gemini/gemini-cli/pull/29695\n* fix(cli): prevent right-hand border bleed in scrollable tool containers by @villahernandez-coder in https://github.com/google-gemini/gemini-cli/pull/29742\n* refactor(core,cli): emit tool call groups from the scheduler and drop the UI lookahead by @jesussamuel-byte in https://github.com/google-gemini/gemini-cli/pull/29736\n* fix(core): format and quote Windows diff command arguments in openDiff by @jvargassanchez-dot in https://github.com/google-gemini/gemini-cli/pull/29753\n* fix(cli): round before selecting units in formatDuration by @diegogodinezr in https://github.com/google-gemini/gemini-cli/pull/29766\n* fix(core): disable interactive credential and SSH prompts in getSafeGitEnv by @villahernandez-coder in https://github.com/google-gemini/gemini-cli/pull/29760\n* fix(cli): resolve settings placeholders after loading .env files by @elberthc-byte in https://github.com/google-gemini/gemini-cli/pull/29750\n* fix(core): harden SKILL.md frontmatter parsing for single-line descriptions by @jesussamuel-byte in https://github.com/google-gemini/gemini-cli/pull/29769\n\n\n**Full Changelog**: https://github.com/google-gemini/gemini-cli/compare/v0.65.0-nightly.20261014.g42c518220...v0.66.0-nightly.20261016.gdebf42324",
+    "draft": false,
+    "prerelease": true,
+    "created_at": "2026-10-16T01:23:41Z",
+    "published_at": "2026-10-16T01:32:08Z"
+  },
+  {
+    "id": 412251794,
+    "tag_name": "v0.65.0-nightly.20261014.g42c518220",
+    "name": "Release v0.65.0-nightly.20261014.g42c518220",
+    "html_url": "https://github.com/google-gemini/gemini-cli/releases/tag/v0.65.0-nightly.20261014.g42c518220",
+    "body": "## What's Changed\n* fix(cli): correct reverse search highlight index for expanding unicode characters by @diegogodinezr in https://github.com/google-gemini/gemini-cli/pull/29699\n* fix(core): treat whitespace-only UTF-16 and UTF-32 files as empty by @jesussamuel-byte in https://github.com/google-gemini/gemini-cli/pull/29722\n* fix(cli): restore debounced static UI refresh on terminal width changes by @jvargassanchez-dot in https://github.com/google-gemini/gemini-cli/pull/29644\n* fix(cli): prevent session poisoning on rapid Ctrl-C interruption by @villahernandez-coder in https://github.com/google-gemini/gemini-cli/pull/29728\n* Update ROADMAP.md to no longer reference outdated 2025 roadmap by @DavidAPierce in https://github.com/google-gemini/gemini-cli/pull/29723\n* Changelog for v0.65.0-preview.0 by @gemini-cli-robot in https://github.com/google-gemini/gemini-cli/pull/29739\n\n\n**Full Changelog**: https://github.com/google-gemini/gemini-cli/compare/v0.65.0-nightly.20261013.g51617c1bc...v0.65.0-nightly.20261014.g42c518220",
+    "draft": false,
+    "prerelease": true,
+    "created_at": "2026-10-14T01:21:11Z",
+    "published_at": "2026-10-14T01:29:12Z"
+  },
+  {
+    "id": 412081255,
+    "tag_name": "v0.65.0-preview.0",
+    "name": "Release v0.65.0-preview.0",
+    "html_url": "https://github.com/google-gemini/gemini-cli/releases/tag/v0.65.0-preview.0",
+    "body": "## What's Changed\n* fix(cli): enforce read-only workspace settings in untrusted folders by @jvargassanchez-dot in https://github.com/google-gemini/gemini-cli/pull/29583\n* fix(core): avoid duplicate tool response turns when resuming sessions by @diegogodinezr in https://github.com/google-gemini/gemini-cli/pull/29618\n* fix(core): prevent deletion of resumed session history on quick exit (#29198) by @villahernandez-coder in https://github.com/google-gemini/gemini-cli/pull/29584\n* Changelog for v0.64.0-preview.0 by @gemini-cli-robot in https://github.com/google-gemini/gemini-cli/pull/29656\n* Changelog for v0.63.0 by @gemini-cli-robot in https://github.com/google-gemini/gemini-cli/pull/29659\n* fix(core): align OAuth callback iss parameter validation with RFC 9207 metadata by @luisfelipe-alt in https://github.com/google-gemini/gemini-cli/pull/29616\n* fix(cli): prevent unnecessary terminal clears and scroll resets when expanding with Ctrl+O by @jesussamuel-byte in https://github.com/google-gemini/gemini-cli/pull/29640\n* chore(release): bump version to 0.65.0-nightly.20261006.gfb972b2f8 by @gemini-cli-robot in https://github.com/google-gemini/gemini-cli/pull/29657\n* fix(ci): add missing loop in unassign-inactive-assignees workflow by @ugorla-dev in https://github.com/google-gemini/gemini-cli/pull/29609\n* fix(core): enforce terminal user turn invariant and normalize request contents by @luisfelipe-alt in https://github.com/google-gemini/gemini-cli/pull/29612\n* `feat(telemetry): support custom OTLP headers in telemetry configuration` by @jesussamuel-byte in https://github.com/google-gemini/gemini-cli/pull/29641\n* fix(auth): prevent infinite verification and OAuth retry loops by @villahernandez-coder in https://github.com/google-gemini/gemini-cli/pull/29655\n* fix(cli): handle JSON parse and response stream errors in fetchJson by @jesussamuel-byte in https://github.com/google-gemini/gemini-cli/pull/29658\n* fix(core): preserve line terminators in truncateString by @diegogodinezr in https://github.com/google-gemini/gemini-cli/pull/29673\n* fix(vscode-ide-companion): make IdeServer.stop() resolve while MCP sessions are open by @elberthc-byte in https://github.com/google-gemini/gemini-cli/pull/29674\n* fix(core): retain ask_user question text in the tool result display by @elberthc-byte in https://github.com/google-gemini/gemini-cli/pull/29677\n* fix(core): eliminate false positives on untrusted command flags and compound loops by @DavidAPierce in https://github.com/google-gemini/gemini-cli/pull/29672\n* fix(cli): clear cached credentials when re-selecting Google login by @urielefrenvirtusa in https://github.com/google-gemini/gemini-cli/pull/29643\n* fix(cli): resolve hang on Enter keypress in interactive mode (#23297) by @elberthc-byte in https://github.com/google-gemini/gemini-cli/pull/29476\n* perf(core): optimize ignore filtering and enable subtree pruning (#29077) by @amelidev in https://github.com/google-gemini/gemini-cli/pull/29582\n* fix(a2a-server): isolate tool rejection to active call in sequential batches by @jvargassanchez-dot in https://github.com/google-gemini/gemini-cli/pull/29683\n* fix(cli): skip eager recursive file reading for @<directory> references by @jvargassanchez-dot in https://github.com/google-gemini/gemini-cli/pull/29617\n* fix(cli): keep loading other extensions when one fails the allowlist check by @jesussamuel-byte in https://github.com/google-gemini/gemini-cli/pull/29720\n* fix(cli): correct reverse search highlight index for expanding unicode characters by @diegogodinezr in https://github.com/google-gemini/gemini-cli/pull/29699\n* fix(core): treat whitespace-only UTF-16 and UTF-32 files as empty by @jesussamuel-byte in https://github.com/google-gemini/gemini-cli/pull/29722\n* fix(cli): restore debounced static UI refresh on terminal width changes by @jvargassanchez-dot in https://github.com/google-gemini/gemini-cli/pull/29644\n* fix(cli): prevent session poisoning on rapid Ctrl-C interruption by @villahernandez-coder in https://github.com/google-gemini/gemini-cli/pull/29728\n\n\n**Full Changelog**: https://github.com/google-gemini/gemini-cli/compare/v0.64.0-preview.1...v0.65.0-preview.0",
+    "draft": false,
+    "prerelease": true,
+    "created_at": "2026-10-13T20:17:03Z",
+    "published_at": "2026-10-13T20:27:55Z"
+  },
+  {
+    "id": 411151224,
+    "tag_name": "v0.65.0-nightly.20261013.g51617c1bc",
+    "name": "Release v0.65.0-nightly.20261013.g51617c1bc",
+    "html_url": "https://github.com/google-gemini/gemini-cli/releases/tag/v0.65.0-nightly.20261013.g51617c1bc",
+    "body": "## What's Changed\n* fix(cli): keep loading other extensions when one fails the allowlist check by @jesussamuel-byte in https://github.com/google-gemini/gemini-cli/pull/29720\n\n\n**Full Changelog**: https://github.com/google-gemini/gemini-cli/compare/v0.65.0-nightly.20261012.g9b6e0265d...v0.65.0-nightly.20261013.g51617c1bc",
+    "draft": false,
+    "prerelease": true,
+    "created_at": "2026-10-13T01:28:41Z",
+    "published_at": "2026-10-13T01:36:45Z"
+  }
+]
