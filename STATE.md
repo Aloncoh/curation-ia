@@ -3,7 +3,7 @@
 _Mis à jour le 2026-10-30 (P2 : tout est fait sauf la validation de la maquette)._
 
 - **Phase** : P1 terminé. **P2 en cours** : code, tests, relectures, essai réel et maquette faits ; **reste la validation de la maquette par l'utilisateur** (critère de sortie), puis le commit.
-- **Dépôt** : dernier commit `P2 (en cours)` (341eb3b) ; les changements de cette séance **ne sont pas commités** (41 entrées dans `git status`).
+- **Dépôt** : dernier commit `P2 (en cours)` (341eb3b) ; tout P2 est commité (`3a13b0f`).
 - **Base locale** `data/curation.db` : migrations 0000–0002 appliquées ; essai réel de P2 (5 sources, 70 documents, 44 actualités). Copie d'avant migration dans le dossier temporaire de la séance (non conservée).
 - **Blocages** : aucun. **Dépenses** : 0 €. Aucun compte créé.
 
@@ -18,7 +18,7 @@ _Mis à jour le 2026-10-30 (P2 : tout est fait sauf la validation de la maquette
 
 1. **Validation de la maquette** (fil, fiche détail, états ; téléphone et ordinateur) — ou liste de changements souhaités.
 2. **Droits d'usage de la mascotte** (avant toute publication, P5) et, si possible, une version haute définition ou vectorielle.
-3. **Commit** des changements de P2 (proposé à la fin de la séance).
+3. Changements de maquette : l'utilisateur les donnera après la remise à zéro de la conversation.
 4. Budget plafond (IA, hébergement, domaine) et plafond de coût par exécution — avant P3.
 
 ## Repères techniques
