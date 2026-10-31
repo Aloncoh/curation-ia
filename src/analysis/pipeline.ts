@@ -67,7 +67,7 @@ async function aTraiter(client: Client, limite: number) {
           where d.id is null or d.status = 'qualifiee'
           order by d.id is not null desc, coalesce(n.announced_at, n.first_seen_at) desc, n.id desc`,
   );
-  const tailleAdmise = r.rows.filter((row) => String(row.content).length <= LONGUEUR_MAX_CAPTURE);
+  const tailleAdmise = r.rows.filter((row) => String(row.content).length + String(row.snapshot_title).length <= LONGUEUR_MAX_CAPTURE);
   const avecTexte = tailleAdmise.filter((row) => !moinsDeTroisMots(toPlainText(String(row.content), String(row.content_format))));
   return { lignes: avecTexte.slice(0, limite), sansTexte: tailleAdmise.length - avecTexte.length, tropLongues: r.rows.length - tailleAdmise.length };
 }
@@ -136,9 +136,12 @@ export async function genererBrouillons(o: OptionsBrouillons) {
     if (r.rowsAffected === 0) throw new BailPerdu('bail perdu : exécution close par un autre lot');
   };
 
-  /** Pendant l'attente du modèle, seul ce battement utilise le client : il garde le bail d'un processus vivant. */
+  /**
+   * Pendant l'attente du modèle, seul ce battement utilise le client : il garde le bail d'un processus vivant.
+   * Après un échec, la connexion est rouverte : libSQL la laisserait inutilisable pour les écritures suivantes (voir withBusyRetry).
+   */
   async function appelSousBail(requete: RequeteModele) {
-    const battement = setInterval(() => void client.execute({ sql: `update llm_run set lease_expires_at = ? where id = ? and status = 'en_cours'`, args: [finDeBail(), runId] }).catch(() => {}), dureeBail / 3);
+    const battement = setInterval(() => void client.execute({ sql: `update llm_run set lease_expires_at = ? where id = ? and status = 'en_cours'`, args: [finDeBail(), runId] }).catch(() => client.reconnect()).catch(() => {}), dureeBail / 3);
     try {
       return await o.modele.appeler(requete);
     } finally {
@@ -161,7 +164,14 @@ export async function genererBrouillons(o: OptionsBrouillons) {
         continue;
       }
       await renouvelerBail();
-      const id = await ecrire(() => reserver(client, plafonds, { newsItemId, stage, attempt, model: o.nomModele, promptVersion: PROMPT_VERSION, inputTokens, maxTokens }, now()));
+      let id: number;
+      try {
+        id = await ecrire(() => reserver(client, plafonds, { newsItemId, stage, attempt, model: o.nomModele, promptVersion: PROMPT_VERSION, inputTokens, maxTokens }, now()));
+      } catch (e) {
+        // Le premier essai tronqué est payé : sans marge pour le second, le résultat devient définitif, sinon chaque relance le repaierait.
+        if (e instanceof BudgetInsuffisant && maxTokens > MAX_TOKENS[stage]) return { ok: false, statut: 'sortie_tronquee' };
+        throw e;
+      }
       try {
         const r = await appelSousBail(requete);
         await ecrire(() => solder(client, id, o.nomModele, r.usage, r.stop, now()));

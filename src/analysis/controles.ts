@@ -33,16 +33,17 @@ export interface DiapositiveResolue {
 
 // Liste anti-sensationnalisme, version 1 (docs/agents-editoriaux.md §6).
 const SENSATIONNEL = /révolutionnaire|incroyable|époustouflant|hallucinant|game changer|tout change|vous n['’]allez pas croire|ce que personne ne vous dit|\bchoc\b/i;
-const SIGLES = new Set(['API', 'MCP', 'SDK', 'CLI', 'IA', 'AI', 'GPU', 'CPU', 'LLM', 'GPT', 'RAG', 'SQL', 'RSS', 'HTTP', 'JSON', 'URL', 'UI', 'UX', '3D']);
+const SIGLES = new Set(['API', 'MCP', 'SDK', 'CLI', 'IA', 'AI', 'GPU', 'CPU', 'LLM', 'GPT', 'RAG', 'SQL', 'RSS', 'HTTP', 'JSON', 'URL', 'UI', 'UX', '3D', 'PDF', 'DOCX', 'XLSX', 'CSV', 'HTML', 'CSS', 'PNG', 'JPG', 'SVG', 'MP3', 'MP4']);
 const NUANCE_SOURCE = /\b(?:not|never|only|except|unless|may|might|preview|beta|experimental|limited|deprecated|coming soon|planned)\b|n[’']t\b/i;
 // Bornes Unicode : `\b` ignore les lettres accentuées, « limité » n'y serait jamais reconnu.
-const NUANCE_TEXTE = /(?<![\p{L}\p{N}])(?:(?:ne|pas|jamais|seulement|uniquement|sauf|peut|peuvent|pourrait|préversion|bêta|expérimental|limité|limitée|bientôt|prévu|prévue|selon)(?![\p{L}\p{N}])|n['’])/iu;
+const NUANCE_TEXTE = /(?<![\p{L}\p{N}])(?:(?:ne|pas|jamais|seulement|uniquement|sauf|peut|peuvent|pourrait|sans|préversion|bêta|expérimentale?s?|expérimentaux|limitée?s?|restreinte?s?|indisponibles?|bientôt|prévue?s?|selon)(?![\p{L}\p{N}])|n['’])/iu;
 // Heuristiques : elles repèrent un passage hors sujet, elles ne prouvent pas que le coût ou l'accès annoncé est exact.
 const INDICE_COUT = /[$€£]\s?\d|\d\s?(?:[$€£]|usd\b|eur\b|dollars?\b|euros?\b)|\bfree\b|\bgratuit\w*|\bno cost\b|\bpric\w*|\bcosts?\b|\bpaid\b|\bplans?\b|\btiers?\b|\bsubscri\w*|\bcredits?\b|\bbilling\b/i;
 const GRATUITE = /\bfree\b|\bgratuit\w*|\bno cost\b|\bsans frais\b/i;
 const INDICE_ACCES = /https?:\/\/|\b(?:available|access|download\w*|install\w*|sign[- ]?up|waitlist|rolling out|preview|beta|github|npm|pip|marketplace|disponible\w*|accès)\b/i;
 const ATTRIBUTION = /\bselon\b|d['’]après|\baffirme\b|\brevendique\b|\bindique\b|\bannonce (?:que|une?|l[ea]s?|des|son|sa|ses)\b/i;
-const PERFORMANCE = /\bbenchmarks?\b|\bscores?\b|\d\s*(?:%|fois\b|x\b)|\bfois plus\b/i;
+// Un pourcentage seul peut être une remise ou une part d'écran : seule une comparaison compte comme une performance.
+const PERFORMANCE = /\bbenchmarks?\b|\bscores?\b|\bfois plus\b|\d\s*%\s*(?:de\s+)?(?:plus|moins|mieux)\b|\d\s*x\s+plus\b/i;
 const SUPERLATIF = /\b(?:l[ea]s?|du|des) (?:plus|meilleur\w*)\b|\bmeilleur\w*|\bplus (?:rapide|puissant|précis|performant|fiable)\w*|\bfois plus\b|\b\d+\s*(?:%|fois)|\bleader\b|\bn°\s*1\b/i;
 /** Types jamais publiables comme un fait : ils passent toujours en relecture. */
 const TYPES_A_RELIRE = ['non_confirmee', 'opinion', 'temoignage'];

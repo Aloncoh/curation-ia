@@ -21,6 +21,10 @@ describe('valeurs extraites d’un texte', () => {
     expect(liste(valeursDe('1 000 € par an').prix)).toEqual(['EUR:1000']);
     expect(liste(valeursDe('$1.2.3').prix)).toEqual([]);
   });
+  it('prix : trois décimales après un zéro ne sont pas des milliers', () => {
+    expect(liste(valeursDe('$0.125 per request').prix)).toEqual(['USD:0.125']);
+    expect(liste(valeursDe('$1,250 per year').prix)).toEqual(['USD:1250']);
+  });
   it('version : le point final d’une phrase n’en fait pas partie', () => {
     expect(liste(valeursDe('Disponible en version 0.65.0-preview.0.').versions)).toEqual(['0.65.0-preview.0']);
   });
@@ -46,6 +50,12 @@ describe('contradictions entre une analyse et sa capture', () => {
     expect(entre('le 30 octobre', 'Published October 29, 2026')).toEqual(['dates:10-30']);
     expect(entre('le 30 octobre 2025', 'Published October 30, 2026')).toEqual(['dates:2025-10-30']);
     expect(entre('version 2.1.312', 'Fixes in 2.1.311')).toEqual(['versions:2.1.312']);
+  });
+  it('deux écritures de la même version de base ne se contredisent pas', () => {
+    expect(entre('version 2', 'Released v2.0')).toEqual([]);
+    expect(entre('v2.0', 'Released 2.0.0')).toEqual([]);
+    expect(entre('version 0.66.0', 'Release 0.66.0-nightly.20261030')).toEqual([]);
+    expect(entre('version 0.67.0', 'Release 0.66.0-nightly.20261030')).toEqual(['versions:0.67.0']);
   });
   it('la version du catalogue n’est jamais une contradiction', () => {
     expect(entre('version 2.1.312', 'Fixes in 2.1.311', '2.1.312')).toEqual([]);

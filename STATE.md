@@ -3,8 +3,8 @@
 _Mis à jour le 2026-10-31 : code de P3 écrit et testé sur faux modèle ; Reddit en source différée ; 24 sources actives._
 
 - **Phase** : P2 fusionné dans `main`. **P3 en cours, pas terminé** sur `p3-brouillons` : collecte élargie réelle ; brouillons et publication non publiée codés, testés sur faux modèle ; aucun appel réel.
-- **Dépôt** : `main` à `e56db82` ; `p3-brouillons` non fusionnée et non poussée (aucun dépôt distant configuré). Dernier commit : fiabilisation et publication non publiée. Migration 0004 appliquée à la base locale.
-- **Tests** : 324 au vert sur fixtures et faux modèle (`npm test`), types OK. **Blocages** : aucun. **Dépenses** : 0 €. Aucun compte créé.
+- **Dépôt** : `main` à `e56db82` ; `p3-brouillons` non fusionnée et non poussée (aucun dépôt distant configuré), tout est commité. Migration 0004 appliquée à la base locale.
+- **Tests** : 346 au vert sur fixtures et faux modèle (`npm test`), types OK. **Blocages** : aucun. **Dépenses** : 0 €. Aucun compte créé.
 
 ## Ce qui fonctionne réellement (vérifié le 2026-10-31)
 
@@ -12,15 +12,12 @@ _Mis à jour le 2026-10-31 : code de P3 écrit et testé sur faux modèle ; Redd
 - **Brouillons : non, jamais exécutés en réel.** Sur faux modèle : qualification, rédaction, contrôles, reprises, publication non publiée. Essai sur une copie de la base : 327 actualités réelles traversent la chaîne, avec un texte artificiel, 66 sont laissées de côté. `llm_run`, `llm_call`, `post_draft` et `post` sont vides ; pas de clé ; dialogue réel avec l'API jamais essayé.
 - **Affichage : maquette statique locale.** Coulisses montre les actualités réelles ; le fil montre 8 exemples et le projet earshot, écrits pendant le développement ; aucun brouillon affiché ; site réel (P4) non commencé.
 
-## À reprendre en premier
-
-Une relecture ciblée des derniers correctifs était en cours au moment du commit : flux, bail, `neutraliser`, prix et versions, contrôles de copie et de benchmark, `relecture.ts`, migration 0004. Si PROGRESS.md n'en donne pas le résultat, la relancer sur ces points avant tout lot réel.
-
 ## Reste à faire dans P3
 
 - **Sans dépense** : plus rien de prévu ; `npm run brouillons:relire` est prêt pour le premier lot.
 - **Avec ton accord, ta clé et tes plafonds** : premier lot réel, réponse réelle de l'API, coût mesuré, revue des brouillons.
 - **Reporté à la publication réelle** : l'analyse ne repasse pas sur une actualité déjà traitée, même si sa source change ; les révisions datées arrivent avec P5.
+- **Limites gardées volontairement** : un refus 400 de l'API arrête le lot, pour ne pas marquer tout un lot invalide si le schéma est refusé ; il faudra alors lire le motif avant de relancer. Une coupure réseau en plein flux arrête aussi le lot. Le contrôle entre deux captures n'a encore aucun cas réel : aucune actualité n'a d'autre capture dans la base de travail.
 
 ## Ce qui est prêt à montrer
 

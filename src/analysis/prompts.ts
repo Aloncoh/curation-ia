@@ -13,11 +13,14 @@ const INVISIBLES = /[\s/\p{Cf}\p{Cc}\p{Default_Ignorable_Code_Point}]/gu;
 
 /**
  * Neutralise tout délimiteur, casse, espaces et caractères invisibles compris, même à l'intérieur du mot, sans rien
- * retirer : retirer pourrait recomposer une balise. Examen borné à 80 caractères après chaque « < », donc linéaire.
+ * retirer : retirer pourrait recomposer une balise. Les segments qui suivent chaque « < » sont disjoints : coût linéaire.
  */
 const neutraliser = (texte: string) =>
-  texte.replace(/<[^<]{0,80}/g, (suite) => (suite.slice(1).replace(INVISIBLES, '').toLowerCase().startsWith('document') ? `‹${suite.slice(1)}` : suite));
+  texte.replace(/<[^<]*/g, (suite) => (suite.slice(1).replace(INVISIBLES, '').toLowerCase().startsWith('document') ? `‹${suite.slice(1)}` : suite));
 
-/** Le titre est collecté lui aussi : il reste dans le bloc de données. Le produit vient du catalogue, il n'est pas citable. */
+/**
+ * Le titre est collecté lui aussi : il reste dans le bloc de données. Le tout est neutralisé d'un seul tenant, pour
+ * qu'aucune balise ne se forme à la jonction du titre et du texte. Le produit vient du catalogue, il n'est pas citable.
+ */
 export const documentUtilisateur = (titre: string, capture: string, produit?: string | null) =>
-  `<document>\n${produit ? `Produit (catalogue, ne pas citer) : ${neutraliser(produit)}\n` : ''}Titre : ${neutraliser(titre)}\n\n${neutraliser(capture)}\n</document>`;
+  `<document>\n${neutraliser(`${produit ? `Produit (catalogue, ne pas citer) : ${produit}\n` : ''}Titre : ${titre}\n\n${capture}`)}\n</document>`;

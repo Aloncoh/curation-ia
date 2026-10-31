@@ -36,7 +36,9 @@ export interface Modele {
 }
 
 export const estReprenable = (e: unknown) =>
-  e instanceof Anthropic.RateLimitError || e instanceof Anthropic.InternalServerError || e instanceof Anthropic.APIConnectionError;
+  e instanceof Anthropic.RateLimitError || e instanceof Anthropic.InternalServerError || e instanceof Anthropic.APIConnectionError ||
+  // En flux, une surcharge arrive comme un événement d'erreur, sans statut HTTP.
+  (e instanceof Anthropic.APIError && e.status === undefined && e.type === 'overloaded_error');
 
 /** Reprises du SDK désactivées : chaque tentative doit passer par le budget. Pas de repli serveur vers un autre modèle : son coût échapperait au contrôle. */
 export function modeleAnthropic(options: ConstructorParameters<typeof Anthropic>[0] = {}): Modele {

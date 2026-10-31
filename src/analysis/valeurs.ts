@@ -43,7 +43,8 @@ const date = (annee: string | undefined, mois: number, jour: number) => {
 /** « 1,000 » et « 1 000 » sont des milliers ; « 1,50 » est une décimale. */
 function montant(brut: string): string {
   const compact = brut.replace(/\s/g, '');
-  const sansMilliers = /[.,]\d{3}(?:[.,]|$)/.test(compact) ? compact.replace(/[.,](?=\d{3}(?:[.,]|$))/g, '') : compact;
+  // « 0.125 » est une décimale : un groupe de milliers ne suit jamais un zéro seul.
+  const sansMilliers = !/^0[.,]/.test(compact) && /[.,]\d{3}(?:[.,]|$)/.test(compact) ? compact.replace(/[.,](?=\d{3}(?:[.,]|$))/g, '') : compact;
   return String(Number(sansMilliers.replace(',', '.')));
 }
 
@@ -65,12 +66,15 @@ export function valeursDe(texte: string): Valeurs {
   };
 }
 
+/** « v2 », « 2.0 » et « 2.0.0-beta.1 » désignent la même version de base. */
+const versionDeBase = (version: string) => version.replace(/-.*$/, '').replace(/(?:\.0)+$/, '');
 const memeDate = (a: string, b: string) => a.slice(-5) === b.slice(-5) && (a.length === 5 || b.length === 5 || a === b);
 
 /** L'analyse affirme une valeur alors que la capture en donne une autre, de même nature. Sans valeur de ce type dans la capture, rien n'est comparable. */
 export function contradictions(affirme: Valeurs, source: Valeurs, version: string | null): Contradiction[] {
   const resultat: Contradiction[] = [];
-  for (const valeur of affirme.versions) if (source.versions.size > 0 && !source.versions.has(valeur) && valeur !== version) resultat.push({ type: 'versions', valeur });
+  const versionsSource = new Set([...source.versions, ...(version ? [version] : [])].map(versionDeBase));
+  for (const valeur of affirme.versions) if (source.versions.size > 0 && !versionsSource.has(versionDeBase(valeur))) resultat.push({ type: 'versions', valeur });
   for (const valeur of affirme.prix) if (source.prix.size > 0 && !source.prix.has(valeur)) resultat.push({ type: 'prix', valeur });
   for (const valeur of affirme.licences) if (source.licences.size > 0 && !source.licences.has(valeur)) resultat.push({ type: 'licences', valeur });
   for (const valeur of affirme.dates) if (source.dates.size > 0 && ![...source.dates].some((d) => memeDate(d, valeur))) resultat.push({ type: 'dates', valeur });

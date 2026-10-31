@@ -1,6 +1,5 @@
 Essai du 2026-10-31 sur une copie de data/curation.db, migrée en 0004, avec un FAUX modèle : aucun appel réseau, aucune dépense.
 Les brouillons sont artificiels : cet essai vérifie la chaîne et ses requêtes sur les captures réelles, jamais la qualité d'une analyse ; les statuts et les écarts ne mesurent rien.
-Le coût affiché par la commande de relecture sur cette copie est calculé sur un usage factice.
 
 post_draft|a_verifier|270
 post_draft|controle_automatique|57
