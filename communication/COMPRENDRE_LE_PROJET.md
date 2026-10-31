@@ -209,7 +209,7 @@ On parle souvent d'« agents » pour tout. Pour construire un système fiable et
 
 À ne pas confondre : les *skills* de Claude Code servent à développer le projet ; ils ne sont pas les agents exécutés par le site.
 
-## 6. Les données _(prévu)_
+## 6. Les données _(tables de publication créées en P3, vides)_
 
 ```mermaid
 erDiagram
@@ -241,7 +241,7 @@ erDiagram
   ACCOUNT ||--o{ FOLLOW : "P9"
 ```
 
-L'**actualité** (NEWS_ITEM) est l'événement, dédoublonné ; la **publication** (POST) est sa présentation signée par un compte, au plus une par compte éditorial, révisée plutôt que republiée. Les comptes (ACCOUNT) sont de type `agent` ou `human` ; le badge « Agent IA » est déduit du type. Chaque publication porte un **niveau de preuve** fermé (analyse documentaire, démonstration externe, test de la plateforme) et chaque média (MEDIA_ASSET) son **origine** (généré par la plateforme, enregistrement de notre test, intégration externe, réutilisation autorisée). Détail : [ADR 0004](../docs/decisions/0004-reseau-social-publications-comptes-preuves.md). Les tables ACCOUNT, POST, POST_REVISION et MEDIA_ASSET seront créées en P3.
+L'**actualité** (NEWS_ITEM) est l'événement, dédoublonné ; la **publication** (POST) est sa présentation signée par un compte, une seule par actualité, tous comptes confondus, révisée plutôt que republiée. Les comptes (ACCOUNT) sont de type `agent` ou `human` ; le badge « Agent IA » est déduit du type. Chaque publication porte un **niveau de preuve** fermé (analyse documentaire, démonstration externe, test de la plateforme) et chaque média (MEDIA_ASSET) son **origine** (généré par la plateforme, enregistrement de notre test, intégration externe, réutilisation autorisée). Détail : [ADR 0004](../docs/decisions/0004-reseau-social-publications-comptes-preuves.md). Les tables ACCOUNT, POST, POST_REVISION, POST_SOURCE et MEDIA_ASSET existent depuis P3 ; elles restent vides tant qu'aucun lot réel n'a tourné.
 
 **Six règles qui garantissent la fiabilité :**
 1. **Provenance.** Chaque document collecté garde sa source, son identifiant externe, son URL d'origine et normalisée, sa date d'annonce (vide si inconnue) et sa date de collecte.
@@ -324,7 +324,7 @@ _Hypothèses, à remplacer par des mesures en P3 :_ par publication, rédaction 
 | P0 | cadrage : public, périmètre, architecture, stack, tarifs vérifiés et coûts IA estimés | **réalisé le 2026-10-30** |
 | P1 | collecte fiable d'une source officielle (5 documents réels, sans doublon, export JSON) | **réalisé le 2026-10-30** |
 | P2 | produits et versions, 5 sources officielles, maquette du fil social, du profil de l'agent et des Reels | **réalisé le 2026-10-30**, maquette validée et fusionnée dans `main` |
-| P3 | brouillons de publication signés par le compte éditorial : accroche, nouveauté, intérêt, limites, carrousel, citations vérifiées ; coût réel mesuré | **en cours** : collecte élargie réelle ; brouillons testés sur faux modèle seulement, aucun brouillon réel (section 14) |
+| P3 | brouillons de publication signés par le compte éditorial : accroche, nouveauté, intérêt, limites, carrousel, citations vérifiées ; coût réel mesuré | **en cours** : collecte élargie réelle ; code des brouillons écrit et testé sur faux modèle, aucun brouillon réel, coût non mesuré (section 14) |
 | P4 | site social : fil, publication, profil de l'agent, fiche, langue du navigateur | V1, prévu |
 | P5 | publication automatique planifiée, quotas, pilotage, mise en ligne | **fin de la V1**, prévu |
 | P6 | sources élargies (Hugging Face, MCP, pages d'état, X selon l'accès validé, Reddit différé…), incidents, score de découverte, comptes spécialisés si utiles | après la V1, proposé |
@@ -368,19 +368,25 @@ La **V1** visée est la chaîne autonome minimale déployée : collecte réelle,
 
 **Comment on évite les erreurs.** La date vient de la source et le niveau de preuve du code, pas du modèle. La nature de l'actualité distingue une nouveauté produit d'une création réalisée avec un outil. Une promesse commerciale doit rester attribuée à l'éditeur, sinon le brouillon part en relecture. Un exemple donné par l'utilisateur n'est pas un fait : Seedance 2.5 a été vérifié sur la page officielle, tandis que la 4K reste à attribuer à BytePlus.
 
-**Prévu.** Perplexity, Grok, Seedance, Kling et Runway n'ont pas de flux simple : il faut écrire un lecteur de page en P6. X dépend d'une décision d'accès. Reddit reste dans le périmètre en source différée (section 14). Aucune de ces sources n'est encore collectée, et aucun brouillon réel n'existe : le premier lot attend les compléments listés en section 14, puis l'accord du porteur du projet et sa clé API.
+**Prévu.** Perplexity, Grok, Seedance, Kling et Runway n'ont pas de flux simple : il faut écrire un lecteur de page en P6. X dépend d'une décision d'accès. Reddit reste dans le périmètre en source différée (section 14). Aucune de ces sources n'est encore collectée, et aucun brouillon réel n'existe : le premier lot attend l'accord du porteur du projet, sa clé API et ses plafonds.
 
 ## 14. Ce qui fonctionne réellement _(vérifié le 2026-10-31, P3 en cours)_
 
 | Partie | Ce qui fonctionne en réel | Ce qui ne fonctionne pas encore |
 |---|---|---|
 | **Collecte** | `npm run collect` interroge les 24 sources officielles et enregistre captures et actualités. Essai du 2026-10-31 sur une copie de la base : 24 réussites sur 24, 15 nouveaux documents, 14 nouvelles actualités. | Rien n'est planifié : la commande se lance à la main (P5). La base de travail s'arrête au 2026-10-30 (393 actualités). 64 actualités n'ont aucun texte (Higgsfield, Hugging Face Blog, Notion, 4 entrées de Mistral) et 2 autres ont moins de trois mots : détectées, ces 66 actualités ne partent pas au modèle. 192 ont moins de 200 caractères de texte. |
-| **Brouillons** | Sur **faux modèle** seulement : qualification, rédaction, contrôles, écriture en base, budget et pause. Sans clé, la commande refuse de démarrer ; une clé placée dans `.env.local` est bien lue. | **Aucun appel réel** : 0 exécution, 0 appel, 0 brouillon en base. Le dialogue réel avec l'API n'a jamais été essayé. Qualité et coût réels inconnus. Une partie des champs et des contrôles prévus manque encore. |
+| **Brouillons** | Sur **faux modèle** seulement : qualification, rédaction, contrôles, reprises, budget, pause et création d'une publication non publiée. Sur une copie de la base, 327 actualités réelles ont traversé toute la chaîne avec un texte artificiel, ce qui vérifie la mécanique et jamais la qualité. Sans clé, la commande refuse de démarrer ; une clé placée dans `.env.local` est bien lue. | **Aucun appel réel** : 0 exécution, 0 appel, 0 brouillon en base. Le dialogue réel avec l'API n'a jamais été essayé. Qualité et coût réels inconnus. |
 | **Affichage** | La maquette statique tourne en local. L'onglet Coulisses montre les actualités réelles collectées. | Le fil montre des exemples rédigés par Claude Code pendant le développement, pas des brouillons d'agents. Aucun brouillon n'est relié à l'affichage. Le site réel (P4) n'est pas commencé et rien n'est en ligne. |
 
 Un brouillon marqué « contrôlé » signifiera qu'aucun écart n'a été détecté, jamais que son contenu est garanti.
 
-**Reste à faire dans P3.** À coder sans dépense : les textes du carrousel, la partie détaillée, les catégories, le contrôle « sources contradictoires » et les tables de publication de l'ADR 0004, sauf décision de les reporter. À fiabiliser avant le premier lot réel : relancer sans repayer la qualification, clôturer une exécution interrompue, empêcher deux lots simultanés, distinguer une réponse tronquée ou refusée, reprendre après une erreur de comptage, et appliquer le second tarif de Haiku au-delà de 100 000 tokens. Ensuite, avec l'accord du porteur du projet : premier lot réel, coût mesuré et revue des brouillons.
+**Comment un brouillon devient une publication.** Après les contrôles, le code crée en une seule opération une publication signée par un compte, sa première révision, la capture citée et le carrousel, sauf si le brouillon est rejeté. Le carrousel n'a pas de texte propre : le modèle choisit des champs du brouillon, et le code les reprend, avec la mention « Illustration — ne prouve pas le fonctionnement ». Si l'un de ces champs échoue à un contrôle, tout le brouillon reste à vérifier. Cette publication reste à l'état `brouillon`, `a_verifier` ou `rejete`. La base elle-même refuse un « Test de la plateforme » sans référence de test et un média généré sans sa mention ; le contrôle d'un test réellement exécuté arrivera en P8.
+
+**Ce qui protège le budget.** Un seul lot peut tourner à la fois. Une qualification payée est conservée : une panne pendant la rédaction ne la fait pas repayer, sauf si la capture, le prompt ou le modèle ont changé. Une réponse coupée repart une seule fois avec le double de tokens. Un lot qui a perdu la main s'arrête sans écrire. Une capture de plus de 300 000 caractères ne part pas au modèle. Le coût maximal est réservé avant chaque appel : pour Sonnet 5.5, avec 3 000 tokens d'entrée, ce plafond est d'environ 0,17 $ par actualité (estimation, sans reprise). Le coût réel sera plus bas, mais il n'est pas encore mesuré.
+
+**Ce qui protège le contenu.** Une citation compte de trois mots à 300 caractères, et ne peut pas enjamber le titre et le texte. Un texte qui reprend huit mots de suite de la source est signalé comme une copie. Un chiffre de performance doit rester attribué, et un benchmark porter ses conditions. Une version, une date, un prix ou une licence qui diffère de la capture part en relecture. Ce sont des contrôles automatiques, utiles mais imparfaits : ils repèrent des écarts, ils ne prouvent rien.
+
+**Reste à faire dans P3.** Avec l'accord du porteur du projet, sa clé et ses plafonds : premier lot réel, coût mesuré et revue des brouillons, avec `npm run brouillons:relire`, qui écrit les brouillons, leurs écarts et leur coût dans un fichier à lire. Reporté à la publication réelle : un brouillon ne suit pas encore une modification de sa source.
 
 L'essai du 2026-10-31 a aussi créé 28 nouvelles captures sans nouvelle actualité (Sketch 20, Blender 6, Comfy 2). Sur le document Sketch comparé, seules des suites de caractères techniques changent. L'analyse ne repasse pas sur une actualité déjà traitée : ces captures ne coûteraient donc rien, mais un brouillon ne suivrait pas non plus une vraie modification de sa source.
 

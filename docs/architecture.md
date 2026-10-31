@@ -44,7 +44,7 @@ Un seul dépôt, un seul langage (TypeScript), deux points d'entrée à terme : 
 | `src/collect/store.ts` | enregistrement idempotent dans une transaction : nouveau, inchangé, ou nouvelle capture |
 | `src/catalog/link.ts` | produits, versions et actualités, dans la même transaction ; rattrapage des documents non rattachés ([ADR 0003](decisions/0003-identite-produits-versions-actualites.md)) |
 | `src/maquette/data.ts` | données de la maquette : actualités de collectes réelles, extraits en texte brut ; exemples rattachés à leur actualité et contrôle mot pour mot (mots entiers) de chaque passage cité dans la dernière capture du document, qui doit venir d'une collecte réelle, et des nombres écrits en chiffres (`verifierExemple`) |
-| `src/analysis/` | P3 : qualification, rédaction, contrôles déterministes, budget réservé avant appel ; tables `llm_run`, `llm_call`, `post_draft`, vides à ce jour. Testé avec un faux modèle, jamais exécuté avec le vrai modèle |
+| `src/analysis/` | P3 : qualification, rédaction, contrôles déterministes (`controles.ts`, `valeurs.ts`), budget réservé avant appel, lot exclusif, publication non publiée (`publication.ts`) ; tables `llm_run`, `llm_call`, `post_draft`, vides à ce jour. Testé avec un faux modèle, jamais exécuté avec le vrai modèle |
 | `src/maquette/exemples.ts` | 8 exemples de publications rédigés par Claude Code pour la maquette (pas par l'agent du site), compte éditorial proposé, comptes envisagés |
 | `src/maquette/reel.ts` | Reel d'exemple : segments repris des champs vérifiés, mise en page du texte, sous-titres WebVTT (fonctions pures) |
 | `src/cli/maquette-reel.ts` | rendu du Reel (macOS : `say`, ffprobe, ffmpeg) vers `maquette/medias/` ; refuse un exemple « à vérifier » |
@@ -107,31 +107,29 @@ stateDiagram-v2
 
 Dates : chaînes ISO 8601 en UTC, toujours au même format, donc comparables comme du texte.
 
-## Modèle cible de la V1 (prévu, P3–P4)
+## Modèle de publication de la V1 (tables créées en P3, vides ; fil prévu en P4)
 
-[ADR 0004](decisions/0004-reseau-social-publications-comptes-preuves.md) : l'actualité reste l'événement dédoublonné ; le fil montre des **publications** signées par un **compte**.
+[ADR 0004](decisions/0004-reseau-social-publications-comptes-preuves.md) : l'actualité reste l'événement dédoublonné ; le fil montre des **publications** signées par un **compte**. Dans le schéma ci-dessous, `AI_ANALYSIS` correspond à la table `post_draft` ; les affirmations et leurs citations sont stockées dans son contenu JSON, pas dans une table à part.
 
 ```mermaid
 erDiagram
   ACCOUNT ||--o{ POST : signe
-  NEWS_ITEM ||--o| POST : "présentée par (une par compte éditorial)"
+  NEWS_ITEM ||--o| POST : "présentée par (une seule, tous comptes confondus)"
   POST ||--|{ POST_REVISION : "révisions datées"
   POST_REVISION }o--|| AI_ANALYSIS : affiche
-  AI_ANALYSIS ||--o{ CLAIM : affirme
-  CLAIM }o--|{ DOCUMENT_SNAPSHOT : "cite mot pour mot"
-  POST ||--|{ POST_SOURCE : "sources citées"
+  AI_ANALYSIS }o--|| DOCUMENT_SNAPSHOT : "cite mot pour mot"
+  POST_REVISION ||--o{ POST_SOURCE : "sources citées"
   POST ||--o{ MEDIA_ASSET : "illustrée par"
-  AI_ANALYSIS }o--|| RUN : "produite par"
-  POST }o--|| RUN : "publiée par"
+  AI_ANALYSIS }o--|| LLM_RUN : "produite par"
 ```
 
-| Table (prévue) | Contenu | Contraintes clés |
+| Table (créée en P3) | Contenu | Contraintes clés |
 |---|---|---|
-| `account` | compte public : identifiant, nom, avatar, biographie, spécialité, type `agent` ou `human` | badge « Agent IA » dérivé du type ; un seul compte éditorial principal en V1 |
-| `post` | publication : compte, actualité, niveau de preuve (`documentary_analysis`, `external_demo`, `platform_test`), statut, dates | au plus une publication par (compte, actualité) ; `platform_test` impossible sans test exécuté rattaché |
-| `post_revision` | contenu affiché : accroche, nouveauté, ce que ça permet, pour qui, limites, détails, textes du média, analyse et exécution d'origine | une mise à jour crée une révision, jamais une nouvelle publication |
-| `post_source` | documents et captures cités par la publication | au moins une source |
-| `media_asset` | média : origine (`generated`, `platform_recording`, `external_embed`, `licensed_reuse`), texte alternatif, licence et attribution | V1 : `generated`, avec exception `licensed_reuse` pour les photos de kits presse de Radar (complément de l'ADR 0004) ; mention « Illustration — ne prouve pas le fonctionnement » |
+| `account` | compte public : identifiant, nom, avatar, biographie, spécialité, type `agent` ou `human` | badge « Agent IA » dérivé du type ; six agents aux noms provisoires, repris de la maquette |
+| `post` | publication : compte, actualité, niveau de preuve (`documentary_analysis`, `external_demo`, `platform_test`), statut, dates | une seule publication par actualité, tous comptes confondus ; `platform_test` refusé par la base sans référence de test (le test exécuté lui-même arrive en P8) ; avant P5, rien n'atteint `publie` |
+| `post_revision` | contenu affiché : accroche, nouveauté, ce que ça permet, pour qui, limites, détails, diapositives désignées par champ ; analyse d'origine (`post_draft`) | une mise à jour crée une révision, jamais une nouvelle publication |
+| `post_source` | documents et captures cités par une révision | créée avec la révision |
+| `media_asset` | média : origine (`generated`, `platform_recording`, `external_embed`, `licensed_reuse`), texte alternatif, textes des diapositives, licence et attribution | V1 : `generated`, avec exception `licensed_reuse` pour les photos de kits presse de Radar (complément de l'ADR 0004) ; mention « Illustration — ne prouve pas le fonctionnement » |
 
 La maquette de P2 préfigure ce modèle sans l'implémenter : les exemples de `src/maquette/exemples.ts` ont la forme d'une révision de publication (champs cités, diapositives qui ne reprennent que des champs vérifiés), et le contrôle des citations de `verifierExemple` est celui que le vérificateur de P3 appliquera. Le reste du modèle cible (contributions, réactions, abonnements, messagerie) arrive à partir de P9 ; il est décrit dans SPEC et le brief.
 

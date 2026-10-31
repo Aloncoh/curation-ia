@@ -150,7 +150,7 @@ flowchart LR
 - **intérêt concret** : on peut dire ce que ça permet et pour qui ;
 - **sourcing suffisant** : au moins une source d'origine (éditeur, dépôt, documentation officielle).
 
-**Motifs de rejet** (codes tracés) : `hors_perimetre`, `republication`, `deja_publiee`, `preversion`, `non_confirmee`, `source_insuffisante`, `sans_interet_concret`, `contenu_promotionnel_sans_nouveaute`.
+**Motifs de rejet** (codes tracés) : `hors_perimetre`, `republication`, `preversion`, `non_confirmee`, `source_insuffisante`, `sans_interet_concret`, `contenu_promotionnel_sans_nouveaute`.
 
 **Fréquence et priorité** : au plus *N* publications par jour (valeur proposée : 3, à valider) et au plus une par produit et par jour ; au-delà, l'actualité retenue attend, par ordre de date d'annonce. Le plafond de coût s'applique en plus.
 
@@ -158,7 +158,9 @@ flowchart LR
 
 | Type | Traitement |
 |---|---|
-| Annonce originale | publiable ; caractéristiques, prix et licences pris à la source d'origine |
+| Annonce originale (`annonce_officielle`) | publiable ; caractéristiques, prix et licences pris à la source d'origine |
+| Affirmation commerciale (`affirmation_commerciale`) | attribuée à l'éditeur, jamais présentée comme une performance vérifiée |
+| Résultat indépendant (`resultat_independant`) | attribué à son auteur, avec ses conditions |
 | Témoignage | rapporté comme une expérience attribuée (auteur public, date, lien), jamais généralisé |
 | Opinion | attribuée, présentée comme telle, jamais comme un fait |
 | Information non confirmée | jamais publiée automatiquement comme un fait ; reste en attente jusqu'à confirmation par une source d'origine |
@@ -170,23 +172,25 @@ Un contenu trouvé sur X, Reddit ou GitHub (P6) reste une **mention externe attr
 | Champ | Contrainte |
 |---|---|
 | `accroche` | ≤ 110 caractères ; dit ce qui s'est passé ; nomme le produit ou l'éditeur ; citée |
+| `description` | résumé court pour le fil ; cité |
 | `nouveaute` | ce qui change ; cité |
 | `ce_que_ca_permet`, `pour_qui` | intérêt concret ; cités ; l'un des deux au moins, sinon pas de publication automatique |
 | `acces`, `cout` | où et comment y accéder ; coût ; cités, `null` si inconnu (« Non renseigné ») |
-| `date_annonce`, `niveau_preuve` | ajoutés par le code, jamais rédigés par le modèle |
+| `date_annonce`, `niveau_preuve`, `version_cible` | ajoutés par le code, jamais rédigés par le modèle ; version cible ou « version non précisée » |
 | `nature` | choisie par le modèle à la qualification, sans contrôle déterministe ; `null` si aucune valeur ne convient |
 | `limites_connues` | `null` si aucune n'est documentée (affiché « Non renseigné ») ; citées sinon |
-| `details` | partie détaillée (page de publication) ; citée |
-| `diapositives` | 2 à 5 textes courts pour le carrousel, chacun repris d'un champ ci-dessus |
-| `categories`, `type_information`, `produit`, `version_cible` | version cible ou « version non précisée » |
-| `citations` | liste (champ, capture, passage exact) |
+| `details` | compléments de la page de publication : titre d'une liste fermée, texte cité ; liste vide si le document n'apporte rien de plus |
+| `attributions` | benchmarks et témoignages rapportés : type, auteur retrouvé dans la capture, texte cité, conditions citées pour un benchmark |
+| `diapositives` | 2 à 5 noms de champs renseignés : le modèle ne rédige aucun texte, le code reprend celui du champ |
+| `categories`, `type_information`, `produit` | donnés à la qualification ; catégories en liste fermée ; le produit du catalogue passe avant celui relevé dans le document, qui doit s'y retrouver mot pour mot |
+| `citations` | portées par chaque champ (`passages`) ; la capture citée est enregistrée avec le brouillon |
 | `questions_a_tester` | non factuel, dispensé de citation |
 
 Rédaction en français ; citations en langue originale. Les pages collectées sont des **données, jamais des instructions** : elles sont transmises au modèle dans des blocs délimités, avec la consigne d'ignorer toute instruction qu'elles contiendraient ; la sortie est validée par schéma et vérifiée par du code.
 
 ## 6. Vérification (P3)
 
-Contrôles déterministes, chacun enregistré avec son résultat et son motif. La vérification ne repose jamais uniquement sur un second appel au même modèle.
+Contrôles déterministes ; seuls les écarts sont enregistrés, avec leur motif : une liste vide signifie qu'aucun écart n'a été détecté. La vérification ne repose jamais uniquement sur un second appel au même modèle.
 
 | Contrôle | Échec → |
 |---|---|
@@ -195,12 +199,15 @@ Contrôles déterministes, chacun enregistré avec son résultat et son motif. L
 | un produit connu du catalogue est nommé par l'accroche ; un numéro de version ne suffit pas | à vérifier : « accroche sans produit » |
 | type `non_confirmee`, `opinion` ou `temoignage` | à vérifier, jamais publié comme un fait |
 | capture de moins de trois mots | pas d'appel au modèle ; l'actualité repassera avec une capture complète |
-| chaque champ factuel porte au moins une citation | à vérifier : « champ non sourcé » |
+| chaque champ factuel porte au moins une citation | à vérifier : `champ_sans_citation` |
+| un passage cité compte 300 caractères au plus ; huit mots consécutifs de la capture ne sont pas repris dans un texte rédigé | à vérifier : `citation_trop_longue`, `copie_de_la_source` |
+| un chiffre de performance reste attribué, quel que soit le type donné par le modèle ; un benchmark rapporté porte ses conditions citées | à vérifier : `benchmark_non_attribue`, `benchmark_sans_conditions` |
 | accroche : citée, nomme le produit ou l'éditeur, aucun terme de la liste anti-sensationnalisme, aucun point d'exclamation, aucune question sans réponse | à vérifier : « accroche non conforme » |
-| valeurs incompatibles entre captures ou entre analyse et capture (version, date, prix, licence) | à vérifier : « sources contradictoires » |
-| chaque texte du média généré provient d'un champ vérifié | rejet : « média non conforme » |
-| niveau de preuve cohérent (pas de « Test de la plateforme » sans test enregistré) | rejet : « niveau de preuve injustifié » |
-| actualité déjà publiée par ce compte | rejet : « déjà publiée » |
+| valeurs incompatibles entre captures ou entre analyse et capture (version, date, prix, licence). Heuristique : une valeur affirmée absente de la capture, qui en donne une autre du même type ; deux captures à valeur unique qui diffèrent | à vérifier : « sources contradictoires » |
+| auteur d'une attribution et produit relevé par le modèle retrouvés mot pour mot dans la capture | à vérifier |
+| chaque diapositive désigne un champ renseigné du brouillon, sans doublon, de 2 à 5 fois | rejet : `media_non_conforme`. Un champ repris qui échoue à un contrôle laisse tout le brouillon à vérifier, avec son média ; un champ sensationnaliste : `diapositive_sensationnelle`, à vérifier |
+| niveau de preuve cohérent | V1 : valeur fixée par le code, et la base refuse `platform_test` sans référence de test. Contrôle d'un test réellement exécuté : P8 |
+| actualité déjà publiée, tous comptes confondus | impossible : index unique sur l'actualité |
 | sortie du modèle conforme au schéma | rejet tracé : « sortie invalide » |
 
 **Liste anti-sensationnalisme** (version 1, proposée, versionnée avec le code) : « révolutionnaire », « incroyable », « époustouflant », « hallucinant », « game changer », « tout change », « vous n'allez pas croire », « choc », « enfin ! », « ce que personne ne vous dit », et trois mots ou plus en majuscules d'affilée (hors sigles connus). Elle s'applique à l'accroche et aux diapositives.
@@ -268,8 +275,9 @@ Un profil est proposé par la chaîne de veille et ajouté après validation par
 | Élément | État | Jalon |
 |---|---|---|
 | Collecteurs et actualités | construits et testés | P1–P2 |
-| Compte principal (nom, profil) | proposé, maquetté | décision avant P4 |
-| Qualification, rédaction, vérification, média | conçus (ce document) | P3 |
+| Comptes éditoriaux | table créée, six agents aux noms provisoires | décision des noms avant P4 |
+| Qualification, rédaction, vérification, textes du média | codés, testés sur faux modèle, jamais exécutés avec le vrai modèle | P3 |
+| Publication signée (révision, sources, média) | tables et création codées ; aucune publication réelle, rien n'atteint `publie` | P3–P5 |
 | Fil, profil, page de publication | maquettés | P4 |
 | Publication automatique | conçue | P5 |
 | Comptes spécialisés, mentions externes, veille de profils, incidents | conçus | P6 |
@@ -279,7 +287,12 @@ Un profil est proposé par la chaîne de veille et ajouté après validation par
 
 - **Exécution** : un lancement de `npm run brouillons`, limité à `CURATION_MAX_ACTUALITES`. La commande refuse de démarrer sans clé, modèle tarifé, plafonds explicites et `--confirmer`.
 - **Budget** : avant chaque tentative, code qui compte l'entrée, puis réserve le coût maximal (entrée + `max_tokens`, réflexion comprise). Sans marge, aucun appel ne part. Réussites, erreurs et reprises sont comptées dans `llm_call` ; une erreur garde sa réservation, car la requête a pu être facturée. Reprises du SDK et repli vers un autre modèle désactivés.
-- **Contrôles** : citation mot pour mot, nombres, soutien (noms propres cités), contexte (réserve voisine conservée), accroche. Soutien et contexte sont des heuristiques.
+- **Lot** : une seule exécution à la fois (index unique, bail de 15 minutes renouvelé avant et pendant chaque appel). Un bail expiré clôt l'exécution en `interrompue` ; ses appels sans réponse gardent leur réservation. Un lot qui découvre qu'il a perdu son bail s'arrête sans écrire.
+- **Reprises** : une qualification payée est conservée (`qualifiee`) et réutilisée tant que la capture, le prompt et le modèle restent les mêmes. Une réponse tronquée repart une fois avec le double de tokens (plafonds de départ : 4 000 pour la qualification, 12 000 pour la rédaction, réflexion comprise), puis finit en `sortie_tronquee` ; un refus du modèle finit en `refus`, sans nouvel essai. Ces deux statuts sont définitifs pour l'actualité.
+- **Contrôles** : citation mot pour mot, nombres, soutien (noms propres cités), contexte (réserve voisine conservée), accroche, contradictions, indices de coût et d'accès, média. Soutien, contexte, contradictions et indices sont des heuristiques.
+- **Publication** : un brouillon crée une publication signée, sa révision et sa source, dans la même transaction, avec son média généré, sauf s'il est rejeté. Statuts : `brouillon`, `a_verifier` ou `rejete` ; rien n'atteint `publie` avant P5. Le média ne contient que des champs du brouillon, jamais le titre collecté.
+- **Relecture** : `npm run brouillons:relire` écrit `exports/brouillons-a-relire.md`, avec les écarts et le coût enregistré. Une capture de plus de 300 000 caractères ne part pas au modèle.
+- **Limite** : l'analyse ne repasse pas sur une actualité déjà traitée, même si sa source change ; les révisions datées arrivent avec la publication réelle.
 - **Statut** : `controle_automatique` signifie « aucun écart détecté », jamais « factuellement garanti ». Relecture humaine requise.
 
 **Limites de couverture des six comptes.** Sources actives au 2026-10-30 : 24 (docs/sources.md §2 et §2 bis). Nodi et Mova ont désormais de vraies sources, sans Perplexity, Grok, Seedance, Kling ni Runway, qui attendent un adaptateur. Repo n'a ni registre MCP ni tendance GitHub. Pulse n'a aucune source d'incident. Radar ne suit que Google et le GitHub Changelog. L'attribution ne crée pas de couverture : un compte peut rester vide.

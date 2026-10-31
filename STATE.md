@@ -1,22 +1,26 @@
 # État du projet
 
-_Mis à jour le 2026-10-31 : Reddit en source différée ; veille élargie à l'écosystème IA et créatif, 24 sources actives._
+_Mis à jour le 2026-10-31 : code de P3 écrit et testé sur faux modèle ; Reddit en source différée ; 24 sources actives._
 
-- **Phase** : P2 fusionné dans `main`. **P3 en cours, pas terminé** sur `p3-brouillons` : collecte élargie réelle ; brouillons partiellement codés, testés sur faux modèle ; aucun appel réel.
-- **Dépôt** : `main` à `e56db82` ; travail de P3 commité sur `p3-brouillons`, non fusionné et non poussé.
-- **Tests** : voir `npm test`, types OK. **Blocages** : aucun. **Dépenses** : 0 €. Aucun compte créé.
+- **Phase** : P2 fusionné dans `main`. **P3 en cours, pas terminé** sur `p3-brouillons` : collecte élargie réelle ; brouillons et publication non publiée codés, testés sur faux modèle ; aucun appel réel.
+- **Dépôt** : `main` à `e56db82` ; `p3-brouillons` non fusionnée et non poussée (aucun dépôt distant configuré). Dernier commit : fiabilisation et publication non publiée. Migration 0004 appliquée à la base locale.
+- **Tests** : 324 au vert sur fixtures et faux modèle (`npm test`), types OK. **Blocages** : aucun. **Dépenses** : 0 €. Aucun compte créé.
 
 ## Ce qui fonctionne réellement (vérifié le 2026-10-31)
 
 - **Collecte : oui, à la main.** Essai sur une copie de la base : 24 sources sur 24, 15 nouveaux documents, 14 nouvelles actualités. Aucune planification (P5). Base de travail : 393 actualités, arrêtée au 2026-10-30, dont 66 inexploitables (64 vides, 2 de moins de trois mots), qui ne partent pas au modèle. 24 sources au registre ; 25 lignes en base (`npm run status`), dont DeepMind, reportée, sans document.
-- **Brouillons : non, jamais exécutés en réel.** Sur faux modèle : qualification, rédaction, contrôles, écriture en base, budget. `llm_run`, `llm_call` et `post_draft` sont vides ; pas de clé ; dialogue réel avec l'API jamais essayé.
+- **Brouillons : non, jamais exécutés en réel.** Sur faux modèle : qualification, rédaction, contrôles, reprises, publication non publiée. Essai sur une copie de la base : 327 actualités réelles traversent la chaîne, avec un texte artificiel, 66 sont laissées de côté. `llm_run`, `llm_call`, `post_draft` et `post` sont vides ; pas de clé ; dialogue réel avec l'API jamais essayé.
 - **Affichage : maquette statique locale.** Coulisses montre les actualités réelles ; le fil montre 8 exemples et le projet earshot, écrits pendant le développement ; aucun brouillon affiché ; site réel (P4) non commencé.
+
+## À reprendre en premier
+
+Une relecture ciblée des derniers correctifs était en cours au moment du commit : flux, bail, `neutraliser`, prix et versions, contrôles de copie et de benchmark, `relecture.ts`, migration 0004. Si PROGRESS.md n'en donne pas le résultat, la relancer sur ces points avant tout lot réel.
 
 ## Reste à faire dans P3
 
-- **À coder sans dépense** : textes du carrousel, `details`, `categories`, contrôle « sources contradictoires », tables de publication de l'ADR 0004 (ou report décidé).
-- **À fiabiliser avant le premier lot réel** : relance sans repayer la qualification et clôture des `llm_run` interrompus ; un seul lot à la fois et reprise sur base verrouillée ; réponse tronquée ou refusée distinguée ; reprise sur erreur de comptage ; second tarif de Haiku au-delà de 100 000 tokens.
-- **Limite connue** : l'analyse ne repasse pas sur une actualité déjà traitée, même si sa source change.
+- **Sans dépense** : plus rien de prévu ; `npm run brouillons:relire` est prêt pour le premier lot.
+- **Avec ton accord, ta clé et tes plafonds** : premier lot réel, réponse réelle de l'API, coût mesuré, revue des brouillons.
+- **Reporté à la publication réelle** : l'analyse ne repasse pas sur une actualité déjà traitée, même si sa source change ; les révisions datées arrivent avec P5.
 
 ## Ce qui est prêt à montrer
 
@@ -34,16 +38,17 @@ _Mis à jour le 2026-10-31 : Reddit en source différée ; veille élargie à l'
 
 ## En attente de l'utilisateur
 
-1. Avant tout appel : confirmer modèle et plafonds, lire le solde de crédits (console Anthropic), saisir la clé soi-même. Tarifs revérifiés le 2026-10-30.
+1. Avant tout appel : confirmer modèle et plafonds, lire le solde de crédits (console Anthropic), saisir la clé soi-même. Tarifs revérifiés le 2026-10-31. Plafond par actualité (Sonnet 5.5, estimation pour 3 000 tokens d'entrée, sans reprise) : 0,17 $ ; le coût réel sera inférieur et reste à mesurer.
 2. Kits presse autorisés ; droits à vérifier photo par photo avant mise en ligne.
 3. Langues disponibles au lancement (proposition : français seul) et nom définitif du compte éditorial — avant P4.
 4. Droits d'usage de la mascotte ; budget plafond et fréquence maximale de publication — avant le premier lot réel de P3.
 5. Décisions sur les sources et médias (X, reprise de Reddit, sources aux conditions restrictives, hébergement vidéo, traduction, bacs à sable, points juridiques) : options chiffrées dans `docs/sources.md` §8.1 — avant P6/P7, pas maintenant.
 6. Proposition : préciser SPEC §7.3 « sous-chaîne exacte » en « sous-chaîne exacte, bornée à des mots entiers » (déjà appliqué par le code, plus strict).
+7. Proposition : préciser SPEC §7.3 « les textes du média généré » en « les diapositives, désignées par nom de champ, le texte étant repris par le code » (déjà appliqué, plus strict : le modèle ne rédige aucun texte de média).
 
 ## Prochaine action
 
-P3 : traiter « Reste à faire dans P3 », puis premier petit lot réel après la confirmation du point 1 ; aucun crédit API activé sans accord. Système de comptes demandé par l'utilisateur : reste en P9, plan inchangé pour l'instant. Règle visuelle : photos qui donnent envie, comme Radar/Google.
+P3 : premier petit lot réel après la confirmation du point 1, puis `npm run brouillons:relire` ; aucun crédit API activé sans accord. Système de comptes demandé par l'utilisateur : reste en P9, plan inchangé pour l'instant. Règle visuelle : photos qui donnent envie, comme Radar/Google.
 
 ## Repères techniques
 

@@ -125,8 +125,9 @@ export function toPlainText(content: string, format: string): string {
     // Les balises de bloc séparent des mots ; les balises en ligne (<b>, <a>…) non.
     text = text
       .replace(/<(script|style)[^>]*>[\s\S]*?<\/\1>/gi, ' ')
-      .replace(/<\/?(?:p|br|div|li|ul|ol|h[1-6]|tr|td|th|blockquote|pre|hr|section|article|figure|figcaption)\b[^>]*>/gi, ' ')
-      .replace(/<[^>]*>/g, '');
+      .replace(/<\/?(?:p|br|div|li|ul|ol|h[1-6]|tr|td|th|blockquote|pre|hr|section|article|figure|figcaption)\b[^<>]*>/gi, ' ')
+      // `[^<>]` : une page faite de « < » sans « > » ne doit pas rendre ce retrait quadratique.
+      .replace(/<[^<>]*>/g, '');
     text = decodeHtmlEntities(text);
   } else {
     text = text

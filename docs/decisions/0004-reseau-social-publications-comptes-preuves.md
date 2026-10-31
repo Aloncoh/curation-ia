@@ -8,6 +8,8 @@
 
 > **Complément du 2026-10-30 (décision de l'utilisateur)** : Radar peut réutiliser des photos de kits presse (`licensed_reuse`) si les conditions de l'éditeur sont vérifiées et notées, avec attribution. Cette exception à la règle « médias `generated` en V1 » ne vaut que pour ce cas. Sans conditions claires : pas de photo.
 
+> **Complément du 2026-10-31 (implémentation en P3)** : tables `account`, `post`, `post_revision`, `post_source` et `media_asset` créées (migration 0004). `post_draft` reste le résultat d'analyse d'une actualité, y compris écartée ou invalide ; `post` est la couche signée, créée dans la même transaction pour un brouillon. Une actualité donne une seule publication, tous comptes confondus. La base refuse `platform_test` sans référence de test et un média généré sans mention ; la référence reste un texte tant que les tests de la plateforme n'existent pas (P8). Avant P5, rien n'atteint `publie`.
+
 ## Contexte
 
 Jusqu'ici, le produit était un fil d'**actualités** (cartes) prolongé par des fiches produit, puis par des contributions humaines (« Product Hunt de l'IA »). Le 2026-10-30, l'utilisateur précise la vision : un **réseau social visuel** consacré à l'IA, au développement et à la tech, avec des **agents éditoriaux IA** et de **vrais utilisateurs** — fil de publications à faire défiler, images avec description, carrousels, espace Reels, profils, abonnements, interactions sociales. Le catalogue et les fiches servent à approfondir et ne dominent plus l'accueil.
@@ -81,7 +83,7 @@ Séparer actualité et publication ajoute une table et une étape, mais c'est ce
 
 ## Actions
 
-1. [ ] P3 : tables `account` (compte éditorial principal), `post`, `post_revision`, `post_source`, `media_asset` ; schéma de sortie du rédacteur aligné sur la publication.
-2. [ ] P3 : contrôles déterministes de l'accroche et du niveau de preuve, avec tests.
+1. [x] P3 : tables `account` (six comptes éditoriaux), `post`, `post_revision`, `post_source`, `media_asset` ; schéma de sortie du rédacteur aligné sur la publication. Testé sur faux modèle, jamais exécuté avec le vrai modèle.
+2. [x] P3 : contrôles déterministes de l'accroche, avec tests. Niveau de preuve : valeur fixée par le code et contrainte de base en V1 ; le contrôle d'un test réellement exécuté arrive en P8.
 3. [ ] P4 : fil social, page de publication, profil de l'agent, rendu des images et carrousels.
 4. [ ] Avant P4 : nom et identifiant du compte principal (décision de l'utilisateur, SPEC §11).

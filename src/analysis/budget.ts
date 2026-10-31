@@ -55,10 +55,14 @@ export async function reserver(client: Client, plafonds: Plafonds, t: Tentative,
   }
 }
 
+/** Le coût réel remplace la réservation ; un dépassement de la réservation reste visible dans `error`. */
 export async function solder(client: Client, id: number, model: string, usage: { input: number; output: number }, stop: string | null, now: string): Promise<void> {
+  const reel = coutMicroUsd(model, usage.input, usage.output);
   await client.execute({
-    sql: `update llm_call set status = 'reussi', actual_micro_usd = ?, input_tokens = ?, output_tokens = ?, stop_reason = ?, finished_at = ? where id = ?`,
-    args: [coutMicroUsd(model, usage.input, usage.output), usage.input, usage.output, stop, now, id],
+    sql: `update llm_call set status = 'reussi', actual_micro_usd = ?, input_tokens = ?, output_tokens = ?, stop_reason = ?, finished_at = ?,
+            error = case when ? > reserved_micro_usd then 'coût réel supérieur à la réservation' end
+          where id = ?`,
+    args: [reel, usage.input, usage.output, stop, now, reel, id],
   });
 }
 

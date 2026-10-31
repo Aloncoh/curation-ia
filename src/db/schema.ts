@@ -1,6 +1,6 @@
 // Schéma de la base. Les dates sont des chaînes ISO 8601 en UTC (toujours au même format, donc comparables).
 import { sql } from 'drizzle-orm';
-import { index, integer, primaryKey, sqliteTable, text, uniqueIndex } from 'drizzle-orm/sqlite-core';
+import { check, index, integer, primaryKey, sqliteTable, text, uniqueIndex } from 'drizzle-orm/sqlite-core';
 
 /** Source configurée (ex. les releases GitHub d'un dépôt officiel). */
 export const sources = sqliteTable('source', {
@@ -212,18 +212,24 @@ export const settings = sqliteTable('setting', {
   updatedAt: text('updated_at').notNull(),
 });
 
-/** Exécution d'analyse : un lancement de `npm run brouillons`, avec ses plafonds. Rien n'est publié. */
-export const llmRuns = sqliteTable('llm_run', {
-  id: text('id').primaryKey(),
-  startedAt: text('started_at').notNull(),
-  finishedAt: text('finished_at'),
-  /** en_cours | terminee | arret_budget | arret_pause | echec */
-  status: text('status').notNull(),
-  maxItems: integer('max_items').notNull(),
-  capRunMicroUsd: integer('cap_run_micro_usd').notNull(),
-  capTotalMicroUsd: integer('cap_total_micro_usd').notNull(),
-  reason: text('reason'),
-});
+/** Exécution d'analyse : un lancement de `npm run brouillons`, avec ses plafonds. Rien n'est publié. Une seule à la fois. */
+export const llmRuns = sqliteTable(
+  'llm_run',
+  {
+    id: text('id').primaryKey(),
+    startedAt: text('started_at').notNull(),
+    finishedAt: text('finished_at'),
+    /** en_cours | terminee | arret_budget | arret_pause | echec | interrompue */
+    status: text('status').notNull(),
+    /** Renouvelé avant chaque appel : une exécution `en_cours` dont le bail a expiré est tenue pour interrompue. */
+    leaseExpiresAt: text('lease_expires_at'),
+    maxItems: integer('max_items').notNull(),
+    capRunMicroUsd: integer('cap_run_micro_usd').notNull(),
+    capTotalMicroUsd: integer('cap_total_micro_usd').notNull(),
+    reason: text('reason'),
+  },
+  (t) => [uniqueIndex('llm_run_en_cours_uq').on(t.status).where(sql`status = 'en_cours'`)],
+);
 
 /** Tentative d'appel au modèle, y compris erreurs et reprises. Coût en millionièmes de dollar ; une réservation non soldée reste comptée. */
 export const llmCalls = sqliteTable(
@@ -257,7 +263,7 @@ export const postDrafts = sqliteTable(
     id: integer('id').primaryKey({ autoIncrement: true }),
     newsItemId: integer('news_item_id').notNull().references(() => newsItems.id),
     runId: text('run_id').notNull().references(() => llmRuns.id),
-    /** ecartee | sortie_invalide | a_verifier | controle_automatique (jamais une garantie factuelle) */
+    /** qualifiee (reprise possible) | ecartee | sortie_invalide | sortie_tronquee | refus | rejete | a_verifier | controle_automatique (jamais une garantie factuelle) */
     status: text('status').notNull(),
     account: text('account'),
     rejectionReason: text('rejection_reason'),
@@ -270,4 +276,93 @@ export const postDrafts = sqliteTable(
     createdAt: text('created_at').notNull(),
   },
   (t) => [uniqueIndex('post_draft_news_item_uq').on(t.newsItemId)],
+);
+
+/** Compte public, agent ou humain (ADR 0004). Le badge « Agent IA » est dérivé de `type`, jamais saisi. */
+export const accounts = sqliteTable(
+  'account',
+  {
+    id: text('id').primaryKey(),
+    handle: text('handle').notNull(),
+    displayName: text('display_name').notNull(),
+    type: text('type').notNull(),
+    avatar: text('avatar').notNull(),
+    bio: text('bio').notNull(),
+    specialty: text('specialty').notNull(),
+    provisional: integer('provisional', { mode: 'boolean' }).notNull(),
+    createdAt: text('created_at').notNull(),
+  },
+  (t) => [uniqueIndex('account_handle_uq').on(t.handle), check('account_type_ck', sql`type in ('agent', 'human')`)],
+);
+
+/** Publication signée d'une actualité : une seule par actualité, tous comptes confondus. Avant P5, rien n'atteint `publie`. */
+export const posts = sqliteTable(
+  'post',
+  {
+    id: integer('id').primaryKey({ autoIncrement: true }),
+    accountId: text('account_id').notNull().references(() => accounts.id),
+    newsItemId: integer('news_item_id').notNull().references(() => newsItems.id),
+    evidenceLevel: text('evidence_level').notNull(),
+    /** Référence du test exécuté : obligatoire pour afficher `platform_test` (P8). */
+    platformTestRef: text('platform_test_ref'),
+    /** brouillon | a_verifier | rejete | en_attente | publie | retire */
+    status: text('status').notNull(),
+    createdAt: text('created_at').notNull(),
+    publishedAt: text('published_at'),
+  },
+  (t) => [
+    uniqueIndex('post_news_item_uq').on(t.newsItemId),
+    check('post_evidence_level_ck', sql`evidence_level in ('documentary_analysis', 'external_demo', 'platform_test')`),
+    check('post_platform_test_ck', sql`evidence_level <> 'platform_test' or length(trim(coalesce(platform_test_ref, ''))) > 0`),
+    check('post_status_ck', sql`status in ('brouillon', 'a_verifier', 'rejete', 'en_attente', 'publie', 'retire')`),
+  ],
+);
+
+/** Contenu affiché d'une publication. Une mise à jour ajoute une révision, jamais une nouvelle publication. */
+export const postRevisions = sqliteTable(
+  'post_revision',
+  {
+    id: integer('id').primaryKey({ autoIncrement: true }),
+    postId: integer('post_id').notNull().references(() => posts.id),
+    seq: integer('seq').notNull(),
+    /** Analyse d'origine : modèle, version du prompt, exécution et contrôles. */
+    draftId: integer('draft_id').notNull().references(() => postDrafts.id),
+    content: text('content', { mode: 'json' }).notNull().$type<Record<string, unknown>>(),
+    createdAt: text('created_at').notNull(),
+  },
+  (t) => [uniqueIndex('post_revision_post_seq_uq').on(t.postId, t.seq)],
+);
+
+/** Captures citées par une révision. */
+export const postSources = sqliteTable(
+  'post_source',
+  {
+    id: integer('id').primaryKey({ autoIncrement: true }),
+    revisionId: integer('revision_id').notNull().references(() => postRevisions.id),
+    documentId: integer('document_id').notNull().references(() => sourceDocuments.id),
+    snapshotId: integer('snapshot_id').notNull().references(() => documentSnapshots.id),
+  },
+  (t) => [uniqueIndex('post_source_revision_snapshot_uq').on(t.revisionId, t.snapshotId)],
+);
+
+/** Média d'une publication : origine, droits et mention. Un média généré porte toujours la mention d'illustration. */
+export const mediaAssets = sqliteTable(
+  'media_asset',
+  {
+    id: integer('id').primaryKey({ autoIncrement: true }),
+    postId: integer('post_id').notNull().references(() => posts.id),
+    origin: text('origin').notNull(),
+    altText: text('alt_text').notNull(),
+    notice: text('notice'),
+    license: text('license'),
+    attribution: text('attribution'),
+    content: text('content', { mode: 'json' }).$type<Record<string, unknown>>(),
+    createdAt: text('created_at').notNull(),
+  },
+  (t) => [
+    index('media_asset_post_idx').on(t.postId),
+    check('media_asset_origin_ck', sql`origin in ('generated', 'platform_recording', 'external_embed', 'licensed_reuse')`),
+    // `is`, pas `=` : une valeur NULL ferait passer un CHECK en SQLite.
+    check('media_asset_notice_ck', sql`origin <> 'generated' or notice is 'Illustration — ne prouve pas le fonctionnement'`),
+  ],
 );

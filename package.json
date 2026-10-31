@@ -12,6 +12,7 @@
     "status": "node src/cli/status.ts",
     "export": "node src/cli/export.ts",
     "brouillons": "node src/cli/brouillons.ts",
+    "brouillons:relire": "node src/cli/brouillons-relire.ts",
     "maquette": "node src/cli/maquette.ts",
     "maquette:reel": "node src/cli/maquette-reel.ts",
     "pause": "node src/cli/pause.ts",

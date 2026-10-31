@@ -7,12 +7,17 @@ import { releasesUrl } from '../src/collect/github-releases.ts';
 import { setPaused } from '../src/control/settings.ts';
 import { depense } from '../src/analysis/budget.ts';
 import { controlerBrouillon, LIBELLE_CONTROLE, moinsDeTroisMots } from '../src/analysis/controles.ts';
-import { schemaSortie, type Modele, type RequeteModele } from '../src/analysis/modele.ts';
-import { genererBrouillons, MAX_TENTATIVES } from '../src/analysis/pipeline.ts';
+import { modeleAnthropic, schemaSortie, type Modele, type RequeteModele } from '../src/analysis/modele.ts';
+import { DUREE_BAIL_MS, genererBrouillons, LONGUEUR_MAX_CAPTURE, LotEnCours, MAX_TENTATIVES, MAX_TOKENS } from '../src/analysis/pipeline.ts';
 import { documentUtilisateur, PROMPT_VERSION, SYSTEME_QUALIFICATION } from '../src/analysis/prompts.ts';
-import { Brouillon, Qualification } from '../src/analysis/schemas.ts';
+import { MENTION_ILLUSTRATION } from '../src/analysis/publication.ts';
+import { relectureMarkdown } from '../src/analysis/relecture.ts';
+import { valeursDe } from '../src/analysis/valeurs.ts';
+import { Brouillon, COMPTES_IDS, Qualification } from '../src/analysis/schemas.ts';
 import { coutMicroUsd } from '../src/analysis/tarifs.ts';
+import { openDatabase } from '../src/db/client.ts';
 import { toPlainText } from '../src/maquette/data.ts';
+import { COMPTES } from '../src/maquette/exemples.ts';
 import { runCollect } from '../src/worker/collect.ts';
 import { PROJECT_ROOT } from './helpers/cli.ts';
 import { CLAUDE_CODE, createTestDb, readFixture, routeFetcher, type TestDb } from './helpers/db.ts';
@@ -21,7 +26,8 @@ const CAPTURE = 'Acme Tool 2.0 adds offline mode. It is not available on Windows
 const brouillon = (texte: string, passages: string[]): Brouillon => ({
   accroche: { texte: 'Acme Tool 2.0 ajoute un mode hors ligne', passages: ['Acme Tool 2.0 adds offline mode.'] },
   description: { texte, passages }, nouveaute: { texte: 'Un mode hors ligne.', passages: ['adds offline mode'] },
-  ce_que_ca_permet: null, pour_qui: { texte: 'Les utilisateurs.', passages: ['adds offline mode'] }, acces: null, cout: null, limites_connues: null, questions_a_tester: [],
+  ce_que_ca_permet: null, pour_qui: { texte: 'Les utilisateurs.', passages: ['adds offline mode'] }, acces: null, cout: null, limites_connues: null,
+  details: [], attributions: [], diapositives: ['accroche', 'nouveaute'], questions_a_tester: [],
 });
 const codes = (b: Brouillon) => controlerBrouillon(b, CAPTURE, 'Acme Tool 2.0', '2.0').map((c) => c.code);
 
@@ -41,19 +47,19 @@ describe('contrôles', () => {
   });
   it('une affirmation commerciale non attribuée est signalée', () => {
     const b = brouillon('Le mode est deux fois plus rapide.', ['adds offline mode']);
-    expect(controlerBrouillon(b, CAPTURE, 'Acme Tool 2.0', '2.0', 'affirmation_commerciale').map((c) => c.code)).toContain('attribution_manquante');
-    expect(controlerBrouillon({ ...b, description: { ...b.description, texte: "Selon l'éditeur, le mode est plus rapide." } }, CAPTURE, 'Acme Tool 2.0', '2.0', 'affirmation_commerciale').map((c) => c.code)).not.toContain('attribution_manquante');
+    expect(controlerBrouillon(b, CAPTURE, 'Acme Tool 2.0', '2.0', { typeInformation: 'affirmation_commerciale' }).map((c) => c.code)).toContain('attribution_manquante');
+    expect(controlerBrouillon({ ...b, description: { ...b.description, texte: "Selon l'éditeur, le mode est plus rapide." } }, CAPTURE, 'Acme Tool 2.0', '2.0', { typeInformation: 'affirmation_commerciale' }).map((c) => c.code)).not.toContain('attribution_manquante');
   });
   it('un superlatif commercial non attribué est signalé sur chaque champ, pas seulement la description', () => {
     const b = { ...brouillon('Acme annonce un mode hors ligne.', ['adds offline mode']), nouveaute: { texte: 'Le mode hors ligne est le plus rapide du marché.', passages: ['adds offline mode'] } };
-    expect(controlerBrouillon(b, CAPTURE, 'Acme Tool 2.0', '2.0', 'affirmation_commerciale')).toContainEqual({ champ: 'nouveaute', code: 'attribution_manquante' });
+    expect(controlerBrouillon(b, CAPTURE, 'Acme Tool 2.0', '2.0', { typeInformation: 'affirmation_commerciale' })).toContainEqual({ champ: 'nouveaute', code: 'attribution_manquante' });
   });
   it.each(['non_confirmee', 'opinion', 'temoignage'])('type %s : toujours en relecture', (type) => {
-    expect(controlerBrouillon(brouillon('Mode ajouté.', ['adds offline mode']), CAPTURE, 'Acme Tool 2.0', '2.0', type).map((c) => c.code)).toContain('type_a_relire');
+    expect(controlerBrouillon(brouillon('Mode ajouté.', ['adds offline mode']), CAPTURE, 'Acme Tool 2.0', '2.0', { typeInformation: type }).map((c) => c.code)).toContain('type_a_relire');
   });
   it('le mot « annonce » seul ne vaut pas attribution', () => {
     const b = brouillon('L’annonce du mode hors ligne est importante.', ['adds offline mode']);
-    expect(controlerBrouillon(b, CAPTURE, 'Acme Tool 2.0', '2.0', 'affirmation_commerciale').map((c) => c.code)).toContain('attribution_manquante');
+    expect(controlerBrouillon(b, CAPTURE, 'Acme Tool 2.0', '2.0', { typeInformation: 'affirmation_commerciale' }).map((c) => c.code)).toContain('attribution_manquante');
   });
   it.each(['.', 'offline mode', 'v2.1.312', '1.2.3', 'https://a.io/b'])('citation de moins de trois mots : %s', (passage) => {
     expect(codes(brouillon('Mode ajouté.', [passage]))).toContain('citation_trop_courte');
@@ -79,22 +85,133 @@ describe('contrôles', () => {
     expect(codes({ ...brouillon('Mode ajouté.', ['adds offline mode']), acces: { texte: 'Disponible partout.', passages: ['The app was rebuilt'] } })).toContain('acces_sans_indice');
   });
   const accroche = (texte: string, titre: string, produit?: string) =>
-    controlerBrouillon({ ...brouillon('Mode ajouté.', ['adds offline mode']), accroche: { texte, passages: ['adds offline mode'] } }, CAPTURE, titre, null, undefined, produit).map((c) => c.code);
+    controlerBrouillon({ ...brouillon('Mode ajouté.', ['adds offline mode']), accroche: { texte, passages: ['adds offline mode'] } }, CAPTURE, titre, null, { produit, produitCatalogue: true }).map((c) => c.code);
   it('accroche : un mot du titre compte entier, jamais à l’intérieur d’un autre mot', () => {
-    expect(accroche('Un encodeur ouvre ses portes', 'Claude Code 2.1')).toContain('accroche_sans_produit');
-    expect(accroche('Une note sur Codex et ses portes', 'Claude Code 2.1')).toContain('accroche_sans_produit');
+    expect(accroche('Un encodeur ouvre ses portes', 'Claude Code 2.1')).toContain('accroche_non_conforme');
+    expect(accroche('Une note sur Codex et ses portes', 'Claude Code 2.1')).toContain('accroche_non_conforme');
   });
   it('accroche : un mot vide ou un numéro de version ne nomme rien', () => {
-    expect(accroche('Un guide pour les débutants', 'Codex pour les équipes')).toContain('accroche_sans_produit');
-    expect(accroche('2.1.308 : nouvelle version', 'Claude Code 2.1.308')).toContain('accroche_sans_produit');
+    expect(accroche('Un guide pour les débutants', 'Codex pour les équipes')).toContain('accroche_non_conforme');
+    expect(accroche('2.1.308 : nouvelle version', 'Claude Code 2.1.308')).toContain('accroche_non_conforme');
   });
   it('un produit du catalogue doit être nommé, sans avoir à être cité', () => {
     const codesNomme = accroche('Claude Code ajoute un mode hors ligne', 'Claude Code 2.1', 'Claude Code');
-    expect(codesNomme).not.toContain('accroche_sans_produit');
+    expect(codesNomme).not.toContain('accroche_non_conforme');
     expect(codesNomme).not.toContain('soutien_nom_absent');
-    expect(accroche('Une note sur le code ouvert', 'Claude Code 2.1', 'Claude Code')).toContain('accroche_sans_produit');
+    expect(accroche('Une note sur le code ouvert', 'Claude Code 2.1', 'Claude Code')).toContain('accroche_non_conforme');
   });
   it('le libellé ne promet aucune garantie', () => expect(LIBELLE_CONTROLE).toContain('non garantie'));
+
+  it('accroche : pas de cri en majuscules, mais les sigles restent permis', () => {
+    expect(accroche('ACME TOOL ARRIVE ENFIN', 'Acme Tool')).toContain('accroche_non_conforme');
+    expect(accroche('Acme Tool ajoute API MCP SDK', 'Acme Tool')).not.toContain('accroche_non_conforme');
+  });
+
+  const base = brouillon('Mode ajouté.', ['adds offline mode']);
+  it.each([
+    ['une seule diapositive', { diapositives: ['accroche'] }],
+    ['plus de cinq diapositives', { diapositives: ['accroche', 'nouveaute', 'pour_qui', 'details:0', 'details:1', 'details:2'], details: [0, 1, 2].map(() => ({ titre: 'Fonctionnement', texte: 'Mode ajouté.', passages: ['adds offline mode'] })) }],
+    ['un champ vide', { diapositives: ['accroche', 'ce_que_ca_permet'] }],
+    ['un détail absent', { diapositives: ['accroche', 'details:0'] }],
+    ['un doublon', { diapositives: ['accroche', 'accroche'] }],
+  ] as [string, Partial<Brouillon>][])('média non conforme : %s', (_cas, ecart) => {
+    expect(codes({ ...base, ...ecart })).toContain('media_non_conforme');
+  });
+  it('un carrousel qui reprend deux champs renseignés est conforme', () => {
+    expect(codes(base)).not.toContain('media_non_conforme');
+  });
+  it('une diapositive sensationnaliste reste à vérifier, sans rejeter le brouillon', () => {
+    const c = codes({ ...base, nouveaute: { texte: 'Un mode incroyable.', passages: ['adds offline mode'] } });
+    expect(c).toContain('diapositive_sensationnelle');
+    expect(c).not.toContain('media_non_conforme');
+  });
+  it('une accroche sensationnaliste reste à vérifier, même reprise dans le carrousel', () => {
+    const c = codes({ ...base, accroche: { texte: 'Acme Tool 2.0 : incroyable', passages: ['adds offline mode'] } });
+    expect(c).toContain('accroche_non_conforme');
+    expect(c).not.toContain('media_non_conforme');
+    expect(c).not.toContain('diapositive_sensationnelle');
+  });
+  it('la liste anti-sensationnalisme accepte l’apostrophe typographique', () => {
+    expect(codes({ ...base, accroche: { texte: 'Acme Tool 2.0 : vous n’allez pas croire', passages: ['adds offline mode'] } })).toContain('accroche_non_conforme');
+  });
+  it('une accroche sans citation est non conforme', () => {
+    expect(controlerBrouillon({ ...base, accroche: { texte: 'Acme Tool 2.0 ajoute un mode', passages: [] } }, CAPTURE, 'Acme Tool 2.0', '2.0')).toContainEqual({ champ: 'accroche', code: 'accroche_non_conforme', detail: 'sans citation' });
+  });
+  it('une réserve écrite avec un mot accentué est reconnue', () => {
+    const capture = 'Access is limited to paid members of the team for the whole of this quarter and beyond.';
+    expect(controlerBrouillon(brouillon('Accès limité aux membres payants.', ['limited to paid members']), capture, 'Acme Tool', null).filter((c) => c.champ === 'description').map((c) => c.code)).not.toContain('contexte_a_relire');
+    expect(controlerBrouillon(brouillon('Accès ouvert aux membres.', ['limited to paid members']), capture, 'Acme Tool', null).filter((c) => c.champ === 'description').map((c) => c.code)).toContain('contexte_a_relire');
+  });
+  it('une citation ne peut pas enjamber le titre et le texte', () => {
+    const capture = ['Acme Tool drops Windows', 'support for Linux arrives today with this release'];
+    expect(controlerBrouillon(brouillon('Mode ajouté.', ['drops Windows support for Linux']), capture, 'Acme Tool', null).map((c) => c.code)).toContain('citation_introuvable');
+    expect(controlerBrouillon(brouillon('Mode ajouté.', ['Acme Tool drops Windows']), capture, 'Acme Tool', null).filter((c) => c.champ === 'description').map((c) => c.code)).not.toContain('citation_introuvable');
+  });
+  it('une reprise longue de la source n’est plus une citation', () => {
+    const longue = `${'Acme Tool adds a very long sentence copied from the source. '.repeat(8)}`.trim();
+    const c = controlerBrouillon(brouillon('Mode ajouté.', [longue]), longue, 'Acme Tool', null).map((x) => x.code);
+    expect(c).toContain('citation_trop_longue');
+  });
+  it('un texte recopié de la source n’est pas une synthèse', () => {
+    const capture = 'Acme Tool adds an offline mode that keeps every file available when the network is gone for a while.';
+    expect(controlerBrouillon(brouillon(capture, ['Acme Tool adds an offline mode']), capture, 'Acme Tool', null).map((x) => x.code)).toContain('copie_de_la_source');
+    expect(controlerBrouillon(brouillon('Un mode hors ligne garde les fichiers accessibles.', ['Acme Tool adds an offline mode']), capture, 'Acme Tool', null).map((x) => x.code)).not.toContain('copie_de_la_source');
+  });
+  it.each(['annonce_officielle', 'resultat_independant', undefined])('un chiffre de performance reste attribué, quel que soit le type (%s)', (typeInformation) => {
+    const capture = 'Acme Tool scores 92% on SWE-bench in the published results of this quarter.';
+    const avec = (texte: string) => controlerBrouillon(brouillon(texte, ['scores 92% on SWE-bench']), capture, 'Acme Tool', null, { typeInformation }).map((x) => x.code);
+    expect(avec('Il obtient 92% au benchmark SWE-bench.')).toContain('benchmark_non_attribue');
+    expect(avec('Selon Acme, il obtient 92% au benchmark SWE-bench.')).not.toContain('benchmark_non_attribue');
+  });
+  it('un benchmark rapporté exige ses conditions, pas un témoignage', () => {
+    const attribution = { auteur: 'Acme Tool', texte: 'Un résultat rapporté.', passages: ['adds offline mode'], conditions: null };
+    expect(controlerBrouillon({ ...base, attributions: [{ ...attribution, type: 'benchmark' }] }, CAPTURE, 'Acme Tool 2.0', '2.0')).toContainEqual({ champ: 'attributions:0', code: 'benchmark_sans_conditions' });
+    expect(controlerBrouillon({ ...base, attributions: [{ ...attribution, type: 'temoignage' }] }, CAPTURE, 'Acme Tool 2.0', '2.0').map((x) => x.code)).not.toContain('benchmark_sans_conditions');
+  });
+  it('détails et attributions sont contrôlés comme les autres champs', () => {
+    const b: Brouillon = { ...base, details: [{ titre: 'Compatibilité', texte: 'Sur Linux.', passages: ['ce passage est inventé'] }], attributions: [{ type: 'benchmark', auteur: 'Acme Labs', texte: 'Un test.', passages: ['ce score est inventé'], conditions: { texte: 'Sur un jeu réduit.', passages: ['ces conditions sont inventées'] } }] };
+    const resultats = controlerBrouillon(b, CAPTURE, 'Acme Tool 2.0', '2.0');
+    expect(resultats).toContainEqual({ champ: 'details:0', code: 'citation_introuvable', detail: 'ce passage est inventé' });
+    expect(resultats).toContainEqual({ champ: 'attributions:0', code: 'citation_introuvable', detail: 'ce score est inventé' });
+    expect(resultats).toContainEqual({ champ: 'attributions:0', code: 'auteur_introuvable', detail: 'Acme Labs' });
+    expect(resultats).toContainEqual({ champ: 'attributions:0:conditions', code: 'citation_introuvable', detail: 'ces conditions sont inventées' });
+  });
+  it('un produit relevé par le modèle doit figurer dans la capture ; celui du catalogue, non', () => {
+    const avec = (contexte: object) => controlerBrouillon(base, CAPTURE, 'Acme Tool 2.0', '2.0', contexte).map((c) => c.code);
+    expect(avec({ produit: 'Acme Cloud' })).toContain('produit_introuvable');
+    expect(avec({ produit: 'Acme Tool' })).not.toContain('produit_introuvable');
+    expect(avec({ produit: 'Acme Cloud', produitCatalogue: true })).not.toContain('produit_introuvable');
+  });
+  it('sources contradictoires : l’analyse donne une autre valeur que la capture', () => {
+    const source = 'Acme Tool 2.0 adds offline mode. The plan costs $10 per month and comes under the MIT license, published on October 29, 2026.';
+    const b: Brouillon = { ...base, description: { texte: 'Publié le 30 octobre, selon la source.', passages: ['published on October 29, 2026'] }, cout: { texte: '10 € par mois.', passages: ['costs $10 per month'] } };
+    const resultats = controlerBrouillon(b, source, 'Acme Tool 2.0', '2.0');
+    expect(resultats).toContainEqual({ champ: 'cout', code: 'sources_contradictoires', detail: 'prix : EUR:10' });
+    expect(resultats).toContainEqual({ champ: 'description', code: 'sources_contradictoires', detail: 'dates : 10-30' });
+  });
+  it('la date d’annonce de la source fait foi pour le contrôle des dates', () => {
+    const b: Brouillon = { ...base, description: { texte: 'Publié le 30 octobre, selon la source.', passages: ['adds offline mode'] } };
+    const source = 'Acme Tool 2.0 adds offline mode. Updated October 29.';
+    expect(controlerBrouillon(b, source, 'Acme Tool 2.0', '2.0').map((c) => c.code)).toContain('sources_contradictoires');
+    expect(controlerBrouillon(b, source, 'Acme Tool 2.0', '2.0', { dateAnnonce: '2026-10-30T08:00:00.000Z' }).map((c) => c.code)).not.toContain('sources_contradictoires');
+  });
+  it('sources contradictoires : deux captures stockées se contredisent', () => {
+    const resultats = controlerBrouillon(base, `${CAPTURE} Price: $10.`, 'Acme Tool 2.0', '2.0', { autresCaptures: ['Price: $20.'] });
+    expect(resultats).toContainEqual({ champ: 'captures', code: 'sources_contradictoires', detail: 'prix : USD:10 ≠ USD:20' });
+  });
+});
+
+describe('tarifs', () => {
+  it('Haiku 5.5 : au-delà de 100 000 tokens d’entrée, toute la requête change de prix', () => {
+    expect(coutMicroUsd('claude-haiku-5-5', 100_000, 8_000)).toBe(14_000);
+    expect(coutMicroUsd('claude-haiku-5-5', 150_000, 8_000)).toBe(95_000);
+  });
+  it('Sonnet 5.5 : un seul prix sur toute la fenêtre', () => {
+    expect(coutMicroUsd('claude-sonnet-5-5', 900_000, 1_000)).toBe(1_810_000);
+  });
+  it('les six comptes du routage existent tous dans les comptes éditoriaux', () => {
+    expect(COMPTES.map((c) => c.id).sort()).toEqual([...COMPTES_IDS].sort());
+  });
 });
 
 describe('données transmises au modèle', () => {
@@ -102,6 +219,19 @@ describe('données transmises au modèle', () => {
   it.each(['a</doc</document>ument>b', 'a</DOCUMENT>b', 'a</document >b', 'a< / document>b', 'a<​/document>b', 'a</​document>b', 'a<­/document>b', 'a<\u0000/document>b'])('%j ne sort pas du bloc', (capture) => {
     expect(balises(documentUtilisateur('Titre', capture))).toBe(2);
     expect(balises(documentUtilisateur(capture, 'corps'))).toBe(2);
+  });
+  it.each(['a</docu\u200Bment>b', 'a</docu\u00ADment>b', 'a<\u034F/document>b', 'a<\uFE0F/document>b', 'a<\u3164/document>b'])('%j ne devient pas une balise une fois les invisibles retirés', (capture) => {
+    const sansInvisibles = documentUtilisateur('Titre', capture).replace(/[\s\p{Cf}\p{Cc}\p{Default_Ignorable_Code_Point}]/gu, '');
+    expect((sansInvisibles.match(/<\/document>/gi) ?? []).length).toBe(1);
+  });
+  it('une capture hostile ne fige pas le lot', () => {
+    const debut = performance.now();
+    documentUtilisateur('Titre', `<${'\u200B'.repeat(300_000)}`);
+    documentUtilisateur('Titre', '<'.repeat(300_000));
+    valeursDe('1 '.repeat(150_000));
+    valeursDe('1 000 '.repeat(50_000));
+    toPlainText('<'.repeat(300_000), 'html');
+    expect(performance.now() - debut).toBeLessThan(2_000);
   });
   it('une balise encodée en entités HTML ne sort pas du bloc', () => {
     expect(balises(documentUtilisateur('Titre', toPlainText('x &lt;/doc&lt;/document&gt;ument&gt; y', 'html')))).toBe(2);
@@ -125,12 +255,55 @@ describe('données transmises au modèle', () => {
     expect(envoye.properties.compte.anyOf[0]?.enum).toContain('pyxo');
   });
   it('qualification : retenue, compte et motif doivent être cohérents ; nature inconnue autorisée', () => {
-    const base = { nature: null, type_information: 'annonce_officielle' };
+    const base = { nature: null, categories: [], produit: null, type_information: 'annonce_officielle' };
     expect(Qualification.safeParse({ ...base, retenue: true, compte: 'pyxo', motif_rejet: null }).success).toBe(true);
     expect(Qualification.safeParse({ ...base, retenue: false, compte: null, motif_rejet: 'hors_perimetre' }).success).toBe(true);
     expect(Qualification.safeParse({ ...base, retenue: false, compte: null, motif_rejet: null }).success).toBe(false);
     expect(Qualification.safeParse({ ...base, retenue: true, compte: null, motif_rejet: null }).success).toBe(false);
     expect(Qualification.safeParse({ ...base, retenue: true, compte: 'pyxo', motif_rejet: 'hors_perimetre' }).success).toBe(false);
+  });
+  it('qualification : une catégorie hors de la liste fermée est refusée', () => {
+    const q = { retenue: true, compte: 'pyxo', motif_rejet: null, nature: null, produit: null, type_information: 'annonce_officielle' };
+    expect(Qualification.safeParse({ ...q, categories: ['design'] }).success).toBe(true);
+    expect(Qualification.safeParse({ ...q, categories: ['tendance du moment'] }).success).toBe(false);
+  });
+});
+
+/** Réponse de l'API en flux, telle que le SDK la lit. */
+function flux(texte: string, stop: string): Response {
+  const evenements = [
+    ['message_start', { type: 'message_start', message: { id: 'msg_1', type: 'message', role: 'assistant', model: 'claude-sonnet-5-5', content: [], stop_reason: null, stop_sequence: null, usage: { input_tokens: 10, output_tokens: 1 } } }],
+    ['content_block_start', { type: 'content_block_start', index: 0, content_block: { type: 'text', text: '' } }],
+    ['content_block_delta', { type: 'content_block_delta', index: 0, delta: { type: 'text_delta', text: texte } }],
+    ['content_block_stop', { type: 'content_block_stop', index: 0 }],
+    ['message_delta', { type: 'message_delta', delta: { stop_reason: stop, stop_sequence: null }, usage: { output_tokens: 5 } }],
+    ['message_stop', { type: 'message_stop' }],
+  ] as const;
+  return new Response(evenements.map(([nom, data]) => `event: ${nom}\ndata: ${JSON.stringify(data)}\n\n`).join(''), { headers: { 'content-type': 'text/event-stream' } });
+}
+const coupsDeFil = (repondre: (corps: { system: string; max_tokens: number; stream?: boolean }) => Response) => {
+  const corps: { system: string; max_tokens: number; stream?: boolean; output_config?: { format?: { type: string } } }[] = [];
+  const fetch = async (url: unknown, init?: { body?: unknown }) => {
+    if (String(url).includes('count_tokens')) return Response.json({ input_tokens: 12 });
+    const recu = JSON.parse(String(init?.body));
+    corps.push(recu);
+    return repondre(recu);
+  };
+  return { corps, modele: modeleAnthropic({ apiKey: 'cle-factice-de-test', fetch: fetch as typeof globalThis.fetch }) };
+};
+
+describe('adaptateur Anthropic : vrai SDK, réseau simulé', () => {
+  const requete = { modele: 'claude-sonnet-5-5', systeme: 's', utilisateur: 'u', maxTokens: 24_000, schema: { type: 'object' } };
+  it('24 000 tokens partent en flux, et la réponse est reconstituée', async () => {
+    const { corps, modele } = coupsDeFil(() => flux('{"a":1}', 'end_turn'));
+    expect(await modele.compter(requete)).toBe(12);
+    expect(await modele.appeler(requete)).toEqual({ texte: '{"a":1}', usage: { input: 10, output: 5 }, stop: 'end_turn' });
+    expect(corps).toHaveLength(1);
+    expect(corps[0]).toMatchObject({ stream: true, max_tokens: 24_000, output_config: { format: { type: 'json_schema' } } });
+  });
+  it('une réponse tronquée ou refusée garde son motif d’arrêt', async () => {
+    expect((await coupsDeFil(() => flux('{', 'max_tokens')).modele.appeler(requete)).stop).toBe('max_tokens');
+    expect((await coupsDeFil(() => flux('', 'refusal')).modele.appeler(requete)).stop).toBe('refusal');
   });
 });
 
@@ -163,13 +336,13 @@ describe('budget et pipeline, sans réseau', () => {
   afterEach(() => t.cleanup());
 
   const reponse = (texte: string) => ({ texte, usage: { input: 100, output: 100 }, stop: 'end_turn' });
-  const ecarte = JSON.stringify({ retenue: false, motif_rejet: 'hors_perimetre', compte: null, nature: 'nouvelle_fonctionnalite', type_information: 'annonce_officielle' });
+  const ecarte = JSON.stringify({ retenue: false, motif_rejet: 'hors_perimetre', compte: null, nature: 'nouvelle_fonctionnalite', categories: [], produit: null, type_information: 'annonce_officielle' });
   const faux = (appeler: Modele['appeler']): Modele & { appels: number } => {
     const m = { appels: 0, compter: async () => 100, appeler: (r: Parameters<Modele['appeler']>[0]) => { m.appels++; return appeler(r); } };
     return m;
   };
   const lancer = (modele: Modele, capRun = 10_000_000, capTotal = 10_000_000, extra = {}) =>
-    genererBrouillons({ database: t.database, modele, nomModele: 'claude-opus-5-5', maxItems: 2, capRunMicroUsd: capRun, capTotalMicroUsd: capTotal, ...extra });
+    genererBrouillons({ database: t.database, modele, nomModele: 'claude-opus-5-5', maxItems: 2, capRunMicroUsd: capRun, capTotalMicroUsd: capTotal, attente: async () => {}, ...extra });
 
   it('budget insuffisant : aucun appel ne part', async () => {
     const m = faux(async () => reponse(ecarte));
@@ -188,7 +361,7 @@ describe('budget et pipeline, sans réseau', () => {
     const r = await lancer(m, 10_000_000, 10_000_000, { estReprenable: () => true });
     expect(r.statut).toBe('echec');
     expect(m.appels).toBe(MAX_TENTATIVES);
-    expect(await depense(t.database.client)).toBe(MAX_TENTATIVES * coutMicroUsd('claude-opus-5-5', 100, 2000));
+    expect(await depense(t.database.client)).toBe(MAX_TENTATIVES * coutMicroUsd('claude-opus-5-5', 100, MAX_TOKENS.qualification));
   });
 
   it('le plafond total s’applique entre exécutions', async () => {
@@ -214,13 +387,13 @@ describe('budget et pipeline, sans réseau', () => {
     expect(m2.appels).toBe(3);
   });
 
-  const retenue = JSON.stringify({ retenue: true, motif_rejet: null, compte: 'pyxo', nature: 'amelioration', type_information: 'annonce_officielle' });
+  const retenue = JSON.stringify({ retenue: true, motif_rejet: null, compte: 'pyxo', nature: 'amelioration', categories: ['assistant de code'], produit: null, type_information: 'annonce_officielle' });
   /** Rédige un brouillon dont chaque champ cite `passage`, calculé à partir du texte de la capture reçue. L'accroche nomme le produit du catalogue. */
-  const redige = (passage: (corps: string) => string) => async (r: RequeteModele) => {
+  const redige = (passage: (corps: string) => string, diapositives: string[] = ['accroche', 'nouveaute']) => async (r: RequeteModele) => {
     if (r.systeme === SYSTEME_QUALIFICATION) return reponse(retenue);
     const produit = /Produit \(catalogue, ne pas citer\) : (.*)\n/.exec(r.utilisateur)![1]!;
     const cite = { texte: 'Nouvelle version, selon la source.', passages: [passage(r.utilisateur.split('\n\n')[1]!)] };
-    return reponse(JSON.stringify({ accroche: { ...cite, texte: `${produit} : nouvelle version, selon la source.` }, description: cite, nouveaute: cite, ce_que_ca_permet: cite, pour_qui: null, acces: null, cout: null, limites_connues: null, questions_a_tester: [] }));
+    return reponse(JSON.stringify({ accroche: { ...cite, texte: `${produit} : nouvelle version, selon la source.` }, description: cite, nouveaute: cite, ce_que_ca_permet: cite, pour_qui: null, acces: null, cout: null, limites_connues: null, details: [], attributions: [], diapositives, questions_a_tester: [] }));
   };
   const debut = (corps: string) => corps.split(/\s+/).slice(0, 6).join(' ');
   const brouillons = async () =>
@@ -244,7 +417,8 @@ describe('budget et pipeline, sans réseau', () => {
       expect(JSON.parse(String(ligne.checks))).toEqual([]);
       expect(ligne.snapshot_id).toBe(ligne.derniere_capture);
       const contenu = JSON.parse(String(ligne.content));
-      expect(contenu).toMatchObject({ date_annonce: ligne.announced_at, nature: 'amelioration', niveau_preuve: 'analyse_documentaire' });
+      expect(contenu).toMatchObject({ date_annonce: ligne.announced_at, nature: 'amelioration', categories: ['assistant de code'], produit: 'Claude Code', niveau_preuve: 'documentary_analysis' });
+      expect(contenu.version_cible).toMatch(/^\d+\.\d+\.\d+$/);
       expect(contenu.date_annonce).toMatch(/^\d{4}-\d{2}-\d{2}T/);
     }
   });
@@ -274,6 +448,340 @@ describe('budget et pipeline, sans réseau', () => {
       expect(String(trace)).not.toContain('sk-ant-factice');
     }
     expect(r.motif).toContain('***');
+  });
+
+  const nombre = async (table: string) => Number((await t.database.client.execute(`select count(*) as n from ${table}`)).rows[0]!.n);
+  const panneRedaction = (r: RequeteModele) => {
+    if (r.systeme === SYSTEME_QUALIFICATION) return Promise.resolve(reponse(retenue));
+    return Promise.reject(new Error('panne'));
+  };
+
+  it('relance : une qualification déjà payée n’est pas repayée', async () => {
+    const m = faux(panneRedaction);
+    expect((await lancer(m)).statut).toBe('echec');
+    expect(m.appels).toBe(2);
+    const m2 = faux(redige(debut));
+    expect(await lancer(m2)).toMatchObject({ statut: 'terminee', qualifications_reprises: 1, controlees: 2 });
+    expect(m2.appels).toBe(3);
+  });
+
+  it.each([
+    ['le prompt a changé', `update post_draft set prompt_version = 'ancien'`],
+    ['le modèle a changé', `update post_draft set model = 'autre-modele'`],
+    ['la capture a changé', `update post_draft set snapshot_id = (select min(id) from document_snapshot where id <> post_draft.snapshot_id)`],
+    ['la qualification conservée est illisible', `update post_draft set content = '{"qualification":{}}'`],
+  ])('relance : nouvelle qualification quand %s', async (_cas, modification) => {
+    await lancer(faux(panneRedaction));
+    await t.database.client.execute(modification);
+    const m = faux(redige(debut));
+    expect(await lancer(m)).toMatchObject({ statut: 'terminee', qualifications_reprises: 0, controlees: 2 });
+    expect(m.appels).toBe(4);
+  });
+
+  it('relance : une actualité déjà qualifiée passe avant les autres, même plus récentes', async () => {
+    await lancer(faux(panneRedaction));
+    const client = t.database.client;
+    const ancienne = `(select n.id from news_item n order by coalesce(n.announced_at, n.first_seen_at) asc, n.id asc limit 1)`;
+    await client.execute(`update post_draft set
+      news_item_id = ${ancienne},
+      snapshot_id = (select c.id from document_snapshot c join news_item_document nd on nd.document_id = c.document_id where nd.news_item_id = ${ancienne})`);
+    const m = faux(redige(debut));
+    expect(await lancer(m, 10_000_000, 10_000_000, { maxItems: 1 })).toMatchObject({ statut: 'terminee', qualifications_reprises: 1 });
+    expect(m.appels).toBe(1);
+  });
+
+  it('rédaction de bout en bout : le produit du catalogue n’a pas à figurer dans la capture', async () => {
+    await t.database.client.execute(`update document_snapshot set content = 'Bug fixes and reliability improvements for every member of the team.'`);
+    expect(await lancer(faux(redige(debut)))).toMatchObject({ statut: 'terminee', controlees: 2, a_verifier: 0 });
+  });
+
+  it('rédaction de bout en bout : une citation ne peut pas enjamber le titre et le texte de la capture', async () => {
+    await t.database.client.execute(`update document_snapshot set title = 'Acme Tool drops Windows', content = 'support for Linux arrives today with this release'`);
+    await lancer(faux(redige(() => 'drops Windows support for Linux')));
+    for (const ligne of await brouillons()) {
+      expect(JSON.parse(String(ligne.checks)).map((c: { code: string }) => c.code)).toContain('citation_introuvable');
+    }
+  });
+
+  it('rédaction de bout en bout : deux captures stockées contradictoires restent à vérifier', async () => {
+    const client = t.database.client;
+    await client.execute(`update document_snapshot set content = 'The plan now costs $10 per month for every member of the team.'`);
+    await client.execute(`insert into document_snapshot (document_id, seq, content_hash, title, content, content_format, captured_at, run_id)
+      select document_id, 0, 'ancienne', title, 'The plan costs $20 per month for every member of the team.', content_format, captured_at, run_id from document_snapshot`);
+    expect(await lancer(faux(redige(debut)))).toMatchObject({ statut: 'terminee', a_verifier: 2, controlees: 0 });
+    for (const ligne of await brouillons()) {
+      expect(JSON.parse(String(ligne.checks))).toContainEqual({ champ: 'captures', code: 'sources_contradictoires', detail: 'prix : USD:10 ≠ USD:20' });
+    }
+  });
+
+  it('rédaction de bout en bout : la date d’annonce de la source vaut pour le contrôle des dates', async () => {
+    const client = t.database.client;
+    await client.execute(`update document_snapshot set content = 'Fixes shipped for everyone on October 29 across all regions today.'`);
+    await client.execute(`update news_item set announced_at = '2026-10-30T10:00:00.000Z'`);
+    const m = faux(async (r) => {
+      if (r.systeme === SYSTEME_QUALIFICATION) return reponse(retenue);
+      const brouillonValide = JSON.parse((await redige(debut)(r)).texte) as Brouillon;
+      return reponse(JSON.stringify({ ...brouillonValide, description: { ...brouillonValide.description, texte: 'Publié le 30 octobre, selon la source.' } }));
+    });
+    await lancer(m);
+    for (const ligne of await brouillons()) {
+      expect(JSON.parse(String(ligne.checks)).map((c: { code: string }) => c.code)).not.toContain('sources_contradictoires');
+    }
+  });
+
+  it('rédaction tronquée avec le vrai SDK : statut définitif, sans blocage du lot', async () => {
+    const qualification = JSON.stringify({ retenue: true, motif_rejet: null, compte: 'pyxo', nature: null, categories: [], produit: null, type_information: 'annonce_officielle' });
+    const { corps, modele } = coupsDeFil((c) => (c.system === SYSTEME_QUALIFICATION ? flux(qualification, 'end_turn') : flux('{', 'max_tokens')));
+    expect(await genererBrouillons({ database: t.database, modele, nomModele: 'claude-sonnet-5-5', maxItems: 2, capRunMicroUsd: 10_000_000, capTotalMicroUsd: 10_000_000 })).toMatchObject({ statut: 'terminee', tronquees: 2 });
+    expect(corps.filter((c) => c.system !== SYSTEME_QUALIFICATION).map((c) => c.max_tokens)).toEqual([MAX_TOKENS.redaction, MAX_TOKENS.redaction * 2, MAX_TOKENS.redaction, MAX_TOKENS.redaction * 2]);
+    expect((await t.database.client.execute(`select distinct status from post_draft`)).rows.map((l) => l.status)).toEqual(['sortie_tronquee']);
+  });
+
+  it('un lot qui a perdu son bail s’arrête sans écrire ni écraser l’état de l’exécution', async () => {
+    const client = t.database.client;
+    const m = faux(async () => {
+      await client.execute(`update llm_run set status = 'interrompue', reason = 'bail expiré' where status = 'en_cours'`);
+      return reponse(retenue);
+    });
+    expect((await lancer(m)).statut).toBe('interrompue');
+    expect(m.appels).toBe(1);
+    expect(await nombre('post_draft')).toBe(0);
+    expect((await client.execute('select status, reason from llm_run')).rows[0]).toMatchObject({ status: 'interrompue', reason: 'bail expiré' });
+  });
+
+  it('un bail perdu avant l’appel empêche de payer', async () => {
+    const client = t.database.client;
+    const m: Modele & { appels: number } = { appels: 0, compter: async () => { await client.execute(`update llm_run set status = 'interrompue' where status = 'en_cours'`); return 100; }, appeler: async () => { m.appels++; return reponse(ecarte); } };
+    expect((await lancer(m)).statut).toBe('interrompue');
+    expect(m.appels).toBe(0);
+    expect(await nombre('llm_call')).toBe(0);
+  });
+
+  it('un résultat définitif n’est jamais écrasé', async () => {
+    const client = t.database.client;
+    const m = faux(async () => {
+      await client.execute(`insert into post_draft (news_item_id, run_id, status, snapshot_id, model, prompt_version, created_at)
+        select nd.news_item_id, (select id from llm_run), 'controle_automatique', c.id, 'autre', 'autre', 'x'
+        from news_item_document nd join news_item n on n.id = nd.news_item_id join document_snapshot c on c.document_id = nd.document_id
+        order by coalesce(n.announced_at, n.first_seen_at) desc, n.id desc limit 1`);
+      return reponse(retenue);
+    });
+    expect((await lancer(m)).statut).toBe('echec');
+    expect(m.appels).toBe(1);
+    expect((await client.execute(`select status, model from post_draft`)).rows).toEqual([expect.objectContaining({ status: 'controle_automatique', model: 'autre' })]);
+  });
+
+  it('le bail est renouvelé pendant un long appel', async () => {
+    let heure = Date.parse('2026-10-31T10:00:00.000Z');
+    const bail = async () => (await t.database.client.execute(`select lease_expires_at from llm_run where status = 'en_cours'`)).rows[0]!.lease_expires_at;
+    let avant: unknown;
+    let apres: unknown;
+    const m = faux(async () => {
+      avant = await bail();
+      heure += 1_000;
+      await new Promise((fin) => setTimeout(fin, 60));
+      apres = await bail();
+      return reponse(ecarte);
+    });
+    await lancer(m, 10_000_000, 10_000_000, { clock: () => new Date(heure), dureeBailMs: 30, maxItems: 1 });
+    expect(apres).not.toBe(avant);
+  });
+
+  it('une capture trop longue ne part pas au modèle et ne fige rien', async () => {
+    await t.database.client.execute({ sql: 'update document_snapshot set content = ?', args: ['mot '.repeat(LONGUEUR_MAX_CAPTURE / 4 + 1)] });
+    const m = faux(async () => reponse(ecarte));
+    expect(await lancer(m)).toMatchObject({ statut: 'terminee', trop_longues: 5, sans_texte: 0 });
+    expect(m.appels).toBe(0);
+    expect(await nombre('post_draft')).toBe(0);
+  });
+
+  it('relecture : brouillons, écarts, coût et valeurs inconnues, sans rien inventer', async () => {
+    await lancer(faux(redige(() => 'ce passage inventé est absent de la capture')), 10_000_000, 10_000_000, { maxItems: 1 });
+    const m = faux(async () => reponse(ecarte));
+    await genererBrouillons({ database: t.database, modele: m, nomModele: 'claude-opus-5-5', maxItems: 1, capRunMicroUsd: 10_000_000, capTotalMicroUsd: 10_000_000 });
+    const texte = await relectureMarkdown(t.database.client, '2026-10-31T12:00:00.000Z');
+    expect(texte).toContain('# Brouillons à relire');
+    expect(texte).toContain('Rien n\'est publié');
+    expect(texte).toContain('2 actualité(s) ; 1 à vérifier, 0 sans écart détecté, 0 rejetée(s), 1 écartée(s)');
+    expect(texte).toContain('## Claude Code : nouvelle version, selon la source.');
+    expect(texte).toContain('citation_introuvable');
+    expect(texte.split('> ce passage inventé est absent de la capture')).toHaveLength(5);
+    expect(texte).toContain('- **Coût** : Non renseigné');
+    expect(texte).toContain('## Actualités sans brouillon');
+    expect(texte).toContain('- ecartee (hors_perimetre)');
+    const facture = 3 * coutMicroUsd('claude-opus-5-5', 100, 100);
+    expect(texte).toContain(`**Coût enregistré** : ${(facture / 1_000_000).toFixed(4)} $ sur 3 appel(s)`);
+  });
+
+  const executionActive = async (bail: string) => {
+    await t.database.client.execute({ sql: `insert into llm_run (id, started_at, status, lease_expires_at, max_items, cap_run_micro_usd, cap_total_micro_usd) values ('ancien', '2026-10-31T10:00:00.000Z', 'en_cours', ?, 1, 1, 1)`, args: [bail] });
+    await t.database.client.execute(`insert into llm_call (run_id, news_item_id, stage, attempt, model, prompt_version, status, reserved_micro_usd, started_at)
+      values ('ancien', (select min(id) from news_item), 'qualification', 1, 'claude-opus-5-5', 'p3-4', 'reserve', 5000, '2026-10-31T10:00:00.000Z')`);
+  };
+
+  it('un seul lot à la fois : un bail valide refuse le démarrage, sans appel', async () => {
+    await executionActive('2026-10-31T12:00:00.000Z');
+    const m = faux(async () => reponse(ecarte));
+    await expect(lancer(m, 10_000_000, 10_000_000, { clock: () => new Date('2026-10-31T11:00:00.000Z') })).rejects.toBeInstanceOf(LotEnCours);
+    expect(m.appels).toBe(0);
+    expect(await nombre('llm_run')).toBe(1);
+  });
+
+  it('bail expiré : l’exécution est close, ses appels sans réponse restent comptés, et un lot repart', async () => {
+    await executionActive('2026-10-31T10:15:00.000Z');
+    const m = faux(async () => reponse(ecarte));
+    expect(await lancer(m, 10_000_000, 10_000_000, { clock: () => new Date('2026-10-31T11:00:00.000Z') })).toMatchObject({ statut: 'terminee', ecartees: 2 });
+    const client = t.database.client;
+    expect((await client.execute(`select status, reason, finished_at, lease_expires_at from llm_run where id = 'ancien'`)).rows[0]).toMatchObject({ status: 'interrompue', reason: 'bail expiré', finished_at: '2026-10-31T11:00:00.000Z', lease_expires_at: null });
+    expect((await client.execute(`select status, error from llm_call where run_id = 'ancien'`)).rows[0]).toMatchObject({ status: 'erreur', error: 'exécution interrompue, facturation inconnue' });
+    expect(await depense(client)).toBe(5000 + 2 * coutMicroUsd('claude-opus-5-5', 100, 100));
+  });
+
+  it('le bail est renouvelé avant chaque appel, puis libéré en fin de lot', async () => {
+    let heure = Date.parse('2026-10-31T10:00:00.000Z');
+    const baux: unknown[] = [];
+    const m = faux(async () => {
+      baux.push((await t.database.client.execute(`select lease_expires_at from llm_run where status = 'en_cours'`)).rows[0]!.lease_expires_at);
+      heure += 60_000;
+      return reponse(ecarte);
+    });
+    await lancer(m, 10_000_000, 10_000_000, { clock: () => new Date(heure) });
+    expect(baux).toEqual([new Date(Date.parse('2026-10-31T10:00:00.000Z') + DUREE_BAIL_MS).toISOString(), new Date(Date.parse('2026-10-31T10:01:00.000Z') + DUREE_BAIL_MS).toISOString()]);
+    expect((await t.database.client.execute('select lease_expires_at from llm_run')).rows[0]!.lease_expires_at).toBeNull();
+  });
+
+  it('la base refuse deux exécutions en cours', async () => {
+    await executionActive('2026-10-31T12:00:00.000Z');
+    await expect(t.database.client.execute(`insert into llm_run (id, started_at, status, max_items, cap_run_micro_usd, cap_total_micro_usd) values ('double', '2026-10-31T10:00:00.000Z', 'en_cours', 1, 1, 1)`)).rejects.toThrow();
+  });
+
+  it('réponse tronquée : un nouvel essai avec le double de tokens, réservé comme tel', async () => {
+    const plafonds: number[] = [];
+    const m = faux(async (r) => {
+      plafonds.push(r.maxTokens);
+      return plafonds.length === 1 ? { ...reponse('{'), stop: 'max_tokens' } : reponse(ecarte);
+    });
+    expect(await lancer(m)).toMatchObject({ statut: 'terminee', ecartees: 2, tronquees: 0 });
+    expect(plafonds).toEqual([MAX_TOKENS.qualification, MAX_TOKENS.qualification * 2, MAX_TOKENS.qualification]);
+    const reservation = (await t.database.client.execute(`select reserved_micro_usd from llm_call where attempt = 2`)).rows[0]!.reserved_micro_usd;
+    expect(reservation).toBe(coutMicroUsd('claude-opus-5-5', 100, MAX_TOKENS.qualification * 2));
+  });
+
+  it('réponse tronquée deux fois : statut distinct, et l’actualité ne repart pas', async () => {
+    const m = faux(async () => ({ ...reponse('{'), stop: 'max_tokens' }));
+    expect(await lancer(m)).toMatchObject({ statut: 'terminee', tronquees: 2, invalides: 0 });
+    expect(m.appels).toBe(2 * MAX_TENTATIVES);
+    expect((await t.database.client.execute(`select distinct status from post_draft`)).rows.map((l) => l.status)).toEqual(['sortie_tronquee']);
+    const m2 = faux(async () => reponse(ecarte));
+    await lancer(m2);
+    expect(await nombre('post_draft')).toBe(4);
+  });
+
+  it('refus du modèle : statut distinct, sans nouvel essai', async () => {
+    const m = faux(async () => ({ ...reponse(''), stop: 'refusal' }));
+    expect(await lancer(m)).toMatchObject({ statut: 'terminee', refus: 2, invalides: 0 });
+    expect(m.appels).toBe(2);
+    expect((await t.database.client.execute(`select distinct status from post_draft`)).rows.map((l) => l.status)).toEqual(['refus']);
+  });
+
+  it('erreur de comptage reprenable : nouvel essai, sans arrêt du lot', async () => {
+    let comptages = 0;
+    const pauses: number[] = [];
+    const m: Modele = { compter: async () => { if (comptages++ === 0) throw new Error('429'); return 100; }, appeler: async () => reponse(ecarte) };
+    expect(await lancer(m, 10_000_000, 10_000_000, { estReprenable: () => true, attente: async (ms: number) => pauses.push(ms) })).toMatchObject({ statut: 'terminee', ecartees: 2 });
+    expect(pauses).toEqual([1_000]);
+  });
+
+  it('erreur de comptage non reprenable : arrêt sans réservation', async () => {
+    const m: Modele = { compter: async () => { throw new Error('400'); }, appeler: async () => reponse(ecarte) };
+    expect((await lancer(m, 10_000_000, 10_000_000, { estReprenable: () => false })).statut).toBe('echec');
+    expect(await nombre('llm_call')).toBe(0);
+  });
+
+  it('un coût réel supérieur à la réservation reste visible', async () => {
+    await lancer(faux(async () => ({ texte: ecarte, usage: { input: 100, output: 50_000 }, stop: 'end_turn' })));
+    expect((await t.database.client.execute(`select distinct error from llm_call`)).rows[0]!.error).toBe('coût réel supérieur à la réservation');
+  });
+
+  it('base verrouillée après un appel payé : l’écriture reprend, rien n’est perdu', async () => {
+    const pressee = openDatabase(t.url, 1);
+    const concurrente = openDatabase(t.url, 5_000);
+    try {
+      let verrouille = false;
+      const m = faux(async () => {
+        if (!verrouille) {
+          verrouille = true;
+          const verrou = await concurrente.client.transaction('write');
+          setTimeout(() => void verrou.commit().then(() => verrou.close()), 100);
+        }
+        return reponse(ecarte);
+      });
+      const r = await genererBrouillons({ database: pressee, modele: m, nomModele: 'claude-opus-5-5', maxItems: 2, capRunMicroUsd: 10_000_000, capTotalMicroUsd: 10_000_000 });
+      expect(r).toMatchObject({ statut: 'terminee', ecartees: 2 });
+    } finally {
+      pressee.close();
+      concurrente.close();
+    }
+  });
+
+  it('brouillon : publication signée, non publiée, avec révision, source et média', async () => {
+    await lancer(faux(redige(debut)));
+    const client = t.database.client;
+    const publications = (await client.execute(`select p.*, d.id as draft, d.snapshot_id as capture from post p join post_draft d on d.news_item_id = p.news_item_id`)).rows;
+    expect(publications).toHaveLength(2);
+    for (const p of publications) {
+      expect(p).toMatchObject({ account_id: 'pyxo', evidence_level: 'documentary_analysis', status: 'brouillon', published_at: null, platform_test_ref: null });
+      const revision = (await client.execute({ sql: `select * from post_revision where post_id = ?`, args: [Number(p.id)] })).rows;
+      expect(revision).toHaveLength(1);
+      expect(revision[0]).toMatchObject({ seq: 1, draft_id: p.draft });
+      expect(JSON.parse(String(revision[0]!.content))).toMatchObject({ niveau_preuve: 'documentary_analysis' });
+      const sources = (await client.execute({ sql: `select s.snapshot_id, c.document_id as attendu, s.document_id from post_source s join document_snapshot c on c.id = s.snapshot_id where revision_id = ?`, args: [Number(revision[0]!.id)] })).rows;
+      expect(sources).toHaveLength(1);
+      expect(sources[0]).toMatchObject({ snapshot_id: p.capture, document_id: sources[0]!.attendu });
+      const medias = (await client.execute({ sql: `select * from media_asset where post_id = ?`, args: [Number(p.id)] })).rows;
+      expect(medias).toHaveLength(1);
+      expect(medias[0]).toMatchObject({ origin: 'generated', notice: MENTION_ILLUSTRATION });
+      const media = JSON.parse(String(medias[0]!.content));
+      expect(media.diapositives.map((d: { champ: string }) => d.champ)).toEqual(['accroche', 'nouveaute']);
+      expect(media).not.toHaveProperty('titre');
+      expect(String(medias[0]!.alt_text)).toBe(`Carrousel. ${media.diapositives.map((d: { libelle: string; texte: string }) => `${d.libelle} : ${d.texte}`).join(' ')}`);
+    }
+    expect(await nombre(`post where status = 'publie'`)).toBe(0);
+  });
+
+  it('les six comptes sont des agents, et le badge se déduit du type', async () => {
+    await lancer(faux(async () => reponse(ecarte)));
+    const comptes = (await t.database.client.execute('select id, type, provisional from account order by id')).rows;
+    expect(comptes.map((c) => c.id)).toEqual([...COMPTES_IDS].sort());
+    for (const c of comptes) expect(c).toMatchObject({ type: 'agent', provisional: 1 });
+  });
+
+  it('à vérifier : publication à vérifier ; écartée ou invalide : aucune publication', async () => {
+    await lancer(faux(redige(() => 'ce passage inventé est absent de la capture')));
+    expect((await t.database.client.execute('select distinct status from post')).rows.map((l) => l.status)).toEqual(['a_verifier']);
+    const m = faux(async () => reponse(ecarte));
+    await genererBrouillons({ database: t.database, modele: m, nomModele: 'claude-opus-5-5', maxItems: 3, capRunMicroUsd: 10_000_000, capTotalMicroUsd: 10_000_000 });
+    expect(await nombre('post')).toBe(2);
+    expect(await nombre('post_draft')).toBe(5);
+  });
+
+  it('média non conforme : brouillon rejeté avec son motif, sans média', async () => {
+    expect(await lancer(faux(redige(debut, ['accroche'])))).toMatchObject({ statut: 'terminee', rejetees: 2, a_verifier: 0, controlees: 0 });
+    const client = t.database.client;
+    expect((await client.execute('select distinct status, rejection_reason from post_draft')).rows).toEqual([expect.objectContaining({ status: 'rejete', rejection_reason: 'media_non_conforme' })]);
+    expect((await client.execute('select distinct status from post')).rows.map((l) => l.status)).toEqual(['rejete']);
+    expect(await nombre('media_asset')).toBe(0);
+  });
+
+  it('la base refuse un test de la plateforme sans test, un média généré sans mention et un type de compte inconnu', async () => {
+    await lancer(faux(redige(debut)));
+    const client = t.database.client;
+    await expect(client.execute(`update post set evidence_level = 'platform_test'`)).rejects.toThrow();
+    await expect(client.execute(`update post set evidence_level = 'platform_test', platform_test_ref = '  '`)).rejects.toThrow();
+    await expect(client.execute(`update post set evidence_level = 'preuve_libre'`)).rejects.toThrow();
+    await expect(client.execute(`update media_asset set notice = null`)).rejects.toThrow();
+    await expect(client.execute(`update account set type = 'robot'`)).rejects.toThrow();
+    await expect(client.execute(`insert into post (account_id, news_item_id, evidence_level, status, created_at) select account_id, news_item_id, evidence_level, status, created_at from post limit 1`)).rejects.toThrow();
   });
 
   it('capture sans texte : aucun appel, rien de figé, et l’actualité repasse avec une capture complète', async () => {

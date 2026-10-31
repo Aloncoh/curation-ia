@@ -39,8 +39,8 @@ export const estReprenable = (e: unknown) =>
   e instanceof Anthropic.RateLimitError || e instanceof Anthropic.InternalServerError || e instanceof Anthropic.APIConnectionError;
 
 /** Reprises du SDK désactivées : chaque tentative doit passer par le budget. Pas de repli serveur vers un autre modèle : son coût échapperait au contrôle. */
-export function modeleAnthropic(): Modele {
-  const client = new Anthropic({ maxRetries: 0 });
+export function modeleAnthropic(options: ConstructorParameters<typeof Anthropic>[0] = {}): Modele {
+  const client = new Anthropic({ maxRetries: 0, ...options });
   return {
     async compter(r) {
       const res = await client.messages.countTokens({
@@ -52,13 +52,16 @@ export function modeleAnthropic(): Modele {
       return res.input_tokens;
     },
     async appeler(r) {
-      const res = await client.messages.create({
-        model: r.modele,
-        max_tokens: r.maxTokens,
-        system: r.systeme,
-        messages: [{ role: 'user', content: r.utilisateur }],
-        output_config: { effort: 'medium', format: { type: 'json_schema', schema: r.schema } },
-      });
+      // En flux : au-delà d'environ 21 000 tokens, le SDK refuse un appel sans flux avant même de l'envoyer.
+      const res = await client.messages
+        .stream({
+          model: r.modele,
+          max_tokens: r.maxTokens,
+          system: r.systeme,
+          messages: [{ role: 'user', content: r.utilisateur }],
+          output_config: { effort: 'medium', format: { type: 'json_schema', schema: r.schema } },
+        })
+        .finalMessage();
       const texte = res.content.flatMap((b) => (b.type === 'text' ? [b.text] : [])).join('');
       return { texte, usage: { input: res.usage.input_tokens, output: res.usage.output_tokens }, stop: res.stop_reason };
     },
