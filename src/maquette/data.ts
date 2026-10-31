@@ -5,6 +5,7 @@
 // passage cité est recherché mot pour mot dans la dernière capture du document, qui doit venir d'une collecte réelle.
 import type { Client, Transaction } from '@libsql/client';
 import { decodeHtmlEntities } from '../collect/normalize.ts';
+import { SOURCES } from '../sources.ts';
 import {
   COMPTES,
   EXEMPLES,
@@ -198,7 +199,7 @@ export function contientMotPourMot(texte: string, passage: string): boolean {
  * Nombres écrits en chiffres dans un texte (« 30 », « 2.1.312 », « 5,5 » ramené à « 5.5 » : virgule décimale française).
  * Les nombres écrits en lettres (« deux niveaux ») ne sont pas contrôlés : ils restent du ressort de la relecture.
  */
-const nombresDe = (texte: string): string[] => (texte.match(/\p{N}+(?:[.,]\p{N}+)*/gu) ?? []).map((n) => n.replace(/,(?=\p{N})/gu, '.'));
+export const nombresDe = (texte: string): string[] => (texte.match(/\p{N}+(?:[.,]\p{N}+)*/gu) ?? []).map((n) => n.replace(/,(?=\p{N})/gu, '.'));
 
 /**
  * Contrôle un exemple contre le texte brut de sa capture : chaque passage doit s'y trouver mot pour mot
@@ -301,7 +302,7 @@ async function exemplesDeLaMaquette(
     }
     const snapshots = await tx.execute({
       sql: `
-        select c.content, c.content_format, c.content_hash, c.captured_at, c.run_id, r.mode
+        select c.title, c.content, c.content_format, c.content_hash, c.captured_at, c.run_id, r.mode
         from document_snapshot c left join run r on r.id = c.run_id
         where c.document_id = ?
         order by c.seq desc limit 1`,
@@ -315,7 +316,8 @@ async function exemplesDeLaMaquette(
       absent('dernière capture non issue d’une collecte réelle');
       continue;
     }
-    const texte = toPlainText(String(snapshot.content), String(snapshot.content_format));
+    // Le titre fait partie de la capture stockée : certains flux ne donnent que lui.
+    const texte = `${String(snapshot.title)} ${toPlainText(String(snapshot.content), String(snapshot.content_format))}`;
     const verification = verifierExemple(exemple, texte, str(row.version));
     // Le titre du média nomme l'actualité (titre, version ou produit) : il ne doit rien affirmer d'autre.
     const nomme = [row.title, row.version, row.product_name].some((t) => t != null && contientMotPourMot(String(t), exemple.titre_media));
@@ -461,7 +463,8 @@ export async function buildMaquetteData(
       projets: PROJETS.map(verifierProjet),
       exemples: exemplesVerifies.exemples,
       exemples_introuvables: exemplesVerifies.introuvables,
-      sources: sourceRows.rows.map((row) => ({
+      // Une source retirée du registre garde sa ligne en base (historique), mais n'est plus présentée comme suivie.
+      sources: sourceRows.rows.filter((row) => SOURCES.some((def) => def.id === row.id)).map((row) => ({
         id: String(row.id),
         name: String(row.name),
         kind: String(row.kind),

@@ -1,7 +1,7 @@
 # Comprendre le projet CURATION AI
 
 > Document de compréhension et de présentation, mis à jour au fil des jalons.
-> **Dernière mise à jour : 2026-10-30, P2 en cours.** **Construit et vérifié : la collecte fiable** (section 4 bis), **le catalogue produits, versions, actualités sur 5 sources officielles** (section 4 ter) et **la maquette du réseau social** avec des exemples de publications vérifiés mot pour mot et un Reel d'exemple (section 4 quater), à valider. Le reste décrit la conception validée ; chaque partie passe de « prévu » à « réalisé » avec ses preuves (dossier [`linkedin/`](linkedin/)).
+> **Dernière mise à jour : 2026-10-31, P3 en cours.** **Construit et vérifié : la collecte fiable** (section 4 bis), **le catalogue produits, versions, actualités** (section 4 ter), **la maquette du réseau social** avec des exemples de publications vérifiés mot pour mot et un Reel d'exemple (section 4 quater) et **la collecte réelle de 24 sources officielles** (section 13). La génération de brouillons n'a jamais appelé le modèle : voir la section 14, qui sépare ce qui fonctionne en réel du reste. Le reste décrit la conception validée ; chaque partie passe de « prévu » à « réalisé » avec ses preuves (dossier [`linkedin/`](linkedin/)).
 
 ## Sommaire
 
@@ -17,6 +17,8 @@
 10. Qui fait quoi
 11. Avancement
 12. Glossaire
+13. Élargissement à l'écosystème IA et créatif
+14. Ce qui fonctionne réellement
 
 ---
 
@@ -36,7 +38,7 @@ Le fil s'alimente sans rédaction manuelle : une tâche planifiée collecte les 
 
 **Leur besoin :** découvrir vite ce qui sort, comprendre à quoi ça sert, décider si ça mérite d'être testé.
 
-**La ligne éditoriale.** Le cœur du site, ce sont les assistants et agents de code et leur écosystème ; s'y ajoute une sélection des grandes nouveautés des modèles et des applications IA. Chaque publication répond à trois questions : *que permet concrètement la nouveauté ? pour qui ? quelles sont ses limites connues ?* Le site publie peu, mais en profondeur.
+**La ligne éditoriale.** Le site couvre tout l'écosystème IA et créatif : modèles, applications, assistants et agents de code, création visuelle, design et automatisations (SPEC §3.4). Chaque publication répond à trois questions : *que permet concrètement la nouveauté ? pour qui ? quelles sont ses limites connues ?* Le site publie peu, mais en profondeur.
 
 ## 3. Ce que verra un visiteur _(prévu ; maquette en P2)_
 
@@ -119,11 +121,11 @@ flowchart LR
 - **Une relecture adversariale** du code par trois agents, chaque remarque contre-vérifiée par un quatrième : 18 défauts confirmés, tous corrigés et couverts par un test. Le plus subtil : après une attente de verrou trop longue, le pilote de base de données gardait une connexion inutilisable ; le correctif rouvre les connexions avant de réessayer, et le test qui le prouve échoue si on retire le correctif.
 - **Un essai réel** le 2026-10-30 à 01:26 UTC : 5 versions réelles collectées (v2.1.309 à v2.1.314, cette dernière publiée la nuit même), seconde collecte sans doublon, pause respectée. Journal et vérifications SQL dans [`linkedin/02-collecte/preuves/`](linkedin/02-collecte/preuves/).
 
-**Limites assumées.** Une seule source pour l'instant (c'est le rôle de P2 d'en ajouter). La politique de durée de conservation des captures sera fixée avant la mise en ligne. L'arrêt brutal et la panne de source n'ont été provoqués qu'en test, pas sur la vraie source.
+**Limites assumées.** En P1, une seule source (24 aujourd'hui, section 13). La politique de durée de conservation des captures sera fixée avant la mise en ligne. L'arrêt brutal et la panne de source n'ont été provoqués qu'en test, pas sur la vraie source.
 
-## 4 ter. Produits, versions et actualités _(P2, en cours de validation)_
+## 4 ter. Produits, versions et actualités _(P2, réalisé le 2026-10-30)_
 
-**Ce que fait le programme.** La collecte couvre maintenant 5 sources officielles : les pages de versions (« releases ») GitHub de Claude Code, Codex CLI et Gemini CLI, et les flux RSS d'OpenAI News et du GitHub Changelog. Chaque document collecté est ensuite rangé, sans IA, dans un petit catalogue :
+**Ce que faisait le programme en P2.** La collecte couvrait 5 sources officielles (24 depuis P3, section 13) : les pages de versions (« releases ») GitHub de Claude Code, Codex CLI et Gemini CLI, et les flux RSS d'OpenAI News et du GitHub Changelog. Chaque document collecté est ensuite rangé, sans IA, dans un petit catalogue :
 
 | Notion | Ce que c'est | Comment on le reconnaît |
 |---|---|---|
@@ -149,13 +151,13 @@ flowchart LR
 
 **Limites assumées.** Les annonces des flux ne sont pas encore rattachées à un produit (P3). Une entrée de flux dont l'adresse change réapparaît comme nouvelle. La fréquence de collecte de chaque source ne sera appliquée qu'avec la planification (P5) ; d'ici là, le programme signale un « trou possible ».
 
-## 4 quater. La maquette du réseau social _(P2, à valider)_
+## 4 quater. La maquette du réseau social _(P2, réalisé et validé le 2026-10-30)_
 
 **Ce que c'est.** Une maquette statique ([`maquette/index.html`](../maquette/index.html)) qui montre le produit visé avant de construire le vrai site (P4) : le **fil de publications**, la **publication détaillée**, le **profil** de l'agent éditorial `@veilleuse` (nom provisoire), l'espace **Reels**, les **actualités collectées** pas encore publiées, la **fiche** d'approfondissement, les **états** (chargement, vide, erreur, fin) et le **sélecteur de langue**. Elle fonctionne sur ordinateur et téléphone (barre de navigation en bas de l'écran), en mode clair et sombre, et au clavier.
 
 **Trois statuts, toujours affichés.** Une légende en haut de chaque page distingue :
-- **Réel** : ce qui a été réellement collecté ou qui fonctionne déjà (44 actualités de 5 sources officielles, dates, captures, contrôle des citations) ;
-- **Exemple** : ce qui a été rédigé pour la maquette (4 publications et 1 vidéo) ;
+- **Réel** : ce qui a été réellement collecté ou qui fonctionne déjà (393 actualités de 24 sources officielles au 2026-10-31, dates, captures, contrôle des citations) ;
+- **Exemple** : ce qui a été rédigé pour la maquette (8 publications, 1 projet GitHub et 1 vidéo) ;
 - **Prévu** : ce qui n'est pas encore construit (réactions, commentaires, abonnements, démonstrations externes, tests de la plateforme, comptes spécialisés), avec le jalon prévu.
 
 **Les 4 exemples de publication.** Ils ont été rédigés **par Claude Code**, pas par un agent du site : l'agent éditorial n'existe pas encore (P3). Ils partent de 4 annonces réellement collectées (Copilot Fusion, Claude Code 2.1.312, Codex CLI 0.166.0, images dans Copilot). Chaque champ factuel (accroche, nouveauté, ce que ça permet, pour qui, limites, détails, benchmark, témoignage) cite au moins un passage de la source, en anglais. Un bandeau « Exemple » est affiché sur chacun, partout où il apparaît.
@@ -172,13 +174,13 @@ flowchart LR
 
 ### Révision de la maquette : quatre agents et un fil plus visuel _(2026-10-30, remplace ce qui précède sur le compte unique et sur les 4 exemples)_
 
-- **Fonctionne** : collecte réelle, contrôle des citations par le code (y compris les éléments de chaque média), 6 exemples vérifiés sur la base réelle.
-- **Illustratif** : les 4 profils (Nodi, Repo, Pyxo, Mova, noms provisoires) signent des exemples rédigés par Claude Code ; aucun compte n'existe. Ce sont quatre identités sur un même moteur. La mascotte reste l'identité du site et présente les Reels.
+- **Fonctionne** : collecte réelle, contrôle des citations par le code (y compris les éléments de chaque média), 8 exemples vérifiés sur la base réelle.
+- **Illustratif** : les 6 profils (Nodi, Repo, Pyxo, Mova, Pulse, Radar, noms provisoires) signent des exemples rédigés par Claude Code, sauf Pulse, qui n'a rien publié ; aucun compte n'existe. Ce sont six identités sur un même moteur. La mascotte reste l'identité du site et présente les Reels.
 - **Médias** : schéma, commande reconstituée ou aperçu de dépôt, créés par le projet ; les images de GitHub sont seulement liées, leurs droits n'étant pas vérifiés.
 - **GitHub** : earshot affiche 3 268 étoiles cumulées mesurées le 30 octobre 2026 via l'API publique. La progression est « Non mesurée », faute de deuxième mesure.
 - **Prévu** : collecte des bibliothèques Python, extensions Chrome, matériel et incidents. Le fil les signale « À construire ».
 - **Pulse** : cinquième compte, sur le même moteur et sans clé propre. Son profil montre la fiche incident vide et le registre de sources : aucun incident n'est encore collecté, donc aucun n'est publié. Une découverte (X, Reddit, issues) n'est qu'un signal à confirmer. Pyxo annonce le nouveau, Pulse suit son exploitation.
-- **Radar** : sixième compte, consacré aux grandes entreprises. Il signe un exemple réel (Copilot inclus dans GitHub Enterprise) ; seul le GitHub Changelog est connecté parmi ses sources. Le fil a un filtre par auteur.
+- **Radar** : sixième compte, consacré aux grandes entreprises. Son format visé : grande photo et gros titre sur une nouveauté marquante. Son premier exemple annonce Gemini 4 Carbon sur une photo du campus Google créditée, dont les droits sont à revérifier avant toute mise en ligne ; l'ancien, trop niche, est passé à Pyxo. Parmi ses sources, seuls Google et le GitHub Changelog sont connectés. Le fil a un filtre par auteur.
 - **Illustré ou construit** : les six profils sont illustrés. La collecte fonctionne ; la publication automatique n'est pas construite.
 - **Inchangé** : la V1 minimale collecte → analyse sourcée → publication → fil → traçabilité.
 
@@ -321,11 +323,11 @@ _Hypothèses, à remplacer par des mesures en P3 :_ par publication, rédaction 
 |---|---|---|
 | P0 | cadrage : public, périmètre, architecture, stack, tarifs vérifiés et coûts IA estimés | **réalisé le 2026-10-30** |
 | P1 | collecte fiable d'une source officielle (5 documents réels, sans doublon, export JSON) | **réalisé le 2026-10-30** |
-| P2 | produits et versions, 5 sources officielles, maquette du fil social, du profil de l'agent et des Reels | **en cours** : code, tests, relectures et maquette faits ; maquette à valider |
-| P3 | brouillons de publication signés par le compte éditorial : accroche, nouveauté, intérêt, limites, carrousel, citations vérifiées ; coût réel mesuré | V1, prévu |
+| P2 | produits et versions, 5 sources officielles, maquette du fil social, du profil de l'agent et des Reels | **réalisé le 2026-10-30**, maquette validée et fusionnée dans `main` |
+| P3 | brouillons de publication signés par le compte éditorial : accroche, nouveauté, intérêt, limites, carrousel, citations vérifiées ; coût réel mesuré | **en cours** : collecte élargie réelle ; brouillons testés sur faux modèle seulement, aucun brouillon réel (section 14) |
 | P4 | site social : fil, publication, profil de l'agent, fiche, langue du navigateur | V1, prévu |
 | P5 | publication automatique planifiée, quotas, pilotage, mise en ligne | **fin de la V1**, prévu |
-| P6 | sources élargies (Hugging Face, MCP, pages d'état, X et Reddit selon l'accès validé…), incidents, score de découverte, comptes spécialisés si utiles | après la V1, proposé |
+| P6 | sources élargies (Hugging Face, MCP, pages d'état, X selon l'accès validé, Reddit différé…), incidents, score de découverte, comptes spécialisés si utiles | après la V1, proposé |
 | P7 | médias et Reels : vidéos hébergées, démonstrations externes intégrées | après la V1, proposé |
 | P8 | tests de la plateforme dans un bac à sable | après la V1, proposé |
 | P9 | comptes et contributions humaines, modération | après la V1, proposé |
@@ -359,3 +361,27 @@ La **V1** visée est la chaîne autonome minimale déployée : collecte réelle,
 - **Reel** : vidéo courte et verticale, que l'on fait défiler de haut en bas.
 - **Niveau de preuve** : ce sur quoi repose une publication (lecture des sources, démonstration de l'éditeur, ou test réellement exécuté par la plateforme).
 - **WebVTT** : format standard de sous-titres pour les vidéos du web.
+
+## 13. Élargissement à l'écosystème IA et créatif _(2026-10-30)_
+
+**Construit.** La commande de collecte, lancée à la main, interroge 24 sources officielles au lieu de 6 : audio et musique (ElevenLabs, Suno), image (Midjourney), vidéo et création (Higgsfield, Comfy, Blender), design (Figma, Spline, Sketch), outils (Cursor, Notion), automatisation (n8n, Vapi), modèles (Mistral, Hugging Face), protocole MCP et conférence SIGGRAPH. Le schéma des brouillons demande désormais quatre réponses : qu'est-ce qui est nouveau et quand ; à quoi ça sert et pour qui ; où y accéder ; combien ça coûte et quelles sont les limites. Si l'information manque, le champ reste vide et le site affichera « Non renseigné ». Aucun brouillon réel n'existe encore (section 14).
+
+**Comment on évite les erreurs.** La date vient de la source et le niveau de preuve du code, pas du modèle. La nature de l'actualité distingue une nouveauté produit d'une création réalisée avec un outil. Une promesse commerciale doit rester attribuée à l'éditeur, sinon le brouillon part en relecture. Un exemple donné par l'utilisateur n'est pas un fait : Seedance 2.5 a été vérifié sur la page officielle, tandis que la 4K reste à attribuer à BytePlus.
+
+**Prévu.** Perplexity, Grok, Seedance, Kling et Runway n'ont pas de flux simple : il faut écrire un lecteur de page en P6. X dépend d'une décision d'accès. Reddit reste dans le périmètre en source différée (section 14). Aucune de ces sources n'est encore collectée, et aucun brouillon réel n'existe : le premier lot attend les compléments listés en section 14, puis l'accord du porteur du projet et sa clé API.
+
+## 14. Ce qui fonctionne réellement _(vérifié le 2026-10-31, P3 en cours)_
+
+| Partie | Ce qui fonctionne en réel | Ce qui ne fonctionne pas encore |
+|---|---|---|
+| **Collecte** | `npm run collect` interroge les 24 sources officielles et enregistre captures et actualités. Essai du 2026-10-31 sur une copie de la base : 24 réussites sur 24, 15 nouveaux documents, 14 nouvelles actualités. | Rien n'est planifié : la commande se lance à la main (P5). La base de travail s'arrête au 2026-10-30 (393 actualités). 64 actualités n'ont aucun texte (Higgsfield, Hugging Face Blog, Notion, 4 entrées de Mistral) et 2 autres ont moins de trois mots : détectées, ces 66 actualités ne partent pas au modèle. 192 ont moins de 200 caractères de texte. |
+| **Brouillons** | Sur **faux modèle** seulement : qualification, rédaction, contrôles, écriture en base, budget et pause. Sans clé, la commande refuse de démarrer ; une clé placée dans `.env.local` est bien lue. | **Aucun appel réel** : 0 exécution, 0 appel, 0 brouillon en base. Le dialogue réel avec l'API n'a jamais été essayé. Qualité et coût réels inconnus. Une partie des champs et des contrôles prévus manque encore. |
+| **Affichage** | La maquette statique tourne en local. L'onglet Coulisses montre les actualités réelles collectées. | Le fil montre des exemples rédigés par Claude Code pendant le développement, pas des brouillons d'agents. Aucun brouillon n'est relié à l'affichage. Le site réel (P4) n'est pas commencé et rien n'est en ligne. |
+
+Un brouillon marqué « contrôlé » signifiera qu'aucun écart n'a été détecté, jamais que son contenu est garanti.
+
+**Reste à faire dans P3.** À coder sans dépense : les textes du carrousel, la partie détaillée, les catégories, le contrôle « sources contradictoires » et les tables de publication de l'ADR 0004, sauf décision de les reporter. À fiabiliser avant le premier lot réel : relancer sans repayer la qualification, clôturer une exécution interrompue, empêcher deux lots simultanés, distinguer une réponse tronquée ou refusée, reprendre après une erreur de comptage, et appliquer le second tarif de Haiku au-delà de 100 000 tokens. Ensuite, avec l'accord du porteur du projet : premier lot réel, coût mesuré et revue des brouillons.
+
+L'essai du 2026-10-31 a aussi créé 28 nouvelles captures sans nouvelle actualité (Sketch 20, Blender 6, Comfy 2). Sur le document Sketch comparé, seules des suites de caractères techniques changent. L'analyse ne repasse pas sur une actualité déjà traitée : ces captures ne coûteraient donc rien, mais un brouillon ne suivrait pas non plus une vraie modification de sa source.
+
+**Reddit : source différée, pas exclue.** Reddit reste dans le périmètre de veille, car le porteur du projet l'a demandé. Le 2026-10-31, il a refusé de déposer la demande d'accès proposée ; Claude Code a pris ce refus pour un retrait du cadrage, sans que cela ait été demandé, puis a rétabli Reddit le jour même à sa demande. Reddit n'est pas collecté, car aucun accès autorisé n'est disponible : l'API exige une approbation, aucune demande n'a été déposée, et Reddit annonce la fin des nouvelles demandes au 2026-10-31. Les flux RSS répondaient encore le 2026-10-30, mais aucun texte n'autorise leur collecte automatisée, robots.txt l'interdit et leur support s'arrête le 2026-11-13. Une incertitude demeure : la politique de Reddit, éditée le 2026-10-05, mentionne un ticket pour les cas non couverts par sa plateforme de développement, et aucune page lue ne dit si cette voie reste ouverte après le 2026-10-31. Conditions de reprise : `docs/sources.md` §3.7.

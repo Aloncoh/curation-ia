@@ -60,7 +60,7 @@ Candidats : **Incidents** (pannes et rétablissements), **Design et motion**, **
 
 | Temps | Sources | Règle |
 |---|---|---|
-| Découverte | issues GitHub, Reddit, X (accès autorisés) | signal seulement, jamais publié seul |
+| Découverte | issues GitHub, Reddit, X (accès autorisés ; Reddit différé, sources §3.7) | signal seulement, jamais publié seul |
 | Vérification | pages de statut, post-mortems, blogs d'ingénierie, releases | confirme composant, dates, impact, cause |
 | Publication | fiche vérifiée | une publication par incident ; chaque changement de statut crée une révision datée, avec l'historique |
 
@@ -83,6 +83,10 @@ Chaque publication dit ce qui est annoncé, ce qui change, pour qui, la disponib
 
 Une actualité a **une publication principale**, attribuée au compte le plus pertinent. La collecte est mutualisée. Sources : [sources.md](sources.md) §3.9.
 
+**Format Radar (demande du 2026-10-30).** Grand public, pas de sujets de niche : une nouveauté marquante (produit, puce, robot), une grande photo de l'entreprise ou du produit et la nouveauté en gros titre, puis une explication brève. Les sujets d'offre ou d'administration vont aux autres comptes. La photo vient d'un kit presse dont les conditions sont vérifiées, avec attribution. C'est une exception à la limite de la V1 aux médias générés, décidée par l'utilisateur (complément de l'ADR 0004) ; droits à revérifier avant toute mise en ligne. Premier exemple : Gemini 4 Carbon, photo du campus issue du Press Corner de Google, créditée. Le flux ne donne que le titre : disponibilité et limites restent « Non renseigné ».
+
+**Format de tous les comptes (demande du 2026-10-30).** Chaque publication a un visuel lumineux, bien éclairé, et la nouveauté en gros titre : photo autorisée quand c'est possible, sinon visuel clair créé par le projet. Jamais de média sombre.
+
 ### 2.4 Format « Sélection » (demande du 2026-10-30, à partir de P6)
 
 Publication occasionnelle : une liste de ressources utiles (par exemple des galeries de design ou des bibliothèques de prompts), signée par le compte du sujet, en général Mova.
@@ -92,6 +96,21 @@ Publication occasionnelle : une liste de ressources utiles (par exemple des gale
 - **Origine** : un post X ou Reddit n'est qu'une découverte. Ses chiffres (« 800+ prompts ») ne sont repris que s'ils sont retrouvés à la source, et l'auteur de la liste d'origine est crédité.
 - **Média** : mosaïque d'aperçus seulement avec droits vérifiés ; sinon présentation originale et liens vers les sites.
 - **Liens** : aucun lien affilié ni contenu sponsorisé sans mention explicite.
+
+### 2.5 Répartition de l'écosystème créatif (demande du 2026-10-30)
+
+Collecte partagée, une publication principale par actualité (SPEC §3.4).
+
+| Sujet | Compte |
+|---|---|
+| Modèles texte, image, vidéo, audio, voix, multimodaux ; assistants et applications grand public | Nodi |
+| Vidéo, retouche, animation, motion, 3D, musique, doublage ; design, sites, créations remarquables | Mova |
+| Outils de code, bibliothèques, agents, n8n, agents vocaux | Pyxo |
+| GitHub, open source, API, connecteurs, plugins, skills, MCP | Repo |
+| Annonces marquantes des grandes entreprises | Radar |
+| Fiabilité, incidents, pipelines | Pulse |
+
+Chaque brouillon porte sa **nature** : nouvel outil, nouveau modèle, nouvelle fonctionnalité, modèle ajouté à une plateforme, intégration, amélioration, changement de prix, disponibilité élargie, création réalisée, ressource ou incident. Une création réalisée avec un outil n'est jamais une nouveauté produit. Une affirmation commerciale reste attribuée : le code signale `attribution_manquante`.
 
 ## 3. Chaîne de traitement (V1)
 
@@ -153,6 +172,9 @@ Un contenu trouvé sur X, Reddit ou GitHub (P6) reste une **mention externe attr
 | `accroche` | ≤ 110 caractères ; dit ce qui s'est passé ; nomme le produit ou l'éditeur ; citée |
 | `nouveaute` | ce qui change ; cité |
 | `ce_que_ca_permet`, `pour_qui` | intérêt concret ; cités ; l'un des deux au moins, sinon pas de publication automatique |
+| `acces`, `cout` | où et comment y accéder ; coût ; cités, `null` si inconnu (« Non renseigné ») |
+| `date_annonce`, `niveau_preuve` | ajoutés par le code, jamais rédigés par le modèle |
+| `nature` | choisie par le modèle à la qualification, sans contrôle déterministe ; `null` si aucune valeur ne convient |
 | `limites_connues` | `null` si aucune n'est documentée (affiché « Non renseigné ») ; citées sinon |
 | `details` | partie détaillée (page de publication) ; citée |
 | `diapositives` | 2 à 5 textes courts pour le carrousel, chacun repris d'un champ ci-dessus |
@@ -168,7 +190,11 @@ Contrôles déterministes, chacun enregistré avec son résultat et son motif. L
 
 | Contrôle | Échec → |
 |---|---|
-| chaque citation est une sous-chaîne exacte de la capture citée (espaces normalisés) | à vérifier : « citation introuvable » |
+| chaque citation est une sous-chaîne exacte de la capture citée (titre et texte, espaces normalisés) | à vérifier : « citation introuvable » |
+| chaque citation compte au moins trois mots ; le passage cité pour `cout` ou `acces` contient un indice de prix ou d'accès ; une gratuité annoncée est citée | à vérifier |
+| un produit connu du catalogue est nommé par l'accroche ; un numéro de version ne suffit pas | à vérifier : « accroche sans produit » |
+| type `non_confirmee`, `opinion` ou `temoignage` | à vérifier, jamais publié comme un fait |
+| capture de moins de trois mots | pas d'appel au modèle ; l'actualité repassera avec une capture complète |
 | chaque champ factuel porte au moins une citation | à vérifier : « champ non sourcé » |
 | accroche : citée, nomme le produit ou l'éditeur, aucun terme de la liste anti-sensationnalisme, aucun point d'exclamation, aucune question sans réponse | à vérifier : « accroche non conforme » |
 | valeurs incompatibles entre captures ou entre analyse et capture (version, date, prix, licence) | à vérifier : « sources contradictoires » |
@@ -247,3 +273,15 @@ Un profil est proposé par la chaîne de veille et ajouté après validation par
 | Fil, profil, page de publication | maquettés | P4 |
 | Publication automatique | conçue | P5 |
 | Comptes spécialisés, mentions externes, veille de profils, incidents | conçus | P6 |
+
+
+## 13. P3 : exécution, budget et contrôles (2026-10-30)
+
+- **Exécution** : un lancement de `npm run brouillons`, limité à `CURATION_MAX_ACTUALITES`. La commande refuse de démarrer sans clé, modèle tarifé, plafonds explicites et `--confirmer`.
+- **Budget** : avant chaque tentative, code qui compte l'entrée, puis réserve le coût maximal (entrée + `max_tokens`, réflexion comprise). Sans marge, aucun appel ne part. Réussites, erreurs et reprises sont comptées dans `llm_call` ; une erreur garde sa réservation, car la requête a pu être facturée. Reprises du SDK et repli vers un autre modèle désactivés.
+- **Contrôles** : citation mot pour mot, nombres, soutien (noms propres cités), contexte (réserve voisine conservée), accroche. Soutien et contexte sont des heuristiques.
+- **Statut** : `controle_automatique` signifie « aucun écart détecté », jamais « factuellement garanti ». Relecture humaine requise.
+
+**Limites de couverture des six comptes.** Sources actives au 2026-10-30 : 24 (docs/sources.md §2 et §2 bis). Nodi et Mova ont désormais de vraies sources, sans Perplexity, Grok, Seedance, Kling ni Runway, qui attendent un adaptateur. Repo n'a ni registre MCP ni tendance GitHub. Pulse n'a aucune source d'incident. Radar ne suit que Google et le GitHub Changelog. L'attribution ne crée pas de couverture : un compte peut rester vide.
+
+**Sujets séparés, à résoudre avant la mise en ligne** : fréquence de publication ; droits des personnages et des photos.

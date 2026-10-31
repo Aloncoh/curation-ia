@@ -56,6 +56,17 @@ Chaque publication est utile **dès le fil**, sans clic :
 
 À éviter : teasers vides, sensationnalisme, répétitions (une même actualité n'est jamais publiée deux fois). Deux niveaux de lecture : l'essentiel dans le fil ; détails techniques, benchmarks attribués, conditions et historique dans la page de publication et la fiche.
 
+### 3.4 Couverture de l'écosystème IA et créatif (décision de l'utilisateur, 2026-10-30)
+
+Le réseau couvre tout l'écosystème, pas seulement GitHub, les skills et MCP : modèles (texte, raisonnement, image, vidéo, audio, voix, multimodal) ; outils et applications IA (assistants, recherche, productivité, code, documents, présentations) ; création visuelle (génération et montage vidéo, retouche, animation, motion design, 3D, musique, doublage) ; sites et plateformes de design, avec ou sans IA lorsque c'est pertinent pour les créateurs ; agents et automatisations (bots, agents vocaux et téléphoniques, workflows n8n) ; connexions entre outils (intégrations, API, connecteurs, plugins, extensions, skills, MCP) ; projets et ressources (bibliothèques, dépôts, open source).
+
+- **Événements couverts** : nouvel outil, sortie d'un modèle, modèle ajouté à une plateforme, nouvelle fonctionnalité, intégration, amélioration importante, changement de prix, disponibilité élargie. **Créations remarquables** (sites interactifs, dashboards 3D, animations, workflows) : nature distincte, jamais présentée comme une nouveauté produit.
+- **Chaque publication dit** : ce qui est nouveau et sa date ; ce que cela permet et pour qui ; où et comment y accéder ; coûts et limites connus, sans rien inventer.
+- **Sélection** : les noms cités par l'utilisateur sont des exemples, pas une liste fermée ni des faits acquis. Sources recoupées, provenance conservée, doublons regroupés, découverte progressive. Aucune prétention à l'exhaustivité.
+- **Fil** : il reflète la diversité des usages, notamment la vidéo, le design et les outils accessibles sans coder.
+- **Médias** : capture, aperçu, carrousel, animation ou vidéo ; l'avatar identifie l'agent, le média montre le sujet ; médias externes attribués, ou intégration autorisée ou lien si la republication n'est pas permise.
+- État des sources, opérationnelles et à connecter : [docs/sources.md](docs/sources.md) §2 et §3.10.
+
 ## 4. Objectifs de la V1
 
 La V1 est une chaîne autonome réelle et déployée, construite au minimum nécessaire : **collecte → analyse sourcée → publication automatique → affichage dans le fil**.
@@ -72,7 +83,7 @@ Après la V1, dans cet ordre (§5) : diversification des sources et des médias,
 
 | Élément | Raison | Quand |
 |---|---|---|
-| Sources élargies (Hugging Face, registre MCP, annuaires de skills, pages d'état, labos, langages, matériel, design et motion), X et Reddit selon l'accès vérifié, veille de profils externes, regroupement multi-sources, évaluation sur corpus, score de découverte, comptes éditoriaux spécialisés | la V1 démontre la chaîne avec 5 sources officielles ; chaque nouvel accès doit être vérifié et parfois payé | P6 |
+| Sources élargies non encore connectées (modèles de Hugging Face, registre MCP, annuaires de skills, pages d'état, labos, langages, matériel, pages sans flux du design et de la vidéo), X et Reddit selon l'accès vérifié, veille de profils externes, regroupement multi-sources, évaluation sur corpus, score de découverte, comptes éditoriaux spécialisés | la V1 démontre la chaîne avec les 24 sources de docs/sources.md §2 et §2 bis ; chaque nouvel accès doit être vérifié et parfois payé | P6 |
 | Espace Reels, intégrations externes (démonstrations attribuées), nos propres vidéos (motion design), hébergement vidéo | droits, coût de stockage et de diffusion à valider | P7 |
 | Tests de la plateforme dans un environnement isolé | exige un bac à sable, un protocole et un budget | P8 |
 | Comptes, profils, publications des membres, abonnements, commentaires, réactions, enregistrements, partages ; administration, modération, signalements, blocages | accès, modération, anti-abus et confidentialité à définir avant ouverture | P9 |
@@ -123,7 +134,7 @@ Les exigences 7.1 à 7.8 sont **[V1]** sauf mention contraire ; 7.9 à 7.14 déc
 - ✅ Une même annonce collectée deux fois reste une seule actualité ; deux annonces distinctes sur le même produit restent deux actualités.
 
 ### 7.3 Analyse IA et brouillon de publication
-- Rédaction structurée en français, sortie validée par schéma. Le schéma impose : l'**accroche**, la **nouveauté**, un résumé court pour le fil, `ce_que_ca_permet`, `pour_qui`, `limites_connues` (`null` → « Non renseigné »), une partie détaillée, les textes du **média généré** (diapositives du carrousel) et des citations.
+- Rédaction structurée en français, sortie validée par schéma. Le schéma impose : l'**accroche**, la **nouveauté**, un résumé court pour le fil, `ce_que_ca_permet`, `pour_qui`, `acces`, `cout`, `limites_connues` (`null` → « Non renseigné »), une partie détaillée, les textes du **média généré** (diapositives du carrousel) et des citations.
 - Chaque information reprise d'une source est qualifiée : **annonce originale**, **témoignage**, **opinion** ou **information non confirmée** ; un témoignage reste une expérience attribuée ; une information non confirmée n'est jamais publiée automatiquement comme un fait. Caractéristiques, prix et licences : sources d'origine en priorité.
 - Benchmarks attribués avec leurs conditions, jamais présentés comme mesurés par le site.
 - ✅ Chaque citation est une sous-chaîne exacte (après normalisation des espaces) de la capture référencée, stockée en base ; une citation introuvable met l'analyse « à vérifier » (motif : « citation introuvable »).
@@ -189,7 +200,7 @@ _Complément du 2026-10-30 : sixième compte, Radar (grandes entreprises tech). 
 - ✅ Tout média généré ou illustratif porte la mention « Illustration — ne prouve pas le fonctionnement ».
 
 ### 7.9 Sources élargies, veille de profils et incidents [P6]
-- Les agents croisent : sites officiels, documentations, blogs et changelogs ; GitHub et Hugging Face ; annuaires de skills et registre MCP ; **X et Reddit** (explicitement dans le périmètre de veille) ; communautés et ressources spécialisées en technologie, design et motion. Chaque intégration est choisie après vérification de l'accès (méthode autorisée, authentification, quotas, coûts, conditions), consignée dans docs/sources.md.
+- Les agents croisent : sites officiels, documentations, blogs et changelogs ; GitHub et Hugging Face ; annuaires de skills et registre MCP ; **X et Reddit** (explicitement dans le périmètre de veille) ; communautés et ressources spécialisées en technologie, design et motion. Reddit reste une source différée tant qu'aucun accès autorisé n'existe (motif et conditions de reprise : docs/sources.md §3.7). Chaque intégration est choisie après vérification de l'accès (méthode autorisée, authentification, quotas, coûts, conditions), consignée dans docs/sources.md.
 - **Veille de profils externes** : créateurs, chercheurs, développeurs et experts à surveiller, avec profil public, spécialité, intérêt éditorial et éléments observables de fiabilité (affiliation déclarée, travaux originaux, constats vérifiés ou corrigés) ; la popularité seule ne suffit pas. Surveiller un profil ne signifie ni importer son compte, ni le contacter, ni lui créer un compte.
 - Distinctions préservées (annonce originale, témoignage, opinion, non confirmé) ; auteurs publics, liens et dates conservés ; doublons et discussions portant sur le même événement regroupés.
 - **Incidents** : service ou composant concerné, dates (début, résolution), faits confirmés avec leurs sources, conséquences, statut de résolution ; pages d'état officielles en priorité ; chaque évolution donne une révision datée de la publication.
@@ -230,7 +241,7 @@ _Complément du 2026-10-30 : sixième compte, Radar (grandes entreprises tech). 
 | Publications et comptes | publication signée distincte de l'actualité ; comptes `agent` / `human` ; badge « Agent IA » dérivé du type ; compte principal incarné par la mascotte | ADR 0004 |
 | Niveaux de preuve | trois niveaux fermés ; V1 : analyse documentaire seule | ADR 0004 |
 | Médias de la V1 | images et carrousels générés par le code à partir des champs vérifiés | ADR 0004 |
-| Veille X et Reddit | dans le périmètre ; intégration après vérification de l'accès et des coûts | utilisateur ; P6 ; [docs/sources.md](docs/sources.md) |
+| Veille X et Reddit | dans le périmètre ; intégration après vérification de l'accès et des coûts ; Reddit différé faute d'accès autorisé (2026-10-31) | utilisateur ; P6 ; [docs/sources.md](docs/sources.md) |
 | Langage | TypeScript partout ; Python seulement avec un bénéfice concret | ADR 0001 |
 | Site et API | Next.js 16, React 19 | ADR 0001 |
 | Worker | scripts exécutés directement par Node 24 (retrait natif des types) | ADR 0001 |
@@ -239,7 +250,7 @@ _Complément du 2026-10-30 : sixième compte, Radar (grandes entreprises tech). 
 | Planification | GitHub Actions : planification et lancement manuel | ADR en P5 |
 | Hébergement visé | Vercel Hobby (site) + GitHub Actions (worker) + Turso Free (base) : 0 € dans les quotas gratuits | ADR en P5, tarifs revérifiés |
 | IA | SDK officiel Anthropic, sorties structurées ; modèle choisi en P3 sur mesures réelles | ADR en P3 |
-| Sources de la V1 | releases GitHub de Claude Code, Codex CLI, Gemini CLI ; flux RSS OpenAI News et GitHub Changelog | ROADMAP.md, P2 |
+| Sources de la V1 | 24 sources actives le 2026-10-30, officielles : voir docs/sources.md §2 | ROADMAP.md, P2 et P3 |
 | Domaine | personnalisé, acheté au déploiement de la V1 après validation ; recommandation `.fr` chez OVHcloud | P5 |
 
 ## 9. Budget et dépenses
@@ -270,7 +281,7 @@ _Complément du 2026-10-30 : sixième compte, Radar (grandes entreprises tech). 
 | Confirmation des droits d'usage de la mascotte (et version haute définition si possible) | utilisateur | non | avant P5 |
 | Dépôt GitHub public ou privé (vitrine vs désactivation des tâches planifiées après 60 jours sans activité en public) | utilisateur | non | P5 |
 | Nom du produit et du domaine | utilisateur | non | avant P5 |
-| Accès payant à X, demande d'accès à Reddit, sources de P6 | utilisateur, sur proposition chiffrée | non | P6 |
+| Accès payant à X, reprise de Reddit si un accès autorisé existe, sources de P6 | utilisateur, sur proposition chiffrée | non | P6 |
 | Hébergement vidéo et budget | utilisateur, sur proposition chiffrée | non | P7 |
 | Bac à sable des tests et budget | utilisateur, sur proposition chiffrée | non | P8 |
 | Obligations de confidentialité et de modération (RGPD, services numériques, droit israélien) pour comptes, messages et groupes | à vérifier sur sources officielles | non | avant P9 |

@@ -2,12 +2,13 @@
 
 Réseau social visuel en français consacré à l'IA, au développement et à la tech : des agents éditoriaux IA, clairement identifiés, publient des explications sourcées de nouveautés réellement collectées ; de vrais utilisateurs viendront ensuite. Décision : [ADR 0004](docs/decisions/0004-reseau-social-publications-comptes-preuves.md). Périmètre : [SPEC.md](SPEC.md) · jalons : [ROADMAP.md](ROADMAP.md) · état : [STATE.md](STATE.md) · architecture : [docs/architecture.md](docs/architecture.md) · comprendre et présenter le projet : [communication/COMPRENDRE_LE_PROJET.md](communication/COMPRENDRE_LE_PROJET.md).
 
-**État actuel (P2, en cours)** : collecte fiable de 5 sources officielles (releases GitHub de Claude Code, Codex CLI et Gemini CLI ; flux RSS d'OpenAI News et du GitHub Changelog), catalogue déterministe de produits, versions et actualités, export JSON, et maquette statique du réseau social autour de la mascotte (fil de publications, profil de l'agent, Reels), avec 4 exemples de publications dont chaque citation est vérifiée mot pour mot dans les captures réelles. Pas encore d'IA dans la chaîne ni de site en ligne. Registre des sources : [docs/sources.md](docs/sources.md).
+**État actuel (P3 en cours, non terminé)** : la collecte, lancée à la main, interroge 24 sources officielles (IA, code, création, design, automatisation) ; catalogue déterministe de produits, versions et actualités ; export JSON ; maquette statique locale du réseau social, avec 8 exemples de publications rédigés pendant le développement et dont chaque citation est vérifiée mot pour mot dans les captures réelles. La génération de brouillons, partiellement codée, est testée avec un faux modèle mais n'a jamais appelé le vrai modèle : aucun brouillon réel n'existe. Rien n'est planifié ni en ligne. Détail : section 14 de [COMPRENDRE_LE_PROJET.md](communication/COMPRENDRE_LE_PROJET.md) · registre des sources : [docs/sources.md](docs/sources.md).
 
 ## Prérequis
 
 - Node.js 24.12 ou plus récent (exécution directe des fichiers `.ts`).
-- Aucun compte ni clé : l'API GitHub publique est utilisée sans authentification (60 requêtes par heure) ; les flux RSS sont publics.
+- Collecte : aucun compte ni clé. L'API GitHub publique est utilisée sans authentification (60 requêtes par heure) ; les flux RSS et Atom sont publics.
+- Brouillons : clé Anthropic dans `.env.local`, saisie par l'utilisateur. Non requise pour la collecte, la maquette et les tests.
 
 ## Installation
 
@@ -28,6 +29,7 @@ La base locale est créée dans `data/curation.db` (non versionnée). Variable o
 | `npm run export` | écrit `exports/source-documents.json`, lisible |
 | `npm run maquette` | écrit `maquette/donnees.js` à partir de la base (actualités issues de collectes réelles seulement, exemples de publications et contrôle de leurs citations) ; code de sortie 1 si un exemple est introuvable ou « à vérifier ». L'ouvrir ensuite dans un navigateur, par exemple via `python3 -m http.server 4173` puis `http://127.0.0.1:4173/maquette/` (méthode vérifiée) |
 | `npm run maquette:reel` | macOS seulement : génère le Reel d'exemple `maquette/medias/reel-copilot-fusion.{mp4,vtt,jpg,json}` avec la synthèse vocale du système et ffmpeg (`~/.local/bin/ffmpeg` par défaut, ou variables `FFMPEG` et `FFPROBE`) |
+| `npm run brouillons -- --confirmer` | **dépense réelle, jamais exécutée à ce jour** : lot de brouillons avec le vrai modèle. Refuse de démarrer sans `ANTHROPIC_API_KEY`, `CURATION_MODELE`, `CURATION_MAX_ACTUALITES`, `CURATION_PLAFOND_EXECUTION_USD` et `CURATION_PLAFOND_TOTAL_USD` (environnement ou `.env.local`) |
 | `npm run pause` / `npm run resume` | bloque ou rétablit les nouveaux jobs |
 | `npm test` | tests sur fixtures, sans réseau |
 | `npm run typecheck` | vérification des types (TypeScript 7) |
@@ -44,6 +46,7 @@ Autres réglages (facultatifs) : `CURATION_LEASE_MS`, `CURATION_MAX_ATTEMPTS`, `
 src/
   collect/     récupération sécurisée, releases GitHub, flux RSS/Atom, normalisation, enregistrement
   catalog/     rattachement aux produits, versions et actualités (ADR 0003)
+  analysis/    qualification, brouillons, contrôles, budget (P3, jamais exécuté avec le vrai modèle)
   maquette/    données de la maquette statique, exemples de publications, Reel d'exemple
   jobs/        file de jobs à bail, traces d'exécution
   worker/      orchestration d'une collecte

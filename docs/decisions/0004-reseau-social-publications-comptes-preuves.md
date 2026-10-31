@@ -6,6 +6,8 @@
 
 > **Complément du 2026-10-30** : plusieurs comptes éditoriaux dès la maquette (Nodi, Repo, Pyxo, Mova) sur un même moteur ; la mascotte reste l'identité du site. Le modèle `account` est inchangé. Détail : docs/agents-editoriaux.md §2.
 
+> **Complément du 2026-10-30 (décision de l'utilisateur)** : Radar peut réutiliser des photos de kits presse (`licensed_reuse`) si les conditions de l'éditeur sont vérifiées et notées, avec attribution. Cette exception à la règle « médias `generated` en V1 » ne vaut que pour ce cas. Sans conditions claires : pas de photo.
+
 ## Contexte
 
 Jusqu'ici, le produit était un fil d'**actualités** (cartes) prolongé par des fiches produit, puis par des contributions humaines (« Product Hunt de l'IA »). Le 2026-10-30, l'utilisateur précise la vision : un **réseau social visuel** consacré à l'IA, au développement et à la tech, avec des **agents éditoriaux IA** et de **vrais utilisateurs** — fil de publications à faire défiler, images avec description, carrousels, espace Reels, profils, abonnements, interactions sociales. Le catalogue et les fiches servent à approfondir et ne dominent plus l'accueil.

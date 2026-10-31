@@ -513,6 +513,20 @@
   .depot-stats dt { font-size: max(.7rem, 2.9cqi); color: #5e5874; }
   .depot-stats dd { margin: 0; font: 700 max(.9rem, 4.2cqi)/1.2 var(--texte); }
   .depot .visuel-titre { color: #4d4688; }
+  /* Règle du 2026-10-30 : tous les médias sont lumineux, avec la nouveauté en gros titre. */
+  .publication .diapo:not(.photo-presse), .detail .diapo:not(.photo-presse), .vignette .diapo:not(.photo-presse) { background: linear-gradient(150deg, #fffdf8 20%, color-mix(in srgb, var(--accent) 45%, #fffdf8)); color: #1d1b23; }
+  .diapo .diapo-libelle, .diapo .diapo-coin { color: #4d4688; }
+  .visuel:not(.depot) { justify-content: flex-start; padding-top: 13cqi; }
+  .visuel .visuel-titre { position: static; order: -1; color: #1d1b23; font: 800 max(1.6rem, 9cqi)/1.05 var(--display); letter-spacing: 0; text-transform: none; }
+  .visuel-liste li { background: rgba(255, 255, 255, .78); color: #1d1b23; box-shadow: 0 1px 4px rgba(29, 27, 35, .1); }
+  .forme-etapes li::before { background: #1d1b23; color: #fff; }
+  .forme-priorite li:first-child, .forme-avant_apres li:last-child { outline-color: #1d1b23; }
+  .forme-terminal li { background: #1d1b23; color: #fff; }
+  .depot .visuel-titre { font-size: max(.75rem, 3cqi); font-weight: 700; }
+  .photo-presse { padding: 0; justify-content: flex-end; }
+  .photo-presse img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .photo-presse::after { content: ""; position: absolute; inset: 40% 0 0; background: linear-gradient(transparent, rgba(0, 0, 0, .82)); }
+  .photo-titre { position: relative; z-index: 1; padding: 5cqi; color: #fff; font: 800 max(1.6rem, 9cqi)/1.05 var(--display); text-wrap: balance; }
   .grille-comptes { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
   .carte-compte { background: var(--coton); border-radius: var(--rayon); box-shadow: var(--ombre); padding: 16px; }
   .carte-compte img { width: 84px; height: 84px; }
@@ -586,6 +600,7 @@
     collecte: ['M4 4h16v7H4z', 'M4 15h16v5H4z', 'M8 7.5h4'],
     profil: ['M12 3l2.4 5 5.6.8-4 3.9 1 5.5-5-2.7-5 2.7 1-5.5-4-3.9 5.6-.8z'],
     etats: ['M12 3l9 5-9 5-9-5z', 'M3 13l9 5 9-5'],
+    parametres: ['M4 7h10', 'M18 7h2', 'M4 17h2', 'M10 17h10', 'M16 5v4', 'M8 15v4'],
     reagir: ['M12 4l2.2 4.6 5 .7-3.6 3.5.9 5-4.5-2.4-4.5 2.4.9-5L4.8 9.3l5-.7z'],
     commenter: ['M4 5h16v11H10l-5 4v-4H4z'],
     enregistrer: ['M6 3h12v18l-6-4.2L6 21z'],
@@ -674,6 +689,11 @@
   // Média principal : il montre la nouveauté (étapes, priorité, commande…), jamais la mascotte ni un numéro géant.
   function couverture(ex, attrs = {}) {
     const v = ex.visuel;
+    if (v.forme === 'photo') {
+      return h('div', { class: 'diapo photo-presse', 'data-compte': ex.compte, ...attrs },
+        h('img', { src: `medias/${v.photo.fichier}`, alt: v.photo.alt }),
+        h('span', { class: 'photo-titre' }, v.elements[0].texte));
+    }
     return h('div', { class: `diapo visuel forme-${v.forme}`, 'data-compte': ex.compte, ...attrs }, coin(ex),
       h('ol', { class: 'visuel-liste' }, v.elements.map((e) => h('li', { lang: v.forme === 'terminal' ? 'en' : null }, e.texte))),
       h('span', { class: 'visuel-titre' }, ex.titre_media));
@@ -687,7 +707,7 @@
 
   let numeroCarrousel = 0;
   function media(ex) {
-    const mention = h('figcaption', { class: 'mention-media' }, `${ex.visuel.legende} · ${MENTION_MEDIA}`, ex.visuel.original ? [' · ', lienExterne(ex.visuel.original.url, ex.visuel.original.libelle)] : null);
+    const mention = ex.visuel.photo ? h('figcaption', { class: 'mention-media' }, `${ex.visuel.legende} · ${ex.visuel.photo.credit}`) : h('figcaption', { class: 'mention-media' }, `${ex.visuel.legende} · ${MENTION_MEDIA}`, ex.visuel.original ? [' · ', lienExterne(ex.visuel.original.url, ex.visuel.original.libelle)] : null);
     if (ex.media === 'image') {
       return h('figure', { class: 'media' }, couverture(ex, { role: 'img', 'aria-label': `Image générée : ${ex.titre_media}` }), mention);
     }
@@ -1003,11 +1023,11 @@
     return h('li', null, h('div', null, h('h3', null, titre, tag(type, statut)), h('p', null, texte)));
   }
   // Pulse : format et sources seulement ; la fiche reste vide tant qu'aucun incident n'est réellement collecté.
-  const ETAT = { connecte: ['reel', 'Connectée'], partiel: ['neutre', 'Partielle'], a_integrer: ['prevu', 'À intégrer'] };
+  const ETAT = { connecte: ['reel', 'Connectée'], partiel: ['neutre', 'Partielle'], a_integrer: ['prevu', 'À intégrer'], differe: ['neutre', 'Différée'] };
   function blocRadar() {
     return [
       h('h2', { class: 'sous-titre-section', style: 'margin-top:0' }, 'Sources'),
-      h('p', { class: 'intro-onglet' }, 'Chaque publication distingue annonce officielle, affirmation commerciale, résultat indépendant et rumeur. Le contexte aide à recouper, il ne prouve pas à lui seul. Les sources à intégrer ne sont pas surveillées.'),
+      h('p', { class: 'intro-onglet' }, 'Chaque publication distingue annonce officielle, affirmation commerciale, résultat indépendant et rumeur. Le contexte aide à recouper, il ne prouve pas à lui seul. Les sources à intégrer ou différées ne sont pas surveillées.'),
       h('ul', { class: 'sujets' }, DONNEES.registre_radar.map((s) => h('li', null, tag(...ETAT[s.etat]), ' ', s.famille, h('span', null, `${premiereMajuscule(s.role)} · ${s.note}`)))),
       h('h2', { class: 'sous-titre-section' }, 'Publications'),
     ];
@@ -1154,7 +1174,7 @@
     return [
       h('section', { class: 'tete-page' }, h('div', null,
         h('h1', null, 'Actualités collectées'),
-        h('p', null, tag('reel', 'Réel'), ` Relevées automatiquement sur les pages officielles, pas encore analysées ni publiées (P3). ${pluriel(DONNEES.news_items.length, 'actualité')} · ${pluriel(DONNEES.sources.length, 'source')} · dernière collecte ${quand(derniere)} (heure de Paris).`))),
+        h('p', null, tag('reel', 'Réel'), ` Récupérées dans les flux officiels par la commande de collecte, lancée à la main ; pas encore analysées ni publiées (P3). ${pluriel(DONNEES.news_items.length, 'actualité')} · ${pluriel(DONNEES.sources.length, 'source')} · dernière collecte ${quand(derniere)} (heure de Paris).`))),
       h('div', { class: 'colonnes' },
         h('section', { 'aria-labelledby': 'titre-collecte' },
           h('h2', { id: 'titre-collecte', class: 'sr-only' }, 'Liste des actualités collectées'),
@@ -1320,6 +1340,34 @@
     panneau.open = ouvert;
   }
 
+  // ——— Paramètres : conservés dans ce navigateur seulement ; le profil membre arrive en P9. ———
+  const lirePref = (cle, defaut) => { try { return localStorage.getItem(`curation-${cle}`) || defaut; } catch { return defaut; } };
+  const ecrirePref = (cle, valeur) => { try { localStorage.setItem(`curation-${cle}`, valeur); } catch { /* stockage indisponible : choix non conservé */ } };
+  function appliquerPrefs() {
+    const theme = lirePref('theme', 'auto');
+    if (theme === 'auto') document.documentElement.removeAttribute('data-theme');
+    else document.documentElement.dataset.theme = theme;
+    document.documentElement.style.fontSize = { normal: '', grand: '112.5%' }[lirePref('texte', 'normal')] ?? '';
+  }
+  function choixPref(id, libelle, cle, defaut, options) {
+    return h('div', { style: 'margin-bottom:14px' }, h('label', { for: id, style: 'display:block;font-weight:600;margin-bottom:6px' }, libelle),
+      h('select', { id, onchange: (e) => { ecrirePref(cle, e.target.value); appliquerPrefs(); annoncer('Préférence enregistrée.'); } },
+        options.map(([valeur, nom]) => h('option', { value: valeur, selected: lirePref(cle, defaut) === valeur }, nom))));
+  }
+  function vueParametres() {
+    document.title = 'Paramètres — Curation AI (maquette)';
+    return [
+      h('section', { class: 'tete-page' }, h('div', null, h('h1', null, 'Paramètres'), h('p', null, 'Vos choix restent dans ce navigateur.'))),
+      h('section', { class: 'carton', style: 'max-width:560px;margin-bottom:16px', 'aria-labelledby': 'p-affichage' },
+        h('h2', { id: 'p-affichage' }, 'Affichage'),
+        choixPref('p-theme', 'Thème', 'theme', 'auto', [['auto', 'Comme l’appareil'], ['light', 'Clair'], ['dark', 'Sombre']]),
+        choixPref('p-texte', 'Taille du texte', 'texte', 'normal', [['normal', 'Normale'], ['grand', 'Grande']])),
+      h('section', { class: 'carton', style: 'max-width:560px', 'aria-labelledby': 'p-profil' },
+        h('h2', { id: 'p-profil' }, 'Profil'),
+        h('p', null, tag('prevu', 'Prévu · P9'), ' Nom, photo, biographie et abonnements arriveront avec les comptes membres. Aucun compte n’existe aujourd’hui.')),
+    ];
+  }
+
   // ——— Navigation ———
   const PAGES = [['fil', '#/', 'Fil'], ['reels', '#/reels', 'Reels'], ['collecte', '#/collecte', 'Coulisses'], ['profil', '#/comptes', 'Profils'], ['etats', '#/etats', 'États']];
   function rendreNav(page) {
@@ -1341,6 +1389,7 @@
     if (chemin === '/collecte') return ['collecte', vueCollecte];
     if ((m = /^\/actualite\/(\d+)$/.exec(chemin))) return ['collecte', () => vueDetail(m[1])];
     if (chemin === '/etats') return ['etats', vueEtats];
+    if (chemin === '/parametres') return ['parametres', vueParametres];
     return ['fil', () => [h('a', { class: 'retour', href: '#/' }, '← Retour au fil'), pageErreur('Page introuvable', 'Cette adresse n’existe pas dans la maquette.')]];
   }
 
@@ -1370,7 +1419,10 @@
   if (!DONNEES) {
     main.replaceChildren(pageErreur('Données de la maquette introuvables', 'Lancez « npm run maquette » pour générer maquette/donnees.js, puis rechargez la page.'));
   } else {
-    document.getElementById('bandeau-date').textContent = `données relevées le ${quand(DONNEES.generated_at)} (heure de Paris)`;
+    appliquerPrefs();
+    panneauLangue.before(h('a', { class: 'bouton discret', href: '#/parametres', 'aria-label': 'Paramètres', title: 'Paramètres' }, icone('parametres')));
+    const derniereCollecte = DONNEES.sources.map((s) => s.last_success_at).filter(Boolean).sort().pop();
+    document.getElementById('bandeau-date').textContent = derniereCollecte ? `dernière collecte le ${quand(derniereCollecte)} (heure de Paris)` : 'aucune collecte réelle';
     rendreLangue();
     let precedente = location.hash || '#/';
     window.addEventListener('hashchange', () => {

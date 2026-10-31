@@ -11,6 +11,7 @@
     "collect": "node src/cli/collect.ts",
     "status": "node src/cli/status.ts",
     "export": "node src/cli/export.ts",
+    "brouillons": "node src/cli/brouillons.ts",
     "maquette": "node src/cli/maquette.ts",
     "maquette:reel": "node src/cli/maquette-reel.ts",
     "pause": "node src/cli/pause.ts",
@@ -21,6 +22,7 @@
     "test": "vitest run"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "1.3.0",
     "@libsql/client": "0.18.0",
     "@rowanmanning/feed-parser": "2.1.5",
     "drizzle-orm": "0.45.4",

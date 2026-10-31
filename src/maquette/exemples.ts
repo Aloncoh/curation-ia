@@ -44,8 +44,10 @@ export type CompteId = 'nodi' | 'repo' | 'pyxo' | 'mova' | 'pulse' | 'radar';
  * son adresse doit figurer dans la capture.
  */
 export interface VisuelMedia {
-  forme: 'etapes' | 'terminal' | 'priorite' | 'avant_apres';
-  legende: 'Schéma original' | 'Reconstitution de la commande citée';
+  forme: 'etapes' | 'terminal' | 'priorite' | 'avant_apres' | 'photo';
+  legende: 'Schéma original' | 'Reconstitution de la commande citée' | 'Photo de presse, sans rapport direct avec le produit';
+  /** Photo réutilisée (ADR 0004) : fichier local, crédit exigé et page des conditions. */
+  photo?: { fichier: string; alt: string; credit: string; conditions: string; verifie_le: string };
   elements: ChampCite[];
   original?: { url: string; libelle: string };
 }
@@ -389,8 +391,42 @@ export const EXEMPLES: ExemplePublication[] = [
     questions_a_tester: ["Une image générée garde-t-elle une trace de son origine IA quand le filigrane est désactivé ?"],
   },
   {
-    id: 'exemple-github-enterprise-copilot',
+    id: 'exemple-gemini-4-carbon',
     compte: 'radar',
+    description: {
+      texte: 'Google le présente comme son prochain modèle de pointe. Le flux collecté ne donne pas le détail : disponibilité et limites sont à lire à la source.',
+      passages: ['Gemini 4 Carbon: our next frontier model'],
+    },
+    visuel: {
+      forme: 'photo',
+      legende: 'Photo de presse, sans rapport direct avec le produit',
+      elements: [{ texte: 'Google présente Gemini 4 Carbon', passages: ['Gemini 4 Carbon: our next frontier model'] }],
+      photo: {
+        fichier: 'google-campus.jpg',
+        alt: 'Vue du campus Googleplex',
+        credit: 'Source: Google.',
+        conditions: 'https://blog.google/image-library/',
+        verifie_le: '2026-10-30',
+      },
+    },
+    source_id: 'feed:google-gemini',
+    url: 'https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-carbon',
+    media: 'image',
+    titre_media: 'Gemini 4 Carbon',
+    accroche: { texte: 'Google présente Gemini 4 Carbon, son prochain modèle de pointe', passages: ['Gemini 4 Carbon: our next frontier model'] },
+    nouveaute: { texte: 'Un nouveau modèle de pointe annoncé par Google.', passages: ['Gemini 4 Carbon: our next frontier model'] },
+    ce_que_ca_permet: null,
+    pour_qui: null,
+    limites_connues: null,
+    details: [],
+    attributions: [],
+    diapositives: ['accroche'],
+    categories: ['grandes entreprises', 'annonce officielle'],
+    questions_a_tester: ['Quand et pour qui Gemini 4 Carbon est-il disponible ?'],
+  },
+  {
+    id: 'exemple-github-enterprise-copilot',
+    compte: 'pyxo',
     description: {
       texte: 'Pour les clients suivis par une équipe commerciale : Copilot inclus par utilisateur licencié, usage décompté du budget dès la première requête.',
       passages: [
@@ -436,7 +472,7 @@ export const EXEMPLES: ExemplePublication[] = [
     details: [],
     attributions: [],
     diapositives: ['accroche'],
-    categories: ['grandes entreprises', 'annonce officielle'],
+    categories: ['outil de développement', 'annonce officielle'],
     questions_a_tester: ['Quel est le coût réel d’une équipe type une fois l’usage décompté ?'],
   },
   {
@@ -603,9 +639,9 @@ export const SUJETS = [
   { sujet: 'Outils de développement', compte: 'pyxo', etat: 'collecte', note: 'Releases GitHub et changelogs déjà collectés.' },
   { sujet: 'Bibliothèques Python et frameworks', compte: 'pyxo', etat: 'a_construire', note: 'Collecte à construire.' },
   { sujet: 'Extensions Chrome', compte: 'pyxo', etat: 'a_construire', note: 'Collecte à construire ; conditions du Chrome Web Store à vérifier.' },
-  { sujet: 'Design et motion', compte: 'mova', etat: 'partiel', note: 'Vu seulement quand une source suivie en parle.' },
+  { sujet: 'Design et motion', compte: 'mova', etat: 'partiel', note: 'Figma, Spline, Sketch, Blender et Comfy collectés ; aucune publication pour l’instant.' },
   { sujet: 'Sélections de ressources', compte: 'mova', etat: 'a_construire', note: 'Listes occasionnelles de sites et d’outils utiles ; chaque ressource vérifiée à sa source.' },
-  { sujet: 'Grandes entreprises tech', compte: 'radar', etat: 'partiel', note: 'Vu via le changelog GitHub ; espaces presse à connecter.' },
+  { sujet: 'Grandes entreprises tech', compte: 'radar', etat: 'partiel', note: 'Google et le changelog GitHub collectés ; autres espaces presse à connecter.' },
   { sujet: 'Matériel et robotique', compte: 'radar', etat: 'a_construire', note: 'Flux officiels repérés, collecte à construire.' },
   { sujet: 'Incidents importants', compte: 'pulse', etat: 'a_construire', note: 'Pages d’état à collecter, avec révisions (P6).' },
   { sujet: 'Infrastructures, bases de données et pipelines', compte: 'pulse', etat: 'a_construire', note: 'Exploitation, fiabilité et performances : collecte à construire.' },
@@ -651,7 +687,7 @@ export const REGISTRE_PULSE = [
   { famille: 'Blogs d’ingénierie', role: 'vérification', etat: 'a_integrer', note: 'Choix des flux à faire.' },
   { famille: 'Releases de bases de données et d’outils data', role: 'vérification', etat: 'partiel', note: 'Collecteur de releases GitHub réutilisable ; dépôts à ajouter.' },
   { famille: 'Issues GitHub', role: 'découverte', etat: 'a_integrer', note: 'Signal à confirmer ; API publique.' },
-  { famille: 'Communautés Reddit', role: 'découverte', etat: 'a_integrer', note: 'Accès autorisé à obtenir.' },
+  { famille: 'Communautés Reddit', role: 'découverte', etat: 'differe', note: 'Différée : aucun accès autorisé disponible.' },
   { famille: 'Experts sur X', role: 'découverte', etat: 'a_integrer', note: 'Accès autorisé à obtenir, payant.' },
   { famille: 'GitHub Changelog', role: 'vérification', etat: 'connecte', note: 'Déjà collecté (P2).' },
 ] as const;
@@ -659,11 +695,12 @@ export const REGISTRE_PULSE = [
 /** Registre de Radar : `role` distingue la source de preuve du contexte. Une rumeur n'est jamais publiée comme un fait. */
 export const REGISTRE_RADAR = [
   { famille: 'GitHub Changelog (Microsoft)', role: 'annonce officielle', etat: 'connecte', note: 'Déjà collecté (P2).' },
-  { famille: 'Blogs officiels Google et Microsoft', role: 'annonce officielle', etat: 'a_integrer', note: 'Flux contrôlés, gratuits.' },
+  { famille: 'Blogs officiels Google et Microsoft', role: 'annonce officielle', etat: 'partiel', note: 'Google collecté ; Microsoft à intégrer.' },
   { famille: 'NVIDIA et Apple Newsroom', role: 'annonce officielle', etat: 'a_integrer', note: 'Flux contrôlés, gratuits.' },
   { famille: 'Amazon, Meta, Tesla', role: 'annonce officielle', etat: 'a_integrer', note: 'Accès à vérifier par entreprise.' },
   { famille: 'Documentations, conférences, recherche', role: 'annonce officielle', etat: 'a_integrer', note: 'À sélectionner.' },
   { famille: 'Newsletters publiques', role: 'contexte', etat: 'a_integrer', note: 'Accès autorisé uniquement.' },
   { famille: 'Médias spécialisés', role: 'contexte', etat: 'a_integrer', note: 'Conditions à vérifier ; synthèse attribuée.' },
-  { famille: 'Experts sur X et Reddit', role: 'contexte', etat: 'a_integrer', note: 'Accès autorisé ; X payant.' },
+  { famille: 'Experts sur X', role: 'contexte', etat: 'a_integrer', note: 'Accès autorisé à obtenir, payant.' },
+  { famille: 'Communautés Reddit', role: 'contexte', etat: 'differe', note: 'Différée : aucun accès autorisé disponible.' },
 ] as const;

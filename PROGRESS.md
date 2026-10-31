@@ -70,3 +70,22 @@
 - Ajout de Radar : profil, registre de sources, exemple GitHub Enterprise, filtre par auteur, une publication principale par actualité.
 
 - 2026-10-30 : maquette P2 validée par l'utilisateur ; P2 terminé.
+
+## 2026-10-30 — P3 (en cours, sans dépense)
+
+- P2 fusionné après tests, types et `npm run maquette`.
+- Fait : migration 0003, budget réservé avant appel, qualification, attribution, code des brouillons, contrôles de soutien et de contexte. À cette date, seuls le budget, la pause, l'écartement et les sorties invalides avaient tourné sur faux modèle (rédaction couverte le 2026-10-31).
+- Non fait : aucun appel réel ; adaptateur Anthropic compilé mais jamais exécuté.
+- Radar : exemple trop niche réattribué à Pyxo, format photo et gros titre documenté.
+
+- Radar : source `feed:google-gemini` collectée en réel, exemple Gemini 4 Carbon avec photo créditée du Press Corner.
+
+## 2026-10-30 — P3 : écosystème IA et créatif (en cours)
+
+- Recherche sur 6 domaines et contre-vérification indépendante (12 agents) ; recommandations revues au regard du code.
+- 18 flux officiels ajoutés : collecte réelle réussie, 329 documents, seconde collecte sans doublon. DeepMind reporté (gzip non demandé).
+- Brouillons : accès, coût, nature, date, niveau de preuve ; contrôle `attribution_manquante` ; prompt `p3-2`. 199 tests au vert sur fixtures ; aucun appel réel au modèle.
+- 2026-10-31 : l'utilisateur a refusé de déposer la demande d'accès à Reddit. Claude Code a pris ce refus pour un retrait du cadrage, sans que cela ait été demandé, puis a rétabli Reddit le jour même à la demande de l'utilisateur, en source différée avec motif et conditions de reprise (`docs/sources.md` §3.7).
+- 2026-10-31 : collecte réelle des 24 sources sur une copie de la base : 24 réussites, 15 nouveaux documents, 14 nouvelles actualités, 28 nouvelles captures de documents déjà connus, soit 43 captures au total ([sortie brute](communication/linkedin/05-ecosysteme-creatif/preuves/brut/collecte-reelle-2026-10-31-copie-de-base.txt)). `llm_run`, `llm_call` et `post_draft` vides : aucun brouillon réel ([relevé](communication/linkedin/05-ecosysteme-creatif/preuves/brut/etat-reel-2026-10-31.txt)).
+- 2026-10-31 : une source retirée du registre (DeepMind) n'est plus présentée comme suivie par la maquette ; le bandeau date les données par la dernière collecte.
+- 2026-10-31 : relecture indépendante avant commit (4 angles, 8 agents) : 40 constats confirmés, 3 rejetés. Contre-vérification des corrections (2 agents) : 18 constats de plus, surtout des corrections incomplètes, traités ensuite et vérifiés par tests et mutations, sans troisième relecture indépendante. Corrigés : textes périmés ou trop affirmatifs, statut de Reddit, schéma envoyé à l'API, injection par le contenu collecté, citations trop courtes, attribution, nom du produit transmis au modèle, captures inexploitables, secrets masqués dans les traces, lecture de `.env.local`, test de la rédaction de bout en bout sur faux modèle (`p3-3`). Non traités, listés dans STATE.md : compléments de P3 et fiabilisation avant le premier lot réel. Réaction réelle de l'API au schéma toujours non vérifiée. Bilan : 240 tests au vert sur fixtures et faux modèle, types OK, 23 mutations du code de P3 toutes détectées, maquette contrôlée dans le navigateur.

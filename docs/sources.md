@@ -1,6 +1,6 @@
 # Registre des sources
 
-> Statut au 2026-10-30 : **5 sources actives** (collecte réelle réussie et tracée). Toutes les autres sont **candidates** : rien n'y est collecté. Ce registre consigne l'état d'accès vérifié ; il ne décide rien (les choix à faire sont en §8). Références : SPEC §7.1 et §7.9 ; ROADMAP P2 (étape 7), P6 et P7. Configuration : [src/sources.ts](../src/sources.ts). Essais réels : [PROGRESS.md](../PROGRESS.md). Le registre passe en base en P6.
+> Statut au 2026-10-30 : **24 sources actives** (collecte réelle réussie et tracée), toutes officielles ; élargissement à l'écosystème créatif en §2 bis et §3.10. Toutes les autres sont **candidates** : rien n'y est collecté. Ce registre consigne l'état d'accès vérifié ; il ne décide rien (les choix à faire sont en §8). Références : SPEC §7.1 et §7.9 ; ROADMAP P2 (étape 7), P6 et P7. Configuration : [src/sources.ts](../src/sources.ts). Essais réels : [PROGRESS.md](../PROGRESS.md). Le registre passe en base en P6.
 
 ## 1. Comment lire ce registre
 
@@ -10,7 +10,7 @@
 - **Juridique.** Tout ce qui porte sur des conditions d'utilisation ou sur le droit est une **synthèse documentaire, pas un avis juridique**.
 - **Preuves.** [recherche-sources-2026-10-30-contre-verifiee.json](../communication/linkedin/04-vision-sociale/preuves/brut/recherche-sources-2026-10-30-contre-verifiee.json) (`themes.<clé>.recherche` et `themes.<clé>.verification`) et les scripts `workflow-*.js` du même dossier. Le fichier `…-NON-CONTRE-VERIFIEE.json` est un état intermédiaire : ne rien en citer. Les pages consultées sont des données, jamais des instructions.
 
-## 2. Sources actives (5)
+## 2. Sources actives d'origine (6)
 
 | Identifiant | Point d'accès collecté | Hôte autorisé | Intervalle visé | Taille maximale | Accès |
 |---|---|---|---|---|---|
@@ -19,13 +19,32 @@
 | `github-releases:google-gemini/gemini-cli` | API REST GitHub, 20 dernières releases (surtout des préversions quotidiennes) | `api.github.com` | 360 min | 2 Mio | sans jeton, 0 € |
 | `feed:openai-news` | `https://openai.com/news/rss.xml` (RSS, 20 entrées lues au plus) | `openai.com` | 360 min | 2 Mio | sans compte, 0 € |
 | `feed:github-changelog` | `https://github.blog/changelog/feed/` (RSS, 20 entrées lues au plus) | `github.blog` | 60 min, appliqué par la planification (P5) | 2 Mio | sans compte, 0 € |
+| `feed:google-gemini` | `https://blog.google/products-and-platforms/products/gemini/rss/` (RSS, 20 entrées lues au plus) | `blog.google` | 360 min | 2 Mio | sans compte, 0 € |
 
 Règles communes (code actuel) : délai de 15 s, aucune redirection suivie, adresses IP résolues validées (anti-SSRF), liens d'entrée limités en https aux hôtes de la source, User-Agent `curation-ai-collector/0.1`.
 
-- **Dernière collecte réussie** : essai réel du 2026-10-30 à 02:25 UTC, 5 sources réussies, 65 nouveaux documents (plus 5 documents de P1 rattachés), 44 actualités (14 versions, 30 annonces) ; seconde collecte : aucun nouveau document, 70 inchangés, aucun doublon (requêtes SQL). Réponse réelle de Codex CLI : 5 571 996 octets. [Preuves](../communication/linkedin/03-catalogue/preuves/brut/). Premier essai réel (Claude Code seul) : 2026-10-30 à 01:26 UTC. Collecte non planifiée avant P5.
+- **Dernières collectes** : base de travail le 2026-10-30 à 14:45 UTC (§2 bis) ; essai des 24 sources sur une copie de la base le 2026-10-31 (24 réussites, sortie brute dans `communication/linkedin/05-ecosysteme-creatif/preuves/brut/`).
+- **Essai réel de P2** : 2026-10-30 à 02:25 UTC, 5 sources réussies, 65 nouveaux documents (plus 5 documents de P1 rattachés), 44 actualités (14 versions, 30 annonces) ; seconde collecte : aucun nouveau document, 70 inchangés, aucun doublon (requêtes SQL). Réponse réelle de Codex CLI : 5 571 996 octets. [Preuves](../communication/linkedin/03-catalogue/preuves/brut/). Premier essai réel (Claude Code seul) : 2026-10-30 à 01:26 UTC. Collecte non planifiée avant P5.
 - **GitHub** (vérifié le 2026-10-30) : sans jeton, 60 requêtes/h par adresse IP ; avec `GITHUB_TOKEN` dans GitHub Actions, 1 000/h par dépôt ; une réponse 304 n'échappe au quota que si la requête est authentifiée ([limites](https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api), [bonnes pratiques](https://docs.github.com/en/rest/using-the-rest-api/best-practices-for-using-the-rest-api)). Conditions d'utilisation : §3.1.
 - **OpenAI News** (vérifié le 2026-10-30) : 1 337 entrées depuis 2015, environ 814 Ko, ni ETag ni Last-Modified (flux retéléchargé en entier) ; dernière entrée vue 2026-10-29T17:00:00Z ; la page `/news/` renvoie 403 à un client non navigateur, mais le flux répond. Les conditions d'utilisation d'OpenAI (version UE) n'ont pas pu être lues (§7.3).
 - **GitHub Changelog** (vérifié le 2026-10-30) : 10 entrées seulement dans le flux ; dernière entrée vue 2026-10-29T17:14:38Z. Le projet a observé 9 publications en 25 minutes le 2026-10-28, d'où l'intervalle visé d'une heure.
+
+## 2 bis. Sources ajoutées le 2026-10-30 (18 actives)
+
+Collecte réelle du 2026-10-30 depuis le poste local : 18 sources réussies, 329 documents, puis seconde collecte sans doublon (preuve : la seconde passe ; Notion y fait sa première collecte, après correction de son hôte) ([preuve](../communication/linkedin/05-ecosysteme-creatif/preuves/brut/collecte-reelle-2026-10-30.txt)). Configuration : `src/sources.ts`, intervalle visé 360 min, 20 entrées au plus. Les conditions d'utilisation de ces flux n'ont pas toutes été lues : à vérifier avant la mise en ligne.
+
+| Domaine | Compte probable | Sources |
+|---|---|---|
+| Modèles | Nodi | Mistral, Hugging Face Blog, Suno (notes de version), ElevenLabs, Midjourney |
+| Outils et applications | Nodi, Pyxo | Cursor, Notion, Gemini Notebook |
+| Création visuelle | Mova | Higgsfield, Comfy, Blender |
+| Design | Mova | Figma (notes de version), Spline, Sketch |
+| Agents et automatisations | Pyxo | n8n, Vapi |
+| Connexions, conférences | Repo, Mova | Blog MCP, SIGGRAPH |
+
+Limites : Higgsfield (0 texte sur 285 entrées), Hugging Face Blog et Notion ne donnent que des titres, comme 4 entrées sur 20 de Mistral. Relevé du 2026-10-31 sur 393 actualités : 64 sont sans texte et 2 de plus ont moins de trois mots ; ces 66 sont détectées, mais jamais envoyées au modèle tant que la page n'est pas lue. 192 ont moins de 200 caractères de texte. Notion : flux sur `www.notion.com`, liens sur `www.notion.so`.
+
+**Reporté** : Google DeepMind répond en gzip même sans le demander. Le collecteur ne décompresse pas, et l'ajouter exige une limite contre les archives géantes.
 
 ## 3. Sources candidates (P6)
 
@@ -155,7 +174,15 @@ Sans flux exploitable : **Intel Newsroom** (`newsroom.intel.com` redirige via `c
 
 Non joignables ou inutilisables : **Codrops** (`https://tympanus.net/codrops/feed/` 403, défi Cloudflare non contourné ; relais FeedBurner `https://feeds.feedburner.com/tympanus` joignable, mais de statut officiel inconnu et dont le dernier item date du 2026-09-14) ; **Framer** (aucun flux, 404) ; **Dribbble** (API v2 en 401 sans OAuth ; données limitées à l'utilisateur authentifié ; 60 req/min et 1 440/jour ; les [conditions](https://developer.dribbble.com/terms/) interdisent le stockage, le scraping et l'usage des données pour construire « A community or social network for designers ») ; **Behance** (`https://www.behance.net/dev` 404).
 
-### 3.7 X et Reddit (vérifié le 2026-10-30)
+### 3.7 X et Reddit (vérifié le 2026-10-30 ; statut de Reddit revu le 2026-10-31)
+
+**Statut de Reddit au 2026-10-31 : source différée, toujours dans le périmètre de veille (SPEC §7.9).** Reddit n'est ni connecté ni exclu.
+
+- **Motif** : aucun accès autorisé n'est disponible aujourd'hui. L'API exige une approbation explicite ([Responsible Builder Policy](https://support.reddithelp.com/api/v2/help_center/en-us/articles/42728983564564.json)) ; aucune demande n'a été déposée ; le [Changelog officiel](https://support.reddithelp.com/api/v2/help_center/en-us/articles/54353370049684.json) indique pour le 2026-10-31 : « New requests for public API access will no longer be accepted ». Les RSS répondaient le 2026-10-30, mais aucun texte n'autorise leur collecte automatisée, robots.txt interdit tout et leur support s'arrête le 2026-11-13, sans remplacement hors modération : ils ne sont pas utilisés.
+- **Incertitude** : la politique renvoie vers un ticket si le cas d'usage n'est pas couvert par Devvit. Son texte date du 2026-10-05 (`edited_at`) ; le Changelog du 2026-10-08 relaie une annonce antérieure. Aucune page lue ne dit si cette voie reste ouverte après le 2026-10-31. Le billet r/redditdev du 2026-09-30, qui donnerait le même calendrier, a été lu une seule fois, le 2026-10-30, dans un flux RSS (requête signalée comme écart au robots.txt, à ne pas refaire), sans contre-vérification : seules les dates du Changelog sont confirmées.
+- **Conditions de reprise** : une autorisation écrite de Reddit ou une voie officielle permettant de lire depuis notre collecteur ; un usage de synthèse par IA accepté ; des règles de suppression compatibles avec nos captures (ADR à prévoir).
+- **En attendant** : les embeds officiels restent une option pour une publication dont l'URL est connue, sans découverte automatique (§8.1, option B) ; leur maintien après mars 2027 reste à revérifier ; à décider en P6/P7.
+- **Historique** : le 2026-10-31, l'utilisateur a refusé de déposer la demande d'accès proposée. Claude Code a pris ce refus pour un retrait du cadrage, sans que cela ait été demandé, puis a rétabli Reddit le jour même à la demande de l'utilisateur.
 
 | Point d'accès | Contrôle | Remarque |
 |---|---|---|
@@ -171,8 +198,8 @@ Non joignables ou inutilisables : **Codrops** (`https://tympanus.net/codrops/fee
 - **X, compte et conditions** ([accès](https://docs.x.com/x-api/getting-started/getting-access), [Agreement](https://docs.x.com/developer-terms/agreement), [Policy](https://docs.x.com/developer-terms/policy), [usages restreints](https://docs.x.com/developer-terms/restricted-use-cases), [CGU](https://x.com/en/tos), [PPU Agreement](https://docs.x.com/developer-terms/ppu-agreement)) : compte X, inscription sur console.x.com, Developer Agreement (2026-04-27), téléphone vérifié, pays pris en charge ; établissement dans l'UE : contrat avec X Internet Unlimited Company (Dublin). Stockage permis si l'état du contenu sur X est suivi (suppression au plus tard 24 h après une demande) ; affichage du texte non modifié avec avatar, nom, @handle, horodatage et logo X ; œuvres dérivées interdites (A(d)), contenu X en iframe interdit (K) ; à des tiers, seuls des identifiants (1 500 000 Post IDs par entité destinataire sur 30 jours ; exception : 500 objets publics par personne et par jour par voie non automatisée ; d'autres pages officielles indiquent 50 000 objets hydratés par jour, elles se contredisent) ; entraînement ou affinage de modèles interdit (A(k)) ; scraping interdit (CGU en vigueur au 2026-10-09). Le pay-per-use vise les amateurs, prototypes et applications à nombre d'utilisateurs limité (III.L, III.M) ; au-delà, Enterprise ; contacter X au-delà de 10 millions d'impressions par jour.
 - **X, embeds** ([embeds](https://docs.x.com/x-for-websites/embedded-posts/overview), [vie privée](https://docs.x.com/x-for-websites/privacy)) : endpoint oEmbed sans authentification ni limite annoncée ; rendu par `https://platform.x.com/widgets.js` (sans lui, seul le blockquote de repli s'affiche) ; la Developer Policy exige un avis, un consentement et des instructions d'opposition pour la collecte par X ; option `dnt`.
 - **Reddit, accès** ([Responsible Builder Policy](https://support.reddithelp.com/api/v2/help_center/en-us/articles/42728983564564.json), [accès aux données](https://support.reddithelp.com/api/v2/help_center/en-us/articles/14945211791892.json), [Data API Wiki](https://support.reddithelp.com/api/v2/help_center/en-us/articles/16160319875092.json)) : approbation explicite exigée avant tout accès par l'API (politique modifiée le 2026-10-05) ; une seule demande par cas d'usage ; usage non commercial par formulaire de ticket, usage commercial sous contrat ; jeton OAuth et User-Agent unique obligatoires ; niveau gratuit : 100 requêtes/min par client OAuth (moyenne sur 10 min) ; depuis une IP d'hébergeur, OAuth ou connexion requis.
-- **Reddit, conditions** ([Developer Terms](https://redditinc.com/policies/developer-terms), [Data API Terms](https://redditinc.com/policies/data-api-terms), [User Agreement](https://redditinc.com/policies/user-agreement), [robots.txt](https://www.reddit.com/robots.txt)) : usage commercial (publicité, abonnement, contenu Reddit sur un site monétisé) soumis à accord écrit ; entraînement de modèles interdit sans permission ; recherche académique uniquement via Reddit for Researchers ; contenu supprimé à effacer (purge recommandée sous 48 h) ; affichage sans autre modification que la mise en forme, œuvres dérivées interdites ; nom « [nom] for Reddit » seulement. Aucun texte officiel ne mentionne les flux RSS ; robots.txt : `User-agent: *` puis `Disallow: /`.
-- **Reddit, fin de l'accès anonyme** ([lettre aux actionnaires, SEC](https://www.sec.gov/Archives/edgar/data/1713445/000171344526000114/exhibit992q326.htm)) : passage annoncé à une expérience « logged-in-only » ; tests complets au T4 2026 « in select markets outside the U.S. », version mondiale sans date. Aucune date de fermeture des RSS.
+- **Reddit, conditions** ([Developer Terms](https://redditinc.com/policies/developer-terms), [Data API Terms](https://redditinc.com/policies/data-api-terms), [User Agreement](https://redditinc.com/policies/user-agreement), [robots.txt](https://www.reddit.com/robots.txt)) : usage commercial (publicité, abonnement, contenu Reddit sur un site monétisé) soumis à accord écrit ; entraînement de modèles interdit sans permission ; recherche académique uniquement via Reddit for Researchers ; contenu supprimé à effacer (purge recommandée sous 48 h) ; affichage sans autre modification que la mise en forme, œuvres dérivées interdites ; nom « [nom] for Reddit » seulement. Les conditions lues ne traitent pas de l'usage automatisé des flux RSS ; seul le Changelog les mentionne, pour annoncer la fin de leur support ; robots.txt : `User-agent: *` puis `Disallow: /`.
+- **Reddit, fin de l'accès anonyme** ([lettre aux actionnaires, SEC](https://www.sec.gov/Archives/edgar/data/1713445/000171344526000114/exhibit992q326.htm)) : passage annoncé à une expérience « logged-in-only » ; tests complets au T4 2026 « in select markets outside the U.S. », version mondiale sans date. Le [Changelog officiel](https://support.reddithelp.com/api/v2/help_center/en-us/articles/54353370049684.json) annonce la fin du support des RSS le 13 novembre 2026, le refus des nouvelles demandes d'accès à l'API à la date du 31 octobre 2026, un retrait progressif dès le 12 janvier 2027 et la fin de l'accès public en mars 2027.
 - **Reddit, embeds** ([Embeds Terms](https://redditinc.com/policies/embeds-terms)) : deux méthodes officielles (Partager > Embed, oEmbed) ; « we do not charge for reasonable use of Reddit Embeds » (article 14945211791892) ; embed ni modifié ni masqué, pas à côté de publicités, sans suggérer de partenariat ; le script remplace le blockquote par une iframe `embed.reddit.com`.
 
 ### 3.8 Registre de Pulse (infrastructure, données, incidents ; 2026-10-30)
@@ -187,7 +214,7 @@ Aucune nouvelle clé par personnage : tout passe par le même moteur. Rôles : v
 | Post-mortems officiels | vérification | à intégrer | lister les emplacements par fournisseur |
 | Blogs d'ingénierie | vérification | à intégrer | sélection et contrôle des flux |
 | Issues GitHub | découverte | à intégrer | API publique, quotas à vérifier |
-| Communautés Reddit | découverte | à intégrer | accès autorisé, §3.7 ; décision §8 |
+| Communautés Reddit | découverte | **différée** (2026-10-31) | aucun accès autorisé disponible ; motif et reprise §3.7 |
 | Experts sur X | découverte | à intégrer | accès payant, §3.7 ; décision §8 ; veille de profils P6 |
 
 ### 3.9 Registre de Radar (grandes entreprises ; 2026-10-30)
@@ -195,7 +222,7 @@ Aucune nouvelle clé par personnage : tout passe par le même moteur. Rôles : v
 | Famille | Rôle | État | Accès et coût |
 |---|---|---|---|
 | GitHub Changelog (Microsoft) | annonce officielle | **connectée** (P2) | flux public, gratuit |
-| Google, Microsoft (blogs officiels) | annonce officielle | candidate | flux contrôlés §3.2, gratuits |
+| Google, Microsoft (blogs officiels) | annonce officielle | **partielle** : Google connecté, Microsoft candidate | flux contrôlés §3.2, gratuits |
 | NVIDIA, Apple Newsroom | annonce officielle | candidate | flux contrôlés §3.4, gratuits |
 | AWS | annonce officielle | candidate | flux IA contrôlé §3.2, gratuit ; espace presse Amazon non contrôlé |
 | Meta | annonce officielle | candidate | blog d'ingénierie contrôlé ; `ai.meta.com` interdit la collecte automatisée sans permission (§3.2) |
@@ -203,9 +230,139 @@ Aucune nouvelle clé par personnage : tout passe par le même moteur. Rôles : v
 | Documentations, conférences, recherche | annonce officielle | à sélectionner | à vérifier source par source |
 | Newsletters | contexte | à sélectionner | publiques ou avec autorisation |
 | Médias spécialisés | contexte | à sélectionner | conditions et coûts à vérifier ; synthèse attribuée, sans copie |
-| Experts sur X et Reddit | contexte | candidate | §3.7 : X payant, Reddit sur autorisation |
+| Experts sur X | contexte | candidate | §3.7 : X payant |
+| Communautés Reddit | contexte | **différée** (2026-10-31) | aucun accès autorisé disponible ; motif et reprise §3.7 |
 
-Seule la première ligne est surveillée aujourd'hui.
+Seuls le GitHub Changelog et le flux Google Gemini sont collectés, par une commande lancée à la main ; rien n'est planifié.
+
+### 3.10 Écosystème IA et créatif, à connecter (recherche du 2026-10-30)
+
+Six domaines recherchés puis contre-vérifiés par 12 agents ; toutes les recommandations ont été revues au regard du code réel. [Résultat complet](../communication/linkedin/05-ecosysteme-creatif/preuves/brut/veille-sources-contre-verifiee-2026-10-30.json). Rien ici n'est collecté.
+
+**Blocages techniques à lever (P6)**
+
+- **Pages sans flux** : Perplexity, xAI, Grok, Claude, v0 demandent un adaptateur de page ou de Markdown ; Seedance et Kling un adaptateur de sitemap.
+- **Changelogs à ancres** (Mintlify : Lovable, Devin, Bolt, Base44) : l'identité d'une entrée est son lien sans ancre, donc 1 document sur 15 survit. De plus, leur `pubDate` n'est pas la date de la nouveauté.
+- **Liens hors domaine** : agrégateurs (Sidebar) ; Webflow (second hôte) ; Google Workspace (liens http).
+- **Releases Atom de GitHub** : seulement `updated`, donc une release éditée paraît récente.
+- **Contenu trop court pour citer** : shadcn, Webflow, Tailwind, Motionographer, Spline, ComfyUI : à compléter par la page liée.
+
+**Conditions** : les newsletters hébergées sur Substack (Latent Space, Import AI, Ben's Bites) relèvent de conditions contre le crawl et le stockage ; les conditions de fal et d'Ollama sont restrictives ; `/c/*.rss` est interdit sur plusieurs forums Discourse ; `unity.com/blog/rss` est interdit par robots.txt.
+
+**Faits vérifiés sur les exemples** (rien de publié) : Seedance 2.5 existe (billet officiel du 2026-07-31) ; 4K et 10 bits n'apparaissent que sur une page BytePlus, à attribuer ; Sora est retiré (API le 2026-09-24) ; Veo 3.1 en préversion arrêté dans l'API Gemini le 2026-10-22, remplacé par Gemini Omni ; n8n 3.0 est en bêta, la stable est 2.45.7 ; l'éditeur de Grok s'appelle SpaceXSI dans ses notes de version ; Higgsfield : annonces lues en titres seulement.
+
+**Décision de l'utilisateur requise**
+
+| Source | Accès |
+|---|---|
+| OpenRouter, catalogue des modèles | `https://openrouter.ai/api/v1/models?output_modalities=all` |
+| OpenRouter, catalogue vidéo | `https://openrouter.ai/api/v1/videos/models` |
+| Microsoft Copilot Blog | `https://www.microsoft.com/en-us/copilot/blog/feed/` |
+| ChatGPT, notes de version | `https://help.openai.com/en/articles/6825453-chatgpt-release-notes` |
+| CG Channel | `https://feeds.feedburner.com/cgchannel/nHpU` |
+| Awwwards Sites of the Day | `https://www.awwwards.com/websites/sites_of_the_day/` |
+| OpenRouter, catalogue de modèles (toutes modalités) | `https://openrouter.ai/api/v1/models?output_modalities=all&use_rss=true` |
+| Awwwards, Sites of the Day | `https://feeds.feedburner.com/awwwards-sites-of-the-day` |
+| Latent Space, Import AI, Ben's Bites | flux Substack |
+
+**Candidates**
+
+| Domaine | Source | Point d'accès | Méthode |
+|---|---|---|---|
+| agents | Blog Daily | `https://www.daily.co/blog/rss/` | rss |
+| agents | Blog Manus | `https://manus.im/sitemap.xml` | sitemap |
+| agents | Blog OpenClaw | `https://openclaw.ai/rss.xml` | rss |
+| agents | Blog PolyAI | `https://poly.ai/blog/rss.xml` | rss |
+| agents | Blog Zapier | `https://zapier.com/blog/feeds/latest/` | rss |
+| agents | Changelog Bland | `https://www.bland.ai/sitemap-changelog.xml` | sitemap |
+| agents | Changelog Deepgram | `https://developers.deepgram.com/changelog.rss` | rss |
+| agents | Changelog Retell AI | `https://www.retellai.com/changelog` | page_html_seule |
+| agents | Notes de version Make | `https://help.make.com/2026` | page_html_seule |
+| agents | Releases CrewAI | `https://github.com/crewAIInc/crewAI/releases.atom` | atom |
+| agents | Releases Dify | `https://github.com/langgenius/dify/releases.atom` | atom |
+| agents | Releases LangGraph | `https://github.com/langchain-ai/langgraph/releases.atom` | atom |
+| agents | Releases LiveKit Agents | `https://github.com/livekit/agents/releases.atom` | atom |
+| agents | Releases Pipecat | `https://github.com/pipecat-ai/pipecat/releases.atom` | atom |
+| agents | Releases n8n | `https://github.com/n8n-io/n8n/releases.atom` | atom |
+| creation | Adobe Newsroom (sitemap) | `https://news.adobe.com/assets/sitemap.xml` | sitemap |
+| creation | Blackmagic Design, mises à jour produits | `https://www.blackmagicdesign.com/rss` | rss |
+| creation | Blog Adobe (sitemap) | `https://blog.adobe.com/en/sitemap.xml` | sitemap |
+| creation | CapCut (sitemap et llms.txt) | `https://www.capcut.com/sitemap.xml` | sitemap |
+| creation | Changelog Descript (Canny) | `https://descript.canny.io/changelog` | page_html_seule |
+| creation | Changelog HeyGen | `https://developers.heygen.com/changelog/rss.xml` | rss |
+| creation | Changelog Krea | `https://www.krea.ai/docs/changelog/rss.xml` | rss |
+| creation | Changelog Magnific (ex-Freepik) | `https://docs.magnific.com/changelog/2026` | page_html_seule |
+| creation | ComfyUI, releases GitHub | `https://github.com/Comfy-Org/ComfyUI/releases.atom` | atom |
+| creation | Pika (sitemap et blog) | `https://pika.art/sitemap.xml` | sitemap |
+| creation | Synthesia Updates | `https://www.synthesia.io/updates` | page_html_seule |
+| creation | Topaz Labs (sitemap) | `https://www.topazlabs.com/sitemap.xml` | sitemap |
+| design | 21st Changelog | `https://21st.dev/changelog` | page_html_seule |
+| design | Canva Newsroom | `https://www.canva.com/newsroom/news/` | aucun_acces |
+| design | CodePen Blog | `https://blog.codepen.io/feed/` | rss |
+| design | FWA of the Day | `https://thefwa.com/rss/` | rss |
+| design | Framer Updates | `https://www.framer.com/updates` | page_html_seule |
+| design | GSAP Blog | `https://gsap.com/blog/rss.xml` | rss |
+| design | Motionographer | `https://motionographer.com/feed/` | rss |
+| design | Rive Blog | `https://rive.app/sitemap.xml` | sitemap |
+| design | Sidebar | `https://sidebar.io/feed.xml` | rss |
+| design | Tailwind CSS Blog | `https://tailwindcss.com/feeds/feed.xml` | rss |
+| design | Three.js Releases | `https://github.com/mrdoob/three.js/releases.atom` | atom |
+| design | Webflow Updates | `https://webflow.com/updates/rss.xml` | rss |
+| design | minimal.gallery | `https://minimal.gallery/feed/` | rss |
+| design | shadcn/ui Changelog | `https://ui.shadcn.com/rss.xml` | rss |
+| modeles | Alibaba Model Studio, nouveaux modèles | `https://www.alibabacloud.com/help/en/model-studio/newly-released-models` | page_html_seule |
+| modeles | Black Forest Labs, notes de version | `https://docs.bfl.ai/release-notes` | page_html_seule |
+| modeles | ByteDance Seed, sitemap | `https://seed.bytedance.com/sitemap.xml` | sitemap |
+| modeles | DeepSeek Change Log | `https://api-docs.deepseek.com/updates/` | page_html_seule |
+| modeles | ElevenLabs Changelog | `https://elevenlabs.io/docs/changelog.rss` | rss |
+| modeles | Gemini API, notes de version | `https://ai.google.dev/gemini-api/docs/changelog.md.txt` | page_html_seule |
+| modeles | Luma, sitemap news | `https://lumalabs.ai/news/sitemap.xml` | sitemap |
+| modeles | MiniMax, notes de version modèles | `https://platform.minimax.io/docs/release-notes/models` | page_html_seule |
+| modeles | Ollama Blog | `https://ollama.com/blog/rss.xml` | rss |
+| modeles | Replicate Changelog | `https://replicate.com/changelog/rss` | rss |
+| modeles | Runway Changelog | `https://runway.com/changelog` | page_html_seule |
+| modeles | Suno Blog | `https://suno.com/blog/rss.xml` | rss |
+| modeles | Together AI Blog | `https://www.together.ai/blog/rss.xml` | rss |
+| modeles | fal Blog | `https://blog.fal.ai/rss/` | rss |
+| modeles | fal, catalogue des modèles | `https://api.fal.ai/v1/models` | json_sans_cle |
+| modeles | xAI Release Notes | `https://docs.x.ai/developers/release-notes` | page_html_seule |
+| outils | Bolt Release Notes | `https://support.bolt.new/release-notes` | page_html_seule |
+| outils | Claude Platform, notes de version | `https://platform.claude.com/docs/en/release-notes/overview.md` | page_html_seule |
+| outils | Claude, notes de version (grand public) | `https://support.claude.com/en/articles/12138966-release-notes` | page_html_seule |
+| outils | Cline, versions | `https://github.com/cline/cline/releases.atom` | atom |
+| outils | Devin Desktop (ex-Windsurf), changelog | `https://docs.devin.ai/desktop/changelog/rss.xml` | rss |
+| outils | Gamma API, changelog | `https://developers.gamma.app/reference/changelog` | page_html_seule |
+| outils | Gemini app, notes de version | `https://gemini.google/us/release-notes/?hl=en` | page_html_seule |
+| outils | GitHub Changelog, label Copilot | `https://github.blog/changelog/label/copilot/feed/` | rss |
+| outils | Google Antigravity Blog | `https://antigravity.google/blog/rss.xml` | rss |
+| outils | Google Labs, blog | `https://blog.google/innovation-and-ai/models-and-research/google-labs/rss/` | rss |
+| outils | Google Workspace Updates | `https://feeds.feedburner.com/GoogleAppsUpdates` | atom |
+| outils | Google Workspace, The Keyword | `https://blog.google/products-and-platforms/products/workspace/rss/` | rss |
+| outils | JetBrains AI Blog | `https://blog.jetbrains.com/ai/feed/` | rss |
+| outils | Kagi Blog | `https://blog.kagi.com/rss.xml` | rss |
+| outils | Linear Changelog | `https://linear.app/rss/changelog.xml` | rss |
+| outils | Lovable Blog | `https://lovable.dev/blog/rss.xml` | rss |
+| outils | Lovable Changelog | `https://docs.lovable.dev/changelog/rss.xml` | rss |
+| outils | Manus Blog | `https://manus.im/blog` | page_html_seule |
+| outils | Microsoft 365 Copilot, notes de version | `https://learn.microsoft.com/en-us/microsoft-365/copilot/release-notes` | page_html_seule |
+| outils | OpenAI API, changelog | `https://developers.openai.com/api/docs/changelog.md` | page_html_seule |
+| outils | Perplexity API, changelog | `https://docs.perplexity.ai/docs/resources/changelog` | page_html_seule |
+| outils | Perplexity Changelog | `https://www.perplexity.ai/changelog` | page_html_seule |
+| outils | Replit Blog | `https://replit.com/blog/feed.xml` | rss |
+| outils | Replit Updates (changelog hebdomadaire) | `https://docs.replit.com/updates/2026/10/23/changelog` | page_html_seule |
+| outils | Zed Blog | `https://zed.dev/blog.rss` | rss |
+| outils | v0 Changelog | `https://v0.app/changelog` | page_html_seule |
+| veille | Ben's Bites | `https://www.bensbites.com/feed` | rss |
+| veille | Bluesky, flux par compte | `https://bsky.app/profile/did:plc:z72i7hdynmk6r22z27h6tvur/rss` | rss |
+| veille | Comfy Registry | `https://api.comfy.org/nodes?limit=1` | json_sans_cle |
+| veille | Hugging Face, modèles par tâche | `https://huggingface.co/api/models?pipeline_tag=text-to-speech&sort=trendingScore&limit=5` | json_sans_cle |
+| veille | Import AI | `https://importai.substack.com/feed` | rss |
+| veille | Latent Space (avec AINews) | `https://latent.space/feed` | rss |
+| veille | NeurIPS Blog | `https://blog.neurips.cc/feed/` | rss |
+| veille | Protocole A2A, versions | `https://github.com/a2aproject/A2A/releases.atom` | atom |
+| veille | TLDR Design (et TLDR AI) | `https://tldr.tech/api/rss/design` | rss |
+| veille | arXiv, graphisme (cs.GR) | `https://rss.arxiv.org/rss/cs.GR` | rss |
+| veille | befores & afters | `https://beforesandafters.com/feed/` | rss |
 
 ## 4. Médias et intégrations (P7, P8)
 
@@ -284,7 +441,7 @@ Seule la première ligne est surveillée aujourd'hui.
 ### 7.2 Points restés ouverts (sources tierces, pages illisibles, essais non faits)
 
 - **X** : statut actuel des offres Basic et Pro (seul le changelog du 2026-02-06 les dit encore disponibles ; vérifiable seulement dans la console X) ; liste des pays pris en charge (France, Israël) ; usage de l'oEmbed pour récupérer le texte à analyser ; l'envoi d'un post X ou Reddit à l'API Anthropic pour une synthèse est-il une redistribution ou une œuvre dérivée (aucun texte ne le traite).
-- **Reddit** : critères et délai d'approbation ; réponse des RSS depuis les IP de GitHub Actions ou de Vercel (non testé) ; date de fin de l'accès anonyme ; « old.reddit exige une connexion depuis juillet 2026 » (source tierce) ; données collectées par les embeds (politique de confidentialité en 403).
+- **Reddit** : recevabilité d'un ticket après le 2026-10-31 (§3.7) ; critères et délai d'approbation ; date de fin de l'accès anonyme ; « old.reddit exige une connexion depuis juillet 2026 » (source tierce) ; données collectées par les embeds (politique de confidentialité en 403).
 - **Anthropic** : les contenus envoyés par l'API peuvent-ils servir à l'entraînement ? À vérifier dans les conditions commerciales avant P3.
 - **Écosystème** : limites de SkillsMP avec clé (500/jour et 30/min selon un extrait tiers) ; CGU de skills.sh (API publique limitée par IP) contre doc et test (jeton OIDC) ; accès sans clé à Smithery non garanti ; quota GitHub de 60/h déjà entamé sur les runners partagés (estimation) ; Lobsters : le robots.txt vise-t-il la lecture des flux par un pipeline IA ? ; DEV : affichage public de métadonnées.
 - **Éditeurs** : existence d'un flux pour xAI et pour le newsroom Intel (blocages non contournés : à vérifier dans un navigateur) ; flux investisseurs de Cerebras (403) ; conditions de réutilisation des contenus de flux (Apple, NVIDIA, Google, AWS…) non vérifiées.
@@ -310,7 +467,7 @@ Ce registre ne tranche rien. Montants au 2026-10-30, à revérifier avant usage 
 ### 8.1 Avant P6 et P7 (dépense, compte ou conditions juridiques)
 
 1. **X.** A) API en paiement à l'usage : compte X, compte développeur, téléphone vérifié, carte et premier achat de crédits ; 0,005 $ par post lu ; **estimation non mesurée** : 50 comptes × 5 posts/jour × 30 jours ≈ 7 500 posts/mois ≈ 37,5 $/mois, hors lecture des profils ; contraintes : suppression sous 24 h sur demande, pas d'œuvre dérivée, cas d'usage déclaré, pas de redistribution du texte. B) 0 € sans compte : embeds de posts dont l'URL est connue (saisie éditoriale ou citation par une source), chargés après consentement, sans découverte automatique. C) Pas de X en P6. Scraping, RSS tiers et navigateur automatisé sont exclus par les conditions de X.
-2. **Reddit.** A) Demande d'accès au Data API (gratuit, 100 req/min) : compte et demande déposés par l'utilisateur, approbation et délai incertains, usage non commercial, cas d'usage unique déclarant la synthèse IA, contenus supprimés à effacer (incompatible avec une capture conservée durablement : ADR à prévoir). B) Embeds seulement (0 €, sans compte). C) RSS anonymes : fonctionnaient le 2026-10-30 depuis le poste local, mais aucun texte ne les autorise, robots.txt interdit tout, essai depuis un hébergeur non fait, passage au « logged-in-only » annoncé hors des États-Unis : risque de conditions et de coupure.
+2. **Reddit (source différée depuis le 2026-10-31, §3.7).** A) Demande d'accès au Data API (gratuit, 100 req/min) : aucune déposée, recevabilité incertaine depuis le 2026-10-31 ; compte et demande déposés par l'utilisateur, approbation et délai incertains, usage non commercial, cas d'usage unique déclarant la synthèse IA, contenus supprimés à effacer (incompatible avec une capture conservée durablement : ADR à prévoir) ; accès provisoire, car la fin de l'accès public restant est annoncée pour mars 2027. B) Embeds seulement (0 €, sans compte ; maintien après mars 2027 à revérifier). C) RSS anonymes : option retirée (support arrêté le 2026-11-13, robots.txt, jamais utilisés).
 3. **Sources à conditions restrictives** (inclure, limiter au titre et au lien sans analyse IA, demander un accord, ou écarter) : Lobsters (`ai-input=no`) ; DEV (licence de consultation personnelle) ; Hacker News (conditions de Y Combinator) ; API Product Hunt (compte, jeton, usage non commercial à confirmer) ; Glama (clé, clause « produit concurrent ») ; PulseMCP (clé par e-mail) ; Smithery et SkillsMP (CGU non lues) ; Dribbble (clause « réseau social pour designers ») ; ai.meta.com (collecte automatisée interdite sans permission) ; flux d'AWS et de Microsoft (conditions restrictives) ; xAI, newsroom Intel et Codrops (blocages anti-robot, saisie manuelle éventuelle).
 4. **Hébergement vidéo (P7)** : Vercel Blob Hobby (0 €, images seulement) ; Cloudflare R2 (0 € jusqu'à 10 Go-mois, compte, abonnement et domaine personnalisé à acheter probablement, coût non vérifié) ; Mux Free Plan (0 €, 10 vidéos) ; Bunny Stream (minimum 1 $/mois) ; Cloudflare Stream (au moins 5 $/mois). Associés : licence Remotion (gratuite à titre individuel ; licence entreprise si le projet est porté par l'école ou une structure de plus de 3 personnes) ; dépôt public (GitHub Actions gratuit) ou privé (12 $ de calcul inclus par mois).
 5. **Traduction (P12)** : DeepL Developer (0 €, crédit unique, textes non exclus de l'entraînement) ; DeepL Growth (26,00 à 32,50 $/mois) ; Google Cloud Translation (500 000 caractères/mois gratuits, compte de facturation obligatoire) ; Claude sur les crédits API (accord requis en P3 ; estimation ≈ 0,0013 $ par article avec Haiku 5.5).
@@ -326,3 +483,18 @@ Ce registre ne tranche rien. Montants au 2026-10-30, à revérifier avant usage 
 - Dates et formats : `pubDate` absent, `updated` seul, années sur deux chiffres, dates au jour, format reconnu au contenu (`text/plain`, Atom servi en RSS), fixtures dédiées.
 - GitHub : `GITHUB_TOKEN` et requêtes conditionnelles (ETag) dans le worker planifié.
 - YouTube : façade de consentement sans miniature hébergée chez nous, en attendant de lever la contradiction signalée en §7.3.
+
+### Note du 2026-10-30 : photos de presse pour Radar
+
+Apple Newsroom : aucune condition d'usage éditorial sur la page d'annonce du MacBook Pro du 28 octobre 2026. Les [conditions générales](https://www.apple.com/legal/intellectual-property/guidelinesfor3rdparties.html) demandent une autorisation écrite pour toute photo d'Apple. Faute de conditions claires, la photo n'est pas reprise (ADR 0004). Autres éditeurs non vérifiés.
+
+| Éditeur (contrôle du 2026-10-30) | Photos de presse | Conclusion pour Radar |
+|---|---|---|
+| Google | [Press Corner](https://blog.google/press/), qui redirige vers [Image library](https://blog.google/image-library/) : publication autorisée avec le crédit « Source: Google. », pour les images de cette page. Contrôle du 2026-10-31 : `maquette/medias/google-campus.jpg` a la même empreinte SHA-256 (`0471dbcd…`) que le fichier `download_url` de l'entrée « Googleplex Campus » de cette page, `https://storage.googleapis.com/gweb-uniblog-publish-prod/images/Wide-view-of-Google-campus.original.jpg` | utilisable pour ces images ; droits à revérifier avant toute mise en ligne |
+| Microsoft | [Permissions](https://www.microsoft.com/en-us/legal/intellectualproperty/permissions/default) : usage éditorial réservé à la presse et aux analystes | à clarifier : le site est-il « presse » ? |
+| NVIDIA | aucune condition de presse trouvée ; kits presse et Brand Guidelines non lus | non utilisable pour l'instant |
+| Meta | conditions non lisibles (contenu tronqué) | non utilisable pour l'instant |
+| Tesla | presskit et page légale en 403, non contournés | non utilisable |
+| Apple | autorisation écrite demandée | non utilisable sans accord |
+
+Ces lectures ne sont pas un avis juridique.

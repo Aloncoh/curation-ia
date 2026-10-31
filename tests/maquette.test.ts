@@ -3,7 +3,7 @@ import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { releasesUrl } from '../src/collect/github-releases.ts';
 import { buildMaquetteData, contientMotPourMot, excerpt, toPlainText, verifierExemple, verifierProjet, type MaquetteData } from '../src/maquette/data.ts';
 import { COMPTES, EXEMPLES, PROJETS, REGISTRE_PULSE, REGISTRE_RADAR, SUJETS, type ExemplePublication } from '../src/maquette/exemples.ts';
-import { SOURCES, type FeedSource, type GithubReleasesSource } from '../src/sources.ts';
+import { SOURCES, syncSources, type FeedSource, type GithubReleasesSource } from '../src/sources.ts';
 import { runCollect } from '../src/worker/collect.ts';
 import { CLAUDE_CODE, createTestDb, fixture, readFixture, routeFetcher, type TestDb } from './helpers/db.ts';
 
@@ -86,6 +86,13 @@ describe('données de la maquette', () => {
     expect(data.sources[0]).toMatchObject({ status: 'ok', last_success_at: '2026-10-30T01:00:00.000Z' });
   });
 
+  it('une source retirée du registre garde sa ligne en base, mais n’est plus présentée', async () => {
+    await collect('live');
+    await syncSources(t.database, [{ ...CLAUDE_CODE, id: 'github-releases:exemple/retiree' }], '2026-10-30T00:00:00.000Z');
+    const data = await buildMaquetteData(t.database.client, '2026-10-30T00:00:00.000Z');
+    expect(data.sources.map((source) => source.id)).toEqual([CLAUDE_CODE.id]);
+  });
+
   it('collecte réelle : actualités datées, rattachées à leur produit et à leur version, avec un extrait en texte brut', async () => {
     await collect('live');
     const data = await buildMaquetteData(t.database.client, '2026-10-30T00:00:00.000Z');
@@ -133,6 +140,7 @@ describe('exemples de publications de la maquette', () => {
   const source = <T extends GithubReleasesSource | FeedSource>(id: string) => SOURCES.find((def) => def.id === id) as T;
   const codex = source<GithubReleasesSource>('github-releases:openai/codex');
   const changelog = source<FeedSource>('feed:github-changelog');
+  const google = source<FeedSource>('feed:google-gemini');
 
   /** Collecte « live » servie par les fixtures réelles des trois sources citées par les exemples. */
   const collectLive = () =>
@@ -142,13 +150,14 @@ describe('exemples de publications de la maquette', () => {
         [releasesUrl(CLAUDE_CODE.config)]: readFixture(),
         [releasesUrl(codex.config)]: fixture('github-releases-openai-codex.json'),
         [changelog.config.url]: fixture('feed-github-changelog.xml'),
+        [google.config.url]: fixture('feed-google-gemini.xml'),
       }),
       mode: 'live',
       workerId: 'test-worker',
       leaseMs: 60_000,
       maxAttempts: 3,
       retryBackoffMs: 60_000,
-      definitions: [CLAUDE_CODE, codex, changelog],
+      definitions: [CLAUDE_CODE, codex, changelog, google],
     });
 
   it('tous les exemples sont rattachés à leur actualité réelle et toutes leurs citations sont retrouvées mot pour mot', async () => {
@@ -298,8 +307,21 @@ describe('comptes, médias et projets', () => {
     for (const nom of ['Issues GitHub', 'Communautés Reddit', 'Experts sur X']) expect(REGISTRE_PULSE.find((s) => s.famille === nom)?.role).toBe('découverte');
   });
 
-  it('Radar signe un exemple sourcé ; seule une source connectée est présentée comme telle', () => {
-    expect(EXEMPLES.some((e) => e.compte === 'radar')).toBe(true);
+  it('Reddit reste au registre comme source différée, motif affiché, sans être présenté comme connecté', () => {
+    const lignes = [...REGISTRE_PULSE, ...REGISTRE_RADAR].filter((s) => s.famille.includes('Reddit'));
+    expect(lignes).toHaveLength(2);
+    for (const ligne of lignes) expect(ligne).toMatchObject({ etat: 'differe', note: expect.stringContaining('aucun accès autorisé') });
+    expect(readFileSync('maquette/index.html', 'utf8')).toContain("differe: ['neutre', 'Différée']");
+  });
+
+  it('le bandeau date les données par la dernière collecte, pas par la génération de la page', () => {
+    const page = readFileSync('maquette/index.html', 'utf8');
+    expect(page).toContain('dernière collecte le ${quand(derniereCollecte)}');
+    expect(page).not.toContain('données relevées');
+  });
+
+  it('Radar publie avec une photo créditée ; seule une source connectée est présentée comme telle', () => {
+    expect(EXEMPLES.filter((e) => e.compte === 'radar').map((e) => e.visuel.photo?.credit)).toEqual(['Source: Google.']);
     expect(REGISTRE_RADAR.filter((s) => s.etat === 'connecte').map((s) => s.famille)).toEqual(['GitHub Changelog (Microsoft)']);
   });
 

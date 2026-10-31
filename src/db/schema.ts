@@ -211,3 +211,63 @@ export const settings = sqliteTable('setting', {
   value: text('value').notNull(),
   updatedAt: text('updated_at').notNull(),
 });
+
+/** Exécution d'analyse : un lancement de `npm run brouillons`, avec ses plafonds. Rien n'est publié. */
+export const llmRuns = sqliteTable('llm_run', {
+  id: text('id').primaryKey(),
+  startedAt: text('started_at').notNull(),
+  finishedAt: text('finished_at'),
+  /** en_cours | terminee | arret_budget | arret_pause | echec */
+  status: text('status').notNull(),
+  maxItems: integer('max_items').notNull(),
+  capRunMicroUsd: integer('cap_run_micro_usd').notNull(),
+  capTotalMicroUsd: integer('cap_total_micro_usd').notNull(),
+  reason: text('reason'),
+});
+
+/** Tentative d'appel au modèle, y compris erreurs et reprises. Coût en millionièmes de dollar ; une réservation non soldée reste comptée. */
+export const llmCalls = sqliteTable(
+  'llm_call',
+  {
+    id: integer('id').primaryKey({ autoIncrement: true }),
+    runId: text('run_id').notNull().references(() => llmRuns.id),
+    newsItemId: integer('news_item_id').notNull().references(() => newsItems.id),
+    stage: text('stage').notNull(),
+    attempt: integer('attempt').notNull(),
+    model: text('model').notNull(),
+    promptVersion: text('prompt_version').notNull(),
+    /** reserve | reussi | erreur */
+    status: text('status').notNull(),
+    reservedMicroUsd: integer('reserved_micro_usd').notNull(),
+    actualMicroUsd: integer('actual_micro_usd'),
+    inputTokens: integer('input_tokens'),
+    outputTokens: integer('output_tokens'),
+    stopReason: text('stop_reason'),
+    error: text('error'),
+    startedAt: text('started_at').notNull(),
+    finishedAt: text('finished_at'),
+  },
+  (t) => [index('llm_call_run_idx').on(t.runId)],
+);
+
+/** Résultat pour une actualité : écartée ou brouillon. Unique par actualité : une seule publication principale, tous comptes confondus. */
+export const postDrafts = sqliteTable(
+  'post_draft',
+  {
+    id: integer('id').primaryKey({ autoIncrement: true }),
+    newsItemId: integer('news_item_id').notNull().references(() => newsItems.id),
+    runId: text('run_id').notNull().references(() => llmRuns.id),
+    /** ecartee | sortie_invalide | a_verifier | controle_automatique (jamais une garantie factuelle) */
+    status: text('status').notNull(),
+    account: text('account'),
+    rejectionReason: text('rejection_reason'),
+    informationType: text('information_type'),
+    snapshotId: integer('snapshot_id').notNull().references(() => documentSnapshots.id),
+    model: text('model').notNull(),
+    promptVersion: text('prompt_version').notNull(),
+    content: text('content', { mode: 'json' }).$type<Record<string, unknown>>(),
+    checks: text('checks', { mode: 'json' }).$type<unknown[]>(),
+    createdAt: text('created_at').notNull(),
+  },
+  (t) => [uniqueIndex('post_draft_news_item_uq').on(t.newsItemId)],
+);

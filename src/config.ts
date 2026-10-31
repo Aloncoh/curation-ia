@@ -57,7 +57,8 @@ export function redactSecrets(text: string): string {
   return text
     .replace(/(authToken=)[^&\s'"]+/gi, '$1***')
     .replace(/(\/\/)[^/\s:@'"]+:[^/\s@'"]+@/g, '$1***:***@')
-    .replace(/(Bearer\s+)\S+/gi, '$1***');
+    .replace(/(Bearer\s+)\S+/gi, '$1***')
+    .replace(/sk-ant-[\w-]+/g, '***');
 }
 
 /** Affiche une URL de base sans secret (pas de requête ni d'identifiants). */

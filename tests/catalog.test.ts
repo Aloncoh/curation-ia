@@ -16,13 +16,16 @@ const FIXTURES: Record<string, string> = {
   'github-releases:google-gemini/gemini-cli': 'github-releases-gemini-cli.json',
   'feed:openai-news': 'feed-openai-news.xml',
   'feed:github-changelog': 'feed-github-changelog.xml',
+  'feed:google-gemini': 'feed-google-gemini.xml',
 };
+/** Les six sources dotées d'une réponse enregistrée : les scénarios du catalogue portent sur elles. */
+const CORPUS = SOURCES.filter((def) => def.id in FIXTURES);
 const urlOf = (def: SourceDefinition) => (def.kind === 'github_releases' ? releasesUrl(def.config) : def.config.url);
 const source = (id: string) => SOURCES.find((def) => def.id === id)!;
 
 /** Réponses réelles enregistrées, avec remplacements éventuels par source. */
 function routes(overrides: Record<string, string> = {}): Record<string, string> {
-  return Object.fromEntries(SOURCES.map((def) => [urlOf(def), overrides[def.id] ?? fixture(FIXTURES[def.id]!)]));
+  return Object.fromEntries(CORPUS.map((def) => [urlOf(def), overrides[def.id] ?? fixture(FIXTURES[def.id]!)]));
 }
 
 let t: TestDb;
@@ -31,7 +34,7 @@ beforeEach(async () => {
 });
 afterEach(() => t.cleanup());
 
-const collectWith = (fetcher: SourceFetcher, definitions: SourceDefinition[] = SOURCES) =>
+const collectWith = (fetcher: SourceFetcher, definitions: SourceDefinition[] = CORPUS) =>
   runCollect({
     database: t.database,
     fetcher,
@@ -42,7 +45,7 @@ const collectWith = (fetcher: SourceFetcher, definitions: SourceDefinition[] = S
     retryBackoffMs: 60_000,
     definitions,
   });
-const collect = (body: Record<string, string>, definitions: SourceDefinition[] = SOURCES) => collectWith(routeFetcher(body), definitions);
+const collect = (body: Record<string, string>, definitions: SourceDefinition[] = CORPUS) => collectWith(routeFetcher(body), definitions);
 
 /** État complet du catalogue et des documents, pour vérifier qu'un échec ne change rien. */
 async function state(): Promise<string> {
@@ -62,7 +65,7 @@ const releasesOf = (id: string) => JSON.parse(fixture(FIXTURES[id]!)) as Release
 describe('catalogue : produits, versions, actualités', () => {
   it('collecte multi-sources : chaque produit, version et actualité créé une seule fois', async () => {
     const first = await collect(routes());
-    expect(first.runs.map((run) => run.status)).toEqual(['succeeded', 'succeeded', 'succeeded', 'succeeded', 'succeeded']);
+    expect(first.runs.map((run) => run.status)).toEqual(Array(CORPUS.length).fill('succeeded'));
 
     // Valeurs relevées dans les fixtures réelles : 5 + 20 + 20 tags distincts, dont 5 + 3 + 2 stables.
     const expectedVersions = 45;
@@ -71,7 +74,7 @@ describe('catalogue : produits, versions, actualités', () => {
     expect(await scalar(t.database, 'select count(*) from product')).toBe(3);
     expect(await scalar(t.database, 'select count(*) from product_version')).toBe(expectedVersions);
     expect(await scalar(t.database, "select count(*) from news_item where kind = 'version'")).toBe(expectedStable);
-    expect(await scalar(t.database, "select count(*) from news_item where kind = 'annonce'")).toBe(30);
+    expect(await scalar(t.database, "select count(*) from news_item where kind = 'annonce'")).toBe(50);
 
     // Chaque actualité a exactement un document principal ; chaque actualité « version » cible un produit et une version.
     expect(await scalar(t.database, "select count(*) from news_item n where (select count(*) from news_item_document d where d.news_item_id = n.id and d.role = 'primary') <> 1")).toBe(0);
@@ -83,10 +86,10 @@ describe('catalogue : produits, versions, actualités', () => {
     expect(await scalar(t.database, "select count(*) from news_item n join news_item_document d on d.news_item_id = n.id and d.role = 'primary' join news_item_target t on t.news_item_id = n.id join product_version v on v.id = t.product_version_id where v.source_document_id <> d.document_id")).toBe(0);
 
     const second = await collect(routes());
-    expect(second.runs.map((run) => run.status)).toEqual(Array(5).fill('succeeded'));
+    expect(second.runs.map((run) => run.status)).toEqual(Array(CORPUS.length).fill('succeeded'));
     expect(second.runs.map((run) => run.unchangedDocuments)).toEqual(first.runs.map((run) => run.newDocuments));
     expect(second.runs.every((run) => run.newNewsItems === 0 && run.newDocuments === 0)).toBe(true);
-    expect(await scalar(t.database, 'select count(*) from news_item')).toBe(expectedStable + 30);
+    expect(await scalar(t.database, 'select count(*) from news_item')).toBe(expectedStable + 50);
     expect(await scalar(t.database, 'select count(*) from product_version')).toBe(expectedVersions);
   });
 
@@ -165,7 +168,7 @@ describe('catalogue : produits, versions, actualités', () => {
     const summary = await collectWith(fetcher);
     const failed = summary.runs.filter((run) => run.status === 'failed');
     expect(failed.map((run) => [run.sourceId, run.errorKind])).toEqual([['feed:openai-news', kind]]);
-    expect(summary.runs.filter((run) => run.status === 'succeeded')).toHaveLength(4);
+    expect(summary.runs.filter((run) => run.status === 'succeeded')).toHaveLength(CORPUS.length - 1);
     expect(await state()).toBe(before);
   });
 
@@ -263,7 +266,7 @@ describe('catalogue : produits, versions, actualités', () => {
       return healthy(url, headers, hosts);
     });
     expect(limits[urlOf(source('github-releases:openai/codex'))]).toBe(12 * 1024 * 1024);
-    expect(Object.values(limits).filter((value) => value === undefined)).toHaveLength(4);
+    expect(Object.values(limits).filter((value) => value === undefined)).toHaveLength(CORPUS.length - 1);
   });
 
   it('tag corrigé sur la même release : la version change de numéro, une seule version par document, titre mis à jour', async () => {

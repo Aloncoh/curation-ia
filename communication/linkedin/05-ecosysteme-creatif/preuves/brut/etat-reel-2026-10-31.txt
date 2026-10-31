@@ -1,0 +1,35 @@
+Relevé du 2026-10-31 (16:05 UTC). Aucune dépense, aucune clé utilisée.
+
+== Base de travail data/curation.db ==
+sources en base|25
+documents|419
+captures|419
+actualites|393
+executions reelles reussies|48
+llm_run|0
+llm_call|0
+post_draft|0
+
+== Commande de brouillons ==
+$ node src/cli/brouillons.ts
+Refus : ajouter --confirmer. Cette commande engage une dépense réelle.
+code=1
+$ node src/cli/brouillons.ts --confirmer
+Refus : ANTHROPIC_API_KEY absente de l’environnement.
+code=1
+
+== Reddit, pages officielles lues le 2026-10-31 ==
+54353370049684 | Changelog - October 8, 2026 | mise a jour 2026-10-24T07:34:19Z
+42728983564564 | Responsible Builder Policy | mise a jour 2026-10-31T16:00:42Z
+14945211791892 | Developer Platform & Accessing Reddit Data | mise a jour 2026-10-31T13:23:50Z
+Changelog, section API : "New requests for public API access will no longer be accepted" (daté October 31, 2026).
+Responsible Builder Policy : renvoi vers un ticket si le cas d'usage n'est pas couvert par Devvit.
+Calendrier complet sur r/redditdev non lu : reddit.com refusé par le navigateur intégré.
+
+Notes ajoutées après relecture indépendante, le 2026-10-31 (le relevé ci-dessus reste tel quel) :
+- « mise a jour » reprend le champ updated_at, qui ne date pas le texte. Champs edited_at : Responsible Builder Policy 2026-10-05, Changelog 2026-10-08, Developer Platform & Accessing Reddit Data 2026-05-28.
+- Le billet r/redditdev a été lu une seule fois le 2026-10-30 dans un flux RSS, sans contre-vérification (veille-sources-contre-verifiee-2026-10-30.json).
+- Sources : 24 au registre src/sources.ts ; 25 lignes en base, dont feed:google-deepmind, reportée, sans document.
+- La comparaison d'un document Sketch entre deux captures n'a pas été conservée en preuve brute.
+- Mesures sur la dernière capture de chaque actualité, base de travail : 393 actualités ; 64 sans texte (feed:higgsfield 20, feed:huggingface-blog 20, feed:notion 20, feed:mistral 4) ; 66 de moins de trois mots ; 192 de moins de 200 caractères de texte ; 178 de moins de 200 caractères bruts.
+- Photo : maquette/medias/google-campus.jpg et le fichier téléchargé le 2026-10-31 depuis le download_url de l'entrée « Googleplex Campus » de https://blog.google/image-library/ ont la même empreinte SHA-256, 0471dbcdf0db400268b8e513f2e365d51a82772b54e794acb7ea5415d0171323.
