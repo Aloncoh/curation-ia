@@ -4,6 +4,7 @@
 import { modeleAnthropic } from '../analysis/modele.ts';
 import { genererBrouillons } from '../analysis/pipeline.ts';
 import { TARIFS } from '../analysis/tarifs.ts';
+import { AGE_MAX_JOURS } from '../selection/consignes.ts';
 import { runCommand } from './shared.ts';
 
 const usd = (nom: string) => {
@@ -17,9 +18,11 @@ await runCommand(async ({ database }) => {
   if (!process.env.ANTHROPIC_API_KEY) { console.error('Refus : ANTHROPIC_API_KEY absente de l’environnement et de .env.local.'); return 1; }
   const nomModele = process.env.CURATION_MODELE ?? '';
   if (!TARIFS[nomModele]) { console.error('Refus : CURATION_MODELE absent ou sans tarif vérifié.'); return 1; }
+  // Le moteur n'appelle qu'Anthropic : DeepSeek ne sert à ce jour qu'à la comparaison.
+  if (!nomModele.startsWith('claude-')) { console.error('Refus : le moteur de brouillons n’accepte qu’un modèle Claude.'); return 1; }
   const maxItems = Number(process.env.CURATION_MAX_ACTUALITES);
   if (!Number.isInteger(maxItems) || maxItems < 1) { console.error('Refus : CURATION_MAX_ACTUALITES requis.'); return 1; }
-  const r = await genererBrouillons({ database, modele: modeleAnthropic(), nomModele, maxItems, capRunMicroUsd: usd('CURATION_PLAFOND_EXECUTION_USD'), capTotalMicroUsd: usd('CURATION_PLAFOND_TOTAL_USD') });
+  const r = await genererBrouillons({ database, modele: modeleAnthropic(), nomModele, maxItems, ageMaxJours: AGE_MAX_JOURS, capRunMicroUsd: usd('CURATION_PLAFOND_EXECUTION_USD'), capTotalMicroUsd: usd('CURATION_PLAFOND_TOTAL_USD') });
   console.log(JSON.stringify(r));
   return r.statut === 'terminee' ? 0 : 1;
 });

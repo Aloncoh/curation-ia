@@ -31,6 +31,13 @@ La base locale est créée dans `data/curation.db` (non versionnée). Variable o
 | `npm run maquette:reel` | macOS seulement : génère le Reel d'exemple `maquette/medias/reel-copilot-fusion.{mp4,vtt,jpg,json}` avec la synthèse vocale du système et ffmpeg (`~/.local/bin/ffmpeg` par défaut, ou variables `FFMPEG` et `FFPROBE`) |
 | `npm run brouillons -- --confirmer` | **dépense réelle, jamais exécutée à ce jour** : lot de brouillons avec le vrai modèle. Refuse de démarrer sans `ANTHROPIC_API_KEY`, `CURATION_MODELE`, `CURATION_MAX_ACTUALITES`, `CURATION_PLAFOND_EXECUTION_USD` et `CURATION_PLAFOND_TOTAL_USD` (environnement ou `.env.local`) |
 | `npm run brouillons:relire` | écrit `exports/brouillons-a-relire.md` : brouillons, écarts et coût enregistré, sans appel au modèle |
+| `npm run selection -- <sous-commande>` | corpus figé, dossiers des juges, jugements, avis humains, corrections et évaluation, sans appel payant (détail en tête de `src/cli/selection.ts`) |
+| `npm run sonde -- --minutes 90` | mesure la détection sur les sources réelles, sans toucher au catalogue ni au modèle |
+| `npm run delais` | écrit `exports/delais.md` : détection et préparation mesurées séparément |
+| `npm run budget` | écrit `exports/budget.md` : coût estimé du texte, sans aucun appel |
+| `npm run comparaison -- <sous-commande>` | compare Haiku et DeepSeek Flash sur un même lot réel : `estimer`, `lancer --confirmer` (1 $ au plus, deux clés requises), `rapport`, `aveugle` |
+| `npm run cles` | saisie guidée des clés dans `.env.local`, sans les afficher à l'écran |
+| `npm run montage` | rend les montages d'exemple dans `maquette/medias/montages/` avec Chrome local, sans réseau ni modèle |
 | `npm run pause` / `npm run resume` | bloque ou rétablit les nouveaux jobs |
 | `npm test` | tests sur fixtures, sans réseau |
 | `npm run typecheck` | vérification des types (TypeScript 7) |

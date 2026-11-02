@@ -34,7 +34,7 @@ export async function depense(client: Client, runId?: string): Promise<number> {
 
 /** Réserve le coût maximal ; lève BudgetInsuffisant sans rien écrire si l'un des plafonds serait dépassé. */
 export async function reserver(client: Client, plafonds: Plafonds, t: Tentative, now: string): Promise<number> {
-  const maximum = coutMicroUsd(t.model, t.inputTokens, t.maxTokens);
+  const maximum = coutMicroUsd(t.model, t.inputTokens, t.maxTokens, { quand: now });
   const tx = await client.transaction('write');
   try {
     const sum = async (where: string, args: string[]) =>
@@ -56,8 +56,8 @@ export async function reserver(client: Client, plafonds: Plafonds, t: Tentative,
 }
 
 /** Le coût réel remplace la réservation ; un dépassement de la réservation reste visible dans `error`. */
-export async function solder(client: Client, id: number, model: string, usage: { input: number; output: number }, stop: string | null, now: string): Promise<void> {
-  const reel = coutMicroUsd(model, usage.input, usage.output);
+export async function solder(client: Client, id: number, model: string, usage: { input: number; output: number; cache?: number; cacheEcrit?: number }, stop: string | null, now: string): Promise<void> {
+  const reel = coutMicroUsd(model, usage.input, usage.output, { cache: usage.cache, cacheEcrit: usage.cacheEcrit, quand: now });
   await client.execute({
     sql: `update llm_call set status = 'reussi', actual_micro_usd = ?, input_tokens = ?, output_tokens = ?, stop_reason = ?, finished_at = ?,
             error = case when ? > reserved_micro_usd then 'coût réel supérieur à la réservation' end

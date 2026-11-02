@@ -246,6 +246,8 @@ export async function safeGet(
       throw new SafeFetchError('network', `Erreur réseau vers ${url.host} : ${(error as Error).message}`);
     }
 
+    // Un 304 n'est pas une redirection : il répond à une requête conditionnelle et n'emmène nulle part.
+    if (response.status === 304 && (headers['if-none-match'] !== undefined || headers['if-modified-since'] !== undefined)) return response;
     if (response.status >= 300 && response.status < 400) {
       throw new SafeFetchError('redirect', `Redirection refusée (HTTP ${response.status})`, response.status);
     }

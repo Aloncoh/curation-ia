@@ -45,14 +45,20 @@ const ATTRIBUTION = /\bselon\b|d['’]après|\baffirme\b|\brevendique\b|\bindiqu
 // Un pourcentage seul peut être une remise ou une part d'écran : seule une comparaison compte comme une performance.
 const PERFORMANCE = /\bbenchmarks?\b|\bscores?\b|\bfois plus\b|\d\s*%\s*(?:de\s+)?(?:plus|moins|mieux)\b|\d\s*x\s+plus\b/i;
 const SUPERLATIF = /\b(?:l[ea]s?|du|des) (?:plus|meilleur\w*)\b|\bmeilleur\w*|\bplus (?:rapide|puissant|précis|performant|fiable)\w*|\bfois plus\b|\b\d+\s*(?:%|fois)|\bleader\b|\bn°\s*1\b/i;
+// V1 : analyse documentaire seule. Un texte rédigé ne raconte pas un essai qui n'a pas eu lieu (SPEC §7.8).
+const ESSAI_REVENDIQUE = /\b(?:nous avons|j['’]ai|on a)\s+(?:test|essay|mesur|obtenu|constaté)\w*|\b(?:testée?s?|essayée?s?) par (?:nos|notre|nous|la plateforme)\b|\b(?:d['’]après|selon) (?:nos|notre) (?:tests?|essais?|mesures?)\b/i;
 /** Types jamais publiables comme un fait : ils passent toujours en relecture. */
 const TYPES_A_RELIRE = ['non_confirmee', 'opinion', 'temoignage'];
 /** Au-delà, un passage cesse d'être une citation et devient une reprise de la source. */
 const LONGUEUR_MAX_PASSAGE = 300;
+const REPERES_MAX = 3;
+const LONGUEUR_MAX_REPERE = 64;
 /** Autant de mots consécutifs repris de la capture dans un texte rédigé : une copie, pas une synthèse. */
 const MOTS_DE_COPIE = 8;
 const MOTS_VIDES = new Set(['the', 'and', 'for', 'with', 'new', 'now', 'you', 'your', 'our', 'from', 'how', 'why', 'what', 'into', 'les', 'des', 'une', 'pour', 'avec', 'dans', 'sur', 'nos', 'vos']);
-const LIBELLES_CHAMPS = { accroche: 'Accroche', nouveaute: 'Nouveauté', ce_que_ca_permet: 'Ce que ça permet', pour_qui: 'Pour qui', acces: 'Accès', cout: 'Coût', limites_connues: 'Limites connues' } as const;
+const LIBELLES_CHAMPS = { accroche: 'Accroche', nouveaute: 'Nouveauté', ce_que_ca_permet: 'Ce que ça permet', pour_qui: 'Pour qui', exemple_usage: 'Exemple d’usage', acces: 'Pour commencer', prerequis: 'Prérequis', cout: 'Coût', limites_connues: 'Limites connues' } as const;
+
+const JOUR_PARIS = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Paris' });
 
 const mots = (texte: string) => (texte.toLowerCase().match(/[\p{L}\p{N}][\p{L}\p{N}.+-]*/gu) ?? []).map((m) => m.replace(/\.+$/, ''));
 /** Moins de trois mots, séparés par des espaces : un point, une version ou une adresse se retrouve partout et ne soutient rien. */
@@ -106,13 +112,15 @@ export function controlerBrouillon(b: Brouillon, capture: string | string[], tit
   if (produit && !produitValide) resultats.push({ champ: 'produit', code: 'produit_introuvable', detail: produit });
   const nomsConnus = new Set(produitValide ? mots(produit!) : []);
   const source = valeursDe(texte);
-  if (dateAnnonce) source.dates.add(dateAnnonce.slice(0, 10));
+  // Jour UTC stocké et jour de Paris affiché : les deux désignent la même annonce.
+  if (dateAnnonce) for (const jour of [dateAnnonce.slice(0, 10), JOUR_PARIS.format(new Date(dateAnnonce))]) source.dates.add(jour);
   const champs: [string, { texte: string; passages: string[] }][] = [
     ...Object.entries({
       accroche: b.accroche, description: b.description, nouveaute: b.nouveaute,
-      ce_que_ca_permet: b.ce_que_ca_permet, pour_qui: b.pour_qui, acces: b.acces, cout: b.cout, limites_connues: b.limites_connues,
+      ce_que_ca_permet: b.ce_que_ca_permet, pour_qui: b.pour_qui, exemple_usage: b.exemple_usage, acces: b.acces, prerequis: b.prerequis, cout: b.cout, limites_connues: b.limites_connues,
     }).filter((e): e is [string, Brouillon['accroche']] => e[1] !== null),
     ...b.details.map((d, i): [string, Brouillon['accroche']] => [`details:${i}`, d]),
+    ...b.reperes.map((r, i): [string, Brouillon['accroche']] => [`reperes:${i}`, r]),
     ...b.attributions.map((a, i): [string, Brouillon['accroche']] => [`attributions:${i}`, a]),
     ...b.attributions.flatMap((a, i): [string, Brouillon['accroche']][] => (a.conditions ? [[`attributions:${i}:conditions`, a.conditions]] : [])),
   ];
@@ -124,6 +132,7 @@ export function controlerBrouillon(b: Brouillon, capture: string | string[], tit
     for (const p of passages) if (p.length > LONGUEUR_MAX_PASSAGE) resultats.push({ champ, code: 'citation_trop_longue', detail: p.slice(0, 60) });
     if (recopie(c.texte, texte)) resultats.push({ champ, code: 'copie_de_la_source' });
     if (!champ.startsWith('attributions:') && PERFORMANCE.test(c.texte) && !ATTRIBUTION.test(c.texte)) resultats.push({ champ, code: 'benchmark_non_attribue' });
+    if (!champ.startsWith('attributions:') && ESSAI_REVENDIQUE.test(c.texte)) resultats.push({ champ, code: 'essai_non_realise' });
     const cite = passages.join(' ');
     if (champ === 'cout' && !INDICE_COUT.test(cite)) resultats.push({ champ, code: 'cout_sans_indice' });
     if (champ === 'cout' && GRATUITE.test(c.texte) && !GRATUITE.test(cite)) resultats.push({ champ, code: 'gratuite_non_citee' });
@@ -160,6 +169,13 @@ export function controlerBrouillon(b: Brouillon, capture: string | string[], tit
   if (compte < 2 || compte > 5 || diapositives.length !== compte || new Set(b.diapositives).size !== compte) resultats.push({ champ: 'diapositives', code: 'media_non_conforme' });
   // L'accroche a déjà son propre contrôle : un terme interdit la laisse à vérifier, il ne rejette pas le brouillon.
   for (const d of diapositives) if (d.champ !== 'accroche' && sensationnel(d.texte)) resultats.push({ champ: d.champ, code: 'diapositive_sensationnelle' });
+  // Un repère s'affiche sur l'image : trop long, il déborderait ; trop nombreux, ils cacheraient ce qu'ils montrent.
+  if (b.reperes.length === 0) resultats.push({ champ: 'reperes', code: 'reperes_absents' });
+  if (b.reperes.length > REPERES_MAX) resultats.push({ champ: 'reperes', code: 'reperes_trop_nombreux' });
+  for (const [i, r] of b.reperes.entries()) {
+    if (r.texte.length > LONGUEUR_MAX_REPERE) resultats.push({ champ: `reperes:${i}`, code: 'repere_trop_long' });
+    if (sensationnel(r.texte)) resultats.push({ champ: `reperes:${i}`, code: 'diapositive_sensationnelle' });
+  }
   // Une annonce commerciale reste attribuée à son auteur, jamais présentée comme une performance vérifiée.
   if (typeInformation === 'affirmation_commerciale') {
     if (!ATTRIBUTION.test(b.description.texte)) resultats.push({ champ: 'description', code: 'attribution_manquante' });

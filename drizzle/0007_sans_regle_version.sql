@@ -1,0 +1,1 @@
+ALTER TABLE `selection_avis` DROP COLUMN `regle_version`;

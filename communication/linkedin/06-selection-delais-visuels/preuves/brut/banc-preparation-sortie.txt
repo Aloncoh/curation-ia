@@ -1,0 +1,1 @@
+{"date":"2026-10-31T22:02:57.877Z","actualites":100,"duree_totale_ms":735,"par_actualite_ms":7,"bilan":{"statut":"terminee","controlees":7,"a_verifier":93,"a_approfondir":0,"ecartees":0,"rejetees":0}}

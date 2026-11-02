@@ -36,6 +36,34 @@
       "when": 1793471597278,
       "tag": "0004_naive_jane_foster",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "6",
+      "when": 1793478584647,
+      "tag": "0005_big_annihilus",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "6",
+      "when": 1793483407103,
+      "tag": "0006_selection_historisee",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "6",
+      "when": 1793483407849,
+      "tag": "0007_sans_regle_version",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "6",
+      "when": 1793522401240,
+      "tag": "0008_comparaison_sortie",
+      "breakpoints": true
     }
   ]
 }

@@ -35,6 +35,9 @@ describe('protection des secrets', () => {
     expect(message).toContain('authToken=***');
     expect(redactSecrets('https://user:motdepasse@example.org/x')).not.toContain('motdepasse');
     expect(redactSecrets('Authorization: Bearer abc.def')).not.toContain('abc.def');
+    expect(redactSecrets('clé sk-ant-api03-abcdef')).not.toContain('abcdef');
+    expect(redactSecrets('clé sk-0123456789abcdef refusée')).toBe('clé *** refusée');
+    expect(redactSecrets('plan risk-management-2026')).toBe('plan risk-management-2026');
   });
 
   it("décrit l'URL de base sans jeton", () => {

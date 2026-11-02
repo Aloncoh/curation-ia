@@ -12,6 +12,7 @@ import { BudgetInsuffisant, marquerErreur, reserver, solder, type Plafonds } fro
 import { CODES_BLOQUANTS, controlerBrouillon, diapositivesDe, moinsDeTroisMots, type DiapositiveResolue } from './controles.ts';
 import { estReprenable, schemaSortie, type Modele, type RequeteModele } from './modele.ts';
 import { documentUtilisateur, PROMPT_VERSION, SYSTEME_QUALIFICATION, SYSTEME_REDACTION } from './prompts.ts';
+import { consignesActuelles, deciderSelection, passagesRetrouves, preselection, type Selection } from '../selection/consignes.ts';
 import { creerPublication, NIVEAU_PREUVE_V1, synchroniserComptes } from './publication.ts';
 import { Brouillon, Qualification } from './schemas.ts';
 
@@ -39,6 +40,8 @@ export interface OptionsBrouillons {
   maxItems: number;
   capRunMicroUsd: number;
   capTotalMicroUsd: number;
+  /** Au-delà de cet âge à la première vue, l'entrée vient de l'historique d'un flux : écartée sans appel. Sans valeur, aucun filtre. */
+  ageMaxJours?: number;
   clock?: () => Date;
   estReprenable?: (e: unknown) => boolean;
   attente?: (ms: number) => Promise<unknown>;
@@ -47,24 +50,26 @@ export interface OptionsBrouillons {
 
 /**
  * Actualités sans résultat définitif, dont la dernière capture vient d'une collecte réelle, en commençant par celles
- * déjà qualifiées et payées. Une capture de moins de trois mots ne permet aucune citation, une capture trop longue
+ * déjà qualifiées et payées. Un sujet à approfondir repasse quand une nouvelle capture arrive. Une capture de moins de trois mots ne permet aucune citation, une capture trop longue
  * coûterait trop cher : elles ne partent pas au modèle et ne figent rien, l'actualité repassera avec une autre capture.
  */
 async function aTraiter(client: Client, limite: number) {
   const r = await client.execute(
-    `select n.id, n.title, n.announced_at, v.version, pr.name as produit,
-            c.id as snapshot_id, c.document_id, c.title as snapshot_title, c.content, c.content_format,
+    `select n.id, n.title, n.announced_at, n.first_seen_at, v.version, pr.name as produit,
+            c.id as snapshot_id, c.document_id, c.title as snapshot_title, c.content, c.content_format, src.name as source_nom,
             d.status as etat, d.snapshot_id as snapshot_qualifie, d.prompt_version as prompt_qualifie, d.model as modele_qualifie, d.content as qualification
           from news_item n
           join news_item_document nd on nd.news_item_id = n.id and nd.role = 'primary'
           join document_snapshot c on c.document_id = nd.document_id
             and c.seq = (select max(seq) from document_snapshot x where x.document_id = nd.document_id)
           join run r on r.id = c.run_id and r.mode = 'live'
+          join source_document doc on doc.id = nd.document_id
+          join source src on src.id = doc.source_id
           left join news_item_target t on t.news_item_id = n.id
           left join product_version v on v.id = t.product_version_id
           left join product pr on pr.id = t.product_id
           left join post_draft d on d.news_item_id = n.id
-          where d.id is null or d.status = 'qualifiee'
+          where d.id is null or d.status = 'qualifiee' or (d.status = 'a_approfondir' and d.snapshot_id <> c.id)
           order by d.id is not null desc, coalesce(n.announced_at, n.first_seen_at) desc, n.id desc`,
   );
   const tailleAdmise = r.rows.filter((row) => String(row.content).length + String(row.snapshot_title).length <= LONGUEUR_MAX_CAPTURE);
@@ -80,7 +85,7 @@ function qualificationReprise(row: Row, nomModele: string): Qualification | null
 }
 
 /** Autres captures réelles de l'actualité : anciennes versions du document et documents secondaires. */
-async function autresCaptures(client: Client, newsItemId: number, snapshotId: number): Promise<string[]> {
+export async function autresCaptures(client: Client, newsItemId: number, snapshotId: number): Promise<string[]> {
   const r = await client.execute({
     sql: `select c.title, c.content, c.content_format
           from document_snapshot c
@@ -154,7 +159,7 @@ export async function genererBrouillons(o: OptionsBrouillons) {
     for (let attempt = 1; attempt <= MAX_TENTATIVES; attempt++) {
       if (await isPaused(o.database.db)) throw new ArretPause('pause active');
       await renouvelerBail();
-      const requete: RequeteModele = { modele: o.nomModele, systeme, utilisateur, maxTokens, schema: schemaSortie(schema) };
+      const requete: RequeteModele = { modele: o.nomModele, systeme, utilisateur, maxTokens, schema: schemaSortie(schema), imposerSchema: schema !== (Brouillon as z.ZodType) };
       let inputTokens: number;
       try {
         inputTokens = await o.modele.compter(requete);
@@ -198,7 +203,7 @@ export async function genererBrouillons(o: OptionsBrouillons) {
 
   let statut = 'terminee';
   let motif: string | null = null;
-  const bilan = { ecartees: 0, invalides: 0, tronquees: 0, refus: 0, rejetees: 0, a_verifier: 0, controlees: 0, sans_texte: 0, trop_longues: 0, qualifications_reprises: 0 };
+  const bilan = { ecartees: 0, anciennes: 0, a_approfondir: 0, invalides: 0, tronquees: 0, refus: 0, rejetees: 0, a_verifier: 0, controlees: 0, sans_texte: 0, trop_longues: 0, qualifications_reprises: 0 };
   try {
     const { lignes, sansTexte, tropLongues } = await aTraiter(client, o.maxItems);
     bilan.sans_texte = sansTexte;
@@ -210,8 +215,9 @@ export async function genererBrouillons(o: OptionsBrouillons) {
       const produit = row.produit === null ? null : String(row.produit);
       const version = row.version === null ? null : String(row.version);
       const texte = toPlainText(String(row.content), String(row.content_format));
-      const doc = documentUtilisateur(titreCapture, texte, produit);
-      const enregistrer = (status: string, q: Qualification | null, content: unknown, checks: unknown, motifRejet: string | null, diapositives?: DiapositiveResolue[]) =>
+      const annonce = row.announced_at === null ? null : String(row.announced_at);
+      const doc = documentUtilisateur(titreCapture, texte, produit, { source: String(row.source_nom), annonce });
+      const enregistrer = (status: string, q: Qualification | null, content: unknown, checks: unknown, motifRejet: string | null, diapositives?: DiapositiveResolue[], selection?: Selection) =>
         ecrire(async () => {
           const tx = await client.transaction('write');
           try {
@@ -223,12 +229,29 @@ export async function genererBrouillons(o: OptionsBrouillons) {
                     on conflict(news_item_id) do update set run_id = excluded.run_id, status = excluded.status, account = excluded.account, rejection_reason = excluded.rejection_reason,
                       information_type = excluded.information_type, snapshot_id = excluded.snapshot_id, model = excluded.model, prompt_version = excluded.prompt_version,
                       content = excluded.content, checks = excluded.checks, created_at = excluded.created_at
-                    where post_draft.status = 'qualifiee'
+                    where post_draft.status in ('qualifiee', 'a_approfondir')
                     returning id`,
               args: [id, runId, status, q?.compte ?? null, motifRejet, q?.type_information ?? null, Number(row.snapshot_id), o.nomModele, PROMPT_VERSION,
                 content ? JSON.stringify(content) : null, checks ? JSON.stringify(checks) : null, now()],
             });
             if (draft.rows.length === 0) throw new Error(`résultat déjà définitif pour l'actualité ${id}`);
+            // La décision, ses critères et ses passages restent consultables, que le sujet soit retenu ou non.
+            if (selection) {
+              const juge = q ? o.nomModele : 'code';
+              const version = consignesActuelles().version;
+              const criteres = q ? JSON.stringify(q.criteres) : null;
+              // Les anciennes lignes restent : un humain a pu les voir. Elles ne comptent simplement plus. Seule une ligne identique est gardée.
+              await tx.execute({
+                sql: `update selection_decision set remplacee_le = ? where news_item_id = ? and origine in ('modele', 'regles') and remplacee_le is null
+                        and not (juge = ? and consignes_version = ? and snapshot_id = ? and prompt_version = ? and decision = ? and motif = ? and criteres is ?)`,
+                args: [now(), id, juge, version, Number(row.snapshot_id), PROMPT_VERSION, selection.decision, selection.motif, criteres],
+              });
+              await tx.execute({
+                sql: `insert into selection_decision (news_item_id, origine, juge, consignes_version, prompt_version, decision, criteres, motif, passages, snapshot_id, created_at) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                      on conflict(news_item_id, juge, consignes_version, snapshot_id, prompt_version) where remplacee_le is null do nothing`,
+                args: [id, q ? 'modele' : 'regles', juge, version, PROMPT_VERSION, selection.decision, criteres, selection.motif, JSON.stringify(q ? passagesRetrouves(q.passages, [titreCapture, texte]) : []), Number(row.snapshot_id), now()],
+              });
+            }
             if (diapositives) {
               await creerPublication(tx, {
                 draftId: Number(draft.rows[0]!.id), compte: q!.compte!, newsItemId: id, statutBrouillon: status, contenu: content as Record<string, unknown>,
@@ -242,16 +265,31 @@ export async function genererBrouillons(o: OptionsBrouillons) {
         });
 
       let q = qualificationReprise(row, o.nomModele);
+      const reprise = q !== null;
       if (q) {
         bilan.qualifications_reprises++;
       } else {
+        const ancienne = o.ageMaxJours === undefined ? null : preselection({ annonceLe: annonce, vuLe: String(row.first_seen_at) }, o.ageMaxJours);
+        if (ancienne) { await enregistrer('ecartee', null, null, null, ancienne.motif, undefined, ancienne); bilan.anciennes++; continue; }
         const qualification = await appeler(id, 'qualification', SYSTEME_QUALIFICATION, doc, Qualification);
-        if (!qualification.ok) { await enregistrer(qualification.statut, null, null, null, null); bilan[BILAN_ECHEC[qualification.statut]]++; continue; }
+        if (!qualification.ok) {
+          // Un sujet à approfondir le reste, sur la capture essayée : la suivante le fera repasser.
+          if (row.etat === 'a_approfondir') await enregistrer('a_approfondir', null, JSON.parse(String(row.qualification)), null, qualification.statut);
+          else await enregistrer(qualification.statut, null, null, null, null);
+          // La décision précédente ne décrit plus l'état du sujet.
+          await ecrire(() => client.execute({ sql: `update selection_decision set remplacee_le = ? where news_item_id = ? and origine in ('modele', 'regles') and remplacee_le is null`, args: [now(), id] }));
+          bilan[BILAN_ECHEC[qualification.statut]]++;
+          continue;
+        }
         q = qualification.valeur;
-        if (!q.retenue) { await enregistrer('ecartee', q, null, null, q.motif_rejet); bilan.ecartees++; continue; }
-        // Payée, donc conservée avant la rédaction : une interruption ne la fera pas repayer.
-        await enregistrer('qualifiee', q, { qualification: q }, null, null);
       }
+      // Recalculée aussi pour une qualification reprise : un garde-fou durci depuis s'applique sans rien repayer.
+      const choix = deciderSelection(q, [titreCapture, texte]);
+      if (choix.decision === 'ecarter') { await enregistrer('ecartee', q, null, null, choix.motif, undefined, choix); bilan.ecartees++; continue; }
+      // Un sujet à approfondir n'est pas rédigé : aucune dépense de plus, et rien de douteux n'avance vers la publication.
+      if (choix.decision === 'approfondir') { await enregistrer('a_approfondir', q, { qualification: q }, null, choix.motif, undefined, choix); bilan.a_approfondir++; continue; }
+      // Payée, donc conservée avant la rédaction : une interruption ne la fera pas repayer.
+      if (!reprise) await enregistrer('qualifiee', q, { qualification: q }, null, null, undefined, choix);
       const redaction = await appeler(id, 'redaction', SYSTEME_REDACTION, doc, Brouillon);
       if (!redaction.ok) { await enregistrer(redaction.statut, q, null, null, null); bilan[BILAN_ECHEC[redaction.statut]]++; continue; }
       const b = redaction.valeur;

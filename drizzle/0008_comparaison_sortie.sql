@@ -1,0 +1,33 @@
+CREATE TABLE `comparaison_sortie` (
+	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
+	`run_id` text NOT NULL,
+	`origine` text NOT NULL,
+	`bras` text NOT NULL,
+	`modele` text NOT NULL,
+	`reglage` text NOT NULL,
+	`news_item_id` integer NOT NULL,
+	`snapshot_id` integer NOT NULL,
+	`etape` text NOT NULL,
+	`prompt_version` text NOT NULL,
+	`statut` text NOT NULL,
+	`tentatives` integer NOT NULL,
+	`brut` text,
+	`contenu` text,
+	`controles` text,
+	`decision` text,
+	`motif` text,
+	`duree_ms` integer,
+	`tokens_entree` integer,
+	`tokens_cache` integer,
+	`tokens_sortie` integer,
+	`tokens_raisonnement` integer,
+	`cout_micro_usd` integer NOT NULL,
+	`created_at` text NOT NULL,
+	FOREIGN KEY (`run_id`) REFERENCES `llm_run`(`id`) ON UPDATE no action ON DELETE no action,
+	FOREIGN KEY (`news_item_id`) REFERENCES `news_item`(`id`) ON UPDATE no action ON DELETE no action,
+	FOREIGN KEY (`snapshot_id`) REFERENCES `document_snapshot`(`id`) ON UPDATE no action ON DELETE no action,
+	CONSTRAINT "comparaison_sortie_origine_ck" CHECK(origine in ('reel', 'simulation')),
+	CONSTRAINT "comparaison_sortie_etape_ck" CHECK(etape in ('qualification', 'redaction'))
+);
+--> statement-breakpoint
+CREATE UNIQUE INDEX `comparaison_sortie_uq` ON `comparaison_sortie` (`origine`,`bras`,`news_item_id`,`etape`,`snapshot_id`,`prompt_version`);

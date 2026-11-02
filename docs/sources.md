@@ -265,6 +265,8 @@ Six domaines recherchés puis contre-vérifiés par 12 agents ; toutes les recom
 | Awwwards, Sites of the Day | `https://feeds.feedburner.com/awwwards-sites-of-the-day` |
 | Latent Space, Import AI, Ben's Bites | flux Substack |
 
+**Compléments du 2026-11-01** : Supabase, Vercel et DeepSeek sont cités comme exemples à couvrir ; leurs flux et leurs conditions n'ont pas été vérifiés. Pour les découvertes (SPEC §7.3 ter), l'API de recherche GitHub est la piste retenue, avec jeton ; repère relevé sans jeton le 2026-11-01 : dépôts « mcp » créés depuis 90 jours, 798 à 50 étoiles et plus, 230 à 200, 102 à 500, 55 à 1 000.
+
 **Candidates**
 
 | Domaine | Source | Point d'accès | Méthode |

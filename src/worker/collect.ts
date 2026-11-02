@@ -63,7 +63,7 @@ export interface CollectSummary {
 const EMPTY_COUNTS = { newDocuments: 0, unchangedDocuments: 0, changedDocuments: 0, newNewsItems: 0, possibleGap: false };
 
 /** Ce qui change d'un type de source à l'autre : l'adresse interrogée, les en-têtes et la lecture de la réponse. */
-function adapterFor(definition: SourceDefinition): { url: string; headers: Record<string, string>; parse: (body: string) => ParsedFeed } {
+export function adapterFor(definition: SourceDefinition): { url: string; headers: Record<string, string>; parse: (body: string) => ParsedFeed } {
   if (definition.kind === 'github_releases') {
     const parse = (body: string) => ({ documents: parseReleases(body, definition.config), rejected: {} });
     return { url: releasesUrl(definition.config), headers: GITHUB_API_HEADERS, parse };

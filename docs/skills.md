@@ -16,11 +16,12 @@ Doublons à éviter : trois skills de relecture de code (`engineering:code-revie
 |---|---|---|
 | `product-management:write-spec` | P0 | consignes lues ; structure des questions de cadrage et de SPEC.md |
 | `engineering:system-design` | P0 | consignes lues ; structure de la synthèse d'architecture |
-| `engineering:architecture` | P0, P1 | consignes lues ; format des ADR 0001 et 0002 (ADR 0003 en P2 : même structure reprise de l'ADR 0002, skill non rechargé) |
-| `claude-api` | P0 | chargé ; référence officielle des modèles et des tarifs |
+| `engineering:architecture` | P0, P1, P3 | consignes lues ; format des ADR 0001 et 0002 (ADR 0003 en P2 : même structure reprise de l'ADR 0002, skill non rechargé) ; rechargé le 2026-11-01 pour l'ADR 0008 |
+| `claude-api` | P0, P3 | chargé ; référence officielle des modèles et des tarifs ; rechargé le 2026-11-01 pour la comparaison de modèles (identifiants, cache, sorties structurées) |
 | `engineering:testing-strategy` | P1 | consignes lues ; choix des tests du collecteur |
 | `workflow-authoring` | P0, P1, P2 | chargé ; recherches et relectures par agents contre-vérifiés (P2 : relecture adversariale à 3 axes + complétude, puis contre-relecture des corrections ; reprise du 2026-10-30 : contre-vérification des 6 thèmes de recherche sur les sources, relecture adversariale à 5 angles de la maquette sociale) |
-| `frontend-design` | P2 | chargé lors de la première maquette ; démarche de conception (jetons tirés de la mascotte, élément signature, typographie, états). Non rechargé pour la maquette sociale : mêmes jetons et mêmes principes repris |
+| `artifact-capabilities` | P3 | chargé ; page de revue où l'utilisateur corrige les exemples de sélection |
+| `frontend-design` | P2, P3 | chargé lors de la première maquette, puis pour les gabarits de montage ; élément signature : étiquettes cousues reliées par un fil ; démarche de conception (jetons tirés de la mascotte, élément signature, typographie, états). Non rechargé pour la maquette sociale : mêmes jetons et mêmes principes repris |
 
 ## Prévu, pas encore utilisé
 

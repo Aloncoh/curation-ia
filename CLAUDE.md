@@ -78,6 +78,9 @@ Python uniquement avec un bénéfice concret justifié par ADR. Pas de Kubernete
 | docs/architecture.md (dès P1) | schémas Mermaid, responsabilités, flux |
 | docs/decisions/ (dès P1) | un ADR par décision structurante, sans journal en double |
 | docs/skills.md (dès P1) | skills détectés et usage par étape |
+| docs/budget-modeles.md | tarifs vérifiés, hypothèses et coûts estimés par volume |
+| docs/delais.md | délais mesurés, limites des sources, options de cycle |
+| docs/visuels.md | gabarits, règles et droits des montages |
 | communication/ | livrable de compréhension et de présentation (remplace `docs/learning.md` et `docs/demo.md` du brief) |
 
 Les traces d'exécution, dédoublonnages et données métier vont en base de données, pas dans ces fichiers.

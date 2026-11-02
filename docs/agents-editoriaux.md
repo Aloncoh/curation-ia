@@ -112,6 +112,10 @@ Collecte partagée, une publication principale par actualité (SPEC §3.4).
 
 Chaque brouillon porte sa **nature** : nouvel outil, nouveau modèle, nouvelle fonctionnalité, modèle ajouté à une plateforme, intégration, amélioration, changement de prix, disponibilité élargie, création réalisée, ressource ou incident. Une création réalisée avec un outil n'est jamais une nouveauté produit. Une affirmation commerciale reste attribuée : le code signale `attribution_manquante`.
 
+### 2.6 Actualités et découvertes (demande du 2026-11-01)
+
+Deux usages, un même fil (SPEC §3.5) : rester informé, et trouver des ressources pour construire. Les actualités partent d'une sortie datée. Les découvertes partent de l'intérêt actuel d'une ressource, même ancienne, et arrivent en P6, signées surtout par Repo. Le moteur actuel ne traite que les actualités : aucune source ne fournit encore de découverte.
+
 ## 3. Chaîne de traitement (V1)
 
 ```mermaid
@@ -142,6 +146,10 @@ flowchart LR
 
 ## 4. Sélection
 
+> **Révision du 2026-10-31 (ADR 0005), qui prime sur ce qui suit** : le modèle note la nouveauté réelle, l'utilité concrète, l'impact pour nos utilisateurs et la solidité des sources, de 0 à 2, avec une raison et des passages. Le code en déduit `publier`, `ecarter` ou `approfondir` : un 0 en nouveauté, utilité ou impact écarte ; une somme de ces trois notes sous 4 écarte ; sinon une solidité de 2 publie et une solidité plus basse envoie en approfondissement. Popularité, étoiles GitHub, notoriété et taille de l'éditeur ne comptent pas. Consignes versionnées : `src/selection/consignes.ts`. Corrections humaines : `npm run selection`, jamais transformées en règle automatiquement.
+
+> **Complément du 2026-11-01 (ADR 0005)** : ces règles valent pour les actualités. Les découvertes auront leur grille en P6 : utilité, documentation, maintenance, licence, limites, sans critère de nouveauté et sans filtre de 14 jours. Un seuil d'étoiles configurable agit avant, à l'entrée de la découverte automatique de dépôts, sans jamais noter un sujet ni bloquer une annonce officielle (SPEC §7.3 ter). Les doublons entre sources ne sont pas encore détectés : garde-fou en P5, regroupement complet en P6.
+
 **Critères d'entrée** (tous requis) :
 
 - dans le périmètre éditorial (SPEC §3.2) ;
@@ -152,7 +160,7 @@ flowchart LR
 
 **Motifs de rejet** (codes tracés) : `hors_perimetre`, `republication`, `preversion`, `non_confirmee`, `source_insuffisante`, `sans_interet_concret`, `contenu_promotionnel_sans_nouveaute`.
 
-**Fréquence et priorité** : au plus *N* publications par jour (valeur proposée : 3, à valider) et au plus une par produit et par jour ; au-delà, l'actualité retenue attend, par ordre de date d'annonce. Le plafond de coût s'applique en plus.
+**Fréquence et priorité** : au plus **20 publications par jour**, tous comptes confondus (décision de l'utilisateur, 2026-11-02, SPEC §3.6), sans quota à remplir, et au plus une par produit et par jour ; priorité aux nouveaux modèles, puis ressources pour construire, fonctionnalités importantes, autres actualités à fort impact ; petites annonces liées regroupées ; une part du plafond réservée aux nouveautés importantes de la journée ; une actualité obsolète n'est jamais reportée au lendemain. Le plafond de coût s'applique en plus.
 
 **Types d'information** (préservés jusqu'à l'affichage) :
 
@@ -174,13 +182,15 @@ Un contenu trouvé sur X, Reddit ou GitHub (P6) reste une **mention externe attr
 | `accroche` | ≤ 110 caractères ; dit ce qui s'est passé ; nomme le produit ou l'éditeur ; citée |
 | `description` | résumé court pour le fil ; cité |
 | `nouveaute` | ce qui change ; cité |
-| `ce_que_ca_permet`, `pour_qui` | intérêt concret ; cités ; l'un des deux au moins, sinon pas de publication automatique |
-| `acces`, `cout` | où et comment y accéder ; coût ; cités, `null` si inconnu (« Non renseigné ») |
+| `ce_que_ca_permet`, `pour_qui` | intérêt concret, public et tâche ; cités ; l'un des deux au moins, sinon pas de publication automatique |
+| `exemple_usage` | un usage possible, tiré de ce que décrit la source, jamais un essai réalisé ; cité ; `null` s'il n'y a pas de matière |
+| `acces`, `prerequis`, `cout` | comment commencer (où aller, quel outil, quelle commande) ; ce qu'il faut avant de commencer ; coût et conditions ; cités, `null` si inconnu (« Non renseigné » sur la page détaillée) |
 | `date_annonce`, `niveau_preuve`, `version_cible` | ajoutés par le code, jamais rédigés par le modèle ; version cible ou « version non précisée » |
 | `nature` | choisie par le modèle à la qualification, sans contrôle déterministe ; `null` si aucune valeur ne convient |
 | `limites_connues` | `null` si aucune n'est documentée (affiché « Non renseigné ») ; citées sinon |
 | `details` | compléments de la page de publication : titre d'une liste fermée, texte cité ; liste vide si le document n'apporte rien de plus |
 | `attributions` | benchmarks et témoignages rapportés : type, auteur retrouvé dans la capture, texte cité, conditions citées pour un benchmark |
+| `reperes` | un à trois textes courts et cités, repris par les annotations du montage (ADR 0007) |
 | `diapositives` | 2 à 5 noms de champs renseignés : le modèle ne rédige aucun texte, le code reprend celui du champ |
 | `categories`, `type_information`, `produit` | donnés à la qualification ; catégories en liste fermée ; le produit du catalogue passe avant celui relevé dans le document, qui doit s'y retrouver mot pour mot |
 | `citations` | portées par chaque champ (`passages`) ; la capture citée est enregistrée avec le brouillon |
@@ -198,6 +208,7 @@ Contrôles déterministes ; seuls les écarts sont enregistrés, avec leur motif
 | chaque citation compte au moins trois mots ; le passage cité pour `cout` ou `acces` contient un indice de prix ou d'accès ; une gratuité annoncée est citée | à vérifier |
 | un produit connu du catalogue est nommé par l'accroche ; un numéro de version ne suffit pas | à vérifier : « accroche sans produit » |
 | type `non_confirmee`, `opinion` ou `temoignage` | à vérifier, jamais publié comme un fait |
+| un texte rédigé revendique un essai ou un résultat obtenu par le site (hors attributions) | à vérifier : `essai_non_realise` |
 | capture de moins de trois mots | pas d'appel au modèle ; l'actualité repassera avec une capture complète |
 | chaque champ factuel porte au moins une citation | à vérifier : `champ_sans_citation` |
 | un passage cité compte 300 caractères au plus ; huit mots consécutifs de la capture ne sont pas repris dans un texte rédigé | à vérifier : `citation_trop_longue`, `copie_de_la_source` |
@@ -277,10 +288,12 @@ Un profil est proposé par la chaîne de veille et ajouté après validation par
 | Collecteurs et actualités | construits et testés | P1–P2 |
 | Comptes éditoriaux | table créée, six agents aux noms provisoires | décision des noms avant P4 |
 | Qualification, rédaction, vérification, textes du média | codés, testés sur faux modèle, jamais exécutés avec le vrai modèle | P3 |
+| Sélection par critères, corpus figé, avis humains | codés et testés ; juges de développement seulement, pas le moteur du site | P3 |
 | Publication signée (révision, sources, média) | tables et création codées ; aucune publication réelle, rien n'atteint `publie` | P3–P5 |
 | Fil, profil, page de publication | maquettés | P4 |
-| Publication automatique | conçue | P5 |
-| Comptes spécialisés, mentions externes, veille de profils, incidents | conçus | P6 |
+| Publication automatique, garde-fou contre les doublons entre sources | conçus | P5 |
+| Découvertes, recherche, suivi des informations obsolètes | spécifiés, non construits | P6 |
+| Comptes supplémentaires, mentions externes, veille de profils, incidents | conçus | P6 |
 
 
 ## 13. P3 : exécution, budget et contrôles (2026-10-30)

@@ -6,10 +6,11 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { releasesUrl } from '../src/collect/github-releases.ts';
 import { setPaused } from '../src/control/settings.ts';
 import { depense } from '../src/analysis/budget.ts';
-import { controlerBrouillon, LIBELLE_CONTROLE, moinsDeTroisMots } from '../src/analysis/controles.ts';
+import { controlerBrouillon, diapositivesDe, LIBELLE_CONTROLE, moinsDeTroisMots } from '../src/analysis/controles.ts';
 import { estReprenable, modeleAnthropic, schemaSortie, type Modele, type RequeteModele } from '../src/analysis/modele.ts';
 import { DUREE_BAIL_MS, genererBrouillons, LONGUEUR_MAX_CAPTURE, LotEnCours, MAX_TENTATIVES, MAX_TOKENS } from '../src/analysis/pipeline.ts';
 import { documentUtilisateur, PROMPT_VERSION, SYSTEME_QUALIFICATION } from '../src/analysis/prompts.ts';
+import { consignesActuelles } from '../src/selection/consignes.ts';
 import { MENTION_ILLUSTRATION } from '../src/analysis/publication.ts';
 import { relectureMarkdown } from '../src/analysis/relecture.ts';
 import { valeursDe } from '../src/analysis/valeurs.ts';
@@ -22,12 +23,16 @@ import { runCollect } from '../src/worker/collect.ts';
 import { PROJECT_ROOT } from './helpers/cli.ts';
 import { CLAUDE_CODE, createTestDb, readFixture, routeFetcher, type TestDb } from './helpers/db.ts';
 
+const notes = (changements: Record<string, { note: number; raison: string }> = {}) => ({
+  nouveaute_reelle: { note: 2, raison: 'Une fonction nouvelle.' }, utilite_concrete: { note: 2, raison: 'Usage décrit.' },
+  impact_utilisateurs: { note: 2, raison: 'Concerne notre public.' }, solidite_sources: { note: 2, raison: 'Source d’origine complète.' }, ...changements,
+});
 const CAPTURE = 'Acme Tool 2.0 adds offline mode. It is not available on Windows. Support for Linux is coming soon.';
 const brouillon = (texte: string, passages: string[]): Brouillon => ({
   accroche: { texte: 'Acme Tool 2.0 ajoute un mode hors ligne', passages: ['Acme Tool 2.0 adds offline mode.'] },
   description: { texte, passages }, nouveaute: { texte: 'Un mode hors ligne.', passages: ['adds offline mode'] },
-  ce_que_ca_permet: null, pour_qui: { texte: 'Les utilisateurs.', passages: ['adds offline mode'] }, acces: null, cout: null, limites_connues: null,
-  details: [], attributions: [], diapositives: ['accroche', 'nouveaute'], questions_a_tester: [],
+  ce_que_ca_permet: null, pour_qui: { texte: 'Les utilisateurs.', passages: ['adds offline mode'] }, exemple_usage: null, acces: null, prerequis: null, cout: null, limites_connues: null,
+  details: [], attributions: [], reperes: [{ texte: 'Mode hors ligne', passages: ['adds offline mode'] }], diapositives: ['accroche', 'nouveaute'], questions_a_tester: [],
 });
 const codes = (b: Brouillon) => controlerBrouillon(b, CAPTURE, 'Acme Tool 2.0', '2.0').map((c) => c.code);
 
@@ -40,6 +45,42 @@ describe('contrôles', () => {
   });
   it('nom propre non cité → soutien insuffisant', () => {
     expect(codes(brouillon('Le mode arrive sur Android.', ['adds offline mode']))).toContain('soutien_nom_absent');
+  });
+  it('exemple d’usage et prérequis sont facultatifs : null ne crée aucun écart', () => {
+    expect(codes(brouillon('Mode ajouté.', ['adds offline mode']))).not.toContain('champ_sans_citation');
+  });
+  it('exemple d’usage et prérequis sont contrôlés comme les autres champs', () => {
+    const avec = (changements: Partial<Brouillon>) => controlerBrouillon({ ...brouillon('Mode ajouté.', ['adds offline mode']), ...changements }, CAPTURE, 'Acme Tool 2.0', '2.0');
+    expect(avec({ exemple_usage: { texte: 'Travailler sans réseau en déplacement.', passages: [] } })).toContainEqual({ champ: 'exemple_usage', code: 'champ_sans_citation' });
+    expect(avec({ prerequis: { texte: 'Il faut un compte Datadog.', passages: ['adds offline mode'] } })).toContainEqual({ champ: 'prerequis', code: 'soutien_nom_absent', detail: 'Datadog' });
+    expect(avec({ exemple_usage: { texte: 'Travailler sans réseau en déplacement.', passages: ['adds offline mode'] } }).map((c) => c.champ)).not.toContain('exemple_usage');
+  });
+  it('un exemple d’usage ou un prérequis peut devenir une diapositive, seulement s’il est renseigné', () => {
+    const b = { ...brouillon('Mode ajouté.', ['adds offline mode']), diapositives: ['accroche', 'exemple_usage'] as Brouillon['diapositives'] };
+    expect(codes(b)).toContain('media_non_conforme');
+    const renseigne = { ...b, exemple_usage: { texte: 'Travailler sans réseau.', passages: ['adds offline mode'] } };
+    expect(codes(renseigne)).not.toContain('media_non_conforme');
+    expect(diapositivesDe(renseigne)[1]).toEqual({ champ: 'exemple_usage', libelle: 'Exemple d’usage', texte: 'Travailler sans réseau.' });
+  });
+  it.each(['Nous avons testé ce mode hors ligne.', 'J’ai essayé cet outil.', 'Selon nos tests, le mode fonctionne.', 'Testé par la plateforme hier.'])('un essai que personne n’a fait est signalé : %s', (texte) => {
+    expect(codes(brouillon(texte, ['adds offline mode']))).toContain('essai_non_realise');
+  });
+  it('une proposition d’essai n’est pas un essai revendiqué', () => {
+    expect(codes(brouillon('Vous pouvez tester ce mode hors ligne.', ['adds offline mode']))).not.toContain('essai_non_realise');
+  });
+  it('un repère du visuel est cité, court et sobre, et trois au plus', () => {
+    const repere = (texte: string, passages = ['adds offline mode']) => ({ texte, passages });
+    const avec = (reperes: { texte: string; passages: string[] }[]) => codes({ ...brouillon('Mode ajouté.', ['adds offline mode']), reperes });
+    expect(avec([repere('Mode hors ligne ajouté')])).not.toContain('repere_trop_long');
+    expect(avec([repere('Mode hors ligne ajouté', [])])).toContain('champ_sans_citation');
+    expect(avec([repere('x'.repeat(65))])).toContain('repere_trop_long');
+    expect(avec([repere('Incroyable mode hors ligne')])).toContain('diapositive_sensationnelle');
+    expect(avec([repere('Un'), repere('Deux'), repere('Trois'), repere('Quatre')])).toContain('reperes_trop_nombreux');
+    expect(avec([])).toContain('reperes_absents');
+  });
+  it('une date du jour de Paris n’est pas une contradiction avec une annonce tardive en UTC', () => {
+    const b = { ...brouillon('Publié le 30 octobre 2026.', ['adds offline mode']) };
+    expect(controlerBrouillon(b, CAPTURE, 'Acme Tool 2.0', '2.0', { dateAnnonce: '2026-10-29T23:30:00.000Z' }).filter((c) => c.code === 'sources_contradictoires')).toEqual([]);
   });
   it('citation absente et nombre inventé sont signalés', () => {
     const c = codes(brouillon('Disponible pour 40 équipes.', ['adds online mode']));
@@ -283,16 +324,15 @@ describe('données transmises au modèle', () => {
     const envoye = schemaSortie(Qualification) as { properties: { compte: { anyOf: { enum?: string[] }[] } } };
     expect(envoye.properties.compte.anyOf[0]?.enum).toContain('pyxo');
   });
-  it('qualification : retenue, compte et motif doivent être cohérents ; nature inconnue autorisée', () => {
-    const base = { nature: null, categories: [], produit: null, type_information: 'annonce_officielle' };
-    expect(Qualification.safeParse({ ...base, retenue: true, compte: 'pyxo', motif_rejet: null }).success).toBe(true);
-    expect(Qualification.safeParse({ ...base, retenue: false, compte: null, motif_rejet: 'hors_perimetre' }).success).toBe(true);
-    expect(Qualification.safeParse({ ...base, retenue: false, compte: null, motif_rejet: null }).success).toBe(false);
-    expect(Qualification.safeParse({ ...base, retenue: true, compte: null, motif_rejet: null }).success).toBe(false);
-    expect(Qualification.safeParse({ ...base, retenue: true, compte: 'pyxo', motif_rejet: 'hors_perimetre' }).success).toBe(false);
+  it('qualification : quatre critères notés de 0 à 2, avec leur raison ; nature inconnue autorisée', () => {
+    const base = { criteres: notes(), passages: [], nature: null, categories: [], produit: null, type_information: 'annonce_officielle', compte: null, motif_rejet: null };
+    expect(Qualification.safeParse(base).success).toBe(true);
+    expect(Qualification.safeParse({ ...base, criteres: notes({ impact_utilisateurs: { note: 3, raison: 'x' } }) }).success).toBe(false);
+    expect(Qualification.safeParse({ ...base, criteres: notes({ impact_utilisateurs: { note: 1, raison: '' } }) }).success).toBe(false);
+    expect(Qualification.safeParse({ ...base, retenue: true }).success).toBe(false);
   });
   it('qualification : une catégorie hors de la liste fermée est refusée', () => {
-    const q = { retenue: true, compte: 'pyxo', motif_rejet: null, nature: null, produit: null, type_information: 'annonce_officielle' };
+    const q = { criteres: notes(), passages: [], compte: 'pyxo', motif_rejet: null, nature: null, produit: null, type_information: 'annonce_officielle' };
     expect(Qualification.safeParse({ ...q, categories: ['design'] }).success).toBe(true);
     expect(Qualification.safeParse({ ...q, categories: ['tendance du moment'] }).success).toBe(false);
   });
@@ -310,8 +350,8 @@ function flux(texte: string, stop: string): Response {
   ] as const;
   return new Response(evenements.map(([nom, data]) => `event: ${nom}\ndata: ${JSON.stringify(data)}\n\n`).join(''), { headers: { 'content-type': 'text/event-stream' } });
 }
-const coupsDeFil = (repondre: (corps: { system: string; max_tokens: number; stream?: boolean }) => Response) => {
-  const corps: { system: string; max_tokens: number; stream?: boolean; output_config?: { format?: { type: string } } }[] = [];
+const coupsDeFil = (repondre: (corps: { system: { text: string; cache_control?: unknown }[]; max_tokens: number; stream?: boolean; messages?: { content: string }[] }) => Response) => {
+  const corps: { system: { text: string; cache_control?: unknown }[]; max_tokens: number; stream?: boolean; output_config?: { format?: { type: string } } }[] = [];
   const fetch = async (url: unknown, init?: { body?: unknown }) => {
     if (String(url).includes('count_tokens')) return Response.json({ input_tokens: 12 });
     const recu = JSON.parse(String(init?.body));
@@ -326,7 +366,7 @@ describe('adaptateur Anthropic : vrai SDK, réseau simulé', () => {
   it('24 000 tokens partent en flux, et la réponse est reconstituée', async () => {
     const { corps, modele } = coupsDeFil(() => flux('{"a":1}', 'end_turn'));
     expect(await modele.compter(requete)).toBe(12);
-    expect(await modele.appeler(requete)).toEqual({ texte: '{"a":1}', usage: { input: 10, output: 5 }, stop: 'end_turn' });
+    expect(await modele.appeler(requete)).toEqual({ texte: '{"a":1}', usage: { input: 10, output: 5, cache: 0, cacheEcrit: 0 }, stop: 'end_turn' });
     expect(corps).toHaveLength(1);
     expect(corps[0]).toMatchObject({ stream: true, max_tokens: 24_000, output_config: { format: { type: 'json_schema' } } });
   });
@@ -377,7 +417,7 @@ describe('budget et pipeline, sans réseau', () => {
   afterEach(() => t.cleanup());
 
   const reponse = (texte: string) => ({ texte, usage: { input: 100, output: 100 }, stop: 'end_turn' });
-  const ecarte = JSON.stringify({ retenue: false, motif_rejet: 'hors_perimetre', compte: null, nature: 'nouvelle_fonctionnalite', categories: [], produit: null, type_information: 'annonce_officielle' });
+  const ecarte = JSON.stringify({ criteres: notes({ impact_utilisateurs: { note: 0, raison: 'Hors de notre public.' } }), passages: [], motif_rejet: 'hors_perimetre', compte: null, nature: 'nouvelle_fonctionnalite', categories: [], produit: null, type_information: 'annonce_officielle' });
   const faux = (appeler: Modele['appeler']): Modele & { appels: number } => {
     const m = { appels: 0, compter: async () => 100, appeler: (r: Parameters<Modele['appeler']>[0]) => { m.appels++; return appeler(r); } };
     return m;
@@ -428,13 +468,16 @@ describe('budget et pipeline, sans réseau', () => {
     expect(m2.appels).toBe(3);
   });
 
-  const retenue = JSON.stringify({ retenue: true, motif_rejet: null, compte: 'pyxo', nature: 'amelioration', categories: ['assistant de code'], produit: null, type_information: 'annonce_officielle' });
+  const retenue = { criteres: notes(), motif_rejet: null, compte: 'pyxo', nature: 'amelioration', categories: ['assistant de code'], produit: null, type_information: 'annonce_officielle' };
+  /** Six premiers mots de la capture reçue : un passage réel, retrouvé mot pour mot. */
+  const passageDe = (utilisateur: string) => utilisateur.split('\n\n')[1]!.split(/\s+/).slice(0, 6).join(' ');
+  const qualifiee = (r: RequeteModele, changements: Record<string, unknown> = {}) => reponse(JSON.stringify({ ...retenue, passages: [passageDe(r.utilisateur)], ...changements }));
   /** Rédige un brouillon dont chaque champ cite `passage`, calculé à partir du texte de la capture reçue. L'accroche nomme le produit du catalogue. */
   const redige = (passage: (corps: string) => string, diapositives: string[] = ['accroche', 'nouveaute']) => async (r: RequeteModele) => {
-    if (r.systeme === SYSTEME_QUALIFICATION) return reponse(retenue);
+    if (r.systeme === SYSTEME_QUALIFICATION) return qualifiee(r);
     const produit = /Produit \(catalogue, ne pas citer\) : (.*)\n/.exec(r.utilisateur)![1]!;
     const cite = { texte: 'Nouvelle version, selon la source.', passages: [passage(r.utilisateur.split('\n\n')[1]!)] };
-    return reponse(JSON.stringify({ accroche: { ...cite, texte: `${produit} : nouvelle version, selon la source.` }, description: cite, nouveaute: cite, ce_que_ca_permet: cite, pour_qui: null, acces: null, cout: null, limites_connues: null, details: [], attributions: [], diapositives, questions_a_tester: [] }));
+    return reponse(JSON.stringify({ accroche: { ...cite, texte: `${produit} : nouvelle version, selon la source.` }, description: cite, nouveaute: cite, ce_que_ca_permet: cite, pour_qui: null, exemple_usage: null, acces: null, prerequis: null, cout: null, limites_connues: null, details: [], attributions: [], reperes: [cite], diapositives, questions_a_tester: [] }));
   };
   const debut = (corps: string) => corps.split(/\s+/).slice(0, 6).join(' ');
   const brouillons = async () =>
@@ -465,20 +508,146 @@ describe('budget et pipeline, sans réseau', () => {
   });
 
   it('rédaction de bout en bout : citation fausse, brouillon gardé à vérifier avec son écart', async () => {
-    expect(await lancer(faux(redige(() => 'ce passage inventé est absent de la capture')))).toMatchObject({ statut: 'terminee', a_verifier: 2, controlees: 0 });
+    expect(await lancer(faux(async (r) => (r.systeme === SYSTEME_QUALIFICATION ? qualifiee(r) : redige(() => 'ce passage inventé est absent de la capture')(r))))).toMatchObject({ statut: 'terminee', a_verifier: 2, controlees: 0 });
     for (const ligne of await brouillons()) {
       expect(ligne.status).toBe('a_verifier');
       expect(JSON.parse(String(ligne.checks)).map((c: { code: string }) => c.code)).toContain('citation_introuvable');
     }
   });
 
-  it('rédaction de bout en bout : un type non confirmé reste à vérifier, même sans autre écart', async () => {
-    const nonConfirmee = JSON.stringify({ ...JSON.parse(retenue), type_information: 'non_confirmee' });
-    const m = faux(async (r) => (r.systeme === SYSTEME_QUALIFICATION ? reponse(nonConfirmee) : redige(debut)(r)));
-    expect(await lancer(m)).toMatchObject({ statut: 'terminee', a_verifier: 2, controlees: 0 });
-    for (const ligne of await brouillons()) {
-      expect(JSON.parse(String(ligne.checks))).toEqual([{ champ: 'type_information', code: 'type_a_relire', detail: 'non_confirmee' }]);
-    }
+  it('un type non confirmé part en approfondissement : aucune rédaction, rien n’avance vers la publication', async () => {
+    const m = faux(async (r) => (r.systeme === SYSTEME_QUALIFICATION ? qualifiee(r, { type_information: 'non_confirmee' }) : redige(debut)(r)));
+    expect(await lancer(m)).toMatchObject({ statut: 'terminee', a_approfondir: 2, a_verifier: 0, controlees: 0 });
+    expect(m.appels).toBe(2);
+    expect(await nombre('post')).toBe(0);
+    const decisions = (await t.database.client.execute(`select decision, motif, origine, juge, consignes_version from selection_decision`)).rows;
+    expect(decisions).toHaveLength(2);
+    expect(decisions[0]).toMatchObject({ decision: 'approfondir', motif: 'information_non_confirmee', origine: 'modele', juge: 'claude-opus-5-5', consignes_version: consignesActuelles().version });
+  });
+
+  it('un passage de sélection introuvable bloque le sujet, même avec les meilleures notes', async () => {
+    const m = faux(async (r) => (r.systeme === SYSTEME_QUALIFICATION ? qualifiee(r, { passages: ['ce passage inventé est absent de la capture'] }) : redige(debut)(r)));
+    expect(await lancer(m)).toMatchObject({ statut: 'terminee', a_approfondir: 2, controlees: 0 });
+    expect((await t.database.client.execute(`select distinct status, rejection_reason from post_draft`)).rows[0]).toMatchObject({ status: 'a_approfondir', rejection_reason: 'passage_introuvable' });
+  });
+
+  it('des notes basses écartent le sujet sans rédaction, avec ses critères conservés', async () => {
+    const m = faux(async (r) => (r.systeme === SYSTEME_QUALIFICATION ? reponse(ecarte) : redige(debut)(r)));
+    expect(await lancer(m)).toMatchObject({ statut: 'terminee', ecartees: 2 });
+    expect(m.appels).toBe(2);
+    const ligne = (await t.database.client.execute(`select decision, motif, criteres from selection_decision limit 1`)).rows[0]!;
+    expect(ligne).toMatchObject({ decision: 'ecarter', motif: 'hors_perimetre' });
+    expect(JSON.parse(String(ligne.criteres)).impact_utilisateurs.note).toBe(0);
+  });
+
+  it('un doute exprimé par le modèle l’emporte sur ses notes : pas de rédaction', async () => {
+    const m = faux(async (r) => (r.systeme === SYSTEME_QUALIFICATION ? qualifiee(r, { motif_rejet: 'non_confirmee' }) : redige(debut)(r)));
+    expect(await lancer(m)).toMatchObject({ statut: 'terminee', a_approfondir: 2, controlees: 0 });
+    expect(m.appels).toBe(2);
+    expect((await t.database.client.execute(`select distinct motif from selection_decision`)).rows).toEqual([expect.objectContaining({ motif: 'non_confirmee' })]);
+  });
+
+  it('le modèle reçoit la source et la date, comme les juges ; elles restent hors des passages citables', async () => {
+    const documents: string[] = [];
+    await lancer(faux(async (r) => { documents.push(r.utilisateur); return reponse(ecarte); }));
+    expect(documents[0]).toContain('Source (registre, ne pas citer) : Claude Code — releases GitHub officielles');
+    expect(documents[0]).toMatch(/Annoncé le \(ne pas citer\) : \d{4}-\d{2}-\d{2}T/);
+  });
+
+  it('un passage invérifié n’est jamais conservé comme citation', async () => {
+    const m = faux(async (r) => (r.systeme === SYSTEME_QUALIFICATION ? qualifiee(r, { passages: ['ce passage inventé est absent de la capture'] }) : redige(debut)(r)));
+    await lancer(m);
+    expect((await t.database.client.execute(`select distinct passages from selection_decision`)).rows).toEqual([expect.objectContaining({ passages: '[]' })]);
+  });
+
+  it('une qualification reprise repasse par les garde-fous, sans repayer ni rédiger', async () => {
+    await lancer(faux(async (r) => (r.systeme === SYSTEME_QUALIFICATION ? qualifiee(r) : Promise.reject(new Error('panne')))));
+    expect((await t.database.client.execute(`select status from post_draft`)).rows[0]).toMatchObject({ status: 'qualifiee' });
+    const contenu = String((await t.database.client.execute(`select content from post_draft limit 1`)).rows[0]!.content);
+    const durcie = contenu.replace('annonce_officielle', 'non_confirmee');
+    await t.database.client.execute({ sql: `update post_draft set content = ?`, args: [durcie] });
+    const m = faux(redige(debut));
+    expect(await lancer(m, 10_000_000, 10_000_000, { maxItems: 1 })).toMatchObject({ statut: 'terminee', a_approfondir: 1, qualifications_reprises: 1 });
+    expect(m.appels).toBe(0);
+    expect((await t.database.client.execute(`select decision, motif from selection_decision where remplacee_le is null limit 1`)).rows[0]).toMatchObject({ decision: 'approfondir', motif: 'information_non_confirmee' });
+  });
+
+  it('une requalification remplace la décision sans l’effacer : le registre suit le brouillon', async () => {
+    await lancer(faux(async (r) => (r.systeme === SYSTEME_QUALIFICATION ? qualifiee(r) : Promise.reject(new Error('panne')))), 10_000_000, 10_000_000, { maxItems: 1 });
+    await t.database.client.execute(`update post_draft set prompt_version = 'ancien'`);
+    await t.database.client.execute(`update selection_decision set prompt_version = 'ancien'`);
+    await lancer(faux(async () => reponse(ecarte)), 10_000_000, 10_000_000, { maxItems: 1 });
+    const lignes = (await t.database.client.execute(`select decision, remplacee_le, criteres from selection_decision order by id`)).rows;
+    expect(lignes).toHaveLength(2);
+    expect(lignes[0]).toMatchObject({ decision: 'publier' });
+    expect(lignes[0]!.remplacee_le).not.toBeNull();
+    expect(lignes[1]).toMatchObject({ decision: 'ecarter', remplacee_le: null });
+    expect(JSON.parse(String(lignes[1]!.criteres)).impact_utilisateurs.note).toBe(0);
+  });
+
+  it('une reprise qui change la décision garde l’ancienne ligne, vue peut-être par un humain', async () => {
+    const client = t.database.client;
+    await lancer(faux(async (r) => (r.systeme === SYSTEME_QUALIFICATION ? qualifiee(r) : Promise.reject(new Error('panne')))), 10_000_000, 10_000_000, { maxItems: 1 });
+    const contenu = String((await client.execute(`select content from post_draft limit 1`)).rows[0]!.content);
+    await client.execute({ sql: `update post_draft set content = ?`, args: [contenu.replace('annonce_officielle', 'non_confirmee')] });
+    await lancer(faux(redige(debut)), 10_000_000, 10_000_000, { maxItems: 1 });
+    const lignes = (await client.execute(`select decision, remplacee_le from selection_decision order by id`)).rows;
+    expect(lignes.map((l) => l.decision)).toEqual(['publier', 'approfondir']);
+    expect(lignes[0]!.remplacee_le).not.toBeNull();
+    expect(lignes[1]!.remplacee_le).toBeNull();
+  });
+
+  it('modèle A, puis B, puis A : il reste toujours une décision active', async () => {
+    const client = t.database.client;
+    const nom = (nomModele: string) => genererBrouillons({ database: t.database, modele: faux(async (r) => (r.systeme === SYSTEME_QUALIFICATION ? qualifiee(r) : Promise.reject(new Error('panne')))), nomModele, maxItems: 1, capRunMicroUsd: 10_000_000, capTotalMicroUsd: 10_000_000, attente: async () => {} });
+    await nom('claude-opus-5-5');
+    await nom('claude-sonnet-5-5');
+    await nom('claude-opus-5-5');
+    expect((await client.execute(`select juge from selection_decision where remplacee_le is null`)).rows).toEqual([expect.objectContaining({ juge: 'claude-opus-5-5' })]);
+    expect((await client.execute(`select count(*) as n from selection_decision`)).rows[0]!.n).toBe(3);
+  });
+
+  it('une requalification ratée laisse le sujet à approfondir, et la capture suivante le fait repasser', async () => {
+    const client = t.database.client;
+    const nouvelleCapture = async (suffixe: string) => {
+      const ligne = (await client.execute(`select document_id, seq, content, content_format, title, captured_at, run_id from document_snapshot where id = (select max(snapshot_id) from post_draft)`)).rows[0]!;
+      await client.execute({
+        sql: `insert into document_snapshot (document_id, seq, content_hash, title, content, content_format, captured_at, run_id) values (?, ?, ?, ?, ?, ?, ?, ?)`,
+        args: [Number(ligne.document_id), Number(ligne.seq) + 1, suffixe, String(ligne.title), `${String(ligne.content)} ${suffixe}`, String(ligne.content_format), String(ligne.captured_at), String(ligne.run_id)],
+      });
+    };
+    await lancer(faux(async (r) => (r.systeme === SYSTEME_QUALIFICATION ? qualifiee(r, { type_information: 'non_confirmee' }) : redige(debut)(r))), 10_000_000, 10_000_000, { maxItems: 1 });
+    await nouvelleCapture('suite une');
+    await lancer(faux(async () => reponse('{pas du json')), 10_000_000, 10_000_000, { maxItems: 1 });
+    expect((await client.execute(`select status, rejection_reason from post_draft`)).rows[0]).toMatchObject({ status: 'a_approfondir', rejection_reason: 'sortie_invalide' });
+    expect((await client.execute(`select count(*) as n from selection_decision where remplacee_le is null`)).rows[0]!.n).toBe(0);
+    await nouvelleCapture('suite deux');
+    const m = faux(redige(debut));
+    expect(await lancer(m, 10_000_000, 10_000_000, { maxItems: 1 })).toMatchObject({ statut: 'terminee', controlees: 1 });
+  });
+
+  it('un sujet à approfondir repasse quand une nouvelle capture arrive, pas avant', async () => {
+    const client = t.database.client;
+    await lancer(faux(async (r) => (r.systeme === SYSTEME_QUALIFICATION ? qualifiee(r, { type_information: 'non_confirmee' }) : redige(debut)(r))), 10_000_000, 10_000_000, { maxItems: 5 });
+    const sansCapture = faux(redige(debut));
+    await lancer(sansCapture, 10_000_000, 10_000_000, { maxItems: 5 });
+    expect(sansCapture.appels).toBe(0);
+    const ligne = (await client.execute(`select document_id, seq, content, content_format, title, captured_at, run_id from document_snapshot where id = (select snapshot_id from post_draft limit 1)`)).rows[0]!;
+    await client.execute({
+      sql: `insert into document_snapshot (document_id, seq, content_hash, title, content, content_format, captured_at, run_id) values (?, ?, 'autre', ?, ?, ?, ?, ?)`,
+      args: [Number(ligne.document_id), Number(ligne.seq) + 1, String(ligne.title), `${String(ligne.content)} Une suite complète et détaillée.`, String(ligne.content_format), String(ligne.captured_at), String(ligne.run_id)],
+    });
+    const reprise = faux(redige(debut));
+    expect(await lancer(reprise, 10_000_000, 10_000_000, { maxItems: 5 })).toMatchObject({ statut: 'terminee', controlees: 1 });
+    expect(reprise.appels).toBe(2);
+  });
+
+  it('une entrée ancienne à la première vue est écartée par le code, sans appel', async () => {
+    await t.database.client.execute(`update news_item set announced_at = '2020-01-01T00:00:00.000Z'`);
+    const m = faux(redige(debut));
+    expect(await lancer(m, 10_000_000, 10_000_000, { ageMaxJours: 14 })).toMatchObject({ statut: 'terminee', anciennes: 2 });
+    expect(m.appels).toBe(0);
+    expect((await t.database.client.execute(`select distinct origine, juge, decision, motif from selection_decision`)).rows).toEqual([expect.objectContaining({ origine: 'regles', juge: 'code', decision: 'ecarter', motif: 'ancienne_a_la_detection' })]);
   });
 
   it('une erreur ne laisse aucun secret dans les traces', async () => {
@@ -493,7 +662,7 @@ describe('budget et pipeline, sans réseau', () => {
 
   const nombre = async (table: string) => Number((await t.database.client.execute(`select count(*) as n from ${table}`)).rows[0]!.n);
   const panneRedaction = (r: RequeteModele) => {
-    if (r.systeme === SYSTEME_QUALIFICATION) return Promise.resolve(reponse(retenue));
+    if (r.systeme === SYSTEME_QUALIFICATION) return Promise.resolve(qualifiee(r));
     return Promise.reject(new Error('panne'));
   };
 
@@ -526,6 +695,10 @@ describe('budget et pipeline, sans réseau', () => {
     await client.execute(`update post_draft set
       news_item_id = ${ancienne},
       snapshot_id = (select c.id from document_snapshot c join news_item_document nd on nd.document_id = c.document_id where nd.news_item_id = ${ancienne})`);
+    // La qualification reprise repasse par les garde-fous : son passage doit venir de la capture de cette actualité.
+    const capture = (await client.execute(`select c.content, c.content_format from document_snapshot c join post_draft d on d.snapshot_id = c.id`)).rows[0]!;
+    const passage = toPlainText(String(capture.content), String(capture.content_format)).split(/\s+/).slice(0, 5).join(' ');
+    await client.execute({ sql: `update post_draft set content = ?`, args: [JSON.stringify({ qualification: { ...retenue, passages: [passage] } })] });
     const m = faux(redige(debut));
     expect(await lancer(m, 10_000_000, 10_000_000, { maxItems: 1 })).toMatchObject({ statut: 'terminee', qualifications_reprises: 1 });
     expect(m.appels).toBe(1);
@@ -560,7 +733,7 @@ describe('budget et pipeline, sans réseau', () => {
     await client.execute(`update document_snapshot set content = 'Fixes shipped for everyone on October 29 across all regions today.'`);
     await client.execute(`update news_item set announced_at = '2026-10-30T10:00:00.000Z'`);
     const m = faux(async (r) => {
-      if (r.systeme === SYSTEME_QUALIFICATION) return reponse(retenue);
+      if (r.systeme === SYSTEME_QUALIFICATION) return qualifiee(r);
       const brouillonValide = JSON.parse((await redige(debut)(r)).texte) as Brouillon;
       return reponse(JSON.stringify({ ...brouillonValide, description: { ...brouillonValide.description, texte: 'Publié le 30 octobre, selon la source.' } }));
     });
@@ -571,15 +744,15 @@ describe('budget et pipeline, sans réseau', () => {
   });
 
   it('rédaction tronquée avec le vrai SDK : statut définitif, sans blocage du lot', async () => {
-    const qualification = JSON.stringify({ retenue: true, motif_rejet: null, compte: 'pyxo', nature: null, categories: [], produit: null, type_information: 'annonce_officielle' });
-    const { corps, modele } = coupsDeFil((c) => (c.system === SYSTEME_QUALIFICATION ? flux(qualification, 'end_turn') : flux('{', 'max_tokens')));
+    const qualification = (c: { messages?: { content: string }[] }) => JSON.stringify({ ...retenue, nature: null, categories: [], passages: [passageDe(c.messages![0]!.content)] });
+    const { corps, modele } = coupsDeFil((c) => (c.system[0]!.text === SYSTEME_QUALIFICATION ? flux(qualification(c), 'end_turn') : flux('{', 'max_tokens')));
     expect(await genererBrouillons({ database: t.database, modele, nomModele: 'claude-sonnet-5-5', maxItems: 2, capRunMicroUsd: 10_000_000, capTotalMicroUsd: 10_000_000 })).toMatchObject({ statut: 'terminee', tronquees: 2 });
-    expect(corps.filter((c) => c.system !== SYSTEME_QUALIFICATION).map((c) => c.max_tokens)).toEqual([MAX_TOKENS.redaction, MAX_TOKENS.redaction * 2, MAX_TOKENS.redaction, MAX_TOKENS.redaction * 2]);
+    expect(corps.filter((c) => c.system[0]!.text !== SYSTEME_QUALIFICATION).map((c) => c.max_tokens)).toEqual([MAX_TOKENS.redaction, MAX_TOKENS.redaction * 2, MAX_TOKENS.redaction, MAX_TOKENS.redaction * 2]);
     expect((await t.database.client.execute(`select distinct status from post_draft`)).rows.map((l) => l.status)).toEqual(['sortie_tronquee']);
   });
 
   it('rédaction tronquée sans marge pour le second essai : résultat définitif, jamais repayé', async () => {
-    const m = faux(async (r) => (r.systeme === SYSTEME_QUALIFICATION ? reponse(retenue) : { ...reponse('{'), stop: 'max_tokens' }));
+    const m = faux(async (r) => (r.systeme === SYSTEME_QUALIFICATION ? qualifiee(r) : { ...reponse('{'), stop: 'max_tokens' }));
     expect(await lancer(m, 400_000, 10_000_000, { maxItems: 1 })).toMatchObject({ statut: 'terminee', tronquees: 1 });
     expect(m.appels).toBe(2);
     expect((await t.database.client.execute(`select status from post_draft`)).rows.map((l) => l.status)).toEqual(['sortie_tronquee']);
@@ -626,9 +799,9 @@ describe('budget et pipeline, sans réseau', () => {
 
   it('un lot qui a perdu son bail s’arrête sans écrire ni écraser l’état de l’exécution', async () => {
     const client = t.database.client;
-    const m = faux(async () => {
+    const m = faux(async (r) => {
       await client.execute(`update llm_run set status = 'interrompue', reason = 'bail expiré' where status = 'en_cours'`);
-      return reponse(retenue);
+      return qualifiee(r);
     });
     expect((await lancer(m)).statut).toBe('interrompue');
     expect(m.appels).toBe(1);
@@ -646,12 +819,12 @@ describe('budget et pipeline, sans réseau', () => {
 
   it('un résultat définitif n’est jamais écrasé', async () => {
     const client = t.database.client;
-    const m = faux(async () => {
+    const m = faux(async (r) => {
       await client.execute(`insert into post_draft (news_item_id, run_id, status, snapshot_id, model, prompt_version, created_at)
         select nd.news_item_id, (select id from llm_run), 'controle_automatique', c.id, 'autre', 'autre', 'x'
         from news_item_document nd join news_item n on n.id = nd.news_item_id join document_snapshot c on c.document_id = nd.document_id
         order by coalesce(n.announced_at, n.first_seen_at) desc, n.id desc limit 1`);
-      return reponse(retenue);
+      return qualifiee(r);
     });
     expect((await lancer(m)).statut).toBe('echec');
     expect(m.appels).toBe(1);
@@ -698,7 +871,7 @@ describe('budget et pipeline, sans réseau', () => {
     expect(texte).toContain('**Rejeté**');
     expect(texte).toContain('media_non_conforme');
     expect(texte).toContain('1 qualifiée(s) en attente de rédaction');
-    expect(texte).toMatch(/- qualifiee : /);
+    expect(texte).toMatch(/- qualifiee · notes 2-2-2-2 : /);
     expect(texte).toContain('le reste est une réservation sans réponse');
   });
 
@@ -712,7 +885,7 @@ describe('budget et pipeline, sans réseau', () => {
     expect(texte).toContain('2 actualité(s) ; 1 à vérifier, 0 sans écart détecté, 0 rejetée(s), 1 écartée(s)');
     expect(texte).toContain('## Claude Code : nouvelle version, selon la source.');
     expect(texte).toContain('citation_introuvable');
-    expect(texte.split('> ce passage inventé est absent de la capture')).toHaveLength(5);
+    expect(texte.split('> ce passage inventé est absent de la capture')).toHaveLength(6);
     expect(texte).toContain('- **Coût** : Non renseigné');
     expect(texte).toContain('## Actualités sans brouillon');
     expect(texte).toContain('- ecartee (hors_perimetre)');

@@ -345,6 +345,123 @@ export const postSources = sqliteTable(
   (t) => [uniqueIndex('post_source_revision_snapshot_uq').on(t.revisionId, t.snapshotId)],
 );
 
+/** Requête de la sonde de détection : ce que la source a répondu, sans rien écrire dans le catalogue. */
+export const sondeRequetes = sqliteTable(
+  'sonde_requete',
+  {
+    id: integer('id').primaryKey({ autoIncrement: true }),
+    sourceId: text('source_id').notNull(),
+    startedAt: text('started_at').notNull(),
+    durationMs: integer('duration_ms').notNull(),
+    /** null si aucune réponse n'est arrivée. */
+    httpStatus: integer('http_status'),
+    bytes: integer('bytes').notNull().default(0),
+    conditional: integer('conditional', { mode: 'boolean' }).notNull(),
+    hasEtag: integer('has_etag', { mode: 'boolean' }).notNull().default(false),
+    hasLastModified: integer('has_last_modified', { mode: 'boolean' }).notNull().default(false),
+    cacheControl: text('cache_control'),
+    /** Âge annoncé par le cache devant la source, en secondes ; null si absent. */
+    ageSeconds: integer('age_seconds'),
+    rateRemaining: integer('rate_remaining'),
+    /** Adresse du hub WebSub annoncé par le flux ; null si aucun. */
+    websubHub: text('websub_hub'),
+    newEntries: integer('new_entries').notNull().default(0),
+    errorKind: text('error_kind'),
+  },
+  (t) => [index('sonde_requete_source_idx').on(t.sourceId, t.startedAt)],
+);
+
+/** Entrée apparue pendant une sonde : le premier passage sert de référence, il ne compte jamais comme une détection. */
+export const detectionsObservees = sqliteTable(
+  'detection_observee',
+  {
+    id: integer('id').primaryKey({ autoIncrement: true }),
+    sourceId: text('source_id').notNull(),
+    externalId: text('external_id').notNull(),
+    title: text('title').notNull(),
+    announcedAt: text('announced_at'),
+    /** seconde | minute | arrondie | jour | inconnue : en dessous de la minute, le délai n'est pas mesurable. */
+    precision: text('precision').notNull(),
+    firstSeenAt: text('first_seen_at').notNull(),
+    /** Fin de la vérification précédente : l'entrée n'était pas encore visible à ce moment-là. */
+    previousCheckAt: text('previous_check_at').notNull(),
+  },
+  (t) => [uniqueIndex('detection_observee_uq').on(t.sourceId, t.externalId)],
+);
+
+/** Actualités figées pour la sélection : `developpement` sert à régler les consignes, `evaluation` ne sert jamais à les écrire. */
+export const selectionCorpus = sqliteTable(
+  'selection_corpus',
+  {
+    newsItemId: integer('news_item_id').primaryKey().references(() => newsItems.id),
+    jeu: text('jeu').notNull(),
+    strate: text('strate').notNull(),
+    /** Capture figée avec le sujet : deux versions de consignes sont comparées sur le même texte. */
+    snapshotId: integer('snapshot_id').references(() => documentSnapshots.id),
+    graine: text('graine').notNull(),
+    createdAt: text('created_at').notNull(),
+  },
+  (t) => [check('selection_corpus_jeu_ck', sql`jeu in ('developpement', 'evaluation')`)],
+);
+
+/** Décision de sélection, avec ses critères : c'est elle qui explique pourquoi un sujet a été retenu ou non. */
+export const selectionDecisions = sqliteTable(
+  'selection_decision',
+  {
+    id: integer('id').primaryKey({ autoIncrement: true }),
+    newsItemId: integer('news_item_id').notNull().references(() => newsItems.id),
+    /** regles (code, sans appel) | juge_developpement (Claude Code pendant le développement, pas le moteur) | modele (moteur du site) */
+    origine: text('origine').notNull(),
+    juge: text('juge').notNull(),
+    consignesVersion: text('consignes_version').notNull(),
+    /** Vide pour un juge de développement. */
+    promptVersion: text('prompt_version').notNull().default(''),
+    /** publier | ecarter | approfondir */
+    decision: text('decision').notNull(),
+    /** Notes et raisons par critère ; null pour une décision du code. */
+    criteres: text('criteres', { mode: 'json' }).$type<Record<string, unknown>>(),
+    motif: text('motif').notNull(),
+    /** Passages de la capture, contrôlés mot pour mot. */
+    passages: text('passages', { mode: 'json' }).notNull().$type<string[]>(),
+    snapshotId: integer('snapshot_id').references(() => documentSnapshots.id),
+    /** Une requalification garde l'ancienne ligne, que l'humain a pu voir, et la marque remplacée. */
+    remplaceeLe: text('remplacee_le'),
+    createdAt: text('created_at').notNull(),
+  },
+  (t) => [
+    // Une seule décision active par clé ; les lignes remplacées restent, autant qu'il y a eu de requalifications.
+    uniqueIndex('selection_decision_uq').on(t.newsItemId, t.juge, t.consignesVersion, t.snapshotId, t.promptVersion).where(sql`remplacee_le is null`),
+    check('selection_decision_origine_ck', sql`origine in ('regles', 'juge_developpement', 'modele')`),
+    check('selection_decision_decision_ck', sql`decision in ('publier', 'ecarter', 'approfondir')`),
+  ],
+);
+
+/**
+ * Avis humain sur un sujet : une confirmation ou une correction, jamais une règle en soi. `portee` dit ce que l'humain en
+ * fait ; seule une nouvelle version des consignes, relue et datée, transforme des avis en règle, en les citant.
+ */
+export const selectionAvis = sqliteTable(
+  'selection_avis',
+  {
+    id: integer('id').primaryKey({ autoIncrement: true }),
+    newsItemId: integer('news_item_id').notNull().references(() => newsItems.id),
+    /** Décision montrée à l'humain. */
+    decisionId: integer('decision_id').references(() => selectionDecisions.id),
+    /** Déclaré, jamais déduit : l'humain n'a vu aucune décision du système sur ce sujet. */
+    aveugle: integer('aveugle', { mode: 'boolean' }).notNull().default(false),
+    decision: text('decision').notNull(),
+    motif: text('motif'),
+    /** cas_particulier | a_confirmer | regle_proposee */
+    portee: text('portee').notNull().default('cas_particulier'),
+    createdAt: text('created_at').notNull(),
+  },
+  (t) => [
+    index('selection_avis_news_item_idx').on(t.newsItemId),
+    check('selection_avis_decision_ck', sql`decision in ('publier', 'ecarter', 'approfondir')`),
+    check('selection_avis_portee_ck', sql`portee in ('cas_particulier', 'a_confirmer', 'regle_proposee')`),
+  ],
+);
+
 /** Média d'une publication : origine, droits et mention. Un média généré porte toujours la mention d'illustration. */
 export const mediaAssets = sqliteTable(
   'media_asset',
@@ -364,5 +481,49 @@ export const mediaAssets = sqliteTable(
     check('media_asset_origin_ck', sql`origin in ('generated', 'platform_recording', 'external_embed', 'licensed_reuse')`),
     // `is`, pas `=` : une valeur NULL ferait passer un CHECK en SQLite.
     check('media_asset_notice_ck', sql`origin <> 'generated' or notice is 'Illustration — ne prouve pas le fonctionnement'`),
+  ],
+);
+
+/**
+ * Sortie d'un modèle pendant une comparaison. Elle reste ici : elle ne devient ni un brouillon ni une publication.
+ * `origine` sépare les appels réels des essais simulés, qui ne valident jamais un modèle.
+ */
+export const comparaisonSorties = sqliteTable(
+  'comparaison_sortie',
+  {
+    id: integer('id').primaryKey({ autoIncrement: true }),
+    runId: text('run_id').notNull().references(() => llmRuns.id),
+    /** reel | simulation */
+    origine: text('origine').notNull(),
+    bras: text('bras').notNull(),
+    modele: text('modele').notNull(),
+    reglage: text('reglage').notNull(),
+    newsItemId: integer('news_item_id').notNull().references(() => newsItems.id),
+    snapshotId: integer('snapshot_id').notNull().references(() => documentSnapshots.id),
+    /** qualification | redaction */
+    etape: text('etape').notNull(),
+    promptVersion: text('prompt_version').notNull(),
+    /** valide | json_invalide | schema_invalide | tronquee | refus | erreur */
+    statut: text('statut').notNull(),
+    tentatives: integer('tentatives').notNull(),
+    /** Texte tel que le modèle l'a rendu, pour relire une sortie refusée par le schéma. */
+    brut: text('brut'),
+    contenu: text('contenu', { mode: 'json' }).$type<Record<string, unknown>>(),
+    controles: text('controles', { mode: 'json' }).$type<{ champ: string; code: string; detail?: string }[]>(),
+    decision: text('decision'),
+    motif: text('motif'),
+    dureeMs: integer('duree_ms'),
+    tokensEntree: integer('tokens_entree'),
+    tokensCache: integer('tokens_cache'),
+    tokensSortie: integer('tokens_sortie'),
+    tokensRaisonnement: integer('tokens_raisonnement'),
+    /** Coût calculé des tentatives ; une tentative sans réponse garde sa réservation. */
+    coutMicroUsd: integer('cout_micro_usd').notNull(),
+    createdAt: text('created_at').notNull(),
+  },
+  (t) => [
+    uniqueIndex('comparaison_sortie_uq').on(t.origine, t.bras, t.newsItemId, t.etape, t.snapshotId, t.promptVersion),
+    check('comparaison_sortie_origine_ck', sql`origine in ('reel', 'simulation')`),
+    check('comparaison_sortie_etape_ck', sql`etape in ('qualification', 'redaction')`),
   ],
 );

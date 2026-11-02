@@ -1,0 +1,48 @@
+{
+ "accord": {
+  "s1 developpement": {
+   "sujets": 24,
+   "unanimes": 21
+  },
+  "s2 developpement": {
+   "sujets": 24,
+   "unanimes": 20
+  },
+  "s2 evaluation": {
+   "sujets": 36,
+   "unanimes": 28
+  }
+ },
+ "decisions": {
+  "s1 claude-code:opus": {
+   "ecarter": 10,
+   "publier": 8,
+   "approfondir": 6
+  },
+  "s1 claude-code:sonnet": {
+   "ecarter": 9,
+   "publier": 8,
+   "approfondir": 7
+  },
+  "s1 claude-code:haiku": {
+   "ecarter": 12,
+   "publier": 8,
+   "approfondir": 4
+  },
+  "s2 claude-code:opus": {
+   "publier": 19,
+   "ecarter": 24,
+   "approfondir": 17
+  },
+  "s2 claude-code:sonnet": {
+   "publier": 21,
+   "ecarter": 28,
+   "approfondir": 11
+  },
+  "s2 claude-code:haiku": {
+   "ecarter": 23,
+   "publier": 19,
+   "approfondir": 18
+  }
+ }
+}

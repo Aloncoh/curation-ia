@@ -101,3 +101,41 @@
 - Relecture ciblée des derniers correctifs : 2 défauts importants et 9 mineurs. Corrigés : battement de bail qui perdait une écriture après un verrou, balises encore possibles dans le bloc de données, surcharge en plein flux, marge de budget sur une réponse tronquée, décimales de prix, écritures d'une même version, faux positifs sur les pourcentages, la réserve et les formats de fichier, tests renforcés. Gardé volontairement : un refus 400 arrête le lot.
 - Bilan : 346 tests au vert, types OK, 12 mutations de plus toutes détectées (86 au total), chaîne rejouée sur une copie de la base. Ces dernières corrections n'ont pas eu de nouvelle relecture indépendante.
 - Essai de la chaîne sur une copie de la base avec un faux modèle : 327 actualités traitées, 66 laissées de côté, 0 exécution restée en cours ([relevé](communication/linkedin/05-ecosysteme-creatif/preuves/brut/essai-chaine-faux-modele-2026-10-31.txt)). Texte artificiel : cela ne dit rien de la qualité. Aucun appel réel, aucune dépense.
+
+## 2026-11-01 — Comparaison de Haiku et DeepSeek Flash : prête, non lancée
+
+- Demande : comparer les deux modèles sur un même lot réel, 1 $ au plus. **Aucun appel réel fait** : ni clé Anthropic, ni clé DeepSeek, ni compte DeepSeek.
+- Vérifié sur les pages officielles : `claude-haiku-5-5` (0,10 / 0,50 $, cache 0,01 $), `deepseek-flash` (0,15 / 0,60 $ en heures creuses, double en heures pleines, cache 0,003 $), API Responses de DeepSeek. Non établi : schéma imposé par DeepSeek, raisonnement compté dans `output_tokens`.
+- Construit : `src/comparaison/`, `npm run comparaison`, adaptateur DeepSeek, table `comparaison_sortie` (migration 0008, appliquée après sauvegarde), cache des consignes pour Haiku, tarifs à heures pleines, masquage des clés `sk-`, `.env.example`. ADR 0009, règle de choix fixée avant tout résultat.
+- Lot : 24 sujets du jeu de développement, 21 analysés, 42 appels par modèle. Coût estimé sans cache au tarif le plus haut : 0,02 $ pour Haiku, 0,05 $ pour Flash.
+- Tests sur simulation seulement, marqués comme tels : 544 au vert, types OK, 13 mutations détectées sur 13 après correction de deux tests trop faibles. Ces tests ne valident aucun modèle.
+- Saisie guidée `npm run cles` : 557 tests au vert ; masquage vérifié dans un vrai pseudo-terminal avec des clés factices, aucune affichée, fichier en 600. Accord de l'utilisateur pour l'envoi d'annonces publiques à DeepSeek. Crédits Max vérifiés : liaison sur claude.ai, sans carte, 7 jours sur le plan, requêtes arrêtées à épuisement.
+
+## 2026-11-01 — Harmonisation avec l'expérience cible (P3 toujours en cours)
+
+- Avancement vérifié : `post_draft`, `post`, `llm_run`, `llm_call` et `selection_avis` vides, collection `avis` vide, pas de `.env.local` ; P3 n'est pas terminé.
+- Documents : SPEC (§2, §3.1, §3.5, §7.3 ter, §7.15, §7.16, §10, §11, six comptes, médias de la V1), ROADMAP (P3 à P6, P9, P12), docs/agents-editoriaux.md, docs/delais.md, docs/budget-modeles.md, docs/sources.md, COMPRENDRE_LE_PROJET.md §16. ADR 0008 proposée, complément de l'ADR 0005.
+- Moteur, sans appel : `exemple_usage`, `prerequis`, deux catégories, contrôle `essai_non_realise`, prompt `p3-9` ; délai de bout en bout dans `npm run delais`. Essais réels de ces champs : aucun.
+- Essai local de FTS5 avec `@libsql/client` (SQLite 3.45.1) : accents ignorés ; « sécuriser » ne trouve pas « sécurité » ; une saisie brute provoque une erreur. Documentation Turso lue le 2026-11-01 : contradictoire sur FTS5 pour une base hébergée, non établi.
+- Repère GitHub sans jeton, 4 requêtes : dépôts « mcp » créés depuis 90 jours, 798 à 50 étoiles et plus, 230 à 200, 102 à 500, 55 à 1 000.
+- Bilan : 519 tests au vert, types OK. Pas de relecture indépendante de ces changements.
+
+## 2026-11-01 — P3 : sélection, délais, budget et montages (en cours)
+
+- Recherche sur 4 sujets contre-vérifiée (8 agents) : tarifs et conditions DeepSeek, limites de détection, formats et droits des visuels. Aucun appel à l'API DeepSeek, aucun compte, aucune clé.
+- Sélection (ADR 0005) : quatre critères, décision par le code, statut `a_approfondir`, consignes versionnées, corpus figé de 60 sujets, avis humains et évaluation appariée. Trois juges Claude Code : s1, 21/24 unanimes ; s2, 20/24 et 28/36. Les précisions de s2 n'ont pas amélioré l'accord.
+- Délais (ADR 0006, proposée) : sonde réelle de 91 minutes, 1 920 requêtes, 0 erreur, 1 entrée nouvelle, aucun délai de détection mesurable ([rapport](communication/linkedin/06-selection-delais-visuels/preuves/brut/delais-2026-10-31.md)). Chaîne locale : 7 ms par actualité sur faux modèle.
+- Budget : estimation par `npm run budget`, tailles mesurées sur nos textes ([rapport](communication/linkedin/06-selection-delais-visuels/preuves/brut/budget-2026-10-31.md)). Aucun coût réel.
+- Montages (ADR 0007) : 7 gabarits rendus par Chrome local, champ `reperes` ajouté au brouillon (prompt `p3-8`), détourage essayé avec Apple Vision, 8 exemples rendus sans défaut.
+- Relecture indépendante (3 angles, 9 agents) : 54 constats. Sur les 6 contre-vérifiés, 6 réels, dont 2 ramenés de bloquant à important. Corrigés, entre autres : date future comptée comme détection rapide, brouillons mélangés aux sujets écartés dans la préparation, crédit non contrôlé, débordement des fiches non vu, requalification qui laissait une décision périmée, doute du modèle ignoré, jeu d'évaluation mêlé aux corrections. Restent en limites documentées : date de mise à jour d'un flux Atom prise pour une date de sortie, attente fixe de 15 minutes après un refus de débit, corpus plus large que ce que traite le moteur.
+- Contre-relecture des corrections (2 agents) : 15 constats de plus, dont une requalification qui écrasait une ligne déjà vue, une publication à tort hors des sujets appariés et quatre images non signalées comme exemples. Traités, sauf l'image tronquée lisible par le navigateur, gardée en limite. Ces dernières corrections n'ont pas eu de nouvelle relecture indépendante.
+- Bilan : 509 tests au vert, types OK ; 252 décisions enregistrées inchangées sous les garde-fous corrigés. Page de revue publiée en privé, écriture et lecture de sa collection `avis` vérifiées par un essai retiré ensuite ; le clic réel sur la page n'a pas été essayé. Aucune dépense.
+
+
+
+**Résultat réel du 2026-11-01** (21 sujets, heures creuses) : dépense réelle 0,083 $ (Haiku 0,061 $, Flash 0,022 $). Valides du premier coup : Haiku 42/42, Flash 40/42. Latence de rédaction p50 : 14,8 s contre 5,8 s. Relecture à l'aveugle par un seul agent, sur 19 sujets : fidélité 4,6/5 contre 3,9/5, clarté 3,2/5 contre 3,7/5, éléments inventés ou erronés 3 contre 13. Recommandation : Haiku par défaut, décision de l'utilisateur attendue. Aucun des deux n'est publiable sans contrôle. Défaut trouvé : schéma `Brouillon` refusé par la grammaire d'Anthropic, désormais donné en consigne et validé par Zod (`imposerSchema`, sans test dédié).
+
+
+## 2026-11-02 — volume, priorités, clarté, mobile
+
+Plafond de 20 publications par jour, sans quota ; ordre de priorité ; objectif de la minute rétabli ; consignes `s3`, prompt `p3-10`, fonction de priorité (558 tests au vert, types OK, aucun appel au modèle) ; ADR 0010 proposée, exigences Apple, Google, PWA et Expo relevées le 2026-11-02.
