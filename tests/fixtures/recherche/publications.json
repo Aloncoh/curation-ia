@@ -1,0 +1,165 @@
+[
+  {
+    "slug": "demo-anim",
+    "statut": "en_attente",
+    "planifiee": true,
+    "jour": "2026-11-03",
+    "contenu": {
+      "accroche": { "texte": "demo-anim, une bibliothèque pour animer des pages web", "passages": [] },
+      "description": { "texte": "Une bibliothèque JavaScript qui anime des éléments SVG et des propriétés CSS.", "passages": [] },
+      "interet": { "texte": "Elle sert à donner du mouvement à une interface sans écrire chaque image.", "passages": [] },
+      "exemple_usage": { "texte": "Usage possible selon la source : faire apparaître un logo au chargement.", "passages": [] },
+      "demarrage": { "etapes": [{ "texte": "Ajouter la bibliothèque au projet.", "passages": [] }], "commande": null, "passages": [] },
+      "compatibilites": [],
+      "limites": [{ "texte": "Ne couvre pas les scènes 3D.", "passages": [] }]
+    },
+    "mots_cles": {
+      "nom": "demo-anim",
+      "categorie": "création visuelle",
+      "usages": [
+        { "texte": "animation web", "passages": ["A small library for web animation."] },
+        { "texte": "effets d'interface", "passages": ["Add interface effects to buttons and menus."] }
+      ],
+      "technologies": [
+        { "texte": "JavaScript", "passages": ["Written in plain JavaScript."] },
+        { "texte": "SVG", "passages": ["Animate SVG paths and shapes."] }
+      ],
+      "termes_proches": [{ "terme": "motion design", "raison": "L'animation web d'éléments d'interface relève du motion design." }]
+    }
+  },
+  {
+    "slug": "demo-courbes",
+    "statut": "en_attente",
+    "planifiee": true,
+    "jour": "2026-11-04",
+    "contenu": {
+      "accroche": { "texte": "demo-courbes règle les transitions entre deux pages", "passages": [] },
+      "description": { "texte": "Un skill d'agent qui écrit des courbes d'accélération pour les transitions de page.", "passages": [] },
+      "interet": { "texte": "Il évite des transitions brusques quand une page en remplace une autre.", "passages": [] },
+      "exemple_usage": { "texte": "Usage possible selon la source : adoucir l'ouverture d'un menu.", "passages": [] },
+      "demarrage": { "etapes": [{ "texte": "Copier le dossier du skill.", "passages": [] }], "commande": null, "passages": [] },
+      "compatibilites": [],
+      "limites": []
+    },
+    "mots_cles": {
+      "nom": "demo-courbes",
+      "categorie": "design",
+      "usages": [
+        { "texte": "motion design", "passages": ["Use it for motion design between pages."] },
+        { "texte": "transitions de page", "passages": ["Smooth page transitions with easing curves."] }
+      ],
+      "technologies": [{ "texte": "CSS", "passages": ["Outputs CSS easing functions."] }],
+      "termes_proches": []
+    }
+  },
+  {
+    "slug": "demo-video",
+    "statut": "publie",
+    "planifiee": true,
+    "jour": "2026-11-01",
+    "contenu": {
+      "accroche": { "texte": "demo-video assemble des vidéos à partir de code", "passages": [] },
+      "description": { "texte": "Un outil qui produit des vidéos courtes décrites en code.", "passages": [] },
+      "interet": { "texte": "Il sert à générer des séquences répétables pour une présentation.", "passages": [] },
+      "exemple_usage": { "texte": "Usage possible selon la source : produire un générique animé.", "passages": [] },
+      "demarrage": { "etapes": [{ "texte": "Décrire la séquence dans un fichier.", "passages": [] }], "commande": null, "passages": [] },
+      "compatibilites": [],
+      "limites": []
+    },
+    "mots_cles": {
+      "nom": "demo-video",
+      "categorie": "création visuelle",
+      "usages": [{ "texte": "montage vidéo", "passages": ["Programmatic video editing."] }],
+      "technologies": [],
+      "termes_proches": [{ "terme": "motion design", "raison": "Le montage vidéo programmé sert aussi au motion design de génériques." }]
+    }
+  },
+  {
+    "slug": "demo-tableur",
+    "statut": "en_attente",
+    "planifiee": true,
+    "jour": "2026-11-03",
+    "contenu": {
+      "accroche": { "texte": "demo-tableur relie un tableur à une base de données", "passages": [] },
+      "description": { "texte": "Un outil qui aide au design de schéma pour des tableaux de données.", "passages": [] },
+      "interet": { "texte": "Il sert à importer des feuilles de calcul dans une base.", "passages": [] },
+      "exemple_usage": { "texte": "Usage possible selon la source : importer un inventaire.", "passages": [] },
+      "demarrage": { "etapes": [{ "texte": "Choisir le fichier à importer.", "passages": [] }], "commande": null, "passages": [] },
+      "compatibilites": [],
+      "limites": []
+    },
+    "mots_cles": {
+      "nom": "demo-tableur",
+      "categorie": "outil de développement",
+      "usages": [{ "texte": "tableaux de données", "passages": ["Turn spreadsheets into data tables."] }],
+      "technologies": [{ "texte": "SQLite", "passages": ["Stores tables in SQLite."] }],
+      "termes_proches": []
+    }
+  },
+  {
+    "slug": "demo-memoire",
+    "statut": "en_attente",
+    "planifiee": true,
+    "jour": "2026-11-05",
+    "contenu": {
+      "accroche": { "texte": "demo-memoire garde les décisions d'un agent entre deux sessions", "passages": [] },
+      "description": { "texte": "Un skill qui écrit les décisions dans des notes Markdown.", "passages": [] },
+      "interet": { "texte": "Il sert quand un agent doit retrouver ce qui a été décidé la veille.", "passages": [] },
+      "exemple_usage": { "texte": "Usage possible selon la source : reprendre une tâche interrompue.", "passages": [] },
+      "demarrage": { "etapes": [{ "texte": "Créer le dossier des notes.", "passages": [] }], "commande": null, "passages": [] },
+      "compatibilites": [],
+      "limites": []
+    },
+    "mots_cles": {
+      "nom": "demo-memoire",
+      "categorie": "agents et automatisation",
+      "usages": [{ "texte": "mémoire des agents", "passages": ["Persistent memory for coding agents."] }],
+      "technologies": [{ "texte": "Markdown", "passages": ["Notes are plain Markdown files."] }],
+      "termes_proches": [{ "terme": "deuxième cerveau", "raison": "La mémoire des agents en notes Markdown joue le rôle d'un deuxième cerveau." }]
+    }
+  },
+  {
+    "slug": "demo-a-verifier",
+    "statut": "a_verifier",
+    "planifiee": false,
+    "jour": null,
+    "contenu": {
+      "accroche": { "texte": "demo-a-verifier fait du motion design", "passages": [] },
+      "description": { "texte": "Un brouillon à relire sur le motion design.", "passages": [] },
+      "interet": { "texte": "Motion design.", "passages": [] },
+      "exemple_usage": { "texte": "Motion design.", "passages": [] },
+      "demarrage": { "etapes": [], "commande": null, "passages": [] },
+      "compatibilites": [],
+      "limites": []
+    },
+    "mots_cles": {
+      "nom": "demo-a-verifier",
+      "categorie": "design",
+      "usages": [{ "texte": "motion design", "passages": ["Motion design for everyone."] }],
+      "technologies": [],
+      "termes_proches": []
+    }
+  },
+  {
+    "slug": "demo-non-planifiee",
+    "statut": "en_attente",
+    "planifiee": false,
+    "jour": null,
+    "contenu": {
+      "accroche": { "texte": "demo-non-planifiee anime des pages", "passages": [] },
+      "description": { "texte": "Une publication en attente, sans jour prévu.", "passages": [] },
+      "interet": { "texte": "Motion design sans planification.", "passages": [] },
+      "exemple_usage": { "texte": "Aucun.", "passages": [] },
+      "demarrage": { "etapes": [], "commande": null, "passages": [] },
+      "compatibilites": [],
+      "limites": []
+    },
+    "mots_cles": {
+      "nom": "demo-non-planifiee",
+      "categorie": "design",
+      "usages": [{ "texte": "motion design", "passages": ["Motion design without a slot."] }],
+      "technologies": [],
+      "termes_proches": []
+    }
+  }
+]

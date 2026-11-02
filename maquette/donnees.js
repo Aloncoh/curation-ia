@@ -1,6 +1,6 @@
 // Généré par « npm run maquette » — ne pas modifier à la main.
 window.DONNEES_MAQUETTE = {
-  "generated_at": "2026-10-31T18:56:00.293Z",
+  "generated_at": "2026-11-02T18:47:44.050Z",
   "note": "Actualités réellement collectées depuis des sources officielles, pas encore analysées ; les extraits sont des citations courtes de la source, attribuées et liées. Les exemples de publications sont rédigés par Claude Code pour la maquette, pas par l'agent du site : chaque passage cité est recherché mot pour mot dans la capture réelle.",
   "comptes": [
     {
@@ -141,7 +141,7 @@ window.DONNEES_MAQUETTE = {
       "sujet": "Incidents importants",
       "compte": "pulse",
       "etat": "a_construire",
-      "note": "Pages d’état à collecter, avec révisions (P6)."
+      "note": "Pages d’état à collecter, avec révisions."
     },
     {
       "sujet": "Infrastructures, bases de données et pipelines",
@@ -207,7 +207,7 @@ window.DONNEES_MAQUETTE = {
       "famille": "GitHub Changelog",
       "role": "vérification",
       "etat": "connecte",
-      "note": "Déjà collecté (P2)."
+      "note": "Déjà collecté."
     }
   ],
   "registre_radar": [
@@ -215,7 +215,7 @@ window.DONNEES_MAQUETTE = {
       "famille": "GitHub Changelog (Microsoft)",
       "role": "annonce officielle",
       "etat": "connecte",
-      "note": "Déjà collecté (P2)."
+      "note": "Déjà collecté."
     },
     {
       "famille": "Blogs officiels Google et Microsoft",
@@ -10892,5 +10892,6638 @@ window.DONNEES_MAQUETTE = {
       }
     }
   ],
-  "excluded_not_live": 0
+  "excluded_not_live": 0,
+  "ressources": [
+    {
+      "post_id": 1,
+      "revision_id": 42,
+      "slug": "frontend-design",
+      "nom": "frontend-design",
+      "compte": "repo",
+      "statut": "en_attente",
+      "etiquette": "pas encore publié",
+      "planning": {
+        "jour": "2026-11-02",
+        "rang": 1,
+        "etat": "prevue",
+        "utilise_reserve": false,
+        "motif": null
+      },
+      "statut_sortie": "ressource_existante",
+      "badge": "Ressource existante",
+      "origine": {
+        "code": "claude_code_developpement",
+        "texte": "Rédigé pendant le développement par Claude Code, assistant de programmation, pas par l'agent du site ; vérifié par les contrôles du code"
+      },
+      "mention": "Analyse IA à partir des sources — non testé par la plateforme",
+      "accroche": {
+        "texte": "frontend-design pousse Claude vers des interfaces qui ne ressemblent pas à toutes les autres",
+        "passages": [
+          "This repository contains Anthropic's implementation of skills for Claude.",
+          "Guidance for distinctive, intentional visual design when building new UI or reshaping an existing one.",
+          "Helps with aesthetic direction, typography, and making choices that don't read as templated defaults."
+        ]
+      },
+      "description": {
+        "texte": "Le skill d'Anthropic donne à Claude une vraie direction artistique pour créer ou refaire une interface. Palette, typographie et mise en page sont choisies pour le brief, pas tirées des réglages par défaut qu'on voit partout.",
+        "passages": [
+          "This repository contains Anthropic's implementation of skills for Claude.",
+          "Guidance for distinctive, intentional visual design when building new UI or reshaping an existing one.",
+          "make deliberate, opinionated choices about palette, typography, and layout that are specific to this brief",
+          "Helps with aesthetic direction, typography, and making choices that don't read as templated defaults."
+        ]
+      },
+      "interet": {
+        "texte": "Claude écrit d'abord un court plan de design, le relit face au brief, et ne code qu'ensuite. Le skill nomme aussi les tics actuels des designs générés par IA : fond crème avec accent terre cuite, cartes arrondies toutes identiques. Claude les évite quand le brief laisse le choix, et les suit s'il les demande.",
+        "passages": [
+          "Work in two passes. First, brainstorm a short design plan based on the client's design brief",
+          "Then review that plan against the brief before building",
+          "Only after you've confirmed the relative uniqueness of your design plan should you start to write the code",
+          "For calibration, AI-generated design right now clusters around some traits:",
+          "a warm cream background (near #F4F1EA) with a high-contrast serif display and a terracotta or warm-clay accent",
+          "the SaaS-card kit: content chopped into identical rounded cards",
+          "Where the brief pins down a visual direction, follow it exactly — the brief's own words always win, including when it asks for one of these looks.",
+          "Where it leaves an axis free, don't spend that freedom on one of these defaults."
+        ]
+      },
+      "exemple_usage": {
+        "texte": "Les choix visuels partent du sujet : un jouet pour filles de 8 à 11 ans n'aura pas l'esthétique d'un tableau de bord pour analystes financiers.",
+        "passages": [
+          "The subject's industry, subject matter, materials, and vernacular are where distinctive visual choices come from",
+          "a design for a toy for girls aged 8–11 will be very aesthetically different from a dashboard for financial analysts."
+        ]
+      },
+      "demarrage": {
+        "etapes": [
+          {
+            "texte": "Dans Claude Code, ajouter le dépôt comme marketplace",
+            "passages": [
+              "You can register this repository as a Claude Code Plugin marketplace by running the following command in Claude Code"
+            ]
+          },
+          {
+            "texte": "Installer example-skills : /plugin install example-skills@anthropic-agent-skills",
+            "passages": [
+              "/plugin install example-skills@anthropic-agent-skills",
+              "\"./skills/doc-coauthoring\", \"./skills/frontend-design\", \"./skills/internal-comms\""
+            ]
+          },
+          {
+            "texte": "Puis citer frontend-design dans la demande",
+            "passages": [
+              "After installing the plugin, you can use the skill by just mentioning it."
+            ]
+          }
+        ],
+        "commande": "/plugin marketplace add anthropics/skills",
+        "passages": [
+          "You can register this repository as a Claude Code Plugin marketplace by running the following command in Claude Code:",
+          "After installing the plugin, you can use the skill by just mentioning it."
+        ],
+        "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
+      },
+      "compatibilites": [
+        {
+          "texte": "Claude Code, et déjà inclus dans les offres payantes de Claude.ai selon le dépôt.",
+          "passages": [
+            "You can register this repository as a Claude Code Plugin marketplace by running the following command in Claude Code:",
+            "These example skills are all already available to paid plans in Claude.ai."
+          ]
+        }
+      ],
+      "limites": [],
+      "licence_locale": {
+        "texte": "Licence Apache 2.0, propre au dossier du skill selon son fichier LICENSE.txt.",
+        "passages": [
+          "license: Complete terms in LICENSE.txt",
+          "Apache License Version 2.0, January 2004"
+        ]
+      },
+      "reperes": [
+        {
+          "texte": "Une ou deux familles de polices, pas plus",
+          "passages": [
+            "use one family or two, and if two, make them clearly distinct."
+          ]
+        },
+        {
+          "texte": "Un seul moment animé, pas des effets dispersés",
+          "passages": [
+            "A single orchestrated moment — one page-load sequence or one reveal — lands better than scattered effects"
+          ]
+        },
+        {
+          "texte": "Responsive, focus clavier et mouvement réduit, sans l'annoncer",
+          "passages": [
+            "Build to a quality floor without announcing it: responsive down to mobile, visible keyboard focus, reduced motion respected"
+          ]
+        }
+      ],
+      "bouton": {
+        "libelle": "Voir le dépôt",
+        "url": "https://github.com/anthropics/skills/tree/main/skills/frontend-design",
+        "aria_label": "Voir le dépôt anthropics/skills sur GitHub (nouvel onglet)",
+        "verifie_le": "2026-11-02T18:45:40.118Z",
+        "motif": "capture_recente"
+      },
+      "etat_depot": {
+        "full_name": "anthropics/skills",
+        "html_url": "https://github.com/anthropics/skills",
+        "etoiles": 186700,
+        "etoiles_au": "2026-11-02T18:42:26.169Z",
+        "cree_le": "2025-09-22T15:53:31Z",
+        "dernier_push": "2026-10-28T19:20:39Z",
+        "jours_sans_push": 4,
+        "inactif": false,
+        "licence": null,
+        "archive": false,
+        "fork": false,
+        "parent": null,
+        "date_ajout_skill": null
+      },
+      "visuel": {
+        "src": "medias/montages/ressources/frontend-design.jpg",
+        "alt": "frontend-design pousse Claude vers des interfaces qui ne ressemblent pas à toutes les autres. Étape 1 : Dans Claude Code, ajouter le dépôt comme marketplace. Étape 2 : Installer example-skills : /plugin install example-skills@anthropic-agent-skills. Étape 3 : Puis citer frontend-design dans la demande",
+        "gabarit": "etapes",
+        "mention": "Illustration — ne prouve pas le fonctionnement"
+      },
+      "captures": [
+        {
+          "document": "depot",
+          "snapshot_id": 484,
+          "capture_le": "2026-11-02T18:42:26.169Z",
+          "url": "https://github.com/anthropics/skills",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:skills/frontend-design/SKILL.md",
+          "snapshot_id": 421,
+          "capture_le": "2026-11-02T12:15:38.384Z",
+          "url": "https://github.com/anthropics/skills/blob/main/skills/frontend-design/SKILL.md",
+          "mode": "live"
+        },
+        {
+          "document": "dossier:skills/frontend-design",
+          "snapshot_id": 422,
+          "capture_le": "2026-11-02T12:15:38.384Z",
+          "url": "https://github.com/anthropics/skills/tree/main/skills/frontend-design",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:skills/frontend-design/LICENSE.txt",
+          "snapshot_id": 423,
+          "capture_le": "2026-11-02T12:15:38.384Z",
+          "url": "https://github.com/anthropics/skills/blob/main/skills/frontend-design/LICENSE.txt",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:README.md",
+          "snapshot_id": 424,
+          "capture_le": "2026-11-02T12:15:38.384Z",
+          "url": "https://github.com/anthropics/skills/blob/main/README.md",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:.claude-plugin/marketplace.json",
+          "snapshot_id": 485,
+          "capture_le": "2026-11-02T18:42:26.169Z",
+          "url": "https://github.com/anthropics/skills/blob/main/.claude-plugin/marketplace.json",
+          "mode": "live"
+        }
+      ],
+      "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
+      "importe_le": "2026-11-02T18:45:35.166Z"
+    },
+    {
+      "post_id": 2,
+      "revision_id": 22,
+      "slug": "agent-browser",
+      "nom": "agent-browser",
+      "compte": "repo",
+      "statut": "en_attente",
+      "etiquette": "pas encore publié",
+      "planning": {
+        "jour": "2026-11-02",
+        "rang": 2,
+        "etat": "prevue",
+        "utilise_reserve": false,
+        "motif": null
+      },
+      "statut_sortie": "ressource_existante",
+      "badge": "Ressource existante",
+      "origine": {
+        "code": "claude_code_developpement",
+        "texte": "Rédigé pendant le développement par Claude Code, assistant de programmation, pas par l'agent du site ; vérifié par les contrôles du code"
+      },
+      "mention": "Analyse IA à partir des sources — non testé par la plateforme",
+      "accroche": {
+        "texte": "agent-browser, de Vercel Labs : un vrai navigateur que votre agent pilote en ligne de commande",
+        "passages": [
+          "Browser automation CLI for AI agents",
+          "Vercel Labs Product"
+        ]
+      },
+      "description": {
+        "texte": "Une CLI native en Rust : l'agent ouvre une page, lit le texte, clique, remplit un champ et prend une capture. Selon le dépôt, le skill fonctionne avec Claude Code, Codex, Cursor ou Gemini CLI, et l'outil tourne aussi en serveur MCP.",
+        "passages": [
+          "Browser automation CLI for AI agents. Fast native Rust CLI.",
+          "Click by ref from snapshot",
+          "Fill by ref",
+          "Get text by ref",
+          "agent-browser screenshot page.png agent-browser close",
+          "This works with Claude Code, Codex, Cursor, Gemini CLI, GitHub Copilot, Goose, OpenCode, and Windsurf.",
+          "npx skills add vercel-labs/agent-browser",
+          "agent-browser mcp # Start an MCP stdio server"
+        ]
+      },
+      "interet": {
+        "texte": "snapshot renvoie l'arbre d'accessibilité avec une référence par élément (@e1, @e2) : l'agent clique ou remplit par référence, sans requêter le DOM à nouveau. Attention, rien n'est restreint par défaut : domaines autorisés et politique d'actions sont à activer vous-même.",
+        "passages": [
+          "Get interactive elements with refs (@e1, @e2)",
+          "agent-browser click @e2 # Click by ref from snapshot",
+          "Refs provide deterministic element selection from snapshots",
+          "Fast: No DOM re-query needed",
+          "Navigation, action, and output controls are opt-in.",
+          "By default, agent-browser imposes no restrictions on navigation, actions, or output.",
+          "Domain Allowlist: Restrict navigation to trusted domains",
+          "Action Policy: Gate destructive actions with a static policy file"
+        ]
+      },
+      "exemple_usage": {
+        "texte": "Demandez à votre agent de tester le parcours de connexion avec agent-browser : il lit --help, relève les champs du formulaire et les remplit.",
+        "passages": [
+          "Use agent-browser to test the login flow. Run agent-browser --help to see available commands.",
+          "Get interactive elements with refs (@e1, @e2)",
+          "Interact using refs"
+        ]
+      },
+      "demarrage": {
+        "etapes": [
+          {
+            "texte": "npm install -g agent-browser, puis agent-browser install pour récupérer Chrome, uniquement la première fois.",
+            "passages": [
+              "npm install -g agent-browser",
+              "Run agent-browser install to download Chrome from Chrome for Testing"
+            ]
+          }
+        ],
+        "commande": "npm install -g agent-browser\nagent-browser install",
+        "passages": [
+          "Installs the native Rust binary:",
+          "npm install -g agent-browser",
+          "Download Chrome from Chrome for Testing (first time only)"
+        ],
+        "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
+      },
+      "compatibilites": [],
+      "limites": [],
+      "licence_locale": null,
+      "reperes": [
+        {
+          "texte": "Connexions conservées, sans se reconnecter à chaque lancement",
+          "passages": [
+            "agent-browser provides multiple ways to persist login sessions so you don't re-authenticate every run."
+          ]
+        },
+        {
+          "texte": "Audit d'accessibilité axe-core intégré",
+          "passages": [
+            "Run an axe-core accessibility audit against the current page or a URL."
+          ]
+        },
+        {
+          "texte": "Mobile Safari réel dans le simulateur iOS",
+          "passages": [
+            "Control real Mobile Safari in the iOS Simulator for authentic mobile web testing."
+          ]
+        }
+      ],
+      "bouton": {
+        "libelle": "Voir le dépôt",
+        "url": "https://github.com/vercel-labs/agent-browser",
+        "aria_label": "Voir le dépôt vercel-labs/agent-browser sur GitHub (nouvel onglet)",
+        "verifie_le": "2026-11-02T18:46:57.575Z",
+        "motif": "capture_recente"
+      },
+      "etat_depot": {
+        "full_name": "vercel-labs/agent-browser",
+        "html_url": "https://github.com/vercel-labs/agent-browser",
+        "etoiles": 45208,
+        "etoiles_au": "2026-11-02T12:15:39.151Z",
+        "cree_le": "2026-01-11T05:38:15Z",
+        "dernier_push": "2026-11-01T15:29:56Z",
+        "jours_sans_push": 0,
+        "inactif": false,
+        "licence": "Apache-2.0",
+        "archive": false,
+        "fork": false,
+        "parent": null,
+        "date_ajout_skill": null
+      },
+      "visuel": {
+        "src": "medias/montages/ressources/agent-browser.jpg",
+        "alt": "agent-browser, de Vercel Labs : un vrai navigateur que votre agent pilote en ligne de commande. npm install -g agent-browser. agent-browser install",
+        "gabarit": "terminal_annote",
+        "mention": "Illustration — ne prouve pas le fonctionnement"
+      },
+      "captures": [
+        {
+          "document": "depot",
+          "snapshot_id": 425,
+          "capture_le": "2026-11-02T12:15:39.151Z",
+          "url": "https://github.com/vercel-labs/agent-browser",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:README.md",
+          "snapshot_id": 426,
+          "capture_le": "2026-11-02T12:15:39.151Z",
+          "url": "https://github.com/vercel-labs/agent-browser/blob/main/README.md",
+          "mode": "live"
+        }
+      ],
+      "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
+      "importe_le": "2026-11-02T18:46:54.597Z"
+    },
+    {
+      "post_id": 3,
+      "revision_id": 23,
+      "slug": "react-best-practices",
+      "nom": "React Best Practices (Vercel)",
+      "compte": "repo",
+      "statut": "en_attente",
+      "etiquette": "pas encore publié",
+      "planning": {
+        "jour": "2026-11-02",
+        "rang": 3,
+        "etat": "prevue",
+        "utilise_reserve": false,
+        "motif": null
+      },
+      "statut_sortie": "ressource_existante",
+      "badge": "Ressource existante",
+      "origine": {
+        "code": "claude_code_developpement",
+        "texte": "Rédigé pendant le développement par Claude Code, assistant de programmation, pas par l'agent du site ; vérifié par les contrôles du code"
+      },
+      "mention": "Analyse IA à partir des sources — non testé par la plateforme",
+      "accroche": {
+        "texte": "React Best Practices : les 70 règles de performance React et Next.js de Vercel, appliquées par votre agent",
+        "passages": [
+          "React and Next.js performance optimization guidelines from Vercel Engineering.",
+          "Contains 70 rules across 8 categories, prioritized by impact to guide automated refactoring and code generation."
+        ]
+      },
+      "description": {
+        "texte": "Vercel Engineering y condense ses règles de performance React et Next.js. L'agent s'en sert dès qu'il écrit, relit ou refactorise un composant, une page Next.js ou du chargement de données.",
+        "passages": [
+          "React and Next.js performance optimization guidelines from Vercel Engineering.",
+          "This skill should be used when writing, reviewing, or refactoring React/Next.js code to ensure optimal performance patterns.",
+          "Triggers on tasks involving React components, Next.js pages, data fetching, bundle optimization, or performance improvements."
+        ]
+      },
+      "interet": {
+        "texte": "Les règles sont classées par impact : l'agent s'attaque d'abord aux requêtes en cascade et au poids du bundle, avant les re-rendus ou les micro-optimisations JavaScript.",
+        "passages": [
+          "prioritized by impact to guide automated refactoring and code generation.",
+          "Eliminating Waterfalls | CRITICAL | async-",
+          "Bundle Size Optimization | CRITICAL | bundle-",
+          "Re-render Optimization | MEDIUM | rerender-",
+          "JavaScript Performance | LOW-MEDIUM | js-"
+        ]
+      },
+      "exemple_usage": {
+        "texte": "Une page Next.js enchaîne deux requêtes indépendantes ? Demandez à l'agent de l'optimiser : la règle async-parallel les lance ensemble avec Promise.all().",
+        "passages": [
+          "Help me optimize this Next.js page",
+          "async-parallel - Use Promise.all() for independent operations"
+        ]
+      },
+      "demarrage": {
+        "etapes": [
+          {
+            "texte": "La commande installe toute la collection de Vercel, pas seulement ce skill : npx skills add vercel-labs/agent-skills",
+            "passages": [
+              "npx skills add vercel-labs/agent-skills"
+            ]
+          }
+        ],
+        "commande": "npx skills add vercel-labs/agent-skills",
+        "passages": [
+          "npx skills add vercel-labs/agent-skills",
+          "Skills are automatically available once installed."
+        ],
+        "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
+      },
+      "compatibilites": [],
+      "limites": [],
+      "licence_locale": {
+        "texte": "L'en-tête du skill déclare la licence MIT.",
+        "passages": [
+          "license: MIT metadata: author: vercel"
+        ]
+      },
+      "reperes": [
+        {
+          "texte": "Pour chaque règle, le code fautif et sa correction",
+          "passages": [
+            "Incorrect code example with explanation",
+            "Correct code example with explanation"
+          ]
+        },
+        {
+          "texte": "Côté serveur : React.cache(), cache LRU et after()",
+          "passages": [
+            "server-cache-react - Use React.cache() for per-request deduplication",
+            "server-cache-lru - Use LRU cache for cross-request caching",
+            "server-after-nonblocking - Use after() for non-blocking operations"
+          ]
+        },
+        {
+          "texte": "Côté client : SWR et écouteurs d'événements dédoublonnés",
+          "passages": [
+            "client-swr-dedup - Use SWR for automatic request deduplication",
+            "client-event-listeners - Deduplicate global event listeners"
+          ]
+        }
+      ],
+      "bouton": {
+        "libelle": "Voir le dépôt",
+        "url": "https://github.com/vercel-labs/agent-skills/tree/main/skills/react-best-practices",
+        "aria_label": "Voir le dépôt vercel-labs/agent-skills sur GitHub (nouvel onglet)",
+        "verifie_le": "2026-11-02T17:44:49.233Z",
+        "motif": "capture_recente"
+      },
+      "etat_depot": {
+        "full_name": "vercel-labs/agent-skills",
+        "html_url": "https://github.com/vercel-labs/agent-skills",
+        "etoiles": 33391,
+        "etoiles_au": "2026-11-02T12:15:40.327Z",
+        "cree_le": "2025-12-08T19:10:06Z",
+        "dernier_push": "2026-10-28T19:17:28Z",
+        "jours_sans_push": 4,
+        "inactif": false,
+        "licence": null,
+        "archive": false,
+        "fork": false,
+        "parent": null,
+        "date_ajout_skill": null
+      },
+      "visuel": {
+        "src": "medias/montages/ressources/react-best-practices.jpg",
+        "alt": "React Best Practices : les 70 règles de performance React et Next.js de Vercel, appliquées par votre agent. npx skills add vercel-labs/agent-skills",
+        "gabarit": "terminal_annote",
+        "mention": "Illustration — ne prouve pas le fonctionnement"
+      },
+      "captures": [
+        {
+          "document": "depot",
+          "snapshot_id": 427,
+          "capture_le": "2026-11-02T12:15:40.327Z",
+          "url": "https://github.com/vercel-labs/agent-skills",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:skills/react-best-practices/SKILL.md",
+          "snapshot_id": 428,
+          "capture_le": "2026-11-02T12:15:40.327Z",
+          "url": "https://github.com/vercel-labs/agent-skills/blob/main/skills/react-best-practices/SKILL.md",
+          "mode": "live"
+        },
+        {
+          "document": "dossier:skills/react-best-practices",
+          "snapshot_id": 429,
+          "capture_le": "2026-11-02T12:15:40.327Z",
+          "url": "https://github.com/vercel-labs/agent-skills/tree/main/skills/react-best-practices",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:README.md",
+          "snapshot_id": 430,
+          "capture_le": "2026-11-02T12:15:40.327Z",
+          "url": "https://github.com/vercel-labs/agent-skills/blob/main/README.md",
+          "mode": "live"
+        }
+      ],
+      "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
+      "importe_le": "2026-11-02T17:44:44.497Z"
+    },
+    {
+      "post_id": 4,
+      "revision_id": 43,
+      "slug": "skills-documents",
+      "nom": "Skills de documents docx, xlsx, pptx, pdf",
+      "compte": "repo",
+      "statut": "en_attente",
+      "etiquette": "pas encore publié",
+      "planning": {
+        "jour": "2026-11-02",
+        "rang": 4,
+        "etat": "prevue",
+        "utilise_reserve": false,
+        "motif": null
+      },
+      "statut_sortie": "ressource_existante",
+      "badge": "Ressource existante",
+      "origine": {
+        "code": "claude_code_developpement",
+        "texte": "Rédigé pendant le développement par Claude Code, assistant de programmation, pas par l'agent du site ; vérifié par les contrôles du code"
+      },
+      "mention": "Analyse IA à partir des sources — non testé par la plateforme",
+      "accroche": {
+        "texte": "Skills de documents d'Anthropic : Claude crée et modifie vos Word, tableurs, présentations et PDF",
+        "passages": [
+          "This repository contains Anthropic's implementation of skills for Claude.",
+          "create, read, edit, or manipulate Word documents (.docx files)",
+          "Use this skill any time a spreadsheet file is the primary input or output.",
+          "creating slide decks, pitch decks, or presentations",
+          "Use this skill whenever the user wants to do anything with PDF files."
+        ]
+      },
+      "description": {
+        "texte": "Les quatre skills qui font tourner les fonctions de documents de Claude, un par format : docx, xlsx, pptx et pdf. Rapport Word, classeur avec formules, présentation, formulaire PDF : Claude s'appuie dessus pour livrer un fichier propre. Selon Anthropic, une référence de skills complexes utilisés en production.",
+        "passages": [
+          "We've also included the document creation & editing skills that power Claude's document capabilities under the hood in the skills/docx, skills/pdf, skills/pptx, and skills/xlsx subfolders.",
+          "This repository contains Anthropic's implementation of skills for Claude.",
+          "If the user asks for a 'report', 'memo', 'letter', 'template', or similar deliverable as a Word or .docx file, use this skill.",
+          "adding columns, computing formulas, formatting, charting, cleaning messy data",
+          "creating slide decks, pitch decks, or presentations",
+          "If you need to fill out a PDF form, read FORMS.md and follow its instructions.",
+          "we wanted to share these with developers as a reference for more complex skills that are actively used in a production AI application"
+        ]
+      },
+      "interet": {
+        "texte": "Chaque skill choisit sa méthode selon la tâche, recense les pièges connus des bibliothèques et impose de contrôler le fichier produit. Pour un tableur, LibreOffice recalcule toutes les formules, et rien ne part tant qu'il reste une erreur.",
+        "passages": [
+          "A .docx is a ZIP archive of XML files. Choose your approach by task:",
+          "The model knows the API; these are the footguns:",
+          "After writing a .docx, render it and look at it:",
+          "LibreOffice computes every formula, the file is rewritten in place",
+          "Never ship while recalc.py reports errors_found."
+        ]
+      },
+      "exemple_usage": {
+        "texte": "Une fois le plugin document-skills installé, il suffit de demander à Claude Code d'utiliser le skill PDF pour extraire les champs de formulaire d'un fichier.",
+        "passages": [
+          "if you install the document-skills plugin from the marketplace, you can ask Claude Code to do something like",
+          "Use the PDF skill to extract the form fields from path/to/some-file.pdf"
+        ]
+      },
+      "demarrage": {
+        "etapes": [
+          {
+            "texte": "Ajouter le catalogue : /plugin marketplace add anthropics/skills",
+            "passages": [
+              "You can register this repository as a Claude Code Plugin marketplace by running the following command in Claude Code",
+              "/plugin marketplace add anthropics/skills"
+            ]
+          },
+          {
+            "texte": "Installer : /plugin install document-skills@anthropic-agent-skills",
+            "passages": [
+              "Alternatively, directly install either Plugin via:",
+              "/plugin install document-skills@anthropic-agent-skills"
+            ]
+          }
+        ],
+        "commande": "/plugin install document-skills@anthropic-agent-skills",
+        "passages": [
+          "/plugin install document-skills@anthropic-agent-skills",
+          "/plugin marketplace add anthropics/skills",
+          "After installing the plugin, you can use the skill by just mentioning it."
+        ],
+        "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
+      },
+      "compatibilites": [],
+      "limites": [
+        {
+          "texte": "Code consultable mais pas libre : la licence réserve ces skills aux services d'Anthropic et interdit de les copier, modifier ou redistribuer.",
+          "passages": [
+            "These are source-available, not open source",
+            "is governed by your agreement with Anthropic regarding use of Anthropic's services.",
+            "Extract these materials from the Services or retain copies of these materials outside the Services",
+            "Create derivative works based on these materials",
+            "Distribute, sublicense, or transfer these materials to any third party"
+          ]
+        }
+      ],
+      "licence_locale": {
+        "texte": "Selon le LICENSE.txt de chaque skill : licence propriétaire d'Anthropic.",
+        "passages": [
+          "license: Proprietary. LICENSE.txt has complete terms",
+          "© 2025 Anthropic, PBC. All rights reserved."
+        ]
+      },
+      "reperes": [
+        {
+          "texte": "Word : modifications suivies, puis copie propre acceptée",
+          "passages": [
+            "working with tracked changes or comments",
+            "To produce a clean copy with all tracked changes accepted:"
+          ]
+        },
+        {
+          "texte": "Présentations converties en images pour la relecture",
+          "passages": [
+            "Convert presentations to individual slide images for visual inspection:"
+          ]
+        },
+        {
+          "texte": "Finance : une hypothèse par cellule, sauf consigne contraire",
+          "passages": [
+            "Unless the user says otherwise, or the existing file already does something else.",
+            "every assumption in its own labeled cell, referenced by the formulas that use it"
+          ]
+        }
+      ],
+      "bouton": {
+        "libelle": "Voir le dépôt",
+        "url": "https://github.com/anthropics/skills",
+        "aria_label": "Voir le dépôt anthropics/skills sur GitHub (nouvel onglet)",
+        "verifie_le": "2026-11-02T18:45:40.129Z",
+        "motif": "capture_recente"
+      },
+      "etat_depot": {
+        "full_name": "anthropics/skills",
+        "html_url": "https://github.com/anthropics/skills",
+        "etoiles": 186700,
+        "etoiles_au": "2026-11-02T18:42:26.169Z",
+        "cree_le": "2025-09-22T15:53:31Z",
+        "dernier_push": "2026-10-28T19:20:39Z",
+        "jours_sans_push": 4,
+        "inactif": false,
+        "licence": null,
+        "archive": false,
+        "fork": false,
+        "parent": null,
+        "date_ajout_skill": null
+      },
+      "visuel": {
+        "src": "medias/montages/ressources/skills-documents.jpg",
+        "alt": "Skills de documents d'Anthropic : Claude crée et modifie vos Word, tableurs, présentations et PDF. Étape 1 : Ajouter le catalogue : /plugin marketplace add anthropics/skills. Étape 2 : Installer : /plugin install document-skills@anthropic-agent-skills",
+        "gabarit": "etapes",
+        "mention": "Illustration — ne prouve pas le fonctionnement"
+      },
+      "captures": [
+        {
+          "document": "depot",
+          "snapshot_id": 484,
+          "capture_le": "2026-11-02T18:42:26.169Z",
+          "url": "https://github.com/anthropics/skills",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:skills/docx/SKILL.md",
+          "snapshot_id": 431,
+          "capture_le": "2026-11-02T12:15:43.875Z",
+          "url": "https://github.com/anthropics/skills/blob/main/skills/docx/SKILL.md",
+          "mode": "live"
+        },
+        {
+          "document": "dossier:skills/docx",
+          "snapshot_id": 432,
+          "capture_le": "2026-11-02T12:15:43.875Z",
+          "url": "https://github.com/anthropics/skills/tree/main/skills/docx",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:skills/docx/LICENSE.txt",
+          "snapshot_id": 433,
+          "capture_le": "2026-11-02T12:15:43.875Z",
+          "url": "https://github.com/anthropics/skills/blob/main/skills/docx/LICENSE.txt",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:skills/xlsx/SKILL.md",
+          "snapshot_id": 434,
+          "capture_le": "2026-11-02T12:15:43.875Z",
+          "url": "https://github.com/anthropics/skills/blob/main/skills/xlsx/SKILL.md",
+          "mode": "live"
+        },
+        {
+          "document": "dossier:skills/xlsx",
+          "snapshot_id": 435,
+          "capture_le": "2026-11-02T12:15:43.875Z",
+          "url": "https://github.com/anthropics/skills/tree/main/skills/xlsx",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:skills/xlsx/LICENSE.txt",
+          "snapshot_id": 436,
+          "capture_le": "2026-11-02T12:15:43.875Z",
+          "url": "https://github.com/anthropics/skills/blob/main/skills/xlsx/LICENSE.txt",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:skills/pptx/SKILL.md",
+          "snapshot_id": 437,
+          "capture_le": "2026-11-02T12:15:43.875Z",
+          "url": "https://github.com/anthropics/skills/blob/main/skills/pptx/SKILL.md",
+          "mode": "live"
+        },
+        {
+          "document": "dossier:skills/pptx",
+          "snapshot_id": 438,
+          "capture_le": "2026-11-02T12:15:43.875Z",
+          "url": "https://github.com/anthropics/skills/tree/main/skills/pptx",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:skills/pptx/LICENSE.txt",
+          "snapshot_id": 439,
+          "capture_le": "2026-11-02T12:15:43.875Z",
+          "url": "https://github.com/anthropics/skills/blob/main/skills/pptx/LICENSE.txt",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:skills/pdf/SKILL.md",
+          "snapshot_id": 440,
+          "capture_le": "2026-11-02T12:15:43.875Z",
+          "url": "https://github.com/anthropics/skills/blob/main/skills/pdf/SKILL.md",
+          "mode": "live"
+        },
+        {
+          "document": "dossier:skills/pdf",
+          "snapshot_id": 441,
+          "capture_le": "2026-11-02T12:15:43.875Z",
+          "url": "https://github.com/anthropics/skills/tree/main/skills/pdf",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:skills/pdf/LICENSE.txt",
+          "snapshot_id": 442,
+          "capture_le": "2026-11-02T12:15:43.875Z",
+          "url": "https://github.com/anthropics/skills/blob/main/skills/pdf/LICENSE.txt",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:README.md",
+          "snapshot_id": 424,
+          "capture_le": "2026-11-02T12:15:38.384Z",
+          "url": "https://github.com/anthropics/skills/blob/main/README.md",
+          "mode": "live"
+        }
+      ],
+      "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
+      "importe_le": "2026-11-02T18:45:35.166Z"
+    },
+    {
+      "post_id": 5,
+      "revision_id": 44,
+      "slug": "ui-ux-pro-max",
+      "nom": "UI UX Pro Max",
+      "compte": "repo",
+      "statut": "en_attente",
+      "etiquette": "pas encore publié",
+      "planning": {
+        "jour": "2026-11-02",
+        "rang": 5,
+        "etat": "prevue",
+        "utilise_reserve": false,
+        "motif": null
+      },
+      "statut_sortie": "ressource_existante",
+      "badge": "Ressource existante",
+      "origine": {
+        "code": "claude_code_developpement",
+        "texte": "Rédigé pendant le développement par Claude Code, assistant de programmation, pas par l'agent du site ; vérifié par les contrôles du code"
+      },
+      "mention": "Analyse IA à partir des sources — non testé par la plateforme",
+      "accroche": {
+        "texte": "UI UX Pro Max donne à votre agent un design system taillé pour votre produit avant qu'il code l'interface",
+        "passages": [
+          "Industry-specific design system generation",
+          "The skill activates automatically when you request UI/UX work."
+        ]
+      },
+      "description": {
+        "texte": "Demandez une landing page ou un dashboard : le skill s'active seul, part de votre type de produit et sort la structure de page, le style, les couleurs, la typographie et les effets. Il puise dans 79 styles, 192 types de produits, des palettes et des paires de polices.",
+        "passages": [
+          "The skill activates automatically when you request UI/UX work.",
+          "Build a landing page for my SaaS product",
+          "Create a dashboard for healthcare analytics",
+          "Pattern + Style + Colors + Typography + Effects",
+          "Full access to 79 searchable UI styles (50 active), 192 product types, color palettes, and curated font pairings."
+        ]
+      },
+      "interet": {
+        "texte": "Chaque proposition arrive avec ses anti-patterns et une checklist avant livraison : pas d'emoji en guise d'icônes, cursor-pointer sur tout élément cliquable. Les palettes suivent le secteur, et les dégradés violet-rose « IA » sont proscrits pour une banque.",
+        "passages": [
+          "+ Anti-patterns to avoid + Pre-delivery checklist",
+          "No emojis as icons (use SVG: Heroicons/Lucide)",
+          "cursor-pointer on all clickable elements",
+          "Industry-specific palettes aligned 1:1 with the 192 product types",
+          "What NOT to do (e.g., \"AI purple/pink gradients\" for banking)"
+        ]
+      },
+      "exemple_usage": {
+        "texte": "Dans l'exemple du dépôt, la landing page d'un spa reçoit un style Soft UI Evolution, du rose pâle et du vert sauge rehaussés d'or, Cormorant Garamond avec Montserrat, sans néon ni animations brusques.",
+        "passages": [
+          "Build a landing page for my beauty spa",
+          "STYLE: Soft UI Evolution",
+          "Primary: #E8B4B8 (Soft Pink)",
+          "Secondary: #A8D5BA (Sage Green)",
+          "Notes: Calming palette with gold accents for luxury feel",
+          "TYPOGRAPHY: Cormorant Garamond / Montserrat",
+          "Bright neon colors + Harsh animations + Dark mode + AI purple/pink gradients"
+        ]
+      },
+      "demarrage": {
+        "etapes": [
+          {
+            "texte": "Dans le projet : npx ui-ux-pro-max-cli init --ai claude (ou cursor, copilot)",
+            "passages": [
+              "skip the global install entirely:",
+              "cd /path/to/your/project uipro init --ai claude",
+              "uipro init --ai claude # Claude Code uipro init --ai cursor # Cursor",
+              "uipro init --ai copilot # GitHub Copilot"
+            ]
+          },
+          {
+            "texte": "Puis demandez l'interface voulue, le skill prend le relais.",
+            "passages": [
+              "The skill activates automatically when you request UI/UX work.",
+              "Build a landing page for my SaaS product"
+            ]
+          }
+        ],
+        "commande": "npx ui-ux-pro-max-cli init --ai claude",
+        "passages": [
+          "Use a Node version manager (recommended), or skip the global install entirely:",
+          "Or use the CLI installer:"
+        ],
+        "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
+      },
+      "compatibilites": [
+        {
+          "texte": "Une vingtaine d'agents selon le dépôt, dont Claude Code, Cursor, Windsurf, Codex CLI et GitHub Copilot.",
+          "passages": [
+            "Supported: Claude Code, Cursor, Windsurf, Antigravity, Codex CLI, Continue, Gemini CLI, OpenCode, Qoder, CodeBuddy, Droid (Factory), KiloCode, Warp, Augment, CodeWhale, ZCode, Kimi Code, Amazon Q Developer, OpenClaw, GitHub Copilot"
+          ]
+        }
+      ],
+      "limites": [
+        {
+          "texte": "Le cœur est sous licence MIT ; logos, bannières et visuels générés n'y sont pas, ils relèvent d'une offre Premium séparée (uupm.cc).",
+          "passages": [
+            "This project is licensed under the MIT License.",
+            "Extended Brand Design Skills: Goes beyond UI/UX to include Brand Identity generation, Logo Design, Corporate Identity Programs (CIP), Banners, Presentation Slides, and custom Iconography.",
+            "Advanced Asset Creation: Deep integration with AI-powered image generation to create real visual assets, not just placeholders.",
+            "For more details on upgrading to the Premium tier, visit uupm.cc."
+          ]
+        }
+      ],
+      "licence_locale": null,
+      "reperes": [
+        {
+          "texte": "Règles par stack, de React et Vue à SwiftUI et Flutter",
+          "passages": [
+            "Tech Stacks - React, Next.js, Astro, Vue",
+            "SwiftUI, React Native, Flutter, HTML+Tailwind"
+          ]
+        },
+        {
+          "texte": "119 règles d'UX, accessibilité comprise",
+          "passages": [
+            "119 UX Guidelines - Best practices, anti-patterns, accessibility rules"
+          ]
+        },
+        {
+          "texte": "Claude Code, Cursor, Copilot et d'autres agents, selon le dépôt",
+          "passages": [
+            "Supported: Claude Code, Cursor, Windsurf, Antigravity, Codex CLI, Continue, Gemini CLI, OpenCode, Qoder, CodeBuddy, Droid (Factory), KiloCode, Warp, Augment, CodeWhale, ZCode, Kimi Code, Amazon Q Developer, OpenClaw, GitHub Copilot"
+          ]
+        }
+      ],
+      "bouton": {
+        "libelle": "Voir le dépôt",
+        "url": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill",
+        "aria_label": "Voir le dépôt nextlevelbuilder/ui-ux-pro-max-skill sur GitHub (nouvel onglet)",
+        "verifie_le": "2026-11-02T18:45:40.134Z",
+        "motif": "capture_recente"
+      },
+      "etat_depot": {
+        "full_name": "nextlevelbuilder/ui-ux-pro-max-skill",
+        "html_url": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill",
+        "etoiles": 144059,
+        "etoiles_au": "2026-11-02T12:15:44.563Z",
+        "cree_le": "2025-11-30T11:36:31Z",
+        "dernier_push": "2026-11-01T07:04:29Z",
+        "jours_sans_push": 1,
+        "inactif": false,
+        "licence": "MIT",
+        "archive": false,
+        "fork": false,
+        "parent": null,
+        "date_ajout_skill": null
+      },
+      "visuel": {
+        "src": "medias/montages/ressources/ui-ux-pro-max.jpg",
+        "alt": "UI UX Pro Max donne à votre agent un design system taillé pour votre produit avant qu'il code l'interface. Étape 1 : Dans le projet : npx ui-ux-pro-max-cli init --ai claude (ou cursor, copilot). Étape 2 : Puis demandez l'interface voulue, le skill prend le relais.",
+        "gabarit": "etapes",
+        "mention": "Illustration — ne prouve pas le fonctionnement"
+      },
+      "captures": [
+        {
+          "document": "depot",
+          "snapshot_id": 443,
+          "capture_le": "2026-11-02T12:15:44.563Z",
+          "url": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:README.md",
+          "snapshot_id": 444,
+          "capture_le": "2026-11-02T12:15:44.563Z",
+          "url": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill/blob/main/README.md",
+          "mode": "live"
+        }
+      ],
+      "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
+      "importe_le": "2026-11-02T18:45:35.166Z"
+    },
+    {
+      "post_id": 6,
+      "revision_id": 45,
+      "slug": "webapp-testing",
+      "nom": "webapp-testing",
+      "compte": "repo",
+      "statut": "en_attente",
+      "etiquette": "pas encore publié",
+      "planning": {
+        "jour": "2026-11-02",
+        "rang": 6,
+        "etat": "prevue",
+        "utilise_reserve": false,
+        "motif": null
+      },
+      "statut_sortie": "ressource_existante",
+      "badge": "Ressource existante",
+      "origine": {
+        "code": "claude_code_developpement",
+        "texte": "Rédigé pendant le développement par Claude Code, assistant de programmation, pas par l'agent du site ; vérifié par les contrôles du code"
+      },
+      "mention": "Analyse IA à partir des sources — non testé par la plateforme",
+      "accroche": {
+        "texte": "webapp-testing : Claude teste votre app web locale avec Playwright",
+        "passages": [
+          "This repository contains Anthropic's implementation of skills for Claude",
+          "Toolkit for interacting with and testing local web applications using Playwright"
+        ]
+      },
+      "description": {
+        "texte": "Le skill d'Anthropic écrit des scripts Playwright en Python pour vérifier le front-end, déboguer l'interface, prendre des captures d'écran et lire les logs du navigateur.",
+        "passages": [
+          "This repository contains Anthropic's implementation of skills for Claude",
+          "To test local web applications, write native Python Playwright scripts.",
+          "Supports verifying frontend functionality, debugging UI behavior, capturing browser screenshots, and viewing browser logs."
+        ]
+      },
+      "interet": {
+        "texte": "Un helper démarre les serveurs de l'app, back-end et front-end compris, puis lance le test. Claude l'appelle tel quel, sans charger son code dans le contexte. Sur une app dynamique, il attend la fin du chargement, observe la page rendue et en tire ses sélecteurs avant d'agir.",
+        "passages": [
+          "scripts/with_server.py - Manages server lifecycle (supports multiple servers)",
+          "Multiple servers (e.g., backend + frontend)",
+          "They exist to be called directly as black-box scripts rather than ingested into your context window.",
+          "Navigate and wait for networkidle",
+          "Take screenshot or inspect DOM",
+          "Identify selectors from rendered state",
+          "Execute actions with discovered selectors"
+        ]
+      },
+      "exemple_usage": {
+        "texte": "Vérifier un formulaire sur une app avec back-end et front-end : le helper lance les deux serveurs, la page s'ouvre en headless, le script attend la fin du chargement puis inspecte le DOM.",
+        "passages": [
+          "Multiple servers (e.g., backend + frontend)",
+          "Always launch chromium in headless mode",
+          "Navigate and wait for networkidle",
+          "Inspect rendered DOM"
+        ]
+      },
+      "demarrage": {
+        "etapes": [
+          {
+            "texte": "Ajouter le catalogue : /plugin marketplace add anthropics/skills",
+            "passages": [
+              "You can register this repository as a Claude Code Plugin marketplace by running the following command in Claude Code",
+              "/plugin marketplace add anthropics/skills"
+            ]
+          },
+          {
+            "texte": "Installer example-skills : /plugin install example-skills@anthropic-agent-skills",
+            "passages": [
+              "/plugin install example-skills@anthropic-agent-skills",
+              "\"./skills/theme-factory\", \"./skills/web-artifacts-builder\", \"./skills/webapp-testing\""
+            ]
+          },
+          {
+            "texte": "Mentionner webapp-testing dans sa demande",
+            "passages": [
+              "After installing the plugin, you can use the skill by just mentioning it."
+            ]
+          }
+        ],
+        "commande": "/plugin marketplace add anthropics/skills",
+        "passages": [
+          "/plugin marketplace add anthropics/skills",
+          "Then, to install a specific set of skills"
+        ],
+        "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
+      },
+      "compatibilites": [],
+      "limites": [],
+      "licence_locale": {
+        "texte": "Apache 2.0 : ce skill a sa propre licence, dans le fichier LICENSE.txt de son dossier",
+        "passages": [
+          "Apache License Version 2.0, January 2004",
+          "license: Complete terms in LICENSE.txt"
+        ]
+      },
+      "reperes": [
+        {
+          "texte": "Exemple fourni pour lister boutons, liens et champs",
+          "passages": [
+            "element_discovery.py - Discovering buttons, links, and inputs on a page"
+          ]
+        },
+        {
+          "texte": "Pages HTML statiques lues sans serveur",
+          "passages": [
+            "Read HTML file directly to identify selectors",
+            "static_html_automation.py - Using file:// URLs for local HTML"
+          ]
+        },
+        {
+          "texte": "Sélecteurs par texte, rôle, CSS ou ID",
+          "passages": [
+            "Use descriptive selectors: text=, role=, CSS selectors, or IDs"
+          ]
+        }
+      ],
+      "bouton": {
+        "libelle": "Voir le dépôt",
+        "url": "https://github.com/anthropics/skills/tree/main/skills/webapp-testing",
+        "aria_label": "Voir le dépôt anthropics/skills sur GitHub (nouvel onglet)",
+        "verifie_le": "2026-11-02T18:45:40.139Z",
+        "motif": "capture_recente"
+      },
+      "etat_depot": {
+        "full_name": "anthropics/skills",
+        "html_url": "https://github.com/anthropics/skills",
+        "etoiles": 186700,
+        "etoiles_au": "2026-11-02T18:42:26.169Z",
+        "cree_le": "2025-09-22T15:53:31Z",
+        "dernier_push": "2026-10-28T19:20:39Z",
+        "jours_sans_push": 4,
+        "inactif": false,
+        "licence": null,
+        "archive": false,
+        "fork": false,
+        "parent": null,
+        "date_ajout_skill": null
+      },
+      "visuel": {
+        "src": "medias/montages/ressources/webapp-testing.jpg",
+        "alt": "webapp-testing : Claude teste votre app web locale avec Playwright. Étape 1 : Ajouter le catalogue : /plugin marketplace add anthropics/skills. Étape 2 : Installer example-skills : /plugin install example-skills@anthropic-agent-skills. Étape 3 : Mentionner webapp-testing dans sa demande",
+        "gabarit": "etapes",
+        "mention": "Illustration — ne prouve pas le fonctionnement"
+      },
+      "captures": [
+        {
+          "document": "depot",
+          "snapshot_id": 484,
+          "capture_le": "2026-11-02T18:42:26.169Z",
+          "url": "https://github.com/anthropics/skills",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:skills/webapp-testing/SKILL.md",
+          "snapshot_id": 445,
+          "capture_le": "2026-11-02T12:15:45.443Z",
+          "url": "https://github.com/anthropics/skills/blob/main/skills/webapp-testing/SKILL.md",
+          "mode": "live"
+        },
+        {
+          "document": "dossier:skills/webapp-testing",
+          "snapshot_id": 446,
+          "capture_le": "2026-11-02T12:15:45.443Z",
+          "url": "https://github.com/anthropics/skills/tree/main/skills/webapp-testing",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:skills/webapp-testing/LICENSE.txt",
+          "snapshot_id": 447,
+          "capture_le": "2026-11-02T12:15:45.443Z",
+          "url": "https://github.com/anthropics/skills/blob/main/skills/webapp-testing/LICENSE.txt",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:README.md",
+          "snapshot_id": 424,
+          "capture_le": "2026-11-02T12:15:38.384Z",
+          "url": "https://github.com/anthropics/skills/blob/main/README.md",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:.claude-plugin/marketplace.json",
+          "snapshot_id": 485,
+          "capture_le": "2026-11-02T18:42:26.169Z",
+          "url": "https://github.com/anthropics/skills/blob/main/.claude-plugin/marketplace.json",
+          "mode": "live"
+        }
+      ],
+      "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
+      "importe_le": "2026-11-02T18:45:35.166Z"
+    },
+    {
+      "post_id": 7,
+      "revision_id": 46,
+      "slug": "mcp-builder",
+      "nom": "mcp-builder",
+      "compte": "repo",
+      "statut": "en_attente",
+      "etiquette": "pas encore publié",
+      "planning": {
+        "jour": "2026-11-02",
+        "rang": 7,
+        "etat": "prevue",
+        "utilise_reserve": false,
+        "motif": null
+      },
+      "statut_sortie": "ressource_existante",
+      "badge": "Ressource existante",
+      "origine": {
+        "code": "claude_code_developpement",
+        "texte": "Rédigé pendant le développement par Claude Code, assistant de programmation, pas par l'agent du site ; vérifié par les contrôles du code"
+      },
+      "mention": "Analyse IA à partir des sources — non testé par la plateforme",
+      "accroche": {
+        "texte": "Avec mcp-builder, Claude mène votre serveur MCP de l’étude de l’API jusqu’aux évaluations",
+        "passages": [
+          "Use when building MCP servers to integrate external APIs or services",
+          "After implementing your MCP server, create comprehensive evaluations to test its effectiveness.",
+          "This repository contains Anthropic's implementation of skills for Claude."
+        ]
+      },
+      "description": {
+        "texte": "Le skill d’Anthropic pour brancher une API externe sur un serveur MCP, en TypeScript ou en Python avec FastMCP. Claude déroule quatre phases : étude de l’API, implémentation, revue et tests avec MCP Inspector, puis évaluations.",
+        "passages": [
+          "This repository contains Anthropic's implementation of skills for Claude.",
+          "Use when building MCP servers to integrate external APIs or services, whether in Python (FastMCP) or Node/TypeScript (MCP SDK).",
+          "Creating a high-quality MCP server involves four main phases:",
+          "Test with MCP Inspector: npx @modelcontextprotocol/inspector",
+          "After implementing your MCP server, create comprehensive evaluations to test its effectiveness."
+        ]
+      },
+      "interet": {
+        "texte": "Tout est pensé pour l’agent qui appellera les outils : noms préfixés et orientés action, descriptions courtes, résultats ciblés et paginables, erreurs qui disent quoi faire ensuite.",
+        "passages": [
+          "Clear, descriptive tool names help agents find the right tools quickly.",
+          "Use consistent prefixes (e.g., github_create_issue, github_list_repos) and action-oriented naming.",
+          "Agents benefit from concise tool descriptions and the ability to filter/paginate results.",
+          "Design tools that return focused, relevant data.",
+          "Error messages should guide agents toward solutions with specific suggestions and next steps."
+        ]
+      },
+      "exemple_usage": {
+        "texte": "Serveur terminé, le guide fait écrire 10 questions réalistes, sans opération destructrice, pour voir si un LLM s’en sert vraiment bien.",
+        "passages": [
+          "Question Generation: Create 10 complex, realistic questions",
+          "Read-only: Only non-destructive operations required",
+          "Use evaluations to test whether LLMs can effectively use your MCP server to answer realistic, complex questions."
+        ]
+      },
+      "demarrage": {
+        "etapes": [
+          {
+            "texte": "Dans Claude Code, ajouter le dépôt comme marketplace",
+            "passages": [
+              "You can register this repository as a Claude Code Plugin marketplace by running the following command in Claude Code"
+            ]
+          },
+          {
+            "texte": "Installer example-skills : /plugin install example-skills@anthropic-agent-skills",
+            "passages": [
+              "/plugin install example-skills@anthropic-agent-skills",
+              "\"./skills/internal-comms\", \"./skills/mcp-builder\", \"./skills/skill-creator\""
+            ]
+          },
+          {
+            "texte": "Puis citer mcp-builder dans la demande",
+            "passages": [
+              "After installing the plugin, you can use the skill by just mentioning it."
+            ]
+          }
+        ],
+        "commande": "/plugin marketplace add anthropics/skills",
+        "passages": [
+          "You can register this repository as a Claude Code Plugin marketplace by running the following command in Claude Code:",
+          "After installing the plugin, you can use the skill by just mentioning it."
+        ],
+        "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
+      },
+      "compatibilites": [
+        {
+          "texte": "Selon le guide, tout nouveau serveur TypeScript part du SDK v2.",
+          "passages": [
+            "The TypeScript SDK has two major versions.",
+            "v2 (@modelcontextprotocol/server): the current stable release. Use it for new servers."
+          ]
+        }
+      ],
+      "limites": [],
+      "licence_locale": {
+        "texte": "Le dossier du skill a sa propre licence : Apache 2.0.",
+        "passages": [
+          "Apache License Version 2.0, January 2004"
+        ]
+      },
+      "reperes": [
+        {
+          "texte": "Entrées validées par Zod ou Pydantic, sorties structurées",
+          "passages": [
+            "Use Zod (TypeScript) or Pydantic (Python)",
+            "Define outputSchema where possible for structured data"
+          ]
+        },
+        {
+          "texte": "Streamable HTTP en distant, stdio en local",
+          "passages": [
+            "Streamable HTTP for remote servers, using stateless JSON",
+            "stdio for local servers."
+          ]
+        },
+        {
+          "texte": "Annotations par outil : lecture seule, destructif, idempotent",
+          "passages": [
+            "readOnlyHint: true/false destructiveHint: true/false idempotentHint: true/false openWorldHint: true/false"
+          ]
+        }
+      ],
+      "bouton": {
+        "libelle": "Voir le dépôt",
+        "url": "https://github.com/anthropics/skills/tree/main/skills/mcp-builder",
+        "aria_label": "Voir le dépôt anthropics/skills sur GitHub (nouvel onglet)",
+        "verifie_le": "2026-11-02T18:45:40.145Z",
+        "motif": "capture_recente"
+      },
+      "etat_depot": {
+        "full_name": "anthropics/skills",
+        "html_url": "https://github.com/anthropics/skills",
+        "etoiles": 186700,
+        "etoiles_au": "2026-11-02T18:42:26.169Z",
+        "cree_le": "2025-09-22T15:53:31Z",
+        "dernier_push": "2026-10-28T19:20:39Z",
+        "jours_sans_push": 4,
+        "inactif": false,
+        "licence": null,
+        "archive": false,
+        "fork": false,
+        "parent": null,
+        "date_ajout_skill": null
+      },
+      "visuel": {
+        "src": "medias/montages/ressources/mcp-builder.jpg",
+        "alt": "Avec mcp-builder, Claude mène votre serveur MCP de l’étude de l’API jusqu’aux évaluations. Étape 1 : Dans Claude Code, ajouter le dépôt comme marketplace. Étape 2 : Installer example-skills : /plugin install example-skills@anthropic-agent-skills. Étape 3 : Puis citer mcp-builder dans la demande",
+        "gabarit": "etapes",
+        "mention": "Illustration — ne prouve pas le fonctionnement"
+      },
+      "captures": [
+        {
+          "document": "depot",
+          "snapshot_id": 484,
+          "capture_le": "2026-11-02T18:42:26.169Z",
+          "url": "https://github.com/anthropics/skills",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:skills/mcp-builder/SKILL.md",
+          "snapshot_id": 448,
+          "capture_le": "2026-11-02T12:15:46.306Z",
+          "url": "https://github.com/anthropics/skills/blob/main/skills/mcp-builder/SKILL.md",
+          "mode": "live"
+        },
+        {
+          "document": "dossier:skills/mcp-builder",
+          "snapshot_id": 449,
+          "capture_le": "2026-11-02T12:15:46.306Z",
+          "url": "https://github.com/anthropics/skills/tree/main/skills/mcp-builder",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:skills/mcp-builder/LICENSE.txt",
+          "snapshot_id": 450,
+          "capture_le": "2026-11-02T12:15:46.306Z",
+          "url": "https://github.com/anthropics/skills/blob/main/skills/mcp-builder/LICENSE.txt",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:README.md",
+          "snapshot_id": 424,
+          "capture_le": "2026-11-02T12:15:38.384Z",
+          "url": "https://github.com/anthropics/skills/blob/main/README.md",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:.claude-plugin/marketplace.json",
+          "snapshot_id": 485,
+          "capture_le": "2026-11-02T18:42:26.169Z",
+          "url": "https://github.com/anthropics/skills/blob/main/.claude-plugin/marketplace.json",
+          "mode": "live"
+        }
+      ],
+      "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
+      "importe_le": "2026-11-02T18:45:35.166Z"
+    },
+    {
+      "post_id": 10,
+      "revision_id": 30,
+      "slug": "scientific-agent-skills",
+      "nom": "Scientific Agent Skills (K-Dense)",
+      "compte": "repo",
+      "statut": "en_attente",
+      "etiquette": "pas encore publié",
+      "planning": {
+        "jour": "2026-11-02",
+        "rang": 8,
+        "etat": "prevue",
+        "utilise_reserve": false,
+        "motif": null
+      },
+      "statut_sortie": "ressource_existante",
+      "badge": "Ressource existante",
+      "origine": {
+        "code": "claude_code_developpement",
+        "texte": "Rédigé pendant le développement par Claude Code, assistant de programmation, pas par l'agent du site ; vérifié par les contrôles du code"
+      },
+      "mention": "Analyse IA à partir des sources — non testé par la plateforme",
+      "accroche": {
+        "texte": "Scientific Agent Skills : 177 skills pour faire de la recherche avec Claude Code, Cursor ou Codex",
+        "passages": [
+          "A collection of 177 scientific and research skills for AI agents, created by K-Dense.",
+          "works with Cursor, Claude Code, Codex, Google Antigravity, and other compatible hosts"
+        ]
+      },
+      "description": {
+        "texte": "Biologie, chimie, médecine, physique, analyse de données : chaque skill de K-Dense cale votre agent sur un paquet, une base ou une méthode précise, avec les conventions et les contrôles du domaine.",
+        "passages": [
+          "A collection of 177 scientific and research skills for AI agents, created by K-Dense.",
+          "The skills cover biology, chemistry, medicine, physics, engineering, Earth science, data analysis, and scientific communication.",
+          "Each provides guidance for a specific package, data source, or workflow, including the scientific conventions and validation checks needed to use it."
+        ]
+      },
+      "interet": {
+        "texte": "Le morceau le plus utile : Database Lookup documente 80 bases (PubChem, ChEMBL, UniProt, ClinicalTrials.gov…), avec les bons endpoints, la pagination et la provenance. Une seule demande suffit ensuite pour enchaîner tout un pipeline.",
+        "passages": [
+          "The Database Lookup skill documents 80 databases with public, registered, or licensed access (PubChem, ChEMBL, UniProt, COSMIC, ClinicalTrials.gov, FRED, USPTO, and more), including endpoint selection, pagination, and provenance.",
+          "Multi-Step Workflows - Execute complex pipelines with a single prompt"
+        ]
+      },
+      "exemple_usage": {
+        "texte": "Dans l'exemple du dépôt, une seule demande pour classer des inhibiteurs d'EGFR : l'agent interroge ChEMBL, analyse les relations structure-activité avec RDKit, cherche les mécanismes de résistance dans PubMed, puis livre graphiques et rapport.",
+        "passages": [
+          "Goal: Prioritize EGFR inhibitor candidates for preclinical lung-cancer research",
+          "Query ChEMBL for EGFR inhibitors",
+          "analyze structure-activity relationships with RDKit",
+          "search PubMed for resistance mechanisms",
+          "create visualizations and a comprehensive report"
+        ]
+      },
+      "demarrage": {
+        "etapes": [
+          {
+            "texte": "Avec GitHub CLI 2.90.0+ : gh skill install, uniquement les skills utiles.",
+            "passages": [
+              "If you use the GitHub CLI (v2.90.0+), you can install skills with gh skill",
+              "gh skill install K-Dense-AI/scientific-agent-skills scanpy",
+              "Only install the skills you actually need for your work."
+            ]
+          },
+          {
+            "texte": "Les dépendances s'installent à part, selon chaque skill.",
+            "passages": [
+              "Installing the skill files does not install their dependencies",
+              "Follow each skill's compatibility field and setup instructions for packages, system tools, credentials, and network access."
+            ]
+          }
+        ],
+        "commande": "gh skill install K-Dense-AI/scientific-agent-skills scanpy",
+        "passages": [
+          "If you use the GitHub CLI (v2.90.0+), you can install skills with gh skill",
+          "gh skill install K-Dense-AI/scientific-agent-skills scanpy",
+          "Only install the skills you actually need for your work."
+        ],
+        "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
+      },
+      "compatibilites": [],
+      "limites": [
+        {
+          "texte": "Un skill peut faire exécuter du code arbitraire à votre agent et K-Dense ne garantit pas une revue exhaustive : lisez le SKILL.md avant d'installer.",
+          "passages": [
+            "they can instruct your AI agent to run arbitrary code, install packages, make network requests, and modify files on your system.",
+            "we cannot guarantee that every skill has been exhaustively reviewed for all possible risks.",
+            "Read the SKILL.md before installing."
+          ]
+        },
+        {
+          "texte": "Dépôt sous MIT, mais chaque skill a sa licence, qui peut ajouter des conditions.",
+          "passages": [
+            "This project is licensed under the MIT License.",
+            "These licenses may differ from the repository's MIT License and may include additional terms or restrictions."
+          ]
+        }
+      ],
+      "licence_locale": null,
+      "reperes": [
+        {
+          "texte": "Workflows versionnés pour RDKit, Scanpy, scikit-learn",
+          "passages": [
+            "Explicitly defined, version-aware workflows for RDKit, Scanpy, PyTorch Lightning, scikit-learn"
+          ]
+        },
+        {
+          "texte": "Installation épinglée sur un tag ou un commit",
+          "passages": [
+            "Pin to a specific release tag or commit SHA for reproducible installs"
+          ]
+        },
+        {
+          "texte": "Aussi chargeable comme un seul plugin",
+          "passages": [
+            "load the collection as one plugin"
+          ]
+        }
+      ],
+      "bouton": {
+        "libelle": "Voir le dépôt",
+        "url": "https://github.com/K-Dense-AI/scientific-agent-skills",
+        "aria_label": "Voir le dépôt K-Dense-AI/scientific-agent-skills sur GitHub (nouvel onglet)",
+        "verifie_le": "2026-11-02T17:44:49.261Z",
+        "motif": "capture_recente"
+      },
+      "etat_depot": {
+        "full_name": "K-Dense-AI/scientific-agent-skills",
+        "html_url": "https://github.com/K-Dense-AI/scientific-agent-skills",
+        "etoiles": 55782,
+        "etoiles_au": "2026-11-02T12:15:48.594Z",
+        "cree_le": "2025-10-19T20:54:15Z",
+        "dernier_push": "2026-11-02T09:23:27Z",
+        "jours_sans_push": 0,
+        "inactif": false,
+        "licence": "MIT",
+        "archive": false,
+        "fork": false,
+        "parent": null,
+        "date_ajout_skill": null
+      },
+      "visuel": {
+        "src": "medias/montages/ressources/scientific-agent-skills.jpg",
+        "alt": "Scientific Agent Skills : 177 skills pour faire de la recherche avec Claude Code, Cursor ou Codex. Étape 1 : Avec GitHub CLI 2.90.0+ : gh skill install, uniquement les skills utiles.. Étape 2 : Les dépendances s'installent à part, selon chaque skill.",
+        "gabarit": "etapes",
+        "mention": "Illustration — ne prouve pas le fonctionnement"
+      },
+      "captures": [
+        {
+          "document": "depot",
+          "snapshot_id": 455,
+          "capture_le": "2026-11-02T12:15:48.594Z",
+          "url": "https://github.com/K-Dense-AI/scientific-agent-skills",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:README.md",
+          "snapshot_id": 456,
+          "capture_le": "2026-11-02T12:15:48.594Z",
+          "url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/main/README.md",
+          "mode": "live"
+        }
+      ],
+      "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
+      "importe_le": "2026-11-02T17:44:44.497Z"
+    },
+    {
+      "post_id": 11,
+      "revision_id": 49,
+      "slug": "superpowers",
+      "nom": "Superpowers",
+      "compte": "repo",
+      "statut": "en_attente",
+      "etiquette": "pas encore publié",
+      "planning": {
+        "jour": "2026-11-02",
+        "rang": 9,
+        "etat": "prevue",
+        "utilise_reserve": false,
+        "motif": null
+      },
+      "statut_sortie": "ressource_existante",
+      "badge": "Ressource existante",
+      "origine": {
+        "code": "claude_code_developpement",
+        "texte": "Rédigé pendant le développement par Claude Code, assistant de programmation, pas par l'agent du site ; vérifié par les contrôles du code"
+      },
+      "mention": "Analyse IA à partir des sources — non testé par la plateforme",
+      "accroche": {
+        "texte": "Superpowers fait cadrer, planifier, tester et relire votre agent de code avant qu'il livre",
+        "passages": [
+          "Superpowers is a complete software development methodology for your coding agents",
+          "Enforces RED-GREEN-REFACTOR: write failing test, watch it fail",
+          "Critical issues block progress.",
+          "brainstorming - Activates before building anything.",
+          "writing-plans - Activates with approved design.",
+          "test-driven-development - Activates during implementation.",
+          "requesting-code-review - Activates between tasks.",
+          "finishing-a-development-branch - Activates when tasks complete."
+        ]
+      },
+      "description": {
+        "texte": "Superpowers impose une vraie méthode à votre agent de code. Il ne fonce pas dans le code : il vous demande ce que vous cherchez à faire, vous montre la spec par morceaux lisibles, puis bâtit un plan d'implémentation une fois le design validé. Les skills se déclenchent seuls, sans commande à taper.",
+        "passages": [
+          "Superpowers is a complete software development methodology for your coding agents, built on top of a set of composable skills and some initial instructions that make sure your agent uses them.",
+          "it doesn't just jump into trying to write code. Instead, it steps back and asks you what you're really trying to do.",
+          "Once it's teased a spec out of the conversation, it shows it to you in chunks short enough to actually read and digest.",
+          "After you've signed off on the design, your agent puts together an implementation plan",
+          "because the skills trigger automatically, you don't need to do anything special"
+        ]
+      },
+      "interet": {
+        "texte": "Le plan découpe le travail en tâches de 2 à 5 minutes, avec fichiers, code et vérifications. Le TDD est strict : le code écrit avant son test est supprimé. Entre deux tâches, une revue classe les problèmes par gravité, et un problème critique bloque la suite. Selon l'auteur, l'agent tient ainsi quelques heures en autonomie sans dévier du plan.",
+        "passages": [
+          "Breaks work into bite-sized tasks (2-5 minutes each). Every task has exact file paths, complete code, verification steps.",
+          "Enforces RED-GREEN-REFACTOR: write failing test, watch it fail, write minimal code, watch it pass, commit.",
+          "It emphasizes true red/green TDD, YAGNI (You Aren't Gonna Need It), and DRY.",
+          "Deletes code written before tests.",
+          "Reviews against plan, reports issues by severity. Critical issues block progress.",
+          "It's not uncommon for your agent to work autonomously for a couple hours at a time without deviating from the plan you put together."
+        ]
+      },
+      "exemple_usage": {
+        "texte": "Pour une nouvelle fonctionnalité : brainstorming fait préciser la demande, writing-plans la découpe en petites tâches, puis l'implémentation commence par un test qui échoue, avant le code minimal.",
+        "passages": [
+          "Draws out what you actually want, and why, through questions that get you describing it",
+          "writing-plans - Activates with approved design. Breaks work into bite-sized tasks",
+          "Enforces RED-GREEN-REFACTOR: write failing test, watch it fail, write minimal code, watch it pass, commit."
+        ]
+      },
+      "demarrage": {
+        "etapes": [
+          {
+            "texte": "Dans Claude Code : /plugin install superpowers@claude-plugins-official",
+            "passages": [
+              "Getting Started Claude Code",
+              "Install the plugin from Anthropic's official marketplace",
+              "/plugin install superpowers@claude-plugins-official"
+            ]
+          },
+          {
+            "texte": "Autres agents : une installation séparée pour chacun, selon le dépôt",
+            "passages": [
+              "Installation differs by harness. If you use more than one, install Superpowers separately for each one."
+            ]
+          }
+        ],
+        "commande": "/plugin install superpowers@claude-plugins-official",
+        "passages": [
+          "Installation differs by harness. If you use more than one, install Superpowers separately for each one.",
+          "Install the plugin from Anthropic's official marketplace"
+        ],
+        "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
+      },
+      "compatibilites": [
+        {
+          "texte": "Claude Code, Codex, Cursor, Gemini CLI, GitHub Copilot CLI et une dizaine d'autres.",
+          "passages": [
+            "Claude Code Antigravity Codex App Codex CLI Cursor Devin CLI Factory Droid Gemini CLI GitHub Copilot CLI Grok Build CLI Kimi Code OpenCode Pi Qwen Code Hermes Agent Muse"
+          ]
+        }
+      ],
+      "limites": [],
+      "licence_locale": null,
+      "reperes": [
+        {
+          "texte": "Un sous-agent neuf par tâche, relu à chaque fois",
+          "passages": [
+            "dispatches a fresh subagent per task with a review after each"
+          ]
+        },
+        {
+          "texte": "Débogage en 4 phases pour remonter à la cause",
+          "passages": [
+            "systematic-debugging - 4-phase root cause process"
+          ]
+        },
+        {
+          "texte": "Chaque chantier isolé sur sa propre branche",
+          "passages": [
+            "using-git-worktrees - Activates after design approval. Creates isolated workspace on new branch"
+          ]
+        }
+      ],
+      "bouton": {
+        "libelle": "Voir le dépôt",
+        "url": "https://github.com/obra/superpowers",
+        "aria_label": "Voir le dépôt obra/superpowers sur GitHub (nouvel onglet)",
+        "verifie_le": "2026-11-02T18:45:40.158Z",
+        "motif": "capture_recente"
+      },
+      "etat_depot": {
+        "full_name": "obra/superpowers",
+        "html_url": "https://github.com/obra/superpowers",
+        "etoiles": 310943,
+        "etoiles_au": "2026-11-02T12:15:49.227Z",
+        "cree_le": "2025-10-09T19:45:18Z",
+        "dernier_push": "2026-10-29T23:35:34Z",
+        "jours_sans_push": 3,
+        "inactif": false,
+        "licence": "MIT",
+        "archive": false,
+        "fork": false,
+        "parent": null,
+        "date_ajout_skill": null
+      },
+      "visuel": {
+        "src": "medias/montages/ressources/superpowers.jpg",
+        "alt": "Superpowers fait cadrer, planifier, tester et relire votre agent de code avant qu'il livre. Étape 1 : Dans Claude Code : /plugin install superpowers@claude-plugins-official. Étape 2 : Autres agents : une installation séparée pour chacun, selon le dépôt",
+        "gabarit": "etapes",
+        "mention": "Illustration — ne prouve pas le fonctionnement"
+      },
+      "captures": [
+        {
+          "document": "depot",
+          "snapshot_id": 457,
+          "capture_le": "2026-11-02T12:15:49.227Z",
+          "url": "https://github.com/obra/superpowers",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:README.md",
+          "snapshot_id": 458,
+          "capture_le": "2026-11-02T12:15:49.227Z",
+          "url": "https://github.com/obra/superpowers/blob/main/README.md",
+          "mode": "live"
+        }
+      ],
+      "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
+      "importe_le": "2026-11-02T18:45:35.166Z"
+    },
+    {
+      "post_id": 12,
+      "revision_id": 32,
+      "slug": "find-skills",
+      "nom": "find-skills",
+      "compte": "repo",
+      "statut": "en_attente",
+      "etiquette": "pas encore publié",
+      "planning": {
+        "jour": "2026-11-02",
+        "rang": 10,
+        "etat": "prevue",
+        "utilise_reserve": false,
+        "motif": null
+      },
+      "statut_sortie": "ressource_existante",
+      "badge": "Ressource existante",
+      "origine": {
+        "code": "claude_code_developpement",
+        "texte": "Rédigé pendant le développement par Claude Code, assistant de programmation, pas par l'agent du site ; vérifié par les contrôles du code"
+      },
+      "mention": "Analyse IA à partir des sources — non testé par la plateforme",
+      "accroche": {
+        "texte": "find-skills : votre agent peut trouver et installer le skill qui lui manque",
+        "passages": [
+          "This skill helps you discover and install skills from the open agent skills ecosystem."
+        ]
+      },
+      "description": {
+        "texte": "Demandez « trouve un skill pour X », ou juste « comment faire X ». L’agent regarde le classement de skills.sh et, s’il n’y trouve pas son bonheur, lance npx skills find. Il revient avec le skill, sa source et la commande d’installation.",
+        "passages": [
+          "Says \"find a skill for X\" or \"is there a skill for X\"",
+          "Asks \"how do I do X\" where X might be a common task with an existing skill",
+          "Before running a CLI search, check the skills.sh leaderboard",
+          "If the leaderboard doesn't cover the user's need, run the find command:",
+          "The install count and source",
+          "The install command they can run"
+        ]
+      },
+      "interet": {
+        "texte": "Il ne recommande pas un skill sur un simple résultat de recherche : il vérifie d’abord le nombre d’installations et la source. Et si rien n’existe, il vous propose d’écrire le vôtre avec npx skills init.",
+        "passages": [
+          "Do not recommend a skill based solely on search results.",
+          "Install count — Prefer skills with 1K+ installs.",
+          "Source reputation — Official sources (vercel-labs, anthropics, microsoft) are more trustworthy than unknown authors.",
+          "Suggest the user could create their own skill with npx skills init"
+        ]
+      },
+      "exemple_usage": {
+        "texte": "Vous voulez accélérer votre app React : l’agent peut lancer npx skills find react performance et vous proposer un skill avec sa commande d’installation.",
+        "passages": [
+          "User asks \"how do I make my React app faster?\" → npx skills find react performance",
+          "The install command they can run"
+        ]
+      },
+      "demarrage": {
+        "etapes": [
+          {
+            "texte": "Ajouter find-skills avec npx skills add (Node.js 22.20 ou plus).",
+            "passages": [
+              "Requires Node.js 22.20 or later.",
+              "npx skills add <package> - Install a skill from GitHub or other sources"
+            ]
+          },
+          {
+            "texte": "Ensuite, il n’y a plus qu’à demander « trouve un skill pour … ».",
+            "passages": [
+              "Says \"find a skill for X\" or \"is there a skill for X\""
+            ]
+          }
+        ],
+        "commande": null,
+        "passages": [
+          "Requires Node.js 22.20 or later.",
+          "See the installation reference for source formats, private repositories, and all options."
+        ],
+        "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
+      },
+      "compatibilites": [
+        {
+          "texte": "Claude Code, Codex, Cursor, OpenCode et 75 autres agents.",
+          "passages": [
+            "Supports OpenCode, Claude Code, Codex, Cursor, and 75 more."
+          ]
+        }
+      ],
+      "limites": [
+        {
+          "texte": "S’il installe pour vous, c’est en global et sans confirmation (-g -y) : lisez le skill avant d’accepter.",
+          "passages": [
+            "If the user wants to proceed, you can install the skill for them:",
+            "The -g flag installs globally (user-level) and -y skips confirmation prompts."
+          ]
+        }
+      ],
+      "licence_locale": null,
+      "reperes": [
+        {
+          "texte": "Pas de commande à retenir : il suffit de demander",
+          "passages": [
+            "Says \"find a skill for X\" or \"is there a skill for X\""
+          ]
+        },
+        {
+          "texte": "Ne propose jamais un skill sans vérifier installations et source",
+          "passages": [
+            "Do not recommend a skill based solely on search results.",
+            "Install count — Prefer skills with 1K+ installs.",
+            "Source reputation — Official sources (vercel-labs, anthropics, microsoft) are more trustworthy than unknown authors."
+          ]
+        },
+        {
+          "texte": "Rien ne correspond ? Il propose d’en créer un",
+          "passages": [
+            "Suggest the user could create their own skill with npx skills init"
+          ]
+        }
+      ],
+      "bouton": {
+        "libelle": "Voir le dépôt",
+        "url": "https://github.com/vercel-labs/skills/tree/main/skills/find-skills",
+        "aria_label": "Voir le dépôt vercel-labs/skills sur GitHub (nouvel onglet)",
+        "verifie_le": "2026-11-02T17:44:49.268Z",
+        "motif": "capture_recente"
+      },
+      "etat_depot": {
+        "full_name": "vercel-labs/skills",
+        "html_url": "https://github.com/vercel-labs/skills",
+        "etoiles": 37731,
+        "etoiles_au": "2026-11-02T12:15:50.450Z",
+        "cree_le": "2026-01-14T21:31:18Z",
+        "dernier_push": "2026-10-30T20:14:22Z",
+        "jours_sans_push": 2,
+        "inactif": false,
+        "licence": "MIT",
+        "archive": false,
+        "fork": false,
+        "parent": null,
+        "date_ajout_skill": null
+      },
+      "visuel": {
+        "src": "medias/montages/ressources/find-skills.jpg",
+        "alt": "find-skills : votre agent peut trouver et installer le skill qui lui manque. Étape 1 : Ajouter find-skills avec npx skills add (Node.js 22.20 ou plus).. Étape 2 : Ensuite, il n’y a plus qu’à demander « trouve un skill pour … ».",
+        "gabarit": "etapes",
+        "mention": "Illustration — ne prouve pas le fonctionnement"
+      },
+      "captures": [
+        {
+          "document": "depot",
+          "snapshot_id": 459,
+          "capture_le": "2026-11-02T12:15:50.450Z",
+          "url": "https://github.com/vercel-labs/skills",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:skills/find-skills/SKILL.md",
+          "snapshot_id": 460,
+          "capture_le": "2026-11-02T12:15:50.450Z",
+          "url": "https://github.com/vercel-labs/skills/blob/main/skills/find-skills/SKILL.md",
+          "mode": "live"
+        },
+        {
+          "document": "dossier:skills/find-skills",
+          "snapshot_id": 461,
+          "capture_le": "2026-11-02T12:15:50.450Z",
+          "url": "https://github.com/vercel-labs/skills/tree/main/skills/find-skills",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:README.md",
+          "snapshot_id": 462,
+          "capture_le": "2026-11-02T12:15:50.450Z",
+          "url": "https://github.com/vercel-labs/skills/blob/main/README.md",
+          "mode": "live"
+        }
+      ],
+      "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
+      "importe_le": "2026-11-02T17:44:44.497Z"
+    },
+    {
+      "post_id": 13,
+      "revision_id": 33,
+      "slug": "grill-me",
+      "nom": "grill-me (Matt Pocock)",
+      "compte": "repo",
+      "statut": "en_attente",
+      "etiquette": "pas encore publié",
+      "planning": {
+        "jour": "2026-11-02",
+        "rang": 11,
+        "etat": "prevue",
+        "utilise_reserve": false,
+        "motif": null
+      },
+      "statut_sortie": "ressource_existante",
+      "badge": "Ressource existante",
+      "origine": {
+        "code": "claude_code_developpement",
+        "texte": "Rédigé pendant le développement par Claude Code, assistant de programmation, pas par l'agent du site ; vérifié par les contrôles du code"
+      },
+      "mention": "Analyse IA à partir des sources — non testé par la plateforme",
+      "accroche": {
+        "texte": "grill-me : votre agent vous interroge sans relâche sur un plan, jusqu'à ce que tout soit tranché",
+        "passages": [
+          "Get relentlessly interviewed about a plan or design until every branch of the design tree is resolved."
+        ]
+      },
+      "description": {
+        "texte": "Avant de lancer quoi que ce soit, on inverse les rôles : l'agent vous pose des questions précises sur votre plan, votre décision ou votre idée, et creuse chaque branche jusqu'à la trancher. Matt Pocock le destine aux sujets hors code.",
+        "passages": [
+          "getting the agent to ask you detailed questions about what you're building.",
+          "Interview the user relentlessly about a plan, decision, or idea until every branch of the design tree is resolved.",
+          "/grill-me - for non-code uses"
+        ]
+      },
+      "interet": {
+        "texte": "Vous vous alignez avec l'agent avant qu'il se mette au travail, au lieu de découvrir après coup qu'il n'avait pas compris. Pour le code, la variante grill-with-docs mène le même entretien et construit au passage le vocabulaire du projet, avec les décisions difficiles consignées en ADR.",
+        "passages": [
+          "They help you align with the agent before you get started",
+          "you realize it didn't understand you at all.",
+          "Grilling session that also builds your project's domain model",
+          "document hard-to-explain decisions in ADR's."
+        ]
+      },
+      "exemple_usage": {
+        "texte": "Un lancement à cadrer, un arbitrage d'équipe à préparer : tapez /grill-me, décrivez le plan, puis répondez jusqu'à ce que plus rien ne reste flou.",
+        "passages": [
+          "User-invoked skills are reachable only when you type them (e.g. /grill-me)",
+          "Interview the user relentlessly about a plan, decision, or idea until every branch of the design tree is resolved."
+        ]
+      },
+      "demarrage": {
+        "etapes": [
+          {
+            "texte": "Dans Claude Code, installez le plugin mattpocock-skills.",
+            "passages": [
+              "claude plugin install mattpocock-skills@claude-plugins-official",
+              "I see with Claude Code, Codex, and other coding agents."
+            ]
+          },
+          {
+            "texte": "Il ne démarre pas seul : tapez /grill-me, puis décrivez votre plan.",
+            "passages": [
+              "User-invoked skills are reachable only when you type them (e.g. /grill-me)"
+            ]
+          }
+        ],
+        "commande": "claude plugin install mattpocock-skills@claude-plugins-official",
+        "passages": [
+          "claude plugin install mattpocock-skills@claude-plugins-official",
+          "User-invoked skills are reachable only when you type them (e.g. /grill-me)"
+        ],
+        "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
+      },
+      "compatibilites": [
+        {
+          "texte": "Claude Code, Codex et d'autres agents ; n'importe quel modèle, selon l'auteur.",
+          "passages": [
+            "I see with Claude Code, Codex, and other coding agents.",
+            "codex plugin add mattpocock-skills@mattpocock",
+            "npx skills@latest add mattpocock/skills -a <agent>",
+            "They work with any model."
+          ]
+        }
+      ],
+      "limites": [],
+      "licence_locale": null,
+      "reperes": [
+        {
+          "texte": "Se lance seulement quand vous tapez /grill-me",
+          "passages": [
+            "User-invoked skills are reachable only when you type them (e.g. /grill-me)"
+          ]
+        },
+        {
+          "texte": "Fonctionne avec n'importe quel modèle",
+          "passages": [
+            "They work with any model."
+          ]
+        }
+      ],
+      "bouton": {
+        "libelle": "Voir le dépôt",
+        "url": "https://github.com/mattpocock/skills",
+        "aria_label": "Voir le dépôt mattpocock/skills sur GitHub (nouvel onglet)",
+        "verifie_le": "2026-11-02T17:44:49.272Z",
+        "motif": "capture_recente"
+      },
+      "etat_depot": {
+        "full_name": "mattpocock/skills",
+        "html_url": "https://github.com/mattpocock/skills",
+        "etoiles": 309698,
+        "etoiles_au": "2026-11-02T12:15:51.625Z",
+        "cree_le": "2026-02-03T11:15:53Z",
+        "dernier_push": "2026-11-01T11:42:33Z",
+        "jours_sans_push": 1,
+        "inactif": false,
+        "licence": "MIT",
+        "archive": false,
+        "fork": false,
+        "parent": null,
+        "date_ajout_skill": null
+      },
+      "visuel": {
+        "src": "medias/montages/ressources/grill-me.jpg",
+        "alt": "grill-me : votre agent vous interroge sans relâche sur un plan, jusqu'à ce que tout soit tranché. Étape 1 : Dans Claude Code, installez le plugin mattpocock-skills.. Étape 2 : Il ne démarre pas seul : tapez /grill-me, puis décrivez votre plan.",
+        "gabarit": "etapes",
+        "mention": "Illustration — ne prouve pas le fonctionnement"
+      },
+      "captures": [
+        {
+          "document": "depot",
+          "snapshot_id": 463,
+          "capture_le": "2026-11-02T12:15:51.625Z",
+          "url": "https://github.com/mattpocock/skills",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:skills/productivity/grill-me/SKILL.md",
+          "snapshot_id": 464,
+          "capture_le": "2026-11-02T12:15:51.625Z",
+          "url": "https://github.com/mattpocock/skills/blob/main/skills/productivity/grill-me/SKILL.md",
+          "mode": "live"
+        },
+        {
+          "document": "dossier:skills/productivity/grill-me",
+          "snapshot_id": 465,
+          "capture_le": "2026-11-02T12:15:51.625Z",
+          "url": "https://github.com/mattpocock/skills/tree/main/skills/productivity/grill-me",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:README.md",
+          "snapshot_id": 466,
+          "capture_le": "2026-11-02T12:15:51.625Z",
+          "url": "https://github.com/mattpocock/skills/blob/main/README.md",
+          "mode": "live"
+        }
+      ],
+      "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
+      "importe_le": "2026-11-02T17:44:44.497Z"
+    },
+    {
+      "post_id": 14,
+      "revision_id": 34,
+      "slug": "claude-mem",
+      "nom": "claude-mem",
+      "compte": "repo",
+      "statut": "en_attente",
+      "etiquette": "pas encore publié",
+      "planning": {
+        "jour": "2026-11-02",
+        "rang": 12,
+        "etat": "prevue",
+        "utilise_reserve": false,
+        "motif": null
+      },
+      "statut_sortie": "ressource_existante",
+      "badge": "Ressource existante",
+      "origine": {
+        "code": "claude_code_developpement",
+        "texte": "Rédigé pendant le développement par Claude Code, assistant de programmation, pas par l'agent du site ; vérifié par les contrôles du code"
+      },
+      "mention": "Analyse IA à partir des sources — non testé par la plateforme",
+      "accroche": {
+        "texte": "claude-mem donne à Claude Code une mémoire qui tient d’une session à l’autre",
+        "passages": [
+          "Persistent memory compression system built for",
+          "Context survives across sessions",
+          "Claude Code: Latest version with plugin support"
+        ]
+      },
+      "description": {
+        "texte": "Pendant la session, il enregistre ce que fait l’agent, le compresse en résumés et réinjecte le contexte utile dans la suivante. Vous reprenez un projet sans tout réexpliquer.",
+        "passages": [
+          "Captures everything your agent does during sessions, compresses it with AI, and injects relevant context back into future sessions",
+          "This enables Claude to maintain continuity of knowledge about projects even after sessions end or reconnect."
+        ]
+      },
+      "interet": {
+        "texte": "Pour retrouver une info, l’agent lit d’abord un index compact, puis ne charge que les notes utiles : environ dix fois moins de tokens, selon les auteurs.",
+        "passages": [
+          "Get compact index with IDs (~50-100 tokens/result)",
+          "~10x token savings by filtering before fetching details"
+        ]
+      },
+      "exemple_usage": {
+        "texte": "Dans la doc : chercher « authentication bug » parmi les corrections, puis ne récupérer que deux observations.",
+        "passages": [
+          "search(query=\"authentication bug\", type=\"bugfix\", limit=10)",
+          "Fetch full details get_observations(ids=[123, 456])"
+        ]
+      },
+      "demarrage": {
+        "etapes": [
+          {
+            "texte": "npx claude-mem install ou la place de marché de plugins de Claude Code, puis redémarrez. Pas npm install -g, qui n’installe que la bibliothèque.",
+            "passages": [
+              "Install with a single command:",
+              "Or install from the plugin marketplace inside Claude Code:",
+              "Restart Claude Code. Context from previous sessions will automatically appear in new sessions.",
+              "npm install -g claude-mem installs the SDK/library only"
+            ]
+          }
+        ],
+        "commande": "npx claude-mem install",
+        "passages": [
+          "Install with a single command:"
+        ],
+        "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
+      },
+      "compatibilites": [
+        {
+          "texte": "Node.js 20.0.0 ou plus récent.",
+          "passages": [
+            "Node.js: 20.0.0 or higher"
+          ]
+        }
+      ],
+      "limites": [
+        {
+          "texte": "Le service claude-mem proposé à l’installation est gratuit 30 jours ; ensuite la mémoire passe sur votre abonnement Anthropic, sauf souscription ou clé OpenRouter ou Gemini.",
+          "passages": [
+            "asks you to sign in to claude-mem in your browser",
+            "unlocks the claude-mem observer with a 30 Day Free Trial",
+            "When the free trial ends, memory automatically falls back to your Anthropic plan unless you subscribe.",
+            "you pick your memory provider — the claude-mem observer, your own OpenRouter or Gemini key, or your Anthropic plan."
+          ]
+        }
+      ],
+      "licence_locale": null,
+      "reperes": [
+        {
+          "texte": "Recherche en trois temps via 4 outils MCP",
+          "passages": [
+            "Query your project history with the three-step mem-search skill",
+            "intelligent memory search through 4 MCP tools"
+          ]
+        },
+        {
+          "texte": "Historique stocké en SQLite et Chroma",
+          "passages": [
+            "SQLite Database - Stores sessions, observations, summaries",
+            "Chroma Vector Database - Hybrid semantic + keyword search"
+          ]
+        },
+        {
+          "texte": "Aussi pour Codex, Gemini, Copilot et OpenCode",
+          "passages": [
+            "Works with Claude Code, OpenClaw, Codex, Gemini, Hermes, Copilot, OpenCode + More"
+          ]
+        }
+      ],
+      "bouton": {
+        "libelle": "Voir le dépôt",
+        "url": "https://github.com/thedotmack/claude-mem",
+        "aria_label": "Voir le dépôt thedotmack/claude-mem sur GitHub (nouvel onglet)",
+        "verifie_le": "2026-11-02T17:44:49.276Z",
+        "motif": "capture_recente"
+      },
+      "etat_depot": {
+        "full_name": "thedotmack/claude-mem",
+        "html_url": "https://github.com/thedotmack/claude-mem",
+        "etoiles": 110217,
+        "etoiles_au": "2026-11-02T12:15:52.226Z",
+        "cree_le": "2025-08-31T20:50:03Z",
+        "dernier_push": "2026-11-02T10:09:11Z",
+        "jours_sans_push": 0,
+        "inactif": false,
+        "licence": "Apache-2.0",
+        "archive": false,
+        "fork": false,
+        "parent": null,
+        "date_ajout_skill": null
+      },
+      "visuel": {
+        "src": "medias/montages/ressources/claude-mem.jpg",
+        "alt": "claude-mem donne à Claude Code une mémoire qui tient d’une session à l’autre. npx claude-mem install",
+        "gabarit": "terminal_annote",
+        "mention": "Illustration — ne prouve pas le fonctionnement"
+      },
+      "captures": [
+        {
+          "document": "depot",
+          "snapshot_id": 467,
+          "capture_le": "2026-11-02T12:15:52.226Z",
+          "url": "https://github.com/thedotmack/claude-mem",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:README.md",
+          "snapshot_id": 468,
+          "capture_le": "2026-11-02T12:15:52.226Z",
+          "url": "https://github.com/thedotmack/claude-mem/blob/main/README.md",
+          "mode": "live"
+        }
+      ],
+      "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
+      "importe_le": "2026-11-02T17:44:44.497Z"
+    },
+    {
+      "post_id": 16,
+      "revision_id": 36,
+      "slug": "planning-with-files",
+      "nom": "planning-with-files",
+      "compte": "repo",
+      "statut": "en_attente",
+      "etiquette": "pas encore publié",
+      "planning": {
+        "jour": "2026-11-02",
+        "rang": 13,
+        "etat": "prevue",
+        "utilise_reserve": false,
+        "motif": null
+      },
+      "statut_sortie": "ressource_existante",
+      "badge": "Ressource existante",
+      "origine": {
+        "code": "claude_code_developpement",
+        "texte": "Rédigé pendant le développement par Claude Code, assistant de programmation, pas par l'agent du site ; vérifié par les contrôles du code"
+      },
+      "mention": "Analyse IA à partir des sources — non testé par la plateforme",
+      "accroche": {
+        "texte": "planning-with-files garde le plan de votre agent sur disque, et la tâche reprend après un /clear",
+        "passages": [
+          "Persistent file-based planning for AI coding agents and long-running tasks.",
+          "Crash-proof markdown plans, session recovery after /clear and compaction"
+        ]
+      },
+      "description": {
+        "texte": "Le plan tient dans trois fichiers Markdown du projet, pas seulement dans le contexte : task_plan.md pour les phases, findings.md pour les découvertes et les décisions, progress.md pour le journal. Après un /clear, une compaction ou un plantage, l’agent les relit et repart de la phase en cours.",
+        "passages": [
+          "The plan lives on disk in task_plan.md, findings.md, and progress.md, not only in the context window.",
+          "Markdown on disk is the shared state between agents.",
+          "task_plan.md ← phases + checkboxes; the resume point after /clear",
+          "findings.md ← research notes and decisions, appended as you go",
+          "progress.md ← session log and test results",
+          "That is the difference between an agent that forgets after /clear, compaction or a crash and one that resumes at the current phase."
+        ]
+      },
+      "interet": {
+        "texte": "Des hooks réinjectent le plan au début de chaque tour : sur une longue session, l’objectif et l’état des phases restent sous les yeux du modèle. En option, l’agent est retenu tant qu’une phase reste en cours, avec un plafond pour ne jamais bloquer la session, sur les outils qui le permettent.",
+        "passages": [
+          "A hook that fires every turn",
+          "Because the plan is re-injected at the start of each turn from disk, the goals and phase status stay in the model's attention window as the conversation grows.",
+          "Gated mode: the Stop gate holds the stop only while an in_progress phase remains, with a block cap and stall detection so an incomplete plan alone never traps a session",
+          "Optional gated mode can request continuation only on a host that supports the required Stop behavior."
+        ]
+      },
+      "exemple_usage": {
+        "texte": "Validez l’approche en mode plan, faites-la écrire en phases dans task_plan.md, puis lancez l’exécution. Si la conversation est vidée en route, l’agent ne perd pas le fil : il relit les fichiers et reprend où il en était.",
+        "passages": [
+          "Plan mode is where you design and approve the approach before execution.",
+          "after accepting a plan-mode plan, tell the agent to write it into task_plan.md as phases",
+          "then execute in normal mode",
+          "after a /clear or a new session the skill re-reads project files from disk"
+        ]
+      },
+      "demarrage": {
+        "etapes": [
+          {
+            "texte": "Dans Claude Code : /plugin marketplace add OthmanAdi/planning-with-files",
+            "passages": [
+              "Claude Code, plugin route (ships everything: skill, hooks, slash commands):",
+              "/plugin marketplace add OthmanAdi/planning-with-files"
+            ]
+          },
+          {
+            "texte": "Puis /plugin install planning-with-files@planning-with-files",
+            "passages": [
+              "/plugin install planning-with-files@planning-with-files",
+              "Claude Code, plugin route (ships everything: skill, hooks, slash commands):"
+            ]
+          },
+          {
+            "texte": "Tapez /plan, ou demandez simplement un plan à l’agent",
+            "passages": [
+              "Trigger it by typing /plan (plugin) or asking the agent to"
+            ]
+          }
+        ],
+        "commande": "npx skills add OthmanAdi/planning-with-files --skill planning-with-files -g",
+        "passages": [
+          "npx skills add OthmanAdi/planning-with-files --skill planning-with-files -g",
+          "Claude Code, plugin route (ships everything: skill, hooks, slash commands):"
+        ],
+        "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
+      },
+      "compatibilites": [
+        {
+          "texte": "Plugins natifs pour Claude Code, Codex CLI, OpenCode et d’autres ; plus de 60 agents via npx skills add, sans les hooks sur certains.",
+          "passages": [
+            "with native plugins for Claude Code, Codex CLI, Qoder CLI, Pi, Hermes Agent, OpenCode and DeepSeek Harness.",
+            "Installs across 60+ agents via the Agent Skills standard",
+            "SKILL.md discovery via npx skills add; the pattern without lifecycle hooks"
+          ]
+        }
+      ],
+      "limites": [],
+      "licence_locale": null,
+      "reperes": [
+        {
+          "texte": "Mode autonome : moins de rappels, moins de tokens brûlés",
+          "passages": [
+            "Autonomous loops burn tokens on recitation",
+            "Autonomous mode drops the per-tool-call recitation and replaces the raw progress tail with a fixed-shape ledger summary"
+          ]
+        },
+        {
+          "texte": "Multi-agents : un orchestrateur tient le plan",
+          "passages": [
+            "One orchestrator owns task_plan.md and the shared summaries; every worker appends to its own ledger or assigned file."
+          ]
+        },
+        {
+          "texte": "Pour Claude Code, Codex, Cursor et plus de 60 agents",
+          "passages": [
+            "Install from npm, the Claude Code plugin marketplace, or npx skills. Codex, Cursor, OpenCode, 60+ agents."
+          ]
+        }
+      ],
+      "bouton": {
+        "libelle": "Voir le dépôt",
+        "url": "https://github.com/OthmanAdi/planning-with-files",
+        "aria_label": "Voir le dépôt OthmanAdi/planning-with-files sur GitHub (nouvel onglet)",
+        "verifie_le": "2026-11-02T17:44:49.282Z",
+        "motif": "capture_recente"
+      },
+      "etat_depot": {
+        "full_name": "OthmanAdi/planning-with-files",
+        "html_url": "https://github.com/OthmanAdi/planning-with-files",
+        "etoiles": 27824,
+        "etoiles_au": "2026-11-02T12:15:53.678Z",
+        "cree_le": "2026-01-03T07:37:28Z",
+        "dernier_push": "2026-10-30T20:57:42Z",
+        "jours_sans_push": 2,
+        "inactif": false,
+        "licence": "MIT",
+        "archive": false,
+        "fork": false,
+        "parent": null,
+        "date_ajout_skill": null
+      },
+      "visuel": {
+        "src": "medias/montages/ressources/planning-with-files.jpg",
+        "alt": "planning-with-files garde le plan de votre agent sur disque, et la tâche reprend après un /clear. Étape 1 : Dans Claude Code : /plugin marketplace add OthmanAdi/planning-with-files. Étape 2 : Puis /plugin install planning-with-files@planning-with-files. Étape 3 : Tapez /plan, ou demandez simplement un plan à l’agent",
+        "gabarit": "etapes",
+        "mention": "Illustration — ne prouve pas le fonctionnement"
+      },
+      "captures": [
+        {
+          "document": "depot",
+          "snapshot_id": 471,
+          "capture_le": "2026-11-02T12:15:53.678Z",
+          "url": "https://github.com/OthmanAdi/planning-with-files",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:README.md",
+          "snapshot_id": 472,
+          "capture_le": "2026-11-02T12:15:53.678Z",
+          "url": "https://github.com/OthmanAdi/planning-with-files/blob/master/README.md",
+          "mode": "live"
+        }
+      ],
+      "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
+      "importe_le": "2026-11-02T17:44:44.497Z"
+    },
+    {
+      "post_id": 17,
+      "revision_id": 37,
+      "slug": "stop-slop",
+      "nom": "stop-slop",
+      "compte": "repo",
+      "statut": "en_attente",
+      "etiquette": "pas encore publié",
+      "planning": {
+        "jour": "2026-11-02",
+        "rang": 14,
+        "etat": "prevue",
+        "utilise_reserve": false,
+        "motif": null
+      },
+      "statut_sortie": "ressource_existante",
+      "badge": "Ressource existante",
+      "origine": {
+        "code": "claude_code_developpement",
+        "texte": "Rédigé pendant le développement par Claude Code, assistant de programmation, pas par l'agent du site ; vérifié par les contrôles du code"
+      },
+      "mention": "Analyse IA à partir des sources — non testé par la plateforme",
+      "accroche": {
+        "texte": "stop-slop traque les tics d’écriture IA dans vos textes et les fait disparaître",
+        "passages": [
+          "A skill for removing AI tells from prose.",
+          "This skill teaches Claude (or any LLM) to catch and remove them."
+        ]
+      },
+      "description": {
+        "texte": "Formules prévisibles, constructions toutes faites, rythme mécanique : stop-slop apprend à Claude, ou à n’importe quel LLM, à les repérer et à les retirer.",
+        "passages": [
+          "AI writing has patterns. Predictable phrases, structures, rhythms.",
+          "This skill teaches Claude (or any LLM) to catch and remove them."
+        ]
+      },
+      "interet": {
+        "texte": "Les règles sont tranchées : pas de jargon d’entreprise, pas d’adverbes, pas de voix passive, pas d’oppositions binaires, pas de tiret cadratin. Chaque famille de tics a son fichier de référence, chargé seulement quand il sert.",
+        "passages": [
+          "Banned phrases - Throat-clearing openers, emphasis crutches, business jargon, all adverbs, vague declaratives, meta-commentary.",
+          "Structural clichés - Binary contrasts, negative listings, dramatic fragmentation, rhetorical setups, false agency, narrator-from-a-distance voice, passive voice.",
+          "Sentence-level rules - No Wh- sentence starters, no em dashes, no staccato fragmentation, no lazy extremes, active voice required.",
+          "Reference files load on demand.",
+          "phrases.md # Phrases to remove",
+          "structures.md # Structural patterns to avoid"
+        ]
+      },
+      "exemple_usage": {
+        "texte": "Un post écrit avec Claude qui sonne trop IA : passez-le dans stop-slop avant de publier.",
+        "passages": [
+          "This skill teaches Claude (or any LLM) to catch and remove them."
+        ]
+      },
+      "demarrage": {
+        "etapes": [
+          {
+            "texte": "Claude Code : ajoutez le dossier comme skill",
+            "passages": [
+              "Claude Code: Add this folder as a skill."
+            ]
+          },
+          {
+            "texte": "API : incluez SKILL.md dans le prompt système",
+            "passages": [
+              "API calls: Include SKILL.md in your system prompt."
+            ]
+          }
+        ],
+        "commande": null,
+        "passages": [
+          "Claude Code: Add this folder as a skill.",
+          "API calls: Include SKILL.md in your system prompt. Reference files load on demand."
+        ],
+        "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
+      },
+      "compatibilites": [
+        {
+          "texte": "Claude Code, projets Claude, instructions personnalisées ou appels API.",
+          "passages": [
+            "Claude Code: Add this folder as a skill.",
+            "Claude Projects: Upload SKILL.md and reference files to project knowledge.",
+            "Custom instructions: Copy core rules from SKILL.md.",
+            "API calls: Include SKILL.md in your system prompt."
+          ]
+        }
+      ],
+      "limites": [],
+      "licence_locale": null,
+      "reperes": [
+        {
+          "texte": "Note sur 50 en cinq critères : sous 35, retour en révision",
+          "passages": [
+            "Rate 1-10 on each dimension:",
+            "Below 35/50: revise."
+          ]
+        },
+        {
+          "texte": "Exemples avant/après fournis avec les règles",
+          "passages": [
+            "examples.md # Before/after transformations"
+          ]
+        },
+        {
+          "texte": "Claude Code, projets Claude, instructions perso ou API",
+          "passages": [
+            "Claude Code: Add this folder as a skill.",
+            "Claude Projects: Upload SKILL.md and reference files to project knowledge.",
+            "Custom instructions: Copy core rules from SKILL.md.",
+            "API calls: Include SKILL.md in your system prompt."
+          ]
+        }
+      ],
+      "bouton": {
+        "libelle": "Voir le dépôt",
+        "url": "https://github.com/hardikpandya/stop-slop",
+        "aria_label": "Voir le dépôt hardikpandya/stop-slop sur GitHub (nouvel onglet)",
+        "verifie_le": "2026-11-02T17:44:49.286Z",
+        "motif": "capture_recente"
+      },
+      "etat_depot": {
+        "full_name": "hardikpandya/stop-slop",
+        "html_url": "https://github.com/hardikpandya/stop-slop",
+        "etoiles": 18542,
+        "etoiles_au": "2026-11-02T12:15:54.354Z",
+        "cree_le": "2026-01-11T12:00:59Z",
+        "dernier_push": "2026-03-17T18:50:39Z",
+        "jours_sans_push": 229,
+        "inactif": true,
+        "licence": "MIT",
+        "archive": false,
+        "fork": false,
+        "parent": null,
+        "date_ajout_skill": null
+      },
+      "visuel": {
+        "src": "medias/montages/ressources/stop-slop.jpg",
+        "alt": "stop-slop traque les tics d’écriture IA dans vos textes et les fait disparaître. Étape 1 : Claude Code : ajoutez le dossier comme skill. Étape 2 : API : incluez SKILL.md dans le prompt système",
+        "gabarit": "etapes",
+        "mention": "Illustration — ne prouve pas le fonctionnement"
+      },
+      "captures": [
+        {
+          "document": "depot",
+          "snapshot_id": 473,
+          "capture_le": "2026-11-02T12:15:54.354Z",
+          "url": "https://github.com/hardikpandya/stop-slop",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:README.md",
+          "snapshot_id": 474,
+          "capture_le": "2026-11-02T12:15:54.354Z",
+          "url": "https://github.com/hardikpandya/stop-slop/blob/main/README.md",
+          "mode": "live"
+        }
+      ],
+      "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
+      "importe_le": "2026-11-02T17:44:44.497Z"
+    },
+    {
+      "post_id": 21,
+      "revision_id": 54,
+      "slug": "ecc",
+      "nom": "ECC (Everything Claude Code)",
+      "compte": "repo",
+      "statut": "en_attente",
+      "etiquette": "pas encore publié",
+      "planning": {
+        "jour": "2026-11-02",
+        "rang": 15,
+        "etat": "prevue",
+        "utilise_reserve": false,
+        "motif": null
+      },
+      "statut_sortie": "ressource_existante",
+      "badge": "Ressource existante",
+      "origine": {
+        "code": "claude_code_developpement",
+        "texte": "Rédigé pendant le développement par Claude Code, assistant de programmation, pas par l'agent du site ; vérifié par les contrôles du code"
+      },
+      "mention": "Analyse IA à partir des sources — non testé par la plateforme",
+      "accroche": {
+        "texte": "ECC installe une méthode de travail dans votre agent de code, au lieu de la redire à chaque prompt",
+        "passages": [
+          "Instead of rebuilding that process in every prompt, you install it once and make it part of how your agent works."
+        ]
+      },
+      "description": {
+        "texte": "Planifier avant de coder, vérifier par les tests, garder ce qui compte : ECC réunit 71 agents, 314 skills, des hooks et des résumés de session pour que ce processus fasse partie de la façon dont votre agent travaille. Il fonctionne aujourd'hui le mieux avec Claude Code, avec des plugins natifs pour Codex et Qoder et des adaptateurs plus limités pour Cursor, OpenCode ou Gemini.",
+        "passages": [
+          "Access to 71 agents, 314 skills, and 98 legacy command shims, plus hooks, rules, memory, continuous learning, and AgentShield security scanning.",
+          "it plans before it builds, verifies changes with tests, reviews its own work from a fresh context, remembers what matters",
+          "Sessions are distilled into summaries, instincts, and reusable skills",
+          "make it part of how your agent works",
+          "It works best with Claude Code today, has native Codex and Qoder plugin paths, and provides capability-limited adapters for Cursor, OpenCode, Gemini, Zed, GitHub Copilot, Antigravity, Qwen, and other harnesses."
+        ]
+      },
+      "interet": {
+        "texte": "Le plan devient un document à valider avant la première ligne, le TDD exige un test en échec avant l'implémentation, et les hooks ajoutent des contrôles qui ne dépendent plus du prompt. Ces hooks lancent des commandes shell sur votre machine : installez ECC uniquement depuis le dépôt officiel ou le paquet npm ecc-universal, les copies non officielles pouvant contenir un logiciel malveillant.",
+        "passages": [
+          "Plans become editable artifacts before implementation starts",
+          "TDD becomes a gated RED -> GREEN -> REFACTOR workflow with evidence",
+          "capture RED evidence before implementation",
+          "Hooks can enforce deterministic checks outside the prompt",
+          "Hooks can run shell commands",
+          "Install ECC only from verified channels: the GitHub repository github.com/affaan-m/ECC, the npm packages ecc-universal and ecc-agentshield",
+          "Third-party re-uploads and unofficial mirrors are not maintained or reviewed by the project and may contain malware."
+        ]
+      },
+      "exemple_usage": {
+        "texte": "Pour une nouvelle fonctionnalité, selon le dépôt : /ecc:plan avec la demande, validation du plan, puis tdd-workflow fait écrire un test qui échoue avant d'implémenter. Suivent une relecture en contexte neuf et une vérification du build, du lint, des types et des tests.",
+        "passages": [
+          "/ecc:plan \"Add usage-based billing alerts\" -> confirm or edit the plan -> activate tdd-workflow -> capture RED evidence before implementation",
+          "implement until GREEN -> review from fresh context -> fix findings with regression tests -> verify build, lint, types, and tests"
+        ]
+      },
+      "demarrage": {
+        "etapes": [
+          {
+            "texte": "Lancer npx ecc-universal@2.2.3 setup (Node.js 18 ou plus requis)",
+            "passages": [
+              "Claude Code plugin setup, updates, scope changes, and hook-profile changes: `bash npx ecc-universal@2.2.3 setup `",
+              "The universal package requires Node.js 18 or newer."
+            ]
+          },
+          {
+            "texte": "Choix de la portée et du profil de hooks ; on peut relancer pour les changer",
+            "passages": [
+              "For a typical personal setup, choose Global user, choose Standard hooks, and confirm.",
+              "Rerun the same command whenever you want to update ECC, change scope, or change its hook profile."
+            ]
+          }
+        ],
+        "commande": "npx ecc-universal@2.2.3 setup",
+        "passages": [
+          "This setup wizard currently configures the Claude Code plugin; use the multi-harness wizard below for Codex or Kimi Code.",
+          "A version pin is not a security audit or an integrity check."
+        ],
+        "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
+      },
+      "compatibilites": [
+        {
+          "texte": "Assistant d'installation pour le plugin Claude Code : Git et Claude Code 2.1 ou plus requis",
+          "passages": [
+            "This setup wizard currently configures the Claude Code plugin",
+            "requires Git and Claude Code 2.1 or newer on PATH."
+          ]
+        }
+      ],
+      "limites": [
+        {
+          "texte": "Les hooks peuvent lancer des commandes shell et les serveurs MCP détenir des identifiants : à traiter comme du code exécutable, et à installer uniquement depuis les sources officielles.",
+          "passages": [
+            "Hooks can run shell commands, MCP servers can hold credentials",
+            "Treat all three as executable configuration.",
+            "Install ECC only from verified channels"
+          ]
+        }
+      ],
+      "licence_locale": null,
+      "reperes": [
+        {
+          "texte": "Relecture par un agent au contexte neuf",
+          "passages": [
+            "A fresh-context reviewer looks for regressions and blind spots"
+          ]
+        },
+        {
+          "texte": "AgentShield, paquet à part, audite la configuration de l'agent",
+          "passages": [
+            "AgentShield scans the harness itself as an attack surface",
+            "these commands require an already installed, reviewed AgentShield binary from ecc-agentshield"
+          ]
+        },
+        {
+          "texte": "Les sessions peuvent devenir instincts et skills réutilisables",
+          "passages": [
+            "Sessions are distilled into summaries, instincts, and reusable skills"
+          ]
+        }
+      ],
+      "bouton": {
+        "libelle": "Voir le dépôt",
+        "url": "https://github.com/affaan-m/ECC",
+        "aria_label": "Voir le dépôt affaan-m/ECC sur GitHub (nouvel onglet)",
+        "verifie_le": "2026-11-02T18:45:40.179Z",
+        "motif": "capture_recente"
+      },
+      "etat_depot": {
+        "full_name": "affaan-m/ECC",
+        "html_url": "https://github.com/affaan-m/ECC",
+        "etoiles": 295309,
+        "etoiles_au": "2026-11-02T15:44:08.245Z",
+        "cree_le": "2026-01-18T00:51:51Z",
+        "dernier_push": "2026-11-02T04:56:08Z",
+        "jours_sans_push": 0,
+        "inactif": false,
+        "licence": "MIT",
+        "archive": false,
+        "fork": false,
+        "parent": null,
+        "date_ajout_skill": null
+      },
+      "visuel": {
+        "src": "medias/montages/ressources/ecc.jpg",
+        "alt": "ECC installe une méthode de travail dans votre agent de code, au lieu de la redire à chaque prompt. Étape 1 : Lancer npx ecc-universal@2.2.3 setup (Node.js 18 ou plus requis). Étape 2 : Choix de la portée et du profil de hooks ; on peut relancer pour les changer",
+        "gabarit": "etapes",
+        "mention": "Illustration — ne prouve pas le fonctionnement"
+      },
+      "captures": [
+        {
+          "document": "depot",
+          "snapshot_id": 482,
+          "capture_le": "2026-11-02T15:44:08.245Z",
+          "url": "https://github.com/affaan-m/ECC",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:README.md",
+          "snapshot_id": 483,
+          "capture_le": "2026-11-02T15:44:08.245Z",
+          "url": "https://github.com/affaan-m/ECC/blob/main/README.md",
+          "mode": "live"
+        }
+      ],
+      "decouverte_via": "Ressource ajoutée par l'utilisateur le 2026-11-02, hors du fil X d'origine",
+      "importe_le": "2026-11-02T18:45:35.166Z"
+    },
+    {
+      "post_id": 8,
+      "revision_id": 47,
+      "slug": "obsidian-skills",
+      "nom": "Obsidian Skills",
+      "compte": "repo",
+      "statut": "en_attente",
+      "etiquette": "pas encore publié",
+      "planning": {
+        "jour": "2026-11-03",
+        "rang": 1,
+        "etat": "prevue",
+        "utilise_reserve": false,
+        "motif": null
+      },
+      "statut_sortie": "ressource_existante",
+      "badge": "Ressource existante",
+      "origine": {
+        "code": "claude_code_developpement",
+        "texte": "Rédigé pendant le développement par Claude Code, assistant de programmation, pas par l'agent du site ; vérifié par les contrôles du code"
+      },
+      "mention": "Analyse IA à partir des sources — non testé par la plateforme",
+      "accroche": {
+        "texte": "Obsidian Skills apprend à votre agent les formats d'Obsidian et son CLI",
+        "passages": [
+          "Teach your agent to use Obsidian CLI and open formats including Markdown, Bases, JSON Canvas.",
+          "any skills-compatible agent, including Claude Code, Codex, and Open Code"
+        ]
+      },
+      "description": {
+        "texte": "Votre agent écrit des notes avec wikilinks, callouts et propriétés, monte des Bases avec vues, filtres et formules, et construit des canevas JSON Canvas, directement dans votre coffre. Ça marche avec Claude Code, Codex et OpenCode.",
+        "passages": [
+          "Create and edit Obsidian Flavored Markdown (.md) with wikilinks, embeds, callouts, properties, and other Obsidian-specific syntax",
+          "Create and edit Obsidian Bases (.base) with views, filters, formulas, and summaries",
+          "Create and edit JSON Canvas files (.canvas) with nodes, edges, groups, and connections",
+          "any skills-compatible agent, including Claude Code, Codex, and Open Code",
+          "OpenCode auto-discovers all SKILL.md files under ~/.opencode/skills/."
+        ]
+      },
+      "interet": {
+        "texte": "Deux skills sortent du cadre des notes : defuddle réduit une page web à un Markdown propre pour économiser des tokens, knap génère des fichiers en série depuis du JSON ou du CSV. Le dépôt suit la spécification Agent Skills, donc les mêmes skills servent à tous vos agents compatibles.",
+        "passages": [
+          "Extract clean markdown from web pages using Defuddle, removing clutter to save tokens",
+          "Render Markdown templates from JSON or CSV data using Knap, including batch file generation",
+          "These skills follow the Agent Skills specification so they can be used by any skills-compatible agent"
+        ]
+      },
+      "exemple_usage": {
+        "texte": "Récupérer un article avec defuddle, puis le ranger dans le coffre en note avec propriétés et wikilinks.",
+        "passages": [
+          "Extract clean markdown from web pages using Defuddle, removing clutter to save tokens",
+          "Create and edit Obsidian Flavored Markdown (.md) with wikilinks, embeds, callouts, properties"
+        ]
+      },
+      "demarrage": {
+        "etapes": [
+          {
+            "texte": "Dans Claude Code : /plugin marketplace add kepano/obsidian-skills",
+            "passages": [
+              "/plugin marketplace add kepano/obsidian-skills /plugin install obsidian@obsidian-skills",
+              "any skills-compatible agent, including Claude Code, Codex, and Open Code"
+            ]
+          },
+          {
+            "texte": "Puis /plugin install obsidian@obsidian-skills",
+            "passages": [
+              "/plugin marketplace add kepano/obsidian-skills /plugin install obsidian@obsidian-skills"
+            ]
+          },
+          {
+            "texte": "Ou avec npx : npx skills add https://github.com/kepano/obsidian-skills",
+            "passages": [
+              "npx skills add https://github.com/kepano/obsidian-skills",
+              "Instead of ssh, if you prefer to use https"
+            ]
+          }
+        ],
+        "commande": "npx skills add https://github.com/kepano/obsidian-skills",
+        "passages": [
+          "npx skills add https://github.com/kepano/obsidian-skills",
+          "Instead of ssh, if you prefer to use https"
+        ],
+        "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
+      },
+      "compatibilites": [
+        {
+          "texte": "Claude Code, Codex, OpenCode et tout agent compatible Agent Skills.",
+          "passages": [
+            "These skills follow the Agent Skills specification so they can be used by any skills-compatible agent",
+            "any skills-compatible agent, including Claude Code, Codex, and Open Code",
+            "OpenCode auto-discovers all SKILL.md files under ~/.opencode/skills/."
+          ]
+        }
+      ],
+      "limites": [],
+      "licence_locale": null,
+      "reperes": [
+        {
+          "texte": "Pilote le coffre via la CLI, plugins et thèmes compris",
+          "passages": [
+            "Interact with Obsidian vaults via the Obsidian CLI including plugin and theme development"
+          ]
+        },
+        {
+          "texte": "Sous OpenCode, aucun fichier de config à modifier",
+          "passages": [
+            "OpenCode auto-discovers all SKILL.md files under ~/.opencode/skills/.",
+            "No changes to opencode.json or any config file are needed."
+          ]
+        },
+        {
+          "texte": "Installable à la main dans le dossier .claude du coffre",
+          "passages": [
+            "Add the contents of this repo to a /.claude folder in the root of your Obsidian vault"
+          ]
+        }
+      ],
+      "bouton": {
+        "libelle": "Voir le dépôt",
+        "url": "https://github.com/kepano/obsidian-skills",
+        "aria_label": "Voir le dépôt kepano/obsidian-skills sur GitHub (nouvel onglet)",
+        "verifie_le": "2026-11-02T18:45:40.150Z",
+        "motif": "capture_recente"
+      },
+      "etat_depot": {
+        "full_name": "kepano/obsidian-skills",
+        "html_url": "https://github.com/kepano/obsidian-skills",
+        "etoiles": 50608,
+        "etoiles_au": "2026-11-02T12:15:46.936Z",
+        "cree_le": "2026-01-02T21:45:11Z",
+        "dernier_push": "2026-09-15T14:43:57Z",
+        "jours_sans_push": 47,
+        "inactif": false,
+        "licence": "MIT",
+        "archive": false,
+        "fork": false,
+        "parent": null,
+        "date_ajout_skill": null
+      },
+      "visuel": {
+        "src": "medias/montages/ressources/obsidian-skills.jpg",
+        "alt": "Obsidian Skills apprend à votre agent les formats d'Obsidian et son CLI. Étape 1 : Dans Claude Code : /plugin marketplace add kepano/obsidian-skills. Étape 2 : Puis /plugin install obsidian@obsidian-skills. Étape 3 : Ou avec npx : npx skills add https://github.com/kepano/obsidian-skills",
+        "gabarit": "etapes",
+        "mention": "Illustration — ne prouve pas le fonctionnement"
+      },
+      "captures": [
+        {
+          "document": "depot",
+          "snapshot_id": 451,
+          "capture_le": "2026-11-02T12:15:46.936Z",
+          "url": "https://github.com/kepano/obsidian-skills",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:README.md",
+          "snapshot_id": 452,
+          "capture_le": "2026-11-02T12:15:46.936Z",
+          "url": "https://github.com/kepano/obsidian-skills/blob/main/README.md",
+          "mode": "live"
+        }
+      ],
+      "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
+      "importe_le": "2026-11-02T18:45:35.166Z"
+    },
+    {
+      "post_id": 9,
+      "revision_id": 48,
+      "slug": "marketingskills",
+      "nom": "Marketing Skills",
+      "compte": "repo",
+      "statut": "en_attente",
+      "etiquette": "pas encore publié",
+      "planning": {
+        "jour": "2026-11-03",
+        "rang": 2,
+        "etat": "prevue",
+        "utilise_reserve": false,
+        "motif": null
+      },
+      "statut_sortie": "ressource_existante",
+      "badge": "Ressource existante",
+      "origine": {
+        "code": "claude_code_developpement",
+        "texte": "Rédigé pendant le développement par Claude Code, assistant de programmation, pas par l'agent du site ; vérifié par les contrôles du code"
+      },
+      "mention": "Analyse IA à partir des sources — non testé par la plateforme",
+      "accroche": {
+        "texte": "Marketing Skills : CRO, copywriting, SEO et séquences d’e-mails pris en charge par votre agent de code",
+        "passages": [
+          "Marketing skills for Claude Code and AI agents.",
+          "CRO, copywriting, SEO, analytics, and growth engineering.",
+          "create or optimize an email sequence"
+        ]
+      },
+      "description": {
+        "texte": "La collection de Corey Haines pour le marketing. Votre agent repère la tâche en cours, page à faire convertir, séquence d’e-mails, prix ou campagne Google Ads, et applique la méthode adaptée.",
+        "passages": [
+          "A collection of AI agent skills focused on marketing tasks.",
+          "Built by Corey Haines.",
+          "your agent can recognize when you're working on a marketing task and apply the right frameworks and best practices",
+          "help with conversion optimization, copywriting, SEO, analytics, and growth engineering.",
+          "When the user wants to create or optimize an email sequence, drip campaign",
+          "When the user wants help with pricing decisions, packaging, or monetization strategy.",
+          "When the user wants help with paid advertising campaigns on Google Ads"
+        ]
+      },
+      "interet": {
+        "texte": "Tout repose sur un document produit commun : vous posez une fois produit, public et positionnement avec product-marketing, et chaque skill le relit avant d’agir.",
+        "passages": [
+          "Skills reference each other and build on shared context.",
+          "When the user wants to create or update their product marketing context document",
+          "every other skill checks it first to understand your product, audience, and positioning before doing anything"
+        ]
+      },
+      "exemple_usage": {
+        "texte": "Demandez d’optimiser une landing page pour la conversion : l’agent s’appuie sur le skill cro.",
+        "passages": [
+          "Once installed, just ask your agent to help with marketing tasks",
+          "Help me optimize this landing page for conversions",
+          "Uses cro skill"
+        ]
+      },
+      "demarrage": {
+        "etapes": [
+          {
+            "texte": "npx skills add coreyhaines31/marketingskills",
+            "passages": [
+              "Use npx skills to install skills directly",
+              "npx skills add coreyhaines31/marketingskills"
+            ]
+          },
+          {
+            "texte": "Lancé depuis Claude Code : ajouter -a claude-code, sinon il ne les lit pas",
+            "passages": [
+              "If you run the command from inside an agent session (e.g., asking Claude Code to install the skills for you)",
+              "may only install to the universal .agents/skills/ directory, which Claude Code does not read",
+              "npx skills add coreyhaines31/marketingskills -a claude-code"
+            ]
+          },
+          {
+            "texte": "Remplir product-marketing, puis confier ses tâches à l’agent",
+            "passages": [
+              "When the user wants to create or update their product marketing context document",
+              "Once installed, just ask your agent to help with marketing tasks"
+            ]
+          }
+        ],
+        "commande": "npx skills add coreyhaines31/marketingskills",
+        "passages": [
+          "Use npx skills to install skills directly",
+          "When the user wants to create or update their product marketing context document",
+          "Once installed, just ask your agent to help with marketing tasks"
+        ],
+        "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
+      },
+      "compatibilites": [
+        {
+          "texte": "Claude Code, Codex, Cursor, Windsurf et tout agent compatible Agent Skills.",
+          "passages": [
+            "Works with Claude Code, OpenAI Codex, Cursor, Windsurf, and any agent that supports the Agent Skills spec."
+          ]
+        }
+      ],
+      "limites": [],
+      "licence_locale": null,
+      "reperes": [
+        {
+          "texte": "Sous licence MIT, réutilisable librement",
+          "passages": [
+            "MIT - Use these however you want."
+          ]
+        },
+        {
+          "texte": "Pour Claude Code, Codex, Cursor et Windsurf",
+          "passages": [
+            "Works with Claude Code, OpenAI Codex, Cursor, Windsurf"
+          ]
+        },
+        {
+          "texte": "Aussi : tests A/B, churn, pipeline commercial",
+          "passages": [
+            "ab-testing - Experiment design",
+            "churn-prevention - Cancel flows, save offers, dunning, payment recovery",
+            "revops - Lead lifecycle, scoring, routing, pipeline management"
+          ]
+        }
+      ],
+      "bouton": {
+        "libelle": "Voir le dépôt",
+        "url": "https://github.com/coreyhaines31/marketingskills",
+        "aria_label": "Voir le dépôt coreyhaines31/marketingskills sur GitHub (nouvel onglet)",
+        "verifie_le": "2026-11-02T18:45:40.154Z",
+        "motif": "capture_recente"
+      },
+      "etat_depot": {
+        "full_name": "coreyhaines31/marketingskills",
+        "html_url": "https://github.com/coreyhaines31/marketingskills",
+        "etoiles": 57957,
+        "etoiles_au": "2026-11-02T12:15:47.595Z",
+        "cree_le": "2026-01-15T19:45:23Z",
+        "dernier_push": "2026-10-31T00:53:07Z",
+        "jours_sans_push": 2,
+        "inactif": false,
+        "licence": "MIT",
+        "archive": false,
+        "fork": false,
+        "parent": null,
+        "date_ajout_skill": null
+      },
+      "visuel": {
+        "src": "medias/montages/ressources/marketingskills.jpg",
+        "alt": "Marketing Skills : CRO, copywriting, SEO et séquences d’e-mails pris en charge par votre agent de code. Étape 1 : npx skills add coreyhaines31/marketingskills. Étape 2 : Lancé depuis Claude Code : ajouter -a claude-code, sinon il ne les lit pas. Étape 3 : Remplir product-marketing, puis confier ses tâches à l’agent",
+        "gabarit": "etapes",
+        "mention": "Illustration — ne prouve pas le fonctionnement"
+      },
+      "captures": [
+        {
+          "document": "depot",
+          "snapshot_id": 453,
+          "capture_le": "2026-11-02T12:15:47.595Z",
+          "url": "https://github.com/coreyhaines31/marketingskills",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:README.md",
+          "snapshot_id": 454,
+          "capture_le": "2026-11-02T12:15:47.595Z",
+          "url": "https://github.com/coreyhaines31/marketingskills/blob/main/README.md",
+          "mode": "live"
+        }
+      ],
+      "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
+      "importe_le": "2026-11-02T18:45:35.166Z"
+    },
+    {
+      "post_id": 15,
+      "revision_id": 50,
+      "slug": "humanizer",
+      "nom": "Humanizer",
+      "compte": "repo",
+      "statut": "en_attente",
+      "etiquette": "pas encore publié",
+      "planning": {
+        "jour": "2026-11-03",
+        "rang": 3,
+        "etat": "prevue",
+        "utilise_reserve": false,
+        "motif": null
+      },
+      "statut_sortie": "ressource_existante",
+      "badge": "Ressource existante",
+      "origine": {
+        "code": "claude_code_developpement",
+        "texte": "Rédigé pendant le développement par Claude Code, assistant de programmation, pas par l'agent du site ; vérifié par les contrôles du code"
+      },
+      "mention": "Analyse IA à partir des sources — non testé par la plateforme",
+      "accroche": {
+        "texte": "Humanizer retire les tics d'écriture IA d'un texte sans toucher à ce qu'il dit",
+        "passages": [
+          "Agent skill that removes signs of AI-generated writing from text",
+          "Humanizer makes AI-written text sound like a person wrote it, without changing what it says."
+        ]
+      },
+      "description": {
+        "texte": "Collez un texte ou donnez le chemin d'un fichier : Humanizer repère les tics d'écriture IA, du plus flagrant au plus discret, puis réécrit la prose. Sur un fichier, il ne touche qu'au texte : code, données et frontmatter restent en place.",
+        "passages": [
+          "Humanizer makes AI-written text sound like a person wrote it, without changing what it says.",
+          "To rewrite a file, give Humanizer its path",
+          "Humanizer marks every tell it finds, strongest first.",
+          "Point it at a file and it changes only the prose, leaving code, data, frontmatter, and link targets alone."
+        ]
+      },
+      "interet": {
+        "texte": "Il n'invente rien : s'il manque un nom, un chiffre ou une date, il pose la question. Sur un texte collé, vous voyez son premier jet, ce qui sonne encore artificiel, puis la version finale. Joignez deux ou trois paragraphes de votre main et il reprend votre rythme, votre vocabulaire et votre ponctuation.",
+        "passages": [
+          "It does not make things up.",
+          "A name, number, date, quote, citation, or other factual detail must come from the source or the writer",
+          "if a sentence needs a detail that is missing, Humanizer asks instead of inventing one",
+          "When you paste text, Humanizer shows its work: the first rewrite, a short critique of anything that still sounds artificial, and the final version.",
+          "If you want the rewrite to sound more like you, include a sample",
+          "paste 2-3 paragraphs of your own writing",
+          "Humanizer follows the sample's rhythm, word choice, punctuation, and deliberate quirks"
+        ]
+      },
+      "exemple_usage": {
+        "texte": "Dans l'exemple du dépôt, une annonce perd son émoji, son « It's not just a feature… » et son « Let that sink in. », puis commence sans détour : « Shared drafts are out today. »",
+        "passages": [
+          "I'm thrilled to announce that shared drafts are finally here! 🚀",
+          "It's not just a feature; it's a whole new way to collaborate.",
+          "It's available today on every plan, completely free. Let that sink in.",
+          "Shared drafts are out today."
+        ]
+      },
+      "demarrage": {
+        "etapes": [
+          {
+            "texte": "Pas avant Claude Code 2.1.142 : /plugin marketplace add blader/humanizer",
+            "passages": [
+              "/plugin marketplace add blader/humanizer /plugin install humanizer@humanizer",
+              "It needs Claude Code 2.1.142 or newer"
+            ]
+          },
+          {
+            "texte": "Puis /plugin install humanizer@humanizer, pas sur une version plus ancienne",
+            "passages": [
+              "/plugin marketplace add blader/humanizer /plugin install humanizer@humanizer"
+            ]
+          },
+          {
+            "texte": "Codex : npx skills add blader/humanizer --global --agent codex",
+            "passages": [
+              "npx skills add blader/humanizer --global --agent codex"
+            ]
+          },
+          {
+            "texte": "Puis /humanizer et le texte ; pour un fichier, son chemin, sans commande",
+            "passages": [
+              "Once installed, the skill answers to /humanizer.",
+              "To rewrite a file, give Humanizer its path",
+              "Humanize the prose in docs/launch-post.md"
+            ]
+          }
+        ],
+        "commande": "/plugin marketplace add blader/humanizer\n/plugin install humanizer@humanizer",
+        "passages": [
+          "/plugin marketplace add blader/humanizer /plugin install humanizer@humanizer",
+          "The plugin answers to /humanizer:humanizer.",
+          "It needs Claude Code 2.1.142 or newer"
+        ],
+        "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
+      },
+      "compatibilites": [
+        {
+          "texte": "Selon le dépôt : Claude Code, Codex et les agents gérés par Skills CLI, dont Gemini CLI, GitHub Copilot et Windsurf.",
+          "passages": [
+            "it works in Claude Code, Codex, and any other agent that supports skills",
+            "This installs Humanizer for every agent the Skills CLI supports, including Gemini CLI, GitHub Copilot, and Windsurf."
+          ]
+        }
+      ],
+      "limites": [],
+      "licence_locale": null,
+      "reperes": [
+        {
+          "texte": "26 motifs issus du guide de Wikipedia, selon le dépôt",
+          "passages": [
+            "Humanizer checks for 26 patterns in all.",
+            "It is built on Wikipedia's Signs of AI writing, the guide Wikipedia editors use to catch AI-generated text"
+          ]
+        },
+        {
+          "texte": "Ne cherche pas à tromper les détecteurs d'IA",
+          "passages": [
+            "Getting past AI detectors is not a goal, and detectors still flag most of its output."
+          ]
+        },
+        {
+          "texte": "Claude Code, Codex et d'autres agents, selon le dépôt",
+          "passages": [
+            "it works in Claude Code, Codex, and any other agent that supports skills"
+          ]
+        }
+      ],
+      "bouton": {
+        "libelle": "Voir le dépôt",
+        "url": "https://github.com/blader/humanizer",
+        "aria_label": "Voir le dépôt blader/humanizer sur GitHub (nouvel onglet)",
+        "verifie_le": "2026-11-02T18:45:40.163Z",
+        "motif": "capture_recente"
+      },
+      "etat_depot": {
+        "full_name": "blader/humanizer",
+        "html_url": "https://github.com/blader/humanizer",
+        "etoiles": 63799,
+        "etoiles_au": "2026-11-02T12:15:52.912Z",
+        "cree_le": "2026-01-18T05:30:15Z",
+        "dernier_push": "2026-10-28T07:17:33Z",
+        "jours_sans_push": 5,
+        "inactif": false,
+        "licence": "MIT",
+        "archive": false,
+        "fork": false,
+        "parent": null,
+        "date_ajout_skill": null
+      },
+      "visuel": {
+        "src": "medias/montages/ressources/humanizer.jpg",
+        "alt": "Humanizer retire les tics d'écriture IA d'un texte sans toucher à ce qu'il dit. Étape 1 : Pas avant Claude Code 2.1.142 : /plugin marketplace add blader/humanizer. Étape 2 : Puis /plugin install humanizer@humanizer, pas sur une version plus ancienne. Étape 3 : Codex : npx skills add blader/humanizer --global --agent codex. Étape 4 : Puis /humanizer et le texte ; pour un fichier, son chemin, sans commande",
+        "gabarit": "etapes",
+        "mention": "Illustration — ne prouve pas le fonctionnement"
+      },
+      "captures": [
+        {
+          "document": "depot",
+          "snapshot_id": 469,
+          "capture_le": "2026-11-02T12:15:52.912Z",
+          "url": "https://github.com/blader/humanizer",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:README.md",
+          "snapshot_id": 470,
+          "capture_le": "2026-11-02T12:15:52.912Z",
+          "url": "https://github.com/blader/humanizer/blob/main/README.md",
+          "mode": "live"
+        }
+      ],
+      "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
+      "importe_le": "2026-11-02T18:45:35.166Z"
+    },
+    {
+      "post_id": 18,
+      "revision_id": 51,
+      "slug": "improve-codebase-architecture",
+      "nom": "improve-codebase-architecture (Matt Pocock)",
+      "compte": "repo",
+      "statut": "en_attente",
+      "etiquette": "pas encore publié",
+      "planning": {
+        "jour": "2026-11-03",
+        "rang": 4,
+        "etat": "prevue",
+        "utilise_reserve": false,
+        "motif": null
+      },
+      "statut_sortie": "ressource_existante",
+      "badge": "Ressource existante",
+      "origine": {
+        "code": "claude_code_developpement",
+        "texte": "Rédigé pendant le développement par Claude Code, assistant de programmation, pas par l'agent du site ; vérifié par les contrôles du code"
+      },
+      "mention": "Analyse IA à partir des sources — non testé par la plateforme",
+      "accroche": {
+        "texte": "improve-codebase-architecture repère les modules à approfondir pour un code plus testable",
+        "passages": [
+          "Surface architectural friction and propose deepening opportunities: refactors that turn shallow modules into deep ones.",
+          "The aim is testability and AI-navigability."
+        ]
+      },
+      "description": {
+        "texte": "Le skill de Matt Pocock part des fichiers qui reviennent le plus dans l'historique des commits et y cherche les modules superficiels, ceux dont l'interface est presque aussi complexe que l'implémentation. Il propose de les approfondir : plus de comportement derrière une interface simple, un code plus facile à tester et à parcourir pour l’IA.",
+        "passages": [
+          "walk back a good stretch of the commit history (git log --oneline) to find the codebase's hot spots, the files and areas that keep coming up",
+          "Where are modules shallow, with an interface nearly as complex as the implementation?",
+          "The best modules are deep. They allow a lot of functionality to be accessed through a simple interface.",
+          "The aim is testability and AI-navigability."
+        ]
+      },
+      "interet": {
+        "texte": "Les pistes arrivent dans un rapport HTML : pour chacune, le problème, la solution, un schéma avant / après et un niveau de recommandation. Vous en choisissez une, et l'agent la creuse avec vous avant de proposer la moindre interface. Les décisions déjà consignées dans vos ADR ne sont pas remises en cause.",
+        "passages": [
+          "present them as a visual HTML report",
+          "Files: which files/modules are involved Problem: why the current architecture is causing friction Solution: plain English description of what would change",
+          "Before / After diagram: side-by-side, custom-drawn, illustrating the shallowness and the deepening",
+          "Recommendation strength: one of Strong, Worth exploring, Speculative, rendered as a badge",
+          "Do NOT propose interfaces yet.",
+          "Once the user picks a candidate, call the Skill tool with \"grilling\" to walk the decision tree with them",
+          "ADRs in docs/adr/ record decisions this command should not re-litigate."
+        ]
+      },
+      "exemple_usage": {
+        "texte": "L'auteur conseille de le lancer tous les quelques jours. Sur un vieux code, il trouve de vraies pistes sans tout démêler à votre place.",
+        "passages": [
+          "I recommend running it on your codebase once every few days.",
+          "on a genuinely old codebase it will find real candidates, but it won't untangle the mud for you."
+        ]
+      },
+      "demarrage": {
+        "etapes": [
+          {
+            "texte": "Installer : claude plugin install mattpocock-skills@claude-plugins-official",
+            "passages": [
+              "claude plugin install mattpocock-skills@claude-plugins-official",
+              "I see with Claude Code, Codex, and other coding agents"
+            ]
+          },
+          {
+            "texte": "Puis /setup-matt-pocock-skills, une fois par dépôt",
+            "passages": [
+              "Run once per repo before using the other engineering skills."
+            ]
+          },
+          {
+            "texte": "Le skill ne se lance que si vous tapez /improve-codebase-architecture",
+            "passages": [
+              "User-invoked skills are reachable only when you type them"
+            ]
+          }
+        ],
+        "commande": "claude plugin install mattpocock-skills@claude-plugins-official",
+        "passages": [
+          "claude plugin install mattpocock-skills@claude-plugins-official",
+          "Run once per repo before using the other engineering skills."
+        ],
+        "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
+      },
+      "compatibilites": [
+        {
+          "texte": "Claude Code, Codex, GitHub Copilot et Gemini CLI.",
+          "passages": [
+            "I see with Claude Code, Codex, and other coding agents",
+            "<strong>GitHub Copilot</strong> (CLI and VS Code)",
+            "<strong>Gemini CLI</strong> (manual updates)"
+          ]
+        }
+      ],
+      "limites": [],
+      "licence_locale": null,
+      "reperes": [
+        {
+          "texte": "Rapport écrit dans le dossier temporaire, hors du dépôt",
+          "passages": [
+            "Write a self-contained HTML file to the OS temp directory so nothing lands in the repo."
+          ]
+        },
+        {
+          "texte": "Un test de suppression pour débusquer les modules creux",
+          "passages": [
+            "Apply the deletion test to anything you suspect is shallow"
+          ]
+        },
+        {
+          "texte": "Une piste écartée pour une vraie raison peut devenir un ADR",
+          "passages": [
+            "Want me to record this as an ADR so future architecture reviews don't re-suggest it?"
+          ]
+        }
+      ],
+      "bouton": {
+        "libelle": "Voir le dépôt",
+        "url": "https://github.com/mattpocock/skills/tree/main/skills/engineering/improve-codebase-architecture",
+        "aria_label": "Voir le dépôt mattpocock/skills sur GitHub (nouvel onglet)",
+        "verifie_le": "2026-11-02T18:45:40.167Z",
+        "motif": "capture_recente"
+      },
+      "etat_depot": {
+        "full_name": "mattpocock/skills",
+        "html_url": "https://github.com/mattpocock/skills",
+        "etoiles": 309698,
+        "etoiles_au": "2026-11-02T12:15:51.625Z",
+        "cree_le": "2026-02-03T11:15:53Z",
+        "dernier_push": "2026-11-01T11:42:33Z",
+        "jours_sans_push": 1,
+        "inactif": false,
+        "licence": "MIT",
+        "archive": false,
+        "fork": false,
+        "parent": null,
+        "date_ajout_skill": null
+      },
+      "visuel": {
+        "src": "medias/montages/ressources/improve-codebase-architecture.jpg",
+        "alt": "improve-codebase-architecture repère les modules à approfondir pour un code plus testable. Étape 1 : Installer : claude plugin install mattpocock-skills@claude-plugins-official. Étape 2 : Puis /setup-matt-pocock-skills, une fois par dépôt. Étape 3 : Le skill ne se lance que si vous tapez /improve-codebase-architecture",
+        "gabarit": "etapes",
+        "mention": "Illustration — ne prouve pas le fonctionnement"
+      },
+      "captures": [
+        {
+          "document": "depot",
+          "snapshot_id": 463,
+          "capture_le": "2026-11-02T12:15:51.625Z",
+          "url": "https://github.com/mattpocock/skills",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:skills/engineering/improve-codebase-architecture/SKILL.md",
+          "snapshot_id": 475,
+          "capture_le": "2026-11-02T12:15:54.977Z",
+          "url": "https://github.com/mattpocock/skills/blob/main/skills/engineering/improve-codebase-architecture/SKILL.md",
+          "mode": "live"
+        },
+        {
+          "document": "dossier:skills/engineering/improve-codebase-architecture",
+          "snapshot_id": 476,
+          "capture_le": "2026-11-02T12:15:54.977Z",
+          "url": "https://github.com/mattpocock/skills/tree/main/skills/engineering/improve-codebase-architecture",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:README.md",
+          "snapshot_id": 466,
+          "capture_le": "2026-11-02T12:15:51.625Z",
+          "url": "https://github.com/mattpocock/skills/blob/main/README.md",
+          "mode": "live"
+        }
+      ],
+      "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
+      "importe_le": "2026-11-02T18:45:35.166Z"
+    },
+    {
+      "post_id": 19,
+      "revision_id": 52,
+      "slug": "skill-creator",
+      "nom": "skill-creator",
+      "compte": "repo",
+      "statut": "en_attente",
+      "etiquette": "pas encore publié",
+      "planning": {
+        "jour": "2026-11-03",
+        "rang": 5,
+        "etat": "prevue",
+        "utilise_reserve": false,
+        "motif": null
+      },
+      "statut_sortie": "ressource_existante",
+      "badge": "Ressource existante",
+      "origine": {
+        "code": "claude_code_developpement",
+        "texte": "Rédigé pendant le développement par Claude Code, assistant de programmation, pas par l'agent du site ; vérifié par les contrôles du code"
+      },
+      "mention": "Analyse IA à partir des sources — non testé par la plateforme",
+      "accroche": {
+        "texte": "skill-creator : le skill d’Anthropic qui écrit, teste et affine vos propres skills",
+        "passages": [
+          "This repository contains Anthropic's implementation of skills for Claude",
+          "A skill for creating new skills and iteratively improving them."
+        ]
+      },
+      "description": {
+        "texte": "Décrivez ce que vous voulez automatiser : skill-creator cadre le besoin, rédige un premier jet, le teste sur des demandes réalistes et vous fait relire les résultats. Il peut aussi reprendre un skill existant pour l’améliorer.",
+        "passages": [
+          "A skill for creating new skills and iteratively improving them.",
+          "Create a few test prompts and run claude-with-access-to-the-skill on them",
+          "Help the user evaluate the results both qualitatively and quantitatively",
+          "Use when users want to create a skill from scratch, edit, or optimize an existing skill"
+        ]
+      },
+      "interet": {
+        "texte": "Chaque test tourne avec et sans le skill, ou contre son ancienne version. Une page de revue rassemble les réponses à annoter et un comparatif chiffré : taux de réussite, durée, tokens. Il retravaille aussi la description pour que le skill se déclenche au bon moment.",
+        "passages": [
+          "For each test case, spawn two subagents in the same turn — one with the skill, one without.",
+          "Improving an existing skill: the old version.",
+          "This produces benchmark.json and benchmark.md with pass_rate, time, and tokens for each configuration",
+          "'Outputs' lets you click through each test case and leave feedback, 'Benchmark' shows the quantitative comparison.",
+          "optimize a skill's description for better triggering accuracy"
+        ]
+      },
+      "exemple_usage": {
+        "texte": "Vous avez rodé une méthode avec Claude ? Dites « turn this into a skill » : il peut reprendre les étapes de la conversation, vous poser quelques questions, rédiger le SKILL.md et proposer deux ou trois demandes de test.",
+        "passages": [
+          "(e.g., they say \"turn this into a skill\")",
+          "extract answers from the conversation history first — the tools used, the sequence of steps, corrections the user made, input/output formats observed.",
+          "Proactively ask questions about edge cases, input/output formats, example files, success criteria, and dependencies.",
+          "Each skill is self-contained in its own folder with a SKILL.md file containing the instructions and metadata that Claude uses.",
+          "come up with 2-3 realistic test prompts — the kind of thing a real user would actually say."
+        ]
+      },
+      "demarrage": {
+        "etapes": [
+          {
+            "texte": "Ajoutez le dépôt comme catalogue de plugins dans Claude Code.",
+            "passages": [
+              "You can register this repository as a Claude Code Plugin marketplace by running the following command in Claude Code"
+            ]
+          },
+          {
+            "texte": "Installez example-skills : /plugin install example-skills@anthropic-agent-skills",
+            "passages": [
+              "/plugin install example-skills@anthropic-agent-skills",
+              "\"./skills/mcp-builder\", \"./skills/skill-creator\", \"./skills/slack-gif-creator\""
+            ]
+          },
+          {
+            "texte": "Ensuite, nommez simplement le skill dans votre demande.",
+            "passages": [
+              "After installing the plugin, you can use the skill by just mentioning it."
+            ]
+          }
+        ],
+        "commande": "/plugin marketplace add anthropics/skills",
+        "passages": [
+          "You can register this repository as a Claude Code Plugin marketplace by running the following command in Claude Code"
+        ],
+        "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
+      },
+      "compatibilites": [
+        {
+          "texte": "Version complète dans Claude Code ; dans Claude.ai, une version allégée, sans sous-agents ni comparatif chiffré.",
+          "passages": [
+            "You can register this repository as a Claude Code Plugin marketplace",
+            "because Claude.ai doesn't have subagents, some mechanics change.",
+            "Skip the quantitative benchmarking"
+          ]
+        }
+      ],
+      "limites": [
+        {
+          "texte": "Chaque test tourne deux fois, avec et sans le skill : prévoyez le double d’appels au modèle.",
+          "passages": [
+            "For each test case, spawn two subagents in the same turn — one with the skill, one without."
+          ]
+        }
+      ],
+      "licence_locale": {
+        "texte": "Le dossier du skill a sa propre licence : Apache 2.0.",
+        "passages": [
+          "Apache License Version 2.0, January 2004"
+        ]
+      },
+      "reperes": [
+        {
+          "texte": "Un skill pour créer et améliorer d'autres skills",
+          "passages": [
+            "A skill for creating new skills and iteratively improving them."
+          ]
+        },
+        {
+          "texte": "Chaque test lancé avec et sans le skill",
+          "passages": [
+            "For each test case, spawn two subagents in the same turn — one with the skill, one without."
+          ]
+        },
+        {
+          "texte": "Une description qui aide Claude à choisir le skill au bon moment",
+          "passages": [
+            "optimize a skill's description for better triggering accuracy",
+            "Skills appear in Claude's available_skills list with their name + description"
+          ]
+        }
+      ],
+      "bouton": {
+        "libelle": "Voir le dépôt",
+        "url": "https://github.com/anthropics/skills/tree/main/skills/skill-creator",
+        "aria_label": "Voir le dépôt anthropics/skills sur GitHub (nouvel onglet)",
+        "verifie_le": "2026-11-02T18:45:40.172Z",
+        "motif": "capture_recente"
+      },
+      "etat_depot": {
+        "full_name": "anthropics/skills",
+        "html_url": "https://github.com/anthropics/skills",
+        "etoiles": 186700,
+        "etoiles_au": "2026-11-02T18:42:26.169Z",
+        "cree_le": "2025-09-22T15:53:31Z",
+        "dernier_push": "2026-10-28T19:20:39Z",
+        "jours_sans_push": 4,
+        "inactif": false,
+        "licence": null,
+        "archive": false,
+        "fork": false,
+        "parent": null,
+        "date_ajout_skill": null
+      },
+      "visuel": {
+        "src": "medias/montages/ressources/skill-creator.jpg",
+        "alt": "skill-creator : le skill d’Anthropic qui écrit, teste et affine vos propres skills. Étape 1 : Ajoutez le dépôt comme catalogue de plugins dans Claude Code.. Étape 2 : Installez example-skills : /plugin install example-skills@anthropic-agent-skills. Étape 3 : Ensuite, nommez simplement le skill dans votre demande.",
+        "gabarit": "etapes",
+        "mention": "Illustration — ne prouve pas le fonctionnement"
+      },
+      "captures": [
+        {
+          "document": "depot",
+          "snapshot_id": 484,
+          "capture_le": "2026-11-02T18:42:26.169Z",
+          "url": "https://github.com/anthropics/skills",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:skills/skill-creator/SKILL.md",
+          "snapshot_id": 477,
+          "capture_le": "2026-11-02T12:15:55.900Z",
+          "url": "https://github.com/anthropics/skills/blob/main/skills/skill-creator/SKILL.md",
+          "mode": "live"
+        },
+        {
+          "document": "dossier:skills/skill-creator",
+          "snapshot_id": 478,
+          "capture_le": "2026-11-02T12:15:55.900Z",
+          "url": "https://github.com/anthropics/skills/tree/main/skills/skill-creator",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:skills/skill-creator/LICENSE.txt",
+          "snapshot_id": 479,
+          "capture_le": "2026-11-02T12:15:55.900Z",
+          "url": "https://github.com/anthropics/skills/blob/main/skills/skill-creator/LICENSE.txt",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:README.md",
+          "snapshot_id": 424,
+          "capture_le": "2026-11-02T12:15:38.384Z",
+          "url": "https://github.com/anthropics/skills/blob/main/README.md",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:.claude-plugin/marketplace.json",
+          "snapshot_id": 485,
+          "capture_le": "2026-11-02T18:42:26.169Z",
+          "url": "https://github.com/anthropics/skills/blob/main/.claude-plugin/marketplace.json",
+          "mode": "live"
+        }
+      ],
+      "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
+      "importe_le": "2026-11-02T18:45:35.166Z"
+    },
+    {
+      "post_id": 20,
+      "revision_id": 53,
+      "slug": "claudeception",
+      "nom": "Claudeception",
+      "compte": "repo",
+      "statut": "en_attente",
+      "etiquette": "pas encore publié",
+      "planning": {
+        "jour": "2026-11-03",
+        "rang": 6,
+        "etat": "prevue",
+        "utilise_reserve": false,
+        "motif": null
+      },
+      "statut_sortie": "ressource_existante",
+      "badge": "Ressource existante",
+      "origine": {
+        "code": "claude_code_developpement",
+        "texte": "Rédigé pendant le développement par Claude Code, assistant de programmation, pas par l'agent du site ; vérifié par les contrôles du code"
+      },
+      "mention": "Analyse IA à partir des sources — non testé par la plateforme",
+      "accroche": {
+        "texte": "Claudeception fait de chaque solution durement trouvée par Claude Code un skill rechargé tout seul",
+        "passages": [
+          "When Claude Code discovers something non-obvious (a debugging technique, a workaround, some project-specific pattern), it saves that knowledge as a new skill.",
+          "Next time a similar problem comes up, the skill gets loaded automatically."
+        ]
+      },
+      "description": {
+        "texte": "Une heure sur une erreur obscure, l’agent finit par trouver, la session se ferme, et la fois suivante tout recommence. Avec Claudeception, la technique de débogage, le contournement ou la particularité du projet découverts en route deviennent un skill, chargé automatiquement dès qu’un problème semblable revient.",
+        "passages": [
+          "You spend an hour debugging some obscure error, the agent figures it out, session ends. Next time you hit the same issue? Another hour.",
+          "When Claude Code discovers something non-obvious (a debugging technique, a workaround, some project-specific pattern), it saves that knowledge as a new skill.",
+          "Next time a similar problem comes up, the skill gets loaded automatically."
+        ]
+      },
+      "interet": {
+        "texte": "Il trie : seul ce qui a demandé une vraie recherche, resservira, a un déclencheur net et a fonctionné devient un skill. Et la description est écrite pour être retrouvée : l’erreur exacte, pas « problèmes de base de données ».",
+        "passages": [
+          "The skill is picky about what it extracts.",
+          "It only extracts knowledge that required actual discovery (not just reading docs), will help with future tasks, has clear trigger conditions, and has been verified to work.",
+          "it writes a new skill with a description optimized for future retrieval",
+          "\"Helps with database problems\" won't match anything useful."
+        ]
+      },
+      "exemple_usage": {
+        "texte": "Exemple du dépôt : une PrismaClientKnownRequestError réglée (trop de connexions en serverless) peut devenir un skill dont la description reprend l’erreur exacte. Quand elle réapparaît, l’agent le retrouve.",
+        "passages": [
+          "Fix for PrismaClientKnownRequestError: Too many database connections in serverless environments (Vercel, AWS Lambda).",
+          "\"Fix for PrismaClientKnownRequestError in serverless\" will match when someone hits that error."
+        ]
+      },
+      "demarrage": {
+        "etapes": [
+          {
+            "texte": "Cloner le dépôt dans ~/.claude/skills/claudeception.",
+            "passages": [
+              "User-level (recommended) `bash git clone https://github.com/blader/Claudeception.git ~/.claude/skills/claudeception"
+            ]
+          },
+          {
+            "texte": "Optionnel : le hook, ajouté à settings.json, fait évaluer chaque session",
+            "passages": [
+              "a hook ensures it evaluates every session for extractable knowledge",
+              "If you already have a settings.json, merge the hooks configuration into it.",
+              "This achieves higher activation rates than relying on semantic description matching alone."
+            ]
+          },
+          {
+            "texte": "Après un débogage : /claudeception, sans skill si rien n’est à garder",
+            "passages": [
+              "Trigger a learning retrospective",
+              "Just completed debugging and discovered a non-obvious solution",
+              "Not every task produces a skill."
+            ]
+          }
+        ],
+        "commande": "git clone https://github.com/blader/Claudeception.git ~/.claude/skills/claudeception",
+        "passages": [
+          "git clone https://github.com/blader/Claudeception.git ~/.claude/skills/claudeception"
+        ],
+        "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
+      },
+      "compatibilites": [
+        {
+          "texte": "Claude Code, via son système de skills natif.",
+          "passages": [
+            "Claude Code has a native skills system."
+          ]
+        }
+      ],
+      "limites": [
+        {
+          "texte": "C’est un fork, sans push depuis plusieurs mois au moment de la capture.",
+          "passages": [
+            "Contributions welcome. Fork, make changes, submit a PR."
+          ]
+        }
+      ],
+      "licence_locale": null,
+      "reperes": [
+        {
+          "texte": "Rétrospective à la demande, sans skill forcé",
+          "passages": [
+            "Trigger a learning retrospective",
+            "Or explicitly request skill extraction",
+            "Not every task produces a skill."
+          ]
+        },
+        {
+          "texte": "Skills écrits en markdown, avec frontmatter YAML",
+          "passages": [
+            "Extracted skills are markdown files with YAML frontmatter"
+          ]
+        },
+        {
+          "texte": "Inspiré de travaux académiques, selon le dépôt",
+          "passages": [
+            "The idea comes from academic work on skill libraries for AI agents."
+          ]
+        }
+      ],
+      "bouton": {
+        "libelle": "Voir le dépôt",
+        "url": "https://github.com/blader/Claudeception",
+        "aria_label": "Voir le dépôt blader/Claudeception sur GitHub (nouvel onglet)",
+        "verifie_le": "2026-11-02T18:46:57.584Z",
+        "motif": "capture_recente"
+      },
+      "etat_depot": {
+        "full_name": "blader/Claudeception",
+        "html_url": "https://github.com/blader/Claudeception",
+        "etoiles": 2442,
+        "etoiles_au": "2026-11-02T12:15:56.649Z",
+        "cree_le": "2026-01-17T19:03:02Z",
+        "dernier_push": "2026-02-21T05:10:15Z",
+        "jours_sans_push": 254,
+        "inactif": true,
+        "licence": "MIT",
+        "archive": false,
+        "fork": true,
+        "parent": {
+          "full_name": "AlexMikhalev/claude-code-continuous-learning-skill",
+          "html_url": "https://github.com/AlexMikhalev/claude-code-continuous-learning-skill"
+        },
+        "date_ajout_skill": null
+      },
+      "visuel": {
+        "src": "medias/montages/ressources/claudeception.jpg",
+        "alt": "Claudeception fait de chaque solution durement trouvée par Claude Code un skill rechargé tout seul. Étape 1 : Cloner le dépôt dans ~/.claude/skills/claudeception.. Étape 2 : Optionnel : le hook, ajouté à settings.json, fait évaluer chaque session. Étape 3 : Après un débogage : /claudeception, sans skill si rien n’est à garder",
+        "gabarit": "etapes",
+        "mention": "Illustration — ne prouve pas le fonctionnement"
+      },
+      "captures": [
+        {
+          "document": "depot",
+          "snapshot_id": 480,
+          "capture_le": "2026-11-02T12:15:56.649Z",
+          "url": "https://github.com/blader/Claudeception",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:README.md",
+          "snapshot_id": 481,
+          "capture_le": "2026-11-02T12:15:56.649Z",
+          "url": "https://github.com/blader/Claudeception/blob/main/README.md",
+          "mode": "live"
+        }
+      ],
+      "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
+      "importe_le": "2026-11-02T18:46:54.597Z"
+    }
+  ],
+  "ressources_non_planifiees": [],
+  "recherche": [
+    {
+      "postId": 1,
+      "revisionId": 42,
+      "jour": "2026-11-02",
+      "motsCles": [
+        {
+          "champ": "nom",
+          "terme": "frontend-design",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "MCP et skills",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "usage",
+          "terme": "design d'interface",
+          "raison": null,
+          "passage": "Guidance for distinctive, intentional visual design when building new UI or reshaping an existing one."
+        },
+        {
+          "champ": "usage",
+          "terme": "direction artistique",
+          "raison": null,
+          "passage": "Helps with aesthetic direction, typography, and making choices that don't read as templated defaults."
+        },
+        {
+          "champ": "usage",
+          "terme": "typographie",
+          "raison": null,
+          "passage": "Typography carries the personality of the page."
+        },
+        {
+          "champ": "usage",
+          "terme": "rédaction d'interface",
+          "raison": null,
+          "passage": "Bring the same intentionality and minimalism to copywriting that you would bring to spacing and color."
+        },
+        {
+          "champ": "usage",
+          "terme": "accessibilité",
+          "raison": null,
+          "passage": "visible keyboard focus, reduced motion respected, visually accessible"
+        },
+        {
+          "champ": "usage",
+          "terme": "motion design",
+          "raison": null,
+          "passage": "Motion that answers a person's action (opening, expanding, confirming) is welcome when it shows what changed."
+        },
+        {
+          "champ": "technologie",
+          "terme": "CSS",
+          "raison": null,
+          "passage": "When writing the code, be careful of structuring your CSS selector specificities."
+        },
+        {
+          "champ": "technologie",
+          "terme": "Claude Code",
+          "raison": null,
+          "passage": "You can register this repository as a Claude Code Plugin marketplace"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Agent Skills",
+          "raison": null,
+          "passage": "For information about the Agent Skills standard, see agentskills.io."
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "front-end",
+          "raison": "Autre graphie de frontend, premier mot du nom frontend-design.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "design web",
+          "raison": "Le skill traite le design d'interface des pages web, haut de page (hero) et CSS compris.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "identité visuelle",
+          "raison": "La direction artistique du skill vise une identité visuelle propre à chaque projet.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "interface utilisateur",
+          "raison": "Le design d'interface s'applique à l'interface utilisateur (UI) d'un site ou d'une application.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "polices de caractères",
+          "raison": "Pour la typographie, le skill conseille une ou deux familles de polices bien distinctes.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "microcopie",
+          "raison": "La rédaction d'interface couvre les textes courts : boutons, messages d'erreur, écrans vides.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "animations d'interface",
+          "raison": "Le skill conseille de limiter les animations automatiques à un seul moment orchestré et d'animer surtout les réponses aux actions ; ce n'est pas un outil d'animation.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "design responsive",
+          "raison": "Le design d'interface du skill doit tenir jusqu'au mobile, sans l'annoncer.",
+          "passage": null
+        }
+      ],
+      "textes": [
+        "frontend-design pousse Claude vers des interfaces qui ne ressemblent pas à toutes les autres",
+        "Le skill d'Anthropic donne à Claude une vraie direction artistique pour créer ou refaire une interface. Palette, typographie et mise en page sont choisies pour le brief, pas tirées des réglages par défaut qu'on voit partout.",
+        "Claude écrit d'abord un court plan de design, le relit face au brief, et ne code qu'ensuite. Le skill nomme aussi les tics actuels des designs générés par IA : fond crème avec accent terre cuite, cartes arrondies toutes identiques. Claude les évite quand le brief laisse le choix, et les suit s'il les demande.",
+        "Les choix visuels partent du sujet : un jouet pour filles de 8 à 11 ans n'aura pas l'esthétique d'un tableau de bord pour analystes financiers.",
+        "Dans Claude Code, ajouter le dépôt comme marketplace",
+        "Installer example-skills : /plugin install example-skills@anthropic-agent-skills",
+        "Puis citer frontend-design dans la demande",
+        "Claude Code, et déjà inclus dans les offres payantes de Claude.ai selon le dépôt."
+      ]
+    },
+    {
+      "postId": 2,
+      "revisionId": 22,
+      "jour": "2026-11-02",
+      "motsCles": [
+        {
+          "champ": "nom",
+          "terme": "agent-browser",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "agents et automatisation",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "usage",
+          "terme": "automatisation de navigateur",
+          "raison": null,
+          "passage": "Browser automation CLI for AI agents"
+        },
+        {
+          "champ": "usage",
+          "terme": "test d'applications web",
+          "raison": null,
+          "passage": "Use agent-browser to test the login flow."
+        },
+        {
+          "champ": "usage",
+          "terme": "remplissage de formulaires",
+          "raison": null,
+          "passage": "Fill by ref"
+        },
+        {
+          "champ": "usage",
+          "terme": "capture d'écran",
+          "raison": null,
+          "passage": "Annotated screenshot with numbered element labels"
+        },
+        {
+          "champ": "usage",
+          "terme": "audit d'accessibilité",
+          "raison": null,
+          "passage": "Run an axe-core accessibility audit against the current page or a URL."
+        },
+        {
+          "champ": "usage",
+          "terme": "lecture de pages web",
+          "raison": null,
+          "passage": "Fetch agent-readable text, or read rendered active-tab DOM"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Rust",
+          "raison": null,
+          "passage": "Fast native Rust CLI."
+        },
+        {
+          "champ": "technologie",
+          "terme": "Chrome",
+          "raison": null,
+          "passage": "Uses Chrome (from Chrome for Testing) by default."
+        },
+        {
+          "champ": "technologie",
+          "terme": "MCP",
+          "raison": null,
+          "passage": "agent-browser mcp # Start an MCP stdio server"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Chrome DevTools Protocol",
+          "raison": null,
+          "passage": "Connect to an existing browser via Chrome DevTools Protocol:"
+        },
+        {
+          "champ": "technologie",
+          "terme": "axe-core",
+          "raison": null,
+          "passage": "Run an axe-core accessibility audit against the current page or a URL."
+        },
+        {
+          "champ": "technologie",
+          "terme": "React DevTools",
+          "raison": null,
+          "passage": "React commands require the React DevTools hook, installed at launch with --enable react-devtools."
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "automatisation web",
+          "raison": "Expression voisine d'automatisation de navigateur, pour les mêmes tâches sur des sites.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "navigateur headless",
+          "raison": "Par défaut, agent-browser lance le navigateur sans fenêtre visible (mode headless) ; l'option --headed l'affiche.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "extraction de contenu web",
+          "raison": "Proche de la lecture de pages web : la commande read récupère le texte lisible d'une page ou d'une URL.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "tests end-to-end",
+          "raison": "Avec agent-browser, un agent peut parcourir une application de bout en bout, comme une connexion ; ce n'est pas un framework de tests avec assertions.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "a11y",
+          "raison": "Abréviation anglaise d'accessibilité ; c'est aussi le nom de la commande d'audit d'accessibilité.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "Model Context Protocol",
+          "raison": "Nom complet du protocole MCP ; agent-browser peut démarrer un serveur de ce type.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "agent web",
+          "raison": "Un agent d'IA qui agit sur des sites a besoin d'une automatisation de navigateur, ce que fournit l'outil.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "skill Claude Code",
+          "raison": "agent-browser fournit un skill pour Claude Code et d'autres assistants de code, ajouté avec npx skills add.",
+          "passage": null
+        }
+      ],
+      "textes": [
+        "agent-browser, de Vercel Labs : un vrai navigateur que votre agent pilote en ligne de commande",
+        "Une CLI native en Rust : l'agent ouvre une page, lit le texte, clique, remplit un champ et prend une capture. Selon le dépôt, le skill fonctionne avec Claude Code, Codex, Cursor ou Gemini CLI, et l'outil tourne aussi en serveur MCP.",
+        "snapshot renvoie l'arbre d'accessibilité avec une référence par élément (@e1, @e2) : l'agent clique ou remplit par référence, sans requêter le DOM à nouveau. Attention, rien n'est restreint par défaut : domaines autorisés et politique d'actions sont à activer vous-même.",
+        "Demandez à votre agent de tester le parcours de connexion avec agent-browser : il lit --help, relève les champs du formulaire et les remplit.",
+        "npm install -g agent-browser, puis agent-browser install pour récupérer Chrome, uniquement la première fois."
+      ]
+    },
+    {
+      "postId": 3,
+      "revisionId": 23,
+      "jour": "2026-11-02",
+      "motsCles": [
+        {
+          "champ": "nom",
+          "terme": "React Best Practices (Vercel)",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "MCP et skills",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "usage",
+          "terme": "optimisation des performances",
+          "raison": null,
+          "passage": "React and Next.js performance optimization guidelines from Vercel Engineering."
+        },
+        {
+          "champ": "usage",
+          "terme": "revue de code",
+          "raison": null,
+          "passage": "Reviewing code for performance issues"
+        },
+        {
+          "champ": "usage",
+          "terme": "refactorisation",
+          "raison": null,
+          "passage": "Refactoring existing React/Next.js code"
+        },
+        {
+          "champ": "usage",
+          "terme": "taille du bundle",
+          "raison": null,
+          "passage": "Optimizing bundle size or load times"
+        },
+        {
+          "champ": "usage",
+          "terme": "chargement des données",
+          "raison": null,
+          "passage": "Implementing data fetching (client or server-side)"
+        },
+        {
+          "champ": "usage",
+          "terme": "temps de chargement",
+          "raison": null,
+          "passage": "Optimizing bundle size or load times"
+        },
+        {
+          "champ": "technologie",
+          "terme": "React",
+          "raison": null,
+          "passage": "Comprehensive performance optimization guide for React and Next.js applications, maintained by Vercel."
+        },
+        {
+          "champ": "technologie",
+          "terme": "Next.js",
+          "raison": null,
+          "passage": "Comprehensive performance optimization guide for React and Next.js applications, maintained by Vercel."
+        },
+        {
+          "champ": "technologie",
+          "terme": "JavaScript",
+          "raison": null,
+          "passage": "JavaScript Performance | LOW-MEDIUM | js-"
+        },
+        {
+          "champ": "technologie",
+          "terme": "RSC",
+          "raison": null,
+          "passage": "Avoid module-level mutable request state in RSC/SSR"
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "vercel-react-best-practices",
+          "raison": "Nom technique du skill React Best Practices, donné par le champ name de son fichier SKILL.md.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "performance web",
+          "raison": "Les règles visent la rapidité des applications React, côté navigateur comme côté serveur.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "requêtes en cascade",
+          "raison": "Traduit waterfalls : des attentes successives qui ralentissent une application React.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "chargement différé",
+          "raison": "Des règles sur la taille du bundle conseillent de charger les composants lourds à la demande (next/dynamic).",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "rendus inutiles",
+          "raison": "Une catégorie de règles React aide à éviter les re-rendus superflus des composants.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "mémoïsation",
+          "raison": "Des règles React conseillent d'isoler les calculs coûteux dans des composants mémoïsés, et d'éviter la mémoïsation pour les valeurs simples.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "SWR",
+          "raison": "Une seule règle cite la bibliothèque SWR, pour dédoublonner les requêtes lors du chargement des données côté client.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "Suspense",
+          "raison": "Une seule règle React cite Suspense, pour afficher le contenu au fur et à mesure de son chargement (streaming).",
+          "passage": null
+        }
+      ],
+      "textes": [
+        "React Best Practices : les 70 règles de performance React et Next.js de Vercel, appliquées par votre agent",
+        "Vercel Engineering y condense ses règles de performance React et Next.js. L'agent s'en sert dès qu'il écrit, relit ou refactorise un composant, une page Next.js ou du chargement de données.",
+        "Les règles sont classées par impact : l'agent s'attaque d'abord aux requêtes en cascade et au poids du bundle, avant les re-rendus ou les micro-optimisations JavaScript.",
+        "Une page Next.js enchaîne deux requêtes indépendantes ? Demandez à l'agent de l'optimiser : la règle async-parallel les lance ensemble avec Promise.all().",
+        "La commande installe toute la collection de Vercel, pas seulement ce skill : npx skills add vercel-labs/agent-skills"
+      ]
+    },
+    {
+      "postId": 4,
+      "revisionId": 43,
+      "jour": "2026-11-02",
+      "motsCles": [
+        {
+          "champ": "nom",
+          "terme": "Skills de documents docx, xlsx, pptx, pdf",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "MCP et skills",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "usage",
+          "terme": "créer des documents Word",
+          "raison": null,
+          "passage": "create, read, edit, or manipulate Word documents (.docx files)"
+        },
+        {
+          "champ": "usage",
+          "terme": "tableurs et formules",
+          "raison": null,
+          "passage": "open, read, edit, or fix an existing .xlsx, .xlsm, .xltx, .csv, or .tsv file (e.g., adding columns, computing formulas, formatting, charting, cleaning messy data)"
+        },
+        {
+          "champ": "usage",
+          "terme": "créer des présentations",
+          "raison": null,
+          "passage": "creating slide decks, pitch decks, or presentations"
+        },
+        {
+          "champ": "usage",
+          "terme": "fusionner des PDF",
+          "raison": null,
+          "passage": "combining or merging multiple PDFs into one, splitting PDFs apart"
+        },
+        {
+          "champ": "usage",
+          "terme": "remplir des formulaires PDF",
+          "raison": null,
+          "passage": "filling PDF forms"
+        },
+        {
+          "champ": "usage",
+          "terme": "suivi des modifications",
+          "raison": null,
+          "passage": "working with tracked changes or comments"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Python",
+          "raison": null,
+          "passage": "This guide covers essential PDF processing operations using Python libraries and command-line tools."
+        },
+        {
+          "champ": "technologie",
+          "terme": "JavaScript",
+          "raison": null,
+          "passage": "Write a docx (npm) script"
+        },
+        {
+          "champ": "technologie",
+          "terme": "LibreOffice",
+          "raison": null,
+          "passage": "LibreOffice computes every formula, the file is rewritten in place"
+        },
+        {
+          "champ": "technologie",
+          "terme": "openpyxl",
+          "raison": null,
+          "passage": "openpyxl writes formulas as strings with no cached values."
+        },
+        {
+          "champ": "technologie",
+          "terme": "pptxgenjs",
+          "raison": null,
+          "passage": "Write a pptxgenjs script"
+        },
+        {
+          "champ": "technologie",
+          "terme": "pypdf",
+          "raison": null,
+          "passage": "from pypdf import PdfReader, PdfWriter"
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "bureautique",
+          "raison": "ces skills traitent les formats de bureautique docx, xlsx, pptx et pdf",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "Excel",
+          "raison": "le skill xlsx produit des classeurs .xlsx, le format des tableurs Excel",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "PowerPoint",
+          "raison": "le skill pptx crée et modifie des présentations .pptx destinées à PowerPoint",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "diaporama",
+          "raison": "autre nom d'une présentation, que le skill pptx sait créer et modifier",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "rapport",
+          "raison": "le skill docx couvre aussi les rapports, mémos et lettres au format Word",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "OCR",
+          "raison": "le skill pdf décrit l'OCR pour rendre cherchables les PDF numérisés",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "Claude Code",
+          "raison": "les skills s'installent dans Claude Code par la marketplace de plugins",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "Agent Skills",
+          "raison": "le dépôt renvoie au standard Agent Skills, dont ces skills suivent le format (SKILL.md) ; leur licence les limite toutefois aux services d'Anthropic",
+          "passage": null
+        }
+      ],
+      "textes": [
+        "Skills de documents d'Anthropic : Claude crée et modifie vos Word, tableurs, présentations et PDF",
+        "Les quatre skills qui font tourner les fonctions de documents de Claude, un par format : docx, xlsx, pptx et pdf. Rapport Word, classeur avec formules, présentation, formulaire PDF : Claude s'appuie dessus pour livrer un fichier propre. Selon Anthropic, une référence de skills complexes utilisés en production.",
+        "Chaque skill choisit sa méthode selon la tâche, recense les pièges connus des bibliothèques et impose de contrôler le fichier produit. Pour un tableur, LibreOffice recalcule toutes les formules, et rien ne part tant qu'il reste une erreur.",
+        "Une fois le plugin document-skills installé, il suffit de demander à Claude Code d'utiliser le skill PDF pour extraire les champs de formulaire d'un fichier.",
+        "Ajouter le catalogue : /plugin marketplace add anthropics/skills",
+        "Installer : /plugin install document-skills@anthropic-agent-skills",
+        "Code consultable mais pas libre : la licence réserve ces skills aux services d'Anthropic et interdit de les copier, modifier ou redistribuer."
+      ]
+    },
+    {
+      "postId": 5,
+      "revisionId": 44,
+      "jour": "2026-11-02",
+      "motsCles": [
+        {
+          "champ": "nom",
+          "terme": "UI UX Pro Max",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "MCP et skills",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "usage",
+          "terme": "design d'interface",
+          "raison": null,
+          "passage": "An AI skill that provides design intelligence for building professional UI/UX across multiple platforms and frameworks."
+        },
+        {
+          "champ": "usage",
+          "terme": "design system",
+          "raison": null,
+          "passage": "Industry-specific design system generation"
+        },
+        {
+          "champ": "usage",
+          "terme": "landing page",
+          "raison": null,
+          "passage": "Build a landing page for my SaaS product"
+        },
+        {
+          "champ": "usage",
+          "terme": "palette de couleurs",
+          "raison": null,
+          "passage": "Industry-specific palettes aligned 1:1 with the 192 product types"
+        },
+        {
+          "champ": "usage",
+          "terme": "association de polices",
+          "raison": null,
+          "passage": "Curated typography combinations with Google Fonts imports"
+        },
+        {
+          "champ": "usage",
+          "terme": "tableau de bord",
+          "raison": null,
+          "passage": "Create a dashboard for healthcare analytics"
+        },
+        {
+          "champ": "technologie",
+          "terme": "React",
+          "raison": null,
+          "passage": "Tech Stacks - React, Next.js, Astro, Vue"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Next.js",
+          "raison": null,
+          "passage": "Tech Stacks - React, Next.js, Astro, Vue"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Vue",
+          "raison": null,
+          "passage": "Tech Stacks - React, Next.js, Astro, Vue"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Tailwind",
+          "raison": null,
+          "passage": "let it default to HTML + Tailwind"
+        },
+        {
+          "champ": "technologie",
+          "terme": "SwiftUI",
+          "raison": null,
+          "passage": "SwiftUI, React Native, Flutter, HTML+Tailwind"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Flutter",
+          "raison": null,
+          "passage": "SwiftUI, React Native, Flutter, HTML+Tailwind"
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "interface utilisateur",
+          "raison": "UI signifie interface utilisateur, le sujet même de UI UX Pro Max.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "expérience utilisateur",
+          "raison": "UX signifie expérience utilisateur ; UI UX Pro Max en donne des règles.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "page d'atterrissage",
+          "raison": "Traduction française de landing page, un usage décrit par le dépôt.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "charte graphique",
+          "raison": "Comme une charte graphique, le design system fixe les couleurs, les polices et le style d'un projet.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "polices d'écriture",
+          "raison": "Les polices d'écriture sont l'objet des associations de polices proposées.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "accessibilité",
+          "raison": "Les règles d'UX de UI UX Pro Max comprennent des règles d'accessibilité, sans la garantir.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "ergonomie",
+          "raison": "En français, l'ergonomie d'interface recouvre une bonne part de l'UX visée par UI UX Pro Max.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "refonte visuelle",
+          "raison": "Le dépôt propose une consigne pour que l'assistant refasse le thème d'une app existante avec UI UX Pro Max.",
+          "passage": null
+        }
+      ],
+      "textes": [
+        "UI UX Pro Max donne à votre agent un design system taillé pour votre produit avant qu'il code l'interface",
+        "Demandez une landing page ou un dashboard : le skill s'active seul, part de votre type de produit et sort la structure de page, le style, les couleurs, la typographie et les effets. Il puise dans 79 styles, 192 types de produits, des palettes et des paires de polices.",
+        "Chaque proposition arrive avec ses anti-patterns et une checklist avant livraison : pas d'emoji en guise d'icônes, cursor-pointer sur tout élément cliquable. Les palettes suivent le secteur, et les dégradés violet-rose « IA » sont proscrits pour une banque.",
+        "Dans l'exemple du dépôt, la landing page d'un spa reçoit un style Soft UI Evolution, du rose pâle et du vert sauge rehaussés d'or, Cormorant Garamond avec Montserrat, sans néon ni animations brusques.",
+        "Dans le projet : npx ui-ux-pro-max-cli init --ai claude (ou cursor, copilot)",
+        "Puis demandez l'interface voulue, le skill prend le relais.",
+        "Une vingtaine d'agents selon le dépôt, dont Claude Code, Cursor, Windsurf, Codex CLI et GitHub Copilot.",
+        "Le cœur est sous licence MIT ; logos, bannières et visuels générés n'y sont pas, ils relèvent d'une offre Premium séparée (uupm.cc)."
+      ]
+    },
+    {
+      "postId": 6,
+      "revisionId": 45,
+      "jour": "2026-11-02",
+      "motsCles": [
+        {
+          "champ": "nom",
+          "terme": "webapp-testing",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "MCP et skills",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "usage",
+          "terme": "tests d'applications web",
+          "raison": null,
+          "passage": "testing local web applications using Playwright"
+        },
+        {
+          "champ": "usage",
+          "terme": "tests d'interface",
+          "raison": null,
+          "passage": "Supports verifying frontend functionality"
+        },
+        {
+          "champ": "usage",
+          "terme": "débogage d'interface",
+          "raison": null,
+          "passage": "debugging UI behavior"
+        },
+        {
+          "champ": "usage",
+          "terme": "captures d'écran",
+          "raison": null,
+          "passage": "capturing browser screenshots"
+        },
+        {
+          "champ": "usage",
+          "terme": "journaux du navigateur",
+          "raison": null,
+          "passage": "viewing browser logs"
+        },
+        {
+          "champ": "usage",
+          "terme": "automatisation de navigateur",
+          "raison": null,
+          "passage": "To create an automation script, include only Playwright logic"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Playwright",
+          "raison": null,
+          "passage": "write native Python Playwright scripts"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Python",
+          "raison": null,
+          "passage": "write native Python Playwright scripts"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Chromium",
+          "raison": null,
+          "passage": "Always launch chromium in headless mode"
+        },
+        {
+          "champ": "technologie",
+          "terme": "HTML",
+          "raison": null,
+          "passage": "Read HTML file directly to identify selectors"
+        },
+        {
+          "champ": "technologie",
+          "terme": "DOM",
+          "raison": null,
+          "passage": "Take screenshot or inspect DOM"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Claude Code",
+          "raison": null,
+          "passage": "You can register this repository as a Claude Code Plugin marketplace"
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "tests end-to-end",
+          "raison": "Le skill pilote un vrai navigateur avec Playwright, mais pour des scripts ponctuels, sans suite de tests ni intégration continue.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "navigateur headless",
+          "raison": "Le skill lance Chromium en headless pour ses scripts Playwright.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "sélecteurs CSS",
+          "raison": "Le skill repère les éléments par des sélecteurs, dont les sélecteurs CSS, après inspection du DOM.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "front-end",
+          "raison": "Le skill sert aux tests d'interface du front-end, lancé en local avec le back-end si besoin.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "tests UI",
+          "raison": "Formulation anglaise courante pour les tests d'interface et le débogage d'interface du skill.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "logs console",
+          "raison": "Les logs de la console font partie des journaux du navigateur que le skill peut relever.",
+          "passage": null
+        }
+      ],
+      "textes": [
+        "webapp-testing : Claude teste votre app web locale avec Playwright",
+        "Le skill d'Anthropic écrit des scripts Playwright en Python pour vérifier le front-end, déboguer l'interface, prendre des captures d'écran et lire les logs du navigateur.",
+        "Un helper démarre les serveurs de l'app, back-end et front-end compris, puis lance le test. Claude l'appelle tel quel, sans charger son code dans le contexte. Sur une app dynamique, il attend la fin du chargement, observe la page rendue et en tire ses sélecteurs avant d'agir.",
+        "Vérifier un formulaire sur une app avec back-end et front-end : le helper lance les deux serveurs, la page s'ouvre en headless, le script attend la fin du chargement puis inspecte le DOM.",
+        "Ajouter le catalogue : /plugin marketplace add anthropics/skills",
+        "Installer example-skills : /plugin install example-skills@anthropic-agent-skills",
+        "Mentionner webapp-testing dans sa demande"
+      ]
+    },
+    {
+      "postId": 7,
+      "revisionId": 46,
+      "jour": "2026-11-02",
+      "motsCles": [
+        {
+          "champ": "nom",
+          "terme": "mcp-builder",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "MCP et skills",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "usage",
+          "terme": "créer un serveur MCP",
+          "raison": null,
+          "passage": "Create MCP (Model Context Protocol) servers that enable LLMs to interact with external services through well-designed tools."
+        },
+        {
+          "champ": "usage",
+          "terme": "intégrer une API externe",
+          "raison": null,
+          "passage": "Use when building MCP servers to integrate external APIs or services"
+        },
+        {
+          "champ": "usage",
+          "terme": "outils pour agents",
+          "raison": null,
+          "passage": "Clear, descriptive tool names help agents find the right tools quickly."
+        },
+        {
+          "champ": "usage",
+          "terme": "évaluer un serveur MCP",
+          "raison": null,
+          "passage": "Use evaluations to test whether LLMs can effectively use your MCP server to answer realistic, complex questions."
+        },
+        {
+          "champ": "technologie",
+          "terme": "Model Context Protocol",
+          "raison": null,
+          "passage": "Create MCP (Model Context Protocol) servers that enable LLMs to interact with external services through well-designed tools."
+        },
+        {
+          "champ": "technologie",
+          "terme": "TypeScript",
+          "raison": null,
+          "passage": "The TypeScript SDK has two major versions."
+        },
+        {
+          "champ": "technologie",
+          "terme": "Python",
+          "raison": null,
+          "passage": "whether in Python (FastMCP) or Node/TypeScript (MCP SDK)"
+        },
+        {
+          "champ": "technologie",
+          "terme": "FastMCP",
+          "raison": null,
+          "passage": "whether in Python (FastMCP) or Node/TypeScript (MCP SDK)"
+        },
+        {
+          "champ": "technologie",
+          "terme": "MCP Inspector",
+          "raison": null,
+          "passage": "Test with MCP Inspector: npx @modelcontextprotocol/inspector"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Claude Code",
+          "raison": null,
+          "passage": "You can register this repository as a Claude Code Plugin marketplace"
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "connecteur d'API",
+          "raison": "mcp-builder guide l'écriture d'un serveur qui relie un LLM à l'API d'un service externe.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "protocole MCP",
+          "raison": "Traduction de Model Context Protocol, le protocole des serveurs que guide mcp-builder.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "agents IA",
+          "raison": "Les outils d'un serveur créé avec mcp-builder sont appelés par des agents IA.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "Agent Skills",
+          "raison": "mcp-builder est un skill du dépôt d'Anthropic consacré aux Agent Skills, chargé par Claude.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "skill Claude",
+          "raison": "mcp-builder est un skill que Claude charge pour guider la création d'un serveur MCP.",
+          "passage": null
+        }
+      ],
+      "textes": [
+        "Avec mcp-builder, Claude mène votre serveur MCP de l’étude de l’API jusqu’aux évaluations",
+        "Le skill d’Anthropic pour brancher une API externe sur un serveur MCP, en TypeScript ou en Python avec FastMCP. Claude déroule quatre phases : étude de l’API, implémentation, revue et tests avec MCP Inspector, puis évaluations.",
+        "Tout est pensé pour l’agent qui appellera les outils : noms préfixés et orientés action, descriptions courtes, résultats ciblés et paginables, erreurs qui disent quoi faire ensuite.",
+        "Serveur terminé, le guide fait écrire 10 questions réalistes, sans opération destructrice, pour voir si un LLM s’en sert vraiment bien.",
+        "Dans Claude Code, ajouter le dépôt comme marketplace",
+        "Installer example-skills : /plugin install example-skills@anthropic-agent-skills",
+        "Puis citer mcp-builder dans la demande",
+        "Selon le guide, tout nouveau serveur TypeScript part du SDK v2."
+      ]
+    },
+    {
+      "postId": 10,
+      "revisionId": 30,
+      "jour": "2026-11-02",
+      "motsCles": [
+        {
+          "champ": "nom",
+          "terme": "Scientific Agent Skills (K-Dense)",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "MCP et skills",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "usage",
+          "terme": "recherche scientifique",
+          "raison": null,
+          "passage": "A collection of 177 scientific and research skills for AI agents, created by K-Dense."
+        },
+        {
+          "champ": "usage",
+          "terme": "analyse génomique",
+          "raison": null,
+          "passage": "Bioinformatics & Genomics - Sequence analysis, single-cell RNA-seq, pooled CRISPR screens"
+        },
+        {
+          "champ": "usage",
+          "terme": "découverte de médicaments",
+          "raison": null,
+          "passage": "Cheminformatics & Drug Discovery - Molecular property prediction, virtual screening, ADMET analysis, molecular docking"
+        },
+        {
+          "champ": "usage",
+          "terme": "bases de données scientifiques",
+          "raison": null,
+          "passage": "The Database Lookup skill documents 80 databases with public, registered, or licensed access"
+        },
+        {
+          "champ": "usage",
+          "terme": "analyse de données",
+          "raison": null,
+          "passage": "Data Analysis & Visualization - Statistical analysis, network analysis, time series, publication-quality figures"
+        },
+        {
+          "champ": "usage",
+          "terme": "rédaction scientifique",
+          "raison": null,
+          "passage": "Scientific Communication - Evidence-traceable writing, confidential authorized peer review, literature synthesis"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Agent Skills",
+          "raison": null,
+          "passage": "The collection follows the open Agent Skills standard"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Python",
+          "raison": null,
+          "passage": "While the agent can use any Python package or API on its own"
+        },
+        {
+          "champ": "technologie",
+          "terme": "RDKit",
+          "raison": null,
+          "passage": "Explicitly defined, version-aware workflows for RDKit, Scanpy, PyTorch Lightning, scikit-learn"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Scanpy",
+          "raison": null,
+          "passage": "Explicitly defined, version-aware workflows for RDKit, Scanpy, PyTorch Lightning, scikit-learn"
+        },
+        {
+          "champ": "technologie",
+          "terme": "scikit-learn",
+          "raison": null,
+          "passage": "Explicitly defined, version-aware workflows for RDKit, Scanpy, PyTorch Lightning, scikit-learn"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Biopython",
+          "raison": null,
+          "passage": "Multi-database packages such as BioServices, Biopython, and gget add further coverage"
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "Claude Scientific Skills",
+          "raison": "Ancien nom du dépôt scientific-agent-skills, qui a changé de nom pour s'ouvrir à d'autres agents que Claude.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "bioinformatique",
+          "raison": "Domaine couvert par plusieurs skills d'analyse génomique : séquences, cellules uniques, variants.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "chémoinformatique",
+          "raison": "Domaine couvert par les skills de découverte de médicaments, avec RDKit notamment.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "recherche clinique",
+          "raison": "Des skills servent la recherche scientifique sur les essais et les variants, sans diagnostic ni traitement.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "visualisation scientifique",
+          "raison": "Plusieurs skills d'analyse de données produisent des figures dignes d'une publication.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "skills pour Claude Code",
+          "raison": "Ces skills au format Agent Skills s'installent notamment dans Claude Code.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "science assistée par IA",
+          "raison": "Scientific Agent Skills met un agent IA au service de la recherche scientifique.",
+          "passage": null
+        }
+      ],
+      "textes": [
+        "Scientific Agent Skills : 177 skills pour faire de la recherche avec Claude Code, Cursor ou Codex",
+        "Biologie, chimie, médecine, physique, analyse de données : chaque skill de K-Dense cale votre agent sur un paquet, une base ou une méthode précise, avec les conventions et les contrôles du domaine.",
+        "Le morceau le plus utile : Database Lookup documente 80 bases (PubChem, ChEMBL, UniProt, ClinicalTrials.gov…), avec les bons endpoints, la pagination et la provenance. Une seule demande suffit ensuite pour enchaîner tout un pipeline.",
+        "Dans l'exemple du dépôt, une seule demande pour classer des inhibiteurs d'EGFR : l'agent interroge ChEMBL, analyse les relations structure-activité avec RDKit, cherche les mécanismes de résistance dans PubMed, puis livre graphiques et rapport.",
+        "Avec GitHub CLI 2.90.0+ : gh skill install, uniquement les skills utiles.",
+        "Les dépendances s'installent à part, selon chaque skill.",
+        "Un skill peut faire exécuter du code arbitraire à votre agent et K-Dense ne garantit pas une revue exhaustive : lisez le SKILL.md avant d'installer.",
+        "Dépôt sous MIT, mais chaque skill a sa licence, qui peut ajouter des conditions."
+      ]
+    },
+    {
+      "postId": 11,
+      "revisionId": 49,
+      "jour": "2026-11-02",
+      "motsCles": [
+        {
+          "champ": "nom",
+          "terme": "Superpowers",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "MCP et skills",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "usage",
+          "terme": "méthode de développement",
+          "raison": null,
+          "passage": "Superpowers is a complete software development methodology for your coding agents"
+        },
+        {
+          "champ": "usage",
+          "terme": "cadrer un besoin",
+          "raison": null,
+          "passage": "Draws out what you actually want, and why, through questions that get you describing it"
+        },
+        {
+          "champ": "usage",
+          "terme": "plan d'implémentation",
+          "raison": null,
+          "passage": "your agent puts together an implementation plan"
+        },
+        {
+          "champ": "usage",
+          "terme": "écrire les tests d'abord",
+          "raison": null,
+          "passage": "Test-Driven Development - Write tests first, always"
+        },
+        {
+          "champ": "usage",
+          "terme": "revue de code",
+          "raison": null,
+          "passage": "requesting-code-review - Activates between tasks. Reviews against plan, reports issues by severity."
+        },
+        {
+          "champ": "usage",
+          "terme": "déléguer à des sous-agents",
+          "raison": null,
+          "passage": "dispatches a fresh subagent per task with a review after each"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Claude Code",
+          "raison": null,
+          "passage": "Getting Started Claude Code"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Codex",
+          "raison": null,
+          "passage": "Superpowers is available via the official Codex plugin marketplace"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Cursor",
+          "raison": null,
+          "passage": "In Cursor Agent chat, install from marketplace"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Gemini CLI",
+          "raison": null,
+          "passage": "gemini extensions install https://github.com/obra/superpowers"
+        },
+        {
+          "champ": "technologie",
+          "terme": "GitHub Copilot CLI",
+          "raison": null,
+          "passage": "copilot plugin install superpowers@superpowers-marketplace"
+        },
+        {
+          "champ": "technologie",
+          "terme": "git worktrees",
+          "raison": null,
+          "passage": "using-git-worktrees - Activates after design approval. Creates isolated workspace on new branch"
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "TDD",
+          "raison": "Superpowers impose le TDD : un test qui échoue est écrit avant le code.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "test-driven development",
+          "raison": "nom anglais du développement piloté par les tests, au cœur de Superpowers.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "débogage",
+          "raison": "Superpowers inclut un skill de débogage systématique en quatre phases.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "subagents",
+          "raison": "terme anglais des sous-agents auxquels Superpowers peut confier chaque tâche du plan.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "spécification",
+          "raison": "Superpowers tire une spécification de la conversation avant d'écrire le code.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "code review",
+          "raison": "terme anglais de la revue de code que Superpowers fait pendant l'exécution du plan.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "agent de code",
+          "raison": "Superpowers est une méthode de travail pour les agents de code.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "plugin Claude Code",
+          "raison": "Superpowers s'installe comme plugin dans Claude Code et dans d'autres agents.",
+          "passage": null
+        }
+      ],
+      "textes": [
+        "Superpowers fait cadrer, planifier, tester et relire votre agent de code avant qu'il livre",
+        "Superpowers impose une vraie méthode à votre agent de code. Il ne fonce pas dans le code : il vous demande ce que vous cherchez à faire, vous montre la spec par morceaux lisibles, puis bâtit un plan d'implémentation une fois le design validé. Les skills se déclenchent seuls, sans commande à taper.",
+        "Le plan découpe le travail en tâches de 2 à 5 minutes, avec fichiers, code et vérifications. Le TDD est strict : le code écrit avant son test est supprimé. Entre deux tâches, une revue classe les problèmes par gravité, et un problème critique bloque la suite. Selon l'auteur, l'agent tient ainsi quelques heures en autonomie sans dévier du plan.",
+        "Pour une nouvelle fonctionnalité : brainstorming fait préciser la demande, writing-plans la découpe en petites tâches, puis l'implémentation commence par un test qui échoue, avant le code minimal.",
+        "Dans Claude Code : /plugin install superpowers@claude-plugins-official",
+        "Autres agents : une installation séparée pour chacun, selon le dépôt",
+        "Claude Code, Codex, Cursor, Gemini CLI, GitHub Copilot CLI et une dizaine d'autres."
+      ]
+    },
+    {
+      "postId": 12,
+      "revisionId": 32,
+      "jour": "2026-11-02",
+      "motsCles": [
+        {
+          "champ": "nom",
+          "terme": "find-skills",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "MCP et skills",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "usage",
+          "terme": "recherche de skills",
+          "raison": null,
+          "passage": "Search for skills interactively or by keyword"
+        },
+        {
+          "champ": "usage",
+          "terme": "installation de skills",
+          "raison": null,
+          "passage": "Install a skill from GitHub or other sources"
+        },
+        {
+          "champ": "usage",
+          "terme": "découverte de skills",
+          "raison": null,
+          "passage": "This skill helps you discover and install skills from the open agent skills ecosystem."
+        },
+        {
+          "champ": "usage",
+          "terme": "extension d'un agent",
+          "raison": null,
+          "passage": "Expresses interest in extending agent capabilities"
+        },
+        {
+          "champ": "usage",
+          "terme": "création de skill",
+          "raison": null,
+          "passage": "Suggest the user could create their own skill with npx skills init"
+        },
+        {
+          "champ": "technologie",
+          "terme": "npx",
+          "raison": null,
+          "passage": "The Skills CLI (npx skills) is the package manager for the open agent skills ecosystem."
+        },
+        {
+          "champ": "technologie",
+          "terme": "Node.js",
+          "raison": null,
+          "passage": "Requires Node.js 22.20 or later."
+        },
+        {
+          "champ": "technologie",
+          "terme": "Claude Code",
+          "raison": null,
+          "passage": "Supports OpenCode, Claude Code, Codex, Cursor, and 75 more."
+        },
+        {
+          "champ": "technologie",
+          "terme": "Codex",
+          "raison": null,
+          "passage": "Supports OpenCode, Claude Code, Codex, Cursor, and 75 more."
+        },
+        {
+          "champ": "technologie",
+          "terme": "Cursor",
+          "raison": null,
+          "passage": "Supports OpenCode, Claude Code, Codex, Cursor, and 75 more."
+        },
+        {
+          "champ": "technologie",
+          "terme": "OpenCode",
+          "raison": null,
+          "passage": "Supports OpenCode, Claude Code, Codex, Cursor, and 75 more."
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "Skills CLI",
+          "raison": "find-skills s'appuie sur l'outil npx skills, que sa fiche appelle Skills CLI et présente comme le gestionnaire de paquets des skills.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "skills.sh",
+          "raison": "Annuaire en ligne de skills que find-skills demande de consulter avant toute recherche.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "compétences d'agent",
+          "raison": "Traduction française de agent skills, ce que find-skills recherche et installe.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "trouver un skill",
+          "raison": "Traduction de find a skill, la demande qui déclenche find-skills selon sa fiche.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "assistant de code",
+          "raison": "find-skills étend un assistant de code IA comme Claude Code, Codex ou Cursor.",
+          "passage": null
+        }
+      ],
+      "textes": [
+        "find-skills : votre agent peut trouver et installer le skill qui lui manque",
+        "Demandez « trouve un skill pour X », ou juste « comment faire X ». L’agent regarde le classement de skills.sh et, s’il n’y trouve pas son bonheur, lance npx skills find. Il revient avec le skill, sa source et la commande d’installation.",
+        "Il ne recommande pas un skill sur un simple résultat de recherche : il vérifie d’abord le nombre d’installations et la source. Et si rien n’existe, il vous propose d’écrire le vôtre avec npx skills init.",
+        "Vous voulez accélérer votre app React : l’agent peut lancer npx skills find react performance et vous proposer un skill avec sa commande d’installation.",
+        "Ajouter find-skills avec npx skills add (Node.js 22.20 ou plus).",
+        "Ensuite, il n’y a plus qu’à demander « trouve un skill pour … ».",
+        "Claude Code, Codex, Cursor, OpenCode et 75 autres agents.",
+        "S’il installe pour vous, c’est en global et sans confirmation (-g -y) : lisez le skill avant d’accepter."
+      ]
+    },
+    {
+      "postId": 13,
+      "revisionId": 33,
+      "jour": "2026-11-02",
+      "motsCles": [
+        {
+          "champ": "nom",
+          "terme": "grill-me (Matt Pocock)",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "MCP et skills",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "usage",
+          "terme": "affiner un plan",
+          "raison": null,
+          "passage": "A relentless interview to sharpen a plan or design."
+        },
+        {
+          "champ": "usage",
+          "terme": "entretien de conception",
+          "raison": null,
+          "passage": "Get relentlessly interviewed about a plan or design until every branch of the design tree is resolved."
+        },
+        {
+          "champ": "usage",
+          "terme": "questions détaillées",
+          "raison": null,
+          "passage": "getting the agent to ask you detailed questions about what you're building."
+        },
+        {
+          "champ": "usage",
+          "terme": "s'aligner avec l'agent",
+          "raison": null,
+          "passage": "They help you align with the agent before you get started"
+        },
+        {
+          "champ": "usage",
+          "terme": "préparer une décision",
+          "raison": null,
+          "passage": "Interview the user relentlessly about a plan, decision, or idea until every branch of the design tree is resolved."
+        },
+        {
+          "champ": "usage",
+          "terme": "cadrage de projet",
+          "raison": null,
+          "passage": "They help you align with the agent before you get started, and think deeply about the change you're making."
+        },
+        {
+          "champ": "technologie",
+          "terme": "Claude Code",
+          "raison": null,
+          "passage": "fix common failure modes I see with Claude Code, Codex, and other coding agents."
+        },
+        {
+          "champ": "technologie",
+          "terme": "Codex",
+          "raison": null,
+          "passage": "codex plugin marketplace add mattpocock/skills"
+        },
+        {
+          "champ": "technologie",
+          "terme": "GitHub Copilot",
+          "raison": null,
+          "passage": "copilot plugin install mattpocock-skills@mattpocock"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Gemini CLI",
+          "raison": null,
+          "passage": "gemini skills install https://github.com/mattpocock/skills.git --path skills/productivity"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Cursor",
+          "raison": null,
+          "passage": "cursor, opencode, devin, windsurf, amp, pi"
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "grilling",
+          "raison": "grill-me délègue l'entretien au skill grilling du même dépôt.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "grill-with-docs",
+          "raison": "Skill du même auteur pour le code : même entretien que grill-me, avec en plus un glossaire et des ADR.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "interview",
+          "raison": "Le dépôt décrit ce skill comme une interview sans relâche sur un plan.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "malentendu",
+          "raison": "Ce skill vise le décalage entre ce que l'on veut et ce que l'agent comprend.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "clarifier ses besoins",
+          "raison": "Le skill fait préciser ses attentes par des questions détaillées, avant que l'agent commence.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "challenger un plan",
+          "raison": "grill-me sert à affiner un plan en le soumettant aux questions de l'agent.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "productivité",
+          "raison": "Le dépôt range ce skill dans sa section Productivity, parmi ses outils généraux.",
+          "passage": null
+        }
+      ],
+      "textes": [
+        "grill-me : votre agent vous interroge sans relâche sur un plan, jusqu'à ce que tout soit tranché",
+        "Avant de lancer quoi que ce soit, on inverse les rôles : l'agent vous pose des questions précises sur votre plan, votre décision ou votre idée, et creuse chaque branche jusqu'à la trancher. Matt Pocock le destine aux sujets hors code.",
+        "Vous vous alignez avec l'agent avant qu'il se mette au travail, au lieu de découvrir après coup qu'il n'avait pas compris. Pour le code, la variante grill-with-docs mène le même entretien et construit au passage le vocabulaire du projet, avec les décisions difficiles consignées en ADR.",
+        "Un lancement à cadrer, un arbitrage d'équipe à préparer : tapez /grill-me, décrivez le plan, puis répondez jusqu'à ce que plus rien ne reste flou.",
+        "Dans Claude Code, installez le plugin mattpocock-skills.",
+        "Il ne démarre pas seul : tapez /grill-me, puis décrivez votre plan.",
+        "Claude Code, Codex et d'autres agents ; n'importe quel modèle, selon l'auteur."
+      ]
+    },
+    {
+      "postId": 14,
+      "revisionId": 34,
+      "jour": "2026-11-02",
+      "motsCles": [
+        {
+          "champ": "nom",
+          "terme": "claude-mem",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "agents et automatisation",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "usage",
+          "terme": "mémoire entre sessions",
+          "raison": null,
+          "passage": "Context survives across sessions"
+        },
+        {
+          "champ": "usage",
+          "terme": "résumés de session",
+          "raison": null,
+          "passage": "generating semantic summaries, and making them available to future sessions"
+        },
+        {
+          "champ": "usage",
+          "terme": "recherche dans l'historique",
+          "raison": null,
+          "passage": "Query your project history with natural language"
+        },
+        {
+          "champ": "usage",
+          "terme": "injection de contexte",
+          "raison": null,
+          "passage": "Fine-grained control over what context gets injected"
+        },
+        {
+          "champ": "usage",
+          "terme": "économie de tokens",
+          "raison": null,
+          "passage": "~10x token savings by filtering before fetching details"
+        },
+        {
+          "champ": "usage",
+          "terme": "mémoire de projet",
+          "raison": null,
+          "passage": "maintain continuity of knowledge about projects"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Claude Code",
+          "raison": null,
+          "passage": "Claude Code: Latest version with plugin support"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Codex",
+          "raison": null,
+          "passage": "Or install for T3 Code (Codex and Claude Code providers):"
+        },
+        {
+          "champ": "technologie",
+          "terme": "OpenCode",
+          "raison": null,
+          "passage": "This works with OpenCode 1.3.4 or later, including OpenCode 2."
+        },
+        {
+          "champ": "technologie",
+          "terme": "MCP",
+          "raison": null,
+          "passage": "intelligent memory search through 4 MCP tools"
+        },
+        {
+          "champ": "technologie",
+          "terme": "SQLite",
+          "raison": null,
+          "passage": "SQLite Database - Stores sessions, observations, summaries"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Chroma",
+          "raison": null,
+          "passage": "Chroma Vector Database - Hybrid semantic + keyword search"
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "mémoire persistante",
+          "raison": "claude-mem se présente comme un système de mémoire persistante pour Claude Code.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "mémoire à long terme",
+          "raison": "le dépôt de claude-mem se range sous le sujet long-term-memory, la mémoire à long terme d'un agent.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "continuité de projet",
+          "raison": "claude-mem aide Claude à garder le fil d'un projet quand une session se termine.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "RAG",
+          "raison": "le dépôt de claude-mem se classe sous le sujet rag : il retrouve des informations passées et les injecte dans le contexte.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "recherche sémantique",
+          "raison": "claude-mem combine recherche par mots-clés et recherche sémantique ; il utilise en interne la base vectorielle Chroma, sans être lui-même une base vectorielle.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "plugin Claude Code",
+          "raison": "claude-mem s'installe comme plugin de Claude Code, par npx ou par la place de marché de plugins.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "agent de code",
+          "raison": "claude-mem sert de mémoire à des agents de code comme Claude Code, Codex ou OpenCode.",
+          "passage": null
+        }
+      ],
+      "textes": [
+        "claude-mem donne à Claude Code une mémoire qui tient d’une session à l’autre",
+        "Pendant la session, il enregistre ce que fait l’agent, le compresse en résumés et réinjecte le contexte utile dans la suivante. Vous reprenez un projet sans tout réexpliquer.",
+        "Pour retrouver une info, l’agent lit d’abord un index compact, puis ne charge que les notes utiles : environ dix fois moins de tokens, selon les auteurs.",
+        "Dans la doc : chercher « authentication bug » parmi les corrections, puis ne récupérer que deux observations.",
+        "npx claude-mem install ou la place de marché de plugins de Claude Code, puis redémarrez. Pas npm install -g, qui n’installe que la bibliothèque.",
+        "Node.js 20.0.0 ou plus récent.",
+        "Le service claude-mem proposé à l’installation est gratuit 30 jours ; ensuite la mémoire passe sur votre abonnement Anthropic, sauf souscription ou clé OpenRouter ou Gemini."
+      ]
+    },
+    {
+      "postId": 16,
+      "revisionId": 36,
+      "jour": "2026-11-02",
+      "motsCles": [
+        {
+          "champ": "nom",
+          "terme": "planning-with-files",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "MCP et skills",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "usage",
+          "terme": "planification de tâches",
+          "raison": null,
+          "passage": "Persistent file-based planning for AI coding agents and long-running tasks."
+        },
+        {
+          "champ": "usage",
+          "terme": "reprise de session",
+          "raison": null,
+          "passage": "session recovery after /clear and compaction"
+        },
+        {
+          "champ": "usage",
+          "terme": "longues tâches d'agent",
+          "raison": null,
+          "passage": "Keeping a coding agent on track for hours: modes, gate, ledger"
+        },
+        {
+          "champ": "usage",
+          "terme": "suivi d'avancement",
+          "raison": null,
+          "passage": "Did something? → log it in progress.md"
+        },
+        {
+          "champ": "usage",
+          "terme": "mémoire de travail d'agent",
+          "raison": null,
+          "passage": "They are working memory, not a tracked deliverable."
+        },
+        {
+          "champ": "usage",
+          "terme": "coordination multi-agents",
+          "raison": null,
+          "passage": "One orchestrator owns task_plan.md and the shared summaries"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Markdown",
+          "raison": null,
+          "passage": "Markdown on disk is the shared state between agents."
+        },
+        {
+          "champ": "technologie",
+          "terme": "Claude Code",
+          "raison": null,
+          "passage": "Claude Code, plugin route (ships everything: skill, hooks, slash commands):"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Codex",
+          "raison": null,
+          "passage": "Codex, Cursor, OpenCode, 60+ agents"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Cursor",
+          "raison": null,
+          "passage": "Plan injection every turn (Cursor: at session start)"
+        },
+        {
+          "champ": "technologie",
+          "terme": "GitHub Copilot",
+          "raison": null,
+          "passage": "GitHub Copilot | Copilot Setup | Hooks (incl. errorOccurred)"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Agent Skills",
+          "raison": null,
+          "passage": "Installs across 60+ agents via the Agent Skills standard"
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "context rot",
+          "raison": "Dérive d'un contexte qui s'allonge ; planning-with-files réinjecte le plan à chaque tour pour la contenir.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "compaction",
+          "raison": "Quand l'agent résume sa conversation, planning-with-files permet la reprise de session depuis les fichiers du plan.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "Manus",
+          "raison": "Méthode de planification par fichiers Markdown décrite par Manus, reprise par planning-with-files : un projet d'un autre auteur, pas un produit Manus.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "context engineering",
+          "raison": "Discipline que planning-with-files applique : écrire l'état durable de la tâche dans des fichiers hors du contexte.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "mode plan",
+          "raison": "Le mode où l'agent propose sa démarche avant d'agir ; planning-with-files prend le relais : le plan validé est écrit dans task_plan.md, puis suivi.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "skill Claude Code",
+          "raison": "planning-with-files s'installe comme skill, ou comme plugin avec ses hooks, dans Claude Code.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "liste de tâches d'agent",
+          "raison": "Là où une liste de tâches reste dans le contexte, planning-with-files garde le plan sur le disque.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "agent autonome",
+          "raison": "planning-with-files n'est pas un agent en soi : c'est un skill qui aide un agent à tenir un plan sur de longues tâches, avec un mode autonome qui réduit les rappels.",
+          "passage": null
+        }
+      ],
+      "textes": [
+        "planning-with-files garde le plan de votre agent sur disque, et la tâche reprend après un /clear",
+        "Le plan tient dans trois fichiers Markdown du projet, pas seulement dans le contexte : task_plan.md pour les phases, findings.md pour les découvertes et les décisions, progress.md pour le journal. Après un /clear, une compaction ou un plantage, l’agent les relit et repart de la phase en cours.",
+        "Des hooks réinjectent le plan au début de chaque tour : sur une longue session, l’objectif et l’état des phases restent sous les yeux du modèle. En option, l’agent est retenu tant qu’une phase reste en cours, avec un plafond pour ne jamais bloquer la session, sur les outils qui le permettent.",
+        "Validez l’approche en mode plan, faites-la écrire en phases dans task_plan.md, puis lancez l’exécution. Si la conversation est vidée en route, l’agent ne perd pas le fil : il relit les fichiers et reprend où il en était.",
+        "Dans Claude Code : /plugin marketplace add OthmanAdi/planning-with-files",
+        "Puis /plugin install planning-with-files@planning-with-files",
+        "Tapez /plan, ou demandez simplement un plan à l’agent",
+        "Plugins natifs pour Claude Code, Codex CLI, OpenCode et d’autres ; plus de 60 agents via npx skills add, sans les hooks sur certains."
+      ]
+    },
+    {
+      "postId": 17,
+      "revisionId": 37,
+      "jour": "2026-11-02",
+      "motsCles": [
+        {
+          "champ": "nom",
+          "terme": "stop-slop",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "MCP et skills",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "usage",
+          "terme": "tics d'écriture IA",
+          "raison": null,
+          "passage": "A skill for removing AI tells from prose."
+        },
+        {
+          "champ": "usage",
+          "terme": "réécrire un texte IA",
+          "raison": null,
+          "passage": "This skill teaches Claude (or any LLM) to catch and remove them."
+        },
+        {
+          "champ": "usage",
+          "terme": "révision de texte",
+          "raison": null,
+          "passage": "Below 35/50: revise."
+        },
+        {
+          "champ": "usage",
+          "terme": "clichés d'écriture",
+          "raison": null,
+          "passage": "Structural clichés - Binary contrasts, negative listings, dramatic fragmentation, rhetorical setups, false agency, narrator-from-a-distance voice, passive voice."
+        },
+        {
+          "champ": "usage",
+          "terme": "formules à bannir",
+          "raison": null,
+          "passage": "Banned phrases - Throat-clearing openers, emphasis crutches, business jargon, all adverbs, vague declaratives, meta-commentary."
+        },
+        {
+          "champ": "usage",
+          "terme": "grille de relecture",
+          "raison": null,
+          "passage": "Rate 1-10 on each dimension:"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Claude Code",
+          "raison": null,
+          "passage": "Claude Code: Add this folder as a skill."
+        },
+        {
+          "champ": "technologie",
+          "terme": "Claude Projects",
+          "raison": null,
+          "passage": "Claude Projects: Upload SKILL.md and reference files to project knowledge."
+        },
+        {
+          "champ": "technologie",
+          "terme": "SKILL.md",
+          "raison": null,
+          "passage": "SKILL.md # Core instructions"
+        },
+        {
+          "champ": "technologie",
+          "terme": "LLM",
+          "raison": null,
+          "passage": "This skill teaches Claude (or any LLM) to catch and remove them."
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "texte généré par IA",
+          "raison": "stop-slop retire d'un texte généré par une IA les tics d'écriture IA qui le trahissent.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "écriture naturelle",
+          "raison": "stop-slop retire les tournures prévisibles de l'IA pour une écriture plus naturelle.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "style d'écriture",
+          "raison": "stop-slop agit sur le style d'écriture : formules, constructions et rythme des phrases.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "ton naturel",
+          "raison": "stop-slop cherche un ton direct et humain, sans formules automatiques.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "relecture",
+          "raison": "stop-slop sert à relire un texte pour en retirer les tics d'écriture IA.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "rédaction",
+          "raison": "stop-slop sert à la rédaction : révision de texte et chasse aux clichés d'écriture.",
+          "passage": null
+        }
+      ],
+      "textes": [
+        "stop-slop traque les tics d’écriture IA dans vos textes et les fait disparaître",
+        "Formules prévisibles, constructions toutes faites, rythme mécanique : stop-slop apprend à Claude, ou à n’importe quel LLM, à les repérer et à les retirer.",
+        "Les règles sont tranchées : pas de jargon d’entreprise, pas d’adverbes, pas de voix passive, pas d’oppositions binaires, pas de tiret cadratin. Chaque famille de tics a son fichier de référence, chargé seulement quand il sert.",
+        "Un post écrit avec Claude qui sonne trop IA : passez-le dans stop-slop avant de publier.",
+        "Claude Code : ajoutez le dossier comme skill",
+        "API : incluez SKILL.md dans le prompt système",
+        "Claude Code, projets Claude, instructions personnalisées ou appels API."
+      ]
+    },
+    {
+      "postId": 21,
+      "revisionId": 54,
+      "jour": "2026-11-02",
+      "motsCles": [
+        {
+          "champ": "nom",
+          "terme": "ECC (Everything Claude Code)",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "agents et automatisation",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "usage",
+          "terme": "planifier avant de coder",
+          "raison": null,
+          "passage": "it plans before it builds"
+        },
+        {
+          "champ": "usage",
+          "terme": "écrire les tests d'abord",
+          "raison": null,
+          "passage": "TDD becomes a gated RED -> GREEN -> REFACTOR workflow with evidence"
+        },
+        {
+          "champ": "usage",
+          "terme": "revue de code",
+          "raison": null,
+          "passage": "A fresh-context reviewer looks for regressions and blind spots"
+        },
+        {
+          "champ": "usage",
+          "terme": "résumés de session",
+          "raison": null,
+          "passage": "Sessions are distilled into summaries, instincts, and reusable skills"
+        },
+        {
+          "champ": "usage",
+          "terme": "audit de configuration",
+          "raison": null,
+          "passage": "Scan your agent configuration for vulnerabilities, misconfigurations, and injection risks."
+        },
+        {
+          "champ": "usage",
+          "terme": "installation sélective",
+          "raison": null,
+          "passage": "use a selective/manual profile when context footprint matters"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Claude Code",
+          "raison": null,
+          "passage": "It works best with Claude Code today"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Codex",
+          "raison": null,
+          "passage": "has native Codex and Qoder plugin paths"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Qoder",
+          "raison": null,
+          "passage": "ECC ships a native Qoder plugin"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Cursor",
+          "raison": null,
+          "passage": "provides capability-limited adapters for Cursor, OpenCode, Gemini"
+        },
+        {
+          "champ": "technologie",
+          "terme": "OpenCode",
+          "raison": null,
+          "passage": "ECC provides a beta OpenCode plugin integration"
+        },
+        {
+          "champ": "technologie",
+          "terme": "GitHub Copilot",
+          "raison": null,
+          "passage": "ECC supports GitHub Copilot on two surfaces"
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "agent harness",
+          "raison": "ECC se présente comme un système d'optimisation des performances du harness de l'agent.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "TDD",
+          "raison": "ECC propose un cycle TDD, avec un test en échec avant le code.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "sous-agents",
+          "raison": "ECC fournit des agents spécialisés pour la planification, la relecture et la sécurité.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "hooks",
+          "raison": "ECC fournit des hooks, à activer ou non, qui ajoutent des contrôles hors du prompt.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "plugin Claude Code",
+          "raison": "ECC s'installe comme plugin Claude Code, par l'installation guidée ou par /plugin.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "apprentissage continu",
+          "raison": "ECC peut tirer des sessions passées des instincts et des skills réutilisables.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "AgentShield",
+          "raison": "AgentShield, l'outil d'audit associé à ECC et installé à part, analyse la configuration de l'agent.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "agent de code",
+          "raison": "ECC structure le travail d'un agent de code comme Claude Code ou Codex.",
+          "passage": null
+        }
+      ],
+      "textes": [
+        "ECC installe une méthode de travail dans votre agent de code, au lieu de la redire à chaque prompt",
+        "Planifier avant de coder, vérifier par les tests, garder ce qui compte : ECC réunit 71 agents, 314 skills, des hooks et des résumés de session pour que ce processus fasse partie de la façon dont votre agent travaille. Il fonctionne aujourd'hui le mieux avec Claude Code, avec des plugins natifs pour Codex et Qoder et des adaptateurs plus limités pour Cursor, OpenCode ou Gemini.",
+        "Le plan devient un document à valider avant la première ligne, le TDD exige un test en échec avant l'implémentation, et les hooks ajoutent des contrôles qui ne dépendent plus du prompt. Ces hooks lancent des commandes shell sur votre machine : installez ECC uniquement depuis le dépôt officiel ou le paquet npm ecc-universal, les copies non officielles pouvant contenir un logiciel malveillant.",
+        "Pour une nouvelle fonctionnalité, selon le dépôt : /ecc:plan avec la demande, validation du plan, puis tdd-workflow fait écrire un test qui échoue avant d'implémenter. Suivent une relecture en contexte neuf et une vérification du build, du lint, des types et des tests.",
+        "Lancer npx ecc-universal@2.2.3 setup (Node.js 18 ou plus requis)",
+        "Choix de la portée et du profil de hooks ; on peut relancer pour les changer",
+        "Assistant d'installation pour le plugin Claude Code : Git et Claude Code 2.1 ou plus requis",
+        "Les hooks peuvent lancer des commandes shell et les serveurs MCP détenir des identifiants : à traiter comme du code exécutable, et à installer uniquement depuis les sources officielles."
+      ]
+    },
+    {
+      "postId": 8,
+      "revisionId": 47,
+      "jour": "2026-11-03",
+      "motsCles": [
+        {
+          "champ": "nom",
+          "terme": "Obsidian Skills",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "MCP et skills",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "usage",
+          "terme": "piloter un coffre Obsidian",
+          "raison": null,
+          "passage": "Interact with Obsidian vaults via the Obsidian CLI including plugin and theme development"
+        },
+        {
+          "champ": "usage",
+          "terme": "édition Markdown",
+          "raison": null,
+          "passage": "Create and edit Obsidian Flavored Markdown (.md) with wikilinks, embeds, callouts, properties"
+        },
+        {
+          "champ": "usage",
+          "terme": "vues filtrées Obsidian Bases",
+          "raison": null,
+          "passage": "Create and edit Obsidian Bases (.base) with views, filters, formulas, and summaries"
+        },
+        {
+          "champ": "usage",
+          "terme": "canevas visuel JSON Canvas",
+          "raison": null,
+          "passage": "Create and edit JSON Canvas files (.canvas) with nodes, edges, groups, and connections"
+        },
+        {
+          "champ": "usage",
+          "terme": "nettoyer une page web",
+          "raison": null,
+          "passage": "Extract clean markdown from web pages using Defuddle"
+        },
+        {
+          "champ": "usage",
+          "terme": "notes Markdown depuis JSON/CSV",
+          "raison": null,
+          "passage": "Render Markdown templates from JSON or CSV data using Knap, including batch file generation"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Markdown",
+          "raison": null,
+          "passage": "open formats including Markdown, Bases, JSON Canvas"
+        },
+        {
+          "champ": "technologie",
+          "terme": "JSON Canvas",
+          "raison": null,
+          "passage": "Create and edit JSON Canvas files (.canvas)"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Obsidian CLI",
+          "raison": null,
+          "passage": "Interact with Obsidian vaults via the Obsidian CLI"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Claude Code",
+          "raison": null,
+          "passage": "any skills-compatible agent, including Claude Code, Codex, and Open Code"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Codex",
+          "raison": null,
+          "passage": "Copy the skills/ directory into your Codex skills path"
+        },
+        {
+          "champ": "technologie",
+          "terme": "OpenCode",
+          "raison": null,
+          "passage": "OpenCode auto-discovers all SKILL.md files under ~/.opencode/skills/."
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "Claude Skills",
+          "raison": "pour Claude Code, le dépôt renvoie à la documentation officielle des Claude Skills.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "Agent Skills",
+          "raison": "Obsidian Skills suit la spécification Agent Skills, un format de skills commun à plusieurs agents.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "wikilinks",
+          "raison": "la syntaxe Markdown d'Obsidian comprend les wikilinks, des liens entre fichiers du coffre.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "économie de tokens",
+          "raison": "le skill defuddle d'Obsidian Skills retire le superflu des pages web pour économiser des tokens.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "modèles de fichiers",
+          "raison": "le skill knap remplit des modèles Markdown à partir de données JSON ou CSV.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "base de connaissances Markdown",
+          "raison": "un coffre Obsidian est un dossier de fichiers Markdown que ces skills apprennent à l'agent à créer et modifier.",
+          "passage": null
+        }
+      ],
+      "textes": [
+        "Obsidian Skills apprend à votre agent les formats d'Obsidian et son CLI",
+        "Votre agent écrit des notes avec wikilinks, callouts et propriétés, monte des Bases avec vues, filtres et formules, et construit des canevas JSON Canvas, directement dans votre coffre. Ça marche avec Claude Code, Codex et OpenCode.",
+        "Deux skills sortent du cadre des notes : defuddle réduit une page web à un Markdown propre pour économiser des tokens, knap génère des fichiers en série depuis du JSON ou du CSV. Le dépôt suit la spécification Agent Skills, donc les mêmes skills servent à tous vos agents compatibles.",
+        "Récupérer un article avec defuddle, puis le ranger dans le coffre en note avec propriétés et wikilinks.",
+        "Dans Claude Code : /plugin marketplace add kepano/obsidian-skills",
+        "Puis /plugin install obsidian@obsidian-skills",
+        "Ou avec npx : npx skills add https://github.com/kepano/obsidian-skills",
+        "Claude Code, Codex, OpenCode et tout agent compatible Agent Skills."
+      ]
+    },
+    {
+      "postId": 9,
+      "revisionId": 48,
+      "jour": "2026-11-03",
+      "motsCles": [
+        {
+          "champ": "nom",
+          "terme": "Marketing Skills",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "MCP et skills",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "usage",
+          "terme": "optimisation des conversions",
+          "raison": null,
+          "passage": "When the user wants to optimize, improve, or increase conversions on any marketing page or form"
+        },
+        {
+          "champ": "usage",
+          "terme": "rédaction marketing",
+          "raison": null,
+          "passage": "When the user wants to write, rewrite, or improve marketing copy for any page"
+        },
+        {
+          "champ": "usage",
+          "terme": "référencement naturel (SEO)",
+          "raison": null,
+          "passage": "When the user wants to audit, review, or diagnose SEO issues on their site."
+        },
+        {
+          "champ": "usage",
+          "terme": "séquences d'e-mails",
+          "raison": null,
+          "passage": "When the user wants to create or optimize an email sequence, drip campaign, automated email flow"
+        },
+        {
+          "champ": "usage",
+          "terme": "suivi analytique",
+          "raison": null,
+          "passage": "When the user wants to set up, improve, or audit analytics tracking and measurement."
+        },
+        {
+          "champ": "usage",
+          "terme": "campagnes publicitaires",
+          "raison": null,
+          "passage": "When the user wants help with paid advertising campaigns on Google Ads, Meta (Facebook/Instagram), LinkedIn, Twitter/X"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Claude Code",
+          "raison": null,
+          "passage": "Marketing skills for Claude Code and AI agents."
+        },
+        {
+          "champ": "technologie",
+          "terme": "Codex",
+          "raison": null,
+          "passage": "Install via Codex's plugin system"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Cursor",
+          "raison": null,
+          "passage": "Works with Claude Code, OpenAI Codex, Cursor, Windsurf"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Windsurf",
+          "raison": null,
+          "passage": "Works with Claude Code, OpenAI Codex, Cursor, Windsurf"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Agent Skills",
+          "raison": null,
+          "passage": "any agent that supports the Agent Skills spec"
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "copywriting",
+          "raison": "terme anglais de la rédaction marketing, un usage central de Marketing Skills.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "CRO",
+          "raison": "sigle anglais de l'optimisation des conversions, cité dans la description de Marketing Skills.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "landing page",
+          "raison": "nom anglais de la page d'atterrissage, dont Marketing Skills aide à optimiser les conversions.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "emailing",
+          "raison": "conception et rédaction de séquences d'e-mails marketing (skill emails) ; Marketing Skills n'envoie pas les e-mails lui-même.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "référencement IA",
+          "raison": "le skill ai-seo de Marketing Skills vise la présence dans les réponses des moteurs de recherche IA.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "tests A/B",
+          "raison": "le skill ab-testing de Marketing Skills aide à concevoir et mener des expériences A/B.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "growth marketing",
+          "raison": "marketing de croissance, un thème du dépôt Marketing Skills, qui couvre le growth engineering.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "SaaS",
+          "raison": "Marketing Skills vise notamment le marketing des logiciels SaaS, par exemple avec le skill marketing-ideas.",
+          "passage": null
+        }
+      ],
+      "textes": [
+        "Marketing Skills : CRO, copywriting, SEO et séquences d’e-mails pris en charge par votre agent de code",
+        "La collection de Corey Haines pour le marketing. Votre agent repère la tâche en cours, page à faire convertir, séquence d’e-mails, prix ou campagne Google Ads, et applique la méthode adaptée.",
+        "Tout repose sur un document produit commun : vous posez une fois produit, public et positionnement avec product-marketing, et chaque skill le relit avant d’agir.",
+        "Demandez d’optimiser une landing page pour la conversion : l’agent s’appuie sur le skill cro.",
+        "npx skills add coreyhaines31/marketingskills",
+        "Lancé depuis Claude Code : ajouter -a claude-code, sinon il ne les lit pas",
+        "Remplir product-marketing, puis confier ses tâches à l’agent",
+        "Claude Code, Codex, Cursor, Windsurf et tout agent compatible Agent Skills."
+      ]
+    },
+    {
+      "postId": 15,
+      "revisionId": 50,
+      "jour": "2026-11-03",
+      "motsCles": [
+        {
+          "champ": "nom",
+          "terme": "Humanizer",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "MCP et skills",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "usage",
+          "terme": "réécrire un texte IA",
+          "raison": null,
+          "passage": "Humanizer makes AI-written text sound like a person wrote it"
+        },
+        {
+          "champ": "usage",
+          "terme": "humaniser un texte",
+          "raison": null,
+          "passage": "Please humanize this text"
+        },
+        {
+          "champ": "usage",
+          "terme": "tics d'écriture IA",
+          "raison": null,
+          "passage": "Agent skill that removes signs of AI-generated writing from text"
+        },
+        {
+          "champ": "usage",
+          "terme": "imiter son style",
+          "raison": null,
+          "passage": "If you want the rewrite to sound more like you, include a sample"
+        },
+        {
+          "champ": "usage",
+          "terme": "réécrire un document",
+          "raison": null,
+          "passage": "To rewrite a file, give Humanizer its path"
+        },
+        {
+          "champ": "usage",
+          "terme": "relecture de style",
+          "raison": null,
+          "passage": "Humanizer edits for human readers."
+        },
+        {
+          "champ": "technologie",
+          "terme": "Claude Code",
+          "raison": null,
+          "passage": "it works in Claude Code, Codex, and any other agent that supports skills"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Codex",
+          "raison": null,
+          "passage": "it works in Claude Code, Codex, and any other agent that supports skills"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Claude.ai",
+          "raison": null,
+          "passage": "Download this repository as a ZIP (Code → Download ZIP) and upload it as a skill in Settings."
+        },
+        {
+          "champ": "technologie",
+          "terme": "Claude Desktop",
+          "raison": null,
+          "passage": "Download this repository as a ZIP (Code → Download ZIP) and upload it as a skill in Settings."
+        },
+        {
+          "champ": "technologie",
+          "terme": "Skills CLI",
+          "raison": null,
+          "passage": "This installs Humanizer for every agent the Skills CLI supports"
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "texte généré par IA",
+          "raison": "Humanizer réécrit les textes générés par une IA pour qu'ils se lisent comme écrits par une personne.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "style d'écriture",
+          "raison": "Humanizer peut suivre le style d'écriture d'un échantillon fourni : rythme, vocabulaire, ponctuation.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "ton naturel",
+          "raison": "Humanizer vise le ton d'un texte écrit par une personne, sans tournures automatiques.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "signes d'écriture IA",
+          "raison": "Humanizer recherche les signes listés par « Signs of AI writing », le guide de Wikipedia pour repérer les textes générés par une IA.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "Agent Skills",
+          "raison": "Humanizer s'installe comme skill dans Claude Code, Codex et les autres agents qui les gèrent.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "rédaction",
+          "raison": "Humanizer retouche la rédaction d'un texte en visant à ne pas changer ce qu'il dit.",
+          "passage": null
+        }
+      ],
+      "textes": [
+        "Humanizer retire les tics d'écriture IA d'un texte sans toucher à ce qu'il dit",
+        "Collez un texte ou donnez le chemin d'un fichier : Humanizer repère les tics d'écriture IA, du plus flagrant au plus discret, puis réécrit la prose. Sur un fichier, il ne touche qu'au texte : code, données et frontmatter restent en place.",
+        "Il n'invente rien : s'il manque un nom, un chiffre ou une date, il pose la question. Sur un texte collé, vous voyez son premier jet, ce qui sonne encore artificiel, puis la version finale. Joignez deux ou trois paragraphes de votre main et il reprend votre rythme, votre vocabulaire et votre ponctuation.",
+        "Dans l'exemple du dépôt, une annonce perd son émoji, son « It's not just a feature… » et son « Let that sink in. », puis commence sans détour : « Shared drafts are out today. »",
+        "Pas avant Claude Code 2.1.142 : /plugin marketplace add blader/humanizer",
+        "Puis /plugin install humanizer@humanizer, pas sur une version plus ancienne",
+        "Codex : npx skills add blader/humanizer --global --agent codex",
+        "Puis /humanizer et le texte ; pour un fichier, son chemin, sans commande",
+        "Selon le dépôt : Claude Code, Codex et les agents gérés par Skills CLI, dont Gemini CLI, GitHub Copilot et Windsurf."
+      ]
+    },
+    {
+      "postId": 18,
+      "revisionId": 51,
+      "jour": "2026-11-03",
+      "motsCles": [
+        {
+          "champ": "nom",
+          "terme": "improve-codebase-architecture (Matt Pocock)",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "MCP et skills",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "usage",
+          "terme": "architecture logicielle",
+          "raison": null,
+          "passage": "Surface architectural friction and propose deepening opportunities"
+        },
+        {
+          "champ": "usage",
+          "terme": "refactorisation",
+          "raison": null,
+          "passage": "refactors that turn shallow modules into deep ones"
+        },
+        {
+          "champ": "usage",
+          "terme": "testabilité",
+          "raison": null,
+          "passage": "The aim is testability and AI-navigability."
+        },
+        {
+          "champ": "usage",
+          "terme": "maintenabilité",
+          "raison": null,
+          "passage": "Deepening a module pays off by making future changes to it easier"
+        },
+        {
+          "champ": "usage",
+          "terme": "revue d'architecture",
+          "raison": null,
+          "passage": "surveys a codebase for deepening opportunities and hands you the candidates"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Claude Code",
+          "raison": null,
+          "passage": "I see with Claude Code, Codex, and other coding agents"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Codex",
+          "raison": null,
+          "passage": "I see with Claude Code, Codex, and other coding agents"
+        },
+        {
+          "champ": "technologie",
+          "terme": "GitHub Copilot",
+          "raison": null,
+          "passage": "<strong>GitHub Copilot</strong> (CLI and VS Code)"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Gemini CLI",
+          "raison": null,
+          "passage": "<strong>Gemini CLI</strong> (manual updates)"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Git",
+          "raison": null,
+          "passage": "walk back a good stretch of the commit history (git log --oneline)"
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "refactoring",
+          "raison": "Mot anglais courant pour la refactorisation, usage central du skill.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "dette technique",
+          "raison": "La refactorisation vise un code devenu dur à faire évoluer, ce qu'on nomme souvent dette technique.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "module profond",
+          "raison": "La refactorisation proposée transforme des modules superficiels en modules profonds.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "couplage",
+          "raison": "Le skill cherche les modules fortement couplés qui débordent les uns sur les autres, comme pistes de refactorisation.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "big ball of mud",
+          "raison": "Le dépôt présente ce skill dans sa section « We Built A Ball Of Mud » : un code enchevêtré, où il cherche des pistes de refactorisation.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "code spaghetti",
+          "raison": "Nom courant d'un code enchevêtré : le skill y cherche des pistes de refactorisation, sans le démêler à votre place.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "domain-driven design",
+          "raison": "Le skill entretient le vocabulaire du domaine (GLOSSARY.md), notion issue du domain-driven design.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "glossaire du domaine",
+          "raison": "Le skill lit et met à jour le glossaire du projet, sans être un outil de glossaire.",
+          "passage": null
+        }
+      ],
+      "textes": [
+        "improve-codebase-architecture repère les modules à approfondir pour un code plus testable",
+        "Le skill de Matt Pocock part des fichiers qui reviennent le plus dans l'historique des commits et y cherche les modules superficiels, ceux dont l'interface est presque aussi complexe que l'implémentation. Il propose de les approfondir : plus de comportement derrière une interface simple, un code plus facile à tester et à parcourir pour l’IA.",
+        "Les pistes arrivent dans un rapport HTML : pour chacune, le problème, la solution, un schéma avant / après et un niveau de recommandation. Vous en choisissez une, et l'agent la creuse avec vous avant de proposer la moindre interface. Les décisions déjà consignées dans vos ADR ne sont pas remises en cause.",
+        "L'auteur conseille de le lancer tous les quelques jours. Sur un vieux code, il trouve de vraies pistes sans tout démêler à votre place.",
+        "Installer : claude plugin install mattpocock-skills@claude-plugins-official",
+        "Puis /setup-matt-pocock-skills, une fois par dépôt",
+        "Le skill ne se lance que si vous tapez /improve-codebase-architecture",
+        "Claude Code, Codex, GitHub Copilot et Gemini CLI."
+      ]
+    },
+    {
+      "postId": 19,
+      "revisionId": 52,
+      "jour": "2026-11-03",
+      "motsCles": [
+        {
+          "champ": "nom",
+          "terme": "skill-creator",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "MCP et skills",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "usage",
+          "terme": "créer un skill",
+          "raison": null,
+          "passage": "Use when users want to create a skill from scratch"
+        },
+        {
+          "champ": "usage",
+          "terme": "améliorer un skill",
+          "raison": null,
+          "passage": "modify and improve existing skills"
+        },
+        {
+          "champ": "usage",
+          "terme": "évaluer un skill",
+          "raison": null,
+          "passage": "run evals to test a skill"
+        },
+        {
+          "champ": "usage",
+          "terme": "benchmark de skills",
+          "raison": null,
+          "passage": "benchmark skill performance with variance analysis"
+        },
+        {
+          "champ": "usage",
+          "terme": "optimiser la description",
+          "raison": null,
+          "passage": "optimize a skill's description for better triggering accuracy"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Claude Code",
+          "raison": null,
+          "passage": "You can register this repository as a Claude Code Plugin marketplace"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Agent Skills",
+          "raison": null,
+          "passage": "For information about the Agent Skills standard, see agentskills.io."
+        },
+        {
+          "champ": "technologie",
+          "terme": "Python",
+          "raison": null,
+          "passage": "The package_skill.py script works anywhere with Python and a filesystem."
+        },
+        {
+          "champ": "technologie",
+          "terme": "Claude.ai",
+          "raison": null,
+          "passage": "because Claude.ai doesn't have subagents, some mechanics change."
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "prompt engineering",
+          "raison": "Rédiger les instructions d'un skill puis les tester sur des demandes types relève du prompt engineering.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "evals",
+          "raison": "Les evals sont les jeux de tests que skill-creator lance pour évaluer un skill.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "comparaison A/B",
+          "raison": "skill-creator propose une comparaison à l'aveugle entre deux versions d'un skill.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "fichier SKILL.md",
+          "raison": "Chaque skill est un dossier avec un fichier SKILL.md, que skill-creator aide à rédiger.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "sous-agents",
+          "raison": "Pour évaluer un skill, skill-creator lance des sous-agents, d'autres agents exécutés en parallèle, un par test, avec et sans le skill.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "workflow réutilisable",
+          "raison": "skill-creator peut transformer une façon de faire tirée d'une conversation en skill réutilisable.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "déclenchement d'un skill",
+          "raison": "Optimiser la description règle le déclenchement : le moment où Claude choisit d'utiliser le skill.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "plugin Claude Code",
+          "raison": "Le dépôt de skill-creator s'ajoute à Claude Code comme catalogue de plugins.",
+          "passage": null
+        }
+      ],
+      "textes": [
+        "skill-creator : le skill d’Anthropic qui écrit, teste et affine vos propres skills",
+        "Décrivez ce que vous voulez automatiser : skill-creator cadre le besoin, rédige un premier jet, le teste sur des demandes réalistes et vous fait relire les résultats. Il peut aussi reprendre un skill existant pour l’améliorer.",
+        "Chaque test tourne avec et sans le skill, ou contre son ancienne version. Une page de revue rassemble les réponses à annoter et un comparatif chiffré : taux de réussite, durée, tokens. Il retravaille aussi la description pour que le skill se déclenche au bon moment.",
+        "Vous avez rodé une méthode avec Claude ? Dites « turn this into a skill » : il peut reprendre les étapes de la conversation, vous poser quelques questions, rédiger le SKILL.md et proposer deux ou trois demandes de test.",
+        "Ajoutez le dépôt comme catalogue de plugins dans Claude Code.",
+        "Installez example-skills : /plugin install example-skills@anthropic-agent-skills",
+        "Ensuite, nommez simplement le skill dans votre demande.",
+        "Version complète dans Claude Code ; dans Claude.ai, une version allégée, sans sous-agents ni comparatif chiffré.",
+        "Chaque test tourne deux fois, avec et sans le skill : prévoyez le double d’appels au modèle."
+      ]
+    },
+    {
+      "postId": 20,
+      "revisionId": 53,
+      "jour": "2026-11-03",
+      "motsCles": [
+        {
+          "champ": "nom",
+          "terme": "Claudeception",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "MCP et skills",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "usage",
+          "terme": "apprentissage continu",
+          "raison": null,
+          "passage": "A Claude Code skill for autonomous skill extraction and continuous learning."
+        },
+        {
+          "champ": "usage",
+          "terme": "extraction de skills",
+          "raison": null,
+          "passage": "Or explicitly request skill extraction"
+        },
+        {
+          "champ": "usage",
+          "terme": "solutions réutilisables entre sessions",
+          "raison": null,
+          "passage": "it saves that knowledge as a new skill"
+        },
+        {
+          "champ": "usage",
+          "terme": "solutions de débogage",
+          "raison": null,
+          "passage": "Just completed debugging and discovered a non-obvious solution"
+        },
+        {
+          "champ": "usage",
+          "terme": "rétrospective de session",
+          "raison": null,
+          "passage": "Trigger a learning retrospective"
+        },
+        {
+          "champ": "usage",
+          "terme": "création automatique de skills",
+          "raison": null,
+          "passage": "A Claude Code skill for autonomous skill extraction and continuous learning."
+        },
+        {
+          "champ": "technologie",
+          "terme": "Claude Code",
+          "raison": null,
+          "passage": "Claude Code has a native skills system."
+        },
+        {
+          "champ": "technologie",
+          "terme": "UserPromptSubmit",
+          "raison": null,
+          "passage": "{ \"hooks\": { \"UserPromptSubmit\": [ { \"hooks\": [ { \"type\": \"command\", \"command\": \"~/.claude/hooks/claudeception-activator.sh\" } ] } ] } }"
+        },
+        {
+          "champ": "technologie",
+          "terme": "YAML",
+          "raison": null,
+          "passage": "Extracted skills are markdown files with YAML frontmatter"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Markdown",
+          "raison": null,
+          "passage": "Extracted skills are markdown files with YAML frontmatter"
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "mémoire d'agent",
+          "raison": "Claudeception donne à Claude Code une forme de mémoire : les solutions trouvées restent sous forme de skills, pas un historique des conversations.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "auto-amélioration",
+          "raison": "Claudeception vise un agent qui progresse en travaillant, en écrivant ses propres skills.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "base de connaissances",
+          "raison": "Claudeception peut constituer au fil du temps une bibliothèque de skills propre à l'utilisateur ou au projet.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "méta-skill",
+          "raison": "le dépôt présente Claudeception comme un méta-skill, un skill qui sert à acquérir d'autres skills.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "solutions de débogage réutilisables",
+          "raison": "Claudeception n'est pas un outil de débogage : il retient les solutions trouvées pendant le débogage pour les réutiliser.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "agent de code",
+          "raison": "Claudeception s'adresse aux agents de code comme Claude Code, pour qu'ils gardent d'une session à l'autre les solutions trouvées.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "retour d'expérience",
+          "raison": "la rétrospective de session de Claudeception peut transformer un retour d'expérience en skill réutilisable.",
+          "passage": null
+        }
+      ],
+      "textes": [
+        "Claudeception fait de chaque solution durement trouvée par Claude Code un skill rechargé tout seul",
+        "Une heure sur une erreur obscure, l’agent finit par trouver, la session se ferme, et la fois suivante tout recommence. Avec Claudeception, la technique de débogage, le contournement ou la particularité du projet découverts en route deviennent un skill, chargé automatiquement dès qu’un problème semblable revient.",
+        "Il trie : seul ce qui a demandé une vraie recherche, resservira, a un déclencheur net et a fonctionné devient un skill. Et la description est écrite pour être retrouvée : l’erreur exacte, pas « problèmes de base de données ».",
+        "Exemple du dépôt : une PrismaClientKnownRequestError réglée (trop de connexions en serverless) peut devenir un skill dont la description reprend l’erreur exacte. Quand elle réapparaît, l’agent le retrouve.",
+        "Cloner le dépôt dans ~/.claude/skills/claudeception.",
+        "Optionnel : le hook, ajouté à settings.json, fait évaluer chaque session",
+        "Après un débogage : /claudeception, sans skill si rien n’est à garder",
+        "Claude Code, via son système de skills natif.",
+        "C’est un fork, sans push depuis plusieurs mois au moment de la capture."
+      ]
+    }
+  ]
 };

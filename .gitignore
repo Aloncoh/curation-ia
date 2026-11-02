@@ -2,7 +2,11 @@ node_modules/
 .env
 .env.*
 !.env.example
-data/
+# Données locales non versionnées, sauf les brouillons de ressources (ADR 0011) ; les captures restent hors du dépôt.
+data/*
+!data/ressources/
+data/ressources/*
+!data/ressources/brouillons/
 exports/
 coverage/
 .npm-cache/

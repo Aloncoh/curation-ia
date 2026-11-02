@@ -16,7 +16,8 @@ export interface CollectedDocument {
   version: string | null;
   announcedAt: string | null;
   content: string;
-  contentFormat: 'markdown' | 'html';
+  /** json et text : captures des ressources (métadonnées d'un dépôt, liste d'un dossier, licence), ADR 0011. */
+  contentFormat: 'markdown' | 'html' | 'json' | 'text';
   contentHash: string;
   metadata: Record<string, unknown>;
 }

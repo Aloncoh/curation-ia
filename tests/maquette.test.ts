@@ -314,7 +314,7 @@ describe('comptes, médias et projets', () => {
     expect(readFileSync('maquette/index.html', 'utf8')).toContain("differe: ['neutre', 'Différée']");
   });
 
-  it('le bandeau date les données par la dernière collecte, pas par la génération de la page', () => {
+  it('les coulisses datent les données par la dernière collecte, pas par la génération de la page', () => {
     const page = readFileSync('maquette/index.html', 'utf8');
     expect(page).toContain('dernière collecte le ${quand(derniereCollecte)}');
     expect(page).not.toContain('données relevées');
@@ -460,5 +460,99 @@ describe('maquette/donnees.js versionné', () => {
       expect(genere.details.map((d) => d.titre)).toEqual(original.details.map((d) => d.titre));
       expect(textes(genere)).toEqual(textes(original));
     }
+  });
+});
+
+describe('page de la maquette (maquette/index.html)', () => {
+  // Contrôles statiques de la page ; le rendu est vérifié dans un vrai navigateur par des captures (data/maquette-captures).
+  const page = readFileSync(new URL('../maquette/index.html', import.meta.url), 'utf8');
+  const script = page.slice(page.indexOf("'use strict';"));
+
+  it('ne mentionne aucun jalon et masque une information absente au lieu d’afficher « Non renseigné »', () => {
+    expect(page).not.toMatch(/\bP\d{1,2}\b/);
+    expect(page).not.toMatch(/prévu en/i);
+    expect(page).not.toContain('Non renseigné');
+  });
+
+  it('les mots-clés ne s’affichent nulle part : ils ne servent qu’au classement de la recherche', () => {
+    expect(page).not.toContain('mots_cles');
+    expect(page).not.toMatch(/Mots-clés|usages indexés|motsCles/);
+    // Le seul usage des documents de recherche : les passer au moteur partagé.
+    expect(script.match(/DONNEES\.recherche/g)).toEqual(['DONNEES.recherche']);
+    expect(script).toContain("window.RECHERCHE.classer(requete.slice(0, 200), DONNEES.recherche || [], 'pertinence')");
+  });
+
+  it('une publication garde la mention IA et un lien Sources discret, sans blocs administratifs ni rubriques systématiques', () => {
+    expect(page).toContain("const LIBELLE_ANALYSE = 'Analyse IA à partir des sources — non testé par la plateforme';");
+    expect(script).toContain("h('p', { class: 'post-mention' }, LIBELLE_ANALYSE, ' · ', boutonSources)");
+    for (const bloc of ['Niveau de preuve', 'État du dépôt', 'Planning', 'Sources et traçabilité', 'Pour commencer', 'Compatibilités', 'Exemple d’usage', 'Questions à tester']) {
+      expect(page).not.toContain(bloc);
+    }
+    // Le texte d'une ressource : accroche, description, intérêt et points distinctifs, rien d'autre.
+    expect(script).toContain('paragraphes: [r.accroche?.texte, r.description?.texte, r.interet?.texte].filter(Boolean)');
+    expect(script).toContain('points: (r.reperes || []).map((x) => x.texte)');
+    expect(script).not.toMatch(/r\.(limites|compatibilites|demarrage|exemple_usage|etat_depot\.etoiles)/);
+  });
+
+  it('ordre d’une publication : en-tête, texte avec « Voir plus », lien vers la ressource, image, actions, puis mention discrète', () => {
+    const corps = script.slice(script.indexOf("h('div', { class: 'post-corps' },"));
+    const positions = ["h('header', { class: 'post-tete' }", 'texte(p, complet)', "class: 'lien-ressource'", 'p.media()', "class: 'post-actions'", 'commentaires,', "class: 'post-mention'", 'sources))'].map((m) => corps.indexOf(m));
+    expect(positions.every((p) => p >= 0)).toBe(true);
+    expect([...positions].sort((a, b) => a - b)).toEqual(positions);
+    for (const libelle of ['Voir plus', 'Voir moins', 'Afficher les commentaires', 'Aucun commentaire pour l’instant', 'Partager']) expect(page).toContain(libelle);
+    // Aucun compteur d'interactions.
+    expect(page).not.toMatch(/\d+ (j’aime|commentaires?|partages?|abonnés)/);
+    // Le lien vers la ressource ouvre un nouvel onglet, sans opener.
+    expect(script).toContain("h('a', { class: 'lien-ressource', href: p.bouton.url, target: '_blank', rel: 'noopener noreferrer'");
+  });
+
+  it('navigation à la manière de X : profil en aperçu, cinq onglets, pages techniques dans « Plus », recherche toujours visible', () => {
+    expect(script).toContain("['accueil', '#/', 'Accueil'], ['explorer', '#/explorer', 'Explorer'], ['notifications', '#/notifications', 'Notifications'], ['reels', '#/reels', 'Reels'], ['profil', '#/moi', 'Profil']");
+    expect(script).toContain("['coulisses', '#/collecte', 'Coulisses'], ['etats', '#/etats', 'États']");
+    expect(page).toMatch(/\.recherche-haut \{\s*position: sticky; top: 0;/);
+    expect(page).toContain('Modifier le profil');
+    expect(page).toContain('Aperçu · aucun compte créé');
+    expect(page).toContain('Rien n’a été enregistré : ce profil est un aperçu.');
+    expect(page).toContain('Aucune notification pour l’instant');
+    // Un compte agent est identifié par « · IA ».
+    expect(script).toContain("const marqueIA = (c) => (c.type === 'agent' ? ' · IA' : '');");
+  });
+
+  it('en-tête : ni titre « Ce qui change dans l’IA » ni grande photo ; en haut à gauche, le logo seul ; le profil dans la colonne de gauche', () => {
+    expect(page).not.toMatch(/Ce qui change/i);
+    expect(page).not.toMatch(/mascotte-accueil|tete-page|bandeau/);
+    const gauche = page.slice(page.indexOf('<aside class="barre-gauche"'), page.indexOf('</aside>'));
+    // Le logo (mascotte + nom) vient en premier, sans autre mention ; puis la navigation, « Plus » et le profil.
+    const ordre = ['class="marque"', 'id="nav"', 'id="plus"', 'id="moi-mini"'].map((m) => gauche.indexOf(m));
+    expect(ordre.every((p) => p >= 0)).toBe(true);
+    expect([...ordre].sort((a, b) => a - b)).toEqual(ordre);
+    const marque = gauche.slice(gauche.indexOf('<a class="marque"'), gauche.indexOf('</a>'));
+    expect(marque).toContain('mascotte-icone.png');
+    expect(marque.replace(/<[^>]+>/g, '').trim()).toBe('Curation AI');
+    // La recherche est la première chose de la colonne principale.
+    expect(page).toMatch(/<div class="centre">\s*<div class="recherche-haut" id="recherche-haut"><\/div>/);
+    // Le profil de l'utilisateur, cliquable, ouvre la page profil.
+    expect(gauche).toContain('<a class="moi-mini" id="moi-mini" href="#/moi"></a>');
+  });
+});
+
+describe('maquette/donnees.js : publications de ressources', () => {
+  const code = readFileSync(new URL('../maquette/donnees.js', import.meta.url), 'utf8');
+  const fenetre: { DONNEES_MAQUETTE?: MaquetteData } = {};
+  new Function('window', code)(fenetre);
+  const donnees = fenetre.DONNEES_MAQUETTE!;
+
+  it('chaque ressource affichée a ses points distinctifs, cités, et aucun mot-clé', () => {
+    for (const r of donnees.ressources) {
+      expect(r).not.toHaveProperty('mots_cles');
+      expect(r.reperes.length).toBeGreaterThanOrEqual(1);
+      expect(r.reperes.length).toBeLessThanOrEqual(3);
+      for (const repere of r.reperes) expect(repere.passages.length).toBeGreaterThan(0);
+    }
+  });
+
+  it('aucune mention de jalon dans les textes affichés des comptes, sujets et registres', () => {
+    const textes = JSON.stringify([donnees.comptes, donnees.sujets, donnees.registre_pulse, donnees.registre_radar]);
+    expect(textes).not.toMatch(/\bP\d{1,2}\b/);
   });
 });

@@ -1,0 +1,199 @@
+{
+  "slug": "find-skills",
+  "consignes": "r2",
+  "accroche": {
+    "texte": "find-skills : votre agent peut trouver et installer le skill qui lui manque",
+    "passages": [
+      "This skill helps you discover and install skills from the open agent skills ecosystem."
+    ]
+  },
+  "description": {
+    "texte": "Demandez « trouve un skill pour X », ou juste « comment faire X ». L’agent regarde le classement de skills.sh et, s’il n’y trouve pas son bonheur, lance npx skills find. Il revient avec le skill, sa source et la commande d’installation.",
+    "passages": [
+      "Says \"find a skill for X\" or \"is there a skill for X\"",
+      "Asks \"how do I do X\" where X might be a common task with an existing skill",
+      "Before running a CLI search, check the skills.sh leaderboard",
+      "If the leaderboard doesn't cover the user's need, run the find command:",
+      "The install count and source",
+      "The install command they can run"
+    ]
+  },
+  "interet": {
+    "texte": "Il ne recommande pas un skill sur un simple résultat de recherche : il vérifie d’abord le nombre d’installations et la source. Et si rien n’existe, il vous propose d’écrire le vôtre avec npx skills init.",
+    "passages": [
+      "Do not recommend a skill based solely on search results.",
+      "Install count — Prefer skills with 1K+ installs.",
+      "Source reputation — Official sources (vercel-labs, anthropics, microsoft) are more trustworthy than unknown authors.",
+      "Suggest the user could create their own skill with npx skills init"
+    ]
+  },
+  "exemple_usage": {
+    "texte": "Vous voulez accélérer votre app React : l’agent peut lancer npx skills find react performance et vous proposer un skill avec sa commande d’installation.",
+    "passages": [
+      "User asks \"how do I make my React app faster?\" → npx skills find react performance",
+      "The install command they can run"
+    ]
+  },
+  "demarrage": {
+    "etapes": [
+      {
+        "texte": "Ajouter find-skills avec npx skills add (Node.js 22.20 ou plus).",
+        "passages": [
+          "Requires Node.js 22.20 or later.",
+          "npx skills add <package> - Install a skill from GitHub or other sources"
+        ]
+      },
+      {
+        "texte": "Ensuite, il n’y a plus qu’à demander « trouve un skill pour … ».",
+        "passages": [
+          "Says \"find a skill for X\" or \"is there a skill for X\""
+        ]
+      }
+    ],
+    "commande": null,
+    "passages": [
+      "Requires Node.js 22.20 or later.",
+      "See the installation reference for source formats, private repositories, and all options."
+    ]
+  },
+  "compatibilites": [
+    {
+      "texte": "Claude Code, Codex, Cursor, OpenCode et 75 autres agents.",
+      "passages": [
+        "Supports OpenCode, Claude Code, Codex, Cursor, and 75 more."
+      ]
+    }
+  ],
+  "limites": [
+    {
+      "texte": "S’il installe pour vous, c’est en global et sans confirmation (-g -y) : lisez le skill avant d’accepter.",
+      "passages": [
+        "If the user wants to proceed, you can install the skill for them:",
+        "The -g flag installs globally (user-level) and -y skips confirmation prompts."
+      ]
+    }
+  ],
+  "licence_locale": null,
+  "mots_cles": {
+    "nom": "find-skills",
+    "categorie": "MCP et skills",
+    "usages": [
+      {
+        "texte": "recherche de skills",
+        "passages": [
+          "Search for skills interactively or by keyword"
+        ]
+      },
+      {
+        "texte": "installation de skills",
+        "passages": [
+          "Install a skill from GitHub or other sources"
+        ]
+      },
+      {
+        "texte": "découverte de skills",
+        "passages": [
+          "This skill helps you discover and install skills from the open agent skills ecosystem."
+        ]
+      },
+      {
+        "texte": "extension d'un agent",
+        "passages": [
+          "Expresses interest in extending agent capabilities"
+        ]
+      },
+      {
+        "texte": "création de skill",
+        "passages": [
+          "Suggest the user could create their own skill with npx skills init"
+        ]
+      }
+    ],
+    "technologies": [
+      {
+        "texte": "npx",
+        "passages": [
+          "The Skills CLI (npx skills) is the package manager for the open agent skills ecosystem."
+        ]
+      },
+      {
+        "texte": "Node.js",
+        "passages": [
+          "Requires Node.js 22.20 or later."
+        ]
+      },
+      {
+        "texte": "Claude Code",
+        "passages": [
+          "Supports OpenCode, Claude Code, Codex, Cursor, and 75 more."
+        ]
+      },
+      {
+        "texte": "Codex",
+        "passages": [
+          "Supports OpenCode, Claude Code, Codex, Cursor, and 75 more."
+        ]
+      },
+      {
+        "texte": "Cursor",
+        "passages": [
+          "Supports OpenCode, Claude Code, Codex, Cursor, and 75 more."
+        ]
+      },
+      {
+        "texte": "OpenCode",
+        "passages": [
+          "Supports OpenCode, Claude Code, Codex, Cursor, and 75 more."
+        ]
+      }
+    ],
+    "termes_proches": [
+      {
+        "terme": "Skills CLI",
+        "raison": "find-skills s'appuie sur l'outil npx skills, que sa fiche appelle Skills CLI et présente comme le gestionnaire de paquets des skills."
+      },
+      {
+        "terme": "skills.sh",
+        "raison": "Annuaire en ligne de skills que find-skills demande de consulter avant toute recherche."
+      },
+      {
+        "terme": "compétences d'agent",
+        "raison": "Traduction française de agent skills, ce que find-skills recherche et installe."
+      },
+      {
+        "terme": "trouver un skill",
+        "raison": "Traduction de find a skill, la demande qui déclenche find-skills selon sa fiche."
+      },
+      {
+        "terme": "assistant de code",
+        "raison": "find-skills étend un assistant de code IA comme Claude Code, Codex ou Cursor."
+      }
+    ]
+  },
+  "bouton": {
+    "libelle": "Voir le dépôt",
+    "url": "https://github.com/vercel-labs/skills/tree/main/skills/find-skills"
+  },
+  "reperes": [
+    {
+      "texte": "Pas de commande à retenir : il suffit de demander",
+      "passages": [
+        "Says \"find a skill for X\" or \"is there a skill for X\""
+      ]
+    },
+    {
+      "texte": "Ne propose jamais un skill sans vérifier installations et source",
+      "passages": [
+        "Do not recommend a skill based solely on search results.",
+        "Install count — Prefer skills with 1K+ installs.",
+        "Source reputation — Official sources (vercel-labs, anthropics, microsoft) are more trustworthy than unknown authors."
+      ]
+    },
+    {
+      "texte": "Rien ne correspond ? Il propose d’en créer un",
+      "passages": [
+        "Suggest the user could create their own skill with npx skills init"
+      ]
+    }
+  ]
+}

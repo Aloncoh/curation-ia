@@ -1,0 +1,214 @@
+{
+  "slug": "scientific-agent-skills",
+  "consignes": "r2",
+  "accroche": {
+    "texte": "Scientific Agent Skills : 177 skills pour faire de la recherche avec Claude Code, Cursor ou Codex",
+    "passages": [
+      "A collection of 177 scientific and research skills for AI agents, created by K-Dense.",
+      "works with Cursor, Claude Code, Codex, Google Antigravity, and other compatible hosts"
+    ]
+  },
+  "description": {
+    "texte": "Biologie, chimie, médecine, physique, analyse de données : chaque skill de K-Dense cale votre agent sur un paquet, une base ou une méthode précise, avec les conventions et les contrôles du domaine.",
+    "passages": [
+      "A collection of 177 scientific and research skills for AI agents, created by K-Dense.",
+      "The skills cover biology, chemistry, medicine, physics, engineering, Earth science, data analysis, and scientific communication.",
+      "Each provides guidance for a specific package, data source, or workflow, including the scientific conventions and validation checks needed to use it."
+    ]
+  },
+  "interet": {
+    "texte": "Le morceau le plus utile : Database Lookup documente 80 bases (PubChem, ChEMBL, UniProt, ClinicalTrials.gov…), avec les bons endpoints, la pagination et la provenance. Une seule demande suffit ensuite pour enchaîner tout un pipeline.",
+    "passages": [
+      "The Database Lookup skill documents 80 databases with public, registered, or licensed access (PubChem, ChEMBL, UniProt, COSMIC, ClinicalTrials.gov, FRED, USPTO, and more), including endpoint selection, pagination, and provenance.",
+      "Multi-Step Workflows - Execute complex pipelines with a single prompt"
+    ]
+  },
+  "exemple_usage": {
+    "texte": "Dans l'exemple du dépôt, une seule demande pour classer des inhibiteurs d'EGFR : l'agent interroge ChEMBL, analyse les relations structure-activité avec RDKit, cherche les mécanismes de résistance dans PubMed, puis livre graphiques et rapport.",
+    "passages": [
+      "Goal: Prioritize EGFR inhibitor candidates for preclinical lung-cancer research",
+      "Query ChEMBL for EGFR inhibitors",
+      "analyze structure-activity relationships with RDKit",
+      "search PubMed for resistance mechanisms",
+      "create visualizations and a comprehensive report"
+    ]
+  },
+  "demarrage": {
+    "etapes": [
+      {
+        "texte": "Avec GitHub CLI 2.90.0+ : gh skill install, uniquement les skills utiles.",
+        "passages": [
+          "If you use the GitHub CLI (v2.90.0+), you can install skills with gh skill",
+          "gh skill install K-Dense-AI/scientific-agent-skills scanpy",
+          "Only install the skills you actually need for your work."
+        ]
+      },
+      {
+        "texte": "Les dépendances s'installent à part, selon chaque skill.",
+        "passages": [
+          "Installing the skill files does not install their dependencies",
+          "Follow each skill's compatibility field and setup instructions for packages, system tools, credentials, and network access."
+        ]
+      }
+    ],
+    "commande": "gh skill install K-Dense-AI/scientific-agent-skills scanpy",
+    "passages": [
+      "If you use the GitHub CLI (v2.90.0+), you can install skills with gh skill",
+      "gh skill install K-Dense-AI/scientific-agent-skills scanpy",
+      "Only install the skills you actually need for your work."
+    ]
+  },
+  "compatibilites": [],
+  "limites": [
+    {
+      "texte": "Un skill peut faire exécuter du code arbitraire à votre agent et K-Dense ne garantit pas une revue exhaustive : lisez le SKILL.md avant d'installer.",
+      "passages": [
+        "they can instruct your AI agent to run arbitrary code, install packages, make network requests, and modify files on your system.",
+        "we cannot guarantee that every skill has been exhaustively reviewed for all possible risks.",
+        "Read the SKILL.md before installing."
+      ]
+    },
+    {
+      "texte": "Dépôt sous MIT, mais chaque skill a sa licence, qui peut ajouter des conditions.",
+      "passages": [
+        "This project is licensed under the MIT License.",
+        "These licenses may differ from the repository's MIT License and may include additional terms or restrictions."
+      ]
+    }
+  ],
+  "licence_locale": null,
+  "mots_cles": {
+    "nom": "Scientific Agent Skills (K-Dense)",
+    "categorie": "MCP et skills",
+    "usages": [
+      {
+        "texte": "recherche scientifique",
+        "passages": [
+          "A collection of 177 scientific and research skills for AI agents, created by K-Dense."
+        ]
+      },
+      {
+        "texte": "analyse génomique",
+        "passages": [
+          "Bioinformatics & Genomics - Sequence analysis, single-cell RNA-seq, pooled CRISPR screens"
+        ]
+      },
+      {
+        "texte": "découverte de médicaments",
+        "passages": [
+          "Cheminformatics & Drug Discovery - Molecular property prediction, virtual screening, ADMET analysis, molecular docking"
+        ]
+      },
+      {
+        "texte": "bases de données scientifiques",
+        "passages": [
+          "The Database Lookup skill documents 80 databases with public, registered, or licensed access"
+        ]
+      },
+      {
+        "texte": "analyse de données",
+        "passages": [
+          "Data Analysis & Visualization - Statistical analysis, network analysis, time series, publication-quality figures"
+        ]
+      },
+      {
+        "texte": "rédaction scientifique",
+        "passages": [
+          "Scientific Communication - Evidence-traceable writing, confidential authorized peer review, literature synthesis"
+        ]
+      }
+    ],
+    "technologies": [
+      {
+        "texte": "Agent Skills",
+        "passages": [
+          "The collection follows the open Agent Skills standard"
+        ]
+      },
+      {
+        "texte": "Python",
+        "passages": [
+          "While the agent can use any Python package or API on its own"
+        ]
+      },
+      {
+        "texte": "RDKit",
+        "passages": [
+          "Explicitly defined, version-aware workflows for RDKit, Scanpy, PyTorch Lightning, scikit-learn"
+        ]
+      },
+      {
+        "texte": "Scanpy",
+        "passages": [
+          "Explicitly defined, version-aware workflows for RDKit, Scanpy, PyTorch Lightning, scikit-learn"
+        ]
+      },
+      {
+        "texte": "scikit-learn",
+        "passages": [
+          "Explicitly defined, version-aware workflows for RDKit, Scanpy, PyTorch Lightning, scikit-learn"
+        ]
+      },
+      {
+        "texte": "Biopython",
+        "passages": [
+          "Multi-database packages such as BioServices, Biopython, and gget add further coverage"
+        ]
+      }
+    ],
+    "termes_proches": [
+      {
+        "terme": "Claude Scientific Skills",
+        "raison": "Ancien nom du dépôt scientific-agent-skills, qui a changé de nom pour s'ouvrir à d'autres agents que Claude."
+      },
+      {
+        "terme": "bioinformatique",
+        "raison": "Domaine couvert par plusieurs skills d'analyse génomique : séquences, cellules uniques, variants."
+      },
+      {
+        "terme": "chémoinformatique",
+        "raison": "Domaine couvert par les skills de découverte de médicaments, avec RDKit notamment."
+      },
+      {
+        "terme": "recherche clinique",
+        "raison": "Des skills servent la recherche scientifique sur les essais et les variants, sans diagnostic ni traitement."
+      },
+      {
+        "terme": "visualisation scientifique",
+        "raison": "Plusieurs skills d'analyse de données produisent des figures dignes d'une publication."
+      },
+      {
+        "terme": "skills pour Claude Code",
+        "raison": "Ces skills au format Agent Skills s'installent notamment dans Claude Code."
+      },
+      {
+        "terme": "science assistée par IA",
+        "raison": "Scientific Agent Skills met un agent IA au service de la recherche scientifique."
+      }
+    ]
+  },
+  "bouton": {
+    "libelle": "Voir le dépôt",
+    "url": "https://github.com/K-Dense-AI/scientific-agent-skills"
+  },
+  "reperes": [
+    {
+      "texte": "Workflows versionnés pour RDKit, Scanpy, scikit-learn",
+      "passages": [
+        "Explicitly defined, version-aware workflows for RDKit, Scanpy, PyTorch Lightning, scikit-learn"
+      ]
+    },
+    {
+      "texte": "Installation épinglée sur un tag ou un commit",
+      "passages": [
+        "Pin to a specific release tag or commit SHA for reproducible installs"
+      ]
+    },
+    {
+      "texte": "Aussi chargeable comme un seul plugin",
+      "passages": [
+        "load the collection as one plugin"
+      ]
+    }
+  ]
+}

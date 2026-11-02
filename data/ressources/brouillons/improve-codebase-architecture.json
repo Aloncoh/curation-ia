@@ -1,0 +1,206 @@
+{
+  "slug": "improve-codebase-architecture",
+  "consignes": "r2",
+  "accroche": {
+    "texte": "improve-codebase-architecture repère les modules à approfondir pour un code plus testable",
+    "passages": [
+      "Surface architectural friction and propose deepening opportunities: refactors that turn shallow modules into deep ones.",
+      "The aim is testability and AI-navigability."
+    ]
+  },
+  "description": {
+    "texte": "Le skill de Matt Pocock part des fichiers qui reviennent le plus dans l'historique des commits et y cherche les modules superficiels, ceux dont l'interface est presque aussi complexe que l'implémentation. Il propose de les approfondir : plus de comportement derrière une interface simple, un code plus facile à tester et à parcourir pour l’IA.",
+    "passages": [
+      "walk back a good stretch of the commit history (git log --oneline) to find the codebase's hot spots, the files and areas that keep coming up",
+      "Where are modules shallow, with an interface nearly as complex as the implementation?",
+      "The best modules are deep. They allow a lot of functionality to be accessed through a simple interface.",
+      "The aim is testability and AI-navigability."
+    ]
+  },
+  "interet": {
+    "texte": "Les pistes arrivent dans un rapport HTML : pour chacune, le problème, la solution, un schéma avant / après et un niveau de recommandation. Vous en choisissez une, et l'agent la creuse avec vous avant de proposer la moindre interface. Les décisions déjà consignées dans vos ADR ne sont pas remises en cause.",
+    "passages": [
+      "present them as a visual HTML report",
+      "Files: which files/modules are involved Problem: why the current architecture is causing friction Solution: plain English description of what would change",
+      "Before / After diagram: side-by-side, custom-drawn, illustrating the shallowness and the deepening",
+      "Recommendation strength: one of Strong, Worth exploring, Speculative, rendered as a badge",
+      "Do NOT propose interfaces yet.",
+      "Once the user picks a candidate, call the Skill tool with \"grilling\" to walk the decision tree with them",
+      "ADRs in docs/adr/ record decisions this command should not re-litigate."
+    ]
+  },
+  "exemple_usage": {
+    "texte": "L'auteur conseille de le lancer tous les quelques jours. Sur un vieux code, il trouve de vraies pistes sans tout démêler à votre place.",
+    "passages": [
+      "I recommend running it on your codebase once every few days.",
+      "on a genuinely old codebase it will find real candidates, but it won't untangle the mud for you."
+    ]
+  },
+  "demarrage": {
+    "etapes": [
+      {
+        "texte": "Installer : claude plugin install mattpocock-skills@claude-plugins-official",
+        "passages": [
+          "claude plugin install mattpocock-skills@claude-plugins-official",
+          "I see with Claude Code, Codex, and other coding agents"
+        ]
+      },
+      {
+        "texte": "Puis /setup-matt-pocock-skills, une fois par dépôt",
+        "passages": [
+          "Run once per repo before using the other engineering skills."
+        ]
+      },
+      {
+        "texte": "Le skill ne se lance que si vous tapez /improve-codebase-architecture",
+        "passages": [
+          "User-invoked skills are reachable only when you type them"
+        ]
+      }
+    ],
+    "commande": "claude plugin install mattpocock-skills@claude-plugins-official",
+    "passages": [
+      "claude plugin install mattpocock-skills@claude-plugins-official",
+      "Run once per repo before using the other engineering skills."
+    ]
+  },
+  "compatibilites": [
+    {
+      "texte": "Claude Code, Codex, GitHub Copilot et Gemini CLI.",
+      "passages": [
+        "I see with Claude Code, Codex, and other coding agents",
+        "<strong>GitHub Copilot</strong> (CLI and VS Code)",
+        "<strong>Gemini CLI</strong> (manual updates)"
+      ]
+    }
+  ],
+  "limites": [],
+  "licence_locale": null,
+  "mots_cles": {
+    "nom": "improve-codebase-architecture (Matt Pocock)",
+    "categorie": "MCP et skills",
+    "usages": [
+      {
+        "texte": "architecture logicielle",
+        "passages": [
+          "Surface architectural friction and propose deepening opportunities"
+        ]
+      },
+      {
+        "texte": "refactorisation",
+        "passages": [
+          "refactors that turn shallow modules into deep ones"
+        ]
+      },
+      {
+        "texte": "testabilité",
+        "passages": [
+          "The aim is testability and AI-navigability."
+        ]
+      },
+      {
+        "texte": "maintenabilité",
+        "passages": [
+          "Deepening a module pays off by making future changes to it easier"
+        ]
+      },
+      {
+        "texte": "revue d'architecture",
+        "passages": [
+          "surveys a codebase for deepening opportunities and hands you the candidates",
+          "so future architecture reviews don't re-suggest it"
+        ]
+      }
+    ],
+    "technologies": [
+      {
+        "texte": "Claude Code",
+        "passages": [
+          "I see with Claude Code, Codex, and other coding agents"
+        ]
+      },
+      {
+        "texte": "Codex",
+        "passages": [
+          "I see with Claude Code, Codex, and other coding agents"
+        ]
+      },
+      {
+        "texte": "GitHub Copilot",
+        "passages": [
+          "<strong>GitHub Copilot</strong> (CLI and VS Code)"
+        ]
+      },
+      {
+        "texte": "Gemini CLI",
+        "passages": [
+          "<strong>Gemini CLI</strong> (manual updates)"
+        ]
+      },
+      {
+        "texte": "Git",
+        "passages": [
+          "walk back a good stretch of the commit history (git log --oneline)"
+        ]
+      }
+    ],
+    "termes_proches": [
+      {
+        "terme": "refactoring",
+        "raison": "Mot anglais courant pour la refactorisation, usage central du skill."
+      },
+      {
+        "terme": "dette technique",
+        "raison": "La refactorisation vise un code devenu dur à faire évoluer, ce qu'on nomme souvent dette technique."
+      },
+      {
+        "terme": "module profond",
+        "raison": "La refactorisation proposée transforme des modules superficiels en modules profonds."
+      },
+      {
+        "terme": "couplage",
+        "raison": "Le skill cherche les modules fortement couplés qui débordent les uns sur les autres, comme pistes de refactorisation."
+      },
+      {
+        "terme": "big ball of mud",
+        "raison": "Le dépôt présente ce skill dans sa section « We Built A Ball Of Mud » : un code enchevêtré, où il cherche des pistes de refactorisation."
+      },
+      {
+        "terme": "code spaghetti",
+        "raison": "Nom courant d'un code enchevêtré : le skill y cherche des pistes de refactorisation, sans le démêler à votre place."
+      },
+      {
+        "terme": "domain-driven design",
+        "raison": "Le skill entretient le vocabulaire du domaine (GLOSSARY.md), notion issue du domain-driven design."
+      },
+      {
+        "terme": "glossaire du domaine",
+        "raison": "Le skill lit et met à jour le glossaire du projet, sans être un outil de glossaire."
+      }
+    ]
+  },
+  "bouton": {
+    "libelle": "Voir le dépôt",
+    "url": "https://github.com/mattpocock/skills/tree/main/skills/engineering/improve-codebase-architecture"
+  },
+  "reperes": [
+    {
+      "texte": "Rapport écrit dans le dossier temporaire, hors du dépôt",
+      "passages": [
+        "Write a self-contained HTML file to the OS temp directory so nothing lands in the repo."
+      ]
+    },
+    {
+      "texte": "Un test de suppression pour débusquer les modules creux",
+      "passages": [
+        "Apply the deletion test to anything you suspect is shallow"
+      ]
+    },
+    {
+      "texte": "Une piste écartée pour une vraie raison peut devenir un ADR",
+      "passages": [
+        "Want me to record this as an ADR so future architecture reviews don't re-suggest it?"
+      ]
+    }
+  ]
+}

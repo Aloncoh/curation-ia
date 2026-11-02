@@ -64,6 +64,20 @@
       "when": 1793522401240,
       "tag": "0008_comparaison_sortie",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "6",
+      "when": 1793621071981,
+      "tag": "0009_chaine_ressources",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "6",
+      "when": 1793642910506,
+      "tag": "0010_chaine_rangs",
+      "breakpoints": true
     }
   ]
 }

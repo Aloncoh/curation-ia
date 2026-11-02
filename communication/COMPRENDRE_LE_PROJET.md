@@ -1,7 +1,7 @@
 # Comprendre le projet CURATION AI
 
 > Document de compréhension et de présentation, mis à jour au fil des jalons.
-> **Dernière mise à jour : 2026-11-01, P3 en cours.** Sélection, délais, budget et visuels : section 15. **Construit et vérifié : la collecte fiable** (section 4 bis), **le catalogue produits, versions, actualités** (section 4 ter), **la maquette du réseau social** avec des exemples de publications vérifiés mot pour mot et un Reel d'exemple (section 4 quater) et **la collecte réelle de 24 sources officielles** (section 13). La génération de brouillons n'a jamais appelé le modèle : voir la section 14, qui sépare ce qui fonctionne en réel du reste. Le reste décrit la conception validée ; chaque partie passe de « prévu » à « réalisé » avec ses preuves (dossier [`linkedin/`](linkedin/)).
+> **Dernière mise à jour : 2026-11-02, P3 en cours.** Chaîne des ressources, recherche et interface façon X : section 17. Sélection, délais, budget et visuels : section 15. **Construit et vérifié : la collecte fiable** (section 4 bis), **le catalogue produits, versions, actualités** (section 4 ter), **la maquette du réseau social** avec des exemples de publications vérifiés mot pour mot et un Reel d'exemple (section 4 quater) et **la collecte réelle de 24 sources officielles** (section 13). La génération de brouillons n'a jamais appelé le modèle : voir la section 14, qui sépare ce qui fonctionne en réel du reste. Le reste décrit la conception validée ; chaque partie passe de « prévu » à « réalisé » avec ses preuves (dossier [`linkedin/`](linkedin/)).
 
 ## Sommaire
 
@@ -21,6 +21,7 @@
 14. Ce qui fonctionne réellement
 15. Sélection, délais, budget et visuels
 16. L'expérience visée et ce qu'elle change
+17. Ressources pour construire, recherche et interface façon X
 
 ---
 
@@ -477,7 +478,7 @@ Aucun seuil chiffré n'existait dans le projet. La règle en place dit que les �
 
 Une recherche permettra de retrouver une publication par son nom, des mots-clés ou un besoin. Elle est prévue en P6, quand il y aura assez de publications et de ressources à chercher. Un essai local a montré ce que SQLite sait faire seul : ignorer les accents, oui ; rapprocher « sécuriser » de « sécurité », non. D'où une méthode par étapes : un index de texte, puis un lexique de termes proches, puis des représentations vectorielles seulement si une évaluation prouve que c'est nécessaire.
 
-La documentation de Turso se contredit sur la disponibilité de cet index pour une base hébergée. Le point n'est donc pas présenté comme acquis : il sera testé sur la vraie base en P5. Détail : [ADR 0008](../docs/decisions/0008-recherche-des-publications.md).
+La documentation de Turso se contredit sur la disponibilité de cet index pour une base hébergée. Le point n'est donc pas présenté comme acquis : il sera testé sur la vraie base en P5. Détail : [ADR 0008](../docs/decisions/0008-recherche-des-publications.md). _Mise à jour du 2026-11-02 : une première recherche est construite pour les ressources (section 17)._
 
 ### Ce qu'une publication explique
 
@@ -510,3 +511,49 @@ Au plus 20 publications par jour, jamais pour remplir un quota : d'abord les nou
 ### Ressources pour construire (2026-11-02)
 
 Une première recherche a relevé 47 skills, MCP, agents et outils dans quatre domaines : design et motion, sécurité et code, méthode et assistants, données, contenu et infrastructure ([docs/ressources-candidates.md](../docs/ressources-candidates.md)). Elles sont vérifiées sur leur page officielle par des agents de recherche, mais rien n'est publié : l'utilisateur les trie d'abord, et ses choix deviennent les exemples des agents.
+
+## 17. Ressources pour construire, recherche et interface façon X _(construit le 2026-11-02, sans dépense)_
+
+Le porteur du projet a fourni une liste de 21 ressources : 20 skills et outils repérés dans un fil X, puis ECC. Il voulait une publication par ressource, retrouvable par une recherche, sans attendre P6. Décision technique : [ADR 0011](../docs/decisions/0011-chaine-des-ressources.md). **Rien n'est publié** : la publication réelle reste en P5.
+
+### La chaîne des ressources
+
+Pour chaque ressource, une commande enchaîne les étapes (`npm run ressources`), sans appel à un modèle :
+
+1. **Capturer** la page du dépôt par l'API GitHub, avec les protections de la collecte.
+2. **Rédiger** un post court avec nos mots. Pendant le développement, c'est Claude Code qui rédige, pas l'agent du site, et cette origine est enregistrée puis affichée dans les sources.
+3. **Contrôler** par le code : chaque affirmation se retrouve mot pour mot dans la capture, une commande n'est montrée que si elle y figure, un dépôt n'est jamais présenté par « Installer ».
+4. **Rendre le visuel** : un montage produit par le code, sans image d'un modèle ni capture sans droits.
+5. **Vérifier le bouton** « Voir le dépôt » par une requête sûre, datée, sans redirection. Cliquer n'installe rien.
+6. **Enregistrer les mots-clés** (nom, catégorie, usages, technologies, termes proches) ; chaque terme proche porte la raison qui le relie à la ressource.
+7. **Planifier** sous le plafond de 20 publications par jour et **indexer** pour la recherche.
+
+Le code calcule aussi un statut, « ressource existante » ou « nouvelle sortie », à partir des dates relevées. Une date inconnue ne fait jamais une nouvelle sortie.
+
+**Construit et relevé dans la base locale le 2026-11-02** : 21 publications en attente, 21 visuels, 69 vérifications de bouton réussies, 1 088 mots-clés, 21 publications indexées ; planning de 15 publications le 2 novembre et 6 le 3 novembre ; toutes « ressource existante ». **Prévu** : publication réelle en P5 ; rédaction par l'agent du site et découverte automatique de ressources en P6.
+
+### Des mots-clés invisibles au service de la recherche
+
+Les mots-clés ne s'affichent nulle part dans les publications : ils servent seulement à les retrouver. La recherche normalise la saisie (majuscules, accents, pluriels simples), trouve des candidats dans un index plein texte de SQLite, puis le code classe les résultats et dit pourquoi chacun sort. Un résultat sans raison explicable n'est pas montré. Le même code sert la commande, la maquette et, plus tard, le site et l'application.
+
+**Essayé sur la base** : « mémoire » trouve 3 ressources, « code review » 1, chacune avec sa raison ; une saisie sans correspondance ne renvoie rien, sans rien inventer. **Limite constatée** : « motion design » ne trouve qu'une ressource, alors que le cahier des charges en attend plusieurs. La recherche fonctionne en mode aperçu ; en mode public, elle ne renvoie rien tant que rien n'est publié. **Prévu** : recherche sur toutes les publications, lexique global et évaluation sur un jeu de requêtes de référence en P6 ; essai de l'index sur la base hébergée en P5.
+
+### Une interface façon X et Instagram
+
+Le porteur du projet veut une interface « vraiment comme sur X, comme sur Instagram ». Ses retours sont inscrits dans le cahier des charges (SPEC §6 bis).
+
+- **Disposition** : en haut à gauche, seulement le logo ; dessous, la navigation (Accueil, Explorer, Notifications, Reels, Profil), un menu « Plus » discret pour les pages techniques, et le profil de l'utilisateur. La barre de recherche reste visible tout en haut. Sur téléphone, la navigation passe en barre d'onglets en bas.
+- **Un post** : le compte, le début du texte avec « Voir plus », le bouton vers le dépôt juste au-dessus de l'image, l'image, puis « Afficher les commentaires » et partager, sans aucun compteur. Restent discrets : la ligne « Analyse IA à partir des sources — non testé par la plateforme » et un lien « Sources ».
+- **Retiré de l'affichage, gardé en base** : niveau de preuve en bloc, état du dépôt, planning, mots-clés, rubriques techniques et textes d'explication.
+- **Honnêteté** : aucun compte humain n'existe. Le profil de l'utilisateur est un aperçu, son formulaire ne s'enregistre pas, et les commentaires et notifications affichent un état vide. Un compte d'agent porte la mention discrète « · IA ». Aucune mention de jalon ne s'affiche, et une information facultative absente est masquée.
+
+**Construit** : cette interface dans la maquette statique locale, avec les 21 publications en aperçu. **Pas encore vérifié** : la conformité complète de la dernière version aux retours, dans un navigateur, sur ordinateur et téléphone, en clair et en sombre. **Prévu** : le vrai site en P4, l'application en P9 bis.
+
+### Décisions du 2026-11-02 sur le produit cible
+
+- Connexion obligatoire ; l'accès de démonstration sert seulement aux essais.
+- Abonnements et Abonnés regroupent humains et agents, sans catégories séparées.
+- Un utilisateur pourra ouvrir volontairement une conversation avec un agent. L'agent ne lit que cette conversation et ne peut que chercher dans les publications. Il n'accède à aucun autre message privé ni groupe privé. Le jalon n'est pas fixé.
+- Ton des textes : le public connaît l'écosystème, donc les termes courants ne sont jamais définis.
+
+Aucune de ces fonctions sociales n'est construite : les comptes arrivent en P9, les messages privés en P10.

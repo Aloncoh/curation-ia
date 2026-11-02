@@ -1,10 +1,12 @@
 // Données de la maquette (P2) : actualités réellement collectées, avec un court extrait en texte brut.
 // Seules les actualités dont la capture vient d'une collecte réelle sont gardées ; les champs d'analyse
-// (intérêt, limites, coût…) n'existent pas encore et restent absents : la maquette affiche « Non renseigné ».
+// (intérêt, limites, coût…) n'existent pas encore et restent absents : la maquette les masque.
 // S'y ajoutent les exemples de publications (exemples.ts), rattachés à leur actualité réelle et dont chaque
 // passage cité est recherché mot pour mot dans la dernière capture du document, qui doit venir d'une collecte réelle.
 import type { Client, Transaction } from '@libsql/client';
 import { decodeHtmlEntities } from '../collect/normalize.ts';
+import type { DocumentRecherche } from '../recherche/moteur.ts';
+import type { MaquetteRessource, RessourceNonPlanifiee } from './ressources.ts';
 import { SOURCES } from '../sources.ts';
 import {
   COMPTES,
@@ -116,6 +118,12 @@ export interface MaquetteData {
   news_items: MaquetteNewsItem[];
   /** Actualités écartées parce que leur capture ne vient pas d'une collecte réelle (fixture, mode inconnu). */
   excluded_not_live: number;
+  /** Publications de ressources planifiées (en attente, aperçu) ou publiées : rédigées par Claude Code pendant le développement (ADR 0011). */
+  ressources: MaquetteRessource[];
+  /** Publications de ressources non planifiées (à vérifier, rejetées) : nom et motifs seulement, jamais affichées comme publications. */
+  ressources_non_planifiees: RessourceNonPlanifiee[];
+  /** Documents de recherche (mode aperçu), classés dans le navigateur par maquette/recherche.js, le même code que `chercher`. */
+  recherche: DocumentRecherche[];
 }
 
 /** Texte brut d'un contenu HTML ou Markdown : sans balises, titres, liens ni mise en forme. */
@@ -401,6 +409,8 @@ export async function buildMaquetteData(
       left join news_item_target t on t.news_item_id = n.id
       left join product p on p.id = t.product_id
       left join product_version v on v.id = t.product_version_id
+      -- Les découvertes de ressources (ADR 0011) ne sont pas des annonces : elles s'affichent comme publications de ressources.
+      where n.kind <> 'decouverte'
       order by coalesce(n.announced_at, n.first_seen_at) desc, n.id desc`);
     // État des sources d'après les seules exécutions réelles (une relecture de fixture n'est pas une collecte).
     const sourceRows = await tx.execute(`
@@ -449,6 +459,9 @@ export async function buildMaquetteData(
       });
     }
     const exemplesVerifies = await exemplesDeLaMaquette(tx, exemples);
+    // Chargé à la demande : ce module dépend de la chaîne des ressources, qui dépend elle-même de ce fichier.
+    const { ressourcesDeLaMaquette } = await import('./ressources.ts');
+    const ressources = await ressourcesDeLaMaquette(tx, generatedAt);
 
     return {
       generated_at: generatedAt,
@@ -491,6 +504,7 @@ export async function buildMaquetteData(
         })),
       news_items: newsItems,
       excluded_not_live: excluded,
+      ...ressources,
     };
   } finally {
     tx.close();

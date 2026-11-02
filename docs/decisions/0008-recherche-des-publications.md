@@ -4,6 +4,12 @@
 **Date :** 2026-11-01
 **Décideurs :** l'utilisateur (besoin, jalon) ; Claude (approche technique)
 
+> **Complément du 2026-11-02** ([ADR 0011](0011-chaine-des-ressources.md)) : sur décision de l'utilisateur, une recherche par mots-clés structurés est construite dès maintenant pour les publications de ressources.
+> - FTS5 fournit les candidats ; le classement et l'explication des correspondances se font dans un module partagé.
+> - Des termes proches par publication, chacun avec sa raison, complètent le lexique global.
+> - Les publications en attente ne sont visibles qu'en mode aperçu.
+> - FTS5 a été réessayé en local le 2026-11-02 : il fonctionne. L'essai sur Turso hébergé reste à faire en P5.
+
 ## Contexte
 
 L'utilisateur veut retrouver une publication sans redescendre dans le fil, par un nom, des mots-clés ou un besoin : « Impeccable », « UX design », « motion design », « code review », « sécuriser mon SaaS », « repo pour un Jarvis ». La recherche couvre les ressources, les actualités et leurs mises à jour, y compris avec des termes proches. Les résultats restent des publications, avec auteur, média, explication, sources et discussions. Jusqu'ici, ni la SPEC ni la feuille de route n'en parlaient.

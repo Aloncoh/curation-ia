@@ -15,3 +15,7 @@ Limites connues de ces fixtures :
 - les réponses complètes et les en-têtes des fixtures de P2 n'ont pas été conservés ; ceux de l'essai réel de P2 le sont dans `communication/linkedin/03-catalogue/preuves/brut/`.
 
 Les tests les utilisent pour être reproductibles sans réseau. Une collecte qui la lit (variable `CURATION_FIXTURE`) est tracée en mode « fixture » et ne doit jamais être présentée comme une collecte réelle.
+
+Ajoutées pour la chaîne des ressources (ADR 0011), dans `ressources/` : **fabriquées pour les tests**, ce ne sont pas des réponses réelles. Le dépôt `exemple-org/demo-skills`, son fork `exemple-org/demo-fork`, leurs README, SKILL.md, licence, listes de dossiers et le brouillon `brouillon-demo-anim.json` sont inventés pour exercer la capture, les contrôles et les commandes sans réseau ni contenu de tiers. Les champs suivent la forme documentée de l'API GitHub (`GET /repos/{owner}/{repo}`, `GET /repos/{owner}/{repo}/contents/{path}`), avec quelques champs non utilisés pour vérifier qu'ils ne sont pas conservés.
+
+Ajoutée pour la recherche (ADR 0011 §5), dans `recherche/publications.json` : **fabriquée pour les tests**. Sept publications de ressources inventées (`demo-anim`, `demo-courbes`, `demo-video`, `demo-tableur`, `demo-memoire`, une à vérifier, une en attente non planifiée), avec leurs textes et leurs mots-clés structurés, pour exercer l'index, le classement, l'explication des correspondances et les exclusions. Les passages cités sont inventés et ne renvoient à aucune capture réelle.

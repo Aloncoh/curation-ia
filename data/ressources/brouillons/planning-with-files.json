@@ -1,0 +1,220 @@
+{
+  "slug": "planning-with-files",
+  "consignes": "r2",
+  "accroche": {
+    "texte": "planning-with-files garde le plan de votre agent sur disque, et la tâche reprend après un /clear",
+    "passages": [
+      "Persistent file-based planning for AI coding agents and long-running tasks.",
+      "Crash-proof markdown plans, session recovery after /clear and compaction"
+    ]
+  },
+  "description": {
+    "texte": "Le plan tient dans trois fichiers Markdown du projet, pas seulement dans le contexte : task_plan.md pour les phases, findings.md pour les découvertes et les décisions, progress.md pour le journal. Après un /clear, une compaction ou un plantage, l’agent les relit et repart de la phase en cours.",
+    "passages": [
+      "The plan lives on disk in task_plan.md, findings.md, and progress.md, not only in the context window.",
+      "Markdown on disk is the shared state between agents.",
+      "task_plan.md ← phases + checkboxes; the resume point after /clear",
+      "findings.md ← research notes and decisions, appended as you go",
+      "progress.md ← session log and test results",
+      "That is the difference between an agent that forgets after /clear, compaction or a crash and one that resumes at the current phase."
+    ]
+  },
+  "interet": {
+    "texte": "Des hooks réinjectent le plan au début de chaque tour : sur une longue session, l’objectif et l’état des phases restent sous les yeux du modèle. En option, l’agent est retenu tant qu’une phase reste en cours, avec un plafond pour ne jamais bloquer la session, sur les outils qui le permettent.",
+    "passages": [
+      "A hook that fires every turn",
+      "Because the plan is re-injected at the start of each turn from disk, the goals and phase status stay in the model's attention window as the conversation grows.",
+      "Gated mode: the Stop gate holds the stop only while an in_progress phase remains, with a block cap and stall detection so an incomplete plan alone never traps a session",
+      "Optional gated mode can request continuation only on a host that supports the required Stop behavior."
+    ]
+  },
+  "exemple_usage": {
+    "texte": "Validez l’approche en mode plan, faites-la écrire en phases dans task_plan.md, puis lancez l’exécution. Si la conversation est vidée en route, l’agent ne perd pas le fil : il relit les fichiers et reprend où il en était.",
+    "passages": [
+      "Plan mode is where you design and approve the approach before execution.",
+      "after accepting a plan-mode plan, tell the agent to write it into task_plan.md as phases",
+      "then execute in normal mode",
+      "after a /clear or a new session the skill re-reads project files from disk"
+    ]
+  },
+  "demarrage": {
+    "etapes": [
+      {
+        "texte": "Dans Claude Code : /plugin marketplace add OthmanAdi/planning-with-files",
+        "passages": [
+          "Claude Code, plugin route (ships everything: skill, hooks, slash commands):",
+          "/plugin marketplace add OthmanAdi/planning-with-files"
+        ]
+      },
+      {
+        "texte": "Puis /plugin install planning-with-files@planning-with-files",
+        "passages": [
+          "/plugin install planning-with-files@planning-with-files",
+          "Claude Code, plugin route (ships everything: skill, hooks, slash commands):"
+        ]
+      },
+      {
+        "texte": "Tapez /plan, ou demandez simplement un plan à l’agent",
+        "passages": [
+          "Trigger it by typing /plan (plugin) or asking the agent to"
+        ]
+      }
+    ],
+    "commande": "npx skills add OthmanAdi/planning-with-files --skill planning-with-files -g",
+    "passages": [
+      "npx skills add OthmanAdi/planning-with-files --skill planning-with-files -g",
+      "Claude Code, plugin route (ships everything: skill, hooks, slash commands):"
+    ]
+  },
+  "compatibilites": [
+    {
+      "texte": "Plugins natifs pour Claude Code, Codex CLI, OpenCode et d’autres ; plus de 60 agents via npx skills add, sans les hooks sur certains.",
+      "passages": [
+        "with native plugins for Claude Code, Codex CLI, Qoder CLI, Pi, Hermes Agent, OpenCode and DeepSeek Harness.",
+        "Installs across 60+ agents via the Agent Skills standard",
+        "SKILL.md discovery via npx skills add; the pattern without lifecycle hooks"
+      ]
+    }
+  ],
+  "limites": [],
+  "licence_locale": null,
+  "mots_cles": {
+    "nom": "planning-with-files",
+    "categorie": "MCP et skills",
+    "usages": [
+      {
+        "texte": "planification de tâches",
+        "passages": [
+          "Persistent file-based planning for AI coding agents and long-running tasks."
+        ]
+      },
+      {
+        "texte": "reprise de session",
+        "passages": [
+          "session recovery after /clear and compaction"
+        ]
+      },
+      {
+        "texte": "longues tâches d'agent",
+        "passages": [
+          "Keeping a coding agent on track for hours: modes, gate, ledger"
+        ]
+      },
+      {
+        "texte": "suivi d'avancement",
+        "passages": [
+          "Did something? → log it in progress.md"
+        ]
+      },
+      {
+        "texte": "mémoire de travail d'agent",
+        "passages": [
+          "They are working memory, not a tracked deliverable."
+        ]
+      },
+      {
+        "texte": "coordination multi-agents",
+        "passages": [
+          "One orchestrator owns task_plan.md and the shared summaries"
+        ]
+      }
+    ],
+    "technologies": [
+      {
+        "texte": "Markdown",
+        "passages": [
+          "Markdown on disk is the shared state between agents."
+        ]
+      },
+      {
+        "texte": "Claude Code",
+        "passages": [
+          "Claude Code, plugin route (ships everything: skill, hooks, slash commands):"
+        ]
+      },
+      {
+        "texte": "Codex",
+        "passages": [
+          "Codex, Cursor, OpenCode, 60+ agents"
+        ]
+      },
+      {
+        "texte": "Cursor",
+        "passages": [
+          "Plan injection every turn (Cursor: at session start)"
+        ]
+      },
+      {
+        "texte": "GitHub Copilot",
+        "passages": [
+          "GitHub Copilot | Copilot Setup | Hooks (incl. errorOccurred)"
+        ]
+      },
+      {
+        "texte": "Agent Skills",
+        "passages": [
+          "Installs across 60+ agents via the Agent Skills standard"
+        ]
+      }
+    ],
+    "termes_proches": [
+      {
+        "terme": "context rot",
+        "raison": "Dérive d'un contexte qui s'allonge ; planning-with-files réinjecte le plan à chaque tour pour la contenir."
+      },
+      {
+        "terme": "compaction",
+        "raison": "Quand l'agent résume sa conversation, planning-with-files permet la reprise de session depuis les fichiers du plan."
+      },
+      {
+        "terme": "Manus",
+        "raison": "Méthode de planification par fichiers Markdown décrite par Manus, reprise par planning-with-files : un projet d'un autre auteur, pas un produit Manus."
+      },
+      {
+        "terme": "context engineering",
+        "raison": "Discipline que planning-with-files applique : écrire l'état durable de la tâche dans des fichiers hors du contexte."
+      },
+      {
+        "terme": "mode plan",
+        "raison": "Le mode où l'agent propose sa démarche avant d'agir ; planning-with-files prend le relais : le plan validé est écrit dans task_plan.md, puis suivi."
+      },
+      {
+        "terme": "skill Claude Code",
+        "raison": "planning-with-files s'installe comme skill, ou comme plugin avec ses hooks, dans Claude Code."
+      },
+      {
+        "terme": "liste de tâches d'agent",
+        "raison": "Là où une liste de tâches reste dans le contexte, planning-with-files garde le plan sur le disque."
+      },
+      {
+        "terme": "agent autonome",
+        "raison": "planning-with-files n'est pas un agent en soi : c'est un skill qui aide un agent à tenir un plan sur de longues tâches, avec un mode autonome qui réduit les rappels."
+      }
+    ]
+  },
+  "bouton": {
+    "libelle": "Voir le dépôt",
+    "url": "https://github.com/OthmanAdi/planning-with-files"
+  },
+  "reperes": [
+    {
+      "texte": "Mode autonome : moins de rappels, moins de tokens brûlés",
+      "passages": [
+        "Autonomous loops burn tokens on recitation",
+        "Autonomous mode drops the per-tool-call recitation and replaces the raw progress tail with a fixed-shape ledger summary"
+      ]
+    },
+    {
+      "texte": "Multi-agents : un orchestrateur tient le plan",
+      "passages": [
+        "One orchestrator owns task_plan.md and the shared summaries; every worker appends to its own ledger or assigned file."
+      ]
+    },
+    {
+      "texte": "Pour Claude Code, Codex, Cursor et plus de 60 agents",
+      "passages": [
+        "Install from npm, the Claude Code plugin marketplace, or npx skills. Codex, Cursor, OpenCode, 60+ agents."
+      ]
+    }
+  ]
+}

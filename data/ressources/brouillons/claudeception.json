@@ -1,0 +1,208 @@
+{
+  "slug": "claudeception",
+  "consignes": "r2",
+  "accroche": {
+    "texte": "Claudeception fait de chaque solution durement trouvée par Claude Code un skill rechargé tout seul",
+    "passages": [
+      "When Claude Code discovers something non-obvious (a debugging technique, a workaround, some project-specific pattern), it saves that knowledge as a new skill.",
+      "Next time a similar problem comes up, the skill gets loaded automatically."
+    ]
+  },
+  "description": {
+    "texte": "Une heure sur une erreur obscure, l’agent finit par trouver, la session se ferme, et la fois suivante tout recommence. Avec Claudeception, la technique de débogage, le contournement ou la particularité du projet découverts en route deviennent un skill, chargé automatiquement dès qu’un problème semblable revient.",
+    "passages": [
+      "You spend an hour debugging some obscure error, the agent figures it out, session ends. Next time you hit the same issue? Another hour.",
+      "When Claude Code discovers something non-obvious (a debugging technique, a workaround, some project-specific pattern), it saves that knowledge as a new skill.",
+      "Next time a similar problem comes up, the skill gets loaded automatically."
+    ]
+  },
+  "interet": {
+    "texte": "Il trie : seul ce qui a demandé une vraie recherche, resservira, a un déclencheur net et a fonctionné devient un skill. Et la description est écrite pour être retrouvée : l’erreur exacte, pas « problèmes de base de données ».",
+    "passages": [
+      "The skill is picky about what it extracts.",
+      "It only extracts knowledge that required actual discovery (not just reading docs), will help with future tasks, has clear trigger conditions, and has been verified to work.",
+      "it writes a new skill with a description optimized for future retrieval",
+      "\"Helps with database problems\" won't match anything useful."
+    ]
+  },
+  "exemple_usage": {
+    "texte": "Exemple du dépôt : une PrismaClientKnownRequestError réglée (trop de connexions en serverless) peut devenir un skill dont la description reprend l’erreur exacte. Quand elle réapparaît, l’agent le retrouve.",
+    "passages": [
+      "Fix for PrismaClientKnownRequestError: Too many database connections in serverless environments (Vercel, AWS Lambda).",
+      "\"Fix for PrismaClientKnownRequestError in serverless\" will match when someone hits that error."
+    ]
+  },
+  "demarrage": {
+    "etapes": [
+      {
+        "texte": "Cloner le dépôt dans ~/.claude/skills/claudeception.",
+        "passages": [
+          "User-level (recommended) `bash git clone https://github.com/blader/Claudeception.git ~/.claude/skills/claudeception"
+        ]
+      },
+      {
+        "texte": "Optionnel : le hook, ajouté à settings.json, fait évaluer chaque session",
+        "passages": [
+          "a hook ensures it evaluates every session for extractable knowledge",
+          "If you already have a settings.json, merge the hooks configuration into it.",
+          "This achieves higher activation rates than relying on semantic description matching alone."
+        ]
+      },
+      {
+        "texte": "Après un débogage : /claudeception, sans skill si rien n’est à garder",
+        "passages": [
+          "Trigger a learning retrospective",
+          "Just completed debugging and discovered a non-obvious solution",
+          "Not every task produces a skill."
+        ]
+      }
+    ],
+    "commande": "git clone https://github.com/blader/Claudeception.git ~/.claude/skills/claudeception",
+    "passages": [
+      "git clone https://github.com/blader/Claudeception.git ~/.claude/skills/claudeception"
+    ]
+  },
+  "compatibilites": [
+    {
+      "texte": "Claude Code, via son système de skills natif.",
+      "passages": [
+        "Claude Code has a native skills system."
+      ]
+    }
+  ],
+  "limites": [
+    {
+      "texte": "C’est un fork, sans push depuis plusieurs mois au moment de la capture.",
+      "passages": [
+        "Contributions welcome. Fork, make changes, submit a PR."
+      ]
+    }
+  ],
+  "licence_locale": null,
+  "mots_cles": {
+    "nom": "Claudeception",
+    "categorie": "MCP et skills",
+    "usages": [
+      {
+        "texte": "apprentissage continu",
+        "passages": [
+          "A Claude Code skill for autonomous skill extraction and continuous learning."
+        ]
+      },
+      {
+        "texte": "extraction de skills",
+        "passages": [
+          "Or explicitly request skill extraction"
+        ]
+      },
+      {
+        "texte": "solutions réutilisables entre sessions",
+        "passages": [
+          "it saves that knowledge as a new skill",
+          "Next time a similar problem comes up, the skill gets loaded automatically."
+        ]
+      },
+      {
+        "texte": "solutions de débogage",
+        "passages": [
+          "Just completed debugging and discovered a non-obvious solution"
+        ]
+      },
+      {
+        "texte": "rétrospective de session",
+        "passages": [
+          "Trigger a learning retrospective"
+        ]
+      },
+      {
+        "texte": "création automatique de skills",
+        "passages": [
+          "A Claude Code skill for autonomous skill extraction and continuous learning.",
+          "it writes a new skill with a description optimized for future retrieval"
+        ]
+      }
+    ],
+    "technologies": [
+      {
+        "texte": "Claude Code",
+        "passages": [
+          "Claude Code has a native skills system."
+        ]
+      },
+      {
+        "texte": "UserPromptSubmit",
+        "passages": [
+          "{ \"hooks\": { \"UserPromptSubmit\": [ { \"hooks\": [ { \"type\": \"command\", \"command\": \"~/.claude/hooks/claudeception-activator.sh\" } ] } ] } }"
+        ]
+      },
+      {
+        "texte": "YAML",
+        "passages": [
+          "Extracted skills are markdown files with YAML frontmatter"
+        ]
+      },
+      {
+        "texte": "Markdown",
+        "passages": [
+          "Extracted skills are markdown files with YAML frontmatter"
+        ]
+      }
+    ],
+    "termes_proches": [
+      {
+        "terme": "mémoire d'agent",
+        "raison": "Claudeception donne à Claude Code une forme de mémoire : les solutions trouvées restent sous forme de skills, pas un historique des conversations."
+      },
+      {
+        "terme": "auto-amélioration",
+        "raison": "Claudeception vise un agent qui progresse en travaillant, en écrivant ses propres skills."
+      },
+      {
+        "terme": "base de connaissances",
+        "raison": "Claudeception peut constituer au fil du temps une bibliothèque de skills propre à l'utilisateur ou au projet."
+      },
+      {
+        "terme": "méta-skill",
+        "raison": "le dépôt présente Claudeception comme un méta-skill, un skill qui sert à acquérir d'autres skills."
+      },
+      {
+        "terme": "solutions de débogage réutilisables",
+        "raison": "Claudeception n'est pas un outil de débogage : il retient les solutions trouvées pendant le débogage pour les réutiliser."
+      },
+      {
+        "terme": "agent de code",
+        "raison": "Claudeception s'adresse aux agents de code comme Claude Code, pour qu'ils gardent d'une session à l'autre les solutions trouvées."
+      },
+      {
+        "terme": "retour d'expérience",
+        "raison": "la rétrospective de session de Claudeception peut transformer un retour d'expérience en skill réutilisable."
+      }
+    ]
+  },
+  "bouton": {
+    "libelle": "Voir le dépôt",
+    "url": "https://github.com/blader/Claudeception"
+  },
+  "reperes": [
+    {
+      "texte": "Rétrospective à la demande, sans skill forcé",
+      "passages": [
+        "Trigger a learning retrospective",
+        "Or explicitly request skill extraction",
+        "Not every task produces a skill."
+      ]
+    },
+    {
+      "texte": "Skills écrits en markdown, avec frontmatter YAML",
+      "passages": [
+        "Extracted skills are markdown files with YAML frontmatter"
+      ]
+    },
+    {
+      "texte": "Inspiré de travaux académiques, selon le dépôt",
+      "passages": [
+        "The idea comes from academic work on skill libraries for AI agents."
+      ]
+    }
+  ]
+}

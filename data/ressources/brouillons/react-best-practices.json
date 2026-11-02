@@ -1,0 +1,190 @@
+{
+  "slug": "react-best-practices",
+  "consignes": "r2",
+  "accroche": {
+    "texte": "React Best Practices : les 70 règles de performance React et Next.js de Vercel, appliquées par votre agent",
+    "passages": [
+      "React and Next.js performance optimization guidelines from Vercel Engineering.",
+      "Contains 70 rules across 8 categories, prioritized by impact to guide automated refactoring and code generation."
+    ]
+  },
+  "description": {
+    "texte": "Vercel Engineering y condense ses règles de performance React et Next.js. L'agent s'en sert dès qu'il écrit, relit ou refactorise un composant, une page Next.js ou du chargement de données.",
+    "passages": [
+      "React and Next.js performance optimization guidelines from Vercel Engineering.",
+      "This skill should be used when writing, reviewing, or refactoring React/Next.js code to ensure optimal performance patterns.",
+      "Triggers on tasks involving React components, Next.js pages, data fetching, bundle optimization, or performance improvements."
+    ]
+  },
+  "interet": {
+    "texte": "Les règles sont classées par impact : l'agent s'attaque d'abord aux requêtes en cascade et au poids du bundle, avant les re-rendus ou les micro-optimisations JavaScript.",
+    "passages": [
+      "prioritized by impact to guide automated refactoring and code generation.",
+      "Eliminating Waterfalls | CRITICAL | async-",
+      "Bundle Size Optimization | CRITICAL | bundle-",
+      "Re-render Optimization | MEDIUM | rerender-",
+      "JavaScript Performance | LOW-MEDIUM | js-"
+    ]
+  },
+  "exemple_usage": {
+    "texte": "Une page Next.js enchaîne deux requêtes indépendantes ? Demandez à l'agent de l'optimiser : la règle async-parallel les lance ensemble avec Promise.all().",
+    "passages": [
+      "Help me optimize this Next.js page",
+      "async-parallel - Use Promise.all() for independent operations"
+    ]
+  },
+  "demarrage": {
+    "etapes": [
+      {
+        "texte": "La commande installe toute la collection de Vercel, pas seulement ce skill : npx skills add vercel-labs/agent-skills",
+        "passages": [
+          "npx skills add vercel-labs/agent-skills"
+        ]
+      }
+    ],
+    "commande": "npx skills add vercel-labs/agent-skills",
+    "passages": [
+      "npx skills add vercel-labs/agent-skills",
+      "Skills are automatically available once installed."
+    ]
+  },
+  "compatibilites": [],
+  "limites": [],
+  "licence_locale": {
+    "texte": "L'en-tête du skill déclare la licence MIT.",
+    "passages": [
+      "license: MIT metadata: author: vercel"
+    ]
+  },
+  "mots_cles": {
+    "nom": "React Best Practices (Vercel)",
+    "categorie": "MCP et skills",
+    "usages": [
+      {
+        "texte": "optimisation des performances",
+        "passages": [
+          "React and Next.js performance optimization guidelines from Vercel Engineering."
+        ]
+      },
+      {
+        "texte": "revue de code",
+        "passages": [
+          "Reviewing code for performance issues"
+        ]
+      },
+      {
+        "texte": "refactorisation",
+        "passages": [
+          "Refactoring existing React/Next.js code"
+        ]
+      },
+      {
+        "texte": "taille du bundle",
+        "passages": [
+          "Optimizing bundle size or load times"
+        ]
+      },
+      {
+        "texte": "chargement des données",
+        "passages": [
+          "Implementing data fetching (client or server-side)"
+        ]
+      },
+      {
+        "texte": "temps de chargement",
+        "passages": [
+          "Optimizing bundle size or load times"
+        ]
+      }
+    ],
+    "technologies": [
+      {
+        "texte": "React",
+        "passages": [
+          "Comprehensive performance optimization guide for React and Next.js applications, maintained by Vercel."
+        ]
+      },
+      {
+        "texte": "Next.js",
+        "passages": [
+          "Comprehensive performance optimization guide for React and Next.js applications, maintained by Vercel."
+        ]
+      },
+      {
+        "texte": "JavaScript",
+        "passages": [
+          "JavaScript Performance | LOW-MEDIUM | js-"
+        ]
+      },
+      {
+        "texte": "RSC",
+        "passages": [
+          "Avoid module-level mutable request state in RSC/SSR",
+          "Avoid duplicate serialization in RSC props"
+        ]
+      }
+    ],
+    "termes_proches": [
+      {
+        "terme": "vercel-react-best-practices",
+        "raison": "Nom technique du skill React Best Practices, donné par le champ name de son fichier SKILL.md."
+      },
+      {
+        "terme": "performance web",
+        "raison": "Les règles visent la rapidité des applications React, côté navigateur comme côté serveur."
+      },
+      {
+        "terme": "requêtes en cascade",
+        "raison": "Traduit waterfalls : des attentes successives qui ralentissent une application React."
+      },
+      {
+        "terme": "chargement différé",
+        "raison": "Des règles sur la taille du bundle conseillent de charger les composants lourds à la demande (next/dynamic)."
+      },
+      {
+        "terme": "rendus inutiles",
+        "raison": "Une catégorie de règles React aide à éviter les re-rendus superflus des composants."
+      },
+      {
+        "terme": "mémoïsation",
+        "raison": "Des règles React conseillent d'isoler les calculs coûteux dans des composants mémoïsés, et d'éviter la mémoïsation pour les valeurs simples."
+      },
+      {
+        "terme": "SWR",
+        "raison": "Une seule règle cite la bibliothèque SWR, pour dédoublonner les requêtes lors du chargement des données côté client."
+      },
+      {
+        "terme": "Suspense",
+        "raison": "Une seule règle React cite Suspense, pour afficher le contenu au fur et à mesure de son chargement (streaming)."
+      }
+    ]
+  },
+  "bouton": {
+    "libelle": "Voir le dépôt",
+    "url": "https://github.com/vercel-labs/agent-skills/tree/main/skills/react-best-practices"
+  },
+  "reperes": [
+    {
+      "texte": "Pour chaque règle, le code fautif et sa correction",
+      "passages": [
+        "Incorrect code example with explanation",
+        "Correct code example with explanation"
+      ]
+    },
+    {
+      "texte": "Côté serveur : React.cache(), cache LRU et after()",
+      "passages": [
+        "server-cache-react - Use React.cache() for per-request deduplication",
+        "server-cache-lru - Use LRU cache for cross-request caching",
+        "server-after-nonblocking - Use after() for non-blocking operations"
+      ]
+    },
+    {
+      "texte": "Côté client : SWR et écouteurs d'événements dédoublonnés",
+      "passages": [
+        "client-swr-dedup - Use SWR for automatic request deduplication",
+        "client-event-listeners - Deduplicate global event listeners"
+      ]
+    }
+  ]
+}

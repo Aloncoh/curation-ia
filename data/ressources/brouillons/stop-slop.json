@@ -1,0 +1,191 @@
+{
+  "slug": "stop-slop",
+  "consignes": "r2",
+  "accroche": {
+    "texte": "stop-slop traque les tics d’écriture IA dans vos textes et les fait disparaître",
+    "passages": [
+      "A skill for removing AI tells from prose.",
+      "This skill teaches Claude (or any LLM) to catch and remove them."
+    ]
+  },
+  "description": {
+    "texte": "Formules prévisibles, constructions toutes faites, rythme mécanique : stop-slop apprend à Claude, ou à n’importe quel LLM, à les repérer et à les retirer.",
+    "passages": [
+      "AI writing has patterns. Predictable phrases, structures, rhythms.",
+      "This skill teaches Claude (or any LLM) to catch and remove them."
+    ]
+  },
+  "interet": {
+    "texte": "Les règles sont tranchées : pas de jargon d’entreprise, pas d’adverbes, pas de voix passive, pas d’oppositions binaires, pas de tiret cadratin. Chaque famille de tics a son fichier de référence, chargé seulement quand il sert.",
+    "passages": [
+      "Banned phrases - Throat-clearing openers, emphasis crutches, business jargon, all adverbs, vague declaratives, meta-commentary.",
+      "Structural clichés - Binary contrasts, negative listings, dramatic fragmentation, rhetorical setups, false agency, narrator-from-a-distance voice, passive voice.",
+      "Sentence-level rules - No Wh- sentence starters, no em dashes, no staccato fragmentation, no lazy extremes, active voice required.",
+      "Reference files load on demand.",
+      "phrases.md # Phrases to remove",
+      "structures.md # Structural patterns to avoid"
+    ]
+  },
+  "exemple_usage": {
+    "texte": "Un post écrit avec Claude qui sonne trop IA : passez-le dans stop-slop avant de publier.",
+    "passages": [
+      "This skill teaches Claude (or any LLM) to catch and remove them."
+    ]
+  },
+  "demarrage": {
+    "etapes": [
+      {
+        "texte": "Claude Code : ajoutez le dossier comme skill",
+        "passages": [
+          "Claude Code: Add this folder as a skill."
+        ]
+      },
+      {
+        "texte": "API : incluez SKILL.md dans le prompt système",
+        "passages": [
+          "API calls: Include SKILL.md in your system prompt."
+        ]
+      }
+    ],
+    "commande": null,
+    "passages": [
+      "Claude Code: Add this folder as a skill.",
+      "API calls: Include SKILL.md in your system prompt. Reference files load on demand."
+    ]
+  },
+  "compatibilites": [
+    {
+      "texte": "Claude Code, projets Claude, instructions personnalisées ou appels API.",
+      "passages": [
+        "Claude Code: Add this folder as a skill.",
+        "Claude Projects: Upload SKILL.md and reference files to project knowledge.",
+        "Custom instructions: Copy core rules from SKILL.md.",
+        "API calls: Include SKILL.md in your system prompt."
+      ]
+    }
+  ],
+  "limites": [],
+  "licence_locale": null,
+  "mots_cles": {
+    "nom": "stop-slop",
+    "categorie": "MCP et skills",
+    "usages": [
+      {
+        "texte": "tics d'écriture IA",
+        "passages": [
+          "A skill for removing AI tells from prose."
+        ]
+      },
+      {
+        "texte": "réécrire un texte IA",
+        "passages": [
+          "This skill teaches Claude (or any LLM) to catch and remove them."
+        ]
+      },
+      {
+        "texte": "révision de texte",
+        "passages": [
+          "Below 35/50: revise."
+        ]
+      },
+      {
+        "texte": "clichés d'écriture",
+        "passages": [
+          "Structural clichés - Binary contrasts, negative listings, dramatic fragmentation, rhetorical setups, false agency, narrator-from-a-distance voice, passive voice."
+        ]
+      },
+      {
+        "texte": "formules à bannir",
+        "passages": [
+          "Banned phrases - Throat-clearing openers, emphasis crutches, business jargon, all adverbs, vague declaratives, meta-commentary."
+        ]
+      },
+      {
+        "texte": "grille de relecture",
+        "passages": [
+          "Rate 1-10 on each dimension:"
+        ]
+      }
+    ],
+    "technologies": [
+      {
+        "texte": "Claude Code",
+        "passages": [
+          "Claude Code: Add this folder as a skill."
+        ]
+      },
+      {
+        "texte": "Claude Projects",
+        "passages": [
+          "Claude Projects: Upload SKILL.md and reference files to project knowledge."
+        ]
+      },
+      {
+        "texte": "SKILL.md",
+        "passages": [
+          "SKILL.md # Core instructions"
+        ]
+      },
+      {
+        "texte": "LLM",
+        "passages": [
+          "This skill teaches Claude (or any LLM) to catch and remove them."
+        ]
+      }
+    ],
+    "termes_proches": [
+      {
+        "terme": "texte généré par IA",
+        "raison": "stop-slop retire d'un texte généré par une IA les tics d'écriture IA qui le trahissent."
+      },
+      {
+        "terme": "écriture naturelle",
+        "raison": "stop-slop retire les tournures prévisibles de l'IA pour une écriture plus naturelle."
+      },
+      {
+        "terme": "style d'écriture",
+        "raison": "stop-slop agit sur le style d'écriture : formules, constructions et rythme des phrases."
+      },
+      {
+        "terme": "ton naturel",
+        "raison": "stop-slop cherche un ton direct et humain, sans formules automatiques."
+      },
+      {
+        "terme": "relecture",
+        "raison": "stop-slop sert à relire un texte pour en retirer les tics d'écriture IA."
+      },
+      {
+        "terme": "rédaction",
+        "raison": "stop-slop sert à la rédaction : révision de texte et chasse aux clichés d'écriture."
+      }
+    ]
+  },
+  "bouton": {
+    "libelle": "Voir le dépôt",
+    "url": "https://github.com/hardikpandya/stop-slop"
+  },
+  "reperes": [
+    {
+      "texte": "Note sur 50 en cinq critères : sous 35, retour en révision",
+      "passages": [
+        "Rate 1-10 on each dimension:",
+        "Below 35/50: revise."
+      ]
+    },
+    {
+      "texte": "Exemples avant/après fournis avec les règles",
+      "passages": [
+        "examples.md # Before/after transformations"
+      ]
+    },
+    {
+      "texte": "Claude Code, projets Claude, instructions perso ou API",
+      "passages": [
+        "Claude Code: Add this folder as a skill.",
+        "Claude Projects: Upload SKILL.md and reference files to project knowledge.",
+        "Custom instructions: Copy core rules from SKILL.md.",
+        "API calls: Include SKILL.md in your system prompt."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "slug": "demo-anim",
+  "consignes": "r2",
+  "accroche": { "texte": "demo-anim, un skill pour animer des pages web", "passages": ["Create web animations with Anime.js, SVG and CSS transitions."] },
+  "description": { "texte": "Un skill d'agent qui crée des animations web avec Anime.js, SVG et des transitions CSS.", "passages": ["Create web animations with Anime.js, SVG and CSS transitions."] },
+  "interet": { "texte": "Il sert quand on demande du motion design sur une page web.", "passages": ["Use this skill when the user asks for motion design on a web page."] },
+  "exemple_usage": { "texte": "Usage possible selon la source : animer un logo SVG au chargement de la page.", "passages": ["animate an SVG logo on page load."] },
+  "demarrage": {
+    "etapes": [
+      { "texte": "Installer le skill avec la commande citée.", "passages": ["Install a skill with the skills CLI:"] },
+      { "texte": "Choisir les éléments à animer, puis écrire la timeline.", "passages": ["Pick the elements to animate.", "Write the timeline with Anime.js."] }
+    ],
+    "commande": "npx skills add exemple-org/demo-skills --skill anim",
+    "passages": ["Install a skill with the skills CLI:"]
+  },
+  "compatibilites": [{ "texte": "Fonctionne avec Claude Code et Cursor, selon le dépôt.", "passages": ["Works with Claude Code and Cursor."] }],
+  "limites": [{ "texte": "Ne couvre pas les scènes 3D.", "passages": ["the skill does not cover 3D scenes."] }],
+  "licence_locale": { "texte": "Le dossier du skill contient sa propre licence MIT.", "passages": ["MIT License Copyright (c) 2026 Exemple"] },
+  "mots_cles": {
+    "nom": "demo-anim",
+    "categorie": "MCP et skills",
+    "usages": [
+      { "texte": "motion design", "passages": ["Use this skill when the user asks for motion design on a web page."] },
+      { "texte": "animation web", "passages": ["A collection of agent skills for web animation and motion design."] }
+    ],
+    "technologies": [
+      { "texte": "Anime.js", "passages": ["Write the timeline with Anime.js."] },
+      { "texte": "SVG", "passages": ["Create web animations with Anime.js, SVG and CSS transitions."] }
+    ],
+    "termes_proches": [{ "terme": "effets visuels", "raison": "Une animation web produit des effets visuels sur une page." }]
+  },
+  "bouton": { "libelle": "Voir le dépôt", "url": "https://github.com/exemple-org/demo-skills/tree/main/skills/anim" },
+  "reperes": [{ "texte": "Vérification du rendu dans le navigateur", "passages": ["Check the result in the browser."] }]
+}

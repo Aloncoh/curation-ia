@@ -139,3 +139,14 @@
 ## 2026-11-02 — volume, priorités, clarté, mobile
 
 Plafond de 20 publications par jour, sans quota ; ordre de priorité ; objectif de la minute rétabli ; consignes `s3`, prompt `p3-10`, fonction de priorité (558 tests au vert, types OK, aucun appel au modèle) ; ADR 0010 proposée, exigences Apple, Google, PWA et Expo relevées le 2026-11-02.
+
+## 2026-11-02 — Chaîne des ressources, recherche et maquette façon X (P3 toujours en cours)
+
+- Demande de l'utilisateur : publier les ressources de sa liste (20 du fil X de @Slonski_rt, puis ECC), retrouvables par une recherche, avant P6. [ADR 0011](docs/decisions/0011-chaine-des-ressources.md) ; migrations 0009 et 0010 ; commande `npm run ressources -- capturer|source|verifier|importer|chercher|planning`.
+- Rédaction : 21 brouillons écrits par Claude Code pendant le développement, selon la règle de ton (prompt `p3-11`), sans appel au modèle. Origine enregistrée et affichée comme telle.
+- Relevé de la base locale (lecture seule, 2026-11-02) : 21 publications `en_attente`, aucune publiée ; 21 brouillons `controle_automatique` ; 69 vérifications de bouton réussies par l'API GitHub entre 15:33 et 18:46 UTC, toutes « Voir le dépôt » ; 1 088 mots-clés (nom 54, catégorie 54, usages 310, technologies 284, termes proches 386) ; 21 publications dans l'index plein texte ; planning sous le plafond, 15 le 2026-11-02 et 6 le 2026-11-03, aucune sur la réserve des nouveautés prioritaires ; 6 imports tracés « aucun appel au modèle ». 21 visuels dans `maquette/medias/montages/ressources/`.
+- Recherche, mode aperçu, essayée sur la base : « mémoire » 3 résultats, « code review » 1, « motion design » 1 seul (frontend-design), « sécuriser » 0 ; en mode public, 0 résultat, puisque rien n'est publié. « motion design » devait retrouver plusieurs ressources (SPEC §7.15) : écart constaté, non corrigé.
+- Maquette : disposition façon X (logo et navigation à gauche, profil de l'utilisateur en aperçu, « Plus » pour Coulisses et États, recherche collante en haut, colonne « À suivre »), post réduit (« Voir plus », bouton vers le dépôt au-dessus de l'image, « Afficher les commentaires » avec état vide, partager, ligne de mention IA et lien « Sources »), mots-clés invisibles, `maquette/recherche.js` généré depuis le moteur partagé. Données régénérées par `npm run maquette` (fichiers du 2026-11-02, 20:47).
+- Documents : décisions et retours d'interface du 2026-11-02 reportés dans SPEC (§2, §3.1, §3.3, §6 bis, §7.2, §7.3 ter, §7.4, §7.7, §7.8, §7.12, §7.15, §8) et CLAUDE.md (valeur absente masquée).
+- Vérifié : `npm test`, 682 tests au vert, dont ceux de la chaîne et de la recherche (`tests/ressources-*.test.ts`, `tests/recherche.test.ts`),, et `npm run typecheck` OK.
+- Non fait : revue dans le navigateur de la dernière version de la maquette pendant cette mise à jour des documents ; relecture indépendante de la chaîne ; publication réelle (P5) ; commit.

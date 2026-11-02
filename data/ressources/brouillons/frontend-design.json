@@ -1,0 +1,206 @@
+{
+  "slug": "frontend-design",
+  "consignes": "r2",
+  "accroche": {
+    "texte": "frontend-design pousse Claude vers des interfaces qui ne ressemblent pas à toutes les autres",
+    "passages": [
+      "This repository contains Anthropic's implementation of skills for Claude.",
+      "Guidance for distinctive, intentional visual design when building new UI or reshaping an existing one.",
+      "Helps with aesthetic direction, typography, and making choices that don't read as templated defaults."
+    ]
+  },
+  "description": {
+    "texte": "Le skill d'Anthropic donne à Claude une vraie direction artistique pour créer ou refaire une interface. Palette, typographie et mise en page sont choisies pour le brief, pas tirées des réglages par défaut qu'on voit partout.",
+    "passages": [
+      "This repository contains Anthropic's implementation of skills for Claude.",
+      "Guidance for distinctive, intentional visual design when building new UI or reshaping an existing one.",
+      "make deliberate, opinionated choices about palette, typography, and layout that are specific to this brief",
+      "Helps with aesthetic direction, typography, and making choices that don't read as templated defaults."
+    ]
+  },
+  "interet": {
+    "texte": "Claude écrit d'abord un court plan de design, le relit face au brief, et ne code qu'ensuite. Le skill nomme aussi les tics actuels des designs générés par IA : fond crème avec accent terre cuite, cartes arrondies toutes identiques. Claude les évite quand le brief laisse le choix, et les suit s'il les demande.",
+    "passages": [
+      "Work in two passes. First, brainstorm a short design plan based on the client's design brief",
+      "Then review that plan against the brief before building",
+      "Only after you've confirmed the relative uniqueness of your design plan should you start to write the code",
+      "For calibration, AI-generated design right now clusters around some traits:",
+      "a warm cream background (near #F4F1EA) with a high-contrast serif display and a terracotta or warm-clay accent",
+      "the SaaS-card kit: content chopped into identical rounded cards",
+      "Where the brief pins down a visual direction, follow it exactly — the brief's own words always win, including when it asks for one of these looks.",
+      "Where it leaves an axis free, don't spend that freedom on one of these defaults."
+    ]
+  },
+  "exemple_usage": {
+    "texte": "Les choix visuels partent du sujet : un jouet pour filles de 8 à 11 ans n'aura pas l'esthétique d'un tableau de bord pour analystes financiers.",
+    "passages": [
+      "The subject's industry, subject matter, materials, and vernacular are where distinctive visual choices come from",
+      "a design for a toy for girls aged 8–11 will be very aesthetically different from a dashboard for financial analysts."
+    ]
+  },
+  "demarrage": {
+    "etapes": [
+      {
+        "texte": "Dans Claude Code, ajouter le dépôt comme marketplace",
+        "passages": [
+          "You can register this repository as a Claude Code Plugin marketplace by running the following command in Claude Code"
+        ]
+      },
+      {
+        "texte": "Installer example-skills : /plugin install example-skills@anthropic-agent-skills",
+        "passages": [
+          "/plugin install example-skills@anthropic-agent-skills",
+          "\"./skills/doc-coauthoring\", \"./skills/frontend-design\", \"./skills/internal-comms\""
+        ]
+      },
+      {
+        "texte": "Puis citer frontend-design dans la demande",
+        "passages": [
+          "After installing the plugin, you can use the skill by just mentioning it."
+        ]
+      }
+    ],
+    "commande": "/plugin marketplace add anthropics/skills",
+    "passages": [
+      "You can register this repository as a Claude Code Plugin marketplace by running the following command in Claude Code:",
+      "After installing the plugin, you can use the skill by just mentioning it."
+    ]
+  },
+  "compatibilites": [
+    {
+      "texte": "Claude Code, et déjà inclus dans les offres payantes de Claude.ai selon le dépôt.",
+      "passages": [
+        "You can register this repository as a Claude Code Plugin marketplace by running the following command in Claude Code:",
+        "These example skills are all already available to paid plans in Claude.ai."
+      ]
+    }
+  ],
+  "limites": [],
+  "licence_locale": {
+    "texte": "Licence Apache 2.0, propre au dossier du skill selon son fichier LICENSE.txt.",
+    "passages": [
+      "license: Complete terms in LICENSE.txt",
+      "Apache License Version 2.0, January 2004"
+    ]
+  },
+  "mots_cles": {
+    "nom": "frontend-design",
+    "categorie": "MCP et skills",
+    "usages": [
+      {
+        "texte": "design d'interface",
+        "passages": [
+          "Guidance for distinctive, intentional visual design when building new UI or reshaping an existing one."
+        ]
+      },
+      {
+        "texte": "direction artistique",
+        "passages": [
+          "Helps with aesthetic direction, typography, and making choices that don't read as templated defaults."
+        ]
+      },
+      {
+        "texte": "typographie",
+        "passages": [
+          "Typography carries the personality of the page."
+        ]
+      },
+      {
+        "texte": "rédaction d'interface",
+        "passages": [
+          "Bring the same intentionality and minimalism to copywriting that you would bring to spacing and color."
+        ]
+      },
+      {
+        "texte": "accessibilité",
+        "passages": [
+          "visible keyboard focus, reduced motion respected, visually accessible"
+        ]
+      },
+      {
+        "texte": "motion design",
+        "passages": [
+          "Motion that answers a person's action (opening, expanding, confirming) is welcome when it shows what changed."
+        ]
+      }
+    ],
+    "technologies": [
+      {
+        "texte": "CSS",
+        "passages": [
+          "When writing the code, be careful of structuring your CSS selector specificities."
+        ]
+      },
+      {
+        "texte": "Claude Code",
+        "passages": [
+          "You can register this repository as a Claude Code Plugin marketplace"
+        ]
+      },
+      {
+        "texte": "Agent Skills",
+        "passages": [
+          "For information about the Agent Skills standard, see agentskills.io."
+        ]
+      }
+    ],
+    "termes_proches": [
+      {
+        "terme": "front-end",
+        "raison": "Autre graphie de frontend, premier mot du nom frontend-design."
+      },
+      {
+        "terme": "design web",
+        "raison": "Le skill traite le design d'interface des pages web, haut de page (hero) et CSS compris."
+      },
+      {
+        "terme": "identité visuelle",
+        "raison": "La direction artistique du skill vise une identité visuelle propre à chaque projet."
+      },
+      {
+        "terme": "interface utilisateur",
+        "raison": "Le design d'interface s'applique à l'interface utilisateur (UI) d'un site ou d'une application."
+      },
+      {
+        "terme": "polices de caractères",
+        "raison": "Pour la typographie, le skill conseille une ou deux familles de polices bien distinctes."
+      },
+      {
+        "terme": "microcopie",
+        "raison": "La rédaction d'interface couvre les textes courts : boutons, messages d'erreur, écrans vides."
+      },
+      {
+        "terme": "animations d'interface",
+        "raison": "Le skill conseille de limiter les animations automatiques à un seul moment orchestré et d'animer surtout les réponses aux actions ; ce n'est pas un outil d'animation."
+      },
+      {
+        "terme": "design responsive",
+        "raison": "Le design d'interface du skill doit tenir jusqu'au mobile, sans l'annoncer."
+      }
+    ]
+  },
+  "bouton": {
+    "libelle": "Voir le dépôt",
+    "url": "https://github.com/anthropics/skills/tree/main/skills/frontend-design"
+  },
+  "reperes": [
+    {
+      "texte": "Une ou deux familles de polices, pas plus",
+      "passages": [
+        "use one family or two, and if two, make them clearly distinct."
+      ]
+    },
+    {
+      "texte": "Un seul moment animé, pas des effets dispersés",
+      "passages": [
+        "A single orchestrated moment — one page-load sequence or one reveal — lands better than scattered effects"
+      ]
+    },
+    {
+      "texte": "Responsive, focus clavier et mouvement réduit, sans l'annoncer",
+      "passages": [
+        "Build to a quality floor without announcing it: responsive down to mobile, visible keyboard focus, reduced motion respected"
+      ]
+    }
+  ]
+}

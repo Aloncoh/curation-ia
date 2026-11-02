@@ -9,7 +9,7 @@ import { depense } from '../src/analysis/budget.ts';
 import { controlerBrouillon, diapositivesDe, LIBELLE_CONTROLE, moinsDeTroisMots } from '../src/analysis/controles.ts';
 import { estReprenable, modeleAnthropic, schemaSortie, type Modele, type RequeteModele } from '../src/analysis/modele.ts';
 import { DUREE_BAIL_MS, genererBrouillons, LONGUEUR_MAX_CAPTURE, LotEnCours, MAX_TENTATIVES, MAX_TOKENS } from '../src/analysis/pipeline.ts';
-import { documentUtilisateur, PROMPT_VERSION, SYSTEME_QUALIFICATION } from '../src/analysis/prompts.ts';
+import { documentUtilisateur, PROMPT_VERSION, SYSTEME_QUALIFICATION, SYSTEME_REDACTION } from '../src/analysis/prompts.ts';
 import { consignesActuelles } from '../src/selection/consignes.ts';
 import { MENTION_ILLUSTRATION } from '../src/analysis/publication.ts';
 import { relectureMarkdown } from '../src/analysis/relecture.ts';
@@ -267,6 +267,22 @@ describe('tarifs', () => {
   });
   it('les six comptes du routage existent tous dans les comptes éditoriaux', () => {
     expect(COMPTES.map((c) => c.id).sort()).toEqual([...COMPTES_IDS].sort());
+  });
+});
+
+describe('consigne de rédaction', () => {
+  it('suit la règle de ton du 2026-11-02 : pairs, pas de définition des termes courants', () => {
+    expect(PROMPT_VERSION).toMatch(/^p3-11-/);
+    expect(SYSTEME_REDACTION).toContain("Ne définis jamais les termes courants (skill, MCP, agent, assistant de code, plugin, dépôt, open source, UX, UI, prompt, CLI, API, workflow, hook, LLM)");
+    expect(SYSTEME_REDACTION).toContain('Commence directement par ce que le sujet permet de faire');
+    expect(SYSTEME_REDACTION).not.toContain('tout terme technique');
+  });
+  it('suit la ligne éditoriale du 2026-11-02 : post court, pas de rubrique systématique, limite seulement si elle compte', () => {
+    expect(SYSTEME_REDACTION).toContain('le texte publié est un post court');
+    expect(SYSTEME_REDACTION).toContain('Aucune définition, aucun rappel des bases');
+    expect(SYSTEME_REDACTION).toContain('pas de rubrique systématique');
+    expect(SYSTEME_REDACTION).toContain('seulement pour une limite qui compte pour décider');
+    expect(SYSTEME_REDACTION).not.toContain('comment commencer, ses compatibilités et ses limites');
   });
 });
 

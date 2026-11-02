@@ -16,7 +16,7 @@ const jour = (url: string) => /(\d{4}-\d{2}-\d{2})/.exec(url)?.[1] ?? null;
 const base = (id: string, m: Pick<Montage, 'gabarit'> & Partial<Montage>): Montage => {
   const e = exemple(id);
   return {
-    id: id.replace(/^exemple-/, ''), compte: e.compte, titre: e.accroche.texte, surtitre: jour(e.url), image: null, apres: null, etiquettes: [], lignes: [], loupe: null,
+    id: id.replace(/^exemple-/, ''), compte: e.compte, titre: e.accroche.texte, surtitre: jour(e.url), image: null, apres: null, etiquettes: [], lignes: [], etapes: [], loupe: null,
     source: `Exemple · Source : ${hote(e.url)}`, mention: MENTION_ILLUSTRATION, ...m,
   };
 };
@@ -29,7 +29,7 @@ const imageGoogle = (chemin: string, alt: string): ImageMontage => ({ src: image
 const coupe = (id: string, separateur: string) => exemple(id).accroche.texte.split(separateur)[0]!;
 const SOURCE_PROJET = 'Exemple · Source : projet Curation AI';
 const projet = (m: Pick<Montage, 'id' | 'gabarit' | 'compte' | 'titre'> & Partial<Montage>): Montage => ({
-  surtitre: 'Exemple de composition', image: null, apres: null, etiquettes: [], lignes: [], loupe: null, source: SOURCE_PROJET, mention: MENTION_ILLUSTRATION, ...m,
+  surtitre: 'Exemple de composition', image: null, apres: null, etiquettes: [], lignes: [], etapes: [], loupe: null, source: SOURCE_PROJET, mention: MENTION_ILLUSTRATION, ...m,
 });
 const fiches = (id: string, titre: string): Montage => base(id, { gabarit: 'fiches', titre, etiquettes: exemple(id).visuel.elements.map((e) => ({ texte: e.texte, x: 0, y: 0, ancre: null })) });
 

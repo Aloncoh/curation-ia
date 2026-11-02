@@ -1,0 +1,230 @@
+{
+  "slug": "skills-documents",
+  "consignes": "r2",
+  "accroche": {
+    "texte": "Skills de documents d'Anthropic : Claude crée et modifie vos Word, tableurs, présentations et PDF",
+    "passages": [
+      "This repository contains Anthropic's implementation of skills for Claude.",
+      "create, read, edit, or manipulate Word documents (.docx files)",
+      "Use this skill any time a spreadsheet file is the primary input or output.",
+      "creating slide decks, pitch decks, or presentations",
+      "Use this skill whenever the user wants to do anything with PDF files."
+    ]
+  },
+  "description": {
+    "texte": "Les quatre skills qui font tourner les fonctions de documents de Claude, un par format : docx, xlsx, pptx et pdf. Rapport Word, classeur avec formules, présentation, formulaire PDF : Claude s'appuie dessus pour livrer un fichier propre. Selon Anthropic, une référence de skills complexes utilisés en production.",
+    "passages": [
+      "We've also included the document creation & editing skills that power Claude's document capabilities under the hood in the skills/docx, skills/pdf, skills/pptx, and skills/xlsx subfolders.",
+      "This repository contains Anthropic's implementation of skills for Claude.",
+      "If the user asks for a 'report', 'memo', 'letter', 'template', or similar deliverable as a Word or .docx file, use this skill.",
+      "adding columns, computing formulas, formatting, charting, cleaning messy data",
+      "creating slide decks, pitch decks, or presentations",
+      "If you need to fill out a PDF form, read FORMS.md and follow its instructions.",
+      "we wanted to share these with developers as a reference for more complex skills that are actively used in a production AI application"
+    ]
+  },
+  "interet": {
+    "texte": "Chaque skill choisit sa méthode selon la tâche, recense les pièges connus des bibliothèques et impose de contrôler le fichier produit. Pour un tableur, LibreOffice recalcule toutes les formules, et rien ne part tant qu'il reste une erreur.",
+    "passages": [
+      "A .docx is a ZIP archive of XML files. Choose your approach by task:",
+      "The model knows the API; these are the footguns:",
+      "After writing a .docx, render it and look at it:",
+      "LibreOffice computes every formula, the file is rewritten in place",
+      "Never ship while recalc.py reports errors_found."
+    ]
+  },
+  "exemple_usage": {
+    "texte": "Une fois le plugin document-skills installé, il suffit de demander à Claude Code d'utiliser le skill PDF pour extraire les champs de formulaire d'un fichier.",
+    "passages": [
+      "if you install the document-skills plugin from the marketplace, you can ask Claude Code to do something like",
+      "Use the PDF skill to extract the form fields from path/to/some-file.pdf"
+    ]
+  },
+  "demarrage": {
+    "etapes": [
+      {
+        "texte": "Ajouter le catalogue : /plugin marketplace add anthropics/skills",
+        "passages": [
+          "You can register this repository as a Claude Code Plugin marketplace by running the following command in Claude Code",
+          "/plugin marketplace add anthropics/skills"
+        ]
+      },
+      {
+        "texte": "Installer : /plugin install document-skills@anthropic-agent-skills",
+        "passages": [
+          "Alternatively, directly install either Plugin via:",
+          "/plugin install document-skills@anthropic-agent-skills"
+        ]
+      }
+    ],
+    "commande": "/plugin install document-skills@anthropic-agent-skills",
+    "passages": [
+      "/plugin install document-skills@anthropic-agent-skills",
+      "/plugin marketplace add anthropics/skills",
+      "After installing the plugin, you can use the skill by just mentioning it."
+    ]
+  },
+  "compatibilites": [],
+  "limites": [
+    {
+      "texte": "Code consultable mais pas libre : la licence réserve ces skills aux services d'Anthropic et interdit de les copier, modifier ou redistribuer.",
+      "passages": [
+        "These are source-available, not open source",
+        "is governed by your agreement with Anthropic regarding use of Anthropic's services.",
+        "Extract these materials from the Services or retain copies of these materials outside the Services",
+        "Create derivative works based on these materials",
+        "Distribute, sublicense, or transfer these materials to any third party"
+      ]
+    }
+  ],
+  "licence_locale": {
+    "texte": "Selon le LICENSE.txt de chaque skill : licence propriétaire d'Anthropic.",
+    "passages": [
+      "license: Proprietary. LICENSE.txt has complete terms",
+      "© 2025 Anthropic, PBC. All rights reserved."
+    ]
+  },
+  "mots_cles": {
+    "nom": "Skills de documents docx, xlsx, pptx, pdf",
+    "categorie": "MCP et skills",
+    "usages": [
+      {
+        "texte": "créer des documents Word",
+        "passages": [
+          "create, read, edit, or manipulate Word documents (.docx files)"
+        ]
+      },
+      {
+        "texte": "tableurs et formules",
+        "passages": [
+          "open, read, edit, or fix an existing .xlsx, .xlsm, .xltx, .csv, or .tsv file (e.g., adding columns, computing formulas, formatting, charting, cleaning messy data)"
+        ]
+      },
+      {
+        "texte": "créer des présentations",
+        "passages": [
+          "creating slide decks, pitch decks, or presentations"
+        ]
+      },
+      {
+        "texte": "fusionner des PDF",
+        "passages": [
+          "combining or merging multiple PDFs into one, splitting PDFs apart"
+        ]
+      },
+      {
+        "texte": "remplir des formulaires PDF",
+        "passages": [
+          "filling PDF forms",
+          "If you need to fill out a PDF form, read FORMS.md and follow its instructions."
+        ]
+      },
+      {
+        "texte": "suivi des modifications",
+        "passages": [
+          "working with tracked changes or comments"
+        ]
+      }
+    ],
+    "technologies": [
+      {
+        "texte": "Python",
+        "passages": [
+          "This guide covers essential PDF processing operations using Python libraries and command-line tools."
+        ]
+      },
+      {
+        "texte": "JavaScript",
+        "passages": [
+          "Write a docx (npm) script",
+          "Write a pptxgenjs script",
+          "For JavaScript libraries (pdf-lib), see REFERENCE.md"
+        ]
+      },
+      {
+        "texte": "LibreOffice",
+        "passages": [
+          "LibreOffice computes every formula, the file is rewritten in place"
+        ]
+      },
+      {
+        "texte": "openpyxl",
+        "passages": [
+          "openpyxl writes formulas as strings with no cached values."
+        ]
+      },
+      {
+        "texte": "pptxgenjs",
+        "passages": [
+          "Write a pptxgenjs script"
+        ]
+      },
+      {
+        "texte": "pypdf",
+        "passages": [
+          "from pypdf import PdfReader, PdfWriter"
+        ]
+      }
+    ],
+    "termes_proches": [
+      {
+        "terme": "bureautique",
+        "raison": "ces skills traitent les formats de bureautique docx, xlsx, pptx et pdf"
+      },
+      {
+        "terme": "Excel",
+        "raison": "le skill xlsx produit des classeurs .xlsx, le format des tableurs Excel"
+      },
+      {
+        "terme": "PowerPoint",
+        "raison": "le skill pptx crée et modifie des présentations .pptx destinées à PowerPoint"
+      },
+      {
+        "terme": "diaporama",
+        "raison": "autre nom d'une présentation, que le skill pptx sait créer et modifier"
+      },
+      {
+        "terme": "rapport",
+        "raison": "le skill docx couvre aussi les rapports, mémos et lettres au format Word"
+      },
+      {
+        "terme": "OCR",
+        "raison": "le skill pdf décrit l'OCR pour rendre cherchables les PDF numérisés"
+      },
+      {
+        "terme": "Claude Code",
+        "raison": "les skills s'installent dans Claude Code par la marketplace de plugins"
+      },
+      {
+        "terme": "Agent Skills",
+        "raison": "le dépôt renvoie au standard Agent Skills, dont ces skills suivent le format (SKILL.md) ; leur licence les limite toutefois aux services d'Anthropic"
+      }
+    ]
+  },
+  "bouton": {
+    "libelle": "Voir le dépôt",
+    "url": "https://github.com/anthropics/skills"
+  },
+  "reperes": [
+    {
+      "texte": "Word : modifications suivies, puis copie propre acceptée",
+      "passages": [
+        "working with tracked changes or comments",
+        "To produce a clean copy with all tracked changes accepted:"
+      ]
+    },
+    {
+      "texte": "Présentations converties en images pour la relecture",
+      "passages": [
+        "Convert presentations to individual slide images for visual inspection:"
+      ]
+    },
+    {
+      "texte": "Finance : une hypothèse par cellule, sauf consigne contraire",
+      "passages": [
+        "Unless the user says otherwise, or the existing file already does something else.",
+        "every assumption in its own labeled cell, referenced by the formulas that use it"
+      ]
+    }
+  ]
+}

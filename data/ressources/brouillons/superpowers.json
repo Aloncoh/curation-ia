@@ -1,0 +1,217 @@
+{
+  "slug": "superpowers",
+  "consignes": "r2",
+  "accroche": {
+    "texte": "Superpowers fait cadrer, planifier, tester et relire votre agent de code avant qu'il livre",
+    "passages": [
+      "Superpowers is a complete software development methodology for your coding agents",
+      "Enforces RED-GREEN-REFACTOR: write failing test, watch it fail",
+      "Critical issues block progress.",
+      "brainstorming - Activates before building anything.",
+      "writing-plans - Activates with approved design.",
+      "test-driven-development - Activates during implementation.",
+      "requesting-code-review - Activates between tasks.",
+      "finishing-a-development-branch - Activates when tasks complete."
+    ]
+  },
+  "description": {
+    "texte": "Superpowers impose une vraie méthode à votre agent de code. Il ne fonce pas dans le code : il vous demande ce que vous cherchez à faire, vous montre la spec par morceaux lisibles, puis bâtit un plan d'implémentation une fois le design validé. Les skills se déclenchent seuls, sans commande à taper.",
+    "passages": [
+      "Superpowers is a complete software development methodology for your coding agents, built on top of a set of composable skills and some initial instructions that make sure your agent uses them.",
+      "it doesn't just jump into trying to write code. Instead, it steps back and asks you what you're really trying to do.",
+      "Once it's teased a spec out of the conversation, it shows it to you in chunks short enough to actually read and digest.",
+      "After you've signed off on the design, your agent puts together an implementation plan",
+      "because the skills trigger automatically, you don't need to do anything special"
+    ]
+  },
+  "interet": {
+    "texte": "Le plan découpe le travail en tâches de 2 à 5 minutes, avec fichiers, code et vérifications. Le TDD est strict : le code écrit avant son test est supprimé. Entre deux tâches, une revue classe les problèmes par gravité, et un problème critique bloque la suite. Selon l'auteur, l'agent tient ainsi quelques heures en autonomie sans dévier du plan.",
+    "passages": [
+      "Breaks work into bite-sized tasks (2-5 minutes each). Every task has exact file paths, complete code, verification steps.",
+      "Enforces RED-GREEN-REFACTOR: write failing test, watch it fail, write minimal code, watch it pass, commit.",
+      "It emphasizes true red/green TDD, YAGNI (You Aren't Gonna Need It), and DRY.",
+      "Deletes code written before tests.",
+      "Reviews against plan, reports issues by severity. Critical issues block progress.",
+      "It's not uncommon for your agent to work autonomously for a couple hours at a time without deviating from the plan you put together."
+    ]
+  },
+  "exemple_usage": {
+    "texte": "Pour une nouvelle fonctionnalité : brainstorming fait préciser la demande, writing-plans la découpe en petites tâches, puis l'implémentation commence par un test qui échoue, avant le code minimal.",
+    "passages": [
+      "Draws out what you actually want, and why, through questions that get you describing it",
+      "writing-plans - Activates with approved design. Breaks work into bite-sized tasks",
+      "Enforces RED-GREEN-REFACTOR: write failing test, watch it fail, write minimal code, watch it pass, commit."
+    ]
+  },
+  "demarrage": {
+    "etapes": [
+      {
+        "texte": "Dans Claude Code : /plugin install superpowers@claude-plugins-official",
+        "passages": [
+          "Getting Started Claude Code",
+          "Install the plugin from Anthropic's official marketplace",
+          "/plugin install superpowers@claude-plugins-official"
+        ]
+      },
+      {
+        "texte": "Autres agents : une installation séparée pour chacun, selon le dépôt",
+        "passages": [
+          "Installation differs by harness. If you use more than one, install Superpowers separately for each one."
+        ]
+      }
+    ],
+    "commande": "/plugin install superpowers@claude-plugins-official",
+    "passages": [
+      "Installation differs by harness. If you use more than one, install Superpowers separately for each one.",
+      "Install the plugin from Anthropic's official marketplace"
+    ]
+  },
+  "compatibilites": [
+    {
+      "texte": "Claude Code, Codex, Cursor, Gemini CLI, GitHub Copilot CLI et une dizaine d'autres.",
+      "passages": [
+        "Claude Code Antigravity Codex App Codex CLI Cursor Devin CLI Factory Droid Gemini CLI GitHub Copilot CLI Grok Build CLI Kimi Code OpenCode Pi Qwen Code Hermes Agent Muse"
+      ]
+    }
+  ],
+  "limites": [],
+  "licence_locale": null,
+  "mots_cles": {
+    "nom": "Superpowers",
+    "categorie": "MCP et skills",
+    "usages": [
+      {
+        "texte": "méthode de développement",
+        "passages": [
+          "Superpowers is a complete software development methodology for your coding agents"
+        ]
+      },
+      {
+        "texte": "cadrer un besoin",
+        "passages": [
+          "Draws out what you actually want, and why, through questions that get you describing it"
+        ]
+      },
+      {
+        "texte": "plan d'implémentation",
+        "passages": [
+          "your agent puts together an implementation plan"
+        ]
+      },
+      {
+        "texte": "écrire les tests d'abord",
+        "passages": [
+          "Test-Driven Development - Write tests first, always"
+        ]
+      },
+      {
+        "texte": "revue de code",
+        "passages": [
+          "requesting-code-review - Activates between tasks. Reviews against plan, reports issues by severity."
+        ]
+      },
+      {
+        "texte": "déléguer à des sous-agents",
+        "passages": [
+          "dispatches a fresh subagent per task with a review after each"
+        ]
+      }
+    ],
+    "technologies": [
+      {
+        "texte": "Claude Code",
+        "passages": [
+          "Getting Started Claude Code"
+        ]
+      },
+      {
+        "texte": "Codex",
+        "passages": [
+          "Superpowers is available via the official Codex plugin marketplace"
+        ]
+      },
+      {
+        "texte": "Cursor",
+        "passages": [
+          "In Cursor Agent chat, install from marketplace"
+        ]
+      },
+      {
+        "texte": "Gemini CLI",
+        "passages": [
+          "gemini extensions install https://github.com/obra/superpowers"
+        ]
+      },
+      {
+        "texte": "GitHub Copilot CLI",
+        "passages": [
+          "copilot plugin install superpowers@superpowers-marketplace"
+        ]
+      },
+      {
+        "texte": "git worktrees",
+        "passages": [
+          "using-git-worktrees - Activates after design approval. Creates isolated workspace on new branch"
+        ]
+      }
+    ],
+    "termes_proches": [
+      {
+        "terme": "TDD",
+        "raison": "Superpowers impose le TDD : un test qui échoue est écrit avant le code."
+      },
+      {
+        "terme": "test-driven development",
+        "raison": "nom anglais du développement piloté par les tests, au cœur de Superpowers."
+      },
+      {
+        "terme": "débogage",
+        "raison": "Superpowers inclut un skill de débogage systématique en quatre phases."
+      },
+      {
+        "terme": "subagents",
+        "raison": "terme anglais des sous-agents auxquels Superpowers peut confier chaque tâche du plan."
+      },
+      {
+        "terme": "spécification",
+        "raison": "Superpowers tire une spécification de la conversation avant d'écrire le code."
+      },
+      {
+        "terme": "code review",
+        "raison": "terme anglais de la revue de code que Superpowers fait pendant l'exécution du plan."
+      },
+      {
+        "terme": "agent de code",
+        "raison": "Superpowers est une méthode de travail pour les agents de code."
+      },
+      {
+        "terme": "plugin Claude Code",
+        "raison": "Superpowers s'installe comme plugin dans Claude Code et dans d'autres agents."
+      }
+    ]
+  },
+  "bouton": {
+    "libelle": "Voir le dépôt",
+    "url": "https://github.com/obra/superpowers"
+  },
+  "reperes": [
+    {
+      "texte": "Un sous-agent neuf par tâche, relu à chaque fois",
+      "passages": [
+        "dispatches a fresh subagent per task with a review after each"
+      ]
+    },
+    {
+      "texte": "Débogage en 4 phases pour remonter à la cause",
+      "passages": [
+        "systematic-debugging - 4-phase root cause process"
+      ]
+    },
+    {
+      "texte": "Chaque chantier isolé sur sa propre branche",
+      "passages": [
+        "using-git-worktrees - Activates after design approval. Creates isolated workspace on new branch"
+      ]
+    }
+  ]
+}

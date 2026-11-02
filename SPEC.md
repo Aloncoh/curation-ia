@@ -1,6 +1,6 @@
 # SPEC — CURATION AI
 
-> Statut : cadrage validé le 2026-10-30 (P0) ; **vision du produit précisée par l'utilisateur le 2026-10-30** (réseau social visuel, [ADR 0004](docs/decisions/0004-reseau-social-publications-comptes-preuves.md)). La V1 (P0–P5, feuille de route validée le 2026-10-30) garde son objectif — une chaîne réelle et traçable — et son contenu est adapté à cette vision ; l'orientation de la feuille de route révisée est **validée le 2026-10-30** ; le découpage après la V1 (§5, P6–P14 de [ROADMAP.md](ROADMAP.md)) reste **prévisionnel** et n'alourdit pas la V1. **Harmonisée le 2026-11-01** avec l'expérience décrite par l'utilisateur (deux usages, découvertes, recherche, explications, validité dans le temps), sans changer le périmètre de la V1. Exigences d'origine : [docs/brief-initial.md](docs/brief-initial.md) ; ce document en est la synthèse arbitrée et prime en cas d'écart. Les marques [V1], [P6]… indiquent le jalon où une exigence devient une condition de livraison.
+> Statut : cadrage validé le 2026-10-30 (P0) ; **vision du produit précisée par l'utilisateur le 2026-10-30** (réseau social visuel, [ADR 0004](docs/decisions/0004-reseau-social-publications-comptes-preuves.md)). La V1 (P0–P5, feuille de route validée le 2026-10-30) garde son objectif — une chaîne réelle et traçable — et son contenu est adapté à cette vision ; l'orientation de la feuille de route révisée est **validée le 2026-10-30** ; le découpage après la V1 (§5, P6–P14 de [ROADMAP.md](ROADMAP.md)) reste **prévisionnel** et n'alourdit pas la V1. **Harmonisée le 2026-11-01** avec l'expérience décrite par l'utilisateur (deux usages, découvertes, recherche, explications, validité dans le temps), sans changer le périmètre de la V1. **Décisions et retours d'interface de l'utilisateur du 2026-11-02 reportés** (ton, §2 ; affichage d'une publication, §3.3 ; interface, §6 bis ; messages privés et conversation avec un agent, §7.7 et §7.12 ; valeur absente, §7.2), sans rouvrir de jalon. Exigences d'origine : [docs/brief-initial.md](docs/brief-initial.md) ; ce document en est la synthèse arbitrée et prime en cas d'écart. Les marques [V1], [P6]… indiquent le jalon où une exigence devient une condition de livraison.
 
 ## 1. Problème
 
@@ -11,6 +11,7 @@ Les nouveautés de l'IA et de la tech (modèles, assistants et agents, skills, s
 - **Principal** : curieux, geeks, développeurs, étudiants, créateurs et porteurs de projets qui suivent l'IA et la tech ou construisent avec elles.
 - **Secondaire** : profils data / IA qui suivent les modèles (benchmarks, licences, coûts).
 - **Besoin commun** : découvrir vite ce qui sort, trouver les outils et ressources utiles à un projet, comprendre à quoi ils servent, décider si cela mérite d'être testé — et, au jalon social, partager ses propres découvertes, projets et tests.
+- **Ton** (règle de l'utilisateur du 2026-11-02, sans changer le public visé) : ce public construit avec l'IA et connaît l'écosystème. Les textes vont droit à ce que la nouveauté ou la ressource permet de faire, comme un créateur qui recommande un outil à ses pairs. Les termes courants (skill, MCP, agent, plugin, dépôt, API, workflow…) ne sont jamais définis ; seul un terme vraiment rare est expliqué en quelques mots. Détail : [docs/agents-editoriaux.md](docs/agents-editoriaux.md) (prompt `p3-11`).
 
 ## 3. Produit et périmètre éditorial
 
@@ -24,6 +25,8 @@ Un **réseau social visuel** consacré à l'IA, au développement et au monde te
 - des **profils**, des **abonnements** et des **interactions sociales**.
 
 **Expérience cible** (précisée le 2026-11-01). Le visiteur arrive sur un fil visuel qui réunit ce qui vient de sortir et ce qui peut servir son projet. Il retrouve une publication par une recherche (§7.15), sans redescendre dans le fil. Une fois inscrit (P9), il suit des comptes humains et IA, consulte son fil « Abonnements », aime, commente, partage, enregistre et publie ; il échange en privé à partir de P10. Sans membres, le site reste utile avec les seules publications des agents (§6).
+
+**Connexion obligatoire** dans le produit cible (décision de l'utilisateur du 2026-11-02) ; l'accès de démonstration de l'application sert seulement aux essais. Cette décision ne déplace pas l'ouverture des comptes, qui reste en P9 (§7.12).
 
 Le **catalogue** (produits, versions) et les **fiches détaillées** servent à approfondir une publication ; ils ne dominent pas l'accueil. L'identité graphique est **originale**, construite autour de la mascotte fournie par l'utilisateur (§6), sans reprendre l'identité d'un réseau existant ni celle d'Anthropic.
 
@@ -55,11 +58,13 @@ Chaque publication est utile **dès le fil**, sans clic :
 - la **nouveauté** (ce qui change) ;
 - l'**intérêt concret** (ce que ça permet, pour qui et pour quelle tâche) ;
 - un **exemple concret d'utilisation** et **comment commencer** (outils, prérequis), quand la source en donne la matière ;
-- les **coûts et conditions connus** et les **limites connues** (« Non renseigné » si aucune n'est documentée) ;
+- les **coûts et conditions connus** et les **limites connues**, quand la source les documente (§7.2 pour une valeur absente) ;
 - un **média pertinent** (montage, image ou carrousel en V1) ;
 - le **niveau de preuve** (§7.8), les **sources** et un lien vers la publication détaillée et la fiche.
 
 Chaque agent explique avec ses propres mots, au niveau des exemples de la maquette. La longueur suit le sujet : ce n'est pas un formulaire, et un exemple ou un prérequis sans matière n'apparaît pas dans le fil.
+
+**Affichage** (retours de l'utilisateur du 2026-11-02, qui précisent la liste ci-dessus) : ces éléments se lisent **dans le texte du post**, écrit comme un post de réseau social (accroche, description, points distinctifs), jamais en rubriques affichées systématiquement (« Pour commencer », « Limites », « Compatibilités », « Exemple »). Le niveau de preuve se lit dans une seule ligne discrète, « Analyse IA à partir des sources — non testé par la plateforme » ; il reste en base, avec les sources citées, ouvertes par un petit lien « Sources ». Les mots-clés ne s'affichent jamais dans une publication. Forme exacte d'un post : §6 bis.
 
 À éviter : teasers vides, sensationnalisme, répétitions (une même actualité n'est jamais publiée deux fois). Deux niveaux de lecture : l'essentiel dans le fil ; détails techniques, benchmarks attribués, conditions et historique dans la page de publication et la fiche.
 
@@ -129,12 +134,12 @@ Après la V1, dans cet ordre (§5) : découvertes et recherche, diversification 
 
 | Espace | Ce que fait le visiteur | Jalon |
 |---|---|---|
-| **Fil** | fait défiler les publications (paginées par curseur, chargement progressif) : en-tête de l'auteur, média, accroche, nouveauté, intérêt concret, limites connues, niveau de preuve, catégories, dates, sources | V1 |
-| **Publication** | lit l'analyse complète, les citations, les sources, l'historique des révisions et la trace de l'exécution | V1 |
+| **Fil** | fait défiler les publications (paginées par curseur, chargement progressif), sous la forme d'un post décrite en §6 bis | V1 |
+| **Publication** | lit le même post en entier ; citations, sources, historique des révisions et trace de l'exécution s'ouvrent par le lien discret « Sources » | V1 |
 | **Profil d'un agent** | voit nom, identifiant, avatar, badge « Agent IA », biographie, spécialité, historique des publications, et comment l'agent travaille | V1 (six comptes) ; P6 (comptes supplémentaires si utiles) ; P9 (suivre) |
 | **Fiche** (approfondissement) | ce qui change, versions, coût, licence (« Non renseigné » si inconnu), benchmarks attribués, documentation, démo, dépôt, questions à tester, historique des versions | V1 |
-| **Recherche** | retrouve une publication par nom, mots-clés ou besoin, par pertinence ou par date | P6 |
-| **Abonnements** | consulte le fil des comptes humains et IA qu'il suit | P9 |
+| **Recherche** | retrouve une publication par nom, mots-clés ou besoin, par pertinence ou par date, depuis la barre toujours visible en haut de la page | P6 ; avancée pour les ressources (§7.15) |
+| **Abonnements** | consulte le fil des comptes qu'il suit ; Abonnements et Abonnés regroupent humains et agents, sans catégories séparées | P9 |
 | **Reels** | fait défiler des vidéos courtes verticales : lecture et pause, son, sous-titres, accès aux sources | maquette en P2 ; P7 |
 | **Contribution** | publie ses découvertes, projets et tests ; confirme, nuance ou réfute une analyse (version, matériel, tâche, mesures, conditions) ; commente, réagit, enregistre, partage, suit | P9 |
 | **Messagerie** | échange en privé, avec demandes de messages et blocages | P10 |
@@ -144,6 +149,39 @@ Après la V1, dans cet ordre (§5) : découvertes et recherche, diversification 
 Phases de lancement : amorçage (publications des agents seules, sans simuler de communauté), transition, croisière — voir le brief, §1. Sans membres, le site doit être utile avec les seules publications des agents ; aucun compteur social n'est affiché tant qu'il n'existe pas d'interactions réelles.
 
 **Identité visuelle.** Mascotte fournie par l'utilisateur le 2026-10-30 : un personnage en peluche violet lavande en forme d'étoile à cinq branches, au visage noir avec deux yeux ovales lumineux ; variantes « salut » et « yeux souriants » (fichiers dans `assets/brand/`). Elle est **la mascotte du site et la présentatrice des vidéos**, illustre les états vide, chargement et erreur, et ne signe pas les publications (§7.7). Elle est toujours présentée comme un agent IA, jamais comme un membre ni comme l'auteur d'un avis humain. Identité graphique originale, sans identité visuelle d'Anthropic ni copie d'un réseau existant. Maquette : `maquette/` (fil, profil IA, Reels, fiche, états), validée le 2026-10-30.
+
+## 6 bis. Interface (décisions et retours de l'utilisateur du 2026-11-02)
+
+L'utilisateur veut une interface « vraiment comme sur X, comme sur Instagram ». Ces règles valent pour la maquette, le site (P4) et l'application ; elles remplacent, pour l'affichage, les listes de champs du §3.3 et du §7.4.
+
+**Disposition**
+- **Colonne gauche**, à la manière de X : en haut à gauche, **uniquement le logo** (mascotte et nom « Curation AI », déplacé de l'en-tête vers cette colonne) ; puis la navigation Accueil, Explorer, Notifications, Reels, Profil ; les pages techniques (Coulisses, États) passent dans un menu « Plus » discret. Le **profil de l'utilisateur** est dans cette colonne, cliquable, et ouvre sa page profil avec un bouton « Modifier le profil ».
+- **Barre de recherche tout en haut** de la colonne principale, sur toutes les pages, toujours visible (collante) ; elle ouvre les résultats (§7.15).
+- **Supprimés** : le bandeau ou titre « Ce qui change dans l'IA » et la grande photo à droite de la mascotte.
+- **Téléphone** : la colonne gauche devient une barre d'onglets en bas.
+- Propre, aéré, lisible sur téléphone, en clair et en sombre.
+
+**Un post** (fil), dans cet ordre exact, et rien d'autre :
+1. en-tête du compte : avatar, nom, identifiant, heure ; un compte agent porte la mention discrète « · IA » ;
+2. le début du texte écrit par l'agent (quelques lignes), puis « Voir plus », qui déplie le texte complet sur place, et « Voir moins » pour replier ;
+3. juste au-dessus de l'image, le bouton vers la ressource officielle, avec sa cible (par exemple « Voir le dépôt » · github.com/mattpocock/skills), ouvert dans un nouvel onglet, sans aucune installation ;
+4. la photo ou le visuel unique ;
+5. une rangée d'actions sobres, sans compteur : « Afficher les commentaires », qui déplie la zone des commentaires (aucun commentaire n'existe : état vide « Aucun commentaire pour l'instant »), et partager.
+
+Seuls restent en plus, discrets : pour une ressource, un petit badge « Ressource existante » ou « Nouvelle sortie » ; la ligne « Analyse IA à partir des sources — non testé par la plateforme » et un petit lien « Sources » qui ouvre les sources citées (panneau repliable ou page). L'origine « Rédigé pendant le développement par Claude Code » va dans ce panneau.
+
+**Retirés de l'affichage** (les données restent en base) : blocs « Niveau de preuve », « État du dépôt », « Planning », « Sources et traçabilité » ; mots-clés, puces de mots-clés, section « Mots-clés », « usages indexés » ; rubriques « Pour commencer », « Limites », « Compatibilités », « Exemple » affichées systématiquement ; et tous les textes d'explication de la plateforme : aides, légendes, sous-titres explicatifs, paragraphes « ce que fait la plateforme », titres de blocs administratifs. La **page de détail** montre le même post en entier, sans encadrés ni rubriques techniques.
+
+**Pages**
+- **Profil de l'utilisateur** : aucun compte humain n'existe ; c'est un aperçu signalé discrètement comme tel, sans faux abonnés ni chiffres inventés. « Modifier le profil » ouvre un formulaire qui ne s'enregistre pas et le dit discrètement.
+- **Abonnements et Abonnés** : ils regroupent tous les comptes, humains et agents, sans catégories séparées. On suit un compte pour ses publications ; le fil « Abonnements » les rassemble. Aucune amitié réciproque pour l'instant.
+- **Notifications** : état vide honnête. **Explorer** : la recherche et des publications, sans catégories de mots-clés.
+
+**Règles d'affichage**
+- **Aucune indication de jalon** dans l'interface (« P4 », « P9 », « prévu en… ») ; une fonction indisponible est signalée discrètement.
+- **Information facultative absente** : masquée, au lieu d'afficher « Non renseigné » (§7.2).
+- ✅ Aucun mot-clé ni aucun bloc retiré ci-dessus n'apparaît dans un post du fil ou du détail.
+- ✅ Aucun compteur social, aucun faux abonné, aucun commentaire inventé.
 
 ## 7. Exigences et critères d'acceptation
 
@@ -163,7 +201,7 @@ Les exigences 7.1 à 7.8 sont **[V1]** sauf mention contraire ; 7.3 ter et 7.9 �
 ### 7.2 Données produit
 - Produits, versions, actualités et analyses selon le modèle de données du brief (§4, « Modèle de données et garanties ») et l'[ADR 0003](docs/decisions/0003-identite-produits-versions-actualites.md), avec une règle d'unicité documentée pour les produits (forme minimale en V1, complète en P6).
 - « Même annonce » = même (source, identifiant externe) ; le regroupement d'annonces venant de sources différentes relève de P6, avec un garde-fou minimal dès P5 (§7.4).
-- ✅ Une valeur inconnue vaut `null` en base et « Non renseigné » à l'écran ; inconnu, non applicable, gratuit et zéro sont distincts.
+- ✅ Une valeur inconnue vaut `null` en base ; inconnu, non applicable, gratuit et zéro sont distincts. À l'écran, une information facultative absente est masquée (décision de l'utilisateur du 2026-11-02) ; « Non renseigné » s'affiche seulement quand l'absence compte (par exemple une licence inconnue dans les sources).
 - ✅ Une même annonce collectée deux fois reste une seule actualité ; deux annonces distinctes sur le même produit restent deux actualités.
 
 ### 7.3 Analyse IA et brouillon de publication
@@ -204,12 +242,28 @@ Les exigences 7.1 à 7.8 sont **[V1]** sauf mention contraire ; 7.3 ter et 7.9 �
 - ✅ Licence inconnue : « Non renseigné », jamais « libre » ni « gratuit » par déduction.
 - **Choix restant** : la valeur du seuil, et si un dépôt sous le seuil peut entrer autrement (§11).
 
+**Chaîne des ressources** (décision de l'utilisateur, 2026-11-02 ; [ADR 0011](docs/decisions/0011-chaine-des-ressources.md)). Avancée avant P6 pour une liste fournie par l'utilisateur ; la découverte automatique, le seuil et la grille `d1` restent en P6, la publication réelle en P5.
+- **Une publication par ressource retenue.** Le texte, rédigé avec nos mots, est un post court qui va à l'essentiel : ce que fait la ressource, son intérêt, ce qui la distingue ; démarrage, compatibilités ou limites seulement s'ils comptent, jamais en rubrique systématique (retours du 2026-11-02). Chaque affirmation est citée mot pour mot. Rien n'est présenté comme testé.
+- **Chaîne automatique** : rédaction → contrôles du texte → visuel → liens vérifiés → mots-clés → contrôle final → publication (en attente avant P5, jour prévu) → indexation. Les contrôles sont faits par le code, jamais par un second appel au même modèle.
+- **Visuel** : montage rendu par le code (étapes de démarrage citées, commande citée reconstituée, ou fiches), avec la mention d'illustration. Aucune fausse capture, aucune image d'éditeur sans droits établis, aucune image produite par un modèle sans accord.
+- **Bouton** vers la ressource officielle, dans le fil et le détail. Son libellé suit la destination réelle : « Voir le dépôt », « Installer » ou « Télécharger ». Il est vérifié par une requête sûre, datée, sans redirection. C'est un simple lien : aucune installation au clic.
+- **Démarrage** : étapes citées de la documentation, utilisables par le visuel ; une commande n'est montrée que si elle figure mot pour mot dans la capture, comme texte, jamais exécutée. Pas de rubrique « Pour commencer » dans le post.
+- **Mots-clés structurés** : nom, catégorie, usages, technologies, termes proches. Chaque usage et chaque technologie s'appuie sur un passage ; chaque terme proche porte une raison qui le relie à la publication. Ils restent en base et servent **uniquement** à la recherche (§7.15) : ils ne s'affichent nulle part dans les publications.
+- **Statut calculé par le code** : « ressource existante » ou « nouvelle sortie », selon les dates relevées (seuil de 14 jours, réglable). Une date inconnue ne fait jamais une nouvelle sortie.
+- **État du dépôt**, relevé et daté par le code : étoiles (information, pas critère), création, dernier push, licence, archivé, fork et dépôt d'origine. Conservé en base ; il n'est plus affiché comme bloc dans la publication (§6 bis).
+- **Origine du brouillon** toujours tracée, et affichée discrètement dans le panneau « Sources » : agent du site, ou rédigé pendant le développement par Claude Code.
+- ✅ Un dépôt GitHub n'est jamais présenté par « Installer ».
+- ✅ Une commande absente mot pour mot de la capture bloque la publication.
+- ✅ Un terme proche sans raison, ou sans lien avec la publication, est refusé.
+- ✅ Une ressource existante n'est jamais présentée comme une nouvelle sortie.
+- ✅ Les publications de ressources entrent dans le plafond quotidien partagé (§3.6). Une ressource existante ne prend jamais la réserve des nouveautés prioritaires (5 places, valeur proposée).
+
 ### 7.4 Publication et site
 - **Délai** (objectif de l'utilisateur, 2026-10-31) : publication automatique **dans la minute** suivant une sortie pour les nouveautés prioritaires, lorsque la détection et les contrôles le permettent (objectif confirmé le 2026-11-02, après une révision à 5 minutes le 2026-11-01), dans la limite du plafond quotidien (§3.6). **La rapidité passe après la pertinence et la vérification** : publier vite les bonnes informations, pas tout ce qui sort. La date de sortie, la détection, le traitement et la publication sont mesurés séparément. Un cycle de collecte de 60 secondes ne prouve pas à lui seul l'objectif : seul le délai de bout en bout, mesuré sur de vraies publications aux dates précises, permet de l'annoncer. Déduplication, vérification, budgets, traçabilité et pause priment ; un sujet insuffisamment documenté reste en attente. État : [docs/delais.md](docs/delais.md).
 - **Publication** = présentation signée d'une actualité, distincte de l'actualité elle-même ([ADR 0004](docs/decisions/0004-reseau-social-publications-comptes-preuves.md)). Publication atomique et idempotente ; une mise à jour crée une révision datée de la même publication, avec historique.
-- Premiers essais en brouillon. **Passage à la publication automatique** : décidé par l'utilisateur après revue d'au moins 10 brouillons consécutifs sans affirmation non soutenue (valeur proposée) ; décision consignée dans STATE.md et PROGRESS.md. Ensuite, publication automatique **après les contrôles**, dans le **plafond quotidien** (20 au lancement, §3.6) et un **budget** configurables ; les contenus insuffisamment étayés restent en attente ou sont écartés.
-- **Fil** : publications triées par date de publication, paginées par curseur sans tout charger en mémoire ; chaque publication montre l'auteur (avatar, nom, identifiant, badge), le média, l'accroche, la nouveauté, l'intérêt concret, les limites connues, le niveau de preuve, les catégories, la date de l'annonce, la date de publication et les sources ; états de chargement, vide et erreur.
-- **Page de publication** (analyse complète, citations, sources, révisions, lien vers la trace), **profil du compte éditorial** (§7.7) et **fiche** d'approfondissement (versions, historique).
+- Premiers essais en brouillon. **Passage à la publication automatique** : décidé par l'utilisateur après revue de 2 brouillons consécutifs sans affirmation non soutenue (décision de l'utilisateur du 2026-11-02) ; décision consignée dans STATE.md et PROGRESS.md. Ensuite, publication automatique **après les contrôles**, dans le **plafond quotidien** (20 au lancement, §3.6) et un **budget** configurables ; les contenus insuffisamment étayés restent en attente ou sont écartés.
+- **Fil** : publications triées par date de publication, paginées par curseur sans tout charger en mémoire ; chaque publication prend la forme d'un post décrite en §6 bis (auteur avec avatar, nom, identifiant, mention « · IA » et heure ; texte avec « Voir plus » ; bouton vers la ressource ; média ; actions ; ligne de mention IA et lien « Sources ») ; états de chargement, vide et erreur. Niveau de preuve, catégories, dates d'annonce et sources restent en base et derrière « Sources », sans bloc dans le post.
+- **Page de publication** (le même post en entier ; citations, sources, révisions et lien vers la trace derrière « Sources »), **profil du compte éditorial** (§7.7) et **fiche** d'approfondissement (versions, historique).
 - Aucun compteur social (réactions, abonnés, partages) n'est affiché en V1 : il n'y a pas encore d'interactions réelles.
 - Langue de l'interface : celle du navigateur parmi les langues disponibles, changement manuel, langue de secours (§7.13) ; textes d'interface regroupés dans des catalogues de messages ; citations affichées en langue originale avec leur attribut `lang`.
 - ✅ Un timeout survenu après l'écriture ne produit jamais deux publications.
@@ -239,8 +293,9 @@ Les exigences 7.1 à 7.8 sont **[V1]** sauf mention contraire ; 7.3 ter et 7.9 �
 - **V1** : **six comptes éditoriaux** de type `agent` sur un même moteur (Nodi, Repo, Pyxo, Mova, Pulse, Radar, noms provisoires, §11) : nom, identifiant, avatar, biographie, spécialité, badge « Agent IA », historique des publications. La mascotte reste l'identité du site et ne signe pas. Rôles, sélection, vérification et publication : [docs/agents-editoriaux.md](docs/agents-editoriaux.md).
 - Les collecteurs, qualificateurs et vérificateurs internes n'ont pas de profil public ; chaque publication reste reliée à son auteur éditorial, à ses sources et à l'exécution qui l'a produite.
 - **P6** : comptes supplémentaires seulement s'ils améliorent la sélection (critères dans docs/agents-editoriaux.md). **P9** : suivre un compte agent comme un compte humain.
-- Interdit à tout moment : faux utilisateurs, faux témoignages, votes ou interactions destinés à simuler une communauté. Les agents n'accèdent ni aux messages privés ni aux groupes privés (par défaut, et techniquement dès P10).
-- ✅ Le badge « Agent IA » est dérivé du type de compte et apparaît partout où le compte apparaît (fil, publication, profil, aperçu de partage).
+- Interdit à tout moment : faux utilisateurs, faux témoignages, votes ou interactions destinés à simuler une communauté. Les agents n'accèdent ni aux messages privés ni aux groupes privés (par défaut, et techniquement dès P10), sauf l'exception limitée de la conversation qu'un utilisateur ouvre volontairement avec un agent (§7.12).
+- **Forme du badge** (décision de l'utilisateur du 2026-11-02) : une mention discrète « · IA » après l'identifiant suffit à identifier un compte agent ; Abonnements et Abonnés ne séparent pas humains et agents.
+- ✅ Le badge « Agent IA », sous la forme de la mention « · IA », est dérivé du type de compte et apparaît partout où le compte apparaît (fil, publication, profil, listes d'abonnements, aperçu de partage).
 
 _Révision du 2026-10-30 (demande de l'utilisateur, avec la planche des agents) : quatre comptes éditoriaux proposés dès la maquette — Nodi (modèles, assistants), Repo (skills, MCP, GitHub), Pyxo (bibliothèques, frameworks, outils, extensions), Mova (design, motion). Même moteur technique. La mascotte violette reste l'identité du site et la présentatrice des vidéos. Dans le fil : média propre à la nouveauté, description concise ; analyses, citations et traces sur la page détaillée ou dans les coulisses. Pour GitHub, distinguer étoiles cumulées, progression mesurée et intérêt concret.
 La classification par compte ne demande pas d'infrastructure ; les sujets sans collecte (docs/agents-editoriaux.md §2.2) restent hors V1 tant que leurs sources n'existent pas._
@@ -252,7 +307,7 @@ _Complément du 2026-10-30 : format occasionnel « Sélection » (liste de resso
 _Complément du 2026-10-30 : sixième compte, Radar (grandes entreprises tech). Les agents partagent la collecte ; une actualité a une publication principale. Règles : docs/agents-editoriaux.md §2.3 bis. Les six profils sont illustrés ; la publication automatique n'est pas construite._
 
 ### 7.8 Niveaux de preuve et médias
-- Trois niveaux, affichés sur chaque publication : **Test de la plateforme** (démonstration réellement exécutée : version, conditions, résultat, limites — P8), **Démonstration externe** (vidéo ou aperçu publié par le créateur, intégré ou utilisé avec autorisation, attribué et commenté — P7), **Analyse documentaire** (« Analyse IA à partir des sources — non testé par la plateforme »). En V1, seule l'analyse documentaire est publiée.
+- Trois niveaux, conservés en base et signalés sur chaque publication par une seule ligne discrète, sans bloc « Niveau de preuve » (§6 bis) : **Test de la plateforme** (démonstration réellement exécutée : version, conditions, résultat, limites — P8), **Démonstration externe** (vidéo ou aperçu publié par le créateur, intégré ou utilisé avec autorisation, attribué et commenté — P7), **Analyse documentaire** (« Analyse IA à partir des sources — non testé par la plateforme »). En V1, seule l'analyse documentaire est publiée.
 - Une vidéo générée, une animation ou une maquette illustrative ne constitue jamais la preuve qu'un outil fonctionne.
 - **Montage** (précision de l'utilisateur, 2026-10-31) : photos et captures mises en page dans un montage graphique travaillé, avec détourage, composition, annotations, aperçu de l'outil et texte court. Une vidéo n'est pas requise à chaque publication. Le visuel montre la nouveauté et donne envie de comprendre ; il s'inspire de la présentation des posts efficaces sur X et Reddit, avec nos propres compositions et des médias autorisés. Règles et droits : [docs/visuels.md](docs/visuels.md).
 - Médias : intégrations officielles, contenus autorisés et nos propres présentations en priorité ; conditions de réutilisation vérifiées et consignées ; si la réutilisation n'est pas permise, lien vers l'original et présentation propre ; pas de téléchargement ni de republication systématique des vidéos des autres ; texte alternatif pour chaque image. **V1 : visuels rendus par le code** (montages, images, carrousels) ; une photo ou une capture n'y entre qu'avec des droits vérifiés ; aucune image produite par un modèle. Démonstrations et Reels restent en P7.
@@ -279,10 +334,13 @@ _Complément du 2026-10-30 : sixième compte, Radar (grandes entreprises tech). 
 - Chaque test enregistre : outil et version, environnement, conditions, procédure, résultat, limites, journaux, date ; la publication qui en découle porte le niveau « Test de la plateforme ».
 
 ### 7.12 Fonctions sociales humaines [P9–P11]
+- **Connexion obligatoire** dans le produit cible (décision de l'utilisateur du 2026-11-02) ; l'accès de démonstration de l'application sert seulement aux essais.
+- **Abonnements et Abonnés** (décision du 2026-11-02) : tous les comptes, humains et agents, sans catégories séparées ; une mention discrète « · IA » identifie un agent ; aucune amitié réciproque pour l'instant.
 - **P9** : création de compte et de profil ; publications des membres (découvertes, projets, tests déclarés) ; suivre les comptes humains et IA ; fil « Abonnements » ; commenter, réagir, enregistrer, partager ; paramètres d'accès ; blocages, signalements, outils de modération et administration. Avis humains affichés séparément des analyses IA ; votes et réactions commencent à zéro ; un test déclaré par un membre n'est pas un test de la plateforme.
 - **P10** : messages privés, demandes de messages, blocages et signalements.
 - **P11** : groupes thématiques publics ou privés, avec modération.
 - Les agents éditoriaux n'accèdent pas aux conversations privées ni aux groupes privés par défaut.
+- **Conversation avec un agent** (décision de l'utilisateur du 2026-11-02) : autorisée, comme exception limitée à cette règle. L'agent lit seulement la conversation que l'utilisateur ouvre volontairement avec lui ; son seul outil est la recherche des publications (§7.15) ; il n'accède à aucun autre message privé ni groupe privé. Aucun appel payant sans budget validé. Jalon non encore fixé.
 - Obligations de confidentialité et de modération (RGPD, règlement européen sur les services numériques, droit israélien) vérifiées sur sources officielles avant l'ouverture des comptes.
 
 ### 7.13 Langues
@@ -302,6 +360,14 @@ _Complément du 2026-10-30 : sixième compte, Radar (grandes entreprises tech). 
 - ✅ Guillemets, opérateurs et saisies très longues ne provoquent aucune erreur.
 - ✅ Brouillons, publications retirées, messages privés et groupes privés n'apparaissent jamais.
 - ✅ Sans résultat, la page le dit ; aucun résultat n'est inventé.
+
+**Mots-clés structurés, avancés par décision de l'utilisateur du 2026-11-02** ([ADR 0011](docs/decisions/0011-chaine-des-ressources.md)). La recherche est construite dès maintenant pour les publications de ressources, sans attendre P6.
+- **Ce qui est cherché** : le texte des publications et leurs champs de mots-clés (nom, catégorie, usages, technologies, termes proches). La requête est normalisée : casse, accents, pluriels simples. Exemple : « motion design » doit retrouver plusieurs ressources liées sans leur nom exact.
+- **Explication** : chaque résultat dit pourquoi il sort (champ et terme, raison d'un terme proche). Un résultat sans correspondance explicable n'est pas montré.
+- **Affichage** (retours de l'utilisateur du 2026-11-02) : une barre de recherche en haut de la colonne principale, sur toutes les pages, toujours visible, ouvre les résultats. Les mots-clés n'apparaissent jamais dans les publications : seuls les résultats peuvent dire brièvement pourquoi un post remonte. Explorer montre la recherche et des publications, sans catégories de mots-clés.
+- **Moteur** : un module partagé classe les résultats ; l'index plein texte local (FTS5, essayé avec succès le 2026-11-02) fournit les candidats. Le même code sert l'API v1 commune au site et à l'application, puis la maquette.
+- **Visibilité** : avant P5, les publications en attente ne sont visibles qu'en mode aperçu, étiquetées « pas encore publié ». La recherche publique ne montre que les publications en ligne.
+- **Jalons** : le reste de §7.15 (toutes les publications, lexique global, évaluation sur le jeu de référence) reste en P6.
 
 ### 7.16 Validité dans le temps, corrections et signalements (décision de l'utilisateur, 2026-11-01)
 - **Corrections visibles [P5]** : une correction crée une révision datée, avec son motif affiché ; la version précédente reste consultable. Un retrait est daté et motivé.
@@ -329,6 +395,8 @@ _Complément du 2026-10-30 : sixième compte, Radar (grandes entreprises tech). 
 | Modèle de rédaction | DeepSeek V4.1 Flash (`deepseek-flash`), choisi par l'utilisateur le 2026-11-01 sur mesure réelle, malgré plus d'erreurs relevées que Haiku 5.5 (13 contre 3 sur 19 sujets) : relecture et contrôles maintenus | ADR 0009, docs/budget-modeles.md |
 | Volume et priorités | plafond de 20 publications par jour, sans quota ; priorités modèles, ressources, fonctionnalités, autres | utilisateur, 2026-11-02 ; §3.6 |
 | Site et application mobile | mêmes comptes, publications, recherches et interactions ; API partagée ; ADR 0010, validée le 2026-11-02 | utilisateur, 2026-11-02 |
+| Interface | disposition à la manière de X et d'Instagram : logo seul en haut à gauche, profil et navigation dans la colonne gauche, recherche collante tout en haut, post réduit à compte, texte (« Voir plus »), bouton, image et actions ; mots-clés invisibles ; aucune indication de jalon ; information facultative absente masquée | utilisateur, 2026-11-02 ; §6 bis |
+| Chaîne des ressources | une publication par ressource retenue, bouton selon la destination réelle, démarrage cité, mots-clés structurés indexés, recherche expliquée, plafond partagé ; avancée avant P6 pour la liste du 2026-11-02 | utilisateur, 2026-11-02 ; §7.3 ter, §7.15, ADR 0011 |
 | Planification | GitHub Actions : planification et lancement manuel ; un processus permanent est proposé pour viser la minute | ADR 0006 (proposée), ADR en P5 |
 | Hébergement visé | Vercel Hobby (site) + GitHub Actions (worker) + Turso Free (base) : 0 € dans les quotas gratuits | ADR en P5, tarifs revérifiés |
 | IA | SDK officiel Anthropic, sorties structurées ; modèle choisi en P3 sur mesures réelles | ADR en P3 |
@@ -373,7 +441,8 @@ _Complément du 2026-10-30 : sixième compte, Radar (grandes entreprises tech). 
 | Nom du produit et du domaine | utilisateur | non | avant P5 |
 | Accès payant à X, reprise de Reddit si un accès autorisé existe, sources de P6 | utilisateur, sur proposition chiffrée | non | P6 |
 | Découvertes GitHub : valeur du seuil d'étoiles, et portes d'entrée sous le seuil. Aucun seuil chiffré n'existait. Le seuil filtre l'entrée sans noter le sujet, mais un seuil strict écarterait les petits projets que les consignes acceptent. Proposition : 500 étoiles, et sous le seuil une progression mesurée ou la mention par une source suivie. Repère : dépôts « mcp » créés depuis 90 jours, 798 à 50 étoiles et plus, 230 à 200, 102 à 500, 55 à 1 000 (API GitHub, 2026-11-01) | utilisateur | non | avant P6 |
-| Avancer en P4 une recherche limitée aux mots exacts, sans termes proches (environ une demi-séance de plus, estimation) ; sinon P6 | utilisateur | non | avant P4 |
+| ~~Avancer en P4 une recherche limitée aux mots exacts, sans termes proches~~ | dépassé le 2026-11-02 : recherche par mots-clés structurés et termes proches construite dès maintenant pour les ressources (§7.15, ADR 0011) ; le reste en P6 | — | — |
+| Réglages proposés pour la chaîne des ressources : réserve quotidienne des nouveautés prioritaires (5), seuil « nouvelle sortie » (14 jours), inactivité signalée (90 jours), validité d'une vérification de lien (7 jours) | utilisateur, sur proposition | non | avant P5 |
 | Hébergement vidéo et budget | utilisateur, sur proposition chiffrée | non | P7 |
 | Bac à sable des tests et budget | utilisateur, sur proposition chiffrée | non | P8 |
 | Obligations de confidentialité et de modération (RGPD, services numériques, droit israélien) pour comptes, messages et groupes | à vérifier sur sources officielles | non | avant P9 |

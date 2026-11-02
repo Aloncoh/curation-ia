@@ -3,7 +3,7 @@
 import { MENTION_ILLUSTRATION } from '../analysis/publication.ts';
 import { COMPTES_MONTAGE, FEUILLE_DE_STYLE, FORMAT, type Compte } from './style.ts';
 
-export const GABARITS = ['photo_titre', 'fenetre_annotee', 'detourage_titre', 'avant_apres', 'loupe', 'terminal_annote', 'fiches'] as const;
+export const GABARITS = ['photo_titre', 'fenetre_annotee', 'detourage_titre', 'avant_apres', 'loupe', 'terminal_annote', 'fiches', 'etapes'] as const;
 export type Gabarit = (typeof GABARITS)[number];
 
 export interface ImageMontage {
@@ -38,6 +38,8 @@ export interface Montage {
   etiquettes: Etiquette[];
   /** Commande citée, ligne par ligne, pour le gabarit terminal. */
   lignes: string[];
+  /** Étapes de démarrage citées, dans l'ordre, pour le gabarit `etapes` (ADR 0011 §4). */
+  etapes: string[];
   /** Point agrandi du gabarit loupe, en pourcentage de l'image : il tombe au centre de la lentille. */
   loupe: { x: number; y: number; zoom: number } | null;
   source: string;
@@ -49,6 +51,12 @@ export const LONGUEUR_MAX_ETIQUETTE = 64;
 /** Une fiche occupe la largeur de la planche : elle accepte une phrase entière. */
 export const LONGUEUR_MAX_FICHE = 96;
 export const ETIQUETTES_MAX = 3;
+/** Gabarit `etapes` : 2 à 4 cases, chacune une étape citée de la documentation. */
+export const ETAPES_MIN = 2;
+export const ETAPES_MAX = 4;
+export const LONGUEUR_MAX_ETAPE = 80;
+/** Surtitre fixe : les étapes viennent de la documentation, pas d'un essai de la plateforme. */
+export const SURTITRE_ETAPES = 'Pour commencer, selon la documentation';
 
 const echapper = (t: string) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
@@ -56,7 +64,8 @@ const echapper = (t: string) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;').r
 export function tailleTitre(texte: string, gabarit?: Gabarit): number {
   const n = texte.length;
   const taille = n <= 22 ? 138 : n <= 40 ? 116 : n <= 64 ? 96 : 78;
-  // Une capture a besoin de place : le titre lui en laisse.
+  // Une capture a besoin de place : le titre lui en laisse. Quatre étapes aussi : un titre long y descend à 64 px.
+  if (gabarit === 'etapes') return Math.min(taille, n > 64 ? 64 : 92);
   return gabarit && ['fenetre_annotee', 'loupe', 'avant_apres'].includes(gabarit) ? Math.min(taille, 92) : taille;
 }
 
@@ -65,7 +74,7 @@ const enPourcentage = (v: number) => Number.isFinite(v) && v >= 0 && v <= 100;
 /** Défauts qui interdisent un montage : ils se contrôlent avant tout rendu. */
 export function defautsMontage(m: Montage): string[] {
   const defauts: string[] = [];
-  const avecImage = m.gabarit !== 'terminal_annote' && m.gabarit !== 'fiches';
+  const avecImage = m.gabarit !== 'terminal_annote' && m.gabarit !== 'fiches' && m.gabarit !== 'etapes';
   if (!/^[a-z0-9-]+$/.test(m.id)) defauts.push('identifiant_invalide');
   if (!COMPTES_MONTAGE.includes(m.compte)) defauts.push('compte_inconnu');
   if (m.titre.trim().length === 0 || m.titre.length > LONGUEUR_MAX_TITRE) defauts.push('titre_hors_limites');
@@ -80,6 +89,10 @@ export function defautsMontage(m: Montage): string[] {
   if (m.gabarit === 'terminal_annote' && (m.lignes.length === 0 || m.lignes.some((l) => l.trim().length === 0))) defauts.push('commande_absente');
   if (m.gabarit === 'terminal_annote' && !/reconstitution/i.test(m.surtitre ?? '')) defauts.push('reconstitution_non_signalee');
   if (m.gabarit === 'fiches' && m.etiquettes.length === 0) defauts.push('reperes_absents');
+  if (m.gabarit === 'etapes' && (m.etapes.length < ETAPES_MIN || m.etapes.length > ETAPES_MAX || m.etapes.some((e) => e.trim().length === 0 || e.length > LONGUEUR_MAX_ETAPE))) {
+    defauts.push('etapes_hors_limites');
+  }
+  if (m.gabarit === 'etapes' && m.surtitre !== SURTITRE_ETAPES) defauts.push('etapes_non_attribuees');
   for (const image of [m.image, m.apres]) {
     if (image && !image.src.startsWith('data:image/')) defauts.push('image_non_locale');
     if (image && image.alt.trim().length === 0) defauts.push('texte_alternatif_absent');
@@ -106,6 +119,8 @@ const pile = (etiquettes: Etiquette[]) => {
   return libres.length === 0 ? '' : `<div class="pile">${libres.map((e) => `<span class="etiquette">${echapper(e.texte)}</span>`).join('')}</div>`;
 };
 
+const FLECHE = `<li class="fleche" aria-hidden="true"><svg viewBox="0 0 40 60"><path d="M20 4 V44" /><path d="M8 34 L20 50 L32 34" /></svg></li>`;
+
 const img = (i: ImageMontage, classe = '') => `<img class="${classe}" src="${echapper(i.src)}" alt="${echapper(i.alt)}">`;
 
 function heros(m: Montage): string {
@@ -127,6 +142,11 @@ function heros(m: Montage): string {
     }
     case 'fiches':
       return `<ol class="heros fiches">${m.etiquettes.map((e) => `<li class="fiche">${echapper(e.texte)}</li>`).join('')}</ol>`;
+    case 'etapes':
+      // Une flèche entre deux cases ; elle ne porte aucun texte et n'est pas lue par un lecteur d'écran.
+      return `<ol class="heros etapes" data-nombre="${m.etapes.length}">${m.etapes
+        .map((e, i) => `${i > 0 ? FLECHE : ''}<li class="etape"><span class="numero" aria-hidden="true">${i + 1}</span><span class="texte">${echapper(e)}</span></li>`)
+        .join('')}</ol>`;
     case 'terminal_annote':
       return `<div class="heros"><pre class="papier">${m.lignes.map((l) => `<span class="ligne"><b>$</b> ${echapper(l)}</span>`).join('\n')}</pre>${annotations}</div>`;
   }
@@ -164,7 +184,7 @@ export interface ContenuMontage {
  * cités deviennent des fiches. Aucun média n'est jamais inventé pour remplir la place.
  */
 export function composerMontage(c: ContenuMontage, media: { image: ImageMontage; genre: 'photo' | 'capture' } | null): Montage {
-  const commun = { id: c.id, compte: c.compte, titre: c.accroche, surtitre: c.date_annonce ? JOUR_PARIS.format(new Date(c.date_annonce)) : null, apres: null, lignes: [], loupe: null, source: c.source, mention: c.mention };
+  const commun = { id: c.id, compte: c.compte, titre: c.accroche, surtitre: c.date_annonce ? JOUR_PARIS.format(new Date(c.date_annonce)) : null, apres: null, lignes: [], etapes: [], loupe: null, source: c.source, mention: c.mention };
   if (media?.genre === 'photo') return { ...commun, gabarit: 'photo_titre', image: media.image, etiquettes: [] };
   if (media) return { ...commun, gabarit: 'fenetre_annotee', image: media.image, etiquettes: etiquettesSansAncre(c.reperes) };
   return { ...commun, gabarit: 'fiches', image: null, etiquettes: etiquettesSansAncre(c.reperes) };
@@ -172,4 +192,13 @@ export function composerMontage(c: ContenuMontage, media: { image: ImageMontage;
 
 /** Texte alternatif du média : il dit ce que montre l'image, annotations comprises. */
 export const texteAlternatif = (m: Montage) =>
-  [m.titre, m.image?.alt, m.gabarit === 'avant_apres' ? m.apres?.alt : null, ...m.lignes, ...(m.gabarit === 'photo_titre' ? [] : m.etiquettes.map((e) => e.texte))].filter(Boolean).join('. ');
+  [
+    m.titre,
+    m.image?.alt,
+    m.gabarit === 'avant_apres' ? m.apres?.alt : null,
+    ...m.lignes,
+    ...(m.gabarit === 'etapes' ? m.etapes.map((e, i) => `Étape ${i + 1} : ${e}`) : []),
+    ...(m.gabarit === 'photo_titre' ? [] : m.etiquettes.map((e) => e.texte)),
+  ]
+    .filter(Boolean)
+    .join('. ');

@@ -273,9 +273,14 @@ export const postDrafts = sqliteTable(
     promptVersion: text('prompt_version').notNull(),
     content: text('content', { mode: 'json' }).$type<Record<string, unknown>>(),
     checks: text('checks', { mode: 'json' }).$type<unknown[]>(),
+    /** Qui a rédigé : l'agent du site, ou Claude Code pendant le développement (ADR 0011). Toujours affiché. */
+    origine: text('origine').notNull().default('agent_site'),
     createdAt: text('created_at').notNull(),
   },
-  (t) => [uniqueIndex('post_draft_news_item_uq').on(t.newsItemId)],
+  (t) => [
+    uniqueIndex('post_draft_news_item_uq').on(t.newsItemId),
+    check('post_draft_origine_ck', sql`origine in ('agent_site', 'claude_code_developpement')`),
+  ],
 );
 
 /** Compte public, agent ou humain (ADR 0004). Le badge « Agent IA » est dérivé de `type`, jamais saisi. */
@@ -527,3 +532,105 @@ export const comparaisonSorties = sqliteTable(
     check('comparaison_sortie_etape_ck', sql`etape in ('qualification', 'redaction')`),
   ],
 );
+
+/**
+ * Mot-clé d'une révision de publication (ADR 0011) : il sert à retrouver et à classer, jamais à décorer.
+ * Un usage ou une technologie s'appuie sur un passage cité ; un terme proche porte la raison qui le relie à la publication.
+ */
+export const postMotsCles = sqliteTable(
+  'post_mot_cle',
+  {
+    id: integer('id').primaryKey({ autoIncrement: true }),
+    postId: integer('post_id').notNull().references(() => posts.id),
+    revisionId: integer('revision_id').notNull().references(() => postRevisions.id),
+    /** nom | categorie | usage | technologie | terme_proche */
+    champ: text('champ').notNull(),
+    terme: text('terme').notNull(),
+    /** Forme normalisée par src/recherche/normaliser.ts, la même pour l'index et pour la requête. */
+    termeNormalise: text('terme_normalise').notNull(),
+    raison: text('raison'),
+    passage: text('passage'),
+    createdAt: text('created_at').notNull(),
+  },
+  (t) => [
+    uniqueIndex('post_mot_cle_uq').on(t.revisionId, t.champ, t.termeNormalise),
+    index('post_mot_cle_terme_idx').on(t.termeNormalise),
+    index('post_mot_cle_post_idx').on(t.postId),
+    check('post_mot_cle_champ_ck', sql`champ in ('nom', 'categorie', 'usage', 'technologie', 'terme_proche')`),
+    check('post_mot_cle_raison_ck', sql`champ <> 'terme_proche' or length(trim(coalesce(raison, ''))) > 0`),
+    check('post_mot_cle_passage_ck', sql`champ not in ('usage', 'technologie') or length(trim(coalesce(passage, ''))) > 0`),
+  ],
+);
+
+/**
+ * Bouton vers la ressource officielle, avec son contrôle daté : une ligne par vérification, l'historique reste.
+ * Le libellé suit la destination réelle ; un dépôt n'est jamais « Installer ».
+ */
+export const postBoutons = sqliteTable(
+  'post_bouton',
+  {
+    id: integer('id').primaryKey({ autoIncrement: true }),
+    postId: integer('post_id').notNull().references(() => posts.id),
+    revisionId: integer('revision_id').notNull().references(() => postRevisions.id),
+    libelle: text('libelle').notNull(),
+    destination: text('destination').notNull(),
+    url: text('url').notNull(),
+    hote: text('hote').notNull(),
+    /** Adresse réellement interrogée pour le contrôle (API), ou celle de la capture qui en tient lieu. */
+    urlControle: text('url_controle').notNull(),
+    statutHttp: integer('statut_http'),
+    /** verifie | echec */
+    resultat: text('resultat').notNull(),
+    motif: text('motif'),
+    /** Capture qui prouve le lien, quand une capture récente tient lieu de vérification. */
+    snapshotId: integer('snapshot_id').references(() => documentSnapshots.id),
+    verifieLe: text('verifie_le').notNull(),
+    createdAt: text('created_at').notNull(),
+  },
+  (t) => [
+    index('post_bouton_post_idx').on(t.postId, t.verifieLe),
+    check('post_bouton_libelle_ck', sql`libelle in ('Voir le dépôt', 'Installer', 'Télécharger')`),
+    check('post_bouton_destination_ck', sql`destination in ('depot', 'installation', 'telechargement')`),
+    check(
+      'post_bouton_coherence_ck',
+      sql`(destination = 'depot' and libelle = 'Voir le dépôt') or (destination = 'installation' and libelle = 'Installer') or (destination = 'telechargement' and libelle = 'Télécharger')`,
+    ),
+    check('post_bouton_resultat_ck', sql`resultat in ('verifie', 'echec')`),
+    // Même règle qu'à l'écriture (destinationDe) : https seulement ; un dépôt ou un téléchargement ne mène qu'à github.com.
+    check('post_bouton_url_ck', sql`url like 'https://%' and (destination = 'installation' or hote = 'github.com')`),
+  ],
+);
+
+/**
+ * Jour prévu d'une publication, dans le plafond quotidien partagé (SPEC §3.6). `jour` : jour civil Europe/Paris.
+ * `reportee` : la publication attend faute de place, ce qui n'a rien à voir avec un sujet écarté.
+ */
+export const publicationsPlanifiees = sqliteTable(
+  'publication_planifiee',
+  {
+    postId: integer('post_id').primaryKey().references(() => posts.id),
+    /** YYYY-MM-DD ; null seulement pour une publication reportée au-delà de l'horizon. */
+    jour: text('jour'),
+    rang: integer('rang'),
+    priorite: integer('priorite').notNull(),
+    statutSortie: text('statut_sortie').notNull(),
+    utiliseReserve: integer('utilise_reserve', { mode: 'boolean' }).notNull().default(false),
+    /** prevue | reportee | publiee */
+    etat: text('etat').notNull(),
+    motif: text('motif'),
+    createdAt: text('created_at').notNull(),
+    updatedAt: text('updated_at').notNull(),
+  },
+  (t) => [
+    index('publication_planifiee_jour_idx').on(t.jour, t.etat),
+    // Un rang par jour : ni doublon ni chevauchement (renumérotés par src/ressources/planification.ts).
+    uniqueIndex('publication_planifiee_jour_rang_uq').on(t.jour, t.rang).where(sql`etat <> 'reportee'`),
+    check('publication_planifiee_priorite_ck', sql`priorite in (1, 2, 3, 4)`),
+    check('publication_planifiee_statut_sortie_ck', sql`statut_sortie in ('ressource_existante', 'nouvelle_sortie', 'actualite')`),
+    check('publication_planifiee_etat_ck', sql`etat in ('prevue', 'reportee', 'publiee')`),
+    check('publication_planifiee_jour_ck', sql`etat = 'reportee' or (jour is not null and rang is not null)`),
+  ],
+);
+
+// Index de recherche `recherche_publication` : table virtuelle FTS5, que drizzle ne déclare pas.
+// Elle est créée par drizzle/0009_chaine_ressources.sql et reçoit des textes déjà normalisés (src/recherche/normaliser.ts).

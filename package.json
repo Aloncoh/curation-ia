@@ -27,7 +27,8 @@
     "montage": "node src/cli/montage.ts",
     "budget": "node src/cli/budget.ts",
     "comparaison": "node src/cli/comparaison.ts",
-    "cles": "node src/cli/cles.ts"
+    "cles": "node src/cli/cles.ts",
+    "ressources": "node src/cli/ressources.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "1.3.0",

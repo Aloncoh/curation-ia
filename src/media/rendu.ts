@@ -32,6 +32,11 @@ const DELAI_RENDU_MS = 15_000;
 const HEROS_MIN = 420;
 /** Une image détourée peut mordre sur le titre : c'est l'effet cherché, tant qu'elle ne cache pas une ligne. */
 const CHEVAUCHEMENT_TITRE_MAX = 40;
+/**
+ * Pied : trois lignes au plus (24 px, interligne 1,2, marges comprises). La troisième sert au crédit d'un fork
+ * (« Fork de <parent> », ADR 0011 §4) ; un contenu recouvert reste refusé par les contrôles de zone, qui partent du haut du pied.
+ */
+const PIED_HAUTEUR_MAX = 125;
 
 export interface ControleMiseEnPage {
   hauteur_heros: number;
@@ -41,13 +46,17 @@ export interface ControleMiseEnPage {
   etiquettes_chevauchees: boolean;
   etiquette_sur_commande: boolean;
   fiches_hors_zone: boolean;
+  /** Gabarit `etapes` : une case ou une flèche sort de la zone entre le titre et le pied. */
+  etapes_hors_zone: boolean;
+  /** Le surtitre passe à la ligne : l'en-tête n'a plus sa hauteur d'une ligne. */
+  surtitre_coupe: boolean;
   image_illisible: boolean;
   image_sur_titre: boolean;
   pied_deborde: boolean;
 }
 
 const mesurer = (page: Page): Promise<ControleMiseEnPage> =>
-  page.evaluate(({ largeur, hauteur, limiteTitre }) => {
+  page.evaluate(({ largeur, hauteur, limiteTitre, limitePied }) => {
     const boite = (selecteur: string) => document.querySelector(selecteur)!.getBoundingClientRect();
     const etiquettes = [...document.querySelectorAll('.etiquette, .carte figcaption')].map((e) => e.getBoundingClientRect());
     const commandes = [...document.querySelectorAll('.ligne')].map((l) => l.getBoundingClientRect());
@@ -55,8 +64,11 @@ const mesurer = (page: Page): Promise<ControleMiseEnPage> =>
     const titre = document.querySelector<HTMLElement>('.titre')!;
     const basTitre = titre.getBoundingClientRect().bottom;
     const secants = (a: DOMRect, b: DOMRect) => a.left < b.right && b.left < a.right && a.top < b.bottom && b.top < a.bottom;
-    const textes = [...document.querySelectorAll<HTMLElement>('.etiquette, .fiche, .papier')];
+    const textes = [...document.querySelectorAll<HTMLElement>('.etiquette, .fiche, .papier, .etape')];
     const fiches = [...document.querySelectorAll('.fiche')].map((f) => f.getBoundingClientRect());
+    const etapes = [...document.querySelectorAll('.etape, .fleche')].map((f) => f.getBoundingClientRect());
+    const surtitre = document.querySelector<HTMLElement>('.surtitre');
+    const hors = (b: DOMRect) => b.left < 0 || b.right > largeur || b.top < basTitre || b.bottom > pied.top;
     const decoupe = document.querySelector('.decoupe')?.getBoundingClientRect();
     return {
       hauteur_heros: Math.round(boite('.heros').height),
@@ -65,12 +77,14 @@ const mesurer = (page: Page): Promise<ControleMiseEnPage> =>
       etiquette_hors_cadre: etiquettes.some((e) => e.left < 0 || e.right > largeur || e.top < 0 || e.bottom > pied.top),
       etiquettes_chevauchees: etiquettes.some((a, i) => etiquettes.slice(i + 1).some((b) => secants(a, b))),
       etiquette_sur_commande: etiquettes.some((e) => commandes.some((c) => secants(e, c))),
-      fiches_hors_zone: fiches.some((f) => f.left < 0 || f.right > largeur || f.top < basTitre || f.bottom > pied.top),
+      fiches_hors_zone: fiches.some(hors),
+      etapes_hors_zone: etapes.some(hors),
+      surtitre_coupe: surtitre !== null && surtitre.getBoundingClientRect().height > parseFloat(getComputedStyle(surtitre).lineHeight) * 1.5,
       image_illisible: [...document.images].some((i) => i.naturalWidth === 0),
       image_sur_titre: decoupe !== undefined && basTitre - decoupe.top > limiteTitre,
-      pied_deborde: pied.height > 110 || pied.bottom > hauteur + 1,
+      pied_deborde: pied.height > limitePied || pied.bottom > hauteur + 1,
     };
-  }, { ...FORMAT, limiteTitre: CHEVAUCHEMENT_TITRE_MAX });
+  }, { ...FORMAT, limiteTitre: CHEVAUCHEMENT_TITRE_MAX, limitePied: PIED_HAUTEUR_MAX });
 
 export const defautsMiseEnPage = (c: ControleMiseEnPage): string[] => [
   ...(c.hauteur_heros < HEROS_MIN ? ['titre_trop_long'] : []),
@@ -80,6 +94,8 @@ export const defautsMiseEnPage = (c: ControleMiseEnPage): string[] => [
   ...(c.etiquettes_chevauchees ? ['etiquettes_chevauchees'] : []),
   ...(c.etiquette_sur_commande ? ['etiquette_sur_commande'] : []),
   ...(c.fiches_hors_zone ? ['fiches_hors_zone'] : []),
+  ...(c.etapes_hors_zone ? ['etapes_hors_zone'] : []),
+  ...(c.surtitre_coupe ? ['surtitre_coupe'] : []),
   ...(c.image_illisible ? ['image_illisible'] : []),
   ...(c.image_sur_titre ? ['image_sur_titre'] : []),
   ...(c.pied_deborde ? ['pied_deborde'] : []),

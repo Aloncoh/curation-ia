@@ -1,0 +1,205 @@
+{
+  "slug": "agent-browser",
+  "consignes": "r2",
+  "accroche": {
+    "texte": "agent-browser, de Vercel Labs : un vrai navigateur que votre agent pilote en ligne de commande",
+    "passages": [
+      "Browser automation CLI for AI agents",
+      "Vercel Labs Product"
+    ]
+  },
+  "description": {
+    "texte": "Une CLI native en Rust : l'agent ouvre une page, lit le texte, clique, remplit un champ et prend une capture. Selon le dépôt, le skill fonctionne avec Claude Code, Codex, Cursor ou Gemini CLI, et l'outil tourne aussi en serveur MCP.",
+    "passages": [
+      "Browser automation CLI for AI agents. Fast native Rust CLI.",
+      "Click by ref from snapshot",
+      "Fill by ref",
+      "Get text by ref",
+      "agent-browser screenshot page.png agent-browser close",
+      "This works with Claude Code, Codex, Cursor, Gemini CLI, GitHub Copilot, Goose, OpenCode, and Windsurf.",
+      "npx skills add vercel-labs/agent-browser",
+      "agent-browser mcp # Start an MCP stdio server"
+    ]
+  },
+  "interet": {
+    "texte": "snapshot renvoie l'arbre d'accessibilité avec une référence par élément (@e1, @e2) : l'agent clique ou remplit par référence, sans requêter le DOM à nouveau. Attention, rien n'est restreint par défaut : domaines autorisés et politique d'actions sont à activer vous-même.",
+    "passages": [
+      "Get interactive elements with refs (@e1, @e2)",
+      "agent-browser click @e2 # Click by ref from snapshot",
+      "Refs provide deterministic element selection from snapshots",
+      "Fast: No DOM re-query needed",
+      "Navigation, action, and output controls are opt-in.",
+      "By default, agent-browser imposes no restrictions on navigation, actions, or output.",
+      "Domain Allowlist: Restrict navigation to trusted domains",
+      "Action Policy: Gate destructive actions with a static policy file"
+    ]
+  },
+  "exemple_usage": {
+    "texte": "Demandez à votre agent de tester le parcours de connexion avec agent-browser : il lit --help, relève les champs du formulaire et les remplit.",
+    "passages": [
+      "Use agent-browser to test the login flow. Run agent-browser --help to see available commands.",
+      "Get interactive elements with refs (@e1, @e2)",
+      "Interact using refs"
+    ]
+  },
+  "demarrage": {
+    "etapes": [
+      {
+        "texte": "npm install -g agent-browser, puis agent-browser install pour récupérer Chrome, uniquement la première fois.",
+        "passages": [
+          "npm install -g agent-browser",
+          "Run agent-browser install to download Chrome from Chrome for Testing"
+        ]
+      }
+    ],
+    "commande": "npm install -g agent-browser\nagent-browser install",
+    "passages": [
+      "Installs the native Rust binary:",
+      "npm install -g agent-browser",
+      "Download Chrome from Chrome for Testing (first time only)"
+    ]
+  },
+  "compatibilites": [],
+  "limites": [],
+  "licence_locale": null,
+  "mots_cles": {
+    "nom": "agent-browser",
+    "categorie": "agents et automatisation",
+    "usages": [
+      {
+        "texte": "automatisation de navigateur",
+        "passages": [
+          "Browser automation CLI for AI agents"
+        ]
+      },
+      {
+        "texte": "test d'applications web",
+        "passages": [
+          "Use agent-browser to test the login flow.",
+          "Control real Mobile Safari in the iOS Simulator for authentic mobile web testing."
+        ]
+      },
+      {
+        "texte": "remplissage de formulaires",
+        "passages": [
+          "Fill by ref",
+          "agent-browser fill @e3 \"test@example.com\" # Fill by ref"
+        ]
+      },
+      {
+        "texte": "capture d'écran",
+        "passages": [
+          "Annotated screenshot with numbered element labels"
+        ]
+      },
+      {
+        "texte": "audit d'accessibilité",
+        "passages": [
+          "Run an axe-core accessibility audit against the current page or a URL."
+        ]
+      },
+      {
+        "texte": "lecture de pages web",
+        "passages": [
+          "Fetch agent-readable text, or read rendered active-tab DOM"
+        ]
+      }
+    ],
+    "technologies": [
+      {
+        "texte": "Rust",
+        "passages": [
+          "Fast native Rust CLI."
+        ]
+      },
+      {
+        "texte": "Chrome",
+        "passages": [
+          "Uses Chrome (from Chrome for Testing) by default."
+        ]
+      },
+      {
+        "texte": "MCP",
+        "passages": [
+          "agent-browser mcp # Start an MCP stdio server"
+        ]
+      },
+      {
+        "texte": "Chrome DevTools Protocol",
+        "passages": [
+          "Connect to an existing browser via Chrome DevTools Protocol:"
+        ]
+      },
+      {
+        "texte": "axe-core",
+        "passages": [
+          "Run an axe-core accessibility audit against the current page or a URL."
+        ]
+      },
+      {
+        "texte": "React DevTools",
+        "passages": [
+          "React commands require the React DevTools hook, installed at launch with --enable react-devtools."
+        ]
+      }
+    ],
+    "termes_proches": [
+      {
+        "terme": "automatisation web",
+        "raison": "Expression voisine d'automatisation de navigateur, pour les mêmes tâches sur des sites."
+      },
+      {
+        "terme": "navigateur headless",
+        "raison": "Par défaut, agent-browser lance le navigateur sans fenêtre visible (mode headless) ; l'option --headed l'affiche."
+      },
+      {
+        "terme": "extraction de contenu web",
+        "raison": "Proche de la lecture de pages web : la commande read récupère le texte lisible d'une page ou d'une URL."
+      },
+      {
+        "terme": "tests end-to-end",
+        "raison": "Avec agent-browser, un agent peut parcourir une application de bout en bout, comme une connexion ; ce n'est pas un framework de tests avec assertions."
+      },
+      {
+        "terme": "a11y",
+        "raison": "Abréviation anglaise d'accessibilité ; c'est aussi le nom de la commande d'audit d'accessibilité."
+      },
+      {
+        "terme": "Model Context Protocol",
+        "raison": "Nom complet du protocole MCP ; agent-browser peut démarrer un serveur de ce type."
+      },
+      {
+        "terme": "agent web",
+        "raison": "Un agent d'IA qui agit sur des sites a besoin d'une automatisation de navigateur, ce que fournit l'outil."
+      },
+      {
+        "terme": "skill Claude Code",
+        "raison": "agent-browser fournit un skill pour Claude Code et d'autres assistants de code, ajouté avec npx skills add."
+      }
+    ]
+  },
+  "bouton": {
+    "libelle": "Voir le dépôt",
+    "url": "https://github.com/vercel-labs/agent-browser"
+  },
+  "reperes": [
+    {
+      "texte": "Connexions conservées, sans se reconnecter à chaque lancement",
+      "passages": [
+        "agent-browser provides multiple ways to persist login sessions so you don't re-authenticate every run."
+      ]
+    },
+    {
+      "texte": "Audit d'accessibilité axe-core intégré",
+      "passages": [
+        "Run an axe-core accessibility audit against the current page or a URL."
+      ]
+    },
+    {
+      "texte": "Mobile Safari réel dans le simulateur iOS",
+      "passages": [
+        "Control real Mobile Safari in the iOS Simulator for authentic mobile web testing."
+      ]
+    }
+  ]
+}

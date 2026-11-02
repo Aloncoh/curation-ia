@@ -1,0 +1,221 @@
+{
+  "slug": "ecc",
+  "consignes": "r2",
+  "accroche": {
+    "texte": "ECC installe une méthode de travail dans votre agent de code, au lieu de la redire à chaque prompt",
+    "passages": [
+      "Instead of rebuilding that process in every prompt, you install it once and make it part of how your agent works."
+    ]
+  },
+  "description": {
+    "texte": "Planifier avant de coder, vérifier par les tests, garder ce qui compte : ECC réunit 71 agents, 314 skills, des hooks et des résumés de session pour que ce processus fasse partie de la façon dont votre agent travaille. Il fonctionne aujourd'hui le mieux avec Claude Code, avec des plugins natifs pour Codex et Qoder et des adaptateurs plus limités pour Cursor, OpenCode ou Gemini.",
+    "passages": [
+      "Access to 71 agents, 314 skills, and 98 legacy command shims, plus hooks, rules, memory, continuous learning, and AgentShield security scanning.",
+      "it plans before it builds, verifies changes with tests, reviews its own work from a fresh context, remembers what matters",
+      "Sessions are distilled into summaries, instincts, and reusable skills",
+      "make it part of how your agent works",
+      "It works best with Claude Code today, has native Codex and Qoder plugin paths, and provides capability-limited adapters for Cursor, OpenCode, Gemini, Zed, GitHub Copilot, Antigravity, Qwen, and other harnesses."
+    ]
+  },
+  "interet": {
+    "texte": "Le plan devient un document à valider avant la première ligne, le TDD exige un test en échec avant l'implémentation, et les hooks ajoutent des contrôles qui ne dépendent plus du prompt. Ces hooks lancent des commandes shell sur votre machine : installez ECC uniquement depuis le dépôt officiel ou le paquet npm ecc-universal, les copies non officielles pouvant contenir un logiciel malveillant.",
+    "passages": [
+      "Plans become editable artifacts before implementation starts",
+      "TDD becomes a gated RED -> GREEN -> REFACTOR workflow with evidence",
+      "capture RED evidence before implementation",
+      "Hooks can enforce deterministic checks outside the prompt",
+      "Hooks can run shell commands",
+      "Install ECC only from verified channels: the GitHub repository github.com/affaan-m/ECC, the npm packages ecc-universal and ecc-agentshield",
+      "Third-party re-uploads and unofficial mirrors are not maintained or reviewed by the project and may contain malware."
+    ]
+  },
+  "exemple_usage": {
+    "texte": "Pour une nouvelle fonctionnalité, selon le dépôt : /ecc:plan avec la demande, validation du plan, puis tdd-workflow fait écrire un test qui échoue avant d'implémenter. Suivent une relecture en contexte neuf et une vérification du build, du lint, des types et des tests.",
+    "passages": [
+      "/ecc:plan \"Add usage-based billing alerts\" -> confirm or edit the plan -> activate tdd-workflow -> capture RED evidence before implementation",
+      "implement until GREEN -> review from fresh context -> fix findings with regression tests -> verify build, lint, types, and tests"
+    ]
+  },
+  "demarrage": {
+    "etapes": [
+      {
+        "texte": "Lancer npx ecc-universal@2.2.3 setup (Node.js 18 ou plus requis)",
+        "passages": [
+          "Claude Code plugin setup, updates, scope changes, and hook-profile changes: `bash npx ecc-universal@2.2.3 setup `",
+          "The universal package requires Node.js 18 or newer."
+        ]
+      },
+      {
+        "texte": "Choix de la portée et du profil de hooks ; on peut relancer pour les changer",
+        "passages": [
+          "For a typical personal setup, choose Global user, choose Standard hooks, and confirm.",
+          "Rerun the same command whenever you want to update ECC, change scope, or change its hook profile."
+        ]
+      }
+    ],
+    "commande": "npx ecc-universal@2.2.3 setup",
+    "passages": [
+      "This setup wizard currently configures the Claude Code plugin; use the multi-harness wizard below for Codex or Kimi Code.",
+      "A version pin is not a security audit or an integrity check."
+    ]
+  },
+  "compatibilites": [
+    {
+      "texte": "Assistant d'installation pour le plugin Claude Code : Git et Claude Code 2.1 ou plus requis",
+      "passages": [
+        "This setup wizard currently configures the Claude Code plugin",
+        "requires Git and Claude Code 2.1 or newer on PATH."
+      ]
+    }
+  ],
+  "limites": [
+    {
+      "texte": "Les hooks peuvent lancer des commandes shell et les serveurs MCP détenir des identifiants : à traiter comme du code exécutable, et à installer uniquement depuis les sources officielles.",
+      "passages": [
+        "Hooks can run shell commands, MCP servers can hold credentials",
+        "Treat all three as executable configuration.",
+        "Install ECC only from verified channels"
+      ]
+    }
+  ],
+  "licence_locale": null,
+  "mots_cles": {
+    "nom": "ECC (Everything Claude Code)",
+    "categorie": "agents et automatisation",
+    "usages": [
+      {
+        "texte": "planifier avant de coder",
+        "passages": [
+          "it plans before it builds"
+        ]
+      },
+      {
+        "texte": "écrire les tests d'abord",
+        "passages": [
+          "TDD becomes a gated RED -> GREEN -> REFACTOR workflow with evidence"
+        ]
+      },
+      {
+        "texte": "revue de code",
+        "passages": [
+          "A fresh-context reviewer looks for regressions and blind spots"
+        ]
+      },
+      {
+        "texte": "résumés de session",
+        "passages": [
+          "Sessions are distilled into summaries, instincts, and reusable skills"
+        ]
+      },
+      {
+        "texte": "audit de configuration",
+        "passages": [
+          "Scan your agent configuration for vulnerabilities, misconfigurations, and injection risks."
+        ]
+      },
+      {
+        "texte": "installation sélective",
+        "passages": [
+          "use a selective/manual profile when context footprint matters"
+        ]
+      }
+    ],
+    "technologies": [
+      {
+        "texte": "Claude Code",
+        "passages": [
+          "It works best with Claude Code today"
+        ]
+      },
+      {
+        "texte": "Codex",
+        "passages": [
+          "has native Codex and Qoder plugin paths"
+        ]
+      },
+      {
+        "texte": "Qoder",
+        "passages": [
+          "ECC ships a native Qoder plugin"
+        ]
+      },
+      {
+        "texte": "Cursor",
+        "passages": [
+          "provides capability-limited adapters for Cursor, OpenCode, Gemini"
+        ]
+      },
+      {
+        "texte": "OpenCode",
+        "passages": [
+          "ECC provides a beta OpenCode plugin integration"
+        ]
+      },
+      {
+        "texte": "GitHub Copilot",
+        "passages": [
+          "ECC supports GitHub Copilot on two surfaces"
+        ]
+      }
+    ],
+    "termes_proches": [
+      {
+        "terme": "agent harness",
+        "raison": "ECC se présente comme un système d'optimisation des performances du harness de l'agent."
+      },
+      {
+        "terme": "TDD",
+        "raison": "ECC propose un cycle TDD, avec un test en échec avant le code."
+      },
+      {
+        "terme": "sous-agents",
+        "raison": "ECC fournit des agents spécialisés pour la planification, la relecture et la sécurité."
+      },
+      {
+        "terme": "hooks",
+        "raison": "ECC fournit des hooks, à activer ou non, qui ajoutent des contrôles hors du prompt."
+      },
+      {
+        "terme": "plugin Claude Code",
+        "raison": "ECC s'installe comme plugin Claude Code, par l'installation guidée ou par /plugin."
+      },
+      {
+        "terme": "apprentissage continu",
+        "raison": "ECC peut tirer des sessions passées des instincts et des skills réutilisables."
+      },
+      {
+        "terme": "AgentShield",
+        "raison": "AgentShield, l'outil d'audit associé à ECC et installé à part, analyse la configuration de l'agent."
+      },
+      {
+        "terme": "agent de code",
+        "raison": "ECC structure le travail d'un agent de code comme Claude Code ou Codex."
+      }
+    ]
+  },
+  "bouton": {
+    "libelle": "Voir le dépôt",
+    "url": "https://github.com/affaan-m/ECC"
+  },
+  "reperes": [
+    {
+      "texte": "Relecture par un agent au contexte neuf",
+      "passages": [
+        "A fresh-context reviewer looks for regressions and blind spots"
+      ]
+    },
+    {
+      "texte": "AgentShield, paquet à part, audite la configuration de l'agent",
+      "passages": [
+        "AgentShield scans the harness itself as an attack surface",
+        "these commands require an already installed, reviewed AgentShield binary from ecc-agentshield"
+      ]
+    },
+    {
+      "texte": "Les sessions peuvent devenir instincts et skills réutilisables",
+      "passages": [
+        "Sessions are distilled into summaries, instincts, and reusable skills"
+      ]
+    }
+  ]
+}

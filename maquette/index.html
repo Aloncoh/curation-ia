@@ -3,27 +3,27 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Fil — Curation AI (maquette)</title>
-<meta name="description" content="Maquette de P2 : fil de publications, profil de l'agent éditorial, Reels, actualités collectées et fiche. Données réelles, exemples et fonctions prévues sont signalés comme tels.">
+<title>Accueil · Curation AI</title>
+<meta name="description" content="Aperçu de Curation AI : un fil de publications sur les outils d’IA, rédigées par des agents à partir des sources.">
 <link rel="icon" href="../assets/brand/mascotte-icone.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- Maquette uniquement : sur le site réel (P4), les polices seront auto-hébergées (aucun appel à Google). -->
+<!-- Aperçu statique : sur le site réel, les polices seront auto-hébergées (aucun appel à Google). -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;600;700&family=Recursive:slnt,wght,CASL,CRSV,MONO@-15..0,300..1000,0..1,0..1,0..1&display=swap">
 <style>
-  /* Jetons tirés de la mascotte : feutre (fond de la planche), visage, lueur des yeux, lavande du corps.
-     Trois statuts, toujours codés de la même façon : réel (vert), exemple (miel), prévu (contour pointillé). */
+  /* Jetons tirés de la mascotte : feutre (fond), visage, lueur des yeux, lavande du corps. */
   :root {
-    --feutre: #e6e0d9;
-    --coton: #fbf9f6;
+    --feutre: #ece7e1;
+    --coton: #fdfcfa;
     --visage: #1d1b23;
     --encre: #1d1b23;
-    --pied: #5e5874;
+    --pied: #615b72;
     --lavande: #847db6;
     --lavande-encre: #4d4688;
-    --lavande-voile: #ebe8f5;
+    --lavande-voile: #eeebf7;
+    --survol: rgba(29, 27, 35, .045);
     --lueur: #faf2e0;
-    --trait: #d9d2c9;
+    --trait: #e0d9d0;
     --alerte: #8a3b2e;
     --alerte-voile: #f6e1dc;
     --reel: #286b40;
@@ -34,548 +34,457 @@
     --miel-encre: #634a0e;
     --miel-trait: #d8bf7a;
     --ombre: 0 1px 0 rgba(29, 27, 35, .04), 0 8px 24px -12px rgba(29, 27, 35, .18);
-    --rayon: 22px;
+    --flotte: 0 18px 40px -16px rgba(29, 27, 35, .45);
+    --rayon: 18px;
     --display: "Recursive", ui-rounded, system-ui, sans-serif;
     --texte: "Atkinson Hyperlegible Next", system-ui, -apple-system, "Segoe UI", sans-serif;
     color-scheme: light;
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-      --feutre: #16151b; --coton: #211f28; --encre: #f1ece4; --pied: #b4aec6;
-      --lavande-encre: #b9b2ea; --lavande-voile: #2b2838; --trait: #34303f; --alerte: #f0a493; --alerte-voile: #3a2420;
-      --focus: #847db6; --actif-fond: #b9b2ea; --actif-texte: #1d1b23;
+      --feutre: #121116; --coton: #1b1a21; --encre: #f1ece4; --pied: #aaa4bc; --survol: rgba(255, 255, 255, .05);
+      --lavande-encre: #bdb6ee; --lavande-voile: #29263a; --trait: #2f2c38; --alerte: #f0a493; --alerte-voile: #3a2420;
+      --focus: #9b94d6; --actif-fond: #ece7f9; --actif-texte: #1d1b23;
       --reel: #6cc58d; --miel: #382f1a; --miel-encre: #f1d58c; --miel-trait: #6b5a2c;
-      --ombre: 0 1px 0 rgba(0, 0, 0, .3), 0 8px 24px -12px rgba(0, 0, 0, .6);
+      --ombre: 0 1px 0 rgba(0, 0, 0, .3), 0 8px 24px -12px rgba(0, 0, 0, .6); --flotte: 0 18px 40px -12px rgba(0, 0, 0, .8);
       color-scheme: dark;
     }
-    :root:not([data-theme="light"]) .visage, :root:not([data-theme="light"]) .piste, :root:not([data-theme="light"]) .reel-ecran { box-shadow: inset 0 0 0 1px #3d3850; }
   }
   :root[data-theme="dark"] {
-    --feutre: #16151b; --coton: #211f28; --encre: #f1ece4; --pied: #b4aec6;
-    --lavande-encre: #b9b2ea; --lavande-voile: #2b2838; --trait: #34303f; --alerte: #f0a493; --alerte-voile: #3a2420;
-    --focus: #847db6; --actif-fond: #b9b2ea; --actif-texte: #1d1b23;
+    --feutre: #121116; --coton: #1b1a21; --encre: #f1ece4; --pied: #aaa4bc; --survol: rgba(255, 255, 255, .05);
+    --lavande-encre: #bdb6ee; --lavande-voile: #29263a; --trait: #2f2c38; --alerte: #f0a493; --alerte-voile: #3a2420;
+    --focus: #9b94d6; --actif-fond: #ece7f9; --actif-texte: #1d1b23;
     --reel: #6cc58d; --miel: #382f1a; --miel-encre: #f1d58c; --miel-trait: #6b5a2c;
-    --ombre: 0 1px 0 rgba(0, 0, 0, .3), 0 8px 24px -12px rgba(0, 0, 0, .6);
+    --ombre: 0 1px 0 rgba(0, 0, 0, .3), 0 8px 24px -12px rgba(0, 0, 0, .6); --flotte: 0 18px 40px -12px rgba(0, 0, 0, .8);
     color-scheme: dark;
   }
-  :root[data-theme="dark"] .visage, :root[data-theme="dark"] .piste, :root[data-theme="dark"] .reel-ecran { box-shadow: inset 0 0 0 1px #3d3850; }
 
   * { box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; }
-  body { margin: 0; background: var(--feutre); color: var(--encre); font: 400 1.0625rem/1.55 var(--texte); }
+  body { margin: 0; background: var(--feutre); color: var(--encre); font: 400 1rem/1.5 var(--texte); }
   img, video { max-width: 100%; display: block; }
   a { color: var(--lavande-encre); text-underline-offset: .18em; }
-  button { font: inherit; }
-  :focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 6px; }
-  main:focus { outline: none; }
+  button { font: inherit; color: inherit; }
+  [hidden] { display: none !important; }
+  :focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; border-radius: 8px; }
+  main:focus, [tabindex="-1"]:focus { outline: none; }
   .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-  .lien-evitement { position: absolute; left: 16px; top: -60px; background: var(--visage); color: var(--lueur); padding: 10px 16px; border-radius: 12px; z-index: 30; }
+  .lien-evitement { position: absolute; left: 16px; top: -60px; background: var(--visage); color: var(--lueur); padding: 10px 16px; border-radius: 12px; z-index: 40; }
   .lien-evitement:focus { top: 12px; }
-  h1, h2, h3, h4 { overflow-wrap: anywhere; }
+  h1, h2, h3 { overflow-wrap: anywhere; }
 
-  /* Bandeau de maquette et légende des statuts : toujours visibles. */
-  .bandeau { background: var(--visage); color: var(--lueur); font-size: .86rem; line-height: 1.4; padding: 9px 16px; }
-  .bandeau .dedans { max-width: 1120px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 6px 18px; align-items: center; justify-content: space-between; }
-  .bandeau strong { font-family: var(--display); font-variation-settings: "CASL" 1; font-weight: 800; letter-spacing: .02em; }
-  .legende { display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: center; margin: 0; padding: 0; list-style: none; }
-  .legende li { display: inline-flex; gap: 6px; align-items: center; color: #d9d3e8; }
+  /* ——— Disposition à la manière de X : colonne gauche, colonne centrale, colonne droite. ——— */
+  .app { display: grid; grid-template-columns: 250px minmax(0, 600px) 300px; gap: 0 28px; justify-content: center; min-height: 100vh; }
+  .barre-gauche { position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; gap: 4px; padding: 14px 0 20px; }
+  .centre { min-width: 0; background: var(--coton); border-inline: 1px solid var(--trait); min-height: 100vh; }
+  .barre-droite { position: sticky; top: 0; align-self: start; padding: 14px 0; display: grid; gap: 16px; }
 
-  .statut-tag {
-    display: inline-flex; align-items: center; gap: 5px; font: 700 .72rem/1 var(--texte); letter-spacing: .05em; text-transform: uppercase;
-    border-radius: 999px; padding: 4px 9px; white-space: nowrap;
+  /* En haut à gauche : uniquement le logo. Le profil de l'utilisateur ferme la colonne, comme sur X. */
+  .moi-mini { display: flex; align-items: center; gap: 10px; padding: 8px 12px 8px 8px; border-radius: 999px; text-decoration: none; color: var(--encre); margin-top: auto; }
+  .moi-mini:hover { background: var(--survol); }
+  .moi-mini .moi-texte { display: grid; line-height: 1.25; min-width: 0; }
+  .moi-mini strong { font-weight: 700; }
+  .moi-mini small { color: var(--pied); font-size: .8rem; }
+  .avatar-vide { display: grid; place-items: center; flex: none; border-radius: 50%; background: var(--lavande-voile); color: var(--lavande-encre); }
+
+  .marque { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--encre); padding: 8px 12px 8px 8px; border-radius: 999px; width: fit-content; margin-bottom: 6px; }
+  .marque:hover { background: var(--survol); }
+  .marque img { width: 36px; height: 36px; border-radius: 12px; }
+  .marque span { font-family: var(--display); font-variation-settings: "CASL" 1; font-weight: 900; font-size: 1.25rem; letter-spacing: -.01em; }
+
+  .nav { display: grid; gap: 2px; }
+  .nav a, .plus > summary {
+    display: flex; align-items: center; gap: 16px; padding: 11px 14px; border-radius: 999px; text-decoration: none; color: var(--encre);
+    font-size: 1.12rem; font-weight: 500; min-height: 48px; cursor: pointer; width: fit-content;
   }
-  .statut-tag.st-reel { color: var(--reel); box-shadow: inset 0 0 0 1.5px currentColor; }
-  .statut-tag.st-reel::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
-  .statut-tag.st-exemple { background: var(--miel); color: var(--miel-encre); box-shadow: inset 0 0 0 1.5px var(--miel-trait); }
-  .statut-tag.st-prevu { color: var(--pied); border: 1.5px dashed currentColor; padding: 3px 8px; }
-  .statut-tag.st-neutre { background: var(--lavande-voile); color: var(--lavande-encre); }
-  .statut-tag.st-verifier { background: var(--alerte-voile); color: var(--alerte); box-shadow: inset 0 0 0 1.5px currentColor; }
-  .bandeau .statut-tag.st-reel { color: #7fd39d; }
-  .bandeau .statut-tag.st-exemple { color: #3b2c06; background: #f1d58c; box-shadow: none; }
-  .bandeau .statut-tag.st-prevu { color: #d9d3e8; }
-
-  .page { max-width: 1120px; margin: 0 auto; padding: 0 16px 64px; }
-  .entete { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 0; position: relative; }
-  .marque { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--encre); }
-  .marque img { width: 44px; height: 44px; border-radius: 14px; }
-  .marque span { font-family: var(--display); font-variation-settings: "CASL" 1; font-weight: 900; font-size: 1.35rem; letter-spacing: -.01em; }
-  .marque small { display: block; font: 600 .7rem/1 var(--texte); color: var(--pied); letter-spacing: .04em; text-transform: uppercase; margin-top: 3px; }
-  .nav { display: flex; gap: 2px; margin-left: auto; }
-  .nav a { display: inline-flex; align-items: center; gap: 7px; text-decoration: none; color: var(--pied); font-weight: 600; font-size: .95rem; padding: 8px 12px; border-radius: 999px; min-height: 40px; }
-  .nav a:hover { color: var(--encre); }
-  /* Page courante : fond, graisse et trait, pour ne pas reposer sur la seule couleur. */
-  .nav a[aria-current="page"] { background: var(--coton); color: var(--encre); font-weight: 800; box-shadow: var(--ombre), inset 0 -3px 0 var(--focus); }
-
-  /* Sélecteur de langue */
-  .langue { position: relative; }
-  .langue > summary {
-    list-style: none; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; font: 700 .85rem/1 var(--texte); color: var(--encre);
-    background: var(--coton); border-radius: 999px; padding: 10px 12px; box-shadow: var(--ombre); min-height: 40px;
+  .nav a:hover, .plus > summary:hover { background: var(--survol); }
+  .nav a[aria-current="page"] { font-weight: 800; }
+  .nav a[aria-current="page"] svg { stroke-width: 2.4; }
+  .plus { position: relative; margin-top: 4px; }
+  .plus > summary { list-style: none; color: var(--pied); font-size: 1rem; }
+  .plus > summary::-webkit-details-marker { display: none; }
+  .plus-panneau {
+    position: absolute; left: 0; top: calc(100% + 4px); z-index: 30; min-width: 220px; background: var(--coton); border-radius: 16px;
+    padding: 6px; box-shadow: var(--flotte); border: 1px solid var(--trait); display: grid;
   }
-  .langue > summary::-webkit-details-marker { display: none; }
-  .langue-panneau {
-    position: absolute; right: 0; top: calc(100% + 8px); z-index: 25; width: min(320px, calc(100vw - 32px)); background: var(--coton);
-    border-radius: 18px; padding: 16px; box-shadow: 0 18px 40px -16px rgba(29, 27, 35, .45); font-size: .9rem;
-  }
-  .langue-panneau label { font-weight: 700; display: block; margin-bottom: 6px; }
-  .langue-panneau select { font: inherit; width: 100%; color: var(--encre); background: var(--feutre); border: 1px solid var(--trait); border-radius: 12px; padding: 9px 10px; min-height: 42px; }
-  .langue-panneau p { margin: 10px 0 0; color: var(--pied); }
+  .plus-panneau a { display: flex; align-items: center; gap: 12px; padding: 11px 12px; border-radius: 10px; text-decoration: none; color: var(--encre); font-weight: 600; min-height: 44px; }
+  .plus-panneau a:hover { background: var(--survol); }
+  .plus-panneau a[aria-current="page"] { color: var(--lavande-encre); }
 
-  /* En-têtes de page */
-  .tete-page { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 20px; padding: 20px 0 22px; }
-  .tete-page h1 { font-family: var(--display); font-variation-settings: "CASL" 1; font-weight: 900; font-size: clamp(1.9rem, 4.6vw, 3.1rem); line-height: 1.04; letter-spacing: -.025em; margin: 0 0 10px; max-width: 20ch; }
-  .tete-page p { margin: 0; color: var(--pied); max-width: 58ch; }
-  .tete-page .mascotte-accueil { width: 132px; aspect-ratio: 1; border-radius: 42% 46% 40% 48% / 46% 42% 48% 40%; overflow: hidden; background: #c1b8ae; }
-  .aide { color: var(--pied); }
-
-  .colonnes { display: grid; grid-template-columns: minmax(0, 600px) minmax(0, 1fr); gap: 32px; align-items: start; }
-  .colonne-cote { position: sticky; top: 16px; display: grid; gap: 16px; max-width: 360px; }
-  .carton { background: var(--coton); border-radius: var(--rayon); padding: 18px; box-shadow: var(--ombre); font-size: .92rem; }
-  .carton h2 { font-family: var(--display); font-variation-settings: "CASL" 1; font-weight: 800; font-size: 1.05rem; margin: 0 0 8px; }
-  .carton p { margin: 0 0 10px; color: var(--pied); }
-  .carton p:last-child { margin-bottom: 0; }
-
-  /* Auteur : avatar de la mascotte, nom, badge « Agent IA » dérivé du type de compte. */
-  .auteur { display: flex; align-items: center; gap: 12px; min-width: 0; }
-  .avatar { width: 44px; height: 44px; border-radius: 15px; flex: none; background: #c1b8ae; }
-  .auteur-texte { display: grid; min-width: 0; line-height: 1.3; }
-  .auteur-nom { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; font-weight: 700; }
-  .auteur-nom a { color: var(--encre); text-decoration: none; }
-  .auteur-nom a:hover { text-decoration: underline; text-decoration-color: var(--lavande); }
-  .auteur-id { color: var(--pied); font-size: .86rem; }
-  .badge-agent {
-    display: inline-flex; align-items: center; gap: 6px; font: 700 .7rem/1 var(--texte); letter-spacing: .04em; text-transform: uppercase;
-    background: var(--visage); color: var(--lueur); border-radius: 999px; padding: 4px 9px 4px 6px;
+  /* Recherche collante en haut de la colonne principale, sur toutes les pages. */
+  .recherche-haut {
+    position: sticky; top: 0; z-index: 20; padding: 8px 16px; border-bottom: 1px solid var(--trait);
+    background: color-mix(in srgb, var(--coton) 86%, transparent); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
   }
-  .mini-yeux { display: inline-flex; gap: 3px; }
-  .mini-yeux i { width: 4px; height: 6px; border-radius: 50%; background: var(--lueur); box-shadow: 0 0 4px rgba(250, 242, 224, .7); }
+  .recherche-haut form { position: relative; }
+  .recherche-haut svg { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--pied); pointer-events: none; }
+  .recherche-haut input {
+    width: 100%; min-height: 44px; font: inherit; color: var(--encre); background: var(--feutre); border: 1.5px solid transparent;
+    border-radius: 999px; padding: 9px 16px 9px 46px;
+  }
+  .recherche-haut input::placeholder { color: var(--pied); }
+  .recherche-haut input:focus { outline: none; border-color: var(--focus); background: var(--coton); }
 
-  /* Publication */
-  .publication { background: var(--coton); border-radius: var(--rayon); box-shadow: var(--ombre); margin-bottom: 24px; overflow: hidden; }
-  .bandeau-exemple {
-    display: flex; gap: 10px; align-items: flex-start; margin: 0; padding: 10px 16px; background: var(--miel); color: var(--miel-encre);
-    font-size: .84rem; line-height: 1.4; border-bottom: 1.5px dashed var(--miel-trait);
-  }
-  .bandeau-exemple .statut-tag.st-exemple { background: var(--coton); }
-  .bandeau-exemple.a-verifier { background: var(--alerte-voile); color: var(--alerte); border-color: currentColor; }
-  .pub-tete { display: flex; justify-content: space-between; gap: 12px; align-items: center; padding: 14px 16px 12px; }
-  .pub-date { font-size: .82rem; color: var(--pied); text-align: right; flex: none; }
-  .pub-corps { padding: 14px 18px 6px; }
-  .accroche { font: 700 1.24rem/1.3 var(--texte); margin: 0 0 14px; letter-spacing: -.005em; }
-  .accroche a { color: var(--encre); text-decoration: none; }
-  .accroche a:hover { text-decoration: underline; text-decoration-color: var(--lavande); }
-  .pub-champs { margin: 0; display: grid; gap: 12px; }
-  .pub-champs div { display: grid; gap: 2px; }
-  .pub-champs dt { font: 700 .74rem/1.2 var(--texte); text-transform: uppercase; letter-spacing: .07em; color: var(--pied); }
-  .pub-champs dd { margin: 0; }
-  .manque { color: var(--pied); font-style: italic; }
-  .preuve {
-    display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; margin: 16px 0 12px; padding: 10px 12px;
-    background: var(--lavande-voile); border-radius: 14px; font-size: .86rem;
-  }
-  .preuve-niveau { font-weight: 800; color: var(--lavande-encre); display: inline-flex; gap: 6px; align-items: center; }
-  .preuve-niveau::before { content: ""; width: 10px; height: 10px; border-radius: 3px; background: var(--lavande); }
-  .etiquettes { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 10px; padding: 0; list-style: none; }
-  .etiquettes li { font-size: .78rem; font-weight: 600; background: var(--lavande-voile); color: var(--lavande-encre); padding: 3px 9px; border-radius: 999px; }
-  .pub-meta { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: .86rem; color: var(--pied); margin: 0 0 10px; }
-  .controle { font-size: .84rem; margin: 0 0 12px; color: var(--reel); font-weight: 600; }
-  .controle.a-verifier { color: var(--alerte); }
-  .lien-suite { display: inline-flex; font-weight: 700; margin-bottom: 8px; }
-  .pub-actions { border-top: 1px solid var(--trait); padding: 10px 12px 12px; margin-top: 8px; }
-  .actions-ligne { display: flex; flex-wrap: wrap; gap: 4px; }
-  .actions-ligne button {
-    display: inline-flex; align-items: center; gap: 6px; background: none; border: 0; color: var(--pied); font-weight: 600; font-size: .9rem;
-    padding: 8px 10px; border-radius: 12px; min-height: 40px; cursor: not-allowed; opacity: .75;
-  }
-  .actions-note { margin: 6px 4px 0; font-size: .8rem; color: var(--pied); display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  .titre-page { font: 800 1.3rem/1.2 var(--texte); margin: 0; padding: 16px 16px 12px; }
+  .barre-retour { display: flex; align-items: center; gap: 20px; padding: 6px 16px; min-height: 52px; }
+  .barre-retour a { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 50%; color: var(--encre); }
+  .barre-retour a:hover { background: var(--survol); }
+  .barre-retour h1 { font: 800 1.2rem/1.2 var(--texte); margin: 0; }
 
-  /* Médias générés : carrousel et image « visage » (fond du visage, lettres lumineuses). */
-  .media { position: relative; margin: 0; }
-  .piste { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; background: var(--visage); overscroll-behavior-x: contain; }
-  .piste::-webkit-scrollbar { display: none; }
-  .piste:focus-visible { outline-offset: -4px; }
+  /* ——— Publication : avatar, en-tête, texte, lien, image, actions. ——— */
+  .post { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 0 12px; padding: 14px 16px 6px; border-bottom: 1px solid var(--trait); }
+  .post-avatar img { width: 44px; height: 44px; border-radius: 50%; }
+  .post-corps { min-width: 0; }
+  .post-raison { grid-column: 1 / -1; display: flex; gap: 8px; align-items: center; margin: 0 0 6px 32px; font-size: .84rem; color: var(--pied); font-weight: 600; }
+  .post-tete { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 6px; line-height: 1.3; margin-bottom: 2px; }
+  .post-nom { font-weight: 700; color: var(--encre); text-decoration: none; }
+  .post-nom:hover { text-decoration: underline; }
+  .post-meta { color: var(--pied); font-size: .94rem; min-width: 0; }
+  .post-meta a { color: inherit; text-decoration: none; }
+  .post-meta a:hover { text-decoration: underline; }
+  .badge {
+    margin-left: auto; align-self: center; font: 700 .72rem/1 var(--texte); letter-spacing: .02em; padding: 5px 9px; border-radius: 999px;
+    background: var(--lavande-voile); color: var(--lavande-encre); white-space: nowrap;
+  }
+  .badge.nouveau { background: color-mix(in srgb, var(--reel) 16%, transparent); color: var(--reel); }
+  .badge.exemple { background: var(--miel); color: var(--miel-encre); }
+  .badge.verifier { background: var(--alerte-voile); color: var(--alerte); }
+
+  .post-texte { overflow-wrap: anywhere; font-size: 1rem; line-height: 1.52; }
+  .post-texte p { margin: 0 0 .7em; }
+  .post-texte .points { list-style: none; margin: 0 0 .7em; padding: 0; display: grid; gap: .25em; }
+  .post-texte .points li { padding-left: 1.35em; position: relative; }
+  .post-texte .points li::before { content: "→"; position: absolute; left: 0; color: var(--pied); }
+  .post-texte > :last-child { margin-bottom: 0; }
+  .voir-plus { background: none; border: 0; padding: 0 2px; margin-left: 4px; color: var(--lavande-encre); font-weight: 700; cursor: pointer; border-radius: 6px; }
+  .voir-plus:hover { text-decoration: underline; }
+  .post.complet .post-texte { font-size: 1.06rem; }
+
+  .lien-ressource {
+    display: flex; align-items: center; gap: 10px; margin: 12px 0 10px; padding: 10px 14px; border: 1px solid var(--trait); border-radius: 14px;
+    text-decoration: none; color: var(--encre); min-height: 48px; max-width: 100%;
+  }
+  .lien-ressource:hover { background: var(--survol); }
+  .lien-ressource svg { flex: none; color: var(--pied); }
+  .lien-ressource .lr-libelle { font-weight: 700; white-space: nowrap; }
+  .lien-ressource .lr-cible { color: var(--pied); font-size: .9rem; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .lien-ressource .lr-fleche { margin-left: auto; color: var(--pied); }
+
+  .post-media { margin: 0 0 6px; border-radius: 16px; overflow: hidden; border: 1px solid var(--trait); background: var(--visage); position: relative; }
+  .post-media > img { width: 100%; height: auto; }
+  .post-texte + .post-media { margin-top: 12px; }
+  .credit { position: absolute; right: 8px; bottom: 8px; z-index: 2; font: 600 .7rem/1 var(--texte); color: #fff; background: rgba(0, 0, 0, .55); padding: 4px 7px; border-radius: 6px; }
+
+  .post-mention { margin: 0 0 10px; font-size: .8rem; color: var(--pied); line-height: 1.4; }
+  .lien-discret { background: none; border: 0; padding: 0; color: var(--pied); font-size: inherit; text-decoration: underline; text-underline-offset: .2em; cursor: pointer; border-radius: 4px; }
+  .lien-discret:hover { color: var(--encre); }
+  .panneau { margin: 8px 0 4px; padding: 12px 14px; border-radius: 14px; background: var(--feutre); font-size: .88rem; color: var(--pied); }
+  .panneau p { margin: 0 0 8px; }
+  .panneau > :last-child { margin-bottom: 0; }
+  .panneau ul { margin: 0 0 8px; padding-left: 1.1em; }
+  .panneau li { margin-bottom: 4px; overflow-wrap: anywhere; }
+  .panneau details summary { cursor: pointer; color: var(--encre); font-weight: 600; padding: 4px 0; }
+  .panneau blockquote { margin: 6px 0; padding: 6px 10px; border-left: 3px solid var(--lavande); background: var(--coton); border-radius: 0 10px 10px 0; color: var(--encre); overflow-wrap: anywhere; }
+  .panneau blockquote.introuvable { border-left-color: var(--alerte); }
+  .panneau .verif { display: block; font-size: .76rem; color: var(--alerte); font-weight: 700; margin-top: 2px; }
+
+  .post-actions { display: flex; gap: 4px; margin: 4px 0 4px -8px; }
+  .post-actions button {
+    display: inline-flex; align-items: center; gap: 7px; background: none; border: 0; color: var(--pied); font-size: .88rem; font-weight: 600;
+    padding: 8px 10px; border-radius: 999px; min-height: 40px; cursor: pointer;
+  }
+  .post-actions button:hover { color: var(--lavande-encre); background: var(--lavande-voile); }
+  .commentaires { margin: 2px 0 10px; padding: 14px; border-radius: 14px; border: 1px dashed var(--trait); text-align: center; }
+  .commentaires p { margin: 0; }
+  .commentaires .vide { font-weight: 700; }
+  .commentaires .discret { font-size: .82rem; color: var(--pied); margin-top: 2px; }
+
+  /* Visuels générés des exemples (couverture d'image) : lumineux, nouveauté en gros titre. */
   .diapo {
-    flex: 0 0 100%; scroll-snap-align: start; aspect-ratio: 1; position: relative; background: var(--visage); color: var(--lueur);
-    display: flex; flex-direction: column; justify-content: center; gap: 3.5cqi; padding: 12% 8% 18%; container-type: inline-size;
+    aspect-ratio: 1; position: relative; color: #1d1b23; display: flex; flex-direction: column; gap: 3.5cqi; padding: 12% 8% 14%; container-type: inline-size;
+    background: linear-gradient(150deg, #fffdf8 20%, color-mix(in srgb, var(--accent) 45%, #fffdf8));
   }
-  .diapo-libelle { font: 700 3.4cqi/1.2 var(--texte); letter-spacing: .09em; text-transform: uppercase; color: #b9b2ea; }
-  .diapo-texte { margin: 0; font-family: var(--display); font-variation-settings: "CASL" .5; font-weight: 640; line-height: 1.22; letter-spacing: -.01em; text-wrap: pretty; }
-  .diapo-texte.court { font-size: 7.4cqi; }
-  .diapo-texte.moyen { font-size: 5.8cqi; }
-  .diapo-texte.long { font-size: 4.8cqi; }
-  .diapo-texte.vide { color: #b4aec6; font-style: italic; }
-  .diapo-coin { position: absolute; left: 5%; top: 5%; font: 600 max(.7rem, 2.9cqi)/1 var(--texte); color: #a59fbd; letter-spacing: .04em; }
-  .couverture { align-items: center; text-align: center; gap: 2cqi; }
-  .couverture .yeux-grands { display: flex; gap: 11cqi; margin-bottom: 8cqi; }
-  .couverture .yeux-grands i { width: 7.5cqi; height: 11.5cqi; border-radius: 50%; background: var(--lueur); box-shadow: 0 0 6cqi rgba(250, 242, 224, .55); }
-  .couverture .titre-media {
-    font-family: var(--display); font-variation-settings: "CASL" 1, "MONO" 0; font-weight: 850; line-height: 1; letter-spacing: -.02em;
-    font-size: min(calc(100cqi / (var(--n) * .62)), 17cqi); text-shadow: 0 0 5cqi rgba(250, 242, 224, .4); white-space: nowrap;
-  }
-  .couverture .sous-media { font: 700 3.6cqi/1.2 var(--texte); letter-spacing: .08em; text-transform: uppercase; color: #b9b2ea; }
-  /* Boutons en bas de l'image, de part et d'autre des points : ils ne couvrent jamais le texte d'une diapositive. */
-  .car-btn {
-    position: absolute; bottom: 44px; width: 40px; height: 40px; border-radius: 50%; border: 0; cursor: pointer;
-    background: rgba(251, 249, 246, .94); color: #1d1b23; display: grid; place-items: center; box-shadow: 0 4px 14px rgba(0, 0, 0, .35);
-  }
-  .car-btn.prec { left: 10px; }
-  .car-btn.suiv { right: 10px; }
-  .car-btn:disabled { opacity: 0; pointer-events: none; }
-  .car-compteur { position: absolute; top: 12px; right: 12px; background: rgba(29, 27, 35, .75); color: var(--lueur); font: 700 .78rem/1 var(--texte); padding: 6px 9px; border-radius: 999px; box-shadow: inset 0 0 0 1px rgba(250, 242, 224, .2); }
-  .car-points { position: absolute; left: 0; right: 0; bottom: 61px; display: flex; justify-content: center; gap: 6px; pointer-events: none; }
-  .car-points i { width: 6px; height: 6px; border-radius: 50%; background: rgba(250, 242, 224, .35); transition: transform .2s ease, background .2s ease; }
-  .car-points i.actif { background: var(--lueur); transform: scale(1.35); }
-  .mention-media {
-    margin: 0; padding: 7px 16px; font-size: .78rem; font-weight: 600; color: var(--pied); background: var(--coton); display: flex; gap: 8px; align-items: center;
-    border-bottom: 1px solid var(--trait);
-  }
-  .mention-media::before { content: ""; width: 12px; height: 12px; border-radius: 4px; border: 1.5px dashed currentColor; flex: none; }
-
-  /* Tuile « visage » des actualités collectées */
-  .carte {
-    position: relative; display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 18px;
-    background: var(--coton); border-radius: var(--rayon); padding: 16px; box-shadow: var(--ombre); margin-bottom: 12px; transition: transform .18s ease;
-  }
-  .carte:hover { transform: translateY(-2px); }
-  .carte:has(h3 a:focus-visible) { outline: 3px solid var(--focus); outline-offset: 3px; }
-  .carte h3 a:focus-visible { outline: none; }
-  .visage {
-    position: relative; background: var(--visage); color: var(--lueur); border-radius: 28px 30px 26px 30px;
-    aspect-ratio: 1; display: flex; flex-direction: column; justify-content: flex-end; padding: 12px 10px 13px; overflow: hidden; container-type: inline-size;
-  }
-  .yeux { position: absolute; top: 16px; left: 50%; transform: translateX(-50%); display: flex; gap: 12px; }
-  .yeux i { display: block; width: 9px; height: 13px; border-radius: 50%; background: var(--lueur); box-shadow: 0 0 10px rgba(250, 242, 224, .55); transform-origin: center; }
-  .carte:hover .yeux i, .carte:focus-within .yeux i { animation: cligne .32s ease-in-out 1; }
-  @keyframes cligne { 0%, 100% { transform: scaleY(1); } 45% { transform: scaleY(.12); } }
-  .visage .lettres {
-    font-family: var(--display); font-variation-settings: "CASL" 1, "MONO" 1; font-weight: 800; text-align: center; line-height: 1; letter-spacing: -.02em; white-space: nowrap;
-    font-size: min(calc(100cqi / (var(--n) * .64)), 28cqi); text-shadow: 0 0 14px rgba(250, 242, 224, .45);
-  }
-  .visage .lettres.annonce { font-variation-settings: "CASL" 1, "MONO" 0; letter-spacing: 0; }
-  .visage .sous { font: 600 .62rem/1.1 var(--texte); text-align: center; color: #c9c2dc; margin-top: 5px; letter-spacing: .04em; text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .surtitre { font-size: .8rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--pied); display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: center; }
-  .type { color: var(--lavande-encre); }
-  .carte h3 { font: 700 1.15rem/1.3 var(--texte); margin: 4px 0 6px; }
-  .carte h3 a { color: var(--encre); text-decoration: none; }
-  .carte h3 a::after { content: ""; position: absolute; inset: 0; border-radius: var(--rayon); }
-  .carte h3 a:hover { text-decoration: underline; text-decoration-color: var(--lavande); }
-  .extrait { margin: 0 0 8px; font-size: .96rem; overflow-wrap: anywhere; }
-  .extrait [lang] { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; line-clamp: 3; overflow: hidden; }
-  .extrait-label { display: block; font-size: .78rem; color: var(--pied); font-weight: 600; margin-bottom: 1px; }
-  .meta { display: flex; flex-wrap: wrap; gap: 4px 14px; align-items: center; font-size: .86rem; color: var(--pied); margin: 0; }
-  .meta a, .carte .lien-exemple a { position: relative; z-index: 1; }
-  .carte .meta a, .carte .lien-exemple a { display: inline-flex; align-items: center; min-height: 32px; }
-  .carte .lien-exemple { margin: 8px 0 0; font-size: .86rem; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
-
-  /* Filtres de la page Collecte */
-  .filtres { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; margin: 4px 0 8px; }
-  .segments { display: inline-flex; background: var(--coton); border-radius: 999px; padding: 4px; box-shadow: var(--ombre); }
-  .segments button { font: 600 .95rem/1 var(--texte); color: var(--pied); background: none; border: 0; border-radius: 999px; padding: 10px 14px; cursor: pointer; min-height: 40px; }
-  .segments button[aria-pressed="true"] { background: var(--actif-fond); color: var(--actif-texte); }
-  .choix-source { display: flex; align-items: center; gap: 8px; font-size: .95rem; color: var(--pied); }
-  .choix-source select { font: inherit; color: var(--encre); background: var(--coton); border: 1px solid var(--trait); border-radius: 12px; padding: 8px 10px; min-height: 40px; max-width: 220px; }
-  .jour { margin-top: 26px; }
-  .jour h2 { font: 700 .8rem/1 var(--texte); text-transform: uppercase; letter-spacing: .08em; color: var(--pied); margin: 0 0 12px; display: flex; gap: 10px; align-items: center; }
-  .jour h2::after { content: ""; flex: 1; height: 1px; background: var(--trait); }
-  .sources-liste { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
-  .sources-liste li { display: grid; grid-template-columns: 12px 1fr; gap: 8px; align-items: baseline; }
-  .pastille { width: 10px; height: 10px; border-radius: 50%; background: var(--reel); transform: translateY(1px); }
-  .pastille.erreur { background: var(--alerte); }
-  .pastille.jamais { background: var(--trait); }
-  .detail-source { display: block; color: var(--pied); font-size: .82rem; }
-
-  .plus { display: flex; justify-content: center; margin: 20px 0; }
-  .bouton {
-    font: 700 1rem/1 var(--texte); background: var(--visage); color: var(--lueur); border: 0; border-radius: 999px;
-    padding: 13px 20px; cursor: pointer; text-decoration: none; display: inline-flex; gap: 8px; align-items: center; min-height: 44px;
-  }
-  .bouton.discret { background: var(--coton); color: var(--encre); box-shadow: var(--ombre); }
-  .bouton:disabled { cursor: not-allowed; opacity: .6; }
-
-  /* États */
-  .etat { display: grid; grid-template-columns: 112px 1fr; gap: 18px; align-items: center; background: var(--coton); border-radius: var(--rayon); padding: 20px; box-shadow: var(--ombre); }
-  .etat img { width: 112px; height: 112px; border-radius: 34px; }
-  .etat :is(h1, h2, h3) { font-family: var(--display); font-variation-settings: "CASL" 1; font-weight: 800; font-size: 1.2rem; margin: 0 0 4px; }
-  .etat p { margin: 0 0 12px; color: var(--pied); }
-  .etat p:last-child { margin-bottom: 0; }
-  .squelette { height: 112px; border-radius: var(--rayon); background: linear-gradient(90deg, var(--coton) 0%, var(--lavande-voile) 50%, var(--coton) 100%); background-size: 200% 100%; animation: reflet 1.4s linear infinite; margin-top: 12px; }
-  .squelette.haut { height: 340px; }
-  @keyframes reflet { to { background-position: -200% 0; } }
-  .grille-etats { display: grid; gap: 28px; margin-top: 12px; max-width: 720px; }
-  .grille-etats h2 { font: 700 .8rem/1 var(--texte); text-transform: uppercase; letter-spacing: .08em; color: var(--pied); margin: 0 0 10px; }
-
-  /* Publication détaillée et fiche */
-  .retour { display: inline-flex; gap: 6px; align-items: center; margin: 8px 0 18px; font-weight: 600; text-decoration: none; min-height: 40px; }
-  .detail { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 28px; align-items: start; }
-  .detail-principal { background: var(--coton); border-radius: var(--rayon); box-shadow: var(--ombre); overflow: hidden; }
-  .detail-principal .pub-tete { padding-top: 16px; }
-  .accroche-grande { font: 700 clamp(1.45rem, 3.2vw, 2.05rem)/1.2 var(--texte); letter-spacing: -.01em; margin: 4px 18px 12px; }
-  .detail-citation-accroche { padding: 0 18px 14px; }
-  .detail-section { padding: 18px; border-top: 1px solid var(--trait); }
-  .detail-section h2 { font-family: var(--display); font-variation-settings: "CASL" 1; font-weight: 800; font-size: 1.15rem; margin: 0 0 6px; }
-  .detail-section > p { margin: 0 0 10px; }
-  .citations { margin: 4px 0 0; }
-  .citations summary { cursor: pointer; font-weight: 700; color: var(--lavande-encre); font-size: .88rem; padding: 6px 0; min-height: 32px; }
-  blockquote.citation { overflow-wrap: anywhere; margin: 6px 0 10px; padding: 12px 14px; border-left: 4px solid var(--lavande); background: var(--lavande-voile); border-radius: 0 14px 14px 0; font-size: .95rem; }
-  blockquote.citation.introuvable { border-left-color: var(--alerte); background: var(--alerte-voile); }
-  .verif { display: block; margin-top: 6px; font: 700 .76rem/1.2 var(--texte); color: var(--reel); }
-  blockquote.introuvable .verif { color: var(--alerte); }
-  .attribution { padding: 12px 14px; border-radius: 16px; border: 1.5px solid var(--trait); margin-bottom: 12px; }
-  .attribution h3 { font-size: .95rem; margin: 0 0 4px; }
-  .attribution .qui { font-size: .86rem; color: var(--pied); margin: 0 0 6px; }
-  .attribution p { margin: 0 0 6px; }
-  .questions { margin: 0; padding-left: 1.2em; }
-  .questions li { margin-bottom: 6px; }
-  .detail-cote { display: grid; gap: 16px; position: sticky; top: 16px; }
-  .infos { margin: 0; display: grid; gap: 9px; font-size: .9rem; }
-  .infos div { display: grid; gap: 1px; }
-  .infos dt { font-weight: 700; }
-  .infos dd { margin: 0; color: var(--pied); overflow-wrap: anywhere; }
-  .infos code { font-family: var(--display); font-variation-settings: "MONO" 1; font-size: .86em; color: var(--encre); }
-  .fiche-tete { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 28px; align-items: center; }
-  .fiche-tete .visage { border-radius: 64px 70px 60px 70px; padding: 18px 16px 22px; }
-  .fiche-tete .yeux { top: 38px; gap: 24px; }
-  .fiche-tete .yeux i { width: 18px; height: 28px; box-shadow: 0 0 22px rgba(250, 242, 224, .6); }
-  .fiche-tete .visage .sous { font-size: .8rem; }
-  .fiche-tete h1 { font: 700 clamp(1.5rem, 3.4vw, 2.3rem)/1.15 var(--texte); margin: 6px 0 10px; letter-spacing: -.01em; }
-  .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
-  .sections { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 24px; margin-top: 28px; align-items: start; }
-  .bloc { background: var(--coton); border-radius: var(--rayon); padding: 22px; box-shadow: var(--ombre); margin-bottom: 20px; }
-  .bloc h2 { font-family: var(--display); font-variation-settings: "CASL" 1; font-weight: 800; font-size: 1.2rem; margin: 0 0 6px; }
-  .bloc > p { margin: 0 0 14px; color: var(--pied); }
-  .bloc .capture { color: var(--pied); font-size: .86rem; margin: 0; }
-  .champs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 20px; margin: 0; }
-  .champs div { padding: 12px 0; border-top: 1px solid var(--trait); }
-  .champs dt { font-weight: 700; font-size: .95rem; }
-  .champs dd { margin: 2px 0 0; color: var(--pied); font-size: .92rem; }
-  .versions { list-style: none; padding: 0; margin: 0; }
-  .versions li { display: flex; justify-content: space-between; gap: 12px; padding: 8px 0; border-top: 1px solid var(--trait); font-size: .92rem; }
-  .versions li.courante { font-weight: 700; }
-  .versions code { font-family: var(--display); font-variation-settings: "MONO" 1, "CASL" 1; font-weight: 600; }
-  .versions .pre { font-size: .75rem; font-weight: 600; color: var(--pied); border: 1px solid var(--trait); border-radius: 999px; padding: 1px 8px; margin-left: 6px; }
-  details.preversions summary { cursor: pointer; font-weight: 600; color: var(--lavande-encre); padding: 10px 0 4px; }
-
-  /* Profil */
-  .profil-tete { display: grid; grid-template-columns: 168px minmax(0, 1fr); gap: 28px; align-items: center; padding: 20px 0 8px; }
-  .profil-avatar { width: 168px; aspect-ratio: 1; border-radius: 42% 46% 40% 48% / 46% 42% 48% 40%; overflow: hidden; background: #c1b8ae; }
-  .profil-tete h1 { font-family: var(--display); font-variation-settings: "CASL" 1; font-weight: 900; font-size: clamp(2rem, 5vw, 3rem); line-height: 1; letter-spacing: -.02em; margin: 0; display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; }
-  .profil-id { color: var(--pied); margin: 6px 0 12px; font-weight: 600; }
-  .profil-bio { margin: 0 0 10px; max-width: 60ch; }
-  .profil-specialite { margin: 0 0 14px; color: var(--pied); font-size: .95rem; }
-  .profil-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
-  .profil-actions .note { color: var(--pied); font-size: .86rem; }
-  .onglets { display: flex; gap: 4px; border-bottom: 1px solid var(--trait); margin: 22px 0 20px; overflow-x: auto; scrollbar-width: none; }
-  .onglets a { text-decoration: none; color: var(--pied); font-weight: 700; padding: 12px 14px; border-bottom: 3px solid transparent; white-space: nowrap; min-height: 44px; display: inline-flex; align-items: center; }
-  .onglets a[aria-current="page"] { color: var(--encre); border-bottom-color: var(--focus); }
-  .intro-onglet { margin: 0 0 14px; color: var(--pied); }
-  .grille-pubs { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
-  .vignette { position: relative; display: grid; align-content: start; background: var(--coton); border-radius: 18px; overflow: hidden; box-shadow: var(--ombre); text-decoration: none; color: var(--encre); }
-  .vignette .vignette-texte { padding: 10px 12px 12px; font-size: .88rem; font-weight: 600; line-height: 1.35; }
-  .vignette .statut-tag { position: absolute; top: 10px; right: 10px; }
-  .vignette .diapo-coin { display: none; } /* l'étiquette « Exemple » de la vignette en tient lieu */
-  .vignette .vignette-mention { padding: 0 12px 10px; font-size: .74rem; font-weight: 600; color: var(--pied); }
-  .vignette:hover .vignette-texte { text-decoration: underline; text-decoration-color: var(--lavande); }
-  .vignette-reel { aspect-ratio: 9 / 16; object-fit: cover; width: 100%; }
-  .emplacement {
-    border: 2px dashed var(--trait); border-radius: 18px; display: grid; place-content: center; justify-items: center; gap: 8px; text-align: center; padding: 20px;
-    color: var(--pied); font-size: .9rem; min-height: 200px;
-  }
-  .emplacement strong { color: var(--encre); font-size: 1rem; }
-  .etapes { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; counter-reset: etape; }
-  .etapes li { display: grid; grid-template-columns: 36px minmax(0, 1fr); gap: 12px; background: var(--coton); border-radius: 18px; padding: 14px; box-shadow: var(--ombre); }
-  .etapes li::before { counter-increment: etape; content: counter(etape); width: 36px; height: 36px; border-radius: 12px; background: var(--visage); color: var(--lueur); display: grid; place-items: center; font-family: var(--display); font-weight: 800; }
-  .etapes h3 { margin: 0 0 4px; font-size: 1rem; display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; }
-  .etapes p { margin: 0; color: var(--pied); font-size: .92rem; }
-  .niveaux { display: grid; gap: 10px; margin: 0; }
-  .niveaux div { background: var(--coton); border-radius: 16px; padding: 12px 14px; box-shadow: var(--ombre); }
-  .niveaux dt { font-weight: 800; display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; }
-  .niveaux dd { margin: 4px 0 0; color: var(--pied); font-size: .92rem; }
-  .sous-titre-section { font-family: var(--display); font-variation-settings: "CASL" 1; font-weight: 800; font-size: 1.2rem; margin: 28px 0 12px; }
-  .comptes { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
-  .comptes li { border: 2px dashed var(--trait); border-radius: 16px; padding: 12px 14px; font-size: .92rem; color: var(--pied); }
-  .comptes strong { color: var(--encre); display: block; margin-bottom: 2px; }
-
-  /* Reels : vidéo verticale hébergée par la plateforme, commandes sous l'image (rien ne couvre les mentions). */
-  .reels-fil { display: grid; gap: 28px; justify-items: center; }
-  .reel { display: grid; grid-template-columns: auto minmax(0, 340px); gap: 24px; align-items: start; width: 100%; justify-content: center; }
-  .reel-colonne { display: grid; gap: 10px; border-radius: 26px; }
-  .reel-ecran { position: relative; height: min(76vh, 700px); aspect-ratio: 9 / 16; background: var(--visage); border-radius: 26px; overflow: hidden; cursor: pointer; }
-  .reel-ecran video { width: 100%; height: 100%; object-fit: cover; }
-  .reel-ecran video::cue { font-family: var(--texte); font-size: 1rem; line-height: 1.35; background: rgba(29, 27, 35, .86); color: #faf2e0; }
-  .reel-grand-bouton {
-    position: absolute; inset: 0; margin: auto; width: 76px; height: 76px; border-radius: 50%; border: 0; display: grid; place-items: center;
-    background: rgba(251, 249, 246, .92); color: #1d1b23; box-shadow: 0 10px 30px rgba(0, 0, 0, .4); cursor: pointer;
-  }
-  .reel-ecran.en-lecture .reel-grand-bouton { display: none; }
-  .reel-commandes { display: flex; align-items: center; gap: 6px; background: var(--coton); border-radius: 18px; padding: 8px; box-shadow: var(--ombre); }
-  .reel-commandes button { display: inline-grid; place-items: center; width: 44px; height: 44px; border-radius: 14px; border: 0; background: none; color: var(--encre); cursor: pointer; }
-  .reel-commandes button[aria-pressed="true"] { background: var(--actif-fond); color: var(--actif-texte); }
-  .reel-commandes button[aria-pressed="false"] .cc { text-decoration: line-through; }
-  .mention-texte { margin: 0; font-size: .86rem; font-weight: 600; color: var(--pied); }
-  .reel-commandes .cc { font: 800 .8rem/1 var(--texte); letter-spacing: .04em; border: 1.5px solid currentColor; border-radius: 5px; padding: 3px 4px; }
-  .reel-temps { font: 600 .82rem/1 var(--texte); color: var(--pied); font-variant-numeric: tabular-nums; margin-left: auto; padding-right: 8px; white-space: nowrap; }
-  .reel-progression { height: 4px; border-radius: 999px; background: var(--trait); overflow: hidden; }
-  .reel-progression i { display: block; height: 100%; width: 0; background: var(--lavande); }
-  .reel-infos { display: grid; gap: 12px; align-content: start; }
-  .reel-infos h2 { font: 700 1.2rem/1.3 var(--texte); margin: 0; }
-  .reel-infos .tags { display: flex; flex-wrap: wrap; gap: 6px; }
-  .reel-infos .preuve { margin: 0; }
-  .transcription { background: var(--coton); border-radius: 16px; padding: 4px 14px 12px; box-shadow: var(--ombre); font-size: .92rem; }
-  .transcription summary { cursor: pointer; font-weight: 700; padding: 10px 0; min-height: 40px; }
-  .transcription dl { margin: 0; }
-  .transcription dt { font: 700 .74rem/1.2 var(--texte); text-transform: uppercase; letter-spacing: .07em; color: var(--pied); margin-top: 10px; }
-  .transcription dd { margin: 2px 0 0; }
-  .reel-erreur { position: absolute; inset: 0; display: none; place-content: center; text-align: center; padding: 24px; color: var(--lueur); gap: 8px; }
-  .reel-ecran.erreur .reel-erreur { display: grid; }
-  .reel-ecran.erreur video, .reel-ecran.erreur .reel-grand-bouton { display: none; }
-  .reel.prevu { grid-template-columns: minmax(0, 420px); }
-  .reel.prevu .reel-ecran { background: transparent; border: 2px dashed var(--trait); cursor: default; display: grid; place-content: center; justify-items: center; text-align: center; gap: 10px; padding: 28px; color: var(--pied); height: auto; aspect-ratio: auto; min-height: 220px; width: 100%; }
-  .reel.prevu .reel-ecran strong { color: var(--encre); font-size: 1.05rem; }
-
-  .pied-page { margin-top: 48px; padding-top: 18px; border-top: 1px solid var(--trait); font-size: .85rem; color: var(--pied); }
-
-  @media (max-width: 980px) {
-    .colonnes, .detail, .sections { grid-template-columns: minmax(0, 1fr); }
-    .colonne-cote, .detail-cote { position: static; max-width: none; }
-    .reel { grid-template-columns: minmax(0, 1fr); justify-items: center; }
-    .reel-infos { max-width: 420px; width: 100%; }
-  }
-  /* Téléphone : la navigation devient une barre en bas d'écran. */
-  @media (max-width: 700px) {
-    body { font-size: 1rem; padding-bottom: calc(74px + env(safe-area-inset-bottom)); }
-    .entete { padding: 12px 0; }
-    .marque small { display: none; }
-    .nav {
-      position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; margin: 0; display: grid; grid-template-columns: repeat(5, 1fr); gap: 0;
-      background: var(--coton); border-top: 1px solid var(--trait); padding: 6px 4px calc(6px + env(safe-area-inset-bottom));
-    }
-    .nav a { flex-direction: column; gap: 2px; font-size: .7rem; padding: 6px 2px; border-radius: 12px; min-height: 52px; justify-content: center; }
-    .nav a[aria-current="page"] { box-shadow: inset 0 3px 0 var(--focus); background: var(--lavande-voile); color: var(--lavande-encre); }
-    /* Le défilement provoqué par le focus tient compte de la barre fixe du bas. */
-    html { scroll-padding-bottom: calc(80px + env(safe-area-inset-bottom)); }
-    .tete-page { grid-template-columns: 1fr; padding-top: 6px; }
-    .tete-page .mascotte-accueil { display: none; }
-    .segments { display: flex; width: 100%; }
-    .segments button { flex: 1; padding: 10px 6px; white-space: nowrap; font-size: .9rem; }
-    .carte { grid-template-columns: 76px minmax(0, 1fr); gap: 12px; padding: 14px; }
-    .visage { border-radius: 22px 24px 20px 24px; padding: 8px 6px 9px; }
-    .yeux { top: 11px; gap: 9px; }
-    .yeux i { width: 7px; height: 10px; }
-    .fiche-tete, .profil-tete { grid-template-columns: minmax(0, 1fr); gap: 16px; }
-    .fiche-tete .visage { width: 160px; }
-    .profil-avatar { width: 112px; }
-    .champs { grid-template-columns: 1fr; }
-    .etat { grid-template-columns: 80px 1fr; }
-    .etat img { width: 80px; height: 80px; border-radius: 24px; }
-    .pub-tete { align-items: flex-start; }
-    .reel-ecran { height: auto; width: 100%; }
-    .reel-colonne { width: 100%; }
-    .grille-pubs { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
-    .bandeau { font-size: .8rem; }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
-  }
-
-  /* Fil social : carte légère, média propre à chaque publication */
-  .publication, .vignette, .carte-compte { --accent: #b9b2ea; }
+  .diapo-coin { position: absolute; left: 5%; top: 5%; font: 600 max(.66rem, 2.9cqi)/1 var(--texte); color: #4d4688; letter-spacing: .04em; }
+  .visuel { justify-content: flex-start; padding-top: 13cqi; }
+  .visuel-titre { order: -1; color: #1d1b23; font: 800 max(1.4rem, 9cqi)/1.05 var(--display); }
+  .visuel-liste { display: grid; gap: 2.6cqi; margin: 0; padding: 0; list-style: none; counter-reset: e; }
+  .visuel-liste li { display: flex; gap: 3cqi; align-items: center; padding: 3cqi 3.6cqi; border-radius: 3cqi; background: rgba(255, 255, 255, .78); box-shadow: 0 1px 4px rgba(29, 27, 35, .1); font: 640 max(.8rem, 4.1cqi)/1.25 var(--display); color: #1d1b23; }
+  .forme-etapes li::before { counter-increment: e; content: counter(e); flex: none; display: grid; place-items: center; width: 7cqi; height: 7cqi; border-radius: 50%; background: #1d1b23; color: #fff; font-size: 3.6cqi; }
+  .forme-priorite li:nth-child(2) { margin-left: 6cqi; opacity: .85; }
+  .forme-priorite li:nth-child(3) { margin-left: 12cqi; opacity: .7; }
+  .forme-priorite li:first-child, .forme-avant_apres li:last-child { outline: 2px solid #1d1b23; }
+  .forme-avant_apres li:first-child { opacity: .7; text-decoration: line-through; }
+  .forme-terminal li { font-family: ui-monospace, Menlo, monospace; background: #1d1b23; color: #fff; word-break: break-word; }
+  .forme-terminal li::before { content: "$"; color: var(--accent); }
+  .photo-presse { padding: 0; justify-content: flex-end; background: #1d1b23; }
+  .photo-presse img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .photo-presse::after { content: ""; position: absolute; inset: 40% 0 0; background: linear-gradient(transparent, rgba(0, 0, 0, .82)); }
+  .photo-titre { position: relative; z-index: 1; padding: 5cqi; color: #fff; font: 800 max(1.4rem, 9cqi)/1.05 var(--display); text-wrap: balance; }
+  .depot { justify-content: center; background: #fbf9f6; }
+  .depot-nom { font: 700 max(1rem, 6cqi)/1.2 var(--display); overflow-wrap: anywhere; }
+  .depot-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2.4cqi; margin: 0; }
+  .depot-stats div { padding: 2.6cqi; border-radius: 2.6cqi; background: #ebe8f5; }
+  .depot-stats dt { font-size: max(.68rem, 2.9cqi); color: #5e5874; }
+  .depot-stats dd { margin: 0; font: 700 max(.86rem, 4.2cqi)/1.2 var(--texte); }
+  [data-compte] { --accent: #b9b2ea; }
   [data-compte="nodi"] { --accent: #7fe0bd; }
   [data-compte="repo"] { --accent: #f09a62; }
   [data-compte="pyxo"] { --accent: #7cc4f5; }
   [data-compte="mova"] { --accent: #c9a7f5; }
   [data-compte="pulse"] { --accent: #f5c04e; }
   [data-compte="radar"] { --accent: #6fe3dc; }
-  .filtre-auteurs { display: flex; gap: 8px; overflow-x: auto; padding: 2px 2px 14px; }
-  .filtre-auteurs button { flex: none; display: flex; align-items: center; gap: 6px; min-height: 44px; padding: 4px 12px 4px 6px; border: 1px solid var(--trait); border-radius: 22px; background: var(--coton); color: var(--encre); font: 600 .86rem var(--texte); cursor: pointer; }
-  .filtre-auteurs button[aria-pressed="true"] { background: var(--actif-fond); color: var(--actif-texte); }
-  .filtre-auteurs img { width: 30px; height: 30px; border-radius: 50%; }
-  .avatar.rond { border-radius: 50%; background: none; }
-  .pub-tete-droite { display: grid; justify-items: end; gap: 4px; font-size: .82rem; color: var(--pied); flex: none; }
-  .description { margin: 6px 0 12px; line-height: 1.5; }
-  .pub-pied { display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: baseline; font-size: .9rem; }
-  .mention-discrete { margin: 10px 0 0; font-size: .76rem; color: var(--pied); }
-  .visuel { justify-content: center; gap: 3.2cqi; }
-  .visuel-titre { position: absolute; left: 5%; bottom: 5%; font: 700 max(.7rem, 2.9cqi)/1.2 var(--texte); letter-spacing: .06em; text-transform: uppercase; color: var(--accent); }
-  .visuel-liste { display: grid; gap: 2.6cqi; margin: 0; padding: 0; list-style: none; counter-reset: e; }
-  .visuel-liste li { display: flex; gap: 3cqi; align-items: center; padding: 3cqi 3.6cqi; border-radius: 3cqi; background: rgba(250, 242, 224, .08); font: 640 max(.85rem, 4.1cqi)/1.25 var(--display); color: var(--lueur); }
-  .forme-etapes li::before { counter-increment: e; content: counter(e); flex: none; display: grid; place-items: center; width: 7cqi; height: 7cqi; border-radius: 50%; background: var(--accent); color: #1d1b23; font-size: 3.6cqi; }
-  .forme-priorite li:nth-child(2) { margin-left: 6cqi; opacity: .85; }
-  .forme-priorite li:nth-child(3) { margin-left: 12cqi; opacity: .7; }
-  .forme-priorite li:first-child { outline: 2px solid var(--accent); }
-  .forme-avant_apres li:first-child { opacity: .7; text-decoration: line-through; text-decoration-color: var(--accent); }
-  .forme-avant_apres li:last-child { outline: 2px solid var(--accent); }
-  .forme-terminal li { font-family: ui-monospace, Menlo, monospace; background: #000; word-break: break-word; }
-  .forme-terminal li::before { content: "$"; color: var(--accent); }
-  .depot { background: #fbf9f6; color: #1d1b23; }
-  .depot-nom { font: 700 max(1rem, 5.4cqi)/1.2 var(--display); overflow-wrap: anywhere; }
-  .depot-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2.4cqi; margin: 0; }
-  .depot-stats div { padding: 2.6cqi; border-radius: 2.6cqi; background: #ebe8f5; }
-  .depot-stats dt { font-size: max(.7rem, 2.9cqi); color: #5e5874; }
-  .depot-stats dd { margin: 0; font: 700 max(.9rem, 4.2cqi)/1.2 var(--texte); }
-  .depot .visuel-titre { color: #4d4688; }
-  /* Règle du 2026-10-30 : tous les médias sont lumineux, avec la nouveauté en gros titre. */
-  .publication .diapo:not(.photo-presse), .detail .diapo:not(.photo-presse), .vignette .diapo:not(.photo-presse) { background: linear-gradient(150deg, #fffdf8 20%, color-mix(in srgb, var(--accent) 45%, #fffdf8)); color: #1d1b23; }
-  .diapo .diapo-libelle, .diapo .diapo-coin { color: #4d4688; }
-  .visuel:not(.depot) { justify-content: flex-start; padding-top: 13cqi; }
-  .visuel .visuel-titre { position: static; order: -1; color: #1d1b23; font: 800 max(1.6rem, 9cqi)/1.05 var(--display); letter-spacing: 0; text-transform: none; }
-  .visuel-liste li { background: rgba(255, 255, 255, .78); color: #1d1b23; box-shadow: 0 1px 4px rgba(29, 27, 35, .1); }
-  .forme-etapes li::before { background: #1d1b23; color: #fff; }
-  .forme-priorite li:first-child, .forme-avant_apres li:last-child { outline-color: #1d1b23; }
-  .forme-terminal li { background: #1d1b23; color: #fff; }
-  .depot .visuel-titre { font-size: max(.75rem, 3cqi); font-weight: 700; }
-  .photo-presse { padding: 0; justify-content: flex-end; }
-  .photo-presse img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-  .photo-presse::after { content: ""; position: absolute; inset: 40% 0 0; background: linear-gradient(transparent, rgba(0, 0, 0, .82)); }
-  .photo-titre { position: relative; z-index: 1; padding: 5cqi; color: #fff; font: 800 max(1.6rem, 9cqi)/1.05 var(--display); text-wrap: balance; }
-  .grille-comptes { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
-  .carte-compte { background: var(--coton); border-radius: var(--rayon); box-shadow: var(--ombre); padding: 16px; }
-  .carte-compte img { width: 84px; height: 84px; }
-  .sujets { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; font-size: .88rem; }
-  .sujets li > span:not(.statut-tag) { display: block; color: var(--pied); font-size: .8rem; }
+
+  /* Explorer : grille d'images, comme sur Instagram. */
+  .grille { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3px; }
+  .tuile-explorer { position: relative; aspect-ratio: 1; overflow: hidden; display: block; background: var(--visage); }
+  .tuile-explorer > img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+  .tuile-explorer .diapo { width: 100%; height: 100%; }
+  .tuile-explorer:hover::after { content: ""; position: absolute; inset: 0; background: rgba(0, 0, 0, .12); }
+
+  /* États vides */
+  .vide-page { padding: 48px 24px; text-align: center; color: var(--pied); }
+  .vide-page strong { display: block; color: var(--encre); font-size: 1.2rem; margin-bottom: 4px; }
+  .vide-page p { margin: 0 auto; max-width: 36ch; }
+
+  /* Colonne droite */
+  .encart { background: var(--coton); border: 1px solid var(--trait); border-radius: var(--rayon); padding: 14px 4px 8px; }
+  .encart h2 { font: 800 1.15rem/1.2 var(--texte); margin: 0 0 6px; padding: 0 14px; }
+  .compte-ligne { display: flex; align-items: center; gap: 10px; padding: 9px 14px; text-decoration: none; color: var(--encre); border-radius: 12px; }
+  .compte-ligne:hover { background: var(--survol); }
+  .compte-ligne img { width: 40px; height: 40px; border-radius: 50%; flex: none; }
+  .compte-ligne span { display: grid; line-height: 1.3; min-width: 0; }
+  .compte-ligne small { color: var(--pied); font-size: .86rem; }
+
+  /* Profils */
+  .profil-banniere { height: 150px; background: linear-gradient(120deg, var(--lavande-voile), color-mix(in srgb, var(--accent, var(--lavande)) 55%, var(--lavande-voile))); }
+  .profil-haut { display: flex; justify-content: space-between; align-items: flex-end; padding: 0 16px; margin-top: -50px; }
+  .profil-photo { width: 104px; height: 104px; border-radius: 50%; border: 4px solid var(--coton); background: var(--coton); }
+  .profil-photo.avatar-vide { width: 104px; height: 104px; background: var(--lavande-voile); }
+  .profil-infos { padding: 10px 16px 4px; }
+  .profil-infos h1 { font: 800 1.35rem/1.2 var(--texte); margin: 0; }
+  .profil-infos .profil-id { color: var(--pied); margin: 0 0 10px; }
+  .profil-infos .bio { margin: 0 0 10px; }
+  .bouton-contour {
+    display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 8px 16px; border-radius: 999px; border: 1px solid var(--trait);
+    background: var(--coton); color: var(--encre); font-weight: 700; cursor: pointer; text-decoration: none;
+  }
+  .bouton-contour:hover { background: var(--survol); }
+  .bouton-contour:disabled { cursor: not-allowed; opacity: .55; }
+  .note-discrete { font-size: .8rem; color: var(--pied); }
+  .onglets { display: flex; border-bottom: 1px solid var(--trait); overflow-x: auto; scrollbar-width: none; }
+  .onglets a { flex: 1; text-align: center; text-decoration: none; color: var(--pied); font-weight: 600; padding: 14px 12px; white-space: nowrap; position: relative; min-height: 48px; }
+  .onglets a:hover { background: var(--survol); }
+  .onglets a[aria-current="page"] { color: var(--encre); font-weight: 800; }
+  .onglets a[aria-current="page"]::after { content: ""; position: absolute; left: 50%; bottom: 0; width: 56px; transform: translateX(-50%); height: 4px; border-radius: 4px; background: var(--focus); }
+  .liste-comptes { list-style: none; margin: 0; padding: 4px 0; }
+  .liste-comptes li { display: flex; align-items: center; gap: 10px; padding: 0 16px 0 0; }
+  .liste-comptes .compte-ligne { flex: 1; min-width: 0; }
+
+  dialog { border: 0; border-radius: 20px; padding: 0; width: min(520px, calc(100vw - 24px)); background: var(--coton); color: var(--encre); box-shadow: var(--flotte); }
+  dialog::backdrop { background: rgba(20, 18, 26, .45); }
+  .formulaire { display: grid; gap: 14px; padding: 18px 20px 20px; }
+  .formulaire-tete { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .formulaire-tete h2 { margin: 0; font: 800 1.15rem/1.2 var(--texte); }
+  .formulaire label { display: grid; gap: 6px; font-weight: 600; font-size: .92rem; }
+  .formulaire input, .formulaire textarea, .reglage select {
+    font: inherit; color: var(--encre); background: var(--feutre); border: 1.5px solid var(--trait); border-radius: 12px; padding: 10px 12px; min-height: 44px; width: 100%;
+  }
+  .formulaire textarea { min-height: 90px; resize: vertical; }
+  .bouton-plein {
+    display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 8px 18px; border-radius: 999px; border: 0;
+    background: var(--actif-fond); color: var(--actif-texte); font-weight: 700; cursor: pointer; text-decoration: none;
+  }
+  .bouton-icone { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 50%; border: 0; background: none; cursor: pointer; color: var(--encre); }
+  .bouton-icone:hover { background: var(--survol); }
+
+  /* Pages techniques (menu « Plus ») */
+  .section { padding: 4px 16px 18px; border-bottom: 1px solid var(--trait); }
+  .section > h2 { font: 800 1.05rem/1.2 var(--texte); margin: 14px 0 10px; }
+  .section > p { margin: 0 0 10px; color: var(--pied); font-size: .94rem; }
+  .statut-tag { display: inline-flex; align-items: center; gap: 5px; font: 700 .7rem/1 var(--texte); letter-spacing: .04em; text-transform: uppercase; border-radius: 999px; padding: 4px 8px; white-space: nowrap; }
+  .statut-tag.st-reel { color: var(--reel); box-shadow: inset 0 0 0 1.5px currentColor; }
+  .statut-tag.st-prevu { color: var(--pied); border: 1.5px dashed currentColor; padding: 3px 7px; }
+  .statut-tag.st-neutre { background: var(--lavande-voile); color: var(--lavande-encre); }
+  .statut-tag.st-verifier { background: var(--alerte-voile); color: var(--alerte); }
+  .sujets { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; font-size: .9rem; }
+  .sujets li > span:not(.statut-tag) { display: block; color: var(--pied); font-size: .82rem; }
+  .sources-liste { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; font-size: .92rem; }
+  .sources-liste li { display: grid; grid-template-columns: 12px 1fr; gap: 8px; align-items: baseline; }
+  .pastille { width: 10px; height: 10px; border-radius: 50%; background: var(--reel); }
+  .pastille.erreur { background: var(--alerte); }
+  .pastille.jamais { background: var(--trait); }
+  .detail-source { display: block; color: var(--pied); font-size: .82rem; }
+  .filtres { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; margin: 4px 0 8px; }
+  .segments { display: inline-flex; background: var(--feutre); border-radius: 999px; padding: 4px; }
+  .segments button { font: 600 .9rem/1 var(--texte); color: var(--pied); background: none; border: 0; border-radius: 999px; padding: 10px 12px; cursor: pointer; min-height: 40px; }
+  .segments button[aria-pressed="true"] { background: var(--actif-fond); color: var(--actif-texte); }
+  .choix-source { display: flex; align-items: center; gap: 8px; font-size: .92rem; color: var(--pied); }
+  .choix-source select { font: inherit; color: var(--encre); background: var(--coton); border: 1px solid var(--trait); border-radius: 12px; padding: 8px 10px; min-height: 40px; max-width: 200px; }
+  .jour { margin-top: 18px; }
+  .jour h3 { font: 700 .78rem/1 var(--texte); text-transform: uppercase; letter-spacing: .08em; color: var(--pied); margin: 0 0 10px; display: flex; gap: 10px; align-items: center; }
+  .jour h3::after { content: ""; flex: 1; height: 1px; background: var(--trait); }
+  .carte { position: relative; display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 14px; padding: 12px; border: 1px solid var(--trait); border-radius: 16px; margin-bottom: 10px; }
+  .carte:hover { background: var(--survol); }
+  .carte:has(h4 a:focus-visible) { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .carte h4 a:focus-visible { outline: none; }
+  .visage {
+    position: relative; background: var(--visage); color: var(--lueur); border-radius: 22px 24px 20px 24px; aspect-ratio: 1; display: flex; flex-direction: column;
+    justify-content: flex-end; padding: 8px 6px 9px; overflow: hidden; container-type: inline-size;
+  }
+  .yeux { position: absolute; top: 11px; left: 50%; transform: translateX(-50%); display: flex; gap: 9px; }
+  .yeux i { display: block; width: 7px; height: 10px; border-radius: 50%; background: var(--lueur); box-shadow: 0 0 10px rgba(250, 242, 224, .55); }
+  .visage .lettres { font-family: var(--display); font-variation-settings: "CASL" 1, "MONO" 1; font-weight: 800; text-align: center; line-height: 1; white-space: nowrap; font-size: min(calc(100cqi / (var(--n) * .64)), 28cqi); }
+  .visage .lettres.annonce { font-variation-settings: "CASL" 1, "MONO" 0; }
+  .visage .sous { font: 600 .62rem/1.1 var(--texte); text-align: center; color: #c9c2dc; margin-top: 5px; text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .surtitre { font-size: .76rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--pied); display: flex; flex-wrap: wrap; gap: 4px 10px; }
+  .carte h4 { font: 700 1rem/1.3 var(--texte); margin: 2px 0 4px; }
+  .carte h4 a { color: var(--encre); text-decoration: none; }
+  .carte h4 a::after { content: ""; position: absolute; inset: 0; border-radius: 16px; }
+  .extrait { margin: 0 0 6px; font-size: .9rem; overflow-wrap: anywhere; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; line-clamp: 3; overflow: hidden; }
+  .meta { display: flex; flex-wrap: wrap; gap: 4px 14px; align-items: center; font-size: .82rem; color: var(--pied); margin: 0; }
+  .meta a { position: relative; z-index: 1; }
+  .plus-bas { display: flex; justify-content: center; margin: 16px 0; }
+  .infos { margin: 0; display: grid; gap: 9px; font-size: .92rem; }
+  .infos div { display: grid; gap: 1px; }
+  .infos dt { font-weight: 700; }
+  .infos dd { margin: 0; color: var(--pied); overflow-wrap: anywhere; }
+  .versions { list-style: none; padding: 0; margin: 0; }
+  .versions li { display: flex; justify-content: space-between; gap: 12px; padding: 8px 0; border-top: 1px solid var(--trait); font-size: .92rem; }
+  .versions li.courante { font-weight: 700; }
+  .versions .pre { font-size: .74rem; color: var(--pied); border: 1px solid var(--trait); border-radius: 999px; padding: 1px 8px; margin-left: 6px; }
+  details.preversions summary { cursor: pointer; font-weight: 600; color: var(--lavande-encre); padding: 10px 0 4px; }
+  blockquote.citation { overflow-wrap: anywhere; margin: 6px 0 10px; padding: 10px 12px; border-left: 4px solid var(--lavande); background: var(--lavande-voile); border-radius: 0 12px 12px 0; font-size: .92rem; }
+  .etat { display: grid; grid-template-columns: 80px 1fr; gap: 16px; align-items: center; padding: 16px; border: 1px solid var(--trait); border-radius: var(--rayon); }
+  .etat img { width: 80px; height: 80px; border-radius: 24px; }
+  .etat :is(h1, h2, h3) { font: 800 1.1rem/1.25 var(--texte); margin: 0 0 4px; }
+  .etat p { margin: 0 0 10px; color: var(--pied); }
+  .etat p:last-child { margin-bottom: 0; }
+  .squelette { height: 96px; border-radius: var(--rayon); background: linear-gradient(90deg, var(--coton) 0%, var(--lavande-voile) 50%, var(--coton) 100%); background-size: 200% 100%; animation: reflet 1.4s linear infinite; margin-top: 12px; }
+  .squelette.haut { height: 260px; }
+  @keyframes reflet { to { background-position: -200% 0; } }
+  .grille-etats { display: grid; gap: 24px; padding: 8px 16px 24px; }
+  .grille-etats h2 { font: 700 .78rem/1 var(--texte); text-transform: uppercase; letter-spacing: .08em; color: var(--pied); margin: 0 0 10px; }
+  .reglage { display: grid; gap: 6px; margin-bottom: 16px; font-weight: 600; max-width: 360px; }
+
+  /* Reels : vidéo verticale, commandes sous l'image. */
+  .reel { padding: 16px; border-bottom: 1px solid var(--trait); display: grid; gap: 14px; justify-items: center; }
+  .reel-colonne { display: grid; gap: 10px; border-radius: 22px; width: min(100%, 380px); }
+  .reel-ecran { position: relative; width: 100%; aspect-ratio: 9 / 16; max-height: 76vh; background: var(--visage); border-radius: 22px; overflow: hidden; cursor: pointer; }
+  .reel-ecran video { width: 100%; height: 100%; object-fit: cover; }
+  .reel-ecran video::cue { font-family: var(--texte); font-size: 1rem; line-height: 1.35; background: rgba(29, 27, 35, .86); color: #faf2e0; }
+  .reel-grand-bouton { position: absolute; inset: 0; margin: auto; width: 72px; height: 72px; border-radius: 50%; border: 0; display: grid; place-items: center; background: rgba(251, 249, 246, .92); color: #1d1b23; box-shadow: 0 10px 30px rgba(0, 0, 0, .4); cursor: pointer; }
+  .reel-ecran.en-lecture .reel-grand-bouton { display: none; }
+  .reel-commandes { display: flex; align-items: center; gap: 6px; border: 1px solid var(--trait); border-radius: 16px; padding: 6px; }
+  .reel-commandes button { display: inline-grid; place-items: center; width: 44px; height: 44px; border-radius: 12px; border: 0; background: none; cursor: pointer; }
+  .reel-commandes button[aria-pressed="true"] { background: var(--actif-fond); color: var(--actif-texte); }
+  .reel-commandes button[aria-pressed="false"] .cc { text-decoration: line-through; }
+  .reel-commandes .cc { font: 800 .8rem/1 var(--texte); border: 1.5px solid currentColor; border-radius: 5px; padding: 3px 4px; }
+  .reel-temps { font: 600 .82rem/1 var(--texte); color: var(--pied); font-variant-numeric: tabular-nums; margin-left: auto; padding-right: 8px; white-space: nowrap; }
+  .reel-progression { height: 4px; border-radius: 999px; background: var(--trait); overflow: hidden; }
+  .reel-progression i { display: block; height: 100%; width: 0; background: var(--lavande); }
+  .reel-infos { width: min(100%, 380px); display: grid; gap: 8px; }
+  .reel-infos .post-tete { margin: 0; }
+  .reel-infos p { margin: 0; }
+  .transcription summary { cursor: pointer; font-weight: 600; color: var(--pied); font-size: .88rem; padding: 4px 0; }
+  .transcription dl { margin: 6px 0 0; font-size: .92rem; }
+  .transcription dt { font-weight: 700; margin-top: 8px; }
+  .transcription dd { margin: 2px 0 0; }
+  .reel-erreur { position: absolute; inset: 0; display: none; place-content: center; text-align: center; padding: 24px; color: var(--lueur); gap: 8px; }
+  .reel-ecran.erreur .reel-erreur { display: grid; }
+  .reel-ecran.erreur video, .reel-ecran.erreur .reel-grand-bouton { display: none; }
+  .grille-reels { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3px; }
+  .grille-reels a { display: block; aspect-ratio: 9 / 16; overflow: hidden; background: var(--visage); }
+  .grille-reels img { width: 100%; height: 100%; object-fit: cover; }
+
+  /* ——— Écrans moyens : pas de colonne droite. ——— */
+  @media (max-width: 1239px) {
+    .app { grid-template-columns: 250px minmax(0, 600px); }
+    .barre-droite { display: none; }
+  }
+  /* ——— Tablette : colonne gauche réduite aux icônes. ——— */
+  @media (max-width: 939px) {
+    .app { grid-template-columns: 76px minmax(0, 600px); gap: 0 12px; }
+    .barre-gauche { align-items: center; }
+    .nav a, .plus > summary { padding: 12px; }
+    .nav a span, .plus > summary span, .moi-mini .moi-texte, .marque span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+    .moi-mini, .marque { padding: 6px; }
+  }
+  /* ——— Téléphone : une seule rangée en haut (logo, recherche, « Plus ») ; la navigation devient une barre d'onglets en bas. ——— */
+  @media (max-width: 699px) {
+    body { padding-bottom: calc(64px + env(safe-area-inset-bottom)); }
+    html { scroll-padding-bottom: calc(72px + env(safe-area-inset-bottom)); }
+    .app { display: block; }
+    .centre { border-inline: 0; min-height: 100vh; }
+    /* Le logo et « Plus » se posent sur la rangée de recherche collante ; la barre elle-même ne capte aucun clic. */
+    .barre-gauche {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 25; height: 61px; flex-direction: row; align-items: center; justify-content: space-between;
+      padding: 0 6px 0 10px; pointer-events: none; gap: 0;
+    }
+    .barre-gauche > * { pointer-events: auto; }
+    .recherche-haut { padding: 8px 54px 8px 56px; }
+    .moi-mini { display: none; }
+    .marque { margin: 0; padding: 4px; }
+    .marque img { width: 34px; height: 34px; border-radius: 11px; }
+    .plus { margin: 0; }
+    .plus > summary { padding: 10px; min-height: 44px; }
+    .plus-panneau { left: auto; right: 0; }
+    .nav {
+      position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; display: grid; grid-template-columns: repeat(5, 1fr); gap: 0;
+      background: color-mix(in srgb, var(--coton) 94%, transparent); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+      border-top: 1px solid var(--trait); padding: 4px 4px calc(4px + env(safe-area-inset-bottom));
+    }
+    .nav a { width: auto; justify-content: center; padding: 10px 4px; min-height: 52px; border-radius: 12px; }
+    .post { padding: 12px 12px 4px; grid-template-columns: 40px minmax(0, 1fr); gap: 0 10px; }
+    .post-avatar img { width: 40px; height: 40px; }
+    .post-raison { margin-left: 26px; }
+    .lien-ressource { padding: 9px 12px; }
+    .post-actions { gap: 0; }
+    .post-actions button { padding: 8px; white-space: nowrap; font-size: .84rem; }
+    .profil-banniere { height: 110px; }
+    .profil-photo, .profil-photo.avatar-vide { width: 84px; height: 84px; }
+    .profil-haut { margin-top: -42px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  }
 </style>
 </head>
 <body>
 <a class="lien-evitement" href="#contenu">Aller au contenu</a>
-<div class="bandeau" role="note">
-  <div class="dedans">
-    <span><strong>Maquette de P2</strong> — <span id="bandeau-date">date inconnue</span>. Rien n’est publié.</span>
-    <ul class="legende" aria-label="Légende">
-      <li><span class="statut-tag st-reel">Réel</span> collecté ou déjà construit</li>
-      <li><span class="statut-tag st-exemple">Exemple</span> rédigé pour la maquette</li>
-      <li><span class="statut-tag st-prevu">Prévu</span> pas encore construit</li>
-    </ul>
-  </div>
-</div>
-<div class="page">
-  <header class="entete">
-    <a class="marque" href="#/">
-      <img src="../assets/brand/mascotte-icone.png" alt="" width="44" height="44">
-      <span>Curation AI<small>nom provisoire</small></span>
+<div class="app">
+  <aside class="barre-gauche" aria-label="Navigation">
+    <a class="marque" href="#/" aria-label="Curation AI, accueil">
+      <img src="../assets/brand/mascotte-icone.png" alt="" width="36" height="36">
+      <span>Curation AI</span>
     </a>
     <nav class="nav" id="nav" aria-label="Navigation principale"></nav>
-    <details class="langue" id="langue"></details>
-  </header>
-  <main id="contenu" tabindex="-1"></main>
-  <p id="annonce" class="sr-only" aria-live="polite"></p>
-  <footer class="pied-page">
-    Maquette statique : données générées par <code>npm run maquette</code>, vidéo par <code>npm run maquette:reel</code>. Les citations sont affichées en langue originale, avec un lien vers la source. La mascotte incarne un agent IA, jamais un membre ni l’auteur d’un avis humain.
-  </footer>
+    <details class="plus" id="plus"></details>
+    <a class="moi-mini" id="moi-mini" href="#/moi"></a>
+  </aside>
+  <div class="centre">
+    <div class="recherche-haut" id="recherche-haut"></div>
+    <main id="contenu" tabindex="-1"></main>
+  </div>
+  <aside class="barre-droite" id="barre-droite" aria-label="Comptes à suivre"></aside>
 </div>
+<p id="annonce" class="sr-only" aria-live="polite"></p>
 <script src="donnees.js"></script>
+<script src="recherche.js"></script>
 <script>
   'use strict';
   // Toutes les données viennent de sources externes : elles sont insérées comme texte (jamais comme HTML)
-  // et seuls les liens http(s) deviennent cliquables.
+  // et seuls les liens https deviennent cliquables. Les mots-clés ne s'affichent nulle part : ils ne servent qu'à la recherche.
   const DONNEES = window.DONNEES_MAQUETTE;
   const EXEMPLES = (DONNEES?.exemples || []).slice().sort((a, b) => (b.actualite.announced_at || '').localeCompare(a.actualite.announced_at || ''));
+  const RESSOURCES = DONNEES?.ressources || [];
   /** Vidéos générées par « npm run maquette:reel » (maquette/medias), chacune liée à un exemple vérifié. */
   const REELS = [{ id: 'reel-copilot-fusion', exemple: 'exemple-copilot-fusion' }];
   const PAR_PAGE = 12;
+  /** Longueur du début de texte affiché dans le fil avant « Voir plus ». */
+  const APERCU = 280;
   const main = document.getElementById('contenu');
-  const etat = { filtre: 'tout', source: 'toutes', visibles: PAR_PAGE, auteur: 'tous' };
+  const etat = { filtre: 'tout', source: 'toutes', visibles: PAR_PAGE };
   const moinsDeMouvement = matchMedia('(prefers-reduced-motion: reduce)');
-  const NON_RENSEIGNE = 'Non renseigné';
-  const MENTION_MEDIA = 'Illustration — ne prouve pas le fonctionnement';
   const LIBELLE_ANALYSE = 'Analyse IA à partir des sources — non testé par la plateforme';
 
   function h(tag, attrs, ...enfants) {
@@ -595,24 +504,25 @@
 
   const SVG = 'http://www.w3.org/2000/svg';
   const ICONES = {
-    fil: ['M4 6h16', 'M4 12h16', 'M4 18h11'],
+    accueil: ['M3.5 10.5L12 3.5l8.5 7', 'M5.5 9v11h4.5v-6h4v6h4.5V9'],
+    explorer: ['M11 4a7 7 0 1 0 0 14 7 7 0 0 0 0-14z', 'M20 20l-4.2-4.2'],
+    notifications: ['M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15z', 'M10 20.5a2.2 2.2 0 0 0 4 0'],
     reels: ['M7 3h10a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z', 'M10.5 9.5l4 2.5-4 2.5z'],
-    collecte: ['M4 4h16v7H4z', 'M4 15h16v5H4z', 'M8 7.5h4'],
-    profil: ['M12 3l2.4 5 5.6.8-4 3.9 1 5.5-5-2.7-5 2.7 1-5.5-4-3.9 5.6-.8z'],
+    profil: ['M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8z', 'M4.5 20.5c.8-3.8 3.9-6 7.5-6s6.7 2.2 7.5 6'],
+    plus: ['M12 3.5a8.5 8.5 0 1 0 0 17 8.5 8.5 0 0 0 0-17z', 'M8 12h.01', 'M12 12h.01', 'M16 12h.01'],
+    coulisses: ['M4 4h16v7H4z', 'M4 15h16v5H4z', 'M8 7.5h4'],
     etats: ['M12 3l9 5-9 5-9-5z', 'M3 13l9 5 9-5'],
     parametres: ['M4 7h10', 'M18 7h2', 'M4 17h2', 'M10 17h10', 'M16 5v4', 'M8 15v4'],
-    reagir: ['M12 4l2.2 4.6 5 .7-3.6 3.5.9 5-4.5-2.4-4.5 2.4.9-5L4.8 9.3l5-.7z'],
     commenter: ['M4 5h16v11H10l-5 4v-4H4z'],
-    enregistrer: ['M6 3h12v18l-6-4.2L6 21z'],
     partager: ['M12 15V3', 'M7.5 7.5L12 3l4.5 4.5', 'M5 13v7h14v-7'],
-    precedent: ['M15 5l-7 7 7 7'],
-    suivant: ['M9 5l7 7-7 7'],
+    lien: ['M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1', 'M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1'],
+    retour: ['M19 12H5', 'M11 6l-6 6 6 6'],
+    fermer: ['M6 6l12 12', 'M18 6L6 18'],
     son: ['M4 9h4l5-4v14l-5-4H4z', 'M16.5 8.5a5 5 0 0 1 0 7', 'M19 6a8.5 8.5 0 0 1 0 12'],
     muet: ['M4 9h4l5-4v14l-5-4H4z', 'M17 9l5 6', 'M22 9l-5 6'],
-    langue: ['M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18z', 'M3 12h18', 'M12 3c2.5 2.6 3.7 5.6 3.7 9s-1.2 6.4-3.7 9c-2.5-2.6-3.7-5.6-3.7-9S9.5 5.6 12 3z'],
   };
   const PLEINES = { lecture: 'M8 5.5v13l11-6.5z', pause: 'M7 5h4v14H7zM13 5h4v14h-4z' };
-  function icone(nom, taille = 20) {
+  function icone(nom, taille = 22) {
     const svg = document.createElementNS(SVG, 'svg');
     for (const [cle, valeur] of Object.entries({ viewBox: '0 0 24 24', width: taille, height: taille, 'aria-hidden': 'true', focusable: 'false' })) svg.setAttribute(cle, valeur);
     const chemins = PLEINES[nom] ? [PLEINES[nom]] : ICONES[nom];
@@ -626,304 +536,329 @@
     return svg;
   }
 
+  /** Lien externe sûr : https seulement, sans identifiants ; renvoie la forme normalisée, seule utilisée comme href. */
   function lienSur(url) {
-    try { const u = new URL(url); return u.protocol === 'https:' || u.protocol === 'http:' ? u.href : null; } catch { return null; }
+    try { const u = new URL(url); return u.protocol === 'https:' && !u.username && !u.password ? u.href : null; } catch { return null; }
+  }
+  /** Bouton d'une ressource : même règle que l'écriture (destinationDe) — https, github.com, sans port, requête ni fragment. */
+  function lienDepot(url) {
+    const href = lienSur(url);
+    if (!href) return null;
+    const u = new URL(href);
+    return u.hostname === 'github.com' && !u.port && !u.search && !u.hash ? href : null;
   }
   function lienExterne(url, texte) {
     const href = lienSur(url);
-    return href ? h('a', { href, rel: 'noopener noreferrer', target: '_blank' }, texte, h('span', { class: 'sr-only' }, ' (nouvel onglet)'), '\u00a0↗') : texte;
+    return href ? h('a', { href, rel: 'noopener noreferrer', target: '_blank' }, texte, h('span', { class: 'sr-only' }, ' (nouvel onglet)')) : texte;
+  }
+  /** Adresse courte : hôte et deux premiers segments (github.com/mattpocock/skills). */
+  function cibleCourte(url) {
+    try {
+      const u = new URL(url);
+      const segments = u.pathname.split('/').filter(Boolean);
+      return `${u.hostname.replace(/^www\./, '')}${segments.length ? `/${segments.slice(0, 2).join('/')}` : ''}${segments.length > 2 ? '/…' : ''}`;
+    } catch { return ''; }
+  }
+
+  /** Adresse d'un document cité : hôte, propriétaire, dépôt, puis le dernier segment (…/frontend-design/SKILL.md). */
+  function cibleDocument(url) {
+    try {
+      const u = new URL(url);
+      const segments = u.pathname.split('/').filter(Boolean);
+      if (segments.length <= 3) return `${u.hostname.replace(/^www\./, '')}/${segments.join('/')}`.replace(/\/$/, '');
+      return `${u.hostname.replace(/^www\./, '')}/${segments.slice(0, 2).join('/')}/…/${segments.slice(-2).join('/')}`;
+    } catch { return ''; }
   }
 
   const fuseau = 'Europe/Paris';
+  const fmtCourt = new Intl.DateTimeFormat('fr-FR', { timeZone: fuseau, day: 'numeric', month: 'short' });
   const fmtDate = new Intl.DateTimeFormat('fr-FR', { timeZone: fuseau, day: 'numeric', month: 'short', year: 'numeric' });
   const fmtDateHeure = new Intl.DateTimeFormat('fr-FR', { timeZone: fuseau, day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
   const fmtJour = new Intl.DateTimeFormat('fr-FR', { timeZone: fuseau, weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
   const cleJour = new Intl.DateTimeFormat('fr-CA', { timeZone: fuseau, year: 'numeric', month: '2-digit', day: '2-digit' });
-  const quand = (iso, f = fmtDateHeure) => (iso ? f.format(new Date(iso)) : NON_RENSEIGNE);
-  const temps = (iso, f = fmtDate) => h('time', { datetime: iso || '' }, quand(iso, f));
+  /** Date affichée ; une date inconnue donne une chaîne vide (l'appelant masque l'information). */
+  const quand = (iso, f = fmtDateHeure) => (iso ? f.format(new Date(iso.length === 10 ? `${iso}T12:00:00Z` : iso)) : '');
+  const temps = (iso, f = fmtDate) => (iso ? h('time', { datetime: iso }, quand(iso, f)) : null);
   const premiereMajuscule = (s) => s.charAt(0).toUpperCase() + s.slice(1);
   const pluriel = (n, mot, motPluriel = `${mot}s`) => `${n} ${n > 1 ? motPluriel : mot}`;
   const nomCourtSource = (nom) => nom.split(' — ')[0];
   const libelleSource = (source) => (source.id.startsWith('github-releases:') ? 'Releases GitHub officielles' : nomCourtSource(source.name));
-  /** Nom de source d'une publication : « Codex CLI, releases GitHub » plutôt que le seul nom du produit. */
-  const nomSource = (source) => (source.id.startsWith('github-releases:') ? `${nomCourtSource(source.name)}, releases GitHub` : nomCourtSource(source.name));
-
   const tag = (type, texte) => h('span', { class: `statut-tag st-${type}` }, texte);
   const compteDe = (id) => DONNEES.comptes.find((c) => c.id === id) || DONNEES.comptes[0];
-  const exempleDe = (newsId) => EXEMPLES.find((e) => e.actualite.id === newsId);
+  const avatarDe = (c, taille = 44) => h('img', { src: `../assets/brand/${c.avatar}`, alt: '', width: taille, height: taille });
+  /** Mention discrète d'un compte agent : « · IA ». */
+  const marqueIA = (c) => (c.type === 'agent' ? ' · IA' : '');
 
-  // ——— Auteur : le badge « Agent IA » est dérivé du type de compte, jamais ajouté à la main. ———
-  const badgeAgent = () => h('span', { class: 'badge-agent' }, h('span', { class: 'mini-yeux', 'aria-hidden': 'true' }, h('i'), h('i')), 'Agent IA');
-  function auteur(id) {
-    const c = compteDe(id);
-    return h('div', { class: 'auteur' },
-      h('img', { class: 'avatar rond', src: `../assets/brand/${c.avatar}`, alt: '', width: 44, height: 44 }),
-      h('div', { class: 'auteur-texte' },
-        h('span', { class: 'auteur-nom' }, h('a', { href: `#/profil/${c.id}` }, c.nom), c.type === 'agent' ? badgeAgent() : null),
-        h('span', { class: 'auteur-id' }, `@${c.identifiant}`)));
+  // ——— Publications : chaque source (ressource, exemple, projet) devient le même objet « post ». ———
+  function postRessource(r) {
+    const depot = r.etat_depot?.html_url ? cibleCourte(r.etat_depot.html_url) : cibleCourte(r.bouton?.url || '');
+    const passages = [r.accroche, r.description, r.interet, ...(r.reperes || [])].filter(Boolean).flatMap((c) => c.passages.map((texte) => ({ texte, trouve: true })));
+    return {
+      cle: `ressource-${r.slug}`,
+      lien: `#/ressource/${r.slug}`,
+      compte: r.compte,
+      date: r.planning?.jour || null,
+      prevue: r.statut !== 'publie',
+      badge: r.statut_sortie === 'nouvelle_sortie' ? ['nouveau', 'Nouvelle sortie'] : ['', 'Ressource existante'],
+      paragraphes: [r.accroche?.texte, r.description?.texte, r.interet?.texte].filter(Boolean),
+      points: (r.reperes || []).map((x) => x.texte),
+      bouton: r.bouton && lienDepot(r.bouton.url) ? { libelle: r.bouton.libelle, url: lienDepot(r.bouton.url), cible: depot, aria: r.bouton.aria_label } : null,
+      media: () => (r.visuel ? h('figure', { class: 'post-media' }, h('img', { src: r.visuel.src, alt: r.visuel.alt, width: 1080, height: 1350, loading: 'lazy' })) : null),
+      vignette: () => (r.visuel ? h('img', { src: r.visuel.src, alt: '', loading: 'lazy' }) : null),
+      sources: () => [
+        h('p', null, `${r.origine.texte}.`),
+        h('ul', null, r.captures.map((c) => h('li', null, c.url ? lienExterne(c.url, cibleDocument(c.url) || c.document) : c.document, c.capture_le ? ` · capturé le ${quand(c.capture_le, fmtDate)}` : ''))),
+        passagesCites(passages),
+        r.visuel?.mention ? h('p', null, `Visuel : ${r.visuel.mention}.`) : null,
+      ],
+    };
   }
 
-  function bandeauExemple(ex) {
-    return ex.statut === 'verifie'
-      ? h('p', { class: 'bandeau-exemple', role: 'note' }, tag('exemple', 'Exemple'),
-          h('span', null, 'Rédigé par Claude Code à partir de la source pour montrer le format. L’agent du site n’existe pas encore (P3) : rien n’a été publié.'))
-      : h('p', { class: 'bandeau-exemple a-verifier', role: 'note' }, tag('verifier', 'À vérifier'),
-          h('span', null, `Exemple non vérifié : ${ex.motifs.join(', ')}. Il ne serait pas publié.`));
+  function postExemple(ex) {
+    const a = ex.actualite;
+    const passages = [ex.accroche, ex.description, ex.ce_que_ca_permet, ...ex.visuel.elements].filter(Boolean).flatMap((c) => c.passages);
+    return {
+      cle: ex.id,
+      lien: `#/publication/${ex.id}`,
+      compte: ex.compte,
+      date: a.announced_at,
+      prevue: false,
+      badge: ex.statut === 'verifie' ? ['exemple', 'Exemple'] : ['verifier', 'À vérifier'],
+      paragraphes: [ex.accroche?.texte, ex.description?.texte, ex.ce_que_ca_permet?.texte].filter(Boolean),
+      points: [],
+      bouton: lienSur(a.source.url) ? { libelle: 'Voir la source', url: lienSur(a.source.url), cible: cibleCourte(a.source.url), aria: `Voir la source sur ${cibleCourte(a.source.url)} (nouvel onglet)` } : null,
+      media: () => h('figure', { class: 'post-media', 'data-compte': ex.compte }, couverture(ex, { role: 'img', 'aria-label': ex.visuel.forme === 'photo' ? ex.visuel.photo.alt : `Visuel : ${ex.titre_media}` })),
+      vignette: () => couverture(ex, { 'aria-hidden': 'true' }),
+      sources: () => [
+        h('p', null, 'Exemple rédigé pour l’aperçu par Claude Code à partir de la source, pas par l’agent du site.'),
+        h('ul', null, h('li', { lang: 'en' }, lienExterne(a.source.url, a.title), h('span', { lang: 'fr' }, ` · ${nomCourtSource(a.source.name)}${ex.capture?.captured_at ? ` · capturé le ${quand(ex.capture.captured_at, fmtDate)}` : ''}`))),
+        passagesCites(passages),
+        ex.visuel.photo ? h('p', null, `Photo : ${ex.visuel.photo.credit}`) : h('p', null, `Visuel : ${ex.visuel.legende}`, ex.visuel.original ? [' · ', lienExterne(ex.visuel.original.url, ex.visuel.original.libelle)] : null, '.'),
+      ],
+    };
   }
 
-  const preuve = () => h('p', { class: 'preuve' }, h('span', { class: 'preuve-niveau' }, 'Analyse documentaire'), h('span', null, LIBELLE_ANALYSE));
-  const passagesDe = (ex) => [ex.accroche, ex.nouveaute, ex.ce_que_ca_permet, ex.pour_qui, ex.limites_connues, ...ex.details, ...ex.attributions].filter(Boolean).flatMap((c) => c.passages);
-  function controle(ex) {
-    const passages = passagesDe(ex);
-    const trouves = passages.filter((p) => p.trouve).length;
-    return ex.statut === 'verifie'
-      ? h('p', { class: 'controle' }, `✓ ${trouves}/${passages.length} citations retrouvées mot pour mot dans la capture du ${quand(ex.capture.captured_at, fmtDate)}`)
-      : h('p', { class: 'controle a-verifier' }, `✗ ${passages.length - trouves} citation(s) introuvable(s) : à vérifier`);
+  function postProjet(p) {
+    const passages = [p.accroche, p.interet].flatMap((c) => c.passages.map((texte) => ({ texte, trouve: p.verifie })));
+    return {
+      cle: p.id,
+      lien: `#/projet/${p.id}`,
+      compte: p.compte,
+      date: p.mesure_le,
+      prevue: false,
+      badge: p.verifie ? ['exemple', 'Exemple'] : ['verifier', 'À vérifier'],
+      paragraphes: [p.accroche.texte, p.interet.texte],
+      points: [],
+      bouton: lienDepot(p.url) ? { libelle: 'Voir le dépôt', url: lienDepot(p.url), cible: cibleCourte(p.url), aria: `Voir le dépôt ${p.depot} sur GitHub (nouvel onglet)` } : null,
+      media: () => h('figure', { class: 'post-media', 'data-compte': p.compte }, carteDepot(p, { role: 'img', 'aria-label': `Dépôt ${p.depot}` })),
+      vignette: () => h('div', { class: 'diapo depot', 'data-compte': p.compte, 'aria-hidden': 'true' }, h('span', { class: 'depot-nom' }, p.depot)),
+      sources: () => [
+        h('p', null, 'Exemple rédigé pour l’aperçu par Claude Code à partir de la description du dépôt, pas par l’agent du site.'),
+        h('ul', null,
+          h('li', null, lienExterne(p.url, cibleCourte(p.url))),
+          p.demonstration ? h('li', null, lienExterne(p.demonstration.url, p.demonstration.libelle)) : null),
+        h('p', null, `Étoiles mesurées le ${quand(p.mesure_le, fmtDate)} : une mesure datée, pas un gage de qualité.`),
+        passagesCites(passages),
+      ],
+    };
   }
 
-  // ——— Médias générés (carrousel, image) : ils reprennent les champs vérifiés et n'ajoutent rien. ———
-  const longueur = (texte) => (texte.length <= 80 ? 'court' : texte.length <= 150 ? 'moyen' : 'long');
-  // Signature des médias générés : « Exemple », le compte et son badge dérivé du type (le média circule seul).
-  const coin = (ex) => { const c = compteDe(ex.compte); return h('span', { class: 'diapo-coin', 'aria-hidden': 'true' },
-    `Exemple · @${c.identifiant}${c.type === 'agent' ? ' · Agent IA' : ''}`); };
-  // Média principal : il montre la nouveauté (étapes, priorité, commande…), jamais la mascotte ni un numéro géant.
+  /** Passages cités, repliés : chacun a été retrouvé mot pour mot dans la capture, par le code. */
+  function passagesCites(passages) {
+    const vus = new Set();
+    const uniques = passages.filter((p) => p.texte && !vus.has(p.texte) && vus.add(p.texte));
+    if (!uniques.length) return null;
+    return h('details', null,
+      h('summary', null, `${pluriel(uniques.length, 'passage cité', 'passages cités')}, retrouvés mot pour mot dans la capture`),
+      uniques.map((p) => h('blockquote', { lang: 'en', class: p.trouve ? null : 'introuvable' }, p.texte,
+        p.trouve ? null : h('span', { class: 'verif', lang: 'fr' }, 'Introuvable dans la capture : à vérifier'))));
+  }
+
+  // Visuel d'un exemple : il montre la nouveauté (étapes, priorité, commande…) ou la photo créditée.
   function couverture(ex, attrs = {}) {
     const v = ex.visuel;
     if (v.forme === 'photo') {
       return h('div', { class: 'diapo photo-presse', 'data-compte': ex.compte, ...attrs },
-        h('img', { src: `medias/${v.photo.fichier}`, alt: v.photo.alt }),
-        h('span', { class: 'photo-titre' }, v.elements[0].texte));
+        h('img', { src: `medias/${v.photo.fichier}`, alt: '' }),
+        h('span', { class: 'photo-titre' }, v.elements[0].texte),
+        h('span', { class: 'credit' }, v.photo.credit));
     }
-    return h('div', { class: `diapo visuel forme-${v.forme}`, 'data-compte': ex.compte, ...attrs }, coin(ex),
+    const c = compteDe(ex.compte);
+    return h('div', { class: `diapo visuel forme-${v.forme}`, 'data-compte': ex.compte, ...attrs },
+      h('span', { class: 'diapo-coin', 'aria-hidden': 'true' }, `@${c.identifiant}${marqueIA(c)}`),
       h('ol', { class: 'visuel-liste' }, v.elements.map((e) => h('li', { lang: v.forme === 'terminal' ? 'en' : null }, e.texte))),
       h('span', { class: 'visuel-titre' }, ex.titre_media));
   }
-  function diapositive(ex, d, i, n) {
-    return h('div', { class: 'diapo', role: 'group', 'aria-roledescription': 'diapositive', 'aria-label': `${i + 1} sur ${n} : ${d.libelle}` },
-      h('span', { class: 'diapo-libelle' }, d.libelle),
-      d.texte ? h('p', { class: `diapo-texte ${longueur(d.texte)}` }, d.texte) : h('p', { class: 'diapo-texte court vide' }, NON_RENSEIGNE),
-      coin(ex));
+  function carteDepot(p, attrs = {}) {
+    const stat = (dt, dd) => (dd ? h('div', null, h('dt', null, dt), h('dd', null, dd)) : null);
+    return h('div', { class: 'diapo depot', 'data-compte': p.compte, ...attrs },
+      h('span', { class: 'depot-nom' }, p.depot),
+      h('dl', { class: 'depot-stats' },
+        stat(`Étoiles au ${quand(p.mesure_le, fmtCourt)}`, Number.isFinite(p.etoiles) ? p.etoiles.toLocaleString('fr-FR') : null),
+        stat('Créé le', quand(p.cree_le, fmtDate)),
+        stat('Licence', p.licence),
+        stat('Langage', p.langage)));
   }
 
-  let numeroCarrousel = 0;
-  function media(ex) {
-    const mention = ex.visuel.photo ? h('figcaption', { class: 'mention-media' }, `${ex.visuel.legende} · ${ex.visuel.photo.credit}`) : h('figcaption', { class: 'mention-media' }, `${ex.visuel.legende} · ${MENTION_MEDIA}`, ex.visuel.original ? [' · ', lienExterne(ex.visuel.original.url, ex.visuel.original.libelle)] : null);
-    if (ex.media === 'image') {
-      return h('figure', { class: 'media' }, couverture(ex, { role: 'img', 'aria-label': `Image générée : ${ex.titre_media}` }), mention);
+  // ——— Texte : le début, puis « Voir plus » qui déplie la suite sur place (et « Voir moins »). ———
+  function apercu(blocs, limite = APERCU) {
+    const garde = [];
+    let reste = limite;
+    for (const b of blocs) {
+      if (b.texte.length <= reste) { garde.push(b); reste -= b.texte.length; continue; }
+      if (garde.length === 0 || reste >= 60) {
+        const coupe = b.texte.slice(0, reste).replace(/[\s,;:.—–-]+\S*$/, '').trimEnd();
+        if (coupe) garde.push({ ...b, texte: `${coupe}…` });
+      }
+      return { blocs: garde, tronque: true };
     }
-    const id = `carrousel-${++numeroCarrousel}`;
-    const n = ex.diapositives.length + 1;
-    const piste = h('div', { class: 'piste', id, tabindex: '0', 'aria-label': `Diapositives de « ${ex.titre_media} » (flèches gauche et droite pour défiler)` },
-      couverture(ex, { role: 'group', 'aria-roledescription': 'diapositive', 'aria-label': `1 sur ${n} : couverture` }),
-      ex.diapositives.map((d, i) => diapositive(ex, d, i + 1, n)));
-    const compteur = h('span', { class: 'car-compteur', 'aria-hidden': 'true' }, `1/${n}`);
-    const points = h('span', { class: 'car-points', 'aria-hidden': 'true' }, Array.from({ length: n }, (_, i) => h('i', { class: i === 0 ? 'actif' : null })));
-    const vocal = h('span', { class: 'sr-only', 'aria-live': 'polite' });
-    const courant = () => Math.round(piste.scrollLeft / Math.max(1, piste.clientWidth));
-    const aller = (i) => piste.scrollTo({ left: Math.max(0, Math.min(n - 1, i)) * piste.clientWidth, behavior: moinsDeMouvement.matches ? 'auto' : 'smooth' });
-    const prec = h('button', { type: 'button', class: 'car-btn prec', 'aria-controls': id, 'aria-label': 'Diapositive précédente', disabled: true, onclick: () => aller(courant() - 1) }, icone('precedent'));
-    const suiv = h('button', { type: 'button', class: 'car-btn suiv', 'aria-controls': id, 'aria-label': 'Diapositive suivante', onclick: () => aller(courant() + 1) }, icone('suivant'));
-    let affiche = 0;
-    let attente = 0;
-    piste.addEventListener('scroll', () => {
-      cancelAnimationFrame(attente);
-      attente = requestAnimationFrame(() => {
-        const i = courant();
-        if (i === affiche) return;
-        const boutonActif = document.activeElement === prec || document.activeElement === suiv;
-        affiche = i;
-        compteur.textContent = `${i + 1}/${n}`;
-        [...points.children].forEach((p, k) => p.classList.toggle('actif', k === i));
-        prec.disabled = i === 0;
-        suiv.disabled = i === n - 1;
-        vocal.textContent = `Diapositive ${i + 1} sur ${n}`;
-        // Le bouton utilisé disparaît en bout de piste : le focus revient à la piste plutôt que d'être perdu.
-        if (boutonActif && document.activeElement.disabled) piste.focus({ preventScroll: true });
-      });
-    }, { passive: true });
-    return h('figure', { class: 'media', role: 'group', 'aria-roledescription': 'carrousel', 'aria-label': `Carrousel généré : ${ex.titre_media}, ${n} diapositives` },
-      piste, prec, suiv, compteur, points, vocal, mention);
+    return { blocs: garde, tronque: false };
+  }
+  function texte(p, complet) {
+    const blocs = [...p.paragraphes.map((t) => ({ type: 'p', texte: t })), ...p.points.map((t) => ({ type: 'point', texte: t }))];
+    const zone = h('div', { class: 'post-texte' });
+    const dessiner = (ouvert, focus) => {
+      const vue = ouvert ? { blocs, tronque: false } : apercu(blocs);
+      const enfants = [];
+      for (const b of vue.blocs) {
+        if (b.type === 'p') enfants.push(h('p', null, b.texte));
+        else {
+          const derniere = enfants[enfants.length - 1];
+          const liste = derniere?.tagName === 'UL' ? derniere : enfants[enfants.push(h('ul', { class: 'points' })) - 1];
+          liste.append(h('li', null, b.texte));
+        }
+      }
+      let bouton = null;
+      if (vue.tronque) bouton = h('button', { type: 'button', class: 'voir-plus', 'aria-expanded': 'false', onclick: () => dessiner(true, true) }, 'Voir plus');
+      else if (ouvert && !complet) bouton = h('button', { type: 'button', class: 'voir-plus', 'aria-expanded': 'true', onclick: () => dessiner(false, true) }, 'Voir moins');
+      if (bouton) {
+        const dernier = enfants[enfants.length - 1];
+        (dernier?.tagName === 'UL' ? dernier.lastElementChild : dernier)?.append(' ', bouton);
+      }
+      zone.replaceChildren(...enfants);
+      if (focus && bouton) bouton.focus({ preventScroll: true });
+    };
+    const besoin = apercu(blocs).tronque;
+    dessiner(complet || !besoin, false);
+    return zone;
   }
 
-  function actionsSociales() {
-    return h('footer', { class: 'pub-actions' },
-      h('div', { class: 'actions-ligne' }, [['reagir', 'Réagir'], ['commenter', 'Commenter'], ['enregistrer', 'Enregistrer'], ['partager', 'Partager']].map(([nom, libelle]) =>
-        h('button', { type: 'button', disabled: true }, icone(nom), libelle))),
-      h('p', { class: 'actions-note' }, tag('prevu', 'Prévu · P9'), 'Interactions des membres. Aucun compteur tant qu’il n’y a pas d’interactions réelles.'));
+  let numero = 0;
+  /** Une publication : en-tête du compte, texte, lien vers la ressource, image, puis actions. */
+  function post(p, { complet = false, raison = null } = {}) {
+    const c = compteDe(p.compte);
+    const id = `post-${++numero}`;
+    const sources = h('div', { class: 'panneau', id: `${id}-sources`, hidden: true }, p.sources());
+    const commentaires = h('div', { class: 'commentaires', id: `${id}-commentaires`, hidden: true },
+      h('p', { class: 'vide' }, 'Aucun commentaire pour l’instant'),
+      h('p', { class: 'discret' }, 'Les commentaires ne sont pas encore ouverts.'));
+    const bascule = (bouton, panneau, ouvrir, fermer) => () => {
+      const ouvert = panneau.hidden;
+      panneau.hidden = !ouvert;
+      bouton.setAttribute('aria-expanded', String(ouvert));
+      bouton.querySelector('.libelle').textContent = ouvert ? fermer : ouvrir;
+    };
+    const boutonSources = h('button', { type: 'button', class: 'lien-discret', 'aria-expanded': 'false', 'aria-controls': sources.id }, h('span', { class: 'libelle' }, 'Sources'));
+    boutonSources.addEventListener('click', bascule(boutonSources, sources, 'Sources', 'Masquer les sources'));
+    const boutonCommentaires = h('button', { type: 'button', 'aria-expanded': 'false', 'aria-controls': commentaires.id }, icone('commenter', 19), h('span', { class: 'libelle' }, 'Afficher les commentaires'));
+    boutonCommentaires.addEventListener('click', bascule(boutonCommentaires, commentaires, 'Afficher les commentaires', 'Masquer les commentaires'));
+    const boutonPartager = h('button', { type: 'button' }, icone('partager', 19), h('span', { class: 'libelle' }, 'Partager'));
+    boutonPartager.addEventListener('click', async () => {
+      const adresse = new URL(p.lien, location.href).href;
+      let message = 'Lien copié';
+      try { await navigator.clipboard.writeText(adresse); } catch { message = 'Copie impossible ici'; }
+      boutonPartager.querySelector('.libelle').textContent = message;
+      annoncer(message);
+      setTimeout(() => { boutonPartager.querySelector('.libelle').textContent = 'Partager'; }, 2000);
+    });
+    const [typeBadge, texteBadge] = p.badge;
+    const date = p.date ? h('a', { href: p.lien, title: p.prevue ? `Publication prévue le ${quand(p.date, fmtDate)}, pas encore publiée` : quand(p.date, fmtDate) },
+      p.prevue ? 'Prévue le ' : '', temps(p.date, fmtCourt)) : null;
+    return h('article', { class: `post${complet ? ' complet' : ''}`, 'data-compte': p.compte, 'aria-label': `Publication de ${c.nom}` },
+      raison ? h('p', { class: 'post-raison' }, icone('explorer', 15), raison) : null,
+      h('a', { class: 'post-avatar', href: `#/profil/${c.id}`, tabindex: '-1', 'aria-hidden': 'true' }, avatarDe(c)),
+      h('div', { class: 'post-corps' },
+        h('header', { class: 'post-tete' },
+          h('a', { class: 'post-nom', href: `#/profil/${c.id}` }, c.nom),
+          h('span', { class: 'post-meta' }, `@${c.identifiant}${marqueIA(c)}`, date ? [' · ', date] : null),
+          h('span', { class: `badge ${typeBadge}` }, texteBadge)),
+        texte(p, complet),
+        p.bouton ? h('a', { class: 'lien-ressource', href: p.bouton.url, target: '_blank', rel: 'noopener noreferrer', 'aria-label': p.bouton.aria },
+          icone('lien', 18), h('span', { class: 'lr-libelle' }, p.bouton.libelle), p.bouton.cible ? h('span', { class: 'lr-cible' }, p.bouton.cible) : null,
+          h('span', { class: 'lr-fleche', 'aria-hidden': 'true' }, '↗')) : null,
+        p.media(),
+        h('div', { class: 'post-actions' }, boutonCommentaires, boutonPartager),
+        commentaires,
+        // Seuls ajouts discrets, après les actions : la mention IA et le lien « Sources ».
+        h('p', { class: 'post-mention' }, LIBELLE_ANALYSE, ' · ', boutonSources),
+        sources));
   }
 
-  // ——— Publication dans le fil : l'essentiel ; citations, contrôles et traces restent sur la page détaillée. ———
-  function publication(ex) {
-    const titreId = `pub-${ex.id}`;
-    return h('article', { class: 'publication', 'data-compte': ex.compte, 'aria-labelledby': titreId },
-      ex.statut === 'verifie' ? null : bandeauExemple(ex),
-      h('div', { class: 'pub-tete' }, auteur(ex.compte), h('span', { class: 'pub-tete-droite' }, temps(ex.actualite.announced_at), tag('exemple', 'Exemple'))),
-      media(ex),
-      h('div', { class: 'pub-corps' },
-        h('h3', { class: 'accroche', id: titreId }, h('a', { href: `#/publication/${ex.id}` }, ex.accroche.texte)),
-        h('p', { class: 'description' }, ex.description.texte),
-        h('ul', { class: 'etiquettes', 'aria-label': 'Catégories' }, ex.categories.map((c) => h('li', null, c))),
-        h('p', { class: 'pub-pied' },
-          h('a', { href: `#/publication/${ex.id}` }, 'Détail et citations →'),
-          lienExterne(ex.actualite.source.url, nomSource(ex.actualite.source))),
-        h('p', { class: 'mention-discrete' }, `${LIBELLE_ANALYSE}.`)));
+  // Ressources planifiées en tête, dans l'ordre du planning ; puis exemples et projet, du plus récent au plus ancien.
+  const POSTS = () => [
+    ...RESSOURCES.map(postRessource),
+    ...[...EXEMPLES.map(postExemple), ...(DONNEES.projets || []).map(postProjet)].sort((a, b) => (b.date || '').localeCompare(a.date || '')),
+  ];
+  const postDe = (lien) => POSTS().find((p) => p.lien === lien);
+
+  // ——— Pages ———
+  const vide = (titre, texteVide, niveau = 'p') => h('div', { class: 'vide-page' }, h(niveau === 'h1' ? 'h1' : 'strong', niveau === 'h1' ? { style: 'font-size:1.2rem;margin:0 0 4px;color:var(--encre)' } : null, titre), texteVide ? h('p', null, texteVide) : null);
+
+  function vueAccueil() {
+    document.title = 'Accueil · Curation AI';
+    const posts = POSTS();
+    return [h('h1', { class: 'sr-only' }, 'Accueil'), posts.length ? posts.map((p) => post(p)) : vide('Aucune publication pour l’instant', null)];
   }
 
-  // Projet GitHub : les étoiles sont une mesure datée, pas un avis ; progression inconnue = « Non renseigné ».
-  function publicationProjet(p) {
-    const nombre = (n) => n.toLocaleString('fr-FR');
-    const stat = (dt, dd) => h('div', null, h('dt', null, dt), h('dd', null, dd));
-    return h('article', { class: 'publication', 'data-compte': p.compte, 'aria-labelledby': `pub-${p.id}` },
-      h('div', { class: 'pub-tete' }, auteur(p.compte), h('span', { class: 'pub-tete-droite' }, temps(p.mesure_le), tag('exemple', 'Exemple'))),
-      h('figure', { class: 'media' },
-        h('div', { class: 'diapo visuel depot', 'data-compte': p.compte, role: 'img', 'aria-label': `Aperçu du dépôt ${p.depot}` },
-          h('span', { class: 'depot-nom' }, p.depot),
-          h('dl', { class: 'depot-stats' },
-            stat('Étoiles cumulées', nombre(p.etoiles)),
-            stat('Progression récente', p.progression_etoiles === null ? 'Non mesurée' : nombre(p.progression_etoiles)),
-            stat('Créé le', quand(p.cree_le, fmtDate)),
-            stat('Licence · langage', `${p.licence} · ${p.langage}`)),
-          h('span', { class: 'visuel-titre' }, `Mesuré le ${quand(p.mesure_le, fmtDate)}`)),
-        h('figcaption', { class: 'mention-media' }, 'Présentation originale · ', lienExterne(p.demonstration.url, p.demonstration.libelle))),
-      h('div', { class: 'pub-corps' },
-        h('h3', { class: 'accroche', id: `pub-${p.id}` }, p.accroche.texte),
-        h('p', { class: 'description' }, p.interet.texte, ' La popularité seule ne prouve ni qualité ni fiabilité.'),
-        h('ul', { class: 'etiquettes', 'aria-label': 'Catégories' }, p.categories.map((c) => h('li', null, c))),
-        h('p', { class: 'pub-pied' }, lienExterne(p.url, 'Dépôt GitHub')),
-        h('p', { class: 'mention-discrete' }, p.verifie ? 'Description de l’auteur — projet non testé par la plateforme.' : 'À vérifier.')));
+  function vueDetail(lien) {
+    const p = postDe(lien);
+    const barre = h('div', { class: 'barre-retour' }, h('a', { href: '#/', 'aria-label': 'Retour à l’accueil' }, icone('retour', 20)), h('h1', null, 'Publication'));
+    if (!p) {
+      document.title = 'Publication introuvable · Curation AI';
+      return [barre, vide('Publication introuvable', 'Le lien est peut-être ancien.')];
+    }
+    document.title = `${compteDe(p.compte).nom} · ${p.paragraphes[0] || 'Publication'} · Curation AI`;
+    return [barre, post(p, { complet: true })];
   }
 
-  const ETATS_SUJET = { collecte: ['reel', 'Collecté'], partiel: ['neutre', 'Partiel'], a_construire: ['prevu', 'À construire'] };
-  const listeSujets = () => h('ul', { class: 'sujets' }, DONNEES.sujets.map((s) => h('li', null, tag(...ETATS_SUJET[s.etat]), ' ', s.sujet, h('span', null, s.note))));
-  const parDate = () => [...EXEMPLES.map((e) => ({ date: e.actualite.announced_at, noeud: () => publication(e), compte: e.compte })),
-    ...DONNEES.projets.map((p) => ({ date: p.mesure_le, noeud: () => publicationProjet(p), compte: p.compte }))]
-    .sort((a, b) => (b.date || '').localeCompare(a.date || ''));
-
-  // ——— Fil ———
-  function listeSources() {
-    return h('ul', { class: 'sources-liste' }, DONNEES.sources.map((s) => h('li', null,
-      h('span', { class: 'pastille' + (s.status === 'ok' ? '' : s.status === 'never' ? ' jamais' : ' erreur'), 'aria-hidden': 'true' }),
-      h('span', null, nomCourtSource(s.name),
-        h('span', { class: 'detail-source' }, s.status === 'ok'
-          ? `Dernière collecte réussie : ${quand(s.last_success_at)}`
-          : s.status === 'never' ? 'Pas encore collectée' : `Dernière collecte en échec${s.last_error ? ` : ${s.last_error}` : ''}`)))));
-  }
-
-  function vueFil() {
-    document.title = 'Fil — Curation AI (maquette)';
-    const introuvables = DONNEES.exemples_introuvables || [];
-    const autres = DONNEES.news_items.length;
-    const cote = h('aside', { class: 'colonne-cote', 'aria-label': 'À propos du fil' },
-      h('section', { class: 'carton', 'aria-labelledby': 'cote-comptes' },
-        h('h2', { id: 'cote-comptes' }, 'Comptes à suivre'),
-        h('div', { style: 'display:grid;gap:12px' }, DONNEES.comptes.map((c) => auteur(c.id))),
-        h('p', { style: 'margin-top:12px' }, 'Noms provisoires. Six identités, un même moteur.')),
-      REELS.length ? h('section', { class: 'carton', 'aria-labelledby': 'cote-reels' },
-        h('h2', { id: 'cote-reels' }, 'Reels'),
-        h('p', null, 'Présentés par la mascotte du site.'),
-        h('a', { class: 'bouton discret', href: '#/reels' }, icone('reels'), 'Ouvrir les Reels')) : null,
-      h('section', { class: 'carton', 'aria-labelledby': 'cote-sujets' },
-        h('h2', { id: 'cote-sujets' }, 'Couverture'),
-        listeSujets()));
+  function vueExplorer() {
+    document.title = 'Explorer · Curation AI';
+    const avecVisuel = POSTS().filter((p) => p.vignette());
     return [
-      h('section', { class: 'tete-page' },
-        h('div', null,
-          h('h1', null, 'Ce qui change dans l’IA et le dev'),
-          h('p', null, 'Exemples rédigés pour la maquette à partir d’annonces réelles.')),
-        h('div', { class: 'mascotte-accueil' }, h('img', { src: '../assets/brand/mascotte-principale.png', alt: '' }))),
-      h('div', { class: 'colonnes' },
-        h('section', { 'aria-labelledby': 'titre-fil' },
-          h('h2', { id: 'titre-fil', class: 'sr-only' }, 'Fil des publications'),
-          h('div', { class: 'filtre-auteurs', role: 'group', 'aria-label': 'Filtrer par auteur' },
-            [{ id: 'tous', nom: 'Tous' }, ...DONNEES.comptes].map((c) => h('button', { type: 'button', id: `auteur-${c.id}`, 'aria-pressed': String(etat.auteur === c.id), onclick: () => { etat.auteur = c.id; rendre(true, `auteur-${c.id}`); } },
-              c.avatar ? h('img', { src: `../assets/brand/${c.avatar}`, alt: '' }) : null, c.nom))),
-          (() => {
-            const liste = parDate().filter((x) => etat.auteur === 'tous' || x.compte === etat.auteur);
-            return liste.length ? liste.map((x) => x.noeud()) : etatBloc('mascotte-principale.png', 'Aucune publication pour ce compte', 'Aucune source connectée ne permet encore de publication vérifiée. Son profil présente le format prévu.',
-              h('a', { class: 'bouton discret', href: `#/profil/${etat.auteur}` }, 'Voir le profil'));
-          })(),
-          EXEMPLES.length ? etatBloc('mascotte-sourire.png', 'Fin des exemples',
-            `${pluriel(autres, 'actualité réelle a été collectée', 'actualités réelles ont été collectées')} ; elles attendent leur analyse (P3).`,
-            h('a', { class: 'bouton discret', href: '#/collecte' }, 'Voir les coulisses')) : null,
-          introuvables.length ? h('p', { class: 'controle a-verifier' }, `${pluriel(introuvables.length, 'exemple écarté', 'exemples écartés')} : document sans capture réelle.`) : null),
-        cote),
+      h('h1', { class: 'titre-page' }, 'Explorer'),
+      h('div', { class: 'grille' }, avecVisuel.map((p) => h('a', { class: 'tuile-explorer', href: p.lien, 'data-compte': p.compte, 'aria-label': `${compteDe(p.compte).nom} : ${p.paragraphes[0] || 'publication'}` }, p.vignette()))),
     ];
   }
 
-  // ——— Publication détaillée ———
-  function citations(champ, ouvert = true) {
-    if (!champ || !champ.passages.length) return null;
-    return h('details', { class: 'citations', open: ouvert },
-      h('summary', null, champ.passages.length > 1 ? `${champ.passages.length} citations de la source` : 'Citation de la source'),
-      champ.passages.map((p) => h('blockquote', { class: 'citation' + (p.trouve ? '' : ' introuvable'), lang: 'en' }, p.texte,
-        h('span', { class: 'verif', lang: 'fr' }, p.trouve ? '✓ Retrouvée mot pour mot dans la capture' : '✗ Introuvable dans la capture : à vérifier'))));
+  // Recherche : même code que la commande `chercher` (maquette/recherche.js). Un résultat dit brièvement pourquoi il remonte.
+  const LIEU = { nom: 'le nom', categorie: 'la catégorie', usage: 'un usage', technologie: 'une technologie', texte: 'le texte' };
+  function raisonCourte(x) {
+    const c = x.correspondances[0];
+    if (!c) return null;
+    if (c.champ === 'terme_proche') return `Proche de « ${c.terme} »`;
+    return c.raison || `Trouvé dans ${LIEU[c.champ] || 'la publication'}`;
   }
-  function sectionChamp(titre, champ, id) {
-    return h('section', { class: 'detail-section', 'aria-labelledby': id },
-      h('h2', { id }, titre),
-      champ ? [h('p', null, champ.texte), citations(champ)] : h('p', { class: 'manque' }, `${NON_RENSEIGNE} : la source n’en dit rien.`));
+  function vueRecherche(requete) {
+    document.title = `${requete ? `${requete} · ` : ''}Recherche · Curation AI`;
+    const titre = (t) => h('h1', { class: 'titre-page', id: 'resultats-titre', tabindex: '-1' }, t);
+    if (!window.RECHERCHE) return [titre('Recherche'), vide('Recherche indisponible', 'Rechargez la page.')];
+    if (!requete) return [titre('Recherche'), vide('Cherchez un outil, un usage ou une technologie', null)];
+    const q = window.RECHERCHE.preparerRequete(requete.slice(0, 200));
+    const resultats = q.mots.length ? window.RECHERCHE.classer(requete.slice(0, 200), DONNEES.recherche || [], 'pertinence') : [];
+    annoncer(`${pluriel(resultats.length, 'résultat')} pour « ${requete} ».`);
+    const posts = resultats.map((x) => {
+      const r = RESSOURCES.find((y) => y.post_id === x.postId);
+      return r ? post(postRessource(r), { raison: raisonCourte(x) }) : null;
+    }).filter(Boolean);
+    return [
+      titre(`Résultats pour « ${requete} »`),
+      posts.length ? posts : vide('Aucun résultat', 'Essayez un autre mot, plus court ou plus général.'),
+    ];
   }
 
-  function vuePublication(id) {
-    const ex = EXEMPLES.find((e) => e.id === id);
-    const retour = h('a', { class: 'retour', href: '#/' }, '← Retour au fil');
-    if (!ex) return [retour, pageErreur('Publication introuvable', 'Cette publication n’existe pas dans la maquette ; le lien est peut-être ancien. Revenez au fil.')];
-    document.title = `${ex.accroche.texte} — Curation AI (maquette)`;
-    const passages = passagesDe(ex);
-    const a = ex.actualite;
-    return [
-      retour,
-      h('div', { class: 'detail' },
-        h('article', { class: 'detail-principal', 'aria-labelledby': 'detail-titre' },
-          bandeauExemple(ex),
-          h('div', { class: 'pub-tete' }, auteur(ex.compte), h('span', { class: 'pub-date' }, 'Annonce du ', h('br'), temps(a.announced_at))),
-          h('h1', { class: 'accroche-grande', id: 'detail-titre' }, ex.accroche.texte),
-          h('div', { class: 'detail-citation-accroche' }, citations(ex.accroche, false)),
-          media(ex),
-          sectionChamp('Nouveauté', ex.nouveaute, 'd-nouveaute'),
-          sectionChamp('Ce que ça permet', ex.ce_que_ca_permet, 'd-permet'),
-          sectionChamp('Pour qui', ex.pour_qui, 'd-qui'),
-          sectionChamp('Limites connues', ex.limites_connues, 'd-limites'),
-          ex.details.map((d, i) => sectionChamp(d.titre, d, `d-detail-${i}`)),
-          ex.attributions.length ? h('section', { class: 'detail-section', 'aria-labelledby': 'd-attrib' },
-            h('h2', { id: 'd-attrib' }, 'Benchmarks et témoignages rapportés'),
-            h('p', { class: 'aide' }, 'Attribués à leur auteur, avec leurs conditions. Jamais mesurés ni vécus par la plateforme.'),
-            ex.attributions.map((at) => h('div', { class: 'attribution' },
-              h('h3', null, at.type === 'benchmark' ? 'Benchmark attribué' : 'Témoignage rapporté'),
-              h('p', { class: 'qui' }, at.auteur),
-              h('p', null, at.texte),
-              citations(at, false)))) : null,
-          h('section', { class: 'detail-section', 'aria-labelledby': 'd-questions' },
-            h('h2', { id: 'd-questions' }, 'Questions à tester'),
-            h('p', { class: 'aide' }, 'Pistes pour un futur test (P8) ou pour les membres (P9) : ce ne sont pas des affirmations, elles ne citent rien.'),
-            ex.questions_a_tester.length ? h('ul', { class: 'questions' }, ex.questions_a_tester.map((q) => h('li', null, q))) : h('p', { class: 'manque' }, NON_RENSEIGNE)),
-          actionsSociales()),
-        h('aside', { class: 'detail-cote', 'aria-label': 'Preuve, source et traçabilité' },
-          h('section', { class: 'carton', 'aria-labelledby': 'c-preuve' },
-            h('h2', { id: 'c-preuve' }, 'Niveau de preuve'),
-            preuve(),
-            h('p', null, 'Rédigé à partir de l’annonce, sans avoir utilisé l’outil. Le carrousel est une illustration générée à partir des champs de la publication.')),
-          h('section', { class: 'carton' }, controle(ex)),
-          h('section', { class: 'carton', 'aria-labelledby': 'c-source' },
-            h('h2', { id: 'c-source' }, 'Source'),
-            h('dl', { class: 'infos' },
-              h('div', null, h('dt', null, 'Document'), h('dd', { lang: 'en' }, lienExterne(a.source.url, a.title))),
-              h('div', null, h('dt', null, 'Publié par'), h('dd', null, a.source.name)),
-              h('div', null, h('dt', null, 'Annoncé le'), h('dd', null, quand(a.announced_at))),
-              h('div', null, h('dt', null, 'Catégories'), h('dd', null, ex.categories.join(', ') || NON_RENSEIGNE))),
-            h('p', { style: 'margin-top:12px' }, h('a', { href: `#/actualite/${a.id}` }, 'Fiche d’approfondissement →'))),
-          h('section', { class: 'carton', 'aria-labelledby': 'c-trace' },
-            h('h2', { id: 'c-trace' }, 'Traçabilité'),
-            h('dl', { class: 'infos' },
-              h('div', null, h('dt', null, 'Actualité'), h('dd', null, `n° ${a.id} (${a.kind === 'version' ? 'version' : 'annonce'})`)),
-              h('div', null, h('dt', null, 'Capture citée'), h('dd', null, `${quand(ex.capture.captured_at)} · collecte réelle`)),
-              h('div', null, h('dt', null, 'Empreinte'), h('dd', null, h('code', null, ex.capture.content_hash.slice(0, 16)), '…')),
-              h('div', null, h('dt', null, 'Exécution de collecte'), h('dd', null, h('code', null, ex.capture.run_id.slice(0, 8)), '…')),
-              h('div', null, h('dt', null, 'Texte brut de la capture'), h('dd', null, `${ex.capture.text_length.toLocaleString('fr-FR')} caractères`)),
-              h('div', null, h('dt', null, 'Contrôle des citations'), h('dd', null, `${passages.filter((p) => p.trouve).length}/${passages.length} retrouvées mot pour mot (par le code, pas par un second appel au modèle)`)),
-              h('div', null, h('dt', null, 'Analyse : modèle, version du prompt'), h('dd', null, tag('prevu', 'Prévu · P3'))),
-              h('div', null, h('dt', null, 'Révisions et trace complète'), h('dd', null, tag('prevu', 'Prévu · P3'))))))),
-    ];
+  function vueNotifications() {
+    document.title = 'Notifications · Curation AI';
+    return [h('h1', { class: 'titre-page' }, 'Notifications'), vide('Aucune notification pour l’instant', null)];
   }
 
   // ——— Reels ———
@@ -934,7 +869,7 @@
       h('track', { kind: 'captions', src: `${base}.vtt`, srclang: 'fr', label: 'Français', default: true }));
     const ecran = h('div', { class: 'reel-ecran' }, video,
       h('button', { type: 'button', class: 'reel-grand-bouton', 'aria-label': 'Lire la vidéo', tabindex: '-1' }, icone('lecture', 30)),
-      h('div', { class: 'reel-erreur', role: 'alert' }, h('strong', null, 'La vidéo n’a pas pu être chargée.'), h('span', null, 'Lancez « npm run maquette:reel », puis rechargez la page.')));
+      h('div', { class: 'reel-erreur', role: 'alert' }, h('strong', null, 'La vidéo n’a pas pu être chargée.'), h('span', null, 'Rechargez la page.')));
     const lecture = h('button', { type: 'button', 'aria-label': 'Lire la vidéo' }, icone('lecture'));
     const son = h('button', { type: 'button', 'aria-label': 'Couper le son', 'aria-pressed': 'false' }, icone('son'));
     const st = h('button', { type: 'button', 'aria-label': 'Sous-titres', 'aria-pressed': 'true' }, h('span', { class: 'cc', 'aria-hidden': 'true' }, 'ST'));
@@ -982,179 +917,143 @@
     });
     return colonne;
   }
-
+  const reelsValides = () => REELS.map((reel) => ({ reel, ex: EXEMPLES.find((e) => e.id === reel.exemple) })).filter(({ ex }) => ex && ex.statut === 'verifie');
   function vueReels() {
-    document.title = 'Reels — Curation AI (maquette)';
-    const elements = REELS.map((reel) => {
-      const ex = EXEMPLES.find((e) => e.id === reel.exemple);
-      if (!ex || ex.statut !== 'verifie') return null;
-      const transcription = [['Accroche', ex.accroche], ['Nouveauté', ex.nouveaute], [ex.details[0]?.titre, ex.details[0]], ['Limites connues', ex.limites_connues]].filter(([, c]) => c);
-      return h('article', { class: 'reel', 'aria-labelledby': `titre-${reel.id}` },
+    document.title = 'Reels · Curation AI';
+    const elements = reelsValides().map(({ reel, ex }) => {
+      const c = compteDe(ex.compte);
+      const transcription = [['Accroche', ex.accroche], ['Nouveauté', ex.nouveaute], [ex.details[0]?.titre, ex.details[0]], ['Limites connues', ex.limites_connues]].filter(([, champ]) => champ);
+      return h('article', { class: 'reel', 'aria-label': `Reel de ${c.nom}` },
         lecteurReel(reel, ex),
         h('div', { class: 'reel-infos' },
-          h('div', { class: 'tags' }, tag('exemple', 'Exemple'), tag('neutre', 'Hébergée par la plateforme')),
-          auteur(ex.compte),
-          h('p', { class: 'mention-discrete' }, `Présenté par la mascotte du site (${DONNEES.presentatrice.nom}, nom provisoire).`),
-          h('h2', { id: `titre-${reel.id}` }, ex.accroche.texte),
-          preuve(),
-          h('p', { class: 'mention-texte' }, `${MENTION_MEDIA}. Voix de synthèse ; texte repris des champs vérifiés de la publication.`),
+          h('header', { class: 'post-tete' }, h('a', { class: 'post-nom', href: `#/profil/${c.id}` }, c.nom), h('span', { class: 'post-meta' }, `@${c.identifiant}${marqueIA(c)}`, ' · ', temps(ex.actualite.announced_at, fmtCourt))),
+          h('p', null, ex.accroche.texte),
+          h('p', { class: 'post-mention' }, `${LIBELLE_ANALYSE} · Vidéo générée, voix de synthèse · `, h('a', { href: `#/publication/${ex.id}`, style: 'color:inherit' }, 'Publication')),
           h('details', { class: 'transcription' },
             h('summary', null, 'Transcription'),
-            h('dl', null, transcription.map(([libelle, c]) => [h('dt', null, libelle), h('dd', null, c.texte)]))),
-          h('p', { class: 'pub-meta' }, h('span', null, 'Source : ', lienExterne(ex.actualite.source.url, nomSource(ex.actualite.source))), h('span', null, 'Annonce du ', temps(ex.actualite.announced_at))),
-          h('a', { class: 'lien-suite', href: `#/publication/${ex.id}` }, 'Publication détaillée et citations →')));
-    }).filter(Boolean);
-    const emplacement = (titre, texte, jalon) => h('article', { class: 'reel prevu', 'aria-label': `${titre} (prévu)` },
-      h('div', { class: 'reel-ecran' }, tag('prevu', `Prévu · ${jalon}`), h('strong', null, titre), h('span', null, texte)));
-    return [
-      h('section', { class: 'tete-page' }, h('div', null,
-        h('h1', null, 'Reels'),
-        h('p', null, 'Des vidéos courtes et verticales. Ici, une vidéo d’exemple générée par le code à partir d’une publication vérifiée : elle illustre l’annonce, elle ne prouve pas que l’outil fonctionne. Aucune lecture automatique.'))),
-      h('div', { class: 'reels-fil' },
-        elements.length ? elements : etatErreur('Aucun Reel dans la maquette.', 'Lancez « npm run maquette:reel ».', { niveau: 'h2' }),
-        emplacement('Démonstration externe', 'Vidéo publiée par l’éditeur, intégrée avec son lecteur officiel et attribuée. Sa lecture dépendra du fournisseur.', 'P7'),
-        emplacement('Test de la plateforme', 'Enregistrement d’un test réellement exécuté par nous, avec version, conditions, résultat et limites.', 'P8')),
-    ];
+            h('dl', null, transcription.map(([libelle, champ]) => [h('dt', null, libelle), h('dd', null, champ.texte)])))));
+    });
+    return [h('h1', { class: 'titre-page' }, 'Reels'), elements.length ? elements : vide('Aucun Reel pour l’instant', null)];
   }
 
-  // ——— Profil du compte éditorial ———
-  const ONGLETS = [['publications', 'Publications'], ['reels', 'Reels'], ['methode', 'Méthode'], ['sources', 'Sources']];
-  function etape(titre, type, statut, texte) {
-    return h('li', null, h('div', null, h('h3', null, titre, tag(type, statut)), h('p', null, texte)));
-  }
-  // Pulse : format et sources seulement ; la fiche reste vide tant qu'aucun incident n'est réellement collecté.
-  const ETAT = { connecte: ['reel', 'Connectée'], partiel: ['neutre', 'Partielle'], a_integrer: ['prevu', 'À intégrer'], differe: ['neutre', 'Différée'] };
-  function blocRadar() {
-    return [
-      h('h2', { class: 'sous-titre-section', style: 'margin-top:0' }, 'Sources'),
-      h('p', { class: 'intro-onglet' }, 'Chaque publication distingue annonce officielle, affirmation commerciale, résultat indépendant et rumeur. Le contexte aide à recouper, il ne prouve pas à lui seul. Les sources à intégrer ou différées ne sont pas surveillées.'),
-      h('ul', { class: 'sujets' }, DONNEES.registre_radar.map((s) => h('li', null, tag(...ETAT[s.etat]), ' ', s.famille, h('span', null, `${premiereMajuscule(s.role)} · ${s.note}`)))),
-      h('h2', { class: 'sous-titre-section' }, 'Publications'),
-    ];
-  }
-  function blocPulse() {
-    return [
-      h('h2', { class: 'sous-titre-section', style: 'margin-top:0' }, 'Format d’une fiche incident'),
-      h('p', { class: 'intro-onglet' }, tag('prevu', 'Prévu · P6'), ' Aucun incident collecté pour l’instant : aucune fiche n’est remplie. Une cause reste une hypothèse tant qu’une source d’origine ne la confirme pas.'),
-      h('dl', { class: 'infos' }, DONNEES.fiche_incident.map((f) => h('div', null, h('dt', null, f), h('dd', { class: 'manque' }, NON_RENSEIGNE)))),
-      h('h2', { class: 'sous-titre-section' }, 'Découverte, vérification, publication'),
-      h('p', { class: 'intro-onglet' }, 'Une découverte n’est qu’un signal. Elle doit être confirmée par une source vérifiable avant publication. La publication est ensuite révisée, datée, quand la situation évolue.'),
-      h('ul', { class: 'sujets' }, DONNEES.registre_pulse.map((s) => h('li', null, tag(...ETAT[s.etat]), ' ', s.famille, h('span', null, `${premiereMajuscule(s.role)} · ${s.note}`)))),
-      h('h2', { class: 'sous-titre-section' }, 'Publications'),
-    ];
-  }
-
-  function vueComptes() {
-    document.title = 'Profils — Curation AI (maquette)';
-    return [
-      h('section', { class: 'tete-page' }, h('div', null, h('h1', null, 'Profils des agents'), h('p', null, 'Six identités éditoriales, un même moteur technique. Noms provisoires. Aucun compte n’existe encore.'))),
-      h('div', { class: 'grille-comptes' }, DONNEES.comptes.map((c) => h('article', { class: 'carte-compte', 'data-compte': c.id },
-        h('img', { class: 'avatar rond', src: `../assets/brand/${c.avatar}`, alt: '' }),
-        h('h2', null, h('a', { href: `#/profil/${c.id}` }, c.nom), ' ', badgeAgent()),
-        h('p', { class: 'auteur-id' }, `@${c.identifiant} · ${c.animal}`),
-        h('p', null, c.specialite)))),
-      h('p', { class: 'intro-onglet', style: 'margin-top:18px' }, `La mascotte violette (${DONNEES.presentatrice.nom}, nom provisoire) reste l’identité du site et présente les Reels ; elle ne signe pas les publications.`),
-    ];
-  }
-  function vueProfil(id, onglet) {
+  // ——— Profil d'un agent ———
+  function vueProfilAgent(id, onglet) {
     const c = compteDe(id);
-    const exemples = EXEMPLES.filter((e) => e.compte === c.id);
-    const projets = DONNEES.projets.filter((p) => p.compte === c.id);
-    const reels = REELS.filter((r) => exemples.some((e) => e.id === r.exemple));
-    document.title = `${c.nom} (@${c.identifiant}) — Curation AI (maquette)`;
-    const contenu = {
-      publications: () => [
-        h('p', { class: 'intro-onglet' }, `${pluriel(exemples.length + projets.length, 'exemple')} de publication ; aucune publication réelle pour l’instant.`),
-        c.id === 'pulse' ? blocPulse() : null,
-        c.id === 'radar' ? blocRadar() : null,
-        h('div', { class: 'grille-pubs' }, exemples.map((ex) => h('a', { class: 'vignette', 'data-compte': ex.compte, href: `#/publication/${ex.id}` },
-          couverture(ex, { 'aria-hidden': 'true' }), tag('exemple', 'Exemple'), h('span', { class: 'vignette-texte' }, ex.accroche.texte),
-          h('span', { class: 'vignette-mention' }, MENTION_MEDIA))),
-          projets.map((p) => h('a', { class: 'vignette', href: p.url, rel: 'noopener noreferrer', target: '_blank' }, tag('exemple', 'Exemple'), h('span', { class: 'vignette-texte' }, p.accroche.texte), h('span', { class: 'vignette-mention' }, `${p.depot} ↗`)))),
-      ],
-      reels: () => h('div', { class: 'grille-pubs' },
-        reels.map((r) => h('a', { class: 'vignette', href: '#/reels' }, h('img', { class: 'vignette-reel', src: `medias/${r.id}.jpg`, alt: '' }), tag('exemple', 'Exemple'),
-          h('span', { class: 'vignette-texte' }, EXEMPLES.find((e) => e.id === r.exemple)?.accroche.texte || r.id),
-          h('span', { class: 'vignette-mention' }, MENTION_MEDIA))),
-        h('div', { class: 'emplacement' }, tag('prevu', 'Prévu · P7'), h('strong', null, 'Démonstrations externes'), 'Intégrées et attribuées.'),
-        h('div', { class: 'emplacement' }, tag('prevu', 'Prévu · P8'), h('strong', null, 'Tests de la plateforme'), 'Exécutés dans un bac à sable.')),
-      methode: () => [
-        h('h2', { class: 'sous-titre-section', style: 'margin-top:0' }, 'Comment travaille l’agent'),
-        h('ol', { class: 'etapes' },
-          etape('Collecter à la source', 'reel', 'Réel · P1–P2', 'Releases GitHub et flux officiels, sur liste blanche d’hôtes, sans suivre de redirection. Chaque document est daté et conservé tel quel.'),
-          etape('Sélectionner', 'prevu', 'Prévu · P3', 'Garder les annonces utiles, écarter doublons, rumeurs et teasers. La sélection rejette plus qu’elle ne publie.'),
-          etape('Rédiger', 'prevu', 'Prévu · P3', 'Accroche fidèle, nouveauté, intérêt concret, limites connues et textes du carrousel, chaque affirmation appuyée par une citation. Dans cette maquette, les exemples sont rédigés par Claude Code.'),
-          etape('Vérifier', 'reel', 'Réel pour les exemples', 'Chaque citation doit se retrouver mot pour mot dans la capture stockée, contrôle fait par le code et non par un second appel au modèle ; sinon « à vérifier ». Ce contrôle tourne déjà sur les exemples de la maquette.'),
-          etape('Publier', 'prevu', 'Prévu · P5', 'Publication automatique après contrôles, dans une fréquence maximale et un budget fixés par l’utilisateur.')),
-        h('h2', { class: 'sous-titre-section' }, 'Trois niveaux de preuve'),
-        h('dl', { class: 'niveaux' },
-          h('div', null, h('dt', null, 'Analyse documentaire', tag('prevu', 'Seul niveau de la V1')), h('dd', null, `${LIBELLE_ANALYSE}.`)),
-          h('div', null, h('dt', null, 'Démonstration externe', tag('prevu', 'Prévu · P7')), h('dd', null, 'Vidéo ou aperçu publié par le créateur, intégré ou réutilisé avec autorisation, attribué.')),
-          h('div', null, h('dt', null, 'Test de la plateforme', tag('prevu', 'Prévu · P8')), h('dd', null, 'Démonstration réellement exécutée par nous : version, conditions, résultat, limites.'))),
-        h('h2', { class: 'sous-titre-section' }, 'Sujets et collecte'),
-        listeSujets(),
-      ],
-      sources: () => [
-        h('p', { class: 'intro-onglet' }, tag('reel', 'Réel'), ` ${pluriel(DONNEES.sources.length, 'source officielle collectée', 'sources officielles collectées')} aujourd’hui.`),
-        h('div', { class: 'carton', style: 'max-width:560px' }, listeSources()),
-        h('p', { class: 'intro-onglet', style: 'margin-top:18px' }, tag('prevu', 'Prévu · P6'), ' Autres sources (Hugging Face, registre MCP, pages d’état, laboratoires, langages, matériel, design) : ajoutées une par une, après vérification de l’accès, des quotas et des conditions.'),
-      ],
-    };
+    document.title = `${c.nom} (@${c.identifiant}) · Curation AI`;
+    const posts = POSTS().filter((p) => p.compte === c.id);
+    const reels = reelsValides().filter(({ ex }) => ex.compte === c.id);
+    const contenu = onglet === 'reels'
+      ? (reels.length ? h('div', { class: 'grille-reels' }, reels.map(({ reel }) => h('a', { href: '#/reels', 'aria-label': 'Ouvrir le Reel' }, h('img', { src: `medias/${reel.id}.jpg`, alt: '' })))) : vide('Aucun Reel pour l’instant', null))
+      : (posts.length ? posts.map((p) => post(p)) : vide('Aucune publication pour l’instant', null));
     return [
-      h('section', { class: 'profil-tete' },
-        h('div', { class: 'profil-avatar', style: 'border-radius:50%;background:none' }, h('img', { src: `../assets/brand/${c.avatar}`, alt: '' })),
-        h('div', null,
-          h('h1', null, c.nom, c.type === 'agent' ? badgeAgent() : null, c.provisoire ? tag('prevu', 'Nom provisoire') : null),
-          h('p', { class: 'profil-id' }, `@${c.identifiant}`),
-          h('p', { class: 'profil-bio' }, c.biographie),
-          h('p', { class: 'profil-specialite' }, h('strong', null, 'Spécialité : '), c.specialite),
-          h('div', { class: 'profil-actions' }, h('button', { class: 'bouton', type: 'button', disabled: true }, 'Suivre'), tag('prevu', 'Prévu · P9'),
-            h('span', { class: 'note' }, 'Compte de type agent ; aucun abonné affiché.')))),
-      h('nav', { class: 'onglets', 'aria-label': 'Sections du profil' }, ONGLETS.map(([cle, libelle]) =>
-        h('a', { href: `#/profil/${c.id}/${cle}`, id: `onglet-${cle}`, 'aria-current': cle === onglet ? 'page' : null }, libelle))),
-      contenu[onglet](),
+      h('div', { class: 'barre-retour' }, h('a', { href: '#/', 'aria-label': 'Retour à l’accueil' }, icone('retour', 20)), h('span', { style: 'font-weight:800' }, c.nom)),
+      h('div', { 'data-compte': c.id }, h('div', { class: 'profil-banniere' })),
+      h('div', { class: 'profil-haut' },
+        h('img', { class: 'profil-photo', src: `../assets/brand/${c.avatar}`, alt: '' }),
+        h('span', { style: 'display:grid;justify-items:end;gap:2px' },
+          h('button', { class: 'bouton-contour', type: 'button', disabled: true, 'aria-describedby': 'suivre-note' }, 'Suivre'),
+          h('span', { class: 'note-discrete', id: 'suivre-note' }, 'Indisponible pour l’instant'))),
+      h('div', { class: 'profil-infos' },
+        h('h1', null, c.nom),
+        h('p', { class: 'profil-id' }, `@${c.identifiant}${marqueIA(c)}`),
+        c.biographie ? h('p', { class: 'bio' }, c.biographie) : null),
+      h('nav', { class: 'onglets', 'aria-label': 'Sections du profil' },
+        [['publications', 'Publications'], ['reels', 'Reels']].map(([cle, libelle]) => h('a', { href: `#/profil/${c.id}/${cle}`, id: `onglet-${cle}`, 'aria-current': cle === onglet ? 'page' : null }, libelle))),
+      contenu,
     ];
   }
 
-  // ——— Actualités collectées (non publiées) ———
+  // ——— Profil de l'utilisateur : aperçu, aucun compte n'existe ; rien n'est enregistré. ———
+  function avatarVide(taille, classe = '') {
+    return h('span', { class: `avatar-vide ${classe}`, style: classe ? null : `width:${taille}px;height:${taille}px`, 'aria-hidden': 'true' }, icone('profil', Math.round(taille * 0.5)));
+  }
+  function ligneCompte(c) {
+    return h('li', null,
+      h('a', { class: 'compte-ligne', href: `#/profil/${c.id}` }, avatarDe(c, 40), h('span', null, h('strong', null, c.nom), h('small', null, `@${c.identifiant}${marqueIA(c)}`))),
+      h('button', { class: 'bouton-contour', type: 'button', disabled: true, title: 'Indisponible pour l’instant' }, 'Suivre'));
+  }
+  function dialogueProfil() {
+    const NOTE = 'Aperçu : rien n’est enregistré.';
+    const statut = h('span', { class: 'note-discrete', role: 'status' }, NOTE);
+    const dialogue = h('dialog', { 'aria-labelledby': 'modifier-titre' },
+      h('form', { class: 'formulaire', onsubmit: (e) => { e.preventDefault(); statut.textContent = 'Rien n’a été enregistré : ce profil est un aperçu.'; } },
+        h('div', { class: 'formulaire-tete' },
+          h('h2', { id: 'modifier-titre' }, 'Modifier le profil'),
+          h('button', { class: 'bouton-icone', type: 'button', 'aria-label': 'Fermer', onclick: () => dialogue.close() }, icone('fermer', 20))),
+        h('label', null, 'Nom', h('input', { name: 'nom', autocomplete: 'off', maxlength: '50' })),
+        h('label', null, 'Bio', h('textarea', { name: 'bio', maxlength: '160' })),
+        h('label', null, 'Site web', h('input', { name: 'site', type: 'url', autocomplete: 'off', inputmode: 'url' })),
+        h('div', { style: 'display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap' },
+          statut,
+          h('button', { class: 'bouton-plein', type: 'submit' }, 'Enregistrer'))));
+    dialogue.addEventListener('close', () => { statut.textContent = NOTE; });
+    return dialogue;
+  }
+  function vueMoi(onglet) {
+    document.title = 'Votre profil · Curation AI';
+    const dialogue = dialogueProfil();
+    const onglets = [['', 'Publications'], ['abonnements', 'Abonnements'], ['abonnes', 'Abonnés']];
+    const contenu = {
+      '': () => vide('Aucune publication pour l’instant', null),
+      abonnements: () => [vide('Vous ne suivez aucun compte', null),
+        h('h2', { class: 'titre-page', style: 'font-size:1.05rem;padding-top:0' }, 'Suggestions'),
+        h('ul', { class: 'liste-comptes' }, DONNEES.comptes.map(ligneCompte))],
+      abonnes: () => vide('Aucun abonné pour l’instant', null),
+    }[onglet]();
+    return [
+      h('div', { class: 'barre-retour' }, h('a', { href: '#/', 'aria-label': 'Retour à l’accueil' }, icone('retour', 20)), h('span', { style: 'font-weight:800' }, 'Votre profil')),
+      h('div', { class: 'profil-banniere' }),
+      h('div', { class: 'profil-haut' },
+        avatarVide(104, 'profil-photo'),
+        h('button', { class: 'bouton-contour', type: 'button', onclick: () => dialogue.showModal() }, 'Modifier le profil')),
+      h('div', { class: 'profil-infos' },
+        h('h1', null, 'Votre profil'),
+        h('p', { class: 'profil-id' }, 'Aperçu · aucun compte créé')),
+      h('nav', { class: 'onglets', 'aria-label': 'Sections du profil' },
+        onglets.map(([cle, libelle]) => h('a', { href: `#/moi${cle ? `/${cle}` : ''}`, id: `onglet-moi-${cle || 'publications'}`, 'aria-current': cle === onglet ? 'page' : null }, libelle))),
+      contenu,
+      dialogue,
+    ];
+  }
+
+  // ——— Coulisses : actualités collectées et registres (menu « Plus »). ———
+  const ETATS_SUJET = { collecte: ['reel', 'Collecté'], partiel: ['neutre', 'Partiel'], a_construire: ['prevu', 'À construire'] };
+  const ETAT = { connecte: ['reel', 'Connectée'], partiel: ['neutre', 'Partielle'], a_integrer: ['prevu', 'À intégrer'], differe: ['neutre', 'Différée'] };
+  const listeSujets = () => h('ul', { class: 'sujets' }, DONNEES.sujets.map((s) => h('li', null, tag(...ETATS_SUJET[s.etat]), ' ', s.sujet, h('span', null, s.note))));
+  const registre = (lignes) => h('ul', { class: 'sujets' }, lignes.map((s) => h('li', null, tag(...ETAT[s.etat]), ' ', s.famille, h('span', null, `${premiereMajuscule(s.role)} · ${s.note}`))));
+  function listeSources() {
+    return h('ul', { class: 'sources-liste' }, DONNEES.sources.map((s) => h('li', null,
+      h('span', { class: 'pastille' + (s.status === 'ok' ? '' : s.status === 'never' ? ' jamais' : ' erreur'), 'aria-hidden': 'true' }),
+      h('span', null, nomCourtSource(s.name),
+        h('span', { class: 'detail-source' }, s.status === 'ok'
+          ? `Dernière collecte réussie : ${quand(s.last_success_at)}`
+          : s.status === 'never' ? 'Pas encore collectée' : `Dernière collecte en échec${s.last_error ? ` : ${s.last_error}` : ''}`)))));
+  }
   function tuile(item, grand = false) {
     const estVersion = item.kind === 'version' && item.version;
-    const texte = estVersion ? item.version : nomCourtSource(item.source.name).split(' ')[0];
-    const sous = estVersion ? item.product.name : (item.kind === 'version' ? 'version' : 'annonce');
+    const lettres = estVersion ? item.version : nomCourtSource(item.source.name).split(' ')[0];
     return h('div', { class: 'visage', 'aria-hidden': 'true' },
-      h('span', { class: 'lettres' + (estVersion ? '' : ' annonce'), style: `--n:${texte.length}` }, texte),
-      grand ? h('span', { class: 'sous' }, sous) : null);
+      h('span', { class: 'yeux' }, h('i'), h('i')),
+      h('span', { class: 'lettres' + (estVersion ? '' : ' annonce'), style: `--n:${lettres.length}` }, lettres),
+      grand ? h('span', { class: 'sous' }, estVersion ? item.product.name : 'annonce') : null);
   }
   function carte(item) {
-    const etiquettes = [item.product?.category, ...item.categories].filter(Boolean);
-    const ex = exempleDe(item.id);
     return h('article', { class: 'carte' },
       tuile(item),
       h('div', null,
-        h('div', { class: 'surtitre' },
-          h('span', { class: 'type' }, item.kind === 'version' ? 'Version' : 'Annonce'),
-          h('span', null, item.product ? `${item.product.name} · ${item.product.publisher}` : nomCourtSource(item.source.name))),
-        h('h3', null, h('a', { href: `#/actualite/${item.id}`, id: `titre-${item.id}`, lang: 'en' }, item.title)),
-        item.excerpt
-          ? h('p', { class: 'extrait' }, h('span', { class: 'extrait-label' }, 'Extrait de la source'), h('span', { lang: 'en' }, item.excerpt))
-          : h('p', { class: 'manque', style: 'margin:0 0 8px' }, 'Aucun texte dans la source.'),
-        etiquettes.length ? h('ul', { class: 'etiquettes', 'aria-label': 'Catégories' }, etiquettes.map((e) => h('li', { lang: item.product?.category === e ? 'fr' : 'en' }, e))) : null,
+        h('div', { class: 'surtitre' }, h('span', null, item.kind === 'version' ? 'Version' : 'Annonce'), h('span', null, item.product ? `${item.product.name} · ${item.product.publisher}` : nomCourtSource(item.source.name))),
+        h('h4', null, h('a', { href: `#/actualite/${item.id}`, id: `titre-${item.id}`, lang: 'en' }, item.title)),
+        item.excerpt ? h('p', { class: 'extrait', lang: 'en' }, item.excerpt) : null,
         h('p', { class: 'meta' },
-          h('span', null, 'Annoncé le ', temps(item.announced_at, fmtDateHeure)),
-          h('span', null, 'Collecté le ', temps(item.first_seen_at, fmtDateHeure)),
-          h('span', null, 'Source : ', lienExterne(item.source.url, libelleSource(item.source)))),
-        ex ? h('p', { class: 'lien-exemple' }, tag('exemple', 'Exemple'), h('a', { href: `#/publication/${ex.id}` }, 'Voir l’exemple de publication')) : null));
-  }
-
-  function filtrees() {
-    return DONNEES.news_items.filter((i) => (etat.filtre === 'tout' || i.kind === etat.filtre) && (etat.source === 'toutes' || i.source.id === etat.source));
+          item.announced_at ? h('span', null, 'Annoncé le ', temps(item.announced_at, fmtDateHeure)) : null,
+          h('span', null, 'Source : ', lienExterne(item.source.url, libelleSource(item.source))))));
   }
   function vueCollecte() {
-    document.title = 'Actualités collectées — Curation AI (maquette)';
+    document.title = 'Coulisses · Curation AI';
     const items = DONNEES.news_items.filter((i) => etat.source === 'toutes' || i.source.id === etat.source);
     const versions = items.filter((i) => i.kind === 'version').length;
-    const derniere = DONNEES.sources.map((s) => s.last_success_at).filter(Boolean).sort().pop();
-    const liste = filtrees();
+    const derniereCollecte = DONNEES.sources.map((s) => s.last_success_at).filter(Boolean).sort().pop();
+    const liste = DONNEES.news_items.filter((i) => (etat.filtre === 'tout' || i.kind === etat.filtre) && (etat.source === 'toutes' || i.source.id === etat.source));
     const visibles = liste.slice(0, etat.visibles);
     const segments = h('div', { class: 'segments', role: 'group', 'aria-label': 'Type d’actualité' },
       [['tout', `Tout (${items.length})`], ['version', `Versions (${versions})`], ['annonce', `Annonces (${items.length - versions})`]].map(([valeur, libelle]) =>
@@ -1170,227 +1069,195 @@
       if (!jour || jour.cle !== cle) { jour = { cle, date, items: [] }; jours.push(jour); }
       jour.items.push(item);
     }
-    annoncer(`${pluriel(liste.length, 'actualité')} pour ce filtre.`);
+    const nonPlanifiees = DONNEES.ressources_non_planifiees || [];
     return [
-      h('section', { class: 'tete-page' }, h('div', null,
-        h('h1', null, 'Actualités collectées'),
-        h('p', null, tag('reel', 'Réel'), ` Récupérées dans les flux officiels par la commande de collecte, lancée à la main ; pas encore analysées ni publiées (P3). ${pluriel(DONNEES.news_items.length, 'actualité')} · ${pluriel(DONNEES.sources.length, 'source')} · dernière collecte ${quand(derniere)} (heure de Paris).`))),
-      h('div', { class: 'colonnes' },
-        h('section', { 'aria-labelledby': 'titre-collecte' },
-          h('h2', { id: 'titre-collecte', class: 'sr-only' }, 'Liste des actualités collectées'),
-          h('div', { class: 'filtres' }, segments, h('label', { class: 'choix-source', for: 'source' }, 'Source', select)),
-          liste.length === 0
-            ? h('div', { class: 'jour' }, etatBloc('mascotte-principale.png', 'Aucune actualité pour ce filtre', 'Aucune version ni annonce ne correspond à ce type et à cette source.',
-                h('button', { class: 'bouton discret', type: 'button', onclick: () => { etat.filtre = 'tout'; etat.source = 'toutes'; rendre(true, 'filtre-tout'); } }, 'Afficher toutes les actualités')))
-            : jours.map((jour) => h('section', { class: 'jour', 'aria-label': premiereMajuscule(fmtJour.format(new Date(jour.date))) },
-                h('h2', { 'aria-hidden': 'true' }, premiereMajuscule(fmtJour.format(new Date(jour.date)))),
-                jour.items.map(carte))),
-          liste.length > visibles.length
-            ? h('div', { class: 'plus' }, h('button', { class: 'bouton', type: 'button', onclick: () => { const suivante = liste[etat.visibles]; etat.visibles += PAR_PAGE; rendre(true, `titre-${suivante.id}`); } },
-                `Afficher ${Math.min(PAR_PAGE, liste.length - visibles.length)} de plus`))
-            : liste.length > 0 ? h('div', { class: 'jour' }, etatFin(liste.length, liste[liste.length - 1].announced_at)) : null),
-        h('aside', { class: 'colonne-cote', 'aria-labelledby': 'titre-apropos' },
-          h('section', { class: 'carton' },
-            h('h2', { id: 'titre-apropos' }, 'D’où viennent ces actualités'),
-            h('p', null, 'Chaque carte renvoie à sa source. Une actualité ne devient une publication qu’après analyse et vérification (P3).'),
-            listeSources()))),
+      h('h1', { class: 'titre-page' }, 'Coulisses'),
+      h('section', { class: 'section', 'aria-labelledby': 'c-actualites' },
+        h('h2', { id: 'c-actualites' }, 'Actualités collectées'),
+        h('p', null, `${pluriel(DONNEES.news_items.length, 'actualité')} · ${pluriel(DONNEES.sources.length, 'source')}${derniereCollecte ? ` · dernière collecte le ${quand(derniereCollecte)}` : ''}. Pas encore analysées ni publiées.`),
+        h('div', { class: 'filtres' }, segments, h('label', { class: 'choix-source', for: 'source' }, 'Source', select)),
+        liste.length === 0
+          ? vide('Aucune actualité pour ce filtre', null)
+          : jours.map((jour) => h('section', { class: 'jour', 'aria-label': premiereMajuscule(fmtJour.format(new Date(jour.date))) },
+              h('h3', { 'aria-hidden': 'true' }, premiereMajuscule(fmtJour.format(new Date(jour.date)))),
+              jour.items.map(carte))),
+        liste.length > visibles.length
+          ? h('div', { class: 'plus-bas' }, h('button', { class: 'bouton-contour', type: 'button', onclick: () => { const suivante = liste[etat.visibles]; etat.visibles += PAR_PAGE; rendre(true, `titre-${suivante.id}`); } },
+              `Afficher ${Math.min(PAR_PAGE, liste.length - visibles.length)} de plus`))
+          : null),
+      h('section', { class: 'section', 'aria-labelledby': 'c-sources' }, h('h2', { id: 'c-sources' }, 'Sources collectées'), listeSources()),
+      nonPlanifiees.length ? h('section', { class: 'section', 'aria-labelledby': 'c-non-planifiees' },
+        h('h2', { id: 'c-non-planifiees' }, 'Ressources non planifiées'),
+        h('p', null, 'Brouillons qui n’ont pas passé tous les contrôles : ni publiés, ni planifiés, ni cherchables.'),
+        h('ul', { class: 'sujets' }, nonPlanifiees.map((x) => h('li', null, tag('verifier', x.statut === 'rejete' ? 'Rejetée' : 'À vérifier'), ' ', x.nom,
+          [...new Set(x.motifs.map((m) => m.code))].length ? h('span', null, [...new Set(x.motifs.map((m) => m.code))].join(', ')) : null)))) : null,
+      h('section', { class: 'section', 'aria-labelledby': 'c-couverture' }, h('h2', { id: 'c-couverture' }, 'Couverture'), listeSujets()),
+      h('section', { class: 'section', 'aria-labelledby': 'c-pulse' }, h('h2', { id: 'c-pulse' }, 'Sources de Pulse'), registre(DONNEES.registre_pulse)),
+      h('section', { class: 'section', 'aria-labelledby': 'c-radar' }, h('h2', { id: 'c-radar' }, 'Sources de Radar'), registre(DONNEES.registre_radar)),
     ];
   }
 
-  // ——— Fiche d'approfondissement ———
-  function vueDetail(id) {
+  // Fiche d'une actualité collectée : les informations absentes sont masquées.
+  function vueActualite(id) {
     const item = DONNEES.news_items.find((i) => String(i.id) === id);
-    const retour = h('a', { class: 'retour', href: '#/collecte' }, '← Actualités collectées');
-    if (!item) return [retour, pageErreur('Actualité introuvable', 'Cette actualité n’existe pas dans la maquette ; le lien est peut-être ancien. Revenez aux actualités collectées.')];
+    const barre = h('div', { class: 'barre-retour' }, h('a', { href: '#/collecte', 'aria-label': 'Retour aux coulisses' }, icone('retour', 20)), h('span', { style: 'font-weight:800' }, 'Actualité collectée'));
+    if (!item) return [barre, vide('Actualité introuvable', 'Le lien est peut-être ancien.')];
     const produit = item.product ? DONNEES.products.find((p) => p.key === item.product.key) : null;
-    const ex = exempleDe(item.id);
-    document.title = `${item.title} — Curation AI (maquette)`;
-    const champs = [
-      ['Ce qui change', 'Résumé des changements, chaque affirmation citée mot pour mot.'],
-      ['Ce que ça permet', 'Usages concrets rendus possibles.'],
-      ['Pour qui', 'Profils concernés.'],
-      ['Limites connues', 'Constats datés, avec leur source.'],
-      ['Coût', 'Prix et conditions relevés, ou « gratuit ».'],
-      ['Licence', 'Licence déclarée par l’éditeur.'],
-      ['Benchmarks', 'Attribués à leur auteur, avec leurs conditions.'],
-      ['Documentation et démo', 'Liens officiels.'],
-      ['Questions à tester', 'Ce qu’un membre pourra vérifier (P9).'],
-    ];
+    document.title = `${item.title} · Curation AI`;
     const versions = produit ? produit.versions : [];
     const stables = versions.filter((v) => !v.is_prerelease);
     const pre = versions.filter((v) => v.is_prerelease);
     const ligneVersion = (v) => h('li', { class: v.version === item.version ? 'courante' : null },
       h('span', null, h('code', null, v.version), v.is_prerelease ? h('span', { class: 'pre' }, 'préversion') : null, v.version === item.version ? h('span', { class: 'sr-only' }, ' (cette actualité)') : null),
       h('span', null, quand(v.released_at, fmtDate)));
+    const ligne = (dt, dd) => (dd ? h('div', null, h('dt', null, dt), h('dd', null, dd)) : null);
+    const categories = [item.product?.category, ...item.categories].filter(Boolean).join(', ');
     return [
-      retour,
-      h('section', { class: 'fiche-tete' },
-        tuile(item, true),
-        h('div', null,
-          h('div', { class: 'surtitre' }, 'Fiche · ', item.kind === 'version' ? 'Version' : 'Annonce', ' · ', item.product ? `${item.product.name} · ${item.product.publisher}` : nomCourtSource(item.source.name)),
-          h('h1', { lang: 'en' }, item.title),
-          h('p', { class: 'meta' },
-            tag('reel', 'Réel'),
-            h('span', null, 'Annoncé le ', temps(item.announced_at, fmtDateHeure)),
-            h('span', null, 'Collecté le ', temps(item.first_seen_at, fmtDateHeure))),
-          h('div', { class: 'actions' },
-            lienSur(item.source.url) ? h('a', { class: 'bouton', href: lienSur(item.source.url), rel: 'noopener noreferrer', target: '_blank' }, 'Lire la source', h('span', { class: 'sr-only' }, ' (nouvel onglet)'), ' ↗') : null,
-            ex ? h('a', { class: 'bouton discret', href: `#/publication/${ex.id}` }, 'Voir l’exemple de publication') : null))),
-      h('div', { class: 'sections' },
-        h('div', null,
-          h('section', { class: 'bloc', 'aria-labelledby': 'b-source' },
-            h('h2', { id: 'b-source' }, 'Ce que dit la source'),
-            h('p', null, 'Début du texte publié par l’éditeur, en langue originale. Le texte complet reste sur la source.'),
-            item.excerpt ? h('blockquote', { class: 'citation', lang: 'en' }, item.excerpt) : h('p', null, 'La source ne contient pas de texte.'),
-            h('p', { class: 'capture' }, `Capture du ${quand(item.capture.captured_at)} · empreinte `, h('code', null, item.capture.content_hash.slice(0, 12)), ' · collecte réelle')),
-          h('section', { class: 'bloc', 'aria-labelledby': 'b-analyse' },
-            h('h2', { id: 'b-analyse' }, 'Analyse'),
-            h('p', null, tag('prevu', 'Prévu · P3'), ' Pas encore d’analyse. Chaque champ sera rempli à partir des sources, avec la mention « ', LIBELLE_ANALYSE, ' ».'),
-            h('dl', { class: 'champs' }, champs.map(([titre, aide]) => h('div', null, h('dt', null, titre), h('dd', null, NON_RENSEIGNE, h('span', { class: 'sr-only' }, ` — ${aide}`))))))),
-        h('div', null,
-          h('section', { class: 'bloc', 'aria-labelledby': 'b-versions' },
-            h('h2', { id: 'b-versions' }, 'Historique des versions'),
-            produit
-              ? [
-                  h('p', null, `${pluriel(stables.length, 'version stable', 'versions stables')}${pre.length ? ` et ${pluriel(pre.length, 'préversion')}` : ''} relevée${stables.length + pre.length > 1 ? 's' : ''} pour ${produit.name}.`),
-                  h('ul', { class: 'versions' }, stables.map(ligneVersion)),
-                  pre.length ? h('details', { class: 'preversions' }, h('summary', null, `Voir les ${pre.length} préversions`), h('ul', { class: 'versions' }, pre.map(ligneVersion))) : null,
-                ]
-              : h('p', null, 'Cette annonce n’est pas encore rattachée à un produit. La qualification arrive en P3.')),
-          h('section', { class: 'bloc', 'aria-labelledby': 'b-infos' },
-            h('h2', { id: 'b-infos' }, 'Références'),
-            h('dl', { class: 'infos' },
-              h('div', null, h('dt', null, 'Source'), h('dd', null, lienExterne(item.source.url, item.source.name))),
-              h('div', null, h('dt', null, 'Éditeur'), h('dd', null, item.product ? item.product.publisher : NON_RENSEIGNE)),
-              h('div', null, h('dt', null, 'Dépôt'), h('dd', null, item.product?.repository_url ? lienExterne(item.product.repository_url, item.product.repository_url.replace('https://', '')) : NON_RENSEIGNE)),
-              h('div', null, h('dt', null, 'Catégories'), h('dd', null, [item.product?.category, ...item.categories].filter(Boolean).join(', ') || NON_RENSEIGNE)))))),
+      barre,
+      h('section', { class: 'section' },
+        h('div', { style: 'display:grid;grid-template-columns:96px minmax(0,1fr);gap:16px;align-items:center;margin-top:8px' },
+          tuile(item, true),
+          h('div', null,
+            h('h1', { lang: 'en', style: 'font:700 1.3rem/1.25 var(--texte);margin:0 0 6px' }, item.title),
+            h('p', { class: 'meta' },
+              item.announced_at ? h('span', null, 'Annoncé le ', temps(item.announced_at, fmtDateHeure)) : null,
+              h('span', null, 'Collecté le ', temps(item.first_seen_at, fmtDateHeure))))),
+        lienSur(item.source.url) ? h('a', { class: 'lien-ressource', href: lienSur(item.source.url), rel: 'noopener noreferrer', target: '_blank' }, icone('lien', 18), h('span', { class: 'lr-libelle' }, 'Lire la source'), h('span', { class: 'lr-cible' }, cibleCourte(item.source.url)), h('span', { class: 'lr-fleche', 'aria-hidden': 'true' }, '↗')) : null),
+      item.excerpt ? h('section', { class: 'section', 'aria-labelledby': 'b-source' },
+        h('h2', { id: 'b-source' }, 'Ce que dit la source'),
+        h('blockquote', { class: 'citation', lang: 'en' }, item.excerpt)) : null,
+      produit ? h('section', { class: 'section', 'aria-labelledby': 'b-versions' },
+        h('h2', { id: 'b-versions' }, 'Historique des versions'),
+        h('ul', { class: 'versions' }, stables.map(ligneVersion)),
+        pre.length ? h('details', { class: 'preversions' }, h('summary', null, `Voir les ${pre.length} préversions`), h('ul', { class: 'versions' }, pre.map(ligneVersion))) : null) : null,
+      h('section', { class: 'section', 'aria-labelledby': 'b-infos' },
+        h('h2', { id: 'b-infos' }, 'Références'),
+        h('dl', { class: 'infos' },
+          ligne('Source', lienExterne(item.source.url, item.source.name)),
+          ligne('Éditeur', item.product?.publisher),
+          ligne('Dépôt', item.product?.repository_url ? lienExterne(item.product.repository_url, item.product.repository_url.replace('https://', '')) : null),
+          ligne('Catégories', categories),
+          ligne('Capture', `${quand(item.capture.captured_at)} · empreinte ${item.capture.content_hash.slice(0, 12)}`))),
     ];
   }
 
-  // ——— États ———
-  // `niveau` : h1 quand l'état remplit la page, h3 dans une liste ; `demo` : état montré en exemple, jamais annoncé.
-  function etatBloc(image, titre, texte, action, niveau = 'h3') {
+  // ——— États de l'interface (menu « Plus ») ———
+  function etatBloc(image, titre, texteEtat, action, niveau = 'h3') {
     return h('div', { class: 'etat' },
       h('img', { src: `../assets/brand/${image}`, alt: '' }),
-      h('div', null, h(niveau, null, titre), h('p', null, texte), action || null));
+      h('div', null, h(niveau, null, titre), texteEtat ? h('p', null, texteEtat) : null, action || null));
   }
-  const etatChargement = ({ demo = false } = {}) => h('div', { role: demo ? null : 'status' },
-    etatBloc('mascotte-salut.png', 'Chargement du fil…', 'Les dernières publications arrivent.'),
-    h('div', { class: 'squelette haut', 'aria-hidden': 'true' }), h('div', { class: 'squelette', 'aria-hidden': 'true' }));
-  const etatVide = () => etatBloc('mascotte-principale.png', 'Aucune publication pour l’instant',
-    'Le compte éditorial n’a encore rien publié : c’est l’état réel aujourd’hui. Les actualités collectées attendent leur analyse.',
-    h('a', { class: 'bouton discret', href: '#/collecte' }, 'Voir les actualités collectées'));
-  const etatErreur = (titre, texte, { niveau = 'h3', demo = false } = {}) => h('div', { role: demo ? null : 'alert' }, etatBloc('mascotte-icone.png', titre, texte,
-    h('button', { class: 'bouton', type: 'button', onclick: () => location.reload() }, 'Réessayer'), niveau));
-  /** Page entière en erreur : titre de l'onglet et titre de niveau 1. */
-  const pageErreur = (titre, texte) => {
-    document.title = `${titre} — Curation AI (maquette)`;
-    return etatErreur(titre, texte, { niveau: 'h1' });
-  };
-  const etatFin = (n, plusAncienne) => etatBloc('mascotte-sourire.png', 'Vous avez tout vu',
-    `${pluriel(n, 'actualité')}${plusAncienne ? `, annoncée${n > 1 ? 's' : ''} depuis le ${quand(plusAncienne, fmtDate)}` : ''}. La prochaine collecte ajoutera les nouveautés en haut de la liste.`);
-
   function vueEtats() {
-    document.title = 'États de l’interface — Curation AI (maquette)';
+    document.title = 'États · Curation AI';
+    const n = DONNEES.news_items.length;
     return [
-      h('section', { class: 'tete-page' }, h('div', null,
-        h('h1', null, 'États de l’interface'),
-        h('p', null, 'Ce que voit le visiteur pendant le chargement, quand il n’y a rien à montrer, quand le chargement échoue, et en bas d’une liste.'))),
+      h('h1', { class: 'titre-page' }, 'États de l’interface'),
       h('div', { class: 'grille-etats' },
-        h('section', null, h('h2', null, 'Chargement'), etatChargement({ demo: true })),
-        h('section', null, h('h2', null, 'Fil vide'), etatVide()),
-        h('section', null, h('h2', null, 'Erreur'), etatErreur('Le fil n’a pas pu être chargé', 'Le serveur n’a pas répondu. Vérifiez votre connexion, puis réessayez.', { demo: true })),
-        h('section', null, h('h2', null, 'Fin de la liste'), etatFin(DONNEES.news_items.length, DONNEES.news_items.at(-1)?.announced_at))),
+        h('section', null, h('h2', null, 'Chargement'), etatBloc('mascotte-salut.png', 'Chargement du fil…', null),
+          h('div', { class: 'squelette haut', 'aria-hidden': 'true' }), h('div', { class: 'squelette', 'aria-hidden': 'true' })),
+        h('section', null, h('h2', null, 'Fil vide'), etatBloc('mascotte-principale.png', 'Aucune publication pour l’instant', null)),
+        h('section', null, h('h2', null, 'Erreur'), etatBloc('mascotte-icone.png', 'Le fil n’a pas pu être chargé', 'Vérifiez votre connexion, puis réessayez.',
+          h('button', { class: 'bouton-plein', type: 'button', onclick: () => location.reload() }, 'Réessayer'))),
+        h('section', null, h('h2', null, 'Fin de la liste'), etatBloc('mascotte-sourire.png', 'Vous avez tout vu', pluriel(n, 'actualité')))),
     ];
   }
 
-  // ——— Langue : celle du navigateur parmi les langues disponibles, choix manuel, langue de secours (SPEC §7.13). ———
-  const LANGUES = [{ code: 'fr', nom: 'Français' }];
-  const LANGUE_SECOURS = 'fr';
-  function negocier(preferees) {
-    for (const t of preferees) {
-      const etiquette = String(t).toLowerCase();
-      const trouvee = LANGUES.find((l) => l.code === etiquette || l.code === etiquette.split('-')[0]);
-      if (trouvee) return { code: trouvee.code, origine: 'navigateur', tag: t };
-    }
-    return { code: LANGUE_SECOURS, origine: 'secours' };
-  }
-  const lireChoix = () => { try { return localStorage.getItem('curation-langue'); } catch { return null; } };
-  const ecrireChoix = (code) => { try { if (code) localStorage.setItem('curation-langue', code); else localStorage.removeItem('curation-langue'); } catch { /* stockage indisponible : choix non conservé */ } };
-  function rendreLangue() {
-    const preferees = navigator.languages?.length ? [...navigator.languages] : [navigator.language || ''];
-    const auto = negocier(preferees);
-    const choix = lireChoix();
-    const manuel = LANGUES.some((l) => l.code === choix) ? choix : null;
-    const code = manuel || auto.code;
-    const nom = LANGUES.find((l) => l.code === code).nom;
-    document.documentElement.lang = code;
-    const panneau = document.getElementById('langue');
-    const ouvert = panneau.open;
-    panneau.replaceChildren(
-      h('summary', null, icone('langue', 18), code.toUpperCase(), h('span', { class: 'sr-only' }, ` — langue de l’interface : ${nom}`)),
-      h('div', { class: 'langue-panneau' },
-        h('label', { for: 'choix-langue' }, 'Langue de l’interface'),
-        h('select', { id: 'choix-langue', onchange: (e) => { ecrireChoix(e.target.value); rendreLangue(); annoncer('Langue enregistrée.'); } },
-          LANGUES.map((l) => h('option', { value: l.code, selected: l.code === code }, l.nom))),
-        h('p', null, `Votre navigateur demande : ${preferees.filter(Boolean).join(', ') || 'aucune langue'}. `,
-          manuel ? `Choix manuel : ${nom}.` : auto.origine === 'navigateur' ? `Langue retenue : ${nom} (${auto.tag}).` : `Aucune n’est disponible : ${nom}, langue de secours.`),
-        manuel ? h('button', { class: 'bouton discret', type: 'button', style: 'margin-top:10px', onclick: () => { ecrireChoix(null); rendreLangue(); annoncer('Langue du navigateur rétablie.'); } }, 'Suivre la langue du navigateur') : null,
-        h('p', null, tag('prevu', 'À valider'), ' Langues proposées au lancement : français seul (proposition).')));
-    panneau.open = ouvert;
-  }
-
-  // ——— Paramètres : conservés dans ce navigateur seulement ; le profil membre arrive en P9. ———
+  // ——— Paramètres : conservés dans ce navigateur seulement. ———
   const lirePref = (cle, defaut) => { try { return localStorage.getItem(`curation-${cle}`) || defaut; } catch { return defaut; } };
-  const ecrirePref = (cle, valeur) => { try { localStorage.setItem(`curation-${cle}`, valeur); } catch { /* stockage indisponible : choix non conservé */ } };
+  const ecrirePref = (cle, valeur) => { try { if (valeur) localStorage.setItem(`curation-${cle}`, valeur); else localStorage.removeItem(`curation-${cle}`); } catch { /* stockage indisponible : choix non conservé */ } };
   function appliquerPrefs() {
     const theme = lirePref('theme', 'auto');
     if (theme === 'auto') document.documentElement.removeAttribute('data-theme');
     else document.documentElement.dataset.theme = theme;
     document.documentElement.style.fontSize = { normal: '', grand: '112.5%' }[lirePref('texte', 'normal')] ?? '';
   }
-  function choixPref(id, libelle, cle, defaut, options) {
-    return h('div', { style: 'margin-bottom:14px' }, h('label', { for: id, style: 'display:block;font-weight:600;margin-bottom:6px' }, libelle),
-      h('select', { id, onchange: (e) => { ecrirePref(cle, e.target.value); appliquerPrefs(); annoncer('Préférence enregistrée.'); } },
+  // Langue : celle du navigateur parmi les langues disponibles, choix manuel, langue de secours (SPEC §7.13).
+  const LANGUES = [{ code: 'fr', nom: 'Français' }];
+  const LANGUE_SECOURS = 'fr';
+  function negocier(preferees) {
+    for (const t of preferees) {
+      const etiquette = String(t).toLowerCase();
+      const trouvee = LANGUES.find((l) => l.code === etiquette || l.code === etiquette.split('-')[0]);
+      if (trouvee) return trouvee.code;
+    }
+    return LANGUE_SECOURS;
+  }
+  function langueCourante() {
+    const choix = lirePref('langue', null);
+    if (LANGUES.some((l) => l.code === choix)) return choix;
+    return negocier(navigator.languages?.length ? [...navigator.languages] : [navigator.language || '']);
+  }
+  function choixPref(id, libelle, cle, defaut, options, apres) {
+    return h('label', { class: 'reglage', for: id }, libelle,
+      h('select', { id, onchange: (e) => { ecrirePref(cle, e.target.value); appliquerPrefs(); apres?.(); annoncer('Préférence enregistrée.'); } },
         options.map(([valeur, nom]) => h('option', { value: valeur, selected: lirePref(cle, defaut) === valeur }, nom))));
   }
   function vueParametres() {
-    document.title = 'Paramètres — Curation AI (maquette)';
+    document.title = 'Paramètres · Curation AI';
     return [
-      h('section', { class: 'tete-page' }, h('div', null, h('h1', null, 'Paramètres'), h('p', null, 'Vos choix restent dans ce navigateur.'))),
-      h('section', { class: 'carton', style: 'max-width:560px;margin-bottom:16px', 'aria-labelledby': 'p-affichage' },
+      h('h1', { class: 'titre-page' }, 'Paramètres'),
+      h('section', { class: 'section', 'aria-labelledby': 'p-affichage' },
         h('h2', { id: 'p-affichage' }, 'Affichage'),
         choixPref('p-theme', 'Thème', 'theme', 'auto', [['auto', 'Comme l’appareil'], ['light', 'Clair'], ['dark', 'Sombre']]),
-        choixPref('p-texte', 'Taille du texte', 'texte', 'normal', [['normal', 'Normale'], ['grand', 'Grande']])),
-      h('section', { class: 'carton', style: 'max-width:560px', 'aria-labelledby': 'p-profil' },
-        h('h2', { id: 'p-profil' }, 'Profil'),
-        h('p', null, tag('prevu', 'Prévu · P9'), ' Nom, photo, biographie et abonnements arriveront avec les comptes membres. Aucun compte n’existe aujourd’hui.')),
+        choixPref('p-texte', 'Taille du texte', 'texte', 'normal', [['normal', 'Normale'], ['grand', 'Grande']]),
+        choixPref('p-langue', 'Langue', 'langue', langueCourante(), LANGUES.map((l) => [l.code, l.nom]), () => { document.documentElement.lang = langueCourante(); }),
+        h('p', { class: 'note-discrete' }, 'Ces choix restent dans ce navigateur.')),
     ];
   }
 
   // ——— Navigation ———
-  const PAGES = [['fil', '#/', 'Fil'], ['reels', '#/reels', 'Reels'], ['collecte', '#/collecte', 'Coulisses'], ['profil', '#/comptes', 'Profils'], ['etats', '#/etats', 'États']];
+  const PAGES = [['accueil', '#/', 'Accueil'], ['explorer', '#/explorer', 'Explorer'], ['notifications', '#/notifications', 'Notifications'], ['reels', '#/reels', 'Reels'], ['profil', '#/moi', 'Profil']];
+  const PLUS = [['coulisses', '#/collecte', 'Coulisses'], ['etats', '#/etats', 'États'], ['parametres', '#/parametres', 'Paramètres']];
   function rendreNav(page) {
     document.getElementById('nav').replaceChildren(...PAGES.map(([cle, href, libelle]) =>
-      h('a', { href, 'aria-current': cle === page ? 'page' : null }, icone(cle), libelle)));
+      h('a', { href, 'aria-current': cle === page ? 'page' : null, 'aria-label': libelle }, icone(cle, 26), h('span', null, libelle))));
+    const plus = document.getElementById('plus');
+    const ouvert = plus.open;
+    plus.replaceChildren(
+      h('summary', { 'aria-label': 'Plus' }, icone('plus', 24), h('span', null, 'Plus')),
+      h('div', { class: 'plus-panneau' }, PLUS.map(([cle, href, libelle]) => h('a', { href, 'aria-current': cle === page ? 'page' : null }, icone(cle, 20), libelle))));
+    plus.open = ouvert;
+  }
+  function rendreCadre() {
+    document.getElementById('moi-mini').replaceChildren(avatarVide(40), h('span', { class: 'moi-texte' }, h('strong', null, 'Votre profil'), h('small', null, 'Aperçu')));
+    document.getElementById('moi-mini').setAttribute('aria-label', 'Votre profil (aperçu)');
+    const input = h('input', { id: 'q', name: 'q', type: 'search', maxlength: '200', autocomplete: 'off', placeholder: 'Rechercher', 'aria-label': 'Rechercher dans les publications' });
+    document.getElementById('recherche-haut').replaceChildren(h('form', { role: 'search', onsubmit: (e) => {
+      e.preventDefault();
+      const q = input.value.trim();
+      const cible = q ? `#/recherche/${encodeURIComponent(q)}` : '#/recherche';
+      input.blur();
+      if (location.hash === cible) rendre(false, 'resultats-titre'); else location.hash = cible;
+    } }, icone('explorer', 18), input));
+    document.getElementById('barre-droite').replaceChildren(
+      h('section', { class: 'encart', 'aria-labelledby': 'a-suivre' },
+        h('h2', { id: 'a-suivre' }, 'À suivre'),
+        DONNEES.comptes.map((c) => h('a', { class: 'compte-ligne', href: `#/profil/${c.id}` }, avatarDe(c, 40), h('span', null, h('strong', null, c.nom), h('small', null, `@${c.identifiant}${marqueIA(c)}`))))));
   }
 
   const annonce = document.getElementById('annonce');
-  function annoncer(texte) { annonce.textContent = texte; }
+  function annoncer(texteAnnonce) { annonce.textContent = texteAnnonce; }
 
   function route() {
     const chemin = location.hash.replace(/^#/, '') || '/';
     let m;
-    if (chemin === '/') return ['fil', vueFil];
-    if ((m = /^\/publication\/([\w-]+)$/.exec(chemin))) return ['fil', () => vuePublication(m[1])];
+    if (chemin === '/') return ['accueil', vueAccueil];
+    if ((m = /^\/(publication|ressource|projet)\/([\w-]+)$/.exec(chemin))) return ['accueil', () => vueDetail(`#/${m[1]}/${m[2]}`)];
+    if ((m = /^\/recherche(?:\/(.*))?$/.exec(chemin))) {
+      let q = '';
+      try { q = decodeURIComponent(m[1] || ''); } catch { q = ''; }
+      return ['explorer', () => vueRecherche(q.trim())];
+    }
+    if (chemin === '/explorer') return ['explorer', vueExplorer];
+    if (chemin === '/notifications') return ['notifications', vueNotifications];
     if (chemin === '/reels') return ['reels', vueReels];
-    if (chemin === '/comptes') return ['profil', vueComptes];
-    if ((m = /^\/profil\/(nodi|repo|pyxo|mova|pulse|radar)(?:\/(publications|reels|methode|sources))?$/.exec(chemin))) return ['profil', () => vueProfil(m[1], m[2] || 'publications')];
-    if (chemin === '/collecte') return ['collecte', vueCollecte];
-    if ((m = /^\/actualite\/(\d+)$/.exec(chemin))) return ['collecte', () => vueDetail(m[1])];
+    if ((m = /^\/moi(?:\/(abonnements|abonnes))?$/.exec(chemin))) return ['profil', () => vueMoi(m[1] || '')];
+    if ((m = /^\/profil\/(nodi|repo|pyxo|mova|pulse|radar)(?:\/(\w+))?$/.exec(chemin))) return ['', () => vueProfilAgent(m[1], m[2] === 'reels' ? 'reels' : 'publications')];
+    if (chemin === '/collecte') return ['coulisses', vueCollecte];
+    if ((m = /^\/actualite\/(\d+)$/.exec(chemin))) return ['coulisses', () => vueActualite(m[1])];
     if (chemin === '/etats') return ['etats', vueEtats];
     if (chemin === '/parametres') return ['parametres', vueParametres];
-    return ['fil', () => [h('a', { class: 'retour', href: '#/' }, '← Retour au fil'), pageErreur('Page introuvable', 'Cette adresse n’existe pas dans la maquette.')]];
+    return ['', () => [h('h1', { class: 'titre-page' }, 'Page introuvable'), vide('Cette adresse n’existe pas.', null)]];
   }
 
   function rendre(garderPosition, focusId) {
@@ -1398,39 +1265,38 @@
     rendreNav(page);
     main.querySelectorAll('video').forEach((v) => v.pause());
     const y = window.scrollY;
-    numeroCarrousel = 0;
+    numero = 0;
     main.replaceChildren(...[vue()].flat(Infinity).filter(Boolean));
+    const champ = document.getElementById('q');
+    const m = /^#\/recherche\/(.*)$/.exec(location.hash);
+    if (champ && document.activeElement !== champ) { try { champ.value = m ? decodeURIComponent(m[1]) : ''; } catch { champ.value = ''; } }
     if (garderPosition) window.scrollTo(0, y);
     if (focusId) document.getElementById(focusId)?.focus({ preventScroll: !focusId.startsWith('titre-') });
   }
 
-  // Le panneau de langue se ferme avec Échap (le focus revient au bouton) ou par un clic ailleurs.
-  const panneauLangue = document.getElementById('langue');
+  // Le menu « Plus » se ferme avec Échap (le focus revient au bouton), par un clic ailleurs ou après un choix.
+  const plus = document.getElementById('plus');
   document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && panneauLangue.open) { panneauLangue.open = false; panneauLangue.querySelector('summary').focus(); }
+    if (event.key === 'Escape' && plus.open) { plus.open = false; plus.querySelector('summary').focus(); }
   });
-  document.addEventListener('click', (event) => { if (panneauLangue.open && !panneauLangue.contains(event.target)) panneauLangue.open = false; });
-
-  document.querySelector('.lien-evitement').addEventListener('click', (event) => {
-    event.preventDefault();
-    main.focus();
-  });
+  document.addEventListener('click', (event) => { if (plus.open && (!plus.contains(event.target) || event.target.closest('.plus-panneau a'))) plus.open = false; });
+  document.querySelector('.lien-evitement').addEventListener('click', (event) => { event.preventDefault(); main.focus(); });
 
   if (!DONNEES) {
-    main.replaceChildren(pageErreur('Données de la maquette introuvables', 'Lancez « npm run maquette » pour générer maquette/donnees.js, puis rechargez la page.'));
+    main.replaceChildren(vide('Données introuvables', 'Rechargez la page.', 'h1'));
   } else {
     appliquerPrefs();
-    panneauLangue.before(h('a', { class: 'bouton discret', href: '#/parametres', 'aria-label': 'Paramètres', title: 'Paramètres' }, icone('parametres')));
-    const derniereCollecte = DONNEES.sources.map((s) => s.last_success_at).filter(Boolean).sort().pop();
-    document.getElementById('bandeau-date').textContent = derniereCollecte ? `dernière collecte le ${quand(derniereCollecte)} (heure de Paris)` : 'aucune collecte réelle';
-    rendreLangue();
+    document.documentElement.lang = langueCourante();
+    rendreCadre();
     let precedente = location.hash || '#/';
     window.addEventListener('hashchange', () => {
       if (location.hash && !location.hash.startsWith('#/')) return;
       const actuelle = location.hash || '#/';
-      // Changer d'onglet du profil garde la position et rend le focus à l'onglet ; toute autre navigation repart du haut.
-      const ongletProfil = precedente.startsWith('#/profil/') && actuelle.startsWith('#/profil/');
-      if (ongletProfil) rendre(true, `onglet-${actuelle.split('/')[3] || 'publications'}`);
+      // Changer d'onglet d'un profil garde la position et rend le focus à l'onglet ; toute autre navigation repart du haut.
+      const memeProfil = (a, b) => (a.startsWith('#/profil/') && b.startsWith('#/profil/') && a.split('/')[2] === b.split('/')[2]) || (a.startsWith('#/moi') && b.startsWith('#/moi'));
+      if (memeProfil(precedente, actuelle)) {
+        rendre(true, actuelle.startsWith('#/moi') ? `onglet-moi-${actuelle.split('/')[2] || 'publications'}` : `onglet-${actuelle.split('/')[3] || 'publications'}`);
+      } else if (actuelle.startsWith('#/recherche')) { rendre(false); window.scrollTo(0, 0); document.getElementById('resultats-titre')?.focus({ preventScroll: true }); }
       else { rendre(false); window.scrollTo(0, 0); main.focus({ preventScroll: true }); }
       precedente = actuelle;
     });

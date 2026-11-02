@@ -1,0 +1,228 @@
+{
+  "slug": "ui-ux-pro-max",
+  "consignes": "r2",
+  "accroche": {
+    "texte": "UI UX Pro Max donne à votre agent un design system taillé pour votre produit avant qu'il code l'interface",
+    "passages": [
+      "Industry-specific design system generation",
+      "The skill activates automatically when you request UI/UX work."
+    ]
+  },
+  "description": {
+    "texte": "Demandez une landing page ou un dashboard : le skill s'active seul, part de votre type de produit et sort la structure de page, le style, les couleurs, la typographie et les effets. Il puise dans 79 styles, 192 types de produits, des palettes et des paires de polices.",
+    "passages": [
+      "The skill activates automatically when you request UI/UX work.",
+      "Build a landing page for my SaaS product",
+      "Create a dashboard for healthcare analytics",
+      "Pattern + Style + Colors + Typography + Effects",
+      "Full access to 79 searchable UI styles (50 active), 192 product types, color palettes, and curated font pairings."
+    ]
+  },
+  "interet": {
+    "texte": "Chaque proposition arrive avec ses anti-patterns et une checklist avant livraison : pas d'emoji en guise d'icônes, cursor-pointer sur tout élément cliquable. Les palettes suivent le secteur, et les dégradés violet-rose « IA » sont proscrits pour une banque.",
+    "passages": [
+      "+ Anti-patterns to avoid + Pre-delivery checklist",
+      "No emojis as icons (use SVG: Heroicons/Lucide)",
+      "cursor-pointer on all clickable elements",
+      "Industry-specific palettes aligned 1:1 with the 192 product types",
+      "What NOT to do (e.g., \"AI purple/pink gradients\" for banking)"
+    ]
+  },
+  "exemple_usage": {
+    "texte": "Dans l'exemple du dépôt, la landing page d'un spa reçoit un style Soft UI Evolution, du rose pâle et du vert sauge rehaussés d'or, Cormorant Garamond avec Montserrat, sans néon ni animations brusques.",
+    "passages": [
+      "Build a landing page for my beauty spa",
+      "STYLE: Soft UI Evolution",
+      "Primary: #E8B4B8 (Soft Pink)",
+      "Secondary: #A8D5BA (Sage Green)",
+      "Notes: Calming palette with gold accents for luxury feel",
+      "TYPOGRAPHY: Cormorant Garamond / Montserrat",
+      "Bright neon colors + Harsh animations + Dark mode + AI purple/pink gradients"
+    ]
+  },
+  "demarrage": {
+    "etapes": [
+      {
+        "texte": "Dans le projet : npx ui-ux-pro-max-cli init --ai claude (ou cursor, copilot)",
+        "passages": [
+          "skip the global install entirely:",
+          "cd /path/to/your/project uipro init --ai claude",
+          "uipro init --ai claude # Claude Code uipro init --ai cursor # Cursor",
+          "uipro init --ai copilot # GitHub Copilot"
+        ]
+      },
+      {
+        "texte": "Puis demandez l'interface voulue, le skill prend le relais.",
+        "passages": [
+          "The skill activates automatically when you request UI/UX work.",
+          "Build a landing page for my SaaS product"
+        ]
+      }
+    ],
+    "commande": "npx ui-ux-pro-max-cli init --ai claude",
+    "passages": [
+      "Use a Node version manager (recommended), or skip the global install entirely:",
+      "Or use the CLI installer:"
+    ]
+  },
+  "compatibilites": [
+    {
+      "texte": "Une vingtaine d'agents selon le dépôt, dont Claude Code, Cursor, Windsurf, Codex CLI et GitHub Copilot.",
+      "passages": [
+        "Supported: Claude Code, Cursor, Windsurf, Antigravity, Codex CLI, Continue, Gemini CLI, OpenCode, Qoder, CodeBuddy, Droid (Factory), KiloCode, Warp, Augment, CodeWhale, ZCode, Kimi Code, Amazon Q Developer, OpenClaw, GitHub Copilot"
+      ]
+    }
+  ],
+  "limites": [
+    {
+      "texte": "Le cœur est sous licence MIT ; logos, bannières et visuels générés n'y sont pas, ils relèvent d'une offre Premium séparée (uupm.cc).",
+      "passages": [
+        "This project is licensed under the MIT License.",
+        "Extended Brand Design Skills: Goes beyond UI/UX to include Brand Identity generation, Logo Design, Corporate Identity Programs (CIP), Banners, Presentation Slides, and custom Iconography.",
+        "Advanced Asset Creation: Deep integration with AI-powered image generation to create real visual assets, not just placeholders.",
+        "For more details on upgrading to the Premium tier, visit uupm.cc."
+      ]
+    }
+  ],
+  "licence_locale": null,
+  "mots_cles": {
+    "nom": "UI UX Pro Max",
+    "categorie": "MCP et skills",
+    "usages": [
+      {
+        "texte": "design d'interface",
+        "passages": [
+          "An AI skill that provides design intelligence for building professional UI/UX across multiple platforms and frameworks."
+        ]
+      },
+      {
+        "texte": "design system",
+        "passages": [
+          "Industry-specific design system generation"
+        ]
+      },
+      {
+        "texte": "landing page",
+        "passages": [
+          "Build a landing page for my SaaS product"
+        ]
+      },
+      {
+        "texte": "palette de couleurs",
+        "passages": [
+          "Industry-specific palettes aligned 1:1 with the 192 product types"
+        ]
+      },
+      {
+        "texte": "association de polices",
+        "passages": [
+          "Curated typography combinations with Google Fonts imports"
+        ]
+      },
+      {
+        "texte": "tableau de bord",
+        "passages": [
+          "Create a dashboard for healthcare analytics",
+          "Chart Types - Recommendations for dashboards and analytics"
+        ]
+      }
+    ],
+    "technologies": [
+      {
+        "texte": "React",
+        "passages": [
+          "Tech Stacks - React, Next.js, Astro, Vue"
+        ]
+      },
+      {
+        "texte": "Next.js",
+        "passages": [
+          "Tech Stacks - React, Next.js, Astro, Vue"
+        ]
+      },
+      {
+        "texte": "Vue",
+        "passages": [
+          "Tech Stacks - React, Next.js, Astro, Vue"
+        ]
+      },
+      {
+        "texte": "Tailwind",
+        "passages": [
+          "let it default to HTML + Tailwind"
+        ]
+      },
+      {
+        "texte": "SwiftUI",
+        "passages": [
+          "SwiftUI, React Native, Flutter, HTML+Tailwind"
+        ]
+      },
+      {
+        "texte": "Flutter",
+        "passages": [
+          "SwiftUI, React Native, Flutter, HTML+Tailwind"
+        ]
+      }
+    ],
+    "termes_proches": [
+      {
+        "terme": "interface utilisateur",
+        "raison": "UI signifie interface utilisateur, le sujet même de UI UX Pro Max."
+      },
+      {
+        "terme": "expérience utilisateur",
+        "raison": "UX signifie expérience utilisateur ; UI UX Pro Max en donne des règles."
+      },
+      {
+        "terme": "page d'atterrissage",
+        "raison": "Traduction française de landing page, un usage décrit par le dépôt."
+      },
+      {
+        "terme": "charte graphique",
+        "raison": "Comme une charte graphique, le design system fixe les couleurs, les polices et le style d'un projet."
+      },
+      {
+        "terme": "polices d'écriture",
+        "raison": "Les polices d'écriture sont l'objet des associations de polices proposées."
+      },
+      {
+        "terme": "accessibilité",
+        "raison": "Les règles d'UX de UI UX Pro Max comprennent des règles d'accessibilité, sans la garantir."
+      },
+      {
+        "terme": "ergonomie",
+        "raison": "En français, l'ergonomie d'interface recouvre une bonne part de l'UX visée par UI UX Pro Max."
+      },
+      {
+        "terme": "refonte visuelle",
+        "raison": "Le dépôt propose une consigne pour que l'assistant refasse le thème d'une app existante avec UI UX Pro Max."
+      }
+    ]
+  },
+  "bouton": {
+    "libelle": "Voir le dépôt",
+    "url": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill"
+  },
+  "reperes": [
+    {
+      "texte": "Règles par stack, de React et Vue à SwiftUI et Flutter",
+      "passages": [
+        "Tech Stacks - React, Next.js, Astro, Vue",
+        "SwiftUI, React Native, Flutter, HTML+Tailwind"
+      ]
+    },
+    {
+      "texte": "119 règles d'UX, accessibilité comprise",
+      "passages": [
+        "119 UX Guidelines - Best practices, anti-patterns, accessibility rules"
+      ]
+    },
+    {
+      "texte": "Claude Code, Cursor, Copilot et d'autres agents, selon le dépôt",
+      "passages": [
+        "Supported: Claude Code, Cursor, Windsurf, Antigravity, Codex CLI, Continue, Gemini CLI, OpenCode, Qoder, CodeBuddy, Droid (Factory), KiloCode, Warp, Augment, CodeWhale, ZCode, Kimi Code, Amazon Q Developer, OpenClaw, GitHub Copilot"
+      ]
+    }
+  ]
+}

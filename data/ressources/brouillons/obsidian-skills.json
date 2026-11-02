@@ -1,0 +1,208 @@
+{
+  "slug": "obsidian-skills",
+  "consignes": "r2",
+  "accroche": {
+    "texte": "Obsidian Skills apprend à votre agent les formats d'Obsidian et son CLI",
+    "passages": [
+      "Teach your agent to use Obsidian CLI and open formats including Markdown, Bases, JSON Canvas.",
+      "any skills-compatible agent, including Claude Code, Codex, and Open Code"
+    ]
+  },
+  "description": {
+    "texte": "Votre agent écrit des notes avec wikilinks, callouts et propriétés, monte des Bases avec vues, filtres et formules, et construit des canevas JSON Canvas, directement dans votre coffre. Ça marche avec Claude Code, Codex et OpenCode.",
+    "passages": [
+      "Create and edit Obsidian Flavored Markdown (.md) with wikilinks, embeds, callouts, properties, and other Obsidian-specific syntax",
+      "Create and edit Obsidian Bases (.base) with views, filters, formulas, and summaries",
+      "Create and edit JSON Canvas files (.canvas) with nodes, edges, groups, and connections",
+      "any skills-compatible agent, including Claude Code, Codex, and Open Code",
+      "OpenCode auto-discovers all SKILL.md files under ~/.opencode/skills/."
+    ]
+  },
+  "interet": {
+    "texte": "Deux skills sortent du cadre des notes : defuddle réduit une page web à un Markdown propre pour économiser des tokens, knap génère des fichiers en série depuis du JSON ou du CSV. Le dépôt suit la spécification Agent Skills, donc les mêmes skills servent à tous vos agents compatibles.",
+    "passages": [
+      "Extract clean markdown from web pages using Defuddle, removing clutter to save tokens",
+      "Render Markdown templates from JSON or CSV data using Knap, including batch file generation",
+      "These skills follow the Agent Skills specification so they can be used by any skills-compatible agent"
+    ]
+  },
+  "exemple_usage": {
+    "texte": "Récupérer un article avec defuddle, puis le ranger dans le coffre en note avec propriétés et wikilinks.",
+    "passages": [
+      "Extract clean markdown from web pages using Defuddle, removing clutter to save tokens",
+      "Create and edit Obsidian Flavored Markdown (.md) with wikilinks, embeds, callouts, properties"
+    ]
+  },
+  "demarrage": {
+    "etapes": [
+      {
+        "texte": "Dans Claude Code : /plugin marketplace add kepano/obsidian-skills",
+        "passages": [
+          "/plugin marketplace add kepano/obsidian-skills /plugin install obsidian@obsidian-skills",
+          "any skills-compatible agent, including Claude Code, Codex, and Open Code"
+        ]
+      },
+      {
+        "texte": "Puis /plugin install obsidian@obsidian-skills",
+        "passages": [
+          "/plugin marketplace add kepano/obsidian-skills /plugin install obsidian@obsidian-skills"
+        ]
+      },
+      {
+        "texte": "Ou avec npx : npx skills add https://github.com/kepano/obsidian-skills",
+        "passages": [
+          "npx skills add https://github.com/kepano/obsidian-skills",
+          "Instead of ssh, if you prefer to use https"
+        ]
+      }
+    ],
+    "commande": "npx skills add https://github.com/kepano/obsidian-skills",
+    "passages": [
+      "npx skills add https://github.com/kepano/obsidian-skills",
+      "Instead of ssh, if you prefer to use https"
+    ]
+  },
+  "compatibilites": [
+    {
+      "texte": "Claude Code, Codex, OpenCode et tout agent compatible Agent Skills.",
+      "passages": [
+        "These skills follow the Agent Skills specification so they can be used by any skills-compatible agent",
+        "any skills-compatible agent, including Claude Code, Codex, and Open Code",
+        "OpenCode auto-discovers all SKILL.md files under ~/.opencode/skills/."
+      ]
+    }
+  ],
+  "limites": [],
+  "licence_locale": null,
+  "mots_cles": {
+    "nom": "Obsidian Skills",
+    "categorie": "MCP et skills",
+    "usages": [
+      {
+        "texte": "piloter un coffre Obsidian",
+        "passages": [
+          "Interact with Obsidian vaults via the Obsidian CLI including plugin and theme development"
+        ]
+      },
+      {
+        "texte": "édition Markdown",
+        "passages": [
+          "Create and edit Obsidian Flavored Markdown (.md) with wikilinks, embeds, callouts, properties"
+        ]
+      },
+      {
+        "texte": "vues filtrées Obsidian Bases",
+        "passages": [
+          "Create and edit Obsidian Bases (.base) with views, filters, formulas, and summaries"
+        ]
+      },
+      {
+        "texte": "canevas visuel JSON Canvas",
+        "passages": [
+          "Create and edit JSON Canvas files (.canvas) with nodes, edges, groups, and connections"
+        ]
+      },
+      {
+        "texte": "nettoyer une page web",
+        "passages": [
+          "Extract clean markdown from web pages using Defuddle"
+        ]
+      },
+      {
+        "texte": "notes Markdown depuis JSON/CSV",
+        "passages": [
+          "Render Markdown templates from JSON or CSV data using Knap, including batch file generation"
+        ]
+      }
+    ],
+    "technologies": [
+      {
+        "texte": "Markdown",
+        "passages": [
+          "open formats including Markdown, Bases, JSON Canvas"
+        ]
+      },
+      {
+        "texte": "JSON Canvas",
+        "passages": [
+          "Create and edit JSON Canvas files (.canvas)"
+        ]
+      },
+      {
+        "texte": "Obsidian CLI",
+        "passages": [
+          "Interact with Obsidian vaults via the Obsidian CLI"
+        ]
+      },
+      {
+        "texte": "Claude Code",
+        "passages": [
+          "any skills-compatible agent, including Claude Code, Codex, and Open Code"
+        ]
+      },
+      {
+        "texte": "Codex",
+        "passages": [
+          "Copy the skills/ directory into your Codex skills path"
+        ]
+      },
+      {
+        "texte": "OpenCode",
+        "passages": [
+          "OpenCode auto-discovers all SKILL.md files under ~/.opencode/skills/."
+        ]
+      }
+    ],
+    "termes_proches": [
+      {
+        "terme": "Claude Skills",
+        "raison": "pour Claude Code, le dépôt renvoie à la documentation officielle des Claude Skills."
+      },
+      {
+        "terme": "Agent Skills",
+        "raison": "Obsidian Skills suit la spécification Agent Skills, un format de skills commun à plusieurs agents."
+      },
+      {
+        "terme": "wikilinks",
+        "raison": "la syntaxe Markdown d'Obsidian comprend les wikilinks, des liens entre fichiers du coffre."
+      },
+      {
+        "terme": "économie de tokens",
+        "raison": "le skill defuddle d'Obsidian Skills retire le superflu des pages web pour économiser des tokens."
+      },
+      {
+        "terme": "modèles de fichiers",
+        "raison": "le skill knap remplit des modèles Markdown à partir de données JSON ou CSV."
+      },
+      {
+        "terme": "base de connaissances Markdown",
+        "raison": "un coffre Obsidian est un dossier de fichiers Markdown que ces skills apprennent à l'agent à créer et modifier."
+      }
+    ]
+  },
+  "bouton": {
+    "libelle": "Voir le dépôt",
+    "url": "https://github.com/kepano/obsidian-skills"
+  },
+  "reperes": [
+    {
+      "texte": "Pilote le coffre via la CLI, plugins et thèmes compris",
+      "passages": [
+        "Interact with Obsidian vaults via the Obsidian CLI including plugin and theme development"
+      ]
+    },
+    {
+      "texte": "Sous OpenCode, aucun fichier de config à modifier",
+      "passages": [
+        "OpenCode auto-discovers all SKILL.md files under ~/.opencode/skills/.",
+        "No changes to opencode.json or any config file are needed."
+      ]
+    },
+    {
+      "texte": "Installable à la main dans le dossier .claude du coffre",
+      "passages": [
+        "Add the contents of this repo to a /.claude folder in the root of your Obsidian vault"
+      ]
+    }
+  ]
+}

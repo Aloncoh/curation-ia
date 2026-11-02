@@ -3,6 +3,13 @@ import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { FIXTURE_PATH, createTestDb, scalar, type TestDb } from './helpers/db.ts';
 import { startCollect } from './helpers/cli.ts';
 
+/**
+ * Attente du démarrage d'un collecteur : un délai large et réglable (machine chargée, autre commande en parallèle),
+ * et un arrêt immédiat si le processus s'est terminé avant d'atteindre l'état attendu.
+ */
+const ATTENTE_DEMARRAGE_MS = Number(process.env.CURATION_TEST_ATTENTE_DEMARRAGE_MS ?? 20_000);
+const TEMPS_TEST_MS = ATTENTE_DEMARRAGE_MS + 30_000;
+
 let t: TestDb;
 beforeEach(async () => {
   t = await createTestDb();
@@ -15,8 +22,9 @@ describe('arrêt brutal puis relance', () => {
     const first = startCollect({ ...env, CURATION_FIXTURE_DELAY_MS: '5000' });
 
     // Attendre que le premier processus ait réservé le job et démarré son exécution, puis le tuer.
-    const deadline = Date.now() + 8_000;
+    const deadline = Date.now() + ATTENTE_DEMARRAGE_MS;
     while ((await scalar(t.database, "select count(*) from run where status = 'running'")) === 0) {
+      if (first.child.exitCode !== null || first.child.signalCode !== null) throw new Error("le premier collecteur s'est arrêté avant de démarrer son exécution");
       if (Date.now() > deadline) throw new Error("le premier collecteur n'a jamais démarré");
       await sleep(100);
     }
@@ -38,15 +46,16 @@ describe('arrêt brutal puis relance', () => {
     expect(job[0]).toMatchObject({ status: 'succeeded', attempts: 2 });
     expect(await scalar(t.database, 'select count(*) from source_document')).toBe(5);
     expect(await scalar(t.database, 'select count(*) from document_snapshot')).toBe(5);
-  });
+  }, TEMPS_TEST_MS);
 
   it("processus tué pendant l'enregistrement : rien n'est à moitié écrit, la relance enregistre tout une seule fois", async () => {
     const env = { DATABASE_URL: t.url, CURATION_FIXTURE: FIXTURE_PATH, CURATION_ONLY_SOURCES: 'github-releases:anthropics/claude-code', CURATION_LEASE_MS: '1000' };
     // Le premier collecteur attend 5 s à l'intérieur de la transaction, après avoir écrit les documents.
     const first = startCollect({ ...env, CURATION_TEST_HOLD_IN_STORE_MS: '5000' });
 
-    const deadline = Date.now() + 8_000;
+    const deadline = Date.now() + ATTENTE_DEMARRAGE_MS;
     while ((await scalar(t.database, 'select count(*) from run_step')) < 2) {
+      if (first.child.exitCode !== null || first.child.signalCode !== null) throw new Error("le premier collecteur s'est arrêté avant l'enregistrement");
       if (Date.now() > deadline) throw new Error("le premier collecteur n'a jamais atteint l'enregistrement");
       await sleep(50);
     }
@@ -67,7 +76,7 @@ describe('arrêt brutal puis relance', () => {
     ).toBe(0);
     const runs = (await t.database.client.execute('select status from run order by started_at')).rows.map((row) => row.status);
     expect(runs).toEqual(['interrupted', 'succeeded']);
-  });
+  }, TEMPS_TEST_MS);
 });
 
 describe('mode fixture', () => {

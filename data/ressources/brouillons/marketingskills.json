@@ -1,0 +1,216 @@
+{
+  "slug": "marketingskills",
+  "consignes": "r2",
+  "accroche": {
+    "texte": "Marketing Skills : CRO, copywriting, SEO et séquences d’e-mails pris en charge par votre agent de code",
+    "passages": [
+      "Marketing skills for Claude Code and AI agents.",
+      "CRO, copywriting, SEO, analytics, and growth engineering.",
+      "create or optimize an email sequence"
+    ]
+  },
+  "description": {
+    "texte": "La collection de Corey Haines pour le marketing. Votre agent repère la tâche en cours, page à faire convertir, séquence d’e-mails, prix ou campagne Google Ads, et applique la méthode adaptée.",
+    "passages": [
+      "A collection of AI agent skills focused on marketing tasks.",
+      "Built by Corey Haines.",
+      "your agent can recognize when you're working on a marketing task and apply the right frameworks and best practices",
+      "help with conversion optimization, copywriting, SEO, analytics, and growth engineering.",
+      "When the user wants to create or optimize an email sequence, drip campaign",
+      "When the user wants help with pricing decisions, packaging, or monetization strategy.",
+      "When the user wants help with paid advertising campaigns on Google Ads"
+    ]
+  },
+  "interet": {
+    "texte": "Tout repose sur un document produit commun : vous posez une fois produit, public et positionnement avec product-marketing, et chaque skill le relit avant d’agir.",
+    "passages": [
+      "Skills reference each other and build on shared context.",
+      "When the user wants to create or update their product marketing context document",
+      "every other skill checks it first to understand your product, audience, and positioning before doing anything"
+    ]
+  },
+  "exemple_usage": {
+    "texte": "Demandez d’optimiser une landing page pour la conversion : l’agent s’appuie sur le skill cro.",
+    "passages": [
+      "Once installed, just ask your agent to help with marketing tasks",
+      "Help me optimize this landing page for conversions",
+      "Uses cro skill"
+    ]
+  },
+  "demarrage": {
+    "etapes": [
+      {
+        "texte": "npx skills add coreyhaines31/marketingskills",
+        "passages": [
+          "Use npx skills to install skills directly",
+          "npx skills add coreyhaines31/marketingskills"
+        ]
+      },
+      {
+        "texte": "Lancé depuis Claude Code : ajouter -a claude-code, sinon il ne les lit pas",
+        "passages": [
+          "If you run the command from inside an agent session (e.g., asking Claude Code to install the skills for you)",
+          "may only install to the universal .agents/skills/ directory, which Claude Code does not read",
+          "npx skills add coreyhaines31/marketingskills -a claude-code"
+        ]
+      },
+      {
+        "texte": "Remplir product-marketing, puis confier ses tâches à l’agent",
+        "passages": [
+          "When the user wants to create or update their product marketing context document",
+          "Once installed, just ask your agent to help with marketing tasks"
+        ]
+      }
+    ],
+    "commande": "npx skills add coreyhaines31/marketingskills",
+    "passages": [
+      "Use npx skills to install skills directly",
+      "When the user wants to create or update their product marketing context document",
+      "Once installed, just ask your agent to help with marketing tasks"
+    ]
+  },
+  "compatibilites": [
+    {
+      "texte": "Claude Code, Codex, Cursor, Windsurf et tout agent compatible Agent Skills.",
+      "passages": [
+        "Works with Claude Code, OpenAI Codex, Cursor, Windsurf, and any agent that supports the Agent Skills spec."
+      ]
+    }
+  ],
+  "limites": [],
+  "licence_locale": null,
+  "mots_cles": {
+    "nom": "Marketing Skills",
+    "categorie": "MCP et skills",
+    "usages": [
+      {
+        "texte": "optimisation des conversions",
+        "passages": [
+          "When the user wants to optimize, improve, or increase conversions on any marketing page or form"
+        ]
+      },
+      {
+        "texte": "rédaction marketing",
+        "passages": [
+          "When the user wants to write, rewrite, or improve marketing copy for any page"
+        ]
+      },
+      {
+        "texte": "référencement naturel (SEO)",
+        "passages": [
+          "When the user wants to audit, review, or diagnose SEO issues on their site."
+        ]
+      },
+      {
+        "texte": "séquences d'e-mails",
+        "passages": [
+          "When the user wants to create or optimize an email sequence, drip campaign, automated email flow"
+        ]
+      },
+      {
+        "texte": "suivi analytique",
+        "passages": [
+          "When the user wants to set up, improve, or audit analytics tracking and measurement."
+        ]
+      },
+      {
+        "texte": "campagnes publicitaires",
+        "passages": [
+          "When the user wants help with paid advertising campaigns on Google Ads, Meta (Facebook/Instagram), LinkedIn, Twitter/X"
+        ]
+      }
+    ],
+    "technologies": [
+      {
+        "texte": "Claude Code",
+        "passages": [
+          "Marketing skills for Claude Code and AI agents."
+        ]
+      },
+      {
+        "texte": "Codex",
+        "passages": [
+          "Install via Codex's plugin system"
+        ]
+      },
+      {
+        "texte": "Cursor",
+        "passages": [
+          "Works with Claude Code, OpenAI Codex, Cursor, Windsurf"
+        ]
+      },
+      {
+        "texte": "Windsurf",
+        "passages": [
+          "Works with Claude Code, OpenAI Codex, Cursor, Windsurf"
+        ]
+      },
+      {
+        "texte": "Agent Skills",
+        "passages": [
+          "any agent that supports the Agent Skills spec"
+        ]
+      }
+    ],
+    "termes_proches": [
+      {
+        "terme": "copywriting",
+        "raison": "terme anglais de la rédaction marketing, un usage central de Marketing Skills."
+      },
+      {
+        "terme": "CRO",
+        "raison": "sigle anglais de l'optimisation des conversions, cité dans la description de Marketing Skills."
+      },
+      {
+        "terme": "landing page",
+        "raison": "nom anglais de la page d'atterrissage, dont Marketing Skills aide à optimiser les conversions."
+      },
+      {
+        "terme": "emailing",
+        "raison": "conception et rédaction de séquences d'e-mails marketing (skill emails) ; Marketing Skills n'envoie pas les e-mails lui-même."
+      },
+      {
+        "terme": "référencement IA",
+        "raison": "le skill ai-seo de Marketing Skills vise la présence dans les réponses des moteurs de recherche IA."
+      },
+      {
+        "terme": "tests A/B",
+        "raison": "le skill ab-testing de Marketing Skills aide à concevoir et mener des expériences A/B."
+      },
+      {
+        "terme": "growth marketing",
+        "raison": "marketing de croissance, un thème du dépôt Marketing Skills, qui couvre le growth engineering."
+      },
+      {
+        "terme": "SaaS",
+        "raison": "Marketing Skills vise notamment le marketing des logiciels SaaS, par exemple avec le skill marketing-ideas."
+      }
+    ]
+  },
+  "bouton": {
+    "libelle": "Voir le dépôt",
+    "url": "https://github.com/coreyhaines31/marketingskills"
+  },
+  "reperes": [
+    {
+      "texte": "Sous licence MIT, réutilisable librement",
+      "passages": [
+        "MIT - Use these however you want."
+      ]
+    },
+    {
+      "texte": "Pour Claude Code, Codex, Cursor et Windsurf",
+      "passages": [
+        "Works with Claude Code, OpenAI Codex, Cursor, Windsurf"
+      ]
+    },
+    {
+      "texte": "Aussi : tests A/B, churn, pipeline commercial",
+      "passages": [
+        "ab-testing - Experiment design",
+        "churn-prevention - Cancel flows, save offers, dunning, payment recovery",
+        "revops - Lead lifecycle, scoring, routing, pipeline management"
+      ]
+    }
+  ]
+}

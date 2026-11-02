@@ -121,7 +121,7 @@ export function decisionDepuisNotes(c: Criteres): Decision {
 }
 
 // Heuristique volontairement large : un faux positif coûte une relecture, un faux négatif laisse passer la popularité.
-const POPULARITE = /(?<![\p{L}\p{N}])(?:populaires?|popularité|popular|étoiles?|stars?|tendances?|trending|viral\w*|géant|grande entreprise|grand éditeur|renommée?|notoriété|leader|très utilisée?s?|largement utilisée?s?|widely used|nombre d'utilisateurs|utilisée? par \d[\d\s,.]*(?:millions?|milliards?)?|\d[\d\s,.]*(?:millions?|milliards?) d['’]utilisateurs)(?![\p{L}\p{N}])/iu;
+export const POPULARITE = /(?<![\p{L}\p{N}])(?:populaires?|popularité|popular|étoiles?|stars?|tendances?|trending|viral\w*|géant|grande entreprise|grand éditeur|renommée?|notoriété|leader|très utilisée?s?|largement utilisée?s?|widely used|nombre d'utilisateurs|utilisée? par \d[\d\s,.]*(?:millions?|milliards?)?|\d[\d\s,.]*(?:millions?|milliards?) d['’]utilisateurs)(?![\p{L}\p{N}])/iu;
 
 export interface Selection {
   decision: Decision;

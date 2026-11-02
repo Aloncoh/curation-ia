@@ -1,0 +1,17 @@
+{
+  "id": 1,
+  "name": "demo-skills",
+  "full_name": "exemple-org/demo-skills",
+  "html_url": "https://github.com/exemple-org/demo-skills",
+  "description": "Agent skills for web animation and motion design",
+  "created_at": "2025-03-01T10:00:00Z",
+  "pushed_at": "2026-10-30T08:00:00Z",
+  "stargazers_count": 1234,
+  "archived": false,
+  "fork": false,
+  "license": null,
+  "default_branch": "main",
+  "topics": ["svg", "animation"],
+  "homepage": null,
+  "owner": { "login": "exemple-org" }
+}

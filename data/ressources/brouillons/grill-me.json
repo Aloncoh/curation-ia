@@ -1,0 +1,191 @@
+{
+  "slug": "grill-me",
+  "consignes": "r2",
+  "accroche": {
+    "texte": "grill-me : votre agent vous interroge sans relâche sur un plan, jusqu'à ce que tout soit tranché",
+    "passages": [
+      "Get relentlessly interviewed about a plan or design until every branch of the design tree is resolved."
+    ]
+  },
+  "description": {
+    "texte": "Avant de lancer quoi que ce soit, on inverse les rôles : l'agent vous pose des questions précises sur votre plan, votre décision ou votre idée, et creuse chaque branche jusqu'à la trancher. Matt Pocock le destine aux sujets hors code.",
+    "passages": [
+      "getting the agent to ask you detailed questions about what you're building.",
+      "Interview the user relentlessly about a plan, decision, or idea until every branch of the design tree is resolved.",
+      "/grill-me - for non-code uses"
+    ]
+  },
+  "interet": {
+    "texte": "Vous vous alignez avec l'agent avant qu'il se mette au travail, au lieu de découvrir après coup qu'il n'avait pas compris. Pour le code, la variante grill-with-docs mène le même entretien et construit au passage le vocabulaire du projet, avec les décisions difficiles consignées en ADR.",
+    "passages": [
+      "They help you align with the agent before you get started",
+      "you realize it didn't understand you at all.",
+      "Grilling session that also builds your project's domain model",
+      "document hard-to-explain decisions in ADR's."
+    ]
+  },
+  "exemple_usage": {
+    "texte": "Un lancement à cadrer, un arbitrage d'équipe à préparer : tapez /grill-me, décrivez le plan, puis répondez jusqu'à ce que plus rien ne reste flou.",
+    "passages": [
+      "User-invoked skills are reachable only when you type them (e.g. /grill-me)",
+      "Interview the user relentlessly about a plan, decision, or idea until every branch of the design tree is resolved."
+    ]
+  },
+  "demarrage": {
+    "etapes": [
+      {
+        "texte": "Dans Claude Code, installez le plugin mattpocock-skills.",
+        "passages": [
+          "claude plugin install mattpocock-skills@claude-plugins-official",
+          "I see with Claude Code, Codex, and other coding agents."
+        ]
+      },
+      {
+        "texte": "Il ne démarre pas seul : tapez /grill-me, puis décrivez votre plan.",
+        "passages": [
+          "User-invoked skills are reachable only when you type them (e.g. /grill-me)"
+        ]
+      }
+    ],
+    "commande": "claude plugin install mattpocock-skills@claude-plugins-official",
+    "passages": [
+      "claude plugin install mattpocock-skills@claude-plugins-official",
+      "User-invoked skills are reachable only when you type them (e.g. /grill-me)"
+    ]
+  },
+  "compatibilites": [
+    {
+      "texte": "Claude Code, Codex et d'autres agents ; n'importe quel modèle, selon l'auteur.",
+      "passages": [
+        "I see with Claude Code, Codex, and other coding agents.",
+        "codex plugin add mattpocock-skills@mattpocock",
+        "npx skills@latest add mattpocock/skills -a <agent>",
+        "They work with any model."
+      ]
+    }
+  ],
+  "limites": [],
+  "licence_locale": null,
+  "mots_cles": {
+    "nom": "grill-me (Matt Pocock)",
+    "categorie": "MCP et skills",
+    "usages": [
+      {
+        "texte": "affiner un plan",
+        "passages": [
+          "A relentless interview to sharpen a plan or design."
+        ]
+      },
+      {
+        "texte": "entretien de conception",
+        "passages": [
+          "Get relentlessly interviewed about a plan or design until every branch of the design tree is resolved."
+        ]
+      },
+      {
+        "texte": "questions détaillées",
+        "passages": [
+          "getting the agent to ask you detailed questions about what you're building."
+        ]
+      },
+      {
+        "texte": "s'aligner avec l'agent",
+        "passages": [
+          "They help you align with the agent before you get started"
+        ]
+      },
+      {
+        "texte": "préparer une décision",
+        "passages": [
+          "Interview the user relentlessly about a plan, decision, or idea until every branch of the design tree is resolved."
+        ]
+      },
+      {
+        "texte": "cadrage de projet",
+        "passages": [
+          "They help you align with the agent before you get started, and think deeply about the change you're making."
+        ]
+      }
+    ],
+    "technologies": [
+      {
+        "texte": "Claude Code",
+        "passages": [
+          "fix common failure modes I see with Claude Code, Codex, and other coding agents."
+        ]
+      },
+      {
+        "texte": "Codex",
+        "passages": [
+          "codex plugin marketplace add mattpocock/skills"
+        ]
+      },
+      {
+        "texte": "GitHub Copilot",
+        "passages": [
+          "copilot plugin install mattpocock-skills@mattpocock"
+        ]
+      },
+      {
+        "texte": "Gemini CLI",
+        "passages": [
+          "gemini skills install https://github.com/mattpocock/skills.git --path skills/productivity"
+        ]
+      },
+      {
+        "texte": "Cursor",
+        "passages": [
+          "cursor, opencode, devin, windsurf, amp, pi"
+        ]
+      }
+    ],
+    "termes_proches": [
+      {
+        "terme": "grilling",
+        "raison": "grill-me délègue l'entretien au skill grilling du même dépôt."
+      },
+      {
+        "terme": "grill-with-docs",
+        "raison": "Skill du même auteur pour le code : même entretien que grill-me, avec en plus un glossaire et des ADR."
+      },
+      {
+        "terme": "interview",
+        "raison": "Le dépôt décrit ce skill comme une interview sans relâche sur un plan."
+      },
+      {
+        "terme": "malentendu",
+        "raison": "Ce skill vise le décalage entre ce que l'on veut et ce que l'agent comprend."
+      },
+      {
+        "terme": "clarifier ses besoins",
+        "raison": "Le skill fait préciser ses attentes par des questions détaillées, avant que l'agent commence."
+      },
+      {
+        "terme": "challenger un plan",
+        "raison": "grill-me sert à affiner un plan en le soumettant aux questions de l'agent."
+      },
+      {
+        "terme": "productivité",
+        "raison": "Le dépôt range ce skill dans sa section Productivity, parmi ses outils généraux."
+      }
+    ]
+  },
+  "bouton": {
+    "libelle": "Voir le dépôt",
+    "url": "https://github.com/mattpocock/skills"
+  },
+  "reperes": [
+    {
+      "texte": "Se lance seulement quand vous tapez /grill-me",
+      "passages": [
+        "User-invoked skills are reachable only when you type them (e.g. /grill-me)"
+      ]
+    },
+    {
+      "texte": "Fonctionne avec n'importe quel modèle",
+      "passages": [
+        "They work with any model."
+      ]
+    }
+  ]
+}

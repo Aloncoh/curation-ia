@@ -643,7 +643,7 @@ export const SUJETS = [
   { sujet: 'Sélections de ressources', compte: 'mova', etat: 'a_construire', note: 'Listes occasionnelles de sites et d’outils utiles ; chaque ressource vérifiée à sa source.' },
   { sujet: 'Grandes entreprises tech', compte: 'radar', etat: 'partiel', note: 'Google et le changelog GitHub collectés ; autres espaces presse à connecter.' },
   { sujet: 'Matériel et robotique', compte: 'radar', etat: 'a_construire', note: 'Flux officiels repérés, collecte à construire.' },
-  { sujet: 'Incidents importants', compte: 'pulse', etat: 'a_construire', note: 'Pages d’état à collecter, avec révisions (P6).' },
+  { sujet: 'Incidents importants', compte: 'pulse', etat: 'a_construire', note: 'Pages d’état à collecter, avec révisions.' },
   { sujet: 'Infrastructures, bases de données et pipelines', compte: 'pulse', etat: 'a_construire', note: 'Exploitation, fiabilité et performances : collecte à construire.' },
 ] as const;
 
@@ -689,12 +689,12 @@ export const REGISTRE_PULSE = [
   { famille: 'Issues GitHub', role: 'découverte', etat: 'a_integrer', note: 'Signal à confirmer ; API publique.' },
   { famille: 'Communautés Reddit', role: 'découverte', etat: 'differe', note: 'Différée : aucun accès autorisé disponible.' },
   { famille: 'Experts sur X', role: 'découverte', etat: 'a_integrer', note: 'Accès autorisé à obtenir, payant.' },
-  { famille: 'GitHub Changelog', role: 'vérification', etat: 'connecte', note: 'Déjà collecté (P2).' },
+  { famille: 'GitHub Changelog', role: 'vérification', etat: 'connecte', note: 'Déjà collecté.' },
 ] as const;
 
 /** Registre de Radar : `role` distingue la source de preuve du contexte. Une rumeur n'est jamais publiée comme un fait. */
 export const REGISTRE_RADAR = [
-  { famille: 'GitHub Changelog (Microsoft)', role: 'annonce officielle', etat: 'connecte', note: 'Déjà collecté (P2).' },
+  { famille: 'GitHub Changelog (Microsoft)', role: 'annonce officielle', etat: 'connecte', note: 'Déjà collecté.' },
   { famille: 'Blogs officiels Google et Microsoft', role: 'annonce officielle', etat: 'partiel', note: 'Google collecté ; Microsoft à intégrer.' },
   { famille: 'NVIDIA et Apple Newsroom', role: 'annonce officielle', etat: 'a_integrer', note: 'Flux contrôlés, gratuits.' },
   { famille: 'Amazon, Meta, Tesla', role: 'annonce officielle', etat: 'a_integrer', note: 'Accès à vérifier par entreprise.' },

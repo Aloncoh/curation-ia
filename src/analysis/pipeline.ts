@@ -69,7 +69,8 @@ async function aTraiter(client: Client, limite: number) {
           left join product_version v on v.id = t.product_version_id
           left join product pr on pr.id = t.product_id
           left join post_draft d on d.news_item_id = n.id
-          where d.id is null or d.status = 'qualifiee' or (d.status = 'a_approfondir' and d.snapshot_id <> c.id)
+          -- Une découverte (liste de ressources, ADR 0011) n'est jamais qualifiée avec la grille des actualités.
+          where n.kind <> 'decouverte' and (d.id is null or d.status = 'qualifiee' or (d.status = 'a_approfondir' and d.snapshot_id <> c.id))
           order by d.id is not null desc, coalesce(n.announced_at, n.first_seen_at) desc, n.id desc`,
   );
   const tailleAdmise = r.rows.filter((row) => String(row.content).length + String(row.snapshot_title).length <= LONGUEUR_MAX_CAPTURE);

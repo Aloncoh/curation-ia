@@ -1,0 +1,5 @@
+[
+  { "name": "SKILL.md", "path": "skills/anim/SKILL.md", "type": "file", "html_url": "https://github.com/exemple-org/demo-skills/blob/main/skills/anim/SKILL.md", "sha": "a1" },
+  { "name": "LICENSE.txt", "path": "skills/anim/LICENSE.txt", "type": "file", "html_url": "https://github.com/exemple-org/demo-skills/blob/main/skills/anim/LICENSE.txt", "sha": "a2" },
+  { "name": "exemples", "path": "skills/anim/exemples", "type": "dir", "html_url": "https://github.com/exemple-org/demo-skills/tree/main/skills/anim/exemples", "sha": "a3" }
+]

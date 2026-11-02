@@ -93,3 +93,41 @@ Les agents n'ont lu que les métadonnées GitHub ou une mention de ces ressource
 1. **Tri de l'utilisateur** : pour chaque ressource, garder ou retirer, avec un motif.
 2. Les choix deviennent des exemples des consignes de découverte (grille `d1`, SPEC §7.3 ter).
 3. Chaque ressource gardée est revérifiée juste avant publication, et toujours présentée avec ses limites.
+
+## Ajout du 2026-11-02 : fil X de @Slonski_rt, transmis par l'utilisateur
+
+Ce fil est un contenu externe, attribué à son auteur. Les étoiles, dates et licences ci-dessous ont été relevées par Claude sur l'API GitHub publique le 2026-11-02 à 11:36 UTC, puis l'existence de chaque skill a été vérifiée dans l'arborescence de son dépôt. Les nombres d'installations cités dans le fil n'ont **pas** été vérifiés.
+
+| Skill (dépôt) | ★ selon le fil | ★ relevées | Dernier push | Licence | Remarque |
+|---|---|---|---|---|---|
+| frontend-design, webapp-testing, mcp-builder, skill-creator, docx/xlsx/pptx/pdf (anthropics/skills) | — | 186 577 (dépôt) | 2026-10-28 | aucune licence globale | skills présents ; skills de documents en code consultable |
+| agent-browser (vercel-labs/agent-browser) | — | 45 202 | 2026-11-01 | Apache-2.0 | |
+| react-best-practices (vercel-labs/agent-skills) | — | 33 389 | 2026-10-28 | aucune licence globale | skill présent |
+| ui-ux-pro-max | 95 K | 144 037 | 2026-11-01 | MIT | chiffre du fil périmé |
+| obsidian-skills (kepano) | 36 K | 50 607 | 2026-09-15 | MIT | chiffre du fil périmé |
+| marketingskills (coreyhaines31) | 35 K | 57 951 | 2026-10-31 | MIT | chiffre du fil périmé |
+| scientific skills (K-Dense-AI) | 29 K | 55 780 | 2026-11-02 | MIT | dépôt renommé `scientific-agent-skills` |
+| superpowers (obra) | — | 310 929 | 2026-10-29 | MIT | |
+| find-skills (vercel-labs/skills) | — | 37 724 | 2026-10-30 | MIT | skill présent |
+| grill-me, improve-codebase-architecture (mattpocock/skills) | — | 309 651 (dépôt) | 2026-11-01 | MIT | skills présents |
+| claude-mem (thedotmack) | 84 K | 110 184 | 2026-11-02 | Apache-2.0 | chiffre du fil périmé |
+| humanizer (blader) | — | 63 774 | 2026-10-28 | MIT | |
+| planning-with-files (OthmanAdi) | 24 K | 27 822 | 2026-10-30 | MIT | |
+| stop-slop (hardikpandya) | — | 18 542 | 2026-03-17 | MIT | plus de 7 mois sans push |
+| Claudeception (blader) | 2 K | 2 442 | 2026-02-21 | MIT | **fork** de `AlexMikhalev/claude-code-continuous-learning-skill` (43 ★) ; plus de 8 mois sans push |
+
+Ces ressources ne sont pas encore sur la page de tri.
+
+## Ajout demandé par l'utilisateur le 2026-11-02 : ECC
+
+| Skill (dépôt) | ★ relevées | Dernier push | Licence | Remarque |
+|---|---|---|---|---|
+| ECC, « Everything Claude Code » (affaan-m/ECC), Affaan Mustafa | 295 281 | 2026-11-02 | MIT | créé le 2026-01-18, donc ressource existante ; README disponible ; site ecc.tools |
+
+Relevé par Claude sur l'API GitHub le 2026-11-02 à 15:00 UTC.
+
+## État au 2026-11-02 : les 21 publications sont préparées
+
+Les 20 ressources du fil X ci-dessus (les skills de documents forment une seule publication) et ECC sont passées par la chaîne des ressources ([ADR 0011](decisions/0011-chaine-des-ressources.md)) : capture par l'API GitHub, brouillon rédigé par Claude Code pendant le développement sans appel au modèle, contrôles du code, visuel, bouton « Voir le dépôt » vérifié, mots-clés, planning et index de recherche. Relevé de la base locale : 21 publications **en attente**, prévues 15 le 2026-11-02 et 6 le 2026-11-03 sous le plafond quotidien, toutes classées « ressource existante ». Rien n'est publié avant P5 ; elles se voient seulement en aperçu dans la maquette et avec `npm run ressources -- chercher`.
+
+Sept candidates des sections 1 à 4 figurent aussi dans le fil X et sont donc couvertes par ces publications : D5, D7, M1, M2, M4, M5 et C7 ; find-skills vient du même dépôt que C12. Les autres restent à trier par l'utilisateur et ne sont pas préparées.

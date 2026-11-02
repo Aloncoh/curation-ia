@@ -34,25 +34,25 @@ export interface DiapositiveResolue {
 // Liste anti-sensationnalisme, version 1 (docs/agents-editoriaux.md §6).
 const SENSATIONNEL = /révolutionnaire|incroyable|époustouflant|hallucinant|game changer|tout change|vous n['’]allez pas croire|ce que personne ne vous dit|\bchoc\b/i;
 const SIGLES = new Set(['API', 'MCP', 'SDK', 'CLI', 'IA', 'AI', 'GPU', 'CPU', 'LLM', 'GPT', 'RAG', 'SQL', 'RSS', 'HTTP', 'JSON', 'URL', 'UI', 'UX', '3D', 'PDF', 'DOCX', 'XLSX', 'CSV', 'HTML', 'CSS', 'PNG', 'JPG', 'SVG', 'MP3', 'MP4']);
-const NUANCE_SOURCE = /\b(?:not|never|only|except|unless|may|might|preview|beta|experimental|limited|deprecated|coming soon|planned)\b|n[’']t\b/i;
+export const NUANCE_SOURCE = /\b(?:not|never|only|except|unless|may|might|preview|beta|experimental|limited|deprecated|coming soon|planned)\b|n[’']t\b/i;
 // Bornes Unicode : `\b` ignore les lettres accentuées, « limité » n'y serait jamais reconnu.
-const NUANCE_TEXTE = /(?<![\p{L}\p{N}])(?:(?:ne|pas|jamais|seulement|uniquement|sauf|peut|peuvent|pourrait|sans|préversion|bêta|expérimentale?s?|expérimentaux|limitée?s?|restreinte?s?|indisponibles?|bientôt|prévue?s?|selon)(?![\p{L}\p{N}])|n['’])/iu;
+export const NUANCE_TEXTE = /(?<![\p{L}\p{N}])(?:(?:ne|pas|jamais|seulement|uniquement|sauf|peut|peuvent|pourrait|sans|préversion|bêta|expérimentale?s?|expérimentaux|limitée?s?|restreinte?s?|indisponibles?|bientôt|prévue?s?|selon)(?![\p{L}\p{N}])|n['’])/iu;
 // Heuristiques : elles repèrent un passage hors sujet, elles ne prouvent pas que le coût ou l'accès annoncé est exact.
 const INDICE_COUT = /[$€£]\s?\d|\d\s?(?:[$€£]|usd\b|eur\b|dollars?\b|euros?\b)|\bfree\b|\bgratuit\w*|\bno cost\b|\bpric\w*|\bcosts?\b|\bpaid\b|\bplans?\b|\btiers?\b|\bsubscri\w*|\bcredits?\b|\bbilling\b/i;
 const GRATUITE = /\bfree\b|\bgratuit\w*|\bno cost\b|\bsans frais\b/i;
 const INDICE_ACCES = /https?:\/\/|\b(?:available|access|download\w*|install\w*|sign[- ]?up|waitlist|rolling out|preview|beta|github|npm|pip|marketplace|disponible\w*|accès)\b/i;
-const ATTRIBUTION = /\bselon\b|d['’]après|\baffirme\b|\brevendique\b|\bindique\b|\bannonce (?:que|une?|l[ea]s?|des|son|sa|ses)\b/i;
+export const ATTRIBUTION = /\bselon\b|d['’]après|\baffirme\b|\brevendique\b|\bindique\b|\bannonce (?:que|une?|l[ea]s?|des|son|sa|ses)\b/i;
 // Un pourcentage seul peut être une remise ou une part d'écran : seule une comparaison compte comme une performance.
-const PERFORMANCE = /\bbenchmarks?\b|\bscores?\b|\bfois plus\b|\d\s*%\s*(?:de\s+)?(?:plus|moins|mieux)\b|\d\s*x\s+plus\b/i;
+export const PERFORMANCE = /\bbenchmarks?\b|\bscores?\b|\bfois plus\b|\d\s*%\s*(?:de\s+)?(?:plus|moins|mieux)\b|\d\s*x\s+plus\b/i;
 const SUPERLATIF = /\b(?:l[ea]s?|du|des) (?:plus|meilleur\w*)\b|\bmeilleur\w*|\bplus (?:rapide|puissant|précis|performant|fiable)\w*|\bfois plus\b|\b\d+\s*(?:%|fois)|\bleader\b|\bn°\s*1\b/i;
 // V1 : analyse documentaire seule. Un texte rédigé ne raconte pas un essai qui n'a pas eu lieu (SPEC §7.8).
-const ESSAI_REVENDIQUE = /\b(?:nous avons|j['’]ai|on a)\s+(?:test|essay|mesur|obtenu|constaté)\w*|\b(?:testée?s?|essayée?s?) par (?:nos|notre|nous|la plateforme)\b|\b(?:d['’]après|selon) (?:nos|notre) (?:tests?|essais?|mesures?)\b/i;
+export const ESSAI_REVENDIQUE = /\b(?:nous avons|j['’]ai|on a)\s+(?:test|essay|mesur|obtenu|constaté)\w*|\b(?:testée?s?|essayée?s?) par (?:nos|notre|nous|la plateforme)\b|\b(?:d['’]après|selon) (?:nos|notre) (?:tests?|essais?|mesures?)\b/i;
 /** Types jamais publiables comme un fait : ils passent toujours en relecture. */
 const TYPES_A_RELIRE = ['non_confirmee', 'opinion', 'temoignage'];
 /** Au-delà, un passage cesse d'être une citation et devient une reprise de la source. */
-const LONGUEUR_MAX_PASSAGE = 300;
+export const LONGUEUR_MAX_PASSAGE = 300;
 const REPERES_MAX = 3;
-const LONGUEUR_MAX_REPERE = 64;
+export const LONGUEUR_MAX_REPERE = 64;
 /** Autant de mots consécutifs repris de la capture dans un texte rédigé : une copie, pas une synthèse. */
 const MOTS_DE_COPIE = 8;
 const MOTS_VIDES = new Set(['the', 'and', 'for', 'with', 'new', 'now', 'you', 'your', 'our', 'from', 'how', 'why', 'what', 'into', 'les', 'des', 'une', 'pour', 'avec', 'dans', 'sur', 'nos', 'vos']);
@@ -60,15 +60,15 @@ const LIBELLES_CHAMPS = { accroche: 'Accroche', nouveaute: 'Nouveauté', ce_que_
 
 const JOUR_PARIS = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Paris' });
 
-const mots = (texte: string) => (texte.toLowerCase().match(/[\p{L}\p{N}][\p{L}\p{N}.+-]*/gu) ?? []).map((m) => m.replace(/\.+$/, ''));
+export const mots = (texte: string) => (texte.toLowerCase().match(/[\p{L}\p{N}][\p{L}\p{N}.+-]*/gu) ?? []).map((m) => m.replace(/\.+$/, ''));
 /** Moins de trois mots, séparés par des espaces : un point, une version ou une adresse se retrouve partout et ne soutient rien. */
 export const moinsDeTroisMots = (texte: string) => texte.trim().split(/\s+/).filter((m) => /[\p{L}\p{N}]/u.test(m)).length < 3;
 const numeroDeVersion = (mot: string) => /^v?\d[\d.]*$/.test(mot);
 /** Noms propres : mot à majuscule, sauf en début de phrase. */
-const nomsPropres = (texte: string) =>
+export const nomsPropres = (texte: string) =>
   [...texte.matchAll(/(?<![.!?:]\s)(?<=\s)[A-Z][\p{L}\p{N}.+-]{2,}/gu)].map((m) => m[0].replace(/[.,]+$/, ''));
 
-function recopie(texte: string, capture: string): boolean {
+export function recopie(texte: string, capture: string): boolean {
   const suite = normaliserEspaces(texte).toLowerCase().split(' ');
   const source = capture.toLowerCase();
   for (let i = 0; i + MOTS_DE_COPIE <= suite.length; i++) if (source.includes(suite.slice(i, i + MOTS_DE_COPIE).join(' '))) return true;
@@ -86,7 +86,7 @@ function crie(texte: string): boolean {
   }
   return false;
 }
-const sensationnel = (texte: string) => SENSATIONNEL.test(texte) || texte.includes('!') || crie(texte);
+export const sensationnel = (texte: string) => SENSATIONNEL.test(texte) || texte.includes('!') || crie(texte);
 
 function resoudre(b: Brouillon, champ: Brouillon['diapositives'][number]): DiapositiveResolue | null {
   if (champ.startsWith('details:')) {

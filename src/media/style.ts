@@ -55,6 +55,21 @@ html, body { background: #fff; }
 .fiche { overflow-wrap: anywhere; padding: 38px 44px 40px; border-radius: 26px; background: var(--papier); font: 700 50px/1.14 'Atkinson', sans-serif; outline: 4px dashed var(--encre); outline-offset: -11px; box-shadow: 0 16px 30px -16px rgba(29, 27, 35, .5); }
 .fiche:nth-child(odd) { transform: rotate(-.8deg); margin-right: 60px; }
 .fiche:nth-child(even) { transform: rotate(.7deg); margin-left: 60px; }
+.etapes { display: flex; flex-direction: column; justify-content: safe center; align-items: stretch; padding: 0 0 100px; list-style: none; }
+.etape { display: flex; align-items: center; gap: 30px; overflow-wrap: anywhere; padding: 28px 40px 30px 30px; border-radius: 26px; background: var(--papier); font: 700 44px/1.14 'Atkinson', sans-serif; outline: 4px dashed var(--encre); outline-offset: -11px; box-shadow: 0 16px 30px -16px rgba(29, 27, 35, .5); }
+.etape:nth-child(4n+1) { transform: rotate(-.7deg); margin-right: 50px; }
+.etape:nth-child(4n+3) { transform: rotate(.6deg); margin-left: 50px; }
+.etape .texte { flex: 1; min-width: 0; }
+.numero { flex: none; display: grid; place-items: center; width: 76px; height: 76px; border-radius: 50%; background: var(--accent); border: 5px solid var(--encre); font: 880 40px/1 'Recursive', sans-serif; font-variation-settings: 'CASL' 1, 'MONO' 0; }
+.fleche { display: flex; justify-content: center; height: 58px; }
+.fleche svg { height: 100%; overflow: visible; }
+.fleche path { fill: none; stroke: var(--encre); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+.fleche path:first-child { stroke-dasharray: 9 10; }
+.etapes[data-nombre="4"] .etape { gap: 22px; padding: 18px 32px 20px 22px; font-size: 37px; }
+.etapes[data-nombre="4"] .etape:nth-child(4n+1) { margin-right: 28px; }
+.etapes[data-nombre="4"] .etape:nth-child(4n+3) { margin-left: 28px; }
+.etapes[data-nombre="4"] .numero { width: 60px; height: 60px; border-width: 4px; font-size: 32px; }
+.etapes[data-nombre="4"] .fleche { height: 40px; }
 .ligne { display: block; }
 .ligne b { padding: 0 10px; border-radius: 8px; background: var(--accent); font-weight: 800; }
 .pied { position: absolute; z-index: 6; left: 0; right: 0; bottom: 0; display: flex; justify-content: space-between; gap: 24px; padding: 16px var(--marge) 18px; background: var(--papier); font: 400 24px/1.2 'Atkinson', sans-serif; }

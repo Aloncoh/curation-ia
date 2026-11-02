@@ -1,0 +1,210 @@
+{
+  "slug": "webapp-testing",
+  "consignes": "r2",
+  "accroche": {
+    "texte": "webapp-testing : Claude teste votre app web locale avec Playwright",
+    "passages": [
+      "This repository contains Anthropic's implementation of skills for Claude",
+      "Toolkit for interacting with and testing local web applications using Playwright"
+    ]
+  },
+  "description": {
+    "texte": "Le skill d'Anthropic écrit des scripts Playwright en Python pour vérifier le front-end, déboguer l'interface, prendre des captures d'écran et lire les logs du navigateur.",
+    "passages": [
+      "This repository contains Anthropic's implementation of skills for Claude",
+      "To test local web applications, write native Python Playwright scripts.",
+      "Supports verifying frontend functionality, debugging UI behavior, capturing browser screenshots, and viewing browser logs."
+    ]
+  },
+  "interet": {
+    "texte": "Un helper démarre les serveurs de l'app, back-end et front-end compris, puis lance le test. Claude l'appelle tel quel, sans charger son code dans le contexte. Sur une app dynamique, il attend la fin du chargement, observe la page rendue et en tire ses sélecteurs avant d'agir.",
+    "passages": [
+      "scripts/with_server.py - Manages server lifecycle (supports multiple servers)",
+      "Multiple servers (e.g., backend + frontend)",
+      "They exist to be called directly as black-box scripts rather than ingested into your context window.",
+      "Navigate and wait for networkidle",
+      "Take screenshot or inspect DOM",
+      "Identify selectors from rendered state",
+      "Execute actions with discovered selectors"
+    ]
+  },
+  "exemple_usage": {
+    "texte": "Vérifier un formulaire sur une app avec back-end et front-end : le helper lance les deux serveurs, la page s'ouvre en headless, le script attend la fin du chargement puis inspecte le DOM.",
+    "passages": [
+      "Multiple servers (e.g., backend + frontend)",
+      "Always launch chromium in headless mode",
+      "Navigate and wait for networkidle",
+      "Inspect rendered DOM"
+    ]
+  },
+  "demarrage": {
+    "etapes": [
+      {
+        "texte": "Ajouter le catalogue : /plugin marketplace add anthropics/skills",
+        "passages": [
+          "You can register this repository as a Claude Code Plugin marketplace by running the following command in Claude Code",
+          "/plugin marketplace add anthropics/skills"
+        ]
+      },
+      {
+        "texte": "Installer example-skills : /plugin install example-skills@anthropic-agent-skills",
+        "passages": [
+          "/plugin install example-skills@anthropic-agent-skills",
+          "\"./skills/theme-factory\", \"./skills/web-artifacts-builder\", \"./skills/webapp-testing\""
+        ]
+      },
+      {
+        "texte": "Mentionner webapp-testing dans sa demande",
+        "passages": [
+          "After installing the plugin, you can use the skill by just mentioning it."
+        ]
+      }
+    ],
+    "commande": "/plugin marketplace add anthropics/skills",
+    "passages": [
+      "/plugin marketplace add anthropics/skills",
+      "Then, to install a specific set of skills"
+    ]
+  },
+  "compatibilites": [],
+  "limites": [],
+  "licence_locale": {
+    "texte": "Apache 2.0 : ce skill a sa propre licence, dans le fichier LICENSE.txt de son dossier",
+    "passages": [
+      "Apache License Version 2.0, January 2004",
+      "license: Complete terms in LICENSE.txt"
+    ]
+  },
+  "mots_cles": {
+    "nom": "webapp-testing",
+    "categorie": "MCP et skills",
+    "usages": [
+      {
+        "texte": "tests d'applications web",
+        "passages": [
+          "testing local web applications using Playwright"
+        ]
+      },
+      {
+        "texte": "tests d'interface",
+        "passages": [
+          "Supports verifying frontend functionality"
+        ]
+      },
+      {
+        "texte": "débogage d'interface",
+        "passages": [
+          "debugging UI behavior"
+        ]
+      },
+      {
+        "texte": "captures d'écran",
+        "passages": [
+          "capturing browser screenshots"
+        ]
+      },
+      {
+        "texte": "journaux du navigateur",
+        "passages": [
+          "viewing browser logs",
+          "Capturing console logs during automation"
+        ]
+      },
+      {
+        "texte": "automatisation de navigateur",
+        "passages": [
+          "To create an automation script, include only Playwright logic"
+        ]
+      }
+    ],
+    "technologies": [
+      {
+        "texte": "Playwright",
+        "passages": [
+          "write native Python Playwright scripts"
+        ]
+      },
+      {
+        "texte": "Python",
+        "passages": [
+          "write native Python Playwright scripts"
+        ]
+      },
+      {
+        "texte": "Chromium",
+        "passages": [
+          "Always launch chromium in headless mode"
+        ]
+      },
+      {
+        "texte": "HTML",
+        "passages": [
+          "Read HTML file directly to identify selectors"
+        ]
+      },
+      {
+        "texte": "DOM",
+        "passages": [
+          "Take screenshot or inspect DOM"
+        ]
+      },
+      {
+        "texte": "Claude Code",
+        "passages": [
+          "You can register this repository as a Claude Code Plugin marketplace"
+        ]
+      }
+    ],
+    "termes_proches": [
+      {
+        "terme": "tests end-to-end",
+        "raison": "Le skill pilote un vrai navigateur avec Playwright, mais pour des scripts ponctuels, sans suite de tests ni intégration continue."
+      },
+      {
+        "terme": "navigateur headless",
+        "raison": "Le skill lance Chromium en headless pour ses scripts Playwright."
+      },
+      {
+        "terme": "sélecteurs CSS",
+        "raison": "Le skill repère les éléments par des sélecteurs, dont les sélecteurs CSS, après inspection du DOM."
+      },
+      {
+        "terme": "front-end",
+        "raison": "Le skill sert aux tests d'interface du front-end, lancé en local avec le back-end si besoin."
+      },
+      {
+        "terme": "tests UI",
+        "raison": "Formulation anglaise courante pour les tests d'interface et le débogage d'interface du skill."
+      },
+      {
+        "terme": "logs console",
+        "raison": "Les logs de la console font partie des journaux du navigateur que le skill peut relever."
+      }
+    ]
+  },
+  "bouton": {
+    "libelle": "Voir le dépôt",
+    "url": "https://github.com/anthropics/skills/tree/main/skills/webapp-testing"
+  },
+  "reperes": [
+    {
+      "texte": "Exemple fourni pour lister boutons, liens et champs",
+      "passages": [
+        "element_discovery.py - Discovering buttons, links, and inputs on a page"
+      ]
+    },
+    {
+      "texte": "Pages HTML statiques lues sans serveur",
+      "passages": [
+        "Read HTML file directly to identify selectors",
+        "static_html_automation.py - Using file:// URLs for local HTML"
+      ]
+    },
+    {
+      "texte": "Sélecteurs par texte, rôle, CSS ou ID",
+      "passages": [
+        "Use descriptive selectors: text=, role=, CSS selectors, or IDs"
+      ]
+    }
+  ]
+}

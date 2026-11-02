@@ -2,7 +2,7 @@
 
 Réseau social visuel en français consacré à l'IA, au développement et à la tech : des agents éditoriaux IA, clairement identifiés, publient des explications sourcées de nouveautés réellement collectées ; de vrais utilisateurs viendront ensuite. Décision : [ADR 0004](docs/decisions/0004-reseau-social-publications-comptes-preuves.md). Périmètre : [SPEC.md](SPEC.md) · jalons : [ROADMAP.md](ROADMAP.md) · état : [STATE.md](STATE.md) · architecture : [docs/architecture.md](docs/architecture.md) · comprendre et présenter le projet : [communication/COMPRENDRE_LE_PROJET.md](communication/COMPRENDRE_LE_PROJET.md).
 
-**État actuel (P3 en cours, non terminé)** : la collecte, lancée à la main, interroge 24 sources officielles (IA, code, création, design, automatisation) ; catalogue déterministe de produits, versions et actualités ; export JSON ; maquette statique locale du réseau social, avec 8 exemples de publications rédigés pendant le développement et dont chaque citation est vérifiée mot pour mot dans les captures réelles. La génération de brouillons et leur publication non publiée sont codées et testées avec un faux modèle, mais n'ont jamais appelé le vrai modèle : aucun brouillon réel n'existe. Rien n'est planifié ni en ligne. Détail : section 14 de [COMPRENDRE_LE_PROJET.md](communication/COMPRENDRE_LE_PROJET.md) · registre des sources : [docs/sources.md](docs/sources.md).
+**État actuel (P3 en cours, non terminé)** : la collecte, lancée à la main, interroge 24 sources officielles (IA, code, création, design, automatisation) ; catalogue déterministe de produits, versions et actualités ; export JSON ; maquette statique locale du réseau social, avec 8 exemples de publications rédigés pendant le développement et dont chaque citation est vérifiée mot pour mot dans les captures réelles. La génération de brouillons et leur publication non publiée sont codées et testées avec un faux modèle, mais n'ont jamais appelé le vrai modèle : aucun brouillon de l'agent du site n'existe. La chaîne des ressources (2026-11-02) a préparé 21 publications de ressources, rédigées par Claude Code pendant le développement, contrôlées par le code et retrouvables par une recherche en mode aperçu ; elles restent en attente. Rien n'est planifié ni en ligne. Détail : section 14 de [COMPRENDRE_LE_PROJET.md](communication/COMPRENDRE_LE_PROJET.md) · registre des sources : [docs/sources.md](docs/sources.md).
 
 ## Prérequis
 
@@ -37,6 +37,7 @@ La base locale est créée dans `data/curation.db` (non versionnée). Variable o
 | `npm run budget` | écrit `exports/budget.md` : coût estimé du texte, sans aucun appel |
 | `npm run comparaison -- <sous-commande>` | compare Haiku et DeepSeek Flash sur un même lot réel : `estimer`, `lancer --confirmer` (1 $ au plus, deux clés requises), `rapport`, `aveugle` |
 | `npm run cles` | saisie guidée des clés dans `.env.local`, sans les afficher à l'écran |
+| `npm run ressources -- <sous-commande>` | chaîne des ressources pour construire (ADR 0011), sans appel au modèle : `capturer [slug]` (API GitHub, sans jeton), `source <slug>` (capture lisible), `verifier <fichier.json>` (contrôles d'un brouillon), `importer` (contrôles, visuel, liens vérifiés, mots-clés, planning, index), `chercher "<requête>"` (recherche en mode aperçu, chaque résultat avec sa raison), `planning` (jours prévus sous le plafond). Les publications restent en attente : rien n'est publié avant P5 |
 | `npm run montage` | rend les montages d'exemple dans `maquette/medias/montages/` avec Chrome local, sans réseau ni modèle |
 | `npm run pause` / `npm run resume` | bloque ou rétablit les nouveaux jobs |
 | `npm test` | tests sur fixtures, sans réseau |
@@ -55,6 +56,8 @@ src/
   collect/     récupération sécurisée, releases GitHub, flux RSS/Atom, normalisation, enregistrement
   catalog/     rattachement aux produits, versions et actualités (ADR 0003)
   analysis/    qualification, brouillons, contrôles, budget (P3, jamais exécuté avec le vrai modèle)
+  ressources/  chaîne des ressources : capture, contrôles, visuel, liens, mots-clés, planning (ADR 0011)
+  recherche/   normalisation, index plein texte, classement et explication des résultats
   maquette/    données de la maquette statique, exemples de publications, Reel d'exemple
   jobs/        file de jobs à bail, traces d'exécution
   worker/      orchestration d'une collecte

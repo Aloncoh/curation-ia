@@ -5,13 +5,14 @@ import { defautsMiseEnPage } from '../src/media/rendu.ts';
 
 const IMAGE = { src: 'data:image/png;base64,AAAA', alt: 'Une capture', origine: 'editeur' as const, credit: 'Crédit' };
 const montage = (m: Partial<Montage> = {}): Montage => ({
-  id: 'x', gabarit: 'fenetre_annotee', compte: 'repo', titre: 'Acme ajoute un mode hors ligne', surtitre: null, image: IMAGE, apres: null, etiquettes: [], lignes: [], loupe: null,
+  id: 'x', gabarit: 'fenetre_annotee', compte: 'repo', titre: 'Acme ajoute un mode hors ligne', surtitre: null, image: IMAGE, apres: null, etiquettes: [], lignes: [], etapes: [], loupe: null,
   source: 'Source : acme.example', mention: 'Illustration — ne prouve pas le fonctionnement', ...m,
 });
 const html = (m: Montage) => htmlMontage(m, { avatar: 'data:image/png;base64,BBBB', polices: '', nomCompte: 'Repo' });
 const etiquette = { texte: 'Nouveau bouton', x: 10, y: 10, ancre: { x: 50, y: 50 } };
 const COMPLET: Record<(typeof GABARITS)[number], Partial<Montage>> = {
   photo_titre: {}, fenetre_annotee: {}, detourage_titre: {}, avant_apres: { apres: IMAGE }, loupe: { loupe: { x: 50, y: 50, zoom: 2 } }, terminal_annote: { image: null, lignes: ['acme run'], surtitre: 'Reconstitution de la commande citée' }, fiches: { image: null, etiquettes: [{ texte: 'Un repère', x: 4, y: 52, ancre: null }] },
+  etapes: { image: null, etapes: ['Installer le skill', 'Lancer la commande'], surtitre: 'Pour commencer, selon la documentation' },
 };
 
 describe('contrôle d’un montage avant rendu', () => {
@@ -33,6 +34,15 @@ describe('contrôle d’un montage avant rendu', () => {
     expect(defautsMontage(montage({ gabarit: 'loupe' }))).toContain('loupe_absente');
     expect(defautsMontage(montage({ gabarit: 'terminal_annote', image: null }))).toContain('commande_absente');
     expect(defautsMontage(montage({ gabarit: 'terminal_annote', image: null, lignes: ['acme run'] }))).toContain('reconstitution_non_signalee');
+  });
+  it('le gabarit étapes exige 2 à 4 étapes de 80 caractères au plus, et son surtitre fixe', () => {
+    const etapes = (e: string[], m: Partial<Montage> = {}) => defautsMontage(montage({ gabarit: 'etapes', ...COMPLET.etapes, etapes: e, ...m }));
+    expect(etapes(['Une seule'])).toContain('etapes_hors_limites');
+    expect(etapes(['a', 'b', 'c', 'd', 'e'])).toContain('etapes_hors_limites');
+    expect(etapes(['Installer', 'x'.repeat(81)])).toContain('etapes_hors_limites');
+    expect(etapes(['Installer', '  '])).toContain('etapes_hors_limites');
+    expect(etapes(['Installer', 'x'.repeat(80), 'Trois', 'Quatre'])).toEqual([]);
+    expect(etapes(['Installer', 'Lancer'], { surtitre: 'Testé par nos soins' })).toContain('etapes_non_attribuees');
   });
   it('une image distante ou sans texte alternatif est refusée', () => {
     expect(defautsMontage(montage({ image: { ...IMAGE, src: 'https://example.com/a.png' } }))).toContain('image_non_locale');
@@ -99,6 +109,15 @@ describe('document du montage', () => {
     expect(texteAlternatif(montage({ gabarit: 'photo_titre', etiquettes: [etiquette] }))).not.toContain('Nouveau bouton');
     expect(texteAlternatif(montage({ gabarit: 'terminal_annote', image: null, lignes: ['acme run'] }))).toContain('acme run');
   });
+  it('le gabarit étapes numérote ses cases, relie par des flèches muettes et décrit chaque étape', () => {
+    const m = montage({ gabarit: 'etapes', ...COMPLET.etapes, etapes: ['Installer <le> skill', 'Lancer', 'Relire'] });
+    const document = html(m);
+    expect(document.match(/class="etape"/g)).toHaveLength(3);
+    expect(document.match(/class="fleche" aria-hidden="true"/g)).toHaveLength(2);
+    expect(document).toContain('Installer &lt;le&gt; skill');
+    expect(document).toContain('Pour commencer, selon la documentation');
+    expect(texteAlternatif(m)).toBe('Acme ajoute un mode hors ligne. Étape 1 : Installer <le> skill. Étape 2 : Lancer. Étape 3 : Relire');
+  });
   it('des étiquettes sans point repéré s’empilent, sans fil ni position fixe', () => {
     const document = html(montage({ etiquettes: [{ texte: 'Sans fil', x: 0, y: 0, ancre: null }] }));
     expect(document).toContain('<div class="pile"><span class="etiquette">Sans fil</span></div>');
@@ -139,7 +158,7 @@ describe('montages de démonstration', () => {
 });
 
 describe('contrôle de la mise en page rendue', () => {
-  const correct = { hauteur_heros: 600, titre_deborde: false, texte_deborde: false, etiquette_hors_cadre: false, etiquettes_chevauchees: false, etiquette_sur_commande: false, fiches_hors_zone: false, image_illisible: false, image_sur_titre: false, pied_deborde: false };
+  const correct = { hauteur_heros: 600, titre_deborde: false, texte_deborde: false, etiquette_hors_cadre: false, etiquettes_chevauchees: false, etiquette_sur_commande: false, fiches_hors_zone: false, etapes_hors_zone: false, surtitre_coupe: false, image_illisible: false, image_sur_titre: false, pied_deborde: false };
   it('une mise en page correcte passe', () => {
     expect(defautsMiseEnPage(correct)).toEqual([]);
   });
@@ -149,6 +168,8 @@ describe('contrôle de la mise en page rendue', () => {
     [{ texte_deborde: true }, 'texte_deborde'],
     [{ etiquette_sur_commande: true }, 'etiquette_sur_commande'],
     [{ fiches_hors_zone: true }, 'fiches_hors_zone'],
+    [{ etapes_hors_zone: true }, 'etapes_hors_zone'],
+    [{ surtitre_coupe: true }, 'surtitre_coupe'],
     [{ image_illisible: true }, 'image_illisible'],
     [{ image_sur_titre: true }, 'image_sur_titre'],
     [{ etiquette_hors_cadre: true }, 'etiquette_hors_cadre'],
