@@ -2,7 +2,7 @@
   "slug": "frontend-design",
   "consignes": "r2",
   "accroche": {
-    "texte": "frontend-design pousse Claude vers des interfaces qui ne ressemblent pas à toutes les autres",
+    "texte": "frontend-design pushes Claude toward interfaces that don't look like everyone else's",
     "passages": [
       "This repository contains Anthropic's implementation of skills for Claude.",
       "Guidance for distinctive, intentional visual design when building new UI or reshaping an existing one.",
@@ -10,7 +10,7 @@
     ]
   },
   "description": {
-    "texte": "Le skill d'Anthropic donne à Claude une vraie direction artistique pour créer ou refaire une interface. Palette, typographie et mise en page sont choisies pour le brief, pas tirées des réglages par défaut qu'on voit partout.",
+    "texte": "Anthropic's skill gives Claude a real artistic direction for creating or redoing an interface. Palette, typography and layout are chosen for the brief, not pulled from the default settings you see everywhere.",
     "passages": [
       "This repository contains Anthropic's implementation of skills for Claude.",
       "Guidance for distinctive, intentional visual design when building new UI or reshaping an existing one.",
@@ -19,7 +19,7 @@
     ]
   },
   "interet": {
-    "texte": "Claude écrit d'abord un court plan de design, le relit face au brief, et ne code qu'ensuite. Le skill nomme aussi les tics actuels des designs générés par IA : fond crème avec accent terre cuite, cartes arrondies toutes identiques. Claude les évite quand le brief laisse le choix, et les suit s'il les demande.",
+    "texte": "Claude first writes a short design plan, rereads it against the brief, and only then codes. The skill also names the current clichés of AI-generated designs: cream background with terracotta accent, rounded cards all identical. Claude avoids them when the brief leaves the choice open, and follows them if the brief asks for them.",
     "passages": [
       "Work in two passes. First, brainstorm a short design plan based on the client's design brief",
       "Then review that plan against the brief before building",
@@ -32,7 +32,7 @@
     ]
   },
   "exemple_usage": {
-    "texte": "Les choix visuels partent du sujet : un jouet pour filles de 8 à 11 ans n'aura pas l'esthétique d'un tableau de bord pour analystes financiers.",
+    "texte": "Visual choices start from the subject: a toy for girls aged 8 to 11 won't have the aesthetic of a dashboard for financial analysts.",
     "passages": [
       "The subject's industry, subject matter, materials, and vernacular are where distinctive visual choices come from",
       "a design for a toy for girls aged 8–11 will be very aesthetically different from a dashboard for financial analysts."
@@ -41,20 +41,20 @@
   "demarrage": {
     "etapes": [
       {
-        "texte": "Dans Claude Code, ajouter le dépôt comme marketplace",
+        "texte": "In Claude Code, add the repository as a marketplace",
         "passages": [
           "You can register this repository as a Claude Code Plugin marketplace by running the following command in Claude Code"
         ]
       },
       {
-        "texte": "Installer example-skills : /plugin install example-skills@anthropic-agent-skills",
+        "texte": "Install example-skills: /plugin install example-skills@anthropic-agent-skills",
         "passages": [
           "/plugin install example-skills@anthropic-agent-skills",
           "\"./skills/doc-coauthoring\", \"./skills/frontend-design\", \"./skills/internal-comms\""
         ]
       },
       {
-        "texte": "Puis citer frontend-design dans la demande",
+        "texte": "Then mention frontend-design in the request",
         "passages": [
           "After installing the plugin, you can use the skill by just mentioning it."
         ]
@@ -68,7 +68,7 @@
   },
   "compatibilites": [
     {
-      "texte": "Claude Code, et déjà inclus dans les offres payantes de Claude.ai selon le dépôt.",
+      "texte": "Claude Code, and already included in Claude.ai's paid plans according to the repository.",
       "passages": [
         "You can register this repository as a Claude Code Plugin marketplace by running the following command in Claude Code:",
         "These example skills are all already available to paid plans in Claude.ai."
@@ -77,7 +77,7 @@
   ],
   "limites": [],
   "licence_locale": {
-    "texte": "Licence Apache 2.0, propre au dossier du skill selon son fichier LICENSE.txt.",
+    "texte": "Apache 2.0 license, specific to the skill folder according to its LICENSE.txt file.",
     "passages": [
       "license: Complete terms in LICENSE.txt",
       "Apache License Version 2.0, January 2004"
@@ -185,19 +185,19 @@
   },
   "reperes": [
     {
-      "texte": "Une ou deux familles de polices, pas plus",
+      "texte": "One or two font families, no more",
       "passages": [
         "use one family or two, and if two, make them clearly distinct."
       ]
     },
     {
-      "texte": "Un seul moment animé, pas des effets dispersés",
+      "texte": "A single animated moment, not scattered effects",
       "passages": [
         "A single orchestrated moment — one page-load sequence or one reveal — lands better than scattered effects"
       ]
     },
     {
-      "texte": "Responsive, focus clavier et mouvement réduit, sans l'annoncer",
+      "texte": "Responsive, focus and reduced motion built in",
       "passages": [
         "Build to a quality floor without announcing it: responsive down to mobile, visible keyboard focus, reduced motion respected"
       ]

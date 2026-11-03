@@ -1,7 +1,8 @@
 // Lot de brouillons (P3). Dépense réelle : refuse de démarrer sans clé, plafonds explicites et --confirmer.
 // Une exécution = un lancement de cette commande. Aucune valeur par défaut : les plafonds sont décidés par l'utilisateur.
 // runCommand charge .env.local avant ces contrôles, vérifie le schéma de la base et masque les secrets dans les erreurs.
-import { modeleAnthropic } from '../analysis/modele.ts';
+// Modèle retenu par l'utilisateur le 2026-11-01 : DeepSeek V4.1 Flash (ADR 0009) ; un modèle Claude reste accepté.
+import { estReprenable, estReprenableDeepSeek, modeleAnthropic, modeleDeepSeek, type Modele } from '../analysis/modele.ts';
 import { genererBrouillons } from '../analysis/pipeline.ts';
 import { TARIFS } from '../analysis/tarifs.ts';
 import { AGE_MAX_JOURS } from '../selection/consignes.ts';
@@ -13,16 +14,27 @@ const usd = (nom: string) => {
   return Math.floor(v * 1_000_000);
 };
 
+/** Fournisseur déduit du nom du modèle : chacun a sa clé et sa règle de reprise. */
+function fournisseur(nomModele: string): { cle: string; client: (cle: string) => Modele; reprenable: (e: unknown) => boolean } | null {
+  if (nomModele.startsWith('claude-')) return { cle: 'ANTHROPIC_API_KEY', client: () => modeleAnthropic(), reprenable: estReprenable };
+  // Sans raisonnement : le réglage mesuré lors de la comparaison réelle du 2026-11-01.
+  if (nomModele.startsWith('deepseek-')) return { cle: 'DEEPSEEK_API_KEY', client: (cle) => modeleDeepSeek({ cle, raisonnement: 'none' }), reprenable: estReprenableDeepSeek };
+  return null;
+}
+
 await runCommand(async ({ database }) => {
   if (!process.argv.includes('--confirmer')) { console.error('Refus : ajouter --confirmer. Cette commande engage une dépense réelle.'); return 1; }
-  if (!process.env.ANTHROPIC_API_KEY) { console.error('Refus : ANTHROPIC_API_KEY absente de l’environnement et de .env.local.'); return 1; }
   const nomModele = process.env.CURATION_MODELE ?? '';
-  if (!TARIFS[nomModele]) { console.error('Refus : CURATION_MODELE absent ou sans tarif vérifié.'); return 1; }
-  // Le moteur n'appelle qu'Anthropic : DeepSeek ne sert à ce jour qu'à la comparaison.
-  if (!nomModele.startsWith('claude-')) { console.error('Refus : le moteur de brouillons n’accepte qu’un modèle Claude.'); return 1; }
+  const f = fournisseur(nomModele);
+  if (!TARIFS[nomModele] || !f) { console.error('Refus : CURATION_MODELE absent, sans tarif vérifié ou d’un fournisseur non pris en charge.'); return 1; }
+  const cle = process.env[f.cle];
+  if (!cle) { console.error(`Refus : ${f.cle} absente de l’environnement et de .env.local.`); return 1; }
   const maxItems = Number(process.env.CURATION_MAX_ACTUALITES);
   if (!Number.isInteger(maxItems) || maxItems < 1) { console.error('Refus : CURATION_MAX_ACTUALITES requis.'); return 1; }
-  const r = await genererBrouillons({ database, modele: modeleAnthropic(), nomModele, maxItems, ageMaxJours: AGE_MAX_JOURS, capRunMicroUsd: usd('CURATION_PLAFOND_EXECUTION_USD'), capTotalMicroUsd: usd('CURATION_PLAFOND_TOTAL_USD') });
+  const r = await genererBrouillons({
+    database, modele: f.client(cle), nomModele, maxItems, ageMaxJours: AGE_MAX_JOURS, estReprenable: f.reprenable,
+    capRunMicroUsd: usd('CURATION_PLAFOND_EXECUTION_USD'), capTotalMicroUsd: usd('CURATION_PLAFOND_TOTAL_USD'),
+  });
   console.log(JSON.stringify(r));
   return r.statut === 'terminee' ? 0 : 1;
 });

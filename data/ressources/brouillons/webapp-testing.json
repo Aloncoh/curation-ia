@@ -2,14 +2,14 @@
   "slug": "webapp-testing",
   "consignes": "r2",
   "accroche": {
-    "texte": "webapp-testing : Claude teste votre app web locale avec Playwright",
+    "texte": "webapp-testing: Claude tests your local web app with Playwright",
     "passages": [
       "This repository contains Anthropic's implementation of skills for Claude",
       "Toolkit for interacting with and testing local web applications using Playwright"
     ]
   },
   "description": {
-    "texte": "Le skill d'Anthropic écrit des scripts Playwright en Python pour vérifier le front-end, déboguer l'interface, prendre des captures d'écran et lire les logs du navigateur.",
+    "texte": "Anthropic's skill writes Playwright scripts in Python to check the front end, debug the interface, take screenshots, and read browser logs.",
     "passages": [
       "This repository contains Anthropic's implementation of skills for Claude",
       "To test local web applications, write native Python Playwright scripts.",
@@ -17,7 +17,7 @@
     ]
   },
   "interet": {
-    "texte": "Un helper démarre les serveurs de l'app, back-end et front-end compris, puis lance le test. Claude l'appelle tel quel, sans charger son code dans le contexte. Sur une app dynamique, il attend la fin du chargement, observe la page rendue et en tire ses sélecteurs avant d'agir.",
+    "texte": "A helper starts the app's servers, back end and front end included, then runs the test. Claude calls it as is, without loading its code into the context. On a dynamic app, it waits for loading to finish, observes the rendered page, and derives its selectors from it before acting.",
     "passages": [
       "scripts/with_server.py - Manages server lifecycle (supports multiple servers)",
       "Multiple servers (e.g., backend + frontend)",
@@ -29,7 +29,7 @@
     ]
   },
   "exemple_usage": {
-    "texte": "Vérifier un formulaire sur une app avec back-end et front-end : le helper lance les deux serveurs, la page s'ouvre en headless, le script attend la fin du chargement puis inspecte le DOM.",
+    "texte": "Testing a form on an app with a back end and front end: the helper starts both servers, the page opens headless, the script waits for loading to finish, then inspects the DOM.",
     "passages": [
       "Multiple servers (e.g., backend + frontend)",
       "Always launch chromium in headless mode",
@@ -40,21 +40,21 @@
   "demarrage": {
     "etapes": [
       {
-        "texte": "Ajouter le catalogue : /plugin marketplace add anthropics/skills",
+        "texte": "Add the catalog: /plugin marketplace add anthropics/skills",
         "passages": [
           "You can register this repository as a Claude Code Plugin marketplace by running the following command in Claude Code",
           "/plugin marketplace add anthropics/skills"
         ]
       },
       {
-        "texte": "Installer example-skills : /plugin install example-skills@anthropic-agent-skills",
+        "texte": "Install example-skills: /plugin install example-skills@anthropic-agent-skills",
         "passages": [
           "/plugin install example-skills@anthropic-agent-skills",
           "\"./skills/theme-factory\", \"./skills/web-artifacts-builder\", \"./skills/webapp-testing\""
         ]
       },
       {
-        "texte": "Mentionner webapp-testing dans sa demande",
+        "texte": "Mention webapp-testing in the request",
         "passages": [
           "After installing the plugin, you can use the skill by just mentioning it."
         ]
@@ -69,7 +69,7 @@
   "compatibilites": [],
   "limites": [],
   "licence_locale": {
-    "texte": "Apache 2.0 : ce skill a sa propre licence, dans le fichier LICENSE.txt de son dossier",
+    "texte": "Apache 2.0: this skill has its own license, in the LICENSE.txt file in its folder",
     "passages": [
       "Apache License Version 2.0, January 2004",
       "license: Complete terms in LICENSE.txt"
@@ -188,20 +188,20 @@
   },
   "reperes": [
     {
-      "texte": "Exemple fourni pour lister boutons, liens et champs",
+      "texte": "Example provided to list buttons, links, and fields",
       "passages": [
         "element_discovery.py - Discovering buttons, links, and inputs on a page"
       ]
     },
     {
-      "texte": "Pages HTML statiques lues sans serveur",
+      "texte": "Static HTML pages read without a server",
       "passages": [
         "Read HTML file directly to identify selectors",
         "static_html_automation.py - Using file:// URLs for local HTML"
       ]
     },
     {
-      "texte": "Sélecteurs par texte, rôle, CSS ou ID",
+      "texte": "Selectors by text, role, CSS, or ID",
       "passages": [
         "Use descriptive selectors: text=, role=, CSS selectors, or IDs"
       ]

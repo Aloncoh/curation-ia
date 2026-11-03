@@ -2,14 +2,14 @@
   "slug": "planning-with-files",
   "consignes": "r2",
   "accroche": {
-    "texte": "planning-with-files garde le plan de votre agent sur disque, et la tâche reprend après un /clear",
+    "texte": "planning-with-files keeps your agent's plan on disk, and the task resumes after a /clear",
     "passages": [
       "Persistent file-based planning for AI coding agents and long-running tasks.",
       "Crash-proof markdown plans, session recovery after /clear and compaction"
     ]
   },
   "description": {
-    "texte": "Le plan tient dans trois fichiers Markdown du projet, pas seulement dans le contexte : task_plan.md pour les phases, findings.md pour les découvertes et les décisions, progress.md pour le journal. Après un /clear, une compaction ou un plantage, l’agent les relit et repart de la phase en cours.",
+    "texte": "The plan lives in three Markdown files in the project, not only in context: task_plan.md for the phases, findings.md for discoveries and decisions, progress.md for the log. After a /clear, a compaction or a crash, the agent rereads them and restarts from the current phase.",
     "passages": [
       "The plan lives on disk in task_plan.md, findings.md, and progress.md, not only in the context window.",
       "Markdown on disk is the shared state between agents.",
@@ -20,7 +20,7 @@
     ]
   },
   "interet": {
-    "texte": "Des hooks réinjectent le plan au début de chaque tour : sur une longue session, l’objectif et l’état des phases restent sous les yeux du modèle. En option, l’agent est retenu tant qu’une phase reste en cours, avec un plafond pour ne jamais bloquer la session, sur les outils qui le permettent.",
+    "texte": "Hooks reinject the plan at the start of each turn: over a long session, the goal and phase status stay in front of the model. Optionally, the agent is held while a phase is still in progress, with a cap so the session is never blocked, on the tools that allow it.",
     "passages": [
       "A hook that fires every turn",
       "Because the plan is re-injected at the start of each turn from disk, the goals and phase status stay in the model's attention window as the conversation grows.",
@@ -29,7 +29,7 @@
     ]
   },
   "exemple_usage": {
-    "texte": "Validez l’approche en mode plan, faites-la écrire en phases dans task_plan.md, puis lancez l’exécution. Si la conversation est vidée en route, l’agent ne perd pas le fil : il relit les fichiers et reprend où il en était.",
+    "texte": "Validate the approach in plan mode, have it written in phases into task_plan.md, then start execution. If the conversation is cleared along the way, the agent doesn't lose the thread: it rereads the files and picks up where it left off.",
     "passages": [
       "Plan mode is where you design and approve the approach before execution.",
       "after accepting a plan-mode plan, tell the agent to write it into task_plan.md as phases",
@@ -40,21 +40,21 @@
   "demarrage": {
     "etapes": [
       {
-        "texte": "Dans Claude Code : /plugin marketplace add OthmanAdi/planning-with-files",
+        "texte": "In Claude Code: /plugin marketplace add OthmanAdi/planning-with-files",
         "passages": [
           "Claude Code, plugin route (ships everything: skill, hooks, slash commands):",
           "/plugin marketplace add OthmanAdi/planning-with-files"
         ]
       },
       {
-        "texte": "Puis /plugin install planning-with-files@planning-with-files",
+        "texte": "Then /plugin install planning-with-files@planning-with-files",
         "passages": [
           "/plugin install planning-with-files@planning-with-files",
           "Claude Code, plugin route (ships everything: skill, hooks, slash commands):"
         ]
       },
       {
-        "texte": "Tapez /plan, ou demandez simplement un plan à l’agent",
+        "texte": "Type /plan, or simply ask the agent for a plan",
         "passages": [
           "Trigger it by typing /plan (plugin) or asking the agent to"
         ]
@@ -68,7 +68,7 @@
   },
   "compatibilites": [
     {
-      "texte": "Plugins natifs pour Claude Code, Codex CLI, OpenCode et d’autres ; plus de 60 agents via npx skills add, sans les hooks sur certains.",
+      "texte": "Native plugins for Claude Code, Codex CLI, OpenCode and others; 60+ agents via npx skills add, without hooks on some.",
       "passages": [
         "with native plugins for Claude Code, Codex CLI, Qoder CLI, Pi, Hermes Agent, OpenCode and DeepSeek Harness.",
         "Installs across 60+ agents via the Agent Skills standard",
@@ -198,20 +198,20 @@
   },
   "reperes": [
     {
-      "texte": "Mode autonome : moins de rappels, moins de tokens brûlés",
+      "texte": "Autonomous mode: fewer reminders, fewer tokens burned",
       "passages": [
         "Autonomous loops burn tokens on recitation",
         "Autonomous mode drops the per-tool-call recitation and replaces the raw progress tail with a fixed-shape ledger summary"
       ]
     },
     {
-      "texte": "Multi-agents : un orchestrateur tient le plan",
+      "texte": "Multi-agent: an orchestrator holds the plan",
       "passages": [
         "One orchestrator owns task_plan.md and the shared summaries; every worker appends to its own ledger or assigned file."
       ]
     },
     {
-      "texte": "Pour Claude Code, Codex, Cursor et plus de 60 agents",
+      "texte": "For Claude Code, Codex, Cursor and 60+ agents",
       "passages": [
         "Install from npm, the Claude Code plugin marketplace, or npx skills. Codex, Cursor, OpenCode, 60+ agents."
       ]

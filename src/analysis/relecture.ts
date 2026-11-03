@@ -54,6 +54,8 @@ export async function relectureMarkdown(client: Client, genereLe: string): Promi
      join news_item n on n.id = d.news_item_id
      join document_snapshot c on c.id = d.snapshot_id
      join source_document doc on doc.id = c.document_id
+     -- Les découvertes ont leur propre format (ADR 0011) : elles se relisent avec npm run ressources.
+     where n.kind not in ('decouverte', 'selection')
      order by case d.status when 'a_verifier' then 0 when 'controle_automatique' then 1 when 'rejete' then 2 else 3 end, d.id`,
   )).rows as unknown as Record<string, unknown>[];
   const appels = (await client.execute(

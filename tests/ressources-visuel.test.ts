@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 import { MENTION_ILLUSTRATION } from '../src/analysis/publication.ts';
-import { defautsMontage, htmlMontage, SURTITRE_ETAPES, type Montage } from '../src/media/montage.ts';
+import { defautsMontage, htmlMontage, MENTION_IMAGE, SURTITRE_ETAPES, type Montage } from '../src/media/montage.ts';
 import type { ResultatRendu } from '../src/media/rendu.ts';
 import { lireDepot } from '../src/ressources/capture.ts';
 import { BrouillonRessource } from '../src/ressources/schemas.ts';
@@ -74,19 +74,19 @@ describe('composition du montage d’une ressource, sans modèle', () => {
 
 describe('pied du visuel', () => {
   it('dépôt canonique et jour de capture à Paris', () => {
-    expect(sourceDuVisuel(DEPOT, CAPTURE)).toBe('Source : github.com/exemple-org/demo-skills · capturé le 2\u00a0novembre\u00a02026');
-    expect(sourceDuVisuel(DEPOT, '2026-11-01T23:30:00.000Z')).toContain('capturé le 2\u00a0novembre\u00a02026');
+    expect(sourceDuVisuel(DEPOT, CAPTURE)).toBe('Source: github.com/exemple-org/demo-skills · captured 2\u00a0November\u00a02026');
+    expect(sourceDuVisuel(DEPOT, '2026-11-01T23:30:00.000Z')).toContain('captured 2\u00a0November\u00a02026');
   });
   it('un fork nomme son parent, dans le pied comme dans le document rendu', () => {
-    expect(sourceDuVisuel(FORK, CAPTURE)).toBe('Source : github.com/exemple-org/demo-fork · capturé le 2\u00a0novembre\u00a02026 · Fork de origine-org/learning-loop');
+    expect(sourceDuVisuel(FORK, CAPTURE)).toBe('Source: github.com/exemple-org/demo-fork · captured 2\u00a0November\u00a02026 · Fork of origine-org/learning-loop');
     const m = composerMontageRessource(BROUILLON, ENTREE, FORK, CAPTURE);
-    expect(html(m)).toContain('Fork de origine-org/learning-loop');
+    expect(html(m)).toContain('Fork of origine-org/learning-loop');
   });
   it('le document du montage ne charge rien du réseau et porte la mention d’illustration', () => {
     const document = html(composerMontageRessource(BROUILLON, ENTREE, DEPOT, CAPTURE));
     expect(document).not.toMatch(/(?:src|href)="https?:/);
     expect(document).not.toContain('<script');
-    expect(document).toContain(MENTION_ILLUSTRATION);
+    expect(document).toContain(MENTION_IMAGE);
     expect(document).toContain(SURTITRE_ETAPES);
   });
 });

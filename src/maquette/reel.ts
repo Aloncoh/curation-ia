@@ -19,6 +19,8 @@ export interface SousTitre {
 
 export const MENTION_ILLUSTRATION = 'Illustration — ne prouve pas le fonctionnement';
 export const MENTION_ANALYSE = 'Analyse IA à partir des sources — non testé par la plateforme';
+/** Mentions dessinées sur la vidéo, en anglais comme tout le texte des images (2026-11-03) ; le manifeste garde les mentions de référence. */
+export const MENTIONS_DESSINEES = ['Illustration — not proof that it works', 'AI analysis from the sources — not tested by the platform'] as const;
 
 /** Tous les textes dessinés dans la vidéo : la commande n'en dessine aucun autre, le manifeste les enregistre. */
 export interface TextesDessines {
@@ -35,12 +37,16 @@ export const dateAnnonceFr = (iso: string | null): string =>
     ? new Intl.DateTimeFormat('fr-FR', { timeZone: 'Europe/Paris', day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(iso))
     : 'date non renseignée';
 
+/** Date d'annonce dessinée sur la vidéo, en anglais (heure de Paris). */
+export const dateAnnonceEn = (iso: string | null): string =>
+  iso ? new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Paris', day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(iso)) : 'date not given';
+
 export function textesDessines(exemple: MaquetteExemple, segments: SegmentReel[]): TextesDessines {
   return {
-    entete: 'EXEMPLE — MAQUETTE',
+    entete: 'EXAMPLE — MOCKUP',
     titre: exemple.titre_media,
-    mentions: [MENTION_ILLUSTRATION, MENTION_ANALYSE],
-    source: `Voix de synthèse — Source : ${exemple.actualite.source.name.split(' — ')[0]}, ${dateAnnonceFr(exemple.actualite.announced_at)}`,
+    mentions: [...MENTIONS_DESSINEES],
+    source: `Synthetic voice — Source: ${exemple.actualite.source.name.split(' — ')[0]}, ${dateAnnonceEn(exemple.actualite.announced_at)}`,
     segments: segments.map((segment) => ({ libelle: segment.libelle, corps: segment.texte })),
   };
 }

@@ -11,14 +11,14 @@ import { toPlainText } from '../maquette/data.ts';
 import { BudgetInsuffisant, marquerErreur, reserver, solder, type Plafonds } from './budget.ts';
 import { CODES_BLOQUANTS, controlerBrouillon, diapositivesDe, moinsDeTroisMots, type DiapositiveResolue } from './controles.ts';
 import { estReprenable, schemaSortie, type Modele, type RequeteModele } from './modele.ts';
-import { documentUtilisateur, PROMPT_VERSION, SYSTEME_QUALIFICATION, SYSTEME_REDACTION } from './prompts.ts';
+import { documentUtilisateur, messageRevision, PROMPT_VERSION, SYSTEME_QUALIFICATION, SYSTEME_REDACTION } from './prompts.ts';
 import { consignesActuelles, deciderSelection, passagesRetrouves, preselection, type Selection } from '../selection/consignes.ts';
 import { creerPublication, NIVEAU_PREUVE_V1, synchroniserComptes } from './publication.ts';
 import { Brouillon, Qualification } from './schemas.ts';
 
 export const MAX_TENTATIVES = 2;
 /** La réflexion du modèle compte dans ces plafonds ; une réponse tronquée repart une fois avec le double. */
-export const MAX_TOKENS = { qualification: 4_000, redaction: 12_000 };
+export const MAX_TOKENS = { qualification: 4_000, redaction: 12_000, revision: 12_000 };
 /** Renouvelé pendant chaque appel : un bail expiré signifie que le processus a disparu ou s'est arrêté, par exemple en veille. */
 export const DUREE_BAIL_MS = 15 * 60_000;
 /** Une capture plus longue ne part pas au modèle : son coût bloquerait le lot et son contrôle serait trop lent. */
@@ -70,7 +70,7 @@ async function aTraiter(client: Client, limite: number) {
           left join product pr on pr.id = t.product_id
           left join post_draft d on d.news_item_id = n.id
           -- Une découverte (liste de ressources, ADR 0011) n'est jamais qualifiée avec la grille des actualités.
-          where n.kind <> 'decouverte' and (d.id is null or d.status = 'qualifiee' or (d.status = 'a_approfondir' and d.snapshot_id <> c.id))
+          where n.kind not in ('decouverte', 'selection') and (d.id is null or d.status = 'qualifiee' or (d.status = 'a_approfondir' and d.snapshot_id <> c.id))
           order by d.id is not null desc, coalesce(n.announced_at, n.first_seen_at) desc, n.id desc`,
   );
   const tailleAdmise = r.rows.filter((row) => String(row.content).length + String(row.snapshot_title).length <= LONGUEUR_MAX_CAPTURE);
@@ -204,7 +204,7 @@ export async function genererBrouillons(o: OptionsBrouillons) {
 
   let statut = 'terminee';
   let motif: string | null = null;
-  const bilan = { ecartees: 0, anciennes: 0, a_approfondir: 0, invalides: 0, tronquees: 0, refus: 0, rejetees: 0, a_verifier: 0, controlees: 0, sans_texte: 0, trop_longues: 0, qualifications_reprises: 0 };
+  const bilan = { revisions_gardees: 0, ecartees: 0, anciennes: 0, a_approfondir: 0, invalides: 0, tronquees: 0, refus: 0, rejetees: 0, a_verifier: 0, controlees: 0, sans_texte: 0, trop_longues: 0, qualifications_reprises: 0 };
   try {
     const { lignes, sansTexte, tropLongues } = await aTraiter(client, o.maxItems);
     bilan.sans_texte = sansTexte;
@@ -293,15 +293,27 @@ export async function genererBrouillons(o: OptionsBrouillons) {
       if (!reprise) await enregistrer('qualifiee', q, { qualification: q }, null, null, undefined, choix);
       const redaction = await appeler(id, 'redaction', SYSTEME_REDACTION, doc, Brouillon);
       if (!redaction.ok) { await enregistrer(redaction.statut, q, null, null, null); bilan[BILAN_ECHEC[redaction.statut]]++; continue; }
-      const b = redaction.valeur;
       // Le titre fait partie de la capture stockée : le modèle et le contrôle mot pour mot lisent le même texte.
-      const controles = controlerBrouillon(b, [titreCapture, texte], titre, version, {
+      const contexteControle = {
         typeInformation: q.type_information,
         produit: produit ?? q.produit,
         produitCatalogue: produit !== null,
         dateAnnonce: row.announced_at === null ? null : String(row.announced_at),
         autresCaptures: await autresCaptures(client, id, Number(row.snapshot_id)),
-      });
+        source: String(row.source_nom),
+      };
+      const controler = (x: Brouillon) => controlerBrouillon(x, [titreCapture, texte], titre, version, contexteControle);
+      let b = redaction.valeur;
+      let controles = controler(b);
+      // Autocorrection (2026-11-03) : une seule reprise, guidée par les écarts du code. Elle n'est gardée que si elle en
+      // compte moins ; un échec de la reprise laisse le premier brouillon tel quel.
+      if (controles.length > 0 && !controles.some((c) => CODES_BLOQUANTS.has(c.code))) {
+        const revision = await appeler(id, 'revision', SYSTEME_REDACTION, messageRevision(doc, b, controles), Brouillon);
+        if (revision.ok) {
+          const apres = controler(revision.valeur);
+          if (apres.length < controles.length && !apres.some((c) => CODES_BLOQUANTS.has(c.code))) { b = revision.valeur; controles = apres; bilan.revisions_gardees++; }
+        }
+      }
       const bloquant = controles.find((c) => CODES_BLOQUANTS.has(c.code));
       const statutBrouillon = bloquant ? 'rejete' : controles.length > 0 ? 'a_verifier' : 'controle_automatique';
       // La date, la version et le niveau de preuve viennent du code ; nature et catégories viennent de la qualification, sans contrôle déterministe. V1 : analyse documentaire seule.

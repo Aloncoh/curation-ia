@@ -2,7 +2,7 @@
   "slug": "marketingskills",
   "consignes": "r2",
   "accroche": {
-    "texte": "Marketing Skills : CRO, copywriting, SEO et séquences d’e-mails pris en charge par votre agent de code",
+    "texte": "Marketing Skills: CRO, copywriting, SEO and email sequences handled by your code agent",
     "passages": [
       "Marketing skills for Claude Code and AI agents.",
       "CRO, copywriting, SEO, analytics, and growth engineering.",
@@ -10,7 +10,7 @@
     ]
   },
   "description": {
-    "texte": "La collection de Corey Haines pour le marketing. Votre agent repère la tâche en cours, page à faire convertir, séquence d’e-mails, prix ou campagne Google Ads, et applique la méthode adaptée.",
+    "texte": "Corey Haines' marketing collection. Your agent identifies the task at hand—a page to convert, an email sequence, pricing or a Google Ads campaign—and applies the appropriate method.",
     "passages": [
       "A collection of AI agent skills focused on marketing tasks.",
       "Built by Corey Haines.",
@@ -22,7 +22,7 @@
     ]
   },
   "interet": {
-    "texte": "Tout repose sur un document produit commun : vous posez une fois produit, public et positionnement avec product-marketing, et chaque skill le relit avant d’agir.",
+    "texte": "Everything rests on a shared product document: you set product, audience and positioning once with product-marketing, and each skill rereads it before acting.",
     "passages": [
       "Skills reference each other and build on shared context.",
       "When the user wants to create or update their product marketing context document",
@@ -30,7 +30,7 @@
     ]
   },
   "exemple_usage": {
-    "texte": "Demandez d’optimiser une landing page pour la conversion : l’agent s’appuie sur le skill cro.",
+    "texte": "Ask to optimize a landing page for conversion: the agent relies on the cro skill.",
     "passages": [
       "Once installed, just ask your agent to help with marketing tasks",
       "Help me optimize this landing page for conversions",
@@ -47,7 +47,7 @@
         ]
       },
       {
-        "texte": "Lancé depuis Claude Code : ajouter -a claude-code, sinon il ne les lit pas",
+        "texte": "Launched from Claude Code: add -a claude-code, otherwise it won't read them",
         "passages": [
           "If you run the command from inside an agent session (e.g., asking Claude Code to install the skills for you)",
           "may only install to the universal .agents/skills/ directory, which Claude Code does not read",
@@ -55,7 +55,7 @@
         ]
       },
       {
-        "texte": "Remplir product-marketing, puis confier ses tâches à l’agent",
+        "texte": "Fill in product-marketing, then hand its tasks to the agent",
         "passages": [
           "When the user wants to create or update their product marketing context document",
           "Once installed, just ask your agent to help with marketing tasks"
@@ -71,7 +71,7 @@
   },
   "compatibilites": [
     {
-      "texte": "Claude Code, Codex, Cursor, Windsurf et tout agent compatible Agent Skills.",
+      "texte": "Claude Code, Codex, Cursor, Windsurf and any agent compatible with Agent Skills.",
       "passages": [
         "Works with Claude Code, OpenAI Codex, Cursor, Windsurf, and any agent that supports the Agent Skills spec."
       ]
@@ -193,19 +193,19 @@
   },
   "reperes": [
     {
-      "texte": "Sous licence MIT, réutilisable librement",
+      "texte": "MIT licensed, freely reusable",
       "passages": [
         "MIT - Use these however you want."
       ]
     },
     {
-      "texte": "Pour Claude Code, Codex, Cursor et Windsurf",
+      "texte": "For Claude Code, Codex, Cursor and Windsurf",
       "passages": [
         "Works with Claude Code, OpenAI Codex, Cursor, Windsurf"
       ]
     },
     {
-      "texte": "Aussi : tests A/B, churn, pipeline commercial",
+      "texte": "Also: A/B tests, churn, sales pipeline",
       "passages": [
         "ab-testing - Experiment design",
         "churn-prevention - Cancel flows, save offers, dunning, payment recovery",

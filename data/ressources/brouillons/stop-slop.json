@@ -2,21 +2,21 @@
   "slug": "stop-slop",
   "consignes": "r2",
   "accroche": {
-    "texte": "stop-slop traque les tics d’écriture IA dans vos textes et les fait disparaître",
+    "texte": "stop-slop tracks down AI writing tics in your texts and makes them disappear",
     "passages": [
       "A skill for removing AI tells from prose.",
       "This skill teaches Claude (or any LLM) to catch and remove them."
     ]
   },
   "description": {
-    "texte": "Formules prévisibles, constructions toutes faites, rythme mécanique : stop-slop apprend à Claude, ou à n’importe quel LLM, à les repérer et à les retirer.",
+    "texte": "Predictable formulas, stock constructions, mechanical rhythm: stop-slop teaches Claude, or any LLM, to spot them and remove them.",
     "passages": [
       "AI writing has patterns. Predictable phrases, structures, rhythms.",
       "This skill teaches Claude (or any LLM) to catch and remove them."
     ]
   },
   "interet": {
-    "texte": "Les règles sont tranchées : pas de jargon d’entreprise, pas d’adverbes, pas de voix passive, pas d’oppositions binaires, pas de tiret cadratin. Chaque famille de tics a son fichier de référence, chargé seulement quand il sert.",
+    "texte": "The rules are firm: no corporate jargon, no adverbs, no passive voice, no binary oppositions, no em dash. Each family of tics has its own reference file, loaded only when needed.",
     "passages": [
       "Banned phrases - Throat-clearing openers, emphasis crutches, business jargon, all adverbs, vague declaratives, meta-commentary.",
       "Structural clichés - Binary contrasts, negative listings, dramatic fragmentation, rhetorical setups, false agency, narrator-from-a-distance voice, passive voice.",
@@ -27,7 +27,7 @@
     ]
   },
   "exemple_usage": {
-    "texte": "Un post écrit avec Claude qui sonne trop IA : passez-le dans stop-slop avant de publier.",
+    "texte": "A post written with Claude that sounds too AI: run it through stop-slop before publishing.",
     "passages": [
       "This skill teaches Claude (or any LLM) to catch and remove them."
     ]
@@ -35,13 +35,13 @@
   "demarrage": {
     "etapes": [
       {
-        "texte": "Claude Code : ajoutez le dossier comme skill",
+        "texte": "Claude Code: add the folder as a skill",
         "passages": [
           "Claude Code: Add this folder as a skill."
         ]
       },
       {
-        "texte": "API : incluez SKILL.md dans le prompt système",
+        "texte": "API: include SKILL.md in the system prompt",
         "passages": [
           "API calls: Include SKILL.md in your system prompt."
         ]
@@ -55,7 +55,7 @@
   },
   "compatibilites": [
     {
-      "texte": "Claude Code, projets Claude, instructions personnalisées ou appels API.",
+      "texte": "Claude Code, Claude projects, custom instructions or API calls.",
       "passages": [
         "Claude Code: Add this folder as a skill.",
         "Claude Projects: Upload SKILL.md and reference files to project knowledge.",
@@ -166,20 +166,20 @@
   },
   "reperes": [
     {
-      "texte": "Note sur 50 en cinq critères : sous 35, retour en révision",
+      "texte": "Rated 1-10 per dimension; below 35/50, revise",
       "passages": [
         "Rate 1-10 on each dimension:",
         "Below 35/50: revise."
       ]
     },
     {
-      "texte": "Exemples avant/après fournis avec les règles",
+      "texte": "Before/after examples provided with the rules",
       "passages": [
         "examples.md # Before/after transformations"
       ]
     },
     {
-      "texte": "Claude Code, projets Claude, instructions perso ou API",
+      "texte": "Claude Code, Claude projects, custom instructions or API",
       "passages": [
         "Claude Code: Add this folder as a skill.",
         "Claude Projects: Upload SKILL.md and reference files to project knowledge.",

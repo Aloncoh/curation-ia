@@ -2,14 +2,14 @@
   "slug": "obsidian-skills",
   "consignes": "r2",
   "accroche": {
-    "texte": "Obsidian Skills apprend à votre agent les formats d'Obsidian et son CLI",
+    "texte": "Obsidian Skills teaches your agent Obsidian's formats and its CLI",
     "passages": [
       "Teach your agent to use Obsidian CLI and open formats including Markdown, Bases, JSON Canvas.",
       "any skills-compatible agent, including Claude Code, Codex, and Open Code"
     ]
   },
   "description": {
-    "texte": "Votre agent écrit des notes avec wikilinks, callouts et propriétés, monte des Bases avec vues, filtres et formules, et construit des canevas JSON Canvas, directement dans votre coffre. Ça marche avec Claude Code, Codex et OpenCode.",
+    "texte": "Your agent writes notes with wikilinks, callouts and properties, builds Bases with views, filters and formulas, and constructs JSON Canvas canvases, directly in your vault. It works with Claude Code, Codex and OpenCode.",
     "passages": [
       "Create and edit Obsidian Flavored Markdown (.md) with wikilinks, embeds, callouts, properties, and other Obsidian-specific syntax",
       "Create and edit Obsidian Bases (.base) with views, filters, formulas, and summaries",
@@ -19,7 +19,7 @@
     ]
   },
   "interet": {
-    "texte": "Deux skills sortent du cadre des notes : defuddle réduit une page web à un Markdown propre pour économiser des tokens, knap génère des fichiers en série depuis du JSON ou du CSV. Le dépôt suit la spécification Agent Skills, donc les mêmes skills servent à tous vos agents compatibles.",
+    "texte": "Two skills go beyond notes: defuddle reduces a web page to clean Markdown to save tokens, knap generates files in series from JSON or CSV. The repository follows the Agent Skills specification, so the same skills serve all your compatible agents.",
     "passages": [
       "Extract clean markdown from web pages using Defuddle, removing clutter to save tokens",
       "Render Markdown templates from JSON or CSV data using Knap, including batch file generation",
@@ -27,7 +27,7 @@
     ]
   },
   "exemple_usage": {
-    "texte": "Récupérer un article avec defuddle, puis le ranger dans le coffre en note avec propriétés et wikilinks.",
+    "texte": "Fetch an article with defuddle, then file it in the vault as a note with properties and wikilinks.",
     "passages": [
       "Extract clean markdown from web pages using Defuddle, removing clutter to save tokens",
       "Create and edit Obsidian Flavored Markdown (.md) with wikilinks, embeds, callouts, properties"
@@ -36,20 +36,20 @@
   "demarrage": {
     "etapes": [
       {
-        "texte": "Dans Claude Code : /plugin marketplace add kepano/obsidian-skills",
+        "texte": "In Claude Code: /plugin marketplace add kepano/obsidian-skills",
         "passages": [
           "/plugin marketplace add kepano/obsidian-skills /plugin install obsidian@obsidian-skills",
           "any skills-compatible agent, including Claude Code, Codex, and Open Code"
         ]
       },
       {
-        "texte": "Puis /plugin install obsidian@obsidian-skills",
+        "texte": "Then /plugin install obsidian@obsidian-skills",
         "passages": [
           "/plugin marketplace add kepano/obsidian-skills /plugin install obsidian@obsidian-skills"
         ]
       },
       {
-        "texte": "Ou avec npx : npx skills add https://github.com/kepano/obsidian-skills",
+        "texte": "Or with npx: npx skills add https://github.com/kepano/obsidian-skills",
         "passages": [
           "npx skills add https://github.com/kepano/obsidian-skills",
           "Instead of ssh, if you prefer to use https"
@@ -64,7 +64,7 @@
   },
   "compatibilites": [
     {
-      "texte": "Claude Code, Codex, OpenCode et tout agent compatible Agent Skills.",
+      "texte": "Claude Code, Codex, OpenCode and any skills-compatible agent.",
       "passages": [
         "These skills follow the Agent Skills specification so they can be used by any skills-compatible agent",
         "any skills-compatible agent, including Claude Code, Codex, and Open Code",
@@ -186,20 +186,20 @@
   },
   "reperes": [
     {
-      "texte": "Pilote le coffre via la CLI, plugins et thèmes compris",
+      "texte": "Drives the vault via the CLI, plugins and themes included",
       "passages": [
         "Interact with Obsidian vaults via the Obsidian CLI including plugin and theme development"
       ]
     },
     {
-      "texte": "Sous OpenCode, aucun fichier de config à modifier",
+      "texte": "Under OpenCode, no config file to modify",
       "passages": [
         "OpenCode auto-discovers all SKILL.md files under ~/.opencode/skills/.",
         "No changes to opencode.json or any config file are needed."
       ]
     },
     {
-      "texte": "Installable à la main dans le dossier .claude du coffre",
+      "texte": "Installable manually in the vault's .claude folder",
       "passages": [
         "Add the contents of this repo to a /.claude folder in the root of your Obsidian vault"
       ]

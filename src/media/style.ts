@@ -72,5 +72,15 @@ html, body { background: #fff; }
 .etapes[data-nombre="4"] .fleche { height: 40px; }
 .ligne { display: block; }
 .ligne b { padding: 0 10px; border-radius: 8px; background: var(--accent); font-weight: 800; }
+.grille { display: grid; grid-template-columns: repeat(2, 1fr); grid-auto-rows: 1fr; gap: 26px 28px; padding: 0 0 112px; list-style: none; }
+.grille[data-nombre="5"] .apercu:last-child { grid-column: 1 / -1; justify-self: center; width: calc(50% - 14px); }
+.apercu { display: flex; flex-direction: column; gap: 12px; min-height: 0; }
+.apercu:nth-child(odd) { transform: rotate(-.6deg); }
+.apercu:nth-child(even) { transform: rotate(.5deg); }
+.apercu .cadre { flex: 1; min-height: 0; padding: 10px; border-radius: 20px; background: var(--papier); box-shadow: 0 22px 40px -22px rgba(29, 27, 35, .5); outline: 3px dashed var(--encre); outline-offset: -6px; overflow: hidden; }
+.apercu .cadre img { width: 100%; height: 100%; object-fit: cover; object-position: center top; border-radius: 12px; }
+.apercu .cadre.vide { display: grid; place-items: center; background: rgba(255, 253, 248, .55); box-shadow: none; }
+.indisponible { font: 700 34px/1.1 'Atkinson', sans-serif; opacity: .7; }
+.nom-site { align-self: flex-start; max-width: 100%; padding: 8px 20px 10px; border-radius: 999px; background: var(--encre); color: #faf2e0; font: 700 32px/1.1 'Atkinson', sans-serif; white-space: nowrap; overflow: hidden; text-overflow: clip; }
 .pied { position: absolute; z-index: 6; left: 0; right: 0; bottom: 0; display: flex; justify-content: space-between; gap: 24px; padding: 16px var(--marge) 18px; background: var(--papier); font: 400 24px/1.2 'Atkinson', sans-serif; }
 `;

@@ -27,6 +27,13 @@ await runCommand(async ({ database }) => {
       `${data.ressources.filter((r) => r.bouton !== null).length} avec bouton vérifié, ${data.ressources.filter((r) => r.visuel !== null).length} avec visuel ; ` +
       `${data.ressources_non_planifiees.length} non planifiée(s) (à vérifier ou rejetée) ; recherche : ${RECHERCHE} (${data.recherche.length} document(s))`,
   );
+  console.log(
+    `Sélections : ${data.selections.length} publication(s) planifiée(s) ou publiée(s), ` +
+      `${data.selections.reduce((n, x) => n + x.ressources.filter((r) => r.url !== null).length, 0)} lien(s) vérifié(s), ${data.selections.filter((x) => x.visuel !== null).length} avec montage ; ` +
+      `${data.selections_non_planifiees.length} non planifiée(s)`,
+    `Actualités de l'agent : ${data.actualites.length} planifiée(s) ou publiée(s), ${data.actualites.filter((a) => a.verification !== 'verifie').length} à vérifier`,
+  );
+  for (const x of data.selections_non_planifiees) console.error(`Sélection non planifiée : ${x.slug} [${x.statut}] (${x.motifs.map((m) => m.code).join(', ')})`);
   for (const r of data.ressources_non_planifiees) console.error(`Ressource non planifiée : ${r.slug} [${r.statut}] (${r.motifs.map((m) => m.code).join(', ')})`);
   for (const exemple of aVerifier) console.error(`À vérifier : ${exemple.id} (${exemple.motifs.join(', ')})`);
   for (const exemple of data.exemples_introuvables) console.error(`Introuvable : ${exemple.id} (${exemple.motif})`);

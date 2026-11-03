@@ -2,14 +2,14 @@
   "slug": "improve-codebase-architecture",
   "consignes": "r2",
   "accroche": {
-    "texte": "improve-codebase-architecture repère les modules à approfondir pour un code plus testable",
+    "texte": "improve-codebase-architecture spots the modules to deepen for more testable code",
     "passages": [
       "Surface architectural friction and propose deepening opportunities: refactors that turn shallow modules into deep ones.",
       "The aim is testability and AI-navigability."
     ]
   },
   "description": {
-    "texte": "Le skill de Matt Pocock part des fichiers qui reviennent le plus dans l'historique des commits et y cherche les modules superficiels, ceux dont l'interface est presque aussi complexe que l'implémentation. Il propose de les approfondir : plus de comportement derrière une interface simple, un code plus facile à tester et à parcourir pour l’IA.",
+    "texte": "Matt Pocock's skill starts from the files that recur most in commit history and looks there for shallow modules, those whose interface is almost as complex as the implementation. It suggests deepening them: more behavior behind a simple interface, code that is easier to test and to navigate for AI.",
     "passages": [
       "walk back a good stretch of the commit history (git log --oneline) to find the codebase's hot spots, the files and areas that keep coming up",
       "Where are modules shallow, with an interface nearly as complex as the implementation?",
@@ -18,7 +18,7 @@
     ]
   },
   "interet": {
-    "texte": "Les pistes arrivent dans un rapport HTML : pour chacune, le problème, la solution, un schéma avant / après et un niveau de recommandation. Vous en choisissez une, et l'agent la creuse avec vous avant de proposer la moindre interface. Les décisions déjà consignées dans vos ADR ne sont pas remises en cause.",
+    "texte": "The suggestions arrive in an HTML report: for each one, the problem, the solution, a before/after diagram and a recommendation level. You pick one, and the agent digs into it with you before proposing any interface. Decisions already recorded in your ADRs are not called into question.",
     "passages": [
       "present them as a visual HTML report",
       "Files: which files/modules are involved Problem: why the current architecture is causing friction Solution: plain English description of what would change",
@@ -30,7 +30,7 @@
     ]
   },
   "exemple_usage": {
-    "texte": "L'auteur conseille de le lancer tous les quelques jours. Sur un vieux code, il trouve de vraies pistes sans tout démêler à votre place.",
+    "texte": "The author recommends running it every few days. On old code, it finds real leads without untangling everything for you.",
     "passages": [
       "I recommend running it on your codebase once every few days.",
       "on a genuinely old codebase it will find real candidates, but it won't untangle the mud for you."
@@ -39,20 +39,20 @@
   "demarrage": {
     "etapes": [
       {
-        "texte": "Installer : claude plugin install mattpocock-skills@claude-plugins-official",
+        "texte": "Install: claude plugin install mattpocock-skills@claude-plugins-official",
         "passages": [
           "claude plugin install mattpocock-skills@claude-plugins-official",
           "I see with Claude Code, Codex, and other coding agents"
         ]
       },
       {
-        "texte": "Puis /setup-matt-pocock-skills, une fois par dépôt",
+        "texte": "Then /setup-matt-pocock-skills, once per repository",
         "passages": [
           "Run once per repo before using the other engineering skills."
         ]
       },
       {
-        "texte": "Le skill ne se lance que si vous tapez /improve-codebase-architecture",
+        "texte": "The skill only runs if you type /improve-codebase-architecture",
         "passages": [
           "User-invoked skills are reachable only when you type them"
         ]
@@ -66,7 +66,7 @@
   },
   "compatibilites": [
     {
-      "texte": "Claude Code, Codex, GitHub Copilot et Gemini CLI.",
+      "texte": "Claude Code, Codex, GitHub Copilot and Gemini CLI.",
       "passages": [
         "I see with Claude Code, Codex, and other coding agents",
         "<strong>GitHub Copilot</strong> (CLI and VS Code)",
@@ -185,19 +185,19 @@
   },
   "reperes": [
     {
-      "texte": "Rapport écrit dans le dossier temporaire, hors du dépôt",
+      "texte": "Report written to the temporary folder, outside the repository",
       "passages": [
         "Write a self-contained HTML file to the OS temp directory so nothing lands in the repo."
       ]
     },
     {
-      "texte": "Un test de suppression pour débusquer les modules creux",
+      "texte": "A deletion test to flush out hollow modules",
       "passages": [
         "Apply the deletion test to anything you suspect is shallow"
       ]
     },
     {
-      "texte": "Une piste écartée pour une vraie raison peut devenir un ADR",
+      "texte": "A lead set aside for a real reason can become an ADR",
       "passages": [
         "Want me to record this as an ADR so future architecture reviews don't re-suggest it?"
       ]

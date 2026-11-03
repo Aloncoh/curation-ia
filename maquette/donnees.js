@@ -1,6 +1,6 @@
 // Généré par « npm run maquette » — ne pas modifier à la main.
 window.DONNEES_MAQUETTE = {
-  "generated_at": "2026-11-02T18:47:44.050Z",
+  "generated_at": "2026-11-03T07:33:20.634Z",
   "note": "Actualités réellement collectées depuis des sources officielles, pas encore analysées ; les extraits sont des citations courtes de la source, attribuées et liées. Les exemples de publications sont rédigés par Claude Code pour la maquette, pas par l'agent du site : chaque passage cité est recherché mot pour mot dans la capture réelle.",
   "comptes": [
     {
@@ -283,13 +283,13 @@ window.DONNEES_MAQUETTE = {
       "licence": "MIT",
       "capture": "Ears for coding agents: let AI hear, review and make sound. CPU-only, open source. It runs locally on CPU, as a CLI, a Python API and an MCP server.",
       "accroche": {
-        "texte": "earshot veut donner des oreilles aux agents de code",
+        "texte": "earshot wants to give coding agents ears",
         "passages": [
           "Ears for coding agents: let AI hear, review and make sound."
         ]
       },
       "interet": {
-        "texte": "Selon son auteur, il fonctionne en local sur CPU, en ligne de commande, en API Python et en serveur MCP.",
+        "texte": "According to its author, it runs locally on CPU, as a command-line tool, a Python API and an MCP server.",
         "passages": [
           "It runs locally on CPU, as a CLI, a Python API and an MCP server."
         ]
@@ -302,7 +302,8 @@ window.DONNEES_MAQUETTE = {
         "url": "https://github.com/Leonxlnx/earshot/releases/tag/v0.1.0",
         "libelle": "Film de lancement de l’auteur"
       },
-      "verifie": true
+      "verifie": true,
+      "recherche_id": -1001
     }
   ],
   "exemples": [
@@ -312,7 +313,7 @@ window.DONNEES_MAQUETTE = {
       "statut": "verifie",
       "motifs": [],
       "description": {
-        "texte": "On choisit le niveau d'effort, Copilot choisit les modèles. Chaque modèle utilisé est facturé à son tarif standard.",
+        "texte": "You pick the effort level, Copilot picks the models. Each model it uses is billed at its standard rate.",
         "passages": [
           {
             "texte": "For each prompt, Copilot Fusion determines which models to use and how they work together, while you choose the right level of effort.",
@@ -329,7 +330,7 @@ window.DONNEES_MAQUETTE = {
         "legende": "Schéma original",
         "elements": [
           {
-            "texte": "Seul : un modèle traite la tâche",
+            "texte": "Single: one model handles the task",
             "passages": [
               {
                 "texte": "Single: One model solves the task directly.",
@@ -338,7 +339,7 @@ window.DONNEES_MAQUETTE = {
             ]
           },
           {
-            "texte": "Cascade : un modèle économe rédige, un contrôle décide de passer à un modèle plus fort",
+            "texte": "Cascade: a cheaper model drafts, a check decides whether to move up to a stronger one",
             "passages": [
               {
                 "texte": "Cascade: An efficient model drafts a response. A quality check determines whether to accept it or escalate to a stronger model.",
@@ -347,7 +348,7 @@ window.DONNEES_MAQUETTE = {
             ]
           },
           {
-            "texte": "Critique : un modèle rédige, un autre relit, le premier corrige",
+            "texte": "Critique: one model drafts, another reviews, the first one revises",
             "passages": [
               {
                 "texte": "Critique: One model drafts an initial response, another model reviews it, and the original model revises.",
@@ -362,7 +363,7 @@ window.DONNEES_MAQUETTE = {
         }
       },
       "accroche": {
-        "texte": "Copilot Fusion en disponibilité générale : à chaque demande, Copilot choisit les modèles et, si besoin, les fait travailler ensemble",
+        "texte": "Copilot Fusion is generally available: for every request, Copilot picks the models and, when needed, makes them work together",
         "passages": [
           {
             "texte": "GitHub Copilot Fusion is generally available.",
@@ -379,7 +380,7 @@ window.DONNEES_MAQUETTE = {
         ]
       },
       "nouveaute": {
-        "texte": "Au lieu de choisir un modèle pour chaque tâche, on laisse Copilot Fusion décider, à chaque demande, quels modèles utiliser et comment les faire travailler ensemble ; l'utilisateur choisit le niveau d'effort : Standard, High ou Max.",
+        "texte": "Rather than choosing a model for every task, you let Copilot Fusion decide, request by request, which models to use and how to combine them; the user sets the effort level: Standard, High or Max.",
         "passages": [
           {
             "texte": "Instead of picking a model for each task",
@@ -404,7 +405,7 @@ window.DONNEES_MAQUETTE = {
         ]
       },
       "ce_que_ca_permet": {
-        "texte": "Selon GitHub, plus besoin de changer de modèle en cours de tâche ; côté administration, choisir les modèles utilisables et, via les paramètres gérés Enterprise, faire de Copilot Fusion le modèle par défaut.",
+        "texte": "According to GitHub, no more switching models mid-task; on the admin side, you choose which models can be used and, through Enterprise managed settings, can make Copilot Fusion the default model.",
         "passages": [
           {
             "texte": "There’s no need to switch models during a task or decide which model suits each step.",
@@ -421,7 +422,7 @@ window.DONNEES_MAQUETTE = {
         ]
       },
       "pour_qui": {
-        "texte": "Les utilisateurs de Copilot, toutes offres, dans VS Code, l'app GitHub Copilot, Copilot CLI et les IDE JetBrains.",
+        "texte": "Copilot users on every plan, in VS Code, the GitHub Copilot app, Copilot CLI and JetBrains IDEs.",
         "passages": [
           {
             "texte": "Copilot Fusion is available on all Copilot plans in Visual Studio Code, the GitHub Copilot app, GitHub Copilot CLI, and JetBrains IDEs.",
@@ -430,7 +431,7 @@ window.DONNEES_MAQUETTE = {
         ]
       },
       "limites_connues": {
-        "texte": "Les autres clients ne sont pas encore pris en charge (annoncés « bientôt », sans date) ; chaque modèle utilisé est facturé à son tarif standard.",
+        "texte": "Other clients aren’t supported yet (announced as “coming soon”, with no date); each model used is billed at its standard rate.",
         "passages": [
           {
             "texte": "Support for additional clients is coming soon.",
@@ -444,8 +445,8 @@ window.DONNEES_MAQUETTE = {
       },
       "details": [
         {
-          "titre": "Un modèle seul, en cascade ou en critique",
-          "texte": "Selon la tâche : un seul modèle la traite directement ; ou, en cascade, un modèle économe rédige et un contrôle de qualité décide d'accepter ou de passer à un modèle plus fort ; ou, en critique, un modèle rédige, un autre relit, puis le premier corrige.",
+          "titre": "Single model, cascade or critique",
+          "texte": "Depending on the task: a single model handles it directly; or, in cascade mode, a cheaper model drafts and a quality check decides whether to keep the answer or move up to a stronger model; or, in critique mode, one model drafts, another reviews, then the first one revises.",
           "passages": [
             {
               "texte": "orchestrating multiple models through the following workflows when needed",
@@ -466,8 +467,8 @@ window.DONNEES_MAQUETTE = {
           ]
         },
         {
-          "titre": "Coût",
-          "texte": "Chaque modèle utilisé est facturé à son tarif standard ; remise de 30 % sur le coût des modèles, pendant une durée limitée, pour les offres payantes.",
+          "titre": "Cost",
+          "texte": "Each model used is billed at its standard rate; for a limited time, paid plans get a 30% discount on model costs.",
           "passages": [
             {
               "texte": "When you use Copilot Fusion you’re billed for each model it uses, at each model’s standard rate.",
@@ -483,8 +484,8 @@ window.DONNEES_MAQUETTE = {
       "attributions": [
         {
           "type": "benchmark",
-          "auteur": "GitHub, dans son annonce du 28 octobre 2026",
-          "texte": "Selon GitHub, Copilot Fusion Max obtient 60 à l'Artificial Analysis Coding Agent Index, à deux points au plus de Claude Code avec Opus 5.5 Max, pour environ la moitié du coût moyen d'API par tâche. Score annoncé par GitHub ; l'annonce ne dit pas qui a mené l'évaluation ni dans quelles conditions ; non mesuré par la plateforme.",
+          "auteur": "GitHub, in its 28 October 2026 announcement",
+          "texte": "According to GitHub, Copilot Fusion Max scores 60 on the Artificial Analysis Coding Agent Index, at most two points behind Claude Code with Opus 5.5 Max, for roughly half the average API cost per task. Score announced by GitHub; the announcement doesn’t say who ran the evaluation or under what conditions; not measured by the platform.",
           "passages": [
             {
               "texte": "In the Artificial Analysis Coding Agent Index, Copilot Fusion Max scored 60, within two points of Claude Code with Opus 5.5 Max.",
@@ -498,8 +499,8 @@ window.DONNEES_MAQUETTE = {
         },
         {
           "type": "temoignage",
-          "auteur": "Hari Pokhrel, Principal Software Engineer, AT&T — cité par GitHub",
-          "texte": "Témoignage rapporté par l'éditeur : chez AT&T, Copilot Fusion Standard aurait amélioré l'efficacité en tokens en choisissant automatiquement le modèle adapté à la tâche. Expérience attribuée, pas une conclusion générale.",
+          "auteur": "Hari Pokhrel, Principal Software Engineer, AT&T — quoted by GitHub",
+          "texte": "Testimonial reported by the vendor: at AT&T, Copilot Fusion Standard reportedly made token use more efficient by picking a suitable model for each task on its own. An attributed experience, not a general conclusion.",
           "passages": [
             {
               "texte": "GitHub Copilot Fusion Standard has improved token efficiency across AT&T by automatically selecting the right model for the task",
@@ -515,28 +516,28 @@ window.DONNEES_MAQUETTE = {
       "diapositives": [
         {
           "champ": "accroche",
-          "libelle": "Accroche",
-          "texte": "Copilot Fusion en disponibilité générale : à chaque demande, Copilot choisit les modèles et, si besoin, les fait travailler ensemble"
+          "libelle": "Headline",
+          "texte": "Copilot Fusion is generally available: for every request, Copilot picks the models and, when needed, makes them work together"
         },
         {
           "champ": "nouveaute",
-          "libelle": "Nouveauté",
-          "texte": "Au lieu de choisir un modèle pour chaque tâche, on laisse Copilot Fusion décider, à chaque demande, quels modèles utiliser et comment les faire travailler ensemble ; l'utilisateur choisit le niveau d'effort : Standard, High ou Max."
+          "libelle": "What’s new",
+          "texte": "Rather than choosing a model for every task, you let Copilot Fusion decide, request by request, which models to use and how to combine them; the user sets the effort level: Standard, High or Max."
         },
         {
           "champ": "details:0",
-          "libelle": "Un modèle seul, en cascade ou en critique",
-          "texte": "Selon la tâche : un seul modèle la traite directement ; ou, en cascade, un modèle économe rédige et un contrôle de qualité décide d'accepter ou de passer à un modèle plus fort ; ou, en critique, un modèle rédige, un autre relit, puis le premier corrige."
+          "libelle": "Single model, cascade or critique",
+          "texte": "Depending on the task: a single model handles it directly; or, in cascade mode, a cheaper model drafts and a quality check decides whether to keep the answer or move up to a stronger model; or, in critique mode, one model drafts, another reviews, then the first one revises."
         },
         {
           "champ": "pour_qui",
-          "libelle": "Pour qui",
-          "texte": "Les utilisateurs de Copilot, toutes offres, dans VS Code, l'app GitHub Copilot, Copilot CLI et les IDE JetBrains."
+          "libelle": "Who it’s for",
+          "texte": "Copilot users on every plan, in VS Code, the GitHub Copilot app, Copilot CLI and JetBrains IDEs."
         },
         {
           "champ": "limites_connues",
-          "libelle": "Limites connues",
-          "texte": "Les autres clients ne sont pas encore pris en charge (annoncés « bientôt », sans date) ; chaque modèle utilisé est facturé à son tarif standard."
+          "libelle": "Known limits",
+          "texte": "Other clients aren’t supported yet (announced as “coming soon”, with no date); each model used is billed at its standard rate."
         }
       ],
       "actualite": {
@@ -567,9 +568,10 @@ window.DONNEES_MAQUETTE = {
         "modèles"
       ],
       "questions_a_tester": [
-        "Sur une même tâche, quels modèles Copilot Fusion choisit-il à chaque niveau d'effort ?",
-        "Le coût réel d'une tâche est-il visible pour l'utilisateur ?"
-      ]
+        "On the same task, which models does Copilot Fusion pick at each effort level?",
+        "Can the user see what a task actually costs?"
+      ],
+      "recherche_id": -1
     },
     {
       "id": "exemple-claude-code-2-1-312",
@@ -577,7 +579,7 @@ window.DONNEES_MAQUETTE = {
       "statut": "verifie",
       "motifs": [],
       "description": {
-        "texte": "Face à un très gros fichier d'instructions dont Claude n'a vu que le début, Write demande de le lire en entier ou de le modifier sur place.",
+        "texte": "When Claude has only seen the beginning of a very large instructions file, Write now asks it to read the whole file or edit in place.",
         "passages": [
           {
             "texte": "after seeing only its start; Write now asks Claude to read it all or edit in place",
@@ -590,7 +592,7 @@ window.DONNEES_MAQUETTE = {
         "legende": "Schéma original",
         "elements": [
           {
-            "texte": "Avant : réécriture après avoir vu seulement le début du fichier",
+            "texte": "Before: rewritten after reading just the beginning",
             "passages": [
               {
                 "texte": "Fixed Claude overwriting a very large CLAUDE.md, rules file or @-included file in a subdirectory after seeing only its start",
@@ -599,7 +601,7 @@ window.DONNEES_MAQUETTE = {
             ]
           },
           {
-            "texte": "Maintenant : Write demande de tout lire ou de modifier sur place",
+            "texte": "Now: Write asks to read everything or edit in place",
             "passages": [
               {
                 "texte": "Write now asks Claude to read it all or edit in place",
@@ -610,7 +612,7 @@ window.DONNEES_MAQUETTE = {
         ]
       },
       "accroche": {
-        "texte": "Claude Code 2.1.312 corrige la réécriture d'un très gros CLAUDE.md de sous-dossier après n'en avoir vu que le début",
+        "texte": "Claude Code 2.1.312 stops a huge subdirectory CLAUDE.md from being rewritten when only its beginning was read",
         "passages": [
           {
             "texte": "Fixed Claude overwriting a very large CLAUDE.md, rules file or @-included file in a subdirectory after seeing only its start",
@@ -619,7 +621,7 @@ window.DONNEES_MAQUETTE = {
         ]
       },
       "nouveaute": {
-        "texte": "Quand Claude s'apprête à réécrire un très gros CLAUDE.md, fichier de règles ou fichier inclus par @ d'un sous-dossier dont il n'a vu que le début, l'outil Write lui demande désormais de le lire en entier ou de le modifier sur place.",
+        "texte": "When Claude is about to rewrite a huge CLAUDE.md, rules file or file pulled in with @ inside a subdirectory, having seen only its first part, the Write tool now asks it to read everything or edit in place.",
         "passages": [
           {
             "texte": "Fixed Claude overwriting a very large CLAUDE.md, rules file or @-included file in a subdirectory after seeing only its start; Write now asks Claude to read it all or edit in place",
@@ -628,7 +630,7 @@ window.DONNEES_MAQUETTE = {
         ]
       },
       "ce_que_ca_permet": {
-        "texte": "Éviter qu'un long fichier d'instructions placé dans un sous-dossier soit réécrit après n'en avoir vu que le début.",
+        "texte": "Prevents a long instructions file stored in a subdirectory from being rewritten when only its beginning was read.",
         "passages": [
           {
             "texte": "a very large CLAUDE.md, rules file or @-included file in a subdirectory",
@@ -641,7 +643,7 @@ window.DONNEES_MAQUETTE = {
         ]
       },
       "pour_qui": {
-        "texte": "Les utilisateurs de Claude Code qui gardent de longs fichiers d'instructions dans des sous-dossiers de leurs projets.",
+        "texte": "Claude Code users who keep long instructions files in the subdirectories of their projects.",
         "passages": [
           {
             "texte": "a very large CLAUDE.md, rules file or @-included file in a subdirectory",
@@ -652,8 +654,8 @@ window.DONNEES_MAQUETTE = {
       "limites_connues": null,
       "details": [
         {
-          "titre": "Aussi dans cette version",
-          "texte": "En plein écran, cliquer sur l'indication « to send now » sous un message en attente l'envoie tout de suite, comme la touche correspondante.",
+          "titre": "Also in this release",
+          "texte": "In fullscreen, clicking the “to send now” hint below a queued message sends it immediately, just like the matching key.",
           "passages": [
             {
               "texte": "Added click to send: in fullscreen, clicking the \"to send now\" hint under a queued message sends it right away, as its key does",
@@ -662,8 +664,8 @@ window.DONNEES_MAQUETTE = {
           ]
         },
         {
-          "titre": "Erreurs WebFetch",
-          "texte": "Dans les sessions cloud, quand un hôte ne se résout pas, l'erreur de WebFetch explique qu'il est peut-être hors des domaines réseau autorisés, ce qui permet à Claude de nommer l'hôte à autoriser.",
+          "titre": "WebFetch errors",
+          "texte": "In cloud sessions, when a host doesn’t resolve, the WebFetch error explains it may be outside the allowed network domains, so Claude can tell you which host to allow.",
           "passages": [
             {
               "texte": "Improved WebFetch errors in cloud sessions: a host that does not resolve is now explained as possibly outside the allowed network domains, so Claude names the host to allow",
@@ -676,22 +678,22 @@ window.DONNEES_MAQUETTE = {
       "diapositives": [
         {
           "champ": "accroche",
-          "libelle": "Accroche",
-          "texte": "Claude Code 2.1.312 corrige la réécriture d'un très gros CLAUDE.md de sous-dossier après n'en avoir vu que le début"
+          "libelle": "Headline",
+          "texte": "Claude Code 2.1.312 stops a huge subdirectory CLAUDE.md from being rewritten when only its beginning was read"
         },
         {
           "champ": "nouveaute",
-          "libelle": "Nouveauté",
-          "texte": "Quand Claude s'apprête à réécrire un très gros CLAUDE.md, fichier de règles ou fichier inclus par @ d'un sous-dossier dont il n'a vu que le début, l'outil Write lui demande désormais de le lire en entier ou de le modifier sur place."
+          "libelle": "What’s new",
+          "texte": "When Claude is about to rewrite a huge CLAUDE.md, rules file or file pulled in with @ inside a subdirectory, having seen only its first part, the Write tool now asks it to read everything or edit in place."
         },
         {
           "champ": "pour_qui",
-          "libelle": "Pour qui",
-          "texte": "Les utilisateurs de Claude Code qui gardent de longs fichiers d'instructions dans des sous-dossiers de leurs projets."
+          "libelle": "Who it’s for",
+          "texte": "Claude Code users who keep long instructions files in the subdirectories of their projects."
         },
         {
           "champ": "limites_connues",
-          "libelle": "Limites connues",
+          "libelle": "Known limits",
           "texte": null
         }
       ],
@@ -728,8 +730,9 @@ window.DONNEES_MAQUETTE = {
         "assistant de code"
       ],
       "questions_a_tester": [
-        "Avec un CLAUDE.md de plusieurs milliers de lignes dans un sous-dossier, Claude le lit-il en entier avant de le modifier ?"
-      ]
+        "With a CLAUDE.md several thousand lines long in a subdirectory, does Claude read all of it before editing?"
+      ],
+      "recherche_id": -2
     },
     {
       "id": "exemple-codex-cli-0-166-0",
@@ -737,7 +740,7 @@ window.DONNEES_MAQUETTE = {
       "statut": "verifie",
       "motifs": [],
       "description": {
-        "texte": "Une commande pour diagnostiquer la configuration, la connectivité et les WebSockets.",
+        "texte": "A command to diagnose configuration, connectivity and WebSockets.",
         "passages": [
           {
             "texte": "Added codex doctor --network-only for focused configuration, connectivity, and WebSocket diagnostics.",
@@ -770,7 +773,7 @@ window.DONNEES_MAQUETTE = {
         ]
       },
       "accroche": {
-        "texte": "Codex CLI 0.166.0 ajoute codex doctor --network-only pour diagnostiquer configuration, connectivité et WebSockets",
+        "texte": "Codex CLI 0.166.0 adds codex doctor --network-only to diagnose configuration, connectivity and WebSockets",
         "passages": [
           {
             "texte": "Added codex doctor --network-only for focused configuration, connectivity, and WebSocket diagnostics.",
@@ -779,7 +782,7 @@ window.DONNEES_MAQUETTE = {
         ]
       },
       "nouveaute": {
-        "texte": "Un diagnostic ciblé de la configuration, de la connectivité et des WebSockets, et GPT-6.1 Terra dans les catalogues de modèles intégré, Vertex AI et Amazon Bedrock.",
+        "texte": "A targeted check of configuration, connectivity and WebSockets, plus GPT-6.1 Terra in the built-in model catalog and in the Vertex AI and Amazon Bedrock ones.",
         "passages": [
           {
             "texte": "Added codex doctor --network-only for focused configuration, connectivity, and WebSocket diagnostics.",
@@ -792,7 +795,7 @@ window.DONNEES_MAQUETTE = {
         ]
       },
       "ce_que_ca_permet": {
-        "texte": "Lancer avec codex doctor --network-only un diagnostic ciblé de la configuration, de la connectivité et des WebSockets ; sélectionner la transcription au clavier, par mot, ligne ou page, avec recherche intégrée.",
+        "texte": "Run a targeted configuration, connectivity and WebSocket check with codex doctor --network-only; select transcript text from the keyboard, by word, line or page, with built-in search.",
         "passages": [
           {
             "texte": "Added codex doctor --network-only for focused configuration, connectivity, and WebSocket diagnostics.",
@@ -808,8 +811,8 @@ window.DONNEES_MAQUETTE = {
       "limites_connues": null,
       "details": [
         {
-          "titre": "Aussi dans cette version",
-          "texte": "codex queue --resume reprend des fils déchargés après la mise en file d'un message.",
+          "titre": "Also in this release",
+          "texte": "codex queue --resume picks up unloaded threads after a message has been queued.",
           "passages": [
             {
               "texte": "Added codex queue --resume to resume unloaded threads after queueing a message.",
@@ -822,8 +825,8 @@ window.DONNEES_MAQUETTE = {
       "diapositives": [
         {
           "champ": "accroche",
-          "libelle": "Accroche",
-          "texte": "Codex CLI 0.166.0 ajoute codex doctor --network-only pour diagnostiquer configuration, connectivité et WebSockets"
+          "libelle": "Headline",
+          "texte": "Codex CLI 0.166.0 adds codex doctor --network-only to diagnose configuration, connectivity and WebSockets"
         }
       ],
       "actualite": {
@@ -859,8 +862,9 @@ window.DONNEES_MAQUETTE = {
         "assistant de code"
       ],
       "questions_a_tester": [
-        "Que vérifie exactement codex doctor --network-only derrière un proxy d'entreprise ?"
-      ]
+        "What exactly does codex doctor --network-only check behind a corporate proxy?"
+      ],
+      "recherche_id": -3
     },
     {
       "id": "exemple-copilot-images",
@@ -868,7 +872,7 @@ window.DONNEES_MAQUETTE = {
       "statut": "verifie",
       "motifs": [],
       "description": {
-        "texte": "On décrit l'image dans le chat ; un aperçu s'affiche et l'image est enregistrée dans le projet. Filigrane visible désactivé par défaut.",
+        "texte": "Describe the image in chat; a preview appears and the image is saved to the project. Visible watermark off by default.",
         "passages": [
           {
             "texte": "Describe an image conversationally in any Copilot chat session",
@@ -889,7 +893,7 @@ window.DONNEES_MAQUETTE = {
         "legende": "Schéma original",
         "elements": [
           {
-            "texte": "Décrire l’image dans le chat",
+            "texte": "Describe the image in chat",
             "passages": [
               {
                 "texte": "Describe an image conversationally in any Copilot chat session",
@@ -898,7 +902,7 @@ window.DONNEES_MAQUETTE = {
             ]
           },
           {
-            "texte": "Le modèle appelle GPT Image 2.5 Flare",
+            "texte": "The model calls GPT Image 2.5 Flare",
             "passages": [
               {
                 "texte": "your selected reasoning model calls a dedicated image-generation tool powered by GPT Image 2.5 Flare",
@@ -907,7 +911,7 @@ window.DONNEES_MAQUETTE = {
             ]
           },
           {
-            "texte": "Aperçu dans la conversation, image enregistrée dans le projet",
+            "texte": "Preview in the conversation, image saved to the project",
             "passages": [
               {
                 "texte": "previews the result inline, and saves it to your project.",
@@ -918,7 +922,7 @@ window.DONNEES_MAQUETTE = {
         ]
       },
       "accroche": {
-        "texte": "GitHub Copilot génère et modifie des images depuis le chat, en préversion publique",
+        "texte": "GitHub Copilot creates and edits images from chat, in public preview",
         "passages": [
           {
             "texte": "You can now generate and edit images using natural language in GitHub Copilot.",
@@ -935,7 +939,7 @@ window.DONNEES_MAQUETTE = {
         ]
       },
       "nouveaute": {
-        "texte": "Le modèle de raisonnement choisi appelle un outil dédié à la génération d'images (GPT Image 2.5 Flare), affiche un aperçu dans la conversation et enregistre l'image dans le projet.",
+        "texte": "The chosen reasoning model calls a dedicated image-generation tool (GPT Image 2.5 Flare), shows a preview in the conversation and saves the image to the project.",
         "passages": [
           {
             "texte": "your selected reasoning model calls a dedicated image-generation tool powered by GPT Image 2.5 Flare, previews the result inline, and saves it to your project.",
@@ -944,7 +948,7 @@ window.DONNEES_MAQUETTE = {
         ]
       },
       "ce_que_ca_permet": {
-        "texte": "Selon GitHub, obtenir un visuel sans quitter sa session de code ni passer par un outil séparé.",
+        "texte": "According to GitHub, you get a visual without leaving your coding session or switching to a separate tool.",
         "passages": [
           {
             "texte": "Previously, getting a visual asset while working in Copilot meant stepping away to a separate tool",
@@ -957,7 +961,7 @@ window.DONNEES_MAQUETTE = {
         ]
       },
       "pour_qui": {
-        "texte": "Les abonnés Copilot Pro, Pro+, Business et Enterprise ; pour l'essayer, un chat Copilot dans VS Code, l'app GitHub Copilot ou Copilot CLI.",
+        "texte": "Copilot Pro, Pro+, Business and Enterprise subscribers; to try it, a Copilot chat in VS Code, the GitHub Copilot app or Copilot CLI.",
         "passages": [
           {
             "texte": "Image generation is in public preview for Copilot Pro, Copilot Pro+, Copilot Business, and Copilot Enterprise.",
@@ -970,7 +974,7 @@ window.DONNEES_MAQUETTE = {
         ]
       },
       "limites_connues": {
-        "texte": "Préversion publique ; filigrane visible « Made with AI » en option, désactivé par défaut ; facturé à part, en tokens d'image décomptés des crédits IA de l'offre.",
+        "texte": "Public preview; the visible “Made with AI” watermark is optional and off by default; billed separately, in image tokens counted against the plan’s AI credits.",
         "passages": [
           {
             "texte": "Image generation is in public preview",
@@ -993,7 +997,7 @@ window.DONNEES_MAQUETTE = {
       "details": [
         {
           "titre": "Administration",
-          "texte": "Les propriétaires d'organisation et d'entreprise peuvent désactiver la génération d'images dans les règles de modèles de Copilot.",
+          "texte": "Organization and enterprise owners can switch image generation off in Copilot’s model policies.",
           "passages": [
             {
               "texte": "Organization and enterprise owners can turn off image generation by disabling the image generation model using Copilot model policies.",
@@ -1006,8 +1010,8 @@ window.DONNEES_MAQUETTE = {
       "diapositives": [
         {
           "champ": "accroche",
-          "libelle": "Accroche",
-          "texte": "GitHub Copilot génère et modifie des images depuis le chat, en préversion publique"
+          "libelle": "Headline",
+          "texte": "GitHub Copilot creates and edits images from chat, in public preview"
         }
       ],
       "actualite": {
@@ -1038,8 +1042,9 @@ window.DONNEES_MAQUETTE = {
         "design"
       ],
       "questions_a_tester": [
-        "Une image générée garde-t-elle une trace de son origine IA quand le filigrane est désactivé ?"
-      ]
+        "Does a generated image keep any trace of its AI origin when the watermark is off?"
+      ],
+      "recherche_id": -4
     },
     {
       "id": "exemple-gemini-4-carbon",
@@ -1047,7 +1052,7 @@ window.DONNEES_MAQUETTE = {
       "statut": "verifie",
       "motifs": [],
       "description": {
-        "texte": "Google le présente comme son prochain modèle de pointe. Le flux collecté ne donne pas le détail : disponibilité et limites sont à lire à la source.",
+        "texte": "Google presents it as its next frontier model. The collected feed gives no details: check the source for availability and limits.",
         "passages": [
           {
             "texte": "Gemini 4 Carbon: our next frontier model",
@@ -1060,7 +1065,7 @@ window.DONNEES_MAQUETTE = {
         "legende": "Photo de presse, sans rapport direct avec le produit",
         "elements": [
           {
-            "texte": "Google présente Gemini 4 Carbon",
+            "texte": "Google introduces Gemini 4 Carbon",
             "passages": [
               {
                 "texte": "Gemini 4 Carbon: our next frontier model",
@@ -1071,14 +1076,14 @@ window.DONNEES_MAQUETTE = {
         ],
         "photo": {
           "fichier": "google-campus.jpg",
-          "alt": "Vue du campus Googleplex",
+          "alt": "View of the Googleplex campus",
           "credit": "Source: Google.",
           "conditions": "https://blog.google/image-library/",
           "verifie_le": "2026-10-30"
         }
       },
       "accroche": {
-        "texte": "Google présente Gemini 4 Carbon, son prochain modèle de pointe",
+        "texte": "Google introduces Gemini 4 Carbon, its next frontier model",
         "passages": [
           {
             "texte": "Gemini 4 Carbon: our next frontier model",
@@ -1087,7 +1092,7 @@ window.DONNEES_MAQUETTE = {
         ]
       },
       "nouveaute": {
-        "texte": "Un nouveau modèle de pointe annoncé par Google.",
+        "texte": "A new frontier model announced by Google.",
         "passages": [
           {
             "texte": "Gemini 4 Carbon: our next frontier model",
@@ -1103,8 +1108,8 @@ window.DONNEES_MAQUETTE = {
       "diapositives": [
         {
           "champ": "accroche",
-          "libelle": "Accroche",
-          "texte": "Google présente Gemini 4 Carbon, son prochain modèle de pointe"
+          "libelle": "Headline",
+          "texte": "Google introduces Gemini 4 Carbon, its next frontier model"
         }
       ],
       "actualite": {
@@ -1122,11 +1127,11 @@ window.DONNEES_MAQUETTE = {
         }
       },
       "capture": {
-        "content_hash": "47ec5d61d19d8797ac345c7e19decd40a71885feebb51df2dc6e144cd491990a",
-        "captured_at": "2026-10-30T09:55:59.086Z",
+        "content_hash": "bf91c45b8ceaf0ea242356b93033b43021854e553e421c8075bc944c768ea367",
+        "captured_at": "2026-11-03T07:27:53.824Z",
         "mode": "live",
-        "run_id": "ead895be-2335-4266-b920-9909cdd5e2c0",
-        "text_length": 107
+        "run_id": "2b7ea6f4-521b-48ed-ae94-e5e5b0115a4f",
+        "text_length": 11231
       },
       "media": "image",
       "titre_media": "Gemini 4 Carbon",
@@ -1135,8 +1140,9 @@ window.DONNEES_MAQUETTE = {
         "annonce officielle"
       ],
       "questions_a_tester": [
-        "Quand et pour qui Gemini 4 Carbon est-il disponible ?"
-      ]
+        "When, and for whom, is Gemini 4 Carbon available?"
+      ],
+      "recherche_id": -5
     },
     {
       "id": "exemple-github-enterprise-copilot",
@@ -1144,7 +1150,7 @@ window.DONNEES_MAQUETTE = {
       "statut": "verifie",
       "motifs": [],
       "description": {
-        "texte": "Pour les clients suivis par une équipe commerciale : Copilot inclus par utilisateur licencié, usage décompté du budget dès la première requête.",
+        "texte": "For customers working with an account team: Copilot included for every licensed user, usage counted against the budget from the first request.",
         "passages": [
           {
             "texte": "Enterprises working with a GitHub or Microsoft account team can now get Copilot included with GitHub Enterprise for every licensed user.",
@@ -1161,7 +1167,7 @@ window.DONNEES_MAQUETTE = {
         "legende": "Schéma original",
         "elements": [
           {
-            "texte": "Avant : gérer les sièges Copilot et l’usage de l’IA",
+            "texte": "Before: manage Copilot seats and AI usage",
             "passages": [
               {
                 "texte": "Previously, you had to manage two things: how many Copilot seats you were paying for and how much AI usage those users consumed.",
@@ -1170,7 +1176,7 @@ window.DONNEES_MAQUETTE = {
             ]
           },
           {
-            "texte": "Maintenant : gérer surtout l’usage face au budget",
+            "texte": "Now: mostly manage usage against the budget",
             "passages": [
               {
                 "texte": "usage against your enterprise budget is the primary thing to manage",
@@ -1181,7 +1187,7 @@ window.DONNEES_MAQUETTE = {
         ]
       },
       "accroche": {
-        "texte": "GitHub Enterprise inclut désormais Copilot pour les clients suivis par une équipe commerciale",
+        "texte": "GitHub Enterprise now includes Copilot for customers working with an account team",
         "passages": [
           {
             "texte": "Enterprises working with a GitHub or Microsoft account team can now get Copilot included with GitHub Enterprise for every licensed user.",
@@ -1190,7 +1196,7 @@ window.DONNEES_MAQUETTE = {
         ]
       },
       "nouveaute": {
-        "texte": "Copilot est inclus pour chaque utilisateur licencié ; l’usage de l’IA devient le principal élément à gérer, sans allocation incluse.",
+        "texte": "Copilot is included for every licensed user; AI usage becomes the main thing to manage, with no included allowance.",
         "passages": [
           {
             "texte": "With Copilot included in the platform, usage against your enterprise budget is the primary thing to manage.",
@@ -1203,7 +1209,7 @@ window.DONNEES_MAQUETTE = {
         ]
       },
       "ce_que_ca_permet": {
-        "texte": "La complétion de code continue sans budget disponible ; un budget épuisé ne retire pas l’accès.",
+        "texte": "Code completion keeps working with no budget left; an exhausted budget doesn’t remove access.",
         "passages": [
           {
             "texte": "Code completion and next edit suggestions keep working even with no budget available.",
@@ -1216,7 +1222,7 @@ window.DONNEES_MAQUETTE = {
         ]
       },
       "pour_qui": {
-        "texte": "Les clients GitHub Enterprise Cloud suivis par une équipe commerciale GitHub ou Microsoft.",
+        "texte": "GitHub Enterprise Cloud customers working with a GitHub or Microsoft account team.",
         "passages": [
           {
             "texte": "If you work with a GitHub or Microsoft account team: Available now for GitHub Enterprise Cloud.",
@@ -1225,7 +1231,7 @@ window.DONNEES_MAQUETTE = {
         ]
       },
       "limites_connues": {
-        "texte": "Indisponible en libre-service pour l’instant ; Copilot Chat, la revue de code et Copilot dans le cloud exigent un budget disponible.",
+        "texte": "Not available as self-service for now; Copilot Chat, code review and Copilot in the cloud need available budget.",
         "passages": [
           {
             "texte": "Currently unavailable.",
@@ -1242,8 +1248,8 @@ window.DONNEES_MAQUETTE = {
       "diapositives": [
         {
           "champ": "accroche",
-          "libelle": "Accroche",
-          "texte": "GitHub Enterprise inclut désormais Copilot pour les clients suivis par une équipe commerciale"
+          "libelle": "Headline",
+          "texte": "GitHub Enterprise now includes Copilot for customers working with an account team"
         }
       ],
       "actualite": {
@@ -1274,8 +1280,9 @@ window.DONNEES_MAQUETTE = {
         "annonce officielle"
       ],
       "questions_a_tester": [
-        "Quel est le coût réel d’une équipe type une fois l’usage décompté ?"
-      ]
+        "What does a typical team actually pay once usage is counted?"
+      ],
+      "recherche_id": -6
     },
     {
       "id": "exemple-plugins-copilot",
@@ -1283,7 +1290,7 @@ window.DONNEES_MAQUETTE = {
       "statut": "verifie",
       "motifs": [],
       "description": {
-        "texte": "Un dépôt de confiance peut installer des plugins par défaut pour ses contributeurs ; une entreprise peut en imposer ou en bloquer.",
+        "texte": "A trusted repository can install default plugins for its contributors; an enterprise can require or block plugins.",
         "passages": [
           {
             "texte": "Trusted repositories can install and enable default plugins for contributors.",
@@ -1300,7 +1307,7 @@ window.DONNEES_MAQUETTE = {
         "legende": "Schéma original",
         "elements": [
           {
-            "texte": "Paramètres gérés par l’entreprise",
+            "texte": "Enterprise managed settings",
             "passages": [
               {
                 "texte": "Managed settings take precedence over repository and personal choices.",
@@ -1309,7 +1316,7 @@ window.DONNEES_MAQUETTE = {
             ]
           },
           {
-            "texte": "Choix du dépôt",
+            "texte": "Repository choices",
             "passages": [
               {
                 "texte": "Managed settings take precedence over repository and personal choices.",
@@ -1318,7 +1325,7 @@ window.DONNEES_MAQUETTE = {
             ]
           },
           {
-            "texte": "Choix personnels",
+            "texte": "Personal choices",
             "passages": [
               {
                 "texte": "Managed settings take precedence over repository and personal choices.",
@@ -1329,7 +1336,7 @@ window.DONNEES_MAQUETTE = {
         ]
       },
       "accroche": {
-        "texte": "Copilot : plugins par défaut par dépôt et contrôles d’entreprise en disponibilité générale",
+        "texte": "Copilot: per-repository default plugins and enterprise controls are generally available",
         "passages": [
           {
             "texte": "Repository plugin defaults and enterprise-managed plugin controls are now generally available in VS Code, Copilot CLI, and the GitHub Copilot app.",
@@ -1338,7 +1345,7 @@ window.DONNEES_MAQUETTE = {
         ]
       },
       "nouveaute": {
-        "texte": "Un mainteneur définit une place de marché et des plugins par défaut pour éviter de répéter la configuration à chaque projet ; un administrateur fournit les places de marché approuvées et impose ou bloque des plugins.",
+        "texte": "A maintainer sets up a marketplace and default plugins so setup isn’t repeated for every project; an administrator supplies approved marketplaces and requires or blocks plugins.",
         "passages": [
           {
             "texte": "As a repository maintainer, you can define a plugin marketplace and default plugins so contributors don’t have to repeat setup for each project.",
@@ -1351,7 +1358,7 @@ window.DONNEES_MAQUETTE = {
         ]
       },
       "ce_que_ca_permet": {
-        "texte": "Partager la même configuration entre contributeurs, qui peuvent désactiver les valeurs par défaut du dépôt si la politique le permet.",
+        "texte": "Share one setup across contributors, who can turn off the repository defaults if policy allows.",
         "passages": [
           {
             "texte": "Contributors can turn off repository defaults where policy permits.",
@@ -1360,7 +1367,7 @@ window.DONNEES_MAQUETTE = {
         ]
       },
       "pour_qui": {
-        "texte": "Les utilisateurs Copilot individuels, Business et Enterprise ; les contrôles gérés visent GitHub Enterprise Cloud.",
+        "texte": "Individual, Business and Enterprise Copilot users; managed controls target GitHub Enterprise Cloud.",
         "passages": [
           {
             "texte": "Repository defaults are available to individual Copilot users and users with Copilot Business or Copilot Enterprise.",
@@ -1373,7 +1380,7 @@ window.DONNEES_MAQUETTE = {
         ]
       },
       "limites_connues": {
-        "texte": "Les plugins imposés sont installés et activés automatiquement, sans possibilité de les désactiver.",
+        "texte": "Required plugins are installed and enabled automatically, and can’t be turned off.",
         "passages": [
           {
             "texte": "Required plugins are automatically installed and enabled, and users can’t disable them.",
@@ -1386,8 +1393,8 @@ window.DONNEES_MAQUETTE = {
       "diapositives": [
         {
           "champ": "accroche",
-          "libelle": "Accroche",
-          "texte": "Copilot : plugins par défaut par dépôt et contrôles d’entreprise en disponibilité générale"
+          "libelle": "Headline",
+          "texte": "Copilot: per-repository default plugins and enterprise controls are generally available"
         }
       ],
       "actualite": {
@@ -1418,8 +1425,9 @@ window.DONNEES_MAQUETTE = {
         "outil de développement"
       ],
       "questions_a_tester": [
-        "Que voit un contributeur quand un plugin imposé entre en conflit avec son choix personnel ?"
-      ]
+        "What does a contributor see when a required plugin conflicts with their personal choice?"
+      ],
+      "recherche_id": -7
     },
     {
       "id": "exemple-extension-securite-copilot",
@@ -1427,7 +1435,7 @@ window.DONNEES_MAQUETTE = {
       "statut": "verifie",
       "motifs": [],
       "description": {
-        "texte": "Parcourir les alertes de code scanning dans l'app Copilot et demander de les expliquer ou de les corriger, sans commit automatique.",
+        "texte": "Browse code scanning alerts in the Copilot app and ask for an explanation or a fix, with no automatic commit.",
         "passages": [
           {
             "texte": "Select one or more alerts and ask Copilot to Explain or Fix them.",
@@ -1444,7 +1452,7 @@ window.DONNEES_MAQUETTE = {
         "legende": "Schéma original",
         "elements": [
           {
-            "texte": "Parcourir les alertes par gravité",
+            "texte": "Browse alerts by severity",
             "passages": [
               {
                 "texte": "Browse every open code scanning alert, ordered by severity",
@@ -1453,7 +1461,7 @@ window.DONNEES_MAQUETTE = {
             ]
           },
           {
-            "texte": "Demander d’expliquer ou de corriger",
+            "texte": "Ask for an explanation or a fix",
             "passages": [
               {
                 "texte": "Select one or more alerts and ask Copilot to Explain or Fix them.",
@@ -1462,7 +1470,7 @@ window.DONNEES_MAQUETTE = {
             ]
           },
           {
-            "texte": "Relire la correction locale, pousser quand on est prêt",
+            "texte": "Review the local fix, push when ready",
             "passages": [
               {
                 "texte": "review and iterate on the changes in the app and push when you’re ready",
@@ -1477,7 +1485,7 @@ window.DONNEES_MAQUETTE = {
         }
       },
       "accroche": {
-        "texte": "Une extension de sécurité pour l'app GitHub Copilot, en préversion publique",
+        "texte": "A security extension for the GitHub Copilot app, in public preview",
         "passages": [
           {
             "texte": "The new GitHub security extension, now in public preview, lets you find the alerts that matter most and ask Copilot to explain or help fix them.",
@@ -1486,7 +1494,7 @@ window.DONNEES_MAQUETTE = {
         ]
       },
       "nouveaute": {
-        "texte": "Passer de la recherche d'une alerte à sa correction au même endroit, sans quitter l'app.",
+        "texte": "Go from finding an alert to fixing it in one place, without leaving the app.",
         "passages": [
           {
             "texte": "you can move from finding an alert to fixing it in one place",
@@ -1495,7 +1503,7 @@ window.DONNEES_MAQUETTE = {
         ]
       },
       "ce_que_ca_permet": {
-        "texte": "Lancer /security-review sur ses changements en cours et voir les résultats à côté des alertes existantes.",
+        "texte": "Check your in-progress changes with /security-review and see the results next to the alerts already open.",
         "passages": [
           {
             "texte": "Run /security-review on your current changes and see those findings next to your existing alerts.",
@@ -1504,7 +1512,7 @@ window.DONNEES_MAQUETTE = {
         ]
       },
       "pour_qui": {
-        "texte": "Avec toute offre Copilot : installer l'extension et lancer /security-review sur ses changements locaux.",
+        "texte": "Any Copilot plan can install the extension and use /security-review on local changes.",
         "passages": [
           {
             "texte": "With any Copilot plan: You can install the extension and run /security-review on your local changes.",
@@ -1513,7 +1521,7 @@ window.DONNEES_MAQUETTE = {
         ]
       },
       "limites_connues": {
-        "texte": "Préversion publique ; GitHub Enterprise Server n’est pas pris en charge.",
+        "texte": "Public preview; GitHub Enterprise Server isn’t supported.",
         "passages": [
           {
             "texte": "The security extension is in public preview on github.com and GitHub Enterprise Cloud with data residency.",
@@ -1527,8 +1535,8 @@ window.DONNEES_MAQUETTE = {
       },
       "details": [
         {
-          "titre": "Coût",
-          "texte": "Explain, Fix et /security-review consomment des crédits IA ; parcourir et rejeter des alertes n’utilise pas d’IA.",
+          "titre": "Cost",
+          "texte": "Explain, Fix and /security-review use AI credits; browsing and dismissing alerts doesn’t use AI.",
           "passages": [
             {
               "texte": "The Explain, Fix, and /security-review actions use the model you’ve selected in the app and consume AI credits in the same way as any other prompt.",
@@ -1545,8 +1553,8 @@ window.DONNEES_MAQUETTE = {
       "diapositives": [
         {
           "champ": "accroche",
-          "libelle": "Accroche",
-          "texte": "Une extension de sécurité pour l'app GitHub Copilot, en préversion publique"
+          "libelle": "Headline",
+          "texte": "A security extension for the GitHub Copilot app, in public preview"
         }
       ],
       "actualite": {
@@ -1577,8 +1585,9 @@ window.DONNEES_MAQUETTE = {
         "outil de développement"
       ],
       "questions_a_tester": [
-        "Sur une alerte réelle, la correction proposée passe-t-elle les tests du dépôt ?"
-      ]
+        "On a real alert, does the suggested fix pass the repository’s tests?"
+      ],
+      "recherche_id": -8
     }
   ],
   "exemples_introuvables": [],
@@ -1588,7 +1597,7 @@ window.DONNEES_MAQUETTE = {
       "name": "Blender — flux RSS officiel",
       "kind": "feed",
       "status": "ok",
-      "last_success_at": "2026-10-30T14:45:33.171Z",
+      "last_success_at": "2026-11-02T22:02:51.875Z",
       "last_error": null
     },
     {
@@ -1596,7 +1605,7 @@ window.DONNEES_MAQUETTE = {
       "name": "Blog Comfy — flux RSS officiel",
       "kind": "feed",
       "status": "ok",
-      "last_success_at": "2026-10-30T14:45:31.945Z",
+      "last_success_at": "2026-11-02T22:02:51.667Z",
       "last_error": null
     },
     {
@@ -1604,7 +1613,7 @@ window.DONNEES_MAQUETTE = {
       "name": "Cursor Changelog — flux RSS officiel",
       "kind": "feed",
       "status": "ok",
-      "last_success_at": "2026-10-30T14:45:30.612Z",
+      "last_success_at": "2026-11-02T22:02:49.289Z",
       "last_error": null
     },
     {
@@ -1612,7 +1621,7 @@ window.DONNEES_MAQUETTE = {
       "name": "ElevenLabs Blog — flux RSS officiel",
       "kind": "feed",
       "status": "ok",
-      "last_success_at": "2026-10-30T14:45:29.430Z",
+      "last_success_at": "2026-11-03T07:28:05.721Z",
       "last_error": null
     },
     {
@@ -1620,7 +1629,7 @@ window.DONNEES_MAQUETTE = {
       "name": "Figma, notes de version — flux Atom officiel",
       "kind": "feed",
       "status": "ok",
-      "last_success_at": "2026-10-30T14:45:33.689Z",
+      "last_success_at": "2026-11-03T07:28:07.072Z",
       "last_error": null
     },
     {
@@ -1628,7 +1637,7 @@ window.DONNEES_MAQUETTE = {
       "name": "Gemini Notebook — flux RSS officiel",
       "kind": "feed",
       "status": "ok",
-      "last_success_at": "2026-10-30T14:45:31.185Z",
+      "last_success_at": "2026-11-03T07:28:01.598Z",
       "last_error": null
     },
     {
@@ -1636,7 +1645,7 @@ window.DONNEES_MAQUETTE = {
       "name": "GitHub Changelog — flux RSS officiel",
       "kind": "feed",
       "status": "ok",
-      "last_success_at": "2026-10-30T02:25:21.343Z",
+      "last_success_at": "2026-11-02T22:02:47.556Z",
       "last_error": null
     },
     {
@@ -1644,7 +1653,7 @@ window.DONNEES_MAQUETTE = {
       "name": "Google The Keyword, Gemini — flux RSS officiel",
       "kind": "feed",
       "status": "ok",
-      "last_success_at": "2026-10-30T09:55:59.106Z",
+      "last_success_at": "2026-11-03T07:27:54.610Z",
       "last_error": null
     },
     {
@@ -1652,7 +1661,7 @@ window.DONNEES_MAQUETTE = {
       "name": "Higgsfield Blog — flux RSS officiel",
       "kind": "feed",
       "status": "ok",
-      "last_success_at": "2026-10-30T14:45:31.689Z",
+      "last_success_at": "2026-11-02T22:02:51.382Z",
       "last_error": null
     },
     {
@@ -1660,7 +1669,7 @@ window.DONNEES_MAQUETTE = {
       "name": "Hugging Face Blog — flux RSS officiel",
       "kind": "feed",
       "status": "ok",
-      "last_success_at": "2026-10-30T14:45:29.130Z",
+      "last_success_at": "2026-11-02T22:02:48.175Z",
       "last_error": null
     },
     {
@@ -1668,7 +1677,7 @@ window.DONNEES_MAQUETTE = {
       "name": "Blog MCP — flux RSS officiel",
       "kind": "feed",
       "status": "ok",
-      "last_success_at": "2026-10-30T14:45:37.187Z",
+      "last_success_at": "2026-11-02T22:02:56.403Z",
       "last_error": null
     },
     {
@@ -1676,7 +1685,7 @@ window.DONNEES_MAQUETTE = {
       "name": "Midjourney Updates — flux RSS officiel",
       "kind": "feed",
       "status": "ok",
-      "last_success_at": "2026-10-30T14:45:30.265Z",
+      "last_success_at": "2026-11-02T22:02:48.937Z",
       "last_error": null
     },
     {
@@ -1684,7 +1693,7 @@ window.DONNEES_MAQUETTE = {
       "name": "Mistral AI — flux RSS officiel",
       "kind": "feed",
       "status": "ok",
-      "last_success_at": "2026-10-30T14:45:28.317Z",
+      "last_success_at": "2026-11-03T07:27:56.186Z",
       "last_error": null
     },
     {
@@ -1692,7 +1701,7 @@ window.DONNEES_MAQUETTE = {
       "name": "Blog n8n — flux RSS officiel",
       "kind": "feed",
       "status": "ok",
-      "last_success_at": "2026-10-30T14:45:35.265Z",
+      "last_success_at": "2026-11-02T22:02:54.404Z",
       "last_error": null
     },
     {
@@ -1700,23 +1709,23 @@ window.DONNEES_MAQUETTE = {
       "name": "Notion What's New — flux RSS officiel",
       "kind": "feed",
       "status": "ok",
-      "last_success_at": "2026-10-30T14:45:28.708Z",
+      "last_success_at": "2026-11-02T22:02:49.459Z",
       "last_error": null
     },
     {
       "id": "feed:openai-news",
       "name": "OpenAI News — flux RSS officiel",
       "kind": "feed",
-      "status": "ok",
-      "last_success_at": "2026-10-30T02:25:21.004Z",
-      "last_error": null
+      "status": "error",
+      "last_success_at": "2026-11-02T22:02:46.750Z",
+      "last_error": "Réponse HTTP 403"
     },
     {
       "id": "feed:siggraph",
       "name": "SIGGRAPH Blog — flux RSS officiel",
       "kind": "feed",
       "status": "ok",
-      "last_success_at": "2026-10-30T14:45:38.196Z",
+      "last_success_at": "2026-11-02T22:02:57.526Z",
       "last_error": null
     },
     {
@@ -1724,7 +1733,7 @@ window.DONNEES_MAQUETTE = {
       "name": "Sketch Changelog — flux Atom officiel",
       "kind": "feed",
       "status": "ok",
-      "last_success_at": "2026-10-30T14:45:34.706Z",
+      "last_success_at": "2026-11-02T22:02:54.043Z",
       "last_error": null
     },
     {
@@ -1732,7 +1741,7 @@ window.DONNEES_MAQUETTE = {
       "name": "Spline Changelog — flux RSS officiel",
       "kind": "feed",
       "status": "ok",
-      "last_success_at": "2026-10-30T14:45:33.983Z",
+      "last_success_at": "2026-11-03T07:28:05.030Z",
       "last_error": null
     },
     {
@@ -1740,7 +1749,7 @@ window.DONNEES_MAQUETTE = {
       "name": "Suno, notes de version — flux RSS officiel",
       "kind": "feed",
       "status": "ok",
-      "last_success_at": "2026-10-30T14:45:29.839Z",
+      "last_success_at": "2026-11-03T07:28:00.092Z",
       "last_error": null
     },
     {
@@ -1748,7 +1757,7 @@ window.DONNEES_MAQUETTE = {
       "name": "Vapi, What's New — flux RSS officiel",
       "kind": "feed",
       "status": "ok",
-      "last_success_at": "2026-10-30T14:45:36.548Z",
+      "last_success_at": "2026-11-02T22:02:55.897Z",
       "last_error": null
     },
     {
@@ -1756,7 +1765,7 @@ window.DONNEES_MAQUETTE = {
       "name": "Claude Code — releases GitHub officielles",
       "kind": "github_releases",
       "status": "ok",
-      "last_success_at": "2026-10-30T02:25:20.469Z",
+      "last_success_at": "2026-11-02T22:02:42.966Z",
       "last_error": null
     },
     {
@@ -1764,7 +1773,7 @@ window.DONNEES_MAQUETTE = {
       "name": "Gemini CLI — releases GitHub officielles",
       "kind": "github_releases",
       "status": "ok",
-      "last_success_at": "2026-10-30T02:25:20.809Z",
+      "last_success_at": "2026-11-02T22:02:46.522Z",
       "last_error": null
     },
     {
@@ -1772,7 +1781,7 @@ window.DONNEES_MAQUETTE = {
       "name": "Codex CLI — releases GitHub officielles",
       "kind": "github_releases",
       "status": "ok",
-      "last_success_at": "2026-10-30T02:25:20.715Z",
+      "last_success_at": "2026-11-02T22:02:46.064Z",
       "last_error": null
     }
   ],
@@ -1784,6 +1793,11 @@ window.DONNEES_MAQUETTE = {
       "category": "assistant de code",
       "repository_url": "https://github.com/anthropics/claude-code",
       "versions": [
+        {
+          "version": "2.1.316",
+          "is_prerelease": false,
+          "released_at": "2026-10-31T01:01:35.000Z"
+        },
         {
           "version": "2.1.314",
           "is_prerelease": false,
@@ -1844,6 +1858,16 @@ window.DONNEES_MAQUETTE = {
       "repository_url": "https://github.com/openai/codex",
       "versions": [
         {
+          "version": "0.167.0-alpha.3",
+          "is_prerelease": true,
+          "released_at": "2026-11-01T22:26:17.000Z"
+        },
+        {
+          "version": "0.167.0-alpha.2",
+          "is_prerelease": true,
+          "released_at": "2026-11-01T19:00:13.000Z"
+        },
+        {
           "version": "0.166.0",
           "is_prerelease": false,
           "released_at": "2026-10-29T19:47:53.000Z"
@@ -1902,6 +1926,21 @@ window.DONNEES_MAQUETTE = {
       "category": "assistant de code",
       "repository_url": "https://github.com/google-gemini/gemini-cli",
       "versions": [
+        {
+          "version": "0.67.0-nightly.20261102.g6814e00d6",
+          "is_prerelease": true,
+          "released_at": "2026-11-02T01:22:38.000Z"
+        },
+        {
+          "version": "0.67.0-nightly.20261101.g6814e00d6",
+          "is_prerelease": true,
+          "released_at": "2026-11-01T01:14:56.000Z"
+        },
+        {
+          "version": "0.67.0-nightly.20261031.g6814e00d6",
+          "is_prerelease": true,
+          "released_at": "2026-10-31T01:19:32.000Z"
+        },
         {
           "version": "0.67.0-nightly.20261030.gb633c0703",
           "is_prerelease": true,
@@ -2007,6 +2046,448 @@ window.DONNEES_MAQUETTE = {
   ],
   "news_items": [
     {
+      "id": 427,
+      "kind": "annonce",
+      "title": "Angle Health’s ElevenAgents pilot handles 90% of provider calls without a transfer",
+      "announced_at": "2026-11-03T12:00:00.000Z",
+      "first_seen_at": "2026-11-02T20:12:14.087Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Customer Stories"
+      ],
+      "source": {
+        "id": "feed:elevenlabs",
+        "name": "ElevenLabs Blog — flux RSS officiel",
+        "url": "https://elevenlabs.io/blog/angle-health"
+      },
+      "excerpt": "Angle Health’s voice agents answer provider calls 24/7 with almost no wait, freeing about 9,000 minutes a day for complex escalations.",
+      "capture": {
+        "content_hash": "11a8b552eb6d80d2a315a592b5c360c3ac20a765bb1e0b912b9ab70f124889c1",
+        "captured_at": "2026-11-02T20:12:14.087Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 423,
+      "kind": "annonce",
+      "title": "The latest AI news we announced in October 2026",
+      "announced_at": "2026-11-02T17:45:00.000Z",
+      "first_seen_at": "2026-11-02T20:12:12.873Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Google DeepMind",
+        "Quantum computing",
+        "AI",
+        "Gemini App"
+      ],
+      "source": {
+        "id": "feed:google-gemini",
+        "name": "Google The Keyword, Gemini — flux RSS officiel",
+        "url": "https://blog.google/innovation-and-ai/technology/ai/google-ai-updates-october-2026"
+      },
+      "excerpt": "Animated carousel of images from AI posts in October",
+      "capture": {
+        "content_hash": "0dafd3059087f10cff4b05e57bffe443739ae21c8150e69343878c788d22c28f",
+        "captured_at": "2026-11-02T20:12:12.873Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 424,
+      "kind": "annonce",
+      "title": "Security risk assessments include repository protection status",
+      "announced_at": "2026-11-02T15:47:21.000Z",
+      "first_seen_at": "2026-11-02T20:12:13.218Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Improvement",
+        "application security"
+      ],
+      "source": {
+        "id": "feed:github-changelog",
+        "name": "GitHub Changelog — flux RSS officiel",
+        "url": "https://github.blog/changelog/2026-11-02-security-risk-assessments-include-repository-protection-status"
+      },
+      "excerpt": "The GitHub code security risk assessment and secret risk assessment now show whether findings are in protected or unprotected repositories, helping you identify where to extend your security coverage. Organization admins and security…",
+      "capture": {
+        "content_hash": "2fd1e87c94fdcd8a92765a5dab6bc6f6a91ffdce8384c0254b96ffae00eff49e",
+        "captured_at": "2026-11-02T20:12:13.218Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 425,
+      "kind": "annonce",
+      "title": "pull_request_target blocked by default December 2",
+      "announced_at": "2026-11-02T15:14:46.000Z",
+      "first_seen_at": "2026-11-02T20:12:13.218Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Retired",
+        "actions",
+        "application security"
+      ],
+      "source": {
+        "id": "feed:github-changelog",
+        "name": "GitHub Changelog — flux RSS officiel",
+        "url": "https://github.blog/changelog/2026-11-02-pull_request_target-blocked-by-default-december-2"
+      },
+      "excerpt": "Starting December 2, 2026, GitHub Actions will block pull_request_target events by default in all public repositories, unless an applicable Actions event policy explicitly allows them. Enforcement was previously scheduled for November 2…",
+      "capture": {
+        "content_hash": "d275b5eb445d96ae253c8d27fd0650c4937fff58f5823a0d9a4f3eeca76ea09f",
+        "captured_at": "2026-11-02T20:12:13.218Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 416,
+      "kind": "annonce",
+      "title": "Introducing the Grid Protectors Program",
+      "announced_at": "2026-11-02T15:00:00.000Z",
+      "first_seen_at": "2026-11-02T20:12:12.545Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Global Affairs"
+      ],
+      "source": {
+        "id": "feed:openai-news",
+        "name": "OpenAI News — flux RSS officiel",
+        "url": "https://openai.com/index/grid-protectors-program"
+      },
+      "excerpt": "OpenAI’s Grid Protectors Program will work with utilities to help future compute campuses support grid reliability and protect consumer electricity costs.",
+      "capture": {
+        "content_hash": "2923c9d6b6f9d0151039db1917a8a41a17794a147f27649e56b1bd52430fdd3b",
+        "captured_at": "2026-11-02T20:12:12.545Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 430,
+      "kind": "annonce",
+      "title": "Why voice wins for complex, stressful conversations",
+      "announced_at": "2026-11-02T12:00:00.000Z",
+      "first_seen_at": "2026-11-02T20:12:14.087Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Product"
+      ],
+      "source": {
+        "id": "feed:elevenlabs",
+        "name": "ElevenLabs Blog — flux RSS officiel",
+        "url": "https://elevenlabs.io/blog/voice-wins-complex-stressful-conversations"
+      },
+      "excerpt": "In conversations longer than two minutes, voice succeeded 32% more often than text-based chat. Voice also resolves longer conversations faster.",
+      "capture": {
+        "content_hash": "743f99fe05193eff5dffe0b2bc19154826ef2fddb7e8e9ee2fc3ff094c368003",
+        "captured_at": "2026-11-02T20:12:14.087Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 429,
+      "kind": "annonce",
+      "title": "Introducing SFX v3 for developers",
+      "announced_at": "2026-11-02T12:00:00.000Z",
+      "first_seen_at": "2026-11-02T20:12:14.087Z",
+      "product": null,
+      "version": null,
+      "categories": [],
+      "source": {
+        "id": "feed:elevenlabs",
+        "name": "ElevenLabs Blog — flux RSS officiel",
+        "url": "https://elevenlabs.io/blog/sfx-v3-for-developers"
+      },
+      "excerpt": "&)]:tw-overflow-x-hidden\"> strong]:tw-font-normal tw-text-gray-600\"> Introducing Eleven v4 Meet Eleven v4, our most emotive model yet. Discover Skip to content Products Solutions Customers Resources Enterprise Pricing Log in Sign up Contact…",
+      "capture": {
+        "content_hash": "62cec7d5ef550fa00774e04c697f661c4dbc1c14a725d36cd9201a451be7986d",
+        "captured_at": "2026-11-03T07:28:05.723Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 428,
+      "kind": "annonce",
+      "title": "How KPN is bringing voice AI to the Netherlands' entrepreneurs with Mobiel AI",
+      "announced_at": "2026-11-02T12:00:00.000Z",
+      "first_seen_at": "2026-11-02T20:12:14.087Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Customer Stories"
+      ],
+      "source": {
+        "id": "feed:elevenlabs",
+        "name": "ElevenLabs Blog — flux RSS officiel",
+        "url": "https://elevenlabs.io/blog/kpn-mobiel-ai"
+      },
+      "excerpt": "KPN partnered with ElevenLabs to build Mobiel AI, an AI assistant inside KPN's business mobile plans that helps Dutch entrepreneurs manage every call.",
+      "capture": {
+        "content_hash": "1b4535038ea400db869af8d4ebfaf74dd154f8f3625bd8a4d06813e615a2cb3f",
+        "captured_at": "2026-11-02T20:12:14.087Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 417,
+      "kind": "annonce",
+      "title": "LifeVal",
+      "announced_at": "2026-11-02T09:00:00.000Z",
+      "first_seen_at": "2026-11-02T20:12:12.545Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Research"
+      ],
+      "source": {
+        "id": "feed:openai-news",
+        "name": "OpenAI News — flux RSS officiel",
+        "url": "https://openai.com/index/lifeval"
+      },
+      "excerpt": "Introducing LifeVal, a benchmark measuring how well AI helps people complete everyday tasks, from finding childcare to managing finances and government paperwork.",
+      "capture": {
+        "content_hash": "2d81e9005600ae67b74f37e5d2c9268a3a2e1dcfe120e85a3fd044aa16986c5b",
+        "captured_at": "2026-11-02T20:12:12.545Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 439,
+      "kind": "annonce",
+      "title": "Export shaders at higher resolutions and bring them into code layers",
+      "announced_at": "2026-11-02T00:00:00.000Z",
+      "first_seen_at": "2026-11-02T20:12:17.037Z",
+      "product": null,
+      "version": null,
+      "categories": [],
+      "source": {
+        "id": "feed:figma-release-notes",
+        "name": "Figma, notes de version — flux Atom officiel",
+        "url": "https://www.figma.com/release-notes?title=export-shaders-at-higher-resolutions-and-bring-them-into-code-layers"
+      },
+      "excerpt": "Shaders now render and export at higher resolutions and can be exported into code layers.",
+      "capture": {
+        "content_hash": "7fa7ea9c6d288ef9157d4022d2277ac009add4672419c3eba3a8417906483ded",
+        "captured_at": "2026-11-02T20:12:17.037Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 418,
+      "kind": "annonce",
+      "title": "Qodo builds context into AI code review with Codex",
+      "announced_at": "2026-11-02T00:00:00.000Z",
+      "first_seen_at": "2026-11-02T20:12:12.545Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Startup"
+      ],
+      "source": {
+        "id": "feed:openai-news",
+        "name": "OpenAI News — flux RSS officiel",
+        "url": "https://openai.com/index/qodo-codex-plugin"
+      },
+      "excerpt": "Qodo brings company knowledge and coding standards into Codex, helping developers catch P0 issues across repositories before opening a pull request.",
+      "capture": {
+        "content_hash": "3f15d692b5d08b031382b8c9564574dc3e893751f6a0ac60e5a4556712686bae",
+        "captured_at": "2026-11-02T20:12:12.545Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 433,
+      "kind": "annonce",
+      "title": "8 Best AI Image Upscalers in 2026 (Free and Paid)",
+      "announced_at": "2026-10-31T13:57:00.000Z",
+      "first_seen_at": "2026-11-02T20:12:15.895Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Comparisons"
+      ],
+      "source": {
+        "id": "feed:higgsfield",
+        "name": "Higgsfield Blog — flux RSS officiel",
+        "url": "https://higgsfield.ai/blog/best-ai-image-upscalers-2026"
+      },
+      "excerpt": null,
+      "capture": {
+        "content_hash": "22bdc4480b70ca43e28699dd6a4e07863458bc1361b7f7d63b1e0975cbd6bfd9",
+        "captured_at": "2026-11-02T20:12:15.895Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 434,
+      "kind": "annonce",
+      "title": "How to Make an Anime Series with AI on Higgsfield",
+      "announced_at": "2026-10-31T13:03:00.000Z",
+      "first_seen_at": "2026-11-02T20:12:15.895Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Guides"
+      ],
+      "source": {
+        "id": "feed:higgsfield",
+        "name": "Higgsfield Blog — flux RSS officiel",
+        "url": "https://higgsfield.ai/blog/how-to-make-anime-series-with-ai"
+      },
+      "excerpt": null,
+      "capture": {
+        "content_hash": "d8adcc30b6fdee09412ec034bc1838cfc9c215aa8ffbecaae173c2f4b733fa24",
+        "captured_at": "2026-11-02T20:12:15.895Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 415,
+      "kind": "version",
+      "title": "Claude Code 2.1.316",
+      "announced_at": "2026-10-31T01:01:35.000Z",
+      "first_seen_at": "2026-11-02T20:12:10.009Z",
+      "product": {
+        "key": "anthropic/claude-code",
+        "name": "Claude Code",
+        "publisher": "Anthropic",
+        "category": "assistant de code",
+        "repository_url": "https://github.com/anthropics/claude-code"
+      },
+      "version": "2.1.316",
+      "categories": [],
+      "source": {
+        "id": "github-releases:anthropics/claude-code",
+        "name": "Claude Code — releases GitHub officielles",
+        "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.316"
+      },
+      "excerpt": "Added CLAUDE_CODE_DISABLE_ULTRATHINK, which turns the ultrathink keyword off Added pooled group budgets to the Claude apps gateway: one monthly budget that a group's members share, on top of each member's own limit, set with pooled_budget…",
+      "capture": {
+        "content_hash": "b5fcb95eb49825f261b8ba6d83b70f1860aee51fbdd2c501388927b7eeb36773",
+        "captured_at": "2026-11-02T20:12:10.009Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 435,
+      "kind": "annonce",
+      "title": "7 Best AI UGC Video Tools for Marketing Agencies in 2026",
+      "announced_at": "2026-10-30T20:30:00.000Z",
+      "first_seen_at": "2026-11-02T20:12:15.895Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Comparisons"
+      ],
+      "source": {
+        "id": "feed:higgsfield",
+        "name": "Higgsfield Blog — flux RSS officiel",
+        "url": "https://higgsfield.ai/blog/best-ai-ugc-video-tools-agencies-2026"
+      },
+      "excerpt": null,
+      "capture": {
+        "content_hash": "524ebc16bc7af5a0bcac3edd5d743bc3f590208d276d349c7801451656529226",
+        "captured_at": "2026-11-02T20:12:15.895Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 436,
+      "kind": "annonce",
+      "title": "How to Make Product Videos with AI in 2026 (Full Guide)",
+      "announced_at": "2026-10-30T19:00:00.000Z",
+      "first_seen_at": "2026-11-02T20:12:15.895Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Guides"
+      ],
+      "source": {
+        "id": "feed:higgsfield",
+        "name": "Higgsfield Blog — flux RSS officiel",
+        "url": "https://higgsfield.ai/blog/ai-product-videos-no-studio"
+      },
+      "excerpt": null,
+      "capture": {
+        "content_hash": "44bd22cec80c73e42893ba5d56b105d394718cba834d0f3020a99922b33de008",
+        "captured_at": "2026-11-02T20:12:15.895Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 437,
+      "kind": "annonce",
+      "title": "Higgsfield’s New 7-Day Unlimited Bonus: Models, Plans, and Limits",
+      "announced_at": "2026-10-30T18:04:00.000Z",
+      "first_seen_at": "2026-11-02T20:12:15.895Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Editorials"
+      ],
+      "source": {
+        "id": "feed:higgsfield",
+        "name": "Higgsfield Blog — flux RSS officiel",
+        "url": "https://higgsfield.ai/blog/higgsfield-7-day-unlimited-bonus"
+      },
+      "excerpt": null,
+      "capture": {
+        "content_hash": "b379bfcf95dd1d705aa87ab44daa5e90c727023c23732dc9a8f11bd834d7369c",
+        "captured_at": "2026-11-02T20:12:15.895Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 426,
+      "kind": "annonce",
+      "title": "nemotron-halloween",
+      "announced_at": "2026-10-30T17:57:24.000Z",
+      "first_seen_at": "2026-11-02T20:12:13.861Z",
+      "product": null,
+      "version": null,
+      "categories": [],
+      "source": {
+        "id": "feed:huggingface-blog",
+        "name": "Hugging Face Blog — flux RSS officiel",
+        "url": "https://huggingface.co/blog/nvidia/nemotron-halloween"
+      },
+      "excerpt": null,
+      "capture": {
+        "content_hash": "169047d20d55620c0ab8a9da66183030884e974fc9387fc90041b0cfb3fc8930",
+        "captured_at": "2026-11-02T20:12:13.861Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 441,
+      "kind": "annonce",
+      "title": "Throttling vs. Rate Limiting: Backoff Strategies for Workflows",
+      "announced_at": "2026-10-30T16:30:34.000Z",
+      "first_seen_at": "2026-11-02T20:12:19.031Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Guides",
+        "ITOps"
+      ],
+      "source": {
+        "id": "feed:n8n",
+        "name": "Blog n8n — flux RSS officiel",
+        "url": "https://blog.n8n.io/throttling-vs-rate-limiting"
+      },
+      "excerpt": "A burst of 429 (Too Many Requests) errors can bring an otherwise healthy workflow to a halt. Retrying is part of the solution, but timing matters: Retry too quickly and you’re likely to hit the same limit again. Understanding throttling…",
+      "capture": {
+        "content_hash": "35aa69be618de49f1832ab58e39a76d0c13980430121c2d8cec9172f09659b1a",
+        "captured_at": "2026-11-02T20:12:19.031Z",
+        "mode": "live"
+      }
+    },
+    {
       "id": 200,
       "kind": "annonce",
       "title": "9 Best AI Filmmaking Tools for Short Films in 2026",
@@ -2015,7 +2496,7 @@ window.DONNEES_MAQUETTE = {
       "product": null,
       "version": null,
       "categories": [
-        "Listicles"
+        "Comparisons"
       ],
       "source": {
         "id": "feed:higgsfield",
@@ -2026,6 +2507,29 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "68b6190ab513afd0f4c64eab06dc67c4a81261f31968f500cfa3b73ca7e5fd9a",
         "captured_at": "2026-10-30T14:44:29.351Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 431,
+      "kind": "annonce",
+      "title": "Warm transfer vs cold transfer: choosing the right call",
+      "announced_at": "2026-10-30T12:00:00.000Z",
+      "first_seen_at": "2026-11-02T20:12:14.087Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Resources"
+      ],
+      "source": {
+        "id": "feed:elevenlabs",
+        "name": "ElevenLabs Blog — flux RSS officiel",
+        "url": "https://elevenlabs.io/blog/warm-transfer-vs-cold-transfer"
+      },
+      "excerpt": "Learn the difference between a warm transfer vs cold transfer, when to use each, and how AI voice agents hand calls to a human with full context.",
+      "capture": {
+        "content_hash": "566fbbee0135bad092e5bc20c59aef673f9659900a020e1fab6d091488cb443e",
+        "captured_at": "2026-11-02T20:12:14.087Z",
         "mode": "live"
       }
     },
@@ -2053,6 +2557,52 @@ window.DONNEES_MAQUETTE = {
       }
     },
     {
+      "id": 419,
+      "kind": "annonce",
+      "title": "Making it easier for websites to express AI training preferences",
+      "announced_at": "2026-10-30T09:30:00.000Z",
+      "first_seen_at": "2026-11-02T20:12:12.545Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Company"
+      ],
+      "source": {
+        "id": "feed:openai-news",
+        "name": "OpenAI News — flux RSS officiel",
+        "url": "https://openai.com/index/helping-websites-express-ai-training-preferences"
+      },
+      "excerpt": "OpenAI will honor a shared robots.txt signal to help website operators communicate their AI training preferences to participating providers.",
+      "capture": {
+        "content_hash": "401279770464274b22690966164be351a64fa37f23ac8eef656add4725e0e723",
+        "captured_at": "2026-11-02T20:12:12.545Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 420,
+      "kind": "annonce",
+      "title": "Community safety report and new protections for teens",
+      "announced_at": "2026-10-30T09:00:00.000Z",
+      "first_seen_at": "2026-11-02T20:12:12.545Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Safety"
+      ],
+      "source": {
+        "id": "feed:openai-news",
+        "name": "OpenAI News — flux RSS officiel",
+        "url": "https://openai.com/index/community-safety-report-and-new-protections-for-teens"
+      },
+      "excerpt": "OpenAI is strengthening violence prevention in ChatGPT with expanded safeguards, earlier interventions, and a new commitment to public safety reporting.",
+      "capture": {
+        "content_hash": "e3bf8e4f54afdda0ec5442af50c2e068e7d722bb0dba28d68a9dde67f468b500",
+        "captured_at": "2026-11-02T20:12:12.545Z",
+        "mode": "live"
+      }
+    },
+    {
       "id": 1,
       "kind": "version",
       "title": "Claude Code 2.1.314",
@@ -2076,6 +2626,50 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "507ed105989aeef86d23d87d9625d04099e41592df2965c7a6d21f676d26e4c1",
         "captured_at": "2026-10-30T01:26:38.899Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 440,
+      "kind": "annonce",
+      "title": "Connect Google Drive to the Figma agent, available on all plans",
+      "announced_at": "2026-10-30T00:00:00.000Z",
+      "first_seen_at": "2026-11-02T20:12:17.037Z",
+      "product": null,
+      "version": null,
+      "categories": [],
+      "source": {
+        "id": "feed:figma-release-notes",
+        "name": "Figma, notes de version — flux Atom officiel",
+        "url": "https://www.figma.com/release-notes?title=connect-google-drive-to-the-figma-agent-available-on-all-plans"
+      },
+      "excerpt": "Skip to main content Products What you can do in figma Design and explore Build and ship products Explore all products Figma Design Design and prototype in one place Figma Make Prompt to code anything you can imagine Figma Weave AI…",
+      "capture": {
+        "content_hash": "3ef8ec559fc1a3f4f30de4f5eced91a55d06746a65bdd518fe9ccc42d1758d20",
+        "captured_at": "2026-11-03T07:28:07.074Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 421,
+      "kind": "annonce",
+      "title": "Fair use benefits everyone",
+      "announced_at": "2026-10-30T00:00:00.000Z",
+      "first_seen_at": "2026-11-02T20:12:12.545Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Company"
+      ],
+      "source": {
+        "id": "feed:openai-news",
+        "name": "OpenAI News — flux RSS officiel",
+        "url": "https://openai.com/index/fair-use-benefits-everyone"
+      },
+      "excerpt": "OpenAI shares excerpts from court briefs by creators, academics, accessibility advocates, and legal experts, among others, on how fair use supports AI training and innovation.",
+      "capture": {
+        "content_hash": "86a3d2d25b227083c9fcfc08b6ca2867d3ce6c88c9f3487634a32f4a652daebe",
+        "captured_at": "2026-11-02T20:12:12.545Z",
         "mode": "live"
       }
     },
@@ -2154,6 +2748,29 @@ window.DONNEES_MAQUETTE = {
       }
     },
     {
+      "id": 438,
+      "kind": "annonce",
+      "title": "How Much Does It Cost to Make an AI Video in 2026? Real Cost per Finished Video",
+      "announced_at": "2026-10-29T19:36:00.000Z",
+      "first_seen_at": "2026-11-02T20:12:15.895Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Guides"
+      ],
+      "source": {
+        "id": "feed:higgsfield",
+        "name": "Higgsfield Blog — flux RSS officiel",
+        "url": "https://higgsfield.ai/blog/how-much-does-ai-video-cost-2026"
+      },
+      "excerpt": null,
+      "capture": {
+        "content_hash": "487d09c1747d5ff73f41fccd94ee3ec2912a804e3e97f5ab3b8afddc05322dbd",
+        "captured_at": "2026-11-02T20:12:15.895Z",
+        "mode": "live"
+      }
+    },
+    {
       "id": 35,
       "kind": "annonce",
       "title": "Webhook IP ranges added to the Meta API",
@@ -2216,10 +2833,10 @@ window.DONNEES_MAQUETTE = {
         "name": "Google The Keyword, Gemini — flux RSS officiel",
         "url": "https://blog.google/innovation-and-ai/products/gemini-app/edit-files-directly"
       },
-      "excerpt": "Generate, edit, and preview PDFs or Docs directly in Gemini. Use the new full-screen editor to refine your files today. See what's new in Gemini.",
+      "excerpt": "Skip to main content Innovation & AI Products & platforms Company news Feed Newsletter Back Innovation & AI See all in Innovation & AI Models & Research Google DeepMind Google Research Google Labs Gemini models Quantum computing See all…",
       "capture": {
-        "content_hash": "c4e26e7784f5a09861bac809f1c691ae36dcca0384666e3eae8818bc1cb1f91a",
-        "captured_at": "2026-10-30T09:55:59.086Z",
+        "content_hash": "0ecad372a6e4f60935060450e108a165a1ceaf305cb443a6c2d699dff67872f7",
+        "captured_at": "2026-11-03T07:27:52.374Z",
         "mode": "live"
       }
     },
@@ -2232,6 +2849,7 @@ window.DONNEES_MAQUETTE = {
       "product": null,
       "version": null,
       "categories": [
+        "Learning & Education",
         "Gemini Notebook"
       ],
       "source": {
@@ -2239,10 +2857,10 @@ window.DONNEES_MAQUETTE = {
         "name": "Gemini Notebook — flux RSS officiel",
         "url": "https://blog.google/innovation-and-ai/products/gemini-notebook/new-access-textbooks"
       },
-      "excerpt": "Add textbooks from OpenStax and S Chand to Google Gemini Notebook. Generate custom study guides and quizzes now. See the available catalog.",
+      "excerpt": "Skip to main content Innovation & AI Products & platforms Company news Feed Newsletter Back Innovation & AI See all in Innovation & AI Models & Research Google DeepMind Google Research Google Labs Gemini models Quantum computing See all…",
       "capture": {
-        "content_hash": "837f057a960dbf58b129c1f65b2a661553c01ae41de887e3c2e9a703532da4e0",
-        "captured_at": "2026-10-30T14:44:28.834Z",
+        "content_hash": "6479f1344fee7141a8f87afc3ea03c2c466a9275aeecd7ce72efb91de7da89e7",
+        "captured_at": "2026-11-03T07:28:00.826Z",
         "mode": "live"
       }
     },
@@ -2302,7 +2920,7 @@ window.DONNEES_MAQUETTE = {
       "product": null,
       "version": null,
       "categories": [
-        "Listicles"
+        "Comparisons"
       ],
       "source": {
         "id": "feed:higgsfield",
@@ -2330,10 +2948,10 @@ window.DONNEES_MAQUETTE = {
         "name": "Mistral AI — flux RSS officiel",
         "url": "https://mistral.ai/news/mistral-large-4-oss"
       },
-      "excerpt": "The weights of Mistral Large 4 (Le Chonk) are now open. A 1T parameter multimodal model, and best open-weight model for coding, trained in Europe.",
+      "excerpt": "Get in touch Menu Research Sovereign AI Cloud Customers Company Get in touch Login Why Sovereign AI Products Method Sovereign AI in practice Inference Compute Energy & utilities Manufacturing Financial services Public sector Cybersecurity…",
       "capture": {
-        "content_hash": "2753b2dfe85b135e3daffcdba9cd28f5824d28a945bd3ee72dcf887fb0579a03",
-        "captured_at": "2026-10-30T14:44:25.168Z",
+        "content_hash": "08b38ffeaee0260cb4063161161b2c54a3028b89ca82d728f1bc1e7920704b4f",
+        "captured_at": "2026-11-03T07:27:55.287Z",
         "mode": "live"
       }
     },
@@ -2353,10 +2971,10 @@ window.DONNEES_MAQUETTE = {
         "name": "ElevenLabs Blog — flux RSS officiel",
         "url": "https://elevenlabs.io/blog/sound-effects-v3"
       },
-      "excerpt": "SFX v3 is here: more reliable multi-sound prompts, more convincing music and vocals, and cleaner audio. Now in ElevenCreative and ElevenAPI.",
+      "excerpt": "&)]:tw-overflow-x-hidden\"> strong]:tw-font-normal tw-text-gray-600\"> Introducing Eleven v4 Meet Eleven v4, our most emotive model yet. Discover Skip to content Products Solutions Customers Resources Enterprise Pricing Log in Sign up Contact…",
       "capture": {
-        "content_hash": "1dbdd35089230f7f876bf47c3fde2db09940677537055c14270fab918b73b74b",
-        "captured_at": "2026-10-30T14:44:26.069Z",
+        "content_hash": "2e4aa5a6414372956a93c5c240e0a7f4ce0f622aef41452e24944ed57f73efb7",
+        "captured_at": "2026-11-03T07:27:56.809Z",
         "mode": "live"
       }
     },
@@ -2470,8 +3088,8 @@ window.DONNEES_MAQUETTE = {
       },
       "excerpt": "Grid view in the web app now comes in three sizes — small, medium, and large. Go small when you want to scan a lot of documents at once. Go large when you need a proper look at each thumbnail before you open it. To change the size, click…",
       "capture": {
-        "content_hash": "130aeccb857e6a03c2f706cb0080aa627c48a101ff31fa1f648d89c8b8cd26b0",
-        "captured_at": "2026-10-30T14:44:32.017Z",
+        "content_hash": "925d48c2a7c2ee85945dc5fba8ebfae7a0a70557ae088a15cdaaa392d28b50a0",
+        "captured_at": "2026-11-02T20:12:18.620Z",
         "mode": "live"
       }
     },
@@ -2516,6 +3134,27 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "03838a50e1258891cb9ef1730434b2518a7fcd61df93c0b5858889f87e761ca7",
         "captured_at": "2026-10-30T02:25:19.448Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 422,
+      "kind": "annonce",
+      "title": "Credit Saison achieves 954% ROI in a ChatGPT Enterprise pilot",
+      "announced_at": "2026-10-29T00:00:00.000Z",
+      "first_seen_at": "2026-11-02T20:12:12.545Z",
+      "product": null,
+      "version": null,
+      "categories": [],
+      "source": {
+        "id": "feed:openai-news",
+        "name": "OpenAI News — flux RSS officiel",
+        "url": "https://openai.com/index/credit-saison"
+      },
+      "excerpt": "Credit Saison’s ChatGPT Enterprise pilot delivered 954% ROI. See how leaders and employees helped turn the results into companywide adoption.",
+      "capture": {
+        "content_hash": "f1002810db807c2fc077d96b944663dd456d3eea4abe2578a34f72cb089a6037",
+        "captured_at": "2026-11-02T20:12:12.545Z",
         "mode": "live"
       }
     },
@@ -2591,7 +3230,7 @@ window.DONNEES_MAQUETTE = {
       "product": null,
       "version": null,
       "categories": [
-        "Listicles"
+        "Comparisons"
       ],
       "source": {
         "id": "feed:higgsfield",
@@ -2669,10 +3308,10 @@ window.DONNEES_MAQUETTE = {
         "name": "Suno, notes de version — flux RSS officiel",
         "url": "https://suno.com/release-notes/suno-mcp-beta"
       },
-      "excerpt": "Connect Suno to Claude, ChatGPT, Claude Code and other MCP clients, then create music in the workspace you're already in, no tab-switching needed. Here’s what you can do: Create songs conversationally: Describe it in plain words, ideate on…",
+      "excerpt": "Oct 28, 2026 Suno MCP (beta) New Feature Web Create Connect Suno to Claude, ChatGPT, Claude Code and other MCP clients, then create music in the workspace you're already in, no tab-switching needed. Here’s what you can do: Create songs…",
       "capture": {
-        "content_hash": "fe0646801d8d16b5a595e5fa8b460f6551f2008cf7da3395c14bd4ddcaf7a65a",
-        "captured_at": "2026-10-30T14:44:26.631Z",
+        "content_hash": "0daae83daf1028a3c5fcef527b07fb6cf273eb3e508d65ee73d47f111a0aa003",
+        "captured_at": "2026-11-03T07:27:59.396Z",
         "mode": "live"
       }
     },
@@ -2693,10 +3332,10 @@ window.DONNEES_MAQUETTE = {
         "name": "Google The Keyword, Gemini — flux RSS officiel",
         "url": "https://blog.google/innovation-and-ai/products/gemini-app/immersive-explorations-student-hub"
       },
-      "excerpt": "Today, we are rolling out immersive explorations in the new Gemini student hub.",
+      "excerpt": "Skip to main content Innovation & AI Products & platforms Company news Feed Newsletter Back Innovation & AI See all in Innovation & AI Models & Research Google DeepMind Google Research Google Labs Gemini models Quantum computing See all…",
       "capture": {
-        "content_hash": "885224450dc6b9c17aae0cbb3ce9e0e0d289d1619ac0d637d65f2883c37a2921",
-        "captured_at": "2026-10-30T09:55:59.086Z",
+        "content_hash": "9c1bd1276b00bc88aab8911f9cf8f0ff3b458a6bc332d1402f8d146884e4e8a7",
+        "captured_at": "2026-11-03T07:27:53.127Z",
         "mode": "live"
       }
     },
@@ -2718,10 +3357,10 @@ window.DONNEES_MAQUETTE = {
         "name": "Google The Keyword, Gemini — flux RSS officiel",
         "url": "https://blog.google/innovation-and-ai/technology/developers-tools/connected-apps-one-place"
       },
-      "excerpt": "A split-screen graphic showing a Google search interface connecting to Gemini to confirm a dinner reservation.",
+      "excerpt": "Skip to main content Build and manage Connected Apps in one place Innovation & AI Products & platforms Company news Feed Newsletter Back Innovation & AI See all in Innovation & AI Models & Research Google DeepMind Google Research Google…",
       "capture": {
-        "content_hash": "7dfcf8af8d76524703ac8d205c150990b6c09f8e02d435770a176a9f08669f88",
-        "captured_at": "2026-10-30T09:55:59.086Z",
+        "content_hash": "482bb4a1bb4d52d372473e37d8f4eb1c99c4e11cdfbb75d496dfd2ab6d53cb7f",
+        "captured_at": "2026-11-03T07:27:54.612Z",
         "mode": "live"
       }
     },
@@ -2766,10 +3405,10 @@ window.DONNEES_MAQUETTE = {
         "name": "Google The Keyword, Gemini — flux RSS officiel",
         "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-carbon"
       },
-      "excerpt": "Faceted iridescent crystal surrounded by floating white number 4s.",
+      "excerpt": "Skip to main content Gemini 4 Carbon: our next frontier model Innovation & AI Products & platforms Company news Feed Newsletter Back Innovation & AI See all in Innovation & AI Models & Research Google DeepMind Google Research Google Labs…",
       "capture": {
-        "content_hash": "47ec5d61d19d8797ac345c7e19decd40a71885feebb51df2dc6e144cd491990a",
-        "captured_at": "2026-10-30T09:55:59.086Z",
+        "content_hash": "bf91c45b8ceaf0ea242356b93033b43021854e553e421c8075bc944c768ea367",
+        "captured_at": "2026-11-03T07:27:53.824Z",
         "mode": "live"
       }
     },
@@ -2782,7 +3421,7 @@ window.DONNEES_MAQUETTE = {
       "product": null,
       "version": null,
       "categories": [
-        "Listicles"
+        "Comparisons"
       ],
       "source": {
         "id": "feed:higgsfield",
@@ -3084,10 +3723,10 @@ window.DONNEES_MAQUETTE = {
         "name": "ElevenLabs Blog — flux RSS officiel",
         "url": "https://elevenlabs.io/blog/cue-aligner"
       },
-      "excerpt": "Meet Cue, ElevenLabs’ forced alignment model: character-level timestamps, any recording length, and an hour of audio aligned in under a second.",
+      "excerpt": "&)]:tw-overflow-x-hidden\"> strong]:tw-font-normal tw-text-gray-600\"> Introducing Eleven v4 Meet Eleven v4, our most emotive model yet. Discover Skip to content Products Solutions Customers Resources Enterprise Pricing Log in Sign up Contact…",
       "capture": {
-        "content_hash": "9edb5048a1e22ae5a679420ab5be36f660a1aa65d5c132ea96c49b58f2229528",
-        "captured_at": "2026-10-30T14:44:26.069Z",
+        "content_hash": "a1bee4f9d89120ffa3de923782be83fbec55fc92a3cdee01d97a8cc44ab05358",
+        "captured_at": "2026-11-03T07:27:57.390Z",
         "mode": "live"
       }
     },
@@ -3236,7 +3875,7 @@ window.DONNEES_MAQUETTE = {
       "product": null,
       "version": null,
       "categories": [
-        "Listicles"
+        "Comparisons"
       ],
       "source": {
         "id": "feed:higgsfield",
@@ -3363,7 +4002,7 @@ window.DONNEES_MAQUETTE = {
       "product": null,
       "version": null,
       "categories": [
-        "Listicles"
+        "Comparisons"
       ],
       "source": {
         "id": "feed:higgsfield",
@@ -3506,6 +4145,29 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "cf78e8b55f60af79a6597e48673d441863f0fbfcfb8da019d65e5dcfd9b10dcc",
         "captured_at": "2026-10-30T14:44:29.351Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 432,
+      "kind": "annonce",
+      "title": "When AI comes knocking, how governments can prepare",
+      "announced_at": "2026-10-27T12:00:00.000Z",
+      "first_seen_at": "2026-11-02T20:12:14.087Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Product"
+      ],
+      "source": {
+        "id": "feed:elevenlabs",
+        "name": "ElevenLabs Blog — flux RSS officiel",
+        "url": "https://elevenlabs.io/blog/ai-knocking-how-governments-prepare"
+      },
+      "excerpt": "Citizens are using AI agents to call government services. Learn how to prepare for agentic flooding with synthetic voice detection and AI agents.",
+      "capture": {
+        "content_hash": "ae719d990cbb6f659227915edd29d3fabeed4e9b831552bf0881d6bafa6c0f65",
+        "captured_at": "2026-11-02T20:12:14.087Z",
         "mode": "live"
       }
     },
@@ -3700,7 +4362,7 @@ window.DONNEES_MAQUETTE = {
       "product": null,
       "version": null,
       "categories": [
-        "Listicles"
+        "Comparisons"
       ],
       "source": {
         "id": "feed:higgsfield",
@@ -3909,10 +4571,10 @@ window.DONNEES_MAQUETTE = {
         "name": "Figma, notes de version — flux Atom officiel",
         "url": "https://www.figma.com/release-notes?title=access-video-and-image-models-from-figma-weave-via-the-figma-mcp"
       },
-      "excerpt": "All of the video and image models available through Figma Weave are now accessible in your AI agent via the Figma MCP.",
+      "excerpt": "Skip to main content Products What you can do in figma Design and explore Build and ship products Explore all products Figma Design Design and prototype in one place Figma Make Prompt to code anything you can imagine Figma Weave AI…",
       "capture": {
-        "content_hash": "93d5ddd7ad85072e87fda1e2c8c035f2c670628abae289ca587634bf1a855168",
-        "captured_at": "2026-10-30T14:44:30.964Z",
+        "content_hash": "39aa601b7cb575422555fbc7a458c1a742b84b968ed070579f9b82be1342da4a",
+        "captured_at": "2026-11-03T07:28:02.944Z",
         "mode": "live"
       }
     },
@@ -4145,10 +4807,10 @@ window.DONNEES_MAQUETTE = {
         "name": "Suno, notes de version — flux RSS officiel",
         "url": "https://suno.com/release-notes/suno-on-ios-update"
       },
-      "excerpt": "iPhone Duo support. New phone, same Suno. The app is now built to fit the iPhone Duo screen. AirPlay. Play your songs and playlists on any AirPlay-compatible speaker, TV or smart home device. Tap the AirPlay icon in the top right of the…",
+      "excerpt": "Oct 23, 2026 Updates for Suno on iOS New Feature iOS Library and Explore iPhone Duo support New phone, same Suno. The app is now built to fit the iPhone Duo screen. AirPlay Play your songs and playlists on any AirPlay-compatible speaker, TV…",
       "capture": {
-        "content_hash": "e6bf4d8b4a2761e801bd262e3d88f64a306da8de374a0be7ae844a4ceb6557c9",
-        "captured_at": "2026-10-30T14:44:26.631Z",
+        "content_hash": "bd083d8be4203f5b1d3003df45583bc307e4413eace3d80c28e783341c60b06e",
+        "captured_at": "2026-11-03T07:28:00.094Z",
         "mode": "live"
       }
     },
@@ -4304,10 +4966,10 @@ window.DONNEES_MAQUETTE = {
         "name": "Spline Changelog — flux RSS officiel",
         "url": "https://spline.design/changelog/3d-comments-improvements"
       },
-      "excerpt": "Comments in the 3D editor have been rebuilt: a comments panel, real resolve, unread markers and previews on the canvas. Spline's AI agent can now work from comments too. Ask AI on a thread and it makes the change, looks from the commenter's…",
+      "excerpt": "Spline Products Resources Customers Enterprise Pricing Talk to sales Start building Changelog October 23, 2026 Improved 3D editor comments, now with AI Comments in the 3D editor have been rebuilt: a comments panel, real resolve, unread…",
       "capture": {
-        "content_hash": "8c0daf328d4de85732f63f0bd663f73c6a13705d9f9d89a55f80baa8fbbf9b5f",
-        "captured_at": "2026-10-30T14:44:31.260Z",
+        "content_hash": "02be455564e3aecf2e1d6403ab6aca9f13fa61a8b759ad1384dd8517100cdb36",
+        "captured_at": "2026-11-03T07:28:05.032Z",
         "mode": "live"
       }
     },
@@ -4325,10 +4987,10 @@ window.DONNEES_MAQUETTE = {
         "name": "Figma, notes de version — flux Atom officiel",
         "url": "https://www.figma.com/release-notes?title=iphone-duo-and-iphone-18-frame-presets-now-available-wherever-you-design-and-prototype"
       },
-      "excerpt": "Frame presets for iPhone Duo and iPhone 18 are now available wherever you can select a mobile frame in Figma.",
+      "excerpt": "Skip to main content Products What you can do in figma Design and explore Build and ship products Explore all products Figma Design Design and prototype in one place Figma Make Prompt to code anything you can imagine Figma Weave AI…",
       "capture": {
-        "content_hash": "5b400f32168225b0d4f4bc0fc981fe4d525cf7d027782470d6510de0e12ea20e",
-        "captured_at": "2026-10-30T14:44:30.964Z",
+        "content_hash": "d294f3cf1ffe61c33513ff917fc8be306dbc34dcaf4b7992ab5aca5ede8fabb1",
+        "captured_at": "2026-11-03T07:28:04.521Z",
         "mode": "live"
       }
     },
@@ -4737,10 +5399,10 @@ window.DONNEES_MAQUETTE = {
         "name": "ElevenLabs Blog — flux RSS officiel",
         "url": "https://elevenlabs.io/blog/realtime-translation"
       },
-      "excerpt": "Deliver live, expressive voice translation in more than 90 languages. Available for enterprises via ElevenAPI",
+      "excerpt": "&)]:tw-overflow-x-hidden\"> strong]:tw-font-normal tw-text-gray-600\"> Introducing Eleven v4 Meet Eleven v4, our most emotive model yet. Discover Skip to content Products Solutions Customers Resources Enterprise Pricing Log in Sign up Contact…",
       "capture": {
-        "content_hash": "e228ddcdcac6de0ad8f419e994a1186ca6cb3d9486e080a88407548916551724",
-        "captured_at": "2026-10-30T14:44:26.069Z",
+        "content_hash": "c893c35890ef4dbe31e726dc8aa296248a85643dbad345932fe4dcf9d99c289f",
+        "captured_at": "2026-11-03T07:27:58.104Z",
         "mode": "live"
       }
     },
@@ -4908,10 +5570,10 @@ window.DONNEES_MAQUETTE = {
         "name": "Mistral AI — flux RSS officiel",
         "url": "https://mistral.ai/news/voxtral-3"
       },
-      "excerpt": "Voxtral 3: Mistral's voice agent SDK for real-time speech in 50+ languages, accurate transcription, emotional TTS, deep tool use.",
+      "excerpt": "Get in touch Menu Research Sovereign AI Cloud Customers Company Get in touch Login Why Sovereign AI Products Method Sovereign AI in practice Inference Compute Energy & utilities Manufacturing Financial services Public sector Cybersecurity…",
       "capture": {
-        "content_hash": "3daeafee6b9e85be14edab4d80195c5b1c5de46e587c9c654f26a39ef366e4de",
-        "captured_at": "2026-10-30T14:44:25.168Z",
+        "content_hash": "89be207bec3d7d2c2b5d61c32abfeb4c6135b3a92bc07c22adebb4d8e6a88d7e",
+        "captured_at": "2026-11-03T07:27:56.189Z",
         "mode": "live"
       }
     },
@@ -4954,10 +5616,10 @@ window.DONNEES_MAQUETTE = {
         "name": "ElevenLabs Blog — flux RSS officiel",
         "url": "https://elevenlabs.io/blog/realtime"
       },
-      "excerpt": "Eleven Realtime is a new class of Speech to Speech models for voice agents that sound natural. Available in ElevenAgents and the Realtime API.",
+      "excerpt": "&)]:tw-overflow-x-hidden\"> strong]:tw-font-normal tw-text-gray-600\"> Introducing Eleven v4 Meet Eleven v4, our most emotive model yet. Discover Skip to content Products Solutions Customers Resources Enterprise Pricing Log in Sign up Contact…",
       "capture": {
-        "content_hash": "cc7445b7c2ce9fac4b6f098387103252caca3e37ea70a2d6fba514dd948d603c",
-        "captured_at": "2026-10-30T14:44:26.069Z",
+        "content_hash": "1144fd3b105fc9c84d08fa98e2abe58a8cef99df23521c36c7081a03b08835fd",
+        "captured_at": "2026-11-03T07:27:58.678Z",
         "mode": "live"
       }
     },
@@ -5313,10 +5975,10 @@ window.DONNEES_MAQUETTE = {
         "name": "Gemini Notebook — flux RSS officiel",
         "url": "https://blog.google/innovation-and-ai/products/gemini-notebook/three-tips-study-gemini-notebook"
       },
-      "excerpt": "Master your exams with Google Gemini Notebook’s new 60-second video overviews and interactive quiz formats. Try these study tools at notebook.google.",
+      "excerpt": "Skip to main content Innovation & AI Products & platforms Company news Feed Newsletter Back Innovation & AI See all in Innovation & AI Models & Research Google DeepMind Google Research Google Labs Gemini models Quantum computing See all…",
       "capture": {
-        "content_hash": "e1b3a783200fb3bd3da1dff88b9250521ef695bc61498189b2dc3f3c6e304d13",
-        "captured_at": "2026-10-30T14:44:28.834Z",
+        "content_hash": "0cb35e282c247a0a30c8ecee44fc19849da6f3d748203acb8a60eb61ef794208",
+        "captured_at": "2026-11-03T07:28:01.600Z",
         "mode": "live"
       }
     },
@@ -5818,8 +6480,8 @@ window.DONNEES_MAQUETTE = {
       },
       "excerpt": "It’s a wrap! Yet another edition of the main Blender event of the year happened in the heart of Amsterdam, catching the very latest warm days of September. As is now tradition, BCON26 brought together artists, developers and contributors…",
       "capture": {
-        "content_hash": "1a1bf2f4c5fed8696b9e69d5c87eab11735d4dcf7666d4643dbc6a84ae168764",
-        "captured_at": "2026-10-30T14:44:30.155Z",
+        "content_hash": "b726f2cf3573ebc4513ddc61769a897ab902634d9637be96b499b5960762a703",
+        "captured_at": "2026-11-02T22:02:51.872Z",
         "mode": "live"
       }
     },
@@ -6120,17 +6782,19 @@ window.DONNEES_MAQUETTE = {
       "product": null,
       "version": null,
       "categories": [
-        "News"
+        "News",
+        "devfund",
+        "survey"
       ],
       "source": {
         "id": "feed:blender",
         "name": "Blender — flux RSS officiel",
         "url": "https://www.blender.org/news/blender-survey-2026"
       },
-      "excerpt": "Blender Foundation announces its annual user survey, which aims to better understand: The user community demographics: age group, geography and professional background Common use cases and workflows Users’ top priorities for further…",
+      "excerpt": "Thanks everyone for participating! The results will be announced in November. Blender Foundation announces its annual user survey, which aims to better understand: The user community demographics: age group, geography and professional…",
       "capture": {
-        "content_hash": "5501876d5223bce6045f94cedc4cdca352d507935d10601d50f5148c1cae72be",
-        "captured_at": "2026-10-30T14:44:30.155Z",
+        "content_hash": "d3f9a09186a866dca0ec14888b04c64ddae3597c5c0d99196854b129535ca3a4",
+        "captured_at": "2026-11-02T20:12:16.546Z",
         "mode": "live"
       }
     },
@@ -6671,8 +7335,8 @@ window.DONNEES_MAQUETTE = {
       },
       "excerpt": "This year we are celebrating 20 years of making Open Movies. 17 titles, all different and beautiful in their own way. We want to thank you for being a part of this journey – without the community support, all of these projects would not be…",
       "capture": {
-        "content_hash": "c01d7b0ebf906d5112e2cf89b65b37226ba1b38e174aaf585fc57ca62e094822",
-        "captured_at": "2026-10-30T14:44:30.155Z",
+        "content_hash": "00f3e169d6663ef29ec034d5ebe0ac3799371d39ba63b2b330012d1bfc1ab3ef",
+        "captured_at": "2026-11-02T22:02:51.872Z",
         "mode": "live"
       }
     },
@@ -6784,8 +7448,8 @@ window.DONNEES_MAQUETTE = {
       },
       "excerpt": "Today Comfy Router is live on the Comfy Developer Platform. Integrate frontier image, video, 3D, and audio models once. Then choose the provider for each job, for better availability and better prices. Day one access includes Seedance 2.5…",
       "capture": {
-        "content_hash": "1b238b50a590cb4a0d7792285fd2f1051547d7b21712ff216db47457d3562903",
-        "captured_at": "2026-10-30T14:44:29.596Z",
+        "content_hash": "85b1f73e2bbfbfbe9ff415dfec1ede50e80e4b5ac1789721d86be7579e3c0c26",
+        "captured_at": "2026-11-02T20:12:16.154Z",
         "mode": "live"
       }
     },
@@ -6902,8 +7566,8 @@ window.DONNEES_MAQUETTE = {
       },
       "excerpt": "A donation to the Blender Development Fund has always been a non-targeted form of support that the Blender project further distributes as it sees fit. This will stay the same: the established process brings balance to development…",
       "capture": {
-        "content_hash": "616fb2d14ea3fde9b1589ae090f3581c611c949748c3e54492e5de6786d794ea",
-        "captured_at": "2026-10-30T14:44:30.155Z",
+        "content_hash": "0414756d63e034ad9dae3a9ae1c8986ed92e8d8a88e91657ac48239b626e645e",
+        "captured_at": "2026-11-02T22:02:51.872Z",
         "mode": "live"
       }
     },
@@ -7165,8 +7829,8 @@ window.DONNEES_MAQUETTE = {
       },
       "excerpt": "This update includes all the great features in our Florence release, enhancements for macOS 27 Golden Gate, along with minor improvements and bug fixes. Changes Document windows now use the system corner radius, matching the rest of macOS…",
       "capture": {
-        "content_hash": "27b47bd62bb2c57ff0de3a753eeb480e6a33b39b7b5b672205fb5de9f610056b",
-        "captured_at": "2026-10-30T14:44:32.017Z",
+        "content_hash": "d9cee35bab9172c18aade468e64090c2f42d948012fa31a0e9ecd3597011c812",
+        "captured_at": "2026-11-02T20:12:18.620Z",
         "mode": "live"
       }
     },
@@ -7539,8 +8203,8 @@ window.DONNEES_MAQUETTE = {
       },
       "excerpt": "Both Trellis.2 (Xiang et al., 2025) and Pixal3D (Li et al., 2026) now run natively in ComfyUI. No custom nodes, no compiled CUDA extensions, no PyTorch downgrades, and no non-commercial dependencies. This is more than a model integration…",
       "capture": {
-        "content_hash": "9c04a2ec20c4a236407470198271e9ab1eaf46af0d877738e9fa8f6972fc8e1b",
-        "captured_at": "2026-10-30T14:44:29.596Z",
+        "content_hash": "0e9a3a700dbc68b2f27eeb76b1ebcfac3b9f31fe9f941c2cbba26f822efdeeb2",
+        "captured_at": "2026-11-02T20:12:16.154Z",
         "mode": "live"
       }
     },
@@ -7808,8 +8472,8 @@ window.DONNEES_MAQUETTE = {
       },
       "excerpt": "For our third major update of 2026, we’re upgrading Stacks with more sizing and layout options, and expanding support for effects and shadows in more places. We’re calling this update Florence. It requires macOS 15 Sequoia or later, which…",
       "capture": {
-        "content_hash": "74646f3d6402faad3f28306b1248bcc71631aa5a6d8ddee9459e06b04bf42db1",
-        "captured_at": "2026-10-30T14:44:32.017Z",
+        "content_hash": "9849506968bda905195ee2b8d12627df595b9ca6ccd4129641bc8a03f49b0e2f",
+        "captured_at": "2026-11-02T20:12:18.620Z",
         "mode": "live"
       }
     },
@@ -8843,8 +9507,8 @@ window.DONNEES_MAQUETTE = {
       },
       "excerpt": "Blender Foundation and the online community proudly present Blender 5.2 LTS! Blender 5.2 LTS splash artwork by Joanna Kobierska, featuring the now-extinct Panthera spelaea. Download this .blend file What’s new Blender 5.2 LTS brings a great…",
       "capture": {
-        "content_hash": "780a716aa529a1178d9d58e481027a53810e2bc8abd932ad9706ed1cd94ec914",
-        "captured_at": "2026-10-30T14:44:30.155Z",
+        "content_hash": "31df3eca10657bbb89aaff2750228d57e0173a27600fdbaaa7177586371d6cef",
+        "captured_at": "2026-11-02T22:02:51.872Z",
         "mode": "live"
       }
     },
@@ -8866,8 +9530,8 @@ window.DONNEES_MAQUETTE = {
       },
       "excerpt": "Introducing two big productivity boosts for the web app — a Command Bar to help you navigate and work faster, and an all-new notifications experience to help you stay on top of what’s happening in your Workspace. A Command Bar for the web…",
       "capture": {
-        "content_hash": "fb52bb0100331cc937046738b3f2d2a73d447d33bc92c173ac7ad26ec3df7542",
-        "captured_at": "2026-10-30T14:44:32.017Z",
+        "content_hash": "b5315836fce2b5eb5abf75b0f8451e5a437858ae4a6542826b04af49dd448eff",
+        "captured_at": "2026-11-02T20:12:18.620Z",
         "mode": "live"
       }
     },
@@ -8889,8 +9553,8 @@ window.DONNEES_MAQUETTE = {
       },
       "excerpt": "This update contains all the great features in our Edinburgh release, along with minor improvements and bug fixes. Improvements You can now choose “Export group contents only” for any Slice layer inside any kind of group, including frames…",
       "capture": {
-        "content_hash": "a1f8aa4c30b4c72197b945258643dacf9873e778c45b336bbc1a8ffde68d1a91",
-        "captured_at": "2026-10-30T14:44:32.017Z",
+        "content_hash": "19e2492733667955f0e40ed540b7f1d663e34015aaa960338706822967a98e9d",
+        "captured_at": "2026-11-02T20:12:18.620Z",
         "mode": "live"
       }
     },
@@ -9115,8 +9779,8 @@ window.DONNEES_MAQUETTE = {
       },
       "excerpt": "It’s been almost a week since the International Animation Film Festival and Market of Annecy wrapped up. Like last year, the Blender delegation was small: Fiona and Francesco representing Blender at various events, plus a couple of Blender…",
       "capture": {
-        "content_hash": "c6ef0d0c10665b5c5cc2adcf06ea06c817dbf7669e0bde188a1955c8593ddf0b",
-        "captured_at": "2026-10-30T14:44:30.155Z",
+        "content_hash": "4a86343011b07abf25981976b4c651f276aa8d3f5fcad312f987faf4fbca1048",
+        "captured_at": "2026-11-02T22:02:51.872Z",
         "mode": "live"
       }
     },
@@ -9382,8 +10046,8 @@ window.DONNEES_MAQUETTE = {
       },
       "excerpt": "Our second 2026 update — Edinburgh — introduces multi-paste, perceptual and vibrant gradients, big performance improvements for symbols and replacing Libraries, and some handy prototype player options. Multi-paste and more predictable paste…",
       "capture": {
-        "content_hash": "a54a5c725167599bf106c20850f3eec920e0003a388c3e2fa660be45b5716e21",
-        "captured_at": "2026-10-30T14:44:32.017Z",
+        "content_hash": "e1f2254f020e64b2475c7c45dd3f2ef5fa3a364e75842013228e707a1a2a7a7e",
+        "captured_at": "2026-11-02T20:12:18.620Z",
         "mode": "live"
       }
     },
@@ -9587,8 +10251,8 @@ window.DONNEES_MAQUETTE = {
       },
       "excerpt": "The world of animation will soon gather in Annecy, and Blender is coming along. Just like in previous years, a small part of the Blender team will attend the Annecy International Animation Film Festival (June 21–27, 2026) to host a…",
       "capture": {
-        "content_hash": "43d36e21fa5c72d11f1d8af3ad0f933e968a97b14f6c2ce829ec3579d00c3985",
-        "captured_at": "2026-10-30T14:44:30.155Z",
+        "content_hash": "873858d6a814ab07b85cecf24c0961343e9014b03d4510750ea1f03608fba580",
+        "captured_at": "2026-11-02T22:02:51.872Z",
         "mode": "live"
       }
     },
@@ -9803,8 +10467,8 @@ window.DONNEES_MAQUETTE = {
       },
       "excerpt": "This update contains all the great features in our Dublin release, along with minor improvements and bug fixes. Fixes Fixes a bug that caused Sketch to freeze up and use a lot of memory. Fixes a bug that could cause changes in a document…",
       "capture": {
-        "content_hash": "d68d94bc8c21a1ddac6aefa9c39f0cfcd039f09bc8fd4d8cafcb5045cef7105d",
-        "captured_at": "2026-10-30T14:44:32.017Z",
+        "content_hash": "ac9264e8d91c31d0e2b21c9c14b363b02d203dad2be92a034402428ad9d2680a",
+        "captured_at": "2026-11-02T20:12:18.620Z",
         "mode": "live"
       }
     },
@@ -9826,8 +10490,8 @@ window.DONNEES_MAQUETTE = {
       },
       "excerpt": "This update contains all the great features in our Dublin release, along with minor improvements and bug fixes. Improvements The Color Variable lists in the Color panel are now taller, so you can see more variables at a glance without…",
       "capture": {
-        "content_hash": "41e02aa2e7ddfa3edaf14b1c5b21db3ca29136f48b029e05f2a4c0271509cc59",
-        "captured_at": "2026-10-30T14:44:32.017Z",
+        "content_hash": "43fe3f9c25794c646366669ffdfcad17de3db46c23a52bba566bc8972c68f62f",
+        "captured_at": "2026-11-02T20:12:18.620Z",
         "mode": "live"
       }
     },
@@ -9870,8 +10534,8 @@ window.DONNEES_MAQUETTE = {
       },
       "excerpt": "For our first major Mac update of 2026, we’re ticking off a list of long-standing feature requests — from selection colors and independent borders, to corner smoothing controls and an all-new eyedropper tool with color variable support…",
       "capture": {
-        "content_hash": "b860289293a85082ffe60b798276d784c07717b543c8643af1268ad72122cf01",
-        "captured_at": "2026-10-30T14:44:32.017Z",
+        "content_hash": "526a22934148ce7cf53c382032d9953a73450c50fdae05f369e7d1d2b26a5c32",
+        "captured_at": "2026-11-02T20:12:18.620Z",
         "mode": "live"
       }
     },
@@ -9959,8 +10623,8 @@ window.DONNEES_MAQUETTE = {
       },
       "excerpt": "We’ve been busy making lots of small improvements to the web app — especially across our developer handoff tools. The layer list in the web app now shows the same icons as the Mac app, reflects hidden and locked layer states, and you can…",
       "capture": {
-        "content_hash": "0c31c54e2abde28d40612083e8a6486197a8613f3842575ab7264c08852af6fe",
-        "captured_at": "2026-10-30T14:44:32.017Z",
+        "content_hash": "a48c1e7e212353a52518afc9236e062afb75827c0b7ebc5c57b4fa0fa9ae51e8",
+        "captured_at": "2026-11-02T20:12:18.620Z",
         "mode": "live"
       }
     },
@@ -10048,8 +10712,8 @@ window.DONNEES_MAQUETTE = {
       },
       "excerpt": "We’ve launched an agents repo for AI agents that work with Sketch. The repo contains skills — reusable workflows that help agents complete specific tasks more effectively. Our first skill, sketch-design-to-code, helps AI agents like Claude…",
       "capture": {
-        "content_hash": "0e8f9a1ef73e38d336a2c5167eea0868f24d3e2397738d1a8a5e2f81da1f2431",
-        "captured_at": "2026-10-30T14:44:32.017Z",
+        "content_hash": "e01ff53734319a15e9827d1566ed75ba3784c2c4b7c227c459b6860541cd85b5",
+        "captured_at": "2026-11-02T20:12:18.620Z",
         "mode": "live"
       }
     },
@@ -10092,8 +10756,8 @@ window.DONNEES_MAQUETTE = {
       },
       "excerpt": "With previews in the web app, you can choose which pages or prototypes from a document to share — and keep the rest hidden. There’s no need to copy work to a clean document, or worry about clients digging through the “Rough Ideas” page. You…",
       "capture": {
-        "content_hash": "06263ee2e07fb06b890ab6ad2da62a7ce6602557a8e44bef05297e99b3998b44",
-        "captured_at": "2026-10-30T14:44:32.017Z",
+        "content_hash": "bd45c37374ee53c09883f1ae191e07832802122ecf85b269b8169c4314fc3b97",
+        "captured_at": "2026-11-02T20:12:18.620Z",
         "mode": "live"
       }
     },
@@ -10115,8 +10779,8 @@ window.DONNEES_MAQUETTE = {
       },
       "excerpt": "With our first-party Slack integration you can connect your Workspace and see rich previews of any document or comment link you share. We already show link previews in Slack for public documents, but now you’ll see them for private…",
       "capture": {
-        "content_hash": "e99db7c2aa6d71edf3f2ad75e9b42acbb4545c0d7d8ddfabef38f8f25a55f378",
-        "captured_at": "2026-10-30T14:44:32.017Z",
+        "content_hash": "cce2cfd205c96efb59d9668a5d1f5d86ef037b7f2e0f1c371051f237a6b21029",
+        "captured_at": "2026-11-02T20:12:18.620Z",
         "mode": "live"
       }
     },
@@ -10138,8 +10802,8 @@ window.DONNEES_MAQUETTE = {
       },
       "excerpt": "You can now quickly select multiple documents or folders in your Workspace, move them by dragging them to another folder, create a new folder from your selection, or even archive them. When you select multiple documents or folders (by…",
       "capture": {
-        "content_hash": "86a0fea096de01851fd3393f4287a8ff2fdbf152891edde150d7edf941650bf0",
-        "captured_at": "2026-10-30T14:44:32.017Z",
+        "content_hash": "e1e8bad6dc64ae6fb6205d8a0f67f4502236c81463c4bd14ca5f6ab5b018d4a8",
+        "captured_at": "2026-11-02T20:12:18.620Z",
         "mode": "live"
       }
     },
@@ -10161,8 +10825,8 @@ window.DONNEES_MAQUETTE = {
       },
       "excerpt": "When you’re inspecting designs in the web app, we now show a full layer list for the document. Now it’s easier than ever to understand a document’s structure and hierarchy, find specific layers, copy their CSS and export them. Along with…",
       "capture": {
-        "content_hash": "32687eda9d9937652df67ded44ff015c51348e1e5bf742bad82eeefb8b27d1a2",
-        "captured_at": "2026-10-30T14:44:32.017Z",
+        "content_hash": "ac3af4bd20eab9d0757d6cb0c5ebf1dd7b4e61f35c124d10652909bd9b1b1408",
+        "captured_at": "2026-11-02T20:12:18.620Z",
         "mode": "live"
       }
     },
@@ -10205,8 +10869,8 @@ window.DONNEES_MAQUETTE = {
       },
       "excerpt": "This update brings bug and crash fixes, plus all the great features from our Copenhagen release. Fixes Fixes a bug that meant the Inspector showed an opacity field for text colors using color variables, which was different to every other…",
       "capture": {
-        "content_hash": "b4f2cd9430c790e5ca88a4bcaba49e375bdd6d806cff446b3582169b0d371db2",
-        "captured_at": "2026-10-30T14:44:32.017Z",
+        "content_hash": "a933acfb208dfabbe54124cf6a8f4ff526c7e9d7ee285a4151617ac72ae23f2a",
+        "captured_at": "2026-11-02T20:12:18.620Z",
         "mode": "live"
       }
     },
@@ -10249,8 +10913,8 @@ window.DONNEES_MAQUETTE = {
       },
       "excerpt": "This update brings improvements and bug fixes, plus all the great features from our Copenhagen release. Improvements When in Scale mode, the Layout section of the Inspector now shows a more relevant title to make it clear that you’re in…",
       "capture": {
-        "content_hash": "4e2055abbf736c6ae5f1e5f4ed4ece33db4db26b4425b986fa6ebfa31561edb8",
-        "captured_at": "2026-10-30T14:44:32.017Z",
+        "content_hash": "11d7dcb1b25bfb08900219db4fb8022cf6bccf0f6fe851f27b18d749b5c4d5ba",
+        "captured_at": "2026-11-02T20:12:18.620Z",
         "mode": "live"
       }
     },
@@ -10359,8 +11023,8 @@ window.DONNEES_MAQUETTE = {
       },
       "excerpt": "This update brings improvements and bug fixes, plus all the great features from our Copenhagen release. Improvements Color hex fields in the Inspector now support CSS color names. We also support clear and transparent, which both render…",
       "capture": {
-        "content_hash": "237a9212df6a0fa4533297314dcc58b399c4aa8193b82f4b529df3ccad632972",
-        "captured_at": "2026-10-30T14:44:32.017Z",
+        "content_hash": "56c00b9e5493c785317a4802146f2698adfd60ae822fdeb29968f1125e810d9a",
+        "captured_at": "2026-11-02T20:12:18.620Z",
         "mode": "live"
       }
     },
@@ -10466,8 +11130,8 @@ window.DONNEES_MAQUETTE = {
       },
       "excerpt": "This update brings performance improvements and bug fixes, plus all the great features from our Copenhagen release. Improvements We’ve improved performance in the Inspector when you edit layers with Symbol overrides. We’ve improved the…",
       "capture": {
-        "content_hash": "0d7df587c677fd264d5717fd8c6ffb3a03c05a3428491495b0c1391a4d9cbef5",
-        "captured_at": "2026-10-30T14:44:32.017Z",
+        "content_hash": "2b4072bf056b48e7fadb1691b22da26d2fb9aae2800b5ae65677af986c63450b",
+        "captured_at": "2026-11-02T20:12:18.620Z",
         "mode": "live"
       }
     },
@@ -10554,8 +11218,8 @@ window.DONNEES_MAQUETTE = {
       },
       "excerpt": "Our third — and final — major update of 2025 is here. It brings a fresh design with an all-new Inspector, wrap for stacks, one-click image background removal, and more flexible way to organize your Workspace. We’ve named this release…",
       "capture": {
-        "content_hash": "6723dcd98e4d4245712f1f841a9db27b7bbd869e27b00ac8457e124c55552f66",
-        "captured_at": "2026-10-30T14:44:32.017Z",
+        "content_hash": "bcf4f2d4f33e1f4fee37b0780214561b7bda5b75bc1a2209ff8846e0991047e4",
+        "captured_at": "2026-11-02T20:12:18.620Z",
         "mode": "live"
       }
     },
@@ -10896,15 +11560,15 @@ window.DONNEES_MAQUETTE = {
   "ressources": [
     {
       "post_id": 1,
-      "revision_id": 42,
+      "revision_id": 151,
       "slug": "frontend-design",
       "nom": "frontend-design",
-      "compte": "repo",
+      "compte": "mova",
       "statut": "en_attente",
       "etiquette": "pas encore publié",
       "planning": {
-        "jour": "2026-11-02",
-        "rang": 1,
+        "jour": "2026-11-03",
+        "rang": 7,
         "etat": "prevue",
         "utilise_reserve": false,
         "motif": null
@@ -10917,7 +11581,7 @@ window.DONNEES_MAQUETTE = {
       },
       "mention": "Analyse IA à partir des sources — non testé par la plateforme",
       "accroche": {
-        "texte": "frontend-design pousse Claude vers des interfaces qui ne ressemblent pas à toutes les autres",
+        "texte": "frontend-design pushes Claude toward interfaces that don't look like everyone else's",
         "passages": [
           "This repository contains Anthropic's implementation of skills for Claude.",
           "Guidance for distinctive, intentional visual design when building new UI or reshaping an existing one.",
@@ -10925,7 +11589,7 @@ window.DONNEES_MAQUETTE = {
         ]
       },
       "description": {
-        "texte": "Le skill d'Anthropic donne à Claude une vraie direction artistique pour créer ou refaire une interface. Palette, typographie et mise en page sont choisies pour le brief, pas tirées des réglages par défaut qu'on voit partout.",
+        "texte": "Anthropic's skill gives Claude a real artistic direction for creating or redoing an interface. Palette, typography and layout are chosen for the brief, not pulled from the default settings you see everywhere.",
         "passages": [
           "This repository contains Anthropic's implementation of skills for Claude.",
           "Guidance for distinctive, intentional visual design when building new UI or reshaping an existing one.",
@@ -10934,7 +11598,7 @@ window.DONNEES_MAQUETTE = {
         ]
       },
       "interet": {
-        "texte": "Claude écrit d'abord un court plan de design, le relit face au brief, et ne code qu'ensuite. Le skill nomme aussi les tics actuels des designs générés par IA : fond crème avec accent terre cuite, cartes arrondies toutes identiques. Claude les évite quand le brief laisse le choix, et les suit s'il les demande.",
+        "texte": "Claude first writes a short design plan, rereads it against the brief, and only then codes. The skill also names the current clichés of AI-generated designs: cream background with terracotta accent, rounded cards all identical. Claude avoids them when the brief leaves the choice open, and follows them if the brief asks for them.",
         "passages": [
           "Work in two passes. First, brainstorm a short design plan based on the client's design brief",
           "Then review that plan against the brief before building",
@@ -10947,7 +11611,7 @@ window.DONNEES_MAQUETTE = {
         ]
       },
       "exemple_usage": {
-        "texte": "Les choix visuels partent du sujet : un jouet pour filles de 8 à 11 ans n'aura pas l'esthétique d'un tableau de bord pour analystes financiers.",
+        "texte": "Visual choices start from the subject: a toy for girls aged 8 to 11 won't have the aesthetic of a dashboard for financial analysts.",
         "passages": [
           "The subject's industry, subject matter, materials, and vernacular are where distinctive visual choices come from",
           "a design for a toy for girls aged 8–11 will be very aesthetically different from a dashboard for financial analysts."
@@ -10956,20 +11620,20 @@ window.DONNEES_MAQUETTE = {
       "demarrage": {
         "etapes": [
           {
-            "texte": "Dans Claude Code, ajouter le dépôt comme marketplace",
+            "texte": "In Claude Code, add the repository as a marketplace",
             "passages": [
               "You can register this repository as a Claude Code Plugin marketplace by running the following command in Claude Code"
             ]
           },
           {
-            "texte": "Installer example-skills : /plugin install example-skills@anthropic-agent-skills",
+            "texte": "Install example-skills: /plugin install example-skills@anthropic-agent-skills",
             "passages": [
               "/plugin install example-skills@anthropic-agent-skills",
               "\"./skills/doc-coauthoring\", \"./skills/frontend-design\", \"./skills/internal-comms\""
             ]
           },
           {
-            "texte": "Puis citer frontend-design dans la demande",
+            "texte": "Then mention frontend-design in the request",
             "passages": [
               "After installing the plugin, you can use the skill by just mentioning it."
             ]
@@ -10984,7 +11648,7 @@ window.DONNEES_MAQUETTE = {
       },
       "compatibilites": [
         {
-          "texte": "Claude Code, et déjà inclus dans les offres payantes de Claude.ai selon le dépôt.",
+          "texte": "Claude Code, and already included in Claude.ai's paid plans according to the repository.",
           "passages": [
             "You can register this repository as a Claude Code Plugin marketplace by running the following command in Claude Code:",
             "These example skills are all already available to paid plans in Claude.ai."
@@ -10993,7 +11657,7 @@ window.DONNEES_MAQUETTE = {
       ],
       "limites": [],
       "licence_locale": {
-        "texte": "Licence Apache 2.0, propre au dossier du skill selon son fichier LICENSE.txt.",
+        "texte": "Apache 2.0 license, specific to the skill folder according to its LICENSE.txt file.",
         "passages": [
           "license: Complete terms in LICENSE.txt",
           "Apache License Version 2.0, January 2004"
@@ -11001,19 +11665,19 @@ window.DONNEES_MAQUETTE = {
       },
       "reperes": [
         {
-          "texte": "Une ou deux familles de polices, pas plus",
+          "texte": "One or two font families, no more",
           "passages": [
             "use one family or two, and if two, make them clearly distinct."
           ]
         },
         {
-          "texte": "Un seul moment animé, pas des effets dispersés",
+          "texte": "A single animated moment, not scattered effects",
           "passages": [
             "A single orchestrated moment — one page-load sequence or one reveal — lands better than scattered effects"
           ]
         },
         {
-          "texte": "Responsive, focus clavier et mouvement réduit, sans l'annoncer",
+          "texte": "Responsive, focus and reduced motion built in",
           "passages": [
             "Build to a quality floor without announcing it: responsive down to mobile, visible keyboard focus, reduced motion respected"
           ]
@@ -11023,7 +11687,7 @@ window.DONNEES_MAQUETTE = {
         "libelle": "Voir le dépôt",
         "url": "https://github.com/anthropics/skills/tree/main/skills/frontend-design",
         "aria_label": "Voir le dépôt anthropics/skills sur GitHub (nouvel onglet)",
-        "verifie_le": "2026-11-02T18:45:40.118Z",
+        "verifie_le": "2026-11-03T07:15:34.040Z",
         "motif": "capture_recente"
       },
       "etat_depot": {
@@ -11043,7 +11707,7 @@ window.DONNEES_MAQUETTE = {
       },
       "visuel": {
         "src": "medias/montages/ressources/frontend-design.jpg",
-        "alt": "frontend-design pousse Claude vers des interfaces qui ne ressemblent pas à toutes les autres. Étape 1 : Dans Claude Code, ajouter le dépôt comme marketplace. Étape 2 : Installer example-skills : /plugin install example-skills@anthropic-agent-skills. Étape 3 : Puis citer frontend-design dans la demande",
+        "alt": "frontend-design pushes Claude toward interfaces that don't look like everyone else's. Étape 1 : In Claude Code, add the repository as a marketplace. Étape 2 : Install example-skills: /plugin install example-skills@anthropic-agent-skills. Étape 3 : Then mention frontend-design in the request",
         "gabarit": "etapes",
         "mention": "Illustration — ne prouve pas le fonctionnement"
       },
@@ -11092,19 +11756,19 @@ window.DONNEES_MAQUETTE = {
         }
       ],
       "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
-      "importe_le": "2026-11-02T18:45:35.166Z"
+      "importe_le": "2026-11-03T07:15:31.762Z"
     },
     {
       "post_id": 2,
-      "revision_id": 22,
+      "revision_id": 132,
       "slug": "agent-browser",
       "nom": "agent-browser",
-      "compte": "repo",
+      "compte": "radar",
       "statut": "en_attente",
       "etiquette": "pas encore publié",
       "planning": {
-        "jour": "2026-11-02",
-        "rang": 2,
+        "jour": "2026-11-03",
+        "rang": 8,
         "etat": "prevue",
         "utilise_reserve": false,
         "motif": null
@@ -11117,14 +11781,14 @@ window.DONNEES_MAQUETTE = {
       },
       "mention": "Analyse IA à partir des sources — non testé par la plateforme",
       "accroche": {
-        "texte": "agent-browser, de Vercel Labs : un vrai navigateur que votre agent pilote en ligne de commande",
+        "texte": "agent-browser, from Vercel Labs: a real browser that your agent controls from the command line",
         "passages": [
           "Browser automation CLI for AI agents",
           "Vercel Labs Product"
         ]
       },
       "description": {
-        "texte": "Une CLI native en Rust : l'agent ouvre une page, lit le texte, clique, remplit un champ et prend une capture. Selon le dépôt, le skill fonctionne avec Claude Code, Codex, Cursor ou Gemini CLI, et l'outil tourne aussi en serveur MCP.",
+        "texte": "A native Rust CLI: the agent opens a page, reads the text, clicks, fills a field and takes a screenshot. According to the repository, the skill works with Claude Code, Codex, Cursor or Gemini CLI, and the tool also runs as an MCP server.",
         "passages": [
           "Browser automation CLI for AI agents. Fast native Rust CLI.",
           "Click by ref from snapshot",
@@ -11137,7 +11801,7 @@ window.DONNEES_MAQUETTE = {
         ]
       },
       "interet": {
-        "texte": "snapshot renvoie l'arbre d'accessibilité avec une référence par élément (@e1, @e2) : l'agent clique ou remplit par référence, sans requêter le DOM à nouveau. Attention, rien n'est restreint par défaut : domaines autorisés et politique d'actions sont à activer vous-même.",
+        "texte": "snapshot returns the accessibility tree with a reference per element (@e1, @e2): the agent clicks or fills by reference, without querying the DOM again. Note: nothing is restricted by default: allowed domains and an action policy must be enabled by you.",
         "passages": [
           "Get interactive elements with refs (@e1, @e2)",
           "agent-browser click @e2 # Click by ref from snapshot",
@@ -11150,7 +11814,7 @@ window.DONNEES_MAQUETTE = {
         ]
       },
       "exemple_usage": {
-        "texte": "Demandez à votre agent de tester le parcours de connexion avec agent-browser : il lit --help, relève les champs du formulaire et les remplit.",
+        "texte": "Ask your agent to test the login flow with agent-browser: it reads --help, picks up the form fields and fills them in.",
         "passages": [
           "Use agent-browser to test the login flow. Run agent-browser --help to see available commands.",
           "Get interactive elements with refs (@e1, @e2)",
@@ -11160,7 +11824,7 @@ window.DONNEES_MAQUETTE = {
       "demarrage": {
         "etapes": [
           {
-            "texte": "npm install -g agent-browser, puis agent-browser install pour récupérer Chrome, uniquement la première fois.",
+            "texte": "npm install -g agent-browser, then agent-browser install to fetch Chrome, only the first time.",
             "passages": [
               "npm install -g agent-browser",
               "Run agent-browser install to download Chrome from Chrome for Testing"
@@ -11180,19 +11844,19 @@ window.DONNEES_MAQUETTE = {
       "licence_locale": null,
       "reperes": [
         {
-          "texte": "Connexions conservées, sans se reconnecter à chaque lancement",
+          "texte": "Connections kept, no need to log in again on each launch",
           "passages": [
             "agent-browser provides multiple ways to persist login sessions so you don't re-authenticate every run."
           ]
         },
         {
-          "texte": "Audit d'accessibilité axe-core intégré",
+          "texte": "Built-in axe-core accessibility audit",
           "passages": [
             "Run an axe-core accessibility audit against the current page or a URL."
           ]
         },
         {
-          "texte": "Mobile Safari réel dans le simulateur iOS",
+          "texte": "Real Mobile Safari in the iOS simulator",
           "passages": [
             "Control real Mobile Safari in the iOS Simulator for authentic mobile web testing."
           ]
@@ -11202,7 +11866,7 @@ window.DONNEES_MAQUETTE = {
         "libelle": "Voir le dépôt",
         "url": "https://github.com/vercel-labs/agent-browser",
         "aria_label": "Voir le dépôt vercel-labs/agent-browser sur GitHub (nouvel onglet)",
-        "verifie_le": "2026-11-02T18:46:57.575Z",
+        "verifie_le": "2026-11-03T07:14:55.289Z",
         "motif": "capture_recente"
       },
       "etat_depot": {
@@ -11222,7 +11886,7 @@ window.DONNEES_MAQUETTE = {
       },
       "visuel": {
         "src": "medias/montages/ressources/agent-browser.jpg",
-        "alt": "agent-browser, de Vercel Labs : un vrai navigateur que votre agent pilote en ligne de commande. npm install -g agent-browser. agent-browser install",
+        "alt": "agent-browser, from Vercel Labs: a real browser that your agent controls from the command line. npm install -g agent-browser. agent-browser install",
         "gabarit": "terminal_annote",
         "mention": "Illustration — ne prouve pas le fonctionnement"
       },
@@ -11243,19 +11907,19 @@ window.DONNEES_MAQUETTE = {
         }
       ],
       "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
-      "importe_le": "2026-11-02T18:46:54.597Z"
+      "importe_le": "2026-11-03T07:14:49.047Z"
     },
     {
-      "post_id": 3,
-      "revision_id": 23,
-      "slug": "react-best-practices",
-      "nom": "React Best Practices (Vercel)",
+      "post_id": 7,
+      "revision_id": 133,
+      "slug": "mcp-builder",
+      "nom": "mcp-builder",
       "compte": "repo",
       "statut": "en_attente",
       "etiquette": "pas encore publié",
       "planning": {
-        "jour": "2026-11-02",
-        "rang": 3,
+        "jour": "2026-11-03",
+        "rang": 9,
         "etat": "prevue",
         "utilise_reserve": false,
         "motif": null
@@ -11268,14 +11932,543 @@ window.DONNEES_MAQUETTE = {
       },
       "mention": "Analyse IA à partir des sources — non testé par la plateforme",
       "accroche": {
-        "texte": "React Best Practices : les 70 règles de performance React et Next.js de Vercel, appliquées par votre agent",
+        "texte": "With mcp-builder, Claude takes your MCP server from API study through evaluations",
+        "passages": [
+          "Use when building MCP servers to integrate external APIs or services",
+          "After implementing your MCP server, create comprehensive evaluations to test its effectiveness.",
+          "This repository contains Anthropic's implementation of skills for Claude."
+        ]
+      },
+      "description": {
+        "texte": "Anthropic's skill for connecting an external API to an MCP server, in TypeScript or Python with FastMCP. Claude runs four phases: API study, implementation, review and testing with MCP Inspector, then evaluations.",
+        "passages": [
+          "This repository contains Anthropic's implementation of skills for Claude.",
+          "Use when building MCP servers to integrate external APIs or services, whether in Python (FastMCP) or Node/TypeScript (MCP SDK).",
+          "Creating a high-quality MCP server involves four main phases:",
+          "Test with MCP Inspector: npx @modelcontextprotocol/inspector",
+          "After implementing your MCP server, create comprehensive evaluations to test its effectiveness."
+        ]
+      },
+      "interet": {
+        "texte": "Everything is designed for the agent that will call the tools: prefixed, action-oriented names, short descriptions, targeted and paginable results, errors that say what to do next.",
+        "passages": [
+          "Clear, descriptive tool names help agents find the right tools quickly.",
+          "Use consistent prefixes (e.g., github_create_issue, github_list_repos) and action-oriented naming.",
+          "Agents benefit from concise tool descriptions and the ability to filter/paginate results.",
+          "Design tools that return focused, relevant data.",
+          "Error messages should guide agents toward solutions with specific suggestions and next steps."
+        ]
+      },
+      "exemple_usage": {
+        "texte": "Once the server is done, the guide has you write 10 realistic questions, with no destructive operation, to see whether an LLM really uses it well.",
+        "passages": [
+          "Question Generation: Create 10 complex, realistic questions",
+          "Read-only: Only non-destructive operations required",
+          "Use evaluations to test whether LLMs can effectively use your MCP server to answer realistic, complex questions."
+        ]
+      },
+      "demarrage": {
+        "etapes": [
+          {
+            "texte": "In Claude Code, add the repository as a marketplace",
+            "passages": [
+              "You can register this repository as a Claude Code Plugin marketplace by running the following command in Claude Code"
+            ]
+          },
+          {
+            "texte": "Install example-skills: /plugin install example-skills@anthropic-agent-skills",
+            "passages": [
+              "/plugin install example-skills@anthropic-agent-skills",
+              "\"./skills/internal-comms\", \"./skills/mcp-builder\", \"./skills/skill-creator\""
+            ]
+          },
+          {
+            "texte": "Then mention mcp-builder in the request",
+            "passages": [
+              "After installing the plugin, you can use the skill by just mentioning it."
+            ]
+          }
+        ],
+        "commande": "/plugin marketplace add anthropics/skills",
+        "passages": [
+          "You can register this repository as a Claude Code Plugin marketplace by running the following command in Claude Code:",
+          "After installing the plugin, you can use the skill by just mentioning it."
+        ],
+        "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
+      },
+      "compatibilites": [
+        {
+          "texte": "According to the guide, every new TypeScript server starts from SDK v2.",
+          "passages": [
+            "The TypeScript SDK has two major versions.",
+            "v2 (@modelcontextprotocol/server): the current stable release. Use it for new servers."
+          ]
+        }
+      ],
+      "limites": [],
+      "licence_locale": {
+        "texte": "The skill folder has its own license: Apache 2.0.",
+        "passages": [
+          "Apache License Version 2.0, January 2004"
+        ]
+      },
+      "reperes": [
+        {
+          "texte": "Inputs validated by Zod or Pydantic, structured outputs",
+          "passages": [
+            "Use Zod (TypeScript) or Pydantic (Python)",
+            "Define outputSchema where possible for structured data"
+          ]
+        },
+        {
+          "texte": "Streamable HTTP for remote, stdio for local",
+          "passages": [
+            "Streamable HTTP for remote servers, using stateless JSON",
+            "stdio for local servers."
+          ]
+        },
+        {
+          "texte": "Per-tool annotations: read-only, destructive, idempotent",
+          "passages": [
+            "readOnlyHint: true/false destructiveHint: true/false idempotentHint: true/false openWorldHint: true/false"
+          ]
+        }
+      ],
+      "bouton": {
+        "libelle": "Voir le dépôt",
+        "url": "https://github.com/anthropics/skills/tree/main/skills/mcp-builder",
+        "aria_label": "Voir le dépôt anthropics/skills sur GitHub (nouvel onglet)",
+        "verifie_le": "2026-11-03T07:14:55.297Z",
+        "motif": "capture_recente"
+      },
+      "etat_depot": {
+        "full_name": "anthropics/skills",
+        "html_url": "https://github.com/anthropics/skills",
+        "etoiles": 186700,
+        "etoiles_au": "2026-11-02T18:42:26.169Z",
+        "cree_le": "2025-09-22T15:53:31Z",
+        "dernier_push": "2026-10-28T19:20:39Z",
+        "jours_sans_push": 4,
+        "inactif": false,
+        "licence": null,
+        "archive": false,
+        "fork": false,
+        "parent": null,
+        "date_ajout_skill": null
+      },
+      "visuel": {
+        "src": "medias/montages/ressources/mcp-builder.jpg",
+        "alt": "With mcp-builder, Claude takes your MCP server from API study through evaluations. Étape 1 : In Claude Code, add the repository as a marketplace. Étape 2 : Install example-skills: /plugin install example-skills@anthropic-agent-skills. Étape 3 : Then mention mcp-builder in the request",
+        "gabarit": "etapes",
+        "mention": "Illustration — ne prouve pas le fonctionnement"
+      },
+      "captures": [
+        {
+          "document": "depot",
+          "snapshot_id": 484,
+          "capture_le": "2026-11-02T18:42:26.169Z",
+          "url": "https://github.com/anthropics/skills",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:skills/mcp-builder/SKILL.md",
+          "snapshot_id": 448,
+          "capture_le": "2026-11-02T12:15:46.306Z",
+          "url": "https://github.com/anthropics/skills/blob/main/skills/mcp-builder/SKILL.md",
+          "mode": "live"
+        },
+        {
+          "document": "dossier:skills/mcp-builder",
+          "snapshot_id": 449,
+          "capture_le": "2026-11-02T12:15:46.306Z",
+          "url": "https://github.com/anthropics/skills/tree/main/skills/mcp-builder",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:skills/mcp-builder/LICENSE.txt",
+          "snapshot_id": 450,
+          "capture_le": "2026-11-02T12:15:46.306Z",
+          "url": "https://github.com/anthropics/skills/blob/main/skills/mcp-builder/LICENSE.txt",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:README.md",
+          "snapshot_id": 424,
+          "capture_le": "2026-11-02T12:15:38.384Z",
+          "url": "https://github.com/anthropics/skills/blob/main/README.md",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:.claude-plugin/marketplace.json",
+          "snapshot_id": 485,
+          "capture_le": "2026-11-02T18:42:26.169Z",
+          "url": "https://github.com/anthropics/skills/blob/main/.claude-plugin/marketplace.json",
+          "mode": "live"
+        }
+      ],
+      "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
+      "importe_le": "2026-11-03T07:14:49.047Z"
+    },
+    {
+      "post_id": 8,
+      "revision_id": 152,
+      "slug": "obsidian-skills",
+      "nom": "Obsidian Skills",
+      "compte": "nodi",
+      "statut": "en_attente",
+      "etiquette": "pas encore publié",
+      "planning": {
+        "jour": "2026-11-03",
+        "rang": 10,
+        "etat": "prevue",
+        "utilise_reserve": false,
+        "motif": null
+      },
+      "statut_sortie": "ressource_existante",
+      "badge": "Ressource existante",
+      "origine": {
+        "code": "claude_code_developpement",
+        "texte": "Rédigé pendant le développement par Claude Code, assistant de programmation, pas par l'agent du site ; vérifié par les contrôles du code"
+      },
+      "mention": "Analyse IA à partir des sources — non testé par la plateforme",
+      "accroche": {
+        "texte": "Obsidian Skills teaches your agent Obsidian's formats and its CLI",
+        "passages": [
+          "Teach your agent to use Obsidian CLI and open formats including Markdown, Bases, JSON Canvas.",
+          "any skills-compatible agent, including Claude Code, Codex, and Open Code"
+        ]
+      },
+      "description": {
+        "texte": "Your agent writes notes with wikilinks, callouts and properties, builds Bases with views, filters and formulas, and constructs JSON Canvas canvases, directly in your vault. It works with Claude Code, Codex and OpenCode.",
+        "passages": [
+          "Create and edit Obsidian Flavored Markdown (.md) with wikilinks, embeds, callouts, properties, and other Obsidian-specific syntax",
+          "Create and edit Obsidian Bases (.base) with views, filters, formulas, and summaries",
+          "Create and edit JSON Canvas files (.canvas) with nodes, edges, groups, and connections",
+          "any skills-compatible agent, including Claude Code, Codex, and Open Code",
+          "OpenCode auto-discovers all SKILL.md files under ~/.opencode/skills/."
+        ]
+      },
+      "interet": {
+        "texte": "Two skills go beyond notes: defuddle reduces a web page to clean Markdown to save tokens, knap generates files in series from JSON or CSV. The repository follows the Agent Skills specification, so the same skills serve all your compatible agents.",
+        "passages": [
+          "Extract clean markdown from web pages using Defuddle, removing clutter to save tokens",
+          "Render Markdown templates from JSON or CSV data using Knap, including batch file generation",
+          "These skills follow the Agent Skills specification so they can be used by any skills-compatible agent"
+        ]
+      },
+      "exemple_usage": {
+        "texte": "Fetch an article with defuddle, then file it in the vault as a note with properties and wikilinks.",
+        "passages": [
+          "Extract clean markdown from web pages using Defuddle, removing clutter to save tokens",
+          "Create and edit Obsidian Flavored Markdown (.md) with wikilinks, embeds, callouts, properties"
+        ]
+      },
+      "demarrage": {
+        "etapes": [
+          {
+            "texte": "In Claude Code: /plugin marketplace add kepano/obsidian-skills",
+            "passages": [
+              "/plugin marketplace add kepano/obsidian-skills /plugin install obsidian@obsidian-skills",
+              "any skills-compatible agent, including Claude Code, Codex, and Open Code"
+            ]
+          },
+          {
+            "texte": "Then /plugin install obsidian@obsidian-skills",
+            "passages": [
+              "/plugin marketplace add kepano/obsidian-skills /plugin install obsidian@obsidian-skills"
+            ]
+          },
+          {
+            "texte": "Or with npx: npx skills add https://github.com/kepano/obsidian-skills",
+            "passages": [
+              "npx skills add https://github.com/kepano/obsidian-skills",
+              "Instead of ssh, if you prefer to use https"
+            ]
+          }
+        ],
+        "commande": "npx skills add https://github.com/kepano/obsidian-skills",
+        "passages": [
+          "npx skills add https://github.com/kepano/obsidian-skills",
+          "Instead of ssh, if you prefer to use https"
+        ],
+        "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
+      },
+      "compatibilites": [
+        {
+          "texte": "Claude Code, Codex, OpenCode and any skills-compatible agent.",
+          "passages": [
+            "These skills follow the Agent Skills specification so they can be used by any skills-compatible agent",
+            "any skills-compatible agent, including Claude Code, Codex, and Open Code",
+            "OpenCode auto-discovers all SKILL.md files under ~/.opencode/skills/."
+          ]
+        }
+      ],
+      "limites": [],
+      "licence_locale": null,
+      "reperes": [
+        {
+          "texte": "Drives the vault via the CLI, plugins and themes included",
+          "passages": [
+            "Interact with Obsidian vaults via the Obsidian CLI including plugin and theme development"
+          ]
+        },
+        {
+          "texte": "Under OpenCode, no config file to modify",
+          "passages": [
+            "OpenCode auto-discovers all SKILL.md files under ~/.opencode/skills/.",
+            "No changes to opencode.json or any config file are needed."
+          ]
+        },
+        {
+          "texte": "Installable manually in the vault's .claude folder",
+          "passages": [
+            "Add the contents of this repo to a /.claude folder in the root of your Obsidian vault"
+          ]
+        }
+      ],
+      "bouton": {
+        "libelle": "Voir le dépôt",
+        "url": "https://github.com/kepano/obsidian-skills",
+        "aria_label": "Voir le dépôt kepano/obsidian-skills sur GitHub (nouvel onglet)",
+        "verifie_le": "2026-11-03T07:15:22.341Z",
+        "motif": "capture_recente"
+      },
+      "etat_depot": {
+        "full_name": "kepano/obsidian-skills",
+        "html_url": "https://github.com/kepano/obsidian-skills",
+        "etoiles": 50608,
+        "etoiles_au": "2026-11-02T12:15:46.936Z",
+        "cree_le": "2026-01-02T21:45:11Z",
+        "dernier_push": "2026-09-15T14:43:57Z",
+        "jours_sans_push": 47,
+        "inactif": false,
+        "licence": "MIT",
+        "archive": false,
+        "fork": false,
+        "parent": null,
+        "date_ajout_skill": null
+      },
+      "visuel": {
+        "src": "medias/montages/ressources/obsidian-skills.jpg",
+        "alt": "Obsidian Skills teaches your agent Obsidian's formats and its CLI. Étape 1 : In Claude Code: /plugin marketplace add kepano/obsidian-skills. Étape 2 : Then /plugin install obsidian@obsidian-skills. Étape 3 : Or with npx: npx skills add https://github.com/kepano/obsidian-skills",
+        "gabarit": "etapes",
+        "mention": "Illustration — ne prouve pas le fonctionnement"
+      },
+      "captures": [
+        {
+          "document": "depot",
+          "snapshot_id": 451,
+          "capture_le": "2026-11-02T12:15:46.936Z",
+          "url": "https://github.com/kepano/obsidian-skills",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:README.md",
+          "snapshot_id": 452,
+          "capture_le": "2026-11-02T12:15:46.936Z",
+          "url": "https://github.com/kepano/obsidian-skills/blob/main/README.md",
+          "mode": "live"
+        }
+      ],
+      "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
+      "importe_le": "2026-11-03T07:15:18.913Z"
+    },
+    {
+      "post_id": 11,
+      "revision_id": 130,
+      "slug": "superpowers",
+      "nom": "Superpowers",
+      "compte": "pyxo",
+      "statut": "en_attente",
+      "etiquette": "pas encore publié",
+      "planning": {
+        "jour": "2026-11-03",
+        "rang": 11,
+        "etat": "prevue",
+        "utilise_reserve": false,
+        "motif": null
+      },
+      "statut_sortie": "ressource_existante",
+      "badge": "Ressource existante",
+      "origine": {
+        "code": "claude_code_developpement",
+        "texte": "Rédigé pendant le développement par Claude Code, assistant de programmation, pas par l'agent du site ; vérifié par les contrôles du code"
+      },
+      "mention": "Analyse IA à partir des sources — non testé par la plateforme",
+      "accroche": {
+        "texte": "Superpowers makes your coding agent scope, plan, test, and review before it delivers",
+        "passages": [
+          "Superpowers is a complete software development methodology for your coding agents",
+          "Enforces RED-GREEN-REFACTOR: write failing test, watch it fail",
+          "Critical issues block progress.",
+          "brainstorming - Activates before building anything.",
+          "writing-plans - Activates with approved design.",
+          "test-driven-development - Activates during implementation.",
+          "requesting-code-review - Activates between tasks.",
+          "finishing-a-development-branch - Activates when tasks complete."
+        ]
+      },
+      "description": {
+        "texte": "Superpowers imposes a real method on your coding agent. It doesn't rush into the code: it asks what you're trying to do, shows you the spec in readable chunks, then builds an implementation plan once the design is approved. Skills trigger on their own, with no command to type.",
+        "passages": [
+          "Superpowers is a complete software development methodology for your coding agents, built on top of a set of composable skills and some initial instructions that make sure your agent uses them.",
+          "it doesn't just jump into trying to write code. Instead, it steps back and asks you what you're really trying to do.",
+          "Once it's teased a spec out of the conversation, it shows it to you in chunks short enough to actually read and digest.",
+          "After you've signed off on the design, your agent puts together an implementation plan",
+          "because the skills trigger automatically, you don't need to do anything special"
+        ]
+      },
+      "interet": {
+        "texte": "The plan splits the work into 2- to 5-minute tasks, with files, code, and checks. TDD is strict: code written before its test is deleted. Between tasks, a review ranks issues by severity, and a critical issue blocks the next step. According to the author, the agent can thus run autonomously for a few hours without straying from the plan.",
+        "passages": [
+          "Breaks work into bite-sized tasks (2-5 minutes each). Every task has exact file paths, complete code, verification steps.",
+          "Enforces RED-GREEN-REFACTOR: write failing test, watch it fail, write minimal code, watch it pass, commit.",
+          "It emphasizes true red/green TDD, YAGNI (You Aren't Gonna Need It), and DRY.",
+          "Deletes code written before tests.",
+          "Reviews against plan, reports issues by severity. Critical issues block progress.",
+          "It's not uncommon for your agent to work autonomously for a couple hours at a time without deviating from the plan you put together."
+        ]
+      },
+      "exemple_usage": {
+        "texte": "For a new feature: brainstorming pins down the request, writing-plans breaks it into small tasks, then implementation starts with a failing test, before the minimal code.",
+        "passages": [
+          "Draws out what you actually want, and why, through questions that get you describing it",
+          "writing-plans - Activates with approved design. Breaks work into bite-sized tasks",
+          "Enforces RED-GREEN-REFACTOR: write failing test, watch it fail, write minimal code, watch it pass, commit."
+        ]
+      },
+      "demarrage": {
+        "etapes": [
+          {
+            "texte": "In Claude Code: /plugin install superpowers@claude-plugins-official",
+            "passages": [
+              "Getting Started Claude Code",
+              "Install the plugin from Anthropic's official marketplace",
+              "/plugin install superpowers@claude-plugins-official"
+            ]
+          },
+          {
+            "texte": "Other agents: a separate install for each, depending on the repository",
+            "passages": [
+              "Installation differs by harness. If you use more than one, install Superpowers separately for each one."
+            ]
+          }
+        ],
+        "commande": "/plugin install superpowers@claude-plugins-official",
+        "passages": [
+          "Installation differs by harness. If you use more than one, install Superpowers separately for each one.",
+          "Install the plugin from Anthropic's official marketplace"
+        ],
+        "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
+      },
+      "compatibilites": [
+        {
+          "texte": "Claude Code, Codex, Cursor, Gemini CLI, GitHub Copilot CLI and about ten others.",
+          "passages": [
+            "Claude Code Antigravity Codex App Codex CLI Cursor Devin CLI Factory Droid Gemini CLI GitHub Copilot CLI Grok Build CLI Kimi Code OpenCode Pi Qwen Code Hermes Agent Muse"
+          ]
+        }
+      ],
+      "limites": [],
+      "licence_locale": null,
+      "reperes": [
+        {
+          "texte": "A fresh sub-agent per task, reviewed every time",
+          "passages": [
+            "dispatches a fresh subagent per task with a review after each"
+          ]
+        },
+        {
+          "texte": "4-phase debugging to trace back to the root cause",
+          "passages": [
+            "systematic-debugging - 4-phase root cause process"
+          ]
+        },
+        {
+          "texte": "Each project isolated on its own branch",
+          "passages": [
+            "using-git-worktrees - Activates after design approval. Creates isolated workspace on new branch"
+          ]
+        }
+      ],
+      "bouton": {
+        "libelle": "Voir le dépôt",
+        "url": "https://github.com/obra/superpowers",
+        "aria_label": "Voir le dépôt obra/superpowers sur GitHub (nouvel onglet)",
+        "verifie_le": "2026-11-03T07:11:54.821Z",
+        "motif": "capture_recente"
+      },
+      "etat_depot": {
+        "full_name": "obra/superpowers",
+        "html_url": "https://github.com/obra/superpowers",
+        "etoiles": 310943,
+        "etoiles_au": "2026-11-02T12:15:49.227Z",
+        "cree_le": "2025-10-09T19:45:18Z",
+        "dernier_push": "2026-10-29T23:35:34Z",
+        "jours_sans_push": 3,
+        "inactif": false,
+        "licence": "MIT",
+        "archive": false,
+        "fork": false,
+        "parent": null,
+        "date_ajout_skill": null
+      },
+      "visuel": {
+        "src": "medias/montages/ressources/superpowers.jpg",
+        "alt": "Superpowers makes your coding agent scope, plan, test, and review before it delivers. Étape 1 : In Claude Code: /plugin install superpowers@claude-plugins-official. Étape 2 : Other agents: a separate install for each, depending on the repository",
+        "gabarit": "etapes",
+        "mention": "Illustration — ne prouve pas le fonctionnement"
+      },
+      "captures": [
+        {
+          "document": "depot",
+          "snapshot_id": 457,
+          "capture_le": "2026-11-02T12:15:49.227Z",
+          "url": "https://github.com/obra/superpowers",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:README.md",
+          "snapshot_id": 458,
+          "capture_le": "2026-11-02T12:15:49.227Z",
+          "url": "https://github.com/obra/superpowers/blob/main/README.md",
+          "mode": "live"
+        }
+      ],
+      "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
+      "importe_le": "2026-11-03T07:11:53.355Z"
+    },
+    {
+      "post_id": 3,
+      "revision_id": 135,
+      "slug": "react-best-practices",
+      "nom": "React Best Practices (Vercel)",
+      "compte": "mova",
+      "statut": "en_attente",
+      "etiquette": "pas encore publié",
+      "planning": {
+        "jour": "2026-11-03",
+        "rang": 12,
+        "etat": "prevue",
+        "utilise_reserve": false,
+        "motif": null
+      },
+      "statut_sortie": "ressource_existante",
+      "badge": "Ressource existante",
+      "origine": {
+        "code": "claude_code_developpement",
+        "texte": "Rédigé pendant le développement par Claude Code, assistant de programmation, pas par l'agent du site ; vérifié par les contrôles du code"
+      },
+      "mention": "Analyse IA à partir des sources — non testé par la plateforme",
+      "accroche": {
+        "texte": "React Best Practices: Vercel's 70 React and Next.js performance rules, applied by your agent",
         "passages": [
           "React and Next.js performance optimization guidelines from Vercel Engineering.",
           "Contains 70 rules across 8 categories, prioritized by impact to guide automated refactoring and code generation."
         ]
       },
       "description": {
-        "texte": "Vercel Engineering y condense ses règles de performance React et Next.js. L'agent s'en sert dès qu'il écrit, relit ou refactorise un composant, une page Next.js ou du chargement de données.",
+        "texte": "Vercel Engineering condenses its React and Next.js performance rules there. The agent uses them whenever it writes, reviews or refactors a component, a Next.js page or data loading.",
         "passages": [
           "React and Next.js performance optimization guidelines from Vercel Engineering.",
           "This skill should be used when writing, reviewing, or refactoring React/Next.js code to ensure optimal performance patterns.",
@@ -11283,7 +12476,7 @@ window.DONNEES_MAQUETTE = {
         ]
       },
       "interet": {
-        "texte": "Les règles sont classées par impact : l'agent s'attaque d'abord aux requêtes en cascade et au poids du bundle, avant les re-rendus ou les micro-optimisations JavaScript.",
+        "texte": "The rules are ranked by impact: the agent tackles cascading requests and bundle weight first, before re-renders or JavaScript micro-optimizations.",
         "passages": [
           "prioritized by impact to guide automated refactoring and code generation.",
           "Eliminating Waterfalls | CRITICAL | async-",
@@ -11293,7 +12486,7 @@ window.DONNEES_MAQUETTE = {
         ]
       },
       "exemple_usage": {
-        "texte": "Une page Next.js enchaîne deux requêtes indépendantes ? Demandez à l'agent de l'optimiser : la règle async-parallel les lance ensemble avec Promise.all().",
+        "texte": "A Next.js page chains two independent requests? Ask the agent to optimize it: the async-parallel rule runs them together with Promise.all().",
         "passages": [
           "Help me optimize this Next.js page",
           "async-parallel - Use Promise.all() for independent operations"
@@ -11302,7 +12495,7 @@ window.DONNEES_MAQUETTE = {
       "demarrage": {
         "etapes": [
           {
-            "texte": "La commande installe toute la collection de Vercel, pas seulement ce skill : npx skills add vercel-labs/agent-skills",
+            "texte": "The command installs Vercel's entire collection, not just this skill: npx skills add vercel-labs/agent-skills",
             "passages": [
               "npx skills add vercel-labs/agent-skills"
             ]
@@ -11318,21 +12511,21 @@ window.DONNEES_MAQUETTE = {
       "compatibilites": [],
       "limites": [],
       "licence_locale": {
-        "texte": "L'en-tête du skill déclare la licence MIT.",
+        "texte": "The skill's header declares the MIT license.",
         "passages": [
           "license: MIT metadata: author: vercel"
         ]
       },
       "reperes": [
         {
-          "texte": "Pour chaque règle, le code fautif et sa correction",
+          "texte": "For each rule, the faulty code and its fix",
           "passages": [
             "Incorrect code example with explanation",
             "Correct code example with explanation"
           ]
         },
         {
-          "texte": "Côté serveur : React.cache(), cache LRU et after()",
+          "texte": "Server side: React.cache(), LRU cache and after()",
           "passages": [
             "server-cache-react - Use React.cache() for per-request deduplication",
             "server-cache-lru - Use LRU cache for cross-request caching",
@@ -11340,7 +12533,7 @@ window.DONNEES_MAQUETTE = {
           ]
         },
         {
-          "texte": "Côté client : SWR et écouteurs d'événements dédoublonnés",
+          "texte": "Client side: SWR and deduplicated event listeners",
           "passages": [
             "client-swr-dedup - Use SWR for automatic request deduplication",
             "client-event-listeners - Deduplicate global event listeners"
@@ -11351,7 +12544,7 @@ window.DONNEES_MAQUETTE = {
         "libelle": "Voir le dépôt",
         "url": "https://github.com/vercel-labs/agent-skills/tree/main/skills/react-best-practices",
         "aria_label": "Voir le dépôt vercel-labs/agent-skills sur GitHub (nouvel onglet)",
-        "verifie_le": "2026-11-02T17:44:49.233Z",
+        "verifie_le": "2026-11-03T07:14:55.308Z",
         "motif": "capture_recente"
       },
       "etat_depot": {
@@ -11371,7 +12564,7 @@ window.DONNEES_MAQUETTE = {
       },
       "visuel": {
         "src": "medias/montages/ressources/react-best-practices.jpg",
-        "alt": "React Best Practices : les 70 règles de performance React et Next.js de Vercel, appliquées par votre agent. npx skills add vercel-labs/agent-skills",
+        "alt": "React Best Practices: Vercel's 70 React and Next.js performance rules, applied by your agent. npx skills add vercel-labs/agent-skills",
         "gabarit": "terminal_annote",
         "mention": "Illustration — ne prouve pas le fonctionnement"
       },
@@ -11406,19 +12599,19 @@ window.DONNEES_MAQUETTE = {
         }
       ],
       "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
-      "importe_le": "2026-11-02T17:44:44.497Z"
+      "importe_le": "2026-11-03T07:14:49.047Z"
     },
     {
       "post_id": 4,
-      "revision_id": 43,
+      "revision_id": 153,
       "slug": "skills-documents",
       "nom": "Skills de documents docx, xlsx, pptx, pdf",
-      "compte": "repo",
+      "compte": "radar",
       "statut": "en_attente",
       "etiquette": "pas encore publié",
       "planning": {
-        "jour": "2026-11-02",
-        "rang": 4,
+        "jour": "2026-11-03",
+        "rang": 13,
         "etat": "prevue",
         "utilise_reserve": false,
         "motif": null
@@ -11431,7 +12624,7 @@ window.DONNEES_MAQUETTE = {
       },
       "mention": "Analyse IA à partir des sources — non testé par la plateforme",
       "accroche": {
-        "texte": "Skills de documents d'Anthropic : Claude crée et modifie vos Word, tableurs, présentations et PDF",
+        "texte": "Anthropic document skills: Claude creates and edits Word files, spreadsheets, slides and PDF files",
         "passages": [
           "This repository contains Anthropic's implementation of skills for Claude.",
           "create, read, edit, or manipulate Word documents (.docx files)",
@@ -11441,7 +12634,7 @@ window.DONNEES_MAQUETTE = {
         ]
       },
       "description": {
-        "texte": "Les quatre skills qui font tourner les fonctions de documents de Claude, un par format : docx, xlsx, pptx et pdf. Rapport Word, classeur avec formules, présentation, formulaire PDF : Claude s'appuie dessus pour livrer un fichier propre. Selon Anthropic, une référence de skills complexes utilisés en production.",
+        "texte": "The four skills that power Claude's document functions, one per format: docx, xlsx, pptx and pdf. Word report, spreadsheet with formulas, presentation, PDF form: Claude relies on them to deliver a clean file. According to Anthropic, a reference for complex skills used in production.",
         "passages": [
           "We've also included the document creation & editing skills that power Claude's document capabilities under the hood in the skills/docx, skills/pdf, skills/pptx, and skills/xlsx subfolders.",
           "This repository contains Anthropic's implementation of skills for Claude.",
@@ -11453,7 +12646,7 @@ window.DONNEES_MAQUETTE = {
         ]
       },
       "interet": {
-        "texte": "Chaque skill choisit sa méthode selon la tâche, recense les pièges connus des bibliothèques et impose de contrôler le fichier produit. Pour un tableur, LibreOffice recalcule toutes les formules, et rien ne part tant qu'il reste une erreur.",
+        "texte": "Each skill picks its method based on the task, lists the known library pitfalls and requires checking the produced file. For a spreadsheet, LibreOffice recalculates all formulas, and nothing goes out while an error remains.",
         "passages": [
           "A .docx is a ZIP archive of XML files. Choose your approach by task:",
           "The model knows the API; these are the footguns:",
@@ -11463,7 +12656,7 @@ window.DONNEES_MAQUETTE = {
         ]
       },
       "exemple_usage": {
-        "texte": "Une fois le plugin document-skills installé, il suffit de demander à Claude Code d'utiliser le skill PDF pour extraire les champs de formulaire d'un fichier.",
+        "texte": "Once the document-skills plugin is installed, just ask Claude Code to use the PDF skill to extract a file's form fields.",
         "passages": [
           "if you install the document-skills plugin from the marketplace, you can ask Claude Code to do something like",
           "Use the PDF skill to extract the form fields from path/to/some-file.pdf"
@@ -11472,14 +12665,14 @@ window.DONNEES_MAQUETTE = {
       "demarrage": {
         "etapes": [
           {
-            "texte": "Ajouter le catalogue : /plugin marketplace add anthropics/skills",
+            "texte": "Add the catalog: /plugin marketplace add anthropics/skills",
             "passages": [
               "You can register this repository as a Claude Code Plugin marketplace by running the following command in Claude Code",
               "/plugin marketplace add anthropics/skills"
             ]
           },
           {
-            "texte": "Installer : /plugin install document-skills@anthropic-agent-skills",
+            "texte": "Install: /plugin install document-skills@anthropic-agent-skills",
             "passages": [
               "Alternatively, directly install either Plugin via:",
               "/plugin install document-skills@anthropic-agent-skills"
@@ -11497,7 +12690,7 @@ window.DONNEES_MAQUETTE = {
       "compatibilites": [],
       "limites": [
         {
-          "texte": "Code consultable mais pas libre : la licence réserve ces skills aux services d'Anthropic et interdit de les copier, modifier ou redistribuer.",
+          "texte": "Code viewable but not free: the license reserves these skills for Anthropic's services and forbids copying, modifying or redistributing them.",
           "passages": [
             "These are source-available, not open source",
             "is governed by your agreement with Anthropic regarding use of Anthropic's services.",
@@ -11508,7 +12701,7 @@ window.DONNEES_MAQUETTE = {
         }
       ],
       "licence_locale": {
-        "texte": "Selon le LICENSE.txt de chaque skill : licence propriétaire d'Anthropic.",
+        "texte": "Not open source: each skill's LICENSE.txt states a proprietary Anthropic license.",
         "passages": [
           "license: Proprietary. LICENSE.txt has complete terms",
           "© 2025 Anthropic, PBC. All rights reserved."
@@ -11516,20 +12709,20 @@ window.DONNEES_MAQUETTE = {
       },
       "reperes": [
         {
-          "texte": "Word : modifications suivies, puis copie propre acceptée",
+          "texte": "Word: tracked changes, then a clean accepted copy",
           "passages": [
             "working with tracked changes or comments",
             "To produce a clean copy with all tracked changes accepted:"
           ]
         },
         {
-          "texte": "Présentations converties en images pour la relecture",
+          "texte": "Presentations converted to images for review",
           "passages": [
             "Convert presentations to individual slide images for visual inspection:"
           ]
         },
         {
-          "texte": "Finance : une hypothèse par cellule, sauf consigne contraire",
+          "texte": "Finance: one assumption per cell, unless stated otherwise",
           "passages": [
             "Unless the user says otherwise, or the existing file already does something else.",
             "every assumption in its own labeled cell, referenced by the formulas that use it"
@@ -11540,7 +12733,7 @@ window.DONNEES_MAQUETTE = {
         "libelle": "Voir le dépôt",
         "url": "https://github.com/anthropics/skills",
         "aria_label": "Voir le dépôt anthropics/skills sur GitHub (nouvel onglet)",
-        "verifie_le": "2026-11-02T18:45:40.129Z",
+        "verifie_le": "2026-11-03T07:15:22.350Z",
         "motif": "capture_recente"
       },
       "etat_depot": {
@@ -11560,7 +12753,7 @@ window.DONNEES_MAQUETTE = {
       },
       "visuel": {
         "src": "medias/montages/ressources/skills-documents.jpg",
-        "alt": "Skills de documents d'Anthropic : Claude crée et modifie vos Word, tableurs, présentations et PDF. Étape 1 : Ajouter le catalogue : /plugin marketplace add anthropics/skills. Étape 2 : Installer : /plugin install document-skills@anthropic-agent-skills",
+        "alt": "Anthropic document skills: Claude creates and edits Word files, spreadsheets, slides and PDF files. Étape 1 : Add the catalog: /plugin marketplace add anthropics/skills. Étape 2 : Install: /plugin install document-skills@anthropic-agent-skills",
         "gabarit": "etapes",
         "mention": "Illustration — ne prouve pas le fonctionnement"
       },
@@ -11665,19 +12858,19 @@ window.DONNEES_MAQUETTE = {
         }
       ],
       "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
-      "importe_le": "2026-11-02T18:45:35.166Z"
+      "importe_le": "2026-11-03T07:15:18.913Z"
     },
     {
-      "post_id": 5,
-      "revision_id": 44,
-      "slug": "ui-ux-pro-max",
-      "nom": "UI UX Pro Max",
+      "post_id": 10,
+      "revision_id": 137,
+      "slug": "scientific-agent-skills",
+      "nom": "Scientific Agent Skills (K-Dense)",
       "compte": "repo",
       "statut": "en_attente",
       "etiquette": "pas encore publié",
       "planning": {
-        "jour": "2026-11-02",
-        "rang": 5,
+        "jour": "2026-11-03",
+        "rang": 14,
         "etat": "prevue",
         "utilise_reserve": false,
         "motif": null
@@ -11690,14 +12883,501 @@ window.DONNEES_MAQUETTE = {
       },
       "mention": "Analyse IA à partir des sources — non testé par la plateforme",
       "accroche": {
-        "texte": "UI UX Pro Max donne à votre agent un design system taillé pour votre produit avant qu'il code l'interface",
+        "texte": "Scientific Agent Skills: 177 skills for doing research with Claude Code, Cursor or Codex",
+        "passages": [
+          "A collection of 177 scientific and research skills for AI agents, created by K-Dense.",
+          "works with Cursor, Claude Code, Codex, Google Antigravity, and other compatible hosts"
+        ]
+      },
+      "description": {
+        "texte": "Biology, chemistry, medicine, physics, data analysis: each K-Dense skill aligns your agent with a specific package, database or method, including the domain's conventions and checks.",
+        "passages": [
+          "A collection of 177 scientific and research skills for AI agents, created by K-Dense.",
+          "The skills cover biology, chemistry, medicine, physics, engineering, Earth science, data analysis, and scientific communication.",
+          "Each provides guidance for a specific package, data source, or workflow, including the scientific conventions and validation checks needed to use it."
+        ]
+      },
+      "interet": {
+        "texte": "The most useful piece: Database Lookup documents 80 databases (PubChem, ChEMBL, UniProt, ClinicalTrials.gov…), with the right endpoints, pagination and provenance. A single request is then enough to chain a whole pipeline.",
+        "passages": [
+          "The Database Lookup skill documents 80 databases with public, registered, or licensed access (PubChem, ChEMBL, UniProt, COSMIC, ClinicalTrials.gov, FRED, USPTO, and more), including endpoint selection, pagination, and provenance.",
+          "Multi-Step Workflows - Execute complex pipelines with a single prompt"
+        ]
+      },
+      "exemple_usage": {
+        "texte": "In the repository example, a single request to classify EGFR inhibitors: the agent queries ChEMBL, analyzes structure-activity relationships with RDKit, looks for resistance mechanisms in PubMed, then delivers charts and a report.",
+        "passages": [
+          "Goal: Prioritize EGFR inhibitor candidates for preclinical lung-cancer research",
+          "Query ChEMBL for EGFR inhibitors",
+          "analyze structure-activity relationships with RDKit",
+          "search PubMed for resistance mechanisms",
+          "create visualizations and a comprehensive report"
+        ]
+      },
+      "demarrage": {
+        "etapes": [
+          {
+            "texte": "With GitHub CLI 2.90.0+: gh skill install, only the useful skills.",
+            "passages": [
+              "If you use the GitHub CLI (v2.90.0+), you can install skills with gh skill",
+              "gh skill install K-Dense-AI/scientific-agent-skills scanpy",
+              "Only install the skills you actually need for your work."
+            ]
+          },
+          {
+            "texte": "Dependencies are installed separately, depending on each skill.",
+            "passages": [
+              "Installing the skill files does not install their dependencies",
+              "Follow each skill's compatibility field and setup instructions for packages, system tools, credentials, and network access."
+            ]
+          }
+        ],
+        "commande": "gh skill install K-Dense-AI/scientific-agent-skills scanpy",
+        "passages": [
+          "If you use the GitHub CLI (v2.90.0+), you can install skills with gh skill",
+          "gh skill install K-Dense-AI/scientific-agent-skills scanpy",
+          "Only install the skills you actually need for your work."
+        ],
+        "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
+      },
+      "compatibilites": [],
+      "limites": [
+        {
+          "texte": "A skill can make your agent execute arbitrary code and K-Dense does not guarantee an exhaustive review: read SKILL.md before installing.",
+          "passages": [
+            "they can instruct your AI agent to run arbitrary code, install packages, make network requests, and modify files on your system.",
+            "we cannot guarantee that every skill has been exhaustively reviewed for all possible risks.",
+            "Read the SKILL.md before installing."
+          ]
+        },
+        {
+          "texte": "Repository under MIT, but each skill has its own license, which may add conditions.",
+          "passages": [
+            "This project is licensed under the MIT License.",
+            "These licenses may differ from the repository's MIT License and may include additional terms or restrictions."
+          ]
+        }
+      ],
+      "licence_locale": null,
+      "reperes": [
+        {
+          "texte": "Versioned workflows for RDKit, Scanpy, scikit-learn",
+          "passages": [
+            "Explicitly defined, version-aware workflows for RDKit, Scanpy, PyTorch Lightning, scikit-learn"
+          ]
+        },
+        {
+          "texte": "Installation pinned to a tag or a commit",
+          "passages": [
+            "Pin to a specific release tag or commit SHA for reproducible installs"
+          ]
+        },
+        {
+          "texte": "Also loadable as a single plugin",
+          "passages": [
+            "load the collection as one plugin"
+          ]
+        }
+      ],
+      "bouton": {
+        "libelle": "Voir le dépôt",
+        "url": "https://github.com/K-Dense-AI/scientific-agent-skills",
+        "aria_label": "Voir le dépôt K-Dense-AI/scientific-agent-skills sur GitHub (nouvel onglet)",
+        "verifie_le": "2026-11-03T07:14:55.319Z",
+        "motif": "capture_recente"
+      },
+      "etat_depot": {
+        "full_name": "K-Dense-AI/scientific-agent-skills",
+        "html_url": "https://github.com/K-Dense-AI/scientific-agent-skills",
+        "etoiles": 55782,
+        "etoiles_au": "2026-11-02T12:15:48.594Z",
+        "cree_le": "2025-10-19T20:54:15Z",
+        "dernier_push": "2026-11-02T09:23:27Z",
+        "jours_sans_push": 0,
+        "inactif": false,
+        "licence": "MIT",
+        "archive": false,
+        "fork": false,
+        "parent": null,
+        "date_ajout_skill": null
+      },
+      "visuel": {
+        "src": "medias/montages/ressources/scientific-agent-skills.jpg",
+        "alt": "Scientific Agent Skills: 177 skills for doing research with Claude Code, Cursor or Codex. Étape 1 : With GitHub CLI 2.90.0+: gh skill install, only the useful skills.. Étape 2 : Dependencies are installed separately, depending on each skill.",
+        "gabarit": "etapes",
+        "mention": "Illustration — ne prouve pas le fonctionnement"
+      },
+      "captures": [
+        {
+          "document": "depot",
+          "snapshot_id": 455,
+          "capture_le": "2026-11-02T12:15:48.594Z",
+          "url": "https://github.com/K-Dense-AI/scientific-agent-skills",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:README.md",
+          "snapshot_id": 456,
+          "capture_le": "2026-11-02T12:15:48.594Z",
+          "url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/main/README.md",
+          "mode": "live"
+        }
+      ],
+      "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
+      "importe_le": "2026-11-03T07:14:49.047Z"
+    },
+    {
+      "post_id": 13,
+      "revision_id": 154,
+      "slug": "grill-me",
+      "nom": "grill-me (Matt Pocock)",
+      "compte": "nodi",
+      "statut": "en_attente",
+      "etiquette": "pas encore publié",
+      "planning": {
+        "jour": "2026-11-03",
+        "rang": 15,
+        "etat": "prevue",
+        "utilise_reserve": false,
+        "motif": null
+      },
+      "statut_sortie": "ressource_existante",
+      "badge": "Ressource existante",
+      "origine": {
+        "code": "claude_code_developpement",
+        "texte": "Rédigé pendant le développement par Claude Code, assistant de programmation, pas par l'agent du site ; vérifié par les contrôles du code"
+      },
+      "mention": "Analyse IA à partir des sources — non testé par la plateforme",
+      "accroche": {
+        "texte": "grill-me: your agent questions you about a plan until every branch is resolved, not before",
+        "passages": [
+          "Get relentlessly interviewed about a plan or design until every branch of the design tree is resolved."
+        ]
+      },
+      "description": {
+        "texte": "Before launching anything, you flip the roles: the agent asks you precise questions about your plan, decision or idea, and digs into every branch until it is settled. Matt Pocock intends it for non-code topics.",
+        "passages": [
+          "getting the agent to ask you detailed questions about what you're building.",
+          "Interview the user relentlessly about a plan, decision, or idea until every branch of the design tree is resolved.",
+          "/grill-me - for non-code uses"
+        ]
+      },
+      "interet": {
+        "texte": "You align with the agent before it starts working, instead of finding out afterward that it misunderstood. For code, the grill-with-docs variant runs the same interview and builds the project vocabulary along the way.",
+        "passages": [
+          "They help you align with the agent before you get started",
+          "you realize it didn't understand you at all.",
+          "Grilling session that also builds your project's domain model",
+          "document hard-to-explain decisions in ADR's."
+        ]
+      },
+      "exemple_usage": {
+        "texte": "A launch to scope out, a team trade-off to prepare: type /grill-me, describe the plan, then answer until nothing is left unclear.",
+        "passages": [
+          "User-invoked skills are reachable only when you type them (e.g. /grill-me)",
+          "Interview the user relentlessly about a plan, decision, or idea until every branch of the design tree is resolved."
+        ]
+      },
+      "demarrage": {
+        "etapes": [
+          {
+            "texte": "In Claude Code, install the mattpocock-skills plugin.",
+            "passages": [
+              "claude plugin install mattpocock-skills@claude-plugins-official",
+              "I see with Claude Code, Codex, and other coding agents."
+            ]
+          },
+          {
+            "texte": "It does not start on its own: type /grill-me, then describe your plan.",
+            "passages": [
+              "User-invoked skills are reachable only when you type them (e.g. /grill-me)"
+            ]
+          }
+        ],
+        "commande": "claude plugin install mattpocock-skills@claude-plugins-official",
+        "passages": [
+          "claude plugin install mattpocock-skills@claude-plugins-official",
+          "User-invoked skills are reachable only when you type them (e.g. /grill-me)"
+        ],
+        "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
+      },
+      "compatibilites": [
+        {
+          "texte": "Claude Code, Codex and other agents; any model, according to the author.",
+          "passages": [
+            "I see with Claude Code, Codex, and other coding agents.",
+            "codex plugin add mattpocock-skills@mattpocock",
+            "npx skills@latest add mattpocock/skills -a <agent>",
+            "They work with any model."
+          ]
+        }
+      ],
+      "limites": [],
+      "licence_locale": null,
+      "reperes": [
+        {
+          "texte": "Runs only when you type /grill-me",
+          "passages": [
+            "User-invoked skills are reachable only when you type them (e.g. /grill-me)"
+          ]
+        },
+        {
+          "texte": "Works with any model",
+          "passages": [
+            "They work with any model."
+          ]
+        }
+      ],
+      "bouton": {
+        "libelle": "Voir le dépôt",
+        "url": "https://github.com/mattpocock/skills",
+        "aria_label": "Voir le dépôt mattpocock/skills sur GitHub (nouvel onglet)",
+        "verifie_le": "2026-11-03T07:15:22.356Z",
+        "motif": "capture_recente"
+      },
+      "etat_depot": {
+        "full_name": "mattpocock/skills",
+        "html_url": "https://github.com/mattpocock/skills",
+        "etoiles": 309698,
+        "etoiles_au": "2026-11-02T12:15:51.625Z",
+        "cree_le": "2026-02-03T11:15:53Z",
+        "dernier_push": "2026-11-01T11:42:33Z",
+        "jours_sans_push": 1,
+        "inactif": false,
+        "licence": "MIT",
+        "archive": false,
+        "fork": false,
+        "parent": null,
+        "date_ajout_skill": null
+      },
+      "visuel": {
+        "src": "medias/montages/ressources/grill-me.jpg",
+        "alt": "grill-me: your agent questions you about a plan until every branch is resolved, not before. Étape 1 : In Claude Code, install the mattpocock-skills plugin.. Étape 2 : It does not start on its own: type /grill-me, then describe your plan.",
+        "gabarit": "etapes",
+        "mention": "Illustration — ne prouve pas le fonctionnement"
+      },
+      "captures": [
+        {
+          "document": "depot",
+          "snapshot_id": 463,
+          "capture_le": "2026-11-02T12:15:51.625Z",
+          "url": "https://github.com/mattpocock/skills",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:skills/productivity/grill-me/SKILL.md",
+          "snapshot_id": 464,
+          "capture_le": "2026-11-02T12:15:51.625Z",
+          "url": "https://github.com/mattpocock/skills/blob/main/skills/productivity/grill-me/SKILL.md",
+          "mode": "live"
+        },
+        {
+          "document": "dossier:skills/productivity/grill-me",
+          "snapshot_id": 465,
+          "capture_le": "2026-11-02T12:15:51.625Z",
+          "url": "https://github.com/mattpocock/skills/tree/main/skills/productivity/grill-me",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:README.md",
+          "snapshot_id": 466,
+          "capture_le": "2026-11-02T12:15:51.625Z",
+          "url": "https://github.com/mattpocock/skills/blob/main/README.md",
+          "mode": "live"
+        }
+      ],
+      "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
+      "importe_le": "2026-11-03T07:15:18.913Z"
+    },
+    {
+      "post_id": 14,
+      "revision_id": 139,
+      "slug": "claude-mem",
+      "nom": "claude-mem",
+      "compte": "pyxo",
+      "statut": "en_attente",
+      "etiquette": "pas encore publié",
+      "planning": {
+        "jour": "2026-11-03",
+        "rang": 16,
+        "etat": "prevue",
+        "utilise_reserve": false,
+        "motif": null
+      },
+      "statut_sortie": "ressource_existante",
+      "badge": "Ressource existante",
+      "origine": {
+        "code": "claude_code_developpement",
+        "texte": "Rédigé pendant le développement par Claude Code, assistant de programmation, pas par l'agent du site ; vérifié par les contrôles du code"
+      },
+      "mention": "Analyse IA à partir des sources — non testé par la plateforme",
+      "accroche": {
+        "texte": "claude-mem gives Claude Code a memory that persists from one session to the next",
+        "passages": [
+          "Persistent memory compression system built for",
+          "Context survives across sessions",
+          "Claude Code: Latest version with plugin support"
+        ]
+      },
+      "description": {
+        "texte": "During the session, it records what the agent does, compresses it into summaries, and injects the useful context back into the next one. You pick a project back up without re-explaining everything.",
+        "passages": [
+          "Captures everything your agent does during sessions, compresses it with AI, and injects relevant context back into future sessions",
+          "This enables Claude to maintain continuity of knowledge about projects even after sessions end or reconnect."
+        ]
+      },
+      "interet": {
+        "texte": "To find information, the agent first reads a compact index, then loads only the useful notes: about ten times fewer tokens, according to the authors.",
+        "passages": [
+          "Get compact index with IDs (~50-100 tokens/result)",
+          "~10x token savings by filtering before fetching details"
+        ]
+      },
+      "exemple_usage": {
+        "texte": "In the docs: search for \"authentication bug\" among the fixes, then retrieve only two observations.",
+        "passages": [
+          "search(query=\"authentication bug\", type=\"bugfix\", limit=10)",
+          "Fetch full details get_observations(ids=[123, 456])"
+        ]
+      },
+      "demarrage": {
+        "etapes": [
+          {
+            "texte": "npx claude-mem install or the Claude Code plugin marketplace, then restart. Not npm install -g, which only installs the library.",
+            "passages": [
+              "Install with a single command:",
+              "Or install from the plugin marketplace inside Claude Code:",
+              "Restart Claude Code. Context from previous sessions will automatically appear in new sessions.",
+              "npm install -g claude-mem installs the SDK/library only"
+            ]
+          }
+        ],
+        "commande": "npx claude-mem install",
+        "passages": [
+          "Install with a single command:"
+        ],
+        "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
+      },
+      "compatibilites": [
+        {
+          "texte": "Node.js 20.0.0 or newer.",
+          "passages": [
+            "Node.js: 20.0.0 or higher"
+          ]
+        }
+      ],
+      "limites": [
+        {
+          "texte": "The claude-mem service offered at install is free for 30 days; after that, memory runs on your Anthropic subscription, unless you have an OpenRouter or Gemini subscription or key.",
+          "passages": [
+            "asks you to sign in to claude-mem in your browser",
+            "unlocks the claude-mem observer with a 30 Day Free Trial",
+            "When the free trial ends, memory automatically falls back to your Anthropic plan unless you subscribe.",
+            "you pick your memory provider — the claude-mem observer, your own OpenRouter or Gemini key, or your Anthropic plan."
+          ]
+        }
+      ],
+      "licence_locale": null,
+      "reperes": [
+        {
+          "texte": "Three-step search via 4 MCP tools",
+          "passages": [
+            "Query your project history with the three-step mem-search skill",
+            "intelligent memory search through 4 MCP tools"
+          ]
+        },
+        {
+          "texte": "History stored in SQLite and Chroma",
+          "passages": [
+            "SQLite Database - Stores sessions, observations, summaries",
+            "Chroma Vector Database - Hybrid semantic + keyword search"
+          ]
+        },
+        {
+          "texte": "Also for Codex, Gemini, Copilot and OpenCode",
+          "passages": [
+            "Works with Claude Code, OpenClaw, Codex, Gemini, Hermes, Copilot, OpenCode + More"
+          ]
+        }
+      ],
+      "bouton": {
+        "libelle": "Voir le dépôt",
+        "url": "https://github.com/thedotmack/claude-mem",
+        "aria_label": "Voir le dépôt thedotmack/claude-mem sur GitHub (nouvel onglet)",
+        "verifie_le": "2026-11-03T07:14:55.328Z",
+        "motif": "capture_recente"
+      },
+      "etat_depot": {
+        "full_name": "thedotmack/claude-mem",
+        "html_url": "https://github.com/thedotmack/claude-mem",
+        "etoiles": 110217,
+        "etoiles_au": "2026-11-02T12:15:52.226Z",
+        "cree_le": "2025-08-31T20:50:03Z",
+        "dernier_push": "2026-11-02T10:09:11Z",
+        "jours_sans_push": 0,
+        "inactif": false,
+        "licence": "Apache-2.0",
+        "archive": false,
+        "fork": false,
+        "parent": null,
+        "date_ajout_skill": null
+      },
+      "visuel": {
+        "src": "medias/montages/ressources/claude-mem.jpg",
+        "alt": "claude-mem gives Claude Code a memory that persists from one session to the next. npx claude-mem install",
+        "gabarit": "terminal_annote",
+        "mention": "Illustration — ne prouve pas le fonctionnement"
+      },
+      "captures": [
+        {
+          "document": "depot",
+          "snapshot_id": 467,
+          "capture_le": "2026-11-02T12:15:52.226Z",
+          "url": "https://github.com/thedotmack/claude-mem",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:README.md",
+          "snapshot_id": 468,
+          "capture_le": "2026-11-02T12:15:52.226Z",
+          "url": "https://github.com/thedotmack/claude-mem/blob/main/README.md",
+          "mode": "live"
+        }
+      ],
+      "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
+      "importe_le": "2026-11-03T07:14:49.047Z"
+    },
+    {
+      "post_id": 5,
+      "revision_id": 155,
+      "slug": "ui-ux-pro-max",
+      "nom": "UI UX Pro Max",
+      "compte": "mova",
+      "statut": "en_attente",
+      "etiquette": "pas encore publié",
+      "planning": {
+        "jour": "2026-11-03",
+        "rang": 17,
+        "etat": "prevue",
+        "utilise_reserve": false,
+        "motif": null
+      },
+      "statut_sortie": "ressource_existante",
+      "badge": "Ressource existante",
+      "origine": {
+        "code": "claude_code_developpement",
+        "texte": "Rédigé pendant le développement par Claude Code, assistant de programmation, pas par l'agent du site ; vérifié par les contrôles du code"
+      },
+      "mention": "Analyse IA à partir des sources — non testé par la plateforme",
+      "accroche": {
+        "texte": "UI UX Pro Max gives your agent a design system tailored to your product before it codes the interface",
         "passages": [
           "Industry-specific design system generation",
           "The skill activates automatically when you request UI/UX work."
         ]
       },
       "description": {
-        "texte": "Demandez une landing page ou un dashboard : le skill s'active seul, part de votre type de produit et sort la structure de page, le style, les couleurs, la typographie et les effets. Il puise dans 79 styles, 192 types de produits, des palettes et des paires de polices.",
+        "texte": "Ask for a landing page or a dashboard: the skill activates on its own, starts from your product type and outputs the page structure, style, colors, typography and effects. It draws on 79 styles, 192 product types, palettes and font pairs.",
         "passages": [
           "The skill activates automatically when you request UI/UX work.",
           "Build a landing page for my SaaS product",
@@ -11707,7 +13387,7 @@ window.DONNEES_MAQUETTE = {
         ]
       },
       "interet": {
-        "texte": "Chaque proposition arrive avec ses anti-patterns et une checklist avant livraison : pas d'emoji en guise d'icônes, cursor-pointer sur tout élément cliquable. Les palettes suivent le secteur, et les dégradés violet-rose « IA » sont proscrits pour une banque.",
+        "texte": "Each proposal comes with its anti-patterns and a pre-delivery checklist: no emoji as icons, cursor-pointer on every clickable element. Palettes follow the sector, and the purple-pink \"AI\" gradients are banned for a bank.",
         "passages": [
           "+ Anti-patterns to avoid + Pre-delivery checklist",
           "No emojis as icons (use SVG: Heroicons/Lucide)",
@@ -11717,7 +13397,7 @@ window.DONNEES_MAQUETTE = {
         ]
       },
       "exemple_usage": {
-        "texte": "Dans l'exemple du dépôt, la landing page d'un spa reçoit un style Soft UI Evolution, du rose pâle et du vert sauge rehaussés d'or, Cormorant Garamond avec Montserrat, sans néon ni animations brusques.",
+        "texte": "In the repository example, a spa landing page gets a Soft UI Evolution style, pale pink and sage green accented with gold, Cormorant Garamond with Montserrat, no neon or abrupt animations.",
         "passages": [
           "Build a landing page for my beauty spa",
           "STYLE: Soft UI Evolution",
@@ -11731,7 +13411,7 @@ window.DONNEES_MAQUETTE = {
       "demarrage": {
         "etapes": [
           {
-            "texte": "Dans le projet : npx ui-ux-pro-max-cli init --ai claude (ou cursor, copilot)",
+            "texte": "In the project: npx ui-ux-pro-max-cli init --ai claude (or cursor, copilot)",
             "passages": [
               "skip the global install entirely:",
               "cd /path/to/your/project uipro init --ai claude",
@@ -11740,7 +13420,7 @@ window.DONNEES_MAQUETTE = {
             ]
           },
           {
-            "texte": "Puis demandez l'interface voulue, le skill prend le relais.",
+            "texte": "Then ask for the interface you want, the skill takes over.",
             "passages": [
               "The skill activates automatically when you request UI/UX work.",
               "Build a landing page for my SaaS product"
@@ -11756,7 +13436,7 @@ window.DONNEES_MAQUETTE = {
       },
       "compatibilites": [
         {
-          "texte": "Une vingtaine d'agents selon le dépôt, dont Claude Code, Cursor, Windsurf, Codex CLI et GitHub Copilot.",
+          "texte": "About twenty agents depending on the repository, including Claude Code, Cursor, Windsurf, Codex CLI and GitHub Copilot.",
           "passages": [
             "Supported: Claude Code, Cursor, Windsurf, Antigravity, Codex CLI, Continue, Gemini CLI, OpenCode, Qoder, CodeBuddy, Droid (Factory), KiloCode, Warp, Augment, CodeWhale, ZCode, Kimi Code, Amazon Q Developer, OpenClaw, GitHub Copilot"
           ]
@@ -11764,7 +13444,7 @@ window.DONNEES_MAQUETTE = {
       ],
       "limites": [
         {
-          "texte": "Le cœur est sous licence MIT ; logos, bannières et visuels générés n'y sont pas, ils relèvent d'une offre Premium séparée (uupm.cc).",
+          "texte": "The core is under MIT license; logos, banners and generated visuals are not, they fall under a separate Premium offer (uupm.cc).",
           "passages": [
             "This project is licensed under the MIT License.",
             "Extended Brand Design Skills: Goes beyond UI/UX to include Brand Identity generation, Logo Design, Corporate Identity Programs (CIP), Banners, Presentation Slides, and custom Iconography.",
@@ -11776,20 +13456,20 @@ window.DONNEES_MAQUETTE = {
       "licence_locale": null,
       "reperes": [
         {
-          "texte": "Règles par stack, de React et Vue à SwiftUI et Flutter",
+          "texte": "Rules per stack, from React and Vue to SwiftUI and Flutter",
           "passages": [
             "Tech Stacks - React, Next.js, Astro, Vue",
             "SwiftUI, React Native, Flutter, HTML+Tailwind"
           ]
         },
         {
-          "texte": "119 règles d'UX, accessibilité comprise",
+          "texte": "119 UX rules, accessibility included",
           "passages": [
             "119 UX Guidelines - Best practices, anti-patterns, accessibility rules"
           ]
         },
         {
-          "texte": "Claude Code, Cursor, Copilot et d'autres agents, selon le dépôt",
+          "texte": "Works with Claude Code, Cursor, Copilot and more",
           "passages": [
             "Supported: Claude Code, Cursor, Windsurf, Antigravity, Codex CLI, Continue, Gemini CLI, OpenCode, Qoder, CodeBuddy, Droid (Factory), KiloCode, Warp, Augment, CodeWhale, ZCode, Kimi Code, Amazon Q Developer, OpenClaw, GitHub Copilot"
           ]
@@ -11799,7 +13479,7 @@ window.DONNEES_MAQUETTE = {
         "libelle": "Voir le dépôt",
         "url": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill",
         "aria_label": "Voir le dépôt nextlevelbuilder/ui-ux-pro-max-skill sur GitHub (nouvel onglet)",
-        "verifie_le": "2026-11-02T18:45:40.134Z",
+        "verifie_le": "2026-11-03T07:15:34.056Z",
         "motif": "capture_recente"
       },
       "etat_depot": {
@@ -11819,7 +13499,7 @@ window.DONNEES_MAQUETTE = {
       },
       "visuel": {
         "src": "medias/montages/ressources/ui-ux-pro-max.jpg",
-        "alt": "UI UX Pro Max donne à votre agent un design system taillé pour votre produit avant qu'il code l'interface. Étape 1 : Dans le projet : npx ui-ux-pro-max-cli init --ai claude (ou cursor, copilot). Étape 2 : Puis demandez l'interface voulue, le skill prend le relais.",
+        "alt": "UI UX Pro Max gives your agent a design system tailored to your product before it codes the interface. Étape 1 : In the project: npx ui-ux-pro-max-cli init --ai claude (or cursor, copilot). Étape 2 : Then ask for the interface you want, the skill takes over.",
         "gabarit": "etapes",
         "mention": "Illustration — ne prouve pas le fonctionnement"
       },
@@ -11840,19 +13520,19 @@ window.DONNEES_MAQUETTE = {
         }
       ],
       "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
-      "importe_le": "2026-11-02T18:45:35.166Z"
+      "importe_le": "2026-11-03T07:15:31.762Z"
     },
     {
       "post_id": 6,
-      "revision_id": 45,
+      "revision_id": 141,
       "slug": "webapp-testing",
       "nom": "webapp-testing",
-      "compte": "repo",
+      "compte": "radar",
       "statut": "en_attente",
       "etiquette": "pas encore publié",
       "planning": {
-        "jour": "2026-11-02",
-        "rang": 6,
+        "jour": "2026-11-03",
+        "rang": 18,
         "etat": "prevue",
         "utilise_reserve": false,
         "motif": null
@@ -11865,14 +13545,14 @@ window.DONNEES_MAQUETTE = {
       },
       "mention": "Analyse IA à partir des sources — non testé par la plateforme",
       "accroche": {
-        "texte": "webapp-testing : Claude teste votre app web locale avec Playwright",
+        "texte": "webapp-testing: Claude tests your local web app with Playwright",
         "passages": [
           "This repository contains Anthropic's implementation of skills for Claude",
           "Toolkit for interacting with and testing local web applications using Playwright"
         ]
       },
       "description": {
-        "texte": "Le skill d'Anthropic écrit des scripts Playwright en Python pour vérifier le front-end, déboguer l'interface, prendre des captures d'écran et lire les logs du navigateur.",
+        "texte": "Anthropic's skill writes Playwright scripts in Python to check the front end, debug the interface, take screenshots, and read browser logs.",
         "passages": [
           "This repository contains Anthropic's implementation of skills for Claude",
           "To test local web applications, write native Python Playwright scripts.",
@@ -11880,7 +13560,7 @@ window.DONNEES_MAQUETTE = {
         ]
       },
       "interet": {
-        "texte": "Un helper démarre les serveurs de l'app, back-end et front-end compris, puis lance le test. Claude l'appelle tel quel, sans charger son code dans le contexte. Sur une app dynamique, il attend la fin du chargement, observe la page rendue et en tire ses sélecteurs avant d'agir.",
+        "texte": "A helper starts the app's servers, back end and front end included, then runs the test. Claude calls it as is, without loading its code into the context. On a dynamic app, it waits for loading to finish, observes the rendered page, and derives its selectors from it before acting.",
         "passages": [
           "scripts/with_server.py - Manages server lifecycle (supports multiple servers)",
           "Multiple servers (e.g., backend + frontend)",
@@ -11892,7 +13572,7 @@ window.DONNEES_MAQUETTE = {
         ]
       },
       "exemple_usage": {
-        "texte": "Vérifier un formulaire sur une app avec back-end et front-end : le helper lance les deux serveurs, la page s'ouvre en headless, le script attend la fin du chargement puis inspecte le DOM.",
+        "texte": "Testing a form on an app with a back end and front end: the helper starts both servers, the page opens headless, the script waits for loading to finish, then inspects the DOM.",
         "passages": [
           "Multiple servers (e.g., backend + frontend)",
           "Always launch chromium in headless mode",
@@ -11903,21 +13583,21 @@ window.DONNEES_MAQUETTE = {
       "demarrage": {
         "etapes": [
           {
-            "texte": "Ajouter le catalogue : /plugin marketplace add anthropics/skills",
+            "texte": "Add the catalog: /plugin marketplace add anthropics/skills",
             "passages": [
               "You can register this repository as a Claude Code Plugin marketplace by running the following command in Claude Code",
               "/plugin marketplace add anthropics/skills"
             ]
           },
           {
-            "texte": "Installer example-skills : /plugin install example-skills@anthropic-agent-skills",
+            "texte": "Install example-skills: /plugin install example-skills@anthropic-agent-skills",
             "passages": [
               "/plugin install example-skills@anthropic-agent-skills",
               "\"./skills/theme-factory\", \"./skills/web-artifacts-builder\", \"./skills/webapp-testing\""
             ]
           },
           {
-            "texte": "Mentionner webapp-testing dans sa demande",
+            "texte": "Mention webapp-testing in the request",
             "passages": [
               "After installing the plugin, you can use the skill by just mentioning it."
             ]
@@ -11933,7 +13613,7 @@ window.DONNEES_MAQUETTE = {
       "compatibilites": [],
       "limites": [],
       "licence_locale": {
-        "texte": "Apache 2.0 : ce skill a sa propre licence, dans le fichier LICENSE.txt de son dossier",
+        "texte": "Apache 2.0: this skill has its own license, in the LICENSE.txt file in its folder",
         "passages": [
           "Apache License Version 2.0, January 2004",
           "license: Complete terms in LICENSE.txt"
@@ -11941,20 +13621,20 @@ window.DONNEES_MAQUETTE = {
       },
       "reperes": [
         {
-          "texte": "Exemple fourni pour lister boutons, liens et champs",
+          "texte": "Example provided to list buttons, links, and fields",
           "passages": [
             "element_discovery.py - Discovering buttons, links, and inputs on a page"
           ]
         },
         {
-          "texte": "Pages HTML statiques lues sans serveur",
+          "texte": "Static HTML pages read without a server",
           "passages": [
             "Read HTML file directly to identify selectors",
             "static_html_automation.py - Using file:// URLs for local HTML"
           ]
         },
         {
-          "texte": "Sélecteurs par texte, rôle, CSS ou ID",
+          "texte": "Selectors by text, role, CSS, or ID",
           "passages": [
             "Use descriptive selectors: text=, role=, CSS selectors, or IDs"
           ]
@@ -11964,7 +13644,7 @@ window.DONNEES_MAQUETTE = {
         "libelle": "Voir le dépôt",
         "url": "https://github.com/anthropics/skills/tree/main/skills/webapp-testing",
         "aria_label": "Voir le dépôt anthropics/skills sur GitHub (nouvel onglet)",
-        "verifie_le": "2026-11-02T18:45:40.139Z",
+        "verifie_le": "2026-11-03T07:14:55.337Z",
         "motif": "capture_recente"
       },
       "etat_depot": {
@@ -11984,7 +13664,7 @@ window.DONNEES_MAQUETTE = {
       },
       "visuel": {
         "src": "medias/montages/ressources/webapp-testing.jpg",
-        "alt": "webapp-testing : Claude teste votre app web locale avec Playwright. Étape 1 : Ajouter le catalogue : /plugin marketplace add anthropics/skills. Étape 2 : Installer example-skills : /plugin install example-skills@anthropic-agent-skills. Étape 3 : Mentionner webapp-testing dans sa demande",
+        "alt": "webapp-testing: Claude tests your local web app with Playwright. Étape 1 : Add the catalog: /plugin marketplace add anthropics/skills. Étape 2 : Install example-skills: /plugin install example-skills@anthropic-agent-skills. Étape 3 : Mention webapp-testing in the request",
         "gabarit": "etapes",
         "mention": "Illustration — ne prouve pas le fonctionnement"
       },
@@ -12033,19 +13713,19 @@ window.DONNEES_MAQUETTE = {
         }
       ],
       "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
-      "importe_le": "2026-11-02T18:45:35.166Z"
+      "importe_le": "2026-11-03T07:14:49.047Z"
     },
     {
-      "post_id": 7,
-      "revision_id": 46,
-      "slug": "mcp-builder",
-      "nom": "mcp-builder",
+      "post_id": 20,
+      "revision_id": 142,
+      "slug": "claudeception",
+      "nom": "Claudeception",
       "compte": "repo",
       "statut": "en_attente",
       "etiquette": "pas encore publié",
       "planning": {
-        "jour": "2026-11-02",
-        "rang": 7,
+        "jour": "2026-11-03",
+        "rang": 19,
         "etat": "prevue",
         "utilise_reserve": false,
         "motif": null
@@ -12058,360 +13738,167 @@ window.DONNEES_MAQUETTE = {
       },
       "mention": "Analyse IA à partir des sources — non testé par la plateforme",
       "accroche": {
-        "texte": "Avec mcp-builder, Claude mène votre serveur MCP de l’étude de l’API jusqu’aux évaluations",
+        "texte": "Claudeception turns every hard-won solution from Claude Code into a skill that reloads on its own",
         "passages": [
-          "Use when building MCP servers to integrate external APIs or services",
-          "After implementing your MCP server, create comprehensive evaluations to test its effectiveness.",
-          "This repository contains Anthropic's implementation of skills for Claude."
+          "When Claude Code discovers something non-obvious (a debugging technique, a workaround, some project-specific pattern), it saves that knowledge as a new skill.",
+          "Next time a similar problem comes up, the skill gets loaded automatically."
         ]
       },
       "description": {
-        "texte": "Le skill d’Anthropic pour brancher une API externe sur un serveur MCP, en TypeScript ou en Python avec FastMCP. Claude déroule quatre phases : étude de l’API, implémentation, revue et tests avec MCP Inspector, puis évaluations.",
+        "texte": "An hour on an obscure error, the agent finally finds the fix, the session closes, and next time it all starts over. With Claudeception, the debugging technique, workaround, or project quirk discovered along the way becomes a skill, loaded automatically as soon as a similar problem comes back.",
         "passages": [
-          "This repository contains Anthropic's implementation of skills for Claude.",
-          "Use when building MCP servers to integrate external APIs or services, whether in Python (FastMCP) or Node/TypeScript (MCP SDK).",
-          "Creating a high-quality MCP server involves four main phases:",
-          "Test with MCP Inspector: npx @modelcontextprotocol/inspector",
-          "After implementing your MCP server, create comprehensive evaluations to test its effectiveness."
+          "You spend an hour debugging some obscure error, the agent figures it out, session ends. Next time you hit the same issue? Another hour.",
+          "When Claude Code discovers something non-obvious (a debugging technique, a workaround, some project-specific pattern), it saves that knowledge as a new skill.",
+          "Next time a similar problem comes up, the skill gets loaded automatically."
         ]
       },
       "interet": {
-        "texte": "Tout est pensé pour l’agent qui appellera les outils : noms préfixés et orientés action, descriptions courtes, résultats ciblés et paginables, erreurs qui disent quoi faire ensuite.",
+        "texte": "It sorts: only what required real research, will be reused, has a clear trigger, and actually worked becomes a skill. And the description is written to be found again: the exact error, not \"database issues\".",
         "passages": [
-          "Clear, descriptive tool names help agents find the right tools quickly.",
-          "Use consistent prefixes (e.g., github_create_issue, github_list_repos) and action-oriented naming.",
-          "Agents benefit from concise tool descriptions and the ability to filter/paginate results.",
-          "Design tools that return focused, relevant data.",
-          "Error messages should guide agents toward solutions with specific suggestions and next steps."
+          "The skill is picky about what it extracts.",
+          "It only extracts knowledge that required actual discovery (not just reading docs), will help with future tasks, has clear trigger conditions, and has been verified to work.",
+          "it writes a new skill with a description optimized for future retrieval",
+          "\"Helps with database problems\" won't match anything useful."
         ]
       },
       "exemple_usage": {
-        "texte": "Serveur terminé, le guide fait écrire 10 questions réalistes, sans opération destructrice, pour voir si un LLM s’en sert vraiment bien.",
+        "texte": "Example from the repository: a resolved PrismaClientKnownRequestError (too many connections in serverless) can become a skill whose description reuses the exact error. When it reappears, the agent finds it again.",
         "passages": [
-          "Question Generation: Create 10 complex, realistic questions",
-          "Read-only: Only non-destructive operations required",
-          "Use evaluations to test whether LLMs can effectively use your MCP server to answer realistic, complex questions."
+          "Fix for PrismaClientKnownRequestError: Too many database connections in serverless environments (Vercel, AWS Lambda).",
+          "\"Fix for PrismaClientKnownRequestError in serverless\" will match when someone hits that error."
         ]
       },
       "demarrage": {
         "etapes": [
           {
-            "texte": "Dans Claude Code, ajouter le dépôt comme marketplace",
+            "texte": "Clone the repository into ~/.claude/skills/claudeception.",
             "passages": [
-              "You can register this repository as a Claude Code Plugin marketplace by running the following command in Claude Code"
+              "User-level (recommended) `bash git clone https://github.com/blader/Claudeception.git ~/.claude/skills/claudeception"
             ]
           },
           {
-            "texte": "Installer example-skills : /plugin install example-skills@anthropic-agent-skills",
+            "texte": "Optional: the hook, added to settings.json, makes each session evaluated",
             "passages": [
-              "/plugin install example-skills@anthropic-agent-skills",
-              "\"./skills/internal-comms\", \"./skills/mcp-builder\", \"./skills/skill-creator\""
+              "a hook ensures it evaluates every session for extractable knowledge",
+              "If you already have a settings.json, merge the hooks configuration into it.",
+              "This achieves higher activation rates than relying on semantic description matching alone."
             ]
           },
           {
-            "texte": "Puis citer mcp-builder dans la demande",
+            "texte": "After debugging: /claudeception, with no skill if nothing is worth keeping",
             "passages": [
-              "After installing the plugin, you can use the skill by just mentioning it."
+              "Trigger a learning retrospective",
+              "Just completed debugging and discovered a non-obvious solution",
+              "Not every task produces a skill."
             ]
           }
         ],
-        "commande": "/plugin marketplace add anthropics/skills",
+        "commande": "git clone https://github.com/blader/Claudeception.git ~/.claude/skills/claudeception",
         "passages": [
-          "You can register this repository as a Claude Code Plugin marketplace by running the following command in Claude Code:",
-          "After installing the plugin, you can use the skill by just mentioning it."
+          "git clone https://github.com/blader/Claudeception.git ~/.claude/skills/claudeception"
         ],
         "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
       },
       "compatibilites": [
         {
-          "texte": "Selon le guide, tout nouveau serveur TypeScript part du SDK v2.",
+          "texte": "Claude Code, through its native skills system.",
           "passages": [
-            "The TypeScript SDK has two major versions.",
-            "v2 (@modelcontextprotocol/server): the current stable release. Use it for new servers."
+            "Claude Code has a native skills system."
           ]
         }
       ],
-      "limites": [],
-      "licence_locale": {
-        "texte": "Le dossier du skill a sa propre licence : Apache 2.0.",
-        "passages": [
-          "Apache License Version 2.0, January 2004"
-        ]
-      },
-      "reperes": [
-        {
-          "texte": "Entrées validées par Zod ou Pydantic, sorties structurées",
-          "passages": [
-            "Use Zod (TypeScript) or Pydantic (Python)",
-            "Define outputSchema where possible for structured data"
-          ]
-        },
-        {
-          "texte": "Streamable HTTP en distant, stdio en local",
-          "passages": [
-            "Streamable HTTP for remote servers, using stateless JSON",
-            "stdio for local servers."
-          ]
-        },
-        {
-          "texte": "Annotations par outil : lecture seule, destructif, idempotent",
-          "passages": [
-            "readOnlyHint: true/false destructiveHint: true/false idempotentHint: true/false openWorldHint: true/false"
-          ]
-        }
-      ],
-      "bouton": {
-        "libelle": "Voir le dépôt",
-        "url": "https://github.com/anthropics/skills/tree/main/skills/mcp-builder",
-        "aria_label": "Voir le dépôt anthropics/skills sur GitHub (nouvel onglet)",
-        "verifie_le": "2026-11-02T18:45:40.145Z",
-        "motif": "capture_recente"
-      },
-      "etat_depot": {
-        "full_name": "anthropics/skills",
-        "html_url": "https://github.com/anthropics/skills",
-        "etoiles": 186700,
-        "etoiles_au": "2026-11-02T18:42:26.169Z",
-        "cree_le": "2025-09-22T15:53:31Z",
-        "dernier_push": "2026-10-28T19:20:39Z",
-        "jours_sans_push": 4,
-        "inactif": false,
-        "licence": null,
-        "archive": false,
-        "fork": false,
-        "parent": null,
-        "date_ajout_skill": null
-      },
-      "visuel": {
-        "src": "medias/montages/ressources/mcp-builder.jpg",
-        "alt": "Avec mcp-builder, Claude mène votre serveur MCP de l’étude de l’API jusqu’aux évaluations. Étape 1 : Dans Claude Code, ajouter le dépôt comme marketplace. Étape 2 : Installer example-skills : /plugin install example-skills@anthropic-agent-skills. Étape 3 : Puis citer mcp-builder dans la demande",
-        "gabarit": "etapes",
-        "mention": "Illustration — ne prouve pas le fonctionnement"
-      },
-      "captures": [
-        {
-          "document": "depot",
-          "snapshot_id": 484,
-          "capture_le": "2026-11-02T18:42:26.169Z",
-          "url": "https://github.com/anthropics/skills",
-          "mode": "live"
-        },
-        {
-          "document": "fichier:skills/mcp-builder/SKILL.md",
-          "snapshot_id": 448,
-          "capture_le": "2026-11-02T12:15:46.306Z",
-          "url": "https://github.com/anthropics/skills/blob/main/skills/mcp-builder/SKILL.md",
-          "mode": "live"
-        },
-        {
-          "document": "dossier:skills/mcp-builder",
-          "snapshot_id": 449,
-          "capture_le": "2026-11-02T12:15:46.306Z",
-          "url": "https://github.com/anthropics/skills/tree/main/skills/mcp-builder",
-          "mode": "live"
-        },
-        {
-          "document": "fichier:skills/mcp-builder/LICENSE.txt",
-          "snapshot_id": 450,
-          "capture_le": "2026-11-02T12:15:46.306Z",
-          "url": "https://github.com/anthropics/skills/blob/main/skills/mcp-builder/LICENSE.txt",
-          "mode": "live"
-        },
-        {
-          "document": "fichier:README.md",
-          "snapshot_id": 424,
-          "capture_le": "2026-11-02T12:15:38.384Z",
-          "url": "https://github.com/anthropics/skills/blob/main/README.md",
-          "mode": "live"
-        },
-        {
-          "document": "fichier:.claude-plugin/marketplace.json",
-          "snapshot_id": 485,
-          "capture_le": "2026-11-02T18:42:26.169Z",
-          "url": "https://github.com/anthropics/skills/blob/main/.claude-plugin/marketplace.json",
-          "mode": "live"
-        }
-      ],
-      "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
-      "importe_le": "2026-11-02T18:45:35.166Z"
-    },
-    {
-      "post_id": 10,
-      "revision_id": 30,
-      "slug": "scientific-agent-skills",
-      "nom": "Scientific Agent Skills (K-Dense)",
-      "compte": "repo",
-      "statut": "en_attente",
-      "etiquette": "pas encore publié",
-      "planning": {
-        "jour": "2026-11-02",
-        "rang": 8,
-        "etat": "prevue",
-        "utilise_reserve": false,
-        "motif": null
-      },
-      "statut_sortie": "ressource_existante",
-      "badge": "Ressource existante",
-      "origine": {
-        "code": "claude_code_developpement",
-        "texte": "Rédigé pendant le développement par Claude Code, assistant de programmation, pas par l'agent du site ; vérifié par les contrôles du code"
-      },
-      "mention": "Analyse IA à partir des sources — non testé par la plateforme",
-      "accroche": {
-        "texte": "Scientific Agent Skills : 177 skills pour faire de la recherche avec Claude Code, Cursor ou Codex",
-        "passages": [
-          "A collection of 177 scientific and research skills for AI agents, created by K-Dense.",
-          "works with Cursor, Claude Code, Codex, Google Antigravity, and other compatible hosts"
-        ]
-      },
-      "description": {
-        "texte": "Biologie, chimie, médecine, physique, analyse de données : chaque skill de K-Dense cale votre agent sur un paquet, une base ou une méthode précise, avec les conventions et les contrôles du domaine.",
-        "passages": [
-          "A collection of 177 scientific and research skills for AI agents, created by K-Dense.",
-          "The skills cover biology, chemistry, medicine, physics, engineering, Earth science, data analysis, and scientific communication.",
-          "Each provides guidance for a specific package, data source, or workflow, including the scientific conventions and validation checks needed to use it."
-        ]
-      },
-      "interet": {
-        "texte": "Le morceau le plus utile : Database Lookup documente 80 bases (PubChem, ChEMBL, UniProt, ClinicalTrials.gov…), avec les bons endpoints, la pagination et la provenance. Une seule demande suffit ensuite pour enchaîner tout un pipeline.",
-        "passages": [
-          "The Database Lookup skill documents 80 databases with public, registered, or licensed access (PubChem, ChEMBL, UniProt, COSMIC, ClinicalTrials.gov, FRED, USPTO, and more), including endpoint selection, pagination, and provenance.",
-          "Multi-Step Workflows - Execute complex pipelines with a single prompt"
-        ]
-      },
-      "exemple_usage": {
-        "texte": "Dans l'exemple du dépôt, une seule demande pour classer des inhibiteurs d'EGFR : l'agent interroge ChEMBL, analyse les relations structure-activité avec RDKit, cherche les mécanismes de résistance dans PubMed, puis livre graphiques et rapport.",
-        "passages": [
-          "Goal: Prioritize EGFR inhibitor candidates for preclinical lung-cancer research",
-          "Query ChEMBL for EGFR inhibitors",
-          "analyze structure-activity relationships with RDKit",
-          "search PubMed for resistance mechanisms",
-          "create visualizations and a comprehensive report"
-        ]
-      },
-      "demarrage": {
-        "etapes": [
-          {
-            "texte": "Avec GitHub CLI 2.90.0+ : gh skill install, uniquement les skills utiles.",
-            "passages": [
-              "If you use the GitHub CLI (v2.90.0+), you can install skills with gh skill",
-              "gh skill install K-Dense-AI/scientific-agent-skills scanpy",
-              "Only install the skills you actually need for your work."
-            ]
-          },
-          {
-            "texte": "Les dépendances s'installent à part, selon chaque skill.",
-            "passages": [
-              "Installing the skill files does not install their dependencies",
-              "Follow each skill's compatibility field and setup instructions for packages, system tools, credentials, and network access."
-            ]
-          }
-        ],
-        "commande": "gh skill install K-Dense-AI/scientific-agent-skills scanpy",
-        "passages": [
-          "If you use the GitHub CLI (v2.90.0+), you can install skills with gh skill",
-          "gh skill install K-Dense-AI/scientific-agent-skills scanpy",
-          "Only install the skills you actually need for your work."
-        ],
-        "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
-      },
-      "compatibilites": [],
       "limites": [
         {
-          "texte": "Un skill peut faire exécuter du code arbitraire à votre agent et K-Dense ne garantit pas une revue exhaustive : lisez le SKILL.md avant d'installer.",
+          "texte": "It is a fork, with no pushes for several months at the time of the capture.",
           "passages": [
-            "they can instruct your AI agent to run arbitrary code, install packages, make network requests, and modify files on your system.",
-            "we cannot guarantee that every skill has been exhaustively reviewed for all possible risks.",
-            "Read the SKILL.md before installing."
-          ]
-        },
-        {
-          "texte": "Dépôt sous MIT, mais chaque skill a sa licence, qui peut ajouter des conditions.",
-          "passages": [
-            "This project is licensed under the MIT License.",
-            "These licenses may differ from the repository's MIT License and may include additional terms or restrictions."
+            "Contributions welcome. Fork, make changes, submit a PR."
           ]
         }
       ],
       "licence_locale": null,
       "reperes": [
         {
-          "texte": "Workflows versionnés pour RDKit, Scanpy, scikit-learn",
+          "texte": "On-demand retrospective, with no forced skill",
           "passages": [
-            "Explicitly defined, version-aware workflows for RDKit, Scanpy, PyTorch Lightning, scikit-learn"
+            "Trigger a learning retrospective",
+            "Or explicitly request skill extraction",
+            "Not every task produces a skill."
           ]
         },
         {
-          "texte": "Installation épinglée sur un tag ou un commit",
+          "texte": "Skills written in markdown, with YAML frontmatter",
           "passages": [
-            "Pin to a specific release tag or commit SHA for reproducible installs"
+            "Extracted skills are markdown files with YAML frontmatter"
           ]
         },
         {
-          "texte": "Aussi chargeable comme un seul plugin",
+          "texte": "Inspired by academic work, according to the repository",
           "passages": [
-            "load the collection as one plugin"
+            "The idea comes from academic work on skill libraries for AI agents."
           ]
         }
       ],
       "bouton": {
         "libelle": "Voir le dépôt",
-        "url": "https://github.com/K-Dense-AI/scientific-agent-skills",
-        "aria_label": "Voir le dépôt K-Dense-AI/scientific-agent-skills sur GitHub (nouvel onglet)",
-        "verifie_le": "2026-11-02T17:44:49.261Z",
+        "url": "https://github.com/blader/Claudeception",
+        "aria_label": "Voir le dépôt blader/Claudeception sur GitHub (nouvel onglet)",
+        "verifie_le": "2026-11-03T07:14:55.341Z",
         "motif": "capture_recente"
       },
       "etat_depot": {
-        "full_name": "K-Dense-AI/scientific-agent-skills",
-        "html_url": "https://github.com/K-Dense-AI/scientific-agent-skills",
-        "etoiles": 55782,
-        "etoiles_au": "2026-11-02T12:15:48.594Z",
-        "cree_le": "2025-10-19T20:54:15Z",
-        "dernier_push": "2026-11-02T09:23:27Z",
-        "jours_sans_push": 0,
-        "inactif": false,
+        "full_name": "blader/Claudeception",
+        "html_url": "https://github.com/blader/Claudeception",
+        "etoiles": 2442,
+        "etoiles_au": "2026-11-02T12:15:56.649Z",
+        "cree_le": "2026-01-17T19:03:02Z",
+        "dernier_push": "2026-02-21T05:10:15Z",
+        "jours_sans_push": 254,
+        "inactif": true,
         "licence": "MIT",
         "archive": false,
-        "fork": false,
-        "parent": null,
+        "fork": true,
+        "parent": {
+          "full_name": "AlexMikhalev/claude-code-continuous-learning-skill",
+          "html_url": "https://github.com/AlexMikhalev/claude-code-continuous-learning-skill"
+        },
         "date_ajout_skill": null
       },
       "visuel": {
-        "src": "medias/montages/ressources/scientific-agent-skills.jpg",
-        "alt": "Scientific Agent Skills : 177 skills pour faire de la recherche avec Claude Code, Cursor ou Codex. Étape 1 : Avec GitHub CLI 2.90.0+ : gh skill install, uniquement les skills utiles.. Étape 2 : Les dépendances s'installent à part, selon chaque skill.",
+        "src": "medias/montages/ressources/claudeception.jpg",
+        "alt": "Claudeception turns every hard-won solution from Claude Code into a skill that reloads on its own. Étape 1 : Clone the repository into ~/.claude/skills/claudeception.. Étape 2 : Optional: the hook, added to settings.json, makes each session evaluated. Étape 3 : After debugging: /claudeception, with no skill if nothing is worth keeping",
         "gabarit": "etapes",
         "mention": "Illustration — ne prouve pas le fonctionnement"
       },
       "captures": [
         {
           "document": "depot",
-          "snapshot_id": 455,
-          "capture_le": "2026-11-02T12:15:48.594Z",
-          "url": "https://github.com/K-Dense-AI/scientific-agent-skills",
+          "snapshot_id": 480,
+          "capture_le": "2026-11-02T12:15:56.649Z",
+          "url": "https://github.com/blader/Claudeception",
           "mode": "live"
         },
         {
           "document": "fichier:README.md",
-          "snapshot_id": 456,
-          "capture_le": "2026-11-02T12:15:48.594Z",
-          "url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/main/README.md",
+          "snapshot_id": 481,
+          "capture_le": "2026-11-02T12:15:56.649Z",
+          "url": "https://github.com/blader/Claudeception/blob/main/README.md",
           "mode": "live"
         }
       ],
       "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
-      "importe_le": "2026-11-02T17:44:44.497Z"
+      "importe_le": "2026-11-03T07:14:49.047Z"
     },
     {
-      "post_id": 11,
-      "revision_id": 49,
-      "slug": "superpowers",
-      "nom": "Superpowers",
-      "compte": "repo",
+      "post_id": 15,
+      "revision_id": 156,
+      "slug": "humanizer",
+      "nom": "Humanizer",
+      "compte": "nodi",
       "statut": "en_attente",
       "etiquette": "pas encore publié",
       "planning": {
-        "jour": "2026-11-02",
-        "rang": 9,
+        "jour": "2026-11-03",
+        "rang": 20,
         "etat": "prevue",
         "utilise_reserve": false,
         "motif": null
@@ -12424,76 +13911,86 @@ window.DONNEES_MAQUETTE = {
       },
       "mention": "Analyse IA à partir des sources — non testé par la plateforme",
       "accroche": {
-        "texte": "Superpowers fait cadrer, planifier, tester et relire votre agent de code avant qu'il livre",
+        "texte": "Humanizer removes AI writing tics from a text without changing what it says",
         "passages": [
-          "Superpowers is a complete software development methodology for your coding agents",
-          "Enforces RED-GREEN-REFACTOR: write failing test, watch it fail",
-          "Critical issues block progress.",
-          "brainstorming - Activates before building anything.",
-          "writing-plans - Activates with approved design.",
-          "test-driven-development - Activates during implementation.",
-          "requesting-code-review - Activates between tasks.",
-          "finishing-a-development-branch - Activates when tasks complete."
+          "Agent skill that removes signs of AI-generated writing from text",
+          "Humanizer makes AI-written text sound like a person wrote it, without changing what it says."
         ]
       },
       "description": {
-        "texte": "Superpowers impose une vraie méthode à votre agent de code. Il ne fonce pas dans le code : il vous demande ce que vous cherchez à faire, vous montre la spec par morceaux lisibles, puis bâtit un plan d'implémentation une fois le design validé. Les skills se déclenchent seuls, sans commande à taper.",
+        "texte": "Paste a text or give a file path: Humanizer spots AI writing tics, from the most obvious to the most subtle, then rewrites the prose. On a file, it only touches the text: code, data and frontmatter stay in place.",
         "passages": [
-          "Superpowers is a complete software development methodology for your coding agents, built on top of a set of composable skills and some initial instructions that make sure your agent uses them.",
-          "it doesn't just jump into trying to write code. Instead, it steps back and asks you what you're really trying to do.",
-          "Once it's teased a spec out of the conversation, it shows it to you in chunks short enough to actually read and digest.",
-          "After you've signed off on the design, your agent puts together an implementation plan",
-          "because the skills trigger automatically, you don't need to do anything special"
+          "Humanizer makes AI-written text sound like a person wrote it, without changing what it says.",
+          "To rewrite a file, give Humanizer its path",
+          "Humanizer marks every tell it finds, strongest first.",
+          "Point it at a file and it changes only the prose, leaving code, data, frontmatter, and link targets alone."
         ]
       },
       "interet": {
-        "texte": "Le plan découpe le travail en tâches de 2 à 5 minutes, avec fichiers, code et vérifications. Le TDD est strict : le code écrit avant son test est supprimé. Entre deux tâches, une revue classe les problèmes par gravité, et un problème critique bloque la suite. Selon l'auteur, l'agent tient ainsi quelques heures en autonomie sans dévier du plan.",
+        "texte": "It invents nothing: if a name, number or date is missing, it asks. On a pasted text, you see its first draft, what still sounds artificial, then the final version. Attach two or three paragraphs of your own and it picks up your rhythm, vocabulary and punctuation.",
         "passages": [
-          "Breaks work into bite-sized tasks (2-5 minutes each). Every task has exact file paths, complete code, verification steps.",
-          "Enforces RED-GREEN-REFACTOR: write failing test, watch it fail, write minimal code, watch it pass, commit.",
-          "It emphasizes true red/green TDD, YAGNI (You Aren't Gonna Need It), and DRY.",
-          "Deletes code written before tests.",
-          "Reviews against plan, reports issues by severity. Critical issues block progress.",
-          "It's not uncommon for your agent to work autonomously for a couple hours at a time without deviating from the plan you put together."
+          "It does not make things up.",
+          "A name, number, date, quote, citation, or other factual detail must come from the source or the writer",
+          "if a sentence needs a detail that is missing, Humanizer asks instead of inventing one",
+          "When you paste text, Humanizer shows its work: the first rewrite, a short critique of anything that still sounds artificial, and the final version.",
+          "If you want the rewrite to sound more like you, include a sample",
+          "paste 2-3 paragraphs of your own writing",
+          "Humanizer follows the sample's rhythm, word choice, punctuation, and deliberate quirks"
         ]
       },
       "exemple_usage": {
-        "texte": "Pour une nouvelle fonctionnalité : brainstorming fait préciser la demande, writing-plans la découpe en petites tâches, puis l'implémentation commence par un test qui échoue, avant le code minimal.",
+        "texte": "In the repository's example, an announcement loses its emoji, its \"It's not just a feature…\" and its \"Let that sink in.\", then starts without detour: \"Shared drafts are out today.\"",
         "passages": [
-          "Draws out what you actually want, and why, through questions that get you describing it",
-          "writing-plans - Activates with approved design. Breaks work into bite-sized tasks",
-          "Enforces RED-GREEN-REFACTOR: write failing test, watch it fail, write minimal code, watch it pass, commit."
+          "I'm thrilled to announce that shared drafts are finally here! 🚀",
+          "It's not just a feature; it's a whole new way to collaborate.",
+          "It's available today on every plan, completely free. Let that sink in.",
+          "Shared drafts are out today."
         ]
       },
       "demarrage": {
         "etapes": [
           {
-            "texte": "Dans Claude Code : /plugin install superpowers@claude-plugins-official",
+            "texte": "Not before Claude Code 2.1.142: /plugin marketplace add blader/humanizer",
             "passages": [
-              "Getting Started Claude Code",
-              "Install the plugin from Anthropic's official marketplace",
-              "/plugin install superpowers@claude-plugins-official"
+              "/plugin marketplace add blader/humanizer /plugin install humanizer@humanizer",
+              "It needs Claude Code 2.1.142 or newer"
             ]
           },
           {
-            "texte": "Autres agents : une installation séparée pour chacun, selon le dépôt",
+            "texte": "Then /plugin install humanizer@humanizer, not on an older version",
             "passages": [
-              "Installation differs by harness. If you use more than one, install Superpowers separately for each one."
+              "/plugin marketplace add blader/humanizer /plugin install humanizer@humanizer"
+            ]
+          },
+          {
+            "texte": "Codex: npx skills add blader/humanizer --global --agent codex",
+            "passages": [
+              "npx skills add blader/humanizer --global --agent codex"
+            ]
+          },
+          {
+            "texte": "Then /humanizer and the text; for a file, its path, no command",
+            "passages": [
+              "Once installed, the skill answers to /humanizer.",
+              "To rewrite a file, give Humanizer its path",
+              "Humanize the prose in docs/launch-post.md"
             ]
           }
         ],
-        "commande": "/plugin install superpowers@claude-plugins-official",
+        "commande": "/plugin marketplace add blader/humanizer\n/plugin install humanizer@humanizer",
         "passages": [
-          "Installation differs by harness. If you use more than one, install Superpowers separately for each one.",
-          "Install the plugin from Anthropic's official marketplace"
+          "/plugin marketplace add blader/humanizer /plugin install humanizer@humanizer",
+          "The plugin answers to /humanizer:humanizer.",
+          "It needs Claude Code 2.1.142 or newer"
         ],
         "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
       },
       "compatibilites": [
         {
-          "texte": "Claude Code, Codex, Cursor, Gemini CLI, GitHub Copilot CLI et une dizaine d'autres.",
+          "texte": "Claude Code, Codex and any skills-compatible agent; the Skills CLI install also covers Gemini CLI, GitHub Copilot and Windsurf, according to the repository.",
           "passages": [
-            "Claude Code Antigravity Codex App Codex CLI Cursor Devin CLI Factory Droid Gemini CLI GitHub Copilot CLI Grok Build CLI Kimi Code OpenCode Pi Qwen Code Hermes Agent Muse"
+            "it works in Claude Code, Codex, and any other agent that supports skills",
+            "This installs Humanizer for every agent the Skills CLI supports, including Gemini CLI, GitHub Copilot, and Windsurf."
           ]
         }
       ],
@@ -12501,39 +13998,40 @@ window.DONNEES_MAQUETTE = {
       "licence_locale": null,
       "reperes": [
         {
-          "texte": "Un sous-agent neuf par tâche, relu à chaque fois",
+          "texte": "26 patterns checked, according to the repository",
           "passages": [
-            "dispatches a fresh subagent per task with a review after each"
+            "Humanizer checks for 26 patterns in all.",
+            "It is built on Wikipedia's Signs of AI writing, the guide Wikipedia editors use to catch AI-generated text"
           ]
         },
         {
-          "texte": "Débogage en 4 phases pour remonter à la cause",
+          "texte": "Do not try to fool AI detectors",
           "passages": [
-            "systematic-debugging - 4-phase root cause process"
+            "Getting past AI detectors is not a goal, and detectors still flag most of its output."
           ]
         },
         {
-          "texte": "Chaque chantier isolé sur sa propre branche",
+          "texte": "Claude Code, Codex and other agents, per the repository",
           "passages": [
-            "using-git-worktrees - Activates after design approval. Creates isolated workspace on new branch"
+            "it works in Claude Code, Codex, and any other agent that supports skills"
           ]
         }
       ],
       "bouton": {
         "libelle": "Voir le dépôt",
-        "url": "https://github.com/obra/superpowers",
-        "aria_label": "Voir le dépôt obra/superpowers sur GitHub (nouvel onglet)",
-        "verifie_le": "2026-11-02T18:45:40.158Z",
+        "url": "https://github.com/blader/humanizer",
+        "aria_label": "Voir le dépôt blader/humanizer sur GitHub (nouvel onglet)",
+        "verifie_le": "2026-11-03T07:15:22.365Z",
         "motif": "capture_recente"
       },
       "etat_depot": {
-        "full_name": "obra/superpowers",
-        "html_url": "https://github.com/obra/superpowers",
-        "etoiles": 310943,
-        "etoiles_au": "2026-11-02T12:15:49.227Z",
-        "cree_le": "2025-10-09T19:45:18Z",
-        "dernier_push": "2026-10-29T23:35:34Z",
-        "jours_sans_push": 3,
+        "full_name": "blader/humanizer",
+        "html_url": "https://github.com/blader/humanizer",
+        "etoiles": 63799,
+        "etoiles_au": "2026-11-02T12:15:52.912Z",
+        "cree_le": "2026-01-18T05:30:15Z",
+        "dernier_push": "2026-10-28T07:17:33Z",
+        "jours_sans_push": 5,
         "inactif": false,
         "licence": "MIT",
         "archive": false,
@@ -12542,41 +14040,379 @@ window.DONNEES_MAQUETTE = {
         "date_ajout_skill": null
       },
       "visuel": {
-        "src": "medias/montages/ressources/superpowers.jpg",
-        "alt": "Superpowers fait cadrer, planifier, tester et relire votre agent de code avant qu'il livre. Étape 1 : Dans Claude Code : /plugin install superpowers@claude-plugins-official. Étape 2 : Autres agents : une installation séparée pour chacun, selon le dépôt",
+        "src": "medias/montages/ressources/humanizer.jpg",
+        "alt": "Humanizer removes AI writing tics from a text without changing what it says. Étape 1 : Not before Claude Code 2.1.142: /plugin marketplace add blader/humanizer. Étape 2 : Then /plugin install humanizer@humanizer, not on an older version. Étape 3 : Codex: npx skills add blader/humanizer --global --agent codex. Étape 4 : Then /humanizer and the text; for a file, its path, no command",
         "gabarit": "etapes",
         "mention": "Illustration — ne prouve pas le fonctionnement"
       },
       "captures": [
         {
           "document": "depot",
-          "snapshot_id": 457,
-          "capture_le": "2026-11-02T12:15:49.227Z",
-          "url": "https://github.com/obra/superpowers",
+          "snapshot_id": 469,
+          "capture_le": "2026-11-02T12:15:52.912Z",
+          "url": "https://github.com/blader/humanizer",
           "mode": "live"
         },
         {
           "document": "fichier:README.md",
-          "snapshot_id": 458,
-          "capture_le": "2026-11-02T12:15:49.227Z",
-          "url": "https://github.com/obra/superpowers/blob/main/README.md",
+          "snapshot_id": 470,
+          "capture_le": "2026-11-02T12:15:52.912Z",
+          "url": "https://github.com/blader/humanizer/blob/main/README.md",
           "mode": "live"
         }
       ],
       "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
-      "importe_le": "2026-11-02T18:45:35.166Z"
+      "importe_le": "2026-11-03T07:15:18.913Z"
+    },
+    {
+      "post_id": 16,
+      "revision_id": 144,
+      "slug": "planning-with-files",
+      "nom": "planning-with-files",
+      "compte": "pyxo",
+      "statut": "en_attente",
+      "etiquette": "pas encore publié",
+      "planning": {
+        "jour": "2026-11-04",
+        "rang": 1,
+        "etat": "prevue",
+        "utilise_reserve": false,
+        "motif": null
+      },
+      "statut_sortie": "ressource_existante",
+      "badge": "Ressource existante",
+      "origine": {
+        "code": "claude_code_developpement",
+        "texte": "Rédigé pendant le développement par Claude Code, assistant de programmation, pas par l'agent du site ; vérifié par les contrôles du code"
+      },
+      "mention": "Analyse IA à partir des sources — non testé par la plateforme",
+      "accroche": {
+        "texte": "planning-with-files keeps your agent's plan on disk, and the task resumes after a /clear",
+        "passages": [
+          "Persistent file-based planning for AI coding agents and long-running tasks.",
+          "Crash-proof markdown plans, session recovery after /clear and compaction"
+        ]
+      },
+      "description": {
+        "texte": "The plan lives in three Markdown files in the project, not only in context: task_plan.md for the phases, findings.md for discoveries and decisions, progress.md for the log. After a /clear, a compaction or a crash, the agent rereads them and restarts from the current phase.",
+        "passages": [
+          "The plan lives on disk in task_plan.md, findings.md, and progress.md, not only in the context window.",
+          "Markdown on disk is the shared state between agents.",
+          "task_plan.md ← phases + checkboxes; the resume point after /clear",
+          "findings.md ← research notes and decisions, appended as you go",
+          "progress.md ← session log and test results",
+          "That is the difference between an agent that forgets after /clear, compaction or a crash and one that resumes at the current phase."
+        ]
+      },
+      "interet": {
+        "texte": "Hooks reinject the plan at the start of each turn: over a long session, the goal and phase status stay in front of the model. Optionally, the agent is held while a phase is still in progress, with a cap so the session is never blocked, on the tools that allow it.",
+        "passages": [
+          "A hook that fires every turn",
+          "Because the plan is re-injected at the start of each turn from disk, the goals and phase status stay in the model's attention window as the conversation grows.",
+          "Gated mode: the Stop gate holds the stop only while an in_progress phase remains, with a block cap and stall detection so an incomplete plan alone never traps a session",
+          "Optional gated mode can request continuation only on a host that supports the required Stop behavior."
+        ]
+      },
+      "exemple_usage": {
+        "texte": "Validate the approach in plan mode, have it written in phases into task_plan.md, then start execution. If the conversation is cleared along the way, the agent doesn't lose the thread: it rereads the files and picks up where it left off.",
+        "passages": [
+          "Plan mode is where you design and approve the approach before execution.",
+          "after accepting a plan-mode plan, tell the agent to write it into task_plan.md as phases",
+          "then execute in normal mode",
+          "after a /clear or a new session the skill re-reads project files from disk"
+        ]
+      },
+      "demarrage": {
+        "etapes": [
+          {
+            "texte": "In Claude Code: /plugin marketplace add OthmanAdi/planning-with-files",
+            "passages": [
+              "Claude Code, plugin route (ships everything: skill, hooks, slash commands):",
+              "/plugin marketplace add OthmanAdi/planning-with-files"
+            ]
+          },
+          {
+            "texte": "Then /plugin install planning-with-files@planning-with-files",
+            "passages": [
+              "/plugin install planning-with-files@planning-with-files",
+              "Claude Code, plugin route (ships everything: skill, hooks, slash commands):"
+            ]
+          },
+          {
+            "texte": "Type /plan, or simply ask the agent for a plan",
+            "passages": [
+              "Trigger it by typing /plan (plugin) or asking the agent to"
+            ]
+          }
+        ],
+        "commande": "npx skills add OthmanAdi/planning-with-files --skill planning-with-files -g",
+        "passages": [
+          "npx skills add OthmanAdi/planning-with-files --skill planning-with-files -g",
+          "Claude Code, plugin route (ships everything: skill, hooks, slash commands):"
+        ],
+        "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
+      },
+      "compatibilites": [
+        {
+          "texte": "Native plugins for Claude Code, Codex CLI, OpenCode and others; 60+ agents via npx skills add, without hooks on some.",
+          "passages": [
+            "with native plugins for Claude Code, Codex CLI, Qoder CLI, Pi, Hermes Agent, OpenCode and DeepSeek Harness.",
+            "Installs across 60+ agents via the Agent Skills standard",
+            "SKILL.md discovery via npx skills add; the pattern without lifecycle hooks"
+          ]
+        }
+      ],
+      "limites": [],
+      "licence_locale": null,
+      "reperes": [
+        {
+          "texte": "Autonomous mode: fewer reminders, fewer tokens burned",
+          "passages": [
+            "Autonomous loops burn tokens on recitation",
+            "Autonomous mode drops the per-tool-call recitation and replaces the raw progress tail with a fixed-shape ledger summary"
+          ]
+        },
+        {
+          "texte": "Multi-agent: an orchestrator holds the plan",
+          "passages": [
+            "One orchestrator owns task_plan.md and the shared summaries; every worker appends to its own ledger or assigned file."
+          ]
+        },
+        {
+          "texte": "For Claude Code, Codex, Cursor and 60+ agents",
+          "passages": [
+            "Install from npm, the Claude Code plugin marketplace, or npx skills. Codex, Cursor, OpenCode, 60+ agents."
+          ]
+        }
+      ],
+      "bouton": {
+        "libelle": "Voir le dépôt",
+        "url": "https://github.com/OthmanAdi/planning-with-files",
+        "aria_label": "Voir le dépôt OthmanAdi/planning-with-files sur GitHub (nouvel onglet)",
+        "verifie_le": "2026-11-03T07:14:55.349Z",
+        "motif": "capture_recente"
+      },
+      "etat_depot": {
+        "full_name": "OthmanAdi/planning-with-files",
+        "html_url": "https://github.com/OthmanAdi/planning-with-files",
+        "etoiles": 27824,
+        "etoiles_au": "2026-11-02T12:15:53.678Z",
+        "cree_le": "2026-01-03T07:37:28Z",
+        "dernier_push": "2026-10-30T20:57:42Z",
+        "jours_sans_push": 2,
+        "inactif": false,
+        "licence": "MIT",
+        "archive": false,
+        "fork": false,
+        "parent": null,
+        "date_ajout_skill": null
+      },
+      "visuel": {
+        "src": "medias/montages/ressources/planning-with-files.jpg",
+        "alt": "planning-with-files keeps your agent's plan on disk, and the task resumes after a /clear. Étape 1 : In Claude Code: /plugin marketplace add OthmanAdi/planning-with-files. Étape 2 : Then /plugin install planning-with-files@planning-with-files. Étape 3 : Type /plan, or simply ask the agent for a plan",
+        "gabarit": "etapes",
+        "mention": "Illustration — ne prouve pas le fonctionnement"
+      },
+      "captures": [
+        {
+          "document": "depot",
+          "snapshot_id": 471,
+          "capture_le": "2026-11-02T12:15:53.678Z",
+          "url": "https://github.com/OthmanAdi/planning-with-files",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:README.md",
+          "snapshot_id": 472,
+          "capture_le": "2026-11-02T12:15:53.678Z",
+          "url": "https://github.com/OthmanAdi/planning-with-files/blob/master/README.md",
+          "mode": "live"
+        }
+      ],
+      "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
+      "importe_le": "2026-11-03T07:14:49.047Z"
+    },
+    {
+      "post_id": 9,
+      "revision_id": 145,
+      "slug": "marketingskills",
+      "nom": "Marketing Skills",
+      "compte": "mova",
+      "statut": "en_attente",
+      "etiquette": "pas encore publié",
+      "planning": {
+        "jour": "2026-11-04",
+        "rang": 2,
+        "etat": "prevue",
+        "utilise_reserve": false,
+        "motif": null
+      },
+      "statut_sortie": "ressource_existante",
+      "badge": "Ressource existante",
+      "origine": {
+        "code": "claude_code_developpement",
+        "texte": "Rédigé pendant le développement par Claude Code, assistant de programmation, pas par l'agent du site ; vérifié par les contrôles du code"
+      },
+      "mention": "Analyse IA à partir des sources — non testé par la plateforme",
+      "accroche": {
+        "texte": "Marketing Skills: CRO, copywriting, SEO and email sequences handled by your code agent",
+        "passages": [
+          "Marketing skills for Claude Code and AI agents.",
+          "CRO, copywriting, SEO, analytics, and growth engineering.",
+          "create or optimize an email sequence"
+        ]
+      },
+      "description": {
+        "texte": "Corey Haines' marketing collection. Your agent identifies the task at hand—a page to convert, an email sequence, pricing or a Google Ads campaign—and applies the appropriate method.",
+        "passages": [
+          "A collection of AI agent skills focused on marketing tasks.",
+          "Built by Corey Haines.",
+          "your agent can recognize when you're working on a marketing task and apply the right frameworks and best practices",
+          "help with conversion optimization, copywriting, SEO, analytics, and growth engineering.",
+          "When the user wants to create or optimize an email sequence, drip campaign",
+          "When the user wants help with pricing decisions, packaging, or monetization strategy.",
+          "When the user wants help with paid advertising campaigns on Google Ads"
+        ]
+      },
+      "interet": {
+        "texte": "Everything rests on a shared product document: you set product, audience and positioning once with product-marketing, and each skill rereads it before acting.",
+        "passages": [
+          "Skills reference each other and build on shared context.",
+          "When the user wants to create or update their product marketing context document",
+          "every other skill checks it first to understand your product, audience, and positioning before doing anything"
+        ]
+      },
+      "exemple_usage": {
+        "texte": "Ask to optimize a landing page for conversion: the agent relies on the cro skill.",
+        "passages": [
+          "Once installed, just ask your agent to help with marketing tasks",
+          "Help me optimize this landing page for conversions",
+          "Uses cro skill"
+        ]
+      },
+      "demarrage": {
+        "etapes": [
+          {
+            "texte": "npx skills add coreyhaines31/marketingskills",
+            "passages": [
+              "Use npx skills to install skills directly",
+              "npx skills add coreyhaines31/marketingskills"
+            ]
+          },
+          {
+            "texte": "Launched from Claude Code: add -a claude-code, otherwise it won't read them",
+            "passages": [
+              "If you run the command from inside an agent session (e.g., asking Claude Code to install the skills for you)",
+              "may only install to the universal .agents/skills/ directory, which Claude Code does not read",
+              "npx skills add coreyhaines31/marketingskills -a claude-code"
+            ]
+          },
+          {
+            "texte": "Fill in product-marketing, then hand its tasks to the agent",
+            "passages": [
+              "When the user wants to create or update their product marketing context document",
+              "Once installed, just ask your agent to help with marketing tasks"
+            ]
+          }
+        ],
+        "commande": "npx skills add coreyhaines31/marketingskills",
+        "passages": [
+          "Use npx skills to install skills directly",
+          "When the user wants to create or update their product marketing context document",
+          "Once installed, just ask your agent to help with marketing tasks"
+        ],
+        "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
+      },
+      "compatibilites": [
+        {
+          "texte": "Claude Code, Codex, Cursor, Windsurf and any agent compatible with Agent Skills.",
+          "passages": [
+            "Works with Claude Code, OpenAI Codex, Cursor, Windsurf, and any agent that supports the Agent Skills spec."
+          ]
+        }
+      ],
+      "limites": [],
+      "licence_locale": null,
+      "reperes": [
+        {
+          "texte": "MIT licensed, freely reusable",
+          "passages": [
+            "MIT - Use these however you want."
+          ]
+        },
+        {
+          "texte": "For Claude Code, Codex, Cursor and Windsurf",
+          "passages": [
+            "Works with Claude Code, OpenAI Codex, Cursor, Windsurf"
+          ]
+        },
+        {
+          "texte": "Also: A/B tests, churn, sales pipeline",
+          "passages": [
+            "ab-testing - Experiment design",
+            "churn-prevention - Cancel flows, save offers, dunning, payment recovery",
+            "revops - Lead lifecycle, scoring, routing, pipeline management"
+          ]
+        }
+      ],
+      "bouton": {
+        "libelle": "Voir le dépôt",
+        "url": "https://github.com/coreyhaines31/marketingskills",
+        "aria_label": "Voir le dépôt coreyhaines31/marketingskills sur GitHub (nouvel onglet)",
+        "verifie_le": "2026-11-03T07:14:55.353Z",
+        "motif": "capture_recente"
+      },
+      "etat_depot": {
+        "full_name": "coreyhaines31/marketingskills",
+        "html_url": "https://github.com/coreyhaines31/marketingskills",
+        "etoiles": 57957,
+        "etoiles_au": "2026-11-02T12:15:47.595Z",
+        "cree_le": "2026-01-15T19:45:23Z",
+        "dernier_push": "2026-10-31T00:53:07Z",
+        "jours_sans_push": 2,
+        "inactif": false,
+        "licence": "MIT",
+        "archive": false,
+        "fork": false,
+        "parent": null,
+        "date_ajout_skill": null
+      },
+      "visuel": {
+        "src": "medias/montages/ressources/marketingskills.jpg",
+        "alt": "Marketing Skills: CRO, copywriting, SEO and email sequences handled by your code agent. Étape 1 : npx skills add coreyhaines31/marketingskills. Étape 2 : Launched from Claude Code: add -a claude-code, otherwise it won't read them. Étape 3 : Fill in product-marketing, then hand its tasks to the agent",
+        "gabarit": "etapes",
+        "mention": "Illustration — ne prouve pas le fonctionnement"
+      },
+      "captures": [
+        {
+          "document": "depot",
+          "snapshot_id": 453,
+          "capture_le": "2026-11-02T12:15:47.595Z",
+          "url": "https://github.com/coreyhaines31/marketingskills",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:README.md",
+          "snapshot_id": 454,
+          "capture_le": "2026-11-02T12:15:47.595Z",
+          "url": "https://github.com/coreyhaines31/marketingskills/blob/main/README.md",
+          "mode": "live"
+        }
+      ],
+      "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
+      "importe_le": "2026-11-03T07:14:49.047Z"
     },
     {
       "post_id": 12,
-      "revision_id": 32,
+      "revision_id": 157,
       "slug": "find-skills",
       "nom": "find-skills",
-      "compte": "repo",
+      "compte": "radar",
       "statut": "en_attente",
       "etiquette": "pas encore publié",
       "planning": {
-        "jour": "2026-11-02",
-        "rang": 10,
+        "jour": "2026-11-04",
+        "rang": 3,
         "etat": "prevue",
         "utilise_reserve": false,
         "motif": null
@@ -12589,13 +14425,13 @@ window.DONNEES_MAQUETTE = {
       },
       "mention": "Analyse IA à partir des sources — non testé par la plateforme",
       "accroche": {
-        "texte": "find-skills : votre agent peut trouver et installer le skill qui lui manque",
+        "texte": "find-skills: your agent can find and install the skill it's missing",
         "passages": [
           "This skill helps you discover and install skills from the open agent skills ecosystem."
         ]
       },
       "description": {
-        "texte": "Demandez « trouve un skill pour X », ou juste « comment faire X ». L’agent regarde le classement de skills.sh et, s’il n’y trouve pas son bonheur, lance npx skills find. Il revient avec le skill, sa source et la commande d’installation.",
+        "texte": "Ask \"find a skill for X\", or just \"how do I do X\". The agent checks the skills.sh ranking and, if it can't find what it needs, runs npx skills find. It comes back with the skill, its source and the install command.",
         "passages": [
           "Says \"find a skill for X\" or \"is there a skill for X\"",
           "Asks \"how do I do X\" where X might be a common task with an existing skill",
@@ -12606,7 +14442,7 @@ window.DONNEES_MAQUETTE = {
         ]
       },
       "interet": {
-        "texte": "Il ne recommande pas un skill sur un simple résultat de recherche : il vérifie d’abord le nombre d’installations et la source. Et si rien n’existe, il vous propose d’écrire le vôtre avec npx skills init.",
+        "texte": "It doesn't recommend a skill based on a search result alone: it first checks the install count and the source. And if nothing exists, it offers to write your own with npx skills init.",
         "passages": [
           "Do not recommend a skill based solely on search results.",
           "Install count — Prefer skills with 1K+ installs.",
@@ -12615,7 +14451,7 @@ window.DONNEES_MAQUETTE = {
         ]
       },
       "exemple_usage": {
-        "texte": "Vous voulez accélérer votre app React : l’agent peut lancer npx skills find react performance et vous proposer un skill avec sa commande d’installation.",
+        "texte": "Want to speed up your React app: the agent can run npx skills find react performance and suggest a skill with its install command.",
         "passages": [
           "User asks \"how do I make my React app faster?\" → npx skills find react performance",
           "The install command they can run"
@@ -12624,14 +14460,14 @@ window.DONNEES_MAQUETTE = {
       "demarrage": {
         "etapes": [
           {
-            "texte": "Ajouter find-skills avec npx skills add (Node.js 22.20 ou plus).",
+            "texte": "Add find-skills with npx skills add (Node.js 22.20 or later).",
             "passages": [
               "Requires Node.js 22.20 or later.",
               "npx skills add <package> - Install a skill from GitHub or other sources"
             ]
           },
           {
-            "texte": "Ensuite, il n’y a plus qu’à demander « trouve un skill pour … ».",
+            "texte": "Then just ask, for example \"find a skill for …\"; no command needed.",
             "passages": [
               "Says \"find a skill for X\" or \"is there a skill for X\""
             ]
@@ -12646,7 +14482,7 @@ window.DONNEES_MAQUETTE = {
       },
       "compatibilites": [
         {
-          "texte": "Claude Code, Codex, Cursor, OpenCode et 75 autres agents.",
+          "texte": "Claude Code, Codex, Cursor, OpenCode and 75 other agents.",
           "passages": [
             "Supports OpenCode, Claude Code, Codex, Cursor, and 75 more."
           ]
@@ -12654,7 +14490,7 @@ window.DONNEES_MAQUETTE = {
       ],
       "limites": [
         {
-          "texte": "S’il installe pour vous, c’est en global et sans confirmation (-g -y) : lisez le skill avant d’accepter.",
+          "texte": "If it installs for you, it's global and without confirmation (-g -y): read the skill before accepting.",
           "passages": [
             "If the user wants to proceed, you can install the skill for them:",
             "The -g flag installs globally (user-level) and -y skips confirmation prompts."
@@ -12664,13 +14500,13 @@ window.DONNEES_MAQUETTE = {
       "licence_locale": null,
       "reperes": [
         {
-          "texte": "Pas de commande à retenir : il suffit de demander",
+          "texte": "Triggered by plain requests, no syntax",
           "passages": [
             "Says \"find a skill for X\" or \"is there a skill for X\""
           ]
         },
         {
-          "texte": "Ne propose jamais un skill sans vérifier installations et source",
+          "texte": "Never suggests a skill without checking installs and source",
           "passages": [
             "Do not recommend a skill based solely on search results.",
             "Install count — Prefer skills with 1K+ installs.",
@@ -12678,7 +14514,7 @@ window.DONNEES_MAQUETTE = {
           ]
         },
         {
-          "texte": "Rien ne correspond ? Il propose d’en créer un",
+          "texte": "Nothing matches? It offers to create one",
           "passages": [
             "Suggest the user could create their own skill with npx skills init"
           ]
@@ -12688,7 +14524,7 @@ window.DONNEES_MAQUETTE = {
         "libelle": "Voir le dépôt",
         "url": "https://github.com/vercel-labs/skills/tree/main/skills/find-skills",
         "aria_label": "Voir le dépôt vercel-labs/skills sur GitHub (nouvel onglet)",
-        "verifie_le": "2026-11-02T17:44:49.268Z",
+        "verifie_le": "2026-11-03T07:15:22.370Z",
         "motif": "capture_recente"
       },
       "etat_depot": {
@@ -12708,7 +14544,7 @@ window.DONNEES_MAQUETTE = {
       },
       "visuel": {
         "src": "medias/montages/ressources/find-skills.jpg",
-        "alt": "find-skills : votre agent peut trouver et installer le skill qui lui manque. Étape 1 : Ajouter find-skills avec npx skills add (Node.js 22.20 ou plus).. Étape 2 : Ensuite, il n’y a plus qu’à demander « trouve un skill pour … ».",
+        "alt": "find-skills: your agent can find and install the skill it's missing. Étape 1 : Add find-skills with npx skills add (Node.js 22.20 or later).. Étape 2 : Then just ask, for example \"find a skill for …\"; no command needed.",
         "gabarit": "etapes",
         "mention": "Illustration — ne prouve pas le fonctionnement"
       },
@@ -12743,667 +14579,19 @@ window.DONNEES_MAQUETTE = {
         }
       ],
       "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
-      "importe_le": "2026-11-02T17:44:44.497Z"
-    },
-    {
-      "post_id": 13,
-      "revision_id": 33,
-      "slug": "grill-me",
-      "nom": "grill-me (Matt Pocock)",
-      "compte": "repo",
-      "statut": "en_attente",
-      "etiquette": "pas encore publié",
-      "planning": {
-        "jour": "2026-11-02",
-        "rang": 11,
-        "etat": "prevue",
-        "utilise_reserve": false,
-        "motif": null
-      },
-      "statut_sortie": "ressource_existante",
-      "badge": "Ressource existante",
-      "origine": {
-        "code": "claude_code_developpement",
-        "texte": "Rédigé pendant le développement par Claude Code, assistant de programmation, pas par l'agent du site ; vérifié par les contrôles du code"
-      },
-      "mention": "Analyse IA à partir des sources — non testé par la plateforme",
-      "accroche": {
-        "texte": "grill-me : votre agent vous interroge sans relâche sur un plan, jusqu'à ce que tout soit tranché",
-        "passages": [
-          "Get relentlessly interviewed about a plan or design until every branch of the design tree is resolved."
-        ]
-      },
-      "description": {
-        "texte": "Avant de lancer quoi que ce soit, on inverse les rôles : l'agent vous pose des questions précises sur votre plan, votre décision ou votre idée, et creuse chaque branche jusqu'à la trancher. Matt Pocock le destine aux sujets hors code.",
-        "passages": [
-          "getting the agent to ask you detailed questions about what you're building.",
-          "Interview the user relentlessly about a plan, decision, or idea until every branch of the design tree is resolved.",
-          "/grill-me - for non-code uses"
-        ]
-      },
-      "interet": {
-        "texte": "Vous vous alignez avec l'agent avant qu'il se mette au travail, au lieu de découvrir après coup qu'il n'avait pas compris. Pour le code, la variante grill-with-docs mène le même entretien et construit au passage le vocabulaire du projet, avec les décisions difficiles consignées en ADR.",
-        "passages": [
-          "They help you align with the agent before you get started",
-          "you realize it didn't understand you at all.",
-          "Grilling session that also builds your project's domain model",
-          "document hard-to-explain decisions in ADR's."
-        ]
-      },
-      "exemple_usage": {
-        "texte": "Un lancement à cadrer, un arbitrage d'équipe à préparer : tapez /grill-me, décrivez le plan, puis répondez jusqu'à ce que plus rien ne reste flou.",
-        "passages": [
-          "User-invoked skills are reachable only when you type them (e.g. /grill-me)",
-          "Interview the user relentlessly about a plan, decision, or idea until every branch of the design tree is resolved."
-        ]
-      },
-      "demarrage": {
-        "etapes": [
-          {
-            "texte": "Dans Claude Code, installez le plugin mattpocock-skills.",
-            "passages": [
-              "claude plugin install mattpocock-skills@claude-plugins-official",
-              "I see with Claude Code, Codex, and other coding agents."
-            ]
-          },
-          {
-            "texte": "Il ne démarre pas seul : tapez /grill-me, puis décrivez votre plan.",
-            "passages": [
-              "User-invoked skills are reachable only when you type them (e.g. /grill-me)"
-            ]
-          }
-        ],
-        "commande": "claude plugin install mattpocock-skills@claude-plugins-official",
-        "passages": [
-          "claude plugin install mattpocock-skills@claude-plugins-official",
-          "User-invoked skills are reachable only when you type them (e.g. /grill-me)"
-        ],
-        "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
-      },
-      "compatibilites": [
-        {
-          "texte": "Claude Code, Codex et d'autres agents ; n'importe quel modèle, selon l'auteur.",
-          "passages": [
-            "I see with Claude Code, Codex, and other coding agents.",
-            "codex plugin add mattpocock-skills@mattpocock",
-            "npx skills@latest add mattpocock/skills -a <agent>",
-            "They work with any model."
-          ]
-        }
-      ],
-      "limites": [],
-      "licence_locale": null,
-      "reperes": [
-        {
-          "texte": "Se lance seulement quand vous tapez /grill-me",
-          "passages": [
-            "User-invoked skills are reachable only when you type them (e.g. /grill-me)"
-          ]
-        },
-        {
-          "texte": "Fonctionne avec n'importe quel modèle",
-          "passages": [
-            "They work with any model."
-          ]
-        }
-      ],
-      "bouton": {
-        "libelle": "Voir le dépôt",
-        "url": "https://github.com/mattpocock/skills",
-        "aria_label": "Voir le dépôt mattpocock/skills sur GitHub (nouvel onglet)",
-        "verifie_le": "2026-11-02T17:44:49.272Z",
-        "motif": "capture_recente"
-      },
-      "etat_depot": {
-        "full_name": "mattpocock/skills",
-        "html_url": "https://github.com/mattpocock/skills",
-        "etoiles": 309698,
-        "etoiles_au": "2026-11-02T12:15:51.625Z",
-        "cree_le": "2026-02-03T11:15:53Z",
-        "dernier_push": "2026-11-01T11:42:33Z",
-        "jours_sans_push": 1,
-        "inactif": false,
-        "licence": "MIT",
-        "archive": false,
-        "fork": false,
-        "parent": null,
-        "date_ajout_skill": null
-      },
-      "visuel": {
-        "src": "medias/montages/ressources/grill-me.jpg",
-        "alt": "grill-me : votre agent vous interroge sans relâche sur un plan, jusqu'à ce que tout soit tranché. Étape 1 : Dans Claude Code, installez le plugin mattpocock-skills.. Étape 2 : Il ne démarre pas seul : tapez /grill-me, puis décrivez votre plan.",
-        "gabarit": "etapes",
-        "mention": "Illustration — ne prouve pas le fonctionnement"
-      },
-      "captures": [
-        {
-          "document": "depot",
-          "snapshot_id": 463,
-          "capture_le": "2026-11-02T12:15:51.625Z",
-          "url": "https://github.com/mattpocock/skills",
-          "mode": "live"
-        },
-        {
-          "document": "fichier:skills/productivity/grill-me/SKILL.md",
-          "snapshot_id": 464,
-          "capture_le": "2026-11-02T12:15:51.625Z",
-          "url": "https://github.com/mattpocock/skills/blob/main/skills/productivity/grill-me/SKILL.md",
-          "mode": "live"
-        },
-        {
-          "document": "dossier:skills/productivity/grill-me",
-          "snapshot_id": 465,
-          "capture_le": "2026-11-02T12:15:51.625Z",
-          "url": "https://github.com/mattpocock/skills/tree/main/skills/productivity/grill-me",
-          "mode": "live"
-        },
-        {
-          "document": "fichier:README.md",
-          "snapshot_id": 466,
-          "capture_le": "2026-11-02T12:15:51.625Z",
-          "url": "https://github.com/mattpocock/skills/blob/main/README.md",
-          "mode": "live"
-        }
-      ],
-      "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
-      "importe_le": "2026-11-02T17:44:44.497Z"
-    },
-    {
-      "post_id": 14,
-      "revision_id": 34,
-      "slug": "claude-mem",
-      "nom": "claude-mem",
-      "compte": "repo",
-      "statut": "en_attente",
-      "etiquette": "pas encore publié",
-      "planning": {
-        "jour": "2026-11-02",
-        "rang": 12,
-        "etat": "prevue",
-        "utilise_reserve": false,
-        "motif": null
-      },
-      "statut_sortie": "ressource_existante",
-      "badge": "Ressource existante",
-      "origine": {
-        "code": "claude_code_developpement",
-        "texte": "Rédigé pendant le développement par Claude Code, assistant de programmation, pas par l'agent du site ; vérifié par les contrôles du code"
-      },
-      "mention": "Analyse IA à partir des sources — non testé par la plateforme",
-      "accroche": {
-        "texte": "claude-mem donne à Claude Code une mémoire qui tient d’une session à l’autre",
-        "passages": [
-          "Persistent memory compression system built for",
-          "Context survives across sessions",
-          "Claude Code: Latest version with plugin support"
-        ]
-      },
-      "description": {
-        "texte": "Pendant la session, il enregistre ce que fait l’agent, le compresse en résumés et réinjecte le contexte utile dans la suivante. Vous reprenez un projet sans tout réexpliquer.",
-        "passages": [
-          "Captures everything your agent does during sessions, compresses it with AI, and injects relevant context back into future sessions",
-          "This enables Claude to maintain continuity of knowledge about projects even after sessions end or reconnect."
-        ]
-      },
-      "interet": {
-        "texte": "Pour retrouver une info, l’agent lit d’abord un index compact, puis ne charge que les notes utiles : environ dix fois moins de tokens, selon les auteurs.",
-        "passages": [
-          "Get compact index with IDs (~50-100 tokens/result)",
-          "~10x token savings by filtering before fetching details"
-        ]
-      },
-      "exemple_usage": {
-        "texte": "Dans la doc : chercher « authentication bug » parmi les corrections, puis ne récupérer que deux observations.",
-        "passages": [
-          "search(query=\"authentication bug\", type=\"bugfix\", limit=10)",
-          "Fetch full details get_observations(ids=[123, 456])"
-        ]
-      },
-      "demarrage": {
-        "etapes": [
-          {
-            "texte": "npx claude-mem install ou la place de marché de plugins de Claude Code, puis redémarrez. Pas npm install -g, qui n’installe que la bibliothèque.",
-            "passages": [
-              "Install with a single command:",
-              "Or install from the plugin marketplace inside Claude Code:",
-              "Restart Claude Code. Context from previous sessions will automatically appear in new sessions.",
-              "npm install -g claude-mem installs the SDK/library only"
-            ]
-          }
-        ],
-        "commande": "npx claude-mem install",
-        "passages": [
-          "Install with a single command:"
-        ],
-        "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
-      },
-      "compatibilites": [
-        {
-          "texte": "Node.js 20.0.0 ou plus récent.",
-          "passages": [
-            "Node.js: 20.0.0 or higher"
-          ]
-        }
-      ],
-      "limites": [
-        {
-          "texte": "Le service claude-mem proposé à l’installation est gratuit 30 jours ; ensuite la mémoire passe sur votre abonnement Anthropic, sauf souscription ou clé OpenRouter ou Gemini.",
-          "passages": [
-            "asks you to sign in to claude-mem in your browser",
-            "unlocks the claude-mem observer with a 30 Day Free Trial",
-            "When the free trial ends, memory automatically falls back to your Anthropic plan unless you subscribe.",
-            "you pick your memory provider — the claude-mem observer, your own OpenRouter or Gemini key, or your Anthropic plan."
-          ]
-        }
-      ],
-      "licence_locale": null,
-      "reperes": [
-        {
-          "texte": "Recherche en trois temps via 4 outils MCP",
-          "passages": [
-            "Query your project history with the three-step mem-search skill",
-            "intelligent memory search through 4 MCP tools"
-          ]
-        },
-        {
-          "texte": "Historique stocké en SQLite et Chroma",
-          "passages": [
-            "SQLite Database - Stores sessions, observations, summaries",
-            "Chroma Vector Database - Hybrid semantic + keyword search"
-          ]
-        },
-        {
-          "texte": "Aussi pour Codex, Gemini, Copilot et OpenCode",
-          "passages": [
-            "Works with Claude Code, OpenClaw, Codex, Gemini, Hermes, Copilot, OpenCode + More"
-          ]
-        }
-      ],
-      "bouton": {
-        "libelle": "Voir le dépôt",
-        "url": "https://github.com/thedotmack/claude-mem",
-        "aria_label": "Voir le dépôt thedotmack/claude-mem sur GitHub (nouvel onglet)",
-        "verifie_le": "2026-11-02T17:44:49.276Z",
-        "motif": "capture_recente"
-      },
-      "etat_depot": {
-        "full_name": "thedotmack/claude-mem",
-        "html_url": "https://github.com/thedotmack/claude-mem",
-        "etoiles": 110217,
-        "etoiles_au": "2026-11-02T12:15:52.226Z",
-        "cree_le": "2025-08-31T20:50:03Z",
-        "dernier_push": "2026-11-02T10:09:11Z",
-        "jours_sans_push": 0,
-        "inactif": false,
-        "licence": "Apache-2.0",
-        "archive": false,
-        "fork": false,
-        "parent": null,
-        "date_ajout_skill": null
-      },
-      "visuel": {
-        "src": "medias/montages/ressources/claude-mem.jpg",
-        "alt": "claude-mem donne à Claude Code une mémoire qui tient d’une session à l’autre. npx claude-mem install",
-        "gabarit": "terminal_annote",
-        "mention": "Illustration — ne prouve pas le fonctionnement"
-      },
-      "captures": [
-        {
-          "document": "depot",
-          "snapshot_id": 467,
-          "capture_le": "2026-11-02T12:15:52.226Z",
-          "url": "https://github.com/thedotmack/claude-mem",
-          "mode": "live"
-        },
-        {
-          "document": "fichier:README.md",
-          "snapshot_id": 468,
-          "capture_le": "2026-11-02T12:15:52.226Z",
-          "url": "https://github.com/thedotmack/claude-mem/blob/main/README.md",
-          "mode": "live"
-        }
-      ],
-      "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
-      "importe_le": "2026-11-02T17:44:44.497Z"
-    },
-    {
-      "post_id": 16,
-      "revision_id": 36,
-      "slug": "planning-with-files",
-      "nom": "planning-with-files",
-      "compte": "repo",
-      "statut": "en_attente",
-      "etiquette": "pas encore publié",
-      "planning": {
-        "jour": "2026-11-02",
-        "rang": 13,
-        "etat": "prevue",
-        "utilise_reserve": false,
-        "motif": null
-      },
-      "statut_sortie": "ressource_existante",
-      "badge": "Ressource existante",
-      "origine": {
-        "code": "claude_code_developpement",
-        "texte": "Rédigé pendant le développement par Claude Code, assistant de programmation, pas par l'agent du site ; vérifié par les contrôles du code"
-      },
-      "mention": "Analyse IA à partir des sources — non testé par la plateforme",
-      "accroche": {
-        "texte": "planning-with-files garde le plan de votre agent sur disque, et la tâche reprend après un /clear",
-        "passages": [
-          "Persistent file-based planning for AI coding agents and long-running tasks.",
-          "Crash-proof markdown plans, session recovery after /clear and compaction"
-        ]
-      },
-      "description": {
-        "texte": "Le plan tient dans trois fichiers Markdown du projet, pas seulement dans le contexte : task_plan.md pour les phases, findings.md pour les découvertes et les décisions, progress.md pour le journal. Après un /clear, une compaction ou un plantage, l’agent les relit et repart de la phase en cours.",
-        "passages": [
-          "The plan lives on disk in task_plan.md, findings.md, and progress.md, not only in the context window.",
-          "Markdown on disk is the shared state between agents.",
-          "task_plan.md ← phases + checkboxes; the resume point after /clear",
-          "findings.md ← research notes and decisions, appended as you go",
-          "progress.md ← session log and test results",
-          "That is the difference between an agent that forgets after /clear, compaction or a crash and one that resumes at the current phase."
-        ]
-      },
-      "interet": {
-        "texte": "Des hooks réinjectent le plan au début de chaque tour : sur une longue session, l’objectif et l’état des phases restent sous les yeux du modèle. En option, l’agent est retenu tant qu’une phase reste en cours, avec un plafond pour ne jamais bloquer la session, sur les outils qui le permettent.",
-        "passages": [
-          "A hook that fires every turn",
-          "Because the plan is re-injected at the start of each turn from disk, the goals and phase status stay in the model's attention window as the conversation grows.",
-          "Gated mode: the Stop gate holds the stop only while an in_progress phase remains, with a block cap and stall detection so an incomplete plan alone never traps a session",
-          "Optional gated mode can request continuation only on a host that supports the required Stop behavior."
-        ]
-      },
-      "exemple_usage": {
-        "texte": "Validez l’approche en mode plan, faites-la écrire en phases dans task_plan.md, puis lancez l’exécution. Si la conversation est vidée en route, l’agent ne perd pas le fil : il relit les fichiers et reprend où il en était.",
-        "passages": [
-          "Plan mode is where you design and approve the approach before execution.",
-          "after accepting a plan-mode plan, tell the agent to write it into task_plan.md as phases",
-          "then execute in normal mode",
-          "after a /clear or a new session the skill re-reads project files from disk"
-        ]
-      },
-      "demarrage": {
-        "etapes": [
-          {
-            "texte": "Dans Claude Code : /plugin marketplace add OthmanAdi/planning-with-files",
-            "passages": [
-              "Claude Code, plugin route (ships everything: skill, hooks, slash commands):",
-              "/plugin marketplace add OthmanAdi/planning-with-files"
-            ]
-          },
-          {
-            "texte": "Puis /plugin install planning-with-files@planning-with-files",
-            "passages": [
-              "/plugin install planning-with-files@planning-with-files",
-              "Claude Code, plugin route (ships everything: skill, hooks, slash commands):"
-            ]
-          },
-          {
-            "texte": "Tapez /plan, ou demandez simplement un plan à l’agent",
-            "passages": [
-              "Trigger it by typing /plan (plugin) or asking the agent to"
-            ]
-          }
-        ],
-        "commande": "npx skills add OthmanAdi/planning-with-files --skill planning-with-files -g",
-        "passages": [
-          "npx skills add OthmanAdi/planning-with-files --skill planning-with-files -g",
-          "Claude Code, plugin route (ships everything: skill, hooks, slash commands):"
-        ],
-        "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
-      },
-      "compatibilites": [
-        {
-          "texte": "Plugins natifs pour Claude Code, Codex CLI, OpenCode et d’autres ; plus de 60 agents via npx skills add, sans les hooks sur certains.",
-          "passages": [
-            "with native plugins for Claude Code, Codex CLI, Qoder CLI, Pi, Hermes Agent, OpenCode and DeepSeek Harness.",
-            "Installs across 60+ agents via the Agent Skills standard",
-            "SKILL.md discovery via npx skills add; the pattern without lifecycle hooks"
-          ]
-        }
-      ],
-      "limites": [],
-      "licence_locale": null,
-      "reperes": [
-        {
-          "texte": "Mode autonome : moins de rappels, moins de tokens brûlés",
-          "passages": [
-            "Autonomous loops burn tokens on recitation",
-            "Autonomous mode drops the per-tool-call recitation and replaces the raw progress tail with a fixed-shape ledger summary"
-          ]
-        },
-        {
-          "texte": "Multi-agents : un orchestrateur tient le plan",
-          "passages": [
-            "One orchestrator owns task_plan.md and the shared summaries; every worker appends to its own ledger or assigned file."
-          ]
-        },
-        {
-          "texte": "Pour Claude Code, Codex, Cursor et plus de 60 agents",
-          "passages": [
-            "Install from npm, the Claude Code plugin marketplace, or npx skills. Codex, Cursor, OpenCode, 60+ agents."
-          ]
-        }
-      ],
-      "bouton": {
-        "libelle": "Voir le dépôt",
-        "url": "https://github.com/OthmanAdi/planning-with-files",
-        "aria_label": "Voir le dépôt OthmanAdi/planning-with-files sur GitHub (nouvel onglet)",
-        "verifie_le": "2026-11-02T17:44:49.282Z",
-        "motif": "capture_recente"
-      },
-      "etat_depot": {
-        "full_name": "OthmanAdi/planning-with-files",
-        "html_url": "https://github.com/OthmanAdi/planning-with-files",
-        "etoiles": 27824,
-        "etoiles_au": "2026-11-02T12:15:53.678Z",
-        "cree_le": "2026-01-03T07:37:28Z",
-        "dernier_push": "2026-10-30T20:57:42Z",
-        "jours_sans_push": 2,
-        "inactif": false,
-        "licence": "MIT",
-        "archive": false,
-        "fork": false,
-        "parent": null,
-        "date_ajout_skill": null
-      },
-      "visuel": {
-        "src": "medias/montages/ressources/planning-with-files.jpg",
-        "alt": "planning-with-files garde le plan de votre agent sur disque, et la tâche reprend après un /clear. Étape 1 : Dans Claude Code : /plugin marketplace add OthmanAdi/planning-with-files. Étape 2 : Puis /plugin install planning-with-files@planning-with-files. Étape 3 : Tapez /plan, ou demandez simplement un plan à l’agent",
-        "gabarit": "etapes",
-        "mention": "Illustration — ne prouve pas le fonctionnement"
-      },
-      "captures": [
-        {
-          "document": "depot",
-          "snapshot_id": 471,
-          "capture_le": "2026-11-02T12:15:53.678Z",
-          "url": "https://github.com/OthmanAdi/planning-with-files",
-          "mode": "live"
-        },
-        {
-          "document": "fichier:README.md",
-          "snapshot_id": 472,
-          "capture_le": "2026-11-02T12:15:53.678Z",
-          "url": "https://github.com/OthmanAdi/planning-with-files/blob/master/README.md",
-          "mode": "live"
-        }
-      ],
-      "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
-      "importe_le": "2026-11-02T17:44:44.497Z"
-    },
-    {
-      "post_id": 17,
-      "revision_id": 37,
-      "slug": "stop-slop",
-      "nom": "stop-slop",
-      "compte": "repo",
-      "statut": "en_attente",
-      "etiquette": "pas encore publié",
-      "planning": {
-        "jour": "2026-11-02",
-        "rang": 14,
-        "etat": "prevue",
-        "utilise_reserve": false,
-        "motif": null
-      },
-      "statut_sortie": "ressource_existante",
-      "badge": "Ressource existante",
-      "origine": {
-        "code": "claude_code_developpement",
-        "texte": "Rédigé pendant le développement par Claude Code, assistant de programmation, pas par l'agent du site ; vérifié par les contrôles du code"
-      },
-      "mention": "Analyse IA à partir des sources — non testé par la plateforme",
-      "accroche": {
-        "texte": "stop-slop traque les tics d’écriture IA dans vos textes et les fait disparaître",
-        "passages": [
-          "A skill for removing AI tells from prose.",
-          "This skill teaches Claude (or any LLM) to catch and remove them."
-        ]
-      },
-      "description": {
-        "texte": "Formules prévisibles, constructions toutes faites, rythme mécanique : stop-slop apprend à Claude, ou à n’importe quel LLM, à les repérer et à les retirer.",
-        "passages": [
-          "AI writing has patterns. Predictable phrases, structures, rhythms.",
-          "This skill teaches Claude (or any LLM) to catch and remove them."
-        ]
-      },
-      "interet": {
-        "texte": "Les règles sont tranchées : pas de jargon d’entreprise, pas d’adverbes, pas de voix passive, pas d’oppositions binaires, pas de tiret cadratin. Chaque famille de tics a son fichier de référence, chargé seulement quand il sert.",
-        "passages": [
-          "Banned phrases - Throat-clearing openers, emphasis crutches, business jargon, all adverbs, vague declaratives, meta-commentary.",
-          "Structural clichés - Binary contrasts, negative listings, dramatic fragmentation, rhetorical setups, false agency, narrator-from-a-distance voice, passive voice.",
-          "Sentence-level rules - No Wh- sentence starters, no em dashes, no staccato fragmentation, no lazy extremes, active voice required.",
-          "Reference files load on demand.",
-          "phrases.md # Phrases to remove",
-          "structures.md # Structural patterns to avoid"
-        ]
-      },
-      "exemple_usage": {
-        "texte": "Un post écrit avec Claude qui sonne trop IA : passez-le dans stop-slop avant de publier.",
-        "passages": [
-          "This skill teaches Claude (or any LLM) to catch and remove them."
-        ]
-      },
-      "demarrage": {
-        "etapes": [
-          {
-            "texte": "Claude Code : ajoutez le dossier comme skill",
-            "passages": [
-              "Claude Code: Add this folder as a skill."
-            ]
-          },
-          {
-            "texte": "API : incluez SKILL.md dans le prompt système",
-            "passages": [
-              "API calls: Include SKILL.md in your system prompt."
-            ]
-          }
-        ],
-        "commande": null,
-        "passages": [
-          "Claude Code: Add this folder as a skill.",
-          "API calls: Include SKILL.md in your system prompt. Reference files load on demand."
-        ],
-        "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
-      },
-      "compatibilites": [
-        {
-          "texte": "Claude Code, projets Claude, instructions personnalisées ou appels API.",
-          "passages": [
-            "Claude Code: Add this folder as a skill.",
-            "Claude Projects: Upload SKILL.md and reference files to project knowledge.",
-            "Custom instructions: Copy core rules from SKILL.md.",
-            "API calls: Include SKILL.md in your system prompt."
-          ]
-        }
-      ],
-      "limites": [],
-      "licence_locale": null,
-      "reperes": [
-        {
-          "texte": "Note sur 50 en cinq critères : sous 35, retour en révision",
-          "passages": [
-            "Rate 1-10 on each dimension:",
-            "Below 35/50: revise."
-          ]
-        },
-        {
-          "texte": "Exemples avant/après fournis avec les règles",
-          "passages": [
-            "examples.md # Before/after transformations"
-          ]
-        },
-        {
-          "texte": "Claude Code, projets Claude, instructions perso ou API",
-          "passages": [
-            "Claude Code: Add this folder as a skill.",
-            "Claude Projects: Upload SKILL.md and reference files to project knowledge.",
-            "Custom instructions: Copy core rules from SKILL.md.",
-            "API calls: Include SKILL.md in your system prompt."
-          ]
-        }
-      ],
-      "bouton": {
-        "libelle": "Voir le dépôt",
-        "url": "https://github.com/hardikpandya/stop-slop",
-        "aria_label": "Voir le dépôt hardikpandya/stop-slop sur GitHub (nouvel onglet)",
-        "verifie_le": "2026-11-02T17:44:49.286Z",
-        "motif": "capture_recente"
-      },
-      "etat_depot": {
-        "full_name": "hardikpandya/stop-slop",
-        "html_url": "https://github.com/hardikpandya/stop-slop",
-        "etoiles": 18542,
-        "etoiles_au": "2026-11-02T12:15:54.354Z",
-        "cree_le": "2026-01-11T12:00:59Z",
-        "dernier_push": "2026-03-17T18:50:39Z",
-        "jours_sans_push": 229,
-        "inactif": true,
-        "licence": "MIT",
-        "archive": false,
-        "fork": false,
-        "parent": null,
-        "date_ajout_skill": null
-      },
-      "visuel": {
-        "src": "medias/montages/ressources/stop-slop.jpg",
-        "alt": "stop-slop traque les tics d’écriture IA dans vos textes et les fait disparaître. Étape 1 : Claude Code : ajoutez le dossier comme skill. Étape 2 : API : incluez SKILL.md dans le prompt système",
-        "gabarit": "etapes",
-        "mention": "Illustration — ne prouve pas le fonctionnement"
-      },
-      "captures": [
-        {
-          "document": "depot",
-          "snapshot_id": 473,
-          "capture_le": "2026-11-02T12:15:54.354Z",
-          "url": "https://github.com/hardikpandya/stop-slop",
-          "mode": "live"
-        },
-        {
-          "document": "fichier:README.md",
-          "snapshot_id": 474,
-          "capture_le": "2026-11-02T12:15:54.354Z",
-          "url": "https://github.com/hardikpandya/stop-slop/blob/main/README.md",
-          "mode": "live"
-        }
-      ],
-      "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
-      "importe_le": "2026-11-02T17:44:44.497Z"
+      "importe_le": "2026-11-03T07:15:18.913Z"
     },
     {
       "post_id": 21,
-      "revision_id": 54,
+      "revision_id": 158,
       "slug": "ecc",
       "nom": "ECC (Everything Claude Code)",
       "compte": "repo",
       "statut": "en_attente",
       "etiquette": "pas encore publié",
       "planning": {
-        "jour": "2026-11-02",
-        "rang": 15,
+        "jour": "2026-11-04",
+        "rang": 4,
         "etat": "prevue",
         "utilise_reserve": false,
         "motif": null
@@ -13416,13 +14604,13 @@ window.DONNEES_MAQUETTE = {
       },
       "mention": "Analyse IA à partir des sources — non testé par la plateforme",
       "accroche": {
-        "texte": "ECC installe une méthode de travail dans votre agent de code, au lieu de la redire à chaque prompt",
+        "texte": "ECC installs a working method into your coding agent, instead of restating it in every prompt",
         "passages": [
           "Instead of rebuilding that process in every prompt, you install it once and make it part of how your agent works."
         ]
       },
       "description": {
-        "texte": "Planifier avant de coder, vérifier par les tests, garder ce qui compte : ECC réunit 71 agents, 314 skills, des hooks et des résumés de session pour que ce processus fasse partie de la façon dont votre agent travaille. Il fonctionne aujourd'hui le mieux avec Claude Code, avec des plugins natifs pour Codex et Qoder et des adaptateurs plus limités pour Cursor, OpenCode ou Gemini.",
+        "texte": "Plan before coding, verify through tests, keep what matters: ECC brings together 71 agents, 314 skills, hooks and session summaries so this process becomes part of how your agent works. Today it works best with Claude Code, with native plugins for Codex and Qoder and more limited adapters for Cursor, OpenCode or Gemini.",
         "passages": [
           "Access to 71 agents, 314 skills, and 98 legacy command shims, plus hooks, rules, memory, continuous learning, and AgentShield security scanning.",
           "it plans before it builds, verifies changes with tests, reviews its own work from a fresh context, remembers what matters",
@@ -13432,7 +14620,7 @@ window.DONNEES_MAQUETTE = {
         ]
       },
       "interet": {
-        "texte": "Le plan devient un document à valider avant la première ligne, le TDD exige un test en échec avant l'implémentation, et les hooks ajoutent des contrôles qui ne dépendent plus du prompt. Ces hooks lancent des commandes shell sur votre machine : installez ECC uniquement depuis le dépôt officiel ou le paquet npm ecc-universal, les copies non officielles pouvant contenir un logiciel malveillant.",
+        "texte": "The plan becomes a document to approve before the first line, TDD requires a failing test before implementation, and hooks add checks that no longer depend on the prompt. These hooks run shell commands on your machine: install ECC only from the official repository or the npm package ecc-universal, since unofficial copies may contain malware.",
         "passages": [
           "Plans become editable artifacts before implementation starts",
           "TDD becomes a gated RED -> GREEN -> REFACTOR workflow with evidence",
@@ -13444,7 +14632,7 @@ window.DONNEES_MAQUETTE = {
         ]
       },
       "exemple_usage": {
-        "texte": "Pour une nouvelle fonctionnalité, selon le dépôt : /ecc:plan avec la demande, validation du plan, puis tdd-workflow fait écrire un test qui échoue avant d'implémenter. Suivent une relecture en contexte neuf et une vérification du build, du lint, des types et des tests.",
+        "texte": "For a new feature, depending on the repository: /ecc:plan with the request, plan approval, then tdd-workflow has a failing test written before implementing. Then comes a review in a fresh context and a check of the build, lint, types and tests.",
         "passages": [
           "/ecc:plan \"Add usage-based billing alerts\" -> confirm or edit the plan -> activate tdd-workflow -> capture RED evidence before implementation",
           "implement until GREEN -> review from fresh context -> fix findings with regression tests -> verify build, lint, types, and tests"
@@ -13453,14 +14641,14 @@ window.DONNEES_MAQUETTE = {
       "demarrage": {
         "etapes": [
           {
-            "texte": "Lancer npx ecc-universal@2.2.3 setup (Node.js 18 ou plus requis)",
+            "texte": "Run npx ecc-universal@2.2.3 setup (Node.js 18 or later required)",
             "passages": [
               "Claude Code plugin setup, updates, scope changes, and hook-profile changes: `bash npx ecc-universal@2.2.3 setup `",
               "The universal package requires Node.js 18 or newer."
             ]
           },
           {
-            "texte": "Choix de la portée et du profil de hooks ; on peut relancer pour les changer",
+            "texte": "Choose the scope and hook profile; you can rerun to change them",
             "passages": [
               "For a typical personal setup, choose Global user, choose Standard hooks, and confirm.",
               "Rerun the same command whenever you want to update ECC, change scope, or change its hook profile."
@@ -13476,7 +14664,7 @@ window.DONNEES_MAQUETTE = {
       },
       "compatibilites": [
         {
-          "texte": "Assistant d'installation pour le plugin Claude Code : Git et Claude Code 2.1 ou plus requis",
+          "texte": "Setup wizard for the Claude Code plugin: Git and Claude Code 2.1 or later required",
           "passages": [
             "This setup wizard currently configures the Claude Code plugin",
             "requires Git and Claude Code 2.1 or newer on PATH."
@@ -13485,7 +14673,7 @@ window.DONNEES_MAQUETTE = {
       ],
       "limites": [
         {
-          "texte": "Les hooks peuvent lancer des commandes shell et les serveurs MCP détenir des identifiants : à traiter comme du code exécutable, et à installer uniquement depuis les sources officielles.",
+          "texte": "Hooks can run shell commands and MCP servers can hold credentials: treat them as executable code, and install only from official sources.",
           "passages": [
             "Hooks can run shell commands, MCP servers can hold credentials",
             "Treat all three as executable configuration.",
@@ -13496,20 +14684,20 @@ window.DONNEES_MAQUETTE = {
       "licence_locale": null,
       "reperes": [
         {
-          "texte": "Relecture par un agent au contexte neuf",
+          "texte": "Review by an agent in a fresh context",
           "passages": [
             "A fresh-context reviewer looks for regressions and blind spots"
           ]
         },
         {
-          "texte": "AgentShield, paquet à part, audite la configuration de l'agent",
+          "texte": "AgentShield audits the agent's own setup",
           "passages": [
             "AgentShield scans the harness itself as an attack surface",
             "these commands require an already installed, reviewed AgentShield binary from ecc-agentshield"
           ]
         },
         {
-          "texte": "Les sessions peuvent devenir instincts et skills réutilisables",
+          "texte": "Sessions can become instincts and reusable skills",
           "passages": [
             "Sessions are distilled into summaries, instincts, and reusable skills"
           ]
@@ -13519,7 +14707,7 @@ window.DONNEES_MAQUETTE = {
         "libelle": "Voir le dépôt",
         "url": "https://github.com/affaan-m/ECC",
         "aria_label": "Voir le dépôt affaan-m/ECC sur GitHub (nouvel onglet)",
-        "verifie_le": "2026-11-02T18:45:40.179Z",
+        "verifie_le": "2026-11-03T07:15:22.376Z",
         "motif": "capture_recente"
       },
       "etat_depot": {
@@ -13539,7 +14727,7 @@ window.DONNEES_MAQUETTE = {
       },
       "visuel": {
         "src": "medias/montages/ressources/ecc.jpg",
-        "alt": "ECC installe une méthode de travail dans votre agent de code, au lieu de la redire à chaque prompt. Étape 1 : Lancer npx ecc-universal@2.2.3 setup (Node.js 18 ou plus requis). Étape 2 : Choix de la portée et du profil de hooks ; on peut relancer pour les changer",
+        "alt": "ECC installs a working method into your coding agent, instead of restating it in every prompt. Étape 1 : Run npx ecc-universal@2.2.3 setup (Node.js 18 or later required). Étape 2 : Choose the scope and hook profile; you can rerun to change them",
         "gabarit": "etapes",
         "mention": "Illustration — ne prouve pas le fonctionnement"
       },
@@ -13560,19 +14748,19 @@ window.DONNEES_MAQUETTE = {
         }
       ],
       "decouverte_via": "Ressource ajoutée par l'utilisateur le 2026-11-02, hors du fil X d'origine",
-      "importe_le": "2026-11-02T18:45:35.166Z"
+      "importe_le": "2026-11-03T07:15:18.913Z"
     },
     {
-      "post_id": 8,
-      "revision_id": 47,
-      "slug": "obsidian-skills",
-      "nom": "Obsidian Skills",
-      "compte": "repo",
+      "post_id": 17,
+      "revision_id": 159,
+      "slug": "stop-slop",
+      "nom": "stop-slop",
+      "compte": "nodi",
       "statut": "en_attente",
       "etiquette": "pas encore publié",
       "planning": {
-        "jour": "2026-11-03",
-        "rang": 1,
+        "jour": "2026-11-04",
+        "rang": 5,
         "etat": "prevue",
         "utilise_reserve": false,
         "motif": null
@@ -13585,74 +14773,66 @@ window.DONNEES_MAQUETTE = {
       },
       "mention": "Analyse IA à partir des sources — non testé par la plateforme",
       "accroche": {
-        "texte": "Obsidian Skills apprend à votre agent les formats d'Obsidian et son CLI",
+        "texte": "stop-slop tracks down AI writing tics in your texts and makes them disappear",
         "passages": [
-          "Teach your agent to use Obsidian CLI and open formats including Markdown, Bases, JSON Canvas.",
-          "any skills-compatible agent, including Claude Code, Codex, and Open Code"
+          "A skill for removing AI tells from prose.",
+          "This skill teaches Claude (or any LLM) to catch and remove them."
         ]
       },
       "description": {
-        "texte": "Votre agent écrit des notes avec wikilinks, callouts et propriétés, monte des Bases avec vues, filtres et formules, et construit des canevas JSON Canvas, directement dans votre coffre. Ça marche avec Claude Code, Codex et OpenCode.",
+        "texte": "Predictable formulas, stock constructions, mechanical rhythm: stop-slop teaches Claude, or any LLM, to spot them and remove them.",
         "passages": [
-          "Create and edit Obsidian Flavored Markdown (.md) with wikilinks, embeds, callouts, properties, and other Obsidian-specific syntax",
-          "Create and edit Obsidian Bases (.base) with views, filters, formulas, and summaries",
-          "Create and edit JSON Canvas files (.canvas) with nodes, edges, groups, and connections",
-          "any skills-compatible agent, including Claude Code, Codex, and Open Code",
-          "OpenCode auto-discovers all SKILL.md files under ~/.opencode/skills/."
+          "AI writing has patterns. Predictable phrases, structures, rhythms.",
+          "This skill teaches Claude (or any LLM) to catch and remove them."
         ]
       },
       "interet": {
-        "texte": "Deux skills sortent du cadre des notes : defuddle réduit une page web à un Markdown propre pour économiser des tokens, knap génère des fichiers en série depuis du JSON ou du CSV. Le dépôt suit la spécification Agent Skills, donc les mêmes skills servent à tous vos agents compatibles.",
+        "texte": "The rules are firm: no corporate jargon, no adverbs, no passive voice, no binary oppositions, no em dash. Each family of tics has its own reference file, loaded only when needed.",
         "passages": [
-          "Extract clean markdown from web pages using Defuddle, removing clutter to save tokens",
-          "Render Markdown templates from JSON or CSV data using Knap, including batch file generation",
-          "These skills follow the Agent Skills specification so they can be used by any skills-compatible agent"
+          "Banned phrases - Throat-clearing openers, emphasis crutches, business jargon, all adverbs, vague declaratives, meta-commentary.",
+          "Structural clichés - Binary contrasts, negative listings, dramatic fragmentation, rhetorical setups, false agency, narrator-from-a-distance voice, passive voice.",
+          "Sentence-level rules - No Wh- sentence starters, no em dashes, no staccato fragmentation, no lazy extremes, active voice required.",
+          "Reference files load on demand.",
+          "phrases.md # Phrases to remove",
+          "structures.md # Structural patterns to avoid"
         ]
       },
       "exemple_usage": {
-        "texte": "Récupérer un article avec defuddle, puis le ranger dans le coffre en note avec propriétés et wikilinks.",
+        "texte": "A post written with Claude that sounds too AI: run it through stop-slop before publishing.",
         "passages": [
-          "Extract clean markdown from web pages using Defuddle, removing clutter to save tokens",
-          "Create and edit Obsidian Flavored Markdown (.md) with wikilinks, embeds, callouts, properties"
+          "This skill teaches Claude (or any LLM) to catch and remove them."
         ]
       },
       "demarrage": {
         "etapes": [
           {
-            "texte": "Dans Claude Code : /plugin marketplace add kepano/obsidian-skills",
+            "texte": "Claude Code: add the folder as a skill",
             "passages": [
-              "/plugin marketplace add kepano/obsidian-skills /plugin install obsidian@obsidian-skills",
-              "any skills-compatible agent, including Claude Code, Codex, and Open Code"
+              "Claude Code: Add this folder as a skill."
             ]
           },
           {
-            "texte": "Puis /plugin install obsidian@obsidian-skills",
+            "texte": "API: include SKILL.md in the system prompt",
             "passages": [
-              "/plugin marketplace add kepano/obsidian-skills /plugin install obsidian@obsidian-skills"
-            ]
-          },
-          {
-            "texte": "Ou avec npx : npx skills add https://github.com/kepano/obsidian-skills",
-            "passages": [
-              "npx skills add https://github.com/kepano/obsidian-skills",
-              "Instead of ssh, if you prefer to use https"
+              "API calls: Include SKILL.md in your system prompt."
             ]
           }
         ],
-        "commande": "npx skills add https://github.com/kepano/obsidian-skills",
+        "commande": null,
         "passages": [
-          "npx skills add https://github.com/kepano/obsidian-skills",
-          "Instead of ssh, if you prefer to use https"
+          "Claude Code: Add this folder as a skill.",
+          "API calls: Include SKILL.md in your system prompt. Reference files load on demand."
         ],
         "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
       },
       "compatibilites": [
         {
-          "texte": "Claude Code, Codex, OpenCode et tout agent compatible Agent Skills.",
+          "texte": "Claude Code, Claude projects, custom instructions or API calls.",
           "passages": [
-            "These skills follow the Agent Skills specification so they can be used by any skills-compatible agent",
-            "any skills-compatible agent, including Claude Code, Codex, and Open Code",
-            "OpenCode auto-discovers all SKILL.md files under ~/.opencode/skills/."
+            "Claude Code: Add this folder as a skill.",
+            "Claude Projects: Upload SKILL.md and reference files to project knowledge.",
+            "Custom instructions: Copy core rules from SKILL.md.",
+            "API calls: Include SKILL.md in your system prompt."
           ]
         }
       ],
@@ -13660,41 +14840,44 @@ window.DONNEES_MAQUETTE = {
       "licence_locale": null,
       "reperes": [
         {
-          "texte": "Pilote le coffre via la CLI, plugins et thèmes compris",
+          "texte": "Rated 1-10 per dimension; below 35/50, revise",
           "passages": [
-            "Interact with Obsidian vaults via the Obsidian CLI including plugin and theme development"
+            "Rate 1-10 on each dimension:",
+            "Below 35/50: revise."
           ]
         },
         {
-          "texte": "Sous OpenCode, aucun fichier de config à modifier",
+          "texte": "Before/after examples provided with the rules",
           "passages": [
-            "OpenCode auto-discovers all SKILL.md files under ~/.opencode/skills/.",
-            "No changes to opencode.json or any config file are needed."
+            "examples.md # Before/after transformations"
           ]
         },
         {
-          "texte": "Installable à la main dans le dossier .claude du coffre",
+          "texte": "Claude Code, Claude projects, custom instructions or API",
           "passages": [
-            "Add the contents of this repo to a /.claude folder in the root of your Obsidian vault"
+            "Claude Code: Add this folder as a skill.",
+            "Claude Projects: Upload SKILL.md and reference files to project knowledge.",
+            "Custom instructions: Copy core rules from SKILL.md.",
+            "API calls: Include SKILL.md in your system prompt."
           ]
         }
       ],
       "bouton": {
         "libelle": "Voir le dépôt",
-        "url": "https://github.com/kepano/obsidian-skills",
-        "aria_label": "Voir le dépôt kepano/obsidian-skills sur GitHub (nouvel onglet)",
-        "verifie_le": "2026-11-02T18:45:40.150Z",
+        "url": "https://github.com/hardikpandya/stop-slop",
+        "aria_label": "Voir le dépôt hardikpandya/stop-slop sur GitHub (nouvel onglet)",
+        "verifie_le": "2026-11-03T07:15:22.382Z",
         "motif": "capture_recente"
       },
       "etat_depot": {
-        "full_name": "kepano/obsidian-skills",
-        "html_url": "https://github.com/kepano/obsidian-skills",
-        "etoiles": 50608,
-        "etoiles_au": "2026-11-02T12:15:46.936Z",
-        "cree_le": "2026-01-02T21:45:11Z",
-        "dernier_push": "2026-09-15T14:43:57Z",
-        "jours_sans_push": 47,
-        "inactif": false,
+        "full_name": "hardikpandya/stop-slop",
+        "html_url": "https://github.com/hardikpandya/stop-slop",
+        "etoiles": 18542,
+        "etoiles_au": "2026-11-02T12:15:54.354Z",
+        "cree_le": "2026-01-11T12:00:59Z",
+        "dernier_push": "2026-03-17T18:50:39Z",
+        "jours_sans_push": 229,
+        "inactif": true,
         "licence": "MIT",
         "archive": false,
         "fork": false,
@@ -13702,387 +14885,41 @@ window.DONNEES_MAQUETTE = {
         "date_ajout_skill": null
       },
       "visuel": {
-        "src": "medias/montages/ressources/obsidian-skills.jpg",
-        "alt": "Obsidian Skills apprend à votre agent les formats d'Obsidian et son CLI. Étape 1 : Dans Claude Code : /plugin marketplace add kepano/obsidian-skills. Étape 2 : Puis /plugin install obsidian@obsidian-skills. Étape 3 : Ou avec npx : npx skills add https://github.com/kepano/obsidian-skills",
+        "src": "medias/montages/ressources/stop-slop.jpg",
+        "alt": "stop-slop tracks down AI writing tics in your texts and makes them disappear. Étape 1 : Claude Code: add the folder as a skill. Étape 2 : API: include SKILL.md in the system prompt",
         "gabarit": "etapes",
         "mention": "Illustration — ne prouve pas le fonctionnement"
       },
       "captures": [
         {
           "document": "depot",
-          "snapshot_id": 451,
-          "capture_le": "2026-11-02T12:15:46.936Z",
-          "url": "https://github.com/kepano/obsidian-skills",
+          "snapshot_id": 473,
+          "capture_le": "2026-11-02T12:15:54.354Z",
+          "url": "https://github.com/hardikpandya/stop-slop",
           "mode": "live"
         },
         {
           "document": "fichier:README.md",
-          "snapshot_id": 452,
-          "capture_le": "2026-11-02T12:15:46.936Z",
-          "url": "https://github.com/kepano/obsidian-skills/blob/main/README.md",
+          "snapshot_id": 474,
+          "capture_le": "2026-11-02T12:15:54.354Z",
+          "url": "https://github.com/hardikpandya/stop-slop/blob/main/README.md",
           "mode": "live"
         }
       ],
       "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
-      "importe_le": "2026-11-02T18:45:35.166Z"
-    },
-    {
-      "post_id": 9,
-      "revision_id": 48,
-      "slug": "marketingskills",
-      "nom": "Marketing Skills",
-      "compte": "repo",
-      "statut": "en_attente",
-      "etiquette": "pas encore publié",
-      "planning": {
-        "jour": "2026-11-03",
-        "rang": 2,
-        "etat": "prevue",
-        "utilise_reserve": false,
-        "motif": null
-      },
-      "statut_sortie": "ressource_existante",
-      "badge": "Ressource existante",
-      "origine": {
-        "code": "claude_code_developpement",
-        "texte": "Rédigé pendant le développement par Claude Code, assistant de programmation, pas par l'agent du site ; vérifié par les contrôles du code"
-      },
-      "mention": "Analyse IA à partir des sources — non testé par la plateforme",
-      "accroche": {
-        "texte": "Marketing Skills : CRO, copywriting, SEO et séquences d’e-mails pris en charge par votre agent de code",
-        "passages": [
-          "Marketing skills for Claude Code and AI agents.",
-          "CRO, copywriting, SEO, analytics, and growth engineering.",
-          "create or optimize an email sequence"
-        ]
-      },
-      "description": {
-        "texte": "La collection de Corey Haines pour le marketing. Votre agent repère la tâche en cours, page à faire convertir, séquence d’e-mails, prix ou campagne Google Ads, et applique la méthode adaptée.",
-        "passages": [
-          "A collection of AI agent skills focused on marketing tasks.",
-          "Built by Corey Haines.",
-          "your agent can recognize when you're working on a marketing task and apply the right frameworks and best practices",
-          "help with conversion optimization, copywriting, SEO, analytics, and growth engineering.",
-          "When the user wants to create or optimize an email sequence, drip campaign",
-          "When the user wants help with pricing decisions, packaging, or monetization strategy.",
-          "When the user wants help with paid advertising campaigns on Google Ads"
-        ]
-      },
-      "interet": {
-        "texte": "Tout repose sur un document produit commun : vous posez une fois produit, public et positionnement avec product-marketing, et chaque skill le relit avant d’agir.",
-        "passages": [
-          "Skills reference each other and build on shared context.",
-          "When the user wants to create or update their product marketing context document",
-          "every other skill checks it first to understand your product, audience, and positioning before doing anything"
-        ]
-      },
-      "exemple_usage": {
-        "texte": "Demandez d’optimiser une landing page pour la conversion : l’agent s’appuie sur le skill cro.",
-        "passages": [
-          "Once installed, just ask your agent to help with marketing tasks",
-          "Help me optimize this landing page for conversions",
-          "Uses cro skill"
-        ]
-      },
-      "demarrage": {
-        "etapes": [
-          {
-            "texte": "npx skills add coreyhaines31/marketingskills",
-            "passages": [
-              "Use npx skills to install skills directly",
-              "npx skills add coreyhaines31/marketingskills"
-            ]
-          },
-          {
-            "texte": "Lancé depuis Claude Code : ajouter -a claude-code, sinon il ne les lit pas",
-            "passages": [
-              "If you run the command from inside an agent session (e.g., asking Claude Code to install the skills for you)",
-              "may only install to the universal .agents/skills/ directory, which Claude Code does not read",
-              "npx skills add coreyhaines31/marketingskills -a claude-code"
-            ]
-          },
-          {
-            "texte": "Remplir product-marketing, puis confier ses tâches à l’agent",
-            "passages": [
-              "When the user wants to create or update their product marketing context document",
-              "Once installed, just ask your agent to help with marketing tasks"
-            ]
-          }
-        ],
-        "commande": "npx skills add coreyhaines31/marketingskills",
-        "passages": [
-          "Use npx skills to install skills directly",
-          "When the user wants to create or update their product marketing context document",
-          "Once installed, just ask your agent to help with marketing tasks"
-        ],
-        "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
-      },
-      "compatibilites": [
-        {
-          "texte": "Claude Code, Codex, Cursor, Windsurf et tout agent compatible Agent Skills.",
-          "passages": [
-            "Works with Claude Code, OpenAI Codex, Cursor, Windsurf, and any agent that supports the Agent Skills spec."
-          ]
-        }
-      ],
-      "limites": [],
-      "licence_locale": null,
-      "reperes": [
-        {
-          "texte": "Sous licence MIT, réutilisable librement",
-          "passages": [
-            "MIT - Use these however you want."
-          ]
-        },
-        {
-          "texte": "Pour Claude Code, Codex, Cursor et Windsurf",
-          "passages": [
-            "Works with Claude Code, OpenAI Codex, Cursor, Windsurf"
-          ]
-        },
-        {
-          "texte": "Aussi : tests A/B, churn, pipeline commercial",
-          "passages": [
-            "ab-testing - Experiment design",
-            "churn-prevention - Cancel flows, save offers, dunning, payment recovery",
-            "revops - Lead lifecycle, scoring, routing, pipeline management"
-          ]
-        }
-      ],
-      "bouton": {
-        "libelle": "Voir le dépôt",
-        "url": "https://github.com/coreyhaines31/marketingskills",
-        "aria_label": "Voir le dépôt coreyhaines31/marketingskills sur GitHub (nouvel onglet)",
-        "verifie_le": "2026-11-02T18:45:40.154Z",
-        "motif": "capture_recente"
-      },
-      "etat_depot": {
-        "full_name": "coreyhaines31/marketingskills",
-        "html_url": "https://github.com/coreyhaines31/marketingskills",
-        "etoiles": 57957,
-        "etoiles_au": "2026-11-02T12:15:47.595Z",
-        "cree_le": "2026-01-15T19:45:23Z",
-        "dernier_push": "2026-10-31T00:53:07Z",
-        "jours_sans_push": 2,
-        "inactif": false,
-        "licence": "MIT",
-        "archive": false,
-        "fork": false,
-        "parent": null,
-        "date_ajout_skill": null
-      },
-      "visuel": {
-        "src": "medias/montages/ressources/marketingskills.jpg",
-        "alt": "Marketing Skills : CRO, copywriting, SEO et séquences d’e-mails pris en charge par votre agent de code. Étape 1 : npx skills add coreyhaines31/marketingskills. Étape 2 : Lancé depuis Claude Code : ajouter -a claude-code, sinon il ne les lit pas. Étape 3 : Remplir product-marketing, puis confier ses tâches à l’agent",
-        "gabarit": "etapes",
-        "mention": "Illustration — ne prouve pas le fonctionnement"
-      },
-      "captures": [
-        {
-          "document": "depot",
-          "snapshot_id": 453,
-          "capture_le": "2026-11-02T12:15:47.595Z",
-          "url": "https://github.com/coreyhaines31/marketingskills",
-          "mode": "live"
-        },
-        {
-          "document": "fichier:README.md",
-          "snapshot_id": 454,
-          "capture_le": "2026-11-02T12:15:47.595Z",
-          "url": "https://github.com/coreyhaines31/marketingskills/blob/main/README.md",
-          "mode": "live"
-        }
-      ],
-      "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
-      "importe_le": "2026-11-02T18:45:35.166Z"
-    },
-    {
-      "post_id": 15,
-      "revision_id": 50,
-      "slug": "humanizer",
-      "nom": "Humanizer",
-      "compte": "repo",
-      "statut": "en_attente",
-      "etiquette": "pas encore publié",
-      "planning": {
-        "jour": "2026-11-03",
-        "rang": 3,
-        "etat": "prevue",
-        "utilise_reserve": false,
-        "motif": null
-      },
-      "statut_sortie": "ressource_existante",
-      "badge": "Ressource existante",
-      "origine": {
-        "code": "claude_code_developpement",
-        "texte": "Rédigé pendant le développement par Claude Code, assistant de programmation, pas par l'agent du site ; vérifié par les contrôles du code"
-      },
-      "mention": "Analyse IA à partir des sources — non testé par la plateforme",
-      "accroche": {
-        "texte": "Humanizer retire les tics d'écriture IA d'un texte sans toucher à ce qu'il dit",
-        "passages": [
-          "Agent skill that removes signs of AI-generated writing from text",
-          "Humanizer makes AI-written text sound like a person wrote it, without changing what it says."
-        ]
-      },
-      "description": {
-        "texte": "Collez un texte ou donnez le chemin d'un fichier : Humanizer repère les tics d'écriture IA, du plus flagrant au plus discret, puis réécrit la prose. Sur un fichier, il ne touche qu'au texte : code, données et frontmatter restent en place.",
-        "passages": [
-          "Humanizer makes AI-written text sound like a person wrote it, without changing what it says.",
-          "To rewrite a file, give Humanizer its path",
-          "Humanizer marks every tell it finds, strongest first.",
-          "Point it at a file and it changes only the prose, leaving code, data, frontmatter, and link targets alone."
-        ]
-      },
-      "interet": {
-        "texte": "Il n'invente rien : s'il manque un nom, un chiffre ou une date, il pose la question. Sur un texte collé, vous voyez son premier jet, ce qui sonne encore artificiel, puis la version finale. Joignez deux ou trois paragraphes de votre main et il reprend votre rythme, votre vocabulaire et votre ponctuation.",
-        "passages": [
-          "It does not make things up.",
-          "A name, number, date, quote, citation, or other factual detail must come from the source or the writer",
-          "if a sentence needs a detail that is missing, Humanizer asks instead of inventing one",
-          "When you paste text, Humanizer shows its work: the first rewrite, a short critique of anything that still sounds artificial, and the final version.",
-          "If you want the rewrite to sound more like you, include a sample",
-          "paste 2-3 paragraphs of your own writing",
-          "Humanizer follows the sample's rhythm, word choice, punctuation, and deliberate quirks"
-        ]
-      },
-      "exemple_usage": {
-        "texte": "Dans l'exemple du dépôt, une annonce perd son émoji, son « It's not just a feature… » et son « Let that sink in. », puis commence sans détour : « Shared drafts are out today. »",
-        "passages": [
-          "I'm thrilled to announce that shared drafts are finally here! 🚀",
-          "It's not just a feature; it's a whole new way to collaborate.",
-          "It's available today on every plan, completely free. Let that sink in.",
-          "Shared drafts are out today."
-        ]
-      },
-      "demarrage": {
-        "etapes": [
-          {
-            "texte": "Pas avant Claude Code 2.1.142 : /plugin marketplace add blader/humanizer",
-            "passages": [
-              "/plugin marketplace add blader/humanizer /plugin install humanizer@humanizer",
-              "It needs Claude Code 2.1.142 or newer"
-            ]
-          },
-          {
-            "texte": "Puis /plugin install humanizer@humanizer, pas sur une version plus ancienne",
-            "passages": [
-              "/plugin marketplace add blader/humanizer /plugin install humanizer@humanizer"
-            ]
-          },
-          {
-            "texte": "Codex : npx skills add blader/humanizer --global --agent codex",
-            "passages": [
-              "npx skills add blader/humanizer --global --agent codex"
-            ]
-          },
-          {
-            "texte": "Puis /humanizer et le texte ; pour un fichier, son chemin, sans commande",
-            "passages": [
-              "Once installed, the skill answers to /humanizer.",
-              "To rewrite a file, give Humanizer its path",
-              "Humanize the prose in docs/launch-post.md"
-            ]
-          }
-        ],
-        "commande": "/plugin marketplace add blader/humanizer\n/plugin install humanizer@humanizer",
-        "passages": [
-          "/plugin marketplace add blader/humanizer /plugin install humanizer@humanizer",
-          "The plugin answers to /humanizer:humanizer.",
-          "It needs Claude Code 2.1.142 or newer"
-        ],
-        "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
-      },
-      "compatibilites": [
-        {
-          "texte": "Selon le dépôt : Claude Code, Codex et les agents gérés par Skills CLI, dont Gemini CLI, GitHub Copilot et Windsurf.",
-          "passages": [
-            "it works in Claude Code, Codex, and any other agent that supports skills",
-            "This installs Humanizer for every agent the Skills CLI supports, including Gemini CLI, GitHub Copilot, and Windsurf."
-          ]
-        }
-      ],
-      "limites": [],
-      "licence_locale": null,
-      "reperes": [
-        {
-          "texte": "26 motifs issus du guide de Wikipedia, selon le dépôt",
-          "passages": [
-            "Humanizer checks for 26 patterns in all.",
-            "It is built on Wikipedia's Signs of AI writing, the guide Wikipedia editors use to catch AI-generated text"
-          ]
-        },
-        {
-          "texte": "Ne cherche pas à tromper les détecteurs d'IA",
-          "passages": [
-            "Getting past AI detectors is not a goal, and detectors still flag most of its output."
-          ]
-        },
-        {
-          "texte": "Claude Code, Codex et d'autres agents, selon le dépôt",
-          "passages": [
-            "it works in Claude Code, Codex, and any other agent that supports skills"
-          ]
-        }
-      ],
-      "bouton": {
-        "libelle": "Voir le dépôt",
-        "url": "https://github.com/blader/humanizer",
-        "aria_label": "Voir le dépôt blader/humanizer sur GitHub (nouvel onglet)",
-        "verifie_le": "2026-11-02T18:45:40.163Z",
-        "motif": "capture_recente"
-      },
-      "etat_depot": {
-        "full_name": "blader/humanizer",
-        "html_url": "https://github.com/blader/humanizer",
-        "etoiles": 63799,
-        "etoiles_au": "2026-11-02T12:15:52.912Z",
-        "cree_le": "2026-01-18T05:30:15Z",
-        "dernier_push": "2026-10-28T07:17:33Z",
-        "jours_sans_push": 5,
-        "inactif": false,
-        "licence": "MIT",
-        "archive": false,
-        "fork": false,
-        "parent": null,
-        "date_ajout_skill": null
-      },
-      "visuel": {
-        "src": "medias/montages/ressources/humanizer.jpg",
-        "alt": "Humanizer retire les tics d'écriture IA d'un texte sans toucher à ce qu'il dit. Étape 1 : Pas avant Claude Code 2.1.142 : /plugin marketplace add blader/humanizer. Étape 2 : Puis /plugin install humanizer@humanizer, pas sur une version plus ancienne. Étape 3 : Codex : npx skills add blader/humanizer --global --agent codex. Étape 4 : Puis /humanizer et le texte ; pour un fichier, son chemin, sans commande",
-        "gabarit": "etapes",
-        "mention": "Illustration — ne prouve pas le fonctionnement"
-      },
-      "captures": [
-        {
-          "document": "depot",
-          "snapshot_id": 469,
-          "capture_le": "2026-11-02T12:15:52.912Z",
-          "url": "https://github.com/blader/humanizer",
-          "mode": "live"
-        },
-        {
-          "document": "fichier:README.md",
-          "snapshot_id": 470,
-          "capture_le": "2026-11-02T12:15:52.912Z",
-          "url": "https://github.com/blader/humanizer/blob/main/README.md",
-          "mode": "live"
-        }
-      ],
-      "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
-      "importe_le": "2026-11-02T18:45:35.166Z"
+      "importe_le": "2026-11-03T07:15:18.913Z"
     },
     {
       "post_id": 18,
-      "revision_id": 51,
+      "revision_id": 149,
       "slug": "improve-codebase-architecture",
       "nom": "improve-codebase-architecture (Matt Pocock)",
-      "compte": "repo",
+      "compte": "pyxo",
       "statut": "en_attente",
       "etiquette": "pas encore publié",
       "planning": {
-        "jour": "2026-11-03",
-        "rang": 4,
+        "jour": "2026-11-04",
+        "rang": 6,
         "etat": "prevue",
         "utilise_reserve": false,
         "motif": null
@@ -14095,14 +14932,14 @@ window.DONNEES_MAQUETTE = {
       },
       "mention": "Analyse IA à partir des sources — non testé par la plateforme",
       "accroche": {
-        "texte": "improve-codebase-architecture repère les modules à approfondir pour un code plus testable",
+        "texte": "improve-codebase-architecture spots the modules to deepen for more testable code",
         "passages": [
           "Surface architectural friction and propose deepening opportunities: refactors that turn shallow modules into deep ones.",
           "The aim is testability and AI-navigability."
         ]
       },
       "description": {
-        "texte": "Le skill de Matt Pocock part des fichiers qui reviennent le plus dans l'historique des commits et y cherche les modules superficiels, ceux dont l'interface est presque aussi complexe que l'implémentation. Il propose de les approfondir : plus de comportement derrière une interface simple, un code plus facile à tester et à parcourir pour l’IA.",
+        "texte": "Matt Pocock's skill starts from the files that recur most in commit history and looks there for shallow modules, those whose interface is almost as complex as the implementation. It suggests deepening them: more behavior behind a simple interface, code that is easier to test and to navigate for AI.",
         "passages": [
           "walk back a good stretch of the commit history (git log --oneline) to find the codebase's hot spots, the files and areas that keep coming up",
           "Where are modules shallow, with an interface nearly as complex as the implementation?",
@@ -14111,7 +14948,7 @@ window.DONNEES_MAQUETTE = {
         ]
       },
       "interet": {
-        "texte": "Les pistes arrivent dans un rapport HTML : pour chacune, le problème, la solution, un schéma avant / après et un niveau de recommandation. Vous en choisissez une, et l'agent la creuse avec vous avant de proposer la moindre interface. Les décisions déjà consignées dans vos ADR ne sont pas remises en cause.",
+        "texte": "The suggestions arrive in an HTML report: for each one, the problem, the solution, a before/after diagram and a recommendation level. You pick one, and the agent digs into it with you before proposing any interface. Decisions already recorded in your ADRs are not called into question.",
         "passages": [
           "present them as a visual HTML report",
           "Files: which files/modules are involved Problem: why the current architecture is causing friction Solution: plain English description of what would change",
@@ -14123,7 +14960,7 @@ window.DONNEES_MAQUETTE = {
         ]
       },
       "exemple_usage": {
-        "texte": "L'auteur conseille de le lancer tous les quelques jours. Sur un vieux code, il trouve de vraies pistes sans tout démêler à votre place.",
+        "texte": "The author recommends running it every few days. On old code, it finds real leads without untangling everything for you.",
         "passages": [
           "I recommend running it on your codebase once every few days.",
           "on a genuinely old codebase it will find real candidates, but it won't untangle the mud for you."
@@ -14132,20 +14969,20 @@ window.DONNEES_MAQUETTE = {
       "demarrage": {
         "etapes": [
           {
-            "texte": "Installer : claude plugin install mattpocock-skills@claude-plugins-official",
+            "texte": "Install: claude plugin install mattpocock-skills@claude-plugins-official",
             "passages": [
               "claude plugin install mattpocock-skills@claude-plugins-official",
               "I see with Claude Code, Codex, and other coding agents"
             ]
           },
           {
-            "texte": "Puis /setup-matt-pocock-skills, une fois par dépôt",
+            "texte": "Then /setup-matt-pocock-skills, once per repository",
             "passages": [
               "Run once per repo before using the other engineering skills."
             ]
           },
           {
-            "texte": "Le skill ne se lance que si vous tapez /improve-codebase-architecture",
+            "texte": "The skill only runs if you type /improve-codebase-architecture",
             "passages": [
               "User-invoked skills are reachable only when you type them"
             ]
@@ -14160,7 +14997,7 @@ window.DONNEES_MAQUETTE = {
       },
       "compatibilites": [
         {
-          "texte": "Claude Code, Codex, GitHub Copilot et Gemini CLI.",
+          "texte": "Claude Code, Codex, GitHub Copilot and Gemini CLI.",
           "passages": [
             "I see with Claude Code, Codex, and other coding agents",
             "<strong>GitHub Copilot</strong> (CLI and VS Code)",
@@ -14172,19 +15009,19 @@ window.DONNEES_MAQUETTE = {
       "licence_locale": null,
       "reperes": [
         {
-          "texte": "Rapport écrit dans le dossier temporaire, hors du dépôt",
+          "texte": "Report written to the temporary folder, outside the repository",
           "passages": [
             "Write a self-contained HTML file to the OS temp directory so nothing lands in the repo."
           ]
         },
         {
-          "texte": "Un test de suppression pour débusquer les modules creux",
+          "texte": "A deletion test to flush out hollow modules",
           "passages": [
             "Apply the deletion test to anything you suspect is shallow"
           ]
         },
         {
-          "texte": "Une piste écartée pour une vraie raison peut devenir un ADR",
+          "texte": "A lead set aside for a real reason can become an ADR",
           "passages": [
             "Want me to record this as an ADR so future architecture reviews don't re-suggest it?"
           ]
@@ -14194,7 +15031,7 @@ window.DONNEES_MAQUETTE = {
         "libelle": "Voir le dépôt",
         "url": "https://github.com/mattpocock/skills/tree/main/skills/engineering/improve-codebase-architecture",
         "aria_label": "Voir le dépôt mattpocock/skills sur GitHub (nouvel onglet)",
-        "verifie_le": "2026-11-02T18:45:40.167Z",
+        "verifie_le": "2026-11-03T07:14:55.372Z",
         "motif": "capture_recente"
       },
       "etat_depot": {
@@ -14214,7 +15051,7 @@ window.DONNEES_MAQUETTE = {
       },
       "visuel": {
         "src": "medias/montages/ressources/improve-codebase-architecture.jpg",
-        "alt": "improve-codebase-architecture repère les modules à approfondir pour un code plus testable. Étape 1 : Installer : claude plugin install mattpocock-skills@claude-plugins-official. Étape 2 : Puis /setup-matt-pocock-skills, une fois par dépôt. Étape 3 : Le skill ne se lance que si vous tapez /improve-codebase-architecture",
+        "alt": "improve-codebase-architecture spots the modules to deepen for more testable code. Étape 1 : Install: claude plugin install mattpocock-skills@claude-plugins-official. Étape 2 : Then /setup-matt-pocock-skills, once per repository. Étape 3 : The skill only runs if you type /improve-codebase-architecture",
         "gabarit": "etapes",
         "mention": "Illustration — ne prouve pas le fonctionnement"
       },
@@ -14249,19 +15086,19 @@ window.DONNEES_MAQUETTE = {
         }
       ],
       "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
-      "importe_le": "2026-11-02T18:45:35.166Z"
+      "importe_le": "2026-11-03T07:14:49.047Z"
     },
     {
       "post_id": 19,
-      "revision_id": 52,
+      "revision_id": 160,
       "slug": "skill-creator",
       "nom": "skill-creator",
-      "compte": "repo",
+      "compte": "radar",
       "statut": "en_attente",
       "etiquette": "pas encore publié",
       "planning": {
-        "jour": "2026-11-03",
-        "rang": 5,
+        "jour": "2026-11-04",
+        "rang": 7,
         "etat": "prevue",
         "utilise_reserve": false,
         "motif": null
@@ -14274,14 +15111,14 @@ window.DONNEES_MAQUETTE = {
       },
       "mention": "Analyse IA à partir des sources — non testé par la plateforme",
       "accroche": {
-        "texte": "skill-creator : le skill d’Anthropic qui écrit, teste et affine vos propres skills",
+        "texte": "skill-creator: Anthropic's skill that writes, tests, and refines your own skills",
         "passages": [
           "This repository contains Anthropic's implementation of skills for Claude",
           "A skill for creating new skills and iteratively improving them."
         ]
       },
       "description": {
-        "texte": "Décrivez ce que vous voulez automatiser : skill-creator cadre le besoin, rédige un premier jet, le teste sur des demandes réalistes et vous fait relire les résultats. Il peut aussi reprendre un skill existant pour l’améliorer.",
+        "texte": "Describe what you want to automate: skill-creator frames the need, drafts a first version, tests it on realistic requests, and has you review the results. It can also take an existing skill and improve it.",
         "passages": [
           "A skill for creating new skills and iteratively improving them.",
           "Create a few test prompts and run claude-with-access-to-the-skill on them",
@@ -14290,7 +15127,7 @@ window.DONNEES_MAQUETTE = {
         ]
       },
       "interet": {
-        "texte": "Chaque test tourne avec et sans le skill, ou contre son ancienne version. Une page de revue rassemble les réponses à annoter et un comparatif chiffré : taux de réussite, durée, tokens. Il retravaille aussi la description pour que le skill se déclenche au bon moment.",
+        "texte": "Each test runs with and without the skill, or against its previous version. A review page gathers the responses to annotate and a quantified comparison: success rate, duration, tokens. It also reworks the description so the skill triggers at the right time.",
         "passages": [
           "For each test case, spawn two subagents in the same turn — one with the skill, one without.",
           "Improving an existing skill: the old version.",
@@ -14300,7 +15137,7 @@ window.DONNEES_MAQUETTE = {
         ]
       },
       "exemple_usage": {
-        "texte": "Vous avez rodé une méthode avec Claude ? Dites « turn this into a skill » : il peut reprendre les étapes de la conversation, vous poser quelques questions, rédiger le SKILL.md et proposer deux ou trois demandes de test.",
+        "texte": "Have you honed a method with Claude? Say \"turn this into a skill\": it can pick up the steps from the conversation, ask you a few questions, write the SKILL.md, and suggest two or three test requests.",
         "passages": [
           "(e.g., they say \"turn this into a skill\")",
           "extract answers from the conversation history first — the tools used, the sequence of steps, corrections the user made, input/output formats observed.",
@@ -14312,20 +15149,20 @@ window.DONNEES_MAQUETTE = {
       "demarrage": {
         "etapes": [
           {
-            "texte": "Ajoutez le dépôt comme catalogue de plugins dans Claude Code.",
+            "texte": "Add the repository as a plugin catalog in Claude Code.",
             "passages": [
               "You can register this repository as a Claude Code Plugin marketplace by running the following command in Claude Code"
             ]
           },
           {
-            "texte": "Installez example-skills : /plugin install example-skills@anthropic-agent-skills",
+            "texte": "Install example-skills: /plugin install example-skills@anthropic-agent-skills",
             "passages": [
               "/plugin install example-skills@anthropic-agent-skills",
               "\"./skills/mcp-builder\", \"./skills/skill-creator\", \"./skills/slack-gif-creator\""
             ]
           },
           {
-            "texte": "Ensuite, nommez simplement le skill dans votre demande.",
+            "texte": "Then simply name the skill in your request.",
             "passages": [
               "After installing the plugin, you can use the skill by just mentioning it."
             ]
@@ -14339,7 +15176,7 @@ window.DONNEES_MAQUETTE = {
       },
       "compatibilites": [
         {
-          "texte": "Version complète dans Claude Code ; dans Claude.ai, une version allégée, sans sous-agents ni comparatif chiffré.",
+          "texte": "Full version in Claude Code; in Claude.ai, a lighter version, without sub-agents or quantified comparison.",
           "passages": [
             "You can register this repository as a Claude Code Plugin marketplace",
             "because Claude.ai doesn't have subagents, some mechanics change.",
@@ -14349,33 +15186,33 @@ window.DONNEES_MAQUETTE = {
       ],
       "limites": [
         {
-          "texte": "Chaque test tourne deux fois, avec et sans le skill : prévoyez le double d’appels au modèle.",
+          "texte": "Each test runs twice, with and without the skill: plan for double the model calls.",
           "passages": [
             "For each test case, spawn two subagents in the same turn — one with the skill, one without."
           ]
         }
       ],
       "licence_locale": {
-        "texte": "Le dossier du skill a sa propre licence : Apache 2.0.",
+        "texte": "The skill's folder has its own license: Apache 2.0.",
         "passages": [
           "Apache License Version 2.0, January 2004"
         ]
       },
       "reperes": [
         {
-          "texte": "Un skill pour créer et améliorer d'autres skills",
+          "texte": "A skill for creating and improving other skills",
           "passages": [
             "A skill for creating new skills and iteratively improving them."
           ]
         },
         {
-          "texte": "Chaque test lancé avec et sans le skill",
+          "texte": "A/B runs: one subagent with, one without",
           "passages": [
             "For each test case, spawn two subagents in the same turn — one with the skill, one without."
           ]
         },
         {
-          "texte": "Une description qui aide Claude à choisir le skill au bon moment",
+          "texte": "A description that helps Claude pick the skill at the right time",
           "passages": [
             "optimize a skill's description for better triggering accuracy",
             "Skills appear in Claude's available_skills list with their name + description"
@@ -14386,7 +15223,7 @@ window.DONNEES_MAQUETTE = {
         "libelle": "Voir le dépôt",
         "url": "https://github.com/anthropics/skills/tree/main/skills/skill-creator",
         "aria_label": "Voir le dépôt anthropics/skills sur GitHub (nouvel onglet)",
-        "verifie_le": "2026-11-02T18:45:40.172Z",
+        "verifie_le": "2026-11-03T07:15:22.389Z",
         "motif": "capture_recente"
       },
       "etat_depot": {
@@ -14406,7 +15243,7 @@ window.DONNEES_MAQUETTE = {
       },
       "visuel": {
         "src": "medias/montages/ressources/skill-creator.jpg",
-        "alt": "skill-creator : le skill d’Anthropic qui écrit, teste et affine vos propres skills. Étape 1 : Ajoutez le dépôt comme catalogue de plugins dans Claude Code.. Étape 2 : Installez example-skills : /plugin install example-skills@anthropic-agent-skills. Étape 3 : Ensuite, nommez simplement le skill dans votre demande.",
+        "alt": "skill-creator: Anthropic's skill that writes, tests, and refines your own skills. Étape 1 : Add the repository as a plugin catalog in Claude Code.. Étape 2 : Install example-skills: /plugin install example-skills@anthropic-agent-skills. Étape 3 : Then simply name the skill in your request.",
         "gabarit": "etapes",
         "mention": "Illustration — ne prouve pas le fonctionnement"
       },
@@ -14455,188 +15292,15 @@ window.DONNEES_MAQUETTE = {
         }
       ],
       "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
-      "importe_le": "2026-11-02T18:45:35.166Z"
-    },
-    {
-      "post_id": 20,
-      "revision_id": 53,
-      "slug": "claudeception",
-      "nom": "Claudeception",
-      "compte": "repo",
-      "statut": "en_attente",
-      "etiquette": "pas encore publié",
-      "planning": {
-        "jour": "2026-11-03",
-        "rang": 6,
-        "etat": "prevue",
-        "utilise_reserve": false,
-        "motif": null
-      },
-      "statut_sortie": "ressource_existante",
-      "badge": "Ressource existante",
-      "origine": {
-        "code": "claude_code_developpement",
-        "texte": "Rédigé pendant le développement par Claude Code, assistant de programmation, pas par l'agent du site ; vérifié par les contrôles du code"
-      },
-      "mention": "Analyse IA à partir des sources — non testé par la plateforme",
-      "accroche": {
-        "texte": "Claudeception fait de chaque solution durement trouvée par Claude Code un skill rechargé tout seul",
-        "passages": [
-          "When Claude Code discovers something non-obvious (a debugging technique, a workaround, some project-specific pattern), it saves that knowledge as a new skill.",
-          "Next time a similar problem comes up, the skill gets loaded automatically."
-        ]
-      },
-      "description": {
-        "texte": "Une heure sur une erreur obscure, l’agent finit par trouver, la session se ferme, et la fois suivante tout recommence. Avec Claudeception, la technique de débogage, le contournement ou la particularité du projet découverts en route deviennent un skill, chargé automatiquement dès qu’un problème semblable revient.",
-        "passages": [
-          "You spend an hour debugging some obscure error, the agent figures it out, session ends. Next time you hit the same issue? Another hour.",
-          "When Claude Code discovers something non-obvious (a debugging technique, a workaround, some project-specific pattern), it saves that knowledge as a new skill.",
-          "Next time a similar problem comes up, the skill gets loaded automatically."
-        ]
-      },
-      "interet": {
-        "texte": "Il trie : seul ce qui a demandé une vraie recherche, resservira, a un déclencheur net et a fonctionné devient un skill. Et la description est écrite pour être retrouvée : l’erreur exacte, pas « problèmes de base de données ».",
-        "passages": [
-          "The skill is picky about what it extracts.",
-          "It only extracts knowledge that required actual discovery (not just reading docs), will help with future tasks, has clear trigger conditions, and has been verified to work.",
-          "it writes a new skill with a description optimized for future retrieval",
-          "\"Helps with database problems\" won't match anything useful."
-        ]
-      },
-      "exemple_usage": {
-        "texte": "Exemple du dépôt : une PrismaClientKnownRequestError réglée (trop de connexions en serverless) peut devenir un skill dont la description reprend l’erreur exacte. Quand elle réapparaît, l’agent le retrouve.",
-        "passages": [
-          "Fix for PrismaClientKnownRequestError: Too many database connections in serverless environments (Vercel, AWS Lambda).",
-          "\"Fix for PrismaClientKnownRequestError in serverless\" will match when someone hits that error."
-        ]
-      },
-      "demarrage": {
-        "etapes": [
-          {
-            "texte": "Cloner le dépôt dans ~/.claude/skills/claudeception.",
-            "passages": [
-              "User-level (recommended) `bash git clone https://github.com/blader/Claudeception.git ~/.claude/skills/claudeception"
-            ]
-          },
-          {
-            "texte": "Optionnel : le hook, ajouté à settings.json, fait évaluer chaque session",
-            "passages": [
-              "a hook ensures it evaluates every session for extractable knowledge",
-              "If you already have a settings.json, merge the hooks configuration into it.",
-              "This achieves higher activation rates than relying on semantic description matching alone."
-            ]
-          },
-          {
-            "texte": "Après un débogage : /claudeception, sans skill si rien n’est à garder",
-            "passages": [
-              "Trigger a learning retrospective",
-              "Just completed debugging and discovered a non-obvious solution",
-              "Not every task produces a skill."
-            ]
-          }
-        ],
-        "commande": "git clone https://github.com/blader/Claudeception.git ~/.claude/skills/claudeception",
-        "passages": [
-          "git clone https://github.com/blader/Claudeception.git ~/.claude/skills/claudeception"
-        ],
-        "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
-      },
-      "compatibilites": [
-        {
-          "texte": "Claude Code, via son système de skills natif.",
-          "passages": [
-            "Claude Code has a native skills system."
-          ]
-        }
-      ],
-      "limites": [
-        {
-          "texte": "C’est un fork, sans push depuis plusieurs mois au moment de la capture.",
-          "passages": [
-            "Contributions welcome. Fork, make changes, submit a PR."
-          ]
-        }
-      ],
-      "licence_locale": null,
-      "reperes": [
-        {
-          "texte": "Rétrospective à la demande, sans skill forcé",
-          "passages": [
-            "Trigger a learning retrospective",
-            "Or explicitly request skill extraction",
-            "Not every task produces a skill."
-          ]
-        },
-        {
-          "texte": "Skills écrits en markdown, avec frontmatter YAML",
-          "passages": [
-            "Extracted skills are markdown files with YAML frontmatter"
-          ]
-        },
-        {
-          "texte": "Inspiré de travaux académiques, selon le dépôt",
-          "passages": [
-            "The idea comes from academic work on skill libraries for AI agents."
-          ]
-        }
-      ],
-      "bouton": {
-        "libelle": "Voir le dépôt",
-        "url": "https://github.com/blader/Claudeception",
-        "aria_label": "Voir le dépôt blader/Claudeception sur GitHub (nouvel onglet)",
-        "verifie_le": "2026-11-02T18:46:57.584Z",
-        "motif": "capture_recente"
-      },
-      "etat_depot": {
-        "full_name": "blader/Claudeception",
-        "html_url": "https://github.com/blader/Claudeception",
-        "etoiles": 2442,
-        "etoiles_au": "2026-11-02T12:15:56.649Z",
-        "cree_le": "2026-01-17T19:03:02Z",
-        "dernier_push": "2026-02-21T05:10:15Z",
-        "jours_sans_push": 254,
-        "inactif": true,
-        "licence": "MIT",
-        "archive": false,
-        "fork": true,
-        "parent": {
-          "full_name": "AlexMikhalev/claude-code-continuous-learning-skill",
-          "html_url": "https://github.com/AlexMikhalev/claude-code-continuous-learning-skill"
-        },
-        "date_ajout_skill": null
-      },
-      "visuel": {
-        "src": "medias/montages/ressources/claudeception.jpg",
-        "alt": "Claudeception fait de chaque solution durement trouvée par Claude Code un skill rechargé tout seul. Étape 1 : Cloner le dépôt dans ~/.claude/skills/claudeception.. Étape 2 : Optionnel : le hook, ajouté à settings.json, fait évaluer chaque session. Étape 3 : Après un débogage : /claudeception, sans skill si rien n’est à garder",
-        "gabarit": "etapes",
-        "mention": "Illustration — ne prouve pas le fonctionnement"
-      },
-      "captures": [
-        {
-          "document": "depot",
-          "snapshot_id": 480,
-          "capture_le": "2026-11-02T12:15:56.649Z",
-          "url": "https://github.com/blader/Claudeception",
-          "mode": "live"
-        },
-        {
-          "document": "fichier:README.md",
-          "snapshot_id": 481,
-          "capture_le": "2026-11-02T12:15:56.649Z",
-          "url": "https://github.com/blader/Claudeception/blob/main/README.md",
-          "mode": "live"
-        }
-      ],
-      "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
-      "importe_le": "2026-11-02T18:46:54.597Z"
+      "importe_le": "2026-11-03T07:15:18.913Z"
     }
   ],
   "ressources_non_planifiees": [],
   "recherche": [
     {
       "postId": 1,
-      "revisionId": 42,
-      "jour": "2026-11-02",
+      "revisionId": 151,
+      "jour": "2026-11-03",
       "motsCles": [
         {
           "champ": "nom",
@@ -14754,20 +15418,20 @@ window.DONNEES_MAQUETTE = {
         }
       ],
       "textes": [
-        "frontend-design pousse Claude vers des interfaces qui ne ressemblent pas à toutes les autres",
-        "Le skill d'Anthropic donne à Claude une vraie direction artistique pour créer ou refaire une interface. Palette, typographie et mise en page sont choisies pour le brief, pas tirées des réglages par défaut qu'on voit partout.",
-        "Claude écrit d'abord un court plan de design, le relit face au brief, et ne code qu'ensuite. Le skill nomme aussi les tics actuels des designs générés par IA : fond crème avec accent terre cuite, cartes arrondies toutes identiques. Claude les évite quand le brief laisse le choix, et les suit s'il les demande.",
-        "Les choix visuels partent du sujet : un jouet pour filles de 8 à 11 ans n'aura pas l'esthétique d'un tableau de bord pour analystes financiers.",
-        "Dans Claude Code, ajouter le dépôt comme marketplace",
-        "Installer example-skills : /plugin install example-skills@anthropic-agent-skills",
-        "Puis citer frontend-design dans la demande",
-        "Claude Code, et déjà inclus dans les offres payantes de Claude.ai selon le dépôt."
+        "frontend-design pushes Claude toward interfaces that don't look like everyone else's",
+        "Anthropic's skill gives Claude a real artistic direction for creating or redoing an interface. Palette, typography and layout are chosen for the brief, not pulled from the default settings you see everywhere.",
+        "Claude first writes a short design plan, rereads it against the brief, and only then codes. The skill also names the current clichés of AI-generated designs: cream background with terracotta accent, rounded cards all identical. Claude avoids them when the brief leaves the choice open, and follows them if the brief asks for them.",
+        "Visual choices start from the subject: a toy for girls aged 8 to 11 won't have the aesthetic of a dashboard for financial analysts.",
+        "In Claude Code, add the repository as a marketplace",
+        "Install example-skills: /plugin install example-skills@anthropic-agent-skills",
+        "Then mention frontend-design in the request",
+        "Claude Code, and already included in Claude.ai's paid plans according to the repository."
       ]
     },
     {
       "postId": 2,
-      "revisionId": 22,
-      "jour": "2026-11-02",
+      "revisionId": 132,
+      "jour": "2026-11-03",
       "motsCles": [
         {
           "champ": "nom",
@@ -14903,584 +15567,17 @@ window.DONNEES_MAQUETTE = {
         }
       ],
       "textes": [
-        "agent-browser, de Vercel Labs : un vrai navigateur que votre agent pilote en ligne de commande",
-        "Une CLI native en Rust : l'agent ouvre une page, lit le texte, clique, remplit un champ et prend une capture. Selon le dépôt, le skill fonctionne avec Claude Code, Codex, Cursor ou Gemini CLI, et l'outil tourne aussi en serveur MCP.",
-        "snapshot renvoie l'arbre d'accessibilité avec une référence par élément (@e1, @e2) : l'agent clique ou remplit par référence, sans requêter le DOM à nouveau. Attention, rien n'est restreint par défaut : domaines autorisés et politique d'actions sont à activer vous-même.",
-        "Demandez à votre agent de tester le parcours de connexion avec agent-browser : il lit --help, relève les champs du formulaire et les remplit.",
-        "npm install -g agent-browser, puis agent-browser install pour récupérer Chrome, uniquement la première fois."
-      ]
-    },
-    {
-      "postId": 3,
-      "revisionId": 23,
-      "jour": "2026-11-02",
-      "motsCles": [
-        {
-          "champ": "nom",
-          "terme": "React Best Practices (Vercel)",
-          "raison": null,
-          "passage": null
-        },
-        {
-          "champ": "categorie",
-          "terme": "MCP et skills",
-          "raison": null,
-          "passage": null
-        },
-        {
-          "champ": "usage",
-          "terme": "optimisation des performances",
-          "raison": null,
-          "passage": "React and Next.js performance optimization guidelines from Vercel Engineering."
-        },
-        {
-          "champ": "usage",
-          "terme": "revue de code",
-          "raison": null,
-          "passage": "Reviewing code for performance issues"
-        },
-        {
-          "champ": "usage",
-          "terme": "refactorisation",
-          "raison": null,
-          "passage": "Refactoring existing React/Next.js code"
-        },
-        {
-          "champ": "usage",
-          "terme": "taille du bundle",
-          "raison": null,
-          "passage": "Optimizing bundle size or load times"
-        },
-        {
-          "champ": "usage",
-          "terme": "chargement des données",
-          "raison": null,
-          "passage": "Implementing data fetching (client or server-side)"
-        },
-        {
-          "champ": "usage",
-          "terme": "temps de chargement",
-          "raison": null,
-          "passage": "Optimizing bundle size or load times"
-        },
-        {
-          "champ": "technologie",
-          "terme": "React",
-          "raison": null,
-          "passage": "Comprehensive performance optimization guide for React and Next.js applications, maintained by Vercel."
-        },
-        {
-          "champ": "technologie",
-          "terme": "Next.js",
-          "raison": null,
-          "passage": "Comprehensive performance optimization guide for React and Next.js applications, maintained by Vercel."
-        },
-        {
-          "champ": "technologie",
-          "terme": "JavaScript",
-          "raison": null,
-          "passage": "JavaScript Performance | LOW-MEDIUM | js-"
-        },
-        {
-          "champ": "technologie",
-          "terme": "RSC",
-          "raison": null,
-          "passage": "Avoid module-level mutable request state in RSC/SSR"
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "vercel-react-best-practices",
-          "raison": "Nom technique du skill React Best Practices, donné par le champ name de son fichier SKILL.md.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "performance web",
-          "raison": "Les règles visent la rapidité des applications React, côté navigateur comme côté serveur.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "requêtes en cascade",
-          "raison": "Traduit waterfalls : des attentes successives qui ralentissent une application React.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "chargement différé",
-          "raison": "Des règles sur la taille du bundle conseillent de charger les composants lourds à la demande (next/dynamic).",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "rendus inutiles",
-          "raison": "Une catégorie de règles React aide à éviter les re-rendus superflus des composants.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "mémoïsation",
-          "raison": "Des règles React conseillent d'isoler les calculs coûteux dans des composants mémoïsés, et d'éviter la mémoïsation pour les valeurs simples.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "SWR",
-          "raison": "Une seule règle cite la bibliothèque SWR, pour dédoublonner les requêtes lors du chargement des données côté client.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "Suspense",
-          "raison": "Une seule règle React cite Suspense, pour afficher le contenu au fur et à mesure de son chargement (streaming).",
-          "passage": null
-        }
-      ],
-      "textes": [
-        "React Best Practices : les 70 règles de performance React et Next.js de Vercel, appliquées par votre agent",
-        "Vercel Engineering y condense ses règles de performance React et Next.js. L'agent s'en sert dès qu'il écrit, relit ou refactorise un composant, une page Next.js ou du chargement de données.",
-        "Les règles sont classées par impact : l'agent s'attaque d'abord aux requêtes en cascade et au poids du bundle, avant les re-rendus ou les micro-optimisations JavaScript.",
-        "Une page Next.js enchaîne deux requêtes indépendantes ? Demandez à l'agent de l'optimiser : la règle async-parallel les lance ensemble avec Promise.all().",
-        "La commande installe toute la collection de Vercel, pas seulement ce skill : npx skills add vercel-labs/agent-skills"
-      ]
-    },
-    {
-      "postId": 4,
-      "revisionId": 43,
-      "jour": "2026-11-02",
-      "motsCles": [
-        {
-          "champ": "nom",
-          "terme": "Skills de documents docx, xlsx, pptx, pdf",
-          "raison": null,
-          "passage": null
-        },
-        {
-          "champ": "categorie",
-          "terme": "MCP et skills",
-          "raison": null,
-          "passage": null
-        },
-        {
-          "champ": "usage",
-          "terme": "créer des documents Word",
-          "raison": null,
-          "passage": "create, read, edit, or manipulate Word documents (.docx files)"
-        },
-        {
-          "champ": "usage",
-          "terme": "tableurs et formules",
-          "raison": null,
-          "passage": "open, read, edit, or fix an existing .xlsx, .xlsm, .xltx, .csv, or .tsv file (e.g., adding columns, computing formulas, formatting, charting, cleaning messy data)"
-        },
-        {
-          "champ": "usage",
-          "terme": "créer des présentations",
-          "raison": null,
-          "passage": "creating slide decks, pitch decks, or presentations"
-        },
-        {
-          "champ": "usage",
-          "terme": "fusionner des PDF",
-          "raison": null,
-          "passage": "combining or merging multiple PDFs into one, splitting PDFs apart"
-        },
-        {
-          "champ": "usage",
-          "terme": "remplir des formulaires PDF",
-          "raison": null,
-          "passage": "filling PDF forms"
-        },
-        {
-          "champ": "usage",
-          "terme": "suivi des modifications",
-          "raison": null,
-          "passage": "working with tracked changes or comments"
-        },
-        {
-          "champ": "technologie",
-          "terme": "Python",
-          "raison": null,
-          "passage": "This guide covers essential PDF processing operations using Python libraries and command-line tools."
-        },
-        {
-          "champ": "technologie",
-          "terme": "JavaScript",
-          "raison": null,
-          "passage": "Write a docx (npm) script"
-        },
-        {
-          "champ": "technologie",
-          "terme": "LibreOffice",
-          "raison": null,
-          "passage": "LibreOffice computes every formula, the file is rewritten in place"
-        },
-        {
-          "champ": "technologie",
-          "terme": "openpyxl",
-          "raison": null,
-          "passage": "openpyxl writes formulas as strings with no cached values."
-        },
-        {
-          "champ": "technologie",
-          "terme": "pptxgenjs",
-          "raison": null,
-          "passage": "Write a pptxgenjs script"
-        },
-        {
-          "champ": "technologie",
-          "terme": "pypdf",
-          "raison": null,
-          "passage": "from pypdf import PdfReader, PdfWriter"
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "bureautique",
-          "raison": "ces skills traitent les formats de bureautique docx, xlsx, pptx et pdf",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "Excel",
-          "raison": "le skill xlsx produit des classeurs .xlsx, le format des tableurs Excel",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "PowerPoint",
-          "raison": "le skill pptx crée et modifie des présentations .pptx destinées à PowerPoint",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "diaporama",
-          "raison": "autre nom d'une présentation, que le skill pptx sait créer et modifier",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "rapport",
-          "raison": "le skill docx couvre aussi les rapports, mémos et lettres au format Word",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "OCR",
-          "raison": "le skill pdf décrit l'OCR pour rendre cherchables les PDF numérisés",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "Claude Code",
-          "raison": "les skills s'installent dans Claude Code par la marketplace de plugins",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "Agent Skills",
-          "raison": "le dépôt renvoie au standard Agent Skills, dont ces skills suivent le format (SKILL.md) ; leur licence les limite toutefois aux services d'Anthropic",
-          "passage": null
-        }
-      ],
-      "textes": [
-        "Skills de documents d'Anthropic : Claude crée et modifie vos Word, tableurs, présentations et PDF",
-        "Les quatre skills qui font tourner les fonctions de documents de Claude, un par format : docx, xlsx, pptx et pdf. Rapport Word, classeur avec formules, présentation, formulaire PDF : Claude s'appuie dessus pour livrer un fichier propre. Selon Anthropic, une référence de skills complexes utilisés en production.",
-        "Chaque skill choisit sa méthode selon la tâche, recense les pièges connus des bibliothèques et impose de contrôler le fichier produit. Pour un tableur, LibreOffice recalcule toutes les formules, et rien ne part tant qu'il reste une erreur.",
-        "Une fois le plugin document-skills installé, il suffit de demander à Claude Code d'utiliser le skill PDF pour extraire les champs de formulaire d'un fichier.",
-        "Ajouter le catalogue : /plugin marketplace add anthropics/skills",
-        "Installer : /plugin install document-skills@anthropic-agent-skills",
-        "Code consultable mais pas libre : la licence réserve ces skills aux services d'Anthropic et interdit de les copier, modifier ou redistribuer."
-      ]
-    },
-    {
-      "postId": 5,
-      "revisionId": 44,
-      "jour": "2026-11-02",
-      "motsCles": [
-        {
-          "champ": "nom",
-          "terme": "UI UX Pro Max",
-          "raison": null,
-          "passage": null
-        },
-        {
-          "champ": "categorie",
-          "terme": "MCP et skills",
-          "raison": null,
-          "passage": null
-        },
-        {
-          "champ": "usage",
-          "terme": "design d'interface",
-          "raison": null,
-          "passage": "An AI skill that provides design intelligence for building professional UI/UX across multiple platforms and frameworks."
-        },
-        {
-          "champ": "usage",
-          "terme": "design system",
-          "raison": null,
-          "passage": "Industry-specific design system generation"
-        },
-        {
-          "champ": "usage",
-          "terme": "landing page",
-          "raison": null,
-          "passage": "Build a landing page for my SaaS product"
-        },
-        {
-          "champ": "usage",
-          "terme": "palette de couleurs",
-          "raison": null,
-          "passage": "Industry-specific palettes aligned 1:1 with the 192 product types"
-        },
-        {
-          "champ": "usage",
-          "terme": "association de polices",
-          "raison": null,
-          "passage": "Curated typography combinations with Google Fonts imports"
-        },
-        {
-          "champ": "usage",
-          "terme": "tableau de bord",
-          "raison": null,
-          "passage": "Create a dashboard for healthcare analytics"
-        },
-        {
-          "champ": "technologie",
-          "terme": "React",
-          "raison": null,
-          "passage": "Tech Stacks - React, Next.js, Astro, Vue"
-        },
-        {
-          "champ": "technologie",
-          "terme": "Next.js",
-          "raison": null,
-          "passage": "Tech Stacks - React, Next.js, Astro, Vue"
-        },
-        {
-          "champ": "technologie",
-          "terme": "Vue",
-          "raison": null,
-          "passage": "Tech Stacks - React, Next.js, Astro, Vue"
-        },
-        {
-          "champ": "technologie",
-          "terme": "Tailwind",
-          "raison": null,
-          "passage": "let it default to HTML + Tailwind"
-        },
-        {
-          "champ": "technologie",
-          "terme": "SwiftUI",
-          "raison": null,
-          "passage": "SwiftUI, React Native, Flutter, HTML+Tailwind"
-        },
-        {
-          "champ": "technologie",
-          "terme": "Flutter",
-          "raison": null,
-          "passage": "SwiftUI, React Native, Flutter, HTML+Tailwind"
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "interface utilisateur",
-          "raison": "UI signifie interface utilisateur, le sujet même de UI UX Pro Max.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "expérience utilisateur",
-          "raison": "UX signifie expérience utilisateur ; UI UX Pro Max en donne des règles.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "page d'atterrissage",
-          "raison": "Traduction française de landing page, un usage décrit par le dépôt.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "charte graphique",
-          "raison": "Comme une charte graphique, le design system fixe les couleurs, les polices et le style d'un projet.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "polices d'écriture",
-          "raison": "Les polices d'écriture sont l'objet des associations de polices proposées.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "accessibilité",
-          "raison": "Les règles d'UX de UI UX Pro Max comprennent des règles d'accessibilité, sans la garantir.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "ergonomie",
-          "raison": "En français, l'ergonomie d'interface recouvre une bonne part de l'UX visée par UI UX Pro Max.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "refonte visuelle",
-          "raison": "Le dépôt propose une consigne pour que l'assistant refasse le thème d'une app existante avec UI UX Pro Max.",
-          "passage": null
-        }
-      ],
-      "textes": [
-        "UI UX Pro Max donne à votre agent un design system taillé pour votre produit avant qu'il code l'interface",
-        "Demandez une landing page ou un dashboard : le skill s'active seul, part de votre type de produit et sort la structure de page, le style, les couleurs, la typographie et les effets. Il puise dans 79 styles, 192 types de produits, des palettes et des paires de polices.",
-        "Chaque proposition arrive avec ses anti-patterns et une checklist avant livraison : pas d'emoji en guise d'icônes, cursor-pointer sur tout élément cliquable. Les palettes suivent le secteur, et les dégradés violet-rose « IA » sont proscrits pour une banque.",
-        "Dans l'exemple du dépôt, la landing page d'un spa reçoit un style Soft UI Evolution, du rose pâle et du vert sauge rehaussés d'or, Cormorant Garamond avec Montserrat, sans néon ni animations brusques.",
-        "Dans le projet : npx ui-ux-pro-max-cli init --ai claude (ou cursor, copilot)",
-        "Puis demandez l'interface voulue, le skill prend le relais.",
-        "Une vingtaine d'agents selon le dépôt, dont Claude Code, Cursor, Windsurf, Codex CLI et GitHub Copilot.",
-        "Le cœur est sous licence MIT ; logos, bannières et visuels générés n'y sont pas, ils relèvent d'une offre Premium séparée (uupm.cc)."
-      ]
-    },
-    {
-      "postId": 6,
-      "revisionId": 45,
-      "jour": "2026-11-02",
-      "motsCles": [
-        {
-          "champ": "nom",
-          "terme": "webapp-testing",
-          "raison": null,
-          "passage": null
-        },
-        {
-          "champ": "categorie",
-          "terme": "MCP et skills",
-          "raison": null,
-          "passage": null
-        },
-        {
-          "champ": "usage",
-          "terme": "tests d'applications web",
-          "raison": null,
-          "passage": "testing local web applications using Playwright"
-        },
-        {
-          "champ": "usage",
-          "terme": "tests d'interface",
-          "raison": null,
-          "passage": "Supports verifying frontend functionality"
-        },
-        {
-          "champ": "usage",
-          "terme": "débogage d'interface",
-          "raison": null,
-          "passage": "debugging UI behavior"
-        },
-        {
-          "champ": "usage",
-          "terme": "captures d'écran",
-          "raison": null,
-          "passage": "capturing browser screenshots"
-        },
-        {
-          "champ": "usage",
-          "terme": "journaux du navigateur",
-          "raison": null,
-          "passage": "viewing browser logs"
-        },
-        {
-          "champ": "usage",
-          "terme": "automatisation de navigateur",
-          "raison": null,
-          "passage": "To create an automation script, include only Playwright logic"
-        },
-        {
-          "champ": "technologie",
-          "terme": "Playwright",
-          "raison": null,
-          "passage": "write native Python Playwright scripts"
-        },
-        {
-          "champ": "technologie",
-          "terme": "Python",
-          "raison": null,
-          "passage": "write native Python Playwright scripts"
-        },
-        {
-          "champ": "technologie",
-          "terme": "Chromium",
-          "raison": null,
-          "passage": "Always launch chromium in headless mode"
-        },
-        {
-          "champ": "technologie",
-          "terme": "HTML",
-          "raison": null,
-          "passage": "Read HTML file directly to identify selectors"
-        },
-        {
-          "champ": "technologie",
-          "terme": "DOM",
-          "raison": null,
-          "passage": "Take screenshot or inspect DOM"
-        },
-        {
-          "champ": "technologie",
-          "terme": "Claude Code",
-          "raison": null,
-          "passage": "You can register this repository as a Claude Code Plugin marketplace"
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "tests end-to-end",
-          "raison": "Le skill pilote un vrai navigateur avec Playwright, mais pour des scripts ponctuels, sans suite de tests ni intégration continue.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "navigateur headless",
-          "raison": "Le skill lance Chromium en headless pour ses scripts Playwright.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "sélecteurs CSS",
-          "raison": "Le skill repère les éléments par des sélecteurs, dont les sélecteurs CSS, après inspection du DOM.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "front-end",
-          "raison": "Le skill sert aux tests d'interface du front-end, lancé en local avec le back-end si besoin.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "tests UI",
-          "raison": "Formulation anglaise courante pour les tests d'interface et le débogage d'interface du skill.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "logs console",
-          "raison": "Les logs de la console font partie des journaux du navigateur que le skill peut relever.",
-          "passage": null
-        }
-      ],
-      "textes": [
-        "webapp-testing : Claude teste votre app web locale avec Playwright",
-        "Le skill d'Anthropic écrit des scripts Playwright en Python pour vérifier le front-end, déboguer l'interface, prendre des captures d'écran et lire les logs du navigateur.",
-        "Un helper démarre les serveurs de l'app, back-end et front-end compris, puis lance le test. Claude l'appelle tel quel, sans charger son code dans le contexte. Sur une app dynamique, il attend la fin du chargement, observe la page rendue et en tire ses sélecteurs avant d'agir.",
-        "Vérifier un formulaire sur une app avec back-end et front-end : le helper lance les deux serveurs, la page s'ouvre en headless, le script attend la fin du chargement puis inspecte le DOM.",
-        "Ajouter le catalogue : /plugin marketplace add anthropics/skills",
-        "Installer example-skills : /plugin install example-skills@anthropic-agent-skills",
-        "Mentionner webapp-testing dans sa demande"
+        "agent-browser, from Vercel Labs: a real browser that your agent controls from the command line",
+        "A native Rust CLI: the agent opens a page, reads the text, clicks, fills a field and takes a screenshot. According to the repository, the skill works with Claude Code, Codex, Cursor or Gemini CLI, and the tool also runs as an MCP server.",
+        "snapshot returns the accessibility tree with a reference per element (@e1, @e2): the agent clicks or fills by reference, without querying the DOM again. Note: nothing is restricted by default: allowed domains and an action policy must be enabled by you.",
+        "Ask your agent to test the login flow with agent-browser: it reads --help, picks up the form fields and fills them in.",
+        "npm install -g agent-browser, then agent-browser install to fetch Chrome, only the first time."
       ]
     },
     {
       "postId": 7,
-      "revisionId": 46,
-      "jour": "2026-11-02",
+      "revisionId": 133,
+      "jour": "2026-11-03",
       "motsCles": [
         {
           "champ": "nom",
@@ -15586,24 +15683,24 @@ window.DONNEES_MAQUETTE = {
         }
       ],
       "textes": [
-        "Avec mcp-builder, Claude mène votre serveur MCP de l’étude de l’API jusqu’aux évaluations",
-        "Le skill d’Anthropic pour brancher une API externe sur un serveur MCP, en TypeScript ou en Python avec FastMCP. Claude déroule quatre phases : étude de l’API, implémentation, revue et tests avec MCP Inspector, puis évaluations.",
-        "Tout est pensé pour l’agent qui appellera les outils : noms préfixés et orientés action, descriptions courtes, résultats ciblés et paginables, erreurs qui disent quoi faire ensuite.",
-        "Serveur terminé, le guide fait écrire 10 questions réalistes, sans opération destructrice, pour voir si un LLM s’en sert vraiment bien.",
-        "Dans Claude Code, ajouter le dépôt comme marketplace",
-        "Installer example-skills : /plugin install example-skills@anthropic-agent-skills",
-        "Puis citer mcp-builder dans la demande",
-        "Selon le guide, tout nouveau serveur TypeScript part du SDK v2."
+        "With mcp-builder, Claude takes your MCP server from API study through evaluations",
+        "Anthropic's skill for connecting an external API to an MCP server, in TypeScript or Python with FastMCP. Claude runs four phases: API study, implementation, review and testing with MCP Inspector, then evaluations.",
+        "Everything is designed for the agent that will call the tools: prefixed, action-oriented names, short descriptions, targeted and paginable results, errors that say what to do next.",
+        "Once the server is done, the guide has you write 10 realistic questions, with no destructive operation, to see whether an LLM really uses it well.",
+        "In Claude Code, add the repository as a marketplace",
+        "Install example-skills: /plugin install example-skills@anthropic-agent-skills",
+        "Then mention mcp-builder in the request",
+        "According to the guide, every new TypeScript server starts from SDK v2."
       ]
     },
     {
-      "postId": 10,
-      "revisionId": 30,
-      "jour": "2026-11-02",
+      "postId": 8,
+      "revisionId": 152,
+      "jour": "2026-11-03",
       "motsCles": [
         {
           "champ": "nom",
-          "terme": "Scientific Agent Skills (K-Dense)",
+          "terme": "Obsidian Skills",
           "raison": null,
           "passage": null
         },
@@ -15615,134 +15712,128 @@ window.DONNEES_MAQUETTE = {
         },
         {
           "champ": "usage",
-          "terme": "recherche scientifique",
+          "terme": "piloter un coffre Obsidian",
           "raison": null,
-          "passage": "A collection of 177 scientific and research skills for AI agents, created by K-Dense."
+          "passage": "Interact with Obsidian vaults via the Obsidian CLI including plugin and theme development"
         },
         {
           "champ": "usage",
-          "terme": "analyse génomique",
+          "terme": "édition Markdown",
           "raison": null,
-          "passage": "Bioinformatics & Genomics - Sequence analysis, single-cell RNA-seq, pooled CRISPR screens"
+          "passage": "Create and edit Obsidian Flavored Markdown (.md) with wikilinks, embeds, callouts, properties"
         },
         {
           "champ": "usage",
-          "terme": "découverte de médicaments",
+          "terme": "vues filtrées Obsidian Bases",
           "raison": null,
-          "passage": "Cheminformatics & Drug Discovery - Molecular property prediction, virtual screening, ADMET analysis, molecular docking"
+          "passage": "Create and edit Obsidian Bases (.base) with views, filters, formulas, and summaries"
         },
         {
           "champ": "usage",
-          "terme": "bases de données scientifiques",
+          "terme": "canevas visuel JSON Canvas",
           "raison": null,
-          "passage": "The Database Lookup skill documents 80 databases with public, registered, or licensed access"
+          "passage": "Create and edit JSON Canvas files (.canvas) with nodes, edges, groups, and connections"
         },
         {
           "champ": "usage",
-          "terme": "analyse de données",
+          "terme": "nettoyer une page web",
           "raison": null,
-          "passage": "Data Analysis & Visualization - Statistical analysis, network analysis, time series, publication-quality figures"
+          "passage": "Extract clean markdown from web pages using Defuddle"
         },
         {
           "champ": "usage",
-          "terme": "rédaction scientifique",
+          "terme": "notes Markdown depuis JSON/CSV",
           "raison": null,
-          "passage": "Scientific Communication - Evidence-traceable writing, confidential authorized peer review, literature synthesis"
+          "passage": "Render Markdown templates from JSON or CSV data using Knap, including batch file generation"
         },
         {
           "champ": "technologie",
+          "terme": "Markdown",
+          "raison": null,
+          "passage": "open formats including Markdown, Bases, JSON Canvas"
+        },
+        {
+          "champ": "technologie",
+          "terme": "JSON Canvas",
+          "raison": null,
+          "passage": "Create and edit JSON Canvas files (.canvas)"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Obsidian CLI",
+          "raison": null,
+          "passage": "Interact with Obsidian vaults via the Obsidian CLI"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Claude Code",
+          "raison": null,
+          "passage": "any skills-compatible agent, including Claude Code, Codex, and Open Code"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Codex",
+          "raison": null,
+          "passage": "Copy the skills/ directory into your Codex skills path"
+        },
+        {
+          "champ": "technologie",
+          "terme": "OpenCode",
+          "raison": null,
+          "passage": "OpenCode auto-discovers all SKILL.md files under ~/.opencode/skills/."
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "Claude Skills",
+          "raison": "pour Claude Code, le dépôt renvoie à la documentation officielle des Claude Skills.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
           "terme": "Agent Skills",
-          "raison": null,
-          "passage": "The collection follows the open Agent Skills standard"
-        },
-        {
-          "champ": "technologie",
-          "terme": "Python",
-          "raison": null,
-          "passage": "While the agent can use any Python package or API on its own"
-        },
-        {
-          "champ": "technologie",
-          "terme": "RDKit",
-          "raison": null,
-          "passage": "Explicitly defined, version-aware workflows for RDKit, Scanpy, PyTorch Lightning, scikit-learn"
-        },
-        {
-          "champ": "technologie",
-          "terme": "Scanpy",
-          "raison": null,
-          "passage": "Explicitly defined, version-aware workflows for RDKit, Scanpy, PyTorch Lightning, scikit-learn"
-        },
-        {
-          "champ": "technologie",
-          "terme": "scikit-learn",
-          "raison": null,
-          "passage": "Explicitly defined, version-aware workflows for RDKit, Scanpy, PyTorch Lightning, scikit-learn"
-        },
-        {
-          "champ": "technologie",
-          "terme": "Biopython",
-          "raison": null,
-          "passage": "Multi-database packages such as BioServices, Biopython, and gget add further coverage"
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "Claude Scientific Skills",
-          "raison": "Ancien nom du dépôt scientific-agent-skills, qui a changé de nom pour s'ouvrir à d'autres agents que Claude.",
+          "raison": "Obsidian Skills suit la spécification Agent Skills, un format de skills commun à plusieurs agents.",
           "passage": null
         },
         {
           "champ": "terme_proche",
-          "terme": "bioinformatique",
-          "raison": "Domaine couvert par plusieurs skills d'analyse génomique : séquences, cellules uniques, variants.",
+          "terme": "wikilinks",
+          "raison": "la syntaxe Markdown d'Obsidian comprend les wikilinks, des liens entre fichiers du coffre.",
           "passage": null
         },
         {
           "champ": "terme_proche",
-          "terme": "chémoinformatique",
-          "raison": "Domaine couvert par les skills de découverte de médicaments, avec RDKit notamment.",
+          "terme": "économie de tokens",
+          "raison": "le skill defuddle d'Obsidian Skills retire le superflu des pages web pour économiser des tokens.",
           "passage": null
         },
         {
           "champ": "terme_proche",
-          "terme": "recherche clinique",
-          "raison": "Des skills servent la recherche scientifique sur les essais et les variants, sans diagnostic ni traitement.",
+          "terme": "modèles de fichiers",
+          "raison": "le skill knap remplit des modèles Markdown à partir de données JSON ou CSV.",
           "passage": null
         },
         {
           "champ": "terme_proche",
-          "terme": "visualisation scientifique",
-          "raison": "Plusieurs skills d'analyse de données produisent des figures dignes d'une publication.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "skills pour Claude Code",
-          "raison": "Ces skills au format Agent Skills s'installent notamment dans Claude Code.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "science assistée par IA",
-          "raison": "Scientific Agent Skills met un agent IA au service de la recherche scientifique.",
+          "terme": "base de connaissances Markdown",
+          "raison": "un coffre Obsidian est un dossier de fichiers Markdown que ces skills apprennent à l'agent à créer et modifier.",
           "passage": null
         }
       ],
       "textes": [
-        "Scientific Agent Skills : 177 skills pour faire de la recherche avec Claude Code, Cursor ou Codex",
-        "Biologie, chimie, médecine, physique, analyse de données : chaque skill de K-Dense cale votre agent sur un paquet, une base ou une méthode précise, avec les conventions et les contrôles du domaine.",
-        "Le morceau le plus utile : Database Lookup documente 80 bases (PubChem, ChEMBL, UniProt, ClinicalTrials.gov…), avec les bons endpoints, la pagination et la provenance. Une seule demande suffit ensuite pour enchaîner tout un pipeline.",
-        "Dans l'exemple du dépôt, une seule demande pour classer des inhibiteurs d'EGFR : l'agent interroge ChEMBL, analyse les relations structure-activité avec RDKit, cherche les mécanismes de résistance dans PubMed, puis livre graphiques et rapport.",
-        "Avec GitHub CLI 2.90.0+ : gh skill install, uniquement les skills utiles.",
-        "Les dépendances s'installent à part, selon chaque skill.",
-        "Un skill peut faire exécuter du code arbitraire à votre agent et K-Dense ne garantit pas une revue exhaustive : lisez le SKILL.md avant d'installer.",
-        "Dépôt sous MIT, mais chaque skill a sa licence, qui peut ajouter des conditions."
+        "Obsidian Skills teaches your agent Obsidian's formats and its CLI",
+        "Your agent writes notes with wikilinks, callouts and properties, builds Bases with views, filters and formulas, and constructs JSON Canvas canvases, directly in your vault. It works with Claude Code, Codex and OpenCode.",
+        "Two skills go beyond notes: defuddle reduces a web page to clean Markdown to save tokens, knap generates files in series from JSON or CSV. The repository follows the Agent Skills specification, so the same skills serve all your compatible agents.",
+        "Fetch an article with defuddle, then file it in the vault as a note with properties and wikilinks.",
+        "In Claude Code: /plugin marketplace add kepano/obsidian-skills",
+        "Then /plugin install obsidian@obsidian-skills",
+        "Or with npx: npx skills add https://github.com/kepano/obsidian-skills",
+        "Claude Code, Codex, OpenCode and any skills-compatible agent."
       ]
     },
     {
       "postId": 11,
-      "revisionId": 49,
-      "jour": "2026-11-02",
+      "revisionId": 130,
+      "jour": "2026-11-03",
       "motsCles": [
         {
           "champ": "nom",
@@ -15878,23 +15969,23 @@ window.DONNEES_MAQUETTE = {
         }
       ],
       "textes": [
-        "Superpowers fait cadrer, planifier, tester et relire votre agent de code avant qu'il livre",
-        "Superpowers impose une vraie méthode à votre agent de code. Il ne fonce pas dans le code : il vous demande ce que vous cherchez à faire, vous montre la spec par morceaux lisibles, puis bâtit un plan d'implémentation une fois le design validé. Les skills se déclenchent seuls, sans commande à taper.",
-        "Le plan découpe le travail en tâches de 2 à 5 minutes, avec fichiers, code et vérifications. Le TDD est strict : le code écrit avant son test est supprimé. Entre deux tâches, une revue classe les problèmes par gravité, et un problème critique bloque la suite. Selon l'auteur, l'agent tient ainsi quelques heures en autonomie sans dévier du plan.",
-        "Pour une nouvelle fonctionnalité : brainstorming fait préciser la demande, writing-plans la découpe en petites tâches, puis l'implémentation commence par un test qui échoue, avant le code minimal.",
-        "Dans Claude Code : /plugin install superpowers@claude-plugins-official",
-        "Autres agents : une installation séparée pour chacun, selon le dépôt",
-        "Claude Code, Codex, Cursor, Gemini CLI, GitHub Copilot CLI et une dizaine d'autres."
+        "Superpowers makes your coding agent scope, plan, test, and review before it delivers",
+        "Superpowers imposes a real method on your coding agent. It doesn't rush into the code: it asks what you're trying to do, shows you the spec in readable chunks, then builds an implementation plan once the design is approved. Skills trigger on their own, with no command to type.",
+        "The plan splits the work into 2- to 5-minute tasks, with files, code, and checks. TDD is strict: code written before its test is deleted. Between tasks, a review ranks issues by severity, and a critical issue blocks the next step. According to the author, the agent can thus run autonomously for a few hours without straying from the plan.",
+        "For a new feature: brainstorming pins down the request, writing-plans breaks it into small tasks, then implementation starts with a failing test, before the minimal code.",
+        "In Claude Code: /plugin install superpowers@claude-plugins-official",
+        "Other agents: a separate install for each, depending on the repository",
+        "Claude Code, Codex, Cursor, Gemini CLI, GitHub Copilot CLI and about ten others."
       ]
     },
     {
-      "postId": 12,
-      "revisionId": 32,
-      "jour": "2026-11-02",
+      "postId": 3,
+      "revisionId": 135,
+      "jour": "2026-11-03",
       "motsCles": [
         {
           "champ": "nom",
-          "terme": "find-skills",
+          "terme": "React Best Practices (Vercel)",
           "raison": null,
           "passage": null
         },
@@ -15906,116 +15997,416 @@ window.DONNEES_MAQUETTE = {
         },
         {
           "champ": "usage",
-          "terme": "recherche de skills",
+          "terme": "optimisation des performances",
           "raison": null,
-          "passage": "Search for skills interactively or by keyword"
+          "passage": "React and Next.js performance optimization guidelines from Vercel Engineering."
         },
         {
           "champ": "usage",
-          "terme": "installation de skills",
+          "terme": "revue de code",
           "raison": null,
-          "passage": "Install a skill from GitHub or other sources"
+          "passage": "Reviewing code for performance issues"
         },
         {
           "champ": "usage",
-          "terme": "découverte de skills",
+          "terme": "refactorisation",
           "raison": null,
-          "passage": "This skill helps you discover and install skills from the open agent skills ecosystem."
+          "passage": "Refactoring existing React/Next.js code"
         },
         {
           "champ": "usage",
-          "terme": "extension d'un agent",
+          "terme": "taille du bundle",
           "raison": null,
-          "passage": "Expresses interest in extending agent capabilities"
+          "passage": "Optimizing bundle size or load times"
         },
         {
           "champ": "usage",
-          "terme": "création de skill",
+          "terme": "chargement des données",
           "raison": null,
-          "passage": "Suggest the user could create their own skill with npx skills init"
+          "passage": "Implementing data fetching (client or server-side)"
+        },
+        {
+          "champ": "usage",
+          "terme": "temps de chargement",
+          "raison": null,
+          "passage": "Optimizing bundle size or load times"
         },
         {
           "champ": "technologie",
-          "terme": "npx",
+          "terme": "React",
           "raison": null,
-          "passage": "The Skills CLI (npx skills) is the package manager for the open agent skills ecosystem."
+          "passage": "Comprehensive performance optimization guide for React and Next.js applications, maintained by Vercel."
         },
         {
           "champ": "technologie",
-          "terme": "Node.js",
+          "terme": "Next.js",
           "raison": null,
-          "passage": "Requires Node.js 22.20 or later."
+          "passage": "Comprehensive performance optimization guide for React and Next.js applications, maintained by Vercel."
         },
         {
           "champ": "technologie",
-          "terme": "Claude Code",
+          "terme": "JavaScript",
           "raison": null,
-          "passage": "Supports OpenCode, Claude Code, Codex, Cursor, and 75 more."
+          "passage": "JavaScript Performance | LOW-MEDIUM | js-"
         },
         {
           "champ": "technologie",
-          "terme": "Codex",
+          "terme": "RSC",
           "raison": null,
-          "passage": "Supports OpenCode, Claude Code, Codex, Cursor, and 75 more."
-        },
-        {
-          "champ": "technologie",
-          "terme": "Cursor",
-          "raison": null,
-          "passage": "Supports OpenCode, Claude Code, Codex, Cursor, and 75 more."
-        },
-        {
-          "champ": "technologie",
-          "terme": "OpenCode",
-          "raison": null,
-          "passage": "Supports OpenCode, Claude Code, Codex, Cursor, and 75 more."
+          "passage": "Avoid module-level mutable request state in RSC/SSR"
         },
         {
           "champ": "terme_proche",
-          "terme": "Skills CLI",
-          "raison": "find-skills s'appuie sur l'outil npx skills, que sa fiche appelle Skills CLI et présente comme le gestionnaire de paquets des skills.",
+          "terme": "vercel-react-best-practices",
+          "raison": "Nom technique du skill React Best Practices, donné par le champ name de son fichier SKILL.md.",
           "passage": null
         },
         {
           "champ": "terme_proche",
-          "terme": "skills.sh",
-          "raison": "Annuaire en ligne de skills que find-skills demande de consulter avant toute recherche.",
+          "terme": "performance web",
+          "raison": "Les règles visent la rapidité des applications React, côté navigateur comme côté serveur.",
           "passage": null
         },
         {
           "champ": "terme_proche",
-          "terme": "compétences d'agent",
-          "raison": "Traduction française de agent skills, ce que find-skills recherche et installe.",
+          "terme": "requêtes en cascade",
+          "raison": "Traduit waterfalls : des attentes successives qui ralentissent une application React.",
           "passage": null
         },
         {
           "champ": "terme_proche",
-          "terme": "trouver un skill",
-          "raison": "Traduction de find a skill, la demande qui déclenche find-skills selon sa fiche.",
+          "terme": "chargement différé",
+          "raison": "Des règles sur la taille du bundle conseillent de charger les composants lourds à la demande (next/dynamic).",
           "passage": null
         },
         {
           "champ": "terme_proche",
-          "terme": "assistant de code",
-          "raison": "find-skills étend un assistant de code IA comme Claude Code, Codex ou Cursor.",
+          "terme": "rendus inutiles",
+          "raison": "Une catégorie de règles React aide à éviter les re-rendus superflus des composants.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "mémoïsation",
+          "raison": "Des règles React conseillent d'isoler les calculs coûteux dans des composants mémoïsés, et d'éviter la mémoïsation pour les valeurs simples.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "SWR",
+          "raison": "Une seule règle cite la bibliothèque SWR, pour dédoublonner les requêtes lors du chargement des données côté client.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "Suspense",
+          "raison": "Une seule règle React cite Suspense, pour afficher le contenu au fur et à mesure de son chargement (streaming).",
           "passage": null
         }
       ],
       "textes": [
-        "find-skills : votre agent peut trouver et installer le skill qui lui manque",
-        "Demandez « trouve un skill pour X », ou juste « comment faire X ». L’agent regarde le classement de skills.sh et, s’il n’y trouve pas son bonheur, lance npx skills find. Il revient avec le skill, sa source et la commande d’installation.",
-        "Il ne recommande pas un skill sur un simple résultat de recherche : il vérifie d’abord le nombre d’installations et la source. Et si rien n’existe, il vous propose d’écrire le vôtre avec npx skills init.",
-        "Vous voulez accélérer votre app React : l’agent peut lancer npx skills find react performance et vous proposer un skill avec sa commande d’installation.",
-        "Ajouter find-skills avec npx skills add (Node.js 22.20 ou plus).",
-        "Ensuite, il n’y a plus qu’à demander « trouve un skill pour … ».",
-        "Claude Code, Codex, Cursor, OpenCode et 75 autres agents.",
-        "S’il installe pour vous, c’est en global et sans confirmation (-g -y) : lisez le skill avant d’accepter."
+        "React Best Practices: Vercel's 70 React and Next.js performance rules, applied by your agent",
+        "Vercel Engineering condenses its React and Next.js performance rules there. The agent uses them whenever it writes, reviews or refactors a component, a Next.js page or data loading.",
+        "The rules are ranked by impact: the agent tackles cascading requests and bundle weight first, before re-renders or JavaScript micro-optimizations.",
+        "A Next.js page chains two independent requests? Ask the agent to optimize it: the async-parallel rule runs them together with Promise.all().",
+        "The command installs Vercel's entire collection, not just this skill: npx skills add vercel-labs/agent-skills"
+      ]
+    },
+    {
+      "postId": 4,
+      "revisionId": 153,
+      "jour": "2026-11-03",
+      "motsCles": [
+        {
+          "champ": "nom",
+          "terme": "Skills de documents docx, xlsx, pptx, pdf",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "MCP et skills",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "usage",
+          "terme": "créer des documents Word",
+          "raison": null,
+          "passage": "create, read, edit, or manipulate Word documents (.docx files)"
+        },
+        {
+          "champ": "usage",
+          "terme": "tableurs et formules",
+          "raison": null,
+          "passage": "open, read, edit, or fix an existing .xlsx, .xlsm, .xltx, .csv, or .tsv file (e.g., adding columns, computing formulas, formatting, charting, cleaning messy data)"
+        },
+        {
+          "champ": "usage",
+          "terme": "créer des présentations",
+          "raison": null,
+          "passage": "creating slide decks, pitch decks, or presentations"
+        },
+        {
+          "champ": "usage",
+          "terme": "fusionner des PDF",
+          "raison": null,
+          "passage": "combining or merging multiple PDFs into one, splitting PDFs apart"
+        },
+        {
+          "champ": "usage",
+          "terme": "remplir des formulaires PDF",
+          "raison": null,
+          "passage": "filling PDF forms"
+        },
+        {
+          "champ": "usage",
+          "terme": "suivi des modifications",
+          "raison": null,
+          "passage": "working with tracked changes or comments"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Python",
+          "raison": null,
+          "passage": "This guide covers essential PDF processing operations using Python libraries and command-line tools."
+        },
+        {
+          "champ": "technologie",
+          "terme": "JavaScript",
+          "raison": null,
+          "passage": "Write a docx (npm) script"
+        },
+        {
+          "champ": "technologie",
+          "terme": "LibreOffice",
+          "raison": null,
+          "passage": "LibreOffice computes every formula, the file is rewritten in place"
+        },
+        {
+          "champ": "technologie",
+          "terme": "openpyxl",
+          "raison": null,
+          "passage": "openpyxl writes formulas as strings with no cached values."
+        },
+        {
+          "champ": "technologie",
+          "terme": "pptxgenjs",
+          "raison": null,
+          "passage": "Write a pptxgenjs script"
+        },
+        {
+          "champ": "technologie",
+          "terme": "pypdf",
+          "raison": null,
+          "passage": "from pypdf import PdfReader, PdfWriter"
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "bureautique",
+          "raison": "ces skills traitent les formats de bureautique docx, xlsx, pptx et pdf",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "Excel",
+          "raison": "le skill xlsx produit des classeurs .xlsx, le format des tableurs Excel",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "PowerPoint",
+          "raison": "le skill pptx crée et modifie des présentations .pptx destinées à PowerPoint",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "diaporama",
+          "raison": "autre nom d'une présentation, que le skill pptx sait créer et modifier",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "rapport",
+          "raison": "le skill docx couvre aussi les rapports, mémos et lettres au format Word",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "OCR",
+          "raison": "le skill pdf décrit l'OCR pour rendre cherchables les PDF numérisés",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "Claude Code",
+          "raison": "les skills s'installent dans Claude Code par la marketplace de plugins",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "Agent Skills",
+          "raison": "le dépôt renvoie au standard Agent Skills, dont ces skills suivent le format (SKILL.md) ; leur licence les limite toutefois aux services d'Anthropic",
+          "passage": null
+        }
+      ],
+      "textes": [
+        "Anthropic document skills: Claude creates and edits Word files, spreadsheets, slides and PDF files",
+        "The four skills that power Claude's document functions, one per format: docx, xlsx, pptx and pdf. Word report, spreadsheet with formulas, presentation, PDF form: Claude relies on them to deliver a clean file. According to Anthropic, a reference for complex skills used in production.",
+        "Each skill picks its method based on the task, lists the known library pitfalls and requires checking the produced file. For a spreadsheet, LibreOffice recalculates all formulas, and nothing goes out while an error remains.",
+        "Once the document-skills plugin is installed, just ask Claude Code to use the PDF skill to extract a file's form fields.",
+        "Add the catalog: /plugin marketplace add anthropics/skills",
+        "Install: /plugin install document-skills@anthropic-agent-skills",
+        "Code viewable but not free: the license reserves these skills for Anthropic's services and forbids copying, modifying or redistributing them."
+      ]
+    },
+    {
+      "postId": 10,
+      "revisionId": 137,
+      "jour": "2026-11-03",
+      "motsCles": [
+        {
+          "champ": "nom",
+          "terme": "Scientific Agent Skills (K-Dense)",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "MCP et skills",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "usage",
+          "terme": "recherche scientifique",
+          "raison": null,
+          "passage": "A collection of 177 scientific and research skills for AI agents, created by K-Dense."
+        },
+        {
+          "champ": "usage",
+          "terme": "analyse génomique",
+          "raison": null,
+          "passage": "Bioinformatics & Genomics - Sequence analysis, single-cell RNA-seq, pooled CRISPR screens"
+        },
+        {
+          "champ": "usage",
+          "terme": "découverte de médicaments",
+          "raison": null,
+          "passage": "Cheminformatics & Drug Discovery - Molecular property prediction, virtual screening, ADMET analysis, molecular docking"
+        },
+        {
+          "champ": "usage",
+          "terme": "bases de données scientifiques",
+          "raison": null,
+          "passage": "The Database Lookup skill documents 80 databases with public, registered, or licensed access"
+        },
+        {
+          "champ": "usage",
+          "terme": "analyse de données",
+          "raison": null,
+          "passage": "Data Analysis & Visualization - Statistical analysis, network analysis, time series, publication-quality figures"
+        },
+        {
+          "champ": "usage",
+          "terme": "rédaction scientifique",
+          "raison": null,
+          "passage": "Scientific Communication - Evidence-traceable writing, confidential authorized peer review, literature synthesis"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Agent Skills",
+          "raison": null,
+          "passage": "The collection follows the open Agent Skills standard"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Python",
+          "raison": null,
+          "passage": "While the agent can use any Python package or API on its own"
+        },
+        {
+          "champ": "technologie",
+          "terme": "RDKit",
+          "raison": null,
+          "passage": "Explicitly defined, version-aware workflows for RDKit, Scanpy, PyTorch Lightning, scikit-learn"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Scanpy",
+          "raison": null,
+          "passage": "Explicitly defined, version-aware workflows for RDKit, Scanpy, PyTorch Lightning, scikit-learn"
+        },
+        {
+          "champ": "technologie",
+          "terme": "scikit-learn",
+          "raison": null,
+          "passage": "Explicitly defined, version-aware workflows for RDKit, Scanpy, PyTorch Lightning, scikit-learn"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Biopython",
+          "raison": null,
+          "passage": "Multi-database packages such as BioServices, Biopython, and gget add further coverage"
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "Claude Scientific Skills",
+          "raison": "Ancien nom du dépôt scientific-agent-skills, qui a changé de nom pour s'ouvrir à d'autres agents que Claude.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "bioinformatique",
+          "raison": "Domaine couvert par plusieurs skills d'analyse génomique : séquences, cellules uniques, variants.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "chémoinformatique",
+          "raison": "Domaine couvert par les skills de découverte de médicaments, avec RDKit notamment.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "recherche clinique",
+          "raison": "Des skills servent la recherche scientifique sur les essais et les variants, sans diagnostic ni traitement.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "visualisation scientifique",
+          "raison": "Plusieurs skills d'analyse de données produisent des figures dignes d'une publication.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "skills pour Claude Code",
+          "raison": "Ces skills au format Agent Skills s'installent notamment dans Claude Code.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "science assistée par IA",
+          "raison": "Scientific Agent Skills met un agent IA au service de la recherche scientifique.",
+          "passage": null
+        }
+      ],
+      "textes": [
+        "Scientific Agent Skills: 177 skills for doing research with Claude Code, Cursor or Codex",
+        "Biology, chemistry, medicine, physics, data analysis: each K-Dense skill aligns your agent with a specific package, database or method, including the domain's conventions and checks.",
+        "The most useful piece: Database Lookup documents 80 databases (PubChem, ChEMBL, UniProt, ClinicalTrials.gov…), with the right endpoints, pagination and provenance. A single request is then enough to chain a whole pipeline.",
+        "In the repository example, a single request to classify EGFR inhibitors: the agent queries ChEMBL, analyzes structure-activity relationships with RDKit, looks for resistance mechanisms in PubMed, then delivers charts and a report.",
+        "With GitHub CLI 2.90.0+: gh skill install, only the useful skills.",
+        "Dependencies are installed separately, depending on each skill.",
+        "A skill can make your agent execute arbitrary code and K-Dense does not guarantee an exhaustive review: read SKILL.md before installing.",
+        "Repository under MIT, but each skill has its own license, which may add conditions."
       ]
     },
     {
       "postId": 13,
-      "revisionId": 33,
-      "jour": "2026-11-02",
+      "revisionId": 154,
+      "jour": "2026-11-03",
       "motsCles": [
         {
           "champ": "nom",
@@ -16139,19 +16530,19 @@ window.DONNEES_MAQUETTE = {
         }
       ],
       "textes": [
-        "grill-me : votre agent vous interroge sans relâche sur un plan, jusqu'à ce que tout soit tranché",
-        "Avant de lancer quoi que ce soit, on inverse les rôles : l'agent vous pose des questions précises sur votre plan, votre décision ou votre idée, et creuse chaque branche jusqu'à la trancher. Matt Pocock le destine aux sujets hors code.",
-        "Vous vous alignez avec l'agent avant qu'il se mette au travail, au lieu de découvrir après coup qu'il n'avait pas compris. Pour le code, la variante grill-with-docs mène le même entretien et construit au passage le vocabulaire du projet, avec les décisions difficiles consignées en ADR.",
-        "Un lancement à cadrer, un arbitrage d'équipe à préparer : tapez /grill-me, décrivez le plan, puis répondez jusqu'à ce que plus rien ne reste flou.",
-        "Dans Claude Code, installez le plugin mattpocock-skills.",
-        "Il ne démarre pas seul : tapez /grill-me, puis décrivez votre plan.",
-        "Claude Code, Codex et d'autres agents ; n'importe quel modèle, selon l'auteur."
+        "grill-me: your agent questions you about a plan until every branch is resolved, not before",
+        "Before launching anything, you flip the roles: the agent asks you precise questions about your plan, decision or idea, and digs into every branch until it is settled. Matt Pocock intends it for non-code topics.",
+        "You align with the agent before it starts working, instead of finding out afterward that it misunderstood. For code, the grill-with-docs variant runs the same interview and builds the project vocabulary along the way.",
+        "A launch to scope out, a team trade-off to prepare: type /grill-me, describe the plan, then answer until nothing is left unclear.",
+        "In Claude Code, install the mattpocock-skills plugin.",
+        "It does not start on its own: type /grill-me, then describe your plan.",
+        "Claude Code, Codex and other agents; any model, according to the author."
       ]
     },
     {
       "postId": 14,
-      "revisionId": 34,
-      "jour": "2026-11-02",
+      "revisionId": 139,
+      "jour": "2026-11-03",
       "motsCles": [
         {
           "champ": "nom",
@@ -16281,19 +16672,673 @@ window.DONNEES_MAQUETTE = {
         }
       ],
       "textes": [
-        "claude-mem donne à Claude Code une mémoire qui tient d’une session à l’autre",
-        "Pendant la session, il enregistre ce que fait l’agent, le compresse en résumés et réinjecte le contexte utile dans la suivante. Vous reprenez un projet sans tout réexpliquer.",
-        "Pour retrouver une info, l’agent lit d’abord un index compact, puis ne charge que les notes utiles : environ dix fois moins de tokens, selon les auteurs.",
-        "Dans la doc : chercher « authentication bug » parmi les corrections, puis ne récupérer que deux observations.",
-        "npx claude-mem install ou la place de marché de plugins de Claude Code, puis redémarrez. Pas npm install -g, qui n’installe que la bibliothèque.",
-        "Node.js 20.0.0 ou plus récent.",
-        "Le service claude-mem proposé à l’installation est gratuit 30 jours ; ensuite la mémoire passe sur votre abonnement Anthropic, sauf souscription ou clé OpenRouter ou Gemini."
+        "claude-mem gives Claude Code a memory that persists from one session to the next",
+        "During the session, it records what the agent does, compresses it into summaries, and injects the useful context back into the next one. You pick a project back up without re-explaining everything.",
+        "To find information, the agent first reads a compact index, then loads only the useful notes: about ten times fewer tokens, according to the authors.",
+        "In the docs: search for \"authentication bug\" among the fixes, then retrieve only two observations.",
+        "npx claude-mem install or the Claude Code plugin marketplace, then restart. Not npm install -g, which only installs the library.",
+        "Node.js 20.0.0 or newer.",
+        "The claude-mem service offered at install is free for 30 days; after that, memory runs on your Anthropic subscription, unless you have an OpenRouter or Gemini subscription or key."
+      ]
+    },
+    {
+      "postId": 5,
+      "revisionId": 155,
+      "jour": "2026-11-03",
+      "motsCles": [
+        {
+          "champ": "nom",
+          "terme": "UI UX Pro Max",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "MCP et skills",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "usage",
+          "terme": "design d'interface",
+          "raison": null,
+          "passage": "An AI skill that provides design intelligence for building professional UI/UX across multiple platforms and frameworks."
+        },
+        {
+          "champ": "usage",
+          "terme": "design system",
+          "raison": null,
+          "passage": "Industry-specific design system generation"
+        },
+        {
+          "champ": "usage",
+          "terme": "landing page",
+          "raison": null,
+          "passage": "Build a landing page for my SaaS product"
+        },
+        {
+          "champ": "usage",
+          "terme": "palette de couleurs",
+          "raison": null,
+          "passage": "Industry-specific palettes aligned 1:1 with the 192 product types"
+        },
+        {
+          "champ": "usage",
+          "terme": "association de polices",
+          "raison": null,
+          "passage": "Curated typography combinations with Google Fonts imports"
+        },
+        {
+          "champ": "usage",
+          "terme": "tableau de bord",
+          "raison": null,
+          "passage": "Create a dashboard for healthcare analytics"
+        },
+        {
+          "champ": "technologie",
+          "terme": "React",
+          "raison": null,
+          "passage": "Tech Stacks - React, Next.js, Astro, Vue"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Next.js",
+          "raison": null,
+          "passage": "Tech Stacks - React, Next.js, Astro, Vue"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Vue",
+          "raison": null,
+          "passage": "Tech Stacks - React, Next.js, Astro, Vue"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Tailwind",
+          "raison": null,
+          "passage": "let it default to HTML + Tailwind"
+        },
+        {
+          "champ": "technologie",
+          "terme": "SwiftUI",
+          "raison": null,
+          "passage": "SwiftUI, React Native, Flutter, HTML+Tailwind"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Flutter",
+          "raison": null,
+          "passage": "SwiftUI, React Native, Flutter, HTML+Tailwind"
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "interface utilisateur",
+          "raison": "UI signifie interface utilisateur, le sujet même de UI UX Pro Max.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "expérience utilisateur",
+          "raison": "UX signifie expérience utilisateur ; UI UX Pro Max en donne des règles.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "page d'atterrissage",
+          "raison": "Traduction française de landing page, un usage décrit par le dépôt.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "charte graphique",
+          "raison": "Comme une charte graphique, le design system fixe les couleurs, les polices et le style d'un projet.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "polices d'écriture",
+          "raison": "Les polices d'écriture sont l'objet des associations de polices proposées.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "accessibilité",
+          "raison": "Les règles d'UX de UI UX Pro Max comprennent des règles d'accessibilité, sans la garantir.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "ergonomie",
+          "raison": "En français, l'ergonomie d'interface recouvre une bonne part de l'UX visée par UI UX Pro Max.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "refonte visuelle",
+          "raison": "Le dépôt propose une consigne pour que l'assistant refasse le thème d'une app existante avec UI UX Pro Max.",
+          "passage": null
+        }
+      ],
+      "textes": [
+        "UI UX Pro Max gives your agent a design system tailored to your product before it codes the interface",
+        "Ask for a landing page or a dashboard: the skill activates on its own, starts from your product type and outputs the page structure, style, colors, typography and effects. It draws on 79 styles, 192 product types, palettes and font pairs.",
+        "Each proposal comes with its anti-patterns and a pre-delivery checklist: no emoji as icons, cursor-pointer on every clickable element. Palettes follow the sector, and the purple-pink \"AI\" gradients are banned for a bank.",
+        "In the repository example, a spa landing page gets a Soft UI Evolution style, pale pink and sage green accented with gold, Cormorant Garamond with Montserrat, no neon or abrupt animations.",
+        "In the project: npx ui-ux-pro-max-cli init --ai claude (or cursor, copilot)",
+        "Then ask for the interface you want, the skill takes over.",
+        "About twenty agents depending on the repository, including Claude Code, Cursor, Windsurf, Codex CLI and GitHub Copilot.",
+        "The core is under MIT license; logos, banners and generated visuals are not, they fall under a separate Premium offer (uupm.cc)."
+      ]
+    },
+    {
+      "postId": 6,
+      "revisionId": 141,
+      "jour": "2026-11-03",
+      "motsCles": [
+        {
+          "champ": "nom",
+          "terme": "webapp-testing",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "MCP et skills",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "usage",
+          "terme": "tests d'applications web",
+          "raison": null,
+          "passage": "testing local web applications using Playwright"
+        },
+        {
+          "champ": "usage",
+          "terme": "tests d'interface",
+          "raison": null,
+          "passage": "Supports verifying frontend functionality"
+        },
+        {
+          "champ": "usage",
+          "terme": "débogage d'interface",
+          "raison": null,
+          "passage": "debugging UI behavior"
+        },
+        {
+          "champ": "usage",
+          "terme": "captures d'écran",
+          "raison": null,
+          "passage": "capturing browser screenshots"
+        },
+        {
+          "champ": "usage",
+          "terme": "journaux du navigateur",
+          "raison": null,
+          "passage": "viewing browser logs"
+        },
+        {
+          "champ": "usage",
+          "terme": "automatisation de navigateur",
+          "raison": null,
+          "passage": "To create an automation script, include only Playwright logic"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Playwright",
+          "raison": null,
+          "passage": "write native Python Playwright scripts"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Python",
+          "raison": null,
+          "passage": "write native Python Playwright scripts"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Chromium",
+          "raison": null,
+          "passage": "Always launch chromium in headless mode"
+        },
+        {
+          "champ": "technologie",
+          "terme": "HTML",
+          "raison": null,
+          "passage": "Read HTML file directly to identify selectors"
+        },
+        {
+          "champ": "technologie",
+          "terme": "DOM",
+          "raison": null,
+          "passage": "Take screenshot or inspect DOM"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Claude Code",
+          "raison": null,
+          "passage": "You can register this repository as a Claude Code Plugin marketplace"
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "tests end-to-end",
+          "raison": "Le skill pilote un vrai navigateur avec Playwright, mais pour des scripts ponctuels, sans suite de tests ni intégration continue.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "navigateur headless",
+          "raison": "Le skill lance Chromium en headless pour ses scripts Playwright.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "sélecteurs CSS",
+          "raison": "Le skill repère les éléments par des sélecteurs, dont les sélecteurs CSS, après inspection du DOM.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "front-end",
+          "raison": "Le skill sert aux tests d'interface du front-end, lancé en local avec le back-end si besoin.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "tests UI",
+          "raison": "Formulation anglaise courante pour les tests d'interface et le débogage d'interface du skill.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "logs console",
+          "raison": "Les logs de la console font partie des journaux du navigateur que le skill peut relever.",
+          "passage": null
+        }
+      ],
+      "textes": [
+        "webapp-testing: Claude tests your local web app with Playwright",
+        "Anthropic's skill writes Playwright scripts in Python to check the front end, debug the interface, take screenshots, and read browser logs.",
+        "A helper starts the app's servers, back end and front end included, then runs the test. Claude calls it as is, without loading its code into the context. On a dynamic app, it waits for loading to finish, observes the rendered page, and derives its selectors from it before acting.",
+        "Testing a form on an app with a back end and front end: the helper starts both servers, the page opens headless, the script waits for loading to finish, then inspects the DOM.",
+        "Add the catalog: /plugin marketplace add anthropics/skills",
+        "Install example-skills: /plugin install example-skills@anthropic-agent-skills",
+        "Mention webapp-testing in the request"
+      ]
+    },
+    {
+      "postId": 20,
+      "revisionId": 142,
+      "jour": "2026-11-03",
+      "motsCles": [
+        {
+          "champ": "nom",
+          "terme": "Claudeception",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "MCP et skills",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "usage",
+          "terme": "apprentissage continu",
+          "raison": null,
+          "passage": "A Claude Code skill for autonomous skill extraction and continuous learning."
+        },
+        {
+          "champ": "usage",
+          "terme": "extraction de skills",
+          "raison": null,
+          "passage": "Or explicitly request skill extraction"
+        },
+        {
+          "champ": "usage",
+          "terme": "solutions réutilisables entre sessions",
+          "raison": null,
+          "passage": "it saves that knowledge as a new skill"
+        },
+        {
+          "champ": "usage",
+          "terme": "solutions de débogage",
+          "raison": null,
+          "passage": "Just completed debugging and discovered a non-obvious solution"
+        },
+        {
+          "champ": "usage",
+          "terme": "rétrospective de session",
+          "raison": null,
+          "passage": "Trigger a learning retrospective"
+        },
+        {
+          "champ": "usage",
+          "terme": "création automatique de skills",
+          "raison": null,
+          "passage": "A Claude Code skill for autonomous skill extraction and continuous learning."
+        },
+        {
+          "champ": "technologie",
+          "terme": "Claude Code",
+          "raison": null,
+          "passage": "Claude Code has a native skills system."
+        },
+        {
+          "champ": "technologie",
+          "terme": "UserPromptSubmit",
+          "raison": null,
+          "passage": "{ \"hooks\": { \"UserPromptSubmit\": [ { \"hooks\": [ { \"type\": \"command\", \"command\": \"~/.claude/hooks/claudeception-activator.sh\" } ] } ] } }"
+        },
+        {
+          "champ": "technologie",
+          "terme": "YAML",
+          "raison": null,
+          "passage": "Extracted skills are markdown files with YAML frontmatter"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Markdown",
+          "raison": null,
+          "passage": "Extracted skills are markdown files with YAML frontmatter"
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "mémoire d'agent",
+          "raison": "Claudeception donne à Claude Code une forme de mémoire : les solutions trouvées restent sous forme de skills, pas un historique des conversations.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "auto-amélioration",
+          "raison": "Claudeception vise un agent qui progresse en travaillant, en écrivant ses propres skills.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "base de connaissances",
+          "raison": "Claudeception peut constituer au fil du temps une bibliothèque de skills propre à l'utilisateur ou au projet.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "méta-skill",
+          "raison": "le dépôt présente Claudeception comme un méta-skill, un skill qui sert à acquérir d'autres skills.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "solutions de débogage réutilisables",
+          "raison": "Claudeception n'est pas un outil de débogage : il retient les solutions trouvées pendant le débogage pour les réutiliser.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "agent de code",
+          "raison": "Claudeception s'adresse aux agents de code comme Claude Code, pour qu'ils gardent d'une session à l'autre les solutions trouvées.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "retour d'expérience",
+          "raison": "la rétrospective de session de Claudeception peut transformer un retour d'expérience en skill réutilisable.",
+          "passage": null
+        }
+      ],
+      "textes": [
+        "Claudeception turns every hard-won solution from Claude Code into a skill that reloads on its own",
+        "An hour on an obscure error, the agent finally finds the fix, the session closes, and next time it all starts over. With Claudeception, the debugging technique, workaround, or project quirk discovered along the way becomes a skill, loaded automatically as soon as a similar problem comes back.",
+        "It sorts: only what required real research, will be reused, has a clear trigger, and actually worked becomes a skill. And the description is written to be found again: the exact error, not \"database issues\".",
+        "Example from the repository: a resolved PrismaClientKnownRequestError (too many connections in serverless) can become a skill whose description reuses the exact error. When it reappears, the agent finds it again.",
+        "Clone the repository into ~/.claude/skills/claudeception.",
+        "Optional: the hook, added to settings.json, makes each session evaluated",
+        "After debugging: /claudeception, with no skill if nothing is worth keeping",
+        "Claude Code, through its native skills system.",
+        "It is a fork, with no pushes for several months at the time of the capture."
+      ]
+    },
+    {
+      "postId": 15,
+      "revisionId": 156,
+      "jour": "2026-11-03",
+      "motsCles": [
+        {
+          "champ": "nom",
+          "terme": "Humanizer",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "MCP et skills",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "usage",
+          "terme": "réécrire un texte IA",
+          "raison": null,
+          "passage": "Humanizer makes AI-written text sound like a person wrote it"
+        },
+        {
+          "champ": "usage",
+          "terme": "humaniser un texte",
+          "raison": null,
+          "passage": "Please humanize this text"
+        },
+        {
+          "champ": "usage",
+          "terme": "tics d'écriture IA",
+          "raison": null,
+          "passage": "Agent skill that removes signs of AI-generated writing from text"
+        },
+        {
+          "champ": "usage",
+          "terme": "imiter son style",
+          "raison": null,
+          "passage": "If you want the rewrite to sound more like you, include a sample"
+        },
+        {
+          "champ": "usage",
+          "terme": "réécrire un document",
+          "raison": null,
+          "passage": "To rewrite a file, give Humanizer its path"
+        },
+        {
+          "champ": "usage",
+          "terme": "relecture de style",
+          "raison": null,
+          "passage": "Humanizer edits for human readers."
+        },
+        {
+          "champ": "technologie",
+          "terme": "Claude Code",
+          "raison": null,
+          "passage": "it works in Claude Code, Codex, and any other agent that supports skills"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Codex",
+          "raison": null,
+          "passage": "it works in Claude Code, Codex, and any other agent that supports skills"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Claude.ai",
+          "raison": null,
+          "passage": "Download this repository as a ZIP (Code → Download ZIP) and upload it as a skill in Settings."
+        },
+        {
+          "champ": "technologie",
+          "terme": "Claude Desktop",
+          "raison": null,
+          "passage": "Download this repository as a ZIP (Code → Download ZIP) and upload it as a skill in Settings."
+        },
+        {
+          "champ": "technologie",
+          "terme": "Skills CLI",
+          "raison": null,
+          "passage": "This installs Humanizer for every agent the Skills CLI supports"
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "texte généré par IA",
+          "raison": "Humanizer réécrit les textes générés par une IA pour qu'ils se lisent comme écrits par une personne.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "style d'écriture",
+          "raison": "Humanizer peut suivre le style d'écriture d'un échantillon fourni : rythme, vocabulaire, ponctuation.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "ton naturel",
+          "raison": "Humanizer vise le ton d'un texte écrit par une personne, sans tournures automatiques.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "signes d'écriture IA",
+          "raison": "Humanizer recherche les signes listés par « Signs of AI writing », le guide de Wikipedia pour repérer les textes générés par une IA.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "Agent Skills",
+          "raison": "Humanizer s'installe comme skill dans Claude Code, Codex et les autres agents qui les gèrent.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "rédaction",
+          "raison": "Humanizer retouche la rédaction d'un texte en visant à ne pas changer ce qu'il dit.",
+          "passage": null
+        }
+      ],
+      "textes": [
+        "Humanizer removes AI writing tics from a text without changing what it says",
+        "Paste a text or give a file path: Humanizer spots AI writing tics, from the most obvious to the most subtle, then rewrites the prose. On a file, it only touches the text: code, data and frontmatter stay in place.",
+        "It invents nothing: if a name, number or date is missing, it asks. On a pasted text, you see its first draft, what still sounds artificial, then the final version. Attach two or three paragraphs of your own and it picks up your rhythm, vocabulary and punctuation.",
+        "In the repository's example, an announcement loses its emoji, its \"It's not just a feature…\" and its \"Let that sink in.\", then starts without detour: \"Shared drafts are out today.\"",
+        "Not before Claude Code 2.1.142: /plugin marketplace add blader/humanizer",
+        "Then /plugin install humanizer@humanizer, not on an older version",
+        "Codex: npx skills add blader/humanizer --global --agent codex",
+        "Then /humanizer and the text; for a file, its path, no command",
+        "Claude Code, Codex and any skills-compatible agent; the Skills CLI install also covers Gemini CLI, GitHub Copilot and Windsurf, according to the repository."
+      ]
+    },
+    {
+      "postId": 63,
+      "revisionId": 113,
+      "jour": "2026-11-03",
+      "motsCles": [],
+      "textes": [
+        "Agent SDK",
+        "Cursor's Agent SDK turns an agent into a code folder you can test and deploy",
+        "An agent becomes a folder you keep in version control: the prompt lives in a file, each tool is a typed action, skills are loaded on demand. You test it with evals, run it locally in a playground, then deploy with one command that builds it, gives it a URL and hosts it. Agents can also wake on pull request, comment and CI events, on Slack mentions and DMs, on webhooks or on a schedule. Each conversation keeps its own session, so a follow-up on a PR or a Slack thread picks up where it left off.\n\nThe interesting part is not the hosting, it's the loop: replay a real pull request as signed payloads, turn it into fixtures, assert on which tools ran and with what input. Four starters ship as templates: security reviewer, owners-policy approver, PR autofixer, Linear or Jira triager.",
+        "An agent ships as a project rather than a config blob. Prompts, tools, skills, MCP connections and channels each get their own place on disk, two commands validate and inspect what the SDK found, and evals are part of the same folder.",
+        "Build once, run the same agent locally with a playground or hosted by Cursor, with the same logs and evals in both places. Deploy builds it, gives it a URL and starts it, and secrets plus integrations stay in the dashboard.",
+        "People writing bots that answer in pull requests and Slack threads and need to check their behaviour before shipping, either on Cursor or on their own infrastructure.",
+        "An agent is a project",
+        "Deploy builds it and gives it a URL",
+        "Replay a real PR as payloads"
+      ]
+    },
+    {
+      "postId": 74,
+      "revisionId": 124,
+      "jour": "2026-11-03",
+      "motsCles": [],
+      "textes": [
+        "Remote MCP, native PBR and more",
+        "Spline's MCP server now runs in the cloud, no editor open",
+        "Ask ChatGPT, Claude or Cursor for a scene and get a real Spline file back, ready to open and keep editing. Handy when you want to sketch a 3D idea straight from the chat you're already in. The same update pushes PBR materials, booleans and timeline animations into the native iOS and Android exports, adds camera and light keyframes, and makes big files behave in Hana. A batch of interaction fixes comes along.",
+        "The MCP server moves to the cloud, and the native mobile exports pick up the material, boolean and timeline features.",
+        "Generate a scene from a chat prompt and get an editable Spline file without launching the app; on mobile, native builds now carry PBR materials, booleans and timeline animations.",
+        "Designers and builders who work from ChatGPT, Claude or Cursor and want a 3D starting point they can keep editing in Spline.",
+        "MCP server now in the cloud",
+        "PBR, booleans, timeline on mobile",
+        "Camera and light keyframes"
+      ]
+    },
+    {
+      "postId": 82,
+      "revisionId": 164,
+      "jour": "2026-11-03",
+      "motsCles": [],
+      "textes": [
+        "Le Chonk: Built for Coders, Trusted by Defenders.",
+        "Mistral Large 4 (Le Chonk): open weights for agentic coding and defense",
+        "Le Chonk is Mistral's 1-trillion-parameter multimodal model, and the weights are now out. Coding and defensive security got the bulk of the reinforcement learning push, with three reasoning modes to trade cost against depth. You can point it at a repo, run it in a terminal loop, or host it yourself.",
+        "The preview shipped earlier and the team kept scaling RL; three extra weeks moved coding results and token efficiency, and reasoning got cheaper to run. Weights and a license are published alongside.",
+        "Frontier-level coding with far fewer tokens spent per task, which matters once agents run at scale. On the defensive side it hunts and patches vulnerabilities without bailing out of legitimate work. Reasoning effort is selectable per request.",
+        "Teams building coding agents, security teams that want to stay in control instead of handing off triage, and organizations that need to own and host the model rather than rent it through an API.",
+        "Live-traffic monitoring showed the model declining black-box attacks on real targets but a possible uplift for conducting real attacks, so guardrails are being revised and the red-teaming variant stays gated behind vetting and contractual safeguards.",
+        "Weights out, three reasoning modes",
+        "47% fewer tokens per task, Mistral says",
+        "Cyber Index at 51%"
+      ]
+    },
+    {
+      "postId": 83,
+      "revisionId": 165,
+      "jour": "2026-11-03",
+      "motsCles": [],
+      "textes": [
+        "Build and manage Connected Apps in one place",
+        "Google opens a preview of its Connected Apps Platform for Gemini and Search.",
+        "Developers get one place to build an app once and put it in front of people searching or chatting with Gemini. You integrate through a cloud-hosted MCP server or Android MCP with the AppFunctions APIs, then register, test and submit the app in the Google Connected Console. Before review you pick where it goes live: Search, the Gemini app, or both. After launch you follow traffic, latency and error rates, and keep hold of the branding with verified logos and authenticated accounts. Access is still in preview and opens in stages, with more developers, markets and Google products promised later.",
+        "A single console for building, testing, submitting and monitoring Connected Apps, plus a choice of where each one appears.",
+        "Ship one integration and cover both surfaces, then watch how it behaves once live.",
+        "App developers who want their product inside Search and the Gemini app during the preview phase.",
+        "It's a staged preview, with more developers and markets added later.",
+        "Build once, reach Gemini and Search",
+        "Register, test and submit in one console",
+        "Track traffic, latency and errors"
+      ]
+    },
+    {
+      "postId": 84,
+      "revisionId": 166,
+      "jour": "2026-11-03",
+      "motsCles": [],
+      "textes": [
+        "Gemini 4 Carbon: our next frontier model",
+        "Gemini 4 Carbon: a model built for long-horizon agentic work and cyber defense",
+        "Carbon is aimed at harder engineering runs that stretch out over time, and at the security work that comes with them: finding flaws, checking which ones are actually exploitable, and patching the root cause. Google says its teams have watched it keep going across multi-step jobs on large codebases and low-level systems. It ships into a small group of cyber defenders first, then more trusted partners, with developer and consumer access later. Intro pricing matches Argon.",
+        "Google positions it as its strongest model so far, with 88.2% on SEC-bench Pro, 54.8% on ExploitGym and 71.0% on CWE-bench, and claims a firm lead on the first. On WebDev Arena it sits at #4 with 1768 after a jump of 89 elo points.",
+        "Sustained multi-step runs rather than single prompts: the model keeps working through dead ends instead of stalling. Google also reports less overreach and less under-service on plan execution, with discrepancies surfaced to the user before it acts.",
+        "Security defenders first, then trusted partners; developers and product teams follow once access opens up.",
+        "Rollout starts narrow, so developers, businesses and consumers can only get it once access widens.",
+        "Built for sustained agentic workflows",
+        "88.2% on SEC-bench Pro",
+        "$2 in / $10 out per million tokens"
+      ]
+    },
+    {
+      "postId": 88,
+      "revisionId": 170,
+      "jour": "2026-11-03",
+      "motsCles": [],
+      "textes": [
+        "Voxtral 3",
+        "Voxtral 3 turns calls into a working voice agent: listen, reason, act, speak.",
+        "It gives you a speech stack for agents that hold a real conversation and finish the job. One model listens, a general model such as Mistral Small decides and calls tools, and the TTS speaks back in the mood of what came before. Swap out any of the three — LLM, voice, language — and the agent still stands. Run it through Mistral's API in Europe or on hardware you control.",
+        "The release bundles new speech-to-text and text-to-speech models with a voice agent SDK built on LiveKit. Voxtral Mini TTS 3 adds context-aware voices that shift emotion, pacing and emphasis, plus voice cloning and custom prompt instruction following. Transcribe 3 adds diarization, context biasing and end-of-turn prediction.",
+        "Mid-call, an agent can pull an identity check, a bill balance or a booking through function calling, web search and retrieval over your own systems. Calls go over SIP; browsers and apps connect over WebRTC; and the telephony, IVR and contact-center tools you already run stay in place. Domain vocabulary lands correctly without fine-tuning, thanks to context biasing.",
+        "Teams building contact-center agents, service desks, virtual assistants and hands-free copilots, especially those with data-residency constraints.",
+        "Turns under one second",
+        "35+ languages, 50+ dialects",
+        "EU-hosted or self-deployed"
       ]
     },
     {
       "postId": 16,
-      "revisionId": 36,
-      "jour": "2026-11-02",
+      "revisionId": 144,
+      "jour": "2026-11-04",
       "motsCles": [
         {
           "champ": "nom",
@@ -16429,24 +17474,24 @@ window.DONNEES_MAQUETTE = {
         }
       ],
       "textes": [
-        "planning-with-files garde le plan de votre agent sur disque, et la tâche reprend après un /clear",
-        "Le plan tient dans trois fichiers Markdown du projet, pas seulement dans le contexte : task_plan.md pour les phases, findings.md pour les découvertes et les décisions, progress.md pour le journal. Après un /clear, une compaction ou un plantage, l’agent les relit et repart de la phase en cours.",
-        "Des hooks réinjectent le plan au début de chaque tour : sur une longue session, l’objectif et l’état des phases restent sous les yeux du modèle. En option, l’agent est retenu tant qu’une phase reste en cours, avec un plafond pour ne jamais bloquer la session, sur les outils qui le permettent.",
-        "Validez l’approche en mode plan, faites-la écrire en phases dans task_plan.md, puis lancez l’exécution. Si la conversation est vidée en route, l’agent ne perd pas le fil : il relit les fichiers et reprend où il en était.",
-        "Dans Claude Code : /plugin marketplace add OthmanAdi/planning-with-files",
-        "Puis /plugin install planning-with-files@planning-with-files",
-        "Tapez /plan, ou demandez simplement un plan à l’agent",
-        "Plugins natifs pour Claude Code, Codex CLI, OpenCode et d’autres ; plus de 60 agents via npx skills add, sans les hooks sur certains."
+        "planning-with-files keeps your agent's plan on disk, and the task resumes after a /clear",
+        "The plan lives in three Markdown files in the project, not only in context: task_plan.md for the phases, findings.md for discoveries and decisions, progress.md for the log. After a /clear, a compaction or a crash, the agent rereads them and restarts from the current phase.",
+        "Hooks reinject the plan at the start of each turn: over a long session, the goal and phase status stay in front of the model. Optionally, the agent is held while a phase is still in progress, with a cap so the session is never blocked, on the tools that allow it.",
+        "Validate the approach in plan mode, have it written in phases into task_plan.md, then start execution. If the conversation is cleared along the way, the agent doesn't lose the thread: it rereads the files and picks up where it left off.",
+        "In Claude Code: /plugin marketplace add OthmanAdi/planning-with-files",
+        "Then /plugin install planning-with-files@planning-with-files",
+        "Type /plan, or simply ask the agent for a plan",
+        "Native plugins for Claude Code, Codex CLI, OpenCode and others; 60+ agents via npx skills add, without hooks on some."
       ]
     },
     {
-      "postId": 17,
-      "revisionId": 37,
-      "jour": "2026-11-02",
+      "postId": 9,
+      "revisionId": 145,
+      "jour": "2026-11-04",
       "motsCles": [
         {
           "champ": "nom",
-          "terme": "stop-slop",
+          "terme": "Marketing Skills",
           "raison": null,
           "passage": null
         },
@@ -16458,115 +17503,259 @@ window.DONNEES_MAQUETTE = {
         },
         {
           "champ": "usage",
-          "terme": "tics d'écriture IA",
+          "terme": "optimisation des conversions",
           "raison": null,
-          "passage": "A skill for removing AI tells from prose."
+          "passage": "When the user wants to optimize, improve, or increase conversions on any marketing page or form"
         },
         {
           "champ": "usage",
-          "terme": "réécrire un texte IA",
+          "terme": "rédaction marketing",
           "raison": null,
-          "passage": "This skill teaches Claude (or any LLM) to catch and remove them."
+          "passage": "When the user wants to write, rewrite, or improve marketing copy for any page"
         },
         {
           "champ": "usage",
-          "terme": "révision de texte",
+          "terme": "référencement naturel (SEO)",
           "raison": null,
-          "passage": "Below 35/50: revise."
+          "passage": "When the user wants to audit, review, or diagnose SEO issues on their site."
         },
         {
           "champ": "usage",
-          "terme": "clichés d'écriture",
+          "terme": "séquences d'e-mails",
           "raison": null,
-          "passage": "Structural clichés - Binary contrasts, negative listings, dramatic fragmentation, rhetorical setups, false agency, narrator-from-a-distance voice, passive voice."
+          "passage": "When the user wants to create or optimize an email sequence, drip campaign, automated email flow"
         },
         {
           "champ": "usage",
-          "terme": "formules à bannir",
+          "terme": "suivi analytique",
           "raison": null,
-          "passage": "Banned phrases - Throat-clearing openers, emphasis crutches, business jargon, all adverbs, vague declaratives, meta-commentary."
+          "passage": "When the user wants to set up, improve, or audit analytics tracking and measurement."
         },
         {
           "champ": "usage",
-          "terme": "grille de relecture",
+          "terme": "campagnes publicitaires",
           "raison": null,
-          "passage": "Rate 1-10 on each dimension:"
+          "passage": "When the user wants help with paid advertising campaigns on Google Ads, Meta (Facebook/Instagram), LinkedIn, Twitter/X"
         },
         {
           "champ": "technologie",
           "terme": "Claude Code",
           "raison": null,
-          "passage": "Claude Code: Add this folder as a skill."
+          "passage": "Marketing skills for Claude Code and AI agents."
         },
         {
           "champ": "technologie",
-          "terme": "Claude Projects",
+          "terme": "Codex",
           "raison": null,
-          "passage": "Claude Projects: Upload SKILL.md and reference files to project knowledge."
+          "passage": "Install via Codex's plugin system"
         },
         {
           "champ": "technologie",
-          "terme": "SKILL.md",
+          "terme": "Cursor",
           "raison": null,
-          "passage": "SKILL.md # Core instructions"
+          "passage": "Works with Claude Code, OpenAI Codex, Cursor, Windsurf"
         },
         {
           "champ": "technologie",
-          "terme": "LLM",
+          "terme": "Windsurf",
           "raison": null,
-          "passage": "This skill teaches Claude (or any LLM) to catch and remove them."
+          "passage": "Works with Claude Code, OpenAI Codex, Cursor, Windsurf"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Agent Skills",
+          "raison": null,
+          "passage": "any agent that supports the Agent Skills spec"
         },
         {
           "champ": "terme_proche",
-          "terme": "texte généré par IA",
-          "raison": "stop-slop retire d'un texte généré par une IA les tics d'écriture IA qui le trahissent.",
+          "terme": "copywriting",
+          "raison": "terme anglais de la rédaction marketing, un usage central de Marketing Skills.",
           "passage": null
         },
         {
           "champ": "terme_proche",
-          "terme": "écriture naturelle",
-          "raison": "stop-slop retire les tournures prévisibles de l'IA pour une écriture plus naturelle.",
+          "terme": "CRO",
+          "raison": "sigle anglais de l'optimisation des conversions, cité dans la description de Marketing Skills.",
           "passage": null
         },
         {
           "champ": "terme_proche",
-          "terme": "style d'écriture",
-          "raison": "stop-slop agit sur le style d'écriture : formules, constructions et rythme des phrases.",
+          "terme": "landing page",
+          "raison": "nom anglais de la page d'atterrissage, dont Marketing Skills aide à optimiser les conversions.",
           "passage": null
         },
         {
           "champ": "terme_proche",
-          "terme": "ton naturel",
-          "raison": "stop-slop cherche un ton direct et humain, sans formules automatiques.",
+          "terme": "emailing",
+          "raison": "conception et rédaction de séquences d'e-mails marketing (skill emails) ; Marketing Skills n'envoie pas les e-mails lui-même.",
           "passage": null
         },
         {
           "champ": "terme_proche",
-          "terme": "relecture",
-          "raison": "stop-slop sert à relire un texte pour en retirer les tics d'écriture IA.",
+          "terme": "référencement IA",
+          "raison": "le skill ai-seo de Marketing Skills vise la présence dans les réponses des moteurs de recherche IA.",
           "passage": null
         },
         {
           "champ": "terme_proche",
-          "terme": "rédaction",
-          "raison": "stop-slop sert à la rédaction : révision de texte et chasse aux clichés d'écriture.",
+          "terme": "tests A/B",
+          "raison": "le skill ab-testing de Marketing Skills aide à concevoir et mener des expériences A/B.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "growth marketing",
+          "raison": "marketing de croissance, un thème du dépôt Marketing Skills, qui couvre le growth engineering.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "SaaS",
+          "raison": "Marketing Skills vise notamment le marketing des logiciels SaaS, par exemple avec le skill marketing-ideas.",
           "passage": null
         }
       ],
       "textes": [
-        "stop-slop traque les tics d’écriture IA dans vos textes et les fait disparaître",
-        "Formules prévisibles, constructions toutes faites, rythme mécanique : stop-slop apprend à Claude, ou à n’importe quel LLM, à les repérer et à les retirer.",
-        "Les règles sont tranchées : pas de jargon d’entreprise, pas d’adverbes, pas de voix passive, pas d’oppositions binaires, pas de tiret cadratin. Chaque famille de tics a son fichier de référence, chargé seulement quand il sert.",
-        "Un post écrit avec Claude qui sonne trop IA : passez-le dans stop-slop avant de publier.",
-        "Claude Code : ajoutez le dossier comme skill",
-        "API : incluez SKILL.md dans le prompt système",
-        "Claude Code, projets Claude, instructions personnalisées ou appels API."
+        "Marketing Skills: CRO, copywriting, SEO and email sequences handled by your code agent",
+        "Corey Haines' marketing collection. Your agent identifies the task at hand—a page to convert, an email sequence, pricing or a Google Ads campaign—and applies the appropriate method.",
+        "Everything rests on a shared product document: you set product, audience and positioning once with product-marketing, and each skill rereads it before acting.",
+        "Ask to optimize a landing page for conversion: the agent relies on the cro skill.",
+        "npx skills add coreyhaines31/marketingskills",
+        "Launched from Claude Code: add -a claude-code, otherwise it won't read them",
+        "Fill in product-marketing, then hand its tasks to the agent",
+        "Claude Code, Codex, Cursor, Windsurf and any agent compatible with Agent Skills."
+      ]
+    },
+    {
+      "postId": 12,
+      "revisionId": 157,
+      "jour": "2026-11-04",
+      "motsCles": [
+        {
+          "champ": "nom",
+          "terme": "find-skills",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "MCP et skills",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "usage",
+          "terme": "recherche de skills",
+          "raison": null,
+          "passage": "Search for skills interactively or by keyword"
+        },
+        {
+          "champ": "usage",
+          "terme": "installation de skills",
+          "raison": null,
+          "passage": "Install a skill from GitHub or other sources"
+        },
+        {
+          "champ": "usage",
+          "terme": "découverte de skills",
+          "raison": null,
+          "passage": "This skill helps you discover and install skills from the open agent skills ecosystem."
+        },
+        {
+          "champ": "usage",
+          "terme": "extension d'un agent",
+          "raison": null,
+          "passage": "Expresses interest in extending agent capabilities"
+        },
+        {
+          "champ": "usage",
+          "terme": "création de skill",
+          "raison": null,
+          "passage": "Suggest the user could create their own skill with npx skills init"
+        },
+        {
+          "champ": "technologie",
+          "terme": "npx",
+          "raison": null,
+          "passage": "The Skills CLI (npx skills) is the package manager for the open agent skills ecosystem."
+        },
+        {
+          "champ": "technologie",
+          "terme": "Node.js",
+          "raison": null,
+          "passage": "Requires Node.js 22.20 or later."
+        },
+        {
+          "champ": "technologie",
+          "terme": "Claude Code",
+          "raison": null,
+          "passage": "Supports OpenCode, Claude Code, Codex, Cursor, and 75 more."
+        },
+        {
+          "champ": "technologie",
+          "terme": "Codex",
+          "raison": null,
+          "passage": "Supports OpenCode, Claude Code, Codex, Cursor, and 75 more."
+        },
+        {
+          "champ": "technologie",
+          "terme": "Cursor",
+          "raison": null,
+          "passage": "Supports OpenCode, Claude Code, Codex, Cursor, and 75 more."
+        },
+        {
+          "champ": "technologie",
+          "terme": "OpenCode",
+          "raison": null,
+          "passage": "Supports OpenCode, Claude Code, Codex, Cursor, and 75 more."
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "Skills CLI",
+          "raison": "find-skills s'appuie sur l'outil npx skills, que sa fiche appelle Skills CLI et présente comme le gestionnaire de paquets des skills.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "skills.sh",
+          "raison": "Annuaire en ligne de skills que find-skills demande de consulter avant toute recherche.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "compétences d'agent",
+          "raison": "Traduction française de agent skills, ce que find-skills recherche et installe.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "trouver un skill",
+          "raison": "Traduction de find a skill, la demande qui déclenche find-skills selon sa fiche.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "assistant de code",
+          "raison": "find-skills étend un assistant de code IA comme Claude Code, Codex ou Cursor.",
+          "passage": null
+        }
+      ],
+      "textes": [
+        "find-skills: your agent can find and install the skill it's missing",
+        "Ask \"find a skill for X\", or just \"how do I do X\". The agent checks the skills.sh ranking and, if it can't find what it needs, runs npx skills find. It comes back with the skill, its source and the install command.",
+        "It doesn't recommend a skill based on a search result alone: it first checks the install count and the source. And if nothing exists, it offers to write your own with npx skills init.",
+        "Want to speed up your React app: the agent can run npx skills find react performance and suggest a skill with its install command.",
+        "Add find-skills with npx skills add (Node.js 22.20 or later).",
+        "Then just ask, for example \"find a skill for …\"; no command needed.",
+        "Claude Code, Codex, Cursor, OpenCode and 75 other agents.",
+        "If it installs for you, it's global and without confirmation (-g -y): read the skill before accepting."
       ]
     },
     {
       "postId": 21,
-      "revisionId": 54,
-      "jour": "2026-11-02",
+      "revisionId": 158,
+      "jour": "2026-11-04",
       "motsCles": [
         {
           "champ": "nom",
@@ -16702,24 +17891,24 @@ window.DONNEES_MAQUETTE = {
         }
       ],
       "textes": [
-        "ECC installe une méthode de travail dans votre agent de code, au lieu de la redire à chaque prompt",
-        "Planifier avant de coder, vérifier par les tests, garder ce qui compte : ECC réunit 71 agents, 314 skills, des hooks et des résumés de session pour que ce processus fasse partie de la façon dont votre agent travaille. Il fonctionne aujourd'hui le mieux avec Claude Code, avec des plugins natifs pour Codex et Qoder et des adaptateurs plus limités pour Cursor, OpenCode ou Gemini.",
-        "Le plan devient un document à valider avant la première ligne, le TDD exige un test en échec avant l'implémentation, et les hooks ajoutent des contrôles qui ne dépendent plus du prompt. Ces hooks lancent des commandes shell sur votre machine : installez ECC uniquement depuis le dépôt officiel ou le paquet npm ecc-universal, les copies non officielles pouvant contenir un logiciel malveillant.",
-        "Pour une nouvelle fonctionnalité, selon le dépôt : /ecc:plan avec la demande, validation du plan, puis tdd-workflow fait écrire un test qui échoue avant d'implémenter. Suivent une relecture en contexte neuf et une vérification du build, du lint, des types et des tests.",
-        "Lancer npx ecc-universal@2.2.3 setup (Node.js 18 ou plus requis)",
-        "Choix de la portée et du profil de hooks ; on peut relancer pour les changer",
-        "Assistant d'installation pour le plugin Claude Code : Git et Claude Code 2.1 ou plus requis",
-        "Les hooks peuvent lancer des commandes shell et les serveurs MCP détenir des identifiants : à traiter comme du code exécutable, et à installer uniquement depuis les sources officielles."
+        "ECC installs a working method into your coding agent, instead of restating it in every prompt",
+        "Plan before coding, verify through tests, keep what matters: ECC brings together 71 agents, 314 skills, hooks and session summaries so this process becomes part of how your agent works. Today it works best with Claude Code, with native plugins for Codex and Qoder and more limited adapters for Cursor, OpenCode or Gemini.",
+        "The plan becomes a document to approve before the first line, TDD requires a failing test before implementation, and hooks add checks that no longer depend on the prompt. These hooks run shell commands on your machine: install ECC only from the official repository or the npm package ecc-universal, since unofficial copies may contain malware.",
+        "For a new feature, depending on the repository: /ecc:plan with the request, plan approval, then tdd-workflow has a failing test written before implementing. Then comes a review in a fresh context and a check of the build, lint, types and tests.",
+        "Run npx ecc-universal@2.2.3 setup (Node.js 18 or later required)",
+        "Choose the scope and hook profile; you can rerun to change them",
+        "Setup wizard for the Claude Code plugin: Git and Claude Code 2.1 or later required",
+        "Hooks can run shell commands and MCP servers can hold credentials: treat them as executable code, and install only from official sources."
       ]
     },
     {
-      "postId": 8,
-      "revisionId": 47,
-      "jour": "2026-11-03",
+      "postId": 17,
+      "revisionId": 159,
+      "jour": "2026-11-04",
       "motsCles": [
         {
           "champ": "nom",
-          "terme": "Obsidian Skills",
+          "terme": "stop-slop",
           "raison": null,
           "passage": null
         },
@@ -16728,406 +17917,118 @@ window.DONNEES_MAQUETTE = {
           "terme": "MCP et skills",
           "raison": null,
           "passage": null
-        },
-        {
-          "champ": "usage",
-          "terme": "piloter un coffre Obsidian",
-          "raison": null,
-          "passage": "Interact with Obsidian vaults via the Obsidian CLI including plugin and theme development"
-        },
-        {
-          "champ": "usage",
-          "terme": "édition Markdown",
-          "raison": null,
-          "passage": "Create and edit Obsidian Flavored Markdown (.md) with wikilinks, embeds, callouts, properties"
-        },
-        {
-          "champ": "usage",
-          "terme": "vues filtrées Obsidian Bases",
-          "raison": null,
-          "passage": "Create and edit Obsidian Bases (.base) with views, filters, formulas, and summaries"
-        },
-        {
-          "champ": "usage",
-          "terme": "canevas visuel JSON Canvas",
-          "raison": null,
-          "passage": "Create and edit JSON Canvas files (.canvas) with nodes, edges, groups, and connections"
-        },
-        {
-          "champ": "usage",
-          "terme": "nettoyer une page web",
-          "raison": null,
-          "passage": "Extract clean markdown from web pages using Defuddle"
-        },
-        {
-          "champ": "usage",
-          "terme": "notes Markdown depuis JSON/CSV",
-          "raison": null,
-          "passage": "Render Markdown templates from JSON or CSV data using Knap, including batch file generation"
-        },
-        {
-          "champ": "technologie",
-          "terme": "Markdown",
-          "raison": null,
-          "passage": "open formats including Markdown, Bases, JSON Canvas"
-        },
-        {
-          "champ": "technologie",
-          "terme": "JSON Canvas",
-          "raison": null,
-          "passage": "Create and edit JSON Canvas files (.canvas)"
-        },
-        {
-          "champ": "technologie",
-          "terme": "Obsidian CLI",
-          "raison": null,
-          "passage": "Interact with Obsidian vaults via the Obsidian CLI"
-        },
-        {
-          "champ": "technologie",
-          "terme": "Claude Code",
-          "raison": null,
-          "passage": "any skills-compatible agent, including Claude Code, Codex, and Open Code"
-        },
-        {
-          "champ": "technologie",
-          "terme": "Codex",
-          "raison": null,
-          "passage": "Copy the skills/ directory into your Codex skills path"
-        },
-        {
-          "champ": "technologie",
-          "terme": "OpenCode",
-          "raison": null,
-          "passage": "OpenCode auto-discovers all SKILL.md files under ~/.opencode/skills/."
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "Claude Skills",
-          "raison": "pour Claude Code, le dépôt renvoie à la documentation officielle des Claude Skills.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "Agent Skills",
-          "raison": "Obsidian Skills suit la spécification Agent Skills, un format de skills commun à plusieurs agents.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "wikilinks",
-          "raison": "la syntaxe Markdown d'Obsidian comprend les wikilinks, des liens entre fichiers du coffre.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "économie de tokens",
-          "raison": "le skill defuddle d'Obsidian Skills retire le superflu des pages web pour économiser des tokens.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "modèles de fichiers",
-          "raison": "le skill knap remplit des modèles Markdown à partir de données JSON ou CSV.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "base de connaissances Markdown",
-          "raison": "un coffre Obsidian est un dossier de fichiers Markdown que ces skills apprennent à l'agent à créer et modifier.",
-          "passage": null
-        }
-      ],
-      "textes": [
-        "Obsidian Skills apprend à votre agent les formats d'Obsidian et son CLI",
-        "Votre agent écrit des notes avec wikilinks, callouts et propriétés, monte des Bases avec vues, filtres et formules, et construit des canevas JSON Canvas, directement dans votre coffre. Ça marche avec Claude Code, Codex et OpenCode.",
-        "Deux skills sortent du cadre des notes : defuddle réduit une page web à un Markdown propre pour économiser des tokens, knap génère des fichiers en série depuis du JSON ou du CSV. Le dépôt suit la spécification Agent Skills, donc les mêmes skills servent à tous vos agents compatibles.",
-        "Récupérer un article avec defuddle, puis le ranger dans le coffre en note avec propriétés et wikilinks.",
-        "Dans Claude Code : /plugin marketplace add kepano/obsidian-skills",
-        "Puis /plugin install obsidian@obsidian-skills",
-        "Ou avec npx : npx skills add https://github.com/kepano/obsidian-skills",
-        "Claude Code, Codex, OpenCode et tout agent compatible Agent Skills."
-      ]
-    },
-    {
-      "postId": 9,
-      "revisionId": 48,
-      "jour": "2026-11-03",
-      "motsCles": [
-        {
-          "champ": "nom",
-          "terme": "Marketing Skills",
-          "raison": null,
-          "passage": null
-        },
-        {
-          "champ": "categorie",
-          "terme": "MCP et skills",
-          "raison": null,
-          "passage": null
-        },
-        {
-          "champ": "usage",
-          "terme": "optimisation des conversions",
-          "raison": null,
-          "passage": "When the user wants to optimize, improve, or increase conversions on any marketing page or form"
-        },
-        {
-          "champ": "usage",
-          "terme": "rédaction marketing",
-          "raison": null,
-          "passage": "When the user wants to write, rewrite, or improve marketing copy for any page"
-        },
-        {
-          "champ": "usage",
-          "terme": "référencement naturel (SEO)",
-          "raison": null,
-          "passage": "When the user wants to audit, review, or diagnose SEO issues on their site."
-        },
-        {
-          "champ": "usage",
-          "terme": "séquences d'e-mails",
-          "raison": null,
-          "passage": "When the user wants to create or optimize an email sequence, drip campaign, automated email flow"
-        },
-        {
-          "champ": "usage",
-          "terme": "suivi analytique",
-          "raison": null,
-          "passage": "When the user wants to set up, improve, or audit analytics tracking and measurement."
-        },
-        {
-          "champ": "usage",
-          "terme": "campagnes publicitaires",
-          "raison": null,
-          "passage": "When the user wants help with paid advertising campaigns on Google Ads, Meta (Facebook/Instagram), LinkedIn, Twitter/X"
-        },
-        {
-          "champ": "technologie",
-          "terme": "Claude Code",
-          "raison": null,
-          "passage": "Marketing skills for Claude Code and AI agents."
-        },
-        {
-          "champ": "technologie",
-          "terme": "Codex",
-          "raison": null,
-          "passage": "Install via Codex's plugin system"
-        },
-        {
-          "champ": "technologie",
-          "terme": "Cursor",
-          "raison": null,
-          "passage": "Works with Claude Code, OpenAI Codex, Cursor, Windsurf"
-        },
-        {
-          "champ": "technologie",
-          "terme": "Windsurf",
-          "raison": null,
-          "passage": "Works with Claude Code, OpenAI Codex, Cursor, Windsurf"
-        },
-        {
-          "champ": "technologie",
-          "terme": "Agent Skills",
-          "raison": null,
-          "passage": "any agent that supports the Agent Skills spec"
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "copywriting",
-          "raison": "terme anglais de la rédaction marketing, un usage central de Marketing Skills.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "CRO",
-          "raison": "sigle anglais de l'optimisation des conversions, cité dans la description de Marketing Skills.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "landing page",
-          "raison": "nom anglais de la page d'atterrissage, dont Marketing Skills aide à optimiser les conversions.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "emailing",
-          "raison": "conception et rédaction de séquences d'e-mails marketing (skill emails) ; Marketing Skills n'envoie pas les e-mails lui-même.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "référencement IA",
-          "raison": "le skill ai-seo de Marketing Skills vise la présence dans les réponses des moteurs de recherche IA.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "tests A/B",
-          "raison": "le skill ab-testing de Marketing Skills aide à concevoir et mener des expériences A/B.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "growth marketing",
-          "raison": "marketing de croissance, un thème du dépôt Marketing Skills, qui couvre le growth engineering.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "SaaS",
-          "raison": "Marketing Skills vise notamment le marketing des logiciels SaaS, par exemple avec le skill marketing-ideas.",
-          "passage": null
-        }
-      ],
-      "textes": [
-        "Marketing Skills : CRO, copywriting, SEO et séquences d’e-mails pris en charge par votre agent de code",
-        "La collection de Corey Haines pour le marketing. Votre agent repère la tâche en cours, page à faire convertir, séquence d’e-mails, prix ou campagne Google Ads, et applique la méthode adaptée.",
-        "Tout repose sur un document produit commun : vous posez une fois produit, public et positionnement avec product-marketing, et chaque skill le relit avant d’agir.",
-        "Demandez d’optimiser une landing page pour la conversion : l’agent s’appuie sur le skill cro.",
-        "npx skills add coreyhaines31/marketingskills",
-        "Lancé depuis Claude Code : ajouter -a claude-code, sinon il ne les lit pas",
-        "Remplir product-marketing, puis confier ses tâches à l’agent",
-        "Claude Code, Codex, Cursor, Windsurf et tout agent compatible Agent Skills."
-      ]
-    },
-    {
-      "postId": 15,
-      "revisionId": 50,
-      "jour": "2026-11-03",
-      "motsCles": [
-        {
-          "champ": "nom",
-          "terme": "Humanizer",
-          "raison": null,
-          "passage": null
-        },
-        {
-          "champ": "categorie",
-          "terme": "MCP et skills",
-          "raison": null,
-          "passage": null
-        },
-        {
-          "champ": "usage",
-          "terme": "réécrire un texte IA",
-          "raison": null,
-          "passage": "Humanizer makes AI-written text sound like a person wrote it"
-        },
-        {
-          "champ": "usage",
-          "terme": "humaniser un texte",
-          "raison": null,
-          "passage": "Please humanize this text"
         },
         {
           "champ": "usage",
           "terme": "tics d'écriture IA",
           "raison": null,
-          "passage": "Agent skill that removes signs of AI-generated writing from text"
+          "passage": "A skill for removing AI tells from prose."
         },
         {
           "champ": "usage",
-          "terme": "imiter son style",
+          "terme": "réécrire un texte IA",
           "raison": null,
-          "passage": "If you want the rewrite to sound more like you, include a sample"
+          "passage": "This skill teaches Claude (or any LLM) to catch and remove them."
         },
         {
           "champ": "usage",
-          "terme": "réécrire un document",
+          "terme": "révision de texte",
           "raison": null,
-          "passage": "To rewrite a file, give Humanizer its path"
+          "passage": "Below 35/50: revise."
         },
         {
           "champ": "usage",
-          "terme": "relecture de style",
+          "terme": "clichés d'écriture",
           "raison": null,
-          "passage": "Humanizer edits for human readers."
+          "passage": "Structural clichés - Binary contrasts, negative listings, dramatic fragmentation, rhetorical setups, false agency, narrator-from-a-distance voice, passive voice."
+        },
+        {
+          "champ": "usage",
+          "terme": "formules à bannir",
+          "raison": null,
+          "passage": "Banned phrases - Throat-clearing openers, emphasis crutches, business jargon, all adverbs, vague declaratives, meta-commentary."
+        },
+        {
+          "champ": "usage",
+          "terme": "grille de relecture",
+          "raison": null,
+          "passage": "Rate 1-10 on each dimension:"
         },
         {
           "champ": "technologie",
           "terme": "Claude Code",
           "raison": null,
-          "passage": "it works in Claude Code, Codex, and any other agent that supports skills"
+          "passage": "Claude Code: Add this folder as a skill."
         },
         {
           "champ": "technologie",
-          "terme": "Codex",
+          "terme": "Claude Projects",
           "raison": null,
-          "passage": "it works in Claude Code, Codex, and any other agent that supports skills"
+          "passage": "Claude Projects: Upload SKILL.md and reference files to project knowledge."
         },
         {
           "champ": "technologie",
-          "terme": "Claude.ai",
+          "terme": "SKILL.md",
           "raison": null,
-          "passage": "Download this repository as a ZIP (Code → Download ZIP) and upload it as a skill in Settings."
+          "passage": "SKILL.md # Core instructions"
         },
         {
           "champ": "technologie",
-          "terme": "Claude Desktop",
+          "terme": "LLM",
           "raison": null,
-          "passage": "Download this repository as a ZIP (Code → Download ZIP) and upload it as a skill in Settings."
-        },
-        {
-          "champ": "technologie",
-          "terme": "Skills CLI",
-          "raison": null,
-          "passage": "This installs Humanizer for every agent the Skills CLI supports"
+          "passage": "This skill teaches Claude (or any LLM) to catch and remove them."
         },
         {
           "champ": "terme_proche",
           "terme": "texte généré par IA",
-          "raison": "Humanizer réécrit les textes générés par une IA pour qu'ils se lisent comme écrits par une personne.",
+          "raison": "stop-slop retire d'un texte généré par une IA les tics d'écriture IA qui le trahissent.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "écriture naturelle",
+          "raison": "stop-slop retire les tournures prévisibles de l'IA pour une écriture plus naturelle.",
           "passage": null
         },
         {
           "champ": "terme_proche",
           "terme": "style d'écriture",
-          "raison": "Humanizer peut suivre le style d'écriture d'un échantillon fourni : rythme, vocabulaire, ponctuation.",
+          "raison": "stop-slop agit sur le style d'écriture : formules, constructions et rythme des phrases.",
           "passage": null
         },
         {
           "champ": "terme_proche",
           "terme": "ton naturel",
-          "raison": "Humanizer vise le ton d'un texte écrit par une personne, sans tournures automatiques.",
+          "raison": "stop-slop cherche un ton direct et humain, sans formules automatiques.",
           "passage": null
         },
         {
           "champ": "terme_proche",
-          "terme": "signes d'écriture IA",
-          "raison": "Humanizer recherche les signes listés par « Signs of AI writing », le guide de Wikipedia pour repérer les textes générés par une IA.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "Agent Skills",
-          "raison": "Humanizer s'installe comme skill dans Claude Code, Codex et les autres agents qui les gèrent.",
+          "terme": "relecture",
+          "raison": "stop-slop sert à relire un texte pour en retirer les tics d'écriture IA.",
           "passage": null
         },
         {
           "champ": "terme_proche",
           "terme": "rédaction",
-          "raison": "Humanizer retouche la rédaction d'un texte en visant à ne pas changer ce qu'il dit.",
+          "raison": "stop-slop sert à la rédaction : révision de texte et chasse aux clichés d'écriture.",
           "passage": null
         }
       ],
       "textes": [
-        "Humanizer retire les tics d'écriture IA d'un texte sans toucher à ce qu'il dit",
-        "Collez un texte ou donnez le chemin d'un fichier : Humanizer repère les tics d'écriture IA, du plus flagrant au plus discret, puis réécrit la prose. Sur un fichier, il ne touche qu'au texte : code, données et frontmatter restent en place.",
-        "Il n'invente rien : s'il manque un nom, un chiffre ou une date, il pose la question. Sur un texte collé, vous voyez son premier jet, ce qui sonne encore artificiel, puis la version finale. Joignez deux ou trois paragraphes de votre main et il reprend votre rythme, votre vocabulaire et votre ponctuation.",
-        "Dans l'exemple du dépôt, une annonce perd son émoji, son « It's not just a feature… » et son « Let that sink in. », puis commence sans détour : « Shared drafts are out today. »",
-        "Pas avant Claude Code 2.1.142 : /plugin marketplace add blader/humanizer",
-        "Puis /plugin install humanizer@humanizer, pas sur une version plus ancienne",
-        "Codex : npx skills add blader/humanizer --global --agent codex",
-        "Puis /humanizer et le texte ; pour un fichier, son chemin, sans commande",
-        "Selon le dépôt : Claude Code, Codex et les agents gérés par Skills CLI, dont Gemini CLI, GitHub Copilot et Windsurf."
+        "stop-slop tracks down AI writing tics in your texts and makes them disappear",
+        "Predictable formulas, stock constructions, mechanical rhythm: stop-slop teaches Claude, or any LLM, to spot them and remove them.",
+        "The rules are firm: no corporate jargon, no adverbs, no passive voice, no binary oppositions, no em dash. Each family of tics has its own reference file, loaded only when needed.",
+        "A post written with Claude that sounds too AI: run it through stop-slop before publishing.",
+        "Claude Code: add the folder as a skill",
+        "API: include SKILL.md in the system prompt",
+        "Claude Code, Claude projects, custom instructions or API calls."
       ]
     },
     {
       "postId": 18,
-      "revisionId": 51,
-      "jour": "2026-11-03",
+      "revisionId": 149,
+      "jour": "2026-11-04",
       "motsCles": [
         {
           "champ": "nom",
@@ -17251,20 +18152,20 @@ window.DONNEES_MAQUETTE = {
         }
       ],
       "textes": [
-        "improve-codebase-architecture repère les modules à approfondir pour un code plus testable",
-        "Le skill de Matt Pocock part des fichiers qui reviennent le plus dans l'historique des commits et y cherche les modules superficiels, ceux dont l'interface est presque aussi complexe que l'implémentation. Il propose de les approfondir : plus de comportement derrière une interface simple, un code plus facile à tester et à parcourir pour l’IA.",
-        "Les pistes arrivent dans un rapport HTML : pour chacune, le problème, la solution, un schéma avant / après et un niveau de recommandation. Vous en choisissez une, et l'agent la creuse avec vous avant de proposer la moindre interface. Les décisions déjà consignées dans vos ADR ne sont pas remises en cause.",
-        "L'auteur conseille de le lancer tous les quelques jours. Sur un vieux code, il trouve de vraies pistes sans tout démêler à votre place.",
-        "Installer : claude plugin install mattpocock-skills@claude-plugins-official",
-        "Puis /setup-matt-pocock-skills, une fois par dépôt",
-        "Le skill ne se lance que si vous tapez /improve-codebase-architecture",
-        "Claude Code, Codex, GitHub Copilot et Gemini CLI."
+        "improve-codebase-architecture spots the modules to deepen for more testable code",
+        "Matt Pocock's skill starts from the files that recur most in commit history and looks there for shallow modules, those whose interface is almost as complex as the implementation. It suggests deepening them: more behavior behind a simple interface, code that is easier to test and to navigate for AI.",
+        "The suggestions arrive in an HTML report: for each one, the problem, the solution, a before/after diagram and a recommendation level. You pick one, and the agent digs into it with you before proposing any interface. Decisions already recorded in your ADRs are not called into question.",
+        "The author recommends running it every few days. On old code, it finds real leads without untangling everything for you.",
+        "Install: claude plugin install mattpocock-skills@claude-plugins-official",
+        "Then /setup-matt-pocock-skills, once per repository",
+        "The skill only runs if you type /improve-codebase-architecture",
+        "Claude Code, Codex, GitHub Copilot and Gemini CLI."
       ]
     },
     {
       "postId": 19,
-      "revisionId": 52,
-      "jour": "2026-11-03",
+      "revisionId": 160,
+      "jour": "2026-11-04",
       "motsCles": [
         {
           "champ": "nom",
@@ -17382,148 +18283,1862 @@ window.DONNEES_MAQUETTE = {
         }
       ],
       "textes": [
-        "skill-creator : le skill d’Anthropic qui écrit, teste et affine vos propres skills",
-        "Décrivez ce que vous voulez automatiser : skill-creator cadre le besoin, rédige un premier jet, le teste sur des demandes réalistes et vous fait relire les résultats. Il peut aussi reprendre un skill existant pour l’améliorer.",
-        "Chaque test tourne avec et sans le skill, ou contre son ancienne version. Une page de revue rassemble les réponses à annoter et un comparatif chiffré : taux de réussite, durée, tokens. Il retravaille aussi la description pour que le skill se déclenche au bon moment.",
-        "Vous avez rodé une méthode avec Claude ? Dites « turn this into a skill » : il peut reprendre les étapes de la conversation, vous poser quelques questions, rédiger le SKILL.md et proposer deux ou trois demandes de test.",
-        "Ajoutez le dépôt comme catalogue de plugins dans Claude Code.",
-        "Installez example-skills : /plugin install example-skills@anthropic-agent-skills",
-        "Ensuite, nommez simplement le skill dans votre demande.",
-        "Version complète dans Claude Code ; dans Claude.ai, une version allégée, sans sous-agents ni comparatif chiffré.",
-        "Chaque test tourne deux fois, avec et sans le skill : prévoyez le double d’appels au modèle."
+        "skill-creator: Anthropic's skill that writes, tests, and refines your own skills",
+        "Describe what you want to automate: skill-creator frames the need, drafts a first version, tests it on realistic requests, and has you review the results. It can also take an existing skill and improve it.",
+        "Each test runs with and without the skill, or against its previous version. A review page gathers the responses to annotate and a quantified comparison: success rate, duration, tokens. It also reworks the description so the skill triggers at the right time.",
+        "Have you honed a method with Claude? Say \"turn this into a skill\": it can pick up the steps from the conversation, ask you a few questions, write the SKILL.md, and suggest two or three test requests.",
+        "Add the repository as a plugin catalog in Claude Code.",
+        "Install example-skills: /plugin install example-skills@anthropic-agent-skills",
+        "Then simply name the skill in your request.",
+        "Full version in Claude Code; in Claude.ai, a lighter version, without sub-agents or quantified comparison.",
+        "Each test runs twice, with and without the skill: plan for double the model calls."
       ]
     },
     {
-      "postId": 20,
-      "revisionId": 53,
-      "jour": "2026-11-03",
+      "postId": 25,
+      "revisionId": 161,
+      "jour": "2026-11-04",
       "motsCles": [
         {
           "champ": "nom",
-          "terme": "Claudeception",
+          "terme": "Sélection design web",
           "raison": null,
           "passage": null
         },
         {
           "champ": "categorie",
-          "terme": "MCP et skills",
+          "terme": "design",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "nom",
+          "terme": "Land-book",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "galerie de sites",
           "raison": null,
           "passage": null
         },
         {
           "champ": "usage",
-          "terme": "apprentissage continu",
+          "terme": "web design inspiration",
           "raison": null,
-          "passage": "A Claude Code skill for autonomous skill extraction and continuous learning."
+          "passage": "Find the best hand-picked website design inspiration."
         },
         {
           "champ": "usage",
-          "terme": "extraction de skills",
+          "terme": "website gallery",
           "raison": null,
-          "passage": "Or explicitly request skill extraction"
+          "passage": "We're a curated website design gallery for Creatives, updated daily."
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "landing page",
+          "raison": "Land-book range des landing pages parmi les sites de sa galerie de sites",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "Landbook",
+          "raison": "Nom que Land-book se donne dans le titre de sa page",
+          "passage": null
+        },
+        {
+          "champ": "nom",
+          "terme": "Landdding",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "galerie de landing pages",
+          "raison": null,
+          "passage": null
         },
         {
           "champ": "usage",
-          "terme": "solutions réutilisables entre sessions",
+          "terme": "landing page inspiration",
           "raison": null,
-          "passage": "it saves that knowledge as a new skill"
+          "passage": "The curated gallery of landing pages and website templates that designers bookmark — fresh picks every day across Webflow, Framer, WordPress, Wix and Squarespace."
         },
         {
           "champ": "usage",
-          "terme": "solutions de débogage",
+          "terme": "Webflow templates",
           "raison": null,
-          "passage": "Just completed debugging and discovered a non-obvious solution"
+          "passage": "The curated gallery of landing pages and website templates that designers bookmark — fresh picks every day across Webflow, Framer, WordPress, Wix and Squarespace."
         },
         {
           "champ": "usage",
-          "terme": "rétrospective de session",
+          "terme": "Framer templates",
           "raison": null,
-          "passage": "Trigger a learning retrospective"
+          "passage": "The curated gallery of landing pages and website templates that designers bookmark — fresh picks every day across Webflow, Framer, WordPress, Wix and Squarespace."
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "page d'atterrissage",
+          "raison": "Équivalent français de landing page, l'objet de la galerie de landing pages de Landdding",
+          "passage": null
+        },
+        {
+          "champ": "nom",
+          "terme": "Recent Design",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "inspiration design",
+          "raison": null,
+          "passage": null
         },
         {
           "champ": "usage",
-          "terme": "création automatique de skills",
+          "terme": "launch videos",
           "raison": null,
-          "passage": "A Claude Code skill for autonomous skill extraction and continuous learning."
+          "passage": "Design Launch Videos new Websites OG Images App Screenshots App Icons"
         },
         {
-          "champ": "technologie",
-          "terme": "Claude Code",
+          "champ": "usage",
+          "terme": "app icons",
           "raison": null,
-          "passage": "Claude Code has a native skills system."
+          "passage": "Design Launch Videos new Websites OG Images App Screenshots App Icons"
         },
         {
-          "champ": "technologie",
-          "terme": "UserPromptSubmit",
+          "champ": "usage",
+          "terme": "OG images",
           "raison": null,
-          "passage": "{ \"hooks\": { \"UserPromptSubmit\": [ { \"hooks\": [ { \"type\": \"command\", \"command\": \"~/.claude/hooks/claudeception-activator.sh\" } ] } ] } }"
+          "passage": "Design Launch Videos new Websites OG Images App Screenshots App Icons"
         },
         {
-          "champ": "technologie",
-          "terme": "YAML",
+          "champ": "terme_proche",
+          "terme": "Godly",
+          "raison": "godly.website redirige vers Recent Design, d'après la capture refusée du 2 novembre 2026",
+          "passage": null
+        },
+        {
+          "champ": "nom",
+          "terme": "Motion Sites",
           "raison": null,
-          "passage": "Extracted skills are markdown files with YAML frontmatter"
+          "passage": null
         },
         {
-          "champ": "technologie",
-          "terme": "Markdown",
+          "champ": "categorie",
+          "terme": "prompts de design",
           "raison": null,
-          "passage": "Extracted skills are markdown files with YAML frontmatter"
+          "passage": null
+        },
+        {
+          "champ": "usage",
+          "terme": "landing page prompts",
+          "raison": null,
+          "passage": "Build beautiful landing pages in minutes with our ready-to-use prompts. Just copy, paste, and launch."
+        },
+        {
+          "champ": "usage",
+          "terme": "animated backgrounds",
+          "raison": null,
+          "passage": "Animated backgrounds designed to convert, impress, and amaze."
         },
         {
           "champ": "terme_proche",
-          "terme": "mémoire d'agent",
-          "raison": "Claudeception donne à Claude Code une forme de mémoire : les solutions trouvées restent sous forme de skills, pas un historique des conversations.",
+          "terme": "générateur de site IA",
+          "raison": "Motion Sites fournit des prompts de landing page à coller dans un outil d'IA",
+          "passage": null
+        },
+        {
+          "champ": "nom",
+          "terme": "60fps",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "animation d'interface",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "usage",
+          "terme": "mobile animations",
+          "raison": null,
+          "passage": "60fps - UI/UX animation inspiration for mobile & web apps"
+        },
+        {
+          "champ": "usage",
+          "terme": "micro-interactions",
+          "raison": null,
+          "passage": "60fps is a curated collection of UI/UX animation and interaction design details from the world’s best iOS, and web apps."
+        },
+        {
+          "champ": "usage",
+          "terme": "UI/UX inspiration",
+          "raison": null,
+          "passage": "60fps - UI/UX animation inspiration for mobile & web apps"
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "motion design",
+          "raison": "60fps rassemble des animations mobile et web, le motion design des interfaces",
+          "passage": null
+        },
+        {
+          "champ": "nom",
+          "terme": "Font in Logo",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "typographie",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "usage",
+          "terme": "logo fonts",
+          "raison": null,
+          "passage": "Find out what font is used in famous brand logos."
+        },
+        {
+          "champ": "usage",
+          "terme": "identify a font",
+          "raison": null,
+          "passage": "Find out what font is used in famous brand logos."
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "font de logo",
+          "raison": "Font in Logo identifie la typographie des logos de marque, en anglais font",
           "passage": null
         },
         {
           "champ": "terme_proche",
-          "terme": "auto-amélioration",
-          "raison": "Claudeception vise un agent qui progresse en travaillant, en écrivant ses propres skills.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "base de connaissances",
-          "raison": "Claudeception peut constituer au fil du temps une bibliothèque de skills propre à l'utilisateur ou au projet.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "méta-skill",
-          "raison": "le dépôt présente Claudeception comme un méta-skill, un skill qui sert à acquérir d'autres skills.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "solutions de débogage réutilisables",
-          "raison": "Claudeception n'est pas un outil de débogage : il retient les solutions trouvées pendant le débogage pour les réutiliser.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "agent de code",
-          "raison": "Claudeception s'adresse aux agents de code comme Claude Code, pour qu'ils gardent d'une session à l'autre les solutions trouvées.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "retour d'expérience",
-          "raison": "la rétrospective de session de Claudeception peut transformer un retour d'expérience en skill réutilisable.",
+          "terme": "moodboard",
+          "raison": "Les galeries de la sélection design web servent de références visuelles",
           "passage": null
         }
       ],
       "textes": [
-        "Claudeception fait de chaque solution durement trouvée par Claude Code un skill rechargé tout seul",
-        "Une heure sur une erreur obscure, l’agent finit par trouver, la session se ferme, et la fois suivante tout recommence. Avec Claudeception, la technique de débogage, le contournement ou la particularité du projet découverts en route deviennent un skill, chargé automatiquement dès qu’un problème semblable revient.",
-        "Il trie : seul ce qui a demandé une vraie recherche, resservira, a un déclencheur net et a fonctionné devient un skill. Et la description est écrite pour être retrouvée : l’erreur exacte, pas « problèmes de base de données ».",
-        "Exemple du dépôt : une PrismaClientKnownRequestError réglée (trop de connexions en serverless) peut devenir un skill dont la description reprend l’erreur exacte. Quand elle réapparaît, l’agent le retrouve.",
-        "Cloner le dépôt dans ~/.claude/skills/claudeception.",
-        "Optionnel : le hook, ajouté à settings.json, fait évaluer chaque session",
-        "Après un débogage : /claudeception, sans skill si rien n’est à garder",
-        "Claude Code, via son système de skills natif.",
-        "C’est un fork, sans push depuis plusieurs mois au moment de la capture."
+        "6 sites to keep on hand for finding inspiration in web design",
+        "Land-book",
+        "A hand-picked gallery of sites, updated daily; the free plan limits access to categories.",
+        "Landdding",
+        "Landing pages and templates submitted daily and voted on by designers, on Webflow, Framer, WordPress, Wix and Squarespace.",
+        "Recent Design",
+        "Inspiration organized by format: launch videos, sites, OG images, screenshots and app icons.",
+        "Motion Sites",
+        "Ready-to-copy-paste prompts for building a landing page with AI, plus animated backgrounds.",
+        "60fps",
+        "Animations and micro-interactions spotted in iOS and web apps, for UI/UX inspiration.",
+        "Font in Logo",
+        "Find the font used in a brand logo, and the closest match when the exact font isn't verified."
       ]
+    },
+    {
+      "postId": 69,
+      "revisionId": 119,
+      "jour": "2026-11-04",
+      "motsCles": [],
+      "textes": [
+        "GitHub Copilot app, Universe releases",
+        "GitHub Copilot app adds Projects and desktop control",
+        "Work that spills across repos, specs, mocks and threads now has a place to land. Describe a goal, attach the context, pick models and tools, and Copilot spins up the agents it needs and hands back results like pull requests for you to review. Repeatable chores can become project automations. Connected tools such as Slack and Figma feed research, specs and design work, and you can generate or edit images from chat. When a job lives in a desktop app rather than a repo, Copilot can drive that app too, asking first before it takes control.",
+        "Projects move into a public preview. Computer use also lands in preview, on macOS and Windows, and reaches software that offers no API, CLI or MCP hook.",
+        "Multi-repo features and repo-free launch work stay in a single project, context, agents and outputs included. Copilot requests approval before it drives an app, and an org can turn the whole thing off via managed settings.",
+        "Teams whose features spread over multiple repos, or whose work lives in Slack threads, Figma files and desktop apps — though when a task is confined to one repo, the doc still lets you launch a session from that repo. Note that Projects remain in public preview.",
+        "Projects and computer use are both in public preview.",
+        "Agents per project, results to review",
+        "Slack and Figma as context (examples)",
+        "Computer use in public preview"
+      ]
+    },
+    {
+      "postId": 71,
+      "revisionId": 121,
+      "jour": "2026-11-04",
+      "motsCles": [],
+      "textes": [
+        "View and restore previous versions of your generative plugins and shaders",
+        "Your generative Figma plugins and shaders now keep their history",
+        "Editing a generative plugin or shader now creates a new version instead of overwriting what you had. Older versions stay available, so you can go back to them and restore one when an experiment doesn't pay off. You can revisit earlier states of your tools without keeping a separate copy somewhere else.",
+        "Each edit produces a new version, and the earlier ones are kept for you.",
+        "Go back to an earlier state of a plugin or shader and restore it.",
+        "For anyone building generative plugins or shaders and iterating on them.",
+        "Editing creates a new version",
+        "Earlier versions stay available"
+      ]
+    },
+    {
+      "postId": 72,
+      "revisionId": 122,
+      "jour": "2026-11-04",
+      "motsCles": [],
+      "textes": [
+        "October 26, 2026",
+        "Vapi adds a Traffic tab and OpenAI's gpt-transcribe",
+        "The Traffic tab breaks down calls per published version, with a flow view, a side-by-side version table and figures you can narrow down. Transcription widens too: gpt-transcribe accepts keywords and a guiding prompt, and AssemblyAI now works on HIPAA-enabled assistants. Regional OpenAI models become selectable for assistants, squads, evals and structured output.",
+        "Published versions can now be compared call by call, and the transcription and model choices widen. Calls that drop a GPT-Live assistant into a squad or pair it with a recording consent plan are now rejected upfront instead of ending right after they start.",
+        "See how traffic spreads across versions before changing anything, filter the numbers by date range and version, and compare flows side by side. On the model side, you can guide transcription with keywords and a prompt, or switch to a regional OpenAI model.",
+        "Teams running several published versions of an assistant and anyone tuning transcription or model routing.",
+        "A GPT-Live assistant is not supported in squads or with recording consent plans, and such calls are now refused at creation rather than dropped mid-call.",
+        "Traffic tab par assistant",
+        "gpt-transcribe dispo",
+        "AssemblyAI sur HIPAA"
+      ]
+    },
+    {
+      "postId": 76,
+      "revisionId": 126,
+      "jour": "2026-11-04",
+      "motsCles": [],
+      "textes": [
+        "Webhook IP ranges added to the Meta API",
+        "New webhook IP ranges are now in GitHub's Meta API",
+        "GitHub added three CIDR prefixes for webhook deliveries on github.com, and they now show up in the Meta API. If your firewall pulls those ranges automatically, you have nothing to do. If you keep a hand-written allowlist, you need to add the new prefixes or deliveries may start bouncing.",
+        "The hooks field in the Meta API carries three extra prefixes for webhook traffic on github.com, and they cover every plan, GitHub Enterprise Cloud included.",
+        "Keep your inbound allowlist in sync with what GitHub actually sends from, so receivers stop turning away legitimate deliveries.",
+        "Teams that filter inbound webhook traffic by IP, and anyone who maintains a static allowlist instead of reading ranges from the API.",
+        "Static allowlists need a manual edit; only setups that refresh from the Meta API skip the work.",
+        "Three new prefixes for webhook deliveries",
+        "Listed in the Meta API hooks field",
+        "Covers all plans, Enterprise Cloud included"
+      ]
+    }
+  ],
+  "recherche_hors_base": [
+    {
+      "postId": -1,
+      "revisionId": 0,
+      "jour": "2026-10-28",
+      "motsCles": [
+        {
+          "champ": "nom",
+          "terme": "Copilot Fusion",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "outil de développement",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "modèles",
+          "raison": null,
+          "passage": null
+        }
+      ],
+      "textes": [
+        "Copilot Fusion is generally available: for every request, Copilot picks the models and, when needed, makes them work together",
+        "You pick the effort level, Copilot picks the models. Each model it uses is billed at its standard rate.",
+        "Rather than choosing a model for every task, you let Copilot Fusion decide, request by request, which models to use and how to combine them; the user sets the effort level: Standard, High or Max.",
+        "According to GitHub, no more switching models mid-task; on the admin side, you choose which models can be used and, through Enterprise managed settings, can make Copilot Fusion the default model.",
+        "Copilot users on every plan, in VS Code, the GitHub Copilot app, Copilot CLI and JetBrains IDEs.",
+        "Other clients aren’t supported yet (announced as “coming soon”, with no date); each model used is billed at its standard rate.",
+        "Depending on the task: a single model handles it directly; or, in cascade mode, a cheaper model drafts and a quality check decides whether to keep the answer or move up to a stronger model; or, in critique mode, one model drafts, another reviews, then the first one revises.",
+        "Each model used is billed at its standard rate; for a limited time, paid plans get a 30% discount on model costs.",
+        "Single: one model handles the task",
+        "Cascade: a cheaper model drafts, a check decides whether to move up to a stronger one",
+        "Critique: one model drafts, another reviews, the first one revises",
+        "Route and orchestrate models with GitHub Copilot Fusion"
+      ]
+    },
+    {
+      "postId": -2,
+      "revisionId": 0,
+      "jour": "2026-10-27",
+      "motsCles": [
+        {
+          "champ": "nom",
+          "terme": "2.1.312",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "nom",
+          "terme": "Claude Code",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "assistant de code",
+          "raison": null,
+          "passage": null
+        }
+      ],
+      "textes": [
+        "Claude Code 2.1.312 stops a huge subdirectory CLAUDE.md from being rewritten when only its beginning was read",
+        "When Claude has only seen the beginning of a very large instructions file, Write now asks it to read the whole file or edit in place.",
+        "When Claude is about to rewrite a huge CLAUDE.md, rules file or file pulled in with @ inside a subdirectory, having seen only its first part, the Write tool now asks it to read everything or edit in place.",
+        "Prevents a long instructions file stored in a subdirectory from being rewritten when only its beginning was read.",
+        "Claude Code users who keep long instructions files in the subdirectories of their projects.",
+        "In fullscreen, clicking the “to send now” hint below a queued message sends it immediately, just like the matching key.",
+        "In cloud sessions, when a host doesn’t resolve, the WebFetch error explains it may be outside the allowed network domains, so Claude can tell you which host to allow.",
+        "Before: rewritten after reading just the beginning",
+        "Now: Write asks to read everything or edit in place",
+        "Claude Code 2.1.312",
+        "Anthropic"
+      ]
+    },
+    {
+      "postId": -3,
+      "revisionId": 0,
+      "jour": "2026-10-29",
+      "motsCles": [
+        {
+          "champ": "nom",
+          "terme": "0.166.0",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "nom",
+          "terme": "Codex CLI",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "assistant de code",
+          "raison": null,
+          "passage": null
+        }
+      ],
+      "textes": [
+        "Codex CLI 0.166.0 adds codex doctor --network-only to diagnose configuration, connectivity and WebSockets",
+        "A command to diagnose configuration, connectivity and WebSockets.",
+        "A targeted check of configuration, connectivity and WebSockets, plus GPT-6.1 Terra in the built-in model catalog and in the Vertex AI and Amazon Bedrock ones.",
+        "Run a targeted configuration, connectivity and WebSocket check with codex doctor --network-only; select transcript text from the keyboard, by word, line or page, with built-in search.",
+        "codex queue --resume picks up unloaded threads after a message has been queued.",
+        "codex doctor --network-only",
+        "codex queue --resume",
+        "Codex CLI 0.166.0",
+        "OpenAI"
+      ]
+    },
+    {
+      "postId": -4,
+      "revisionId": 0,
+      "jour": "2026-10-28",
+      "motsCles": [
+        {
+          "champ": "nom",
+          "terme": "Copilot",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "outil de développement",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "design",
+          "raison": null,
+          "passage": null
+        }
+      ],
+      "textes": [
+        "GitHub Copilot creates and edits images from chat, in public preview",
+        "Describe the image in chat; a preview appears and the image is saved to the project. Visible watermark off by default.",
+        "The chosen reasoning model calls a dedicated image-generation tool (GPT Image 2.5 Flare), shows a preview in the conversation and saves the image to the project.",
+        "According to GitHub, you get a visual without leaving your coding session or switching to a separate tool.",
+        "Copilot Pro, Pro+, Business and Enterprise subscribers; to try it, a Copilot chat in VS Code, the GitHub Copilot app or Copilot CLI.",
+        "Public preview; the visible “Made with AI” watermark is optional and off by default; billed separately, in image tokens counted against the plan’s AI credits.",
+        "Organization and enterprise owners can switch image generation off in Copilot’s model policies.",
+        "Describe the image in chat",
+        "The model calls GPT Image 2.5 Flare",
+        "Preview in the conversation, image saved to the project",
+        "Generate and edit images directly in Copilot"
+      ]
+    },
+    {
+      "postId": -5,
+      "revisionId": 0,
+      "jour": "2026-10-28",
+      "motsCles": [
+        {
+          "champ": "nom",
+          "terme": "Gemini 4 Carbon",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "grandes entreprises",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "annonce officielle",
+          "raison": null,
+          "passage": null
+        }
+      ],
+      "textes": [
+        "Google introduces Gemini 4 Carbon, its next frontier model",
+        "Google presents it as its next frontier model. The collected feed gives no details: check the source for availability and limits.",
+        "A new frontier model announced by Google.",
+        "Google introduces Gemini 4 Carbon",
+        "Gemini 4 Carbon: our next frontier model"
+      ]
+    },
+    {
+      "postId": -6,
+      "revisionId": 0,
+      "jour": "2026-10-28",
+      "motsCles": [
+        {
+          "champ": "nom",
+          "terme": "GitHub Enterprise",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "outil de développement",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "annonce officielle",
+          "raison": null,
+          "passage": null
+        }
+      ],
+      "textes": [
+        "GitHub Enterprise now includes Copilot for customers working with an account team",
+        "For customers working with an account team: Copilot included for every licensed user, usage counted against the budget from the first request.",
+        "Copilot is included for every licensed user; AI usage becomes the main thing to manage, with no included allowance.",
+        "Code completion keeps working with no budget left; an exhausted budget doesn’t remove access.",
+        "GitHub Enterprise Cloud customers working with a GitHub or Microsoft account team.",
+        "Not available as self-service for now; Copilot Chat, code review and Copilot in the cloud need available budget.",
+        "Before: manage Copilot seats and AI usage",
+        "Now: mostly manage usage against the budget",
+        "GitHub Enterprise now includes access to GitHub Copilot"
+      ]
+    },
+    {
+      "postId": -7,
+      "revisionId": 0,
+      "jour": "2026-10-28",
+      "motsCles": [
+        {
+          "champ": "nom",
+          "terme": "Repository plugin defaults",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "plugins",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "outil de développement",
+          "raison": null,
+          "passage": null
+        }
+      ],
+      "textes": [
+        "Copilot: per-repository default plugins and enterprise controls are generally available",
+        "A trusted repository can install default plugins for its contributors; an enterprise can require or block plugins.",
+        "A maintainer sets up a marketplace and default plugins so setup isn’t repeated for every project; an administrator supplies approved marketplaces and requires or blocks plugins.",
+        "Share one setup across contributors, who can turn off the repository defaults if policy allows.",
+        "Individual, Business and Enterprise Copilot users; managed controls target GitHub Enterprise Cloud.",
+        "Required plugins are installed and enabled automatically, and can’t be turned off.",
+        "Enterprise managed settings",
+        "Repository choices",
+        "Personal choices",
+        "Repository plugin defaults and enterprise plugin controls generally available"
+      ]
+    },
+    {
+      "postId": -8,
+      "revisionId": 0,
+      "jour": "2026-10-28",
+      "motsCles": [
+        {
+          "champ": "nom",
+          "terme": "Security extension",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "extension",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "outil de développement",
+          "raison": null,
+          "passage": null
+        }
+      ],
+      "textes": [
+        "A security extension for the GitHub Copilot app, in public preview",
+        "Browse code scanning alerts in the Copilot app and ask for an explanation or a fix, with no automatic commit.",
+        "Go from finding an alert to fixing it in one place, without leaving the app.",
+        "Check your in-progress changes with /security-review and see the results next to the alerts already open.",
+        "Any Copilot plan can install the extension and use /security-review on local changes.",
+        "Public preview; GitHub Enterprise Server isn’t supported.",
+        "Explain, Fix and /security-review use AI credits; browsing and dismissing alerts doesn’t use AI.",
+        "Browse alerts by severity",
+        "Ask for an explanation or a fix",
+        "Review the local fix, push when ready",
+        "Security extension for the GitHub Copilot app"
+      ]
+    },
+    {
+      "postId": -1001,
+      "revisionId": 0,
+      "jour": "2026-10-30",
+      "motsCles": [
+        {
+          "champ": "nom",
+          "terme": "earshot",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "nom",
+          "terme": "Leonxlnx/earshot",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "technologie",
+          "terme": "Python",
+          "raison": null,
+          "passage": null
+        }
+      ],
+      "textes": [
+        "earshot wants to give coding agents ears",
+        "According to its author, it runs locally on CPU, as a command-line tool, a Python API and an MCP server.",
+        "Ears for coding agents: let AI hear, review and make sound. CPU-only, open source. It runs locally on CPU, as a CLI, a Python API and an MCP server."
+      ]
+    }
+  ],
+  "selections": [
+    {
+      "post_id": 25,
+      "revision_id": 161,
+      "slug": "selection-design-web",
+      "nature": "selection",
+      "nom": "Sélection design web",
+      "compte": "mova",
+      "statut": "en_attente",
+      "etiquette": "pas encore publié",
+      "planning": {
+        "jour": "2026-11-04",
+        "rang": 8,
+        "etat": "prevue",
+        "utilise_reserve": false,
+        "motif": null
+      },
+      "origine": {
+        "code": "claude_code_developpement",
+        "texte": "Rédigé pendant le développement par Claude Code, assistant de programmation, pas par l'agent du site ; vérifié par les contrôles du code"
+      },
+      "mention": "Analyse IA à partir des sources — non testé par la plateforme",
+      "accroche": {
+        "texte": "6 sites to keep on hand for finding inspiration in web design",
+        "passages": []
+      },
+      "ressources": [
+        {
+          "site": "land-book",
+          "nom": "Land-book",
+          "url": "https://land-book.com/",
+          "libelle_lien": "Land-book",
+          "hote": "land-book.com",
+          "explication": {
+            "texte": "A hand-picked gallery of sites, updated daily; the free plan limits access to categories.",
+            "passages": [
+              "Find the best hand-picked website design inspiration.",
+              "We're a curated website design gallery for Creatives, updated daily.",
+              "With the free Basic plan, you get:",
+              "Limited access to website categories"
+            ]
+          },
+          "lien": {
+            "resultat": "verifie",
+            "motif": "capture_recente",
+            "verifie_le": "2026-11-02T21:17:45.565Z"
+          }
+        },
+        {
+          "site": "landdding",
+          "nom": "Landdding",
+          "url": "https://landdding.com/",
+          "libelle_lien": "Landdding",
+          "hote": "landdding.com",
+          "explication": {
+            "texte": "Landing pages and templates submitted daily and voted on by designers, on Webflow, Framer, WordPress, Wix and Squarespace.",
+            "passages": [
+              "Find daily new web designs submitted to Landdding for showcasing their great design and getting upvotes from the community of web designers.",
+              "The curated gallery of landing pages and website templates that designers bookmark — fresh picks every day across Webflow, Framer, WordPress, Wix and Squarespace."
+            ]
+          },
+          "lien": {
+            "resultat": "verifie",
+            "motif": "capture_recente",
+            "verifie_le": "2026-11-02T21:17:48.483Z"
+          }
+        },
+        {
+          "site": "recent-design",
+          "nom": "Recent Design",
+          "url": "https://recent.design/",
+          "libelle_lien": "Recent Design",
+          "hote": "recent.design",
+          "explication": {
+            "texte": "Inspiration organized by format: launch videos, sites, OG images, screenshots and app icons.",
+            "passages": [
+              "Design Launch Videos new Websites OG Images App Screenshots App Icons"
+            ]
+          },
+          "lien": {
+            "resultat": "verifie",
+            "motif": "capture_recente",
+            "verifie_le": "2026-11-02T21:17:46.395Z"
+          }
+        },
+        {
+          "site": "motionsites",
+          "nom": "Motion Sites",
+          "url": "https://motionsites.ai/",
+          "libelle_lien": "Motion Sites",
+          "hote": "motionsites.ai",
+          "explication": {
+            "texte": "Ready-to-copy-paste prompts for building a landing page with AI, plus animated backgrounds.",
+            "passages": [
+              "Build beautiful landing pages in minutes with our ready-to-use prompts. Just copy, paste, and launch.",
+              "Animated backgrounds designed to convert, impress, and amaze."
+            ]
+          },
+          "lien": {
+            "resultat": "verifie",
+            "motif": "capture_recente",
+            "verifie_le": "2026-11-02T21:17:44.966Z"
+          }
+        },
+        {
+          "site": "60fps",
+          "nom": "60fps",
+          "url": "https://60fps.design/",
+          "libelle_lien": "60fps",
+          "hote": "60fps.design",
+          "explication": {
+            "texte": "Animations and micro-interactions spotted in iOS and web apps, for UI/UX inspiration.",
+            "passages": [
+              "60fps - UI/UX animation inspiration for mobile & web apps",
+              "60fps is a curated collection of UI/UX animation and interaction design details from the world’s best iOS, and web apps."
+            ]
+          },
+          "lien": {
+            "resultat": "verifie",
+            "motif": "capture_recente",
+            "verifie_le": "2026-11-02T21:17:51.399Z"
+          }
+        },
+        {
+          "site": "fontinlogo",
+          "nom": "Font in Logo",
+          "url": "https://www.fontinlogo.com/",
+          "libelle_lien": "Font in Logo",
+          "hote": "www.fontinlogo.com",
+          "explication": {
+            "texte": "Find the font used in a brand logo, and the closest match when the exact font isn't verified.",
+            "passages": [
+              "Find out what font is used in famous brand logos.",
+              "Verified Source-checked, confirmed font matches",
+              "The closest font you can get for the \"Adobe Photoshop\" logo is this font"
+            ]
+          },
+          "lien": {
+            "resultat": "verifie",
+            "motif": "capture_recente",
+            "verifie_le": "2026-11-02T21:17:50.244Z"
+          }
+        }
+      ],
+      "visuel": {
+        "src": "medias/montages/selections/selection-design-web.jpg",
+        "alt": "6 sites to keep on hand for finding inspiration in web design. Land-book : aperçu indisponible. Page d’accueil de Landdding, capture d’écran. Page d’accueil de Recent Design, capture d’écran. Page d’accueil de Motion Sites, capture d’écran. Page d’accueil de 60fps, capture d’écran. Page d’accueil de Font in Logo, capture d’écran",
+        "gabarit": "selection",
+        "mention": "Illustration — ne prouve pas le fonctionnement",
+        "credit": "Captures des sites cités, © leurs auteurs",
+        "droits_a_verifier": true,
+        "motif_droits": "Captures d'écran de sites tiers : droits de publication non tranchés (STATE.md, point montages) ; exemple de maquette, jamais publié tel quel"
+      },
+      "exclus": [
+        {
+          "site": "godly",
+          "nom": "Godly",
+          "url": "https://godly.website/",
+          "motif": "redirection (HTTP 301 vers http://recent.design/?ref=godly)"
+        }
+      ],
+      "captures": [
+        {
+          "document": "liste",
+          "snapshot_id": 560,
+          "capture_le": "2026-11-02T21:17:51.403Z"
+        },
+        {
+          "document": "land-book:page-accueil",
+          "snapshot_id": 550,
+          "capture_le": "2026-11-02T21:17:45.565Z"
+        },
+        {
+          "document": "land-book:robots",
+          "snapshot_id": 549,
+          "capture_le": "2026-11-02T21:17:45.565Z"
+        },
+        {
+          "document": "landdding:page-accueil",
+          "snapshot_id": 554,
+          "capture_le": "2026-11-02T21:17:48.483Z"
+        },
+        {
+          "document": "landdding:robots",
+          "snapshot_id": 553,
+          "capture_le": "2026-11-02T21:17:48.483Z"
+        },
+        {
+          "document": "landdding:apercu",
+          "snapshot_id": 568,
+          "capture_le": "2026-11-02T21:21:04.531Z"
+        },
+        {
+          "document": "recent-design:page-accueil",
+          "snapshot_id": 552,
+          "capture_le": "2026-11-02T21:17:46.395Z"
+        },
+        {
+          "document": "recent-design:robots",
+          "snapshot_id": 551,
+          "capture_le": "2026-11-02T21:17:46.395Z"
+        },
+        {
+          "document": "recent-design:apercu",
+          "snapshot_id": 567,
+          "capture_le": "2026-11-02T21:21:04.529Z"
+        },
+        {
+          "document": "motionsites:page-accueil",
+          "snapshot_id": 548,
+          "capture_le": "2026-11-02T21:17:44.966Z"
+        },
+        {
+          "document": "motionsites:robots",
+          "snapshot_id": 547,
+          "capture_le": "2026-11-02T21:17:44.966Z"
+        },
+        {
+          "document": "motionsites:apercu",
+          "snapshot_id": 566,
+          "capture_le": "2026-11-02T21:21:04.525Z"
+        },
+        {
+          "document": "60fps:page-accueil",
+          "snapshot_id": 559,
+          "capture_le": "2026-11-02T21:17:51.399Z"
+        },
+        {
+          "document": "60fps:robots",
+          "snapshot_id": 558,
+          "capture_le": "2026-11-02T21:17:51.399Z"
+        },
+        {
+          "document": "60fps:apercu",
+          "snapshot_id": 570,
+          "capture_le": "2026-11-02T21:21:04.533Z"
+        },
+        {
+          "document": "fontinlogo:page-accueil",
+          "snapshot_id": 556,
+          "capture_le": "2026-11-02T21:17:50.244Z"
+        },
+        {
+          "document": "fontinlogo:robots",
+          "snapshot_id": 555,
+          "capture_le": "2026-11-02T21:17:50.244Z"
+        },
+        {
+          "document": "fontinlogo:apercu",
+          "snapshot_id": 569,
+          "capture_le": "2026-11-02T21:21:04.532Z"
+        }
+      ],
+      "decouverte_via": "Liste de sites transmise par l'utilisateur le 2026-11-02, repérée dans un post X dont l'auteur n'est pas identifié (contenu externe attribué ; affirmations du post non reprises)",
+      "importe_le": "2026-11-03T07:15:44.383Z"
+    }
+  ],
+  "selections_non_planifiees": [],
+  "actualites": [
+    {
+      "post_id": 63,
+      "revision_id": 113,
+      "compte": "pyxo",
+      "statut": "en_attente",
+      "etiquette": "pas encore publié",
+      "verification": "verifie",
+      "passages_introuvables": [],
+      "planning": {
+        "jour": "2026-11-03",
+        "rang": 4,
+        "etat": "prevue",
+        "utilise_reserve": true,
+        "priorite": 2
+      },
+      "kind": "annonce",
+      "titre": "Agent SDK",
+      "titre_media": "Agent SDK",
+      "date_annonce": "2026-10-20T00:00:00.000Z",
+      "categories": [
+        "agents et automatisation",
+        "outil de développement",
+        "MCP et skills"
+      ],
+      "accroche": {
+        "texte": "Cursor's Agent SDK turns an agent into a code folder you can test and deploy",
+        "passages": [
+          "It allows you to define an agent as a folder of code, test it with evals, and deploy it to Cursor or your own infrastructure"
+        ]
+      },
+      "description": {
+        "texte": "An agent becomes a folder you keep in version control: the prompt lives in a file, each tool is a typed action, skills are loaded on demand. You test it with evals, run it locally in a playground, then deploy with one command that builds it, gives it a URL and hosts it. Agents can also wake on pull request, comment and CI events, on Slack mentions and DMs, on webhooks or on a schedule. Each conversation keeps its own session, so a follow-up on a PR or a Slack thread picks up where it left off.\n\nThe interesting part is not the hosting, it's the loop: replay a real pull request as signed payloads, turn it into fixtures, assert on which tools ran and with what input. Four starters ship as templates: security reviewer, owners-policy approver, PR autofixer, Linear or Jira triager.",
+        "passages": [
+          "It allows you to define an agent as a folder of code, test it with evals, and deploy it to Cursor or your own infrastructure",
+          "Each file in `tools/` is one typed action the model can call",
+          "the shape of the reply",
+          "Follow-ups on a pull request or Slack thread resume the same session"
+        ]
+      },
+      "nouveaute": {
+        "texte": "An agent ships as a project rather than a config blob. Prompts, tools, skills, MCP connections and channels each get their own place on disk, two commands validate and inspect what the SDK found, and evals are part of the same folder.",
+        "passages": [
+          "An agent is a project. `instructions.md` is the prompt",
+          "`agent-sdk validate` checks the project and `agent-sdk info` prints what was discovered"
+        ]
+      },
+      "ce_que_ca_permet": {
+        "texte": "Build once, run the same agent locally with a playground or hosted by Cursor, with the same logs and evals in both places. Deploy builds it, gives it a URL and starts it, and secrets plus integrations stay in the dashboard.",
+        "passages": [
+          "continuing to use the same logs, evals, and playground available locally",
+          "The command builds the agent, gives it a URL, and starts it on our infrastructure"
+        ]
+      },
+      "pour_qui": {
+        "texte": "People writing bots that answer in pull requests and Slack threads and need to check their behaviour before shipping, either on Cursor or on their own infrastructure.",
+        "passages": [
+          "Run `agent-sdk eval` locally or in CI",
+          "start from a security reviewer, an owners-policy approver, a PR autofixer, or a Linear or Jira triager"
+        ]
+      },
+      "limites_connues": null,
+      "reperes": [
+        {
+          "texte": "An agent is a project",
+          "passages": [
+            "An agent is a project"
+          ]
+        },
+        {
+          "texte": "Deploy builds it and gives it a URL",
+          "passages": [
+            "The command builds the agent, gives it a URL, and starts it on our infrastructure"
+          ]
+        },
+        {
+          "texte": "Replay a real PR as payloads",
+          "passages": [
+            "turns a real pull request into signed webhook payloads"
+          ]
+        }
+      ],
+      "source": {
+        "id": "feed:cursor",
+        "nom": "Cursor Changelog — flux RSS officiel",
+        "url": "https://cursor.com/changelog/agent-sdk",
+        "capture_le": "2026-10-30T14:44:27.727Z"
+      },
+      "redaction": {
+        "modele": "deepseek-flash",
+        "prompt": "p3-13-s4"
+      }
+    },
+    {
+      "post_id": 69,
+      "revision_id": 119,
+      "compte": "repo",
+      "statut": "en_attente",
+      "etiquette": "pas encore publié",
+      "verification": "verifie",
+      "passages_introuvables": [],
+      "planning": {
+        "jour": "2026-11-04",
+        "rang": 9,
+        "etat": "prevue",
+        "utilise_reserve": true,
+        "priorite": 3
+      },
+      "kind": "annonce",
+      "titre": "GitHub Copilot app, Universe releases",
+      "titre_media": "GitHub Copilot app",
+      "date_annonce": "2026-10-28T15:55:00.000Z",
+      "categories": [
+        "agents et automatisation",
+        "assistant de code"
+      ],
+      "accroche": {
+        "texte": "GitHub Copilot app adds Projects and desktop control",
+        "passages": [
+          "Projects in the GitHub Copilot app give that work one home"
+        ]
+      },
+      "description": {
+        "texte": "Work that spills across repos, specs, mocks and threads now has a place to land. Describe a goal, attach the context, pick models and tools, and Copilot spins up the agents it needs and hands back results like pull requests for you to review. Repeatable chores can become project automations. Connected tools such as Slack and Figma feed research, specs and design work, and you can generate or edit images from chat. When a job lives in a desktop app rather than a repo, Copilot can drive that app too, asking first before it takes control.",
+        "passages": [
+          "Copilot coordinates the work in the background and checks in when it needs you",
+          "Copilot runs as many agents as the work needs and brings back results",
+          "Use project automations for repeatable tasks",
+          "Use context from connected tools such as Slack and Figma",
+          "generate and edit images using natural language in chat"
+        ]
+      },
+      "nouveaute": {
+        "texte": "Projects move into a public preview. Computer use also lands in preview, on macOS and Windows, and reaches software that offers no API, CLI or MCP hook.",
+        "passages": [
+          "Copilot Projects are now in public preview",
+          "Computer use—in public preview on macOS and Windows",
+          "including those without an API, command-line interface, or MCP integration"
+        ]
+      },
+      "ce_que_ca_permet": {
+        "texte": "Multi-repo features and repo-free launch work stay in a single project, context, agents and outputs included. Copilot requests approval before it drives an app, and an org can turn the whole thing off via managed settings.",
+        "passages": [
+          "with its context, agents, and results together",
+          "Copilot asks for your approval before controlling an app",
+          "your organization can disable the feature through managed settings"
+        ]
+      },
+      "pour_qui": {
+        "texte": "Teams whose features spread over multiple repos, or whose work lives in Slack threads, Figma files and desktop apps — though when a task is confined to one repo, the doc still lets you launch a session from that repo. Note that Projects remain in public preview.",
+        "passages": [
+          "A feature can span several repositories",
+          "you can still start a session directly from that repository",
+          "Copilot Projects are now in public preview"
+        ]
+      },
+      "limites_connues": {
+        "texte": "Projects and computer use are both in public preview.",
+        "passages": [
+          "Copilot Projects are now in public preview",
+          "Computer use—in public preview on macOS and Windows"
+        ]
+      },
+      "reperes": [
+        {
+          "texte": "Agents per project, results to review",
+          "passages": [
+            "brings back results (e.g., pull requests) for your review"
+          ]
+        },
+        {
+          "texte": "Slack and Figma as context (examples)",
+          "passages": [
+            "Use context from connected tools such as Slack and Figma"
+          ]
+        },
+        {
+          "texte": "Computer use in public preview",
+          "passages": [
+            "Computer use—in public preview on macOS and Windows"
+          ]
+        }
+      ],
+      "source": {
+        "id": "feed:github-changelog",
+        "nom": "GitHub Changelog — flux RSS officiel",
+        "url": "https://github.blog/changelog/2026-10-28-github-copilot-app-universe-releases",
+        "capture_le": "2026-10-30T02:25:19.782Z"
+      },
+      "redaction": {
+        "modele": "deepseek-flash",
+        "prompt": "p3-14-s4"
+      }
+    },
+    {
+      "post_id": 71,
+      "revision_id": 121,
+      "compte": "mova",
+      "statut": "en_attente",
+      "etiquette": "pas encore publié",
+      "verification": "verifie",
+      "passages_introuvables": [],
+      "planning": {
+        "jour": "2026-11-04",
+        "rang": 10,
+        "etat": "prevue",
+        "utilise_reserve": true,
+        "priorite": 3
+      },
+      "kind": "annonce",
+      "titre": "View and restore previous versions of your generative plugins and shaders",
+      "titre_media": "Figma",
+      "date_annonce": "2026-10-27T00:00:00.000Z",
+      "categories": [
+        "création visuelle",
+        "design"
+      ],
+      "accroche": {
+        "texte": "Your generative Figma plugins and shaders now keep their history",
+        "passages": [
+          "View and restore previous versions of your generative plugins and shaders"
+        ]
+      },
+      "description": {
+        "texte": "Editing a generative plugin or shader now creates a new version instead of overwriting what you had. Older versions stay available, so you can go back to them and restore one when an experiment doesn't pay off. You can revisit earlier states of your tools without keeping a separate copy somewhere else.",
+        "passages": [
+          "Editing your generative plugins and shaders now creates a new version, preserving previous versions of your tools for you to revisit and restore."
+        ]
+      },
+      "nouveaute": {
+        "texte": "Each edit produces a new version, and the earlier ones are kept for you.",
+        "passages": [
+          "Editing your generative plugins and shaders now creates a new version"
+        ]
+      },
+      "ce_que_ca_permet": {
+        "texte": "Go back to an earlier state of a plugin or shader and restore it.",
+        "passages": [
+          "preserving previous versions of your tools for you to revisit and restore"
+        ]
+      },
+      "pour_qui": {
+        "texte": "For anyone building generative plugins or shaders and iterating on them.",
+        "passages": [
+          "generative plugins and shaders"
+        ]
+      },
+      "limites_connues": null,
+      "reperes": [
+        {
+          "texte": "Editing creates a new version",
+          "passages": [
+            "now creates a new version"
+          ]
+        },
+        {
+          "texte": "Earlier versions stay available",
+          "passages": [
+            "preserving previous versions of your tools"
+          ]
+        }
+      ],
+      "source": {
+        "id": "feed:figma-release-notes",
+        "nom": "Figma, notes de version — flux Atom officiel",
+        "url": "https://www.figma.com/release-notes/?title=view-and-restore-previous-versions-of-your-generative-plugins-and-shaders",
+        "capture_le": "2026-10-30T14:44:30.964Z"
+      },
+      "redaction": {
+        "modele": "deepseek-flash",
+        "prompt": "p3-14-s4"
+      }
+    },
+    {
+      "post_id": 72,
+      "revision_id": 122,
+      "compte": "pyxo",
+      "statut": "en_attente",
+      "etiquette": "pas encore publié",
+      "verification": "verifie",
+      "passages_introuvables": [],
+      "planning": {
+        "jour": "2026-11-04",
+        "rang": 11,
+        "etat": "prevue",
+        "utilise_reserve": true,
+        "priorite": 3
+      },
+      "kind": "annonce",
+      "titre": "October 26, 2026",
+      "titre_media": "Vapi",
+      "date_annonce": "2026-10-26T00:00:00.000Z",
+      "categories": [
+        "agents et automatisation",
+        "modèles"
+      ],
+      "accroche": {
+        "texte": "Vapi adds a Traffic tab and OpenAI's gpt-transcribe",
+        "passages": [
+          "Traffic tab: Each assistant now has a Traffic tab",
+          "gpt-transcribe (OpenAI): OpenAI's gpt-transcribe transcription model"
+        ]
+      },
+      "description": {
+        "texte": "The Traffic tab breaks down calls per published version, with a flow view, a side-by-side version table and figures you can narrow down. Transcription widens too: gpt-transcribe accepts keywords and a guiding prompt, and AssemblyAI now works on HIPAA-enabled assistants. Regional OpenAI models become selectable for assistants, squads, evals and structured output.",
+        "passages": [
+          "shows how calls split across published versions",
+          "a version comparison table, and metrics you can filter by date range and version",
+          "support for keywords and a prompt to guide transcription",
+          "select regional OpenAI models when configuring an assistant, squad, eval, or structured output"
+        ]
+      },
+      "nouveaute": {
+        "texte": "Published versions can now be compared call by call, and the transcription and model choices widen. Calls that drop a GPT-Live assistant into a squad or pair it with a recording consent plan are now rejected upfront instead of ending right after they start.",
+        "passages": [
+          "GPT-Live assistants don't support squads or recording consent plans",
+          "These calls are now rejected when they're created, with an error that says what to change",
+          "Each assistant now has a Traffic tab"
+        ]
+      },
+      "ce_que_ca_permet": {
+        "texte": "See how traffic spreads across versions before changing anything, filter the numbers by date range and version, and compare flows side by side. On the model side, you can guide transcription with keywords and a prompt, or switch to a regional OpenAI model.",
+        "passages": [
+          "with a call-flow view, a version comparison table, and metrics you can filter",
+          "support for keywords and a prompt to guide transcription",
+          "select regional OpenAI models"
+        ]
+      },
+      "pour_qui": {
+        "texte": "Teams running several published versions of an assistant and anyone tuning transcription or model routing.",
+        "passages": [
+          "how calls split across published versions"
+        ]
+      },
+      "limites_connues": {
+        "texte": "A GPT-Live assistant is not supported in squads or with recording consent plans, and such calls are now refused at creation rather than dropped mid-call.",
+        "passages": [
+          "GPT-Live assistants don't support squads or recording consent plans"
+        ]
+      },
+      "reperes": [
+        {
+          "texte": "Traffic tab par assistant",
+          "passages": [
+            "Each assistant now has a Traffic tab"
+          ]
+        },
+        {
+          "texte": "gpt-transcribe dispo",
+          "passages": [
+            "gpt-transcribe transcription model is now available"
+          ]
+        },
+        {
+          "texte": "AssemblyAI sur HIPAA",
+          "passages": [
+            "transcriber on HIPAA-enabled assistants"
+          ]
+        }
+      ],
+      "source": {
+        "id": "feed:vapi",
+        "nom": "Vapi, What's New — flux RSS officiel",
+        "url": "https://docs.vapi.ai/whats-new/2026/10/26",
+        "capture_le": "2026-10-30T14:44:34.353Z"
+      },
+      "redaction": {
+        "modele": "deepseek-flash",
+        "prompt": "p3-14-s4"
+      }
+    },
+    {
+      "post_id": 74,
+      "revision_id": 124,
+      "compte": "mova",
+      "statut": "en_attente",
+      "etiquette": "pas encore publié",
+      "verification": "verifie",
+      "passages_introuvables": [],
+      "planning": {
+        "jour": "2026-11-03",
+        "rang": 5,
+        "etat": "prevue",
+        "utilise_reserve": true,
+        "priorite": 2
+      },
+      "kind": "annonce",
+      "titre": "Remote MCP, native PBR and more",
+      "titre_media": "Spline MCP server",
+      "date_annonce": "2026-10-19T00:00:00.000Z",
+      "categories": [
+        "création visuelle",
+        "MCP et skills"
+      ],
+      "accroche": {
+        "texte": "Spline's MCP server now runs in the cloud, no editor open",
+        "passages": [
+          "Spline's MCP server now runs in the cloud",
+          "without the editor open"
+        ]
+      },
+      "description": {
+        "texte": "Ask ChatGPT, Claude or Cursor for a scene and get a real Spline file back, ready to open and keep editing. Handy when you want to sketch a 3D idea straight from the chat you're already in. The same update pushes PBR materials, booleans and timeline animations into the native iOS and Android exports, adds camera and light keyframes, and makes big files behave in Hana. A batch of interaction fixes comes along.",
+        "passages": [
+          "ask ChatGPT, Claude or Cursor for a 3D scene and it's built in a real Spline file",
+          "ready for you to open and keep editing",
+          "PBR materials, booleans and timeline animations to the native iOS and Android exports",
+          "camera and light keyframes, smoother large files in Hana"
+        ]
+      },
+      "nouveaute": {
+        "texte": "The MCP server moves to the cloud, and the native mobile exports pick up the material, boolean and timeline features.",
+        "passages": [
+          "Spline's MCP server now runs in the cloud",
+          "This update also brings PBR materials, booleans and timeline animations"
+        ]
+      },
+      "ce_que_ca_permet": {
+        "texte": "Generate a scene from a chat prompt and get an editable Spline file without launching the app; on mobile, native builds now carry PBR materials, booleans and timeline animations.",
+        "passages": [
+          "it's built in a real Spline file",
+          "native iOS and Android exports"
+        ]
+      },
+      "pour_qui": {
+        "texte": "Designers and builders who work from ChatGPT, Claude or Cursor and want a 3D starting point they can keep editing in Spline.",
+        "passages": [
+          "ask ChatGPT, Claude or Cursor for a 3D scene"
+        ]
+      },
+      "limites_connues": null,
+      "reperes": [
+        {
+          "texte": "MCP server now in the cloud",
+          "passages": [
+            "Spline's MCP server now runs in the cloud"
+          ]
+        },
+        {
+          "texte": "PBR, booleans, timeline on mobile",
+          "passages": [
+            "PBR materials, booleans and timeline animations"
+          ]
+        },
+        {
+          "texte": "Camera and light keyframes",
+          "passages": [
+            "camera and light keyframes"
+          ]
+        }
+      ],
+      "source": {
+        "id": "feed:spline",
+        "nom": "Spline Changelog — flux RSS officiel",
+        "url": "https://spline.design/changelog/remote-mcp-native-pbr-and-more",
+        "capture_le": "2026-10-30T14:44:31.260Z"
+      },
+      "redaction": {
+        "modele": "deepseek-flash",
+        "prompt": "p3-14-s4"
+      }
+    },
+    {
+      "post_id": 76,
+      "revision_id": 126,
+      "compte": "repo",
+      "statut": "en_attente",
+      "etiquette": "pas encore publié",
+      "verification": "verifie",
+      "passages_introuvables": [],
+      "planning": {
+        "jour": "2026-11-04",
+        "rang": 12,
+        "etat": "prevue",
+        "utilise_reserve": true,
+        "priorite": 3
+      },
+      "kind": "annonce",
+      "titre": "Webhook IP ranges added to the Meta API",
+      "titre_media": "Meta API",
+      "date_annonce": "2026-10-29T17:14:38.000Z",
+      "categories": [
+        "grandes entreprises",
+        "sécurité"
+      ],
+      "accroche": {
+        "texte": "New webhook IP ranges are now in GitHub's Meta API",
+        "passages": [
+          "Webhook IP ranges added to the Meta API"
+        ]
+      },
+      "description": {
+        "texte": "GitHub added three CIDR prefixes for webhook deliveries on github.com, and they now show up in the Meta API. If your firewall pulls those ranges automatically, you have nothing to do. If you keep a hand-written allowlist, you need to add the new prefixes or deliveries may start bouncing.",
+        "passages": [
+          "We’re adding IP ranges for GitHub webhook deliveries on github.com.",
+          "The Meta API now includes these additional ranges in the hooks field.",
+          "If you already keep your allowlist up to date using the Meta API, no changes are needed for these additions."
+        ]
+      },
+      "nouveaute": {
+        "texte": "The hooks field in the Meta API carries three extra prefixes for webhook traffic on github.com, and they cover every plan, GitHub Enterprise Cloud included.",
+        "passages": [
+          "The Meta API now includes these additional ranges in the hooks field.",
+          "These ranges apply to webhook deliveries on github.com across all plans, including GitHub Enterprise Cloud."
+        ]
+      },
+      "ce_que_ca_permet": {
+        "texte": "Keep your inbound allowlist in sync with what GitHub actually sends from, so receivers stop turning away legitimate deliveries.",
+        "passages": [
+          "If you maintain a static network allowlist for incoming webhook deliveries, add these CIDR prefixes alongside your existing webhook IP ranges to avoid rejecting deliveries"
+        ]
+      },
+      "pour_qui": {
+        "texte": "Teams that filter inbound webhook traffic by IP, and anyone who maintains a static allowlist instead of reading ranges from the API.",
+        "passages": [
+          "If you maintain a static network allowlist for incoming webhook deliveries"
+        ]
+      },
+      "limites_connues": {
+        "texte": "Static allowlists need a manual edit; only setups that refresh from the Meta API skip the work.",
+        "passages": [
+          "If you already keep your allowlist up to date using the Meta API, no changes are needed for these additions."
+        ]
+      },
+      "reperes": [
+        {
+          "texte": "Three new prefixes for webhook deliveries",
+          "passages": [
+            "9.234.98.160/28 9.234.98.176/28 9.234.106.48/28"
+          ]
+        },
+        {
+          "texte": "Listed in the Meta API hooks field",
+          "passages": [
+            "The Meta API now includes these additional ranges in the hooks field."
+          ]
+        },
+        {
+          "texte": "Covers all plans, Enterprise Cloud included",
+          "passages": [
+            "across all plans, including GitHub Enterprise Cloud"
+          ]
+        }
+      ],
+      "source": {
+        "id": "feed:github-changelog",
+        "nom": "GitHub Changelog — flux RSS officiel",
+        "url": "https://github.blog/changelog/2026-10-29-webhook-ip-ranges-added-to-the-meta-api",
+        "capture_le": "2026-10-30T02:25:19.782Z"
+      },
+      "redaction": {
+        "modele": "deepseek-flash",
+        "prompt": "p3-15-s4"
+      }
+    },
+    {
+      "post_id": 82,
+      "revision_id": 164,
+      "compte": "nodi",
+      "statut": "en_attente",
+      "etiquette": "pas encore publié",
+      "verification": "verifie",
+      "passages_introuvables": [],
+      "planning": {
+        "jour": "2026-11-03",
+        "rang": 1,
+        "etat": "prevue",
+        "utilise_reserve": true,
+        "priorite": 1
+      },
+      "kind": "annonce",
+      "titre": "Le Chonk: Built for Coders, Trusted by Defenders.",
+      "titre_media": "Mistral Large 4 (Le Chonk)",
+      "date_annonce": "2026-10-29T12:00:07.000Z",
+      "categories": [
+        "modèles",
+        "agents et automatisation"
+      ],
+      "accroche": {
+        "texte": "Mistral Large 4 (Le Chonk): open weights for agentic coding and defense",
+        "passages": [
+          "Mistral Large 4 (Le Chonk) Built for Coders, Trusted by Defenders."
+        ]
+      },
+      "description": {
+        "texte": "Le Chonk is Mistral's 1-trillion-parameter multimodal model, and the weights are now out. Coding and defensive security got the bulk of the reinforcement learning push, with three reasoning modes to trade cost against depth. You can point it at a repo, run it in a terminal loop, or host it yourself.",
+        "passages": [
+          "1-trillion-parameter, natively multimodal model",
+          "Mistral Large 4 now supports three reasoning modes",
+          "We release the weights of Le Chonk",
+          "terminal-based coding workflows"
+        ]
+      },
+      "nouveaute": {
+        "texte": "The preview shipped earlier and the team kept scaling RL; three extra weeks moved coding results and token efficiency, and reasoning got cheaper to run. Weights and a license are published alongside.",
+        "passages": [
+          "Just three weeks of additional reinforcement learning have since propelled it to the forefront of open-weight coding",
+          "substantial gains in reasoning efficiency",
+          "lowering inference costs",
+          "releasing the weights of this improved Mistral Large 4"
+        ]
+      },
+      "ce_que_ca_permet": {
+        "texte": "Frontier-level coding with far fewer tokens spent per task, which matters once agents run at scale. On the defensive side it hunts and patches vulnerabilities without bailing out of legitimate work. Reasoning effort is selectable per request.",
+        "passages": [
+          "frontier coding performance with significantly fewer tokens",
+          "discover vulnerabilities in a codebase, reproduce and validate them, and patch them",
+          "without unnecessary refusals",
+          "three reasoning modes"
+        ]
+      },
+      "pour_qui": {
+        "texte": "Teams building coding agents, security teams that want to stay in control instead of handing off triage, and organizations that need to own and host the model rather than rent it through an API.",
+        "passages": [
+          "making sophisticated coding agents more economical to run at scale",
+          "Security teams perform best when they take the steering wheel",
+          "without depending on Mistral to serve it through an API",
+          "Organizations have the ability to inspect, customize, and deploy the model on their own infrastructure"
+        ]
+      },
+      "limites_connues": {
+        "texte": "Live-traffic monitoring showed the model declining black-box attacks on real targets but a possible uplift for conducting real attacks, so guardrails are being revised and the red-teaming variant stays gated behind vetting and contractual safeguards.",
+        "passages": [
+          "we see a potential for uplift to conduct real attacks",
+          "We are modifying our guardrails accordingly"
+        ]
+      },
+      "reperes": [
+        {
+          "texte": "Weights out, three reasoning modes",
+          "passages": [
+            "Mistral Large 4 now supports three reasoning modes"
+          ]
+        },
+        {
+          "texte": "47% fewer tokens per task, Mistral says",
+          "passages": [
+            "47% fewer tokens per task on average"
+          ]
+        },
+        {
+          "texte": "Cyber Index at 51%",
+          "passages": [
+            "51% on the Artificial Analysis Cyber Index"
+          ]
+        }
+      ],
+      "source": {
+        "id": "feed:mistral",
+        "nom": "Mistral AI — flux RSS officiel",
+        "url": "https://mistral.ai/news/mistral-large-4-oss/",
+        "capture_le": "2026-11-03T07:27:55.287Z"
+      },
+      "redaction": {
+        "modele": "deepseek-flash",
+        "prompt": "p3-15-s4"
+      }
+    },
+    {
+      "post_id": 83,
+      "revision_id": 165,
+      "compte": "repo",
+      "statut": "en_attente",
+      "etiquette": "pas encore publié",
+      "verification": "verifie",
+      "passages_introuvables": [],
+      "planning": {
+        "jour": "2026-11-03",
+        "rang": 6,
+        "etat": "prevue",
+        "utilise_reserve": false,
+        "priorite": 2
+      },
+      "kind": "annonce",
+      "titre": "Build and manage Connected Apps in one place",
+      "titre_media": "Connected Apps Platform",
+      "date_annonce": "2026-10-28T17:00:00.000Z",
+      "categories": [
+        "MCP et skills",
+        "agents et automatisation",
+        "grandes entreprises"
+      ],
+      "accroche": {
+        "texte": "Google opens a preview of its Connected Apps Platform for Gemini and Search.",
+        "passages": [
+          "launching the preview of our Connected Apps Platform"
+        ]
+      },
+      "description": {
+        "texte": "Developers get one place to build an app once and put it in front of people searching or chatting with Gemini. You integrate through a cloud-hosted MCP server or Android MCP with the AppFunctions APIs, then register, test and submit the app in the Google Connected Console. Before review you pick where it goes live: Search, the Gemini app, or both. After launch you follow traffic, latency and error rates, and keep hold of the branding with verified logos and authenticated accounts. Access is still in preview and opens in stages, with more developers, markets and Google products promised later.",
+        "passages": [
+          "single place to build and manage apps for Search and the Gemini app",
+          "build once and reach high-intent users across both Search and the Gemini app",
+          "Developers integrate with a cloud-hosted MCP server or Android MCP using the AppFunctions APIs",
+          "use the Google Connected Console to register, test, and submit their app",
+          "developers choose whether it will go live in Search, the Gemini app, or both",
+          "track traffic, latency, and error rates, and keep control of your brand identity",
+          "launching the preview of our Connected Apps Platform",
+          "We're opening access in phases, and will add more developers, markets, and Google products over the coming months"
+        ]
+      },
+      "nouveaute": {
+        "texte": "A single console for building, testing, submitting and monitoring Connected Apps, plus a choice of where each one appears.",
+        "passages": [
+          "register, test, and submit their app"
+        ]
+      },
+      "ce_que_ca_permet": {
+        "texte": "Ship one integration and cover both surfaces, then watch how it behaves once live.",
+        "passages": [
+          "build once and reach high-intent users"
+        ]
+      },
+      "pour_qui": {
+        "texte": "App developers who want their product inside Search and the Gemini app during the preview phase.",
+        "passages": [
+          "a unified way for more app developers to bring their capabilities directly into Gemini and Search",
+          "launching the preview of our Connected Apps Platform"
+        ]
+      },
+      "limites_connues": {
+        "texte": "It's a staged preview, with more developers and markets added later.",
+        "passages": [
+          "We're opening access in phases"
+        ]
+      },
+      "reperes": [
+        {
+          "texte": "Build once, reach Gemini and Search",
+          "passages": [
+            "build once and reach high-intent users"
+          ]
+        },
+        {
+          "texte": "Register, test and submit in one console",
+          "passages": [
+            "use the Google Connected Console to register, test, and submit their app"
+          ]
+        },
+        {
+          "texte": "Track traffic, latency and errors",
+          "passages": [
+            "you can track traffic, latency, and error rates"
+          ]
+        }
+      ],
+      "source": {
+        "id": "feed:google-gemini",
+        "nom": "Google The Keyword, Gemini — flux RSS officiel",
+        "url": "https://blog.google/innovation-and-ai/technology/developers-tools/connected-apps-one-place/",
+        "capture_le": "2026-11-03T07:27:54.612Z"
+      },
+      "redaction": {
+        "modele": "deepseek-flash",
+        "prompt": "p3-15-s4"
+      }
+    },
+    {
+      "post_id": 84,
+      "revision_id": 166,
+      "compte": "nodi",
+      "statut": "en_attente",
+      "etiquette": "pas encore publié",
+      "verification": "verifie",
+      "passages_introuvables": [],
+      "planning": {
+        "jour": "2026-11-03",
+        "rang": 2,
+        "etat": "prevue",
+        "utilise_reserve": true,
+        "priorite": 1
+      },
+      "kind": "annonce",
+      "titre": "Gemini 4 Carbon: our next frontier model",
+      "titre_media": "Gemini 4 Carbon",
+      "date_annonce": "2026-10-28T17:00:00.000Z",
+      "categories": [
+        "modèles",
+        "sécurité",
+        "agents et automatisation"
+      ],
+      "accroche": {
+        "texte": "Gemini 4 Carbon: a model built for long-horizon agentic work and cyber defense",
+        "passages": [
+          "Gemini 4 Carbon is our strongest model with state-of-the-art cybersecurity and long horizon capabilities."
+        ]
+      },
+      "description": {
+        "texte": "Carbon is aimed at harder engineering runs that stretch out over time, and at the security work that comes with them: finding flaws, checking which ones are actually exploitable, and patching the root cause. Google says its teams have watched it keep going across multi-step jobs on large codebases and low-level systems. It ships into a small group of cyber defenders first, then more trusted partners, with developer and consumer access later. Intro pricing matches Argon.",
+        "passages": [
+          "Designed to take on much harder, long-horizon engineering problems, Carbon is built for sustained agentic workflows.",
+          "root-causing and patching subtle bugs across large codebases and low-level systems",
+          "we will make Carbon available to a subset of cyber defenders"
+        ]
+      },
+      "nouveaute": {
+        "texte": "Google positions it as its strongest model so far, with 88.2% on SEC-bench Pro, 54.8% on ExploitGym and 71.0% on CWE-bench, and claims a firm lead on the first. On WebDev Arena it sits at #4 with 1768 after a jump of 89 elo points.",
+        "passages": [
+          "landing a firm lead in SEC-bench Pro (88.2%) for finding vulnerabilities, ExploitGym (54.8%) for exploitation, and CWE-bench (71.0%) for patching",
+          "Carbon jumps +89 elo points to land at #4 (1768) on WebDev Arena"
+        ]
+      },
+      "ce_que_ca_permet": {
+        "texte": "Sustained multi-step runs rather than single prompts: the model keeps working through dead ends instead of stalling. Google also reports less overreach and less under-service on plan execution, with discrepancies surfaced to the user before it acts.",
+        "passages": [
+          "Carbon simultaneously reduced overreach by 26% and under-service by 29%",
+          "Carbon retrieves the relevant sources and surfaces discrepancies to the user before acting"
+        ]
+      },
+      "pour_qui": {
+        "texte": "Security defenders first, then trusted partners; developers and product teams follow once access opens up.",
+        "passages": [
+          "we will make Carbon available to a subset of cyber defenders",
+          "before making Carbon available to developers, businesses, and consumers"
+        ]
+      },
+      "limites_connues": {
+        "texte": "Rollout starts narrow, so developers, businesses and consumers can only get it once access widens.",
+        "passages": [
+          "We’re continuing to gather feedback and iterate on guardrails before making Carbon available to developers, businesses, and consumers"
+        ]
+      },
+      "reperes": [
+        {
+          "texte": "Built for sustained agentic workflows",
+          "passages": [
+            "built for sustained agentic workflows"
+          ]
+        },
+        {
+          "texte": "88.2% on SEC-bench Pro",
+          "passages": [
+            "88.2% on SEC-bench Pro"
+          ]
+        },
+        {
+          "texte": "$2 in / $10 out per million tokens",
+          "passages": [
+            "at $2 per million input tokens and $10 per million output tokens"
+          ]
+        }
+      ],
+      "source": {
+        "id": "feed:google-gemini",
+        "nom": "Google The Keyword, Gemini — flux RSS officiel",
+        "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-carbon/",
+        "capture_le": "2026-11-03T07:27:53.824Z"
+      },
+      "redaction": {
+        "modele": "deepseek-flash",
+        "prompt": "p3-15-s4"
+      }
+    },
+    {
+      "post_id": 88,
+      "revision_id": 170,
+      "compte": "nodi",
+      "statut": "en_attente",
+      "etiquette": "pas encore publié",
+      "verification": "verifie",
+      "passages_introuvables": [],
+      "planning": {
+        "jour": "2026-11-03",
+        "rang": 3,
+        "etat": "prevue",
+        "utilise_reserve": true,
+        "priorite": 1
+      },
+      "kind": "annonce",
+      "titre": "Voxtral 3",
+      "titre_media": "Voxtral 3",
+      "date_annonce": "2026-10-20T12:00:22.000Z",
+      "categories": [
+        "modèles",
+        "audio et musique",
+        "agents et automatisation"
+      ],
+      "accroche": {
+        "texte": "Voxtral 3 turns calls into a working voice agent: listen, reason, act, speak.",
+        "passages": [
+          "Voxtral 3 introduces a voice agent SDK, built on LiveKit, that runs speech in, reasoning, and speech out as one streaming pipeline.",
+          "a voice agent SDK that brings listening, thinking, tool calling, and speaking into a single real-time streaming pipeline"
+        ]
+      },
+      "description": {
+        "texte": "It gives you a speech stack for agents that hold a real conversation and finish the job. One model listens, a general model such as Mistral Small decides and calls tools, and the TTS speaks back in the mood of what came before. Swap out any of the three — LLM, voice, language — and the agent still stands. Run it through Mistral's API in Europe or on hardware you control.",
+        "passages": [
+          "Each stage is a separate model, so you can change the LLM, the voice, or the language without rewriting the agent",
+          "a general model—like Mistral Small —reasons and calls tools",
+          "Voxtral TTS replies in the tone of the conversation so far"
+        ]
+      },
+      "nouveaute": {
+        "texte": "The release bundles new speech-to-text and text-to-speech models with a voice agent SDK built on LiveKit. Voxtral Mini TTS 3 adds context-aware voices that shift emotion, pacing and emphasis, plus voice cloning and custom prompt instruction following. Transcribe 3 adds diarization, context biasing and end-of-turn prediction.",
+        "passages": [
+          "The text-to-speech model, Voxtral Mini TTS 3 , introduces new voices that adjust their emotion, pace, and emphasis based on conversational context",
+          "The speech-to-text model, Voxtral Small Transcribe 3 , is state-of-the-art in multilingual transcription, identifying who said what (diarization)",
+          "It detects when someone has finished speaking so agents can respond without delay (end-of-turn detection)."
+        ]
+      },
+      "ce_que_ca_permet": {
+        "texte": "Mid-call, an agent can pull an identity check, a bill balance or a booking through function calling, web search and retrieval over your own systems. Calls go over SIP; browsers and apps connect over WebRTC; and the telephony, IVR and contact-center tools you already run stay in place. Domain vocabulary lands correctly without fine-tuning, thanks to context biasing.",
+        "passages": [
+          "During a call, the agent can verify a caller's identity, check a bill, or book an appointment, using function calling, web search, and retrieval over your own systems.",
+          "It answers and places calls over SIP, runs in browsers and apps over WebRTC",
+          "This enables them to be used in production settings with domain-specific vocabulary without the need for fine-tuning."
+        ]
+      },
+      "pour_qui": {
+        "texte": "Teams building contact-center agents, service desks, virtual assistants and hands-free copilots, especially those with data-residency constraints.",
+        "passages": [
+          "from contact-center agents and service desks to virtual assistants and hands-free copilots",
+          "Keep sensitive conversations within your environment and control whether any audio is retained."
+        ]
+      },
+      "limites_connues": null,
+      "reperes": [
+        {
+          "texte": "Turns under one second",
+          "passages": [
+            "each turn completes in under one second"
+          ]
+        },
+        {
+          "texte": "35+ languages, 50+ dialects",
+          "passages": [
+            "Speech sounds local in 35 languages and over 50 dialects."
+          ]
+        },
+        {
+          "texte": "EU-hosted or self-deployed",
+          "passages": [
+            "deploy Voxtral 3 on your own infrastructure"
+          ]
+        }
+      ],
+      "source": {
+        "id": "feed:mistral",
+        "nom": "Mistral AI — flux RSS officiel",
+        "url": "https://mistral.ai/news/voxtral-3/",
+        "capture_le": "2026-11-03T07:27:56.189Z"
+      },
+      "redaction": {
+        "modele": "deepseek-flash",
+        "prompt": "p3-15-s4"
+      }
     }
   ]
 };

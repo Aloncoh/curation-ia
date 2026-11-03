@@ -11,8 +11,13 @@ const montage = (m: Partial<Montage> = {}): Montage => ({
 const html = (m: Montage) => htmlMontage(m, { avatar: 'data:image/png;base64,BBBB', polices: '', nomCompte: 'Repo' });
 const etiquette = { texte: 'Nouveau bouton', x: 10, y: 10, ancre: { x: 50, y: 50 } };
 const COMPLET: Record<(typeof GABARITS)[number], Partial<Montage>> = {
-  photo_titre: {}, fenetre_annotee: {}, detourage_titre: {}, avant_apres: { apres: IMAGE }, loupe: { loupe: { x: 50, y: 50, zoom: 2 } }, terminal_annote: { image: null, lignes: ['acme run'], surtitre: 'Reconstitution de la commande citée' }, fiches: { image: null, etiquettes: [{ texte: 'Un repère', x: 4, y: 52, ancre: null }] },
-  etapes: { image: null, etapes: ['Installer le skill', 'Lancer la commande'], surtitre: 'Pour commencer, selon la documentation' },
+  photo_titre: {}, fenetre_annotee: {}, detourage_titre: {}, avant_apres: { apres: IMAGE }, loupe: { loupe: { x: 50, y: 50, zoom: 2 } }, terminal_annote: { image: null, lignes: ['acme run'], surtitre: 'Reconstructed from the quoted command' }, fiches: { image: null, etiquettes: [{ texte: 'Un repère', x: 4, y: 52, ancre: null }] },
+  etapes: { image: null, etapes: ['Installer le skill', 'Lancer la commande'], surtitre: 'Getting started, per the documentation' },
+  selection: {
+    image: null,
+    apercus: ['Alpha', 'Beta', 'Gamma', 'Delta'].map((nom) => ({ src: 'data:image/jpeg;base64,AAAA', nom, alt: `Page d’accueil de ${nom}` })),
+    source: 'Screenshots of the cited sites, © their owners · captured 2 November 2026',
+  },
 };
 
 describe('contrôle d’un montage avant rendu', () => {
@@ -44,6 +49,17 @@ describe('contrôle d’un montage avant rendu', () => {
     expect(etapes(['Installer', 'x'.repeat(80), 'Trois', 'Quatre'])).toEqual([]);
     expect(etapes(['Installer', 'Lancer'], { surtitre: 'Testé par nos soins' })).toContain('etapes_non_attribuees');
   });
+  it('le gabarit sélection exige 4 à 6 aperçus locaux, nommés, et le crédit des captures', () => {
+    const sel = (m: Partial<Montage>) => defautsMontage(montage({ gabarit: 'selection', ...COMPLET.selection, ...m }));
+    const apercu = (nom: string) => ({ src: 'data:image/jpeg;base64,AAAA', nom, alt: `Page de ${nom}` });
+    expect(sel({ apercus: ['a', 'b', 'c'].map(apercu) })).toContain('apercus_hors_limites');
+    expect(sel({ apercus: ['a', 'b', 'c', 'd', 'e', 'f', 'g'].map(apercu) })).toContain('apercus_hors_limites');
+    expect(sel({ apercus: ['a', 'b', 'c', 'd', 'e', 'f'].map(apercu) })).toEqual([]);
+    expect(sel({ apercus: [...['a', 'b', 'c'].map(apercu), { ...apercu('d'), src: 'https://exemple.test/a.jpg' }] })).toContain('image_non_locale');
+    expect(sel({ apercus: [...['a', 'b', 'c'].map(apercu), apercu(' ')] })).toContain('nom_apercu_hors_limites');
+    expect(sel({ source: 'Source : exemple.test' })).toContain('credit_absent');
+    expect(defautsMontage(montage({ apercus: ['a', 'b', 'c', 'd'].map(apercu) }))).toContain('apercus_hors_gabarit');
+  });
   it('une image distante ou sans texte alternatif est refusée', () => {
     expect(defautsMontage(montage({ image: { ...IMAGE, src: 'https://example.com/a.png' } }))).toContain('image_non_locale');
     expect(defautsMontage(montage({ image: { ...IMAGE, alt: '' } }))).toContain('texte_alternatif_absent');
@@ -73,8 +89,8 @@ describe('document du montage', () => {
     const document = html(montage({ gabarit, ...COMPLET[gabarit], etiquettes: [etiquette] }));
     expect(document).not.toMatch(/(?:src|href)="https?:/);
     expect(document).not.toContain('<script');
-    expect(document).toContain('Agent IA');
-    expect(document).toContain('Illustration — ne prouve pas le fonctionnement');
+    expect(document).toContain('AI agent');
+    expect(document).toContain('Illustration — not proof that it works');
   });
   it('un texte collecté reste du texte, jamais une balise', () => {
     const document = html(montage({ titre: '<img src=x onerror=alert(1)>', etiquettes: [{ ...etiquette, texte: '<script>alert(1)</script>' }], gabarit: 'terminal_annote', image: null, lignes: ['echo "<b>"'] }));
@@ -115,7 +131,7 @@ describe('document du montage', () => {
     expect(document.match(/class="etape"/g)).toHaveLength(3);
     expect(document.match(/class="fleche" aria-hidden="true"/g)).toHaveLength(2);
     expect(document).toContain('Installer &lt;le&gt; skill');
-    expect(document).toContain('Pour commencer, selon la documentation');
+    expect(document).toContain('Getting started, per the documentation');
     expect(texteAlternatif(m)).toBe('Acme ajoute un mode hors ligne. Étape 1 : Installer <le> skill. Étape 2 : Lancer. Étape 3 : Relire');
   });
   it('des étiquettes sans point repéré s’empilent, sans fil ni position fixe', () => {
@@ -129,7 +145,7 @@ describe('choix de la composition, sans modèle', () => {
   const contenu = { id: 'x', compte: 'nodi' as const, accroche: 'Acme ajoute un mode hors ligne', reperes: ['Hors ligne', 'Sur Linux'], date_annonce: '2026-10-29T17:14:38.000Z', source: 'Source : acme.example', mention: 'Illustration — ne prouve pas le fonctionnement' };
   it('sans image autorisée, les repères deviennent des fiches', () => {
     const m = composerMontage(contenu, null);
-    expect(m).toMatchObject({ gabarit: 'fiches', image: null, surtitre: '29 octobre 2026' });
+    expect(m).toMatchObject({ gabarit: 'fiches', image: null, surtitre: '29 October 2026' });
     expect(m.etiquettes.map((e) => e.texte)).toEqual(contenu.reperes);
     expect(defautsMontage(m)).toEqual([]);
   });
@@ -141,7 +157,7 @@ describe('choix de la composition, sans modèle', () => {
     expect(html(capture)).not.toContain('class="point"');
   });
   it('la date affichée est celle de Paris, pas celle d’UTC', () => {
-    expect(composerMontage({ ...contenu, date_annonce: '2026-10-29T23:30:00.000Z' }, null).surtitre).toBe('30 octobre 2026');
+    expect(composerMontage({ ...contenu, date_annonce: '2026-10-29T23:30:00.000Z' }, null).surtitre).toBe('30 October 2026');
   });
   it('sans repère ni image, rien n’est rendu', () => {
     expect(defautsMontage(composerMontage({ ...contenu, reperes: [] }, null))).toContain('reperes_absents');
@@ -151,7 +167,7 @@ describe('choix de la composition, sans modèle', () => {
 describe('montages de démonstration', () => {
   it('sont tous signalés comme exemples et passent les contrôles', () => {
     for (const m of [...montagesDeBase(), ...montagesDerives()]) {
-      expect(m.source).toMatch(/^Exemple · /);
+      expect(m.source).toMatch(/^Example · /);
       expect(defautsMontage(m)).toEqual([]);
     }
   });

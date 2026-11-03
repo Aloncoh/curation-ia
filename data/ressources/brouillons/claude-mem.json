@@ -2,7 +2,7 @@
   "slug": "claude-mem",
   "consignes": "r2",
   "accroche": {
-    "texte": "claude-mem donne à Claude Code une mémoire qui tient d’une session à l’autre",
+    "texte": "claude-mem gives Claude Code a memory that persists from one session to the next",
     "passages": [
       "Persistent memory compression system built for",
       "Context survives across sessions",
@@ -10,21 +10,21 @@
     ]
   },
   "description": {
-    "texte": "Pendant la session, il enregistre ce que fait l’agent, le compresse en résumés et réinjecte le contexte utile dans la suivante. Vous reprenez un projet sans tout réexpliquer.",
+    "texte": "During the session, it records what the agent does, compresses it into summaries, and injects the useful context back into the next one. You pick a project back up without re-explaining everything.",
     "passages": [
       "Captures everything your agent does during sessions, compresses it with AI, and injects relevant context back into future sessions",
       "This enables Claude to maintain continuity of knowledge about projects even after sessions end or reconnect."
     ]
   },
   "interet": {
-    "texte": "Pour retrouver une info, l’agent lit d’abord un index compact, puis ne charge que les notes utiles : environ dix fois moins de tokens, selon les auteurs.",
+    "texte": "To find information, the agent first reads a compact index, then loads only the useful notes: about ten times fewer tokens, according to the authors.",
     "passages": [
       "Get compact index with IDs (~50-100 tokens/result)",
       "~10x token savings by filtering before fetching details"
     ]
   },
   "exemple_usage": {
-    "texte": "Dans la doc : chercher « authentication bug » parmi les corrections, puis ne récupérer que deux observations.",
+    "texte": "In the docs: search for \"authentication bug\" among the fixes, then retrieve only two observations.",
     "passages": [
       "search(query=\"authentication bug\", type=\"bugfix\", limit=10)",
       "Fetch full details get_observations(ids=[123, 456])"
@@ -33,7 +33,7 @@
   "demarrage": {
     "etapes": [
       {
-        "texte": "npx claude-mem install ou la place de marché de plugins de Claude Code, puis redémarrez. Pas npm install -g, qui n’installe que la bibliothèque.",
+        "texte": "npx claude-mem install or the Claude Code plugin marketplace, then restart. Not npm install -g, which only installs the library.",
         "passages": [
           "Install with a single command:",
           "Or install from the plugin marketplace inside Claude Code:",
@@ -49,7 +49,7 @@
   },
   "compatibilites": [
     {
-      "texte": "Node.js 20.0.0 ou plus récent.",
+      "texte": "Node.js 20.0.0 or newer.",
       "passages": [
         "Node.js: 20.0.0 or higher"
       ]
@@ -57,7 +57,7 @@
   ],
   "limites": [
     {
-      "texte": "Le service claude-mem proposé à l’installation est gratuit 30 jours ; ensuite la mémoire passe sur votre abonnement Anthropic, sauf souscription ou clé OpenRouter ou Gemini.",
+      "texte": "The claude-mem service offered at install is free for 30 days; after that, memory runs on your Anthropic subscription, unless you have an OpenRouter or Gemini subscription or key.",
       "passages": [
         "asks you to sign in to claude-mem in your browser",
         "unlocks the claude-mem observer with a 30 Day Free Trial",
@@ -183,21 +183,21 @@
   },
   "reperes": [
     {
-      "texte": "Recherche en trois temps via 4 outils MCP",
+      "texte": "Three-step search via 4 MCP tools",
       "passages": [
         "Query your project history with the three-step mem-search skill",
         "intelligent memory search through 4 MCP tools"
       ]
     },
     {
-      "texte": "Historique stocké en SQLite et Chroma",
+      "texte": "History stored in SQLite and Chroma",
       "passages": [
         "SQLite Database - Stores sessions, observations, summaries",
         "Chroma Vector Database - Hybrid semantic + keyword search"
       ]
     },
     {
-      "texte": "Aussi pour Codex, Gemini, Copilot et OpenCode",
+      "texte": "Also for Codex, Gemini, Copilot and OpenCode",
       "passages": [
         "Works with Claude Code, OpenClaw, Codex, Gemini, Hermes, Copilot, OpenCode + More"
       ]

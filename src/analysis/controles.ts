@@ -23,6 +23,8 @@ export interface ContexteControle {
   produitCatalogue?: boolean;
   dateAnnonce?: string | null;
   autresCaptures?: string[];
+  /** Nom de la source (« Figma, notes de version ») : un journal officiel atteste le nom de son produit sans le répéter. */
+  source?: string;
 }
 
 export interface DiapositiveResolue {
@@ -32,21 +34,21 @@ export interface DiapositiveResolue {
 }
 
 // Liste anti-sensationnalisme, version 1 (docs/agents-editoriaux.md §6).
-const SENSATIONNEL = /révolutionnaire|incroyable|époustouflant|hallucinant|game changer|tout change|vous n['’]allez pas croire|ce que personne ne vous dit|\bchoc\b/i;
+const SENSATIONNEL = /révolutionnaire|incroyable|époustouflant|hallucinant|game changer|tout change|vous n['’]allez pas croire|ce que personne ne vous dit|\bchoc\b|revolutionary|incredible|mind-blowing|insane|groundbreaking|changes everything|you won['’]t believe|nobody tells you/i;
 const SIGLES = new Set(['API', 'MCP', 'SDK', 'CLI', 'IA', 'AI', 'GPU', 'CPU', 'LLM', 'GPT', 'RAG', 'SQL', 'RSS', 'HTTP', 'JSON', 'URL', 'UI', 'UX', '3D', 'PDF', 'DOCX', 'XLSX', 'CSV', 'HTML', 'CSS', 'PNG', 'JPG', 'SVG', 'MP3', 'MP4']);
 export const NUANCE_SOURCE = /\b(?:not|never|only|except|unless|may|might|preview|beta|experimental|limited|deprecated|coming soon|planned)\b|n[’']t\b/i;
 // Bornes Unicode : `\b` ignore les lettres accentuées, « limité » n'y serait jamais reconnu.
-export const NUANCE_TEXTE = /(?<![\p{L}\p{N}])(?:(?:ne|pas|jamais|seulement|uniquement|sauf|peut|peuvent|pourrait|sans|préversion|bêta|expérimentale?s?|expérimentaux|limitée?s?|restreinte?s?|indisponibles?|bientôt|prévue?s?|selon)(?![\p{L}\p{N}])|n['’])/iu;
+export const NUANCE_TEXTE = /(?<![\p{L}\p{N}])(?:(?:ne|pas|jamais|seulement|uniquement|sauf|peut|peuvent|pourrait|sans|préversion|bêta|expérimentale?s?|expérimentaux|limitée?s?|restreinte?s?|indisponibles?|bientôt|prévue?s?|selon|not|never|only|except|unless|may|might|can|could|without|preview|beta|experimental|limited|restricted|unavailable|soon|planned|requires?|according|no|none|nothing|nor|cannot|instead|if|depending|depends)(?![\p{L}\p{N}])|n['’])|n['’]t(?![\p{L}\p{N}])/iu;
 // Heuristiques : elles repèrent un passage hors sujet, elles ne prouvent pas que le coût ou l'accès annoncé est exact.
 const INDICE_COUT = /[$€£]\s?\d|\d\s?(?:[$€£]|usd\b|eur\b|dollars?\b|euros?\b)|\bfree\b|\bgratuit\w*|\bno cost\b|\bpric\w*|\bcosts?\b|\bpaid\b|\bplans?\b|\btiers?\b|\bsubscri\w*|\bcredits?\b|\bbilling\b/i;
 const GRATUITE = /\bfree\b|\bgratuit\w*|\bno cost\b|\bsans frais\b/i;
 const INDICE_ACCES = /https?:\/\/|\b(?:available|access|download\w*|install\w*|sign[- ]?up|waitlist|rolling out|preview|beta|github|npm|pip|marketplace|disponible\w*|accès)\b/i;
-export const ATTRIBUTION = /\bselon\b|d['’]après|\baffirme\b|\brevendique\b|\bindique\b|\bannonce (?:que|une?|l[ea]s?|des|son|sa|ses)\b/i;
+export const ATTRIBUTION = /\bselon\b|d['’]après|\baffirme\b|\brevendique\b|\bindique\b|\bannonce (?:que|une?|l[ea]s?|des|son|sa|ses)\b|\baccording to\b|\bclaims?\b|\bsays\b|\breports?\b/i;
 // Un pourcentage seul peut être une remise ou une part d'écran : seule une comparaison compte comme une performance.
-export const PERFORMANCE = /\bbenchmarks?\b|\bscores?\b|\bfois plus\b|\d\s*%\s*(?:de\s+)?(?:plus|moins|mieux)\b|\d\s*x\s+plus\b/i;
-const SUPERLATIF = /\b(?:l[ea]s?|du|des) (?:plus|meilleur\w*)\b|\bmeilleur\w*|\bplus (?:rapide|puissant|précis|performant|fiable)\w*|\bfois plus\b|\b\d+\s*(?:%|fois)|\bleader\b|\bn°\s*1\b/i;
+export const PERFORMANCE = /\bbenchmarks?\b|\bscores?\b|\bfois plus\b|\d\s*%\s*(?:de\s+)?(?:plus|moins|mieux)\b|\d\s*x\s+plus\b|\btimes (?:faster|better|more)\b|\d\s*%\s*(?:faster|better|more|less|fewer)\b|\d\s*x\s+(?:faster|better|more)\b/i;
+const SUPERLATIF = /\b(?:l[ea]s?|du|des) (?:plus|meilleur\w*)\b|\bmeilleur\w*|\bplus (?:rapide|puissant|précis|performant|fiable)\w*|\bfois plus\b|\b\d+\s*(?:%|fois)|\bleader\b|\bn°\s*1\b|\b(?:the )?(?:best(?! practices?\b)|fastest|most (?:powerful|accurate|reliable))\b|\bleading\b|\bnumber one\b|#1\b|\b\d+\s*x (?:faster|better)\b/i;
 // V1 : analyse documentaire seule. Un texte rédigé ne raconte pas un essai qui n'a pas eu lieu (SPEC §7.8).
-export const ESSAI_REVENDIQUE = /\b(?:nous avons|j['’]ai|on a)\s+(?:test|essay|mesur|obtenu|constaté)\w*|\b(?:testée?s?|essayée?s?) par (?:nos|notre|nous|la plateforme)\b|\b(?:d['’]après|selon) (?:nos|notre) (?:tests?|essais?|mesures?)\b/i;
+export const ESSAI_REVENDIQUE = /\b(?:nous avons|j['’]ai|on a)\s+(?:test|essay|mesur|obtenu|constaté)\w*|\b(?:testée?s?|essayée?s?) par (?:nos|notre|nous|la plateforme)\b|\b(?:d['’]après|selon) (?:nos|notre) (?:tests?|essais?|mesures?)\b|\b(?:we|I) (?:tested|tried|measured|benchmarked)\b|\btested by (?:us|our team|the platform)\b|\b(?:according to|in) our (?:tests?|testing|measurements?)\b/i;
 /** Types jamais publiables comme un fait : ils passent toujours en relecture. */
 const TYPES_A_RELIRE = ['non_confirmee', 'opinion', 'temoignage'];
 /** Au-delà, un passage cesse d'être une citation et devient une reprise de la source. */
@@ -56,7 +58,8 @@ export const LONGUEUR_MAX_REPERE = 64;
 /** Autant de mots consécutifs repris de la capture dans un texte rédigé : une copie, pas une synthèse. */
 const MOTS_DE_COPIE = 8;
 const MOTS_VIDES = new Set(['the', 'and', 'for', 'with', 'new', 'now', 'you', 'your', 'our', 'from', 'how', 'why', 'what', 'into', 'les', 'des', 'une', 'pour', 'avec', 'dans', 'sur', 'nos', 'vos']);
-const LIBELLES_CHAMPS = { accroche: 'Accroche', nouveaute: 'Nouveauté', ce_que_ca_permet: 'Ce que ça permet', pour_qui: 'Pour qui', exemple_usage: 'Exemple d’usage', acces: 'Pour commencer', prerequis: 'Prérequis', cout: 'Coût', limites_connues: 'Limites connues' } as const;
+/** Libellés des diapositives, inscrits sur l'image : en anglais (décision de l'utilisateur du 2026-11-03). */
+const LIBELLES_CHAMPS = { accroche: 'Headline', nouveaute: 'What’s new', ce_que_ca_permet: 'What it enables', pour_qui: 'Who it’s for', exemple_usage: 'Example use', acces: 'Getting started', prerequis: 'Requirements', cout: 'Cost', limites_connues: 'Known limits' } as const;
 
 const JOUR_PARIS = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Paris' });
 
@@ -64,6 +67,14 @@ export const mots = (texte: string) => (texte.toLowerCase().match(/[\p{L}\p{N}][
 /** Moins de trois mots, séparés par des espaces : un point, une version ou une adresse se retrouve partout et ne soutient rien. */
 export const moinsDeTroisMots = (texte: string) => texte.trim().split(/\s+/).filter((m) => /[\p{L}\p{N}]/u.test(m)).length < 3;
 const numeroDeVersion = (mot: string) => /^v?\d[\d.]*$/.test(mot);
+/**
+ * Sigles génériques (minuscules) : ils ne nomment aucun produit ni éditeur. Les systèmes (Android, Linux…) n'y sont pas :
+ * « arrive sur Android » affirme une disponibilité, qui doit être citée.
+ */
+export const TERMES_COURANTS = ['api', 'apis', 'cli', 'sdk', 'mcp', 'json', 'yaml', 'http', 'https', 'url', 'urls', 'utc', 'llm', 'llms', 'gpu', 'cpu', 'ssh', 'sql', 'css', 'html', 'pdf', 'ide', 'oauth', 'sso'];
+/** Mots-outils français : trois au moins dans un texte suffisent à dire qu'il n'est pas en anglais. */
+const MOTS_FRANCAIS = /(?<![\p{L}])(?:le|la|les|des|une|est|et|pour|avec|dans|sur|cette|ces|qui|du|aux|ajoute|selon|sans)(?![\p{L}])/giu;
+export const enFrancais = (texte: string) => (texte.match(MOTS_FRANCAIS) ?? []).length >= 3;
 /** Noms propres : mot à majuscule, sauf en début de phrase. */
 export const nomsPropres = (texte: string) =>
   [...texte.matchAll(/(?<![.!?:]\s)(?<=\s)[A-Z][\p{L}\p{N}.+-]{2,}/gu)].map((m) => m[0].replace(/[.,]+$/, ''));
@@ -103,14 +114,17 @@ export const diapositivesDe = (b: Brouillon): DiapositiveResolue[] => b.diaposit
 
 /** `capture` : titre et texte séparés, pour qu'une citation ne puisse pas enjamber les deux. */
 export function controlerBrouillon(b: Brouillon, capture: string | string[], titre: string, version: string | null, contexte: ContexteControle = {}): Controle[] {
-  const { typeInformation, produit, produitCatalogue, dateAnnonce, autresCaptures = [] } = contexte;
+  const { typeInformation, produit, produitCatalogue, dateAnnonce, autresCaptures = [], source: nomSource = '' } = contexte;
   const parties = [capture].flat().map(normaliserEspaces);
   const texte = parties.join(' ');
   const trouve = (passage: string) => parties.some((partie) => contientMotPourMot(partie, passage));
   const resultats: Controle[] = [];
-  const produitValide = Boolean(produit) && (produitCatalogue || trouve(normaliserEspaces(produit!)));
+  const motsSource = new Set(mots(nomSource));
+  const produitValide = Boolean(produit) && (produitCatalogue || trouve(normaliserEspaces(produit!)) || mots(produit!).some((m) => m.length > 2 && motsSource.has(m)));
   if (produit && !produitValide) resultats.push({ champ: 'produit', code: 'produit_introuvable', detail: produit });
-  const nomsConnus = new Set(produitValide ? mots(produit!) : []);
+  // Le nom du produit, les mots du titre de l'actualité (écrit par la source) et les termes techniques courants ne
+  // désignent rien de nouveau : leur absence d'une citation ne révèle aucune affirmation non soutenue.
+  const nomsConnus = new Set([...(produitValide ? mots(produit!) : []), ...mots(titre), ...motsSource, ...TERMES_COURANTS]);
   const source = valeursDe(texte);
   // Jour UTC stocké et jour de Paris affiché : les deux désignent la même annonce.
   if (dateAnnonce) for (const jour of [dateAnnonce.slice(0, 10), JOUR_PARIS.format(new Date(dateAnnonce))]) source.dates.add(jour);
@@ -139,12 +153,15 @@ export function controlerBrouillon(b: Brouillon, capture: string | string[], tit
     if (champ === 'acces' && !INDICE_ACCES.test(cite)) resultats.push({ champ, code: 'acces_sans_indice' });
     for (const n of nombresDe(c.texte)) if (n !== version && !nombresDe(cite).includes(n)) resultats.push({ champ, code: 'nombre_absent_des_citations', detail: n });
     // Soutien : un nom propre affirmé doit figurer dans les passages cités du champ.
-    for (const nom of nomsPropres(c.texte)) if (!cite.includes(nom) && !nomsConnus.has(nom.toLowerCase())) resultats.push({ champ, code: 'soutien_nom_absent', detail: nom });
+    // Un nom écrit tel quel dans la source est attesté par elle ; un nom absent de la source (inventé, traduit, mal
+    // orthographié) reste un écart.
+    for (const nom of nomsPropres(c.texte)) if (!cite.includes(nom) && !nomsConnus.has(nom.toLowerCase()) && !trouve(nom)) resultats.push({ champ, code: 'soutien_nom_absent', detail: nom });
     // Contexte : une réserve dans le passage ou juste autour ne doit pas disparaître du texte français.
     for (const p of passages) {
       const i = texte.indexOf(p);
       const autour = i < 0 ? p : texte.slice(Math.max(0, i - 120), i + p.length + 120);
-      if (NUANCE_SOURCE.test(autour) && !NUANCE_TEXTE.test(c.texte)) resultats.push({ champ, code: 'contexte_a_relire', detail: p });
+      // Un repère (55 caractères, sur l'image) ne porte pas de réserve : elle va dans le texte du post, contrôlé lui aussi.
+      if (!champ.startsWith('reperes:') && NUANCE_SOURCE.test(autour) && !NUANCE_TEXTE.test(c.texte)) resultats.push({ champ, code: 'contexte_a_relire', detail: p });
     }
     for (const x of contradictions(valeursDe(c.texte), source, version)) resultats.push({ champ, code: 'sources_contradictoires', detail: `${x.type} : ${x.valeur}` });
   }
@@ -155,6 +172,8 @@ export function controlerBrouillon(b: Brouillon, capture: string | string[], tit
   }
   const a = b.accroche.texte;
   if (a.length > 110 || a.includes('?') || sensationnel(a)) resultats.push({ champ: 'accroche', code: 'accroche_non_conforme' });
+  // Posts rédigés en anglais (décision de l'utilisateur du 2026-11-03) : un champ de tête écrit en français est un écart.
+  for (const [champ, c] of [['accroche', b.accroche], ['description', b.description]] as const) if (enFrancais(c.texte)) resultats.push({ champ, code: 'langue_non_conforme' });
   const motsAccroche = new Set(mots(a));
   // Un numéro de version ne nomme rien. Sans produit connu, un mot significatif du titre reste une approximation.
   const nomme = produit

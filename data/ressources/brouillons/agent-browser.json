@@ -2,14 +2,14 @@
   "slug": "agent-browser",
   "consignes": "r2",
   "accroche": {
-    "texte": "agent-browser, de Vercel Labs : un vrai navigateur que votre agent pilote en ligne de commande",
+    "texte": "agent-browser, from Vercel Labs: a real browser that your agent controls from the command line",
     "passages": [
       "Browser automation CLI for AI agents",
       "Vercel Labs Product"
     ]
   },
   "description": {
-    "texte": "Une CLI native en Rust : l'agent ouvre une page, lit le texte, clique, remplit un champ et prend une capture. Selon le dépôt, le skill fonctionne avec Claude Code, Codex, Cursor ou Gemini CLI, et l'outil tourne aussi en serveur MCP.",
+    "texte": "A native Rust CLI: the agent opens a page, reads the text, clicks, fills a field and takes a screenshot. According to the repository, the skill works with Claude Code, Codex, Cursor or Gemini CLI, and the tool also runs as an MCP server.",
     "passages": [
       "Browser automation CLI for AI agents. Fast native Rust CLI.",
       "Click by ref from snapshot",
@@ -22,7 +22,7 @@
     ]
   },
   "interet": {
-    "texte": "snapshot renvoie l'arbre d'accessibilité avec une référence par élément (@e1, @e2) : l'agent clique ou remplit par référence, sans requêter le DOM à nouveau. Attention, rien n'est restreint par défaut : domaines autorisés et politique d'actions sont à activer vous-même.",
+    "texte": "snapshot returns the accessibility tree with a reference per element (@e1, @e2): the agent clicks or fills by reference, without querying the DOM again. Note: nothing is restricted by default: allowed domains and an action policy must be enabled by you.",
     "passages": [
       "Get interactive elements with refs (@e1, @e2)",
       "agent-browser click @e2 # Click by ref from snapshot",
@@ -35,7 +35,7 @@
     ]
   },
   "exemple_usage": {
-    "texte": "Demandez à votre agent de tester le parcours de connexion avec agent-browser : il lit --help, relève les champs du formulaire et les remplit.",
+    "texte": "Ask your agent to test the login flow with agent-browser: it reads --help, picks up the form fields and fills them in.",
     "passages": [
       "Use agent-browser to test the login flow. Run agent-browser --help to see available commands.",
       "Get interactive elements with refs (@e1, @e2)",
@@ -45,7 +45,7 @@
   "demarrage": {
     "etapes": [
       {
-        "texte": "npm install -g agent-browser, puis agent-browser install pour récupérer Chrome, uniquement la première fois.",
+        "texte": "npm install -g agent-browser, then agent-browser install to fetch Chrome, only the first time.",
         "passages": [
           "npm install -g agent-browser",
           "Run agent-browser install to download Chrome from Chrome for Testing"
@@ -184,19 +184,19 @@
   },
   "reperes": [
     {
-      "texte": "Connexions conservées, sans se reconnecter à chaque lancement",
+      "texte": "Connections kept, no need to log in again on each launch",
       "passages": [
         "agent-browser provides multiple ways to persist login sessions so you don't re-authenticate every run."
       ]
     },
     {
-      "texte": "Audit d'accessibilité axe-core intégré",
+      "texte": "Built-in axe-core accessibility audit",
       "passages": [
         "Run an axe-core accessibility audit against the current page or a URL."
       ]
     },
     {
-      "texte": "Mobile Safari réel dans le simulateur iOS",
+      "texte": "Real Mobile Safari in the iOS simulator",
       "passages": [
         "Control real Mobile Safari in the iOS Simulator for authentic mobile web testing."
       ]

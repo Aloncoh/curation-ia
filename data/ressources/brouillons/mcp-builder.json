@@ -2,7 +2,7 @@
   "slug": "mcp-builder",
   "consignes": "r2",
   "accroche": {
-    "texte": "Avec mcp-builder, Claude mène votre serveur MCP de l’étude de l’API jusqu’aux évaluations",
+    "texte": "With mcp-builder, Claude takes your MCP server from API study through evaluations",
     "passages": [
       "Use when building MCP servers to integrate external APIs or services",
       "After implementing your MCP server, create comprehensive evaluations to test its effectiveness.",
@@ -10,7 +10,7 @@
     ]
   },
   "description": {
-    "texte": "Le skill d’Anthropic pour brancher une API externe sur un serveur MCP, en TypeScript ou en Python avec FastMCP. Claude déroule quatre phases : étude de l’API, implémentation, revue et tests avec MCP Inspector, puis évaluations.",
+    "texte": "Anthropic's skill for connecting an external API to an MCP server, in TypeScript or Python with FastMCP. Claude runs four phases: API study, implementation, review and testing with MCP Inspector, then evaluations.",
     "passages": [
       "This repository contains Anthropic's implementation of skills for Claude.",
       "Use when building MCP servers to integrate external APIs or services, whether in Python (FastMCP) or Node/TypeScript (MCP SDK).",
@@ -20,7 +20,7 @@
     ]
   },
   "interet": {
-    "texte": "Tout est pensé pour l’agent qui appellera les outils : noms préfixés et orientés action, descriptions courtes, résultats ciblés et paginables, erreurs qui disent quoi faire ensuite.",
+    "texte": "Everything is designed for the agent that will call the tools: prefixed, action-oriented names, short descriptions, targeted and paginable results, errors that say what to do next.",
     "passages": [
       "Clear, descriptive tool names help agents find the right tools quickly.",
       "Use consistent prefixes (e.g., github_create_issue, github_list_repos) and action-oriented naming.",
@@ -30,7 +30,7 @@
     ]
   },
   "exemple_usage": {
-    "texte": "Serveur terminé, le guide fait écrire 10 questions réalistes, sans opération destructrice, pour voir si un LLM s’en sert vraiment bien.",
+    "texte": "Once the server is done, the guide has you write 10 realistic questions, with no destructive operation, to see whether an LLM really uses it well.",
     "passages": [
       "Question Generation: Create 10 complex, realistic questions",
       "Read-only: Only non-destructive operations required",
@@ -40,20 +40,20 @@
   "demarrage": {
     "etapes": [
       {
-        "texte": "Dans Claude Code, ajouter le dépôt comme marketplace",
+        "texte": "In Claude Code, add the repository as a marketplace",
         "passages": [
           "You can register this repository as a Claude Code Plugin marketplace by running the following command in Claude Code"
         ]
       },
       {
-        "texte": "Installer example-skills : /plugin install example-skills@anthropic-agent-skills",
+        "texte": "Install example-skills: /plugin install example-skills@anthropic-agent-skills",
         "passages": [
           "/plugin install example-skills@anthropic-agent-skills",
           "\"./skills/internal-comms\", \"./skills/mcp-builder\", \"./skills/skill-creator\""
         ]
       },
       {
-        "texte": "Puis citer mcp-builder dans la demande",
+        "texte": "Then mention mcp-builder in the request",
         "passages": [
           "After installing the plugin, you can use the skill by just mentioning it."
         ]
@@ -67,7 +67,7 @@
   },
   "compatibilites": [
     {
-      "texte": "Selon le guide, tout nouveau serveur TypeScript part du SDK v2.",
+      "texte": "According to the guide, every new TypeScript server starts from SDK v2.",
       "passages": [
         "The TypeScript SDK has two major versions.",
         "v2 (@modelcontextprotocol/server): the current stable release. Use it for new servers."
@@ -76,7 +76,7 @@
   ],
   "limites": [],
   "licence_locale": {
-    "texte": "Le dossier du skill a sa propre licence : Apache 2.0.",
+    "texte": "The skill folder has its own license: Apache 2.0.",
     "passages": [
       "Apache License Version 2.0, January 2004"
     ]
@@ -177,21 +177,21 @@
   },
   "reperes": [
     {
-      "texte": "Entrées validées par Zod ou Pydantic, sorties structurées",
+      "texte": "Inputs validated by Zod or Pydantic, structured outputs",
       "passages": [
         "Use Zod (TypeScript) or Pydantic (Python)",
         "Define outputSchema where possible for structured data"
       ]
     },
     {
-      "texte": "Streamable HTTP en distant, stdio en local",
+      "texte": "Streamable HTTP for remote, stdio for local",
       "passages": [
         "Streamable HTTP for remote servers, using stateless JSON",
         "stdio for local servers."
       ]
     },
     {
-      "texte": "Annotations par outil : lecture seule, destructif, idempotent",
+      "texte": "Per-tool annotations: read-only, destructive, idempotent",
       "passages": [
         "readOnlyHint: true/false destructiveHint: true/false idempotentHint: true/false openWorldHint: true/false"
       ]

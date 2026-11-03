@@ -1,0 +1,249 @@
+{
+  "format": "selection",
+  "slug": "selection-design-web",
+  "consignes": "s1",
+  "accroche": {
+    "texte": "6 sites to keep on hand for finding inspiration in web design",
+    "passages": []
+  },
+  "ressources": [
+    {
+      "site": "land-book",
+      "nom": "Land-book",
+      "url": "https://land-book.com/",
+      "libelle_lien": "Land-book",
+      "explication": {
+        "texte": "A hand-picked gallery of sites, updated daily; the free plan limits access to categories.",
+        "passages": [
+          "Find the best hand-picked website design inspiration.",
+          "We're a curated website design gallery for Creatives, updated daily.",
+          "With the free Basic plan, you get:",
+          "Limited access to website categories"
+        ]
+      },
+      "categorie": "galerie de sites",
+      "usages": [
+        {
+          "texte": "web design inspiration",
+          "passages": [
+            "Find the best hand-picked website design inspiration."
+          ]
+        },
+        {
+          "texte": "website gallery",
+          "passages": [
+            "We're a curated website design gallery for Creatives, updated daily."
+          ]
+        }
+      ],
+      "termes_proches": [
+        {
+          "terme": "landing page",
+          "raison": "Land-book range des landing pages parmi les sites de sa galerie de sites"
+        },
+        {
+          "terme": "Landbook",
+          "raison": "Nom que Land-book se donne dans le titre de sa page"
+        }
+      ]
+    },
+    {
+      "site": "landdding",
+      "nom": "Landdding",
+      "url": "https://landdding.com/",
+      "libelle_lien": "Landdding",
+      "explication": {
+        "texte": "Landing pages and templates submitted daily and voted on by designers, on Webflow, Framer, WordPress, Wix and Squarespace.",
+        "passages": [
+          "Find daily new web designs submitted to Landdding for showcasing their great design and getting upvotes from the community of web designers.",
+          "The curated gallery of landing pages and website templates that designers bookmark — fresh picks every day across Webflow, Framer, WordPress, Wix and Squarespace."
+        ]
+      },
+      "categorie": "galerie de landing pages",
+      "usages": [
+        {
+          "texte": "landing page inspiration",
+          "passages": [
+            "The curated gallery of landing pages and website templates that designers bookmark — fresh picks every day across Webflow, Framer, WordPress, Wix and Squarespace."
+          ]
+        },
+        {
+          "texte": "Webflow templates",
+          "passages": [
+            "The curated gallery of landing pages and website templates that designers bookmark — fresh picks every day across Webflow, Framer, WordPress, Wix and Squarespace."
+          ]
+        },
+        {
+          "texte": "Framer templates",
+          "passages": [
+            "The curated gallery of landing pages and website templates that designers bookmark — fresh picks every day across Webflow, Framer, WordPress, Wix and Squarespace."
+          ]
+        }
+      ],
+      "termes_proches": [
+        {
+          "terme": "page d'atterrissage",
+          "raison": "Équivalent français de landing page, l'objet de la galerie de landing pages de Landdding"
+        }
+      ]
+    },
+    {
+      "site": "recent-design",
+      "nom": "Recent Design",
+      "url": "https://recent.design/",
+      "libelle_lien": "Recent Design",
+      "explication": {
+        "texte": "Inspiration organized by format: launch videos, sites, OG images, screenshots and app icons.",
+        "passages": [
+          "Design Launch Videos new Websites OG Images App Screenshots App Icons"
+        ]
+      },
+      "categorie": "inspiration design",
+      "usages": [
+        {
+          "texte": "launch videos",
+          "passages": [
+            "Design Launch Videos new Websites OG Images App Screenshots App Icons"
+          ]
+        },
+        {
+          "texte": "app icons",
+          "passages": [
+            "Design Launch Videos new Websites OG Images App Screenshots App Icons"
+          ]
+        },
+        {
+          "texte": "OG images",
+          "passages": [
+            "Design Launch Videos new Websites OG Images App Screenshots App Icons"
+          ]
+        }
+      ],
+      "termes_proches": [
+        {
+          "terme": "Godly",
+          "raison": "godly.website redirige vers Recent Design, d'après la capture refusée du 2 novembre 2026"
+        }
+      ]
+    },
+    {
+      "site": "motionsites",
+      "nom": "Motion Sites",
+      "url": "https://motionsites.ai/",
+      "libelle_lien": "Motion Sites",
+      "explication": {
+        "texte": "Ready-to-copy-paste prompts for building a landing page with AI, plus animated backgrounds.",
+        "passages": [
+          "Build beautiful landing pages in minutes with our ready-to-use prompts. Just copy, paste, and launch.",
+          "Animated backgrounds designed to convert, impress, and amaze."
+        ]
+      },
+      "categorie": "prompts de design",
+      "usages": [
+        {
+          "texte": "landing page prompts",
+          "passages": [
+            "Build beautiful landing pages in minutes with our ready-to-use prompts. Just copy, paste, and launch."
+          ]
+        },
+        {
+          "texte": "animated backgrounds",
+          "passages": [
+            "Animated backgrounds designed to convert, impress, and amaze."
+          ]
+        }
+      ],
+      "termes_proches": [
+        {
+          "terme": "générateur de site IA",
+          "raison": "Motion Sites fournit des prompts de landing page à coller dans un outil d'IA"
+        }
+      ]
+    },
+    {
+      "site": "60fps",
+      "nom": "60fps",
+      "url": "https://60fps.design/",
+      "libelle_lien": "60fps",
+      "explication": {
+        "texte": "Animations and micro-interactions spotted in iOS and web apps, for UI/UX inspiration.",
+        "passages": [
+          "60fps - UI/UX animation inspiration for mobile & web apps",
+          "60fps is a curated collection of UI/UX animation and interaction design details from the world’s best iOS, and web apps."
+        ]
+      },
+      "categorie": "animation d'interface",
+      "usages": [
+        {
+          "texte": "mobile animations",
+          "passages": [
+            "60fps - UI/UX animation inspiration for mobile & web apps"
+          ]
+        },
+        {
+          "texte": "micro-interactions",
+          "passages": [
+            "60fps is a curated collection of UI/UX animation and interaction design details from the world’s best iOS, and web apps."
+          ]
+        },
+        {
+          "texte": "UI/UX inspiration",
+          "passages": [
+            "60fps - UI/UX animation inspiration for mobile & web apps"
+          ]
+        }
+      ],
+      "termes_proches": [
+        {
+          "terme": "motion design",
+          "raison": "60fps rassemble des animations mobile et web, le motion design des interfaces"
+        }
+      ]
+    },
+    {
+      "site": "fontinlogo",
+      "nom": "Font in Logo",
+      "url": "https://www.fontinlogo.com/",
+      "libelle_lien": "Font in Logo",
+      "explication": {
+        "texte": "Find the font used in a brand logo, and the closest match when the exact font isn't verified.",
+        "passages": [
+          "Find out what font is used in famous brand logos.",
+          "Verified Source-checked, confirmed font matches",
+          "The closest font you can get for the \"Adobe Photoshop\" logo is this font"
+        ]
+      },
+      "categorie": "typographie",
+      "usages": [
+        {
+          "texte": "logo fonts",
+          "passages": [
+            "Find out what font is used in famous brand logos."
+          ]
+        },
+        {
+          "texte": "identify a font",
+          "passages": [
+            "Find out what font is used in famous brand logos."
+          ]
+        }
+      ],
+      "termes_proches": [
+        {
+          "terme": "font de logo",
+          "raison": "Font in Logo identifie la typographie des logos de marque, en anglais font"
+        }
+      ]
+    }
+  ],
+  "mots_cles": {
+    "nom": "Sélection design web",
+    "categorie": "design",
+    "termes_proches": [
+      {
+        "terme": "moodboard",
+        "raison": "Les galeries de la sélection design web servent de références visuelles"
+      }
+    ]
+  }
+}

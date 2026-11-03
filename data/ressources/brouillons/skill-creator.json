@@ -2,14 +2,14 @@
   "slug": "skill-creator",
   "consignes": "r2",
   "accroche": {
-    "texte": "skill-creator : le skill d’Anthropic qui écrit, teste et affine vos propres skills",
+    "texte": "skill-creator: Anthropic's skill that writes, tests, and refines your own skills",
     "passages": [
       "This repository contains Anthropic's implementation of skills for Claude",
       "A skill for creating new skills and iteratively improving them."
     ]
   },
   "description": {
-    "texte": "Décrivez ce que vous voulez automatiser : skill-creator cadre le besoin, rédige un premier jet, le teste sur des demandes réalistes et vous fait relire les résultats. Il peut aussi reprendre un skill existant pour l’améliorer.",
+    "texte": "Describe what you want to automate: skill-creator frames the need, drafts a first version, tests it on realistic requests, and has you review the results. It can also take an existing skill and improve it.",
     "passages": [
       "A skill for creating new skills and iteratively improving them.",
       "Create a few test prompts and run claude-with-access-to-the-skill on them",
@@ -18,7 +18,7 @@
     ]
   },
   "interet": {
-    "texte": "Chaque test tourne avec et sans le skill, ou contre son ancienne version. Une page de revue rassemble les réponses à annoter et un comparatif chiffré : taux de réussite, durée, tokens. Il retravaille aussi la description pour que le skill se déclenche au bon moment.",
+    "texte": "Each test runs with and without the skill, or against its previous version. A review page gathers the responses to annotate and a quantified comparison: success rate, duration, tokens. It also reworks the description so the skill triggers at the right time.",
     "passages": [
       "For each test case, spawn two subagents in the same turn — one with the skill, one without.",
       "Improving an existing skill: the old version.",
@@ -28,7 +28,7 @@
     ]
   },
   "exemple_usage": {
-    "texte": "Vous avez rodé une méthode avec Claude ? Dites « turn this into a skill » : il peut reprendre les étapes de la conversation, vous poser quelques questions, rédiger le SKILL.md et proposer deux ou trois demandes de test.",
+    "texte": "Have you honed a method with Claude? Say \"turn this into a skill\": it can pick up the steps from the conversation, ask you a few questions, write the SKILL.md, and suggest two or three test requests.",
     "passages": [
       "(e.g., they say \"turn this into a skill\")",
       "extract answers from the conversation history first — the tools used, the sequence of steps, corrections the user made, input/output formats observed.",
@@ -40,20 +40,20 @@
   "demarrage": {
     "etapes": [
       {
-        "texte": "Ajoutez le dépôt comme catalogue de plugins dans Claude Code.",
+        "texte": "Add the repository as a plugin catalog in Claude Code.",
         "passages": [
           "You can register this repository as a Claude Code Plugin marketplace by running the following command in Claude Code"
         ]
       },
       {
-        "texte": "Installez example-skills : /plugin install example-skills@anthropic-agent-skills",
+        "texte": "Install example-skills: /plugin install example-skills@anthropic-agent-skills",
         "passages": [
           "/plugin install example-skills@anthropic-agent-skills",
           "\"./skills/mcp-builder\", \"./skills/skill-creator\", \"./skills/slack-gif-creator\""
         ]
       },
       {
-        "texte": "Ensuite, nommez simplement le skill dans votre demande.",
+        "texte": "Then simply name the skill in your request.",
         "passages": [
           "After installing the plugin, you can use the skill by just mentioning it."
         ]
@@ -66,7 +66,7 @@
   },
   "compatibilites": [
     {
-      "texte": "Version complète dans Claude Code ; dans Claude.ai, une version allégée, sans sous-agents ni comparatif chiffré.",
+      "texte": "Full version in Claude Code; in Claude.ai, a lighter version, without sub-agents or quantified comparison.",
       "passages": [
         "You can register this repository as a Claude Code Plugin marketplace",
         "because Claude.ai doesn't have subagents, some mechanics change.",
@@ -76,14 +76,14 @@
   ],
   "limites": [
     {
-      "texte": "Chaque test tourne deux fois, avec et sans le skill : prévoyez le double d’appels au modèle.",
+      "texte": "Each test runs twice, with and without the skill: plan for double the model calls.",
       "passages": [
         "For each test case, spawn two subagents in the same turn — one with the skill, one without."
       ]
     }
   ],
   "licence_locale": {
-    "texte": "Le dossier du skill a sa propre licence : Apache 2.0.",
+    "texte": "The skill's folder has its own license: Apache 2.0.",
     "passages": [
       "Apache License Version 2.0, January 2004"
     ]
@@ -190,19 +190,19 @@
   },
   "reperes": [
     {
-      "texte": "Un skill pour créer et améliorer d'autres skills",
+      "texte": "A skill for creating and improving other skills",
       "passages": [
         "A skill for creating new skills and iteratively improving them."
       ]
     },
     {
-      "texte": "Chaque test lancé avec et sans le skill",
+      "texte": "A/B runs: one subagent with, one without",
       "passages": [
         "For each test case, spawn two subagents in the same turn — one with the skill, one without."
       ]
     },
     {
-      "texte": "Une description qui aide Claude à choisir le skill au bon moment",
+      "texte": "A description that helps Claude pick the skill at the right time",
       "passages": [
         "optimize a skill's description for better triggering accuracy",
         "Skills appear in Claude's available_skills list with their name + description"

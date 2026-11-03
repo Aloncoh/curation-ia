@@ -33,9 +33,11 @@
     --miel: #f4e6bf;
     --miel-encre: #634a0e;
     --miel-trait: #d8bf7a;
+    --fond: #fdfcfa;
+    --champ: #f1ede7;
     --ombre: 0 1px 0 rgba(29, 27, 35, .04), 0 8px 24px -12px rgba(29, 27, 35, .18);
     --flotte: 0 18px 40px -16px rgba(29, 27, 35, .45);
-    --rayon: 18px;
+    --rayon: 16px;
     --display: "Recursive", ui-rounded, system-ui, sans-serif;
     --texte: "Atkinson Hyperlegible Next", system-ui, -apple-system, "Segoe UI", sans-serif;
     color-scheme: light;
@@ -47,6 +49,7 @@
       --focus: #9b94d6; --actif-fond: #ece7f9; --actif-texte: #1d1b23;
       --reel: #6cc58d; --miel: #382f1a; --miel-encre: #f1d58c; --miel-trait: #6b5a2c;
       --ombre: 0 1px 0 rgba(0, 0, 0, .3), 0 8px 24px -12px rgba(0, 0, 0, .6); --flotte: 0 18px 40px -12px rgba(0, 0, 0, .8);
+      --fond: #121116; --champ: #211f28;
       color-scheme: dark;
     }
   }
@@ -56,12 +59,13 @@
     --focus: #9b94d6; --actif-fond: #ece7f9; --actif-texte: #1d1b23;
     --reel: #6cc58d; --miel: #382f1a; --miel-encre: #f1d58c; --miel-trait: #6b5a2c;
     --ombre: 0 1px 0 rgba(0, 0, 0, .3), 0 8px 24px -12px rgba(0, 0, 0, .6); --flotte: 0 18px 40px -12px rgba(0, 0, 0, .8);
+    --fond: #121116; --champ: #211f28;
     color-scheme: dark;
   }
 
   * { box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; }
-  body { margin: 0; background: var(--feutre); color: var(--encre); font: 400 1rem/1.5 var(--texte); }
+  body { margin: 0; background: var(--fond); color: var(--encre); font: 400 1rem/1.5 var(--texte); -webkit-font-smoothing: antialiased; }
   img, video { max-width: 100%; display: block; }
   a { color: var(--lavande-encre); text-underline-offset: .18em; }
   button { font: inherit; color: inherit; }
@@ -76,7 +80,7 @@
   /* ——— Disposition à la manière de X : colonne gauche, colonne centrale, colonne droite. ——— */
   .app { display: grid; grid-template-columns: 250px minmax(0, 600px) 300px; gap: 0 28px; justify-content: center; min-height: 100vh; }
   .barre-gauche { position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; gap: 4px; padding: 14px 0 20px; }
-  .centre { min-width: 0; background: var(--coton); border-inline: 1px solid var(--trait); min-height: 100vh; }
+  .centre { min-width: 0; background: var(--fond); border-inline: 1px solid var(--trait); min-height: 100vh; }
   .barre-droite { position: sticky; top: 0; align-self: start; padding: 14px 0; display: grid; gap: 16px; }
 
   /* En haut à gauche : uniquement le logo. Le profil de l'utilisateur ferme la colonne, comme sur X. */
@@ -114,16 +118,16 @@
   /* Recherche collante en haut de la colonne principale, sur toutes les pages. */
   .recherche-haut {
     position: sticky; top: 0; z-index: 20; padding: 8px 16px; border-bottom: 1px solid var(--trait);
-    background: color-mix(in srgb, var(--coton) 86%, transparent); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+    background: color-mix(in srgb, var(--fond) 86%, transparent); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
   }
   .recherche-haut form { position: relative; }
   .recherche-haut svg { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--pied); pointer-events: none; }
   .recherche-haut input {
-    width: 100%; min-height: 44px; font: inherit; color: var(--encre); background: var(--feutre); border: 1.5px solid transparent;
+    width: 100%; min-height: 44px; font: inherit; color: var(--encre); background: var(--champ); border: 1px solid transparent;
     border-radius: 999px; padding: 9px 16px 9px 46px;
   }
   .recherche-haut input::placeholder { color: var(--pied); }
-  .recherche-haut input:focus { outline: none; border-color: var(--focus); background: var(--coton); }
+  .recherche-haut input:focus { outline: none; border-color: var(--focus); background: var(--fond); }
 
   .titre-page { font: 800 1.3rem/1.2 var(--texte); margin: 0; padding: 16px 16px 12px; }
   .barre-retour { display: flex; align-items: center; gap: 20px; padding: 6px 16px; min-height: 52px; }
@@ -131,73 +135,93 @@
   .barre-retour a:hover { background: var(--survol); }
   .barre-retour h1 { font: 800 1.2rem/1.2 var(--texte); margin: 0; }
 
-  /* ——— Publication : avatar, en-tête, texte, lien, image, actions. ——— */
-  .post { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 0 12px; padding: 14px 16px 6px; border-bottom: 1px solid var(--trait); }
-  .post-avatar img { width: 44px; height: 44px; border-radius: 50%; }
+  /* ——— Publication, à la manière de X : un filet entre les posts, pas de carte ; avatar, en-tête, texte, lien, média, actions. ——— */
+  .post { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 0 12px; padding: 12px 16px 4px; border-bottom: 1px solid var(--trait); transition: background-color .15s; }
+  .post:not(.complet):hover { background: color-mix(in srgb, var(--encre) 2%, transparent); }
+  .post-avatar img { width: 40px; height: 40px; border-radius: 50%; }
   .post-corps { min-width: 0; }
-  .post-raison { grid-column: 1 / -1; display: flex; gap: 8px; align-items: center; margin: 0 0 6px 32px; font-size: .84rem; color: var(--pied); font-weight: 600; }
-  .post-tete { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 6px; line-height: 1.3; margin-bottom: 2px; }
-  .post-nom { font-weight: 700; color: var(--encre); text-decoration: none; }
+  .post-raison { grid-column: 1 / -1; display: flex; gap: 8px; align-items: center; margin: 0 0 4px 28px; font-size: .8rem; color: var(--pied); font-weight: 600; }
+  .post-tete { display: flex; align-items: baseline; gap: 4px; line-height: 1.3; margin-bottom: 1px; min-width: 0; }
+  .post-nom { font-weight: 700; color: var(--encre); text-decoration: none; white-space: nowrap; }
   .post-nom:hover { text-decoration: underline; }
-  .post-meta { color: var(--pied); font-size: .94rem; min-width: 0; }
+  .post-meta { color: var(--pied); font-size: .94rem; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .post-meta a { color: inherit; text-decoration: none; }
   .post-meta a:hover { text-decoration: underline; }
-  .badge {
-    margin-left: auto; align-self: center; font: 700 .72rem/1 var(--texte); letter-spacing: .02em; padding: 5px 9px; border-radius: 999px;
-    background: var(--lavande-voile); color: var(--lavande-encre); white-space: nowrap;
-  }
-  .badge.nouveau { background: color-mix(in srgb, var(--reel) 16%, transparent); color: var(--reel); }
-  .badge.exemple { background: var(--miel); color: var(--miel-encre); }
-  .badge.verifier { background: var(--alerte-voile); color: var(--alerte); }
+  /* Seul repère d'une ressource : un mot discret, sans pastille. */
+  .badge { margin-left: auto; flex: none; font: 600 .76rem/1.3 var(--texte); color: var(--pied); white-space: nowrap; }
+  .badge.nouveau { color: var(--reel); }
+  .badge.verifier { color: var(--alerte); }
 
-  .post-texte { overflow-wrap: anywhere; font-size: 1rem; line-height: 1.52; }
-  .post-texte p { margin: 0 0 .7em; }
-  .post-texte .points { list-style: none; margin: 0 0 .7em; padding: 0; display: grid; gap: .25em; }
-  .post-texte .points li { padding-left: 1.35em; position: relative; }
+  .post-texte { overflow-wrap: anywhere; font-size: 1rem; line-height: 1.48; }
+  .post-texte p { margin: 0 0 .6em; }
+  .post-texte .points { list-style: none; margin: 0 0 .6em; padding: 0; display: grid; gap: .2em; }
+  .post-texte .points li { padding-left: 1.3em; position: relative; }
   .post-texte .points li::before { content: "→"; position: absolute; left: 0; color: var(--pied); }
   .post-texte > :last-child { margin-bottom: 0; }
-  .voir-plus { background: none; border: 0; padding: 0 2px; margin-left: 4px; color: var(--lavande-encre); font-weight: 700; cursor: pointer; border-radius: 6px; }
+  .voir-plus { background: none; border: 0; padding: 0 2px; margin-left: 2px; color: var(--lavande-encre); font-weight: 700; cursor: pointer; border-radius: 6px; }
   .voir-plus:hover { text-decoration: underline; }
   .post.complet .post-texte { font-size: 1.06rem; }
 
-  .lien-ressource {
-    display: flex; align-items: center; gap: 10px; margin: 12px 0 10px; padding: 10px 14px; border: 1px solid var(--trait); border-radius: 14px;
-    text-decoration: none; color: var(--encre); min-height: 48px; max-width: 100%;
-  }
-  .lien-ressource:hover { background: var(--survol); }
-  .lien-ressource svg { flex: none; color: var(--pied); }
-  .lien-ressource .lr-libelle { font-weight: 700; white-space: nowrap; }
-  .lien-ressource .lr-cible { color: var(--pied); font-size: .9rem; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .lien-ressource .lr-fleche { margin-left: auto; color: var(--pied); }
+  /* Sélection : une liste numérotée, le nom cliquable vers le site officiel, puis l'explication. */
+  .sel-liste { list-style: none; margin: 0 0 .6em; padding: 0; display: grid; gap: .45em; counter-reset: sel; }
+  .sel-liste li { counter-increment: sel; padding-left: 1.45em; position: relative; }
+  .sel-liste li::before { content: counter(sel) "."; position: absolute; left: 0; color: var(--pied); font-variant-numeric: tabular-nums; }
+  .sel-nom { font-weight: 700; }
+  a.sel-nom { color: var(--lavande-encre); text-decoration: none; }
+  a.sel-nom:hover { text-decoration: underline; }
 
-  .post-media { margin: 0 0 6px; border-radius: 16px; overflow: hidden; border: 1px solid var(--trait); background: var(--visage); position: relative; }
+  /* Lien vers la ressource, juste au-dessus du média : une ligne, sans encadré. */
+  .lien-ressource {
+    display: flex; align-items: center; gap: 6px; margin: 8px 0 0; padding: 4px 0; min-height: 36px; width: fit-content; max-width: 100%;
+    text-decoration: none; color: var(--lavande-encre); font-size: .94rem;
+  }
+  .lien-ressource:hover .lr-libelle { text-decoration: underline; }
+  .lien-ressource svg { flex: none; }
+  .lien-ressource .lr-libelle { font-weight: 700; white-space: nowrap; }
+  .lien-ressource .lr-cible { color: var(--pied); min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .lien-ressource .lr-fleche { color: var(--pied); }
+
+  /* Média : toute la largeur de la colonne du texte, coins légèrement arrondis, un filet. */
+  .post-media { margin: 8px 0 2px; border-radius: 14px; overflow: hidden; border: 1px solid var(--trait); background: var(--visage); position: relative; }
   .post-media > img { width: 100%; height: auto; }
-  .post-texte + .post-media { margin-top: 12px; }
   .credit { position: absolute; right: 8px; bottom: 8px; z-index: 2; font: 600 .7rem/1 var(--texte); color: #fff; background: rgba(0, 0, 0, .55); padding: 4px 7px; border-radius: 6px; }
 
-  .post-mention { margin: 0 0 10px; font-size: .8rem; color: var(--pied); line-height: 1.4; }
+  .post-mention { margin: 0 0 10px; font-size: .78rem; color: var(--pied); line-height: 1.4; }
   .lien-discret { background: none; border: 0; padding: 0; color: var(--pied); font-size: inherit; text-decoration: underline; text-underline-offset: .2em; cursor: pointer; border-radius: 4px; }
   .lien-discret:hover { color: var(--encre); }
-  .panneau { margin: 8px 0 4px; padding: 12px 14px; border-radius: 14px; background: var(--feutre); font-size: .88rem; color: var(--pied); }
+  /* Sources : un retrait et un filet, pas une carte dans la carte. */
+  .panneau { margin: 0 0 12px; padding: 2px 0 2px 12px; border-left: 2px solid var(--trait); font-size: .86rem; color: var(--pied); }
   .panneau p { margin: 0 0 8px; }
   .panneau > :last-child { margin-bottom: 0; }
   .panneau ul { margin: 0 0 8px; padding-left: 1.1em; }
   .panneau li { margin-bottom: 4px; overflow-wrap: anywhere; }
   .panneau details summary { cursor: pointer; color: var(--encre); font-weight: 600; padding: 4px 0; }
-  .panneau blockquote { margin: 6px 0; padding: 6px 10px; border-left: 3px solid var(--lavande); background: var(--coton); border-radius: 0 10px 10px 0; color: var(--encre); overflow-wrap: anywhere; }
+  .panneau blockquote { margin: 6px 0; padding: 2px 0 2px 10px; border-left: 2px solid var(--lavande); color: var(--encre); overflow-wrap: anywhere; }
   .panneau blockquote.introuvable { border-left-color: var(--alerte); }
   .panneau .verif { display: block; font-size: .76rem; color: var(--alerte); font-weight: 700; margin-top: 2px; }
 
-  .post-actions { display: flex; gap: 4px; margin: 4px 0 4px -8px; }
+  /* Actions : quatre icônes réparties, sans compteur. */
+  .post-actions { display: flex; justify-content: space-between; max-width: 420px; margin: 2px 0 2px -9px; }
   .post-actions button {
-    display: inline-flex; align-items: center; gap: 7px; background: none; border: 0; color: var(--pied); font-size: .88rem; font-weight: 600;
-    padding: 8px 10px; border-radius: 999px; min-height: 40px; cursor: pointer;
+    display: inline-grid; place-items: center; background: none; border: 0; color: var(--pied); width: 38px; height: 38px; border-radius: 50%; cursor: pointer;
+    transition: color .15s, background-color .15s;
   }
-  .post-actions button:hover { color: var(--lavande-encre); background: var(--lavande-voile); }
-  .commentaires { margin: 2px 0 10px; padding: 14px; border-radius: 14px; border: 1px dashed var(--trait); text-align: center; }
+  .post-actions button:hover, .post-actions button[aria-expanded="true"] { color: var(--lavande-encre); background: var(--lavande-voile); }
+  .post-actions .act-aimer:hover { color: #c2416b; background: color-mix(in srgb, #c2416b 12%, transparent); }
+  .lien-partage { display: flex; gap: 8px; align-items: center; margin: 0 0 10px; font-size: .86rem; color: var(--pied); }
+  .lien-partage input { flex: 1; min-width: 0; font: inherit; color: var(--encre); background: var(--champ); border: 1px solid var(--trait); border-radius: 8px; padding: 6px 8px; }
+  .commentaires { margin: 0 0 10px; padding: 10px 0 12px; border-top: 1px solid var(--trait); }
   .commentaires p { margin: 0; }
   .commentaires .vide { font-weight: 700; }
   .commentaires .discret { font-size: .82rem; color: var(--pied); margin-top: 2px; }
+
+  /* Message bref et discret (« Disponible avec un compte », « Lien copié »), au-dessus de la barre d'onglets sur téléphone. */
+  .toast {
+    position: fixed; left: 50%; bottom: 24px; z-index: 50; transform: translate(-50%, 8px); opacity: 0; pointer-events: none;
+    background: var(--actif-fond); color: var(--actif-texte); font: 600 .9rem/1.3 var(--texte); padding: 10px 16px; border-radius: 10px;
+    box-shadow: var(--flotte); transition: opacity .18s, transform .18s; max-width: calc(100vw - 32px);
+  }
+  .toast.visible { opacity: 1; transform: translate(-50%, 0); }
 
   /* Visuels générés des exemples (couverture d'image) : lumineux, nouveauté en gros titre. */
   .diapo {
@@ -247,7 +271,7 @@
   .vide-page p { margin: 0 auto; max-width: 36ch; }
 
   /* Colonne droite */
-  .encart { background: var(--coton); border: 1px solid var(--trait); border-radius: var(--rayon); padding: 14px 4px 8px; }
+  .encart { background: var(--fond); border: 1px solid var(--trait); border-radius: var(--rayon); padding: 12px 4px 8px; }
   .encart h2 { font: 800 1.15rem/1.2 var(--texte); margin: 0 0 6px; padding: 0 14px; }
   .compte-ligne { display: flex; align-items: center; gap: 10px; padding: 9px 14px; text-decoration: none; color: var(--encre); border-radius: 12px; }
   .compte-ligne:hover { background: var(--survol); }
@@ -429,17 +453,19 @@
     .plus > summary { padding: 10px; min-height: 44px; }
     .plus-panneau { left: auto; right: 0; }
     .nav {
-      position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; display: grid; grid-template-columns: repeat(5, 1fr); gap: 0;
-      background: color-mix(in srgb, var(--coton) 94%, transparent); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+      position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; display: grid; grid-template-columns: repeat(6, 1fr); gap: 0;
+      background: color-mix(in srgb, var(--fond) 94%, transparent); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
       border-top: 1px solid var(--trait); padding: 4px 4px calc(4px + env(safe-area-inset-bottom));
     }
-    .nav a { width: auto; justify-content: center; padding: 10px 4px; min-height: 52px; border-radius: 12px; }
-    .post { padding: 12px 12px 4px; grid-template-columns: 40px minmax(0, 1fr); gap: 0 10px; }
-    .post-avatar img { width: 40px; height: 40px; }
+    .nav a { width: auto; justify-content: center; padding: 10px 2px; min-height: 52px; border-radius: 12px; }
+    .post { padding: 10px 12px 2px; grid-template-columns: 40px minmax(0, 1fr); gap: 0 10px; }
     .post-raison { margin-left: 26px; }
-    .lien-ressource { padding: 9px 12px; }
-    .post-actions { gap: 0; }
-    .post-actions button { padding: 8px; white-space: nowrap; font-size: .84rem; }
+    /* Le repère « Ressource existante » passe sous l'en-tête plutôt que de couper la date. */
+    .post-tete { flex-wrap: wrap; }
+    .post-meta { white-space: normal; }
+    .badge { margin-left: 0; flex-basis: 100%; order: 3; }
+    .post-actions { max-width: none; }
+    .toast { bottom: calc(76px + env(safe-area-inset-bottom)); }
     .profil-banniere { height: 110px; }
     .profil-photo, .profil-photo.avatar-vide { width: 84px; height: 84px; }
     .profil-haut { margin-top: -42px; }
@@ -477,6 +503,12 @@
   const DONNEES = window.DONNEES_MAQUETTE;
   const EXEMPLES = (DONNEES?.exemples || []).slice().sort((a, b) => (b.actualite.announced_at || '').localeCompare(a.actualite.announced_at || ''));
   const RESSOURCES = DONNEES?.ressources || [];
+  const SELECTIONS = DONNEES?.selections || [];
+  /** Actualités rédigées par l'agent du site et relues par l'utilisateur (base), planifiées ou publiées. */
+  const ACTUALITES = DONNEES?.actualites || [];
+  const PROJETS = DONNEES?.projets || [];
+  /** Toutes les publications affichées sont cherchables : ressources et sélections (base), exemples et projets (hors base). */
+  const DOCUMENTS_RECHERCHE = [...(DONNEES?.recherche || []), ...(DONNEES?.recherche_hors_base || [])];
   /** Vidéos générées par « npm run maquette:reel » (maquette/medias), chacune liée à un exemple vérifié. */
   const REELS = [{ id: 'reel-copilot-fusion', exemple: 'exemple-copilot-fusion' }];
   const PAR_PAGE = 12;
@@ -486,6 +518,29 @@
   const etat = { filtre: 'tout', source: 'toutes', visibles: PAR_PAGE };
   const moinsDeMouvement = matchMedia('(prefers-reduced-motion: reduce)');
   const LIBELLE_ANALYSE = 'Analyse IA à partir des sources — non testé par la plateforme';
+
+  // Textes de l'interface, regroupés pour pouvoir ajouter d'autres langues à côté du français sans toucher au rendu (SPEC §7.13).
+  const TEXTES = {
+    fr: {
+      accueil: 'Accueil', explorer: 'Explorer', notifications: 'Notifications', messages: 'Messages', reels: 'Reels', profil: 'Profil', plus: 'Plus',
+      monProfil: 'Mon profil', apercuProfil: 'Aperçu',
+      rechercher: 'Rechercher', rechercherAria: 'Rechercher dans les publications', recherche: 'Recherche',
+      resultatsPour: (q) => `Résultats pour « ${q} »`, aucunResultat: 'Aucun résultat', aucunResultatAide: 'Essayez un autre mot, plus court ou plus général.',
+      rechercheVide: 'Cherchez un outil, un site, un usage ou une technologie', rechercheIndisponible: 'Recherche indisponible',
+      voirPlus: 'Voir plus', voirMoins: 'Voir moins',
+      aimer: 'Aimer', enregistrer: 'Enregistrer', partager: 'Partager',
+      commenter: 'Afficher les commentaires', masquerCommentaires: 'Masquer les commentaires',
+      compteRequis: 'Disponible avec un compte', lienCopie: 'Lien copié', lienACopier: 'Lien de la publication',
+      aucunCommentaire: 'Aucun commentaire pour l’instant', commentairesFermes: 'Les commentaires ne sont pas encore ouverts.',
+      sources: 'Sources', masquerSources: 'Masquer les sources', nouvelOnglet: ' (nouvel onglet)',
+      aucunePublication: 'Aucune publication pour l’instant', aucuneNotification: 'Aucune notification pour l’instant',
+      aucunMessage: 'Aucun message pour l’instant', messagesNote: 'Les messages privés seront disponibles avec un compte.',
+      abonnements: 'Abonnements', abonnes: 'Abonnés', publications: 'Publications',
+      aucunAbonnement: 'Aucun abonnement pour l’instant', abonnementsNote: 'Les comptes que vous suivrez apparaîtront ici, avec un compte.',
+      aucunAbonne: 'Aucun abonné pour l’instant', abonnesNote: 'Les comptes qui vous suivront apparaîtront ici, avec un compte.',
+    },
+  };
+  const T = TEXTES.fr;
 
   function h(tag, attrs, ...enfants) {
     const el = document.createElement(tag);
@@ -514,6 +569,9 @@
     etats: ['M12 3l9 5-9 5-9-5z', 'M3 13l9 5 9-5'],
     parametres: ['M4 7h10', 'M18 7h2', 'M4 17h2', 'M10 17h10', 'M16 5v4', 'M8 15v4'],
     commenter: ['M4 5h16v11H10l-5 4v-4H4z'],
+    aimer: ['M12 20s-7.5-4.6-7.5-10.1A4.4 4.4 0 0 1 12 7.3a4.4 4.4 0 0 1 7.5 2.6C19.5 15.4 12 20 12 20z'],
+    enregistrer: ['M6.5 3.5h11v17L12 16.5l-5.5 4z'],
+    messages: ['M3.5 6h17v12h-17z', 'M3.5 6.5L12 13l8.5-6.5'],
     partager: ['M12 15V3', 'M7.5 7.5L12 3l4.5 4.5', 'M5 13v7h14v-7'],
     lien: ['M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1', 'M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1'],
     retour: ['M19 12H5', 'M11 6l-6 6 6 6'],
@@ -638,6 +696,32 @@
     };
   }
 
+  function postActualite(a) {
+    const passages = [a.accroche, a.description, a.ce_que_ca_permet, ...a.reperes].filter(Boolean)
+      .flatMap((c) => c.passages.map((texte) => ({ texte, trouve: !a.passages_introuvables.includes(texte) })));
+    // Visuel : les repères cités, sous le nom du produit (et sa version) ; à défaut, l'accroche.
+    const visuel = { compte: a.compte, titre_media: a.titre_media, visuel: { forme: 'etapes', elements: a.reperes.length ? a.reperes : [a.accroche] } };
+    return {
+      cle: `actualite-${a.post_id}`,
+      lien: `#/info/${a.post_id}`,
+      compte: a.compte,
+      date: a.planning?.jour || a.date_annonce,
+      prevue: a.statut !== 'publie',
+      badge: a.verification !== 'verifie' ? ['verifier', 'À vérifier'] : a.kind === 'version' ? ['nouveau', 'Nouvelle version'] : ['nouveau', 'Actualité'],
+      paragraphes: [a.accroche.texte, a.description.texte, a.ce_que_ca_permet?.texte].filter(Boolean),
+      points: [],
+      bouton: lienSur(a.source.url) ? { libelle: 'Voir la source', url: lienSur(a.source.url), cible: cibleCourte(a.source.url), aria: `Voir la source sur ${cibleCourte(a.source.url)} (nouvel onglet)` } : null,
+      media: () => h('figure', { class: 'post-media', 'data-compte': a.compte }, couverture(visuel, { role: 'img', 'aria-label': `Visuel : ${a.titre_media}` })),
+      vignette: () => couverture(visuel, { 'aria-hidden': 'true' }),
+      sources: () => [
+        h('p', null, `Rédigé par l’agent du site (${a.redaction.modele}) à partir de la source, relu avant planification.`),
+        h('ul', null, h('li', { lang: 'en' }, lienExterne(a.source.url, a.titre), h('span', { lang: 'fr' }, ` · ${nomCourtSource(a.source.nom)} · capturé le ${quand(a.source.capture_le, fmtDate)}`))),
+        passagesCites(passages),
+        h('p', null, 'Visuel : Schéma original.'),
+      ],
+    };
+  }
+
   function postProjet(p) {
     const passages = [p.accroche, p.interet].flatMap((c) => c.passages.map((texte) => ({ texte, trouve: p.verifie })));
     return {
@@ -659,6 +743,38 @@
           p.demonstration ? h('li', null, lienExterne(p.demonstration.url, p.demonstration.libelle)) : null),
         h('p', null, `Étoiles mesurées le ${quand(p.mesure_le, fmtDate)} : une mesure datée, pas un gage de qualité.`),
         passagesCites(passages),
+      ],
+    };
+  }
+
+  /**
+   * Sélection : l'accroche, puis chaque site (nom cliquable vers sa page officielle si le lien est vérifié, puis son
+   * explication d'une ligne) ; le texte vient avant le montage. Les sites exclus et les mots-clés ne s'affichent pas.
+   */
+  function postSelection(x) {
+    const passages = [x.accroche, ...x.ressources.map((r) => r.explication)].filter(Boolean).flatMap((c) => c.passages.map((texte) => ({ texte, trouve: true })));
+    return {
+      cle: `selection-${x.slug}`,
+      lien: `#/selection/${x.slug}`,
+      compte: x.compte,
+      date: x.planning?.jour || null,
+      prevue: x.statut !== 'publie',
+      badge: null,
+      paragraphes: [x.accroche.texte],
+      points: [],
+      ressources: x.ressources.map((r) => ({ nom: r.nom, url: lienSur(r.url), hote: r.hote, explication: r.explication.texte })),
+      // Aperçu replié : l'accroche et les deux premiers sites, puis « Voir plus ».
+      apercuBlocs: 3,
+      bouton: null,
+      media: () => (x.visuel ? h('figure', { class: 'post-media' }, h('img', { src: x.visuel.src, alt: x.visuel.alt, width: 1080, height: 1350, loading: 'lazy' })) : null),
+      vignette: () => (x.visuel ? h('img', { src: x.visuel.src, alt: '', loading: 'lazy' }) : null),
+      sources: () => [
+        h('p', null, `${x.origine.texte}.`),
+        x.decouverte_via ? h('p', null, `Liste : ${x.decouverte_via}.`) : null,
+        h('ul', null, x.ressources.map((r) => h('li', null, r.url ? lienExterne(r.url, cibleCourte(r.url) || r.nom) : `${r.nom} · lien non vérifié`,
+          r.lien?.verifie_le && r.url ? ` · lien vérifié le ${quand(r.lien.verifie_le, fmtDate)}` : ''))),
+        passagesCites(passages),
+        x.visuel ? h('p', null, `Visuel : ${x.visuel.mention}. ${x.visuel.credit}.`) : null,
       ],
     };
   }
@@ -701,7 +817,9 @@
   }
 
   // ——— Texte : le début, puis « Voir plus » qui déplie la suite sur place (et « Voir moins »). ———
-  function apercu(blocs, limite = APERCU) {
+  function apercu(blocs, limite = APERCU, nombre = null) {
+    // Nombre de blocs fixé (sélection) : les blocs entiers, jamais coupés au milieu d'un site.
+    if (nombre !== null) return { blocs: blocs.slice(0, nombre), tronque: blocs.length > nombre };
     const garde = [];
     let reste = limite;
     for (const b of blocs) {
@@ -715,91 +833,145 @@
     return { blocs: garde, tronque: false };
   }
   function texte(p, complet) {
-    const blocs = [...p.paragraphes.map((t) => ({ type: 'p', texte: t })), ...p.points.map((t) => ({ type: 'point', texte: t }))];
+    const blocs = [
+      ...p.paragraphes.map((t) => ({ type: 'p', texte: t })),
+      ...p.points.map((t) => ({ type: 'point', texte: t })),
+      ...(p.ressources || []).map((r) => ({ type: 'ressource', texte: `${r.nom} ${r.explication}`, r })),
+    ];
     const zone = h('div', { class: 'post-texte' });
+    const LISTES = { point: ['UL', 'points'], ressource: ['OL', 'sel-liste'] };
+    const nomSite = (r) => (r.url
+      ? h('a', { class: 'sel-nom', href: r.url, target: '_blank', rel: 'noopener noreferrer', title: r.hote || null }, r.nom, h('span', { class: 'sr-only' }, T.nouvelOnglet))
+      : h('span', { class: 'sel-nom' }, r.nom));
     const dessiner = (ouvert, focus) => {
-      const vue = ouvert ? { blocs, tronque: false } : apercu(blocs);
+      const vue = ouvert ? { blocs, tronque: false } : apercu(blocs, APERCU, p.apercuBlocs ?? null);
       const enfants = [];
       for (const b of vue.blocs) {
-        if (b.type === 'p') enfants.push(h('p', null, b.texte));
-        else {
-          const derniere = enfants[enfants.length - 1];
-          const liste = derniere?.tagName === 'UL' ? derniere : enfants[enfants.push(h('ul', { class: 'points' })) - 1];
-          liste.append(h('li', null, b.texte));
-        }
+        if (b.type === 'p') { enfants.push(h('p', null, b.texte)); continue; }
+        const [balise, classe] = LISTES[b.type];
+        const derniere = enfants[enfants.length - 1];
+        const liste = derniere?.tagName === balise ? derniere : enfants[enfants.push(h(balise.toLowerCase(), { class: classe })) - 1];
+        liste.append(b.type === 'ressource' ? h('li', null, nomSite(b.r), ' — ', b.r.explication) : h('li', null, b.texte));
       }
       let bouton = null;
-      if (vue.tronque) bouton = h('button', { type: 'button', class: 'voir-plus', 'aria-expanded': 'false', onclick: () => dessiner(true, true) }, 'Voir plus');
-      else if (ouvert && !complet) bouton = h('button', { type: 'button', class: 'voir-plus', 'aria-expanded': 'true', onclick: () => dessiner(false, true) }, 'Voir moins');
+      if (vue.tronque) bouton = h('button', { type: 'button', class: 'voir-plus', 'aria-expanded': 'false', onclick: () => dessiner(true, true) }, T.voirPlus);
+      else if (ouvert && !complet && besoin) bouton = h('button', { type: 'button', class: 'voir-plus', 'aria-expanded': 'true', onclick: () => dessiner(false, true) }, T.voirMoins);
       if (bouton) {
         const dernier = enfants[enfants.length - 1];
-        (dernier?.tagName === 'UL' ? dernier.lastElementChild : dernier)?.append(' ', bouton);
+        (dernier?.tagName === 'UL' || dernier?.tagName === 'OL' ? dernier.lastElementChild : dernier)?.append(' ', bouton);
       }
       zone.replaceChildren(...enfants);
       if (focus && bouton) bouton.focus({ preventScroll: true });
     };
-    const besoin = apercu(blocs).tronque;
+    const besoin = apercu(blocs, APERCU, p.apercuBlocs ?? null).tronque;
     dessiner(complet || !besoin, false);
     return zone;
   }
 
   let numero = 0;
-  /** Une publication : en-tête du compte, texte, lien vers la ressource, image, puis actions. */
+  /** Une publication : en-tête du compte, texte, lien vers la ressource, média, puis actions. */
   function post(p, { complet = false, raison = null } = {}) {
     const c = compteDe(p.compte);
     const id = `post-${++numero}`;
     const sources = h('div', { class: 'panneau', id: `${id}-sources`, hidden: true }, p.sources());
     const commentaires = h('div', { class: 'commentaires', id: `${id}-commentaires`, hidden: true },
-      h('p', { class: 'vide' }, 'Aucun commentaire pour l’instant'),
-      h('p', { class: 'discret' }, 'Les commentaires ne sont pas encore ouverts.'));
-    const bascule = (bouton, panneau, ouvrir, fermer) => () => {
-      const ouvert = panneau.hidden;
-      panneau.hidden = !ouvert;
-      bouton.setAttribute('aria-expanded', String(ouvert));
-      bouton.querySelector('.libelle').textContent = ouvert ? fermer : ouvrir;
-    };
-    const boutonSources = h('button', { type: 'button', class: 'lien-discret', 'aria-expanded': 'false', 'aria-controls': sources.id }, h('span', { class: 'libelle' }, 'Sources'));
-    boutonSources.addEventListener('click', bascule(boutonSources, sources, 'Sources', 'Masquer les sources'));
-    const boutonCommentaires = h('button', { type: 'button', 'aria-expanded': 'false', 'aria-controls': commentaires.id }, icone('commenter', 19), h('span', { class: 'libelle' }, 'Afficher les commentaires'));
-    boutonCommentaires.addEventListener('click', bascule(boutonCommentaires, commentaires, 'Afficher les commentaires', 'Masquer les commentaires'));
-    const boutonPartager = h('button', { type: 'button' }, icone('partager', 19), h('span', { class: 'libelle' }, 'Partager'));
-    boutonPartager.addEventListener('click', async () => {
-      const adresse = new URL(p.lien, location.href).href;
-      let message = 'Lien copié';
-      try { await navigator.clipboard.writeText(adresse); } catch { message = 'Copie impossible ici'; }
-      boutonPartager.querySelector('.libelle').textContent = message;
-      annoncer(message);
-      setTimeout(() => { boutonPartager.querySelector('.libelle').textContent = 'Partager'; }, 2000);
+      h('p', { class: 'vide' }, T.aucunCommentaire),
+      h('p', { class: 'discret' }, T.commentairesFermes));
+    const partage = h('div', { class: 'lien-partage', hidden: true });
+    const boutonSources = h('button', { type: 'button', class: 'lien-discret', 'aria-expanded': 'false', 'aria-controls': sources.id }, T.sources);
+    boutonSources.addEventListener('click', () => {
+      sources.hidden = !sources.hidden;
+      boutonSources.setAttribute('aria-expanded', String(!sources.hidden));
+      boutonSources.textContent = sources.hidden ? T.sources : T.masquerSources;
     });
-    const [typeBadge, texteBadge] = p.badge;
+    const action = (nom, libelle, attrs = {}) => h('button', { type: 'button', class: `act-${nom}`, 'aria-label': libelle, title: libelle, ...attrs }, icone(nom, 19));
+    // Aimer et enregistrer : visibles, mais sans compte un toucher le dit discrètement et ne change aucun état.
+    const boutonAimer = action('aimer', T.aimer, { onclick: () => toast(T.compteRequis) });
+    const boutonEnregistrer = action('enregistrer', T.enregistrer, { onclick: () => toast(T.compteRequis) });
+    const boutonCommentaires = action('commenter', T.commenter, { 'aria-expanded': 'false', 'aria-controls': commentaires.id });
+    boutonCommentaires.addEventListener('click', () => {
+      commentaires.hidden = !commentaires.hidden;
+      const libelle = commentaires.hidden ? T.commenter : T.masquerCommentaires;
+      boutonCommentaires.setAttribute('aria-expanded', String(!commentaires.hidden));
+      boutonCommentaires.setAttribute('aria-label', libelle);
+      boutonCommentaires.title = libelle;
+    });
+    // Partager : copie le lien si le navigateur le permet, sinon l'affiche, sélectionné, sous les actions.
+    const boutonPartager = action('partager', T.partager, { onclick: async () => {
+      const adresse = new URL(p.lien, location.href).href;
+      try {
+        await navigator.clipboard.writeText(adresse);
+        partage.hidden = true;
+        toast(T.lienCopie);
+      } catch {
+        const champ = h('input', { type: 'text', readonly: true, value: adresse, 'aria-label': T.lienACopier });
+        partage.replaceChildren(h('span', null, T.lienACopier), champ);
+        partage.hidden = false;
+        champ.focus();
+        champ.select();
+      }
+    } });
+    const [typeBadge, texteBadge] = p.badge || [];
     const date = p.date ? h('a', { href: p.lien, title: p.prevue ? `Publication prévue le ${quand(p.date, fmtDate)}, pas encore publiée` : quand(p.date, fmtDate) },
       p.prevue ? 'Prévue le ' : '', temps(p.date, fmtCourt)) : null;
-    return h('article', { class: `post${complet ? ' complet' : ''}`, 'data-compte': p.compte, 'aria-label': `Publication de ${c.nom}` },
+    return h('article', { class: `post${complet ? ' complet' : ''}`, 'data-compte': p.compte, 'data-cle': p.cle, 'aria-label': `Publication de ${c.nom}` },
       raison ? h('p', { class: 'post-raison' }, icone('explorer', 15), raison) : null,
-      h('a', { class: 'post-avatar', href: `#/profil/${c.id}`, tabindex: '-1', 'aria-hidden': 'true' }, avatarDe(c)),
+      h('a', { class: 'post-avatar', href: `#/profil/${c.id}`, tabindex: '-1', 'aria-hidden': 'true' }, avatarDe(c, 40)),
       h('div', { class: 'post-corps' },
         h('header', { class: 'post-tete' },
           h('a', { class: 'post-nom', href: `#/profil/${c.id}` }, c.nom),
           h('span', { class: 'post-meta' }, `@${c.identifiant}${marqueIA(c)}`, date ? [' · ', date] : null),
-          h('span', { class: `badge ${typeBadge}` }, texteBadge)),
+          texteBadge ? h('span', { class: `badge ${typeBadge}` }, texteBadge) : null),
         texte(p, complet),
         p.bouton ? h('a', { class: 'lien-ressource', href: p.bouton.url, target: '_blank', rel: 'noopener noreferrer', 'aria-label': p.bouton.aria },
-          icone('lien', 18), h('span', { class: 'lr-libelle' }, p.bouton.libelle), p.bouton.cible ? h('span', { class: 'lr-cible' }, p.bouton.cible) : null,
+          icone('lien', 17), h('span', { class: 'lr-libelle' }, p.bouton.libelle), p.bouton.cible ? h('span', { class: 'lr-cible' }, `· ${p.bouton.cible}`) : null,
           h('span', { class: 'lr-fleche', 'aria-hidden': 'true' }, '↗')) : null,
         p.media(),
-        h('div', { class: 'post-actions' }, boutonCommentaires, boutonPartager),
+        h('div', { class: 'post-actions', role: 'group', 'aria-label': 'Actions' }, boutonAimer, boutonCommentaires, boutonPartager, boutonEnregistrer),
+        partage,
         commentaires,
         // Seuls ajouts discrets, après les actions : la mention IA et le lien « Sources ».
         h('p', { class: 'post-mention' }, LIBELLE_ANALYSE, ' · ', boutonSources),
         sources));
   }
 
-  // Ressources planifiées en tête, dans l'ordre du planning ; puis exemples et projet, du plus récent au plus ancien.
+  /** Message bref et discret, lu aussi par les lecteurs d'écran ; il ne change rien d'autre. */
+  let minuteurToast = null;
+  function toast(message) {
+    let el = document.getElementById('toast');
+    if (!el) { el = h('div', { id: 'toast', class: 'toast', role: 'status', 'aria-live': 'polite' }); document.body.append(el); }
+    el.textContent = message;
+    el.classList.add('visible');
+    clearTimeout(minuteurToast);
+    minuteurToast = setTimeout(() => el.classList.remove('visible'), 2200);
+  }
+
+  // Ressources et sélections planifiées en tête, dans l'ordre du planning (jour, puis rang) ; puis exemples et projet,
+  // du plus récent au plus ancien.
+  // Le même jour, les actualités passent avant les ressources : elles vieillissent, une ressource existante non.
+  const estActualite = (x) => ACTUALITES.includes(x);
+  const ordreDuPlan = (a, b) => (a.planning?.jour || '9999').localeCompare(b.planning?.jour || '9999') || estActualite(b) - estActualite(a) || (a.planning?.rang ?? 999) - (b.planning?.rang ?? 999);
   const POSTS = () => [
-    ...RESSOURCES.map(postRessource),
-    ...[...EXEMPLES.map(postExemple), ...(DONNEES.projets || []).map(postProjet)].sort((a, b) => (b.date || '').localeCompare(a.date || '')),
+    ...[...RESSOURCES.map((r) => [r, postRessource]), ...SELECTIONS.map((x) => [x, postSelection]), ...ACTUALITES.map((a) => [a, postActualite])].sort(([a], [b]) => ordreDuPlan(a, b)).map(([x, f]) => f(x)),
+    ...[...EXEMPLES.map(postExemple), ...PROJETS.map(postProjet)].sort((a, b) => (b.date || '').localeCompare(a.date || '')),
   ];
   const postDe = (lien) => POSTS().find((p) => p.lien === lien);
+  /**
+   * Publication d'un document de recherche, quelle que soit sa nature : `post_id` d'une ressource ou d'une sélection,
+   * `recherche_id` (négatif) d'un exemple ou d'un projet. Un document sans publication affichée est ignoré.
+   */
+  function postDuDocument(postId) {
+    const r = RESSOURCES.find((y) => y.post_id === postId);
+    if (r) return postRessource(r);
+    const x = SELECTIONS.find((y) => y.post_id === postId);
+    if (x) return postSelection(x);
+    const ac = ACTUALITES.find((y) => y.post_id === postId);
+    if (ac) return postActualite(ac);
+    const ex = EXEMPLES.find((y) => y.recherche_id === postId);
+    if (ex) return postExemple(ex);
+    const pr = PROJETS.find((y) => y.recherche_id === postId);
+    return pr ? postProjet(pr) : null;
+  }
 
   // ——— Pages ———
   const vide = (titre, texteVide, niveau = 'p') => h('div', { class: 'vide-page' }, h(niveau === 'h1' ? 'h1' : 'strong', niveau === 'h1' ? { style: 'font-size:1.2rem;margin:0 0 4px;color:var(--encre)' } : null, titre), texteVide ? h('p', null, texteVide) : null);
@@ -807,7 +979,7 @@
   function vueAccueil() {
     document.title = 'Accueil · Curation AI';
     const posts = POSTS();
-    return [h('h1', { class: 'sr-only' }, 'Accueil'), posts.length ? posts.map((p) => post(p)) : vide('Aucune publication pour l’instant', null)];
+    return [h('h1', { class: 'sr-only' }, T.accueil), posts.length ? posts.map((p) => post(p)) : vide(T.aucunePublication, null)];
   }
 
   function vueDetail(lien) {
@@ -830,35 +1002,40 @@
     ];
   }
 
-  // Recherche : même code que la commande `chercher` (maquette/recherche.js). Un résultat dit brièvement pourquoi il remonte.
-  const LIEU = { nom: 'le nom', categorie: 'la catégorie', usage: 'un usage', technologie: 'une technologie', texte: 'le texte' };
+  // Recherche : même code que la commande `chercher` (maquette/recherche.js). Un résultat dit brièvement où il a été
+  // trouvé, sans jamais montrer le mot-clé qui correspond : les mots-clés restent invisibles dans les publications.
+  const LIEU = { nom: 'Trouvé dans le nom', categorie: 'Trouvé dans la catégorie', usage: 'Trouvé dans un usage', technologie: 'Trouvé dans une technologie', terme_proche: 'Terme proche de votre recherche', texte: 'Trouvé dans le texte' };
   function raisonCourte(x) {
     const c = x.correspondances[0];
-    if (!c) return null;
-    if (c.champ === 'terme_proche') return `Proche de « ${c.terme} »`;
-    return c.raison || `Trouvé dans ${LIEU[c.champ] || 'la publication'}`;
+    return c ? LIEU[c.champ] || 'Trouvé dans la publication' : null;
   }
   function vueRecherche(requete) {
-    document.title = `${requete ? `${requete} · ` : ''}Recherche · Curation AI`;
+    document.title = `${requete ? `${requete} · ` : ''}${T.recherche} · Curation AI`;
     const titre = (t) => h('h1', { class: 'titre-page', id: 'resultats-titre', tabindex: '-1' }, t);
-    if (!window.RECHERCHE) return [titre('Recherche'), vide('Recherche indisponible', 'Rechargez la page.')];
-    if (!requete) return [titre('Recherche'), vide('Cherchez un outil, un usage ou une technologie', null)];
+    if (!window.RECHERCHE) return [titre(T.recherche), vide(T.rechercheIndisponible, 'Rechargez la page.')];
+    if (!requete) return [titre(T.recherche), vide(T.rechercheVide, null)];
     const q = window.RECHERCHE.preparerRequete(requete.slice(0, 200));
-    const resultats = q.mots.length ? window.RECHERCHE.classer(requete.slice(0, 200), DONNEES.recherche || [], 'pertinence') : [];
-    annoncer(`${pluriel(resultats.length, 'résultat')} pour « ${requete} ».`);
+    const resultats = q.mots.length ? window.RECHERCHE.classer(requete.slice(0, 200), DOCUMENTS_RECHERCHE, 'pertinence') : [];
+    // Chaque résultat est la vraie publication, rendue comme dans le fil, avec une ligne discrète qui dit pourquoi.
     const posts = resultats.map((x) => {
-      const r = RESSOURCES.find((y) => y.post_id === x.postId);
-      return r ? post(postRessource(r), { raison: raisonCourte(x) }) : null;
+      const p = postDuDocument(x.postId);
+      return p ? post(p, { raison: raisonCourte(x) }) : null;
     }).filter(Boolean);
+    annoncer(`${pluriel(posts.length, 'résultat')} pour « ${requete} ».`);
     return [
-      titre(`Résultats pour « ${requete} »`),
-      posts.length ? posts : vide('Aucun résultat', 'Essayez un autre mot, plus court ou plus général.'),
+      titre(T.resultatsPour(requete)),
+      posts.length ? posts : vide(T.aucunResultat, T.aucunResultatAide),
     ];
+  }
+
+  function vueMessages() {
+    document.title = `${T.messages} · Curation AI`;
+    return [h('h1', { class: 'titre-page' }, T.messages), vide(T.aucunMessage, T.messagesNote)];
   }
 
   function vueNotifications() {
     document.title = 'Notifications · Curation AI';
-    return [h('h1', { class: 'titre-page' }, 'Notifications'), vide('Aucune notification pour l’instant', null)];
+    return [h('h1', { class: 'titre-page' }, T.notifications), vide(T.aucuneNotification, null)];
   }
 
   // ——— Reels ———
@@ -922,7 +1099,8 @@
     document.title = 'Reels · Curation AI';
     const elements = reelsValides().map(({ reel, ex }) => {
       const c = compteDe(ex.compte);
-      const transcription = [['Accroche', ex.accroche], ['Nouveauté', ex.nouveaute], [ex.details[0]?.titre, ex.details[0]], ['Limites connues', ex.limites_connues]].filter(([, champ]) => champ);
+      // Mêmes libellés que ceux dessinés dans la vidéo (anglais, 2026-11-03).
+      const transcription = [['Headline', ex.accroche], ['What’s new', ex.nouveaute], [ex.details[0]?.titre, ex.details[0]], ['Known limits', ex.limites_connues]].filter(([, champ]) => champ);
       return h('article', { class: 'reel', 'aria-label': `Reel de ${c.nom}` },
         lecteurReel(reel, ex),
         h('div', { class: 'reel-infos' },
@@ -967,11 +1145,6 @@
   function avatarVide(taille, classe = '') {
     return h('span', { class: `avatar-vide ${classe}`, style: classe ? null : `width:${taille}px;height:${taille}px`, 'aria-hidden': 'true' }, icone('profil', Math.round(taille * 0.5)));
   }
-  function ligneCompte(c) {
-    return h('li', null,
-      h('a', { class: 'compte-ligne', href: `#/profil/${c.id}` }, avatarDe(c, 40), h('span', null, h('strong', null, c.nom), h('small', null, `@${c.identifiant}${marqueIA(c)}`))),
-      h('button', { class: 'bouton-contour', type: 'button', disabled: true, title: 'Indisponible pour l’instant' }, 'Suivre'));
-  }
   function dialogueProfil() {
     const NOTE = 'Aperçu : rien n’est enregistré.';
     const statut = h('span', { class: 'note-discrete', role: 'status' }, NOTE);
@@ -990,24 +1163,23 @@
     return dialogue;
   }
   function vueMoi(onglet) {
-    document.title = 'Votre profil · Curation AI';
+    document.title = `${T.monProfil} · Curation AI`;
     const dialogue = dialogueProfil();
-    const onglets = [['', 'Publications'], ['abonnements', 'Abonnements'], ['abonnes', 'Abonnés']];
+    const onglets = [['', T.publications], ['abonnements', T.abonnements], ['abonnes', T.abonnes]];
+    // Abonnements et abonnés : vides, sans chiffre ni suggestion présentée comme un lien réel.
     const contenu = {
-      '': () => vide('Aucune publication pour l’instant', null),
-      abonnements: () => [vide('Vous ne suivez aucun compte', null),
-        h('h2', { class: 'titre-page', style: 'font-size:1.05rem;padding-top:0' }, 'Suggestions'),
-        h('ul', { class: 'liste-comptes' }, DONNEES.comptes.map(ligneCompte))],
-      abonnes: () => vide('Aucun abonné pour l’instant', null),
+      '': () => vide(T.aucunePublication, null),
+      abonnements: () => vide(T.aucunAbonnement, T.abonnementsNote),
+      abonnes: () => vide(T.aucunAbonne, T.abonnesNote),
     }[onglet]();
     return [
-      h('div', { class: 'barre-retour' }, h('a', { href: '#/', 'aria-label': 'Retour à l’accueil' }, icone('retour', 20)), h('span', { style: 'font-weight:800' }, 'Votre profil')),
+      h('div', { class: 'barre-retour' }, h('a', { href: '#/', 'aria-label': 'Retour à l’accueil' }, icone('retour', 20)), h('span', { style: 'font-weight:800' }, T.monProfil)),
       h('div', { class: 'profil-banniere' }),
       h('div', { class: 'profil-haut' },
         avatarVide(104, 'profil-photo'),
         h('button', { class: 'bouton-contour', type: 'button', onclick: () => dialogue.showModal() }, 'Modifier le profil')),
       h('div', { class: 'profil-infos' },
-        h('h1', null, 'Votre profil'),
+        h('h1', null, T.monProfil),
         h('p', { class: 'profil-id' }, 'Aperçu · aucun compte créé')),
       h('nav', { class: 'onglets', 'aria-label': 'Sections du profil' },
         onglets.map(([cle, libelle]) => h('a', { href: `#/moi${cle ? `/${cle}` : ''}`, id: `onglet-moi-${cle || 'publications'}`, 'aria-current': cle === onglet ? 'page' : null }, libelle))),
@@ -1206,7 +1378,7 @@
   }
 
   // ——— Navigation ———
-  const PAGES = [['accueil', '#/', 'Accueil'], ['explorer', '#/explorer', 'Explorer'], ['notifications', '#/notifications', 'Notifications'], ['reels', '#/reels', 'Reels'], ['profil', '#/moi', 'Profil']];
+  const PAGES = [['accueil', '#/', T.accueil], ['explorer', '#/explorer', T.explorer], ['notifications', '#/notifications', T.notifications], ['messages', '#/messages', T.messages], ['reels', '#/reels', T.reels], ['profil', '#/moi', T.profil]];
   const PLUS = [['coulisses', '#/collecte', 'Coulisses'], ['etats', '#/etats', 'États'], ['parametres', '#/parametres', 'Paramètres']];
   function rendreNav(page) {
     document.getElementById('nav').replaceChildren(...PAGES.map(([cle, href, libelle]) =>
@@ -1214,18 +1386,35 @@
     const plus = document.getElementById('plus');
     const ouvert = plus.open;
     plus.replaceChildren(
-      h('summary', { 'aria-label': 'Plus' }, icone('plus', 24), h('span', null, 'Plus')),
+      h('summary', { 'aria-label': T.plus }, icone('plus', 24), h('span', null, T.plus)),
       h('div', { class: 'plus-panneau' }, PLUS.map(([cle, href, libelle]) => h('a', { href, 'aria-current': cle === page ? 'page' : null }, icone(cle, 20), libelle))));
     plus.open = ouvert;
   }
   function rendreCadre() {
-    document.getElementById('moi-mini').replaceChildren(avatarVide(40), h('span', { class: 'moi-texte' }, h('strong', null, 'Votre profil'), h('small', null, 'Aperçu')));
-    document.getElementById('moi-mini').setAttribute('aria-label', 'Votre profil (aperçu)');
-    const input = h('input', { id: 'q', name: 'q', type: 'search', maxlength: '200', autocomplete: 'off', placeholder: 'Rechercher', 'aria-label': 'Rechercher dans les publications' });
+    document.getElementById('moi-mini').replaceChildren(avatarVide(40), h('span', { class: 'moi-texte' }, h('strong', null, T.monProfil), h('small', null, T.apercuProfil)));
+    document.getElementById('moi-mini').setAttribute('aria-label', `${T.monProfil} (${T.apercuProfil.toLowerCase()})`);
+    const input = h('input', { id: 'q', name: 'q', type: 'search', maxlength: '200', autocomplete: 'off', enterkeyhint: 'search', placeholder: T.rechercher, 'aria-label': T.rechercherAria });
+    const cibleDe = (q) => (q ? `#/recherche/${encodeURIComponent(q)}` : '#/recherche');
+    // Résultats au fil de la saisie, sans quitter le champ : une entrée d'historique en arrivant sur la recherche, puis remplacée.
+    let minuteur = null;
+    input.addEventListener('input', () => {
+      clearTimeout(minuteur);
+      minuteur = setTimeout(() => {
+        const q = input.value.trim();
+        const cible = cibleDe(q);
+        if (location.hash === cible) return;
+        if (location.hash.startsWith('#/recherche')) history.replaceState(null, '', cible);
+        else if (q) history.pushState(null, '', cible);
+        else return;
+        precedente = cible;
+        rendre(false);
+        window.scrollTo(0, 0);
+      }, 250);
+    });
     document.getElementById('recherche-haut').replaceChildren(h('form', { role: 'search', onsubmit: (e) => {
       e.preventDefault();
-      const q = input.value.trim();
-      const cible = q ? `#/recherche/${encodeURIComponent(q)}` : '#/recherche';
+      clearTimeout(minuteur);
+      const cible = cibleDe(input.value.trim());
       input.blur();
       if (location.hash === cible) rendre(false, 'resultats-titre'); else location.hash = cible;
     } }, icone('explorer', 18), input));
@@ -1236,13 +1425,15 @@
   }
 
   const annonce = document.getElementById('annonce');
+  /** Dernière adresse rendue, pour savoir si un changement d'adresse reste dans le même profil. */
+  let precedente = '#/';
   function annoncer(texteAnnonce) { annonce.textContent = texteAnnonce; }
 
   function route() {
     const chemin = location.hash.replace(/^#/, '') || '/';
     let m;
     if (chemin === '/') return ['accueil', vueAccueil];
-    if ((m = /^\/(publication|ressource|projet)\/([\w-]+)$/.exec(chemin))) return ['accueil', () => vueDetail(`#/${m[1]}/${m[2]}`)];
+    if ((m = /^\/(publication|ressource|selection|projet|info)\/([\w-]+)$/.exec(chemin))) return ['accueil', () => vueDetail(`#/${m[1]}/${m[2]}`)];
     if ((m = /^\/recherche(?:\/(.*))?$/.exec(chemin))) {
       let q = '';
       try { q = decodeURIComponent(m[1] || ''); } catch { q = ''; }
@@ -1250,6 +1441,7 @@
     }
     if (chemin === '/explorer') return ['explorer', vueExplorer];
     if (chemin === '/notifications') return ['notifications', vueNotifications];
+    if (chemin === '/messages') return ['messages', vueMessages];
     if (chemin === '/reels') return ['reels', vueReels];
     if ((m = /^\/moi(?:\/(abonnements|abonnes))?$/.exec(chemin))) return ['profil', () => vueMoi(m[1] || '')];
     if ((m = /^\/profil\/(nodi|repo|pyxo|mova|pulse|radar)(?:\/(\w+))?$/.exec(chemin))) return ['', () => vueProfilAgent(m[1], m[2] === 'reels' ? 'reels' : 'publications')];
@@ -1288,7 +1480,7 @@
     appliquerPrefs();
     document.documentElement.lang = langueCourante();
     rendreCadre();
-    let precedente = location.hash || '#/';
+    precedente = location.hash || '#/';
     window.addEventListener('hashchange', () => {
       if (location.hash && !location.hash.startsWith('#/')) return;
       const actuelle = location.hash || '#/';

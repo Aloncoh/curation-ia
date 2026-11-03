@@ -6,7 +6,9 @@ import { capturesDeRessource } from '../capture.ts';
 import { controlerRessource, metadonneesDe, type ResultatControles } from '../controles.ts';
 import { trouverRessource } from '../liste.ts';
 import { statutSortie } from '../statut.ts';
+import { estSelection } from '../selection/chaine.ts';
 import type { ContexteCommande } from './contexte.ts';
+import { verifierSelectionFichier } from './selection.ts';
 
 export interface SortieVerifier extends ResultatControles {
   fichier: string;
@@ -47,7 +49,8 @@ export async function verifierFichier(fichier: string, ctx: ContexteCommande): P
 
 export async function verifier(args: string[], ctx: ContexteCommande): Promise<number> {
   if (!args[0]) throw new Error('Usage : verifier <fichier.json>');
-  const sortie = await verifierFichier(args[0], ctx);
+  // Une sélection (`"format": "selection"`) a ses propres contrôles.
+  const sortie = estSelection(args[0]) ? await verifierSelectionFichier(args[0], ctx) : await verifierFichier(args[0], ctx);
   console.log(JSON.stringify(sortie, null, 2));
   return sortie.resultat === 'bloquant' ? 1 : 0;
 }

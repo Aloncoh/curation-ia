@@ -199,7 +199,7 @@ describe('exemples de publications de la maquette', () => {
     expect(claudeCode.actualite).toMatchObject({ kind: 'version', version: '2.1.312', title: 'Claude Code 2.1.312' });
     expect(claudeCode.diapositives.find((d) => d.champ === 'limites_connues')).toEqual({
       champ: 'limites_connues',
-      libelle: 'Limites connues',
+      libelle: 'Known limits',
       texte: null,
     });
     const fusion = data.exemples.find((e) => e.id === 'exemple-copilot-fusion')!;
@@ -478,8 +478,9 @@ describe('page de la maquette (maquette/index.html)', () => {
     expect(page).not.toContain('mots_cles');
     expect(page).not.toMatch(/Mots-clés|usages indexés|motsCles/);
     // Le seul usage des documents de recherche : les passer au moteur partagé.
-    expect(script.match(/DONNEES\.recherche/g)).toEqual(['DONNEES.recherche']);
-    expect(script).toContain("window.RECHERCHE.classer(requete.slice(0, 200), DONNEES.recherche || [], 'pertinence')");
+    expect(script.match(/DONNEES\??\.recherche\b/g)).toEqual(['DONNEES?.recherche']);
+    expect(script.match(/DONNEES\?\.recherche_hors_base/g)).toEqual(['DONNEES?.recherche_hors_base']);
+    expect(script).toContain("window.RECHERCHE.classer(requete.slice(0, 200), DOCUMENTS_RECHERCHE, 'pertinence')");
   });
 
   it('une publication garde la mention IA et un lien Sources discret, sans blocs administratifs ni rubriques systématiques', () => {
@@ -499,21 +500,26 @@ describe('page de la maquette (maquette/index.html)', () => {
     const positions = ["h('header', { class: 'post-tete' }", 'texte(p, complet)', "class: 'lien-ressource'", 'p.media()', "class: 'post-actions'", 'commentaires,', "class: 'post-mention'", 'sources))'].map((m) => corps.indexOf(m));
     expect(positions.every((p) => p >= 0)).toBe(true);
     expect([...positions].sort((a, b) => a - b)).toEqual(positions);
-    for (const libelle of ['Voir plus', 'Voir moins', 'Afficher les commentaires', 'Aucun commentaire pour l’instant', 'Partager']) expect(page).toContain(libelle);
+    for (const libelle of ['Voir plus', 'Voir moins', 'Afficher les commentaires', 'Aucun commentaire pour l’instant', 'Partager', 'Aimer', 'Enregistrer']) expect(page).toContain(libelle);
     // Aucun compteur d'interactions.
     expect(page).not.toMatch(/\d+ (j’aime|commentaires?|partages?|abonnés)/);
     // Le lien vers la ressource ouvre un nouvel onglet, sans opener.
     expect(script).toContain("h('a', { class: 'lien-ressource', href: p.bouton.url, target: '_blank', rel: 'noopener noreferrer'");
   });
 
-  it('navigation à la manière de X : profil en aperçu, cinq onglets, pages techniques dans « Plus », recherche toujours visible', () => {
-    expect(script).toContain("['accueil', '#/', 'Accueil'], ['explorer', '#/explorer', 'Explorer'], ['notifications', '#/notifications', 'Notifications'], ['reels', '#/reels', 'Reels'], ['profil', '#/moi', 'Profil']");
+  it('navigation à la manière de X : profil en aperçu, six onglets dont Messages, pages techniques dans « Plus », recherche toujours visible', () => {
+    expect(script).toContain("['accueil', '#/', T.accueil], ['explorer', '#/explorer', T.explorer], ['notifications', '#/notifications', T.notifications], ['messages', '#/messages', T.messages], ['reels', '#/reels', T.reels], ['profil', '#/moi', T.profil]");
+    expect(script).toContain("if (chemin === '/messages') return ['messages', vueMessages];");
+    expect(page).toMatch(/grid-template-columns: repeat\(6, 1fr\)/);
     expect(script).toContain("['coulisses', '#/collecte', 'Coulisses'], ['etats', '#/etats', 'États']");
     expect(page).toMatch(/\.recherche-haut \{\s*position: sticky; top: 0;/);
     expect(page).toContain('Modifier le profil');
     expect(page).toContain('Aperçu · aucun compte créé');
     expect(page).toContain('Rien n’a été enregistré : ce profil est un aperçu.');
     expect(page).toContain('Aucune notification pour l’instant');
+    // Abonnements, abonnés et messages : vides, une phrase discrète, aucune suggestion ni aucun chiffre.
+    for (const t of ['Aucun abonnement pour l’instant', 'Aucun abonné pour l’instant', 'Aucun message pour l’instant', 'Les messages privés seront disponibles avec un compte.']) expect(page).toContain(t);
+    expect(script).not.toContain('Suggestions');
     // Un compte agent est identifié par « · IA ».
     expect(script).toContain("const marqueIA = (c) => (c.type === 'agent' ? ' · IA' : '');");
   });
@@ -554,5 +560,68 @@ describe('maquette/donnees.js : publications de ressources', () => {
   it('aucune mention de jalon dans les textes affichés des comptes, sujets et registres', () => {
     const textes = JSON.stringify([donnees.comptes, donnees.sujets, donnees.registre_pulse, donnees.registre_radar]);
     expect(textes).not.toMatch(/\bP\d{1,2}\b/);
+  });
+});
+
+describe('page de la maquette : sélection, actions et recherche (demandes du 2026-11-02)', () => {
+  const page = readFileSync(new URL('../maquette/index.html', import.meta.url), 'utf8');
+  const script = page.slice(page.indexOf("'use strict';"));
+  const code = readFileSync(new URL('../maquette/donnees.js', import.meta.url), 'utf8');
+  const fenetre: { DONNEES_MAQUETTE?: MaquetteData } = {};
+  new Function('window', code)(fenetre);
+  const donnees = fenetre.DONNEES_MAQUETTE!;
+
+  it('sélection : nom cliquable seulement si l’URL est vérifiée, nouvel onglet sans opener, texte avant le montage', () => {
+    const fonction = script.slice(script.indexOf('function postSelection('), script.indexOf('function passagesCites('));
+    expect(fonction).toContain('url: lienSur(r.url)');
+    expect(fonction).toContain('bouton: null');
+    expect(script).toContain("h('a', { class: 'sel-nom', href: r.url, target: '_blank', rel: 'noopener noreferrer'");
+    expect(script).toContain(": h('span', { class: 'sel-nom' }, r.nom));");
+    // Le texte (accroche et liste) est rendu par texte(), avant p.media() : même ordre que le post individuel.
+    const corps = script.slice(script.indexOf("h('div', { class: 'post-corps' },"));
+    expect(corps.indexOf('texte(p, complet)')).toBeLessThan(corps.indexOf('p.media()'));
+    // Aperçu replié : l'accroche et deux sites, jamais un site coupé au milieu.
+    expect(fonction).toContain('apercuBlocs: 3');
+    // Les sites exclus ne sont jamais montrés comme ressources.
+    expect(fonction).not.toContain('exclus');
+  });
+
+  it('actions : aimer, commenter, partager, enregistrer, sans compteur ni état fictif', () => {
+    expect(script).toContain('boutonAimer, boutonCommentaires, boutonPartager, boutonEnregistrer');
+    expect(script).toContain("const boutonAimer = action('aimer', T.aimer, { onclick: () => toast(T.compteRequis) });");
+    expect(script).toContain("const boutonEnregistrer = action('enregistrer', T.enregistrer, { onclick: () => toast(T.compteRequis) });");
+    expect(page).toContain("compteRequis: 'Disponible avec un compte'");
+    // Aucun état « aimé » ou « enregistré » simulé.
+    expect(script).not.toMatch(/aria-pressed[^\n]*(aimer|enregistrer)|(aimer|enregistrer)[^\n]*aria-pressed/);
+    // Partager : copie si possible, sinon le lien est affiché.
+    expect(script).toContain('await navigator.clipboard.writeText(adresse);');
+    expect(script).toContain("h('input', { type: 'text', readonly: true, value: adresse");
+  });
+
+  it('recherche : chaque document de recherche renvoie à une publication affichée, de toute nature', () => {
+    const affiches = new Set([
+      ...donnees.ressources.map((r) => r.post_id),
+      ...donnees.selections.map((x) => x.post_id),
+      ...donnees.actualites.map((a) => a.post_id),
+      ...donnees.exemples.map((e) => e.recherche_id),
+      ...donnees.projets.map((p) => p.recherche_id),
+    ]);
+    expect(affiches.size).toBe(donnees.ressources.length + donnees.selections.length + donnees.actualites.length + donnees.exemples.length + donnees.projets.length);
+    expect([...donnees.recherche, ...donnees.recherche_hors_base].map((d) => d.postId).sort((a, b) => a - b)).toEqual([...affiches].sort((a, b) => a - b));
+    // Exemples et projets : identifiants négatifs, jamais confondus avec une publication en base.
+    for (const e of [...donnees.exemples, ...donnees.projets]) expect(e.recherche_id).toBeLessThan(0);
+    expect(script).toContain('const p = postDuDocument(x.postId);');
+    for (const source of ['RESSOURCES', 'SELECTIONS', 'ACTUALITES', 'EXEMPLES', 'PROJETS']) expect(script.slice(script.indexOf('function postDuDocument('))).toContain(`${source}.find(`);
+  });
+
+  it('recherche : la raison affichée nomme le champ, jamais le mot-clé', () => {
+    const fonction = script.slice(script.indexOf('function raisonCourte('), script.indexOf('function vueRecherche('));
+    expect(fonction).not.toMatch(/c\.terme|c\.raison|extrait/);
+  });
+
+  it('textes de l’interface regroupés, sans dépendance nouvelle', () => {
+    expect(script).toContain('const TEXTES = {');
+    expect(script).toContain('const T = TEXTES.fr;');
+    expect(page.match(/<script src="[^"]+">/g)).toEqual(['<script src="donnees.js">', '<script src="recherche.js">']);
   });
 });

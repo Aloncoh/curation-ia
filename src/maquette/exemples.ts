@@ -1,10 +1,10 @@
-// Exemples de publications pour la maquette (P2, vision sociale du 2026-10-30).
+// Exemples de publications pour la maquette (P2, vision sociale du 2026-10-30), en anglais depuis le 2026-11-03 (SPEC §7.13).
 // Rédigés par Claude Code — PAS par l'agent du site, qui n'existe pas encore (P3) — à partir de captures réelles.
 // Chaque champ factuel cite au moins un passage copié tel quel de la capture ; `npm run maquette` et les tests vérifient
 // que chaque passage se retrouve mot pour mot dans le texte brut de la capture (espaces normalisés).
 // Ils montrent le format visé ; ce ne sont pas des publications et ils sont étiquetés « Exemple » partout.
 
-/** Champ factuel : un texte en français et les passages de la source qui le soutiennent (langue originale). */
+/** Champ factuel : un texte en anglais et les passages de la source qui le soutiennent (langue originale). */
 export interface ChampCite {
   texte: string;
   passages: string[];
@@ -15,11 +15,11 @@ export interface ChampCite {
  * le sujet sans rien affirmer. Liste fermée, pour qu'un libellé nouveau soit relu avant d'être utilisé.
  */
 export const LIBELLES_DETAILS = [
-  'Aussi dans cette version',
-  'Coût',
+  'Also in this release',
+  'Cost',
   'Administration',
-  'Erreurs WebFetch',
-  'Un modèle seul, en cascade ou en critique',
+  'WebFetch errors',
+  'Single model, cascade or critique',
 ] as const;
 
 export interface DetailCite extends ChampCite {
@@ -82,7 +82,7 @@ export const EXEMPLES: ExemplePublication[] = [
     id: 'exemple-copilot-fusion',
     compte: 'nodi',
     description: {
-      texte: "On choisit le niveau d'effort, Copilot choisit les modèles. Chaque modèle utilisé est facturé à son tarif standard.",
+      texte: "You pick the effort level, Copilot picks the models. Each model it uses is billed at its standard rate.",
       passages: [
         'For each prompt, Copilot Fusion determines which models to use and how they work together, while you choose the right level of effort.',
         'When you use Copilot Fusion you’re billed for each model it uses, at each model’s standard rate.',
@@ -92,9 +92,9 @@ export const EXEMPLES: ExemplePublication[] = [
       forme: 'etapes',
       legende: 'Schéma original',
       elements: [
-        { texte: 'Seul : un modèle traite la tâche', passages: ['Single: One model solves the task directly.'] },
-        { texte: 'Cascade : un modèle économe rédige, un contrôle décide de passer à un modèle plus fort', passages: ['Cascade: An efficient model drafts a response. A quality check determines whether to accept it or escalate to a stronger model.'] },
-        { texte: 'Critique : un modèle rédige, un autre relit, le premier corrige', passages: ['Critique: One model drafts an initial response, another model reviews it, and the original model revises.'] },
+        { texte: 'Single: one model handles the task', passages: ['Single: One model solves the task directly.'] },
+        { texte: 'Cascade: a cheaper model drafts, a check decides whether to move up to a stronger one', passages: ['Cascade: An efficient model drafts a response. A quality check determines whether to accept it or escalate to a stronger model.'] },
+        { texte: 'Critique: one model drafts, another reviews, the first one revises', passages: ['Critique: One model drafts an initial response, another model reviews it, and the original model revises.'] },
       ],
       original: { url: 'https://github.com/user-attachments/assets/1eeffdb5-0c21-4697-8007-bb6df0e70e8b', libelle: 'Voir le schéma de GitHub' },
     },
@@ -103,7 +103,7 @@ export const EXEMPLES: ExemplePublication[] = [
     media: 'carrousel',
     titre_media: 'Copilot Fusion',
     accroche: {
-      texte: 'Copilot Fusion en disponibilité générale : à chaque demande, Copilot choisit les modèles et, si besoin, les fait travailler ensemble',
+      texte: 'Copilot Fusion is generally available: for every request, Copilot picks the models and, when needed, makes them work together',
       passages: [
         'GitHub Copilot Fusion is generally available.',
         'For each prompt, Copilot Fusion determines which models to use and how they work together',
@@ -112,7 +112,7 @@ export const EXEMPLES: ExemplePublication[] = [
     },
     nouveaute: {
       texte:
-        "Au lieu de choisir un modèle pour chaque tâche, on laisse Copilot Fusion décider, à chaque demande, quels modèles utiliser et comment les faire travailler ensemble ; l'utilisateur choisit le niveau d'effort : Standard, High ou Max.",
+        "Rather than choosing a model for every task, you let Copilot Fusion decide, request by request, which models to use and how to combine them; the user sets the effort level: Standard, High or Max.",
       passages: [
         'Instead of picking a model for each task',
         'For each prompt, Copilot Fusion determines which models to use and how they work together, while you choose the right level of effort.',
@@ -123,7 +123,7 @@ export const EXEMPLES: ExemplePublication[] = [
     },
     ce_que_ca_permet: {
       texte:
-        "Selon GitHub, plus besoin de changer de modèle en cours de tâche ; côté administration, choisir les modèles utilisables et, via les paramètres gérés Enterprise, faire de Copilot Fusion le modèle par défaut.",
+        "According to GitHub, no more switching models mid-task; on the admin side, you choose which models can be used and, through Enterprise managed settings, can make Copilot Fusion the default model.",
       passages: [
         'There’s no need to switch models during a task or decide which model suits each step.',
         'Administrators control which models Copilot Fusion can use and whether Copilot Fusion is the default.',
@@ -131,14 +131,14 @@ export const EXEMPLES: ExemplePublication[] = [
       ],
     },
     pour_qui: {
-      texte: "Les utilisateurs de Copilot, toutes offres, dans VS Code, l'app GitHub Copilot, Copilot CLI et les IDE JetBrains.",
+      texte: "Copilot users on every plan, in VS Code, the GitHub Copilot app, Copilot CLI and JetBrains IDEs.",
       passages: [
         'Copilot Fusion is available on all Copilot plans in Visual Studio Code, the GitHub Copilot app, GitHub Copilot CLI, and JetBrains IDEs.',
       ],
     },
     limites_connues: {
       texte:
-        "Les autres clients ne sont pas encore pris en charge (annoncés « bientôt », sans date) ; chaque modèle utilisé est facturé à son tarif standard.",
+        "Other clients aren’t supported yet (announced as “coming soon”, with no date); each model used is billed at its standard rate.",
       passages: [
         'Support for additional clients is coming soon.',
         'When you use Copilot Fusion you’re billed for each model it uses, at each model’s standard rate.',
@@ -146,9 +146,9 @@ export const EXEMPLES: ExemplePublication[] = [
     },
     details: [
       {
-        titre: 'Un modèle seul, en cascade ou en critique',
+        titre: 'Single model, cascade or critique',
         texte:
-          "Selon la tâche : un seul modèle la traite directement ; ou, en cascade, un modèle économe rédige et un contrôle de qualité décide d'accepter ou de passer à un modèle plus fort ; ou, en critique, un modèle rédige, un autre relit, puis le premier corrige.",
+          "Depending on the task: a single model handles it directly; or, in cascade mode, a cheaper model drafts and a quality check decides whether to keep the answer or move up to a stronger model; or, in critique mode, one model drafts, another reviews, then the first one revises.",
         passages: [
           'orchestrating multiple models through the following workflows when needed',
           'Single: One model solves the task directly.',
@@ -157,9 +157,9 @@ export const EXEMPLES: ExemplePublication[] = [
         ],
       },
       {
-        titre: 'Coût',
+        titre: 'Cost',
         texte:
-          'Chaque modèle utilisé est facturé à son tarif standard ; remise de 30 % sur le coût des modèles, pendant une durée limitée, pour les offres payantes.',
+          'Each model used is billed at its standard rate; for a limited time, paid plans get a 30% discount on model costs.',
         passages: [
           'When you use Copilot Fusion you’re billed for each model it uses, at each model’s standard rate.',
           'For a limited time, users on paid Copilot plans will receive a 30% discount on model costs when using Copilot Fusion.',
@@ -169,9 +169,9 @@ export const EXEMPLES: ExemplePublication[] = [
     attributions: [
       {
         type: 'benchmark',
-        auteur: 'GitHub, dans son annonce du 28 octobre 2026',
+        auteur: 'GitHub, in its 28 October 2026 announcement',
         texte:
-          "Selon GitHub, Copilot Fusion Max obtient 60 à l'Artificial Analysis Coding Agent Index, à deux points au plus de Claude Code avec Opus 5.5 Max, pour environ la moitié du coût moyen d'API par tâche. Score annoncé par GitHub ; l'annonce ne dit pas qui a mené l'évaluation ni dans quelles conditions ; non mesuré par la plateforme.",
+          "According to GitHub, Copilot Fusion Max scores 60 on the Artificial Analysis Coding Agent Index, at most two points behind Claude Code with Opus 5.5 Max, for roughly half the average API cost per task. Score announced by GitHub; the announcement doesn’t say who ran the evaluation or under what conditions; not measured by the platform.",
         passages: [
           'In the Artificial Analysis Coding Agent Index, Copilot Fusion Max scored 60, within two points of Claude Code with Opus 5.5 Max.',
           'It delivered that result at about half the average API cost per task',
@@ -179,9 +179,9 @@ export const EXEMPLES: ExemplePublication[] = [
       },
       {
         type: 'temoignage',
-        auteur: 'Hari Pokhrel, Principal Software Engineer, AT&T — cité par GitHub',
+        auteur: 'Hari Pokhrel, Principal Software Engineer, AT&T — quoted by GitHub',
         texte:
-          "Témoignage rapporté par l'éditeur : chez AT&T, Copilot Fusion Standard aurait amélioré l'efficacité en tokens en choisissant automatiquement le modèle adapté à la tâche. Expérience attribuée, pas une conclusion générale.",
+          "Testimonial reported by the vendor: at AT&T, Copilot Fusion Standard reportedly made token use more efficient by picking a suitable model for each task on its own. An attributed experience, not a general conclusion.",
         passages: [
           'GitHub Copilot Fusion Standard has improved token efficiency across AT&T by automatically selecting the right model for the task',
           'Hari Pokhrel, Principal Software Engineer, AT&T',
@@ -191,23 +191,23 @@ export const EXEMPLES: ExemplePublication[] = [
     diapositives: ['accroche', 'nouveaute', 'details:0', 'pour_qui', 'limites_connues'],
     categories: ['outil de développement', 'modèles'],
     questions_a_tester: [
-      "Sur une même tâche, quels modèles Copilot Fusion choisit-il à chaque niveau d'effort ?",
-      "Le coût réel d'une tâche est-il visible pour l'utilisateur ?",
+      "On the same task, which models does Copilot Fusion pick at each effort level?",
+      "Can the user see what a task actually costs?",
     ],
   },
   {
     id: 'exemple-claude-code-2-1-312',
     compte: 'nodi',
     description: {
-      texte: "Face à un très gros fichier d'instructions dont Claude n'a vu que le début, Write demande de le lire en entier ou de le modifier sur place.",
+      texte: "When Claude has only seen the beginning of a very large instructions file, Write now asks it to read the whole file or edit in place.",
       passages: ['after seeing only its start; Write now asks Claude to read it all or edit in place'],
     },
     visuel: {
       forme: 'avant_apres',
       legende: 'Schéma original',
       elements: [
-        { texte: 'Avant : réécriture après avoir vu seulement le début du fichier', passages: ['Fixed Claude overwriting a very large CLAUDE.md, rules file or @-included file in a subdirectory after seeing only its start'] },
-        { texte: 'Maintenant : Write demande de tout lire ou de modifier sur place', passages: ['Write now asks Claude to read it all or edit in place'] },
+        { texte: 'Before: rewritten after reading just the beginning', passages: ['Fixed Claude overwriting a very large CLAUDE.md, rules file or @-included file in a subdirectory after seeing only its start'] },
+        { texte: 'Now: Write asks to read everything or edit in place', passages: ['Write now asks Claude to read it all or edit in place'] },
       ],
     },
     source_id: 'github-releases:anthropics/claude-code',
@@ -215,41 +215,41 @@ export const EXEMPLES: ExemplePublication[] = [
     media: 'carrousel',
     titre_media: '2.1.312',
     accroche: {
-      texte: "Claude Code 2.1.312 corrige la réécriture d'un très gros CLAUDE.md de sous-dossier après n'en avoir vu que le début",
+      texte: "Claude Code 2.1.312 stops a huge subdirectory CLAUDE.md from being rewritten when only its beginning was read",
       passages: [
         'Fixed Claude overwriting a very large CLAUDE.md, rules file or @-included file in a subdirectory after seeing only its start',
       ],
     },
     nouveaute: {
       texte:
-        "Quand Claude s'apprête à réécrire un très gros CLAUDE.md, fichier de règles ou fichier inclus par @ d'un sous-dossier dont il n'a vu que le début, l'outil Write lui demande désormais de le lire en entier ou de le modifier sur place.",
+        "When Claude is about to rewrite a huge CLAUDE.md, rules file or file pulled in with @ inside a subdirectory, having seen only its first part, the Write tool now asks it to read everything or edit in place.",
       passages: [
         'Fixed Claude overwriting a very large CLAUDE.md, rules file or @-included file in a subdirectory after seeing only its start; Write now asks Claude to read it all or edit in place',
       ],
     },
     ce_que_ca_permet: {
-      texte: "Éviter qu'un long fichier d'instructions placé dans un sous-dossier soit réécrit après n'en avoir vu que le début.",
+      texte: "Prevents a long instructions file stored in a subdirectory from being rewritten when only its beginning was read.",
       passages: [
         'a very large CLAUDE.md, rules file or @-included file in a subdirectory',
         'after seeing only its start; Write now asks Claude to read it all or edit in place',
       ],
     },
     pour_qui: {
-      texte: "Les utilisateurs de Claude Code qui gardent de longs fichiers d'instructions dans des sous-dossiers de leurs projets.",
+      texte: "Claude Code users who keep long instructions files in the subdirectories of their projects.",
       passages: ['a very large CLAUDE.md, rules file or @-included file in a subdirectory'],
     },
     limites_connues: null,
     details: [
       {
-        titre: 'Aussi dans cette version',
+        titre: 'Also in this release',
         texte:
-          "En plein écran, cliquer sur l'indication « to send now » sous un message en attente l'envoie tout de suite, comme la touche correspondante.",
+          "In fullscreen, clicking the “to send now” hint below a queued message sends it immediately, just like the matching key.",
         passages: ['Added click to send: in fullscreen, clicking the "to send now" hint under a queued message sends it right away, as its key does'],
       },
       {
-        titre: 'Erreurs WebFetch',
+        titre: 'WebFetch errors',
         texte:
-          "Dans les sessions cloud, quand un hôte ne se résout pas, l'erreur de WebFetch explique qu'il est peut-être hors des domaines réseau autorisés, ce qui permet à Claude de nommer l'hôte à autoriser.",
+          "In cloud sessions, when a host doesn’t resolve, the WebFetch error explains it may be outside the allowed network domains, so Claude can tell you which host to allow.",
         passages: [
           'Improved WebFetch errors in cloud sessions: a host that does not resolve is now explained as possibly outside the allowed network domains, so Claude names the host to allow',
         ],
@@ -258,13 +258,13 @@ export const EXEMPLES: ExemplePublication[] = [
     attributions: [],
     diapositives: ['accroche', 'nouveaute', 'pour_qui', 'limites_connues'],
     categories: ['assistant de code'],
-    questions_a_tester: ["Avec un CLAUDE.md de plusieurs milliers de lignes dans un sous-dossier, Claude le lit-il en entier avant de le modifier ?"],
+    questions_a_tester: ["With a CLAUDE.md several thousand lines long in a subdirectory, does Claude read all of it before editing?"],
   },
   {
     id: 'exemple-codex-cli-0-166-0',
     compte: 'pyxo',
     description: {
-      texte: 'Une commande pour diagnostiquer la configuration, la connectivité et les WebSockets.',
+      texte: 'A command to diagnose configuration, connectivity and WebSockets.',
       passages: ['Added codex doctor --network-only for focused configuration, connectivity, and WebSocket diagnostics.'],
     },
     visuel: {
@@ -280,12 +280,12 @@ export const EXEMPLES: ExemplePublication[] = [
     media: 'image',
     titre_media: '0.166.0',
     accroche: {
-      texte: 'Codex CLI 0.166.0 ajoute codex doctor --network-only pour diagnostiquer configuration, connectivité et WebSockets',
+      texte: 'Codex CLI 0.166.0 adds codex doctor --network-only to diagnose configuration, connectivity and WebSockets',
       passages: ['Added codex doctor --network-only for focused configuration, connectivity, and WebSocket diagnostics.'],
     },
     nouveaute: {
       texte:
-        'Un diagnostic ciblé de la configuration, de la connectivité et des WebSockets, et GPT-6.1 Terra dans les catalogues de modèles intégré, Vertex AI et Amazon Bedrock.',
+        'A targeted check of configuration, connectivity and WebSockets, plus GPT-6.1 Terra in the built-in model catalog and in the Vertex AI and Amazon Bedrock ones.',
       passages: [
         'Added codex doctor --network-only for focused configuration, connectivity, and WebSocket diagnostics.',
         'Added GPT-6.1 Terra to the bundled, Vertex AI, and Amazon Bedrock model catalogs.',
@@ -293,7 +293,7 @@ export const EXEMPLES: ExemplePublication[] = [
     },
     ce_que_ca_permet: {
       texte:
-        'Lancer avec codex doctor --network-only un diagnostic ciblé de la configuration, de la connectivité et des WebSockets ; sélectionner la transcription au clavier, par mot, ligne ou page, avec recherche intégrée.',
+        'Run a targeted configuration, connectivity and WebSocket check with codex doctor --network-only; select transcript text from the keyboard, by word, line or page, with built-in search.',
       passages: [
         'Added codex doctor --network-only for focused configuration, connectivity, and WebSocket diagnostics.',
         'Added keyboard-driven transcript selection with word, line, and page motions, integrated search, and configurable shortcuts.',
@@ -303,21 +303,21 @@ export const EXEMPLES: ExemplePublication[] = [
     limites_connues: null,
     details: [
       {
-        titre: 'Aussi dans cette version',
-        texte: "codex queue --resume reprend des fils déchargés après la mise en file d'un message.",
+        titre: 'Also in this release',
+        texte: "codex queue --resume picks up unloaded threads after a message has been queued.",
         passages: ['Added codex queue --resume to resume unloaded threads after queueing a message.'],
       },
     ],
     attributions: [],
     diapositives: ['accroche'],
     categories: ['assistant de code'],
-    questions_a_tester: ["Que vérifie exactement codex doctor --network-only derrière un proxy d'entreprise ?"],
+    questions_a_tester: ["What exactly does codex doctor --network-only check behind a corporate proxy?"],
   },
   {
     id: 'exemple-copilot-images',
     compte: 'mova',
     description: {
-      texte: "On décrit l'image dans le chat ; un aperçu s'affiche et l'image est enregistrée dans le projet. Filigrane visible désactivé par défaut.",
+      texte: "Describe the image in chat; a preview appears and the image is saved to the project. Visible watermark off by default.",
       passages: [
         'Describe an image conversationally in any Copilot chat session',
         'previews the result inline, and saves it to your project.',
@@ -328,9 +328,9 @@ export const EXEMPLES: ExemplePublication[] = [
       forme: 'etapes',
       legende: 'Schéma original',
       elements: [
-        { texte: 'Décrire l’image dans le chat', passages: ['Describe an image conversationally in any Copilot chat session'] },
-        { texte: 'Le modèle appelle GPT Image 2.5 Flare', passages: ['your selected reasoning model calls a dedicated image-generation tool powered by GPT Image 2.5 Flare'] },
-        { texte: 'Aperçu dans la conversation, image enregistrée dans le projet', passages: ['previews the result inline, and saves it to your project.'] },
+        { texte: 'Describe the image in chat', passages: ['Describe an image conversationally in any Copilot chat session'] },
+        { texte: 'The model calls GPT Image 2.5 Flare', passages: ['your selected reasoning model calls a dedicated image-generation tool powered by GPT Image 2.5 Flare'] },
+        { texte: 'Preview in the conversation, image saved to the project', passages: ['previews the result inline, and saves it to your project.'] },
       ],
     },
     source_id: 'feed:github-changelog',
@@ -338,7 +338,7 @@ export const EXEMPLES: ExemplePublication[] = [
     media: 'image',
     titre_media: 'Copilot',
     accroche: {
-      texte: 'GitHub Copilot génère et modifie des images depuis le chat, en préversion publique',
+      texte: 'GitHub Copilot creates and edits images from chat, in public preview',
       passages: [
         'You can now generate and edit images using natural language in GitHub Copilot.',
         'Describe an image conversationally in any Copilot chat session',
@@ -347,20 +347,20 @@ export const EXEMPLES: ExemplePublication[] = [
     },
     nouveaute: {
       texte:
-        "Le modèle de raisonnement choisi appelle un outil dédié à la génération d'images (GPT Image 2.5 Flare), affiche un aperçu dans la conversation et enregistre l'image dans le projet.",
+        "The chosen reasoning model calls a dedicated image-generation tool (GPT Image 2.5 Flare), shows a preview in the conversation and saves the image to the project.",
       passages: [
         'your selected reasoning model calls a dedicated image-generation tool powered by GPT Image 2.5 Flare, previews the result inline, and saves it to your project.',
       ],
     },
     ce_que_ca_permet: {
-      texte: 'Selon GitHub, obtenir un visuel sans quitter sa session de code ni passer par un outil séparé.',
+      texte: 'According to GitHub, you get a visual without leaving your coding session or switching to a separate tool.',
       passages: [
         'Previously, getting a visual asset while working in Copilot meant stepping away to a separate tool',
         'This update removes that context switch, so you can go from an idea to a usable image without breaking your flow.',
       ],
     },
     pour_qui: {
-      texte: "Les abonnés Copilot Pro, Pro+, Business et Enterprise ; pour l'essayer, un chat Copilot dans VS Code, l'app GitHub Copilot ou Copilot CLI.",
+      texte: "Copilot Pro, Pro+, Business and Enterprise subscribers; to try it, a Copilot chat in VS Code, the GitHub Copilot app or Copilot CLI.",
       passages: [
         'Image generation is in public preview for Copilot Pro, Copilot Pro+, Copilot Business, and Copilot Enterprise.',
         'To try it, open a Copilot chat in VS Code, the GitHub Copilot app, or Copilot CLI',
@@ -368,7 +368,7 @@ export const EXEMPLES: ExemplePublication[] = [
     },
     limites_connues: {
       texte:
-        "Préversion publique ; filigrane visible « Made with AI » en option, désactivé par défaut ; facturé à part, en tokens d'image décomptés des crédits IA de l'offre.",
+        "Public preview; the visible “Made with AI” watermark is optional and off by default; billed separately, in image tokens counted against the plan’s AI credits.",
       passages: [
         'Image generation is in public preview',
         'You can opt in to a visible “Made with AI” watermark on images Copilot generates and edits.',
@@ -379,7 +379,7 @@ export const EXEMPLES: ExemplePublication[] = [
     details: [
       {
         titre: 'Administration',
-        texte: "Les propriétaires d'organisation et d'entreprise peuvent désactiver la génération d'images dans les règles de modèles de Copilot.",
+        texte: "Organization and enterprise owners can switch image generation off in Copilot’s model policies.",
         passages: [
           'Organization and enterprise owners can turn off image generation by disabling the image generation model using Copilot model policies.',
         ],
@@ -388,22 +388,22 @@ export const EXEMPLES: ExemplePublication[] = [
     attributions: [],
     diapositives: ['accroche'],
     categories: ['outil de développement', 'design'],
-    questions_a_tester: ["Une image générée garde-t-elle une trace de son origine IA quand le filigrane est désactivé ?"],
+    questions_a_tester: ["Does a generated image keep any trace of its AI origin when the watermark is off?"],
   },
   {
     id: 'exemple-gemini-4-carbon',
     compte: 'radar',
     description: {
-      texte: 'Google le présente comme son prochain modèle de pointe. Le flux collecté ne donne pas le détail : disponibilité et limites sont à lire à la source.',
+      texte: 'Google presents it as its next frontier model. The collected feed gives no details: check the source for availability and limits.',
       passages: ['Gemini 4 Carbon: our next frontier model'],
     },
     visuel: {
       forme: 'photo',
       legende: 'Photo de presse, sans rapport direct avec le produit',
-      elements: [{ texte: 'Google présente Gemini 4 Carbon', passages: ['Gemini 4 Carbon: our next frontier model'] }],
+      elements: [{ texte: 'Google introduces Gemini 4 Carbon', passages: ['Gemini 4 Carbon: our next frontier model'] }],
       photo: {
         fichier: 'google-campus.jpg',
-        alt: 'Vue du campus Googleplex',
+        alt: 'View of the Googleplex campus',
         credit: 'Source: Google.',
         conditions: 'https://blog.google/image-library/',
         verifie_le: '2026-10-30',
@@ -413,8 +413,8 @@ export const EXEMPLES: ExemplePublication[] = [
     url: 'https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-carbon',
     media: 'image',
     titre_media: 'Gemini 4 Carbon',
-    accroche: { texte: 'Google présente Gemini 4 Carbon, son prochain modèle de pointe', passages: ['Gemini 4 Carbon: our next frontier model'] },
-    nouveaute: { texte: 'Un nouveau modèle de pointe annoncé par Google.', passages: ['Gemini 4 Carbon: our next frontier model'] },
+    accroche: { texte: 'Google introduces Gemini 4 Carbon, its next frontier model', passages: ['Gemini 4 Carbon: our next frontier model'] },
+    nouveaute: { texte: 'A new frontier model announced by Google.', passages: ['Gemini 4 Carbon: our next frontier model'] },
     ce_que_ca_permet: null,
     pour_qui: null,
     limites_connues: null,
@@ -422,13 +422,13 @@ export const EXEMPLES: ExemplePublication[] = [
     attributions: [],
     diapositives: ['accroche'],
     categories: ['grandes entreprises', 'annonce officielle'],
-    questions_a_tester: ['Quand et pour qui Gemini 4 Carbon est-il disponible ?'],
+    questions_a_tester: ['When, and for whom, is Gemini 4 Carbon available?'],
   },
   {
     id: 'exemple-github-enterprise-copilot',
     compte: 'pyxo',
     description: {
-      texte: 'Pour les clients suivis par une équipe commerciale : Copilot inclus par utilisateur licencié, usage décompté du budget dès la première requête.',
+      texte: 'For customers working with an account team: Copilot included for every licensed user, usage counted against the budget from the first request.',
       passages: [
         'Enterprises working with a GitHub or Microsoft account team can now get Copilot included with GitHub Enterprise for every licensed user.',
         'AI usage is metered from the first request against your enterprise budget',
@@ -438,8 +438,8 @@ export const EXEMPLES: ExemplePublication[] = [
       forme: 'avant_apres',
       legende: 'Schéma original',
       elements: [
-        { texte: 'Avant : gérer les sièges Copilot et l’usage de l’IA', passages: ['Previously, you had to manage two things: how many Copilot seats you were paying for and how much AI usage those users consumed.'] },
-        { texte: 'Maintenant : gérer surtout l’usage face au budget', passages: ['usage against your enterprise budget is the primary thing to manage'] },
+        { texte: 'Before: manage Copilot seats and AI usage', passages: ['Previously, you had to manage two things: how many Copilot seats you were paying for and how much AI usage those users consumed.'] },
+        { texte: 'Now: mostly manage usage against the budget', passages: ['usage against your enterprise budget is the primary thing to manage'] },
       ],
     },
     source_id: 'feed:github-changelog',
@@ -447,39 +447,39 @@ export const EXEMPLES: ExemplePublication[] = [
     media: 'image',
     titre_media: 'GitHub Enterprise',
     accroche: {
-      texte: 'GitHub Enterprise inclut désormais Copilot pour les clients suivis par une équipe commerciale',
+      texte: 'GitHub Enterprise now includes Copilot for customers working with an account team',
       passages: ['Enterprises working with a GitHub or Microsoft account team can now get Copilot included with GitHub Enterprise for every licensed user.'],
     },
     nouveaute: {
-      texte: 'Copilot est inclus pour chaque utilisateur licencié ; l’usage de l’IA devient le principal élément à gérer, sans allocation incluse.',
+      texte: 'Copilot is included for every licensed user; AI usage becomes the main thing to manage, with no included allowance.',
       passages: [
         'With Copilot included in the platform, usage against your enterprise budget is the primary thing to manage.',
         'There is no included usage allowance to track or top up.',
       ],
     },
     ce_que_ca_permet: {
-      texte: 'La complétion de code continue sans budget disponible ; un budget épuisé ne retire pas l’accès.',
+      texte: 'Code completion keeps working with no budget left; an exhausted budget doesn’t remove access.',
       passages: ['Code completion and next edit suggestions keep working even with no budget available.', 'An exhausted budget never removes access.'],
     },
     pour_qui: {
-      texte: 'Les clients GitHub Enterprise Cloud suivis par une équipe commerciale GitHub ou Microsoft.',
+      texte: 'GitHub Enterprise Cloud customers working with a GitHub or Microsoft account team.',
       passages: ['If you work with a GitHub or Microsoft account team: Available now for GitHub Enterprise Cloud.'],
     },
     limites_connues: {
-      texte: 'Indisponible en libre-service pour l’instant ; Copilot Chat, la revue de code et Copilot dans le cloud exigent un budget disponible.',
+      texte: 'Not available as self-service for now; Copilot Chat, code review and Copilot in the cloud need available budget.',
       passages: ['Currently unavailable.', 'Copilot Chat, Copilot code review, and Copilot in the cloud require available budget to use.'],
     },
     details: [],
     attributions: [],
     diapositives: ['accroche'],
     categories: ['outil de développement', 'annonce officielle'],
-    questions_a_tester: ['Quel est le coût réel d’une équipe type une fois l’usage décompté ?'],
+    questions_a_tester: ['What does a typical team actually pay once usage is counted?'],
   },
   {
     id: 'exemple-plugins-copilot',
     compte: 'repo',
     description: {
-      texte: "Un dépôt de confiance peut installer des plugins par défaut pour ses contributeurs ; une entreprise peut en imposer ou en bloquer.",
+      texte: "A trusted repository can install default plugins for its contributors; an enterprise can require or block plugins.",
       passages: [
         'Trusted repositories can install and enable default plugins for contributors.',
         'Enterprises can require plugins, block plugins, and restrict installation to approved marketplaces.',
@@ -489,9 +489,9 @@ export const EXEMPLES: ExemplePublication[] = [
       forme: 'priorite',
       legende: 'Schéma original',
       elements: [
-        { texte: 'Paramètres gérés par l’entreprise', passages: ['Managed settings take precedence over repository and personal choices.'] },
-        { texte: 'Choix du dépôt', passages: ['Managed settings take precedence over repository and personal choices.'] },
-        { texte: 'Choix personnels', passages: ['Managed settings take precedence over repository and personal choices.'] },
+        { texte: 'Enterprise managed settings', passages: ['Managed settings take precedence over repository and personal choices.'] },
+        { texte: 'Repository choices', passages: ['Managed settings take precedence over repository and personal choices.'] },
+        { texte: 'Personal choices', passages: ['Managed settings take precedence over repository and personal choices.'] },
       ],
     },
     source_id: 'feed:github-changelog',
@@ -499,42 +499,42 @@ export const EXEMPLES: ExemplePublication[] = [
     media: 'image',
     titre_media: 'Repository plugin defaults',
     accroche: {
-      texte: 'Copilot : plugins par défaut par dépôt et contrôles d’entreprise en disponibilité générale',
+      texte: 'Copilot: per-repository default plugins and enterprise controls are generally available',
       passages: ['Repository plugin defaults and enterprise-managed plugin controls are now generally available in VS Code, Copilot CLI, and the GitHub Copilot app.'],
     },
     nouveaute: {
-      texte: "Un mainteneur définit une place de marché et des plugins par défaut pour éviter de répéter la configuration à chaque projet ; un administrateur fournit les places de marché approuvées et impose ou bloque des plugins.",
+      texte: "A maintainer sets up a marketplace and default plugins so setup isn’t repeated for every project; an administrator supplies approved marketplaces and requires or blocks plugins.",
       passages: [
         'As a repository maintainer, you can define a plugin marketplace and default plugins so contributors don’t have to repeat setup for each project.',
         'As an enterprise administrator, you can supply approved marketplaces and require or block plugins through managed settings.',
       ],
     },
     ce_que_ca_permet: {
-      texte: 'Partager la même configuration entre contributeurs, qui peuvent désactiver les valeurs par défaut du dépôt si la politique le permet.',
+      texte: 'Share one setup across contributors, who can turn off the repository defaults if policy allows.',
       passages: ['Contributors can turn off repository defaults where policy permits.'],
     },
     pour_qui: {
-      texte: 'Les utilisateurs Copilot individuels, Business et Enterprise ; les contrôles gérés visent GitHub Enterprise Cloud.',
+      texte: 'Individual, Business and Enterprise Copilot users; managed controls target GitHub Enterprise Cloud.',
       passages: [
         'Repository defaults are available to individual Copilot users and users with Copilot Business or Copilot Enterprise.',
         'Managed controls are available on GitHub Enterprise Cloud for users with Copilot Business or Copilot Enterprise licenses issued by the enterprise or one of its organizations.',
       ],
     },
     limites_connues: {
-      texte: 'Les plugins imposés sont installés et activés automatiquement, sans possibilité de les désactiver.',
+      texte: 'Required plugins are installed and enabled automatically, and can’t be turned off.',
       passages: ['Required plugins are automatically installed and enabled, and users can’t disable them.'],
     },
     details: [],
     attributions: [],
     diapositives: ['accroche'],
     categories: ['plugins', 'outil de développement'],
-    questions_a_tester: ['Que voit un contributeur quand un plugin imposé entre en conflit avec son choix personnel ?'],
+    questions_a_tester: ['What does a contributor see when a required plugin conflicts with their personal choice?'],
   },
   {
     id: 'exemple-extension-securite-copilot',
     compte: 'pyxo',
     description: {
-      texte: "Parcourir les alertes de code scanning dans l'app Copilot et demander de les expliquer ou de les corriger, sans commit automatique.",
+      texte: "Browse code scanning alerts in the Copilot app and ask for an explanation or a fix, with no automatic commit.",
       passages: [
         'Select one or more alerts and ask Copilot to Explain or Fix them.',
         'Copilot only makes fixes in your local working copy and doesn’t commit or push anything.',
@@ -544,9 +544,9 @@ export const EXEMPLES: ExemplePublication[] = [
       forme: 'etapes',
       legende: 'Schéma original',
       elements: [
-        { texte: 'Parcourir les alertes par gravité', passages: ['Browse every open code scanning alert, ordered by severity'] },
-        { texte: 'Demander d’expliquer ou de corriger', passages: ['Select one or more alerts and ask Copilot to Explain or Fix them.'] },
-        { texte: 'Relire la correction locale, pousser quand on est prêt', passages: ['review and iterate on the changes in the app and push when you’re ready'] },
+        { texte: 'Browse alerts by severity', passages: ['Browse every open code scanning alert, ordered by severity'] },
+        { texte: 'Ask for an explanation or a fix', passages: ['Select one or more alerts and ask Copilot to Explain or Fix them.'] },
+        { texte: 'Review the local fix, push when ready', passages: ['review and iterate on the changes in the app and push when you’re ready'] },
       ],
       original: { url: 'https://github.com/user-attachments/assets/998394bd-4bce-4779-866e-f52939fac045', libelle: 'Voir la capture de GitHub' },
     },
@@ -555,23 +555,23 @@ export const EXEMPLES: ExemplePublication[] = [
     media: 'image',
     titre_media: 'Security extension',
     accroche: {
-      texte: "Une extension de sécurité pour l'app GitHub Copilot, en préversion publique",
+      texte: "A security extension for the GitHub Copilot app, in public preview",
       passages: ['The new GitHub security extension, now in public preview, lets you find the alerts that matter most and ask Copilot to explain or help fix them.'],
     },
     nouveaute: {
-      texte: "Passer de la recherche d'une alerte à sa correction au même endroit, sans quitter l'app.",
+      texte: "Go from finding an alert to fixing it in one place, without leaving the app.",
       passages: ['you can move from finding an alert to fixing it in one place'],
     },
     ce_que_ca_permet: {
-      texte: 'Lancer /security-review sur ses changements en cours et voir les résultats à côté des alertes existantes.',
+      texte: 'Check your in-progress changes with /security-review and see the results next to the alerts already open.',
       passages: ['Run /security-review on your current changes and see those findings next to your existing alerts.'],
     },
     pour_qui: {
-      texte: "Avec toute offre Copilot : installer l'extension et lancer /security-review sur ses changements locaux.",
+      texte: "Any Copilot plan can install the extension and use /security-review on local changes.",
       passages: ['With any Copilot plan: You can install the extension and run /security-review on your local changes.'],
     },
     limites_connues: {
-      texte: 'Préversion publique ; GitHub Enterprise Server n’est pas pris en charge.',
+      texte: 'Public preview; GitHub Enterprise Server isn’t supported.',
       passages: [
         'The security extension is in public preview on github.com and GitHub Enterprise Cloud with data residency.',
         'GitHub Enterprise Server isn’t supported.',
@@ -579,8 +579,8 @@ export const EXEMPLES: ExemplePublication[] = [
     },
     details: [
       {
-        titre: 'Coût',
-        texte: 'Explain, Fix et /security-review consomment des crédits IA ; parcourir et rejeter des alertes n’utilise pas d’IA.',
+        titre: 'Cost',
+        texte: 'Explain, Fix and /security-review use AI credits; browsing and dismissing alerts doesn’t use AI.',
         passages: [
           'The Explain, Fix, and /security-review actions use the model you’ve selected in the app and consume AI credits in the same way as any other prompt.',
           'Browsing and dismissing alerts don’t use AI.',
@@ -590,7 +590,7 @@ export const EXEMPLES: ExemplePublication[] = [
     attributions: [],
     diapositives: ['accroche'],
     categories: ['extension', 'outil de développement'],
-    questions_a_tester: ['Sur une alerte réelle, la correction proposée passe-t-elle les tests du dépôt ?'],
+    questions_a_tester: ['On a real alert, does the suggested fix pass the repository’s tests?'],
   },
 ];
 
@@ -668,8 +668,8 @@ export const PROJETS = [
     licence: 'MIT',
     capture:
       'Ears for coding agents: let AI hear, review and make sound. CPU-only, open source. It runs locally on CPU, as a CLI, a Python API and an MCP server.',
-    accroche: { texte: 'earshot veut donner des oreilles aux agents de code', passages: ['Ears for coding agents: let AI hear, review and make sound.'] },
-    interet: { texte: 'Selon son auteur, il fonctionne en local sur CPU, en ligne de commande, en API Python et en serveur MCP.', passages: ['It runs locally on CPU, as a CLI, a Python API and an MCP server.'] },
+    accroche: { texte: 'earshot wants to give coding agents ears', passages: ['Ears for coding agents: let AI hear, review and make sound.'] },
+    interet: { texte: 'According to its author, it runs locally on CPU, as a command-line tool, a Python API and an MCP server.', passages: ['It runs locally on CPU, as a CLI, a Python API and an MCP server.'] },
     categories: ['projet GitHub', 'MCP'],
     demonstration: { url: 'https://github.com/Leonxlnx/earshot/releases/tag/v0.1.0', libelle: 'Film de lancement de l’auteur' },
   },

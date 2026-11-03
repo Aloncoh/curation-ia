@@ -247,7 +247,8 @@ export function controlerRessource(brut: unknown, captures: CaptureRessource[], 
       const partie = parties.find((x) => contientMotPourMot(x, p)) ?? texteSource;
       const i = partie.indexOf(p);
       const autour = i < 0 ? p : partie.slice(Math.max(0, i - 120), i + p.length + 120);
-      if (NUANCE_SOURCE.test(autour) && !NUANCE_TEXTE.test(c.texte)) a_verifier.push({ champ, code: 'contexte_a_relire', detail: p });
+      // Un repère (64 caractères, sur l'image) ne porte pas de réserve : elle va dans le texte du post, contrôlé lui aussi.
+      if (!champ.startsWith('reperes:') && NUANCE_SOURCE.test(autour) && !NUANCE_TEXTE.test(c.texte)) a_verifier.push({ champ, code: 'contexte_a_relire', detail: p });
     }
     if (PERFORMANCE.test(c.texte) && !ATTRIBUTION.test(c.texte)) a_verifier.push({ champ, code: 'benchmark_non_attribue' });
   }

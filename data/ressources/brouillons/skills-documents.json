@@ -2,7 +2,7 @@
   "slug": "skills-documents",
   "consignes": "r2",
   "accroche": {
-    "texte": "Skills de documents d'Anthropic : Claude crée et modifie vos Word, tableurs, présentations et PDF",
+    "texte": "Anthropic document skills: Claude creates and edits Word files, spreadsheets, slides and PDF files",
     "passages": [
       "This repository contains Anthropic's implementation of skills for Claude.",
       "create, read, edit, or manipulate Word documents (.docx files)",
@@ -12,7 +12,7 @@
     ]
   },
   "description": {
-    "texte": "Les quatre skills qui font tourner les fonctions de documents de Claude, un par format : docx, xlsx, pptx et pdf. Rapport Word, classeur avec formules, présentation, formulaire PDF : Claude s'appuie dessus pour livrer un fichier propre. Selon Anthropic, une référence de skills complexes utilisés en production.",
+    "texte": "The four skills that power Claude's document functions, one per format: docx, xlsx, pptx and pdf. Word report, spreadsheet with formulas, presentation, PDF form: Claude relies on them to deliver a clean file. According to Anthropic, a reference for complex skills used in production.",
     "passages": [
       "We've also included the document creation & editing skills that power Claude's document capabilities under the hood in the skills/docx, skills/pdf, skills/pptx, and skills/xlsx subfolders.",
       "This repository contains Anthropic's implementation of skills for Claude.",
@@ -24,7 +24,7 @@
     ]
   },
   "interet": {
-    "texte": "Chaque skill choisit sa méthode selon la tâche, recense les pièges connus des bibliothèques et impose de contrôler le fichier produit. Pour un tableur, LibreOffice recalcule toutes les formules, et rien ne part tant qu'il reste une erreur.",
+    "texte": "Each skill picks its method based on the task, lists the known library pitfalls and requires checking the produced file. For a spreadsheet, LibreOffice recalculates all formulas, and nothing goes out while an error remains.",
     "passages": [
       "A .docx is a ZIP archive of XML files. Choose your approach by task:",
       "The model knows the API; these are the footguns:",
@@ -34,7 +34,7 @@
     ]
   },
   "exemple_usage": {
-    "texte": "Une fois le plugin document-skills installé, il suffit de demander à Claude Code d'utiliser le skill PDF pour extraire les champs de formulaire d'un fichier.",
+    "texte": "Once the document-skills plugin is installed, just ask Claude Code to use the PDF skill to extract a file's form fields.",
     "passages": [
       "if you install the document-skills plugin from the marketplace, you can ask Claude Code to do something like",
       "Use the PDF skill to extract the form fields from path/to/some-file.pdf"
@@ -43,14 +43,14 @@
   "demarrage": {
     "etapes": [
       {
-        "texte": "Ajouter le catalogue : /plugin marketplace add anthropics/skills",
+        "texte": "Add the catalog: /plugin marketplace add anthropics/skills",
         "passages": [
           "You can register this repository as a Claude Code Plugin marketplace by running the following command in Claude Code",
           "/plugin marketplace add anthropics/skills"
         ]
       },
       {
-        "texte": "Installer : /plugin install document-skills@anthropic-agent-skills",
+        "texte": "Install: /plugin install document-skills@anthropic-agent-skills",
         "passages": [
           "Alternatively, directly install either Plugin via:",
           "/plugin install document-skills@anthropic-agent-skills"
@@ -67,7 +67,7 @@
   "compatibilites": [],
   "limites": [
     {
-      "texte": "Code consultable mais pas libre : la licence réserve ces skills aux services d'Anthropic et interdit de les copier, modifier ou redistribuer.",
+      "texte": "Code viewable but not free: the license reserves these skills for Anthropic's services and forbids copying, modifying or redistributing them.",
       "passages": [
         "These are source-available, not open source",
         "is governed by your agreement with Anthropic regarding use of Anthropic's services.",
@@ -78,7 +78,7 @@
     }
   ],
   "licence_locale": {
-    "texte": "Selon le LICENSE.txt de chaque skill : licence propriétaire d'Anthropic.",
+    "texte": "Not open source: each skill's LICENSE.txt states a proprietary Anthropic license.",
     "passages": [
       "license: Proprietary. LICENSE.txt has complete terms",
       "© 2025 Anthropic, PBC. All rights reserved."
@@ -207,20 +207,20 @@
   },
   "reperes": [
     {
-      "texte": "Word : modifications suivies, puis copie propre acceptée",
+      "texte": "Word: tracked changes, then a clean accepted copy",
       "passages": [
         "working with tracked changes or comments",
         "To produce a clean copy with all tracked changes accepted:"
       ]
     },
     {
-      "texte": "Présentations converties en images pour la relecture",
+      "texte": "Presentations converted to images for review",
       "passages": [
         "Convert presentations to individual slide images for visual inspection:"
       ]
     },
     {
-      "texte": "Finance : une hypothèse par cellule, sauf consigne contraire",
+      "texte": "Finance: one assumption per cell, unless stated otherwise",
       "passages": [
         "Unless the user says otherwise, or the existing file already does something else.",
         "every assumption in its own labeled cell, referenced by the formulas that use it"

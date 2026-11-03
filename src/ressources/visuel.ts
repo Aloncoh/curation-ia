@@ -7,18 +7,18 @@ import type { MetadonneesDepot } from './capture.ts';
 import type { EntreeRessource } from './liste.ts';
 import type { BrouillonRessource } from './schemas.ts';
 
-export const SURTITRE_COMMANDE = 'Reconstitution de la commande citée';
+export const SURTITRE_COMMANDE = 'Reconstructed from the quoted command';
 /** Dossier des visuels de ressources, servi par la maquette. */
 export const DOSSIER_VISUELS = 'maquette/medias/montages/ressources';
 
-const JOUR_PARIS = new Intl.DateTimeFormat('fr-FR', { dateStyle: 'long', timeZone: 'Europe/Paris' });
+const JOUR_PARIS = new Intl.DateTimeFormat('en-GB', { dateStyle: 'long', timeZone: 'Europe/Paris' });
 
 /** Pied commun : dépôt canonique, jour de la capture (Europe/Paris) et, pour un fork, son parent. */
 export function sourceDuVisuel(m: Pick<MetadonneesDepot, 'full_name' | 'fork' | 'parent'>, captureLe: string): string {
   // Espaces insécables : la date ne se coupe pas en fin de ligne du pied.
   const jour = JOUR_PARIS.format(new Date(captureLe)).replace(/ /g, '\u00a0');
-  const fork = m.fork && m.parent ? ` · Fork de ${m.parent.full_name}` : '';
-  return `Source : github.com/${m.full_name} · capturé le ${jour}${fork}`;
+  const fork = m.fork && m.parent ? ` · Fork of ${m.parent.full_name}` : '';
+  return `Source: github.com/${m.full_name} · captured ${jour}${fork}`;
 }
 
 /**

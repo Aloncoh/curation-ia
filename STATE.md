@@ -1,10 +1,10 @@
 # État du projet
 
-_Mis à jour le 2026-11-02 : chaîne des ressources construite, 21 publications préparées en aperçu ; maquette façon X ; décisions du jour reportées dans SPEC._
+_Mis à jour le 2026-11-03 (matin, après un arrêt forcé du PC et une reprise en deux sessions) : posts, ressources et sélection en anglais ; dépôt et base vérifiés intacts._
 
-- **Phase** : P2 fusionné dans `main`. **P3 en cours, pas terminé** sur `p3-brouillons`. Chaîne des ressources (ADR 0011) avancée avant P6 à la demande de l'utilisateur, sans rouvrir de jalon. Relevé de la base locale le 2026-11-02 : 21 publications, toutes de ressources, à l'état `en_attente` (rien n'est publié) ; 21 brouillons d'origine « rédigé pendant le développement par Claude Code » ; aucun brouillon de l'agent du site ; `selection_avis` vide. `llm_run` compte 3 exécutions de la comparaison du 2026-11-01 et 6 imports de ressources sans appel au modèle.
-- **Dépôt** : `main` à `e56db82` ; `p3-brouillons` à `6fe6a6e`, non fusionnée, non poussée (aucun dépôt distant). **Le travail du 2026-11-02 après ce commit n'est pas commité** (chaîne des ressources, recherche, maquette, documents). Branche `mobile` au commit `6fe6a6e`, dans `.worktrees/mobile`.
-- **Tests** : 682 au vert sur fixtures et faux modèle (`npm test`, 2026-11-02), types OK. Migrations 0009 et 0010 appliquées à la base locale (11 sur 11). **Blocages** : aucun. **Dépenses** : 0 € depuis la comparaison du 2026-11-01 (0,083 $). Aucun compte créé.
+- **Phase** : P2 fusionné dans `main`. **P3 en cours, pas terminé** sur `p3-brouillons`. Chaîne des ressources (ADR 0011) avancée avant P6 à la demande de l'utilisateur, sans rouvrir de jalon. Relevé de la base locale le 2026-11-03 : 38 publications, dont 28 `en_attente` et planifiées, 9 `a_verifier` et 1 `rejete`. Rien n'est publié.
+- **Dépôt** : `main` à `e56db82` ; `p3-brouillons` à `b244c29`, non fusionnée, non poussée (aucun dépôt distant). **Tout le travail du 2026-11-03 n'est pas commité** : actualités de l'agent, anglais, autocorrection, ressources traduites. Branche `mobile` à `17f8408`, dans `.worktrees/mobile`.
+- **Tests** : 717 au vert sur fixtures et faux modèle (`npx vitest run`, 2026-11-03 09:17), types OK. Après l'arrêt forcé : `git fsck` ne signale rien, `PRAGMA integrity_check` répond ok, aucun fichier modifié n'est vide. **Blocages** : aucun. **Dépenses DeepSeek** (budget autorisé : 4 $) : 0,149 $ comptés en base (0,134 $ réels, plus les réservations de 3 appels sans coût connu), et 0,0099 $ de traduction des ressources **absents de la base** (voir plus bas), soit environ 0,16 $. Haiku : 0,061 $ réels (comparaison du 2026-11-01). Aucun compte créé.
 
 ## Ce qui fonctionne réellement (vérifié le 2026-10-31, complété le 2026-11-02)
 
@@ -49,6 +49,7 @@ Vision comparée au dépôt ; aucun jalon rouvert ; périmètre de la V1 inchang
 2. **Connexion obligatoire** dans le produit cible ; l'accès de démonstration de l'application sert seulement aux essais.
 3. **Abonnements et Abonnés** : ils regroupent tous les comptes, humains et agents IA, sans catégories séparées. On suit un compte pour ses publications ; le fil « Abonnements » les rassemble. Une mention discrète suffit à identifier un compte IA. Aucune amitié réciproque pour l'instant.
 4. **Interface** : aucune indication de jalon ; une fonction indisponible est signalée discrètement.
+7. **Équilibre des comptes** : signature selon le sujet, comptes alternés dans le planning ; 21 ressources réparties Radar 5, Mova 4, Pyxo 4, Repo 4, Nodi 4 (docs/agents-editoriaux.md).
 6. **Passage à la publication automatique** : après 2 brouillons consécutifs relus sans affirmation non soutenue (au lieu de 10) ; reporté dans SPEC §7.4.
 5. **Information facultative absente** : masquée à l'affichage au lieu de « Non renseigné » ; `null` reste la règle en base.
 
@@ -58,6 +59,55 @@ Vision comparée au dépôt ; aucun jalon rouvert ; périmètre de la V1 inchang
 - Langue : celle du navigateur parmi les langues disponibles, choix manuel, langue de secours (construit en P4).
 - Six comptes éditoriaux provisoires sur un même moteur ; « Veilleuse » : mascotte du site et présentatrice. Exemples toujours signalés comme tels.
 - **2026-10-31 : Reddit reste dans le périmètre, en source différée.** Demande d'accès non déposée ; il ne doit pas être exclu du cadrage. Motif et conditions de reprise : docs/sources.md §3.7.
+
+## Maquette du 2026-11-02 (soir)
+
+Rendu proche de X, post de sélection (6 sites design web, Godly exclu, « free » et « 800+ » non repris faute de preuve), recherche sur les 31 publications affichées, actions sans compteur ni effet simulé, Messages et Mon profil (Abonnements, Abonnés vides). Langues décidées (ADR 0012). 710 tests au vert. Manque : police hébraïque à choisir (la session mobile recommande Rubik, OFL, graisses 300 à 900, planche dans `docs/mobile/preuves/` ; question posée à l'utilisateur dans la session mobile) ; droits des captures de sites non tranchés.
+
+## Premier lot réel (2026-11-02, 20:12 UTC)
+
+Budget autorisé par l'utilisateur : 4 $ au total. Lot DeepSeek Flash de 30 actualités : 19 écartées, 7 à approfondir, 1 sortie invalide, 3 brouillons « à vérifier » (post_draft 90, 105, 113), 34 appels, **0,0125 $** dépensés. **Relecture faite le 2026-11-02 : « Les 3 sont OK »** (posts 22, 23, 24, passés en attente et planifiés dans la réserve des nouveautés prioritaires). La condition de passage à la publication automatique (2 brouillons consécutifs sans affirmation non soutenue, SPEC §7.4) est remplie ; l'activation effective demande la chaîne en ligne (P5). `brouillons:relire` corrigé (les découvertes en sont exclues).
+
+## Actualités de l'agent dans le fil (2026-11-03)
+
+- Le fil affiche désormais les actualités réelles de l'agent (`src/maquette/actualites.ts`), avec une revérification mot pour mot à l'affichage ; le même jour, elles passent avant les ressources. `npm run brouillons:planifier` planifie les brouillons sans écart (en attente, jamais publiés) ; les « à vérifier » attendent une relecture.
+- Second lot DeepSeek Flash : 138 actualités de moins de 14 jours, 0,045 $ (total DeepSeek 0,094 $ ; budget autorisé 4 $). Résultat : 1 sans écart (planifiée, post 32), 17 « à vérifier » (posts 26 à 43), 13 à approfondir, 60 écartées, 45 trop anciennes, 73 sans texte.
+- Entraînement de l'agent (2026-11-03, demande de l'utilisateur) :
+  - Consigne de rédaction p3-12 : règles de citation tirées des écarts du lot réel.
+  - Consignes de sélection s4 : premiers exemples humains (`selection_avis` 1 à 3, « Les 3 sont OK »).
+  - Contrôle `soutien_nom_absent` : un nom est désormais attesté par le titre, par un sigle courant ou par sa présence telle quelle dans la source ; un nom absent de la source reste un écart. Nouvelles commandes `brouillons:recontroler` (gratuite) et `brouillons:planifier`.
+  - 12 brouillons non relus ont été archivés (`exports/brouillons-remplaces-2026-11-03.json` ; la base avait été sauvegardée dans le dossier temporaire de la session, perdu à l'arrêt forcé), puis réécrits : 0,012 $. Écarts par brouillon : environ 19 avant, 11 après.
+  - Résultat : 5 actualités planifiées (posts 22, 23, 24, 32, 45) ; 15 « à vérifier », dont 5 anciennes versions de Claude Code (2.1.304 à 2.1.310) laissées hors planning. DeepSeek, total dépensé : 0,106 $ sur les 4 $ autorisés. 713 tests au vert.
+
+## Posts en anglais (2026-11-03)
+
+- Décisions de l'utilisateur : posts et texte des images en anglais ; traduction de tout le post, titre compris, automatique comme sur X (SPEC §7.13, ADR 0012 point 5).
+- Fait : consigne de rédaction p3-13 en anglais ; contrôles bilingues, avec un nouvel écart `langue_non_conforme` ; libellés des montages en anglais. 714 tests au vert.
+- Les 16 actualités de l'agent ont été réécrites en anglais pour 0,015 $ (DeepSeek, total 0,12 $ sur 4 $). Les versions françaises sont archivées dans `exports/brouillons-francais-2026-11-03*.json` ; la sauvegarde de la base, faite dans le dossier temporaire de la session, a été perdue à l'arrêt forcé.
+- Résultat : 1 actualité planifiée (Cursor Agent SDK, post 63) ; 11 en anglais à relire, dont les anciens posts 22 à 24, que l'utilisateur avait validés en français ; les anglais sont des textes nouveaux ; 1 rejetée (média). Les écarts restants sont surtout des réserves de la source à relire et des copies de phrases.
+- Encore en français : les 21 ressources, la sélection et les exemples de la maquette (rédigés par Claude Code), ainsi que leurs montages déjà rendus.
+
+## Autocorrection de l'agent (2026-11-03)
+
+- Demande de l'utilisateur : « redige les tous ». Consigne p3-15 : une passe d'autocorrection (étape `revision`) reçoit les écarts du code, et n'est gardée que si elle en compte moins ; une règle de langue est écrite en anglais. Deux faux positifs corrigés : le produit est attesté par le nom de la source officielle, et une réserve n'est pas exigée dans un repère d'image. 716 tests au vert.
+- Résultat : 6 actualités en anglais planifiées (posts 63, 69, 71, 72, 74, 76). 4 restent « à vérifier », avec de vrais écarts (réserve omise, citation inexacte, chiffre hors citation), dont Claude Code 2.1.314 et GitHub Actions pull_request_target ; 1 sortie invalide. Les 5 anciennes versions de Claude Code restent hors planning. DeepSeek, total dépensé : 0,149 $ sur 4 $. Archives : `exports/brouillons-avant-*.json`.
+
+## Ressources en anglais (2026-11-03)
+
+- Les textes des 21 brouillons de ressources et de la sélection, rédigés en français par Claude Code, ont été traduits en anglais par DeepSeek Flash : 22 appels, 0,0099 $, sans chiffre modifié. Le script ponctuel et les versions françaises sont archivés dans `exports/brouillons-ressources-francais-2026-11-03/` (copiés depuis le dossier temporaire). **Ces 22 appels ne sont pas en base** : le script appelait le modèle directement, sans passer par `llm_call`, qui exige une actualité. Le montant de 0,0099 $ vient de la sortie du script et ne peut pas être revérifié ; le plafond total ne le compte pas. Passages, commandes, mots-clés et boutons sont inchangés. 14 champs ont été corrigés à la main par Claude Code (repères trop longs ou redondants, réserves, noms).
+- Réimport complet : 21 ressources et 1 sélection conformes, planifiées et indexées ; images refaites en anglais.
+- Contrôles : négations et conditions anglaises reconnues (« doesn't », « no », « if », « depending ») ; pas de réserve exigée dans un repère d'image (ressources et actualités). La mention de l'image est en anglais (`MENTION_IMAGE`) ; la base garde la mention française de référence, imposée par une contrainte `media_asset_notice_ck`.
+- Reste en français : les 8 exemples et le projet écrits à la main pour la maquette (`src/maquette/exemples.ts`), et l'interface (trilingue en P4). 717 tests au vert.
+
+## Nouveaux modèles et étape « approfondir » (2026-11-03)
+
+- Constat de l'utilisateur : GPT-6.1 Terra et Gemini 4 Carbon n'avaient pas été publiés. Cause : les flux RSS d'OpenAI et de Google ne donnent qu'une phrase (50 et 66 caractères), et aucune étape ne lisait l'article.
+- Nouvelle étape `npm run approfondir` (`src/collect/approfondir.ts`) : pour une actualité « à approfondir » ou écartée faute de source, elle capture la page officielle (safeGet, hôtes autorisés de la source) et l'enregistre comme nouvelle capture (`text`) ; chaque refus est tracé dans `run`. Résultat : 19 pages capturées sur 21. openai.com refuse la collecte (403) pour Terra et LifeVal ; aucun contournement.
+- Lot DeepSeek : 0,074 $ (total 0,22 $ sur 4 $). Gemini 4 Carbon, Mistral Large 4 OSS et Voxtral 3 ont été corrigés par Claude Code sur demande de l'utilisateur (« poste les ») : attribution des benchmarks, chiffre hors citation retiré, réserves reprises, une attribution sans conditions retirée, aucune information ajoutée. Base sauvegardée dans `exports/curation-avant-corrections-modeles.db`.
+- Planning recalculé par priorité (`planning --recalculer`, base sauvegardée dans `exports/curation-avant-replanification.db`) : les 3 modèles ouvrent le 3 novembre. 10 actualités planifiées.
+- Limite connue : la collecte suivante du flux verra la capture de l'article comme un changement et réenregistrera la phrase du flux. C'est sans effet sur les posts planifiés, qui citent leur propre capture, mais à corriger avant P5.
+- Exemples de la maquette, Reel et montages de démonstration en anglais (travail commencé par la session curation-ai-5f, terminé ici) : voix anglaise, mentions dessinées en anglais, manifeste et images régénérés. 717 tests au vert.
+- Source YouTube « AI Search » (@theAIsearch, chaîne UCIgnGlGkVRhd4qNFcEwLL4A) demandée par l'utilisateur : le flux RSS répond 404 le 2026-11-03. Rôle proposé : signal de découverte (contenu externe attribué), le post citant la source officielle. Décision en attente.
 
 ## Ajustements du 2026-11-02
 
@@ -70,14 +120,16 @@ Vision comparée au dépôt ; aucun jalon rouvert ; périmètre de la V1 inchang
 
 Worktree `.worktrees/mobile` (exclu localement via `.git/info/exclude`), branche `mobile` partie de `6fe6a6e` (à jour au 2026-11-02). Règles de partage dans `.worktrees/mobile/MOBILE.md`. La session mobile écrit seulement `apps/mobile/**` et `docs/mobile/**`. La session principale garde tout le reste, dont `packages/contrat/` (API v1) et la racine. Ports : 4173 maquette, 3000 site, 8081 Expo. Aucun compte ni dépense mobile sans accord. Ne pas écrire dans `.worktrees/`.
 
+M3 construit le 2026-11-03 et validé par l'utilisateur (« je valide tout »), non commité : barre commune, Mon profil, interface en/fr/he (catalogues typés dans `src/textes/`), hébreu de droite à gauche sur le web, « Pour toi » ordonné par centres d'intérêt. 89 tests mobiles au vert. Détail : `docs/mobile/M3.md`, ADR mobile 0004. Besoins d'API pour P4 : `propositions-contrat.md` §8 (langue du contenu, clé de champ dans les extraits de recherche, bouton, ordre de « Pour toi » côté serveur en P9).
+
 ## En attente de l'utilisateur
 
 1. **Corriger les 15 exemples** sur la page de revue (0 avis reçu au 2026-11-01). Les avis sont dans la collection `avis` de la page ; Claude les importe avec `npm run selection -- avis`.
-2. **Modèle par défaut** : comparaison réelle faite (0,083 $, ADR 0009). DeepSeek Flash choisi par l'utilisateur le 2026-11-01, contre la recommandation Haiku, risque d'erreurs connu (13 contre 3). À faire : SPEC §8, et `npm run brouillons` qui refuse encore tout modèle non Claude. La première clé Anthropic exposée en conversation a été supprimée.
+2. **Modèle par défaut** : comparaison réelle faite (0,083 $, ADR 0009). DeepSeek Flash choisi par l'utilisateur le 2026-11-01, contre la recommandation Haiku, risque d'erreurs connu (13 contre 3). `npm run brouillons` accepte DeepSeek Flash depuis le 2026-11-02 (CURATION_MODELE=deepseek-flash, DEEPSEEK_API_KEY), sans aucun appel réel à ce jour. La première clé Anthropic exposée en conversation a été supprimée.
 3. **Hébergement du cycle de 60 s** (objectif de la minute rétabli le 2026-11-02, ADR 0006) et jeton GitHub : à décider avant P5.
 4. **Montages** : valider le style (ADR 0007), et décider si annoter ou détourer une capture d'éditeur est acceptable (docs/visuels.md §4).
 5. Kits presse autorisés ; droits à vérifier photo par photo avant mise en ligne.
-6. Langues disponibles au lancement (proposition : français seul) et nom définitif du compte éditorial — avant P4.
+6. ~~Langues~~ décidées le 2026-11-02 (anglais d'origine, français et hébreu, SPEC §7.13). Reste : nom définitif du compte éditorial — avant P4.
 7. Droits d'usage de la mascotte ; fréquence maximale de publication — avant le premier lot réel de P3.
 8. Décisions sur les sources et médias (X, reprise de Reddit, sources aux conditions restrictives, hébergement vidéo, traduction, bacs à sable, points juridiques) : `docs/sources.md` §8.1 — avant P6/P7.
 9. Propositions : préciser SPEC §7.3 « sous-chaîne exacte » en « bornée à des mots entiers », et « les textes du média généré » en « les diapositives, désignées par nom de champ » (déjà appliqué par le code).

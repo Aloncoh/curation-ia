@@ -2,14 +2,14 @@
   "slug": "ui-ux-pro-max",
   "consignes": "r2",
   "accroche": {
-    "texte": "UI UX Pro Max donne à votre agent un design system taillé pour votre produit avant qu'il code l'interface",
+    "texte": "UI UX Pro Max gives your agent a design system tailored to your product before it codes the interface",
     "passages": [
       "Industry-specific design system generation",
       "The skill activates automatically when you request UI/UX work."
     ]
   },
   "description": {
-    "texte": "Demandez une landing page ou un dashboard : le skill s'active seul, part de votre type de produit et sort la structure de page, le style, les couleurs, la typographie et les effets. Il puise dans 79 styles, 192 types de produits, des palettes et des paires de polices.",
+    "texte": "Ask for a landing page or a dashboard: the skill activates on its own, starts from your product type and outputs the page structure, style, colors, typography and effects. It draws on 79 styles, 192 product types, palettes and font pairs.",
     "passages": [
       "The skill activates automatically when you request UI/UX work.",
       "Build a landing page for my SaaS product",
@@ -19,7 +19,7 @@
     ]
   },
   "interet": {
-    "texte": "Chaque proposition arrive avec ses anti-patterns et une checklist avant livraison : pas d'emoji en guise d'icônes, cursor-pointer sur tout élément cliquable. Les palettes suivent le secteur, et les dégradés violet-rose « IA » sont proscrits pour une banque.",
+    "texte": "Each proposal comes with its anti-patterns and a pre-delivery checklist: no emoji as icons, cursor-pointer on every clickable element. Palettes follow the sector, and the purple-pink \"AI\" gradients are banned for a bank.",
     "passages": [
       "+ Anti-patterns to avoid + Pre-delivery checklist",
       "No emojis as icons (use SVG: Heroicons/Lucide)",
@@ -29,7 +29,7 @@
     ]
   },
   "exemple_usage": {
-    "texte": "Dans l'exemple du dépôt, la landing page d'un spa reçoit un style Soft UI Evolution, du rose pâle et du vert sauge rehaussés d'or, Cormorant Garamond avec Montserrat, sans néon ni animations brusques.",
+    "texte": "In the repository example, a spa landing page gets a Soft UI Evolution style, pale pink and sage green accented with gold, Cormorant Garamond with Montserrat, no neon or abrupt animations.",
     "passages": [
       "Build a landing page for my beauty spa",
       "STYLE: Soft UI Evolution",
@@ -43,7 +43,7 @@
   "demarrage": {
     "etapes": [
       {
-        "texte": "Dans le projet : npx ui-ux-pro-max-cli init --ai claude (ou cursor, copilot)",
+        "texte": "In the project: npx ui-ux-pro-max-cli init --ai claude (or cursor, copilot)",
         "passages": [
           "skip the global install entirely:",
           "cd /path/to/your/project uipro init --ai claude",
@@ -52,7 +52,7 @@
         ]
       },
       {
-        "texte": "Puis demandez l'interface voulue, le skill prend le relais.",
+        "texte": "Then ask for the interface you want, the skill takes over.",
         "passages": [
           "The skill activates automatically when you request UI/UX work.",
           "Build a landing page for my SaaS product"
@@ -67,7 +67,7 @@
   },
   "compatibilites": [
     {
-      "texte": "Une vingtaine d'agents selon le dépôt, dont Claude Code, Cursor, Windsurf, Codex CLI et GitHub Copilot.",
+      "texte": "About twenty agents depending on the repository, including Claude Code, Cursor, Windsurf, Codex CLI and GitHub Copilot.",
       "passages": [
         "Supported: Claude Code, Cursor, Windsurf, Antigravity, Codex CLI, Continue, Gemini CLI, OpenCode, Qoder, CodeBuddy, Droid (Factory), KiloCode, Warp, Augment, CodeWhale, ZCode, Kimi Code, Amazon Q Developer, OpenClaw, GitHub Copilot"
       ]
@@ -75,7 +75,7 @@
   ],
   "limites": [
     {
-      "texte": "Le cœur est sous licence MIT ; logos, bannières et visuels générés n'y sont pas, ils relèvent d'une offre Premium séparée (uupm.cc).",
+      "texte": "The core is under MIT license; logos, banners and generated visuals are not, they fall under a separate Premium offer (uupm.cc).",
       "passages": [
         "This project is licensed under the MIT License.",
         "Extended Brand Design Skills: Goes beyond UI/UX to include Brand Identity generation, Logo Design, Corporate Identity Programs (CIP), Banners, Presentation Slides, and custom Iconography.",
@@ -206,20 +206,20 @@
   },
   "reperes": [
     {
-      "texte": "Règles par stack, de React et Vue à SwiftUI et Flutter",
+      "texte": "Rules per stack, from React and Vue to SwiftUI and Flutter",
       "passages": [
         "Tech Stacks - React, Next.js, Astro, Vue",
         "SwiftUI, React Native, Flutter, HTML+Tailwind"
       ]
     },
     {
-      "texte": "119 règles d'UX, accessibilité comprise",
+      "texte": "119 UX rules, accessibility included",
       "passages": [
         "119 UX Guidelines - Best practices, anti-patterns, accessibility rules"
       ]
     },
     {
-      "texte": "Claude Code, Cursor, Copilot et d'autres agents, selon le dépôt",
+      "texte": "Works with Claude Code, Cursor, Copilot and more",
       "passages": [
         "Supported: Claude Code, Cursor, Windsurf, Antigravity, Codex CLI, Continue, Gemini CLI, OpenCode, Qoder, CodeBuddy, Droid (Factory), KiloCode, Warp, Augment, CodeWhale, ZCode, Kimi Code, Amazon Q Developer, OpenClaw, GitHub Copilot"
       ]

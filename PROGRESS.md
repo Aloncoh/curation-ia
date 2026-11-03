@@ -150,3 +150,8 @@ Plafond de 20 publications par jour, sans quota ; ordre de priorité ; objectif 
 - Documents : décisions et retours d'interface du 2026-11-02 reportés dans SPEC (§2, §3.1, §3.3, §6 bis, §7.2, §7.3 ter, §7.4, §7.7, §7.8, §7.12, §7.15, §8) et CLAUDE.md (valeur absente masquée).
 - Vérifié : `npm test`, 682 tests au vert, dont ceux de la chaîne et de la recherche (`tests/ressources-*.test.ts`, `tests/recherche.test.ts`),, et `npm run typecheck` OK.
 - Non fait : revue dans le navigateur de la dernière version de la maquette pendant cette mise à jour des documents ; relecture indépendante de la chaîne ; publication réelle (P5) ; commit.
+
+
+## 2026-11-02 — premier lot réel de brouillons
+
+DeepSeek Flash, 30 actualités, 34 appels, 0,0125 $ (budget autorisé 4 $). 19 écartées, 7 à approfondir, 1 sortie invalide, 3 brouillons. Relus par l'utilisateur : les 3 sont validés ; condition de la publication automatique remplie (SPEC §7.4). `brouillons:relire` corrigé (découvertes exclues). 683 tests au vert.

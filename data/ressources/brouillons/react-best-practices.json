@@ -2,14 +2,14 @@
   "slug": "react-best-practices",
   "consignes": "r2",
   "accroche": {
-    "texte": "React Best Practices : les 70 règles de performance React et Next.js de Vercel, appliquées par votre agent",
+    "texte": "React Best Practices: Vercel's 70 React and Next.js performance rules, applied by your agent",
     "passages": [
       "React and Next.js performance optimization guidelines from Vercel Engineering.",
       "Contains 70 rules across 8 categories, prioritized by impact to guide automated refactoring and code generation."
     ]
   },
   "description": {
-    "texte": "Vercel Engineering y condense ses règles de performance React et Next.js. L'agent s'en sert dès qu'il écrit, relit ou refactorise un composant, une page Next.js ou du chargement de données.",
+    "texte": "Vercel Engineering condenses its React and Next.js performance rules there. The agent uses them whenever it writes, reviews or refactors a component, a Next.js page or data loading.",
     "passages": [
       "React and Next.js performance optimization guidelines from Vercel Engineering.",
       "This skill should be used when writing, reviewing, or refactoring React/Next.js code to ensure optimal performance patterns.",
@@ -17,7 +17,7 @@
     ]
   },
   "interet": {
-    "texte": "Les règles sont classées par impact : l'agent s'attaque d'abord aux requêtes en cascade et au poids du bundle, avant les re-rendus ou les micro-optimisations JavaScript.",
+    "texte": "The rules are ranked by impact: the agent tackles cascading requests and bundle weight first, before re-renders or JavaScript micro-optimizations.",
     "passages": [
       "prioritized by impact to guide automated refactoring and code generation.",
       "Eliminating Waterfalls | CRITICAL | async-",
@@ -27,7 +27,7 @@
     ]
   },
   "exemple_usage": {
-    "texte": "Une page Next.js enchaîne deux requêtes indépendantes ? Demandez à l'agent de l'optimiser : la règle async-parallel les lance ensemble avec Promise.all().",
+    "texte": "A Next.js page chains two independent requests? Ask the agent to optimize it: the async-parallel rule runs them together with Promise.all().",
     "passages": [
       "Help me optimize this Next.js page",
       "async-parallel - Use Promise.all() for independent operations"
@@ -36,7 +36,7 @@
   "demarrage": {
     "etapes": [
       {
-        "texte": "La commande installe toute la collection de Vercel, pas seulement ce skill : npx skills add vercel-labs/agent-skills",
+        "texte": "The command installs Vercel's entire collection, not just this skill: npx skills add vercel-labs/agent-skills",
         "passages": [
           "npx skills add vercel-labs/agent-skills"
         ]
@@ -51,7 +51,7 @@
   "compatibilites": [],
   "limites": [],
   "licence_locale": {
-    "texte": "L'en-tête du skill déclare la licence MIT.",
+    "texte": "The skill's header declares the MIT license.",
     "passages": [
       "license: MIT metadata: author: vercel"
     ]
@@ -165,14 +165,14 @@
   },
   "reperes": [
     {
-      "texte": "Pour chaque règle, le code fautif et sa correction",
+      "texte": "For each rule, the faulty code and its fix",
       "passages": [
         "Incorrect code example with explanation",
         "Correct code example with explanation"
       ]
     },
     {
-      "texte": "Côté serveur : React.cache(), cache LRU et after()",
+      "texte": "Server side: React.cache(), LRU cache and after()",
       "passages": [
         "server-cache-react - Use React.cache() for per-request deduplication",
         "server-cache-lru - Use LRU cache for cross-request caching",
@@ -180,7 +180,7 @@
       ]
     },
     {
-      "texte": "Côté client : SWR et écouteurs d'événements dédoublonnés",
+      "texte": "Client side: SWR and deduplicated event listeners",
       "passages": [
         "client-swr-dedup - Use SWR for automatic request deduplication",
         "client-event-listeners - Deduplicate global event listeners"

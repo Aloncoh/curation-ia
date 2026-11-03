@@ -105,7 +105,7 @@ describe('consignes versionnées', () => {
   });
   it('une version existante ne change jamais : toute retouche doit créer une nouvelle version', () => {
     const empreintes = Object.fromEntries(VERSIONS_CONSIGNES.map((v) => [v.version, createHash('sha256').update(texteConsignes(v)).digest('hex').slice(0, 16)]));
-    expect(empreintes).toEqual({ s1: '1a811916118e515c', s2: '567eb930e5f8a74f', s3: '2c448805d17fbcd3' });
+    expect(empreintes).toEqual({ s1: '1a811916118e515c', s2: '567eb930e5f8a74f', s3: '2c448805d17fbcd3', s4: '1b96fae7f0e4ffee' });
   });
   it('les versions sont uniques et datées', () => {
     expect(new Set(VERSIONS_CONSIGNES.map((v) => v.version)).size).toBe(VERSIONS_CONSIGNES.length);
@@ -228,7 +228,10 @@ describe('registre de la sélection', () => {
     await enregistrerJugements(t.database.client, [jugement(sujets[0]!.id, 2, [passage])], sujets, { juge: 'j', version: 's1', origine: 'juge_developpement', now });
     const decision = (await t.database.client.execute(`select id from selection_decision`)).rows[0]!;
     await enregistrerAvis(t.database.client, [SchemaAvis.parse({ id: sujets[0]!.id, decision: 'ecarter', motif: 'Trop niche.', decision_id: Number(decision.id) })], now);
-    expect(await correctionsARelire(t.database.client)).toEqual([expect.objectContaining({ systeme: 'publier', humain: 'ecarter', motif: 'Trop niche.', portee: 'cas_particulier', regle_version: null })]);
+    // Enregistrer un avis ne crée aucune règle : seule une version des consignes qui cite son numéro en fait une
+    // (les numéros des avis réels, cités par s4, peuvent coïncider avec ceux de la base de test).
+    const regle = VERSIONS_CONSIGNES.find((v) => v.changements.some((c) => c.avis.includes(1)))?.version ?? null;
+    expect(await correctionsARelire(t.database.client)).toEqual([expect.objectContaining({ systeme: 'publier', humain: 'ecarter', motif: 'Trop niche.', portee: 'cas_particulier', regle_version: regle })]);
   });
 
   it('un avis confirmant la décision n’est pas une correction', async () => {

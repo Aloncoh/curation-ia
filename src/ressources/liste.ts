@@ -26,18 +26,42 @@ export const VERSION_LISTE = 'liste-2026-11-02';
 export const DECOUVERTE_VIA =
   "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)";
 
-// Toutes des skills ou des collections de skills : compte Repo (skills, MCP, templates et découvertes GitHub).
+/**
+ * Compte signataire selon le sujet, et non selon le format (décision de l'utilisateur du 2026-11-02 : un fil équilibré,
+ * jamais occupé par un seul compte). Radar : ressources officielles des grandes entreprises ; Mova : design et frontend ;
+ * Pyxo : méthode et outils de code ; Repo : MCP, collections et écosystème de skills ; Nodi : usages IA du quotidien.
+ */
+const COMPTE_PAR_SLUG: Record<string, CompteId> = {
+  'skills-documents': 'radar', 'skill-creator': 'radar', 'webapp-testing': 'radar', 'agent-browser': 'radar', 'find-skills': 'radar',
+  'frontend-design': 'mova', 'ui-ux-pro-max': 'mova', 'react-best-practices': 'mova', marketingskills: 'mova',
+  superpowers: 'pyxo', 'improve-codebase-architecture': 'pyxo', 'planning-with-files': 'pyxo', 'claude-mem': 'pyxo',
+  'mcp-builder': 'repo', ecc: 'repo', claudeception: 'repo', 'scientific-agent-skills': 'repo',
+  'grill-me': 'nodi', humanizer: 'nodi', 'stop-slop': 'nodi', 'obsidian-skills': 'nodi',
+};
+
 const r = (slug: string, nom: string, depot: string, chemins: string[], remarque?: string, decouverteVia?: string): EntreeRessource => ({
   slug,
   nom,
   depot,
   chemins,
-  compte: 'repo',
+  compte: COMPTE_PAR_SLUG[slug] ?? 'repo',
   ...(remarque ? { remarque } : {}),
   ...(decouverteVia ? { decouverteVia } : {}),
 });
 
-export const RESSOURCES: readonly EntreeRessource[] = [
+/**
+ * Alterne les comptes en gardant l'ordre de l'utilisateur à l'intérieur de chacun : le planning suit cet ordre, donc
+ * deux publications voisines viennent de comptes différents tant que c'est possible.
+ */
+export function alternerComptes(liste: readonly EntreeRessource[]): EntreeRessource[] {
+  const files = new Map<CompteId, EntreeRessource[]>();
+  for (const e of liste) files.set(e.compte, [...(files.get(e.compte) ?? []), e]);
+  const resultat: EntreeRessource[] = [];
+  while (resultat.length < liste.length) for (const file of files.values()) { const e = file.shift(); if (e) resultat.push(e); }
+  return resultat;
+}
+
+export const RESSOURCES: readonly EntreeRessource[] = alternerComptes([
   r('frontend-design', 'frontend-design', 'anthropics/skills', ['skills/frontend-design/SKILL.md', 'README.md', '.claude-plugin/marketplace.json'], 'dépôt sans licence globale ; licence propre au skill à lire'),
   r('agent-browser', 'agent-browser', 'vercel-labs/agent-browser', ['README.md']),
   r('react-best-practices', 'React Best Practices (Vercel)', 'vercel-labs/agent-skills', ['skills/react-best-practices/SKILL.md', 'README.md'], 'dépôt sans licence globale'),
@@ -78,7 +102,7 @@ export const RESSOURCES: readonly EntreeRessource[] = [
     "21e ressource, ajoutée à part par l'utilisateur ; aucun guide d'installation dédié à la racine (install.sh et install.ps1 sont des scripts, pas de la documentation) ; dépôt utilisé dans l'environnement de développement de ce projet, jamais présenté comme testé par la plateforme",
     "Ressource ajoutée par l'utilisateur le 2026-11-02, hors du fil X d'origine",
   ),
-];
+]);
 
 export const SOURCE_PREFIXE = 'github-ressource:';
 export const sourceIdDe = (depot: string): string => `${SOURCE_PREFIXE}${depot}`;

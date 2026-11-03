@@ -6,8 +6,11 @@
 import type { Client, Transaction } from '@libsql/client';
 import { decodeHtmlEntities } from '../collect/normalize.ts';
 import type { DocumentRecherche } from '../recherche/moteur.ts';
+import type { MaquetteActualite } from './actualites.ts';
 import type { MaquetteRessource, RessourceNonPlanifiee } from './ressources.ts';
+import type { MaquetteSelection, SelectionNonPlanifiee } from './selections.ts';
 import { SOURCES } from '../sources.ts';
+import { documentExemple, documentProjet, ID_EXEMPLE, ID_PROJET } from './recherche-posts.ts';
 import {
   COMPTES,
   EXEMPLES,
@@ -101,9 +104,12 @@ export interface MaquetteData {
   registre_pulse: typeof REGISTRE_PULSE;
   registre_radar: typeof REGISTRE_RADAR;
   /** Projets GitHub mesurés ponctuellement ; `verifie` : tous les passages figurent dans leur capture. */
-  projets: ((typeof PROJETS)[number] & { verifie: boolean })[];
-  /** Exemples rédigés par Claude Code pour la maquette, pas par l'agent du site : ce ne sont pas des publications. */
-  exemples: MaquetteExemple[];
+  projets: ((typeof PROJETS)[number] & { verifie: boolean; recherche_id: number })[];
+  /**
+   * Exemples rédigés par Claude Code pour la maquette, pas par l'agent du site : ce ne sont pas des publications.
+   * `recherche_id` : identifiant de leur document de recherche (négatif, jamais un `post.id` réel ; recherche-posts.ts).
+   */
+  exemples: (MaquetteExemple & { recherche_id: number })[];
   /** Exemples dont le document n'a pas (ou plus) de capture issue d'une collecte réelle : écartés de la maquette. */
   exemples_introuvables: ExempleIntrouvable[];
   sources: { id: string; name: string; kind: string; status: string; last_success_at: string | null; last_error: string | null }[];
@@ -122,8 +128,22 @@ export interface MaquetteData {
   ressources: MaquetteRessource[];
   /** Publications de ressources non planifiées (à vérifier, rejetées) : nom et motifs seulement, jamais affichées comme publications. */
   ressources_non_planifiees: RessourceNonPlanifiee[];
-  /** Documents de recherche (mode aperçu), classés dans le navigateur par maquette/recherche.js, le même code que `chercher`. */
+  /**
+   * Documents de recherche (mode aperçu) des ressources et des sélections, lus en base, classés dans le navigateur par
+   * maquette/recherche.js, le même code que `chercher` ; leur `postId` est le `post_id` de la publication.
+   */
   recherche: DocumentRecherche[];
+  /**
+   * Documents de recherche des exemples d'actualités et des projets (recherche-posts.ts), classés avec les précédents : la
+   * recherche couvre toutes les publications affichées. Leur `postId` est le `recherche_id` (négatif) de l'exemple ou du projet.
+   */
+  recherche_hors_base: DocumentRecherche[];
+  /** Publications de sélection (plusieurs sites, un lien et une ligne chacun), planifiées ou publiées (ADR 0011, complément du 2026-11-02). */
+  selections: MaquetteSelection[];
+  /** Sélections non planifiées (à vérifier, rejetées) : nom et motifs seulement. */
+  selections_non_planifiees: SelectionNonPlanifiee[];
+  /** Actualités rédigées par l'agent du site, relues par l'utilisateur, planifiées (aperçu) ou publiées. */
+  actualites: MaquetteActualite[];
 }
 
 /** Texte brut d'un contenu HTML ou Markdown : sans balises, titres, liens ni mise en forme. */
@@ -168,12 +188,13 @@ const str = (value: unknown): string | null => (value === null || value === unde
 /** Espaces normalisés (SPEC §7.3) : toute suite d'espaces, tabulations ou retours à la ligne devient une espace. */
 export const normaliserEspaces = (text: string): string => text.replace(/\s+/g, ' ').trim();
 
+/** Libellés dessinés sur les diapositives et dans le Reel : en anglais, comme le texte des médias (2026-11-03). */
 export const LIBELLES: Record<Exclude<Diapositive, `details:${number}`>, string> = {
-  accroche: 'Accroche',
-  nouveaute: 'Nouveauté',
-  ce_que_ca_permet: 'Ce que ça permet',
-  pour_qui: 'Pour qui',
-  limites_connues: 'Limites connues',
+  accroche: 'Headline',
+  nouveaute: 'What’s new',
+  ce_que_ca_permet: 'What it enables',
+  pour_qui: 'Who it’s for',
+  limites_connues: 'Known limits',
 };
 
 const LETTRE_OU_CHIFFRE = /[\p{L}\p{N}]/u;
@@ -409,8 +430,8 @@ export async function buildMaquetteData(
       left join news_item_target t on t.news_item_id = n.id
       left join product p on p.id = t.product_id
       left join product_version v on v.id = t.product_version_id
-      -- Les découvertes de ressources (ADR 0011) ne sont pas des annonces : elles s'affichent comme publications de ressources.
-      where n.kind <> 'decouverte'
+      -- Les découvertes de ressources et les sélections (ADR 0011) ne sont pas des annonces : elles s'affichent comme publications.
+      where n.kind not in ('decouverte', 'selection')
       order by coalesce(n.announced_at, n.first_seen_at) desc, n.id desc`);
     // État des sources d'après les seules exécutions réelles (une relecture de fixture n'est pas une collecte).
     const sourceRows = await tx.execute(`
@@ -462,6 +483,16 @@ export async function buildMaquetteData(
     // Chargé à la demande : ce module dépend de la chaîne des ressources, qui dépend elle-même de ce fichier.
     const { ressourcesDeLaMaquette } = await import('./ressources.ts');
     const ressources = await ressourcesDeLaMaquette(tx, generatedAt);
+    const { selectionsDeLaMaquette } = await import('./selections.ts');
+    const selections = await selectionsDeLaMaquette(tx, generatedAt);
+    const { actualitesDeLaMaquette } = await import('./actualites.ts');
+    const actualites = await actualitesDeLaMaquette(tx);
+    const exemplesAffiches = exemplesVerifies.exemples.map((ex) => ({ ...ex, recherche_id: ID_EXEMPLE(exemples.findIndex((e) => e.id === ex.id)) }));
+    const projets = PROJETS.map((p, i) => ({ ...verifierProjet(p), recherche_id: ID_PROJET(i) }));
+    // Documents de recherche des publications en base : ressources, sélections puis actualités, dans l'ordre du fil (jour, puis publication).
+    const recherche = [...ressources.recherche, ...selections.recherche, ...actualites.recherche].sort((a, b) => (a.jour ?? '').localeCompare(b.jour ?? ''));
+    // Ceux des exemples d'actualités et des projets, publications de la maquette hors base : la page classe les deux jeux ensemble.
+    const rechercheHorsBase = [...exemplesAffiches.map(documentExemple), ...projets.map(documentProjet)];
 
     return {
       generated_at: generatedAt,
@@ -474,8 +505,8 @@ export async function buildMaquetteData(
       fiche_incident: FICHE_INCIDENT,
       registre_pulse: REGISTRE_PULSE,
       registre_radar: REGISTRE_RADAR,
-      projets: PROJETS.map(verifierProjet),
-      exemples: exemplesVerifies.exemples,
+      projets,
+      exemples: exemplesAffiches,
       exemples_introuvables: exemplesVerifies.introuvables,
       // Une source retirée du registre garde sa ligne en base (historique), mais n'est plus présentée comme suivie.
       sources: sourceRows.rows.filter((row) => SOURCES.some((def) => def.id === row.id)).map((row) => ({
@@ -505,6 +536,11 @@ export async function buildMaquetteData(
       news_items: newsItems,
       excluded_not_live: excluded,
       ...ressources,
+      recherche,
+      recherche_hors_base: rechercheHorsBase,
+      selections: selections.selections,
+      selections_non_planifiees: selections.selections_non_planifiees,
+      actualites: actualites.actualites,
     };
   } finally {
     tx.close();

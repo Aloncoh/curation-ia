@@ -6,8 +6,10 @@ import { readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { importerBrouillons, type BilanFichier, type ControleStocke } from '../chaine.ts';
 import { jourParis, lireReglagesPlanning, replanifier } from '../planification.ts';
+import { estSelection } from '../selection/chaine.ts';
 import type { Rendeur } from '../visuel.ts';
 import { DOSSIER_RESSOURCES, type ContexteCommande } from './contexte.ts';
+import { importerFichiersSelection, type ContexteSelection } from './selection.ts';
 
 const motif = (c: ControleStocke) => `${c.code} (${c.champ}${c.detail ? ` : ${c.detail.length > 90 ? `${c.detail.slice(0, 89)}…` : c.detail}` : ''})`;
 
@@ -29,7 +31,7 @@ export function afficherBilan(bilans: BilanFichier[]): string {
   return lignes.join('\n');
 }
 
-export async function importer(args: string[], ctx: ContexteCommande & { rendre?: Rendeur; dossierVisuels?: string }): Promise<number> {
+export async function importer(args: string[], ctx: ContexteCommande & { rendre?: Rendeur; dossierVisuels?: string; selection?: ContexteSelection }): Promise<number> {
   const dossier = join(ctx.dossier ?? DOSSIER_RESSOURCES, 'brouillons');
   let fichiers = args.filter((a) => !a.startsWith('--'));
   const inconnus = args.filter((a) => a.startsWith('--'));
@@ -59,7 +61,10 @@ export async function importer(args: string[], ctx: ContexteCommande & { rendre?
     tx.close();
   }
 
-  const bilans = await importerBrouillons({
+  // Une sélection (`"format": "selection"`) suit sa propre chaîne, après les ressources : même plafond, même planning.
+  const selections = fichiers.filter(estSelection);
+  fichiers = fichiers.filter((f) => !selections.includes(f));
+  const bilans = fichiers.length === 0 ? [] : await importerBrouillons({
     database: ctx.database,
     userAgent: ctx.config.userAgent,
     fichiers,
@@ -70,6 +75,10 @@ export async function importer(args: string[], ctx: ContexteCommande & { rendre?
     ...(ctx.resolve ? { resolve: ctx.resolve } : {}),
     ...(ctx.horloge ? { horloge: ctx.horloge } : {}),
   });
-  console.log(afficherBilan(bilans));
-  return bilans.some((b) => b.issue === 'rejetee' || (b.issue === 'inchangee' && b.statut === 'rejete')) ? 1 : 0;
+  if (bilans.length > 0) console.log(afficherBilan(bilans));
+  const codeRessources = bilans.some((b) => b.issue === 'rejetee' || (b.issue === 'inchangee' && b.statut === 'rejete')) ? 1 : 0;
+  if (selections.length === 0) return codeRessources;
+  console.log('', 'Sélections :');
+  const codeSelections = await importerFichiersSelection(selections, { ...ctx, ...ctx.selection, ...(ctx.rendre && !ctx.selection?.rendre ? { rendre: ctx.rendre } : {}) });
+  return Math.max(codeRessources, codeSelections);
 }

@@ -2,7 +2,7 @@
   "slug": "superpowers",
   "consignes": "r2",
   "accroche": {
-    "texte": "Superpowers fait cadrer, planifier, tester et relire votre agent de code avant qu'il livre",
+    "texte": "Superpowers makes your coding agent scope, plan, test, and review before it delivers",
     "passages": [
       "Superpowers is a complete software development methodology for your coding agents",
       "Enforces RED-GREEN-REFACTOR: write failing test, watch it fail",
@@ -15,7 +15,7 @@
     ]
   },
   "description": {
-    "texte": "Superpowers impose une vraie méthode à votre agent de code. Il ne fonce pas dans le code : il vous demande ce que vous cherchez à faire, vous montre la spec par morceaux lisibles, puis bâtit un plan d'implémentation une fois le design validé. Les skills se déclenchent seuls, sans commande à taper.",
+    "texte": "Superpowers imposes a real method on your coding agent. It doesn't rush into the code: it asks what you're trying to do, shows you the spec in readable chunks, then builds an implementation plan once the design is approved. Skills trigger on their own, with no command to type.",
     "passages": [
       "Superpowers is a complete software development methodology for your coding agents, built on top of a set of composable skills and some initial instructions that make sure your agent uses them.",
       "it doesn't just jump into trying to write code. Instead, it steps back and asks you what you're really trying to do.",
@@ -25,7 +25,7 @@
     ]
   },
   "interet": {
-    "texte": "Le plan découpe le travail en tâches de 2 à 5 minutes, avec fichiers, code et vérifications. Le TDD est strict : le code écrit avant son test est supprimé. Entre deux tâches, une revue classe les problèmes par gravité, et un problème critique bloque la suite. Selon l'auteur, l'agent tient ainsi quelques heures en autonomie sans dévier du plan.",
+    "texte": "The plan splits the work into 2- to 5-minute tasks, with files, code, and checks. TDD is strict: code written before its test is deleted. Between tasks, a review ranks issues by severity, and a critical issue blocks the next step. According to the author, the agent can thus run autonomously for a few hours without straying from the plan.",
     "passages": [
       "Breaks work into bite-sized tasks (2-5 minutes each). Every task has exact file paths, complete code, verification steps.",
       "Enforces RED-GREEN-REFACTOR: write failing test, watch it fail, write minimal code, watch it pass, commit.",
@@ -36,7 +36,7 @@
     ]
   },
   "exemple_usage": {
-    "texte": "Pour une nouvelle fonctionnalité : brainstorming fait préciser la demande, writing-plans la découpe en petites tâches, puis l'implémentation commence par un test qui échoue, avant le code minimal.",
+    "texte": "For a new feature: brainstorming pins down the request, writing-plans breaks it into small tasks, then implementation starts with a failing test, before the minimal code.",
     "passages": [
       "Draws out what you actually want, and why, through questions that get you describing it",
       "writing-plans - Activates with approved design. Breaks work into bite-sized tasks",
@@ -46,7 +46,7 @@
   "demarrage": {
     "etapes": [
       {
-        "texte": "Dans Claude Code : /plugin install superpowers@claude-plugins-official",
+        "texte": "In Claude Code: /plugin install superpowers@claude-plugins-official",
         "passages": [
           "Getting Started Claude Code",
           "Install the plugin from Anthropic's official marketplace",
@@ -54,7 +54,7 @@
         ]
       },
       {
-        "texte": "Autres agents : une installation séparée pour chacun, selon le dépôt",
+        "texte": "Other agents: a separate install for each, depending on the repository",
         "passages": [
           "Installation differs by harness. If you use more than one, install Superpowers separately for each one."
         ]
@@ -68,7 +68,7 @@
   },
   "compatibilites": [
     {
-      "texte": "Claude Code, Codex, Cursor, Gemini CLI, GitHub Copilot CLI et une dizaine d'autres.",
+      "texte": "Claude Code, Codex, Cursor, Gemini CLI, GitHub Copilot CLI and about ten others.",
       "passages": [
         "Claude Code Antigravity Codex App Codex CLI Cursor Devin CLI Factory Droid Gemini CLI GitHub Copilot CLI Grok Build CLI Kimi Code OpenCode Pi Qwen Code Hermes Agent Muse"
       ]
@@ -196,19 +196,19 @@
   },
   "reperes": [
     {
-      "texte": "Un sous-agent neuf par tâche, relu à chaque fois",
+      "texte": "A fresh sub-agent per task, reviewed every time",
       "passages": [
         "dispatches a fresh subagent per task with a review after each"
       ]
     },
     {
-      "texte": "Débogage en 4 phases pour remonter à la cause",
+      "texte": "4-phase debugging to trace back to the root cause",
       "passages": [
         "systematic-debugging - 4-phase root cause process"
       ]
     },
     {
-      "texte": "Chaque chantier isolé sur sa propre branche",
+      "texte": "Each project isolated on its own branch",
       "passages": [
         "using-git-worktrees - Activates after design approval. Creates isolated workspace on new branch"
       ]

@@ -2,13 +2,13 @@
   "slug": "find-skills",
   "consignes": "r2",
   "accroche": {
-    "texte": "find-skills : votre agent peut trouver et installer le skill qui lui manque",
+    "texte": "find-skills: your agent can find and install the skill it's missing",
     "passages": [
       "This skill helps you discover and install skills from the open agent skills ecosystem."
     ]
   },
   "description": {
-    "texte": "Demandez « trouve un skill pour X », ou juste « comment faire X ». L’agent regarde le classement de skills.sh et, s’il n’y trouve pas son bonheur, lance npx skills find. Il revient avec le skill, sa source et la commande d’installation.",
+    "texte": "Ask \"find a skill for X\", or just \"how do I do X\". The agent checks the skills.sh ranking and, if it can't find what it needs, runs npx skills find. It comes back with the skill, its source and the install command.",
     "passages": [
       "Says \"find a skill for X\" or \"is there a skill for X\"",
       "Asks \"how do I do X\" where X might be a common task with an existing skill",
@@ -19,7 +19,7 @@
     ]
   },
   "interet": {
-    "texte": "Il ne recommande pas un skill sur un simple résultat de recherche : il vérifie d’abord le nombre d’installations et la source. Et si rien n’existe, il vous propose d’écrire le vôtre avec npx skills init.",
+    "texte": "It doesn't recommend a skill based on a search result alone: it first checks the install count and the source. And if nothing exists, it offers to write your own with npx skills init.",
     "passages": [
       "Do not recommend a skill based solely on search results.",
       "Install count — Prefer skills with 1K+ installs.",
@@ -28,7 +28,7 @@
     ]
   },
   "exemple_usage": {
-    "texte": "Vous voulez accélérer votre app React : l’agent peut lancer npx skills find react performance et vous proposer un skill avec sa commande d’installation.",
+    "texte": "Want to speed up your React app: the agent can run npx skills find react performance and suggest a skill with its install command.",
     "passages": [
       "User asks \"how do I make my React app faster?\" → npx skills find react performance",
       "The install command they can run"
@@ -37,14 +37,14 @@
   "demarrage": {
     "etapes": [
       {
-        "texte": "Ajouter find-skills avec npx skills add (Node.js 22.20 ou plus).",
+        "texte": "Add find-skills with npx skills add (Node.js 22.20 or later).",
         "passages": [
           "Requires Node.js 22.20 or later.",
           "npx skills add <package> - Install a skill from GitHub or other sources"
         ]
       },
       {
-        "texte": "Ensuite, il n’y a plus qu’à demander « trouve un skill pour … ».",
+        "texte": "Then just ask, for example \"find a skill for …\"; no command needed.",
         "passages": [
           "Says \"find a skill for X\" or \"is there a skill for X\""
         ]
@@ -58,7 +58,7 @@
   },
   "compatibilites": [
     {
-      "texte": "Claude Code, Codex, Cursor, OpenCode et 75 autres agents.",
+      "texte": "Claude Code, Codex, Cursor, OpenCode and 75 other agents.",
       "passages": [
         "Supports OpenCode, Claude Code, Codex, Cursor, and 75 more."
       ]
@@ -66,7 +66,7 @@
   ],
   "limites": [
     {
-      "texte": "S’il installe pour vous, c’est en global et sans confirmation (-g -y) : lisez le skill avant d’accepter.",
+      "texte": "If it installs for you, it's global and without confirmation (-g -y): read the skill before accepting.",
       "passages": [
         "If the user wants to proceed, you can install the skill for them:",
         "The -g flag installs globally (user-level) and -y skips confirmation prompts."
@@ -176,13 +176,13 @@
   },
   "reperes": [
     {
-      "texte": "Pas de commande à retenir : il suffit de demander",
+      "texte": "Triggered by plain requests, no syntax",
       "passages": [
         "Says \"find a skill for X\" or \"is there a skill for X\""
       ]
     },
     {
-      "texte": "Ne propose jamais un skill sans vérifier installations et source",
+      "texte": "Never suggests a skill without checking installs and source",
       "passages": [
         "Do not recommend a skill based solely on search results.",
         "Install count — Prefer skills with 1K+ installs.",
@@ -190,7 +190,7 @@
       ]
     },
     {
-      "texte": "Rien ne correspond ? Il propose d’en créer un",
+      "texte": "Nothing matches? It offers to create one",
       "passages": [
         "Suggest the user could create their own skill with npx skills init"
       ]

@@ -2,14 +2,14 @@
   "slug": "humanizer",
   "consignes": "r2",
   "accroche": {
-    "texte": "Humanizer retire les tics d'écriture IA d'un texte sans toucher à ce qu'il dit",
+    "texte": "Humanizer removes AI writing tics from a text without changing what it says",
     "passages": [
       "Agent skill that removes signs of AI-generated writing from text",
       "Humanizer makes AI-written text sound like a person wrote it, without changing what it says."
     ]
   },
   "description": {
-    "texte": "Collez un texte ou donnez le chemin d'un fichier : Humanizer repère les tics d'écriture IA, du plus flagrant au plus discret, puis réécrit la prose. Sur un fichier, il ne touche qu'au texte : code, données et frontmatter restent en place.",
+    "texte": "Paste a text or give a file path: Humanizer spots AI writing tics, from the most obvious to the most subtle, then rewrites the prose. On a file, it only touches the text: code, data and frontmatter stay in place.",
     "passages": [
       "Humanizer makes AI-written text sound like a person wrote it, without changing what it says.",
       "To rewrite a file, give Humanizer its path",
@@ -18,7 +18,7 @@
     ]
   },
   "interet": {
-    "texte": "Il n'invente rien : s'il manque un nom, un chiffre ou une date, il pose la question. Sur un texte collé, vous voyez son premier jet, ce qui sonne encore artificiel, puis la version finale. Joignez deux ou trois paragraphes de votre main et il reprend votre rythme, votre vocabulaire et votre ponctuation.",
+    "texte": "It invents nothing: if a name, number or date is missing, it asks. On a pasted text, you see its first draft, what still sounds artificial, then the final version. Attach two or three paragraphs of your own and it picks up your rhythm, vocabulary and punctuation.",
     "passages": [
       "It does not make things up.",
       "A name, number, date, quote, citation, or other factual detail must come from the source or the writer",
@@ -30,7 +30,7 @@
     ]
   },
   "exemple_usage": {
-    "texte": "Dans l'exemple du dépôt, une annonce perd son émoji, son « It's not just a feature… » et son « Let that sink in. », puis commence sans détour : « Shared drafts are out today. »",
+    "texte": "In the repository's example, an announcement loses its emoji, its \"It's not just a feature…\" and its \"Let that sink in.\", then starts without detour: \"Shared drafts are out today.\"",
     "passages": [
       "I'm thrilled to announce that shared drafts are finally here! 🚀",
       "It's not just a feature; it's a whole new way to collaborate.",
@@ -41,26 +41,26 @@
   "demarrage": {
     "etapes": [
       {
-        "texte": "Pas avant Claude Code 2.1.142 : /plugin marketplace add blader/humanizer",
+        "texte": "Not before Claude Code 2.1.142: /plugin marketplace add blader/humanizer",
         "passages": [
           "/plugin marketplace add blader/humanizer /plugin install humanizer@humanizer",
           "It needs Claude Code 2.1.142 or newer"
         ]
       },
       {
-        "texte": "Puis /plugin install humanizer@humanizer, pas sur une version plus ancienne",
+        "texte": "Then /plugin install humanizer@humanizer, not on an older version",
         "passages": [
           "/plugin marketplace add blader/humanizer /plugin install humanizer@humanizer"
         ]
       },
       {
-        "texte": "Codex : npx skills add blader/humanizer --global --agent codex",
+        "texte": "Codex: npx skills add blader/humanizer --global --agent codex",
         "passages": [
           "npx skills add blader/humanizer --global --agent codex"
         ]
       },
       {
-        "texte": "Puis /humanizer et le texte ; pour un fichier, son chemin, sans commande",
+        "texte": "Then /humanizer and the text; for a file, its path, no command",
         "passages": [
           "Once installed, the skill answers to /humanizer.",
           "To rewrite a file, give Humanizer its path",
@@ -77,7 +77,7 @@
   },
   "compatibilites": [
     {
-      "texte": "Selon le dépôt : Claude Code, Codex et les agents gérés par Skills CLI, dont Gemini CLI, GitHub Copilot et Windsurf.",
+      "texte": "Claude Code, Codex and any skills-compatible agent; the Skills CLI install also covers Gemini CLI, GitHub Copilot and Windsurf, according to the repository.",
       "passages": [
         "it works in Claude Code, Codex, and any other agent that supports skills",
         "This installs Humanizer for every agent the Skills CLI supports, including Gemini CLI, GitHub Copilot, and Windsurf."
@@ -193,20 +193,20 @@
   },
   "reperes": [
     {
-      "texte": "26 motifs issus du guide de Wikipedia, selon le dépôt",
+      "texte": "26 patterns checked, according to the repository",
       "passages": [
         "Humanizer checks for 26 patterns in all.",
         "It is built on Wikipedia's Signs of AI writing, the guide Wikipedia editors use to catch AI-generated text"
       ]
     },
     {
-      "texte": "Ne cherche pas à tromper les détecteurs d'IA",
+      "texte": "Do not try to fool AI detectors",
       "passages": [
         "Getting past AI detectors is not a goal, and detectors still flag most of its output."
       ]
     },
     {
-      "texte": "Claude Code, Codex et d'autres agents, selon le dépôt",
+      "texte": "Claude Code, Codex and other agents, per the repository",
       "passages": [
         "it works in Claude Code, Codex, and any other agent that supports skills"
       ]

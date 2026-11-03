@@ -2,14 +2,14 @@
   "slug": "scientific-agent-skills",
   "consignes": "r2",
   "accroche": {
-    "texte": "Scientific Agent Skills : 177 skills pour faire de la recherche avec Claude Code, Cursor ou Codex",
+    "texte": "Scientific Agent Skills: 177 skills for doing research with Claude Code, Cursor or Codex",
     "passages": [
       "A collection of 177 scientific and research skills for AI agents, created by K-Dense.",
       "works with Cursor, Claude Code, Codex, Google Antigravity, and other compatible hosts"
     ]
   },
   "description": {
-    "texte": "Biologie, chimie, médecine, physique, analyse de données : chaque skill de K-Dense cale votre agent sur un paquet, une base ou une méthode précise, avec les conventions et les contrôles du domaine.",
+    "texte": "Biology, chemistry, medicine, physics, data analysis: each K-Dense skill aligns your agent with a specific package, database or method, including the domain's conventions and checks.",
     "passages": [
       "A collection of 177 scientific and research skills for AI agents, created by K-Dense.",
       "The skills cover biology, chemistry, medicine, physics, engineering, Earth science, data analysis, and scientific communication.",
@@ -17,14 +17,14 @@
     ]
   },
   "interet": {
-    "texte": "Le morceau le plus utile : Database Lookup documente 80 bases (PubChem, ChEMBL, UniProt, ClinicalTrials.gov…), avec les bons endpoints, la pagination et la provenance. Une seule demande suffit ensuite pour enchaîner tout un pipeline.",
+    "texte": "The most useful piece: Database Lookup documents 80 databases (PubChem, ChEMBL, UniProt, ClinicalTrials.gov…), with the right endpoints, pagination and provenance. A single request is then enough to chain a whole pipeline.",
     "passages": [
       "The Database Lookup skill documents 80 databases with public, registered, or licensed access (PubChem, ChEMBL, UniProt, COSMIC, ClinicalTrials.gov, FRED, USPTO, and more), including endpoint selection, pagination, and provenance.",
       "Multi-Step Workflows - Execute complex pipelines with a single prompt"
     ]
   },
   "exemple_usage": {
-    "texte": "Dans l'exemple du dépôt, une seule demande pour classer des inhibiteurs d'EGFR : l'agent interroge ChEMBL, analyse les relations structure-activité avec RDKit, cherche les mécanismes de résistance dans PubMed, puis livre graphiques et rapport.",
+    "texte": "In the repository example, a single request to classify EGFR inhibitors: the agent queries ChEMBL, analyzes structure-activity relationships with RDKit, looks for resistance mechanisms in PubMed, then delivers charts and a report.",
     "passages": [
       "Goal: Prioritize EGFR inhibitor candidates for preclinical lung-cancer research",
       "Query ChEMBL for EGFR inhibitors",
@@ -36,7 +36,7 @@
   "demarrage": {
     "etapes": [
       {
-        "texte": "Avec GitHub CLI 2.90.0+ : gh skill install, uniquement les skills utiles.",
+        "texte": "With GitHub CLI 2.90.0+: gh skill install, only the useful skills.",
         "passages": [
           "If you use the GitHub CLI (v2.90.0+), you can install skills with gh skill",
           "gh skill install K-Dense-AI/scientific-agent-skills scanpy",
@@ -44,7 +44,7 @@
         ]
       },
       {
-        "texte": "Les dépendances s'installent à part, selon chaque skill.",
+        "texte": "Dependencies are installed separately, depending on each skill.",
         "passages": [
           "Installing the skill files does not install their dependencies",
           "Follow each skill's compatibility field and setup instructions for packages, system tools, credentials, and network access."
@@ -61,7 +61,7 @@
   "compatibilites": [],
   "limites": [
     {
-      "texte": "Un skill peut faire exécuter du code arbitraire à votre agent et K-Dense ne garantit pas une revue exhaustive : lisez le SKILL.md avant d'installer.",
+      "texte": "A skill can make your agent execute arbitrary code and K-Dense does not guarantee an exhaustive review: read SKILL.md before installing.",
       "passages": [
         "they can instruct your AI agent to run arbitrary code, install packages, make network requests, and modify files on your system.",
         "we cannot guarantee that every skill has been exhaustively reviewed for all possible risks.",
@@ -69,7 +69,7 @@
       ]
     },
     {
-      "texte": "Dépôt sous MIT, mais chaque skill a sa licence, qui peut ajouter des conditions.",
+      "texte": "Repository under MIT, but each skill has its own license, which may add conditions.",
       "passages": [
         "This project is licensed under the MIT License.",
         "These licenses may differ from the repository's MIT License and may include additional terms or restrictions."
@@ -193,19 +193,19 @@
   },
   "reperes": [
     {
-      "texte": "Workflows versionnés pour RDKit, Scanpy, scikit-learn",
+      "texte": "Versioned workflows for RDKit, Scanpy, scikit-learn",
       "passages": [
         "Explicitly defined, version-aware workflows for RDKit, Scanpy, PyTorch Lightning, scikit-learn"
       ]
     },
     {
-      "texte": "Installation épinglée sur un tag ou un commit",
+      "texte": "Installation pinned to a tag or a commit",
       "passages": [
         "Pin to a specific release tag or commit SHA for reproducible installs"
       ]
     },
     {
-      "texte": "Aussi chargeable comme un seul plugin",
+      "texte": "Also loadable as a single plugin",
       "passages": [
         "load the collection as one plugin"
       ]

@@ -8,8 +8,7 @@ import {
   decouperEnSousTitres,
   envelopper,
   horodatage,
-  MENTION_ANALYSE,
-  MENTION_ILLUSTRATION,
+  MENTIONS_DESSINEES,
   mettreEnPage,
   minuterSousTitres,
   mots,
@@ -53,7 +52,7 @@ describe('segments du Reel', () => {
     const segments = segmentsDuReel(exempleVerifie(FUSION));
     expect(segments.map((s) => s.champ)).toEqual(CHAMPS_DU_REEL);
     expect(segments.map((s) => s.texte)).toEqual([FUSION.accroche.texte, FUSION.nouveaute.texte, FUSION.details[0]!.texte, FUSION.limites_connues!.texte]);
-    expect(segments.map((s) => s.libelle)).toEqual(['Accroche', 'Nouveauté', FUSION.details[0]!.titre, 'Limites connues']);
+    expect(segments.map((s) => s.libelle)).toEqual(['Headline', 'What’s new', FUSION.details[0]!.titre, 'Known limits']);
   });
 
   it('refusent un exemple « à vérifier » et un champ non renseigné', () => {
@@ -94,7 +93,7 @@ describe('plan de dessin du Reel', () => {
     for (const [i, segment] of textes.segments.entries()) {
       const plan = planDessin(textes, i);
       const dessines = plan.map((e) => e.texte);
-      for (const mention of [MENTION_ILLUSTRATION, MENTION_ANALYSE]) expect(dessines).toContain(mention);
+      for (const mention of MENTIONS_DESSINEES) expect(dessines).toContain(mention);
       expect(plan.find((e) => e.nom === 'corps')!.texte.split('\n').join(' ')).toBe(segment.corps);
       expect(plan.find((e) => e.nom === 'libelle')!.texte.split('\n').join(' ')).toBe(segment.libelle);
       const autorises = new Set([textes.entete, textes.titre, textes.source, ...textes.mentions, `${i + 1}/${textes.segments.length}`]);
@@ -160,8 +159,8 @@ describe('Reel versionné de la maquette (maquette/medias)', () => {
     expect(manifeste).toMatchObject({
       exemple_id: FUSION.id,
       origine: 'generated',
-      mention: MENTION_ILLUSTRATION,
-      mention_analyse: MENTION_ANALYSE,
+      mention: MENTIONS_DESSINEES[0],
+      mention_analyse: MENTIONS_DESSINEES[1],
       niveau_de_preuve: 'documentary_analysis',
     });
     expect(manifeste.segments.map((s) => s.texte)).toEqual(segmentsDuReel(exempleVerifie(FUSION)).map((s) => s.texte));
@@ -174,8 +173,8 @@ describe('Reel versionné de la maquette (maquette/medias)', () => {
       segmentsDuReel(exemple),
     );
     expect(manifeste.textes_dessines).toEqual(attendu);
-    expect(attendu.mentions).toEqual([MENTION_ILLUSTRATION, MENTION_ANALYSE]);
-    expect(attendu.entete).toMatch(/EXEMPLE/);
+    expect(attendu.mentions).toEqual([...MENTIONS_DESSINEES]);
+    expect(attendu.entete).toMatch(/EXAMPLE/);
     // Le .mp4 et le .vtt versionnés sont ceux qui ont été produits avec ces textes (sinon : npm run maquette:reel).
     expect(sha256('reel-copilot-fusion.mp4')).toBe(manifeste.empreintes_sha256.video);
     expect(sha256('reel-copilot-fusion.vtt')).toBe(manifeste.empreintes_sha256.sous_titres);

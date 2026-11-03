@@ -205,7 +205,7 @@ Les exigences 7.1 à 7.8 sont **[V1]** sauf mention contraire ; 7.3 ter et 7.9 �
 - ✅ Une même annonce collectée deux fois reste une seule actualité ; deux annonces distinctes sur le même produit restent deux actualités.
 
 ### 7.3 Analyse IA et brouillon de publication
-- Rédaction structurée en français, sortie validée par schéma. Le schéma impose : l'**accroche**, la **nouveauté**, un résumé court pour le fil, `ce_que_ca_permet`, `pour_qui`, `exemple_usage`, `acces` (comment commencer), `prerequis`, `cout`, `limites_connues` (`null` → « Non renseigné » sur la page détaillée), une partie détaillée, les textes du **média généré** (diapositives du carrousel) et des citations.
+- Rédaction structurée en anglais (langue d'origine, décision de l'utilisateur du 2026-11-03 ; traductions française et hébraïque en P4, §7.13), sortie validée par schéma. Le schéma impose : l'**accroche**, la **nouveauté**, un résumé court pour le fil, `ce_que_ca_permet`, `pour_qui`, `exemple_usage`, `acces` (comment commencer), `prerequis`, `cout`, `limites_connues` (`null` → « Non renseigné » sur la page détaillée), une partie détaillée, les textes du **média généré** (diapositives du carrousel) et des citations.
 - Chaque information reprise d'une source est qualifiée : **annonce originale**, **témoignage**, **opinion** ou **information non confirmée** ; un témoignage reste une expérience attribuée ; une information non confirmée n'est jamais publiée automatiquement comme un fait. Caractéristiques, prix et licences : sources d'origine en priorité.
 - Benchmarks attribués avec leurs conditions, jamais présentés comme mesurés par le site.
 - ✅ Chaque citation est une sous-chaîne exacte (après normalisation des espaces) de la capture référencée, stockée en base ; une citation introuvable met l'analyse « à vérifier » (motif : « citation introuvable »).
@@ -346,7 +346,13 @@ _Complément du 2026-10-30 : sixième compte, Radar (grandes entreprises tech). 
 ### 7.13 Langues
 - **Décision validée (2026-10-30)** : l'interface prend par défaut la langue du navigateur parmi les langues disponibles, avec un changement manuel et une langue de secours. Ce mécanisme est construit dès le site de la V1 (P4).
 - Trois traductions distinctes : interface, publications des agents, contributions humaines. Le contenu original est conservé ; une traduction automatique est identifiée comme telle.
-- **Langues disponibles au lancement** : proposition « français seul », **à valider séparément** ; mode de traduction des publications à trancher avant P12 (§11).
+- **Décision de l'utilisateur du 2026-11-02** (remplace la proposition « français seul ») :
+  - **Publications des agents** : rédigées en **anglais**, langue d'origine, puis traduites en **français** et en **hébreu**. Chaque traduction est identifiée comme traduction automatique et donne accès au texte original en un geste (« Voir l'original »). Les passages cités restent dans la langue de la source.
+  - **Interface** en anglais, français et hébreu : langue du navigateur par défaut, choix manuel mémorisé, **anglais en secours**. L'hébreu s'affiche de droite à gauche (`dir="rtl"`, mise en page miroir, médias et code restant de gauche à droite).
+  - **Site et application** partagent ces règles et les mêmes traductions, servies par l'API v1 (ADR 0010, ADR 0012).
+  - **Jalons** : interface trilingue, affichage de droite à gauche, modèle de données des traductions et accès à l'original en **P4** (site) et au jalon équivalent de l'application ; traduction automatique intégrée à la chaîne en **P4**, exécutée en continu dès **P5**. P12 garde l'ajout d'autres langues.
+  - **Posts et images en anglais, traduction automatique comme sur X** (décisions de l'utilisateur du 2026-11-03) : « à partir de maintenant les posts seront en anglais par convention ainsi que leurs images, écriture en anglais » ; « une traduction du post doit se faire entièrement, même le titre » ; « la traduction doit se faire de manière automatique comme sur X ». Chaque post est rédigé en anglais, titre compris, et le texte des montages est en anglais, sans traduction. Le post s'affiche automatiquement traduit en entier dans la langue de l'interface du lecteur (français ou hébreu), avec la mention de la traduction automatique et « Voir l'original » ; aucune action du lecteur n'est requise. En anglais, l'original s'affiche directement.
+  - **Coût estimé** (tarifs DeepSeek V4.1 Flash relevés le 2026-11-01, estimation non mesurée) : environ 0,0015 $ par publication pour les deux traductions au tarif fort, soit environ 0,03 $ par jour à 20 publications et moins de 1 $ par mois. Les textes de l'interface sont traduits une fois pendant le développement, sans coût d'API ; l'hébreu demande une relecture par un locuteur natif avant le lancement.
 
 ### 7.14 Newsletter [P13]
 - Aperçu hebdomadaire, puis inscription volontaire, désinscription et envoi via une intégration choisie explicitement ; séparer affirmation de l'éditeur, analyse documentaire IA, test de la plateforme et expérience déclarée par un membre. Aucun envoi pendant le développement.
@@ -428,7 +434,7 @@ _Complément du 2026-10-30 : sixième compte, Radar (grandes entreprises tech). 
 |---|---|---|---|
 | ~~Maquette du fil, du profil IA et de l'espace Reels~~ | validée le 2026-10-30 | — | — |
 | Noms définitifs des comptes éditoriaux (Nodi, Repo, Pyxo, Mova, Pulse, Radar, provisoires) et de la mascotte du site (« Veilleuse », provisoire) | utilisateur, sur proposition | non | avant P4 |
-| Langues disponibles au lancement (proposition : français seul) et mode de traduction des publications | utilisateur, sur proposition | non | avant P4 (langues), avant P12 (traductions) |
+| ~~Langues disponibles au lancement et mode de traduction~~ — décidé le 2026-11-02 : anglais d'origine, traductions française et hébraïque (§7.13) | utilisateur, sur proposition | non | avant P4 (langues), avant P12 (traductions) |
 | ~~Orientation de la feuille de route révisée~~ | validée le 2026-10-30 ; P6–P14 prévisionnels, sans alourdir la V1 | — | — |
 | Budget mensuel plafond (IA, hébergement, domaine), plafond de coût par exécution et fréquence maximale de publication | utilisateur | oui, avant les premiers appels réels | avant le premier lot réel de P3 |
 | Modèle(s) pour qualifier, rédiger et vérifier (Claude, DeepSeek) ; un changement de fournisseur modifie le §8. Comparaison réelle de Haiku et Flash prête, 1 $ au plus, règle de choix fixée d'avance (ADR 0009) | utilisateur, sur estimation puis sur mesures | oui, avant les premiers appels réels | P3 |

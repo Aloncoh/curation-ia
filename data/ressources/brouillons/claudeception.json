@@ -2,14 +2,14 @@
   "slug": "claudeception",
   "consignes": "r2",
   "accroche": {
-    "texte": "Claudeception fait de chaque solution durement trouvée par Claude Code un skill rechargé tout seul",
+    "texte": "Claudeception turns every hard-won solution from Claude Code into a skill that reloads on its own",
     "passages": [
       "When Claude Code discovers something non-obvious (a debugging technique, a workaround, some project-specific pattern), it saves that knowledge as a new skill.",
       "Next time a similar problem comes up, the skill gets loaded automatically."
     ]
   },
   "description": {
-    "texte": "Une heure sur une erreur obscure, l’agent finit par trouver, la session se ferme, et la fois suivante tout recommence. Avec Claudeception, la technique de débogage, le contournement ou la particularité du projet découverts en route deviennent un skill, chargé automatiquement dès qu’un problème semblable revient.",
+    "texte": "An hour on an obscure error, the agent finally finds the fix, the session closes, and next time it all starts over. With Claudeception, the debugging technique, workaround, or project quirk discovered along the way becomes a skill, loaded automatically as soon as a similar problem comes back.",
     "passages": [
       "You spend an hour debugging some obscure error, the agent figures it out, session ends. Next time you hit the same issue? Another hour.",
       "When Claude Code discovers something non-obvious (a debugging technique, a workaround, some project-specific pattern), it saves that knowledge as a new skill.",
@@ -17,7 +17,7 @@
     ]
   },
   "interet": {
-    "texte": "Il trie : seul ce qui a demandé une vraie recherche, resservira, a un déclencheur net et a fonctionné devient un skill. Et la description est écrite pour être retrouvée : l’erreur exacte, pas « problèmes de base de données ».",
+    "texte": "It sorts: only what required real research, will be reused, has a clear trigger, and actually worked becomes a skill. And the description is written to be found again: the exact error, not \"database issues\".",
     "passages": [
       "The skill is picky about what it extracts.",
       "It only extracts knowledge that required actual discovery (not just reading docs), will help with future tasks, has clear trigger conditions, and has been verified to work.",
@@ -26,7 +26,7 @@
     ]
   },
   "exemple_usage": {
-    "texte": "Exemple du dépôt : une PrismaClientKnownRequestError réglée (trop de connexions en serverless) peut devenir un skill dont la description reprend l’erreur exacte. Quand elle réapparaît, l’agent le retrouve.",
+    "texte": "Example from the repository: a resolved PrismaClientKnownRequestError (too many connections in serverless) can become a skill whose description reuses the exact error. When it reappears, the agent finds it again.",
     "passages": [
       "Fix for PrismaClientKnownRequestError: Too many database connections in serverless environments (Vercel, AWS Lambda).",
       "\"Fix for PrismaClientKnownRequestError in serverless\" will match when someone hits that error."
@@ -35,13 +35,13 @@
   "demarrage": {
     "etapes": [
       {
-        "texte": "Cloner le dépôt dans ~/.claude/skills/claudeception.",
+        "texte": "Clone the repository into ~/.claude/skills/claudeception.",
         "passages": [
           "User-level (recommended) `bash git clone https://github.com/blader/Claudeception.git ~/.claude/skills/claudeception"
         ]
       },
       {
-        "texte": "Optionnel : le hook, ajouté à settings.json, fait évaluer chaque session",
+        "texte": "Optional: the hook, added to settings.json, makes each session evaluated",
         "passages": [
           "a hook ensures it evaluates every session for extractable knowledge",
           "If you already have a settings.json, merge the hooks configuration into it.",
@@ -49,7 +49,7 @@
         ]
       },
       {
-        "texte": "Après un débogage : /claudeception, sans skill si rien n’est à garder",
+        "texte": "After debugging: /claudeception, with no skill if nothing is worth keeping",
         "passages": [
           "Trigger a learning retrospective",
           "Just completed debugging and discovered a non-obvious solution",
@@ -64,7 +64,7 @@
   },
   "compatibilites": [
     {
-      "texte": "Claude Code, via son système de skills natif.",
+      "texte": "Claude Code, through its native skills system.",
       "passages": [
         "Claude Code has a native skills system."
       ]
@@ -72,7 +72,7 @@
   ],
   "limites": [
     {
-      "texte": "C’est un fork, sans push depuis plusieurs mois au moment de la capture.",
+      "texte": "It is a fork, with no pushes for several months at the time of the capture.",
       "passages": [
         "Contributions welcome. Fork, make changes, submit a PR."
       ]
@@ -185,7 +185,7 @@
   },
   "reperes": [
     {
-      "texte": "Rétrospective à la demande, sans skill forcé",
+      "texte": "On-demand retrospective, with no forced skill",
       "passages": [
         "Trigger a learning retrospective",
         "Or explicitly request skill extraction",
@@ -193,13 +193,13 @@
       ]
     },
     {
-      "texte": "Skills écrits en markdown, avec frontmatter YAML",
+      "texte": "Skills written in markdown, with YAML frontmatter",
       "passages": [
         "Extracted skills are markdown files with YAML frontmatter"
       ]
     },
     {
-      "texte": "Inspiré de travaux académiques, selon le dépôt",
+      "texte": "Inspired by academic work, according to the repository",
       "passages": [
         "The idea comes from academic work on skill libraries for AI agents."
       ]

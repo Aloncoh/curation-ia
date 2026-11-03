@@ -6,7 +6,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { releasesUrl } from '../src/collect/github-releases.ts';
 import { setPaused } from '../src/control/settings.ts';
 import { depense } from '../src/analysis/budget.ts';
-import { controlerBrouillon, diapositivesDe, LIBELLE_CONTROLE, moinsDeTroisMots } from '../src/analysis/controles.ts';
+import { controlerBrouillon, enFrancais, NUANCE_TEXTE, diapositivesDe, LIBELLE_CONTROLE, moinsDeTroisMots } from '../src/analysis/controles.ts';
 import { estReprenable, modeleAnthropic, schemaSortie, type Modele, type RequeteModele } from '../src/analysis/modele.ts';
 import { DUREE_BAIL_MS, genererBrouillons, LONGUEUR_MAX_CAPTURE, LotEnCours, MAX_TENTATIVES, MAX_TOKENS } from '../src/analysis/pipeline.ts';
 import { documentUtilisateur, PROMPT_VERSION, SYSTEME_QUALIFICATION, SYSTEME_REDACTION } from '../src/analysis/prompts.ts';
@@ -19,6 +19,8 @@ import { coutMicroUsd } from '../src/analysis/tarifs.ts';
 import { openDatabase } from '../src/db/client.ts';
 import { toPlainText } from '../src/maquette/data.ts';
 import { COMPTES } from '../src/maquette/exemples.ts';
+import { planifierActualites } from '../src/analysis/planification-actualites.ts';
+import { jourParis } from '../src/ressources/planification.ts';
 import { runCollect } from '../src/worker/collect.ts';
 import { PROJECT_ROOT } from './helpers/cli.ts';
 import { CLAUDE_CODE, createTestDb, readFixture, routeFetcher, type TestDb } from './helpers/db.ts';
@@ -46,6 +48,27 @@ describe('contrôles', () => {
   it('nom propre non cité → soutien insuffisant', () => {
     expect(codes(brouillon('Le mode arrive sur Android.', ['adds offline mode']))).toContain('soutien_nom_absent');
   });
+  it('sigle générique ou mot du titre de l’actualité : aucun écart de soutien', () => {
+    expect(codes(brouillon('Le mode passe par une API et la CLI.', ['adds offline mode']))).not.toContain('soutien_nom_absent');
+    expect(codes(brouillon('Le mode arrive dans Acme.', ['adds offline mode']))).not.toContain('soutien_nom_absent');
+  });
+  it('produit absent du texte mais nommé par la source officielle : attesté ; sinon introuvable', () => {
+    const b = brouillon('Mode ajouté.', ['adds offline mode']);
+    expect(controlerBrouillon(b, CAPTURE, 'Offline mode', null, { produit: 'Figma' }).map((c) => c.code)).toContain('produit_introuvable');
+    expect(controlerBrouillon(b, CAPTURE, 'Offline mode', null, { produit: 'Figma', source: 'Figma, notes de version' }).map((c) => c.code)).not.toContain('produit_introuvable');
+  });
+  it('réserve en anglais reconnue dans le texte rédigé : négation contractée, « no », « only »', () => {
+    for (const t of ['It doesn’t rush into code.', 'No command to type.', 'Only on macOS.']) expect(NUANCE_TEXTE.test(t)).toBe(true);
+    expect(NUANCE_TEXTE.test('It ships a new planner.')).toBe(false);
+  });
+  it('accroche ou description en français : écart de langue ; en anglais : aucun', () => {
+    expect(enFrancais('Claude Code ajoute une permission pour les écritures et la compaction')).toBe(true);
+    expect(enFrancais('Acme Tool adds an offline mode for the desktop app, with sync on reconnect')).toBe(false);
+  });
+  it('nom écrit tel quel dans la source, hors citation du champ : attesté ; nom traduit ou absent : écart', () => {
+    expect(codes(brouillon('Le mode hors ligne, sauf sous Windows.', ['adds offline mode']))).not.toContain('soutien_nom_absent');
+    expect(codes(brouillon('Le mode hors ligne, sauf sous Fenêtres.', ['adds offline mode']))).toContain('soutien_nom_absent');
+  });
   it('exemple d’usage et prérequis sont facultatifs : null ne crée aucun écart', () => {
     expect(codes(brouillon('Mode ajouté.', ['adds offline mode']))).not.toContain('champ_sans_citation');
   });
@@ -60,7 +83,7 @@ describe('contrôles', () => {
     expect(codes(b)).toContain('media_non_conforme');
     const renseigne = { ...b, exemple_usage: { texte: 'Travailler sans réseau.', passages: ['adds offline mode'] } };
     expect(codes(renseigne)).not.toContain('media_non_conforme');
-    expect(diapositivesDe(renseigne)[1]).toEqual({ champ: 'exemple_usage', libelle: 'Exemple d’usage', texte: 'Travailler sans réseau.' });
+    expect(diapositivesDe(renseigne)[1]).toEqual({ champ: 'exemple_usage', libelle: 'Example use', texte: 'Travailler sans réseau.' });
   });
   it.each(['Nous avons testé ce mode hors ligne.', 'J’ai essayé cet outil.', 'Selon nos tests, le mode fonctionne.', 'Testé par la plateforme hier.'])('un essai que personne n’a fait est signalé : %s', (texte) => {
     expect(codes(brouillon(texte, ['adds offline mode']))).toContain('essai_non_realise');
@@ -272,7 +295,7 @@ describe('tarifs', () => {
 
 describe('consigne de rédaction', () => {
   it('suit la règle de ton du 2026-11-02 : pairs, pas de définition des termes courants', () => {
-    expect(PROMPT_VERSION).toMatch(/^p3-11-/);
+    expect(PROMPT_VERSION).toMatch(/^p3-15-/);
     expect(SYSTEME_REDACTION).toContain("Ne définis jamais les termes courants (skill, MCP, agent, assistant de code, plugin, dépôt, open source, UX, UI, prompt, CLI, API, workflow, hook, LLM)");
     expect(SYSTEME_REDACTION).toContain('Commence directement par ce que le sujet permet de faire');
     expect(SYSTEME_REDACTION).not.toContain('tout terme technique');
@@ -418,6 +441,25 @@ describe('commande de brouillons', () => {
       expect(r.status).toBe(1);
       expect(r.stderr).toContain('CURATION_MODELE');
       expect(r.stderr).not.toContain('ANTHROPIC_API_KEY');
+    } finally {
+      rmSync(dossier, { recursive: true, force: true });
+    }
+  });
+  it('accepte DeepSeek Flash, mais exige sa propre clé avant tout appel', () => {
+    const dossier = mkdtempSync(join(tmpdir(), 'curation-brouillons-'));
+    try {
+      // Une clé Anthropic seule ne suffit pas pour un modèle DeepSeek.
+      writeFileSync(join(dossier, '.env.local'), 'ANTHROPIC_API_KEY=cle-factice-de-test\nCURATION_MODELE=deepseek-flash\n');
+      const env: NodeJS.ProcessEnv = { ...process.env, DATABASE_URL: `file:${join(dossier, 'test.db')}` };
+      delete env.ANTHROPIC_API_KEY;
+      delete env.DEEPSEEK_API_KEY;
+      delete env.CURATION_MODELE;
+      const lancer = (script: string, ...args: string[]) => spawnSync(process.execPath, [join(PROJECT_ROOT, script), ...args], { cwd: dossier, env, encoding: 'utf8' });
+      expect(lancer('src/cli/migrate.ts').status).toBe(0);
+      const r = lancer('src/cli/brouillons.ts', '--confirmer');
+      expect(r.status).toBe(1);
+      expect(r.stderr).toContain('DEEPSEEK_API_KEY');
+      expect(r.stderr).not.toContain('cle-factice');
     } finally {
       rmSync(dossier, { recursive: true, force: true });
     }
@@ -704,6 +746,18 @@ describe('budget et pipeline, sans réseau', () => {
     expect(m.appels).toBe(4);
   });
 
+  it('autocorrection : la reprise reçoit les écarts, et n’est gardée que si elle en compte moins', async () => {
+    const recus: string[] = [];
+    const corrige = faux(async (r) => {
+      if (r.utilisateur.includes('Premier brouillon')) { recus.push(r.utilisateur); return redige(debut)(r); }
+      return redige(() => 'ce passage inventé est absent de la capture')(r);
+    });
+    expect(await lancer(corrige, 10_000_000, 10_000_000, { maxItems: 1 })).toMatchObject({ statut: 'terminee', controlees: 1, revisions_gardees: 1 });
+    expect(recus[0]).toContain('citation_introuvable');
+    expect(recus[0]).toContain('recopie-le exactement, ou retire-le');
+    expect(await nombre(`llm_call where stage = 'revision'`)).toBe(1);
+  });
+
   it('relance : une actualité déjà qualifiée passe avant les autres, même plus récentes', async () => {
     await lancer(faux(panneRedaction));
     const client = t.database.client;
@@ -717,7 +771,8 @@ describe('budget et pipeline, sans réseau', () => {
     await client.execute({ sql: `update post_draft set content = ?`, args: [JSON.stringify({ qualification: { ...retenue, passages: [passage] } })] });
     const m = faux(redige(debut));
     expect(await lancer(m, 10_000_000, 10_000_000, { maxItems: 1 })).toMatchObject({ statut: 'terminee', qualifications_reprises: 1 });
-    expect(m.appels).toBe(1);
+    // Aucune qualification repayée : la rédaction, puis sa reprise guidée par les écarts de ce brouillon.
+    expect(m.appels).toBe(2);
   });
 
   it('rédaction de bout en bout : le produit du catalogue n’a pas à figurer dans la capture', async () => {
@@ -905,8 +960,9 @@ describe('budget et pipeline, sans réseau', () => {
     expect(texte).toContain('- **Coût** : Non renseigné');
     expect(texte).toContain('## Actualités sans brouillon');
     expect(texte).toContain('- ecartee (hors_perimetre)');
-    const facture = 3 * coutMicroUsd('claude-opus-5-5', 100, 100);
-    expect(texte).toContain(`**Coût enregistré** : ${(facture / 1_000_000).toFixed(4)} $ sur 3 appel(s)`);
+    // Qualification, rédaction et reprise guidée par les écarts pour le premier sujet ; qualification seule pour le second.
+    const facture = 4 * coutMicroUsd('claude-opus-5-5', 100, 100);
+    expect(texte).toContain(`**Coût enregistré** : ${(facture / 1_000_000).toFixed(4)} $ sur 4 appel(s)`);
   });
 
   const executionActive = async (bail: string) => {
@@ -1043,6 +1099,19 @@ describe('budget et pipeline, sans réseau', () => {
       expect(String(medias[0]!.alt_text)).toBe(`Carrousel. ${media.diapositives.map((d: { libelle: string; texte: string }) => `${d.libelle} : ${d.texte}`).join(' ')}`);
     }
     expect(await nombre(`post where status = 'publie'`)).toBe(0);
+  });
+
+  it('planification : un brouillon sans écart passe en attente avec un jour prévu, jamais publié ; une seconde passe ne change rien', async () => {
+    await lancer(faux(redige(debut)));
+    const maintenant = new Date().toISOString();
+    const r = await planifierActualites(t.database, maintenant);
+    expect(r).toHaveLength(2);
+    for (const { placement } of r) expect(placement).toMatchObject({ etat: 'prevue', jour: jourParis(maintenant) });
+    expect(await nombre(`post where status = 'en_attente'`)).toBe(2);
+    expect(await nombre(`publication_planifiee where statut_sortie = 'actualite'`)).toBe(2);
+    expect(await nombre(`recherche_publication`)).toBe(2);
+    expect(await nombre(`post where status = 'publie'`)).toBe(0);
+    expect(await planifierActualites(t.database, maintenant)).toHaveLength(0);
   });
 
   it('les six comptes sont des agents, et le badge se déduit du type', async () => {

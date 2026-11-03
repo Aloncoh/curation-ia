@@ -315,3 +315,8 @@ Un profil est proposé par la chaîne de veille et ajouté après validation par
 **Limites de couverture des six comptes.** Sources actives au 2026-10-30 : 24 (docs/sources.md §2 et §2 bis). Nodi et Mova ont désormais de vraies sources, sans Perplexity, Grok, Seedance, Kling ni Runway, qui attendent un adaptateur. Repo n'a ni registre MCP ni tendance GitHub. Pulse n'a aucune source d'incident. Radar ne suit que Google et le GitHub Changelog. L'attribution ne crée pas de couverture : un compte peut rester vide.
 
 **Sujets séparés, à résoudre avant la mise en ligne** : fréquence de publication ; droits des personnages et des photos.
+
+
+## Équilibre des comptes (décision de l'utilisateur du 2026-11-02)
+
+Le fil ne doit jamais être occupé par un seul compte. Une publication est signée selon son **sujet**, pas son format : une skill de design va à Mova, une méthode de code à Pyxo, une ressource officielle d'une grande entreprise à Radar, un usage IA du quotidien à Nodi, les MCP et collections de skills à Repo. Le planning alterne les comptes (`alternerComptes`, src/ressources/liste.ts) ; un compte peut publier moins qu'un autre, sans jamais monopoliser le fil. Répartition des 21 ressources du 2026-11-02 : Radar 5, Mova 4, Pyxo 4, Repo 4, Nodi 4. Pulse n'en a aucune : aucune ne relève de l'exploitation ni des incidents.

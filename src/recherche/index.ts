@@ -21,6 +21,13 @@ export function textesDePublication(contenu: unknown): string[] {
     ...liste(demarrage.etapes),
     ...liste(c.compatibilites),
     ...liste(c.limites),
+    // Sélection (complément de l'ADR 0011, 2026-11-02) : chaque ressource citée, son nom et son explication d'une ligne.
+    ...(Array.isArray(c.ressources)
+      ? c.ressources.flatMap((r: unknown) => {
+          const e = r && typeof r === 'object' ? (r as Record<string, unknown>) : {};
+          return [typeof e.nom === 'string' ? e.nom : '', ...texte(e.explication)];
+        })
+      : []),
   ].filter((t) => t.trim().length > 0);
 }
 

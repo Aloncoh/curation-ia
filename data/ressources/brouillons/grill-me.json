@@ -2,13 +2,13 @@
   "slug": "grill-me",
   "consignes": "r2",
   "accroche": {
-    "texte": "grill-me : votre agent vous interroge sans relâche sur un plan, jusqu'à ce que tout soit tranché",
+    "texte": "grill-me: your agent questions you about a plan until every branch is resolved, not before",
     "passages": [
       "Get relentlessly interviewed about a plan or design until every branch of the design tree is resolved."
     ]
   },
   "description": {
-    "texte": "Avant de lancer quoi que ce soit, on inverse les rôles : l'agent vous pose des questions précises sur votre plan, votre décision ou votre idée, et creuse chaque branche jusqu'à la trancher. Matt Pocock le destine aux sujets hors code.",
+    "texte": "Before launching anything, you flip the roles: the agent asks you precise questions about your plan, decision or idea, and digs into every branch until it is settled. Matt Pocock intends it for non-code topics.",
     "passages": [
       "getting the agent to ask you detailed questions about what you're building.",
       "Interview the user relentlessly about a plan, decision, or idea until every branch of the design tree is resolved.",
@@ -16,7 +16,7 @@
     ]
   },
   "interet": {
-    "texte": "Vous vous alignez avec l'agent avant qu'il se mette au travail, au lieu de découvrir après coup qu'il n'avait pas compris. Pour le code, la variante grill-with-docs mène le même entretien et construit au passage le vocabulaire du projet, avec les décisions difficiles consignées en ADR.",
+    "texte": "You align with the agent before it starts working, instead of finding out afterward that it misunderstood. For code, the grill-with-docs variant runs the same interview and builds the project vocabulary along the way.",
     "passages": [
       "They help you align with the agent before you get started",
       "you realize it didn't understand you at all.",
@@ -25,7 +25,7 @@
     ]
   },
   "exemple_usage": {
-    "texte": "Un lancement à cadrer, un arbitrage d'équipe à préparer : tapez /grill-me, décrivez le plan, puis répondez jusqu'à ce que plus rien ne reste flou.",
+    "texte": "A launch to scope out, a team trade-off to prepare: type /grill-me, describe the plan, then answer until nothing is left unclear.",
     "passages": [
       "User-invoked skills are reachable only when you type them (e.g. /grill-me)",
       "Interview the user relentlessly about a plan, decision, or idea until every branch of the design tree is resolved."
@@ -34,14 +34,14 @@
   "demarrage": {
     "etapes": [
       {
-        "texte": "Dans Claude Code, installez le plugin mattpocock-skills.",
+        "texte": "In Claude Code, install the mattpocock-skills plugin.",
         "passages": [
           "claude plugin install mattpocock-skills@claude-plugins-official",
           "I see with Claude Code, Codex, and other coding agents."
         ]
       },
       {
-        "texte": "Il ne démarre pas seul : tapez /grill-me, puis décrivez votre plan.",
+        "texte": "It does not start on its own: type /grill-me, then describe your plan.",
         "passages": [
           "User-invoked skills are reachable only when you type them (e.g. /grill-me)"
         ]
@@ -55,7 +55,7 @@
   },
   "compatibilites": [
     {
-      "texte": "Claude Code, Codex et d'autres agents ; n'importe quel modèle, selon l'auteur.",
+      "texte": "Claude Code, Codex and other agents; any model, according to the author.",
       "passages": [
         "I see with Claude Code, Codex, and other coding agents.",
         "codex plugin add mattpocock-skills@mattpocock",
@@ -176,13 +176,13 @@
   },
   "reperes": [
     {
-      "texte": "Se lance seulement quand vous tapez /grill-me",
+      "texte": "Runs only when you type /grill-me",
       "passages": [
         "User-invoked skills are reachable only when you type them (e.g. /grill-me)"
       ]
     },
     {
-      "texte": "Fonctionne avec n'importe quel modèle",
+      "texte": "Works with any model",
       "passages": [
         "They work with any model."
       ]

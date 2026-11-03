@@ -48,6 +48,8 @@ export interface ControleMiseEnPage {
   fiches_hors_zone: boolean;
   /** Gabarit `etapes` : une case ou une flèche sort de la zone entre le titre et le pied. */
   etapes_hors_zone: boolean;
+  /** Gabarit `selection` : un aperçu sort de la zone entre le titre et le pied, ou son cadre est trop petit pour se lire. */
+  apercus_hors_zone?: boolean;
   /** Le surtitre passe à la ligne : l'en-tête n'a plus sa hauteur d'une ligne. */
   surtitre_coupe: boolean;
   image_illisible: boolean;
@@ -64,9 +66,11 @@ const mesurer = (page: Page): Promise<ControleMiseEnPage> =>
     const titre = document.querySelector<HTMLElement>('.titre')!;
     const basTitre = titre.getBoundingClientRect().bottom;
     const secants = (a: DOMRect, b: DOMRect) => a.left < b.right && b.left < a.right && a.top < b.bottom && b.top < a.bottom;
-    const textes = [...document.querySelectorAll<HTMLElement>('.etiquette, .fiche, .papier, .etape')];
+    const textes = [...document.querySelectorAll<HTMLElement>('.etiquette, .fiche, .papier, .etape, .nom-site')];
     const fiches = [...document.querySelectorAll('.fiche')].map((f) => f.getBoundingClientRect());
     const etapes = [...document.querySelectorAll('.etape, .fleche')].map((f) => f.getBoundingClientRect());
+    const apercus = [...document.querySelectorAll('.apercu')].map((f) => f.getBoundingClientRect());
+    const cadres = [...document.querySelectorAll('.apercu .cadre')].map((f) => f.getBoundingClientRect());
     const surtitre = document.querySelector<HTMLElement>('.surtitre');
     const hors = (b: DOMRect) => b.left < 0 || b.right > largeur || b.top < basTitre || b.bottom > pied.top;
     const decoupe = document.querySelector('.decoupe')?.getBoundingClientRect();
@@ -79,6 +83,7 @@ const mesurer = (page: Page): Promise<ControleMiseEnPage> =>
       etiquette_sur_commande: etiquettes.some((e) => commandes.some((c) => secants(e, c))),
       fiches_hors_zone: fiches.some(hors),
       etapes_hors_zone: etapes.some(hors),
+      apercus_hors_zone: apercus.some(hors) || cadres.some((c) => c.height < 160 || c.width < 300),
       surtitre_coupe: surtitre !== null && surtitre.getBoundingClientRect().height > parseFloat(getComputedStyle(surtitre).lineHeight) * 1.5,
       image_illisible: [...document.images].some((i) => i.naturalWidth === 0),
       image_sur_titre: decoupe !== undefined && basTitre - decoupe.top > limiteTitre,
@@ -95,6 +100,7 @@ export const defautsMiseEnPage = (c: ControleMiseEnPage): string[] => [
   ...(c.etiquette_sur_commande ? ['etiquette_sur_commande'] : []),
   ...(c.fiches_hors_zone ? ['fiches_hors_zone'] : []),
   ...(c.etapes_hors_zone ? ['etapes_hors_zone'] : []),
+  ...(c.apercus_hors_zone ? ['apercus_hors_zone'] : []),
   ...(c.surtitre_coupe ? ['surtitre_coupe'] : []),
   ...(c.image_illisible ? ['image_illisible'] : []),
   ...(c.image_sur_titre ? ['image_sur_titre'] : []),

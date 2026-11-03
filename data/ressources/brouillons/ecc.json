@@ -2,13 +2,13 @@
   "slug": "ecc",
   "consignes": "r2",
   "accroche": {
-    "texte": "ECC installe une méthode de travail dans votre agent de code, au lieu de la redire à chaque prompt",
+    "texte": "ECC installs a working method into your coding agent, instead of restating it in every prompt",
     "passages": [
       "Instead of rebuilding that process in every prompt, you install it once and make it part of how your agent works."
     ]
   },
   "description": {
-    "texte": "Planifier avant de coder, vérifier par les tests, garder ce qui compte : ECC réunit 71 agents, 314 skills, des hooks et des résumés de session pour que ce processus fasse partie de la façon dont votre agent travaille. Il fonctionne aujourd'hui le mieux avec Claude Code, avec des plugins natifs pour Codex et Qoder et des adaptateurs plus limités pour Cursor, OpenCode ou Gemini.",
+    "texte": "Plan before coding, verify through tests, keep what matters: ECC brings together 71 agents, 314 skills, hooks and session summaries so this process becomes part of how your agent works. Today it works best with Claude Code, with native plugins for Codex and Qoder and more limited adapters for Cursor, OpenCode or Gemini.",
     "passages": [
       "Access to 71 agents, 314 skills, and 98 legacy command shims, plus hooks, rules, memory, continuous learning, and AgentShield security scanning.",
       "it plans before it builds, verifies changes with tests, reviews its own work from a fresh context, remembers what matters",
@@ -18,7 +18,7 @@
     ]
   },
   "interet": {
-    "texte": "Le plan devient un document à valider avant la première ligne, le TDD exige un test en échec avant l'implémentation, et les hooks ajoutent des contrôles qui ne dépendent plus du prompt. Ces hooks lancent des commandes shell sur votre machine : installez ECC uniquement depuis le dépôt officiel ou le paquet npm ecc-universal, les copies non officielles pouvant contenir un logiciel malveillant.",
+    "texte": "The plan becomes a document to approve before the first line, TDD requires a failing test before implementation, and hooks add checks that no longer depend on the prompt. These hooks run shell commands on your machine: install ECC only from the official repository or the npm package ecc-universal, since unofficial copies may contain malware.",
     "passages": [
       "Plans become editable artifacts before implementation starts",
       "TDD becomes a gated RED -> GREEN -> REFACTOR workflow with evidence",
@@ -30,7 +30,7 @@
     ]
   },
   "exemple_usage": {
-    "texte": "Pour une nouvelle fonctionnalité, selon le dépôt : /ecc:plan avec la demande, validation du plan, puis tdd-workflow fait écrire un test qui échoue avant d'implémenter. Suivent une relecture en contexte neuf et une vérification du build, du lint, des types et des tests.",
+    "texte": "For a new feature, depending on the repository: /ecc:plan with the request, plan approval, then tdd-workflow has a failing test written before implementing. Then comes a review in a fresh context and a check of the build, lint, types and tests.",
     "passages": [
       "/ecc:plan \"Add usage-based billing alerts\" -> confirm or edit the plan -> activate tdd-workflow -> capture RED evidence before implementation",
       "implement until GREEN -> review from fresh context -> fix findings with regression tests -> verify build, lint, types, and tests"
@@ -39,14 +39,14 @@
   "demarrage": {
     "etapes": [
       {
-        "texte": "Lancer npx ecc-universal@2.2.3 setup (Node.js 18 ou plus requis)",
+        "texte": "Run npx ecc-universal@2.2.3 setup (Node.js 18 or later required)",
         "passages": [
           "Claude Code plugin setup, updates, scope changes, and hook-profile changes: `bash npx ecc-universal@2.2.3 setup `",
           "The universal package requires Node.js 18 or newer."
         ]
       },
       {
-        "texte": "Choix de la portée et du profil de hooks ; on peut relancer pour les changer",
+        "texte": "Choose the scope and hook profile; you can rerun to change them",
         "passages": [
           "For a typical personal setup, choose Global user, choose Standard hooks, and confirm.",
           "Rerun the same command whenever you want to update ECC, change scope, or change its hook profile."
@@ -61,7 +61,7 @@
   },
   "compatibilites": [
     {
-      "texte": "Assistant d'installation pour le plugin Claude Code : Git et Claude Code 2.1 ou plus requis",
+      "texte": "Setup wizard for the Claude Code plugin: Git and Claude Code 2.1 or later required",
       "passages": [
         "This setup wizard currently configures the Claude Code plugin",
         "requires Git and Claude Code 2.1 or newer on PATH."
@@ -70,7 +70,7 @@
   ],
   "limites": [
     {
-      "texte": "Les hooks peuvent lancer des commandes shell et les serveurs MCP détenir des identifiants : à traiter comme du code exécutable, et à installer uniquement depuis les sources officielles.",
+      "texte": "Hooks can run shell commands and MCP servers can hold credentials: treat them as executable code, and install only from official sources.",
       "passages": [
         "Hooks can run shell commands, MCP servers can hold credentials",
         "Treat all three as executable configuration.",
@@ -199,20 +199,20 @@
   },
   "reperes": [
     {
-      "texte": "Relecture par un agent au contexte neuf",
+      "texte": "Review by an agent in a fresh context",
       "passages": [
         "A fresh-context reviewer looks for regressions and blind spots"
       ]
     },
     {
-      "texte": "AgentShield, paquet à part, audite la configuration de l'agent",
+      "texte": "AgentShield audits the agent's own setup",
       "passages": [
         "AgentShield scans the harness itself as an attack surface",
         "these commands require an already installed, reviewed AgentShield binary from ecc-agentshield"
       ]
     },
     {
-      "texte": "Les sessions peuvent devenir instincts et skills réutilisables",
+      "texte": "Sessions can become instincts and reusable skills",
       "passages": [
         "Sessions are distilled into summaries, instincts, and reusable skills"
       ]

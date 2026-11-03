@@ -87,6 +87,18 @@ export const VERSIONS_CONSIGNES: VersionConsignes[] = [
     exemples: [],
     changements: [{ regle: 'Public spécialisé distinct de la qualité, et genres sans nouveauté précisés (décision de l’utilisateur du 2026-11-02) : aucun avis humain en jeu.', avis: [] }],
   },
+  {
+    version: 's4',
+    date: '2026-11-03',
+    texte: `${GRILLE}\n\n${PRECISIONS_S2}\n\n${PRECISIONS_S3}`,
+    // Avis de l'utilisateur sur le premier lot réel (2026-11-02, « Les 3 sont OK ») : selection_avis 1 à 3.
+    exemples: [
+      { titre: 'pull_request_target blocked by default December 2', decision: 'publier', raison: 'Changement de comportement par défaut daté, qui touche les dépôts publics de notre public.', avis: 1 },
+      { titre: 'Claude Code 2.1.314', decision: 'publier', raison: 'Version d’un assistant de code avec une nouvelle permission utilisable tout de suite.', avis: 2 },
+      { titre: 'Webhook IP ranges added to the Meta API', decision: 'publier', raison: 'Changement d’infrastructure concret à appliquer par ceux qui filtrent les webhooks.', avis: 3 },
+    ],
+    changements: [{ regle: 'Premiers exemples relus par l’utilisateur : trois actualités publiées après relecture.', avis: [1, 2, 3] }],
+  },
 ];
 
 /** Ordre de priorité éditoriale (SPEC §3.6) : 1 passe avant 4 quand le plafond quotidien oblige à choisir. Il ne change aucune note. */
