@@ -5,6 +5,7 @@
 import { existsSync } from 'node:fs';
 import { isAbsolute, relative, sep } from 'node:path';
 import type { Client, Transaction } from '@libsql/client';
+import { cheminDepot } from '../config.ts';
 import { REGLAGES_PAR_DEFAUT } from '../control/settings.ts';
 import { textesDePublication } from '../recherche/index.ts';
 import type { DocumentRecherche } from '../recherche/moteur.ts';
@@ -132,7 +133,7 @@ export async function ressourcesDeLaMaquette(executeur: Lecteur, generatedAt: st
     const mc = m?.content ? (JSON.parse(String(m.content)) as { fichier?: string; gabarit?: string }) : null;
     // Chemin servi par la maquette : relatif au dossier maquette/, et seulement si le fichier existe.
     const rel = mc?.fichier ? relative('maquette', mc.fichier) : null;
-    const servi = rel !== null && rel !== '' && !rel.startsWith('..') && !isAbsolute(rel) && existsSync(mc!.fichier!);
+    const servi = rel !== null && rel !== '' && !rel.startsWith('..') && !isAbsolute(rel) && existsSync(cheminDepot(mc!.fichier!));
     const visuel = m && servi ? { src: rel!.split(sep).join('/'), alt: String(m.alt_text), gabarit: String(mc!.gabarit), mention: String(m.notice) } : null;
     const ids = (contenu.captures as { document: string; snapshot_id: number; capture_le: string }[]).map((c) => c.snapshot_id);
     const caps = ids.length

@@ -1,7 +1,24 @@
 // Configuration lue depuis l'environnement, avec des valeurs par défaut prudentes.
+import { existsSync } from 'node:fs';
+import { resolve } from 'node:path';
+
+/**
+ * Racine du dépôt : CURATION_RACINE, sinon le dossier courant s'il contient `maquette/`, sinon deux niveaux au-dessus
+ * (le site lancé depuis `apps/web`, comme sur Vercel). Les chemins stockés en base (montages) y sont relatifs.
+ */
+export function racineDepot(env: NodeJS.ProcessEnv = process.env, cwd = process.cwd()): string {
+  if (env.CURATION_RACINE?.trim()) return resolve(env.CURATION_RACINE.trim());
+  if (existsSync(resolve(cwd, 'maquette'))) return cwd;
+  const parent = resolve(cwd, '..', '..');
+  return existsSync(resolve(parent, 'maquette')) ? parent : cwd;
+}
+
+export const cheminDepot = (relatif: string): string => resolve(racineDepot(), relatif);
 
 export interface AppConfig {
   databaseUrl: string;
+  /** Jeton d'une base Turso distante (DATABASE_AUTH_TOKEN), lu dans l'environnement seulement ; null en local. */
+  databaseAuthToken: string | null;
   /** Attente maximale quand un autre processus verrouille la base SQLite locale. */
   dbBusyTimeoutMs: number;
   /** Durée du bail : un job réservé par un worker qui ne répond plus redevient disponible après ce délai. */
@@ -35,6 +52,7 @@ export function loadConfig(env: NodeJS.ProcessEnv = process.env): AppConfig {
   const fixturePath = env.CURATION_FIXTURE?.trim() || null;
   return {
     databaseUrl: env.DATABASE_URL?.trim() || 'file:data/curation.db',
+    databaseAuthToken: env.DATABASE_AUTH_TOKEN?.trim() || null,
     dbBusyTimeoutMs: intFromEnv(env, 'CURATION_DB_BUSY_TIMEOUT_MS', 5_000, 1),
     leaseMs: intFromEnv(env, 'CURATION_LEASE_MS', 5 * 60_000, 1),
     maxAttempts: intFromEnv(env, 'CURATION_MAX_ATTEMPTS', 3, 1),

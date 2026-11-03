@@ -1,6 +1,27 @@
 # État du projet
 
-_Mis à jour le 2026-11-03 (midi) : **P4 réalisé en local** (site, API v1, trois langues, traductions, fiche, versions, carrousels) ; P3 toujours ouvert ; plan de P5 proposé dans ROADMAP.md._
+_Mis à jour le 2026-11-03 (début d'après-midi) : **P5 préparé en local** (GitHub Actions toutes les 5 minutes, décision de l'utilisateur) ; rien n'est déployé ; P4 réalisé ; P3 toujours ouvert._
+
+## P5 — chaîne en ligne (préparé le 2026-11-03, en attente des comptes de l'utilisateur)
+
+- **Décision de l'utilisateur** (2026-11-03) : « Actions, 5 minutes ». ADR 0006 mise à jour. L'objectif d'une minute n'est pas atteignable ainsi, et GitHub ne garantit pas l'heure d'un cron.
+- **Préparé** :
+  - workflows `.github/workflows/chaine.yml` (cron `2-59/5 * * * *`, un seul cycle à la fois, désactivé tant que `CHAINE_ACTIVE` ≠ `oui`, secrets du dépôt seulement) et `verifications.yml` (types et tests à chaque envoi) ;
+  - commandes `npm run lancer`, `publier`, `etat`, `couts` et `turso:copier` ;
+  - plafond par jour en plus des plafonds par exécution et total ;
+  - connexion Turso (`DATABASE_URL`, `DATABASE_AUTH_TOKEN`) ;
+  - site prêt pour Vercel (`apps/web/vercel.json`, région `cdg1`, fichiers montages et avatars inclus) ; en production, il n'affiche que les publications publiées.
+- **Vérifié en local** :
+  - publication atomique et idempotente, testée avec deux processus concurrents ;
+  - copie complète de la base vers un fichier vide : mêmes nombres de lignes ;
+  - publication sur cette copie jetable : 20 publiées (le plafond), puis 0 au second passage ;
+  - aucune publication réelle sur `data/curation.db`, aucun appel à Turso, Vercel ni GitHub.
+- **À créer par l'utilisateur** : voir ROADMAP.md, section « P5 — plan » (Vercel, Turso `curation-ai` en `aws-eu-west-1`, dépôt privé, secrets `TURSO_DATABASE_URL`, `TURSO_AUTH_TOKEN`, `DEEPSEEK_API_KEY`, variables `CURATION_PLAFOND_JOUR_USD`, `CURATION_PLAFOND_TOTAL_USD`, `CHAINE_ACTIVE`, variables Vercel `DATABASE_URL`, `DATABASE_AUTH_TOKEN`, domaine).
+- **Risques** :
+  - releases GitHub lues sans jeton (60 requêtes par heure et par adresse) sur des runners partagés ;
+  - FTS5 jamais essayé sur Turso (ADR 0008) : la copie le dira ;
+  - workflow de vérification jamais lancé sous Linux ;
+  - versions des actions (`checkout@v5`, `setup-node@v5`) à confirmer au premier lancement.
 
 ## P4 — site social (réalisé le 2026-11-03, en local ; rien n'est publié)
 
@@ -27,9 +48,9 @@ _Mis à jour le 2026-11-03 (midi) : **P4 réalisé en local** (site, API v1, tro
   - installation réelle sur téléphone non essayée.
 - **Pour P5, à demander à l'utilisateur** : comptes Vercel et Turso, un domaine, un dépôt GitHub pour les Actions.
 
-- **Phase** : P2 fusionné dans `main`. **P3 en cours, pas terminé**, et **P4 réalisé en local** (voir plus haut), sur `p3-brouillons`. Chaîne des ressources (ADR 0011) avancée avant P6 à la demande de l'utilisateur, sans rouvrir de jalon. Relevé de la base locale le 2026-11-03 : 38 publications, dont 28 `en_attente` et planifiées, 9 `a_verifier` et 1 `rejete`. Rien n'est publié.
+- **Phase** : P2 fusionné dans `main`. **P3 en cours, pas terminé**, et **P4 réalisé en local** ; **P5 préparé en local** (voir plus haut), sur `p3-brouillons`. Chaîne des ressources (ADR 0011) avancée avant P6 à la demande de l'utilisateur, sans rouvrir de jalon. Relevé de la base locale le 2026-11-03 : 38 publications, dont 28 `en_attente` et planifiées, 9 `a_verifier` et 1 `rejete`. Rien n'est publié.
 - **Dépôt** : `main` à `e56db82` ; `p3-brouillons` non fusionnée, non poussée (aucun dépôt distant) : le travail P3 du 2026-11-03 est dans `b698ffa`, P4 dans le commit qui suit. Branche `mobile` à `17f8408`, dans `.worktrees/mobile`, non fusionnée.
-- **Tests** : 759 au vert sur fixtures et faux modèle (`npx vitest run`, 2026-11-03 10:51), types OK. Après l'arrêt forcé : `git fsck` ne signale rien, `PRAGMA integrity_check` répond ok, aucun fichier modifié n'est vide. **Blocages** : aucun. **Dépenses DeepSeek** (budget autorisé : 4 $) : 0,3043 $ comptés en base au 2026-11-03 10:52 (traductions P4 comprises, 0,0815 $), plus 0,0099 $ de traduction des ressources **absents de la base** (voir plus bas), soit environ 0,314 $. Haiku : 0,061 $ réels (comparaison du 2026-11-01). Aucun compte créé.
+- **Tests** : 777 au vert sur fixtures et faux modèle (`npx vitest run`, 2026-11-03 11:06), types OK. Après l'arrêt forcé : `git fsck` ne signale rien, `PRAGMA integrity_check` répond ok, aucun fichier modifié n'est vide. **Blocages** : aucun. **Dépenses DeepSeek** (budget autorisé : 4 $) : 0,3043 $ comptés en base au 2026-11-03 10:52 (traductions P4 comprises, 0,0815 $), plus 0,0099 $ de traduction des ressources **absents de la base** (voir plus bas), soit environ 0,314 $. Haiku : 0,061 $ réels (comparaison du 2026-11-01). Aucun compte créé.
 
 ## Ce qui fonctionne réellement (vérifié le 2026-10-31, complété le 2026-11-02)
 
@@ -166,7 +187,7 @@ M3 construit le 2026-11-03 et validé par l'utilisateur (« je valide tout »), 
 
 ## Prochaine action
 
-Faire valider le plan de P5 (ROADMAP.md) et confirmer l'interprétation de la police hébraïque. L'utilisateur crée lui-même les comptes Vercel, Turso et GitHub (dépôt pour les Actions) et choisit un domaine ; il tranche aussi l'hébergement du cycle de 60 s (ADR 0006). Ensuite seulement, P5. Aucun appel payant sans plafonds explicites et `--confirmer`.
+L'utilisateur crée lui-même, dans l'ordre : compte Vercel, compte Turso (base `curation-ai`, `aws-eu-west-1`), dépôt GitHub privé, secrets et variables (noms exacts dans ROADMAP.md, « P5 — plan »), domaine. Ensuite, avec son accord : `npm run turso:copier -- --confirmer`, premier envoi du code, un cycle lancé à la main, vérification en ligne, puis `CHAINE_ACTIVE` = `oui`. Confirmer aussi l'interprétation de la police hébraïque. Aucun appel payant sans plafonds explicites et `--confirmer`.
 
 ## Repères techniques
 

@@ -45,6 +45,11 @@ La base locale est créée dans `data/curation.db` (non versionnée). Variable o
 | `npm run web:typecheck` | vérification des types du site (`next build` ne la fait pas avec TypeScript 7) |
 | `npm run traduire -- --confirmer` | **dépense réelle** : traduit en français et en hébreu les publications visibles sans traduction (DeepSeek Flash). Refuse de démarrer sans `CURATION_MODELE=deepseek-flash`, `DEEPSEEK_API_KEY`, `CURATION_MAX_TRADUCTIONS`, `CURATION_PLAFOND_EXECUTION_USD` et `CURATION_PLAFOND_TOTAL_USD`. Options : `--langue=fr`, `--reprendre-ecarts` ; `--recontroler` (sans appel) réapplique les règles de contrôle |
 | `node apps/web/scripts/audit-axe.ts` | audit axe-core du site local (8 pages dont 2 fiches, 3 langues, 375 et 1280 px, thèmes clair et sombre), avec Chrome |
+| `npm run lancer -- --confirmer` | un cycle complet de la chaîne (collecte des sources dues, approfondissement au plus une fois par heure, brouillons, contrôles, planification, traduction, publication). Étapes payantes sautées sans modèle, clé, plafonds (exécution, jour, total). Utilisé par GitHub Actions toutes les 5 minutes |
+| `npm run publier -- --confirmer` | publie les publications dont le jour est arrivé, dans le plafond quotidien ; atomique et idempotent ; `doublon_possible`, `obsolete` ; respecte la pause |
+| `npm run etat` | pause, publiées du jour sur le plafond, file d'attente, reportées par motif, dernier cycle, dépense |
+| `npm run couts` | coûts réels enregistrés par modèle, par étape et par jour |
+| `npm run turso:copier` | aperçu de la copie de la base locale vers `DATABASE_URL` (Turso) ; avec `--confirmer`, migrations puis copie, refusée si la cible a déjà des publications |
 | `npm test` | tests sur fixtures, sans réseau |
 | `npm run typecheck` | vérification des types (TypeScript 7) |
 

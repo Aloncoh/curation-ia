@@ -220,3 +220,26 @@ DeepSeek Flash, 30 actualités, 34 appels, 0,0125 $ (budget autorisé 4 $). 19 �
   - liens entre publications et produits suivis (versions masquées pour les 32 publications prévues) ;
   - mots anglais laissés par la traduction, non détectés.
 - Plan de P5 proposé dans ROADMAP.md, rien n'est déployé.
+
+## 2026-11-03 — P5 préparé en local (rien n'est déployé)
+
+- **Décision de l'utilisateur**, transmise par la session principale : « Actions, 5 minutes ». [ADR 0006](docs/decisions/0006-delai-de-publication.md) mise à jour :
+  - l'objectif d'une minute n'est pas atteignable avec ce choix ;
+  - GitHub ne garantit pas l'heure d'un cron (documentation consultée le 2026-11-03) ;
+  - cron aux minutes 2, 7, …, 57.
+- **Construit** :
+  - `src/publication/publier.ts` et `npm run publier` : passage de « en attente » à « publiée » par une mise à jour conditionnelle, dans une transaction qui recompte le plafond du jour ; vérification mot pour mot refaite avant publication ; `doublon_possible` (même produit et même version, ou titres similaires à 0,8 ou plus sur 7 jours) ; `obsolete` (actualité prévue depuis plus de 2 jours) ;
+  - `src/pilotage/pilotage.ts` et `npm run lancer`, `etat`, `couts` : sources dues seulement, approfondissement au plus une fois par heure, étapes payantes sautées sans clé ni plafonds, plafond par jour (`CURATION_PLAFOND_JOUR_USD`), pause vérifiée avant chaque étape, bilan dans `chaine.dernier_cycle` ;
+  - `src/db/copie.ts` et `npm run turso:copier` ;
+  - connexion Turso par `DATABASE_URL` et `DATABASE_AUTH_TOKEN` (commandes et site) ;
+  - `.github/workflows/chaine.yml` et `verifications.yml` ;
+  - `apps/web/vercel.json`, fichiers montages et avatars inclus au build, `racineDepot()` pour un site lancé depuis `apps/web`.
+- **Défaut de conception relevé et traité** : la collecte ignorait l'intervalle propre à chaque source ; le cycle ne collecte plus que les sources dues.
+- **Constat de test** : deux cycles dans un même processus Node se bloquent sur le verrou SQLite, dont l'attente est synchrone. La concurrence réelle se teste donc entre deux processus ; en production, GitHub n'en lance qu'un à la fois.
+- **Vérifié** :
+  - `npx vitest run` : 777 tests au vert, dont les nouveaux (publication 7, pilotage 6, copie 3, site 2) ; types et `next build` OK ;
+  - copie réelle de `data/curation.db` vers un fichier vide : mêmes nombres de lignes (49 publications, 64 traductions, 595 captures, 555 appels, 32 lignes d'index) ;
+  - `npm run publier` sur cette copie jetable : 20 publiées (le plafond), 0 au second passage ;
+  - `data/curation.db` : toujours 0 publication ;
+  - site local inchangé (montages, avatars, fiche, API ; chemin `..` refusé).
+- **Non fait** : aucun compte, aucun secret, aucun appel à Turso, Vercel ou GitHub ; workflows jamais exécutés ; FTS5 sur Turso non essayé ; aucun délai mesuré de bout en bout.

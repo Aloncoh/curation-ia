@@ -16,14 +16,15 @@ export interface Database {
   close(): void;
 }
 
-export function openDatabase(url: string, busyTimeoutMs: number): Database {
+/** `authToken` : jeton d'une base Turso distante (variable DATABASE_AUTH_TOKEN), jamais écrit ailleurs. */
+export function openDatabase(url: string, busyTimeoutMs: number, authToken: string | null = null): Database {
   if (url.startsWith('file:')) {
     const path = url.slice('file:'.length);
     if (path !== '' && path !== ':memory:') mkdirSync(dirname(path), { recursive: true });
   }
   // `timeout` = attente maximale sur un verrou SQLite local, appliquée à chaque connexion du client.
   // Le mode de journalisation reste celui par défaut (pas de WAL) : voir docs/decisions/0002.
-  const client = createClient({ url, timeout: busyTimeoutMs });
+  const client = createClient({ url, timeout: busyTimeoutMs, ...(authToken ? { authToken } : {}) });
   const db = drizzle(client, { schema });
   return { client, db, close: () => client.close() };
 }

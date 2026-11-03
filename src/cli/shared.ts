@@ -23,7 +23,7 @@ export async function runCommand(
   try {
     loadLocalEnv();
     const config = loadConfig();
-    database = openDatabase(config.databaseUrl, config.dbBusyTimeoutMs);
+    database = openDatabase(config.databaseUrl, config.dbBusyTimeoutMs, config.databaseAuthToken);
     if (options.requireSchema !== false) {
       if (!(await isInitialized(database.client))) {
         console.error(`Base non initialisée (${describeDatabaseUrl(config.databaseUrl)}). Lancez d'abord : npm run db:migrate`);

@@ -1,6 +1,7 @@
 // Rendu du site (P4) sans navigateur : hébreu de droite à gauche avec identifiants, adresses et visuels de gauche à
 // droite, « Voir l'original », contenus collectés rendus comme texte (`<img onerror>`, `javascript:`), chemins des médias.
 import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { describe, expect, it } from 'vitest';
 import type { Bloc, Publication } from '@curation/contrat';
@@ -140,5 +141,23 @@ describe('carrousel', () => {
     expect(html.match(/aria-roledescription="slide"/g)).toHaveLength(2);
     expect(html).toContain('aria-label="שקופית 2 מתוך 2"');
     expect(html).toContain('aria-label="השקופית הבאה"');
+  });
+});
+
+describe('mise en ligne (P5)', () => {
+  it('ne montre que les publications publiées en production, sauf choix explicite', async () => {
+    const { modeDepuis } = await import('../lib/serveur.ts');
+    expect(modeDepuis({ NODE_ENV: 'production' })).toBe('public');
+    expect(modeDepuis({ NODE_ENV: 'development' })).toBe('apercu');
+    expect(modeDepuis({ NODE_ENV: 'production', CURATION_SITE_MODE: 'apercu' })).toBe('apercu');
+    expect(modeDepuis({ NODE_ENV: 'development', CURATION_SITE_MODE: 'n_importe' })).toBe('apercu');
+  });
+
+  it('retrouve les montages depuis apps/web, comme sur Vercel', async () => {
+    const { racineDepot } = await import('../../../src/config.ts');
+    const depot = fileURLToPath(new URL('../../..', import.meta.url)).replace(/\/$/, '');
+    expect(racineDepot({ NODE_ENV: 'test' }, `${depot}/apps/web`)).toBe(depot);
+    expect(racineDepot({ NODE_ENV: 'test' }, depot)).toBe(depot);
+    expect(racineDepot({ NODE_ENV: 'test', CURATION_RACINE: '/srv/curation' }, depot)).toBe('/srv/curation');
   });
 });

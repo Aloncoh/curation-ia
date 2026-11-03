@@ -1,0 +1,49 @@
+# Chaîne planifiée de Curation AI (P5, ADR 0006) : collecte, approfondissement, brouillons, contrôles, planification,
+# traduction, puis publication dans le plafond de 20 par jour (npm run lancer).
+# - Désactivée tant que la variable de dépôt CHAINE_ACTIVE ne vaut pas « oui » (Settings → Secrets and variables →
+#   Actions → Variables) : sans elle, le job est sauté et rien ne tourne.
+# - Toutes les 5 minutes au mieux : GitHub ne garantit ni l'heure ni l'exécution d'un cron (retards aux heures
+#   chargées, surtout en début d'heure, et abandons possibles). Les minutes 2, 7, …, 57 évitent le début d'heure.
+# - Un seul cycle à la fois (concurrency) ; les secrets ne viennent que des secrets du dépôt.
+name: Chaîne planifiée
+
+on:
+  schedule:
+    - cron: '2-59/5 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: chaine-curation
+  cancel-in-progress: false
+
+jobs:
+  cycle:
+    if: vars.CHAINE_ACTIVE == 'oui'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      DATABASE_URL: ${{ secrets.TURSO_DATABASE_URL }}
+      DATABASE_AUTH_TOKEN: ${{ secrets.TURSO_AUTH_TOKEN }}
+      DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+      CURATION_MODELE: deepseek-flash
+      # Plafonds explicites. Sans variable de dépôt pour le total et le jour, les étapes payantes sont sautées.
+      CURATION_MAX_ACTUALITES: '10'
+      CURATION_MAX_TRADUCTIONS: '20'
+      CURATION_PLAFOND_EXECUTION_USD: '0.05'
+      CURATION_PLAFOND_JOUR_USD: ${{ vars.CURATION_PLAFOND_JOUR_USD }}
+      CURATION_PLAFOND_TOTAL_USD: ${{ vars.CURATION_PLAFOND_TOTAL_USD }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - name: Cycle
+        run: npm run lancer -- --confirmer
+      - name: État après le cycle
+        if: always()
+        run: npm run etat

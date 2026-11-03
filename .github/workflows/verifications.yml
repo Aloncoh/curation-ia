@@ -1,0 +1,24 @@
+# Vérifications à chaque envoi : types (code partagé et site) et tests sur fixtures, sans réseau ni secret.
+name: Vérifications
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verifier:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run web:typecheck
+      - run: npm test

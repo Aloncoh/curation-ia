@@ -599,3 +599,25 @@ Aucune de ces fonctions sociales n'est construite : les comptes arrivent en P9, 
 - **Traduction en trois parties** : le post, la fiche et le texte alternatif des images sont traduits et contrôlés séparément. Une partie en écart reste en anglais sans bloquer les autres. Lot de complément : 81 appels, 0,0475 $. Couverture : en français, 32 posts sur 32, 30 fiches sur 31 et 22 textes alternatifs sur 22 ; en hébreu, 31 posts sur 32, 26 fiches sur 31 et 22 textes alternatifs sur 22. Coût total des traductions de P4 : 155 appels, 0,0815 $.
 - **Limite connue** : la traduction automatique laisse parfois un mot anglais en tête de phrase, ce que le contrôle ne détecte pas. En hébreu, une commande au milieu d'une phrase s'affiche dans un ordre peu lisible.
 - **Accessibilité** : axe-core ne relève aucune violation sur 96 vues (8 pages, 3 langues, 2 largeurs, thèmes clair et sombre). La navigation au clavier atteint toutes les commandes d'une publication.
+
+## 19. La chaîne en ligne _(P5, préparée en local le 2026-11-03 ; rien n'est déployé)_
+
+- **Le rythme** : le porteur du projet a choisi GitHub Actions, avec un cycle toutes les 5 minutes. C'est le plus court que GitHub permette. GitHub ne garantit pas l'heure de déclenchement : aux heures chargées, un cycle peut être retardé ou sauté. La publication « dans la minute » n'est donc plus visée avec ce choix ; le délai réel sera mesuré avant d'être annoncé.
+- **Un cycle** (`npm run lancer`) enchaîne :
+  1. la collecte, seulement des sources dont l'intervalle est écoulé ;
+  2. l'approfondissement, au plus une fois par heure ;
+  3. les brouillons ;
+  4. les contrôles ;
+  5. la planification ;
+  6. la traduction ;
+  7. la publication.
+
+  Chaque étape garde sa propre commande. Une étape en échec n'empêche pas les suivantes. La pause (`npm run pause`) arrête tout.
+- **Les coûts** : chaque appel au modèle reste sous trois plafonds, par exécution (0,05 $), par jour et au total, ces deux derniers fixés par le porteur du projet. Sans eux, les étapes payantes sont sautées. `npm run couts` donne la dépense réelle par modèle, par étape et par jour.
+- **La publication** (`npm run publier`) rend publique une publication prévue pour le jour, dans la limite de 20 par jour. Elle ne peut pas publier deux fois : le passage se fait en une seule écriture conditionnelle, vérifiée avec deux cycles lancés en même temps. Restent en attente, avec leur motif :
+  - un sujet qui semble déjà couvert (`doublon_possible`) ;
+  - une actualité devenue trop ancienne (`obsolete`) ;
+  - une actualité dont une citation n'est plus retrouvée dans la source.
+- **La base en ligne** : Turso, avec le même code que la base locale. `npm run turso:copier` y recopie la base locale, une fois, après accord. L'essai sur une copie locale donne exactement les mêmes nombres de lignes.
+- **Le site** est prêt pour Vercel, région de Paris. En ligne, il n'affiche que les publications publiées.
+- **Ce qui manque** : les comptes, les secrets et le domaine, que le porteur du projet crée lui-même (liste dans ROADMAP.md, « P5 — plan »). Rien n'a encore tourné en ligne.

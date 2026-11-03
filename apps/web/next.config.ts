@@ -9,6 +9,8 @@ const config: NextConfig = {
   // Le code partagé (src/, packages/) est hors de apps/web.
   turbopack: { root: racine },
   outputFileTracingRoot: racine,
+  // Fichiers lus à l'exécution hors de apps/web (Vercel) : montages rendus par le code et avatars des comptes.
+  outputFileTracingIncludes: { '/**': ['../../maquette/medias/montages/**/*.{jpg,png,webp}', '../../assets/brand/*.png'] },
   transpilePackages: ['@curation/contrat', '@curation/textes'],
   // Client SQLite natif et navigateur de capture : jamais empaquetés.
   serverExternalPackages: ['@libsql/client', 'libsql', 'playwright-core'],

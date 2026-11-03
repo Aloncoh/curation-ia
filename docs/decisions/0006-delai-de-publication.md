@@ -1,8 +1,26 @@
 # ADR-0006 : viser une publication dans la minute
 
+> **Décision de l'utilisateur du 2026-11-03** : « Actions, 5 minutes ». Le cycle tourne sur **GitHub Actions, avec un cron toutes les 5 minutes**. Le processus permanent (point 3 ci-dessous) n'est pas retenu, et la proposition des deux rythmes (point 4) est remplacée par l'intervalle propre à chaque source, appliqué par `npm run lancer`.
+>
+> **Ce que ce choix change pour l'objectif d'une minute**, dit sans détour :
+>
+> - L'objectif d'une publication dans la minute n'est **pas atteignable** avec ce choix. 5 minutes est l'intervalle minimal d'un cron GitHub (documentation officielle, consultée le 2026-11-03).
+> - **GitHub ne garantit pas l'heure de déclenchement d'un cron.** Les exécutions planifiées peuvent être retardées aux périodes chargées, surtout en début d'heure, et certaines peuvent être abandonnées ([événements déclencheurs](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows)). Le workflow tourne donc aux minutes 2, 7, …, 57, qui évitent le début d'heure.
+> - Le délai attendu entre la détection d'une sortie et sa publication est donc d'**au moins 5 minutes, souvent davantage**, sans borne garantie. S'y ajoute l'intervalle de chaque source : 60 à 360 minutes pour les flux actuels, que la chaîne respecte pour ne pas surcharger les sites interrogés.
+> - Aucun délai ne sera annoncé avant d'avoir été mesuré de bout en bout sur de vraies publications (`npm run delais`).
+> - L'objectif reste inscrit (SPEC §7.4) : y revenir demanderait le processus permanent étudié plus bas, soit 2 à 5 $ par mois.
+>
+> **Construit le 2026-11-03, en local, sans rien déployer** :
+>
+> - workflow `.github/workflows/chaine.yml` : cron `2-59/5 * * * *` et lancement manuel. Un seul cycle à la fois (`concurrency`). Le workflow reste désactivé tant que la variable de dépôt `CHAINE_ACTIVE` ne vaut pas `oui`, et les secrets ne sont lus que depuis les secrets du dépôt ;
+> - plafonds : 0,05 $ par exécution, un plafond par jour (`CURATION_PLAFOND_JOUR_USD`) et un plafond total, tous deux fixés par l'utilisateur. Sans eux, les étapes payantes sont sautées ;
+> - `npm run lancer` enchaîne collecte, approfondissement (une fois par heure au plus), brouillons, contrôles, planification, traduction et publication.
+>
+> **Risque connu** : les releases GitHub sont lues sans jeton, ce qui limite à 60 requêtes par heure et par adresse IP. Sur des runners partagés, des refus sont possibles. Un jeton sera à ajouter si les cycles en relèvent.
+
 > **Mise à jour du 2026-11-01** : objectif révisé à 5 minutes, puis **rétabli à la minute le 2026-11-02** pour les nouveautés prioritaires, dans le plafond de 20 publications par jour. Le présent ADR reste valable.
 
-**Statut :** Proposée, décision de l'utilisateur attendue sur l'hébergement
+**Statut :** acceptée le 2026-11-03 — hébergement du cycle tranché par l'utilisateur : GitHub Actions, toutes les 5 minutes (voir la décision du 2026-11-03 ci-dessous)
 **Date :** 2026-10-31
 **Décideurs :** l'utilisateur (objectif, hébergement, dépense) ; Claude (mesures, proposition)
 

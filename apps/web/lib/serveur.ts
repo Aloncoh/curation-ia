@@ -7,9 +7,10 @@ import type { Contexte, Mode } from '../../../src/api/v1/index.ts';
 
 let client: Client | null = null;
 
-/** Base locale (`file:data/curation.db`, relatif à la racine du dépôt d'où le site est lancé) ou Turso en P5. */
+/** Base locale (`file:data/curation.db`, relatif à la racine du dépôt) ou Turso (DATABASE_URL et DATABASE_AUTH_TOKEN). */
 export function base(): Client {
-  client ??= createClient({ url: process.env.DATABASE_URL?.trim() || 'file:data/curation.db' });
+  const authToken = process.env.DATABASE_AUTH_TOKEN?.trim();
+  client ??= createClient({ url: process.env.DATABASE_URL?.trim() || 'file:data/curation.db', ...(authToken ? { authToken } : {}) });
   return client;
 }
 
@@ -17,11 +18,13 @@ export function base(): Client {
  * `apercu` : publiées et planifiées (avant P5, rien n'est publié) ; `public` : publiées seulement. Par défaut, aperçu en
  * développement et public en production ; CURATION_SITE_MODE force l'un ou l'autre.
  */
-export function modeDuSite(): Mode {
-  const m = process.env.CURATION_SITE_MODE;
+export function modeDepuis(env: NodeJS.ProcessEnv): Mode {
+  const m = env.CURATION_SITE_MODE;
   if (m === 'public' || m === 'apercu') return m;
-  return process.env.NODE_ENV === 'production' ? 'public' : 'apercu';
+  return env.NODE_ENV === 'production' ? 'public' : 'apercu';
 }
+
+export const modeDuSite = (): Mode => modeDepuis(process.env);
 
 /** Langue de l'interface : choix mémorisé (cookie), puis langue du navigateur, puis anglais. */
 export async function langueDeLaRequete(): Promise<Langue> {
