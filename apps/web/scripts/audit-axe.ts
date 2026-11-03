@@ -1,5 +1,5 @@
 // Audit d'accessibilité du site local (SPEC §7.4) : axe-core sur le fil, une publication, un profil et une recherche,
-// dans les trois langues, à 375 px et à 1280 px de large. Le serveur doit tourner (`npm run web:dev`).
+// dans les trois langues, à 375 px et à 1280 px de large, en thème clair et sombre. Le serveur doit tourner (`npm run web:dev`).
 // Usage : node apps/web/scripts/audit-axe.ts [http://localhost:3000] ; sortie : JSON des violations par page.
 import { readFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
@@ -7,13 +7,13 @@ import { chromium } from 'playwright-core';
 
 const base = process.argv[2] ?? 'http://localhost:3000';
 const axe = readFileSync(createRequire(import.meta.url).resolve('axe-core/axe.min.js'), 'utf8');
-const pages = ['/', '/p/82', '/comptes/mova', '/comptes', '/recherche?q=motion%20design', '/recherche'];
+const pages = ['/', '/p/82', '/p/84/fiche', '/p/1/fiche', '/comptes/mova', '/comptes', '/recherche?q=motion%20design', '/recherche'];
 const navigateur = await chromium.launch({ channel: process.env.CURATION_CHROME ?? 'chrome', headless: true });
-const rapport: { langue: string; largeur: number; page: string; violations: { id: string; impact: string | null; noeuds: number; exemple: string }[]; regles_passees: number }[] = [];
+const rapport: { langue: string; theme: string; largeur: number; page: string; violations: { id: string; impact: string | null; noeuds: number; exemple: string }[]; regles_passees: number }[] = [];
 try {
   for (const langue of ['en', 'fr', 'he']) {
-    for (const largeur of [375, 1280]) {
-      const contexte = await navigateur.newContext({ viewport: { width: largeur, height: 900 } });
+    for (const [largeur, theme] of [[375, 'light'], [1280, 'light'], [375, 'dark'], [1280, 'dark']] as const) {
+      const contexte = await navigateur.newContext({ viewport: { width: largeur, height: 900 }, colorScheme: theme });
       await contexte.addCookies([{ name: 'langue', value: langue, url: base }]);
       const onglet = await contexte.newPage();
       for (const page of pages) {
@@ -25,7 +25,7 @@ try {
           const violations = r.violations.map((v: { id: string; impact: string | null; nodes: { target: string[] }[] }) => ({ id: v.id, impact: v.impact, noeuds: v.nodes.length, exemple: String(v.nodes[0]?.target?.[0] ?? '') }));
           return { violations, regles_passees: r.passes.length as number };
         });
-        rapport.push({ langue, largeur, page, ...resultat });
+        rapport.push({ langue, theme, largeur, page, ...resultat });
       }
       await contexte.close();
     }

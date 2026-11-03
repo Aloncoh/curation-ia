@@ -10,7 +10,7 @@ import { actualitesDeLaMaquette, type MaquetteActualite } from '../../maquette/a
 import { ressourcesDeLaMaquette, type MaquetteRessource } from '../../maquette/ressources.ts';
 import { selectionsDeLaMaquette, type MaquetteSelection } from '../../maquette/selections.ts';
 import { RequeteInvalide } from '../../recherche/rechercher.ts';
-import { champsTraduisibles, memesCles, type Champ, type Nature } from '../../traduction/champs.ts';
+import { champsDuPost, partieServable, type Champ, type Nature } from '../../traduction/champs.ts';
 
 export type Mode = 'public' | 'apercu';
 
@@ -123,26 +123,35 @@ export async function lireComptes(client: Client, langue: Langue): Promise<Map<s
 
 // ——— Traductions ———
 
-interface TraductionLue {
+export interface TraductionLue {
   champs: Record<string, string>;
+  /** Champs en écart : leur partie (post, fiche, texte alternatif) n'est pas servie traduite. */
+  ecarts: Set<string>;
   origine: 'machine' | 'humaine';
   modele: string | null;
   cree_le: string;
 }
 
-async function lireTraductions(client: Client, langue: Langue, revisions: number[]): Promise<Map<number, TraductionLue>> {
+export async function lireTraductions(client: Client, langue: Langue, revisions: number[]): Promise<Map<number, TraductionLue>> {
   if (langue === 'en' || revisions.length === 0) return new Map();
   const r = await client.execute({
-    sql: `select revision_id, champs, origine, modele, created_at from post_traduction
-          where statut = 'valide' and langue = ? and revision_id in (${revisions.map(() => '?').join(', ')})`,
+    sql: `select revision_id, champs, statut, ecarts, origine, modele, created_at from post_traduction
+          where langue = ? and revision_id in (${revisions.map(() => '?').join(', ')})`,
     args: [langue, ...revisions],
   });
-  return new Map(r.rows.map((row) => [Number(row.revision_id), {
-    champs: JSON.parse(String(row.champs)) as Record<string, string>,
+  return new Map(r.rows.map((row) => {
+    const champs = JSON.parse(String(row.champs)) as Record<string, string>;
+    const liste = row.ecarts === null ? null : (JSON.parse(String(row.ecarts)) as { cle?: unknown }[]);
+    // Un écart sans détail rend toute la traduction inutilisable.
+    const ecarts = new Set(Array.isArray(liste) ? liste.map((e) => String(e.cle)) : row.statut === 'ecart' ? Object.keys(champs) : []);
+    return [Number(row.revision_id), {
+    champs,
+    ecarts,
     origine: row.origine === 'humaine' ? 'humaine' : 'machine',
     modele: row.modele === null ? null : String(row.modele),
     cree_le: String(row.created_at),
-  }]));
+  }];
+  }));
 }
 
 // ——— Forme commune ———
@@ -153,7 +162,7 @@ const uniques = (passages: { texte: string; trouve: boolean }[]) => {
 };
 
 const blocsDe = (nature: Nature, item: Record<string, unknown>, elements: MaquetteSelection['ressources'] = []): Bloc[] =>
-  champsTraduisibles(nature, item).map((c: Champ): Bloc => {
+  champsDuPost(nature, item).map((c: Champ): Bloc => {
     const element = /^ressources\.(\d+)\.explication$/.exec(c.cle);
     if (element) {
       const e = elements[Number(element[1])]!;
@@ -162,10 +171,10 @@ const blocsDe = (nature: Nature, item: Record<string, unknown>, elements: Maquet
     return { type: c.cle.startsWith('reperes.') ? 'point' : 'paragraphe', cle: c.cle, texte: c.texte };
   });
 
-/** Applique une traduction valide qui couvre tous les champs ; sinon l'original est servi tel quel. */
+/** Applique la traduction si elle couvre tous les champs du post sans écart ; sinon l'original est servi tel quel. */
 export function servirDansLaLangue(blocs: Bloc[], langue: Langue, traduction: TraductionLue | undefined): Pick<Publication, 'langue' | 'traduction' | 'contenu' | 'original'> {
   const champs: Champ[] = blocs.map((b) => ({ cle: b.cle, texte: b.texte }));
-  if (langue === 'en' || !traduction || !memesCles(champs, traduction.champs)) return { langue: 'en', traduction: null, contenu: blocs, original: null };
+  if (langue === 'en' || !traduction || !partieServable(champs, traduction.champs, traduction.ecarts)) return { langue: 'en', traduction: null, contenu: blocs, original: null };
   return {
     langue,
     traduction: { langue, origine: traduction.origine, modele: traduction.modele, cree_le: traduction.cree_le },
@@ -206,7 +215,7 @@ function depuisRessource(r: MaquetteRessource): ReturnType<typeof depuisActualit
   const passages = [r.accroche, r.description, r.interet, ...r.reperes].filter(Boolean).flatMap((c) => c.passages.map((texte) => ({ texte, trouve: true })));
   const url = r.bouton ? lienSur(r.bouton.url) : null;
   const type = r.bouton ? TYPE_BOUTON[r.bouton.libelle] : undefined;
-  const media: Media | null = r.visuel ? { type: 'image', src: `/${r.visuel.src}`, alt: r.visuel.alt, largeur: 1080, hauteur: 1350, lang: 'en', credit: null } : null;
+  const media: Media | null = r.visuel ? { type: 'image', src: `/${r.visuel.src}`, alt: r.visuel.alt, alt_lang: 'en', largeur: 1080, hauteur: 1350, lang: 'en', credit: null } : null;
   return {
     id: r.post_id,
     revision_id: r.revision_id,
@@ -240,7 +249,7 @@ function depuisSelection(x: MaquetteSelection): ReturnType<typeof depuisActualit
     langue_originale: 'en',
     blocs: blocsDe('selection', x as unknown as Record<string, unknown>, x.ressources),
     bouton: null,
-    media: x.visuel ? { type: 'image', src: `/${x.visuel.src}`, alt: x.visuel.alt, largeur: 1080, hauteur: 1350, lang: 'en', credit: CREDIT_IMAGE } : null,
+    media: x.visuel ? { type: 'image', src: `/${x.visuel.src}`, alt: x.visuel.alt, alt_lang: 'en', largeur: 1080, hauteur: 1350, lang: 'en', credit: CREDIT_IMAGE } : null,
     sources: {
       origine: x.origine.code === 'claude_code_developpement' ? 'claude_code_developpement' : 'agent_site',
       modele: null,
@@ -249,6 +258,24 @@ function depuisSelection(x: MaquetteSelection): ReturnType<typeof depuisActualit
       verification: 'verifie',
     },
   };
+}
+
+/** Diapositives des carrousels d'actualités (dernier média de chaque publication), texte en anglais. */
+async function lireCarrousels(client: Client, ids: number[]): Promise<Map<number, { libelle: string; texte: string }[]>> {
+  if (ids.length === 0) return new Map();
+  const r = await client.execute({
+    sql: `select post_id, content from media_asset where id in (select max(id) from media_asset where post_id in (${ids.map(() => '?').join(', ')}) group by post_id)`,
+    args: ids,
+  });
+  const carrousels = new Map<number, { libelle: string; texte: string }[]>();
+  for (const row of r.rows) {
+    const c = row.content === null ? null : (JSON.parse(String(row.content)) as { forme?: string; diapositives?: { libelle?: unknown; texte?: unknown }[] });
+    const diapositives = (c?.forme === 'carrousel' && Array.isArray(c.diapositives) ? c.diapositives : [])
+      .filter((d) => typeof d.libelle === 'string' && typeof d.texte === 'string' && d.texte.trim() !== '')
+      .map((d) => ({ libelle: String(d.libelle), texte: String(d.texte) }));
+    if (diapositives.length) carrousels.set(Number(row.post_id), diapositives);
+  }
+  return carrousels;
 }
 
 /** Publications de ces identifiants, dans cet ordre, dans la langue demandée. Les absentes (non visibles) sont omises. */
@@ -266,7 +293,13 @@ export async function publicationsParIds(ctx: Contexte, ids: readonly number[]):
   const { selections } = await selectionsDeLaMaquette(ctx.client, maintenant, liste);
   const comptes = await lireComptes(ctx.client, ctx.langue);
   const items = new Map<number, { item: ReturnType<typeof depuisActualite>; compte: string }>();
-  for (const a of actualites) items.set(a.post_id, { item: depuisActualite(a), compte: a.compte });
+  const carrousels = await lireCarrousels(ctx.client, actualites.map((a) => a.post_id));
+  for (const a of actualites) {
+    const item = depuisActualite(a);
+    const c = carrousels.get(a.post_id);
+    if (c) item.media = { type: 'carrousel', titre: a.titre_media, diapositives: c, lang: 'en' };
+    items.set(a.post_id, { item, compte: a.compte });
+  }
   for (const r of ressources) items.set(r.post_id, { item: depuisRessource(r), compte: r.compte });
   for (const x of selections) items.set(x.post_id, { item: depuisSelection(x), compte: x.compte });
   const traductions = await lireTraductions(ctx.client, ctx.langue, [...items.values()].map((x) => x.item.revision_id));
@@ -276,7 +309,11 @@ export async function publicationsParIds(ctx: Contexte, ids: readonly number[]):
     const compte = trouve ? comptes.get(trouve.compte) : undefined;
     if (!trouve || !compte) continue;
     const { blocs, ...reste } = trouve.item;
-    publications.push({ ...reste, compte, ...servirDansLaLangue(blocs, ctx.langue, traductions.get(reste.revision_id)) });
+    const traduction = traductions.get(reste.revision_id);
+    // Texte alternatif : traduit s'il l'est sans écart ; le texte inscrit dans l'image reste en anglais (`lang`).
+    const alt = traduction?.champs['media.alt'];
+    const media = reste.media?.type === 'image' && alt && !traduction!.ecarts.has('media.alt') ? { ...reste.media, alt, alt_lang: ctx.langue } : reste.media;
+    publications.push({ ...reste, media, compte, ...servirDansLaLangue(blocs, ctx.langue, traduction) });
   }
   return publications;
 }

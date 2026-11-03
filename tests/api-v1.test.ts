@@ -2,10 +2,10 @@
 // avec l'original, vérification mot pour mot toujours portée par l'original, liens non https refusés (ADR 0003).
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { PageFil, Publication } from '../packages/contrat/src/index.ts';
-import { compte, comptes, fil, publication, recherche, RequeteInvalide, type Contexte } from '../src/api/v1/index.ts';
+import { compte, comptes, fiche as ficheApi, fil, publication, recherche, RequeteInvalide, type Contexte } from '../src/api/v1/index.ts';
 import { cibleCourte, lienSur } from '../src/api/v1/publications.ts';
 import { createTestDb, type TestDb } from './helpers/db.ts';
-import { ajouterActualite, ajouterTraduction, socle } from './helpers/publications.ts';
+import { ajouterActualite, ajouterTraduction, contenuActualite, socle } from './helpers/publications.ts';
 
 let t: TestDb;
 let ids: { postId: number; revisionId: number }[];
@@ -104,5 +104,46 @@ describe('recherche', () => {
     expect(r.resultats.find((x) => x.publication.id === ids[0]!.postId)!.publication.langue).toBe('fr');
     expect((await recherche(ctx({ mode: 'public' }), 'widget')).total).toBe(0);
     await expect(recherche(ctx(), '')).rejects.toBeInstanceOf(RequeteInvalide);
+  });
+});
+
+describe('fiche, versions, carrousel (P4)', () => {
+  const contenu = {
+    ...contenuActualite(9),
+    produit: 'Widget',
+    version_cible: '2.1',
+    nouveaute: { texte: 'Widget 2.1 adds a GPU mode.', passages: [] },
+    details: [{ titre: 'How it works', texte: 'Kernels are fused.', passages: [] }],
+    attributions: [{ type: 'benchmark', auteur: 'Acme Labs', texte: '40% lower latency on A100.', passages: [], conditions: { texte: 'Batch size 8.', passages: [] } }],
+    questions_a_tester: ['Does it need CUDA 12?'],
+  };
+  const fiche = { 'fiche.nouveaute': 'Widget 2.1 ajoute un mode GPU.', 'fiche.details.0.titre': 'Fonctionnement', 'fiche.details.0.texte': 'Les noyaux sont fusionnés.', 'fiche.attributions.0.texte': 'Latence réduite de 40% sur A100.', 'fiche.attributions.0.conditions': 'Taille de lot 8.', 'fiche.questions_a_tester.0': 'Faut-il CUDA 12 ?' };
+
+  it('sert la fiche traduite avec l\'original, les versions du produit suivi et les révisions', async () => {
+    const c = t.database.client;
+    const { postId, revisionId } = await ajouterActualite(c, 9, { contenu });
+    await c.execute(`insert into product (id, key, name, publisher, created_at) values (1, 'acme/widget', 'Widget', 'Acme', 'x')`);
+    for (const [v, d] of [['2.0', '2026-10-01'], ['2.1', '2026-11-02']] as const) await c.execute({ sql: `insert into product_version (product_id, version, is_prerelease, released_at, created_at) values (1, ?, 0, ?, 'x')`, args: [v, d] });
+    await ajouterTraduction(c, revisionId, 'fr', { accroche: 'a', description: 'b', ce_que_ca_permet: 'c', ...fiche });
+    const f = (await ficheApi(ctx({ langue: 'fr' }), postId))!;
+    expect(f.langue).toBe('fr');
+    expect(f.sections.map((s) => s.id)).toEqual(['nouveaute', 'details', 'attributions', 'questions_a_tester']);
+    expect(f.sections[2]!.elements[0]).toEqual({ cle: 'fiche.attributions.0.texte', titre: 'Acme Labs', texte: 'Latence réduite de 40% sur A100.', complement: 'Taille de lot 8.' });
+    expect(f.original![1]!.elements[0]).toMatchObject({ titre: 'How it works', texte: 'Kernels are fused.' });
+    expect(f.versions).toEqual([{ version: '2.1', prerelease: false, publiee_le: '2026-11-02', courante: true }, { version: '2.0', prerelease: false, publiee_le: '2026-10-01', courante: false }]);
+    expect(f.revisions).toEqual([{ seq: 1, cree_le: '2026-11-03T08:00:00.000Z', courante: true }]);
+    expect(f.licence).toBeNull();
+    // Une fiche en écart reste en anglais, sans empêcher le post traduit.
+    await c.execute({ sql: `update post_traduction set statut = 'ecart', ecarts = ? where revision_id = ?`, args: [JSON.stringify([{ cle: 'fiche.nouveaute', code: 'invariant_absent' }]), revisionId] });
+    const f2 = (await ficheApi(ctx({ langue: 'fr' }), postId))!;
+    expect([f2.langue, f2.original, f2.publication.langue]).toEqual(['en', null, 'fr']);
+    expect(await ficheApi(ctx({ mode: 'public' }), postId)).toBeNull();
+  });
+
+  it('sert un carrousel de diapositives, texte en anglais', async () => {
+    const c = t.database.client;
+    await c.execute({ sql: `insert into media_asset (post_id, origin, alt_text, notice, content, created_at) values (?, 'generated', 'Carrousel', 'Illustration — ne prouve pas le fonctionnement', ?, 'x')`, args: [ids[0]!.postId, JSON.stringify({ forme: 'carrousel', diapositives: [{ champ: 'accroche', libelle: 'Headline', texte: 'Widget 2.1' }, { champ: 'nouveaute', libelle: 'What’s new', texte: 'GPU mode' }] })] });
+    const p = (await publication(ctx({ langue: 'he' }), ids[0]!.postId))!;
+    expect(p.media).toEqual({ type: 'carrousel', titre: 'Widget 2.1', diapositives: [{ libelle: 'Headline', texte: 'Widget 2.1' }, { libelle: 'What’s new', texte: 'GPU mode' }], lang: 'en' });
   });
 });

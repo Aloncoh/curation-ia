@@ -17,7 +17,7 @@ const NOM_LANGUE: Record<LangueCible, string> = { fr: 'French', he: 'Hebrew' };
 const DUREE_BAIL_MS = 10 * 60_000;
 
 export const SortieTraduction = z.object({
-  champs: z.array(z.object({ cle: z.string().min(1).max(80), texte: z.string().min(1).max(6000) })).min(1).max(40),
+  champs: z.array(z.object({ cle: z.string().min(1).max(80), texte: z.string().min(1).max(6000) })).min(1).max(80),
 });
 
 export function consigneTraduction(langue: LangueCible): string {
@@ -63,12 +63,40 @@ export interface Candidat {
   news_item_id: number;
   nature: Nature;
   langue: LangueCible;
+  /** Tous les champs traduisibles de la révision (post, fiche, texte alternatif) : base du contrôle. */
   champs: Champ[];
+  /** Champs envoyés au modèle : ceux qui manquent, plus ceux en écart lors d'une reprise. */
+  a_traduire: Champ[];
+  /** Traduction déjà stockée, complétée par ce lot. */
+  existants: Record<string, string>;
 }
 
 const NATURE_DE: Record<string, Nature> = { annonce: 'actualite', version: 'actualite', decouverte: 'ressource', selection: 'selection' };
 
-/** Révisions courantes des publications visibles sans traduction dans une langue cible (ou en écart, si demandé). */
+/** Texte alternatif de la dernière image d'une publication ; un carrousel de diapositives n'en a pas besoin. */
+export async function texteAlternatif(client: Client, postId: number): Promise<string | null> {
+  const r = await client.execute({ sql: 'select alt_text, content from media_asset where post_id = ? order by id desc limit 1', args: [postId] });
+  const m = r.rows[0];
+  if (!m || m.alt_text === null) return null;
+  const forme = m.content ? (JSON.parse(String(m.content)) as { forme?: string }).forme : null;
+  return forme === 'carrousel' || String(m.alt_text).trim() === '' ? null : String(m.alt_text);
+}
+
+/** Tous les champs traduisibles d'une révision : post, fiche, puis texte alternatif de l'image. */
+export async function champsDeRevision(client: Client, nature: Nature, postId: number, contenu: Record<string, unknown>): Promise<Champ[]> {
+  const alt = await texteAlternatif(client, postId);
+  return [...champsTraduisibles(nature, contenu), ...(alt ? [{ cle: 'media.alt', texte: alt }] : [])];
+}
+
+const clesEnEcart = (ecarts: unknown, statut: string, cles: string[]): Set<string> => {
+  if (Array.isArray(ecarts)) return new Set(ecarts.map((e) => String((e as Ecart).cle)));
+  return statut === 'ecart' ? new Set(cles) : new Set();
+};
+
+/**
+ * Révisions courantes des publications visibles dont un champ manque dans une langue cible (traduction absente, ou
+ * fiche et texte alternatif ajoutés depuis). Avec `reprendreEcarts`, les champs en écart sont aussi renvoyés.
+ */
 export async function candidats(client: Client, langues: readonly LangueCible[], reprendreEcarts: boolean): Promise<Candidat[]> {
   const r = await client.execute(`
     select p.id, p.news_item_id, n.kind, rv.id as revision_id, rv.content
@@ -78,18 +106,21 @@ export async function candidats(client: Client, langues: readonly LangueCible[],
     left join publication_planifiee pp on pp.post_id = p.id
     where p.status = 'publie' or (p.status = 'en_attente' and pp.post_id is not null)
     order by coalesce(pp.jour, '9999'), coalesce(pp.rang, 0), p.id`);
-  const existantes = await client.execute('select revision_id, langue, statut from post_traduction');
-  const deja = new Map(existantes.rows.map((x) => [`${Number(x.revision_id)}:${String(x.langue)}`, String(x.statut)]));
+  const existantes = await client.execute('select revision_id, langue, statut, champs, ecarts from post_traduction');
+  const deja = new Map(existantes.rows.map((x) => [`${Number(x.revision_id)}:${String(x.langue)}`, x]));
   const liste: Candidat[] = [];
   for (const row of r.rows) {
     const nature = NATURE_DE[String(row.kind)];
     if (!nature) continue;
-    const champs = champsTraduisibles(nature, JSON.parse(String(row.content)) as Record<string, unknown>);
+    const champs = await champsDeRevision(client, nature, Number(row.id), JSON.parse(String(row.content)) as Record<string, unknown>);
     if (champs.length === 0) continue;
     for (const langue of langues) {
-      const statut = deja.get(`${Number(row.revision_id)}:${langue}`);
-      if (statut === 'valide' || (statut === 'ecart' && !reprendreEcarts)) continue;
-      liste.push({ post_id: Number(row.id), revision_id: Number(row.revision_id), news_item_id: Number(row.news_item_id), nature, langue, champs });
+      const ligne = deja.get(`${Number(row.revision_id)}:${langue}`);
+      const existants = ligne ? (JSON.parse(String(ligne.champs)) as Record<string, string>) : {};
+      const enEcart = ligne ? clesEnEcart(ligne.ecarts === null ? null : JSON.parse(String(ligne.ecarts)), String(ligne.statut), Object.keys(existants)) : new Set<string>();
+      const a_traduire = champs.filter((c) => !(c.cle in existants) || (reprendreEcarts && enEcart.has(c.cle)));
+      if (a_traduire.length === 0) continue;
+      liste.push({ post_id: Number(row.id), revision_id: Number(row.revision_id), news_item_id: Number(row.news_item_id), nature, langue, champs, a_traduire, existants });
     }
   }
   return liste;
@@ -154,15 +185,17 @@ async function enregistrer(client: Client, c: Candidat, champs: Record<string, s
  */
 export async function recontrolerTraductions(client: Client): Promise<{ verifiees: number; changees: { revision_id: number; langue: string; statut: 'valide' | 'ecart' }[] }> {
   const r = await client.execute(`
-    select t.id, t.revision_id, t.langue, t.champs, t.statut, n.kind, rv.content
+    select t.id, t.revision_id, t.langue, t.champs, t.statut, n.kind, rv.content, rv.post_id
     from post_traduction t join post_revision rv on rv.id = t.revision_id join post p on p.id = rv.post_id join news_item n on n.id = p.news_item_id
     where t.origine = 'machine'`);
   const changees: { revision_id: number; langue: string; statut: 'valide' | 'ecart' }[] = [];
   for (const row of r.rows) {
     const nature = NATURE_DE[String(row.kind)];
     if (!nature) continue;
-    const original = champsTraduisibles(nature, JSON.parse(String(row.content)) as Record<string, unknown>);
-    const ecarts = controlerTraduction(original, JSON.parse(String(row.champs)) as Record<string, string>, String(row.langue) as LangueCible);
+    const original = await champsDeRevision(client, nature, Number(row.post_id), JSON.parse(String(row.content)) as Record<string, unknown>);
+    const traduits = JSON.parse(String(row.champs)) as Record<string, string>;
+    // Seuls les champs déjà traduits sont recontrôlés ; ceux qui manquent attendent un lot (ils ne sont pas des écarts).
+    const ecarts = controlerTraduction(original.filter((c) => c.cle in traduits), traduits, String(row.langue) as LangueCible);
     const statut = ecarts.length ? 'ecart' : 'valide';
     await client.execute({ sql: 'update post_traduction set statut = ?, ecarts = ? where id = ?', args: [statut, ecarts.length ? JSON.stringify(ecarts) : null, Number(row.id)] });
     if (statut !== String(row.statut)) changees.push({ revision_id: Number(row.revision_id), langue: String(row.langue), statut });
@@ -183,8 +216,8 @@ export async function traduirePublications(o: OptionsTraduction): Promise<BilanT
   try {
     for (const [rang, c] of lot.entries()) {
       await client.execute({ sql: `update llm_run set lease_expires_at = ? where id = ?`, args: [new Date(Date.parse(now()) + DUREE_BAIL_MS).toISOString(), runId] });
-      const caracteres = c.champs.reduce((n, x) => n + x.texte.length, 0);
-      const requete = { modele: o.nomModele, systeme: consigneTraduction(c.langue), utilisateur: messageTraduction(c.langue, c.champs), maxTokens: Math.min(6000, Math.max(1000, caracteres * 2)), schema };
+      const caracteres = c.a_traduire.reduce((n, x) => n + x.texte.length, 0);
+      const requete = { modele: o.nomModele, systeme: consigneTraduction(c.langue), utilisateur: messageTraduction(c.langue, c.a_traduire), maxTokens: Math.min(8000, Math.max(1000, caracteres * 2)), schema };
       let reponse = null;
       let callId = 0;
       for (let tentative = 1; tentative <= 2 && reponse === null; tentative++) {
@@ -211,11 +244,13 @@ export async function traduirePublications(o: OptionsTraduction): Promise<BilanT
         }
       }
       if (reponse === null) continue;
-      const champs = reponse.stop === 'end_turn' ? lireSortie(reponse.texte) : null;
-      if (champs === null) {
+      const lus = reponse.stop === 'end_turn' ? lireSortie(reponse.texte) : null;
+      if (lus === null) {
         bilan.erreurs.push({ post_id: c.post_id, langue: c.langue, erreur: `sortie illisible (${reponse.stop ?? 'arrêt inconnu'})` });
         continue;
       }
+      // Les champs renvoyés complètent la traduction stockée ; le contrôle porte sur l'ensemble.
+      const champs = { ...c.existants, ...lus };
       const ecarts = controlerTraduction(c.champs, champs, c.langue);
       await enregistrer(client, c, champs, ecarts, o, callId, now());
       if (ecarts.length) bilan.ecarts.push({ post_id: c.post_id, langue: c.langue, ecarts });

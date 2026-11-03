@@ -1,24 +1,43 @@
 {
   "base": "http://localhost:3000",
-  "pages_auditees": 36,
+  "pages_auditees": 96,
   "critiques": 0,
   "rapport": [
     {
       "langue": "en",
+      "theme": "light",
       "largeur": 375,
       "page": "/",
       "violations": [],
-      "regles_passees": 44
+      "regles_passees": 42
     },
     {
       "langue": "en",
+      "theme": "light",
       "largeur": 375,
       "page": "/p/82",
       "violations": [],
-      "regles_passees": 44
+      "regles_passees": 42
     },
     {
       "langue": "en",
+      "theme": "light",
+      "largeur": 375,
+      "page": "/p/84/fiche",
+      "violations": [],
+      "regles_passees": 40
+    },
+    {
+      "langue": "en",
+      "theme": "light",
+      "largeur": 375,
+      "page": "/p/1/fiche",
+      "violations": [],
+      "regles_passees": 41
+    },
+    {
+      "langue": "en",
+      "theme": "light",
       "largeur": 375,
       "page": "/comptes/mova",
       "violations": [],
@@ -26,6 +45,7 @@
     },
     {
       "langue": "en",
+      "theme": "light",
       "largeur": 375,
       "page": "/comptes",
       "violations": [],
@@ -33,6 +53,7 @@
     },
     {
       "langue": "en",
+      "theme": "light",
       "largeur": 375,
       "page": "/recherche?q=motion%20design",
       "violations": [],
@@ -40,6 +61,7 @@
     },
     {
       "langue": "en",
+      "theme": "light",
       "largeur": 375,
       "page": "/recherche",
       "violations": [],
@@ -47,20 +69,39 @@
     },
     {
       "langue": "en",
+      "theme": "light",
       "largeur": 1280,
       "page": "/",
       "violations": [],
-      "regles_passees": 45
+      "regles_passees": 43
     },
     {
       "langue": "en",
+      "theme": "light",
       "largeur": 1280,
       "page": "/p/82",
       "violations": [],
-      "regles_passees": 45
+      "regles_passees": 43
     },
     {
       "langue": "en",
+      "theme": "light",
+      "largeur": 1280,
+      "page": "/p/84/fiche",
+      "violations": [],
+      "regles_passees": 42
+    },
+    {
+      "langue": "en",
+      "theme": "light",
+      "largeur": 1280,
+      "page": "/p/1/fiche",
+      "violations": [],
+      "regles_passees": 42
+    },
+    {
+      "langue": "en",
+      "theme": "light",
       "largeur": 1280,
       "page": "/comptes/mova",
       "violations": [],
@@ -68,6 +109,7 @@
     },
     {
       "langue": "en",
+      "theme": "light",
       "largeur": 1280,
       "page": "/comptes",
       "violations": [],
@@ -75,6 +117,7 @@
     },
     {
       "langue": "en",
+      "theme": "light",
       "largeur": 1280,
       "page": "/recherche?q=motion%20design",
       "violations": [],
@@ -82,6 +125,135 @@
     },
     {
       "langue": "en",
+      "theme": "light",
+      "largeur": 1280,
+      "page": "/recherche",
+      "violations": [],
+      "regles_passees": 40
+    },
+    {
+      "langue": "en",
+      "theme": "dark",
+      "largeur": 375,
+      "page": "/",
+      "violations": [],
+      "regles_passees": 42
+    },
+    {
+      "langue": "en",
+      "theme": "dark",
+      "largeur": 375,
+      "page": "/p/82",
+      "violations": [],
+      "regles_passees": 42
+    },
+    {
+      "langue": "en",
+      "theme": "dark",
+      "largeur": 375,
+      "page": "/p/84/fiche",
+      "violations": [],
+      "regles_passees": 40
+    },
+    {
+      "langue": "en",
+      "theme": "dark",
+      "largeur": 375,
+      "page": "/p/1/fiche",
+      "violations": [],
+      "regles_passees": 41
+    },
+    {
+      "langue": "en",
+      "theme": "dark",
+      "largeur": 375,
+      "page": "/comptes/mova",
+      "violations": [],
+      "regles_passees": 45
+    },
+    {
+      "langue": "en",
+      "theme": "dark",
+      "largeur": 375,
+      "page": "/comptes",
+      "violations": [],
+      "regles_passees": 39
+    },
+    {
+      "langue": "en",
+      "theme": "dark",
+      "largeur": 375,
+      "page": "/recherche?q=motion%20design",
+      "violations": [],
+      "regles_passees": 44
+    },
+    {
+      "langue": "en",
+      "theme": "dark",
+      "largeur": 375,
+      "page": "/recherche",
+      "violations": [],
+      "regles_passees": 37
+    },
+    {
+      "langue": "en",
+      "theme": "dark",
+      "largeur": 1280,
+      "page": "/",
+      "violations": [],
+      "regles_passees": 43
+    },
+    {
+      "langue": "en",
+      "theme": "dark",
+      "largeur": 1280,
+      "page": "/p/82",
+      "violations": [],
+      "regles_passees": 43
+    },
+    {
+      "langue": "en",
+      "theme": "dark",
+      "largeur": 1280,
+      "page": "/p/84/fiche",
+      "violations": [],
+      "regles_passees": 42
+    },
+    {
+      "langue": "en",
+      "theme": "dark",
+      "largeur": 1280,
+      "page": "/p/1/fiche",
+      "violations": [],
+      "regles_passees": 42
+    },
+    {
+      "langue": "en",
+      "theme": "dark",
+      "largeur": 1280,
+      "page": "/comptes/mova",
+      "violations": [],
+      "regles_passees": 46
+    },
+    {
+      "langue": "en",
+      "theme": "dark",
+      "largeur": 1280,
+      "page": "/comptes",
+      "violations": [],
+      "regles_passees": 42
+    },
+    {
+      "langue": "en",
+      "theme": "dark",
+      "largeur": 1280,
+      "page": "/recherche?q=motion%20design",
+      "violations": [],
+      "regles_passees": 45
+    },
+    {
+      "langue": "en",
+      "theme": "dark",
       "largeur": 1280,
       "page": "/recherche",
       "violations": [],
@@ -89,20 +261,39 @@
     },
     {
       "langue": "fr",
+      "theme": "light",
       "largeur": 375,
       "page": "/",
       "violations": [],
-      "regles_passees": 44
+      "regles_passees": 42
     },
     {
       "langue": "fr",
+      "theme": "light",
       "largeur": 375,
       "page": "/p/82",
       "violations": [],
-      "regles_passees": 44
+      "regles_passees": 42
     },
     {
       "langue": "fr",
+      "theme": "light",
+      "largeur": 375,
+      "page": "/p/84/fiche",
+      "violations": [],
+      "regles_passees": 41
+    },
+    {
+      "langue": "fr",
+      "theme": "light",
+      "largeur": 375,
+      "page": "/p/1/fiche",
+      "violations": [],
+      "regles_passees": 42
+    },
+    {
+      "langue": "fr",
+      "theme": "light",
       "largeur": 375,
       "page": "/comptes/mova",
       "violations": [],
@@ -110,6 +301,7 @@
     },
     {
       "langue": "fr",
+      "theme": "light",
       "largeur": 375,
       "page": "/comptes",
       "violations": [],
@@ -117,6 +309,7 @@
     },
     {
       "langue": "fr",
+      "theme": "light",
       "largeur": 375,
       "page": "/recherche?q=motion%20design",
       "violations": [],
@@ -124,6 +317,7 @@
     },
     {
       "langue": "fr",
+      "theme": "light",
       "largeur": 375,
       "page": "/recherche",
       "violations": [],
@@ -131,20 +325,39 @@
     },
     {
       "langue": "fr",
+      "theme": "light",
       "largeur": 1280,
       "page": "/",
       "violations": [],
-      "regles_passees": 45
+      "regles_passees": 43
     },
     {
       "langue": "fr",
+      "theme": "light",
       "largeur": 1280,
       "page": "/p/82",
       "violations": [],
-      "regles_passees": 45
+      "regles_passees": 43
     },
     {
       "langue": "fr",
+      "theme": "light",
+      "largeur": 1280,
+      "page": "/p/84/fiche",
+      "violations": [],
+      "regles_passees": 42
+    },
+    {
+      "langue": "fr",
+      "theme": "light",
+      "largeur": 1280,
+      "page": "/p/1/fiche",
+      "violations": [],
+      "regles_passees": 42
+    },
+    {
+      "langue": "fr",
+      "theme": "light",
       "largeur": 1280,
       "page": "/comptes/mova",
       "violations": [],
@@ -152,6 +365,7 @@
     },
     {
       "langue": "fr",
+      "theme": "light",
       "largeur": 1280,
       "page": "/comptes",
       "violations": [],
@@ -159,6 +373,7 @@
     },
     {
       "langue": "fr",
+      "theme": "light",
       "largeur": 1280,
       "page": "/recherche?q=motion%20design",
       "violations": [],
@@ -166,6 +381,135 @@
     },
     {
       "langue": "fr",
+      "theme": "light",
+      "largeur": 1280,
+      "page": "/recherche",
+      "violations": [],
+      "regles_passees": 40
+    },
+    {
+      "langue": "fr",
+      "theme": "dark",
+      "largeur": 375,
+      "page": "/",
+      "violations": [],
+      "regles_passees": 42
+    },
+    {
+      "langue": "fr",
+      "theme": "dark",
+      "largeur": 375,
+      "page": "/p/82",
+      "violations": [],
+      "regles_passees": 42
+    },
+    {
+      "langue": "fr",
+      "theme": "dark",
+      "largeur": 375,
+      "page": "/p/84/fiche",
+      "violations": [],
+      "regles_passees": 41
+    },
+    {
+      "langue": "fr",
+      "theme": "dark",
+      "largeur": 375,
+      "page": "/p/1/fiche",
+      "violations": [],
+      "regles_passees": 42
+    },
+    {
+      "langue": "fr",
+      "theme": "dark",
+      "largeur": 375,
+      "page": "/comptes/mova",
+      "violations": [],
+      "regles_passees": 45
+    },
+    {
+      "langue": "fr",
+      "theme": "dark",
+      "largeur": 375,
+      "page": "/comptes",
+      "violations": [],
+      "regles_passees": 39
+    },
+    {
+      "langue": "fr",
+      "theme": "dark",
+      "largeur": 375,
+      "page": "/recherche?q=motion%20design",
+      "violations": [],
+      "regles_passees": 44
+    },
+    {
+      "langue": "fr",
+      "theme": "dark",
+      "largeur": 375,
+      "page": "/recherche",
+      "violations": [],
+      "regles_passees": 37
+    },
+    {
+      "langue": "fr",
+      "theme": "dark",
+      "largeur": 1280,
+      "page": "/",
+      "violations": [],
+      "regles_passees": 43
+    },
+    {
+      "langue": "fr",
+      "theme": "dark",
+      "largeur": 1280,
+      "page": "/p/82",
+      "violations": [],
+      "regles_passees": 43
+    },
+    {
+      "langue": "fr",
+      "theme": "dark",
+      "largeur": 1280,
+      "page": "/p/84/fiche",
+      "violations": [],
+      "regles_passees": 42
+    },
+    {
+      "langue": "fr",
+      "theme": "dark",
+      "largeur": 1280,
+      "page": "/p/1/fiche",
+      "violations": [],
+      "regles_passees": 42
+    },
+    {
+      "langue": "fr",
+      "theme": "dark",
+      "largeur": 1280,
+      "page": "/comptes/mova",
+      "violations": [],
+      "regles_passees": 46
+    },
+    {
+      "langue": "fr",
+      "theme": "dark",
+      "largeur": 1280,
+      "page": "/comptes",
+      "violations": [],
+      "regles_passees": 42
+    },
+    {
+      "langue": "fr",
+      "theme": "dark",
+      "largeur": 1280,
+      "page": "/recherche?q=motion%20design",
+      "violations": [],
+      "regles_passees": 45
+    },
+    {
+      "langue": "fr",
+      "theme": "dark",
       "largeur": 1280,
       "page": "/recherche",
       "violations": [],
@@ -173,20 +517,39 @@
     },
     {
       "langue": "he",
+      "theme": "light",
       "largeur": 375,
       "page": "/",
       "violations": [],
-      "regles_passees": 44
+      "regles_passees": 42
     },
     {
       "langue": "he",
+      "theme": "light",
       "largeur": 375,
       "page": "/p/82",
       "violations": [],
-      "regles_passees": 44
+      "regles_passees": 42
     },
     {
       "langue": "he",
+      "theme": "light",
+      "largeur": 375,
+      "page": "/p/84/fiche",
+      "violations": [],
+      "regles_passees": 41
+    },
+    {
+      "langue": "he",
+      "theme": "light",
+      "largeur": 375,
+      "page": "/p/1/fiche",
+      "violations": [],
+      "regles_passees": 41
+    },
+    {
+      "langue": "he",
+      "theme": "light",
       "largeur": 375,
       "page": "/comptes/mova",
       "violations": [],
@@ -194,6 +557,7 @@
     },
     {
       "langue": "he",
+      "theme": "light",
       "largeur": 375,
       "page": "/comptes",
       "violations": [],
@@ -201,6 +565,7 @@
     },
     {
       "langue": "he",
+      "theme": "light",
       "largeur": 375,
       "page": "/recherche?q=motion%20design",
       "violations": [],
@@ -208,6 +573,7 @@
     },
     {
       "langue": "he",
+      "theme": "light",
       "largeur": 375,
       "page": "/recherche",
       "violations": [],
@@ -215,20 +581,39 @@
     },
     {
       "langue": "he",
+      "theme": "light",
       "largeur": 1280,
       "page": "/",
       "violations": [],
-      "regles_passees": 45
+      "regles_passees": 43
     },
     {
       "langue": "he",
+      "theme": "light",
       "largeur": 1280,
       "page": "/p/82",
       "violations": [],
-      "regles_passees": 45
+      "regles_passees": 43
     },
     {
       "langue": "he",
+      "theme": "light",
+      "largeur": 1280,
+      "page": "/p/84/fiche",
+      "violations": [],
+      "regles_passees": 42
+    },
+    {
+      "langue": "he",
+      "theme": "light",
+      "largeur": 1280,
+      "page": "/p/1/fiche",
+      "violations": [],
+      "regles_passees": 42
+    },
+    {
+      "langue": "he",
+      "theme": "light",
       "largeur": 1280,
       "page": "/comptes/mova",
       "violations": [],
@@ -236,6 +621,7 @@
     },
     {
       "langue": "he",
+      "theme": "light",
       "largeur": 1280,
       "page": "/comptes",
       "violations": [],
@@ -243,6 +629,7 @@
     },
     {
       "langue": "he",
+      "theme": "light",
       "largeur": 1280,
       "page": "/recherche?q=motion%20design",
       "violations": [],
@@ -250,6 +637,135 @@
     },
     {
       "langue": "he",
+      "theme": "light",
+      "largeur": 1280,
+      "page": "/recherche",
+      "violations": [],
+      "regles_passees": 40
+    },
+    {
+      "langue": "he",
+      "theme": "dark",
+      "largeur": 375,
+      "page": "/",
+      "violations": [],
+      "regles_passees": 42
+    },
+    {
+      "langue": "he",
+      "theme": "dark",
+      "largeur": 375,
+      "page": "/p/82",
+      "violations": [],
+      "regles_passees": 42
+    },
+    {
+      "langue": "he",
+      "theme": "dark",
+      "largeur": 375,
+      "page": "/p/84/fiche",
+      "violations": [],
+      "regles_passees": 41
+    },
+    {
+      "langue": "he",
+      "theme": "dark",
+      "largeur": 375,
+      "page": "/p/1/fiche",
+      "violations": [],
+      "regles_passees": 41
+    },
+    {
+      "langue": "he",
+      "theme": "dark",
+      "largeur": 375,
+      "page": "/comptes/mova",
+      "violations": [],
+      "regles_passees": 45
+    },
+    {
+      "langue": "he",
+      "theme": "dark",
+      "largeur": 375,
+      "page": "/comptes",
+      "violations": [],
+      "regles_passees": 39
+    },
+    {
+      "langue": "he",
+      "theme": "dark",
+      "largeur": 375,
+      "page": "/recherche?q=motion%20design",
+      "violations": [],
+      "regles_passees": 44
+    },
+    {
+      "langue": "he",
+      "theme": "dark",
+      "largeur": 375,
+      "page": "/recherche",
+      "violations": [],
+      "regles_passees": 37
+    },
+    {
+      "langue": "he",
+      "theme": "dark",
+      "largeur": 1280,
+      "page": "/",
+      "violations": [],
+      "regles_passees": 43
+    },
+    {
+      "langue": "he",
+      "theme": "dark",
+      "largeur": 1280,
+      "page": "/p/82",
+      "violations": [],
+      "regles_passees": 43
+    },
+    {
+      "langue": "he",
+      "theme": "dark",
+      "largeur": 1280,
+      "page": "/p/84/fiche",
+      "violations": [],
+      "regles_passees": 42
+    },
+    {
+      "langue": "he",
+      "theme": "dark",
+      "largeur": 1280,
+      "page": "/p/1/fiche",
+      "violations": [],
+      "regles_passees": 42
+    },
+    {
+      "langue": "he",
+      "theme": "dark",
+      "largeur": 1280,
+      "page": "/comptes/mova",
+      "violations": [],
+      "regles_passees": 46
+    },
+    {
+      "langue": "he",
+      "theme": "dark",
+      "largeur": 1280,
+      "page": "/comptes",
+      "violations": [],
+      "regles_passees": 42
+    },
+    {
+      "langue": "he",
+      "theme": "dark",
+      "largeur": 1280,
+      "page": "/recherche?q=motion%20design",
+      "violations": [],
+      "regles_passees": 45
+    },
+    {
+      "langue": "he",
+      "theme": "dark",
       "largeur": 1280,
       "page": "/recherche",
       "violations": [],

@@ -1,0 +1,103 @@
+{
+  "run_id": "traduction-428e21d3-8962-44ba-85c4-d2303c62832c",
+  "statut": "terminee",
+  "motif": null,
+  "valides": 10,
+  "ecarts": [
+    {
+      "post_id": 82,
+      "langue": "he",
+      "ecarts": [
+        {
+          "cle": "fiche.questions_a_tester.3",
+          "code": "invariant_absent",
+          "detail": "non-Cyber"
+        }
+      ]
+    },
+    {
+      "post_id": 88,
+      "langue": "he",
+      "ecarts": [
+        {
+          "cle": "fiche.acces",
+          "code": "invariant_absent",
+          "detail": "US"
+        }
+      ]
+    },
+    {
+      "post_id": 74,
+      "langue": "he",
+      "ecarts": [
+        {
+          "cle": "fiche.pour_qui",
+          "code": "invariant_absent",
+          "detail": "3"
+        },
+        {
+          "cle": "fiche.pour_qui",
+          "code": "invariant_absent",
+          "detail": "3D"
+        }
+      ]
+    },
+    {
+      "post_id": 3,
+      "langue": "he",
+      "ecarts": [
+        {
+          "cle": "accroche",
+          "code": "invariant_absent",
+          "detail": "Best"
+        },
+        {
+          "cle": "accroche",
+          "code": "invariant_absent",
+          "detail": "Practices"
+        }
+      ]
+    },
+    {
+      "post_id": 15,
+      "langue": "he",
+      "ecarts": [
+        {
+          "cle": "fiche.demarrage.etapes.2",
+          "code": "non_traduit"
+        },
+        {
+          "cle": "fiche.demarrage.etapes.2",
+          "code": "langue_non_conforme"
+        }
+      ]
+    },
+    {
+      "post_id": 9,
+      "langue": "fr",
+      "ecarts": [
+        {
+          "cle": "fiche.demarrage.etapes.0",
+          "code": "non_traduit"
+        }
+      ]
+    },
+    {
+      "post_id": 9,
+      "langue": "he",
+      "ecarts": [
+        {
+          "cle": "fiche.demarrage.etapes.0",
+          "code": "non_traduit"
+        },
+        {
+          "cle": "fiche.demarrage.etapes.0",
+          "code": "langue_non_conforme"
+        }
+      ]
+    }
+  ],
+  "erreurs": [],
+  "restantes": 0,
+  "depense_micro_usd": 2914
+}

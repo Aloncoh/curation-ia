@@ -5,6 +5,7 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import { describe, expect, it } from 'vitest';
 import type { Bloc, Publication } from '@curation/contrat';
 import { textesDe } from '@curation/textes';
+import { Carrousel } from '../components/Carrousel.tsx';
 import { Post } from '../components/Post.tsx';
 import { apercu, texteAffiche, TexteDuPost } from '../components/TexteDuPost.tsx';
 import { cheminMedia } from '../lib/medias.ts';
@@ -29,7 +30,7 @@ const publication = (o: Partial<Publication> = {}): Publication => ({
   contenu: traduit(['Widget 2.1 מקצר את זמן התגובה ב-40%', 'זמן תגובה קצר ב-40%']),
   original,
   bouton: { type: 'depot', url: 'https://github.com/acme/widget', cible: 'github.com/acme/widget' },
-  media: { type: 'image', src: '/medias/montages/ressources/widget.jpg', alt: 'Widget steps', largeur: 1080, hauteur: 1350, lang: 'en', credit: null },
+  media: { type: 'image', src: '/medias/montages/ressources/widget.jpg', alt: 'שלבי Widget', alt_lang: 'he', largeur: 1080, hauteur: 1350, lang: 'en', credit: null },
   sources: { origine: 'claude_code_developpement', modele: null, documents: [{ titre: 'README', url: 'https://github.com/acme/widget', capture_le: '2026-11-02T10:00:00.000Z' }], passages: [{ texte: 'It cuts latency by 40%.', trouve: true }], verification: 'verifie' },
   ...o,
 });
@@ -56,6 +57,16 @@ describe('hébreu de droite à gauche', () => {
     const css = readFileSync(new URL('../app/globals.css', import.meta.url), 'utf8');
     expect(css).not.toMatch(/\b(margin|padding|border)-(left|right)\b/);
     expect(css).toMatch(/\.post-texte\[dir="rtl"\] \.points li::before \{ content: "←"; \}/);
+  });
+
+  it('écrit l\'hébreu avec la police du système, sans police hébraïque embarquée', () => {
+    const css = readFileSync(new URL('../app/globals.css', import.meta.url), 'utf8');
+    expect(css).toMatch(/:lang\(he\) \{ --texte: system-ui,/);
+    expect(css).not.toMatch(/@font-face|Rubik/);
+  });
+
+  it('sert le texte alternatif dans la langue de l\'interface, l\'image gardant son texte anglais', () => {
+    expect(html).toContain('<img src="/medias/montages/ressources/widget.jpg" alt="שלבי Widget" lang="he"');
   });
 });
 
@@ -119,5 +130,15 @@ describe('médias servis', () => {
   it('accepte une image sous le dossier des médias et refuse tout le reste', () => {
     expect(cheminMedia(['montages', 'ressources', 'widget.jpg'], racine)).toBe('/depot/maquette/medias/montages/ressources/widget.jpg');
     for (const segments of [['..', 'data', 'curation.db'], ['montages', '..', '..', '.env.local'], ['.env.local'], ['donnees.js'], ['a%2e%2e', 'x.jpg'], []]) expect(cheminMedia(segments, racine)).toBeNull();
+  });
+});
+
+describe('carrousel', () => {
+  it('rend chaque diapositive en anglais, de gauche à droite, avec des commandes dans la langue de l\'interface', () => {
+    const html = renderToStaticMarkup(<Carrousel compte={{ id: 'nodi', identifiant: 'nodi', agent: true }} titre="Widget 2.1" diapositives={[{ libelle: 'Headline', texte: 'Widget 2.1' }, { libelle: 'What’s new', texte: 'GPU mode' }]} langue="he" />);
+    expect(html).toContain('dir="ltr" lang="en" role="region" aria-roledescription="קרוסלה"');
+    expect(html.match(/aria-roledescription="slide"/g)).toHaveLength(2);
+    expect(html).toContain('aria-label="שקופית 2 מתוך 2"');
+    expect(html).toContain('aria-label="השקופית הבאה"');
   });
 });

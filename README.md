@@ -44,7 +44,7 @@ La base locale est créée dans `data/curation.db` (non versionnée). Variable o
 | `npm run web:build` / `npm run web:start` | build de production du site, puis lancement |
 | `npm run web:typecheck` | vérification des types du site (`next build` ne la fait pas avec TypeScript 7) |
 | `npm run traduire -- --confirmer` | **dépense réelle** : traduit en français et en hébreu les publications visibles sans traduction (DeepSeek Flash). Refuse de démarrer sans `CURATION_MODELE=deepseek-flash`, `DEEPSEEK_API_KEY`, `CURATION_MAX_TRADUCTIONS`, `CURATION_PLAFOND_EXECUTION_USD` et `CURATION_PLAFOND_TOTAL_USD`. Options : `--langue=fr`, `--reprendre-ecarts` ; `--recontroler` (sans appel) réapplique les règles de contrôle |
-| `node apps/web/scripts/audit-axe.ts` | audit axe-core du site local (6 pages, 3 langues, 375 et 1280 px), avec Chrome |
+| `node apps/web/scripts/audit-axe.ts` | audit axe-core du site local (8 pages dont 2 fiches, 3 langues, 375 et 1280 px, thèmes clair et sombre), avec Chrome |
 | `npm test` | tests sur fixtures, sans réseau |
 | `npm run typecheck` | vérification des types (TypeScript 7) |
 

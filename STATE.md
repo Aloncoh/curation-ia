@@ -1,25 +1,35 @@
 # État du projet
 
-_Mis à jour le 2026-11-03 (fin de matinée) : P4 construit en local (site, API v1, trois langues, traductions réelles) ; P3 toujours ouvert._
+_Mis à jour le 2026-11-03 (midi) : **P4 réalisé en local** (site, API v1, trois langues, traductions, fiche, versions, carrousels) ; P3 toujours ouvert ; plan de P5 proposé dans ROADMAP.md._
 
-## P4 — site social (2026-11-03, en cours)
+## P4 — site social (réalisé le 2026-11-03, en local ; rien n'est publié)
 
-- **Construit** ([ADR 0013](docs/decisions/0013-site-api-traductions.md)) : site Next.js 16.4.4 (`apps/web`) lancé par `npm run web:dev` sur http://localhost:3000. Il comprend le fil paginé par curseur, la page de publication, les profils des six comptes, la liste des comptes, Explorer et la recherche, ainsi qu'un manifeste qui rend le site installable. L'API v1 (`/api/v1/*`) vit dans `src/api/v1`, avec son contrat dans `packages/contrat`. L'interface existe en anglais, français et hébreu (`packages/textes`). Choix de la langue : cookie, puis navigateur, puis anglais ; en hébreu, `dir="rtl"`.
-- **Traductions** : migration 0011 (`post_traduction`) et étape `npm run traduire` (DeepSeek Flash, budget et `llm_call` étape `traduction`). Le code contrôle chaque traduction : chiffres, versions et noms propres identiques, rien d'ajouté. « Voir l'original » est en place, le texte des images reste en anglais.
-- **Lot réel** (2026-11-03, 08:22–08:27 UTC, heures pleines) : 64 traductions, 61 valides, 3 écarts fondés (posts 3 en fr et he, 82 en he), qui restent affichés en anglais. Coût : 74 appels, 0,0340 $. Base sauvegardée avant migration : `exports/curation-avant-p4.db`.
-- **Vérifié** : 751 tests au vert, types OK (`typecheck`, `web:typecheck`), `next build` réussi. Dans le navigateur, en, fr et he vérifiés sur ordinateur et à 375 px : choix mémorisé après rechargement, hébreu en miroir, « Voir l'original » dans les deux sens. axe-core : 0 violation sur 36 vues (thème clair).
-- **Reste pour sortir de P4** :
-  - fiche d'approfondissement et historique des versions ;
-  - carrousels à plusieurs images ;
-  - texte alternatif des images traduit ;
-  - thème sombre audité ;
-  - police hébraïque à choisir (l'utilisateur ; Rubik proposée par la session mobile) ;
-  - hébreu relu par un locuteur natif.
+- **Construit** ([ADR 0013](docs/decisions/0013-site-api-traductions.md) et son complément) :
+  - site Next.js 16.4.4 (`apps/web`), lancé par `npm run web:dev` sur http://localhost:3000 : fil, publication, fiche (`/p/:id/fiche`), profils, comptes, Explorer, recherche, manifeste ;
+  - API v1 (`/api/v1/*`, dont `/publications/:id/fiche`), contrat dans `packages/contrat` ;
+  - interface en anglais, français et hébreu (`packages/textes`) : cookie, puis navigateur, puis anglais. En hébreu, `dir="rtl"` et police du système (`:lang(he)`, sans police embarquée).
+- **Traductions** : la table `post_traduction` et `npm run traduire` couvrent trois parties, le post, la fiche (`fiche.*`) et le texte alternatif (`media.alt`). Chaque partie est contrôlée par le code et servie séparément. « Voir l'original » existe pour le post et pour la fiche ; le texte des images et des carrousels reste en anglais.
+- **Lots réels** (2026-11-03, 08:22–08:50 UTC, heures pleines) : 155 appels, **0,0815 $**. Couverture :
+  - en français : 32 posts sur 32, 30 fiches sur 31, 22 textes alternatifs sur 22 ;
+  - en hébreu : 31 posts sur 32, 26 fiches sur 31, 22 textes alternatifs sur 22.
+  - Les écarts restants sont fondés (« US », « 3D », « 1 » perdus, une étape laissée en anglais) et s'affichent en anglais.
+- **Vérifié** :
+  - 759 tests au vert ; types OK (`typecheck`, `web:typecheck`) ; `next build` réussi ;
+  - axe-core : 0 violation sur 96 vues (8 pages, 3 langues, 375 et 1 280 px, thèmes clair et sombre) ;
+  - navigation au clavier complète sur une publication ;
+  - navigateur, en, fr et he, à 375 px et sur ordinateur : fiche, carrousel, choix mémorisé, « Voir l'original ».
+- **Interprétation à confirmer** : « les écritures en hébreu en fonction du système » a été lu comme « police du système de l'appareil, aucune police hébraïque embarquée » (Rubik abandonnée).
+- **Limites connues** :
+  - versions du produit masquées pour les 32 publications, aucune n'étant reliée à un produit suivi ;
+  - mots anglais laissés en tête de phrase par endroits, non détectés par le contrôle ;
+  - questions à tester encore en français dans quelques originaux anglais ;
+  - hébreu de l'interface à faire relire par un locuteur natif avant le lancement ;
+  - installation réelle sur téléphone non essayée.
 - **Pour P5, à demander à l'utilisateur** : comptes Vercel et Turso, un domaine, un dépôt GitHub pour les Actions.
 
-- **Phase** : P2 fusionné dans `main`. **P3 en cours, pas terminé**, et **P4 en cours** (voir plus haut), sur `p3-brouillons`. Chaîne des ressources (ADR 0011) avancée avant P6 à la demande de l'utilisateur, sans rouvrir de jalon. Relevé de la base locale le 2026-11-03 : 38 publications, dont 28 `en_attente` et planifiées, 9 `a_verifier` et 1 `rejete`. Rien n'est publié.
+- **Phase** : P2 fusionné dans `main`. **P3 en cours, pas terminé**, et **P4 réalisé en local** (voir plus haut), sur `p3-brouillons`. Chaîne des ressources (ADR 0011) avancée avant P6 à la demande de l'utilisateur, sans rouvrir de jalon. Relevé de la base locale le 2026-11-03 : 38 publications, dont 28 `en_attente` et planifiées, 9 `a_verifier` et 1 `rejete`. Rien n'est publié.
 - **Dépôt** : `main` à `e56db82` ; `p3-brouillons` non fusionnée, non poussée (aucun dépôt distant) : le travail P3 du 2026-11-03 est dans `b698ffa`, P4 dans le commit qui suit. Branche `mobile` à `17f8408`, dans `.worktrees/mobile`, non fusionnée.
-- **Tests** : 751 au vert sur fixtures et faux modèle (`npx vitest run`, 2026-11-03 10:29), types OK. Après l'arrêt forcé : `git fsck` ne signale rien, `PRAGMA integrity_check` répond ok, aucun fichier modifié n'est vide. **Blocages** : aucun. **Dépenses DeepSeek** (budget autorisé : 4 $) : 0,2568 $ comptés en base au 2026-11-03 10:30 (traductions P4 comprises, 0,0340 $), plus 0,0099 $ de traduction des ressources **absents de la base** (voir plus bas), soit environ 0,267 $. Haiku : 0,061 $ réels (comparaison du 2026-11-01). Aucun compte créé.
+- **Tests** : 759 au vert sur fixtures et faux modèle (`npx vitest run`, 2026-11-03 10:51), types OK. Après l'arrêt forcé : `git fsck` ne signale rien, `PRAGMA integrity_check` répond ok, aucun fichier modifié n'est vide. **Blocages** : aucun. **Dépenses DeepSeek** (budget autorisé : 4 $) : 0,3043 $ comptés en base au 2026-11-03 10:52 (traductions P4 comprises, 0,0815 $), plus 0,0099 $ de traduction des ressources **absents de la base** (voir plus bas), soit environ 0,314 $. Haiku : 0,061 $ réels (comparaison du 2026-11-01). Aucun compte créé.
 
 ## Ce qui fonctionne réellement (vérifié le 2026-10-31, complété le 2026-11-02)
 
@@ -156,7 +166,7 @@ M3 construit le 2026-11-03 et validé par l'utilisateur (« je valide tout »), 
 
 ## Prochaine action
 
-Montrer le site à l'utilisateur (`npm run web:dev`, puis http://localhost:3000) dans les trois langues. Lui demander : la police hébraïque (Rubik proposée), une relecture native de l'hébreu, puis les comptes de P5 (Vercel, Turso, domaine, dépôt GitHub). Ensuite, finir P4 : fiche et historique des versions, carrousels, texte alternatif traduit, thème sombre audité. Aucun appel payant sans plafonds explicites et `--confirmer`.
+Faire valider le plan de P5 (ROADMAP.md) et confirmer l'interprétation de la police hébraïque. L'utilisateur crée lui-même les comptes Vercel, Turso et GitHub (dépôt pour les Actions) et choisit un domaine ; il tranche aussi l'hébergement du cycle de 60 s (ADR 0006). Ensuite seulement, P5. Aucun appel payant sans plafonds explicites et `--confirmer`.
 
 ## Repères techniques
 

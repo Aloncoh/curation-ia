@@ -24,7 +24,8 @@ const TRADUISIBLES = new Set([
 ]);
 
 const sansPossessif = (mot: string) => mot.replace(/['’]s$/u, '');
-const finDePhrase = (avant: string) => /(^|[.!?…]\s*)$/u.test(avant.trimEnd()) || avant.trim() === '';
+// Début de phrase : après un point, un deux-points ou un point-virgule (« Étape 1 : In Claude Code… »), un saut de ligne, ou au tout début.
+const finDePhrase = (avant: string) => avant.trim() === '' || /[.!?…:;·•\n]$/u.test(avant.replace(/[ \t]+$/u, ''));
 
 function nombres(texte: string): string[] {
   return (texte.replace(URL, ' ').replace(CODE, ' ').match(NOMBRE) ?? []).map((n) => n.replace(/[.,:]+$/, ''));
@@ -60,6 +61,9 @@ export function invariants(texte: string): string[] {
   return [...trouves];
 }
 
+/** Indices d'un texte déjà en français : lettres accentuées ou mots outils courants. */
+export const dejaEnFrancais = (texte: string): boolean => /[éèêàçùôîœ]/iu.test(texte) || /\b(le|la|les|des|est|une|dans|pour|avec|qui)\b/iu.test(texte);
+
 /** Écarts d'une traduction ; une liste vide signifie qu'elle peut être servie. */
 export function controlerTraduction(original: readonly Champ[], traduits: Record<string, string>, langue: 'fr' | 'he'): Ecart[] {
   const ecarts: Ecart[] = [];
@@ -69,7 +73,8 @@ export function controlerTraduction(original: readonly Champ[], traduits: Record
     const t = traduits[champ.cle];
     if (t === undefined) { ecarts.push({ cle: champ.cle, code: 'champ_manquant' }); continue; }
     if (t.trim() === '') { ecarts.push({ cle: champ.cle, code: 'texte_vide' }); continue; }
-    if (t.trim() === champ.texte.trim() && champ.texte.length > 40) ecarts.push({ cle: champ.cle, code: 'non_traduit' });
+    // Un original déjà rédigé en français (défaut de données antérieur à l'anglais) peut rester identique en français.
+    if (t.trim() === champ.texte.trim() && champ.texte.length > 40 && !(langue === 'fr' && dejaEnFrancais(champ.texte))) ecarts.push({ cle: champ.cle, code: 'non_traduit' });
     if (langue === 'he' && !/[֐-׿]/u.test(t)) ecarts.push({ cle: champ.cle, code: 'langue_non_conforme' });
     for (const inv of invariants(champ.texte)) if (!t.includes(inv)) ecarts.push({ cle: champ.cle, code: 'invariant_absent', detail: inv });
     const avant = new Set(nombres(champ.texte));

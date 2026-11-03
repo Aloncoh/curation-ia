@@ -35,9 +35,25 @@ P4 doit livrer le site (fil, publication, profils, recherche), une API v1 partag
 
 - Le contrôle des noms propres est une heuristique (majuscules, chiffres, code) : un mot courant capitalisé peut être exigé à tort, et un nom propre en début de phrase peut échapper au contrôle. Une erreur dans ce sens met la traduction en écart : l'original s'affiche, ce qui est sûr.
 - Le site lancé depuis la racine dépend du dossier courant ; l'hébergement (P5) devra fournir la base Turso et les médias autrement.
-- Les montages (texte en anglais) gardent un texte alternatif anglais, marqué `lang="en"` ; il n'est pas encore traduit.
+- Le texte inscrit dans les montages et les carrousels reste en anglais (`lang="en"`) ; leur texte alternatif est traduit (complément ci-dessous).
 
 ## Conséquences
 
 - La session mobile peut consommer `packages/contrat` et `packages/textes` (les fonctions de langue reprennent les siennes).
 - P5 : traduction en continu dans la chaîne en ligne, base Turso, médias hébergés, vérification des types dans GitHub Actions.
+
+## Complément du 2026-11-03 (fin de P4)
+
+1. **Trois parties traduites, servies séparément** : le post, la fiche (clés `fiche.*`) et le texte alternatif d'une image (`media.alt`). Une partie n'est servie traduite que si tous ses champs sont traduits et qu'aucun n'est en écart. Un écart dans la fiche ne retire donc pas la traduction du post, et inversement. Les écarts sont enregistrés champ par champ (`post_traduction.ecarts`).
+2. **Traduction par complément** : `npm run traduire` n'envoie au modèle que les champs absents d'une traduction existante, plus ceux en écart avec `--reprendre-ecarts`. Le contrôle porte ensuite sur l'ensemble fusionné.
+3. **Fiche d'approfondissement** (`/p/:id/fiche`, `/api/v1/publications/:id/fiche`) :
+   - sections rédigées de la révision courante ;
+   - commande citée, gardée de gauche à droite, jamais traduite ;
+   - licence d'une ressource, « Non renseigné » si elle est inconnue ;
+   - état daté du dépôt ;
+   - versions du produit suivi, par le lien `news_item_target` ou, à défaut, par le nom exact du produit ;
+   - historique des révisions de la publication.
+4. **Carrousels** : les diapositives stockées dans `media_asset` (forme `carrousel`) sont dessinées par le site. Elles défilent au doigt et par des boutons, et leur texte reste en anglais.
+5. **Hébreu** : polices du système de l'appareil (`:lang(he)`), sans police hébraïque embarquée. C'est l'interprétation de la phrase de l'utilisateur du 2026-11-03 (« les écritures en hébreu en fonction du système ») ; elle remplace la proposition Rubik. Un bloc anglais ou français dans une page en hébreu garde la police du site.
+
+**Limite constatée** : aucune des 32 publications planifiées n'est reliée à un produit suivi. Seuls Claude Code, Codex CLI et Gemini CLI ont des versions en base. La section « Versions du produit » est donc masquée pour toutes ; elle est testée sur une base fabriquée.

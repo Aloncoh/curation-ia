@@ -6,19 +6,24 @@ import type { Langue, Publication } from '@curation/contrat';
 import type { Textes } from '@curation/textes';
 import { dateCourte, dateLongue, hrefSur } from '../lib/format.ts';
 import { ActionsDuPost } from './ActionsDuPost.tsx';
+import { Carrousel } from './Carrousel.tsx';
 import { Icone } from './Icone.tsx';
 import { TexteDuPost } from './TexteDuPost.tsx';
 
-function Media({ p, t }: { p: Publication; t: Textes }) {
+function Media({ p, langue }: { p: Publication; langue: Langue }) {
   const m = p.media;
   if (!m) return null;
   if (m.type === 'image') {
     return (
       <figure className="post-media" dir="ltr" lang={m.lang}>
-        <img src={m.src} alt={m.alt} width={m.largeur} height={m.hauteur} loading="lazy" />
+        {/* `lang` de l'image : celle de son texte alternatif, traduit quand il l'est ; le texte inscrit reste en anglais. */}
+        <img src={m.src} alt={m.alt} lang={m.alt_lang} width={m.largeur} height={m.hauteur} loading="lazy" />
         {m.credit && <span className="credit">{m.credit}</span>}
       </figure>
     );
+  }
+  if (m.type === 'carrousel') {
+    return <Carrousel compte={{ id: p.compte.id, identifiant: p.compte.identifiant, agent: p.compte.type === 'agent' }} titre={m.titre} diapositives={m.diapositives} langue={langue} />;
   }
   // Schéma dessiné par le site : le texte de l'image reste en anglais, comme les montages.
   return (
@@ -64,7 +69,8 @@ function PanneauSources({ p, t, langue }: { p: Publication; t: Textes; langue: L
           ))}
         </details>
       )}
-      {p.media && <p>{p.media.type === 'schema' ? t.post.schema : t.post.imageEnAnglais}</p>}
+      {p.media && <p>{p.media.type === 'image' ? t.post.imageEnAnglais : t.post.schema}</p>}
+      <p><a href={`/p/${p.id}/fiche`}>{t.fiche.lien}</a></p>
     </>
   );
 }
@@ -124,7 +130,7 @@ export function Post({ p, t, langue, complet = false, raison = null }: { p: Publ
             <span className="sr-only">{t.commun.nouvelOnglet}</span>
           </a>
         )}
-        <Media p={p} t={t} />
+        <Media p={p} langue={langue} />
         <ActionsDuPost
           id={id}
           lien={lien}

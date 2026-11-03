@@ -1,7 +1,8 @@
 // API v1 (ADR 0010) : fonctions de lecture utilisées par les routes /api/v1 et par les pages du site, sans accès propre
 // à la base côté site. Chaque réponse est validée par le contrat (packages/contrat) avant d'être servie.
 import type { Client } from '@libsql/client';
-import { PageFil, ReponseCompte, ReponseComptes, ReponseRecherche, type Langue } from '../../../packages/contrat/src/index.ts';
+import { Fiche, PageFil, ReponseCompte, ReponseComptes, ReponseRecherche, type Langue } from '../../../packages/contrat/src/index.ts';
+import { ficheParId } from './fiche.ts';
 import { rechercher } from '../../recherche/rechercher.ts';
 import { lireComptes, pageDuFil, publicationParId, publicationsParIds, type Contexte } from './publications.ts';
 
@@ -26,6 +27,13 @@ export async function compte(ctx: Contexte, id: string, o: { curseur?: string | 
 
 export async function publication(ctx: Contexte, id: number) {
   return publicationParId(ctx, id);
+}
+
+/** Fiche d'approfondissement d'une publication visible ; null sinon. */
+export async function fiche(ctx: Contexte, id: number): Promise<Fiche | null> {
+  if (!Number.isInteger(id) || id < 1) return null;
+  const f = await ficheParId(ctx, id);
+  return f ? Fiche.parse(f) : null;
 }
 
 /** Recherche (ADR 0011 §5) : même moteur que la commande et la maquette ; les résultats sont des publications. */

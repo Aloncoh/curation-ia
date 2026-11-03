@@ -25,7 +25,12 @@ export default async function PagePublication({ params }: Parametres) {
   return (
     <Cadre langue={ctx.langue} rubrique={null}>
       <BarreRetour titre={t.publication.titre} langue={ctx.langue} />
-      {p ? <Post p={p} t={t} langue={ctx.langue} complet /> : <Vide titre={t.publication.introuvable} texte={t.publication.introuvableMessage} />}
+      {p ? (
+        <>
+          <Post p={p} t={t} langue={ctx.langue} complet />
+          <p className="lien-fiche"><a href={`/p/${p.id}/fiche`}>{t.fiche.lien}</a></p>
+        </>
+      ) : <Vide titre={t.publication.introuvable} texte={t.publication.introuvableMessage} />}
     </Cadre>
   );
 }

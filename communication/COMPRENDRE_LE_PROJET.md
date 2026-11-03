@@ -330,7 +330,7 @@ _Hypothèses, à remplacer par des mesures en P3 :_ par publication, rédaction 
 | P1 | collecte fiable d'une source officielle (5 documents réels, sans doublon, export JSON) | **réalisé le 2026-10-30** |
 | P2 | produits et versions, 5 sources officielles, maquette du fil social, du profil de l'agent et des Reels | **réalisé le 2026-10-30**, maquette validée et fusionnée dans `main` |
 | P3 | brouillons de publication signés par un des six comptes éditoriaux : accroche, nouveauté, intérêt, exemple d'usage, prérequis, limites, carrousel, citations vérifiées ; coût réel mesuré | **en cours** : collecte élargie réelle ; code des brouillons écrit et testé sur faux modèle, aucun brouillon réel, coût non mesuré (section 14) |
-| P4 | site social : fil, publication, profils des comptes, fiche, interface en anglais, français et hébreu, traduction des posts | **en cours** : site, API v1, trois langues et traductions construits en local le 2026-11-03 (section 18) ; fiche, historique des versions et carrousels restants |
+| P4 | site social : fil, publication, profils des comptes, fiche, interface en anglais, français et hébreu, traduction des posts | **réalisé le 2026-11-03**, en local (section 18) |
 | P5 | publication automatique planifiée, garde-fou contre les doublons entre sources, corrections visibles, quotas, pilotage, mise en ligne | **fin de la V1**, prévu |
 | P6 | découvertes pour construire, recherche des publications, suivi des informations obsolètes, sources élargies (Hugging Face, MCP, pages d'état, X selon l'accès validé, Reddit différé…), incidents, score de découverte, comptes supplémentaires si utiles | après la V1, proposé |
 | P7 | médias et Reels : vidéos hébergées, démonstrations externes intégrées | après la V1, proposé |
@@ -559,7 +559,7 @@ Le porteur du projet veut une interface « vraiment comme sur X, comme sur Insta
 
 Aucune de ces fonctions sociales n'est construite : les comptes arrivent en P9, les messages privés en P10.
 
-## 18. Le site en trois langues _(construit en local le 2026-11-03, P4 en cours ; rien n'est publié)_
+## 18. Le site en trois langues _(P4, réalisé en local le 2026-11-03 ; rien n'est publié)_
 
 ### Ce qui est construit
 
@@ -572,7 +572,7 @@ Aucune de ces fonctions sociales n'est construite : les comptes arrivent en P9, 
 - **L'interface** existe en anglais, en français et en hébreu. Ses textes sont dans un paquet partagé avec l'application (`packages/textes`).
 - **Le choix de la langue** suit cet ordre : le choix enregistré dans un cookie, puis la langue du navigateur, puis l'anglais.
 - **En hébreu**, toute la page passe de droite à gauche : la navigation, les menus et les flèches sont en miroir. Les identifiants (@nodi), les adresses, les noms de dépôts, les passages cités et les visuels restent de gauche à droite.
-- **La police hébraïque** n'est pas encore choisie. En attendant, c'est la police du système qui s'affiche. Les textes hébreux ont été traduits par Claude Code : un locuteur natif doit les relire avant le lancement.
+- **La police hébraïque** est celle du système de l'appareil, sans police embarquée : c'est ma lecture de la demande du porteur du projet (« les écritures en hébreu en fonction du système »), à corriger s'il voulait autre chose. Les textes hébreux de l'interface ont été traduits par Claude Code : un locuteur natif doit les relire avant le lancement.
 
 ### La traduction des posts, comme sur X
 
@@ -588,6 +588,14 @@ Aucune de ces fonctions sociales n'est construite : les comptes arrivent en P9, 
 - **Contenus collectés** : React insère tout le texte comme du texte, jamais comme du HTML. Seuls les liens en https deviennent cliquables. Les tests vérifient qu'un `<img onerror>` reste du texte et qu'aucun lien `javascript:` n'est affiché, y compris dans les noms des sites d'une sélection : ce défaut a été trouvé par les tests, puis corrigé.
 - **Accessibilité** : axe-core n'a relevé aucune violation sur 36 vues (6 pages, 3 langues, 375 et 1 280 px de large, thème clair). Le thème sombre n'a pas été audité.
 
-### Ce qui reste pour finir P4
+### Fiche d'approfondissement, versions et carrousels (fin de P4)
 
-La fiche d'approfondissement et l'historique des versions, les carrousels à plusieurs images, la traduction du texte alternatif des images, le choix de la police hébraïque et la relecture de l'hébreu par un locuteur natif.
+- **La fiche** (`/p/:id/fiche`, lien « Fiche détaillée » sous chaque publication et dans « Sources ») reprend le texte rédigé qui ne tient pas dans le post :
+  - ce qui change, pour qui, l'exemple, l'accès, le coût, les limites ;
+  - les détails, les benchmarks attribués à leur auteur avec leurs conditions, les questions à tester ;
+  - pour une ressource, les étapes pour commencer, la commande citée (jamais traduite), la licence (« Non renseigné » si elle est inconnue) et l'état daté du dépôt.
+- **L'historique** : la fiche montre les révisions de la publication (jusqu'à 6 pour une ressource) et les versions du produit suivi. Aucune des 32 publications prévues n'est encore reliée à un produit suivi : cette partie est construite et testée, mais masquée pour l'instant.
+- **Les carrousels** : les 10 actualités ont un carrousel de 5 diapositives dessinées par le site, à faire défiler au doigt ou avec des boutons. Le texte des diapositives reste en anglais.
+- **Traduction en trois parties** : le post, la fiche et le texte alternatif des images sont traduits et contrôlés séparément. Une partie en écart reste en anglais sans bloquer les autres. Lot de complément : 81 appels, 0,0475 $. Couverture : en français, 32 posts sur 32, 30 fiches sur 31 et 22 textes alternatifs sur 22 ; en hébreu, 31 posts sur 32, 26 fiches sur 31 et 22 textes alternatifs sur 22. Coût total des traductions de P4 : 155 appels, 0,0815 $.
+- **Limite connue** : la traduction automatique laisse parfois un mot anglais en tête de phrase, ce que le contrôle ne détecte pas. En hébreu, une commande au milieu d'une phrase s'affiche dans un ordre peu lisible.
+- **Accessibilité** : axe-core ne relève aucune violation sur 96 vues (8 pages, 3 langues, 2 largeurs, thèmes clair et sombre). La navigation au clavier atteint toutes les commandes d'une publication.

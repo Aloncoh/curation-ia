@@ -103,3 +103,20 @@ export function TexteDuPost({ contenu, original, langue, langueOriginale, comple
     </>
   );
 }
+
+/** Bascule entre un texte traduit et son original, rendus par le serveur (fiche d'approfondissement). */
+export function BasculeOriginal({ traduit, original, libelles }: { traduit: ReactNode; original: ReactNode; libelles: Pick<LibellesTexte, 'traductionAuto' | 'voirOriginal' | 'voirTraduction'> }) {
+  const [montrerOriginal, setMontrerOriginal] = useState(false);
+  return (
+    <>
+      <p className="traduction-note">
+        <span>{libelles.traductionAuto}</span>
+        {' · '}
+        <button type="button" className="lien-discret" aria-pressed={montrerOriginal} onClick={() => setMontrerOriginal((x) => !x)}>
+          {montrerOriginal ? libelles.voirTraduction : libelles.voirOriginal}
+        </button>
+      </p>
+      {montrerOriginal ? original : traduit}
+    </>
+  );
+}

@@ -184,3 +184,39 @@ DeepSeek Flash, 30 actualités, 34 appels, 0,0125 $ (budget autorisé 4 $). 19 �
   - police hébraïque (décision de l'utilisateur) ; relecture native de l'hébreu ;
   - installation réelle sur un téléphone (seul le manifeste est servi et vérifié) ;
   - mise en ligne (P5).
+
+## 2026-11-03 — P4 terminé (site social, en local)
+
+- Demande de l'utilisateur, transmise par la session principale : « finis les 4 éléments ; tu as compris que les écritures en hébreu en fonction du système ».
+- **Construit** :
+  - fiche d'approfondissement (`/p/:id/fiche`, `/api/v1/publications/:id/fiche`) avec historique des révisions et versions du produit suivi ;
+  - carrousels de diapositives dessinés par le site pour les 10 actualités ;
+  - traduction de la fiche et du texte alternatif, servies par partie (post, fiche, texte alternatif) ;
+  - `npm run traduire` complète une traduction existante champ par champ ;
+  - hébreu en police du système (`:lang(he)`, sans police embarquée) — interprétation à confirmer par l'utilisateur.
+- **Contrôle affiné sur les écarts réels**, puis recontrôle gratuit :
+  - deux-points compté comme début de phrase (« Étape 1 : In Claude Code… » faisait de « In » un nom propre) ;
+  - un original déjà en français peut rester identique en français.
+- **Lots réels** (DeepSeek Flash, 08:43–08:50 UTC, heures pleines, plafonds de 0,30 $ puis 0,10 $ par exécution et de 3,99 $ au total) :
+  - complément : 64 appels, 0,0446 $ ; reprise des écarts : 17 appels, 0,0029 $ ;
+  - traductions de P4 en tout : 155 appels, 0,0815 $ ;
+  - couverture servie : en français, posts 32 sur 32, fiches 30 sur 31, textes alternatifs 22 sur 22 ; en hébreu, posts 31 sur 32, fiches 26 sur 31, textes alternatifs 22 sur 22 ;
+  - DeepSeek en base : 0,3043 $, plus 0,0099 $ hors base, sur 4 $ autorisés.
+- **Défauts trouvés et corrigés** :
+  - fonctions passées d'un composant serveur au carrousel client ;
+  - `<li role="group">` dans une liste et rôle `region` sur `<figure>` (relevés par axe-core) ;
+  - bloc de commande défilant inatteignable au clavier ;
+  - « Licence · Non renseigné » affiché à côté d'une licence propre connue.
+- **Vérifié** :
+  - 759 tests au vert ; `typecheck`, `web:typecheck` et `web:build` réussis ;
+  - axe-core 4.14.0 : 0 violation sur 96 vues (8 pages dont 2 fiches × 3 langues × 375 et 1 280 px × thèmes clair et sombre) ;
+  - parcours au clavier complet d'une publication ;
+  - navigateur intégré, en, fr et he : fiche traduite avec « Voir l'original », carrousel (bouton et défilement), langue mémorisée.
+  - Preuves : `communication/linkedin/07-site-trilingue/preuves/brut/`.
+- **Critères de sortie de P4 remplis** : API v1, site installable (manifeste servi), fil, publication, profils, fiche, historique des versions, montages, images et carrousels rendus par le code, trois langues avec traduction et « Voir l'original », critères 7.4 (texte brut ou assaini testé avec `<img onerror>` et `javascript:`, axe-core, clavier, 375 px). **P4 clôturé.**
+- **Non fait, hors critères** :
+  - relecture native de l'hébreu ;
+  - installation réelle sur un téléphone ;
+  - liens entre publications et produits suivis (versions masquées pour les 32 publications prévues) ;
+  - mots anglais laissés par la traduction, non détectés.
+- Plan de P5 proposé dans ROADMAP.md, rien n'est déployé.

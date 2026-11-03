@@ -1,4 +1,4 @@
-      Tests  751 passed (751)
-   Start at  10:29:21
-   Duration  6.68s (tests 65%, import 28%, transform 7%)
+      Tests  759 passed (759)
+   Start at  10:51:29
+   Duration  6.71s (tests 68%, import 30%, transform 2%)
 

@@ -39,7 +39,10 @@ export const Traduction = z.object({
 export type Traduction = z.infer<typeof Traduction>;
 
 export const Media = z.discriminatedUnion('type', [
-  z.object({ type: z.literal('image'), src: z.string(), alt: z.string(), largeur: z.number().int(), hauteur: z.number().int(), lang: Langue, credit: z.string().nullable() }),
+  /** Montage rendu par le code. `lang` : langue du texte inscrit dans l'image (en) ; `alt_lang` : langue du texte alternatif servi. */
+  z.object({ type: z.literal('image'), src: z.string(), alt: z.string(), alt_lang: Langue, largeur: z.number().int(), hauteur: z.number().int(), lang: Langue, credit: z.string().nullable() }),
+  /** Carrousel de diapositives dessinées par le site, texte en anglais comme les montages. */
+  z.object({ type: z.literal('carrousel'), titre: z.string(), diapositives: z.array(z.object({ libelle: z.string(), texte: z.string() })).min(1), lang: Langue }),
   /** Schéma dessiné par le site : titre (produit et version) et repères cités, en anglais. */
   z.object({ type: z.literal('schema'), titre: z.string(), elements: z.array(z.string()), lang: Langue }),
 ]);
@@ -123,3 +126,33 @@ export type ReponseRecherche = z.infer<typeof ReponseRecherche>;
 
 export const Erreur = z.object({ erreur: z.object({ code: z.enum(['requete_invalide', 'introuvable', 'interne']), message: z.string() }) });
 export type Erreur = z.infer<typeof Erreur>;
+
+/** Élément d'une section de fiche : `titre` (titre d'un détail, auteur d'un benchmark), `complement` (conditions d'un benchmark). */
+export const ElementFiche = z.object({ cle: z.string(), titre: z.string().nullable(), texte: z.string(), complement: z.string().nullable() });
+export type ElementFiche = z.infer<typeof ElementFiche>;
+export const SectionFiche = z.object({
+  id: z.enum(['nouveaute', 'pour_qui', 'exemple_usage', 'acces', 'prerequis', 'cout', 'limites_connues', 'details', 'attributions', 'questions_a_tester', 'demarrage', 'compatibilites', 'limites', 'licence_locale']),
+  elements: z.array(ElementFiche).min(1),
+});
+export type SectionFiche = z.infer<typeof SectionFiche>;
+
+/**
+ * Fiche d'approfondissement (SPEC §6) : sections rédigées (traduites si possible, original à côté), puis faits datés.
+ * Une section absente n'est pas servie ; `licence` vaut null quand elle ne s'applique pas, `{ valeur: null }` quand
+ * elle est inconnue (« Non renseigné »).
+ */
+export const Fiche = z.object({
+  publication: Publication,
+  langue: Langue,
+  traduction: Traduction.nullable(),
+  sections: z.array(SectionFiche),
+  original: z.array(SectionFiche).nullable(),
+  commande: z.string().nullable(),
+  licence: z.object({ valeur: z.string().nullable() }).nullable(),
+  depot: z.object({ nom: z.string(), url: z.string().nullable(), etoiles: z.number().int().nullable(), etoiles_au: z.string().nullable(), cree_le: z.string().nullable(), dernier_push: z.string().nullable() }).nullable(),
+  /** Versions du produit suivi, de la plus récente à la plus ancienne ; vide si la publication n'est reliée à aucun produit suivi. */
+  versions: z.array(z.object({ version: z.string(), prerelease: z.boolean(), publiee_le: z.string().nullable(), courante: z.boolean() })),
+  /** Révisions de la publication, de la plus récente à la plus ancienne. */
+  revisions: z.array(z.object({ seq: z.number().int().positive(), cree_le: z.string(), courante: z.boolean() })).min(1),
+});
+export type Fiche = z.infer<typeof Fiche>;

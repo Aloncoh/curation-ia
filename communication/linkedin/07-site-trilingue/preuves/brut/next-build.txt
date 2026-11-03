@@ -5,6 +5,7 @@ Route (app)
 ├ ƒ /api/v1/comptes/[id]
 ├ ƒ /api/v1/fil
 ├ ƒ /api/v1/publications/[id]
+├ ƒ /api/v1/publications/[id]/fiche
 ├ ƒ /api/v1/recherche
 ├ ○ /apple-icon.png
 ├ ƒ /comptes
@@ -14,6 +15,7 @@ Route (app)
 ├ ƒ /marque/[fichier]
 ├ ƒ /medias/[...chemin]
 ├ ƒ /p/[id]
+├ ƒ /p/[id]/fiche
 └ ƒ /recherche
 
 

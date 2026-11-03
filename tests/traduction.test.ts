@@ -2,23 +2,29 @@
 // modèle (aucun réseau, aucune dépense), budget et écarts. La vérification mot pour mot reste sur l'original.
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import type { Modele, RequeteModele } from '../src/analysis/modele.ts';
-import { champsTraduisibles, memesCles } from '../src/traduction/champs.ts';
+import { champsDeLaFiche, champsDuPost, champsTraduisibles, partieServable } from '../src/traduction/champs.ts';
 import { controlerTraduction, invariants } from '../src/traduction/controle.ts';
 import { lireSortie, messageTraduction, recontrolerTraductions, traduirePublications } from '../src/traduction/traduire.ts';
 import { createTestDb, scalar, type TestDb } from './helpers/db.ts';
-import { ajouterActualite, ajouterTraduction, socle } from './helpers/publications.ts';
+import { ajouterActualite, ajouterTraduction, contenuActualite, socle } from './helpers/publications.ts';
 
 describe('champs traduits', () => {
-  it('prend tout le texte affiché, titre (accroche) compris, et seulement lui', () => {
-    const c = champsTraduisibles('ressource', {
+  it('prend tout le texte affiché du post, titre (accroche) compris, puis la fiche à part', () => {
+    const contenu = {
       accroche: { texte: 'A', passages: [] }, description: { texte: 'B', passages: [] }, interet: { texte: 'C', passages: [] },
-      reperes: [{ texte: 'D', passages: [] }], exemple_usage: { texte: 'non affiché', passages: [] }, mots_cles: { nom: 'x' },
-    });
-    expect(c.map((x) => x.cle)).toEqual(['accroche', 'description', 'interet', 'reperes.0']);
+      reperes: [{ texte: 'D', passages: [] }], exemple_usage: { texte: 'E', passages: [] }, mots_cles: { nom: 'x' },
+      demarrage: { etapes: [{ texte: 'F', passages: [] }], commande: 'npx skills add x' }, limites: [{ texte: 'G', passages: [] }],
+    };
+    expect(champsDuPost('ressource', contenu).map((x) => x.cle)).toEqual(['accroche', 'description', 'interet', 'reperes.0']);
+    expect(champsDeLaFiche('ressource', contenu).map((x) => x.cle)).toEqual(['fiche.exemple_usage', 'fiche.demarrage.etapes.0', 'fiche.limites.0']);
+    expect(champsTraduisibles('ressource', contenu)).toHaveLength(7);
+    const actualite = { accroche: { texte: 'A', passages: [] }, details: [{ titre: 'How it works', texte: 'T', passages: [] }], attributions: [{ auteur: 'Google DeepMind', texte: '88.2% on X', conditions: { texte: 'Without guardrails', passages: [] } }], questions_a_tester: ['Q?'] };
+    expect(champsDeLaFiche('actualite', actualite).map((x) => x.cle)).toEqual(['fiche.details.0.titre', 'fiche.details.0.texte', 'fiche.attributions.0.texte', 'fiche.attributions.0.conditions', 'fiche.questions_a_tester.0']);
     const s = champsTraduisibles('selection', { accroche: { texte: 'A', passages: [] }, ressources: [{ nom: 'Godly', explication: { texte: 'E', passages: [] } }] });
     expect(s).toEqual([{ cle: 'accroche', texte: 'A' }, { cle: 'ressources.0.explication', texte: 'E' }]);
-    expect(memesCles(s, { accroche: 'a', 'ressources.0.explication': 'e' })).toBe(true);
-    expect(memesCles(s, { accroche: 'a' })).toBe(false);
+    expect(partieServable(s, { accroche: 'a', 'ressources.0.explication': 'e' }, new Set())).toBe(true);
+    expect(partieServable(s, { accroche: 'a' }, new Set())).toBe(false);
+    expect(partieServable(s, { accroche: 'a', 'ressources.0.explication': 'e' }, new Set(['accroche']))).toBe(false);
   });
 });
 
@@ -133,5 +139,47 @@ describe('recontrôle sans appel', () => {
     const r = await recontrolerTraductions(t.database.client);
     expect(r.verifiees).toBe(2);
     expect(r.changees).toEqual([{ revision_id: revisionId, langue: 'fr', statut: 'valide' }, { revision_id: revisionId, langue: 'he', statut: 'ecart' }]);
+  });
+});
+
+describe('fiche et texte alternatif traduits en complément', () => {
+  let t: TestDb;
+  beforeEach(async () => {
+    t = await createTestDb();
+    await socle(t.database.client);
+  });
+  afterEach(() => t.cleanup());
+
+  it('n\'envoie que les champs manquants, garde le post déjà traduit et contrôle l\'ensemble', async () => {
+    const c = t.database.client;
+    const { postId, revisionId } = await ajouterActualite(c, 1, { contenu: { ...contenuActualite(1), nouveaute: { texte: 'Widget 2.1 adds a GPU mode.', passages: [] }, questions_a_tester: ['Does the GPU mode need CUDA 12?'] } });
+    await c.execute({ sql: `insert into media_asset (post_id, origin, alt_text, notice, content, created_at) values (?, 'generated', 'Widget 2.1 steps', 'Illustration — ne prouve pas le fonctionnement', '{"forme":"montage"}', 'x')`, args: [postId] });
+    const post = { accroche: 'Widget 2.1 réduit la latence GPU de 40% (1)', description: 'Acme publie Widget 2.1 pour les GPU.', ce_que_ca_permet: 'Plus rapide, avec une clé API.' };
+    await ajouterTraduction(c, revisionId, 'fr', post);
+    const requetes: string[] = [];
+    const modele: Modele = {
+      compter: async () => 300,
+      appeler: async (r) => {
+        requetes.push(r.utilisateur);
+        const { champs } = JSON.parse(r.utilisateur) as { champs: { cle: string; texte: string }[] };
+        return { texte: JSON.stringify({ champs: champs.map((x) => ({ cle: x.cle, texte: `FR ${x.texte}` })) }), usage: { input: 300, output: 100 }, stop: 'end_turn' };
+      },
+    };
+    const bilan = await traduirePublications({ client: c, modele, nomModele: 'deepseek-flash', langues: ['fr'], maxTraductions: 5, capRunMicroUsd: 50_000, capTotalMicroUsd: 1_000_000, estReprenable: () => false });
+    expect(bilan.valides).toBe(1);
+    expect(JSON.parse(requetes[0]!).champs.map((x: { cle: string }) => x.cle)).toEqual(['fiche.nouveaute', 'fiche.questions_a_tester.0', 'media.alt']);
+    const champs = JSON.parse(String((await c.execute('select champs from post_traduction')).rows[0]!.champs)) as Record<string, string>;
+    expect(champs).toMatchObject({ ...post, 'media.alt': 'FR Widget 2.1 steps', 'fiche.nouveaute': 'FR Widget 2.1 adds a GPU mode.' });
+  });
+});
+
+describe('règles affinées sur le lot du 2026-11-03 (fiche et texte alternatif)', () => {
+  it('compte le deux-points comme un début de phrase', () => {
+    expect(invariants('With mcp-builder, Claude studies the API. Étape 1 : In Claude Code, add the repository. Étape 2 : Then mention it')).toEqual(['1', '2', 'Claude', 'API', 'Code']);
+  });
+  it('accepte qu\'un original déjà en français reste identique en français, pas en hébreu', () => {
+    const original = [{ cle: 'fiche.questions_a_tester.0', texte: 'Le fichier généré s\'ouvre-t-il avec toutes les propriétés éditables ?' }];
+    expect(controlerTraduction(original, { 'fiche.questions_a_tester.0': original[0]!.texte }, 'fr')).toEqual([]);
+    expect(controlerTraduction(original, { 'fiche.questions_a_tester.0': original[0]!.texte }, 'he').map((e) => e.code)).toEqual(['non_traduit', 'langue_non_conforme']);
   });
 });

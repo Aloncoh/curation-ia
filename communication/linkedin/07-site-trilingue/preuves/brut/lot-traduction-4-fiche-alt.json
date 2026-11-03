@@ -1,0 +1,673 @@
+{
+  "run_id": "traduction-56899dfe-a743-440c-a438-7a8f54082de8",
+  "statut": "terminee",
+  "motif": null,
+  "valides": 28,
+  "ecarts": [
+    {
+      "post_id": 82,
+      "langue": "he",
+      "ecarts": [
+        {
+          "cle": "description",
+          "code": "invariant_absent",
+          "detail": "1"
+        },
+        {
+          "cle": "fiche.questions_a_tester.3",
+          "code": "invariant_absent",
+          "detail": "non-Cyber"
+        }
+      ]
+    },
+    {
+      "post_id": 88,
+      "langue": "he",
+      "ecarts": [
+        {
+          "cle": "fiche.acces",
+          "code": "invariant_absent",
+          "detail": "US"
+        }
+      ]
+    },
+    {
+      "post_id": 74,
+      "langue": "fr",
+      "ecarts": [
+        {
+          "cle": "fiche.questions_a_tester.0",
+          "code": "non_traduit"
+        },
+        {
+          "cle": "fiche.questions_a_tester.1",
+          "code": "non_traduit"
+        },
+        {
+          "cle": "fiche.questions_a_tester.2",
+          "code": "non_traduit"
+        }
+      ]
+    },
+    {
+      "post_id": 74,
+      "langue": "he",
+      "ecarts": [
+        {
+          "cle": "fiche.pour_qui",
+          "code": "invariant_absent",
+          "detail": "3"
+        },
+        {
+          "cle": "fiche.pour_qui",
+          "code": "invariant_absent",
+          "detail": "3D"
+        }
+      ]
+    },
+    {
+      "post_id": 1,
+      "langue": "he",
+      "ecarts": [
+        {
+          "cle": "fiche.demarrage.etapes.0",
+          "code": "non_traduit"
+        },
+        {
+          "cle": "fiche.demarrage.etapes.0",
+          "code": "langue_non_conforme"
+        },
+        {
+          "cle": "fiche.demarrage.etapes.1",
+          "code": "non_traduit"
+        },
+        {
+          "cle": "fiche.demarrage.etapes.1",
+          "code": "langue_non_conforme"
+        },
+        {
+          "cle": "fiche.demarrage.etapes.2",
+          "code": "non_traduit"
+        },
+        {
+          "cle": "fiche.demarrage.etapes.2",
+          "code": "langue_non_conforme"
+        }
+      ]
+    },
+    {
+      "post_id": 7,
+      "langue": "fr",
+      "ecarts": [
+        {
+          "cle": "media.alt",
+          "code": "invariant_absent",
+          "detail": "Then"
+        }
+      ]
+    },
+    {
+      "post_id": 7,
+      "langue": "he",
+      "ecarts": [
+        {
+          "cle": "media.alt",
+          "code": "invariant_absent",
+          "detail": "In"
+        },
+        {
+          "cle": "media.alt",
+          "code": "invariant_absent",
+          "detail": "Install"
+        },
+        {
+          "cle": "media.alt",
+          "code": "invariant_absent",
+          "detail": "Then"
+        }
+      ]
+    },
+    {
+      "post_id": 8,
+      "langue": "fr",
+      "ecarts": [
+        {
+          "cle": "media.alt",
+          "code": "invariant_absent",
+          "detail": "In"
+        },
+        {
+          "cle": "media.alt",
+          "code": "invariant_absent",
+          "detail": "Then"
+        },
+        {
+          "cle": "media.alt",
+          "code": "invariant_absent",
+          "detail": "Or"
+        }
+      ]
+    },
+    {
+      "post_id": 8,
+      "langue": "he",
+      "ecarts": [
+        {
+          "cle": "media.alt",
+          "code": "invariant_absent",
+          "detail": "In"
+        },
+        {
+          "cle": "media.alt",
+          "code": "invariant_absent",
+          "detail": "Then"
+        },
+        {
+          "cle": "media.alt",
+          "code": "invariant_absent",
+          "detail": "Or"
+        }
+      ]
+    },
+    {
+      "post_id": 11,
+      "langue": "fr",
+      "ecarts": [
+        {
+          "cle": "media.alt",
+          "code": "invariant_absent",
+          "detail": "In"
+        },
+        {
+          "cle": "media.alt",
+          "code": "invariant_absent",
+          "detail": "Other"
+        }
+      ]
+    },
+    {
+      "post_id": 11,
+      "langue": "he",
+      "ecarts": [
+        {
+          "cle": "media.alt",
+          "code": "invariant_absent",
+          "detail": "In"
+        },
+        {
+          "cle": "media.alt",
+          "code": "invariant_absent",
+          "detail": "Other"
+        }
+      ]
+    },
+    {
+      "post_id": 3,
+      "langue": "fr",
+      "ecarts": [
+        {
+          "cle": "accroche",
+          "code": "invariant_absent",
+          "detail": "Best"
+        },
+        {
+          "cle": "accroche",
+          "code": "invariant_absent",
+          "detail": "Practices"
+        }
+      ]
+    },
+    {
+      "post_id": 3,
+      "langue": "he",
+      "ecarts": [
+        {
+          "cle": "accroche",
+          "code": "invariant_absent",
+          "detail": "Best"
+        },
+        {
+          "cle": "accroche",
+          "code": "invariant_absent",
+          "detail": "Practices"
+        }
+      ]
+    },
+    {
+      "post_id": 4,
+      "langue": "fr",
+      "ecarts": [
+        {
+          "cle": "fiche.demarrage.etapes.0",
+          "code": "non_traduit"
+        },
+        {
+          "cle": "fiche.demarrage.etapes.1",
+          "code": "non_traduit"
+        },
+        {
+          "cle": "media.alt",
+          "code": "non_traduit"
+        }
+      ]
+    },
+    {
+      "post_id": 4,
+      "langue": "he",
+      "ecarts": [
+        {
+          "cle": "media.alt",
+          "code": "invariant_absent",
+          "detail": "Add"
+        },
+        {
+          "cle": "media.alt",
+          "code": "invariant_absent",
+          "detail": "Install"
+        }
+      ]
+    },
+    {
+      "post_id": 10,
+      "langue": "fr",
+      "ecarts": [
+        {
+          "cle": "media.alt",
+          "code": "invariant_absent",
+          "detail": "With"
+        },
+        {
+          "cle": "media.alt",
+          "code": "invariant_absent",
+          "detail": "Dependencies"
+        }
+      ]
+    },
+    {
+      "post_id": 10,
+      "langue": "he",
+      "ecarts": [
+        {
+          "cle": "media.alt",
+          "code": "invariant_absent",
+          "detail": "With"
+        },
+        {
+          "cle": "media.alt",
+          "code": "invariant_absent",
+          "detail": "Dependencies"
+        }
+      ]
+    },
+    {
+      "post_id": 13,
+      "langue": "he",
+      "ecarts": [
+        {
+          "cle": "media.alt",
+          "code": "invariant_absent",
+          "detail": "In"
+        },
+        {
+          "cle": "media.alt",
+          "code": "invariant_absent",
+          "detail": "It"
+        }
+      ]
+    },
+    {
+      "post_id": 5,
+      "langue": "fr",
+      "ecarts": [
+        {
+          "cle": "media.alt",
+          "code": "invariant_absent",
+          "detail": "In"
+        },
+        {
+          "cle": "media.alt",
+          "code": "invariant_absent",
+          "detail": "Then"
+        }
+      ]
+    },
+    {
+      "post_id": 5,
+      "langue": "he",
+      "ecarts": [
+        {
+          "cle": "fiche.demarrage.etapes.1",
+          "code": "non_traduit"
+        },
+        {
+          "cle": "fiche.demarrage.etapes.1",
+          "code": "langue_non_conforme"
+        },
+        {
+          "cle": "media.alt",
+          "code": "invariant_absent",
+          "detail": "In"
+        }
+      ]
+    },
+    {
+      "post_id": 6,
+      "langue": "fr",
+      "ecarts": [
+        {
+          "cle": "fiche.demarrage.etapes.0",
+          "code": "non_traduit"
+        },
+        {
+          "cle": "fiche.demarrage.etapes.1",
+          "code": "non_traduit"
+        },
+        {
+          "cle": "media.alt",
+          "code": "non_traduit"
+        }
+      ]
+    },
+    {
+      "post_id": 6,
+      "langue": "he",
+      "ecarts": [
+        {
+          "cle": "fiche.demarrage.etapes.0",
+          "code": "non_traduit"
+        },
+        {
+          "cle": "fiche.demarrage.etapes.0",
+          "code": "langue_non_conforme"
+        },
+        {
+          "cle": "fiche.demarrage.etapes.1",
+          "code": "non_traduit"
+        },
+        {
+          "cle": "fiche.demarrage.etapes.1",
+          "code": "langue_non_conforme"
+        },
+        {
+          "cle": "fiche.demarrage.etapes.2",
+          "code": "langue_non_conforme"
+        }
+      ]
+    },
+    {
+      "post_id": 15,
+      "langue": "fr",
+      "ecarts": [
+        {
+          "cle": "media.alt",
+          "code": "invariant_absent",
+          "detail": "Not"
+        },
+        {
+          "cle": "media.alt",
+          "code": "invariant_absent",
+          "detail": "Then"
+        }
+      ]
+    },
+    {
+      "post_id": 15,
+      "langue": "he",
+      "ecarts": [
+        {
+          "cle": "fiche.demarrage.etapes.0",
+          "code": "non_traduit"
+        },
+        {
+          "cle": "fiche.demarrage.etapes.0",
+          "code": "langue_non_conforme"
+        },
+        {
+          "cle": "fiche.demarrage.etapes.1",
+          "code": "non_traduit"
+        },
+        {
+          "cle": "fiche.demarrage.etapes.1",
+          "code": "langue_non_conforme"
+        },
+        {
+          "cle": "fiche.demarrage.etapes.2",
+          "code": "non_traduit"
+        },
+        {
+          "cle": "fiche.demarrage.etapes.2",
+          "code": "langue_non_conforme"
+        }
+      ]
+    },
+    {
+      "post_id": 16,
+      "langue": "fr",
+      "ecarts": [
+        {
+          "cle": "fiche.demarrage.etapes.0",
+          "code": "non_traduit"
+        },
+        {
+          "cle": "fiche.demarrage.etapes.1",
+          "code": "non_traduit"
+        },
+        {
+          "cle": "fiche.demarrage.etapes.2",
+          "code": "non_traduit"
+        }
+      ]
+    },
+    {
+      "post_id": 16,
+      "langue": "he",
+      "ecarts": [
+        {
+          "cle": "media.alt",
+          "code": "invariant_absent",
+          "detail": "In"
+        },
+        {
+          "cle": "media.alt",
+          "code": "invariant_absent",
+          "detail": "Then"
+        },
+        {
+          "cle": "media.alt",
+          "code": "invariant_absent",
+          "detail": "Type"
+        }
+      ]
+    },
+    {
+      "post_id": 9,
+      "langue": "fr",
+      "ecarts": [
+        {
+          "cle": "fiche.demarrage.etapes.0",
+          "code": "non_traduit"
+        },
+        {
+          "cle": "media.alt",
+          "code": "invariant_absent",
+          "detail": "Launched"
+        },
+        {
+          "cle": "media.alt",
+          "code": "invariant_absent",
+          "detail": "Fill"
+        }
+      ]
+    },
+    {
+      "post_id": 9,
+      "langue": "he",
+      "ecarts": [
+        {
+          "cle": "fiche.demarrage.etapes.0",
+          "code": "non_traduit"
+        },
+        {
+          "cle": "fiche.demarrage.etapes.0",
+          "code": "langue_non_conforme"
+        },
+        {
+          "cle": "media.alt",
+          "code": "invariant_absent",
+          "detail": "Fill"
+        }
+      ]
+    },
+    {
+      "post_id": 12,
+      "langue": "he",
+      "ecarts": [
+        {
+          "cle": "fiche.demarrage.etapes.1",
+          "code": "non_traduit"
+        },
+        {
+          "cle": "fiche.demarrage.etapes.1",
+          "code": "langue_non_conforme"
+        }
+      ]
+    },
+    {
+      "post_id": 21,
+      "langue": "he",
+      "ecarts": [
+        {
+          "cle": "media.alt",
+          "code": "invariant_absent",
+          "detail": "Run"
+        },
+        {
+          "cle": "media.alt",
+          "code": "invariant_absent",
+          "detail": "Choose"
+        }
+      ]
+    },
+    {
+      "post_id": 18,
+      "langue": "fr",
+      "ecarts": [
+        {
+          "cle": "fiche.demarrage.etapes.2",
+          "code": "non_traduit"
+        }
+      ]
+    },
+    {
+      "post_id": 18,
+      "langue": "he",
+      "ecarts": [
+        {
+          "cle": "fiche.demarrage.etapes.0",
+          "code": "non_traduit"
+        },
+        {
+          "cle": "fiche.demarrage.etapes.0",
+          "code": "langue_non_conforme"
+        },
+        {
+          "cle": "fiche.demarrage.etapes.1",
+          "code": "non_traduit"
+        },
+        {
+          "cle": "fiche.demarrage.etapes.1",
+          "code": "langue_non_conforme"
+        },
+        {
+          "cle": "fiche.demarrage.etapes.2",
+          "code": "non_traduit"
+        },
+        {
+          "cle": "fiche.demarrage.etapes.2",
+          "code": "langue_non_conforme"
+        },
+        {
+          "cle": "fiche.compatibilites.0",
+          "code": "non_traduit"
+        },
+        {
+          "cle": "fiche.compatibilites.0",
+          "code": "langue_non_conforme"
+        }
+      ]
+    },
+    {
+      "post_id": 19,
+      "langue": "fr",
+      "ecarts": [
+        {
+          "cle": "media.alt",
+          "code": "invariant_absent",
+          "detail": "Add"
+        },
+        {
+          "cle": "media.alt",
+          "code": "invariant_absent",
+          "detail": "Then"
+        }
+      ]
+    },
+    {
+      "post_id": 69,
+      "langue": "fr",
+      "ecarts": [
+        {
+          "cle": "fiche.questions_a_tester.0",
+          "code": "non_traduit"
+        },
+        {
+          "cle": "fiche.questions_a_tester.1",
+          "code": "non_traduit"
+        },
+        {
+          "cle": "fiche.questions_a_tester.2",
+          "code": "non_traduit"
+        }
+      ]
+    },
+    {
+      "post_id": 71,
+      "langue": "fr",
+      "ecarts": [
+        {
+          "cle": "fiche.questions_a_tester.0",
+          "code": "non_traduit"
+        },
+        {
+          "cle": "fiche.questions_a_tester.1",
+          "code": "non_traduit"
+        },
+        {
+          "cle": "fiche.questions_a_tester.3",
+          "code": "non_traduit"
+        }
+      ]
+    },
+    {
+      "post_id": 72,
+      "langue": "fr",
+      "ecarts": [
+        {
+          "cle": "fiche.questions_a_tester.0",
+          "code": "non_traduit"
+        },
+        {
+          "cle": "fiche.questions_a_tester.1",
+          "code": "non_traduit"
+        },
+        {
+          "cle": "fiche.questions_a_tester.2",
+          "code": "non_traduit"
+        }
+      ]
+    }
+  ],
+  "erreurs": [],
+  "restantes": 0,
+  "depense_micro_usd": 44622
+}
