@@ -632,5 +632,36 @@ export const publicationsPlanifiees = sqliteTable(
   ],
 );
 
+/**
+ * Traduction d'une révision de publication (ADR 0012) : l'original anglais reste dans `post_revision`, seul vérifié mot
+ * pour mot. `champs` : clé du champ traduit (« accroche », « reperes.0 ») → texte. Une traduction `ecart` (chiffre,
+ * version ou nom propre modifié) est gardée pour la trace mais jamais servie : l'original s'affiche à sa place.
+ */
+export const postTraductions = sqliteTable(
+  'post_traduction',
+  {
+    id: integer('id').primaryKey({ autoIncrement: true }),
+    revisionId: integer('revision_id').notNull().references(() => postRevisions.id),
+    langue: text('langue').notNull(),
+    champs: text('champs', { mode: 'json' }).notNull().$type<Record<string, string>>(),
+    /** machine | humaine */
+    origine: text('origine').notNull(),
+    modele: text('modele'),
+    promptVersion: text('prompt_version'),
+    llmCallId: integer('llm_call_id').references(() => llmCalls.id),
+    /** valide | ecart */
+    statut: text('statut').notNull(),
+    ecarts: text('ecarts', { mode: 'json' }).$type<unknown[]>(),
+    createdAt: text('created_at').notNull(),
+  },
+  (t) => [
+    uniqueIndex('post_traduction_revision_langue_uq').on(t.revisionId, t.langue),
+    check('post_traduction_langue_ck', sql`langue in ('fr', 'he')`),
+    check('post_traduction_origine_ck', sql`origine in ('machine', 'humaine')`),
+    check('post_traduction_statut_ck', sql`statut in ('valide', 'ecart')`),
+    check('post_traduction_modele_ck', sql`origine <> 'machine' or length(trim(coalesce(modele, ''))) > 0`),
+  ],
+);
+
 // Index de recherche `recherche_publication` : table virtuelle FTS5, que drizzle ne déclare pas.
 // Elle est créée par drizzle/0009_chaine_ressources.sql et reçoit des textes déjà normalisés (src/recherche/normaliser.ts).

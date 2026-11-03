@@ -1,0 +1,54 @@
+{
+  "run_id": "traduction-39265f55-30ca-48ef-8786-2a3f73950d86",
+  "statut": "terminee",
+  "motif": null,
+  "valides": 1,
+  "ecarts": [
+    {
+      "post_id": 82,
+      "langue": "he",
+      "ecarts": [
+        {
+          "cle": "description",
+          "code": "invariant_absent",
+          "detail": "1"
+        }
+      ]
+    },
+    {
+      "post_id": 3,
+      "langue": "fr",
+      "ecarts": [
+        {
+          "cle": "accroche",
+          "code": "invariant_absent",
+          "detail": "Best"
+        },
+        {
+          "cle": "accroche",
+          "code": "invariant_absent",
+          "detail": "Practices"
+        }
+      ]
+    },
+    {
+      "post_id": 3,
+      "langue": "he",
+      "ecarts": [
+        {
+          "cle": "accroche",
+          "code": "invariant_absent",
+          "detail": "Best"
+        },
+        {
+          "cle": "accroche",
+          "code": "invariant_absent",
+          "detail": "Practices"
+        }
+      ]
+    }
+  ],
+  "erreurs": [],
+  "restantes": 0,
+  "depense_micro_usd": 1555
+}

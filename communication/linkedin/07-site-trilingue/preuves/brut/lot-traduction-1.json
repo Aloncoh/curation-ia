@@ -1,0 +1,90 @@
+{
+  "run_id": "traduction-40c75544-36db-42ca-bc2d-745cc025519b",
+  "statut": "terminee",
+  "motif": null,
+  "valides": 58,
+  "ecarts": [
+    {
+      "post_id": 82,
+      "langue": "fr",
+      "ecarts": [
+        {
+          "cle": "description",
+          "code": "nombre_ajoute",
+          "detail": "000"
+        }
+      ]
+    },
+    {
+      "post_id": 82,
+      "langue": "he",
+      "ecarts": [
+        {
+          "cle": "description",
+          "code": "invariant_absent",
+          "detail": "1"
+        }
+      ]
+    },
+    {
+      "post_id": 3,
+      "langue": "fr",
+      "ecarts": [
+        {
+          "cle": "accroche",
+          "code": "invariant_absent",
+          "detail": "Best"
+        },
+        {
+          "cle": "accroche",
+          "code": "invariant_absent",
+          "detail": "Practices"
+        }
+      ]
+    },
+    {
+      "post_id": 3,
+      "langue": "he",
+      "ecarts": [
+        {
+          "cle": "accroche",
+          "code": "invariant_absent",
+          "detail": "Best"
+        },
+        {
+          "cle": "accroche",
+          "code": "invariant_absent",
+          "detail": "Practices"
+        }
+      ]
+    },
+    {
+      "post_id": 17,
+      "langue": "fr",
+      "ecarts": [
+        {
+          "cle": "reperes.0",
+          "code": "invariant_absent",
+          "detail": "Rated"
+        }
+      ]
+    },
+    {
+      "post_id": 17,
+      "langue": "he",
+      "ecarts": [
+        {
+          "cle": "reperes.0",
+          "code": "non_traduit"
+        },
+        {
+          "cle": "reperes.0",
+          "code": "langue_non_conforme"
+        }
+      ]
+    }
+  ],
+  "erreurs": [],
+  "restantes": 0,
+  "depense_micro_usd": 30242
+}

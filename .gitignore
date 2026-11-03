@@ -8,6 +8,10 @@ data/*
 data/ressources/*
 !data/ressources/brouillons/
 exports/
+# Site (P4) : sorties de Next.js, régénérées à chaque lancement.
+.next/
+next-env.d.ts
+*.tsbuildinfo
 coverage/
 .npm-cache/
 .DS_Store

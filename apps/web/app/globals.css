@@ -1,0 +1,370 @@
+/* Feuille du site (P4), reprise de la maquette (maquette/index.html, SPEC §6 bis) et passée en propriétés logiques
+   (margin-inline, inset-inline…) pour l'hébreu de droite à gauche. Les visuels (.diapo) restent de gauche à droite. */
+/* Jetons tirés de la mascotte : feutre (fond), visage, lueur des yeux, lavande du corps. */
+:root {
+  --feutre: #ece7e1;
+  --coton: #fdfcfa;
+  --visage: #1d1b23;
+  --encre: #1d1b23;
+  --pied: #615b72;
+  --lavande: #847db6;
+  --lavande-encre: #4d4688;
+  --lavande-voile: #eeebf7;
+  --survol: rgba(29, 27, 35, .045);
+  --lueur: #faf2e0;
+  --trait: #e0d9d0;
+  --alerte: #8a3b2e;
+  --alerte-voile: #f6e1dc;
+  --reel: #286b40;
+  --focus: #6a62a8;
+  --actif-fond: #1d1b23;
+  --actif-texte: #faf2e0;
+  --miel: #f4e6bf;
+  --miel-encre: #634a0e;
+  --miel-trait: #d8bf7a;
+  --fond: #fdfcfa;
+  --champ: #f1ede7;
+  --ombre: 0 1px 0 rgba(29, 27, 35, .04), 0 8px 24px -12px rgba(29, 27, 35, .18);
+  --flotte: 0 18px 40px -16px rgba(29, 27, 35, .45);
+  --rayon: 16px;
+  --display: "Recursive", ui-rounded, system-ui, sans-serif;
+  --texte: "Atkinson Hyperlegible Next", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --feutre: #121116; --coton: #1b1a21; --encre: #f1ece4; --pied: #aaa4bc; --survol: rgba(255, 255, 255, .05);
+    --lavande-encre: #bdb6ee; --lavande-voile: #29263a; --trait: #2f2c38; --alerte: #f0a493; --alerte-voile: #3a2420;
+    --focus: #9b94d6; --actif-fond: #ece7f9; --actif-texte: #1d1b23;
+    --reel: #6cc58d; --miel: #382f1a; --miel-encre: #f1d58c; --miel-trait: #6b5a2c;
+    --ombre: 0 1px 0 rgba(0, 0, 0, .3), 0 8px 24px -12px rgba(0, 0, 0, .6); --flotte: 0 18px 40px -12px rgba(0, 0, 0, .8);
+    --fond: #121116; --champ: #211f28;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --feutre: #121116; --coton: #1b1a21; --encre: #f1ece4; --pied: #aaa4bc; --survol: rgba(255, 255, 255, .05);
+  --lavande-encre: #bdb6ee; --lavande-voile: #29263a; --trait: #2f2c38; --alerte: #f0a493; --alerte-voile: #3a2420;
+  --focus: #9b94d6; --actif-fond: #ece7f9; --actif-texte: #1d1b23;
+  --reel: #6cc58d; --miel: #382f1a; --miel-encre: #f1d58c; --miel-trait: #6b5a2c;
+  --ombre: 0 1px 0 rgba(0, 0, 0, .3), 0 8px 24px -12px rgba(0, 0, 0, .6); --flotte: 0 18px 40px -12px rgba(0, 0, 0, .8);
+  --fond: #121116; --champ: #211f28;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--fond); color: var(--encre); font: 400 1rem/1.5 var(--texte); -webkit-font-smoothing: antialiased; }
+img, video { max-width: 100%; display: block; }
+a { color: var(--lavande-encre); text-underline-offset: .18em; }
+button { font: inherit; color: inherit; }
+[hidden] { display: none !important; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; border-radius: 8px; }
+main:focus, [tabindex="-1"]:focus { outline: none; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.lien-evitement { position: absolute; inset-inline-start: 16px; top: -60px; background: var(--visage); color: var(--lueur); padding: 10px 16px; border-radius: 12px; z-index: 40; }
+.lien-evitement:focus { top: 12px; }
+h1, h2, h3 { overflow-wrap: anywhere; }
+
+/* ——— Disposition à la manière de X : colonne gauche, colonne centrale, colonne droite. ——— */
+.app { display: grid; grid-template-columns: 250px minmax(0, 600px) 300px; gap: 0 28px; justify-content: center; min-height: 100vh; }
+.barre-gauche { position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; gap: 4px; padding: 14px 0 20px; }
+.centre { min-width: 0; background: var(--fond); border-inline: 1px solid var(--trait); min-height: 100vh; }
+.barre-droite { position: sticky; top: 0; align-self: start; padding: 14px 0; display: grid; gap: 16px; }
+
+/* En haut à gauche : uniquement le logo. Le profil de l'utilisateur ferme la colonne, comme sur X. */
+.avatar-vide { display: grid; place-items: center; flex: none; border-radius: 50%; background: var(--lavande-voile); color: var(--lavande-encre); }
+
+.marque { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--encre); padding-block: 8px; padding-inline: 8px 12px; border-radius: 999px; width: fit-content; margin-bottom: 6px; }
+.marque:hover { background: var(--survol); }
+.marque img { width: 36px; height: 36px; border-radius: 12px; }
+.marque span { font-family: var(--display); font-variation-settings: "CASL" 1; font-weight: 900; font-size: 1.25rem; letter-spacing: -.01em; }
+
+.nav { display: grid; gap: 2px; }
+.nav a, .plus > summary {
+  display: flex; align-items: center; gap: 16px; padding: 11px 14px; border-radius: 999px; text-decoration: none; color: var(--encre);
+  font-size: 1.12rem; font-weight: 500; min-height: 48px; cursor: pointer; width: fit-content;
+}
+.nav a:hover, .plus > summary:hover { background: var(--survol); }
+.nav a[aria-current="page"] { font-weight: 800; }
+.nav a[aria-current="page"] svg { stroke-width: 2.4; }
+.plus { position: relative; margin-top: 4px; }
+.plus > summary { list-style: none; color: var(--pied); font-size: 1rem; }
+.plus > summary::-webkit-details-marker { display: none; }
+.plus-panneau {
+  position: absolute; inset-inline-start: 0; top: calc(100% + 4px); z-index: 30; min-width: 220px; background: var(--coton); border-radius: 16px;
+  padding: 6px; box-shadow: var(--flotte); border: 1px solid var(--trait); display: grid;
+}
+.plus-panneau a { display: flex; align-items: center; gap: 12px; padding: 11px 12px; border-radius: 10px; text-decoration: none; color: var(--encre); font-weight: 600; min-height: 44px; }
+.plus-panneau a:hover { background: var(--survol); }
+.plus-panneau a[aria-current="page"] { color: var(--lavande-encre); }
+
+/* Recherche collante en haut de la colonne principale, sur toutes les pages. */
+.recherche-haut {
+  position: sticky; top: 0; z-index: 20; padding: 8px 16px; border-bottom: 1px solid var(--trait);
+  background: color-mix(in srgb, var(--fond) 86%, transparent); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+}
+.recherche-haut form { position: relative; }
+.recherche-haut svg { position: absolute; inset-inline-start: 16px; top: 50%; transform: translateY(-50%); color: var(--pied); pointer-events: none; }
+.recherche-haut input {
+  width: 100%; min-height: 44px; font: inherit; color: var(--encre); background: var(--champ); border: 1px solid transparent;
+  border-radius: 999px; padding-block: 9px; padding-inline: 46px 16px;
+}
+.recherche-haut input::placeholder { color: var(--pied); }
+.recherche-haut input:focus { outline: none; border-color: var(--focus); background: var(--fond); }
+
+.titre-page { font: 800 1.3rem/1.2 var(--texte); margin: 0; padding: 16px 16px 12px; }
+.barre-retour { display: flex; align-items: center; gap: 20px; padding: 6px 16px; min-height: 52px; }
+.barre-retour a { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 50%; color: var(--encre); }
+.barre-retour a:hover { background: var(--survol); }
+.barre-retour h1 { font: 800 1.2rem/1.2 var(--texte); margin: 0; }
+
+/* ——— Publication, à la manière de X : un filet entre les posts, pas de carte ; avatar, en-tête, texte, lien, média, actions. ——— */
+.post { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 0 12px; padding: 12px 16px 4px; border-bottom: 1px solid var(--trait); transition: background-color .15s; }
+.post:not(.complet):hover { background: color-mix(in srgb, var(--encre) 2%, transparent); }
+.post-avatar img { width: 40px; height: 40px; border-radius: 50%; }
+.post-corps { min-width: 0; }
+.post-raison { grid-column: 1 / -1; display: flex; gap: 8px; align-items: center; margin: 0 0 4px; margin-inline-start: 28px; font-size: .8rem; color: var(--pied); font-weight: 600; }
+.post-tete { display: flex; align-items: baseline; gap: 4px; line-height: 1.3; margin-bottom: 1px; min-width: 0; }
+.post-nom { font-weight: 700; color: var(--encre); text-decoration: none; white-space: nowrap; }
+.post-nom:hover { text-decoration: underline; }
+.post-meta { color: var(--pied); font-size: .94rem; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.post-meta a { color: inherit; text-decoration: none; }
+.post-meta a:hover { text-decoration: underline; }
+/* Seul repère d'une ressource : un mot discret, sans pastille. */
+.badge { margin-inline-start: auto; flex: none; font: 600 .76rem/1.3 var(--texte); color: var(--pied); white-space: nowrap; }
+.badge.nouveau { color: var(--reel); }
+.badge.verifier { color: var(--alerte); }
+
+.post-texte { overflow-wrap: anywhere; font-size: 1rem; line-height: 1.48; }
+.post-texte p { margin: 0 0 .6em; }
+.post-texte .points { list-style: none; margin: 0 0 .6em; padding: 0; display: grid; gap: .2em; }
+.post-texte .points li { padding-inline-start: 1.3em; position: relative; }
+.post-texte .points li::before { content: "→"; position: absolute; inset-inline-start: 0; color: var(--pied); }
+.post-texte > :last-child { margin-bottom: 0; }
+.voir-plus { background: none; border: 0; padding: 0 2px; margin-inline-start: 2px; color: var(--lavande-encre); font-weight: 700; cursor: pointer; border-radius: 6px; }
+.voir-plus:hover { text-decoration: underline; }
+.post.complet .post-texte { font-size: 1.06rem; }
+
+/* Sélection : une liste numérotée, le nom cliquable vers le site officiel, puis l'explication. */
+.sel-liste { list-style: none; margin: 0 0 .6em; padding: 0; display: grid; gap: .45em; counter-reset: sel; }
+.sel-liste li { counter-increment: sel; padding-inline-start: 1.45em; position: relative; }
+.sel-liste li::before { content: counter(sel) "."; position: absolute; inset-inline-start: 0; color: var(--pied); font-variant-numeric: tabular-nums; }
+.sel-nom { font-weight: 700; }
+a.sel-nom { color: var(--lavande-encre); text-decoration: none; }
+a.sel-nom:hover { text-decoration: underline; }
+
+/* Lien vers la ressource, juste au-dessus du média : une ligne, sans encadré. */
+.lien-ressource {
+  display: flex; align-items: center; gap: 6px; margin: 8px 0 0; padding: 4px 0; min-height: 36px; width: fit-content; max-width: 100%;
+  text-decoration: none; color: var(--lavande-encre); font-size: .94rem;
+}
+.lien-ressource:hover .lr-libelle { text-decoration: underline; }
+.lien-ressource svg { flex: none; }
+.lien-ressource .lr-libelle { font-weight: 700; white-space: nowrap; }
+.lien-ressource .lr-cible { color: var(--pied); min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.lien-ressource .lr-fleche { color: var(--pied); }
+
+/* Média : toute la largeur de la colonne du texte, coins légèrement arrondis, un filet. */
+.post-media { margin: 8px 0 2px; border-radius: 14px; overflow: hidden; border: 1px solid var(--trait); background: var(--visage); position: relative; }
+.post-media > img { width: 100%; height: auto; }
+.credit { position: absolute; right: 8px; bottom: 8px; z-index: 2; font: 600 .7rem/1 var(--texte); color: #fff; background: rgba(0, 0, 0, .55); padding: 4px 7px; border-radius: 6px; }
+
+.post-mention { margin: 0 0 10px; font-size: .78rem; color: var(--pied); line-height: 1.4; }
+.lien-discret { background: none; border: 0; padding: 0; color: var(--pied); font-size: inherit; text-decoration: underline; text-underline-offset: .2em; cursor: pointer; border-radius: 4px; }
+.lien-discret:hover { color: var(--encre); }
+/* Sources : un retrait et un filet, pas une carte dans la carte. */
+.panneau { margin: 0 0 12px; padding-block: 2px; padding-inline-start: 12px; border-inline-start: 2px solid var(--trait); font-size: .86rem; color: var(--pied); }
+.panneau p { margin: 0 0 8px; }
+.panneau > :last-child { margin-bottom: 0; }
+.panneau ul { margin: 0 0 8px; padding-inline-start: 1.1em; }
+.panneau li { margin-bottom: 4px; overflow-wrap: anywhere; }
+.panneau details summary { cursor: pointer; color: var(--encre); font-weight: 600; padding: 4px 0; }
+.panneau blockquote { margin: 6px 0; padding-block: 2px; padding-inline-start: 10px; border-inline-start: 2px solid var(--lavande); color: var(--encre); overflow-wrap: anywhere; }
+.panneau blockquote.introuvable { border-inline-start-color: var(--alerte); }
+.panneau .verif { display: block; font-size: .76rem; color: var(--alerte); font-weight: 700; margin-top: 2px; }
+
+/* Actions : quatre icônes réparties, sans compteur. */
+.post-actions { display: flex; gap: 48px; max-width: 420px; margin-block: 2px; margin-inline-start: -9px; }
+.post-actions button {
+  display: inline-grid; place-items: center; background: none; border: 0; color: var(--pied); width: 38px; height: 38px; border-radius: 50%; cursor: pointer;
+  transition: color .15s, background-color .15s;
+}
+.post-actions button:hover, .post-actions button[aria-expanded="true"] { color: var(--lavande-encre); background: var(--lavande-voile); }
+.lien-partage { display: flex; gap: 8px; align-items: center; margin: 0 0 10px; font-size: .86rem; color: var(--pied); }
+.lien-partage input { flex: 1; min-width: 0; font: inherit; color: var(--encre); background: var(--champ); border: 1px solid var(--trait); border-radius: 8px; padding: 6px 8px; }
+.commentaires { margin: 0 0 10px; padding: 10px 0 12px; border-top: 1px solid var(--trait); }
+.commentaires p { margin: 0; }
+.commentaires .vide { font-weight: 700; }
+.commentaires .discret { font-size: .82rem; color: var(--pied); margin-top: 2px; }
+
+/* Message bref et discret (« Disponible avec un compte », « Lien copié »), au-dessus de la barre d'onglets sur téléphone. */
+.toast {
+  position: fixed; left: 50%; bottom: 24px; z-index: 50; transform: translate(-50%, 8px); opacity: 0; pointer-events: none;
+  background: var(--actif-fond); color: var(--actif-texte); font: 600 .9rem/1.3 var(--texte); padding: 10px 16px; border-radius: 10px;
+  box-shadow: var(--flotte); transition: opacity .18s, transform .18s; max-width: calc(100vw - 32px);
+}
+.toast.visible { opacity: 1; transform: translate(-50%, 0); }
+
+/* Visuels générés des exemples (couverture d'image) : lumineux, nouveauté en gros titre. */
+.diapo {
+  aspect-ratio: 1; position: relative; color: #1d1b23; display: flex; flex-direction: column; gap: 3.5cqi; padding: 12% 8% 14%; container-type: inline-size;
+  background: linear-gradient(150deg, #fffdf8 20%, color-mix(in srgb, var(--accent) 45%, #fffdf8));
+}
+.diapo-coin { position: absolute; left: 5%; top: 5%; font: 600 max(.66rem, 2.9cqi)/1 var(--texte); color: #4d4688; letter-spacing: .04em; }
+.visuel { justify-content: flex-start; padding-top: 13cqi; }
+.visuel-titre { order: -1; color: #1d1b23; font: 800 max(1.4rem, 9cqi)/1.05 var(--display); }
+.visuel-liste { display: grid; gap: 2.6cqi; margin: 0; padding: 0; list-style: none; counter-reset: e; }
+.visuel-liste li { display: flex; gap: 3cqi; align-items: center; padding: 3cqi 3.6cqi; border-radius: 3cqi; background: rgba(255, 255, 255, .78); box-shadow: 0 1px 4px rgba(29, 27, 35, .1); font: 640 max(.8rem, 4.1cqi)/1.25 var(--display); color: #1d1b23; }
+.forme-etapes li::before { counter-increment: e; content: counter(e); flex: none; display: grid; place-items: center; width: 7cqi; height: 7cqi; border-radius: 50%; background: #1d1b23; color: #fff; font-size: 3.6cqi; }
+[data-compte] { --accent: #b9b2ea; }
+[data-compte="nodi"] { --accent: #7fe0bd; }
+[data-compte="repo"] { --accent: #f09a62; }
+[data-compte="pyxo"] { --accent: #7cc4f5; }
+[data-compte="mova"] { --accent: #c9a7f5; }
+[data-compte="pulse"] { --accent: #f5c04e; }
+[data-compte="radar"] { --accent: #6fe3dc; }
+
+/* Explorer : grille d'images, comme sur Instagram. */
+.grille { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3px; }
+.tuile-explorer { position: relative; aspect-ratio: 1; overflow: hidden; display: block; background: var(--visage); }
+.tuile-explorer > img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.tuile-explorer .diapo { width: 100%; height: 100%; }
+.tuile-explorer:hover::after { content: ""; position: absolute; inset: 0; background: rgba(0, 0, 0, .12); }
+
+/* États vides */
+.vide-page { padding: 48px 24px; text-align: center; color: var(--pied); }
+.vide-page strong { display: block; color: var(--encre); font-size: 1.2rem; margin-bottom: 4px; }
+.vide-page p { margin: 0 auto; max-width: 36ch; }
+
+/* Colonne droite */
+.encart { background: var(--fond); border: 1px solid var(--trait); border-radius: var(--rayon); padding: 12px 4px 8px; }
+.encart h2 { font: 800 1.15rem/1.2 var(--texte); margin: 0 0 6px; padding: 0 14px; }
+.compte-ligne { display: flex; align-items: center; gap: 10px; padding: 9px 14px; text-decoration: none; color: var(--encre); border-radius: 12px; }
+.compte-ligne:hover { background: var(--survol); }
+.compte-ligne img { width: 40px; height: 40px; border-radius: 50%; flex: none; }
+.compte-ligne span { display: grid; line-height: 1.3; min-width: 0; }
+.compte-ligne small { color: var(--pied); font-size: .86rem; }
+
+/* Profils */
+.profil-banniere { height: 150px; background: linear-gradient(120deg, var(--lavande-voile), color-mix(in srgb, var(--accent, var(--lavande)) 55%, var(--lavande-voile))); }
+.profil-haut { display: flex; justify-content: space-between; align-items: flex-end; padding: 0 16px; margin-top: -50px; }
+.profil-photo { width: 104px; height: 104px; border-radius: 50%; border: 4px solid var(--coton); background: var(--coton); }
+.profil-photo.avatar-vide { width: 104px; height: 104px; background: var(--lavande-voile); }
+.profil-infos { padding: 10px 16px 4px; }
+.profil-infos h1 { font: 800 1.35rem/1.2 var(--texte); margin: 0; }
+.profil-infos .profil-id { color: var(--pied); margin: 0 0 10px; }
+.profil-infos .bio { margin: 0 0 10px; }
+.bouton-contour {
+  display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 8px 16px; border-radius: 999px; border: 1px solid var(--trait);
+  background: var(--coton); color: var(--encre); font-weight: 700; cursor: pointer; text-decoration: none;
+}
+.bouton-contour:hover { background: var(--survol); }
+.bouton-contour:disabled { cursor: not-allowed; opacity: .55; }
+.note-discrete { font-size: .8rem; color: var(--pied); }
+.onglets { display: flex; border-bottom: 1px solid var(--trait); overflow-x: auto; scrollbar-width: none; }
+.onglets a { flex: 1; text-align: center; text-decoration: none; color: var(--pied); font-weight: 600; padding: 14px 12px; white-space: nowrap; position: relative; min-height: 48px; }
+.onglets a:hover { background: var(--survol); }
+.onglets a[aria-current="page"] { color: var(--encre); font-weight: 800; }
+.onglets a[aria-current="page"]::after { content: ""; position: absolute; left: 50%; bottom: 0; width: 56px; transform: translateX(-50%); height: 4px; border-radius: 4px; background: var(--focus); }
+.liste-comptes { list-style: none; margin: 0; padding: 4px 0; }
+.liste-comptes li { display: flex; align-items: center; gap: 10px; padding-inline-end: 16px; }
+.liste-comptes .compte-ligne { flex: 1; min-width: 0; }
+
+.bouton-plein {
+  display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 8px 18px; border-radius: 999px; border: 0;
+  background: var(--actif-fond); color: var(--actif-texte); font-weight: 700; cursor: pointer; text-decoration: none;
+}
+.bouton-icone { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 50%; border: 0; background: none; cursor: pointer; color: var(--encre); }
+.bouton-icone:hover { background: var(--survol); }
+
+.plus-bas { display: flex; justify-content: center; margin: 16px 0; }
+
+/* ——— Écrans moyens : pas de colonne droite. ——— */
+@media (max-width: 1239px) {
+  .app { grid-template-columns: 250px minmax(0, 600px); }
+  .barre-droite { display: none; }
+}
+/* ——— Tablette : colonne gauche réduite aux icônes. ——— */
+@media (max-width: 939px) {
+  .app { grid-template-columns: 76px minmax(0, 600px); gap: 0 12px; }
+  .barre-gauche { align-items: center; }
+  .nav a, .plus > summary { padding: 12px; }
+  .nav a span, .plus > summary span, .marque span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .marque { padding: 6px; }
+}
+/* ——— Téléphone : une seule rangée en haut (logo, recherche, « Plus ») ; la navigation devient une barre d'onglets en bas. ——— */
+@media (max-width: 699px) {
+  body { padding-bottom: calc(64px + env(safe-area-inset-bottom)); }
+  html { scroll-padding-bottom: calc(72px + env(safe-area-inset-bottom)); }
+  .app { display: block; }
+  .centre { border-inline: 0; min-height: 100vh; }
+  /* Le logo et « Plus » se posent sur la rangée de recherche collante ; la barre elle-même ne capte aucun clic. */
+  .barre-gauche {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 25; height: 61px; flex-direction: row; align-items: center; justify-content: space-between;
+    padding-inline: 10px 6px; pointer-events: none; gap: 0;
+  }
+  .barre-gauche > * { pointer-events: auto; }
+  .recherche-haut { padding: 8px 54px 8px 56px; }
+  .marque { margin: 0; padding: 4px; }
+  .marque img { width: 34px; height: 34px; border-radius: 11px; }
+  .plus { margin: 0; }
+  .plus > summary { padding: 10px; min-height: 44px; }
+  .plus-panneau { inset-inline-start: auto; inset-inline-end: 0; }
+  .nav {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
+    background: color-mix(in srgb, var(--fond) 94%, transparent); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+    border-top: 1px solid var(--trait); padding: 4px 4px calc(4px + env(safe-area-inset-bottom));
+  }
+  .nav a { width: auto; justify-content: center; padding: 10px 2px; min-height: 52px; border-radius: 12px; }
+  .post { padding: 10px 12px 2px; grid-template-columns: 40px minmax(0, 1fr); gap: 0 10px; }
+  .post-raison { margin-inline-start: 26px; }
+  /* Le repère « Ressource existante » passe sous l'en-tête plutôt que de couper la date. */
+  .post-tete { flex-wrap: wrap; }
+  .post-meta { white-space: normal; }
+  .badge { margin-inline-start: 0; flex-basis: 100%; order: 3; }
+  .post-actions { max-width: none; }
+  .toast { bottom: calc(76px + env(safe-area-inset-bottom)); }
+  .profil-banniere { height: 110px; }
+  .profil-photo, .profil-photo.avatar-vide { width: 84px; height: 84px; }
+  .profil-haut { margin-top: -42px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+
+/* ——— Ajouts du site (P4) ——— */
+/* Hébreu : Recursive et Atkinson n'ont aucun glyphe hébreu (ADR 0012) ; police système en attendant le choix de l'utilisateur. */
+:root[lang="he"] { --texte: "Atkinson Hyperlegible Next", system-ui, -apple-system, "Arial Hebrew", "Noto Sans Hebrew", "Segoe UI", sans-serif; }
+.post-texte[dir="rtl"] .points li::before { content: "←"; }
+[dir="rtl"] .icone-sens { transform: scaleX(-1); }
+.traduction-note { margin: 2px 0 0; font-size: .82rem; color: var(--pied); }
+.traduction-note .lien-discret { color: var(--lavande-encre); font-weight: 600; text-decoration: none; }
+.traduction-note .lien-discret:hover { text-decoration: underline; }
+.intro-page { margin: 0; padding: 0 16px 14px; color: var(--pied); }
+.plus-titre { display: flex; align-items: center; gap: 8px; margin: 4px 8px 6px; font-weight: 700; color: var(--pied); font-size: .86rem; }
+.choix-langue { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 8px 6px; }
+.encart .choix-langue { padding: 0 14px 8px; }
+.choix-langue button {
+  min-height: 40px; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--trait); background: var(--coton); color: var(--encre);
+  font-weight: 600; cursor: pointer;
+}
+.choix-langue button:hover { background: var(--survol); }
+.choix-langue button[aria-pressed="true"] { background: var(--actif-fond); color: var(--actif-texte); border-color: var(--actif-fond); }
+.vide-page img { margin: 0 auto 10px; border-radius: 20px; }
+.fin-fil, .erreur-fil { text-align: center; color: var(--pied); font-size: .9rem; padding: 18px 16px 28px; margin: 0; }
+.erreur-fil { color: var(--alerte); }
+.compte-resultats { margin: 0; padding: 10px 16px; color: var(--pied); font-size: .88rem; border-bottom: 1px solid var(--trait); }
+.liste-comptes .compte-ligne { align-items: flex-start; padding: 12px 16px; }
+.liste-comptes .compte-ligne img { width: 48px; height: 48px; }
+.specialite { color: var(--pied); font-size: .9rem; }
+.mention-agent { color: var(--pied); font-weight: 500; font-size: .86rem; }
+.profil-nom { font: 800 1.35rem/1.2 var(--texte); margin: 0; }
+.profil-infos .specialite { margin: 0 0 10px; }
+.onglet-seul { margin: 6px 0 0; padding: 14px 16px; font: 800 1rem/1.2 var(--texte); border-bottom: 1px solid var(--trait); }
+.profil-banniere[data-compte] { background: linear-gradient(120deg, var(--lavande-voile), color-mix(in srgb, var(--accent) 55%, var(--lavande-voile))); }
+.tuile-explorer > img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.lien-partage input { direction: ltr; }
+@media (max-width: 699px) {
+  .barre-droite { display: none; }
+}

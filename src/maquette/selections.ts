@@ -87,16 +87,17 @@ function lienSur(url: unknown, hote: string): string | null {
   }
 }
 
-export async function selectionsDeLaMaquette(executeur: Lecteur, generatedAt: string): Promise<DonneesSelections> {
-  const r = await executeur.execute(`
+export async function selectionsDeLaMaquette(executeur: Lecteur, generatedAt: string, ids?: readonly number[]): Promise<DonneesSelections> {
+  if (ids && ids.length === 0) return { selections: [], selections_non_planifiees: [], recherche: [] };
+  const r = await executeur.execute({ args: ids ? [...ids] : [], sql: `
     select p.id, p.status, p.account_id, p.published_at, d.origine, d.model, d.prompt_version, d.checks, d.created_at as importe_le,
       rv.id as revision_id, rv.content, pp.jour, pp.rang, pp.etat, pp.utilise_reserve, pp.motif
     from post p
     join news_item n on n.id = p.news_item_id and n.kind = 'selection'
     join post_draft d on d.news_item_id = p.news_item_id
     join post_revision rv on rv.post_id = p.id and rv.seq = (select max(seq) from post_revision x where x.post_id = p.id)
-    left join publication_planifiee pp on pp.post_id = p.id
-    order by p.id`);
+    left join publication_planifiee pp on pp.post_id = p.id${ids ? `\n    where p.id in (${ids.map(() => '?').join(', ')})` : ''}
+    order by p.id` });
   const validite = await validiteLien(executeur);
   const maintenant = new Date(generatedAt);
   const visibles = r.rows.filter((row) => row.status === 'publie' || (row.status === 'en_attente' && row.etat !== null));

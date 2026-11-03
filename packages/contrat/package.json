@@ -1,0 +1,13 @@
+{
+  "name": "@curation/contrat",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Contrat de l'API v1 (schémas Zod et types), partagé par le serveur, le site et l'application (ADR 0010).",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "zod": "4.6.7"
+  }
+}

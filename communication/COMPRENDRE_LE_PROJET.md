@@ -22,6 +22,7 @@
 15. Sélection, délais, budget et visuels
 16. L'expérience visée et ce qu'elle change
 17. Ressources pour construire, recherche et interface façon X
+18. Le site en trois langues
 
 ---
 
@@ -329,7 +330,7 @@ _Hypothèses, à remplacer par des mesures en P3 :_ par publication, rédaction 
 | P1 | collecte fiable d'une source officielle (5 documents réels, sans doublon, export JSON) | **réalisé le 2026-10-30** |
 | P2 | produits et versions, 5 sources officielles, maquette du fil social, du profil de l'agent et des Reels | **réalisé le 2026-10-30**, maquette validée et fusionnée dans `main` |
 | P3 | brouillons de publication signés par un des six comptes éditoriaux : accroche, nouveauté, intérêt, exemple d'usage, prérequis, limites, carrousel, citations vérifiées ; coût réel mesuré | **en cours** : collecte élargie réelle ; code des brouillons écrit et testé sur faux modèle, aucun brouillon réel, coût non mesuré (section 14) |
-| P4 | site social : fil, publication, profils des comptes, fiche, langue du navigateur | V1, prévu |
+| P4 | site social : fil, publication, profils des comptes, fiche, interface en anglais, français et hébreu, traduction des posts | **en cours** : site, API v1, trois langues et traductions construits en local le 2026-11-03 (section 18) ; fiche, historique des versions et carrousels restants |
 | P5 | publication automatique planifiée, garde-fou contre les doublons entre sources, corrections visibles, quotas, pilotage, mise en ligne | **fin de la V1**, prévu |
 | P6 | découvertes pour construire, recherche des publications, suivi des informations obsolètes, sources élargies (Hugging Face, MCP, pages d'état, X selon l'accès validé, Reddit différé…), incidents, score de découverte, comptes supplémentaires si utiles | après la V1, proposé |
 | P7 | médias et Reels : vidéos hébergées, démonstrations externes intégrées | après la V1, proposé |
@@ -557,3 +558,36 @@ Le porteur du projet veut une interface « vraiment comme sur X, comme sur Insta
 - Ton des textes : le public connaît l'écosystème, donc les termes courants ne sont jamais définis.
 
 Aucune de ces fonctions sociales n'est construite : les comptes arrivent en P9, les messages privés en P10.
+
+## 18. Le site en trois langues _(construit en local le 2026-11-03, P4 en cours ; rien n'est publié)_
+
+### Ce qui est construit
+
+- **Le site** (`apps/web`, Next.js 16) : fil, page de publication, profils des six comptes éditoriaux, liste des comptes, Explorer et recherche. Le rendu reprend la maquette façon X : colonne de gauche, recherche collante en haut, post réduit avec « Voir plus », bouton vers la ressource, visuel, « Afficher les commentaires » (vide), partager, mention IA et « Sources ». Sur téléphone, la navigation passe en bas. Le site est installable sur l'écran d'accueil grâce à un manifeste et à ses icônes.
+- **L'API v1** (`/api/v1/fil`, `/publications/:id`, `/comptes`, `/comptes/:id`, `/recherche`) : la même pour le site et pour la future application. Ses réponses sont décrites une seule fois, dans `packages/contrat`, et vérifiées avant chaque envoi. Le fil est paginé par curseur.
+- **Ce qui est visible** : en local, le site est en mode aperçu. Il montre les 32 publications planifiées, marquées « Prévue le ». En mode public, il ne montre que les publications publiées : aucune pour l'instant.
+
+### Les langues
+
+- **L'interface** existe en anglais, en français et en hébreu. Ses textes sont dans un paquet partagé avec l'application (`packages/textes`).
+- **Le choix de la langue** suit cet ordre : le choix enregistré dans un cookie, puis la langue du navigateur, puis l'anglais.
+- **En hébreu**, toute la page passe de droite à gauche : la navigation, les menus et les flèches sont en miroir. Les identifiants (@nodi), les adresses, les noms de dépôts, les passages cités et les visuels restent de gauche à droite.
+- **La police hébraïque** n'est pas encore choisie. En attendant, c'est la police du système qui s'affiche. Les textes hébreux ont été traduits par Claude Code : un locuteur natif doit les relire avant le lancement.
+
+### La traduction des posts, comme sur X
+
+1. Chaque post est rédigé en anglais. L'étape `npm run traduire` le traduit ensuite en français et en hébreu, titre compris, avec DeepSeek Flash.
+2. Le code contrôle chaque traduction. Tous les champs doivent être présents. Les chiffres, les versions, les noms propres, le code et les adresses de l'original doivent s'y retrouver tels quels, et aucun nombre ne doit apparaître en plus. En hébreu, le texte doit contenir de l'hébreu.
+3. Une traduction qui échoue au contrôle est gardée « en écart » pour la trace. Elle n'est jamais affichée : le post reste alors en anglais.
+4. À l'écran, le post s'affiche traduit, avec « Traduit automatiquement de l'anglais » et un bouton « Voir l'original ». Les passages cités et le texte des images restent en anglais. La vérification mot pour mot porte toujours sur l'original.
+
+**Premier lot réel (2026-11-03, heures pleines)** : 64 traductions, soit 32 publications en 2 langues. 58 sont valides du premier coup. Les 6 écarts ont été retentés deux fois, et le recontrôle a réparé un faux écart. Résultat : 61 valides, 3 écarts fondés (le nom « React Best Practices » traduit, un « 1 » perdu en hébreu). Coût mesuré : 74 appels, 0,034 $, soit environ 0,001 $ par publication pour les deux langues. L'estimation de l'ADR 0012 était de 0,0015 $.
+
+### Sécurité et accessibilité
+
+- **Contenus collectés** : React insère tout le texte comme du texte, jamais comme du HTML. Seuls les liens en https deviennent cliquables. Les tests vérifient qu'un `<img onerror>` reste du texte et qu'aucun lien `javascript:` n'est affiché, y compris dans les noms des sites d'une sélection : ce défaut a été trouvé par les tests, puis corrigé.
+- **Accessibilité** : axe-core n'a relevé aucune violation sur 36 vues (6 pages, 3 langues, 375 et 1 280 px de large, thème clair). Le thème sombre n'a pas été audité.
+
+### Ce qui reste pour finir P4
+
+La fiche d'approfondissement et l'historique des versions, les carrousels à plusieurs images, la traduction du texte alternatif des images, le choix de la police hébraïque et la relecture de l'hébreu par un locuteur natif.

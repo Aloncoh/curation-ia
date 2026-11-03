@@ -2,14 +2,15 @@
 // Rendu des montages en images, par un navigateur local sans réseau. Le code contrôle la mise en page réelle : un texte
 // qui déborde ou deux étiquettes qui se chevauchent refusent l'image au lieu de la publier abîmée.
 import { mkdirSync, readFileSync, rmSync, statSync } from 'node:fs';
-import { join } from 'node:path';
+import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { chromium, type Page } from 'playwright-core';
 import { COMPTES } from '../maquette/exemples.ts';
 import { defautsMontage, htmlMontage, type Montage } from './montage.ts';
 import { FORMAT } from './style.ts';
 
-const racine = (chemin: string) => fileURLToPath(new URL(`../../${chemin}`, import.meta.url));
+// Chemin calculé, pas `new URL(gabarit, import.meta.url)` : le site (Turbopack) tenterait de résoudre le gabarit.
+const racine = (chemin: string) => join(dirname(fileURLToPath(import.meta.url)), '..', '..', chemin);
 const TYPES: Record<string, string> = { png: 'image/png', jpg: 'image/jpeg', jpeg: 'image/jpeg', webp: 'image/webp' };
 
 /** Image locale en adresse `data:` : le rendu ne dépend d'aucune ressource distante. */

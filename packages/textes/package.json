@@ -1,0 +1,10 @@
+{
+  "name": "@curation/textes",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Textes de l'interface en anglais, français et hébreu, et choix de la langue (ADR 0012), partagés par le site et l'application.",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  }
+}

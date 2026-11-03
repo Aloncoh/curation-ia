@@ -1,0 +1,22 @@
+Route (app)
+┌ ƒ /
+├ ƒ /_not-found
+├ ƒ /api/v1/comptes
+├ ƒ /api/v1/comptes/[id]
+├ ƒ /api/v1/fil
+├ ƒ /api/v1/publications/[id]
+├ ƒ /api/v1/recherche
+├ ○ /apple-icon.png
+├ ƒ /comptes
+├ ƒ /comptes/[id]
+├ ○ /icon.png
+├ ○ /manifest.webmanifest
+├ ƒ /marque/[fichier]
+├ ƒ /medias/[...chemin]
+├ ƒ /p/[id]
+└ ƒ /recherche
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+

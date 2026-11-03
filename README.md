@@ -40,6 +40,11 @@ La base locale est créée dans `data/curation.db` (non versionnée). Variable o
 | `npm run ressources -- <sous-commande>` | chaîne des ressources pour construire (ADR 0011), sans appel au modèle : `capturer [slug]` (API GitHub, sans jeton), `source <slug>` (capture lisible), `verifier <fichier.json>` (contrôles d'un brouillon), `importer` (contrôles, visuel, liens vérifiés, mots-clés, planning, index), `chercher "<requête>"` (recherche en mode aperçu, chaque résultat avec sa raison), `planning` (jours prévus sous le plafond). Les publications restent en attente : rien n'est publié avant P5 |
 | `npm run montage` | rend les montages d'exemple dans `maquette/medias/montages/` avec Chrome local, sans réseau ni modèle |
 | `npm run pause` / `npm run resume` | bloque ou rétablit les nouveaux jobs |
+| `npm run web:dev` | lance le site (P4) sur http://localhost:3000, depuis la racine du dépôt : fil, publication, profils, recherche, API `/api/v1`. Mode aperçu par défaut en développement (publications planifiées comprises) ; `CURATION_SITE_MODE=public` n'affiche que les publiées |
+| `npm run web:build` / `npm run web:start` | build de production du site, puis lancement |
+| `npm run web:typecheck` | vérification des types du site (`next build` ne la fait pas avec TypeScript 7) |
+| `npm run traduire -- --confirmer` | **dépense réelle** : traduit en français et en hébreu les publications visibles sans traduction (DeepSeek Flash). Refuse de démarrer sans `CURATION_MODELE=deepseek-flash`, `DEEPSEEK_API_KEY`, `CURATION_MAX_TRADUCTIONS`, `CURATION_PLAFOND_EXECUTION_USD` et `CURATION_PLAFOND_TOTAL_USD`. Options : `--langue=fr`, `--reprendre-ecarts` ; `--recontroler` (sans appel) réapplique les règles de contrôle |
+| `node apps/web/scripts/audit-axe.ts` | audit axe-core du site local (6 pages, 3 langues, 375 et 1280 px), avec Chrome |
 | `npm test` | tests sur fixtures, sans réseau |
 | `npm run typecheck` | vérification des types (TypeScript 7) |
 

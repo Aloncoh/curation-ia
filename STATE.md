@@ -1,10 +1,25 @@
 # État du projet
 
-_Mis à jour le 2026-11-03 (matin, après un arrêt forcé du PC et une reprise en deux sessions) : posts, ressources et sélection en anglais ; dépôt et base vérifiés intacts._
+_Mis à jour le 2026-11-03 (fin de matinée) : P4 construit en local (site, API v1, trois langues, traductions réelles) ; P3 toujours ouvert._
 
-- **Phase** : P2 fusionné dans `main`. **P3 en cours, pas terminé** sur `p3-brouillons`. Chaîne des ressources (ADR 0011) avancée avant P6 à la demande de l'utilisateur, sans rouvrir de jalon. Relevé de la base locale le 2026-11-03 : 38 publications, dont 28 `en_attente` et planifiées, 9 `a_verifier` et 1 `rejete`. Rien n'est publié.
-- **Dépôt** : `main` à `e56db82` ; `p3-brouillons` à `b244c29`, non fusionnée, non poussée (aucun dépôt distant). **Tout le travail du 2026-11-03 n'est pas commité** : actualités de l'agent, anglais, autocorrection, ressources traduites. Branche `mobile` à `17f8408`, dans `.worktrees/mobile`.
-- **Tests** : 717 au vert sur fixtures et faux modèle (`npx vitest run`, 2026-11-03 09:17), types OK. Après l'arrêt forcé : `git fsck` ne signale rien, `PRAGMA integrity_check` répond ok, aucun fichier modifié n'est vide. **Blocages** : aucun. **Dépenses DeepSeek** (budget autorisé : 4 $) : 0,149 $ comptés en base (0,134 $ réels, plus les réservations de 3 appels sans coût connu), et 0,0099 $ de traduction des ressources **absents de la base** (voir plus bas), soit environ 0,16 $. Haiku : 0,061 $ réels (comparaison du 2026-11-01). Aucun compte créé.
+## P4 — site social (2026-11-03, en cours)
+
+- **Construit** ([ADR 0013](docs/decisions/0013-site-api-traductions.md)) : site Next.js 16.4.4 (`apps/web`) lancé par `npm run web:dev` sur http://localhost:3000. Il comprend le fil paginé par curseur, la page de publication, les profils des six comptes, la liste des comptes, Explorer et la recherche, ainsi qu'un manifeste qui rend le site installable. L'API v1 (`/api/v1/*`) vit dans `src/api/v1`, avec son contrat dans `packages/contrat`. L'interface existe en anglais, français et hébreu (`packages/textes`). Choix de la langue : cookie, puis navigateur, puis anglais ; en hébreu, `dir="rtl"`.
+- **Traductions** : migration 0011 (`post_traduction`) et étape `npm run traduire` (DeepSeek Flash, budget et `llm_call` étape `traduction`). Le code contrôle chaque traduction : chiffres, versions et noms propres identiques, rien d'ajouté. « Voir l'original » est en place, le texte des images reste en anglais.
+- **Lot réel** (2026-11-03, 08:22–08:27 UTC, heures pleines) : 64 traductions, 61 valides, 3 écarts fondés (posts 3 en fr et he, 82 en he), qui restent affichés en anglais. Coût : 74 appels, 0,0340 $. Base sauvegardée avant migration : `exports/curation-avant-p4.db`.
+- **Vérifié** : 751 tests au vert, types OK (`typecheck`, `web:typecheck`), `next build` réussi. Dans le navigateur, en, fr et he vérifiés sur ordinateur et à 375 px : choix mémorisé après rechargement, hébreu en miroir, « Voir l'original » dans les deux sens. axe-core : 0 violation sur 36 vues (thème clair).
+- **Reste pour sortir de P4** :
+  - fiche d'approfondissement et historique des versions ;
+  - carrousels à plusieurs images ;
+  - texte alternatif des images traduit ;
+  - thème sombre audité ;
+  - police hébraïque à choisir (l'utilisateur ; Rubik proposée par la session mobile) ;
+  - hébreu relu par un locuteur natif.
+- **Pour P5, à demander à l'utilisateur** : comptes Vercel et Turso, un domaine, un dépôt GitHub pour les Actions.
+
+- **Phase** : P2 fusionné dans `main`. **P3 en cours, pas terminé**, et **P4 en cours** (voir plus haut), sur `p3-brouillons`. Chaîne des ressources (ADR 0011) avancée avant P6 à la demande de l'utilisateur, sans rouvrir de jalon. Relevé de la base locale le 2026-11-03 : 38 publications, dont 28 `en_attente` et planifiées, 9 `a_verifier` et 1 `rejete`. Rien n'est publié.
+- **Dépôt** : `main` à `e56db82` ; `p3-brouillons` non fusionnée, non poussée (aucun dépôt distant) : le travail P3 du 2026-11-03 est dans `b698ffa`, P4 dans le commit qui suit. Branche `mobile` à `17f8408`, dans `.worktrees/mobile`, non fusionnée.
+- **Tests** : 751 au vert sur fixtures et faux modèle (`npx vitest run`, 2026-11-03 10:29), types OK. Après l'arrêt forcé : `git fsck` ne signale rien, `PRAGMA integrity_check` répond ok, aucun fichier modifié n'est vide. **Blocages** : aucun. **Dépenses DeepSeek** (budget autorisé : 4 $) : 0,2568 $ comptés en base au 2026-11-03 10:30 (traductions P4 comprises, 0,0340 $), plus 0,0099 $ de traduction des ressources **absents de la base** (voir plus bas), soit environ 0,267 $. Haiku : 0,061 $ réels (comparaison du 2026-11-01). Aucun compte créé.
 
 ## Ce qui fonctionne réellement (vérifié le 2026-10-31, complété le 2026-11-02)
 
@@ -16,7 +31,7 @@ _Mis à jour le 2026-11-03 (matin, après un arrêt forcé du PC et une reprise 
 - **Brouillons de l'agent du site : non, jamais exécutés en réel.** Seule la comparaison de deux modèles a appelé une API (2026-11-01) ; elle n'écrit pas de brouillon.
 - **Chaîne des ressources : oui, en local, sans modèle** (vérifié le 2026-11-02). 21 ressources capturées par l'API GitHub, 21 brouillons rédigés par Claude Code et contrôlés par le code, 21 visuels rendus, 21 boutons « Voir le dépôt » vérifiés (69 vérifications réussies entre 15:33 et 18:46 UTC), 1 088 mots-clés enregistrés, 21 publications indexées et planifiées sous le plafond (15 le 2026-11-02, 6 le 2026-11-03), toutes `en_attente`. Publication réelle : P5.
 - **Recherche : oui, en mode aperçu.** Par exemple « mémoire » trouve 3 ressources, « code review » 1, chacune avec sa raison ; en mode public, 0 résultat, puisque rien n'est publié. « motion design » ne trouve qu'une ressource (frontend-design), alors que SPEC §7.15 en attend plusieurs : à revoir.
-- **Affichage : maquette statique locale** façon X (colonne gauche, recherche en haut, post réduit, mots-clés invisibles), avec les 21 publications de ressources en aperçu ; site réel (P4) non commencé. Retours d'interface du 2026-11-02 reportés dans SPEC §6 bis ; leur conformité complète n'a pas été revue dans un navigateur pendant la mise à jour des documents.
+- **Affichage : site réel en local depuis le 2026-11-03** (section P4 plus haut) ; la maquette statique locale reste disponible, façon X (colonne gauche, recherche en haut, post réduit, mots-clés invisibles), avec les 21 publications de ressources en aperçu ; Retours d'interface du 2026-11-02 reportés dans SPEC §6 bis ; leur conformité complète n'a pas été revue dans un navigateur pendant la mise à jour des documents.
 
 ## Harmonisation du 2026-11-01
 
@@ -141,12 +156,13 @@ M3 construit le 2026-11-03 et validé par l'utilisateur (« je valide tout »), 
 
 ## Prochaine action
 
-Montrer à l'utilisateur la maquette façon X et les 21 publications de ressources ; vérifier dans le navigateur, ordinateur et téléphone, clair et sombre, que chaque retour de SPEC §6 bis est appliqué ; améliorer « motion design » dans la recherche. Ensuite : importer les corrections des exemples dès qu'elles arrivent, puis préparer les avis à l'aveugle. Rien n'est commité. Aucun appel payant sans validation du fournisseur, de la clé et des plafonds. Règle visuelle : photos qui donnent envie, comme Radar/Google.
+Montrer le site à l'utilisateur (`npm run web:dev`, puis http://localhost:3000) dans les trois langues. Lui demander : la police hébraïque (Rubik proposée), une relecture native de l'hébreu, puis les comptes de P5 (Vercel, Turso, domaine, dépôt GitHub). Ensuite, finir P4 : fiche et historique des versions, carrousels, texte alternatif traduit, thème sombre audité. Aucun appel payant sans plafonds explicites et `--confirmer`.
 
 ## Repères techniques
 
 - Cache npm `~/.npm` d'un autre utilisateur → `npm install --cache <dossier temporaire>`.
 - Le hook GateGuard refuse la première commande Bash et la première modification de chaque fichier par séance : donner les informations demandées puis relancer.
+- Site : `npm run web:dev` depuis la racine (configuration `site` de `.claude/launch.json`) ; `next build` ne vérifie pas les types avec TypeScript 7, d'où `npm run web:typecheck`. Un module `'use client'` n'exporte que des composants : une fonction partagée va dans `apps/web/lib/`.
 - Les agents d'un workflow de recherche peuvent utiliser le navigateur intégré : vérifier la maquette dans un onglet à soi (`tabs_create`) et toujours passer son `tabId`.
 - `drizzle-kit generate` s'arrête sur une question si une colonne disparaît en même temps qu'une autre apparaît : le faire en deux migrations.
 - La sonde et les relectures utilisent `data/curation.db` : attendre la fin de la sonde avant une migration.

@@ -78,6 +78,13 @@
       "when": 1793642910506,
       "tag": "0010_chaine_rangs",
       "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "6",
+      "when": 1793692867452,
+      "tag": "0011_traductions",
+      "breakpoints": true
     }
   ]
 }

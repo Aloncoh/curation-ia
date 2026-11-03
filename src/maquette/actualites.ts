@@ -45,8 +45,10 @@ type Lecteur = Client | Transaction;
 const cite = (v: unknown): Cite | null =>
   v && typeof v === 'object' && typeof (v as Cite).texte === 'string' && Array.isArray((v as Cite).passages) ? (v as Cite) : null;
 
-export async function actualitesDeLaMaquette(executeur: Lecteur): Promise<{ actualites: MaquetteActualite[]; recherche: DocumentRecherche[] }> {
-  const r = await executeur.execute(`
+/** `ids` : seulement ces publications (page du fil de l'API v1), sans tout charger. */
+export async function actualitesDeLaMaquette(executeur: Lecteur, ids?: readonly number[]): Promise<{ actualites: MaquetteActualite[]; recherche: DocumentRecherche[] }> {
+  if (ids && ids.length === 0) return { actualites: [], recherche: [] };
+  const r = await executeur.execute({ args: ids ? [...ids] : [], sql: `
     select p.id, p.status, p.account_id, p.published_at, n.kind, n.title, rv.id as revision_id, rv.content,
       pp.jour, pp.rang, pp.etat, pp.utilise_reserve, pp.priorite, dr.model, dr.prompt_version,
       s.id as source_id, s.name as source_name, doc.url, c.title as capture_titre, c.content as capture, c.content_format, c.captured_at
@@ -59,8 +61,8 @@ export async function actualitesDeLaMaquette(executeur: Lecteur): Promise<{ actu
     join source_document doc on doc.id = ps.document_id
     join source s on s.id = doc.source_id
     left join publication_planifiee pp on pp.post_id = p.id
-    where p.status = 'publie' or (p.status = 'en_attente' and pp.post_id is not null)
-    order by p.id`);
+    where (p.status = 'publie' or (p.status = 'en_attente' and pp.post_id is not null))${ids ? ` and p.id in (${ids.map(() => '?').join(', ')})` : ''}
+    order by p.id` });
   const actualites: MaquetteActualite[] = [];
   const recherche: DocumentRecherche[] = [];
   for (const row of r.rows) {

@@ -155,3 +155,32 @@ Plafond de 20 publications par jour, sans quota ; ordre de priorité ; objectif 
 ## 2026-11-02 — premier lot réel de brouillons
 
 DeepSeek Flash, 30 actualités, 34 appels, 0,0125 $ (budget autorisé 4 $). 19 écartées, 7 à approfondir, 1 sortie invalide, 3 brouillons. Relus par l'utilisateur : les 3 sont validés ; condition de la publication automatique remplie (SPEC §7.4). `brouillons:relire` corrigé (découvertes exclues). 683 tests au vert.
+
+## 2026-11-03 — P4 site social construit en local (en cours)
+
+- Point de départ : `b698ffa` sur `p3-brouillons`. Base sauvegardée (`exports/curation-avant-p4.db`), puis migration 0011 (`post_traduction`). [ADR 0013](docs/decisions/0013-site-api-traductions.md).
+- **Construit** :
+  - espaces de travail npm : `apps/web` (Next.js 16.4.4, React 19.3.1), `packages/contrat` (schémas Zod de l'API v1), `packages/textes` (catalogues en, fr, he, choix de la langue repris de la session mobile) ;
+  - API v1 (`src/api/v1`) : fil paginé par curseur, publication, comptes, recherche ; les lecteurs de la maquette acceptent une liste d'identifiants ;
+  - pages : fil, publication, profils, comptes, Explorer et recherche ; manifeste et icônes ; routes à liste fermée pour les montages et les avatars ;
+  - étape `npm run traduire` (option `--recontroler` sans appel) et contrôle des traductions par le code (`src/traduction/`) ;
+  - `src/media/rendu.ts` calcule désormais son chemin sans `new URL(gabarit, import.meta.url)`, que Turbopack ne sait pas résoudre ; même résultat pour les commandes.
+- **Défaut trouvé par les tests et corrigé** : le nom cliquable d'un site de sélection n'était pas recontrôlé à l'affichage. React bloquait le `javascript:`, mais émettait quand même le lien.
+- **Lot réel de traduction** (DeepSeek Flash, 2026-11-03, 08:22–08:27 UTC, heures pleines, plafonds de 0,20 $ par exécution et de 3,99 $ au total) :
+  - premier passage : 64 traductions (32 publications × fr, he), 58 valides, 6 écarts, 0 erreur, 0,0302 $ ;
+  - deux reprises des écarts (0,0022 $ et 0,0016 $), avec entre les deux un recontrôle gratuit après correction d'un faux positif (« Rated » pris pour un nom propre) ;
+  - résultat : **61 valides, 3 écarts fondés**, affichés en anglais ;
+  - total : **74 appels, 40 091 tokens d'entrée, 21 000 de sortie, 0,0340 $**, soit environ 0,0011 $ par publication pour les deux langues (estimation de l'ADR 0012 : 0,0015 $) ;
+  - DeepSeek en base : 0,2568 $, plus 0,0099 $ hors base, sur 4 $ autorisés.
+- **Vérifié** :
+  - `npx vitest run` : 751 tests au vert, dont 34 nouveaux (traduction, API v1, langues, rendu du site : hébreu de droite à gauche, langue de secours, choix mémorisé, « Voir l'original », `<img onerror>`, `javascript:`, chemins des médias) ;
+  - `npm run typecheck`, `npm run web:typecheck` et `npm run web:build` réussis ;
+  - navigateur intégré, en, fr et he, sur ordinateur et à 375 px : langue du navigateur, choix mémorisé par cookie après rechargement, page en miroir en hébreu, « Voir l'original » dans les deux sens, profil, recherche ;
+  - axe-core 4.14.0 : 0 violation sur 36 vues (6 pages × 3 langues × 375 et 1 280 px, thème clair).
+  - Preuves : `communication/linkedin/07-site-trilingue/preuves/brut/`.
+- **Non fait** :
+  - fiche d'approfondissement et historique des versions ; carrousels à plusieurs images ;
+  - texte alternatif traduit ; thème sombre audité ;
+  - police hébraïque (décision de l'utilisateur) ; relecture native de l'hébreu ;
+  - installation réelle sur un téléphone (seul le manifeste est servi et vérifié) ;
+  - mise en ligne (P5).
