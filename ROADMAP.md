@@ -57,7 +57,7 @@ Correspondance avec la feuille de route du 2026-10-30 : P0–P5 inchangés (cont
 3. **Dépôt GitHub privé**, par exemple `curation-ai`, sans le dossier `.worktrees/`.
 4. **Secrets et variables**, saisis par l'utilisateur lui-même, jamais en conversation :
    - secrets du dépôt GitHub (Settings → Secrets and variables → Actions → Secrets) : `TURSO_DATABASE_URL`, `TURSO_AUTH_TOKEN`, `DEEPSEEK_API_KEY` ;
-   - variables du dépôt GitHub (même page, onglet Variables) : `CURATION_PLAFOND_JOUR_USD` (proposé : `0.20`), `CURATION_PLAFOND_TOTAL_USD` (proposé : `3.99`, le budget DeepSeek autorisé moins les 0,0099 $ hors base), puis `CHAINE_ACTIVE` = `oui` en dernier, quand tout est prêt : c'est l'interrupteur de la chaîne ;
+   - variables du dépôt GitHub (même page, onglet Variables) : `CURATION_PLAFOND_JOUR_USD` (proposé : `0.20`), `CURATION_PLAFOND_TOTAL_USD` (proposé : `3.95`, le budget DeepSeek autorisé moins une marge pour les dépenses non enregistrées en base, environ 0,02 $), puis `CHAINE_ACTIVE` = `oui` en dernier, quand tout est prêt : c'est l'interrupteur de la chaîne ;
    - variables d'environnement Vercel (projet → Settings → Environment Variables) : `DATABASE_URL`, `DATABASE_AUTH_TOKEN` ;
    - dans `.env.local`, pour la copie initiale : `DATABASE_URL`, `DATABASE_AUTH_TOKEN`.
 5. **Domaine** : acheté chez le registraire de son choix, puis ajouté au projet Vercel (la dépense est la sienne).
