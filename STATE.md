@@ -188,6 +188,12 @@ M3 construit le 2026-11-03 et validé par l'utilisateur (« je valide tout »), 
 11. ~~Recherche en P4 ou P6~~ : dépassé, recherche par mots-clés construite pour les ressources (SPEC §7.15).
 14. **Chaîne des ressources** : relire les 21 publications en aperçu dans la maquette ; confirmer les réglages proposés (réserve de 5, nouvelle sortie à 14 jours, inactivité à 90 jours, vérification de lien valable 7 jours ; SPEC §11) — avant P5.
 
+## Mise en ligne (2026-11-04)
+
+- Base Turso `curation-ia` (aws-eu-west-1) créée par l'utilisateur ; copie faite le 2026-11-04 (`npm run turso:copier -- --confirmer`) : migrations et toutes les tables, vérifiées par `npm run etat` (34 en attente, 0 publiée, 0,5042 $). Première publication le 2026-11-04 à la demande de l'utilisateur (`npm run publier -- --confirmer` sur Turso) : 20 publiées (plafond du jour atteint), visibles sur https://web-phi-nine-38.vercel.app, traduites en français. **La base Turso fait désormais foi** : la base locale ne reflète pas ces publications.
+- Projet Vercel `web` (racine `apps/web`) et variables `DATABASE_URL`, `DATABASE_AUTH_TOKEN` créés par l'utilisateur ; premier déploiement à confirmer. Secrets GitHub posés par l'utilisateur (à confirmer : variables de plafond).
+- `.env.local` : les lignes `DATABASE_URL` et `DATABASE_AUTH_TOKEN` (Turso) sont **commentées** : actives, elles feraient écrire toutes les commandes locales dans la base en ligne. Les décommenter seulement pour une opération voulue sur Turso.
+
 ## Prochaine action
 
 L'utilisateur crée lui-même, dans l'ordre : compte Vercel, compte Turso (base `curation-ai`, `aws-eu-west-1`), dépôt GitHub privé, secrets et variables (noms exacts dans ROADMAP.md, « P5 — plan »), domaine. Ensuite, avec son accord : `npm run turso:copier -- --confirmer`, premier envoi du code, un cycle lancé à la main, vérification en ligne, puis `CHAINE_ACTIVE` = `oui`. Confirmer aussi l'interprétation de la police hébraïque. Aucun appel payant sans plafonds explicites et `--confirmer`.
