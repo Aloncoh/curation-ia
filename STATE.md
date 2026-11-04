@@ -4,6 +4,7 @@ _Mis à jour le 2026-11-03 (début d'après-midi) : **P5 préparé en local** (G
 
 ## P5 — chaîne en ligne (préparé le 2026-11-03, en attente des comptes de l'utilisateur)
 
+- **Décision de l'utilisateur** (2026-11-04) : dépôt privé, cycle toutes les heures (cron `7 * * * *`) ; public et 5 minutes si l'heure ne suffit pas (ADR 0006). Durée réelle d'un cycle à mesurer au premier lancement.
 - **Décision de l'utilisateur** (2026-11-03) : « Actions, 5 minutes ». ADR 0006 mise à jour. L'objectif d'une minute n'est pas atteignable ainsi, et GitHub ne garantit pas l'heure d'un cron.
 - **Préparé** :
   - workflows `.github/workflows/chaine.yml` (cron `2-59/5 * * * *`, un seul cycle à la fois, désactivé tant que `CHAINE_ACTIVE` ≠ `oui`, secrets du dépôt seulement) et `verifications.yml` (types et tests à chaque envoi) ;

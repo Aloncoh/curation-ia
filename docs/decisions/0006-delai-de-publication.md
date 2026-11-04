@@ -1,5 +1,7 @@
 # ADR-0006 : viser une publication dans la minute
 
+> **Décision de l'utilisateur du 2026-11-04** : le dépôt reste **privé**, le cycle passe **à une heure** (cron `7 * * * *`). Raison : en privé, GitHub Actions offre environ 2 000 minutes par mois ; un cycle estimé à 2,5 minutes (installation comprise, arrondie à la minute, estimation non mesurée) consommerait environ 21 000 minutes par mois toutes les 5 minutes, 3 600 toutes les 30 minutes et 1 800 toutes les heures. Si l'heure ne suffit pas, l'utilisateur passera le dépôt en public et le cycle à 5 minutes. La durée réelle d'un cycle sera mesurée au premier lancement.
+>
 > **Décision de l'utilisateur du 2026-11-03** : « Actions, 5 minutes ». Le cycle tourne sur **GitHub Actions, avec un cron toutes les 5 minutes**. Le processus permanent (point 3 ci-dessous) n'est pas retenu, et la proposition des deux rythmes (point 4) est remplacée par l'intervalle propre à chaque source, appliqué par `npm run lancer`.
 >
 > **Ce que ce choix change pour l'objectif d'une minute**, dit sans détour :
