@@ -11,7 +11,10 @@
   l'état final si le système demande moins d'animations (prefers-reduced-motion).
 -->
 <style>
+  @font-face { font-family: "Recursive"; src: url(../node_modules/@fontsource-variable/recursive/files/recursive-latin-full-normal.woff2) format("woff2"); font-weight: 300 1000; font-display: swap; }
+  @font-face { font-family: "Atkinson"; src: url(../node_modules/@fontsource-variable/atkinson-hyperlegible-next/files/atkinson-hyperlegible-next-latin-wght-normal.woff2) format("woff2"); font-weight: 200 800; font-display: swap; }
   :root {
+    --titre: "Recursive", ui-rounded, sans-serif; --texte: "Atkinson", system-ui, sans-serif; --mono: "Recursive", ui-monospace, monospace;
     --fond: #140e19; --encre: #f3eefb; --pied: #b0a6c4; --violet: #a68bff; --violet-fort: #6c47e8;
     --rayon-orbite: min(24dvh, 30vw, 230px); --taille-agent: min(12dvh, 15vw, 108px);
     color-scheme: dark;
@@ -20,9 +23,9 @@
   html, body { margin: 0; height: 100%; }
   body {
     background: radial-gradient(120% 90% at 50% 40%, #2b1645 0%, var(--fond) 62%); color: var(--encre);
-    font: 400 1rem/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; overflow: hidden;
+    font: 400 1rem/1.5 var(--texte); overflow: hidden;
   }
-  .scene { position: relative; min-height: 100dvh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5dvh; padding: 6dvh 0 4dvh; isolation: isolate; }
+  .scene { position: relative; min-height: 100dvh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4dvh; padding: 6dvh 0 4dvh; isolation: isolate; }
 
   /* Ciel : points lumineux qui scintillent. */
   /* Fond vivant, qui continue de tourner après l'animation : le ciel pivote lentement, un halo tourne derrière. */
@@ -71,25 +74,29 @@
   .agent:hover img, .agent:focus-visible img { transform: scale(1.08); }
   .agent:focus-visible { outline: none; }
   .agent:focus-visible img { box-shadow: 0 0 0 3px var(--fond), 0 0 0 6px #fff, 0 0 28px 6px var(--c); }
-  .agent b { font: 800 clamp(.8rem, 2.4vmin, 1rem)/1 system-ui, sans-serif; letter-spacing: .04em; animation: apparait .5s ease calc(var(--d) + .5s) both; }
+  .agent b { color: var(--encre); font: 600 clamp(.8rem, 2.2vmin, .95rem)/1 var(--mono); font-variation-settings: "MONO" 1, "CASL" 0; animation: apparait .5s ease calc(var(--d) + .5s) both; }
   .agent small { font-size: .74rem; color: var(--pied); text-align: center; max-width: 16ch; opacity: 0; transition: opacity .2s; }
   .agent:hover small, .agent:focus-visible small { opacity: 1; }
 
   /* Titre, phrase d'accueil et boutons, après l'arrivée des agents. */
-  .texte { position: relative; display: grid; justify-items: center; gap: 14px; padding: 0 16px; text-align: center; }
-  .texte h1 { margin: 0; font: 800 clamp(1.7rem, 5vmin, 2.6rem)/1.1 system-ui, sans-serif; letter-spacing: -.02em; animation: monte .7s ease 2.7s both; }
-  .texte h1 span { color: var(--violet); }
-  .texte p { margin: 0; max-width: 42ch; color: var(--pied); animation: monte .7s ease 2.95s both; }
+  .entete { display: grid; justify-items: center; gap: 8px; padding: 0 16px; text-align: center; }
+  .entete h1 {
+    margin: 0; font-family: var(--titre); font-weight: 780; font-size: clamp(2rem, 6vmin, 3.2rem); line-height: 1;
+    font-variation-settings: "CASL" 1, "slnt" 0; letter-spacing: -.015em; animation: monte .7s ease 2.7s both;
+  }
+  .entete p { margin: 0; max-width: 44ch; text-wrap: balance; color: var(--pied); font-size: 1.05rem; animation: monte .7s ease 2.9s both; }
+  .texte { display: grid; justify-items: center; gap: 10px; padding: 0 16px; }
   .actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; animation: monte .7s ease 3.2s both; }
   @keyframes monte { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
-  .bouton { display: inline-block; text-decoration: none; border: 0; border-radius: 999px; padding: 13px 24px; font: 700 1rem/1 system-ui, sans-serif; cursor: pointer; }
+  .bouton { display: inline-block; text-decoration: none; border: 0; border-radius: 14px; padding: 14px 22px; font: 700 1rem/1 var(--texte); cursor: pointer; }
   .bouton.principal { background: var(--violet-fort); color: #fff; box-shadow: 0 10px 30px -10px rgba(108, 71, 232, .9); }
   .bouton.principal:hover { background: #5a37d6; }
-  .bouton.secondaire { background: rgba(255, 255, 255, .08); color: var(--encre); }
+  .bouton.secondaire { background: none; color: var(--pied); padding-inline: 12px; }
+  .bouton.secondaire:hover { color: var(--encre); }
   .bouton:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
-  .passer { position: absolute; top: max(14px, env(safe-area-inset-top)); right: 16px; background: none; border: 0; color: var(--pied); font: 600 .9rem system-ui, sans-serif; cursor: pointer; padding: 8px 10px; border-radius: 999px; }
+  .passer { position: absolute; top: max(14px, env(safe-area-inset-top)); right: 16px; background: none; border: 0; color: var(--pied); font: 500 .82rem var(--mono); font-variation-settings: "MONO" 1; cursor: pointer; padding: 8px 10px; border-radius: 999px; }
   .passer:hover { color: var(--encre); background: rgba(255, 255, 255, .06); }
-  .note { position: absolute; left: 16px; top: max(14px, env(safe-area-inset-top)); font-size: .72rem; color: var(--pied); border: 1px solid rgba(255, 255, 255, .15); border-radius: 999px; padding: 4px 10px; }
+  .note { position: absolute; left: 16px; top: max(14px, env(safe-area-inset-top)); font: 500 .7rem var(--mono); font-variation-settings: "MONO" 1; color: var(--pied); border: 1px solid rgba(255, 255, 255, .15); border-radius: 999px; padding: 4px 10px; }
 
   /* « Passer », ou un système qui demande moins d'animations : l'état final, tout de suite. */
   .fini *, .fini *::before, .fini *::after { animation-delay: 0s !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
@@ -111,26 +118,29 @@
   <span class="note">Maquette — aucun compte n'est créé</span>
   <button class="passer" type="button" id="passer">Passer</button>
 
+  <header class="entete">
+    <h1>Créer un compte</h1>
+    <p>Choisis les agents que tu suis. Ton fil se règle sur eux.</p>
+  </header>
+
   <div class="noyau">
     <span class="onde" aria-hidden="true"></span><span class="onde" aria-hidden="true"></span>
     <span class="orbite-trace" aria-hidden="true"></span>
     <div class="mascotte" role="img" aria-label="Mascotte de Curation AI"></div>
     <nav class="orbite" aria-label="Les six agents éditoriaux">
-      <a class="agent" href="#" style="--a: -90deg; --d: 1.0s; --c: #1fa77a"><span><img src="../assets/brand/agent-nodi.png" alt=""><b>Nodi</b><small>Modèles IA et assistants</small></span></a>
-      <a class="agent" href="#" style="--a: -30deg; --d: 1.15s; --c: #e8732f"><span><img src="../assets/brand/agent-repo.png" alt=""><b>Repo</b><small>Skills, MCP et GitHub</small></span></a>
-      <a class="agent" href="#" style="--a: 30deg; --d: 1.3s; --c: #2f8fd8"><span><img src="../assets/brand/agent-pyxo.png" alt=""><b>Pyxo</b><small>Outils de développement</small></span></a>
-      <a class="agent" href="#" style="--a: 90deg; --d: 1.45s; --c: #9a5cf0"><span><img src="../assets/brand/agent-mova.png" alt=""><b>Mova</b><small>Design et motion</small></span></a>
-      <a class="agent" href="#" style="--a: 150deg; --d: 1.6s; --c: #d99a12"><span><img src="../assets/brand/agent-pulse.png" alt=""><b>Pulse</b><small>Infrastructures et incidents</small></span></a>
-      <a class="agent" href="#" style="--a: 210deg; --d: 1.75s; --c: #12a6a0"><span><img src="../assets/brand/agent-radar.png" alt=""><b>Radar</b><small>Grandes entreprises tech</small></span></a>
+      <a class="agent" href="#" style="--a: -90deg; --d: 1.0s; --c: #1fa77a"><span><img src="../assets/brand/agent-nodi.png" alt=""><b>@nodi</b><small>Modèles IA et assistants</small></span></a>
+      <a class="agent" href="#" style="--a: -30deg; --d: 1.15s; --c: #e8732f"><span><img src="../assets/brand/agent-repo.png" alt=""><b>@repo</b><small>Skills, MCP et GitHub</small></span></a>
+      <a class="agent" href="#" style="--a: 30deg; --d: 1.3s; --c: #2f8fd8"><span><img src="../assets/brand/agent-pyxo.png" alt=""><b>@pyxo</b><small>Outils de développement</small></span></a>
+      <a class="agent" href="#" style="--a: 90deg; --d: 1.45s; --c: #9a5cf0"><span><img src="../assets/brand/agent-mova.png" alt=""><b>@mova</b><small>Design et motion</small></span></a>
+      <a class="agent" href="#" style="--a: 150deg; --d: 1.6s; --c: #d99a12"><span><img src="../assets/brand/agent-pulse.png" alt=""><b>@pulse</b><small>Infrastructures et incidents</small></span></a>
+      <a class="agent" href="#" style="--a: 210deg; --d: 1.75s; --c: #12a6a0"><span><img src="../assets/brand/agent-radar.png" alt=""><b>@radar</b><small>Grandes entreprises tech</small></span></a>
     </nav>
   </div>
 
   <div class="texte">
-    <h1>L'IA va vite. <span>On trie pour toi.</span></h1>
-    <p>Six agents, une seule règle : la source d'abord.</p>
     <div class="actions">
-      <button class="bouton principal" type="button">Créer mon compte</button>
-      <a class="bouton secondaire" href="index.html">Voir le fil d'abord</a>
+      <button class="bouton principal" type="button">Continuer avec un e-mail</button>
+      <a class="bouton secondaire" href="index.html">Plus tard</a>
     </div>
   </div>
 </main>
