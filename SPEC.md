@@ -92,7 +92,7 @@ Le réseau couvre tout l'écosystème, pas seulement GitHub, les skills et MCP :
 Les deux se lisent dans le même fil, sous la même forme de publication, avec les mêmes preuves.
 
 ### 3.6 Volume et priorités éditoriales (décision de l'utilisateur, 2026-11-02)
-- **Plafond initial : 20 publications par jour**, tous comptes éditoriaux confondus, réglable sans toucher au code et relevable après observation. Ce n'est **pas un quota** : si cinq sujets le méritent, cinq publications. Collecter beaucoup n'implique jamais de publier beaucoup.
+- **Plafond : 50 publications par jour** (relevé de 20 à 50 le 2026-11-04 par décision de l'utilisateur, réglage `publication.plafond_jour` de la base en ligne), tous comptes éditoriaux confondus, réglable sans toucher au code et relevable après observation. Ce n'est **pas un quota** : si cinq sujets le méritent, cinq publications. Collecter beaucoup n'implique jamais de publier beaucoup.
 - **Ordre des priorités**, qui guide la sélection sans répartition fixe des 20 places, liste non fermée :
   1. **Nouveaux modèles IA** : capacités, disponibilité, usages concrets, limites.
   2. **Skills et ressources pour construire** : motion design, UX/UI, frontend, code review, automatisation, etc. ; ressources anciennes toujours pertinentes comprises (§7.3 ter, règle des dépôts étoilés inchangée).
