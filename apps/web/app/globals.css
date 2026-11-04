@@ -458,9 +458,9 @@ a.sel-nom:hover { text-decoration: underline; }
 .couv-agent img { width: 28px; height: 28px; border-radius: 50%; display: block; }
 
 /* Annonce courte : vignette carrée à côté du texte. */
-.post-texte-ligne { display: flex; gap: 12px; align-items: flex-start; }
-.post-texte-ligne > :not(.couverture) { flex: 1; min-width: 0; }
-.couv-vignette { flex: none; width: 92px; aspect-ratio: 1; margin: 4px 0 6px; border-radius: 16px; order: 2; }
+.post-texte-ligne { display: flow-root; }
+/* La vignette flotte côté fin de ligne : le texte et la mention de traduction passent à côté puis dessous. */
+.couv-vignette { float: inline-end; width: 92px; aspect-ratio: 1; margin-block: 4px 6px; margin-inline: 12px 0; border-radius: 16px; }
 .couv-vignette .couv-logo { width: 54%; inset-inline-start: 50%; transform: translate(-50%, -50%); border-radius: 26%; }
 .couv-vignette .couv-agent { inset-block-end: 5px; inset-inline-end: 5px; padding: 2px; }
 .couv-vignette .couv-agent img { width: 18px; height: 18px; }
