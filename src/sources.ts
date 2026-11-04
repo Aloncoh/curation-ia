@@ -18,6 +18,11 @@ export interface ProductRef {
 interface BaseSource {
   id: string;
   name: string;
+  /**
+   * Agent qui signe tout ce que publie cette source, quel que soit le compte proposé par le modèle : Radar pour les
+   * grandes entreprises (décision de l'utilisateur du 2026-11-05), Nodi pour les vidéos d'AI Search.
+   */
+  compte?: 'nodi' | 'repo' | 'pyxo' | 'mova' | 'pulse' | 'radar';
   allowedHosts: string[];
   fetchIntervalMinutes: number | null;
   /** Taille maximale de la réponse pour cette source ; la valeur générale (CURATION_MAX_RESPONSE_BYTES) sinon. */
@@ -129,7 +134,19 @@ export const SOURCES: SourceDefinition[] = [
     allowedHosts: ['www.youtube.com'],
     fetchIntervalMinutes: 60,
     attribution: 'AI Search (YouTube)',
+    compte: 'nodi',
   },
+  // Grandes entreprises, signées par Radar (décision de l'utilisateur du 2026-11-05 : NVIDIA, Microsoft, Apple, Amazon et
+  // Tesla obligatoires, liste ouverte). Flux officiels vérifiés le 2026-11-05 (200, 4 à 20 entrées). Tesla : aucun flux
+  // public et site refusé (403) le 2026-11-05 : différé, non contourné. Microsoft : blogs.microsoft.com refuse (403),
+  // « Source », le site d'actualités officiel, répond.
+  { ...flux('nvidia-newsroom', 'NVIDIA Newsroom — flux RSS officiel', 'https://nvidianews.nvidia.com/releases.xml', 'nvidianews.nvidia.com'), compte: 'radar' },
+  { ...flux('nvidia-blog', 'NVIDIA Blog — flux RSS officiel', 'https://blogs.nvidia.com/feed/', 'blogs.nvidia.com'), compte: 'radar' },
+  { ...flux('microsoft-source', 'Microsoft Source — flux RSS officiel', 'https://news.microsoft.com/source/feed/', 'news.microsoft.com'), compte: 'radar' },
+  { ...flux('apple-newsroom', 'Apple Newsroom — flux RSS officiel', 'https://www.apple.com/newsroom/rss-feed.rss', 'www.apple.com'), compte: 'radar' },
+  { ...flux('amazon-news', 'About Amazon — flux RSS officiel', 'https://www.aboutamazon.com/rss/feed.rss', 'www.aboutamazon.com'), compte: 'radar' },
+  { ...flux('amd-press', 'AMD, communiqués — flux RSS officiel', 'https://ir.amd.com/news-events/press-releases/rss', 'ir.amd.com'), compte: 'radar' },
+  { ...flux('meta-newsroom', 'Meta Newsroom — flux RSS officiel', 'https://about.fb.com/feed/', 'about.fb.com'), compte: 'radar' },
   flux('mistral', 'Mistral AI — flux RSS officiel', 'https://mistral.ai/news/rss', 'mistral.ai'),
   flux('huggingface-blog', 'Hugging Face Blog — flux RSS officiel', 'https://huggingface.co/blog/feed.xml', 'huggingface.co'),
   flux('elevenlabs', 'ElevenLabs Blog — flux RSS officiel', 'https://elevenlabs.io/blog/rss.xml', 'elevenlabs.io'),

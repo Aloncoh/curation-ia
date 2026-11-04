@@ -19,9 +19,6 @@ import { Brouillon, Qualification } from './schemas.ts';
 
 export const MAX_TENTATIVES = 2;
 /** La réflexion du modèle compte dans ces plafonds ; une réponse tronquée repart une fois avec le double. */
-/** Compte qui signe les posts tirés d'une source externe attribuée (vidéos AI Search). */
-export const COMPTE_SOURCE_EXTERNE = 'nodi' as const;
-
 export const MAX_TOKENS = { qualification: 4_000, redaction: 12_000, revision: 12_000 };
 /** Renouvelé pendant chaque appel : un bail expiré signifie que le processus a disparu ou s'est arrêté, par exemple en veille. */
 export const DUREE_BAIL_MS = 15 * 60_000;
@@ -226,6 +223,7 @@ export async function genererBrouillons(o: OptionsBrouillons) {
       const annonce = row.announced_at === null ? null : String(row.announced_at);
       const def = SOURCES.find((x) => x.name === String(row.source_nom));
       const attribution = def?.kind === 'feed' ? (def.attribution ?? null) : null;
+      const compteImpose = def?.compte ?? null;
       const doc = documentUtilisateur(titreCapture, texte, produit, { source: String(row.source_nom), annonce, attribution });
       const enregistrer = (status: string, q: Qualification | null, content: unknown, checks: unknown, motifRejet: string | null, diapositives?: DiapositiveResolue[], selection?: Selection) =>
         ecrire(async () => {
@@ -293,8 +291,8 @@ export async function genererBrouillons(o: OptionsBrouillons) {
         }
         q = qualification.valeur;
       }
-      // Vidéos d'AI Search : signées par Nodi (décision de l'utilisateur du 2026-11-04), quel que soit le compte proposé.
-      if (attribution && q.compte !== null) q = { ...q, compte: COMPTE_SOURCE_EXTERNE };
+      // Agent imposé par la source (sources.ts) : Radar pour les grandes entreprises, Nodi pour AI Search.
+      if (compteImpose && q.compte !== null) q = { ...q, compte: compteImpose };
       // Recalculée aussi pour une qualification reprise : un garde-fou durci depuis s'applique sans rien repayer.
       const choix = deciderSelection(q, [titreCapture, texte]);
       if (choix.decision === 'ecarter') { await enregistrer('ecartee', q, null, null, choix.motif, undefined, choix); bilan.ecartees++; continue; }

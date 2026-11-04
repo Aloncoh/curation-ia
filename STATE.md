@@ -194,6 +194,12 @@ M3 construit le 2026-11-03 et validé par l'utilisateur (« je valide tout »), 
 - Projet Vercel `web` (racine `apps/web`) et variables `DATABASE_URL`, `DATABASE_AUTH_TOKEN` créés par l'utilisateur ; premier déploiement à confirmer. Secrets GitHub posés par l'utilisateur (à confirmer : variables de plafond).
 - `.env.local` : les lignes `DATABASE_URL` et `DATABASE_AUTH_TOKEN` (Turso) sont **commentées** : actives, elles feraient écrire toutes les commandes locales dans la base en ligne. Les décommenter seulement pour une opération voulue sur Turso.
 
+## Rôles des agents (2026-11-05, décision de l'utilisateur)
+
+- Ressources signées selon le rôle : Repo (skills, MCP, projets GitHub), Mova (skills de design). Radar, Nodi et Pyxo n'en signent plus. 15 posts réattribués dans Turso (agent seul, statut publié inchangé) et leurs montages régénérés.
+- **Radar couvre toutes les annonces des grandes entreprises** (NVIDIA, Microsoft, Apple, Amazon, Tesla obligatoires ; liste ouverte), sauf la sortie d'un modèle d'IA (Nodi). Sources officielles ajoutées et signées par Radar (`compte: 'radar'` dans sources.ts) : NVIDIA Newsroom et Blog, Microsoft Source, Apple Newsroom, About Amazon, AMD, Meta. **Tesla : aucun flux public, site refusé (403) le 2026-11-05 — différé, non contourné** (piste : X officiel, API payante, ou posts transmis par l'utilisateur). Consigne p3-17.
+- Couvertures : plus d'avatar GitHub (souvent un visage), monogramme du dépôt à la place.
+
 ## Prochaine action
 
 L'utilisateur crée lui-même, dans l'ordre : compte Vercel, compte Turso (base `curation-ai`, `aws-eu-west-1`), dépôt GitHub privé, secrets et variables (noms exacts dans ROADMAP.md, « P5 — plan »), domaine. Ensuite, avec son accord : `npm run turso:copier -- --confirmer`, premier envoi du code, un cycle lancé à la main, vérification en ligne, puis `CHAINE_ACTIVE` = `oui`. Confirmer aussi l'interprétation de la police hébraïque. Aucun appel payant sans plafonds explicites et `--confirmer`.

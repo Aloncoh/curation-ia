@@ -27,16 +27,13 @@ export const DECOUVERTE_VIA =
   "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)";
 
 /**
- * Compte signataire selon le sujet, et non selon le format (décision de l'utilisateur du 2026-11-02 : un fil équilibré,
- * jamais occupé par un seul compte). Radar : ressources officielles des grandes entreprises ; Mova : design et frontend ;
- * Pyxo : méthode et outils de code ; Repo : MCP, collections et écosystème de skills ; Nodi : usages IA du quotidien.
+ * Compte signataire selon le rôle de chaque agent (décision de l'utilisateur du 2026-11-05, qui remplace la répartition
+ * « fil équilibré » du 2026-11-02) : Repo signe les skills, MCP et projets GitHub ; Mova, ceux qui servent le design et
+ * le frontend visuel. Radar (grandes entreprises), Nodi (modèles et assistants) et Pyxo (notes de version des outils)
+ * ne signent aucune ressource.
  */
 const COMPTE_PAR_SLUG: Record<string, CompteId> = {
-  'skills-documents': 'radar', 'skill-creator': 'radar', 'webapp-testing': 'radar', 'agent-browser': 'radar', 'find-skills': 'radar',
-  'frontend-design': 'mova', 'ui-ux-pro-max': 'mova', 'react-best-practices': 'mova', marketingskills: 'mova',
-  superpowers: 'pyxo', 'improve-codebase-architecture': 'pyxo', 'planning-with-files': 'pyxo', 'claude-mem': 'pyxo',
-  'mcp-builder': 'repo', ecc: 'repo', claudeception: 'repo', 'scientific-agent-skills': 'repo',
-  'grill-me': 'nodi', humanizer: 'nodi', 'stop-slop': 'nodi', 'obsidian-skills': 'nodi',
+  'frontend-design': 'mova', 'ui-ux-pro-max': 'mova',
 };
 
 const r = (slug: string, nom: string, depot: string, chemins: string[], remarque?: string, decouverteVia?: string): EntreeRessource => ({

@@ -1,9 +1,10 @@
 // Sujet d'une publication, pour sa couverture (décision de l'utilisateur du 2026-11-05) : avant même de lire le texte,
 // on doit comprendre de quoi parle le post. Le sujet est déduit de l'adresse officielle citée (bouton, puis source) :
 // un éditeur connu donne son logo et sa couleur (bibliothèque simple-icons 16.35.0, CC0 ; une marque qui a demandé son
-// retrait, comme OpenAI, garde un monogramme), un dépôt GitHub donne l'avatar public de son propriétaire. Le logo
+// retrait, comme OpenAI, garde un monogramme), un dépôt GitHub sans marque connue donne son monogramme, jamais l'avatar
+// de son propriétaire, souvent un visage. Le logo
 // identifie le sujet ; il n'affirme aucun partenariat.
-import { siAnthropic, siBlender, siCloudflare, siCursor, siDeepseek, siElevenlabs, siFigma, siGithub, siGooglegemini, siHuggingface, siMistralai, siN8n, siNotion, siNvidia, siSuno, siVercel, siYoutube, type SimpleIcon } from 'simple-icons';
+import { siAmd, siAnthropic, siApple, siBlender, siCloudflare, siCursor, siDeepseek, siElevenlabs, siFigma, siGithub, siGooglegemini, siHuggingface, siMeta, siMistralai, siN8n, siNotion, siNvidia, siSuno, siTesla, siVercel, siYoutube, type SimpleIcon } from 'simple-icons';
 import type { Publication } from '@curation/contrat';
 
 export interface Sujet {
@@ -39,6 +40,13 @@ const EDITEURS: Record<string, Editeur> = {
   'deepseek.com': { nom: 'DeepSeek', icone: siDeepseek },
   'youtube.com': { nom: 'YouTube', icone: siYoutube },
   'openai.com': { nom: 'OpenAI', icone: null, couleur: '#10a37f' },
+  // Grandes entreprises (Radar). Microsoft et Amazon ne figurent plus dans la bibliothèque : monogramme.
+  'apple.com': { nom: 'Apple', icone: siApple, couleur: '#3a3a44' },
+  'microsoft.com': { nom: 'Microsoft', icone: null, couleur: '#0078d4' },
+  'aboutamazon.com': { nom: 'Amazon', icone: null, couleur: '#ff9900' },
+  'amd.com': { nom: 'AMD', icone: siAmd },
+  'fb.com': { nom: 'Meta', icone: siMeta },
+  'tesla.com': { nom: 'Tesla', icone: siTesla },
   'spline.design': { nom: 'Spline', icone: null, couleur: '#7a5cff' },
   'vapi.ai': { nom: 'Vapi', icone: null, couleur: '#14b8a6' },
   'midjourney.com': { nom: 'Midjourney', icone: null, couleur: '#4f6bed' },
@@ -89,8 +97,9 @@ export function sujetDe(p: Pick<Publication, 'bouton' | 'sources' | 'nature'>): 
     // Un skill dans un sous-dossier (`/tree/main/skills/frontend-design`) : son nom, pas celui du dépôt.
     const nomDepot = (type === 'tree' || type === 'blob') && chemin.length ? chemin.at(-1)! : depot ?? proprietaire;
     if (connu) return { ...depuisEditeur(connu, `${connu.nom} · GitHub`), nom: nomDepot };
-    // Avatar public du propriétaire, servi par GitHub pour identifier un compte : il nomme le sujet, rien de plus.
-    return { nom: nomDepot, detail: `${proprietaire} · GitHub`, couleur: couleurDe(proprietaire), logo: { type: 'image', src: `https://github.com/${encodeURIComponent(proprietaire)}.png?size=160` } };
+    // Pas d'avatar du propriétaire : c'est souvent un visage (décision de l'utilisateur du 2026-11-05, « enlève les
+    // visages »). Le monogramme du dépôt, aux couleurs du propriétaire, nomme le sujet.
+    return { nom: nomDepot, detail: `${proprietaire} · GitHub`, couleur: couleurDe(proprietaire), logo: { type: 'monogramme', lettres: monogramme(nomDepot) } };
   }
   const editeur = EDITEURS[h] ?? Object.entries(EDITEURS).find(([cle]) => h.endsWith(`.${cle}`))?.[1];
   return editeur ? depuisEditeur(editeur, null) : { nom: h, detail: null, couleur: couleurDe(h), logo: { type: 'monogramme', lettres: monogramme(h) } };
