@@ -36,6 +36,7 @@ export const fr: Textes = {
   },
   post: {
     publicationDe: (nom) => `Publication de ${nom}`,
+    domaines: { puces: 'Puces', modele: 'Modèle IA', code: 'Skill et code', design: 'Design', audio: 'Audio et voix', appareils: 'Appareils', cloud: 'Cloud', social: 'Réseaux sociaux' },
     couverture: (nom) => `Couverture : ${nom}`,
     voirPlus: 'Voir plus',
     voirMoins: 'Voir moins',

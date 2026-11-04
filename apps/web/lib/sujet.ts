@@ -16,6 +16,25 @@ export interface Sujet {
   logo: { type: 'svg'; chemin: string } | { type: 'image'; src: string } | { type: 'monogramme'; lettres: string };
   /** Couleur de la marque, base de la palette de la couverture. */
   couleur: string;
+  /** Domaine du sujet : l'illustration en filigrane et l'étiquette de la couverture. */
+  domaine: Domaine;
+}
+
+export type Domaine = 'puces' | 'modele' | 'code' | 'design' | 'audio' | 'appareils' | 'cloud' | 'social';
+
+/** Domaine d'un éditeur, par son hôte ; un dépôt GitHub se classe par son nom (design ou code). */
+const DOMAINE_PAR_HOTE: Record<string, Domaine> = {
+  'nvidia.com': 'puces', 'amd.com': 'puces', 'apple.com': 'appareils', 'tesla.com': 'appareils', 'microsoft.com': 'cloud',
+  'aboutamazon.com': 'cloud', 'fb.com': 'social', 'mistral.ai': 'modele', 'blog.google': 'modele', 'openai.com': 'modele',
+  'anthropic.com': 'modele', 'claude.com': 'modele', 'huggingface.co': 'modele', 'deepseek.com': 'modele', 'youtube.com': 'modele',
+  'figma.com': 'design', 'spline.design': 'design', 'blender.org': 'design', 'midjourney.com': 'design',
+  'elevenlabs.io': 'audio', 'suno.com': 'audio', 'vapi.ai': 'audio',
+};
+const DESIGN = /design|ui|ux|frontend|figma|css|motion|anima|style|taste|brand/i;
+
+function domaineDe(h: string, nom: string): Domaine {
+  if (h === 'github.com') return DESIGN.test(nom) ? 'design' : 'code';
+  return DOMAINE_PAR_HOTE[h] ?? Object.entries(DOMAINE_PAR_HOTE).find(([cle]) => h.endsWith(`.${cle}`))?.[1] ?? 'code';
 }
 
 interface Editeur { nom: string; icone: SimpleIcon | null; couleur?: string }
@@ -70,7 +89,7 @@ export function couleurDe(nom: string): string {
 
 const monogramme = (nom: string) => nom.replace(/[^\p{L}\p{N} ]/gu, ' ').trim().split(/\s+/).slice(0, 2).map((m) => m[0]!.toUpperCase()).join('') || '?';
 
-function depuisEditeur(e: Editeur, detail: string | null): Sujet {
+function depuisEditeur(e: Editeur, detail: string | null): Omit<Sujet, 'domaine'> {
   const couleur = e.couleur ?? (e.icone ? `#${e.icone.hex}` : couleurDe(e.nom));
   return { nom: e.nom, detail, couleur, logo: e.icone ? { type: 'svg', chemin: e.icone.path } : { type: 'monogramme', lettres: monogramme(e.nom) } };
 }
@@ -96,11 +115,12 @@ export function sujetDe(p: Pick<Publication, 'bouton' | 'sources' | 'nature'>): 
     const connu = PROPRIETAIRES[proprietaire.toLowerCase()];
     // Un skill dans un sous-dossier (`/tree/main/skills/frontend-design`) : son nom, pas celui du dépôt.
     const nomDepot = (type === 'tree' || type === 'blob') && chemin.length ? chemin.at(-1)! : depot ?? proprietaire;
-    if (connu) return { ...depuisEditeur(connu, `${connu.nom} · GitHub`), nom: nomDepot };
+    if (connu) return { ...depuisEditeur(connu, `${connu.nom} · GitHub`), nom: nomDepot, domaine: domaineDe(h, nomDepot) };
     // Pas d'avatar du propriétaire : c'est souvent un visage (décision de l'utilisateur du 2026-11-05, « enlève les
     // visages »). Le monogramme du dépôt, aux couleurs du propriétaire, nomme le sujet.
-    return { nom: nomDepot, detail: `${proprietaire} · GitHub`, couleur: couleurDe(proprietaire), logo: { type: 'monogramme', lettres: monogramme(nomDepot) } };
+    return { nom: nomDepot, detail: `${proprietaire} · GitHub`, couleur: couleurDe(proprietaire), logo: { type: 'monogramme', lettres: monogramme(nomDepot) }, domaine: domaineDe(h, nomDepot) };
   }
   const editeur = EDITEURS[h] ?? Object.entries(EDITEURS).find(([cle]) => h.endsWith(`.${cle}`))?.[1];
-  return editeur ? depuisEditeur(editeur, null) : { nom: h, detail: null, couleur: couleurDe(h), logo: { type: 'monogramme', lettres: monogramme(h) } };
+  const domaine = domaineDe(h, '');
+  return editeur ? { ...depuisEditeur(editeur, null), domaine } : { nom: h, detail: null, couleur: couleurDe(h), logo: { type: 'monogramme', lettres: monogramme(h) }, domaine };
 }

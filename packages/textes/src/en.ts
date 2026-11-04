@@ -38,6 +38,7 @@ export const en = {
   },
   post: {
     publicationDe: (nom: string) => `Post by ${nom}`,
+    domaines: { puces: 'Chips', modele: 'AI model', code: 'Skill & code', design: 'Design', audio: 'Audio & voice', appareils: 'Devices', cloud: 'Cloud', social: 'Social' },
     couverture: (nom: string) => `Cover: ${nom}`,
     voirPlus: 'Show more',
     voirMoins: 'Show less',

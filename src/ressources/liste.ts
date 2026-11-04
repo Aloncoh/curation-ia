@@ -28,13 +28,11 @@ export const DECOUVERTE_VIA =
 
 /**
  * Compte signataire selon le rôle de chaque agent (décision de l'utilisateur du 2026-11-05, qui remplace la répartition
- * « fil équilibré » du 2026-11-02) : Repo signe les skills, MCP et projets GitHub ; Mova, ceux qui servent le design et
- * le frontend visuel. Radar (grandes entreprises), Nodi (modèles et assistants) et Pyxo (notes de version des outils)
- * ne signent aucune ressource.
+ * « fil équilibré » du 2026-11-02) : Repo signe les skills, MCP et projets GitHub. Radar (grandes entreprises), Nodi (modèles et assistants) et Pyxo (notes de version des outils)
+ * ne signent aucune ressource. Précisé le même jour (« chacun a sa spécialité, il ne faut pas interférer ») : tous les
+ * skills vont à Repo, y compris ceux de design ; Mova garde les outils et sites de design.
  */
-const COMPTE_PAR_SLUG: Record<string, CompteId> = {
-  'frontend-design': 'mova', 'ui-ux-pro-max': 'mova',
-};
+const COMPTE_PAR_SLUG: Record<string, CompteId> = {};
 
 const r = (slug: string, nom: string, depot: string, chemins: string[], remarque?: string, decouverteVia?: string): EntreeRessource => ({
   slug,

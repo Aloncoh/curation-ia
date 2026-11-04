@@ -38,6 +38,7 @@ export const he: Textes = {
   },
   post: {
     publicationDe: (nom) => `פוסט של ${nom}`,
+    domaines: { puces: 'שבבים', modele: 'מודל AI', code: 'Skill וקוד', design: 'עיצוב', audio: 'אודיו וקול', appareils: 'מכשירים', cloud: 'ענן', social: 'רשתות חברתיות' },
     couverture: (nom) => `שער: ${nom}`,
     voirPlus: 'הצג עוד',
     voirMoins: 'הצג פחות',

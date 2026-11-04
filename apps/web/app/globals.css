@@ -437,12 +437,25 @@ a.sel-nom:hover { text-decoration: underline; }
 .couverture {
   position: relative; margin: 10px 0 8px; overflow: hidden; isolation: isolate; color: #fff;
   border-radius: 18px; aspect-ratio: 16 / 9;
+  /* Trois couleurs : la marque du sujet, l'agent (coin opposé) et le violet signature (fond). */
   background:
-    radial-gradient(120% 140% at 0% 0%, color-mix(in srgb, var(--sujet) 55%, #fff) 0%, transparent 55%),
-    linear-gradient(135deg, var(--sujet), color-mix(in srgb, var(--sujet) 55%, #120c1c));
+    radial-gradient(90% 120% at 0% 0%, color-mix(in srgb, var(--sujet) 45%, #fff) 0%, transparent 55%),
+    radial-gradient(80% 110% at 100% 100%, color-mix(in srgb, var(--agent, #6c47e8) 85%, transparent) 0%, transparent 60%),
+    linear-gradient(135deg, var(--sujet) 0%, color-mix(in srgb, var(--sujet) 45%, #6c47e8) 60%, #2a1450 100%);
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .12);
 }
 .couv-fond { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; color: #fff; }
+.couv-illustration {
+  position: absolute; z-index: -1; inset-block-start: -8%; inset-inline-end: -4%; width: 62%; height: 116%;
+  fill: none; stroke: #fff; stroke-width: 1.1; stroke-linecap: round; stroke-linejoin: round; opacity: .2;
+  transform: rotate(-8deg);
+}
+.couv-vignette .couv-illustration { width: 120%; inset-inline-end: -40%; opacity: .16; }
+.couv-domaine {
+  position: absolute; inset-block-start: 12px; inset-inline-start: 12px; padding: 4px 10px; border-radius: 999px;
+  background: rgba(255, 255, 255, .92); color: #24163d; font: 700 .78rem/1.2 var(--texte); letter-spacing: .01em;
+  box-shadow: 0 4px 12px -6px rgba(0, 0, 0, .4);
+}
 .couv-logo {
   position: absolute; display: grid; place-items: center; background: #fff; overflow: hidden;
   width: 30%; aspect-ratio: 1; inset-block-start: 50%; inset-inline-start: 7%; transform: translateY(-50%);
@@ -452,7 +465,8 @@ a.sel-nom:hover { text-decoration: underline; }
 .couv-logo img { width: 100%; height: 100%; object-fit: cover; }
 .couv-monogramme { font: 800 clamp(1.6rem, 7vw, 3.4rem)/1 var(--display); letter-spacing: -.02em; }
 .couv-titre { position: absolute; inset-inline-start: 43%; inset-inline-end: 6%; inset-block-start: 50%; transform: translateY(-50%); display: grid; gap: 4px; text-shadow: 0 2px 14px rgba(0, 0, 0, .35); }
-.couv-titre strong { font: 800 clamp(1.25rem, 4.6vw, 2.3rem)/1.05 var(--display); letter-spacing: -.01em; overflow-wrap: anywhere; }
+.couv-titre strong { font: 800 clamp(1.25rem, 4.6vw, 2.3rem)/1.05 var(--display); letter-spacing: -.01em; overflow-wrap: break-word; hyphens: auto; }
+.couv-titre.long strong { font-size: clamp(1.05rem, 3.4vw, 1.7rem); }
 .couv-titre small { font: 600 clamp(.8rem, 2.4vw, 1rem)/1.2 var(--texte); opacity: .9; }
 .couv-agent { position: absolute; inset-block-end: 10px; inset-inline-end: 10px; padding: 3px; border-radius: 50%; background: #fff; box-shadow: 0 0 0 2px var(--agent), 0 6px 16px -6px rgba(0, 0, 0, .5); }
 .couv-agent img { width: 28px; height: 28px; border-radius: 50%; display: block; }

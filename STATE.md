@@ -196,7 +196,7 @@ M3 construit le 2026-11-03 et validé par l'utilisateur (« je valide tout »), 
 
 ## Rôles des agents (2026-11-05, décision de l'utilisateur)
 
-- Ressources signées selon le rôle : Repo (skills, MCP, projets GitHub), Mova (skills de design). Radar, Nodi et Pyxo n'en signent plus. 15 posts réattribués dans Turso (agent seul, statut publié inchangé) et leurs montages régénérés.
+- Ressources signées selon le rôle : **tous les skills à Repo** (« chacun a sa spécialité, il ne faut pas interférer ») ; Mova garde les outils et sites de design. 17 posts réattribués dans Turso (agent seul, statut publié inchangé) et leurs montages régénérés.
 - **Radar couvre toutes les annonces des grandes entreprises** (NVIDIA, Microsoft, Apple, Amazon, Tesla obligatoires ; liste ouverte), sauf la sortie d'un modèle d'IA (Nodi). Sources officielles ajoutées et signées par Radar (`compte: 'radar'` dans sources.ts) : NVIDIA Newsroom et Blog, Microsoft Source, Apple Newsroom, About Amazon, AMD, Meta. **Tesla : aucun flux public, site refusé (403) le 2026-11-05 — différé, non contourné** (piste : X officiel, API payante, ou posts transmis par l'utilisateur). Consigne p3-17.
 - Couvertures : plus d'avatar GitHub (souvent un visage), monogramme du dépôt à la place.
 

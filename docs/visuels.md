@@ -67,3 +67,5 @@ Relevé du 2026-10-31. Ce n'est pas un avis juridique. Rien de lu ne dit si anno
 - **Rythme du fil** : ressource en grand visuel (16:9), sélection en grille de captures (mosaïque existante), annonce courte avec une vignette carrée. La page d'un post montre la couverture puis le média complet (montage, carrousel).
 - **Couleurs** : violet signature (logo, onglet actif, boutons principaux) ; fond blanc légèrement lilas en clair, aubergine presque noir en sombre ; une couleur par agent (celle de ses montages) pour l'avatar et la signature.
 - **Pas encore fait** : reprise des images officielles (og:image) selon leurs conditions (ADR 0004) ; illustrations générées par une IA d'images, à brancher quand l'utilisateur aura ouvert un compte et fixé un budget ; animation légère pour les outils de motion.
+
+- **Enrichissement (2026-11-05)** : illustration du domaine en filigrane (puces, modèle, code, design, audio, appareils, cloud, réseaux sociaux), dégradé à trois couleurs (marque, agent, violet signature), étiquette de domaine traduite sur le grand visuel.
