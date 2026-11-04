@@ -243,3 +243,10 @@ DeepSeek Flash, 30 actualités, 34 appels, 0,0125 $ (budget autorisé 4 $). 19 �
   - `data/curation.db` : toujours 0 publication ;
   - site local inchangé (montages, avatars, fiche, API ; chemin `..` refusé).
 - **Non fait** : aucun compte, aucun secret, aucun appel à Turso, Vercel ou GitHub ; workflows jamais exécutés ; FTS5 sur Turso non essayé ; aucun délai mesuré de bout en bout.
+
+
+## 2026-11-04 — Mise en ligne (P5)
+
+- Site en ligne sur Vercel (https://web-phi-nine-38.vercel.app), base Turso `curation-ia` copiée et vérifiée (`npm run etat`), 34 publications publiées à la demande de l'utilisateur (plafond relevé à 50).
+- Premier cycle GitHub Actions réussi (déclenché à la main) : 29 sources collectées, 10 sujets rédigés (4 écartés, 1 invalide, 5 à vérifier, 0 publié), 4 traductions ; durée 6 min 15 s, au-dessus de l'estimation de 2,5 min : à remesurer sur les cycles horaires.
+- Audit axe-core en ligne (`node apps/web/scripts/audit-axe.ts https://web-phi-nine-38.vercel.app`) : 0 violation sur 144 vues (12 pages dont les 4 rubriques réservées aux membres, 3 langues, 375 et 1 280 px, thèmes clair et sombre).

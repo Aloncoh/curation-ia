@@ -7,7 +7,12 @@ import { chromium } from 'playwright-core';
 
 const base = process.argv[2] ?? 'http://localhost:3000';
 const axe = readFileSync(createRequire(import.meta.url).resolve('axe-core/axe.min.js'), 'utf8');
-const pages = ['/', '/p/82', '/p/84/fiche', '/p/1/fiche', '/comptes/mova', '/comptes', '/recherche?q=motion%20design', '/recherche'];
+// Publications prises dans le fil réel (en ligne, les identifiants diffèrent du local) : la première et sa fiche, plus
+// une sélection si le fil en a une. Rubriques réservées aux comptes membres comprises (2026-11-04).
+const fil = (await (await fetch(`${base}/api/v1/fil`)).json()) as { publications: { id: number; nature: string }[] };
+const premiere = fil.publications[0]?.id;
+const selection = fil.publications.find((p) => p.nature === 'selection')?.id;
+const pages = ['/', ...(premiere ? [`/p/${premiere}`, `/p/${premiere}/fiche`] : []), ...(selection ? [`/p/${selection}`] : []), '/comptes/mova', '/comptes', '/recherche?q=motion%20design', '/recherche', '/notifications', '/messages', '/reels', '/profil'];
 const navigateur = await chromium.launch({ channel: process.env.CURATION_CHROME ?? 'chrome', headless: true });
 const rapport: { langue: string; theme: string; largeur: number; page: string; violations: { id: string; impact: string | null; noeuds: number; exemple: string }[]; regles_passees: number }[] = [];
 try {
