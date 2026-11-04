@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Bienvenue · Curation AI</title>
 <!--
-  Maquette de l'accueil animé avant la création de compte (P9, demande de l'utilisateur du 2026-11-05) : les six agents
+  Maquette de l'accueil animé avant la création de compte, pour l'application mobile (P9 bis, demande de l'utilisateur du 2026-11-05) : les six agents
   apparaissent autour de la mascotte, prennent leur place sur une orbite et se présentent, puis le formulaire s'ouvre.
   Exemple de maquette : aucun compte n'existe, rien n'est enregistré. Animation passable (« Passer ») et remplacée par
   l'état final si le système demande moins d'animations (prefers-reduced-motion).
@@ -69,9 +69,24 @@
   .agent img {
     width: 100%; aspect-ratio: 1; border-radius: 50%; background: #f4efe8; object-fit: cover;
     box-shadow: 0 0 0 3px var(--fond), 0 0 0 6px var(--c), 0 0 28px 4px color-mix(in srgb, var(--c) 60%, transparent);
-    transition: transform .2s ease;
+    transition: scale .2s ease;
+    /* Vie propre à chaque agent : il penche la tête, sautille, puis tourne sur lui-même ; durée et décalage différents. */
+    animation: vie var(--duree, 7s) ease-in-out calc(var(--d) + 1.4s) infinite;
+    transform-style: preserve-3d;
   }
-  .agent:hover img, .agent:focus-visible img { transform: scale(1.08); }
+  @keyframes vie {
+    0%, 8% { transform: none; }
+    14% { transform: rotate(-10deg); }
+    22% { transform: rotate(9deg); }
+    30% { transform: rotate(0) translateY(0); }
+    36% { transform: translateY(-10px) scale(1.04, .96); }
+    42% { transform: translateY(0) scale(.97, 1.03); }
+    48%, 62% { transform: none; }
+    78% { transform: perspective(400px) rotateY(360deg); }
+    80%, 100% { transform: none; }
+  }
+  .agent:hover img, .agent:focus-visible img { scale: 1.08; animation: tour .7s cubic-bezier(.34, 1.56, .64, 1) both; }
+  @keyframes tour { from { transform: perspective(400px) rotateY(0); } to { transform: perspective(400px) rotateY(360deg); } }
   .agent:focus-visible { outline: none; }
   .agent:focus-visible img { box-shadow: 0 0 0 3px var(--fond), 0 0 0 6px #fff, 0 0 28px 6px var(--c); }
   .agent b { color: var(--encre); font: 600 clamp(.8rem, 2.2vmin, .95rem)/1 var(--texte); animation: apparait .5s ease calc(var(--d) + .5s) both; }
@@ -105,6 +120,8 @@
   .fini .agent > span { animation: contre 45s linear infinite !important; }
   .fini .halo { animation: pivote 40s linear infinite !important; opacity: 1; }
   .fini .ciel { animation: pivote 240s linear infinite !important; }
+  .fini .agent img { animation: vie var(--duree, 7s) ease-in-out infinite !important; }
+  .fini .agent:hover img { animation: tour .7s cubic-bezier(.34, 1.56, .64, 1) both !important; }
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation-delay: 0s !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
   }
@@ -128,12 +145,12 @@
     <span class="orbite-trace" aria-hidden="true"></span>
     <div class="mascotte" role="img" aria-label="Mascotte de Curation AI"></div>
     <nav class="orbite" aria-label="Les six agents éditoriaux">
-      <a class="agent" href="#" style="--a: -90deg; --d: 1.0s; --c: #1fa77a"><span><img src="../assets/brand/agent-nodi.png" alt=""><b>@nodi</b><small>Modèles IA et assistants</small></span></a>
-      <a class="agent" href="#" style="--a: -30deg; --d: 1.15s; --c: #e8732f"><span><img src="../assets/brand/agent-repo.png" alt=""><b>@repo</b><small>Skills, MCP et GitHub</small></span></a>
-      <a class="agent" href="#" style="--a: 30deg; --d: 1.3s; --c: #2f8fd8"><span><img src="../assets/brand/agent-pyxo.png" alt=""><b>@pyxo</b><small>Outils de développement</small></span></a>
-      <a class="agent" href="#" style="--a: 90deg; --d: 1.45s; --c: #9a5cf0"><span><img src="../assets/brand/agent-mova.png" alt=""><b>@mova</b><small>Design et motion</small></span></a>
-      <a class="agent" href="#" style="--a: 150deg; --d: 1.6s; --c: #d99a12"><span><img src="../assets/brand/agent-pulse.png" alt=""><b>@pulse</b><small>Infrastructures et incidents</small></span></a>
-      <a class="agent" href="#" style="--a: 210deg; --d: 1.75s; --c: #12a6a0"><span><img src="../assets/brand/agent-radar.png" alt=""><b>@radar</b><small>Grandes entreprises tech</small></span></a>
+      <a class="agent" href="#" style="--a: -90deg; --d: 1.0s; --c: #1fa77a" data-a="nodi"><span><img style="--duree: 6.2s" src="../assets/brand/agent-nodi.png" alt=""><b>@nodi</b><small>Modèles IA et assistants</small></span></a>
+      <a class="agent" href="#" style="--a: -30deg; --d: 1.15s; --c: #e8732f" data-a="repo"><span><img style="--duree: 7.4s" src="../assets/brand/agent-repo.png" alt=""><b>@repo</b><small>Skills, MCP et GitHub</small></span></a>
+      <a class="agent" href="#" style="--a: 30deg; --d: 1.3s; --c: #2f8fd8" data-a="pyxo"><span><img style="--duree: 8.1s" src="../assets/brand/agent-pyxo.png" alt=""><b>@pyxo</b><small>Outils de développement</small></span></a>
+      <a class="agent" href="#" style="--a: 90deg; --d: 1.45s; --c: #9a5cf0" data-a="mova"><span><img style="--duree: 6.8s" src="../assets/brand/agent-mova.png" alt=""><b>@mova</b><small>Design et motion</small></span></a>
+      <a class="agent" href="#" style="--a: 150deg; --d: 1.6s; --c: #d99a12" data-a="pulse"><span><img style="--duree: 7.9s" src="../assets/brand/agent-pulse.png" alt=""><b>@pulse</b><small>Infrastructures et incidents</small></span></a>
+      <a class="agent" href="#" style="--a: 210deg; --d: 1.75s; --c: #12a6a0" data-a="radar"><span><img style="--duree: 8.6s" src="../assets/brand/agent-radar.png" alt=""><b>@radar</b><small>Grandes entreprises tech</small></span></a>
     </nav>
   </div>
 

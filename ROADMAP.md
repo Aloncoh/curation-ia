@@ -81,7 +81,7 @@ Ensuite, avec son accord : `npm run turso:copier` (aperçu), puis `npm run turso
 
 ## P9 — demandes déjà notées _(à intégrer à son plan)_
 
-- **Création de compte animée** (demande de l'utilisateur du 2026-11-05) : une séquence d'accueil dans l'esprit d'un lancement d'application (référence citée : le lancement de Grok et l'accueil de Discord), où **les six agents apparaissent et s'animent** (mascottes Nodi, Repo, Pyxo, Mova, Pulse, Radar), avant le formulaire. Contraintes : courte, passable, respect de `prefers-reduced-motion`, aucune donnée enregistrée avant validation, identité tirée de la mascotte (pas celle d'une autre marque).
+- **Création de compte animée, dans l'application mobile seulement** (demande de l'utilisateur du 2026-11-05 ; maquette `maquette/accueil.html`, agents qui penchent la tête, sautillent et tournent sur eux-mêmes) : une séquence d'accueil dans l'esprit d'un lancement d'application (référence citée : le lancement de Grok et l'accueil de Discord), où **les six agents apparaissent et s'animent** (mascottes Nodi, Repo, Pyxo, Mova, Pulse, Radar), avant le formulaire. Contraintes : courte, passable, respect de `prefers-reduced-motion`, aucune donnée enregistrée avant validation, identité tirée de la mascotte (pas celle d'une autre marque).
 - Écrire un post, réglages du compte : déjà dans le périmètre de P9 ; messagerie : P10.
 
 ---
