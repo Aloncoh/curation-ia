@@ -79,6 +79,13 @@ Ensuite, avec son accord : `npm run turso:copier` (aperçu), puis `npm run turso
 - **Après le choix du fournisseur, avec sa clé et ses plafonds** : premier lot réel du moteur, coût et latence mesurés, revue des brouillons.
 - Critères de sortie inchangés.
 
+## P9 — demandes déjà notées _(à intégrer à son plan)_
+
+- **Création de compte animée** (demande de l'utilisateur du 2026-11-05) : une séquence d'accueil dans l'esprit d'un lancement d'application (référence citée : le lancement de Grok et l'accueil de Discord), où **les six agents apparaissent et s'animent** (mascottes Nodi, Repo, Pyxo, Mova, Pulse, Radar), avant le formulaire. Contraintes : courte, passable, respect de `prefers-reduced-motion`, aucune donnée enregistrée avant validation, identité tirée de la mascotte (pas celle d'une autre marque).
+- Écrire un post, réglages du compte : déjà dans le périmètre de P9 ; messagerie : P10.
+
+---
+
 ## P6 — ordre proposé _(2026-11-01, à découper à son plan)_
 
 1. Regroupement multi-sources, dans le prolongement du garde-fou de P5.
