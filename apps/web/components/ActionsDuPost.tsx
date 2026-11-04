@@ -1,7 +1,7 @@
 'use client';
 // Actions d'un post (SPEC §6 bis) : « Afficher les commentaires » (aucun commentaire n'existe : état vide honnête) et
 // partager, sans compteur ; puis la mention IA et le lien « Sources » qui déplie le panneau des sources.
-import { useEffect, useState, type ReactNode } from 'react';
+import { useEffect, useState } from 'react';
 import { Icone } from './Icone.tsx';
 
 export interface LibellesActions {
@@ -18,11 +18,25 @@ export interface LibellesActions {
   masquerSources: string;
 }
 
-export function ActionsDuPost({ id, lien, libelles, sources }: { id: string; lien: string; libelles: LibellesActions; sources: ReactNode }) {
+/**
+ * Le panneau des sources est rendu par le serveur juste après ce composant (Post.tsx), caché : il n'est envoyé qu'une
+ * fois, et non une seconde fois dans les données du composant. Dans le fil, il n'est pas chargé du tout : « Sources »
+ * mène à la page du post, où il s'ouvre (`pageSources`, page d'accueil allégée le 2026-11-05).
+ */
+export function ActionsDuPost({ id, lien, libelles, pageSources = null }: { id: string; lien: string; libelles: LibellesActions; pageSources?: string | null }) {
   const [commentaires, setCommentaires] = useState(false);
   const [panneau, setPanneau] = useState(false);
   const [partage, setPartage] = useState<'rien' | 'copie' | 'manuel'>('rien');
   const [adresse, setAdresse] = useState(lien);
+  // Arrivée depuis le lien « Sources » du fil : le panneau s'ouvre et vient à l'écran.
+  useEffect(() => {
+    if (pageSources || window.location.hash !== `#${id}-sources`) return;
+    const p = document.getElementById(`${id}-sources`);
+    if (!p) return;
+    p.hidden = false;
+    setPanneau(true);
+    p.scrollIntoView({ block: 'start' });
+  }, [id, pageSources]);
   useEffect(() => {
     if (partage !== 'copie') return;
     const minuteur = setTimeout(() => setPartage('rien'), 2500);
@@ -64,11 +78,15 @@ export function ActionsDuPost({ id, lien, libelles, sources }: { id: string; lie
       <p className="post-mention">
         {libelles.mentionIA}
         {' · '}
-        <button type="button" className="lien-discret" aria-expanded={panneau} aria-controls={`${id}-sources`} onClick={() => setPanneau((x) => !x)}>
+        {pageSources ? <a className="lien-discret" href={pageSources}>{libelles.sources}</a> : <button type="button" className="lien-discret" aria-expanded={panneau} aria-controls={`${id}-sources`} onClick={() => {
+          const ouvert = !panneau;
+          setPanneau(ouvert);
+          const p = document.getElementById(`${id}-sources`);
+          if (p) p.hidden = !ouvert;
+        }}>
           {panneau ? libelles.masquerSources : libelles.sources}
-        </button>
+        </button>}
       </p>
-      <div className="panneau" id={`${id}-sources`} hidden={!panneau}>{sources}</div>
       <p className={`toast${partage === 'copie' ? ' visible' : ''}`} role="status">{partage === 'copie' ? libelles.lienCopie : ''}</p>
     </>
   );

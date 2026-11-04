@@ -163,8 +163,9 @@ export function Post({ p, t, langue, complet = false, raison = null }: { p: Publ
             sources: t.post.sources,
             masquerSources: t.post.masquerSources,
           }}
-          sources={<PanneauSources p={p} t={t} langue={langue} />}
+          pageSources={complet ? null : `${lien}#${id}-sources`}
         />
+        {complet && <div className="panneau" id={`${id}-sources`} hidden><PanneauSources p={p} t={t} langue={langue} /></div>}
       </div>
     </article>
   );
