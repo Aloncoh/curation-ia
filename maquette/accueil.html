@@ -74,15 +74,15 @@
   .agent:hover img, .agent:focus-visible img { transform: scale(1.08); }
   .agent:focus-visible { outline: none; }
   .agent:focus-visible img { box-shadow: 0 0 0 3px var(--fond), 0 0 0 6px #fff, 0 0 28px 6px var(--c); }
-  .agent b { color: var(--encre); font: 600 clamp(.8rem, 2.2vmin, .95rem)/1 var(--mono); font-variation-settings: "MONO" 1, "CASL" 0; animation: apparait .5s ease calc(var(--d) + .5s) both; }
+  .agent b { color: var(--encre); font: 600 clamp(.8rem, 2.2vmin, .95rem)/1 var(--texte); animation: apparait .5s ease calc(var(--d) + .5s) both; }
   .agent small { font-size: .74rem; color: var(--pied); text-align: center; max-width: 16ch; opacity: 0; transition: opacity .2s; }
   .agent:hover small, .agent:focus-visible small { opacity: 1; }
 
   /* Titre, phrase d'accueil et boutons, après l'arrivée des agents. */
   .entete { display: grid; justify-items: center; gap: 8px; padding: 0 16px; text-align: center; }
   .entete h1 {
-    margin: 0; font-family: var(--titre); font-weight: 780; font-size: clamp(2rem, 6vmin, 3.2rem); line-height: 1;
-    font-variation-settings: "CASL" 1, "slnt" 0; letter-spacing: -.015em; animation: monte .7s ease 2.7s both;
+    margin: 0; font-family: var(--texte); font-weight: 700; font-size: clamp(1.9rem, 5.5vmin, 2.8rem); line-height: 1.1;
+    letter-spacing: -.01em; animation: monte .7s ease 2.7s both;
   }
   .entete p { margin: 0; max-width: 44ch; text-wrap: balance; color: var(--pied); font-size: 1.05rem; animation: monte .7s ease 2.9s both; }
   .texte { display: grid; justify-items: center; gap: 10px; padding: 0 16px; }
@@ -94,9 +94,9 @@
   .bouton.secondaire { background: none; color: var(--pied); padding-inline: 12px; }
   .bouton.secondaire:hover { color: var(--encre); }
   .bouton:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
-  .passer { position: absolute; top: max(14px, env(safe-area-inset-top)); right: 16px; background: none; border: 0; color: var(--pied); font: 500 .82rem var(--mono); font-variation-settings: "MONO" 1; cursor: pointer; padding: 8px 10px; border-radius: 999px; }
+  .passer { position: absolute; top: max(14px, env(safe-area-inset-top)); right: 16px; background: none; border: 0; color: var(--pied); font: 500 .9rem var(--texte); cursor: pointer; padding: 8px 10px; border-radius: 999px; }
   .passer:hover { color: var(--encre); background: rgba(255, 255, 255, .06); }
-  .note { position: absolute; left: 16px; top: max(14px, env(safe-area-inset-top)); font: 500 .7rem var(--mono); font-variation-settings: "MONO" 1; color: var(--pied); border: 1px solid rgba(255, 255, 255, .15); border-radius: 999px; padding: 4px 10px; }
+  .note { position: absolute; left: 16px; top: max(14px, env(safe-area-inset-top)); font: 400 .74rem var(--texte); color: var(--pied); border: 1px solid rgba(255, 255, 255, .15); border-radius: 999px; padding: 4px 10px; }
 
   /* « Passer », ou un système qui demande moins d'animations : l'état final, tout de suite. */
   .fini *, .fini *::before, .fini *::after { animation-delay: 0s !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
