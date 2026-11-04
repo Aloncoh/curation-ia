@@ -83,7 +83,7 @@ h1, h2, h3 { overflow-wrap: anywhere; }
 
 .marque { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--encre); padding-block: 8px; padding-inline: 8px 12px; border-radius: 999px; width: fit-content; margin-bottom: 6px; }
 .marque:hover { background: var(--survol); }
-.marque img { width: 36px; height: 36px; border-radius: 12px; box-shadow: 0 0 0 2px var(--violet); }
+.marque img { width: 38px; height: 38px; }
 .marque span { color: var(--violet-encre); font-weight: 800; }
 .marque span { font-family: var(--display); font-variation-settings: "CASL" 1; font-weight: 900; font-size: 1.25rem; letter-spacing: -.01em; }
 

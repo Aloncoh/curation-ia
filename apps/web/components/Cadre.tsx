@@ -34,7 +34,7 @@ export async function Cadre({ langue, rubrique, requete = '', children }: { lang
     <div className="app">
       <aside className="barre-gauche" aria-label={t.commun.navigation}>
         <a className="marque" href="/" aria-label={`${t.commun.nomSite}, ${t.commun.accueil}`}>
-          <img src="/marque/mascotte-icone.png" alt="" width={36} height={36} />
+          <img src="/marque/logo.svg" alt="" width={36} height={36} />
           <span dir="ltr">Curation AI</span>
         </a>
         <nav className="nav" aria-label={t.commun.navigationPrincipale}>

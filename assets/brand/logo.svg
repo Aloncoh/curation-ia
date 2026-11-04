@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Curation AI">
+<!-- Logo de Curation AI (piste B, choisie par l'utilisateur le 2026-11-05) : la visière aux yeux lumineux commune aux
+     mascottes, entourée d'un anneau en six arcs, un par agent (Nodi, Repo, Pyxo, Mova, Pulse, Radar, dans le sens horaire). -->
+<g fill="none" stroke-width="9" stroke-linecap="round">
+  <path d="M66.09 10.37 A50 50 0 0 1 99.93 29.91" stroke="#1fa77a"/>
+  <path d="M106.03 40.46 A50 50 0 0 1 106.03 79.54" stroke="#e8732f"/>
+  <path d="M99.93 90.09 A50 50 0 0 1 66.09 109.63" stroke="#2f8fd8"/>
+  <path d="M53.91 109.63 A50 50 0 0 1 20.07 90.09" stroke="#9a5cf0"/>
+  <path d="M13.97 79.54 A50 50 0 0 1 13.97 40.46" stroke="#d99a12"/>
+  <path d="M20.07 29.91 A50 50 0 0 1 53.91 10.37" stroke="#12a6a0"/>
+</g>
+<rect x="27" y="37" width="66" height="46" rx="23" fill="#141019" stroke="#3a2b55" stroke-width="2"/>
+<ellipse cx="46" cy="60" rx="7" ry="11" fill="#a68bff"/>
+<ellipse cx="74" cy="60" rx="7" ry="11" fill="#a68bff"/>
+<ellipse cx="44" cy="55" rx="2.2" ry="3.2" fill="#efe8ff"/>
+<ellipse cx="72" cy="55" rx="2.2" ry="3.2" fill="#efe8ff"/>
+</svg>

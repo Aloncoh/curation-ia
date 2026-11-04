@@ -46,8 +46,8 @@
   @keyframes onde { 0% { transform: scale(.6); opacity: .8; } 100% { transform: scale(2.6); opacity: 0; } }
   .orbite-trace { position: absolute; width: calc(var(--rayon-orbite) * 2); aspect-ratio: 1; border-radius: 50%; border: 1px dashed rgba(166, 139, 255, .35); opacity: 0; animation: apparait .8s ease 1.6s both; }
   .mascotte {
-    position: relative; width: 26%; aspect-ratio: 1; border-radius: 30%; z-index: 2;
-    background: #f4efe8 url(../assets/brand/mascotte-icone.png) center / cover; box-shadow: 0 0 0 4px var(--violet-fort), 0 0 60px 10px rgba(108, 71, 232, .55);
+    position: relative; width: 34%; aspect-ratio: 1; border-radius: 30%; z-index: 2;
+    background: url(../assets/brand/logo.svg) center / contain no-repeat; border-radius: 50%; filter: drop-shadow(0 0 28px rgba(108, 71, 232, .6));
     animation: eclot .9s cubic-bezier(.34, 1.56, .64, 1) .1s both, flotte 4s ease-in-out 1.2s infinite, soi 6s ease-in-out 1.6s infinite;
   }
   @keyframes eclot { 0% { transform: scale(0) rotate(-20deg); opacity: 0; } 100% { transform: scale(1) rotate(0); opacity: 1; } }
@@ -152,7 +152,7 @@
   <div class="noyau">
     <span class="onde" aria-hidden="true"></span><span class="onde" aria-hidden="true"></span>
     <span class="orbite-trace" aria-hidden="true"></span>
-    <div class="mascotte" role="img" aria-label="Mascotte de Curation AI"></div>
+    <div class="mascotte" role="img" aria-label="Logo de Curation AI"></div>
     <nav class="orbite" aria-label="Les six agents éditoriaux">
       <a class="agent" href="#" style="--a: -90deg; --d: 1.0s; --c: #1fa77a" data-a="nodi"><span><img style="--duree: 6.2s" src="../assets/brand/agent-nodi.png" alt=""><b>@nodi</b><small>Modèles IA et assistants</small></span></a>
       <a class="agent" href="#" style="--a: -30deg; --d: 1.15s; --c: #e8732f" data-a="repo"><span><img style="--duree: 7.4s" src="../assets/brand/agent-repo.png" alt=""><b>@repo</b><small>Skills, MCP et GitHub</small></span></a>

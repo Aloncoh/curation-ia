@@ -3,8 +3,8 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { racineDepot } from '../../../../../src/config.ts';
 
-const AUTORISES = /^((agent-(nodi|repo|pyxo|mova|pulse|radar)|mascotte-(icone|principale|salut|sourire))\.png|banniere-(nodi|repo|pyxo|mova|pulse|radar)\.(jpg|png|webp))$/;
-const TYPES: Record<string, string> = { png: 'image/png', jpg: 'image/jpeg', webp: 'image/webp' };
+const AUTORISES = /^((agent-(nodi|repo|pyxo|mova|pulse|radar)|mascotte-(icone|principale|salut|sourire))\.png|banniere-(nodi|repo|pyxo|mova|pulse|radar)\.(jpg|png|webp)|logo\.svg)$/;
+const TYPES: Record<string, string> = { png: 'image/png', jpg: 'image/jpeg', webp: 'image/webp', svg: 'image/svg+xml' };
 
 export async function GET(_requete: Request, { params }: { params: Promise<{ fichier: string }> }): Promise<Response> {
   const { fichier } = await params;
