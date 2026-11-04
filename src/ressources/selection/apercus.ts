@@ -15,7 +15,7 @@ import { withBusyRetry } from '../../db/retry.ts';
 import { runs } from '../../db/schema.ts';
 import { finishRun, insertStep } from '../../jobs/runs.ts';
 import { jsonTrie } from '../capture.ts';
-import { capturesDeSelection } from './capture.ts';
+import { capturesDeSelection, idDocument } from './capture.ts';
 import { sourceIdSite, type EntreeSelection, type SiteSelection } from './liste.ts';
 
 export const DOSSIER_SELECTIONS = 'maquette/medias/montages/selections';
@@ -53,7 +53,7 @@ export interface RefusApercu {
 const documentApercu = (s: SiteSelection, c: ContenuApercu | RefusApercu): CollectedDocument => {
   const content = jsonTrie(c);
   const title = `${s.nom} — aperçu de la page d'accueil`;
-  return { externalId: 'apercu', url: s.url, normalizedUrl: normalizeUrl(s.url), title, version: null, announcedAt: null, content, contentFormat: 'json', contentHash: contentHash({ title, version: null, content }), metadata: { hote: s.hote } };
+  return { externalId: idDocument('apercu', s.url), url: s.url, normalizedUrl: normalizeUrl(s.url), title, version: null, announcedAt: null, content, contentFormat: 'json', contentHash: contentHash({ title, version: null, content }), metadata: { hote: s.hote } };
 };
 
 /** Requête qu'une page photographiée peut faire : HTTPS (ou data:/blob:), jamais vers une adresse locale ou privée écrite en clair. */

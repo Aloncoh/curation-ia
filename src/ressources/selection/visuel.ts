@@ -5,7 +5,7 @@ import { createHash } from 'node:crypto';
 import { existsSync, readFileSync } from 'node:fs';
 import { MENTION_ILLUSTRATION } from '../../analysis/publication.ts';
 import { normaliserEspaces } from '../../maquette/data.ts';
-import { CREDIT_APERCUS, type Montage } from '../../media/montage.ts';
+import { APERCUS_MAX, CREDIT_APERCUS, type Montage } from '../../media/montage.ts';
 import { normaliser } from '../../recherche/normaliser.ts';
 import type { LigneMotCle } from '../mots-cles.ts';
 import type { CapturesSelection } from './capture.ts';
@@ -74,7 +74,8 @@ export function piedSelection(apercus: ApercuRetenu[]): string {
 
 /**
  * Montage `selection` : titre = accroche, une case par ressource citée, dans l'ordre du texte, le nom du site sous chaque
- * aperçu. Un site sans aperçu garde sa case, marquée « Aperçu indisponible » : la grille montre toutes les ressources du texte.
+ * aperçu. Un site sans aperçu garde sa case, marquée « Aperçu indisponible ». Au-delà de six ressources (sélection du
+ * 2026-11-04, dix dépôts), la grille montre les six premières dans l'ordre du texte ; toutes restent dans le texte.
  */
 export function composerMontageSelection(b: BrouillonSelection, entree: Pick<EntreeSelection, 'compte'>, apercus: ApercuRetenu[]): Montage {
   const parSite = new Map(apercus.map((a) => [a.site, a]));
@@ -90,13 +91,13 @@ export function composerMontageSelection(b: BrouillonSelection, entree: Pick<Ent
     lignes: [],
     etapes: [],
     loupe: null,
-    apercus: b.ressources.map((r) => {
+    apercus: b.ressources.slice(0, APERCUS_MAX).map((r) => {
       const a = parSite.get(r.site);
       return a
         ? { src: `data:image/jpeg;base64,${readFileSync(a.fichier).toString('base64')}`, nom: r.nom, alt: `Page d’accueil de ${r.nom}, capture d’écran` }
         : { src: null, nom: r.nom, alt: `${r.nom} : aperçu indisponible` };
     }),
-    source: piedSelection(apercus),
+    source: piedSelection(apercus.filter((a) => b.ressources.slice(0, APERCUS_MAX).some((r) => r.site === a.site))),
     mention: MENTION_ILLUSTRATION,
   };
 }

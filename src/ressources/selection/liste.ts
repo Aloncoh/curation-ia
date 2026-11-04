@@ -19,7 +19,7 @@ export interface SiteSelection {
   verifiee_a_la_main: string | null;
 }
 
-export type SujetSelection = 'design';
+export type SujetSelection = 'design' | 'skills';
 
 export interface EntreeSelection {
   slug: string;
@@ -32,7 +32,7 @@ export interface EntreeSelection {
 }
 
 /** Compte signataire selon le sujet (décision du 2026-11-02 : la signature suit le sujet, pas le format). */
-export const COMPTE_PAR_SUJET: Record<SujetSelection, CompteId> = { design: 'mova' };
+export const COMPTE_PAR_SUJET: Record<SujetSelection, CompteId> = { design: 'mova', skills: 'repo' };
 
 /** Version de la liste, reprise dans `selection_decision.consignes_version`. */
 export const VERSION_SELECTIONS = 'selections-2026-11-02';
@@ -60,6 +60,26 @@ export const SELECTIONS: readonly EntreeSelection[] = [
       ),
       site('godly', 'Godly', 'https://godly.website/'),
       site('60fps', '60fps', 'https://60fps.design/'),
+    ],
+  },
+  {
+    slug: 'selection-skills-croissance',
+    nom: 'Sélection skills en forte croissance',
+    sujet: 'skills',
+    compte: COMPTE_PAR_SUJET.skills,
+    decouverteVia:
+      "Classement d'image transmis par l'utilisateur le 2026-11-04 (skillleaderboard.com, « Top 10 fastest-growing Claude skill repos », octobre 2026). Le site ne publie pas de page mensuelle : le 2026-11-04, son classement glissant sur 30 jours (données au 3 novembre 2026) contient les mêmes 10 dépôts dans un ordre voisin. Chiffres d'étoiles non repris dans le post.",
+    sites: [
+      site('mattpocock-skills', 'Matt Pocock Skills', 'https://github.com/mattpocock/skills'),
+      site('security-audit-skill', 'Security Audit Skill', 'https://github.com/cloudflare/security-audit-skill'),
+      site('ponytail', 'Ponytail', 'https://github.com/DietrichGebert/ponytail'),
+      site('impeccable', 'Impeccable', 'https://github.com/pbakaus/impeccable'),
+      site('anatomy', 'Anatomy', 'https://github.com/wheresryan22/anatomy'),
+      site('diagram-design', 'Diagram Design', 'https://github.com/cathrynlavery/diagram-design'),
+      site('graphify', 'Graphify', 'https://github.com/Graphify-Labs/graphify'),
+      site('hallmark', 'Hallmark', 'https://github.com/Nutlope/hallmark'),
+      site('taste-skill', 'Taste Skill', 'https://github.com/Leonxlnx/taste-skill'),
+      site('superpowers', 'Superpowers', 'https://github.com/obra/superpowers'),
     ],
   },
 ];

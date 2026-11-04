@@ -1,0 +1,245 @@
+{
+  "format": "selection",
+  "slug": "selection-skills-croissance",
+  "consignes": "s1",
+  "accroche": {
+    "texte": "10 Claude skill repos to know, from security audits to design taste and codebase maps",
+    "passages": []
+  },
+  "ressources": [
+    {
+      "site": "mattpocock-skills",
+      "nom": "Matt Pocock Skills",
+      "url": "https://github.com/mattpocock/skills",
+      "libelle_lien": "Matt Pocock Skills",
+      "explication": {
+        "texte": "Small, composable engineering skills that work with any model, meant to be adapted rather than to own your process.",
+        "passages": [
+          "These skills are designed to be small, easy to adapt, and composable. They work with any model."
+        ]
+      },
+      "categorie": "engineering skills",
+      "usages": [
+        {
+          "texte": "agent skills",
+          "passages": [
+            "My agent skills that I use every day to do real engineering - not vibe coding."
+          ]
+        }
+      ],
+      "termes_proches": []
+    },
+    {
+      "site": "security-audit-skill",
+      "nom": "Security Audit Skill",
+      "url": "https://github.com/cloudflare/security-audit-skill",
+      "libelle_lien": "Security Audit Skill",
+      "explication": {
+        "texte": "Turns your agent into a security auditor: isolated agents hunt, and a fresh verifier tries to disprove every finding.",
+        "passages": [
+          "A coding-agent skill that turns your agent into a security auditor.",
+          "Candidate validation -- give every unique candidate to a fresh verifier that tries to disprove it."
+        ]
+      },
+      "categorie": "security audit",
+      "usages": [
+        {
+          "texte": "security audit",
+          "passages": [
+            "A coding-agent skill that turns your agent into a security auditor."
+          ]
+        }
+      ],
+      "termes_proches": []
+    },
+    {
+      "site": "ponytail",
+      "nom": "Ponytail",
+      "url": "https://github.com/DietrichGebert/ponytail",
+      "libelle_lien": "Ponytail",
+      "explication": {
+        "texte": "Makes the agent write only what the task needs, without cutting validation, error handling, security or accessibility.",
+        "passages": [
+          "The rule was never \"fewest tokens.\" It is: write only what the task needs, and never cut validation, error handling, security, or accessibility."
+        ]
+      },
+      "categorie": "minimal code",
+      "usages": [
+        {
+          "texte": "less code",
+          "passages": [
+            "The best code is the code you never wrote."
+          ]
+        }
+      ],
+      "termes_proches": []
+    },
+    {
+      "site": "impeccable",
+      "nom": "Impeccable",
+      "url": "https://github.com/pbakaus/impeccable",
+      "libelle_lien": "Impeccable",
+      "explication": {
+        "texte": "Gives your agent design commands to polish, critique and audit a page, and flags AI slop before release.",
+        "passages": [
+          "The design vocabulary for your coding agent. Steer with polish and bolder , review with critique and audit , and catch AI slop before it ships."
+        ]
+      },
+      "categorie": "interface design",
+      "usages": [
+        {
+          "texte": "design review",
+          "passages": [
+            "The design vocabulary for your coding agent."
+          ]
+        }
+      ],
+      "termes_proches": []
+    },
+    {
+      "site": "anatomy",
+      "nom": "Anatomy",
+      "url": "https://github.com/wheresryan22/anatomy",
+      "libelle_lien": "Anatomy",
+      "explication": {
+        "texte": "Explains a technical idea as an interactive isometric figure of a machine, in SVG, WebGL and 3D.",
+        "passages": [
+          "A Claude skill that explains an idea by building it as a real, working object.",
+          "Crafted, interactive isometric figures with many small precise parts, in SVG, WebGL and 3D."
+        ]
+      },
+      "categorie": "illustration",
+      "usages": [
+        {
+          "texte": "isometric illustration",
+          "passages": [
+            "Crafted, interactive isometric figures with many small precise parts, in SVG, WebGL and 3D."
+          ]
+        }
+      ],
+      "termes_proches": []
+    },
+    {
+      "site": "diagram-design",
+      "nom": "Diagram Design",
+      "url": "https://github.com/cathrynlavery/diagram-design",
+      "libelle_lien": "Diagram Design",
+      "explication": {
+        "texte": "Produces each diagram as a single HTML + SVG file and can pick up your site's colours and fonts.",
+        "passages": [
+          "An agent skill that draws diagrams as one self-contained HTML + SVG file, in your brand.",
+          "pulls your palette and fonts so every diagram after this one matches your site"
+        ]
+      },
+      "categorie": "diagrams",
+      "usages": [
+        {
+          "texte": "architecture diagram",
+          "passages": [
+            "Make me an architecture diagram of my app: frontend, backend, database, Redis cache."
+          ]
+        }
+      ],
+      "termes_proches": []
+    },
+    {
+      "site": "graphify",
+      "nom": "Graphify",
+      "url": "https://github.com/Graphify-Labs/graphify",
+      "libelle_lien": "Graphify",
+      "explication": {
+        "texte": "Maps a project into a knowledge graph you query instead of grepping; code is parsed locally, with no vector store.",
+        "passages": [
+          "into a knowledge graph you can query instead of grepping through files.",
+          "Code maps for free, fully local.",
+          "No embeddings, no vector store: a real graph you traverse."
+        ]
+      },
+      "categorie": "knowledge graph",
+      "usages": [
+        {
+          "texte": "codebase map",
+          "passages": [
+            "Type /graphify in your AI coding assistant and it maps your entire project"
+          ]
+        }
+      ],
+      "termes_proches": []
+    },
+    {
+      "site": "hallmark",
+      "nom": "Hallmark",
+      "url": "https://github.com/Nutlope/hallmark",
+      "libelle_lien": "Hallmark",
+      "explication": {
+        "texte": "Offers fifty themes and checks pages in a real browser for the tells of machine-made design.",
+        "passages": [
+          "Fifty themes. Each is a material",
+          "lints the result in a real browser against the tells that read as machine-made"
+        ]
+      },
+      "categorie": "interface design",
+      "usages": [
+        {
+          "texte": "page design",
+          "passages": [
+            "A design skill for Claude Code, Codex, Cursor and OpenCode that refuses to look AI-generated."
+          ]
+        }
+      ],
+      "termes_proches": []
+    },
+    {
+      "site": "taste-skill",
+      "nom": "Taste Skill",
+      "url": "https://github.com/Leonxlnx/taste-skill",
+      "libelle_lien": "Taste Skill",
+      "explication": {
+        "texte": "Hands the agent an art direction, real photos and a browser check, so it stops building the average landing page.",
+        "passages": [
+          "It gives the agent an art direction, real pictures and a way to check its own work in a real browser.",
+          "instead of assembling the average landing page."
+        ]
+      },
+      "categorie": "art direction",
+      "usages": [
+        {
+          "texte": "website design",
+          "passages": [
+            "makes coding agents design websites and app screens instead of assembling the average landing page."
+          ]
+        }
+      ],
+      "termes_proches": []
+    },
+    {
+      "site": "superpowers",
+      "nom": "Superpowers",
+      "url": "https://github.com/obra/superpowers",
+      "libelle_lien": "Superpowers",
+      "explication": {
+        "texte": "A full development method built on skills: spec first, then a plan, then subagents with review and TDD.",
+        "passages": [
+          "Superpowers is a complete software development methodology for your coding agents, built on top of a set of composable skills",
+          "having agents work through each engineering task, inspecting and reviewing their work",
+          "It emphasizes true red/green TDD"
+        ]
+      },
+      "categorie": "development method",
+      "usages": [
+        {
+          "texte": "TDD workflow",
+          "passages": [
+            "It emphasizes true red/green TDD, YAGNI (You Aren't Gonna Need It), and DRY."
+          ]
+        }
+      ],
+      "termes_proches": []
+    }
+  ],
+  "mots_cles": {
+    "nom": "Fastest-growing Claude skills",
+    "categorie": "MCP et skills",
+    "termes_proches": []
+  }
+}

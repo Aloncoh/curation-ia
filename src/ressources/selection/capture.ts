@@ -109,8 +109,17 @@ export interface ContenuPage {
   type_contenu: string | null;
 }
 
+/**
+ * Identifiant d'un document de site : la page d'accueil garde son identifiant historique ; une page qui n'est pas la
+ * racine (plusieurs dépôts sur github.com, sélection du 2026-11-04) reçoit le sien, sinon elles s'écraseraient.
+ */
+export const idDocument = (nom: 'page-accueil' | 'apercu', url: string): string => {
+  const chemin = new URL(url).pathname.replace(/\/+$/, '');
+  return chemin === '' ? nom : `${nom}:${chemin}`;
+};
+
 export const documentPage = (s: SiteSelection, p: ContenuPage): CollectedDocument =>
-  document('page-accueil', s.url, `${s.nom} — page d'accueil`, jsonTrie(p), 'json', { hote: s.hote });
+  document(idDocument('page-accueil', s.url), s.url, `${s.nom} — page d'accueil`, jsonTrie(p), 'json', { hote: s.hote });
 
 export const documentRobots = (s: SiteSelection, texte: string): CollectedDocument =>
   document('robots', `https://${s.hote}/robots.txt`, `${s.hote} — robots.txt`, normalizeText(texte), 'text', { hote: s.hote });
@@ -270,7 +279,7 @@ export async function capturerSelection(o: OptionsCaptureSelection): Promise<Bil
           compteurs.newDocuments += counts.newDocuments;
           compteurs.unchangedDocuments += counts.unchangedDocuments;
           compteurs.changedDocuments += counts.changedDocuments;
-          bilan.issue = stored.find((x) => x.doc.externalId === 'page-accueil')?.outcome ?? null;
+          bilan.issue = stored.find((x) => x.doc.externalId === idDocument('page-accueil', s.url))?.outcome ?? null;
           await tx
             .update(sources)
             .set(bilan.resultat === 'capturee' ? { status: 'ok', lastSuccessAt: now() } : { status: 'error', lastErrorAt: now(), lastError: `${bilan.motif}: ${bilan.detail ?? ''}` })
@@ -371,8 +380,8 @@ export async function capturesDeSelection(client: Client, e: EntreeSelection): P
   const sites: CapturesSelection['sites'] = [];
   for (const s of e.sites) {
     const d = await dernieres(client, sourceIdSite(s.hote));
-    const page = d.get('page-accueil') ?? null;
-    const apercu = d.get('apercu') ?? null;
+    const page = d.get(idDocument('page-accueil', s.url)) ?? null;
+    const apercu = d.get(idDocument('apercu', s.url)) ?? null;
     sites.push({ site: s, page: page && page.url === s.url ? page : null, robots: d.get('robots') ?? null, apercu: apercu && apercu.url === s.url ? apercu : null });
   }
   return { liste, sites };

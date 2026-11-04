@@ -1,6 +1,6 @@
 // Généré par « npm run maquette » — ne pas modifier à la main.
 window.DONNEES_MAQUETTE = {
-  "generated_at": "2026-11-04T08:38:55.570Z",
+  "generated_at": "2026-11-04T10:01:56.030Z",
   "note": "Actualités réellement collectées depuis des sources officielles, pas encore analysées ; les extraits sont des citations courtes de la source, attribuées et liées. Les exemples de publications sont rédigés par Claude Code pour la maquette, pas par l'agent du site : chaque passage cité est recherché mot pour mot dans la capture réelle.",
   "comptes": [
     {
@@ -18539,6 +18539,222 @@ window.DONNEES_MAQUETTE = {
       ]
     },
     {
+      "postId": 91,
+      "revisionId": 173,
+      "jour": "2026-11-04",
+      "motsCles": [
+        {
+          "champ": "nom",
+          "terme": "Fastest-growing Claude skills",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "MCP et skills",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "nom",
+          "terme": "Matt Pocock Skills",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "engineering skills",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "usage",
+          "terme": "agent skills",
+          "raison": null,
+          "passage": "My agent skills that I use every day to do real engineering - not vibe coding."
+        },
+        {
+          "champ": "nom",
+          "terme": "Security Audit Skill",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "security audit",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "usage",
+          "terme": "security audit",
+          "raison": null,
+          "passage": "A coding-agent skill that turns your agent into a security auditor."
+        },
+        {
+          "champ": "nom",
+          "terme": "Ponytail",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "minimal code",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "usage",
+          "terme": "less code",
+          "raison": null,
+          "passage": "The best code is the code you never wrote."
+        },
+        {
+          "champ": "nom",
+          "terme": "Impeccable",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "interface design",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "usage",
+          "terme": "design review",
+          "raison": null,
+          "passage": "The design vocabulary for your coding agent."
+        },
+        {
+          "champ": "nom",
+          "terme": "Anatomy",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "illustration",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "usage",
+          "terme": "isometric illustration",
+          "raison": null,
+          "passage": "Crafted, interactive isometric figures with many small precise parts, in SVG, WebGL and 3D."
+        },
+        {
+          "champ": "nom",
+          "terme": "Diagram Design",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "diagrams",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "usage",
+          "terme": "architecture diagram",
+          "raison": null,
+          "passage": "Make me an architecture diagram of my app: frontend, backend, database, Redis cache."
+        },
+        {
+          "champ": "nom",
+          "terme": "Graphify",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "knowledge graph",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "usage",
+          "terme": "codebase map",
+          "raison": null,
+          "passage": "Type /graphify in your AI coding assistant and it maps your entire project"
+        },
+        {
+          "champ": "nom",
+          "terme": "Hallmark",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "usage",
+          "terme": "page design",
+          "raison": null,
+          "passage": "A design skill for Claude Code, Codex, Cursor and OpenCode that refuses to look AI-generated."
+        },
+        {
+          "champ": "nom",
+          "terme": "Taste Skill",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "art direction",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "usage",
+          "terme": "website design",
+          "raison": null,
+          "passage": "makes coding agents design websites and app screens instead of assembling the average landing page."
+        },
+        {
+          "champ": "nom",
+          "terme": "Superpowers",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "development method",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "usage",
+          "terme": "TDD workflow",
+          "raison": null,
+          "passage": "It emphasizes true red/green TDD, YAGNI (You Aren't Gonna Need It), and DRY."
+        }
+      ],
+      "textes": [
+        "10 Claude skill repos to know, from security audits to design taste and codebase maps",
+        "Matt Pocock Skills",
+        "Small, composable engineering skills that work with any model, meant to be adapted rather than to own your process.",
+        "Security Audit Skill",
+        "Turns your agent into a security auditor: isolated agents hunt, and a fresh verifier tries to disprove every finding.",
+        "Ponytail",
+        "Makes the agent write only what the task needs, without cutting validation, error handling, security or accessibility.",
+        "Impeccable",
+        "Gives your agent design commands to polish, critique and audit a page, and flags AI slop before release.",
+        "Anatomy",
+        "Explains a technical idea as an interactive isometric figure of a machine, in SVG, WebGL and 3D.",
+        "Diagram Design",
+        "Produces each diagram as a single HTML + SVG file and can pick up your site's colours and fonts.",
+        "Graphify",
+        "Maps a project into a knowledge graph you query instead of grepping; code is parsed locally, with no vector store.",
+        "Hallmark",
+        "Offers fifty themes and checks pages in a real browser for the tells of machine-made design.",
+        "Taste Skill",
+        "Hands the agent an art direction, real photos and a browser check, so it stops building the average landing page.",
+        "Superpowers",
+        "A full development method built on skills: spec first, then a plan, then subagents with review and TDD."
+      ]
+    },
+    {
       "postId": 69,
       "revisionId": 119,
       "jour": "2026-11-04",
@@ -19190,6 +19406,392 @@ window.DONNEES_MAQUETTE = {
       ],
       "decouverte_via": "Liste de sites transmise par l'utilisateur le 2026-11-02, repérée dans un post X dont l'auteur n'est pas identifié (contenu externe attribué ; affirmations du post non reprises)",
       "importe_le": "2026-11-03T07:15:44.383Z"
+    },
+    {
+      "post_id": 91,
+      "revision_id": 173,
+      "slug": "selection-skills-croissance",
+      "nature": "selection",
+      "nom": "Fastest-growing Claude skills",
+      "compte": "repo",
+      "statut": "en_attente",
+      "etiquette": "pas encore publié",
+      "planning": {
+        "jour": "2026-11-04",
+        "rang": 9,
+        "etat": "prevue",
+        "utilise_reserve": false,
+        "motif": null
+      },
+      "origine": {
+        "code": "claude_code_developpement",
+        "texte": "Rédigé pendant le développement par Claude Code, assistant de programmation, pas par l'agent du site ; vérifié par les contrôles du code"
+      },
+      "mention": "Analyse IA à partir des sources — non testé par la plateforme",
+      "accroche": {
+        "texte": "10 Claude skill repos to know, from security audits to design taste and codebase maps",
+        "passages": []
+      },
+      "ressources": [
+        {
+          "site": "mattpocock-skills",
+          "nom": "Matt Pocock Skills",
+          "url": "https://github.com/mattpocock/skills",
+          "libelle_lien": "Matt Pocock Skills",
+          "hote": "github.com",
+          "explication": {
+            "texte": "Small, composable engineering skills that work with any model, meant to be adapted rather than to own your process.",
+            "passages": [
+              "These skills are designed to be small, easy to adapt, and composable. They work with any model."
+            ]
+          },
+          "lien": {
+            "resultat": "verifie",
+            "motif": "capture_recente",
+            "verifie_le": "2026-11-04T09:58:30.675Z"
+          }
+        },
+        {
+          "site": "security-audit-skill",
+          "nom": "Security Audit Skill",
+          "url": "https://github.com/cloudflare/security-audit-skill",
+          "libelle_lien": "Security Audit Skill",
+          "hote": "github.com",
+          "explication": {
+            "texte": "Turns your agent into a security auditor: isolated agents hunt, and a fresh verifier tries to disprove every finding.",
+            "passages": [
+              "A coding-agent skill that turns your agent into a security auditor.",
+              "Candidate validation -- give every unique candidate to a fresh verifier that tries to disprove it."
+            ]
+          },
+          "lien": {
+            "resultat": "verifie",
+            "motif": "capture_recente",
+            "verifie_le": "2026-11-04T09:58:31.376Z"
+          }
+        },
+        {
+          "site": "ponytail",
+          "nom": "Ponytail",
+          "url": "https://github.com/DietrichGebert/ponytail",
+          "libelle_lien": "Ponytail",
+          "hote": "github.com",
+          "explication": {
+            "texte": "Makes the agent write only what the task needs, without cutting validation, error handling, security or accessibility.",
+            "passages": [
+              "The rule was never \"fewest tokens.\" It is: write only what the task needs, and never cut validation, error handling, security, or accessibility."
+            ]
+          },
+          "lien": {
+            "resultat": "verifie",
+            "motif": "capture_recente",
+            "verifie_le": "2026-11-04T09:58:32.296Z"
+          }
+        },
+        {
+          "site": "impeccable",
+          "nom": "Impeccable",
+          "url": "https://github.com/pbakaus/impeccable",
+          "libelle_lien": "Impeccable",
+          "hote": "github.com",
+          "explication": {
+            "texte": "Gives your agent design commands to polish, critique and audit a page, and flags AI slop before release.",
+            "passages": [
+              "The design vocabulary for your coding agent. Steer with polish and bolder , review with critique and audit , and catch AI slop before it ships."
+            ]
+          },
+          "lien": {
+            "resultat": "verifie",
+            "motif": "capture_recente",
+            "verifie_le": "2026-11-04T09:58:33.003Z"
+          }
+        },
+        {
+          "site": "anatomy",
+          "nom": "Anatomy",
+          "url": "https://github.com/wheresryan22/anatomy",
+          "libelle_lien": "Anatomy",
+          "hote": "github.com",
+          "explication": {
+            "texte": "Explains a technical idea as an interactive isometric figure of a machine, in SVG, WebGL and 3D.",
+            "passages": [
+              "A Claude skill that explains an idea by building it as a real, working object.",
+              "Crafted, interactive isometric figures with many small precise parts, in SVG, WebGL and 3D."
+            ]
+          },
+          "lien": {
+            "resultat": "verifie",
+            "motif": "capture_recente",
+            "verifie_le": "2026-11-04T09:58:33.816Z"
+          }
+        },
+        {
+          "site": "diagram-design",
+          "nom": "Diagram Design",
+          "url": "https://github.com/cathrynlavery/diagram-design",
+          "libelle_lien": "Diagram Design",
+          "hote": "github.com",
+          "explication": {
+            "texte": "Produces each diagram as a single HTML + SVG file and can pick up your site's colours and fonts.",
+            "passages": [
+              "An agent skill that draws diagrams as one self-contained HTML + SVG file, in your brand.",
+              "pulls your palette and fonts so every diagram after this one matches your site"
+            ]
+          },
+          "lien": {
+            "resultat": "verifie",
+            "motif": "capture_recente",
+            "verifie_le": "2026-11-04T09:58:34.533Z"
+          }
+        },
+        {
+          "site": "graphify",
+          "nom": "Graphify",
+          "url": "https://github.com/Graphify-Labs/graphify",
+          "libelle_lien": "Graphify",
+          "hote": "github.com",
+          "explication": {
+            "texte": "Maps a project into a knowledge graph you query instead of grepping; code is parsed locally, with no vector store.",
+            "passages": [
+              "into a knowledge graph you can query instead of grepping through files.",
+              "Code maps for free, fully local.",
+              "No embeddings, no vector store: a real graph you traverse."
+            ]
+          },
+          "lien": {
+            "resultat": "verifie",
+            "motif": "capture_recente",
+            "verifie_le": "2026-11-04T09:58:35.381Z"
+          }
+        },
+        {
+          "site": "hallmark",
+          "nom": "Hallmark",
+          "url": "https://github.com/Nutlope/hallmark",
+          "libelle_lien": "Hallmark",
+          "hote": "github.com",
+          "explication": {
+            "texte": "Offers fifty themes and checks pages in a real browser for the tells of machine-made design.",
+            "passages": [
+              "Fifty themes. Each is a material",
+              "lints the result in a real browser against the tells that read as machine-made"
+            ]
+          },
+          "lien": {
+            "resultat": "verifie",
+            "motif": "capture_recente",
+            "verifie_le": "2026-11-04T09:58:36.024Z"
+          }
+        },
+        {
+          "site": "taste-skill",
+          "nom": "Taste Skill",
+          "url": "https://github.com/Leonxlnx/taste-skill",
+          "libelle_lien": "Taste Skill",
+          "hote": "github.com",
+          "explication": {
+            "texte": "Hands the agent an art direction, real photos and a browser check, so it stops building the average landing page.",
+            "passages": [
+              "It gives the agent an art direction, real pictures and a way to check its own work in a real browser.",
+              "instead of assembling the average landing page."
+            ]
+          },
+          "lien": {
+            "resultat": "verifie",
+            "motif": "capture_recente",
+            "verifie_le": "2026-11-04T09:58:36.683Z"
+          }
+        },
+        {
+          "site": "superpowers",
+          "nom": "Superpowers",
+          "url": "https://github.com/obra/superpowers",
+          "libelle_lien": "Superpowers",
+          "hote": "github.com",
+          "explication": {
+            "texte": "A full development method built on skills: spec first, then a plan, then subagents with review and TDD.",
+            "passages": [
+              "Superpowers is a complete software development methodology for your coding agents, built on top of a set of composable skills",
+              "having agents work through each engineering task, inspecting and reviewing their work",
+              "It emphasizes true red/green TDD"
+            ]
+          },
+          "lien": {
+            "resultat": "verifie",
+            "motif": "capture_recente",
+            "verifie_le": "2026-11-04T09:58:37.523Z"
+          }
+        }
+      ],
+      "visuel": {
+        "src": "medias/montages/selections/selection-skills-croissance.jpg",
+        "alt": "10 Claude skill repos to know, from security audits to design taste and codebase maps. Page d’accueil de Matt Pocock Skills, capture d’écran. Page d’accueil de Security Audit Skill, capture d’écran. Page d’accueil de Ponytail, capture d’écran. Page d’accueil de Impeccable, capture d’écran. Page d’accueil de Anatomy, capture d’écran. Page d’accueil de Diagram Design, capture d’écran",
+        "gabarit": "selection",
+        "mention": "Illustration — ne prouve pas le fonctionnement",
+        "credit": "Captures des sites cités, © leurs auteurs",
+        "droits_a_verifier": true,
+        "motif_droits": "Captures d'écran de sites tiers : droits de publication non tranchés (STATE.md, point montages) ; exemple de maquette, jamais publié tel quel"
+      },
+      "exclus": [],
+      "captures": [
+        {
+          "document": "liste",
+          "snapshot_id": 607,
+          "capture_le": "2026-11-04T09:57:46.758Z"
+        },
+        {
+          "document": "mattpocock-skills:page-accueil",
+          "snapshot_id": 609,
+          "capture_le": "2026-11-04T09:58:30.675Z"
+        },
+        {
+          "document": "mattpocock-skills:robots",
+          "snapshot_id": 596,
+          "capture_le": "2026-11-04T09:57:39.805Z"
+        },
+        {
+          "document": "mattpocock-skills:apercu",
+          "snapshot_id": 619,
+          "capture_le": "2026-11-04T09:59:42.025Z"
+        },
+        {
+          "document": "security-audit-skill:page-accueil",
+          "snapshot_id": 610,
+          "capture_le": "2026-11-04T09:58:31.376Z"
+        },
+        {
+          "document": "security-audit-skill:robots",
+          "snapshot_id": 596,
+          "capture_le": "2026-11-04T09:57:39.805Z"
+        },
+        {
+          "document": "security-audit-skill:apercu",
+          "snapshot_id": 620,
+          "capture_le": "2026-11-04T09:59:42.027Z"
+        },
+        {
+          "document": "ponytail:page-accueil",
+          "snapshot_id": 611,
+          "capture_le": "2026-11-04T09:58:32.296Z"
+        },
+        {
+          "document": "ponytail:robots",
+          "snapshot_id": 596,
+          "capture_le": "2026-11-04T09:57:39.805Z"
+        },
+        {
+          "document": "ponytail:apercu",
+          "snapshot_id": 621,
+          "capture_le": "2026-11-04T09:59:42.028Z"
+        },
+        {
+          "document": "impeccable:page-accueil",
+          "snapshot_id": 612,
+          "capture_le": "2026-11-04T09:58:33.003Z"
+        },
+        {
+          "document": "impeccable:robots",
+          "snapshot_id": 596,
+          "capture_le": "2026-11-04T09:57:39.805Z"
+        },
+        {
+          "document": "impeccable:apercu",
+          "snapshot_id": 622,
+          "capture_le": "2026-11-04T09:59:42.029Z"
+        },
+        {
+          "document": "anatomy:page-accueil",
+          "snapshot_id": 613,
+          "capture_le": "2026-11-04T09:58:33.816Z"
+        },
+        {
+          "document": "anatomy:robots",
+          "snapshot_id": 596,
+          "capture_le": "2026-11-04T09:57:39.805Z"
+        },
+        {
+          "document": "anatomy:apercu",
+          "snapshot_id": 623,
+          "capture_le": "2026-11-04T09:59:42.030Z"
+        },
+        {
+          "document": "diagram-design:page-accueil",
+          "snapshot_id": 614,
+          "capture_le": "2026-11-04T09:58:34.533Z"
+        },
+        {
+          "document": "diagram-design:robots",
+          "snapshot_id": 596,
+          "capture_le": "2026-11-04T09:57:39.805Z"
+        },
+        {
+          "document": "diagram-design:apercu",
+          "snapshot_id": 624,
+          "capture_le": "2026-11-04T09:59:42.032Z"
+        },
+        {
+          "document": "graphify:page-accueil",
+          "snapshot_id": 615,
+          "capture_le": "2026-11-04T09:58:35.381Z"
+        },
+        {
+          "document": "graphify:robots",
+          "snapshot_id": 596,
+          "capture_le": "2026-11-04T09:57:39.805Z"
+        },
+        {
+          "document": "graphify:apercu",
+          "snapshot_id": 625,
+          "capture_le": "2026-11-04T09:59:42.033Z"
+        },
+        {
+          "document": "hallmark:page-accueil",
+          "snapshot_id": 616,
+          "capture_le": "2026-11-04T09:58:36.024Z"
+        },
+        {
+          "document": "hallmark:robots",
+          "snapshot_id": 596,
+          "capture_le": "2026-11-04T09:57:39.805Z"
+        },
+        {
+          "document": "hallmark:apercu",
+          "snapshot_id": 629,
+          "capture_le": "2026-11-04T10:01:25.559Z"
+        },
+        {
+          "document": "taste-skill:page-accueil",
+          "snapshot_id": 617,
+          "capture_le": "2026-11-04T09:58:36.683Z"
+        },
+        {
+          "document": "taste-skill:robots",
+          "snapshot_id": 596,
+          "capture_le": "2026-11-04T09:57:39.805Z"
+        },
+        {
+          "document": "taste-skill:apercu",
+          "snapshot_id": 627,
+          "capture_le": "2026-11-04T09:59:42.035Z"
+        },
+        {
+          "document": "superpowers:page-accueil",
+          "snapshot_id": 618,
+          "capture_le": "2026-11-04T09:58:37.523Z"
+        },
+        {
+          "document": "superpowers:robots",
+          "snapshot_id": 596,
+          "capture_le": "2026-11-04T09:57:39.805Z"
+        },
+        {
+          "document": "superpowers:apercu",
+          "snapshot_id": 628,
+          "capture_le": "2026-11-04T09:59:42.036Z"
+        }
+      ],
+      "decouverte_via": "Classement d'image transmis par l'utilisateur le 2026-11-04 (skillleaderboard.com, « Top 10 fastest-growing Claude skill repos », octobre 2026). Le site ne publie pas de page mensuelle : le 2026-11-04, son classement glissant sur 30 jours (données au 3 novembre 2026) contient les mêmes 10 dépôts dans un ordre voisin. Chiffres d'étoiles non repris dans le post.",
+      "importe_le": "2026-11-04T10:01:50.196Z"
     }
   ],
   "selections_non_planifiees": [],
@@ -19296,7 +19898,7 @@ window.DONNEES_MAQUETTE = {
       "passages_introuvables": [],
       "planning": {
         "jour": "2026-11-04",
-        "rang": 9,
+        "rang": 10,
         "etat": "prevue",
         "utilise_reserve": true,
         "priorite": 3
@@ -19397,7 +19999,7 @@ window.DONNEES_MAQUETTE = {
       "passages_introuvables": [],
       "planning": {
         "jour": "2026-11-04",
-        "rang": 10,
+        "rang": 11,
         "etat": "prevue",
         "utilise_reserve": true,
         "priorite": 3
@@ -19476,7 +20078,7 @@ window.DONNEES_MAQUETTE = {
       "passages_introuvables": [],
       "planning": {
         "jour": "2026-11-04",
-        "rang": 11,
+        "rang": 12,
         "etat": "prevue",
         "utilise_reserve": true,
         "priorite": 3
@@ -19665,7 +20267,7 @@ window.DONNEES_MAQUETTE = {
       "passages_introuvables": [],
       "planning": {
         "jour": "2026-11-04",
-        "rang": 12,
+        "rang": 13,
         "etat": "prevue",
         "utilise_reserve": true,
         "priorite": 3

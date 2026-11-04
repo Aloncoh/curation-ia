@@ -489,10 +489,13 @@ describe('page de la maquette (maquette/index.html)', () => {
     for (const bloc of ['Niveau de preuve', 'État du dépôt', 'Planning', 'Sources et traçabilité', 'Pour commencer', 'Compatibilités', 'Exemple d’usage', 'Questions à tester']) {
       expect(page).not.toContain(bloc);
     }
-    // Le texte d'une ressource : accroche, description, intérêt et points distinctifs, rien d'autre.
+    // Le texte d'une ressource : accroche, description, intérêt, points distinctifs, puis le contexte d'usage et les
+    // limites (demande de l'utilisateur du 2026-11-04) ; ni démarrage, ni compatibilités, ni étoiles.
     expect(script).toContain('paragraphes: [r.accroche?.texte, r.description?.texte, r.interet?.texte].filter(Boolean)');
     expect(script).toContain('points: (r.reperes || []).map((x) => x.texte)');
-    expect(script).not.toMatch(/r\.(limites|compatibilites|demarrage|exemple_usage|etat_depot\.etoiles)/);
+    expect(script).toContain("r.exemple_usage?.texte ? ['When to use it:', r.exemple_usage.texte] : null");
+    expect(script).toContain("[['Limits:', 'No limits stated by the source.']]");
+    expect(script).not.toMatch(/r\.(compatibilites|demarrage|etat_depot\.etoiles)/);
   });
 
   it('ordre d’une publication : en-tête, texte avec « Voir plus », lien vers la ressource, image, actions, puis mention discrète', () => {
