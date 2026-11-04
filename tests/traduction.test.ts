@@ -2,7 +2,7 @@
 // modèle (aucun réseau, aucune dépense), budget et écarts. La vérification mot pour mot reste sur l'original.
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import type { Modele, RequeteModele } from '../src/analysis/modele.ts';
-import { champsDeLaFiche, champsDuPost, champsTraduisibles, partieServable } from '../src/traduction/champs.ts';
+import { avecAlias, champsDeLaFiche, champsDuPost, champsTraduisibles, partieServable } from '../src/traduction/champs.ts';
 import { controlerTraduction, invariants } from '../src/traduction/controle.ts';
 import { lireSortie, messageTraduction, recontrolerTraductions, traduirePublications } from '../src/traduction/traduire.ts';
 import { createTestDb, scalar, type TestDb } from './helpers/db.ts';
@@ -15,9 +15,16 @@ describe('champs traduits', () => {
       reperes: [{ texte: 'D', passages: [] }], exemple_usage: { texte: 'E', passages: [] }, mots_cles: { nom: 'x' },
       demarrage: { etapes: [{ texte: 'F', passages: [] }], commande: 'npx skills add x' }, limites: [{ texte: 'G', passages: [] }],
     };
-    expect(champsDuPost('ressource', contenu).map((x) => x.cle)).toEqual(['accroche', 'description', 'interet', 'reperes.0']);
+    expect(champsDuPost('ressource', contenu).map((x) => x.cle)).toEqual(['accroche', 'description', 'interet', 'reperes.0', 'exemple_usage', 'limites.0']);
     expect(champsDeLaFiche('ressource', contenu).map((x) => x.cle)).toEqual(['fiche.exemple_usage', 'fiche.demarrage.etapes.0', 'fiche.limites.0']);
     expect(champsTraduisibles('ressource', contenu)).toHaveLength(7);
+    // Contexte d'usage et limites, repris de la fiche : traduits une seule fois, sous leur clé `fiche.`.
+    const traduits = avecAlias({ 'fiche.exemple_usage': 'e', 'fiche.limites.0': 'g' });
+    expect([traduits.exemple_usage, traduits['limites.0']]).toEqual(['e', 'g']);
+    // Sans limite dans la source : un bloc fixe, jamais envoyé à la traduction.
+    const sansLimite = champsDuPost('ressource', { ...contenu, limites: [] });
+    expect(sansLimite.at(-1)).toEqual({ cle: 'limites.aucune', texte: 'No limits stated by the source.' });
+    expect(champsTraduisibles('ressource', { ...contenu, limites: [] }).some((c) => c.cle === 'limites.aucune')).toBe(false);
     const actualite = { accroche: { texte: 'A', passages: [] }, details: [{ titre: 'How it works', texte: 'T', passages: [] }], attributions: [{ auteur: 'Google DeepMind', texte: '88.2% on X', conditions: { texte: 'Without guardrails', passages: [] } }], questions_a_tester: ['Q?'] };
     expect(champsDeLaFiche('actualite', actualite).map((x) => x.cle)).toEqual(['fiche.details.0.titre', 'fiche.details.0.texte', 'fiche.attributions.0.texte', 'fiche.attributions.0.conditions', 'fiche.questions_a_tester.0']);
     const s = champsTraduisibles('selection', { accroche: { texte: 'A', passages: [] }, ressources: [{ nom: 'Godly', explication: { texte: 'E', passages: [] } }] });

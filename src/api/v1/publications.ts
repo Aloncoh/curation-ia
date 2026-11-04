@@ -10,7 +10,7 @@ import { actualitesDeLaMaquette, type MaquetteActualite } from '../../maquette/a
 import { ressourcesDeLaMaquette, type MaquetteRessource } from '../../maquette/ressources.ts';
 import { selectionsDeLaMaquette, type MaquetteSelection } from '../../maquette/selections.ts';
 import { RequeteInvalide } from '../../recherche/rechercher.ts';
-import { champsDuPost, partieServable, type Champ, type Nature } from '../../traduction/champs.ts';
+import { avecAlias, champsDuPost, partieServable, type Champ, type Nature } from '../../traduction/champs.ts';
 
 export type Mode = 'public' | 'apercu';
 
@@ -174,11 +174,12 @@ const blocsDe = (nature: Nature, item: Record<string, unknown>, elements: Maquet
 /** Applique la traduction si elle couvre tous les champs du post sans écart ; sinon l'original est servi tel quel. */
 export function servirDansLaLangue(blocs: Bloc[], langue: Langue, traduction: TraductionLue | undefined): Pick<Publication, 'langue' | 'traduction' | 'contenu' | 'original'> {
   const champs: Champ[] = blocs.map((b) => ({ cle: b.cle, texte: b.texte }));
-  if (langue === 'en' || !traduction || !partieServable(champs, traduction.champs, traduction.ecarts)) return { langue: 'en', traduction: null, contenu: blocs, original: null };
+  const traduits = traduction ? avecAlias(traduction.champs) : {};
+  if (langue === 'en' || !traduction || !partieServable(champs, traduits, traduction.ecarts)) return { langue: 'en', traduction: null, contenu: blocs, original: null };
   return {
     langue,
     traduction: { langue, origine: traduction.origine, modele: traduction.modele, cree_le: traduction.cree_le },
-    contenu: blocs.map((b) => ({ ...b, texte: traduction.champs[b.cle]! })),
+    contenu: blocs.map((b) => ({ ...b, texte: traduits[b.cle]! })),
     original: blocs,
   };
 }

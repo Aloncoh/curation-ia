@@ -30,11 +30,20 @@ export function champsDuPost(nature: Nature, contenu: Record<string, unknown>): 
     ajouter('description', contenu.description);
     ajouter('interet', contenu.interet);
     liste(contenu.reperes).forEach((r, i) => ajouter(`reperes.${i}`, r));
+    // Demande de l'utilisateur (2026-11-04) : le post dit dans quel contexte la ressource sert et ses limites. Ces textes
+    // sont ceux de la fiche : leur traduction s'y trouve déjà (voir `avecAlias`).
+    ajouter('exemple_usage', contenu.exemple_usage);
+    const limites = liste(contenu.limites);
+    if (limites.length > 0) limites.forEach((l, i) => ajouter(`limites.${i}`, l));
+    else champs.push({ cle: LIMITES_AUCUNE, texte: 'No limits stated by the source.' });
   } else {
     liste(contenu.ressources).forEach((r, i) => ajouter(`ressources.${i}.explication`, objet(r).explication));
   }
   return champs;
 }
+
+/** Bloc affiché quand la source ne dit aucune limite : son texte vient de l'interface, jamais du modèle. */
+export const LIMITES_AUCUNE = 'limites.aucune';
 
 const liste = (v: unknown): unknown[] => (Array.isArray(v) ? v : []);
 const objet = (v: unknown): Record<string, unknown> => (v && typeof v === 'object' ? (v as Record<string, unknown>) : {});
@@ -73,7 +82,18 @@ export function champsDeLaFiche(nature: Nature, contenu: Record<string, unknown>
 
 /** Tout ce qui se traduit dans une révision : le post, puis la fiche. Le texte alternatif d'une image s'y ajoute (`media.alt`). */
 export function champsTraduisibles(nature: Nature, contenu: Record<string, unknown>): Champ[] {
-  return [...champsDuPost(nature, contenu), ...champsDeLaFiche(nature, contenu)];
+  const fiche = champsDeLaFiche(nature, contenu);
+  const cles = new Set(fiche.map((c) => c.cle));
+  // Un champ du post repris de la fiche n'est traduit qu'une fois, sous sa clé `fiche.` ; le texte fixe ne l'est jamais.
+  const post = champsDuPost(nature, contenu).filter((c) => c.cle !== LIMITES_AUCUNE && !cles.has(`fiche.${c.cle}`));
+  return [...post, ...fiche];
+}
+
+/** Traductions d'une révision, complétées pour le post par celles de la fiche et par le texte fixe (traduit par l'interface). */
+export function avecAlias(traduits: Record<string, string>): Record<string, string> {
+  const tout: Record<string, string> = { ...traduits, [LIMITES_AUCUNE]: 'No limits stated by the source.' };
+  for (const [cle, texte] of Object.entries(traduits)) if (cle.startsWith('fiche.') && !(cle.slice(6) in tout)) tout[cle.slice(6)] = texte;
+  return tout;
 }
 
 export type Groupe = 'post' | 'fiche' | 'media';

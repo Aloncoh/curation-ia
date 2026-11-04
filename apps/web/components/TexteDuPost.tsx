@@ -36,6 +36,16 @@ export interface LibellesTexte {
   voirTraduction: string;
   traductionAuto: string;
   nouvelOnglet: string;
+  rubriqueUsage: string;
+  rubriqueLimites: string;
+  aucuneLimite: string;
+}
+
+/** Intitulé d'un bloc de ressource : le contexte d'usage et la première limite. */
+function intitule(cle: string, libelles: LibellesTexte): string | null {
+  if (cle === 'exemple_usage') return libelles.rubriqueUsage;
+  if (cle === 'limites.0' || cle === 'limites.aucune') return libelles.rubriqueLimites;
+  return null;
 }
 
 interface Props {
@@ -72,7 +82,13 @@ export function TexteDuPost({ contenu, original, langue, langueOriginale, comple
   }
   const fin = (i: number, j: number): ReactNode => (i === groupes.length - 1 && j === groupes[i]!.blocs.length - 1 && bouton ? <> {bouton}</> : null);
   const enfants = groupes.map((g, i) => {
-    if (g.type === 'paragraphe') return <p key={g.blocs[0]!.cle}>{g.blocs[0]!.texte}{fin(i, 0)}</p>;
+    if (g.type === 'paragraphe') {
+      const b = g.blocs[0]!;
+      const titre = intitule(b.cle, libelles);
+      // Le texte fixe « aucune limite » vient de l'interface, dans sa langue.
+      const texte = b.cle === 'limites.aucune' ? libelles.aucuneLimite : b.texte;
+      return <p key={b.cle}>{titre && <strong className="rubrique">{titre}</strong> }{texte}{fin(i, 0)}</p>;
+    }
     if (g.type === 'point') return <ul key={g.blocs[0]!.cle} className="points">{g.blocs.map((b, j) => <li key={b.cle}>{b.texte}{fin(i, j)}</li>)}</ul>;
     return (
       <ol key={g.blocs[0]!.cle} className="sel-liste">

@@ -72,7 +72,7 @@ describe('hébreu de droite à gauche', () => {
 });
 
 describe('« Voir l\'original »', () => {
-  const libelles = { voirPlus: 'Voir plus', voirMoins: 'Voir moins', voirOriginal: 'Voir l’original', voirTraduction: 'Voir la traduction', traductionAuto: 'Traduit automatiquement de l’anglais', nouvelOnglet: ' (nouvel onglet)' };
+  const libelles = { voirPlus: 'Voir plus', voirMoins: 'Voir moins', voirOriginal: 'Voir l’original', voirTraduction: 'Voir la traduction', traductionAuto: 'Traduit automatiquement de l’anglais', rubriqueUsage: 'Quand l’utiliser :', rubriqueLimites: 'Limites :', aucuneLimite: 'Aucune limite indiquée par la source.', nouvelOnglet: ' (nouvel onglet)' };
   const fr = traduit(['Widget 2.1 réduit la latence GPU de 40%', 'Latence réduite de 40%']);
 
   it('montre la traduction, signalée, avec « Voir l\'original »', () => {

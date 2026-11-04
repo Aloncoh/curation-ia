@@ -1,6 +1,6 @@
 // Généré par « npm run maquette » — ne pas modifier à la main.
 window.DONNEES_MAQUETTE = {
-  "generated_at": "2026-11-03T07:33:20.634Z",
+  "generated_at": "2026-11-04T08:38:55.570Z",
   "note": "Actualités réellement collectées depuis des sources officielles, pas encore analysées ; les extraits sont des citations courtes de la source, attribuées et liées. Les exemples de publications sont rédigés par Claude Code pour la maquette, pas par l'agent du site : chaque passage cité est recherché mot pour mot dans la capture réelle.",
   "comptes": [
     {

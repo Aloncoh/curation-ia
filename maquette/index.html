@@ -660,6 +660,11 @@
       badge: r.statut_sortie === 'nouvelle_sortie' ? ['nouveau', 'Nouvelle sortie'] : ['', 'Ressource existante'],
       paragraphes: [r.accroche?.texte, r.description?.texte, r.interet?.texte].filter(Boolean),
       points: (r.reperes || []).map((x) => x.texte),
+      // Contexte d'usage et limites (demande du 2026-11-04), après les repères.
+      rubriques: [
+        r.exemple_usage?.texte ? ['When to use it:', r.exemple_usage.texte] : null,
+        ...((r.limites || []).length ? r.limites.map((l, i) => [i === 0 ? 'Limits:' : '', l.texte]) : [['Limits:', 'No limits stated by the source.']]),
+      ].filter(Boolean),
       bouton: r.bouton && lienDepot(r.bouton.url) ? { libelle: r.bouton.libelle, url: lienDepot(r.bouton.url), cible: depot, aria: r.bouton.aria_label } : null,
       media: () => (r.visuel ? h('figure', { class: 'post-media' }, h('img', { src: r.visuel.src, alt: r.visuel.alt, width: 1080, height: 1350, loading: 'lazy' })) : null),
       vignette: () => (r.visuel ? h('img', { src: r.visuel.src, alt: '', loading: 'lazy' }) : null),
@@ -837,6 +842,7 @@
       ...p.paragraphes.map((t) => ({ type: 'p', texte: t })),
       ...p.points.map((t) => ({ type: 'point', texte: t })),
       ...(p.ressources || []).map((r) => ({ type: 'ressource', texte: `${r.nom} ${r.explication}`, r })),
+      ...(p.rubriques || []).map(([titre, t]) => ({ type: 'p', titre, texte: t })),
     ];
     const zone = h('div', { class: 'post-texte' });
     const LISTES = { point: ['UL', 'points'], ressource: ['OL', 'sel-liste'] };
@@ -847,7 +853,7 @@
       const vue = ouvert ? { blocs, tronque: false } : apercu(blocs, APERCU, p.apercuBlocs ?? null);
       const enfants = [];
       for (const b of vue.blocs) {
-        if (b.type === 'p') { enfants.push(h('p', null, b.texte)); continue; }
+        if (b.type === 'p') { enfants.push(b.titre ? h('p', null, h('strong', { class: 'rubrique' }, b.titre), ' ', b.texte) : h('p', null, b.texte)); continue; }
         const [balise, classe] = LISTES[b.type];
         const derniere = enfants[enfants.length - 1];
         const liste = derniere?.tagName === balise ? derniere : enfants[enfants.push(h(balise.toLowerCase(), { class: classe })) - 1];

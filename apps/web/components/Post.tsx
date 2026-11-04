@@ -119,6 +119,9 @@ export function Post({ p, t, langue, complet = false, raison = null }: { p: Publ
             voirTraduction: t.post.voirTraduction,
             traductionAuto: t.post.traductionAuto(t.langues.nomsDans[p.langue_originale]),
             nouvelOnglet: t.commun.nouvelOnglet,
+            rubriqueUsage: t.post.rubriqueUsage,
+            rubriqueLimites: t.post.rubriqueLimites,
+            aucuneLimite: t.post.aucuneLimite,
           }}
         />
         {bouton && (
