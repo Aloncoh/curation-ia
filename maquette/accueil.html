@@ -25,7 +25,14 @@
   .scene { position: relative; min-height: 100dvh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5dvh; padding: 6dvh 0 4dvh; isolation: isolate; }
 
   /* Ciel : points lumineux qui scintillent. */
-  .ciel { position: absolute; inset: 0; z-index: -1; }
+  /* Fond vivant, qui continue de tourner après l'animation : le ciel pivote lentement, un halo tourne derrière. */
+  .ciel { position: absolute; inset: -40%; z-index: -1; animation: pivote 240s linear infinite; }
+  .halo {
+    position: absolute; z-index: -1; width: 140vmax; aspect-ratio: 1; left: 50%; top: 42%; translate: -50% -50%; border-radius: 50%;
+    background: conic-gradient(from 0deg, transparent 0 20%, rgba(108, 71, 232, .28) 30%, transparent 42%, rgba(18, 166, 160, .16) 60%, transparent 72%, rgba(232, 115, 47, .14) 86%, transparent);
+    filter: blur(40px); animation: apparait 1.5s ease .3s both, pivote 40s linear infinite;
+  }
+  @keyframes pivote { to { rotate: 360deg; } }
   .ciel i { position: absolute; width: 2px; height: 2px; border-radius: 50%; background: #fff; opacity: 0; animation: scintille 3.6s ease-in-out infinite; }
   @keyframes scintille { 0%, 100% { opacity: 0; } 50% { opacity: .7; } }
 
@@ -45,7 +52,7 @@
   @keyframes apparait { from { opacity: 0; } to { opacity: 1; } }
 
   /* Les six agents : chacun part du centre vers sa place (angle --a), puis l'orbite tourne lentement. */
-  .orbite { position: absolute; inset: 0; animation: tourne 60s linear 3s infinite; }
+  .orbite { position: absolute; inset: 0; animation: tourne 45s linear 3s infinite; }
   @keyframes tourne { to { rotate: 360deg; } }
   .agent {
     --x: calc(cos(var(--a)) * var(--rayon-orbite)); --y: calc(sin(var(--a)) * var(--rayon-orbite));
@@ -53,7 +60,7 @@
     display: grid; justify-items: center; text-decoration: none; color: inherit;
     animation: sort .9s cubic-bezier(.34, 1.56, .64, 1) var(--d) both;
   }
-  .agent > span { display: grid; justify-items: center; gap: 6px; animation: contre 60s linear 3s infinite; }
+  .agent > span { display: grid; justify-items: center; gap: 6px; animation: contre 45s linear 3s infinite; }
   @keyframes contre { to { rotate: -360deg; } }
   @keyframes sort { 0% { transform: translate(0, 0) scale(0); opacity: 0; } 100% { transform: translate(var(--x), var(--y)) scale(1); opacity: 1; } }
   .agent img {
@@ -86,6 +93,11 @@
 
   /* « Passer », ou un système qui demande moins d'animations : l'état final, tout de suite. */
   .fini *, .fini *::before, .fini *::after { animation-delay: 0s !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+  /* Ce qui tourne en continu continue après « Passer ». */
+  .fini .orbite { animation: tourne 45s linear infinite !important; }
+  .fini .agent > span { animation: contre 45s linear infinite !important; }
+  .fini .halo { animation: pivote 40s linear infinite !important; opacity: 1; }
+  .fini .ciel { animation: pivote 240s linear infinite !important; }
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation-delay: 0s !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
   }
@@ -95,6 +107,7 @@
 <body>
 <main class="scene" id="scene">
   <div class="ciel" aria-hidden="true" id="ciel"></div>
+  <div class="halo" aria-hidden="true"></div>
   <span class="note">Maquette — aucun compte n'est créé</span>
   <button class="passer" type="button" id="passer">Passer</button>
 
