@@ -236,6 +236,7 @@ a.sel-nom:hover { text-decoration: underline; }
 .vide-page { padding: 48px 24px; text-align: center; color: var(--pied); }
 .vide-page strong { display: block; color: var(--encre); font-size: 1.2rem; margin-bottom: 4px; }
 .vide-page p { margin: 0 auto; max-width: 36ch; }
+.vide-page .vide-icone { margin: 0 auto 12px; color: var(--lavande-encre); }
 
 /* Colonne droite */
 .encart { background: var(--fond); border: 1px solid var(--trait); border-radius: var(--rayon); padding: 12px 4px 8px; }
@@ -312,7 +313,7 @@ a.sel-nom:hover { text-decoration: underline; }
   .plus > summary { padding: 10px; min-height: 44px; }
   .plus-panneau { inset-inline-start: auto; inset-inline-end: 0; }
   .nav {
-    position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 0;
     background: color-mix(in srgb, var(--fond) 94%, transparent); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
     border-top: 1px solid var(--trait); padding: 4px 4px calc(4px + env(safe-area-inset-bottom));
   }

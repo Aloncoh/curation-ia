@@ -8,7 +8,7 @@ import { choisirLangue } from '../app/actions.ts';
 import { contexte } from '../lib/serveur.ts';
 import { Icone, type NomIcone } from './Icone.tsx';
 
-export type Rubrique = 'accueil' | 'explorer' | 'comptes' | null;
+export type Rubrique = 'accueil' | 'explorer' | 'notifications' | 'messages' | 'reels' | 'comptes' | 'profil' | null;
 
 export function ChoixLangue({ langue }: { langue: Langue }) {
   const t = textesDe(langue);
@@ -40,7 +40,11 @@ export async function Cadre({ langue, rubrique, requete = '', children }: { lang
         <nav className="nav" aria-label={t.commun.navigationPrincipale}>
           {lien('/', 'accueil', t.commun.accueil, 'accueil')}
           {lien('/recherche', 'explorer', t.commun.explorer, 'explorer')}
+          {lien('/notifications', 'notifications', t.commun.notifications, 'notifications')}
+          {lien('/messages', 'messages', t.commun.messages, 'messages')}
+          {lien('/reels', 'reels', t.commun.reels, 'reels')}
           {lien('/comptes', 'comptes', t.commun.comptes, 'comptes')}
+          {lien('/profil', 'profil', t.commun.profil, 'profil')}
         </nav>
         <details className="plus">
           <summary>
