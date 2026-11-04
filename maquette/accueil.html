@@ -78,7 +78,7 @@
     display: block; width: 100%; aspect-ratio: 1; border-radius: 50%; background: #f4efe8; object-fit: cover;
     box-shadow: 0 0 0 3px var(--fond), 0 0 0 6px var(--c), 0 0 28px 4px color-mix(in srgb, var(--c) 60%, transparent);
     transition: scale .2s ease;
-    /* Vie propre à chaque agent : il penche la tête, sautille, puis tourne sur lui-même ; durée et décalage différents. */
+    /* Vie propre à chaque agent, sans tourner sur lui-même : il penche la tête, pulse, se balance ; durée propre. */
     animation: vie var(--duree, 7s) ease-in-out calc(var(--d) + 1.4s) infinite;
     transform-style: preserve-3d;
   }
@@ -89,12 +89,13 @@
     30% { transform: rotate(0) translateY(0); }
     36% { transform: scale(1.08); }
     42% { transform: scale(.97); }
-    48%, 62% { transform: none; }
-    78% { transform: perspective(400px) rotateY(360deg); }
-    80%, 100% { transform: none; }
+    48%, 60% { transform: none; }
+    66% { transform: rotate(-4deg); }
+    72% { transform: rotate(4deg); }
+    78% { transform: rotate(-2deg); }
+    84%, 100% { transform: none; }
   }
-  .agent:hover img, .agent:focus-visible img { scale: 1.08; animation: tour .7s cubic-bezier(.34, 1.56, .64, 1) both; }
-  @keyframes tour { from { transform: perspective(400px) rotateY(0); } to { transform: perspective(400px) rotateY(360deg); } }
+  .agent:hover img, .agent:focus-visible img { scale: 1.08; }
   .agent:focus-visible { outline: none; }
   .agent:focus-visible img { box-shadow: 0 0 0 3px var(--fond), 0 0 0 6px #fff, 0 0 28px 6px var(--c); }
   .agent b { position: absolute; left: 50%; top: calc(100% + 8px); translate: -50% 0; white-space: nowrap; color: var(--encre); font: 600 clamp(.8rem, 2.2vmin, .95rem)/1 var(--texte); animation: apparait .5s ease calc(var(--d) + .5s) both; }
@@ -130,7 +131,6 @@
   .fini .ciel { animation: pivote 240s linear infinite !important; }
   .fini .mascotte { animation: flotte 4s ease-in-out infinite, soi 6s ease-in-out infinite !important; }
   .fini .agent img { animation: vie var(--duree, 7s) ease-in-out infinite !important; }
-  .fini .agent:hover img { animation: tour .7s cubic-bezier(.34, 1.56, .64, 1) both !important; }
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation-delay: 0s !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
   }
