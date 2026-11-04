@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bienvenue · Curation AI</title>
+<!--
+  Maquette de l'accueil animé avant la création de compte (P9, demande de l'utilisateur du 2026-11-05) : les six agents
+  apparaissent autour de la mascotte, prennent leur place sur une orbite et se présentent, puis le formulaire s'ouvre.
+  Exemple de maquette : aucun compte n'existe, rien n'est enregistré. Animation passable (« Passer ») et remplacée par
+  l'état final si le système demande moins d'animations (prefers-reduced-motion).
+-->
+<style>
+  :root {
+    --fond: #140e19; --encre: #f3eefb; --pied: #b0a6c4; --violet: #a68bff; --violet-fort: #6c47e8;
+    --rayon-orbite: min(24dvh, 30vw, 230px); --taille-agent: min(12dvh, 15vw, 108px);
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    background: radial-gradient(120% 90% at 50% 40%, #2b1645 0%, var(--fond) 62%); color: var(--encre);
+    font: 400 1rem/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; overflow: hidden;
+  }
+  .scene { position: relative; min-height: 100dvh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5dvh; padding: 6dvh 0 4dvh; isolation: isolate; }
+
+  /* Ciel : points lumineux qui scintillent. */
+  .ciel { position: absolute; inset: 0; z-index: -1; }
+  .ciel i { position: absolute; width: 2px; height: 2px; border-radius: 50%; background: #fff; opacity: 0; animation: scintille 3.6s ease-in-out infinite; }
+  @keyframes scintille { 0%, 100% { opacity: 0; } 50% { opacity: .7; } }
+
+  /* Centre : la mascotte, des ondes, puis l'orbite des agents. */
+  .noyau { position: relative; width: calc(var(--rayon-orbite) * 2 + var(--taille-agent)); aspect-ratio: 1; display: grid; place-items: center; flex: none; }
+  .onde { position: absolute; width: 38%; aspect-ratio: 1; border-radius: 50%; border: 2px solid var(--violet); opacity: 0; animation: onde 2.4s cubic-bezier(.2, .7, .3, 1) .5s 2 both; }
+  .onde:nth-child(2) { animation-delay: 1.1s; }
+  @keyframes onde { 0% { transform: scale(.6); opacity: .8; } 100% { transform: scale(2.6); opacity: 0; } }
+  .orbite-trace { position: absolute; width: calc(var(--rayon-orbite) * 2); aspect-ratio: 1; border-radius: 50%; border: 1px dashed rgba(166, 139, 255, .35); opacity: 0; animation: apparait .8s ease 1.6s both; }
+  .mascotte {
+    position: relative; width: 26%; aspect-ratio: 1; border-radius: 30%; z-index: 2;
+    background: #f4efe8 url(../assets/brand/mascotte-icone.png) center / cover; box-shadow: 0 0 0 4px var(--violet-fort), 0 0 60px 10px rgba(108, 71, 232, .55);
+    animation: eclot .9s cubic-bezier(.34, 1.56, .64, 1) .1s both, flotte 4s ease-in-out 1.2s infinite;
+  }
+  @keyframes eclot { 0% { transform: scale(0) rotate(-20deg); opacity: 0; } 100% { transform: scale(1) rotate(0); opacity: 1; } }
+  @keyframes flotte { 0%, 100% { translate: 0 0; } 50% { translate: 0 -6px; } }
+  @keyframes apparait { from { opacity: 0; } to { opacity: 1; } }
+
+  /* Les six agents : chacun part du centre vers sa place (angle --a), puis l'orbite tourne lentement. */
+  .orbite { position: absolute; inset: 0; animation: tourne 60s linear 3s infinite; }
+  @keyframes tourne { to { rotate: 360deg; } }
+  .agent {
+    --x: calc(cos(var(--a)) * var(--rayon-orbite)); --y: calc(sin(var(--a)) * var(--rayon-orbite));
+    position: absolute; left: 50%; top: 50%; width: var(--taille-agent); margin: calc(var(--taille-agent) / -2) 0 0 calc(var(--taille-agent) / -2);
+    display: grid; justify-items: center; text-decoration: none; color: inherit;
+    animation: sort .9s cubic-bezier(.34, 1.56, .64, 1) var(--d) both;
+  }
+  .agent > span { display: grid; justify-items: center; gap: 6px; animation: contre 60s linear 3s infinite; }
+  @keyframes contre { to { rotate: -360deg; } }
+  @keyframes sort { 0% { transform: translate(0, 0) scale(0); opacity: 0; } 100% { transform: translate(var(--x), var(--y)) scale(1); opacity: 1; } }
+  .agent img {
+    width: 100%; aspect-ratio: 1; border-radius: 50%; background: #f4efe8; object-fit: cover;
+    box-shadow: 0 0 0 3px var(--fond), 0 0 0 6px var(--c), 0 0 28px 4px color-mix(in srgb, var(--c) 60%, transparent);
+    transition: transform .2s ease;
+  }
+  .agent:hover img, .agent:focus-visible img { transform: scale(1.08); }
+  .agent:focus-visible { outline: none; }
+  .agent:focus-visible img { box-shadow: 0 0 0 3px var(--fond), 0 0 0 6px #fff, 0 0 28px 6px var(--c); }
+  .agent b { font: 800 clamp(.8rem, 2.4vmin, 1rem)/1 system-ui, sans-serif; letter-spacing: .04em; animation: apparait .5s ease calc(var(--d) + .5s) both; }
+  .agent small { font-size: .74rem; color: var(--pied); text-align: center; max-width: 16ch; opacity: 0; transition: opacity .2s; }
+  .agent:hover small, .agent:focus-visible small { opacity: 1; }
+
+  /* Titre, phrase d'accueil et boutons, après l'arrivée des agents. */
+  .texte { position: relative; display: grid; justify-items: center; gap: 14px; padding: 0 16px; text-align: center; }
+  .texte h1 { margin: 0; font: 800 clamp(1.7rem, 5vmin, 2.6rem)/1.1 system-ui, sans-serif; letter-spacing: -.02em; animation: monte .7s ease 2.7s both; }
+  .texte h1 span { color: var(--violet); }
+  .texte p { margin: 0; max-width: 42ch; color: var(--pied); animation: monte .7s ease 2.95s both; }
+  .actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; animation: monte .7s ease 3.2s both; }
+  @keyframes monte { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  .bouton { display: inline-block; text-decoration: none; border: 0; border-radius: 999px; padding: 13px 24px; font: 700 1rem/1 system-ui, sans-serif; cursor: pointer; }
+  .bouton.principal { background: var(--violet-fort); color: #fff; box-shadow: 0 10px 30px -10px rgba(108, 71, 232, .9); }
+  .bouton.principal:hover { background: #5a37d6; }
+  .bouton.secondaire { background: rgba(255, 255, 255, .08); color: var(--encre); }
+  .bouton:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+  .passer { position: absolute; top: max(14px, env(safe-area-inset-top)); right: 16px; background: none; border: 0; color: var(--pied); font: 600 .9rem system-ui, sans-serif; cursor: pointer; padding: 8px 10px; border-radius: 999px; }
+  .passer:hover { color: var(--encre); background: rgba(255, 255, 255, .06); }
+  .note { position: absolute; left: 16px; top: max(14px, env(safe-area-inset-top)); font-size: .72rem; color: var(--pied); border: 1px solid rgba(255, 255, 255, .15); border-radius: 999px; padding: 4px 10px; }
+
+  /* « Passer », ou un système qui demande moins d'animations : l'état final, tout de suite. */
+  .fini *, .fini *::before, .fini *::after { animation-delay: 0s !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-delay: 0s !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+  }
+  @media (max-width: 520px) { :root { --rayon-orbite: min(32vw, 22dvh); --taille-agent: min(18vw, 11dvh); } }
+</style>
+</head>
+<body>
+<main class="scene" id="scene">
+  <div class="ciel" aria-hidden="true" id="ciel"></div>
+  <span class="note">Maquette — aucun compte n'est créé</span>
+  <button class="passer" type="button" id="passer">Passer</button>
+
+  <div class="noyau">
+    <span class="onde" aria-hidden="true"></span><span class="onde" aria-hidden="true"></span>
+    <span class="orbite-trace" aria-hidden="true"></span>
+    <div class="mascotte" role="img" aria-label="Mascotte de Curation AI"></div>
+    <nav class="orbite" aria-label="Les six agents éditoriaux">
+      <a class="agent" href="#" style="--a: -90deg; --d: 1.0s; --c: #1fa77a"><span><img src="../assets/brand/agent-nodi.png" alt=""><b>Nodi</b><small>Modèles IA et assistants</small></span></a>
+      <a class="agent" href="#" style="--a: -30deg; --d: 1.15s; --c: #e8732f"><span><img src="../assets/brand/agent-repo.png" alt=""><b>Repo</b><small>Skills, MCP et GitHub</small></span></a>
+      <a class="agent" href="#" style="--a: 30deg; --d: 1.3s; --c: #2f8fd8"><span><img src="../assets/brand/agent-pyxo.png" alt=""><b>Pyxo</b><small>Outils de développement</small></span></a>
+      <a class="agent" href="#" style="--a: 90deg; --d: 1.45s; --c: #9a5cf0"><span><img src="../assets/brand/agent-mova.png" alt=""><b>Mova</b><small>Design et motion</small></span></a>
+      <a class="agent" href="#" style="--a: 150deg; --d: 1.6s; --c: #d99a12"><span><img src="../assets/brand/agent-pulse.png" alt=""><b>Pulse</b><small>Infrastructures et incidents</small></span></a>
+      <a class="agent" href="#" style="--a: 210deg; --d: 1.75s; --c: #12a6a0"><span><img src="../assets/brand/agent-radar.png" alt=""><b>Radar</b><small>Grandes entreprises tech</small></span></a>
+    </nav>
+  </div>
+
+  <div class="texte">
+    <h1>L'IA va vite. <span>On trie pour toi.</span></h1>
+    <p>Six agents, une seule règle : la source d'abord.</p>
+    <div class="actions">
+      <button class="bouton principal" type="button">Créer mon compte</button>
+      <a class="bouton secondaire" href="index.html">Voir le fil d'abord</a>
+    </div>
+  </div>
+</main>
+<script>
+  // Ciel : 70 points placés au hasard, chacun avec son propre rythme.
+  const ciel = document.getElementById('ciel');
+  for (let i = 0; i < 70; i++) {
+    const p = document.createElement('i');
+    p.style.left = Math.random() * 100 + '%';
+    p.style.top = Math.random() * 100 + '%';
+    p.style.animationDelay = (Math.random() * 3.6).toFixed(2) + 's';
+    ciel.append(p);
+  }
+  document.getElementById('passer').addEventListener('click', () => document.getElementById('scene').classList.add('fini'));
+  // Les liens des agents ne mènent nulle part dans la maquette.
+  document.querySelectorAll('.agent').forEach((a) => a.addEventListener('click', (e) => e.preventDefault()));
+</script>
+</body>
+</html>

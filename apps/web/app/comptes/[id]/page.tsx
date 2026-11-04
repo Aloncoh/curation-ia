@@ -1,5 +1,7 @@
 // Profil d'un compte éditorial (SPEC §6, §7.7) : avatar, nom, identifiant, mention « Agent IA », biographie, spécialité,
 // puis ses publications. Ni abonnés ni compteur : aucune interaction réelle n'existe encore.
+import { existsSync } from 'node:fs';
+import { resolve } from 'node:path';
 import type { Metadata } from 'next';
 import { textesDe } from '@curation/textes';
 import { compte } from '../../../../../src/api/v1/index.ts';
@@ -7,8 +9,15 @@ import { BarreRetour, Cadre, Vide } from '../../../components/Cadre.tsx';
 import { Post } from '../../../components/Post.tsx';
 import { SuiteDuFil } from '../../../components/SuiteDuFil.tsx';
 import { contexte } from '../../../lib/serveur.ts';
+import { racineDepot } from '../../../../../src/config.ts';
 
 type Parametres = { params: Promise<{ id: string }> };
+
+/** Bannière fournie par l'utilisateur (assets/brand/banniere-<compte>.jpg|png|webp), sinon le dégradé du compte. */
+function banniereDe(id: string): string | null {
+  const ext = ['jpg', 'webp', 'png'].find((e) => existsSync(resolve(racineDepot(), 'assets', 'brand', `banniere-${id}.${e}`)));
+  return ext ? `/marque/banniere-${id}.${ext}` : null;
+}
 
 const valide = (id: string) => (/^[a-z0-9_-]{1,40}$/.test(id) ? id : '');
 
@@ -31,10 +40,13 @@ export default async function Profil({ params }: Parametres) {
     );
   }
   const c = r.compte;
+  const banniere = banniereDe(c.id);
   return (
     <Cadre langue={ctx.langue} rubrique="comptes">
       <BarreRetour titre={c.nom} langue={ctx.langue} />
-      <div className="profil-banniere" data-compte={c.id} />
+      <div className="profil-banniere" data-compte={c.id}>
+        {banniere && <img src={banniere} alt="" width={1500} height={500} />}
+      </div>
       <div className="profil-haut">
         <img className="profil-photo" src={c.avatar} alt="" width={104} height={104} />
       </div>

@@ -1,16 +1,17 @@
-// GET /marque/… : mascotte et avatars des comptes (assets/brand), liste fermée de noms.
+// GET /marque/… : mascotte, avatars et bannières de profil des comptes (assets/brand), liste fermée de noms.
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { racineDepot } from '../../../../../src/config.ts';
 
-const AUTORISES = /^(agent-(nodi|repo|pyxo|mova|pulse|radar)|mascotte-(icone|principale|salut|sourire))\.png$/;
+const AUTORISES = /^((agent-(nodi|repo|pyxo|mova|pulse|radar)|mascotte-(icone|principale|salut|sourire))\.png|banniere-(nodi|repo|pyxo|mova|pulse|radar)\.(jpg|png|webp))$/;
+const TYPES: Record<string, string> = { png: 'image/png', jpg: 'image/jpeg', webp: 'image/webp' };
 
 export async function GET(_requete: Request, { params }: { params: Promise<{ fichier: string }> }): Promise<Response> {
   const { fichier } = await params;
   if (!AUTORISES.test(fichier)) return new Response(null, { status: 404 });
   try {
     const corps = await readFile(resolve(racineDepot(), 'assets', 'brand', fichier));
-    return new Response(new Uint8Array(corps), { headers: { 'Content-Type': 'image/png', 'Cache-Control': 'public, max-age=86400', 'X-Content-Type-Options': 'nosniff' } });
+    return new Response(new Uint8Array(corps), { headers: { 'Content-Type': TYPES[fichier.split('.').pop()!]!, 'Cache-Control': 'public, max-age=86400', 'X-Content-Type-Options': 'nosniff' } });
   } catch {
     return new Response(null, { status: 404 });
   }
