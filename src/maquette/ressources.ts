@@ -102,6 +102,29 @@ export async function ressourcesDeLaMaquette(executeur: Lecteur, generatedAt: st
   const visibles = r.rows.filter((row) => row.status === 'publie' || (row.status === 'en_attente' && row.etat !== null));
   const motsCles = await motsClesDesRevisions(executeur, visibles.map((row) => Number(row.revision_id)));
 
+  // Boutons, visuels et captures lus en trois requêtes pour toutes les ressources, et non trois par ressource : en ligne,
+  // chaque aller-retour vers la base coûte des dizaines de millisecondes (fil mesuré à 2,6 s le 2026-11-05).
+  const postIds = visibles.map((row) => Number(row.id));
+  const place = (n: number) => Array.from({ length: n }, () => '?').join(', ');
+  const parPost = <T,>(rows: Iterable<T>, cle: (x: T) => number) => {
+    const m = new Map<number, T[]>();
+    for (const x of rows) m.set(cle(x), [...(m.get(cle(x)) ?? []), x]);
+    return m;
+  };
+  const snapshotIds = visibles.flatMap((row) => ((JSON.parse(String(row.content)) as { captures?: { snapshot_id: number }[] }).captures ?? []).map((c) => c.snapshot_id));
+  const [tousBoutons, tousMedias, toutesCaptures] = postIds.length
+    ? await Promise.all([
+        executeur.execute({ sql: `select post_id, revision_id, libelle, url, resultat, motif, verifie_le from post_bouton where post_id in (${place(postIds.length)}) order by verifie_le`, args: postIds }),
+        executeur.execute({ sql: `select post_id, alt_text, notice, content from media_asset where id in (select max(id) from media_asset where post_id in (${place(postIds.length)}) group by post_id)`, args: postIds }),
+        snapshotIds.length
+          ? executeur.execute({ sql: `select c.id, d.url, r.mode from document_snapshot c join source_document d on d.id = c.document_id left join run r on r.id = c.run_id where c.id in (${place(snapshotIds.length)})`, args: snapshotIds })
+          : Promise.resolve({ rows: [] as Record<string, unknown>[] }),
+      ])
+    : [{ rows: [] }, { rows: [] }, { rows: [] }];
+  const boutonsParPost = parPost(tousBoutons.rows as Record<string, unknown>[], (b) => Number(b.post_id));
+  const mediaParPost = new Map((tousMedias.rows as Record<string, unknown>[]).map((m) => [Number(m.post_id), m]));
+  const infosCaptures = new Map((toutesCaptures.rows as Record<string, unknown>[]).map((c) => [Number(c.id), { url: c.url === null ? null : String(c.url), mode: c.mode === null ? null : String(c.mode) }]));
+
   const ressources: MaquetteRessource[] = [];
   const recherche: DocumentRecherche[] = [];
   const nonPlanifiees: RessourceNonPlanifiee[] = [];
@@ -120,29 +143,18 @@ export async function ressourcesDeLaMaquette(executeur: Lecteur, generatedAt: st
       continue;
     }
     const revisionId = Number(row.revision_id);
-    const boutons = await executeur.execute({
-      sql: 'select libelle, url, resultat, motif, verifie_le from post_bouton where post_id = ? and revision_id = ? order by verifie_le',
-      args: [postId, revisionId],
-    });
-    const historique = boutons.rows.map((b) => ({ libelle: String(b.libelle) as LibelleBouton, url: String(b.url), resultat: String(b.resultat) as 'verifie' | 'echec', motif: String(b.motif ?? ''), verifie_le: String(b.verifie_le) }));
+    const boutons = (boutonsParPost.get(postId) ?? []).filter((b) => Number(b.revision_id) === revisionId);
+    const historique = boutons.map((b) => ({ libelle: String(b.libelle) as LibelleBouton, url: String(b.url), resultat: String(b.resultat) as 'verifie' | 'echec', motif: String(b.motif ?? ''), verifie_le: String(b.verifie_le) }));
     // À la lecture aussi, une URL ne devient un bouton que si elle repasse le contrôle d'écriture (https, hôte attendu,
     // libellé cohérent) : une ligne écrite par un autre chemin ne s'afficherait pas telle quelle.
     const bouton = boutonAffichable(historique.filter(urlDeBoutonSure), maintenant, validite);
-    const media = await executeur.execute({ sql: 'select alt_text, notice, content from media_asset where post_id = ? order by id desc limit 1', args: [postId] });
-    const m = media.rows[0];
+    const m = mediaParPost.get(postId);
     const mc = m?.content ? (JSON.parse(String(m.content)) as { fichier?: string; gabarit?: string }) : null;
     // Chemin servi par la maquette : relatif au dossier maquette/, et seulement si le fichier existe.
     const rel = mc?.fichier ? relative('maquette', mc.fichier) : null;
     const servi = rel !== null && rel !== '' && !rel.startsWith('..') && !isAbsolute(rel) && existsSync(cheminDepot(mc!.fichier!));
     const visuel = m && servi ? { src: rel!.split(sep).join('/'), alt: String(m.alt_text), gabarit: String(mc!.gabarit), mention: String(m.notice) } : null;
-    const ids = (contenu.captures as { document: string; snapshot_id: number; capture_le: string }[]).map((c) => c.snapshot_id);
-    const caps = ids.length
-      ? await executeur.execute({
-          sql: `select c.id, d.url, r.mode from document_snapshot c join source_document d on d.id = c.document_id left join run r on r.id = c.run_id where c.id in (${ids.map(() => '?').join(', ')})`,
-          args: ids,
-        })
-      : { rows: [] };
-    const infos = new Map(caps.rows.map((c) => [Number(c.id), { url: c.url === null ? null : String(c.url), mode: c.mode === null ? null : String(c.mode) }]));
+    const infos = infosCaptures;
     const mots = (motsCles.get(revisionId) ?? []).map(({ champ, terme, raison, passage }) => ({ champ, terme, raison, passage }));
     const statut = row.status === 'publie' ? 'publie' : 'en_attente';
     // Jour civil Europe/Paris, comme le plafond : jamais la sous-chaîne UTC de `published_at`.

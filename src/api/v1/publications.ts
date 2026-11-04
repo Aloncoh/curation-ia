@@ -289,12 +289,16 @@ export async function publicationsParIds(ctx: Contexte, ids: readonly number[]):
     : new Set(ids);
   const liste = ids.filter((id) => autorises.has(id));
   if (liste.length === 0) return [];
-  const { actualites } = await actualitesDeLaMaquette(ctx.client, liste);
-  const { ressources } = await ressourcesDeLaMaquette(ctx.client, maintenant, liste);
-  const { selections } = await selectionsDeLaMaquette(ctx.client, maintenant, liste);
-  const comptes = await lireComptes(ctx.client, ctx.langue);
+  // Lectures indépendantes lancées ensemble : en ligne, chaque aller-retour vers la base compte (2026-11-05). Les
+  // carrousels sont demandés pour toute la liste : seuls ceux des actualités existent.
+  const [{ actualites }, { ressources }, { selections }, comptes, carrousels] = await Promise.all([
+    actualitesDeLaMaquette(ctx.client, liste),
+    ressourcesDeLaMaquette(ctx.client, maintenant, liste),
+    selectionsDeLaMaquette(ctx.client, maintenant, liste),
+    lireComptes(ctx.client, ctx.langue),
+    lireCarrousels(ctx.client, liste),
+  ]);
   const items = new Map<number, { item: ReturnType<typeof depuisActualite>; compte: string }>();
-  const carrousels = await lireCarrousels(ctx.client, actualites.map((a) => a.post_id));
   for (const a of actualites) {
     const item = depuisActualite(a);
     const c = carrousels.get(a.post_id);
