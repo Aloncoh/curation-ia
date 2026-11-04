@@ -36,6 +36,7 @@ export const fr: Textes = {
   },
   post: {
     publicationDe: (nom) => `Publication de ${nom}`,
+    couverture: (nom) => `Couverture : ${nom}`,
     voirPlus: 'Voir plus',
     voirMoins: 'Voir moins',
     rubriqueUsage: 'Quand l’utiliser :',

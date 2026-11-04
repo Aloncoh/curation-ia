@@ -2,30 +2,34 @@
    (margin-inline, inset-inline…) pour l'hébreu de droite à gauche. Les visuels (.diapo) restent de gauche à droite. */
 /* Jetons tirés de la mascotte : feutre (fond), visage, lueur des yeux, lavande du corps. */
 :root {
-  --feutre: #ece7e1;
-  --coton: #fdfcfa;
+  --feutre: #f4f0fc;
+  --coton: #ffffff;
   --visage: #1d1b23;
   --encre: #1d1b23;
   --pied: #615b72;
   --lavande: #847db6;
   --lavande-encre: #4d4688;
-  --lavande-voile: #eeebf7;
+  --lavande-voile: #efe8ff;
   --survol: rgba(29, 27, 35, .045);
   --lueur: #faf2e0;
-  --trait: #e0d9d0;
+  --trait: #e7e0f4;
   --alerte: #8a3b2e;
   --alerte-voile: #f6e1dc;
   --reel: #286b40;
-  --focus: #6a62a8;
-  --actif-fond: #1d1b23;
-  --actif-texte: #faf2e0;
+  --focus: #6c47e8;
+  --actif-fond: #6c47e8;
+  --actif-texte: #ffffff;
   --miel: #f4e6bf;
   --miel-encre: #634a0e;
   --miel-trait: #d8bf7a;
-  --fond: #fdfcfa;
-  --champ: #f1ede7;
+  --fond: #fbf9ff;
+  --champ: #f2edfc;
   --ombre: 0 1px 0 rgba(29, 27, 35, .04), 0 8px 24px -12px rgba(29, 27, 35, .18);
   --flotte: 0 18px 40px -16px rgba(29, 27, 35, .45);
+  /* Violet signature (décision de l'utilisateur du 2026-11-05) : logo, onglet actif, boutons principaux. */
+  --violet: #6c47e8;
+  --violet-encre: #5130c9;
+  --violet-voile: #efe8ff;
   --rayon: 16px;
   --display: "Recursive", ui-rounded, system-ui, sans-serif;
   --texte: "Atkinson Hyperlegible Next", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -33,22 +37,24 @@
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --feutre: #121116; --coton: #1b1a21; --encre: #f1ece4; --pied: #aaa4bc; --survol: rgba(255, 255, 255, .05);
-    --lavande-encre: #bdb6ee; --lavande-voile: #29263a; --trait: #2f2c38; --alerte: #f0a493; --alerte-voile: #3a2420;
-    --focus: #9b94d6; --actif-fond: #ece7f9; --actif-texte: #1d1b23;
+    --feutre: #140e19; --coton: #1d1525; --encre: #f3eefb; --pied: #b0a6c4; --survol: rgba(255, 255, 255, .05);
+    --lavande-encre: #c7b8ff; --lavande-voile: #2c2140; --trait: #332840;
+    --violet: #a68bff; --violet-encre: #c7b8ff; --violet-voile: #2c2140; --alerte: #f0a493; --alerte-voile: #3a2420;
+    --focus: #a68bff; --actif-fond: #a68bff; --actif-texte: #140e19;
     --reel: #6cc58d; --miel: #382f1a; --miel-encre: #f1d58c; --miel-trait: #6b5a2c;
     --ombre: 0 1px 0 rgba(0, 0, 0, .3), 0 8px 24px -12px rgba(0, 0, 0, .6); --flotte: 0 18px 40px -12px rgba(0, 0, 0, .8);
-    --fond: #121116; --champ: #211f28;
+    --fond: #140e19; --champ: #251c30;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --feutre: #121116; --coton: #1b1a21; --encre: #f1ece4; --pied: #aaa4bc; --survol: rgba(255, 255, 255, .05);
-  --lavande-encre: #bdb6ee; --lavande-voile: #29263a; --trait: #2f2c38; --alerte: #f0a493; --alerte-voile: #3a2420;
-  --focus: #9b94d6; --actif-fond: #ece7f9; --actif-texte: #1d1b23;
+  --feutre: #140e19; --coton: #1d1525; --encre: #f3eefb; --pied: #b0a6c4; --survol: rgba(255, 255, 255, .05);
+  --lavande-encre: #c7b8ff; --lavande-voile: #2c2140; --trait: #332840;
+  --violet: #a68bff; --violet-encre: #c7b8ff; --violet-voile: #2c2140; --alerte: #f0a493; --alerte-voile: #3a2420;
+  --focus: #a68bff; --actif-fond: #a68bff; --actif-texte: #140e19;
   --reel: #6cc58d; --miel: #382f1a; --miel-encre: #f1d58c; --miel-trait: #6b5a2c;
   --ombre: 0 1px 0 rgba(0, 0, 0, .3), 0 8px 24px -12px rgba(0, 0, 0, .6); --flotte: 0 18px 40px -12px rgba(0, 0, 0, .8);
-  --fond: #121116; --champ: #211f28;
+  --fond: #140e19; --champ: #251c30;
   color-scheme: dark;
 }
 
@@ -77,7 +83,8 @@ h1, h2, h3 { overflow-wrap: anywhere; }
 
 .marque { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--encre); padding-block: 8px; padding-inline: 8px 12px; border-radius: 999px; width: fit-content; margin-bottom: 6px; }
 .marque:hover { background: var(--survol); }
-.marque img { width: 36px; height: 36px; border-radius: 12px; }
+.marque img { width: 36px; height: 36px; border-radius: 12px; box-shadow: 0 0 0 2px var(--violet); }
+.marque span { color: var(--violet-encre); font-weight: 800; }
 .marque span { font-family: var(--display); font-variation-settings: "CASL" 1; font-weight: 900; font-size: 1.25rem; letter-spacing: -.01em; }
 
 .nav { display: grid; gap: 2px; }
@@ -86,7 +93,7 @@ h1, h2, h3 { overflow-wrap: anywhere; }
   font-size: 1.12rem; font-weight: 500; min-height: 48px; cursor: pointer; width: fit-content;
 }
 .nav a:hover, .plus > summary:hover { background: var(--survol); }
-.nav a[aria-current="page"] { font-weight: 800; }
+.nav a[aria-current="page"] { font-weight: 800; color: var(--violet-encre); background: var(--violet-voile); }
 .nav a[aria-current="page"] svg { stroke-width: 2.4; }
 .plus { position: relative; margin-top: 4px; }
 .plus > summary { list-style: none; color: var(--pied); font-size: 1rem; }
@@ -413,3 +420,57 @@ a.sel-nom:hover { text-decoration: underline; }
 .fiche-etiquette { font-size: .74rem; color: var(--pied); border: 1px solid var(--trait); border-radius: 999px; padding: 1px 8px; font-weight: 500; }
 .fiche-commande { margin: 8px 0 4px; padding: 10px 12px; border-radius: 10px; background: var(--champ); overflow-x: auto; font: .88rem/1.4 ui-monospace, Menlo, monospace; }
 .fiche-faits { list-style: none; margin: 18px 0 0; padding: 0; display: grid; gap: 10px; }
+
+/* ——— Couleurs, couvertures et rythme du fil (décision de l'utilisateur du 2026-11-05) ———
+   Chaque agent a sa couleur (celle de ses montages, src/media/style.ts) ; chaque sujet a la sienne (sa marque). */
+.post, .compte-ligne { --agent: var(--violet); }
+[data-compte="nodi"] { --agent: #1fa77a; }
+[data-compte="repo"] { --agent: #e8732f; }
+[data-compte="pyxo"] { --agent: #2f8fd8; }
+[data-compte="mova"] { --agent: #9a5cf0; }
+[data-compte="pulse"] { --agent: #d99a12; }
+[data-compte="radar"] { --agent: #12a6a0; }
+.post-avatar img { box-shadow: 0 0 0 2px var(--fond), 0 0 0 4px var(--agent); }
+.post-nom { color: var(--encre); }
+.post-nom:hover { color: var(--agent); }
+
+.couverture {
+  position: relative; margin: 10px 0 8px; overflow: hidden; isolation: isolate; color: #fff;
+  border-radius: 18px; aspect-ratio: 16 / 9;
+  background:
+    radial-gradient(120% 140% at 0% 0%, color-mix(in srgb, var(--sujet) 55%, #fff) 0%, transparent 55%),
+    linear-gradient(135deg, var(--sujet), color-mix(in srgb, var(--sujet) 55%, #120c1c));
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .12);
+}
+.couv-fond { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; color: #fff; }
+.couv-logo {
+  position: absolute; display: grid; place-items: center; background: #fff; overflow: hidden;
+  width: 30%; aspect-ratio: 1; inset-block-start: 50%; inset-inline-start: 7%; transform: translateY(-50%);
+  border-radius: 24%; box-shadow: 0 18px 40px -14px rgba(0, 0, 0, .55);
+}
+.couv-logo svg { width: 58%; height: 58%; }
+.couv-logo img { width: 100%; height: 100%; object-fit: cover; }
+.couv-monogramme { font: 800 clamp(1.6rem, 7vw, 3.4rem)/1 var(--display); letter-spacing: -.02em; }
+.couv-titre { position: absolute; inset-inline-start: 43%; inset-inline-end: 6%; inset-block-start: 50%; transform: translateY(-50%); display: grid; gap: 4px; text-shadow: 0 2px 14px rgba(0, 0, 0, .35); }
+.couv-titre strong { font: 800 clamp(1.25rem, 4.6vw, 2.3rem)/1.05 var(--display); letter-spacing: -.01em; overflow-wrap: anywhere; }
+.couv-titre small { font: 600 clamp(.8rem, 2.4vw, 1rem)/1.2 var(--texte); opacity: .9; }
+.couv-agent { position: absolute; inset-block-end: 10px; inset-inline-end: 10px; padding: 3px; border-radius: 50%; background: #fff; box-shadow: 0 0 0 2px var(--agent), 0 6px 16px -6px rgba(0, 0, 0, .5); }
+.couv-agent img { width: 28px; height: 28px; border-radius: 50%; display: block; }
+
+/* Annonce courte : vignette carrée à côté du texte. */
+.post-texte-ligne { display: flex; gap: 12px; align-items: flex-start; }
+.post-texte-ligne > :not(.couverture) { flex: 1; min-width: 0; }
+.couv-vignette { flex: none; width: 92px; aspect-ratio: 1; margin: 4px 0 6px; border-radius: 16px; order: 2; }
+.couv-vignette .couv-logo { width: 54%; inset-inline-start: 50%; transform: translate(-50%, -50%); border-radius: 26%; }
+.couv-vignette .couv-agent { inset-block-end: 5px; inset-inline-end: 5px; padding: 2px; }
+.couv-vignette .couv-agent img { width: 18px; height: 18px; }
+
+/* Sélection : la mosaïque de captures en grand, avec la signature de l'agent. */
+.format-grille .post-media { border-radius: 18px; border-color: color-mix(in srgb, var(--agent) 40%, var(--trait)); }
+.format-grande .post-media { border-radius: 18px; }
+
+@media (max-width: 600px) {
+  .couverture { border-radius: 14px; }
+  .couv-agent img { width: 22px; height: 22px; }
+  .couv-vignette { width: 76px; }
+}

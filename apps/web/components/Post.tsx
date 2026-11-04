@@ -7,6 +7,8 @@ import type { Textes } from '@curation/textes';
 import { dateCourte, dateLongue, hrefSur } from '../lib/format.ts';
 import { ActionsDuPost } from './ActionsDuPost.tsx';
 import { Carrousel } from './Carrousel.tsx';
+import { Couverture } from './Couverture.tsx';
+import { sujetDe } from '../lib/sujet.ts';
 import { Icone } from './Icone.tsx';
 import { TexteDuPost } from './TexteDuPost.tsx';
 
@@ -82,8 +84,15 @@ export function Post({ p, t, langue, complet = false, raison = null }: { p: Publ
   const dateTitre = dateLongue(p.date, langue);
   const prevue = p.statut !== 'publie';
   const bouton = p.bouton && hrefSur(p.bouton.url) ? p.bouton : null;
+  // Rythme du fil (décision du 2026-11-05) : une ressource en grand visuel, une sélection en grille d'images, une
+  // annonce courte avec sa vignette. Sur la page d'un post, la couverture et le média complet se suivent.
+  const sujet = sujetDe(p);
+  const format = p.nature === 'selection' ? 'grille' : p.nature === 'actualite' && !complet ? 'courte' : 'grand';
+  const couverture = (f: 'grand' | 'vignette') => sujet && (
+    <Couverture sujet={sujet} graine={p.id} agent={{ nom: p.compte.nom, avatar: p.compte.avatar }} format={f} etiquette={t.post.couverture(sujet.nom)} />
+  );
   return (
-    <article className={`post${complet ? ' complet' : ''}`} data-compte={p.compte.id} aria-label={t.post.publicationDe(p.compte.nom)}>
+    <article className={`post format-${format}${complet ? ' complet' : ''}`} data-compte={p.compte.id} aria-label={t.post.publicationDe(p.compte.nom)}>
       {raison && <p className="post-raison"><Icone nom="explorer" taille={15} />{raison}</p>}
       <a className="post-avatar" href={`/comptes/${p.compte.id}`} tabIndex={-1} aria-hidden="true">
         <img src={p.compte.avatar} alt="" width={40} height={40} />
@@ -106,6 +115,9 @@ export function Post({ p, t, langue, complet = false, raison = null }: { p: Publ
           </span>
           {p.badge && <span className={`badge${p.badge === 'nouvelle_sortie' || p.badge === 'nouvelle_version' ? ' nouveau' : p.badge === 'a_verifier' ? ' verifier' : ''}`}>{t.post.badges[p.badge]}</span>}
         </header>
+        {format === 'grand' && couverture('grand')}
+        <div className="post-texte-ligne">
+        {format === 'courte' && couverture('vignette')}
         <TexteDuPost
           contenu={p.contenu}
           original={p.original}
@@ -124,6 +136,7 @@ export function Post({ p, t, langue, complet = false, raison = null }: { p: Publ
             aucuneLimite: t.post.aucuneLimite,
           }}
         />
+        </div>
         {bouton && (
           <a className="lien-ressource" href={hrefSur(bouton.url)!} target="_blank" rel="noopener noreferrer">
             <Icone nom="lien" taille={17} />
@@ -133,7 +146,7 @@ export function Post({ p, t, langue, complet = false, raison = null }: { p: Publ
             <span className="sr-only">{t.commun.nouvelOnglet}</span>
           </a>
         )}
-        <Media p={p} langue={langue} />
+        {(complet || format === 'grille' || !sujet) && <Media p={p} langue={langue} />}
         <ActionsDuPost
           id={id}
           lien={lien}

@@ -38,6 +38,7 @@ export const he: Textes = {
   },
   post: {
     publicationDe: (nom) => `פוסט של ${nom}`,
+    couverture: (nom) => `שער: ${nom}`,
     voirPlus: 'הצג עוד',
     voirMoins: 'הצג פחות',
     rubriqueUsage: 'מתי להשתמש:',

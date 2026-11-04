@@ -38,6 +38,7 @@ export const en = {
   },
   post: {
     publicationDe: (nom: string) => `Post by ${nom}`,
+    couverture: (nom: string) => `Cover: ${nom}`,
     voirPlus: 'Show more',
     voirMoins: 'Show less',
     rubriqueUsage: 'When to use it:',

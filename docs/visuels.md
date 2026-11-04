@@ -58,3 +58,12 @@ Relevé du 2026-10-31. Ce n'est pas un avis juridique. Rien de lu ne dit si anno
 ## 6. Production
 
 `npm run montage` rend les exemples dans `maquette/medias/montages/` par le navigateur Chrome local, sans réseau ni modèle. Les exemples sont signalés comme tels : les images du projet remplacent les médias d'éditeurs tant que leurs droits ne sont pas établis. Une capture de la maquette qui montre la photo Google porte le crédit de cette photo.
+
+
+## Couvertures et couleurs du site (décision de l'utilisateur du 2026-11-05)
+
+- **Critère** : avant de lire le texte, on doit comprendre de quoi parle le post.
+- **Couverture de chaque post** (`apps/web/components/Couverture.tsx`, sujet déduit dans `apps/web/lib/sujet.ts`) : fond aux couleurs de la marque du sujet, son logo en grand (simple-icons 16.35.0, CC0 ; monogramme pour une marque retirée de la bibliothèque, comme OpenAI), son nom, et l'avatar de l'agent en petit dans un coin comme signature. Pour un dépôt GitHub sans marque connue : l'avatar public du propriétaire. Formes du fond propres à chaque post (graine = identifiant).
+- **Rythme du fil** : ressource en grand visuel (16:9), sélection en grille de captures (mosaïque existante), annonce courte avec une vignette carrée. La page d'un post montre la couverture puis le média complet (montage, carrousel).
+- **Couleurs** : violet signature (logo, onglet actif, boutons principaux) ; fond blanc légèrement lilas en clair, aubergine presque noir en sombre ; une couleur par agent (celle de ses montages) pour l'avatar et la signature.
+- **Pas encore fait** : reprise des images officielles (og:image) selon leurs conditions (ADR 0004) ; illustrations générées par une IA d'images, à brancher quand l'utilisateur aura ouvert un compte et fixé un budget ; animation légère pour les outils de motion.

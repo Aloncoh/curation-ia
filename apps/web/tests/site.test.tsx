@@ -37,7 +37,17 @@ const publication = (o: Partial<Publication> = {}): Publication => ({
 });
 
 describe('hébreu de droite à gauche', () => {
-  const html = renderToStaticMarkup(<Post p={publication()} t={textesDe('he')} langue="he" />);
+  // Page du post (complet) : la couverture puis le montage ; dans le fil, la couverture seule (fil ci-dessous).
+  const html = renderToStaticMarkup(<Post p={publication()} t={textesDe('he')} langue="he" complet />);
+  const fil = renderToStaticMarkup(<Post p={publication()} t={textesDe('he')} langue="he" />);
+
+  it('couvre chaque post : le sujet (dépôt et propriétaire) et la signature de l\'agent, de gauche à droite', () => {
+    expect(fil).toContain('<figure class="couverture couv-grand" dir="ltr"');
+    expect(fil).toContain('<strong>widget</strong><small>acme · GitHub</small>');
+    expect(fil).toContain('class="couv-agent"');
+    expect(fil).not.toContain('/medias/montages/ressources/widget.jpg');
+    expect(html).toContain('/medias/montages/ressources/widget.jpg');
+  });
 
   it('affiche le texte traduit en hébreu, de droite à gauche', () => {
     expect(html).toContain('<div class="post-texte" lang="he" dir="rtl">');
