@@ -1,5 +1,6 @@
 // Qualification, attribution à un compte, brouillon, contrôles et publication non publiée. Rien ne part en ligne.
 import { randomUUID } from 'node:crypto';
+import { SOURCES } from '../sources.ts';
 import { setTimeout as sleep } from 'node:timers/promises';
 import type { Client, Row } from '@libsql/client';
 import { z } from 'zod';
@@ -18,6 +19,9 @@ import { Brouillon, Qualification } from './schemas.ts';
 
 export const MAX_TENTATIVES = 2;
 /** La réflexion du modèle compte dans ces plafonds ; une réponse tronquée repart une fois avec le double. */
+/** Compte qui signe les posts tirés d'une source externe attribuée (vidéos AI Search). */
+export const COMPTE_SOURCE_EXTERNE = 'nodi' as const;
+
 export const MAX_TOKENS = { qualification: 4_000, redaction: 12_000, revision: 12_000 };
 /** Renouvelé pendant chaque appel : un bail expiré signifie que le processus a disparu ou s'est arrêté, par exemple en veille. */
 export const DUREE_BAIL_MS = 15 * 60_000;
@@ -38,6 +42,8 @@ export interface OptionsBrouillons {
   modele: Modele;
   nomModele: string;
   maxItems: number;
+  /** Seulement ces sources (identifiants du registre) ; toutes sinon. */
+  sources?: readonly string[];
   capRunMicroUsd: number;
   capTotalMicroUsd: number;
   /** Au-delà de cet âge à la première vue, l'entrée vient de l'historique d'un flux : écartée sans appel. Sans valeur, aucun filtre. */
@@ -53,10 +59,10 @@ export interface OptionsBrouillons {
  * déjà qualifiées et payées. Un sujet à approfondir repasse quand une nouvelle capture arrive. Une capture de moins de trois mots ne permet aucune citation, une capture trop longue
  * coûterait trop cher : elles ne partent pas au modèle et ne figent rien, l'actualité repassera avec une autre capture.
  */
-async function aTraiter(client: Client, limite: number) {
+async function aTraiter(client: Client, limite: number, sources?: readonly string[]) {
   const r = await client.execute(
     `select n.id, n.title, n.announced_at, n.first_seen_at, v.version, pr.name as produit,
-            c.id as snapshot_id, c.document_id, c.title as snapshot_title, c.content, c.content_format, src.name as source_nom,
+            c.id as snapshot_id, c.document_id, c.title as snapshot_title, c.content, c.content_format, src.id as source_id, src.name as source_nom,
             d.status as etat, d.snapshot_id as snapshot_qualifie, d.prompt_version as prompt_qualifie, d.model as modele_qualifie, d.content as qualification
           from news_item n
           join news_item_document nd on nd.news_item_id = n.id and nd.role = 'primary'
@@ -73,9 +79,10 @@ async function aTraiter(client: Client, limite: number) {
           where n.kind not in ('decouverte', 'selection') and (d.id is null or d.status = 'qualifiee' or (d.status = 'a_approfondir' and d.snapshot_id <> c.id))
           order by d.id is not null desc, coalesce(n.announced_at, n.first_seen_at) desc, n.id desc`,
   );
-  const tailleAdmise = r.rows.filter((row) => String(row.content).length + String(row.snapshot_title).length <= LONGUEUR_MAX_CAPTURE);
+  const lignesSource = sources?.length ? r.rows.filter((row) => sources.includes(String(row.source_id))) : r.rows;
+  const tailleAdmise = lignesSource.filter((row) => String(row.content).length + String(row.snapshot_title).length <= LONGUEUR_MAX_CAPTURE);
   const avecTexte = tailleAdmise.filter((row) => !moinsDeTroisMots(toPlainText(String(row.content), String(row.content_format))));
-  return { lignes: avecTexte.slice(0, limite), sansTexte: tailleAdmise.length - avecTexte.length, tropLongues: r.rows.length - tailleAdmise.length };
+  return { lignes: avecTexte.slice(0, limite), sansTexte: tailleAdmise.length - avecTexte.length, tropLongues: lignesSource.length - tailleAdmise.length };
 }
 
 /** Une qualification payée se réutilise tant que la capture, le prompt et le modèle sont les mêmes. */
@@ -206,7 +213,7 @@ export async function genererBrouillons(o: OptionsBrouillons) {
   let motif: string | null = null;
   const bilan = { revisions_gardees: 0, ecartees: 0, anciennes: 0, a_approfondir: 0, invalides: 0, tronquees: 0, refus: 0, rejetees: 0, a_verifier: 0, controlees: 0, sans_texte: 0, trop_longues: 0, qualifications_reprises: 0 };
   try {
-    const { lignes, sansTexte, tropLongues } = await aTraiter(client, o.maxItems);
+    const { lignes, sansTexte, tropLongues } = await aTraiter(client, o.maxItems, o.sources);
     bilan.sans_texte = sansTexte;
     bilan.trop_longues = tropLongues;
     for (const row of lignes) {
@@ -217,7 +224,9 @@ export async function genererBrouillons(o: OptionsBrouillons) {
       const version = row.version === null ? null : String(row.version);
       const texte = toPlainText(String(row.content), String(row.content_format));
       const annonce = row.announced_at === null ? null : String(row.announced_at);
-      const doc = documentUtilisateur(titreCapture, texte, produit, { source: String(row.source_nom), annonce });
+      const def = SOURCES.find((x) => x.name === String(row.source_nom));
+      const attribution = def?.kind === 'feed' ? (def.attribution ?? null) : null;
+      const doc = documentUtilisateur(titreCapture, texte, produit, { source: String(row.source_nom), annonce, attribution });
       const enregistrer = (status: string, q: Qualification | null, content: unknown, checks: unknown, motifRejet: string | null, diapositives?: DiapositiveResolue[], selection?: Selection) =>
         ecrire(async () => {
           const tx = await client.transaction('write');
@@ -284,6 +293,8 @@ export async function genererBrouillons(o: OptionsBrouillons) {
         }
         q = qualification.valeur;
       }
+      // Vidéos d'AI Search : signées par Nodi (décision de l'utilisateur du 2026-11-04), quel que soit le compte proposé.
+      if (attribution && q.compte !== null) q = { ...q, compte: COMPTE_SOURCE_EXTERNE };
       // Recalculée aussi pour une qualification reprise : un garde-fou durci depuis s'applique sans rien repayer.
       const choix = deciderSelection(q, [titreCapture, texte]);
       if (choix.decision === 'ecarter') { await enregistrer('ecartee', q, null, null, choix.motif, undefined, choix); bilan.ecartees++; continue; }

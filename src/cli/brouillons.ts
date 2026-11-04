@@ -32,7 +32,9 @@ await runCommand(async ({ database }) => {
   const maxItems = Number(process.env.CURATION_MAX_ACTUALITES);
   if (!Number.isInteger(maxItems) || maxItems < 1) { console.error('Refus : CURATION_MAX_ACTUALITES requis.'); return 1; }
   const r = await genererBrouillons({
-    database, modele: f.client(cle), nomModele, maxItems, ageMaxJours: AGE_MAX_JOURS, estReprenable: f.reprenable,
+    database, modele: f.client(cle), nomModele, maxItems,
+    // CURATION_SOURCES (facultatif) : identifiants séparés par des virgules, pour ne rédiger que ces sources.
+    ...(process.env.CURATION_SOURCES ? { sources: process.env.CURATION_SOURCES.split(',').map((x) => x.trim()).filter(Boolean) } : {}), ageMaxJours: AGE_MAX_JOURS, estReprenable: f.reprenable,
     capRunMicroUsd: usd('CURATION_PLAFOND_EXECUTION_USD'), capTotalMicroUsd: usd('CURATION_PLAFOND_TOTAL_USD'),
   });
   console.log(JSON.stringify(r));

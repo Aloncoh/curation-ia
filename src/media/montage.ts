@@ -73,8 +73,8 @@ export const ETAPES_MAX = 4;
 export const LONGUEUR_MAX_ETAPE = 80;
 /** Surtitre fixe : les étapes viennent de la documentation, pas d'un essai de la plateforme. */
 export const SURTITRE_ETAPES = 'Getting started, per the documentation';
-/** Gabarit `selection` : une grille de 4 à 6 aperçus, chacun nommé. */
-export const APERCUS_MIN = 4;
+/** Gabarit `selection` : une grille de 3 à 6 aperçus, chacun nommé (3 depuis le 2026-11-04 : le minimum d’une sélection). */
+export const APERCUS_MIN = 3;
 export const APERCUS_MAX = 6;
 export const LONGUEUR_MAX_NOM_APERCU = 40;
 /** Crédit obligatoire au pied d'un montage d'aperçus : les captures appartiennent aux sites cités. */

@@ -49,10 +49,11 @@ describe('contrôle d’un montage avant rendu', () => {
     expect(etapes(['Installer', 'x'.repeat(80), 'Trois', 'Quatre'])).toEqual([]);
     expect(etapes(['Installer', 'Lancer'], { surtitre: 'Testé par nos soins' })).toContain('etapes_non_attribuees');
   });
-  it('le gabarit sélection exige 4 à 6 aperçus locaux, nommés, et le crédit des captures', () => {
+  it('le gabarit sélection exige 3 à 6 aperçus locaux, nommés, et le crédit des captures', () => {
     const sel = (m: Partial<Montage>) => defautsMontage(montage({ gabarit: 'selection', ...COMPLET.selection, ...m }));
     const apercu = (nom: string) => ({ src: 'data:image/jpeg;base64,AAAA', nom, alt: `Page de ${nom}` });
-    expect(sel({ apercus: ['a', 'b', 'c'].map(apercu) })).toContain('apercus_hors_limites');
+    expect(sel({ apercus: ['a', 'b'].map(apercu) })).toContain('apercus_hors_limites');
+    expect(sel({ apercus: ['a', 'b', 'c'].map(apercu) })).toEqual([]);
     expect(sel({ apercus: ['a', 'b', 'c', 'd', 'e', 'f', 'g'].map(apercu) })).toContain('apercus_hors_limites');
     expect(sel({ apercus: ['a', 'b', 'c', 'd', 'e', 'f'].map(apercu) })).toEqual([]);
     expect(sel({ apercus: [...['a', 'b', 'c'].map(apercu), { ...apercu('d'), src: 'https://exemple.test/a.jpg' }] })).toContain('image_non_locale');

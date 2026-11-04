@@ -1,0 +1,101 @@
+{
+  "format": "selection",
+  "slug": "selection-references-design",
+  "consignes": "s1",
+  "accroche": {
+    "texte": "3 design reference libraries to give your AI agent before it builds a screen",
+    "passages": []
+  },
+  "ressources": [
+    {
+      "site": "mobbin",
+      "nom": "Mobbin",
+      "url": "https://mobbin.com/",
+      "libelle_lien": "Mobbin",
+      "explication": {
+        "texte": "A library of over 600,000 shipped app and site screens, which your AI agents can also access.",
+        "passages": [
+          "Over 600,000 shipped screens, new every week.",
+          "Give your AI agents access to Mobbin."
+        ]
+      },
+      "categorie": "interfaces mobiles",
+      "usages": [
+        {
+          "texte": "UI references",
+          "passages": [
+            "The design reference library for apps and sites."
+          ]
+        }
+      ],
+      "termes_proches": []
+    },
+    {
+      "site": "recent-design",
+      "nom": "Recent Design",
+      "url": "https://recent.design/",
+      "libelle_lien": "Recent Design",
+      "explication": {
+        "texte": "Inspiration organized by format: launch videos, sites, OG images, screenshots and app icons.",
+        "passages": [
+          "Design Launch Videos new Websites OG Images App Screenshots App Icons"
+        ]
+      },
+      "categorie": "inspiration design",
+      "usages": [
+        {
+          "texte": "launch videos",
+          "passages": [
+            "Design Launch Videos new Websites OG Images App Screenshots App Icons"
+          ]
+        },
+        {
+          "texte": "app icons",
+          "passages": [
+            "Design Launch Videos new Websites OG Images App Screenshots App Icons"
+          ]
+        },
+        {
+          "texte": "OG images",
+          "passages": [
+            "Design Launch Videos new Websites OG Images App Screenshots App Icons"
+          ]
+        }
+      ],
+      "termes_proches": [
+        {
+          "terme": "Godly",
+          "raison": "godly.website redirige vers Recent Design, d'après la capture refusée du 2 novembre 2026"
+        }
+      ]
+    },
+    {
+      "site": "brandguidelines",
+      "nom": "Brand Guidelines",
+      "url": "https://www.brandguidelines.net/",
+      "libelle_lien": "Brand Guidelines",
+      "explication": {
+        "texte": "A handpicked directory of brand guidelines from around the world, with PDF documents to study.",
+        "passages": [
+          "Handpicked curated brand guidelines from around the world",
+          "access to PDF documents for inspiration."
+        ]
+      },
+      "categorie": "identité visuelle",
+      "usages": [
+        {
+          "texte": "brand guidelines",
+          "passages": [
+            "Handpicked curated brand guidelines from around the world"
+          ]
+        }
+      ],
+      "termes_proches": []
+    }
+  ],
+  "mots_cles": {
+    "nom": "Design references for AI agents",
+    "categorie": "design",
+    "termes_proches": []
+  }
+}

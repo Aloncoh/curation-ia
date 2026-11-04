@@ -33,6 +33,11 @@ export interface GithubReleasesSource extends BaseSource {
 export interface FeedSource extends BaseSource {
   kind: 'feed';
   config: FeedConfig;
+  /**
+   * Source externe (chaîne d'un créateur, pas un éditeur) : nom auquel la rédaction attribue chaque affirmation.
+   * Absent pour un flux officiel.
+   */
+  attribution?: string;
 }
 
 export type SourceDefinition = GithubReleasesSource | FeedSource;
@@ -113,6 +118,18 @@ export const SOURCES: SourceDefinition[] = [
     fetchIntervalMinutes: 60,
   },
   // Élargissement du 2026-10-30 : flux officiels contre-vérifiés, voir docs/sources.md §3.10.
+  // Demande de l'utilisateur du 2026-11-04 : la chaîne YouTube AI Search devient une source de rédaction au même niveau
+  // que les releases GitHub (un sujet par vidéo). Contenu externe : chaque post l'attribue à la chaîne, jamais comme
+  // annonce officielle. Flux Atom public de la chaîne (200 le 2026-11-04 ; 404 le 2026-11-03), 15 dernières vidéos.
+  {
+    id: 'feed:youtube-ai-search',
+    kind: 'feed',
+    name: 'AI Search (YouTube, @theAIsearch) — vidéos de la chaîne, contenu externe attribué',
+    config: { url: 'https://www.youtube.com/feeds/videos.xml?channel_id=UCIgnGlGkVRhd4qNFcEwLL4A', maxItems: 15, linkHosts: ['www.youtube.com'] },
+    allowedHosts: ['www.youtube.com'],
+    fetchIntervalMinutes: 60,
+    attribution: 'AI Search (YouTube)',
+  },
   flux('mistral', 'Mistral AI — flux RSS officiel', 'https://mistral.ai/news/rss', 'mistral.ai'),
   flux('huggingface-blog', 'Hugging Face Blog — flux RSS officiel', 'https://huggingface.co/blog/feed.xml', 'huggingface.co'),
   flux('elevenlabs', 'ElevenLabs Blog — flux RSS officiel', 'https://elevenlabs.io/blog/rss.xml', 'elevenlabs.io'),

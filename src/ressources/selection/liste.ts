@@ -82,6 +82,21 @@ export const SELECTIONS: readonly EntreeSelection[] = [
       site('superpowers', 'Superpowers', 'https://github.com/obra/superpowers'),
     ],
   },
+  {
+    slug: 'selection-references-design',
+    nom: 'Sélection références design pour agents',
+    sujet: 'design',
+    compte: COMPTE_PAR_SUJET.design,
+    decouverteVia:
+      "Post X de @elbyron0 transmis par l'utilisateur le 2026-11-04 (https://x.com/elbyron0/status/2117740389314486339), liste de références à donner à un agent IA (contenu externe attribué ; affirmations du post non reprises)",
+    sites: [
+      site('mobbin', 'Mobbin', 'https://mobbin.com/'),
+      site('designspells', 'Design Spells', 'https://designspells.com/'),
+      site('recent-design', 'Recent Design', 'https://recent.design/'),
+      site('brandguidelines', 'Brand Guidelines', 'https://www.brandguidelines.net/', "2026-11-04 : https://brandguidelines.net/ répond 308 vers https://www.brandguidelines.net/ (en-têtes lus à la main, redirection non suivie par la collecte)"),
+      site('deck-gallery', 'Deck Gallery', 'https://www.deck.gallery/', "2026-11-04 : https://deck.gallery/ répond 301 vers https://www.deck.gallery/ (en-têtes lus à la main, redirection non suivie par la collecte)"),
+    ],
+  },
 ];
 
 export const SOURCE_SITE_PREFIXE = 'site-ressource:';

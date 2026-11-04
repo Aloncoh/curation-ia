@@ -79,7 +79,8 @@ function rawContent(item: FeedItem): string {
   if (element.name === 'entry') {
     const content = element.findElementWithName('content');
     const node = text(content) ? content : element.findElementWithName('summary');
-    if (!node) return '';
+    // Flux YouTube : ni content ni summary, le texte de la vidéo est dans media:group/media:description (texte brut).
+    if (!node) return escapeHtml(text(element.findElementWithName('group')?.findElementWithName('description') ?? null));
     return node.getAttribute('type') === 'html' ? text(node) : escapeHtml(text(node));
   }
   const encoded = element.findElementsWithName('encoded').find((candidate) => candidate.namespace === 'content');
