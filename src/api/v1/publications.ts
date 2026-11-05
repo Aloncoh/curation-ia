@@ -279,6 +279,31 @@ async function lireCarrousels(client: Client, ids: number[]): Promise<Map<number
   return carrousels;
 }
 
+/**
+ * Documents qui renforcent l'actualité d'une publication (P6, regroupement multi-sources) : la même annonce vue par
+ * une autre source. Montrés dans les sources du post, après le document cité ; ils ne portent aucun passage cité.
+ */
+async function lireRenforts(client: Client, ids: number[]): Promise<Map<number, Sources['documents']>> {
+  if (ids.length === 0) return new Map();
+  const r = await client.execute({
+    sql: `select p.id as post_id, s.name as source, d.title, d.url, d.first_collected_at
+          from post p
+          join news_item_document nd on nd.news_item_id = p.news_item_id and nd.role = 'supporting'
+          join source_document d on d.id = nd.document_id
+          join source s on s.id = d.source_id
+          where p.id in (${ids.map(() => '?').join(', ')})
+          order by d.first_collected_at, d.id`,
+    args: ids,
+  });
+  const renforts = new Map<number, Sources['documents']>();
+  for (const row of r.rows) {
+    const liste = renforts.get(Number(row.post_id)) ?? [];
+    liste.push({ titre: String(row.title), url: lienSur(String(row.url)), capture_le: row.first_collected_at === null ? null : String(row.first_collected_at) });
+    renforts.set(Number(row.post_id), liste);
+  }
+  return renforts;
+}
+
 /** Publications de ces identifiants, dans cet ordre, dans la langue demandée. Les absentes (non visibles) sont omises. */
 export async function publicationsParIds(ctx: Contexte, ids: readonly number[]): Promise<Publication[]> {
   if (ids.length === 0) return [];
@@ -291,18 +316,21 @@ export async function publicationsParIds(ctx: Contexte, ids: readonly number[]):
   if (liste.length === 0) return [];
   // Lectures indépendantes lancées ensemble : en ligne, chaque aller-retour vers la base compte (2026-11-05). Les
   // carrousels sont demandés pour toute la liste : seuls ceux des actualités existent.
-  const [{ actualites }, { ressources }, { selections }, comptes, carrousels] = await Promise.all([
+  const [{ actualites }, { ressources }, { selections }, comptes, carrousels, renforts] = await Promise.all([
     actualitesDeLaMaquette(ctx.client, liste),
     ressourcesDeLaMaquette(ctx.client, maintenant, liste),
     selectionsDeLaMaquette(ctx.client, maintenant, liste),
     lireComptes(ctx.client, ctx.langue),
     lireCarrousels(ctx.client, liste),
+    lireRenforts(ctx.client, liste),
   ]);
   const items = new Map<number, { item: ReturnType<typeof depuisActualite>; compte: string }>();
   for (const a of actualites) {
     const item = depuisActualite(a);
     const c = carrousels.get(a.post_id);
     if (c) item.media = { type: 'carrousel', titre: a.titre_media, diapositives: c, lang: 'en' };
+    const r = renforts.get(a.post_id);
+    if (r && item.sources) item.sources = { ...item.sources, documents: [...item.sources.documents, ...r] };
     items.set(a.post_id, { item, compte: a.compte });
   }
   for (const r of ressources) items.set(r.post_id, { item: depuisRessource(r), compte: r.compte });

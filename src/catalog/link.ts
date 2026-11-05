@@ -11,6 +11,8 @@
 //  - une entrée de flux devient une actualité « annonce », sans produit tant qu'elle n'est pas qualifiée (P3) ;
 //  - un document est la source principale d'au plus une actualité : une même annonce collectée deux fois, ou
 //    republiée avec une nouvelle date, ne crée jamais de seconde actualité ; une date connue n'est jamais remplacée ;
+//  - une annonce sur le même sujet qu'une annonce récente d'une autre source la renforce (rôle `supporting`) au
+//    lieu de créer une seconde actualité (P6, regroupement.ts) ;
 //  - rattrapage : les documents de la source encore sans rattachement (par exemple collectés avant la migration 0001
 //    et sortis depuis de la réponse de la source) sont repris à chaque collecte, à partir des colonnes stockées.
 import { and, eq, inArray, notExists, notInArray, sql } from 'drizzle-orm';
@@ -19,6 +21,7 @@ import type { StoredDocument } from '../collect/store.ts';
 import type { Executor } from '../db/client.ts';
 import { newsItemDocuments, newsItems, newsItemTargets, products, productVersions, sourceDocuments } from '../db/schema.ts';
 import type { GithubReleasesSource, ProductRef, SourceDefinition } from '../sources.ts';
+import { JOURS_REGROUPEMENT, memeSujet } from './regroupement.ts';
 
 export interface LinkCounts {
   newProducts: number;
@@ -26,6 +29,8 @@ export interface LinkCounts {
   newNewsItems: number;
   /** Documents déjà en base, absents de la réponse courante, rattachés par rattrapage. */
   caughtUpDocuments: number;
+  /** Annonces rattachées à l'actualité d'une autre source (même sujet), au lieu d'en créer une (P6, regroupement). */
+  groupedDocuments: number;
 }
 
 /** Ce que le rattachement lit d'un document : identique qu'il vienne de la réponse courante ou de la base. */
@@ -136,6 +141,12 @@ async function createNewsItem(
   if (target) await tx.insert(newsItemTargets).values({ newsItemId: created!.id, ...target });
 }
 
+/** Le document renforce-t-il déjà une actualité (regroupé lors d'une collecte précédente) ? */
+async function supportingNewsItem(tx: Executor, doc: LinkableDocument): Promise<boolean> {
+  const [link] = await tx.select({ id: newsItemDocuments.newsItemId }).from(newsItemDocuments).where(eq(newsItemDocuments.documentId, doc.documentId));
+  return link !== undefined;
+}
+
 /** Documents de la source qui ne sont rattachés à rien : ni version, ni actualité. */
 async function unlinkedDocuments(tx: Executor, sourceId: string, exclude: number[]): Promise<LinkableDocument[]> {
   const rows = await tx
@@ -199,8 +210,28 @@ async function linkRelease(
   return true;
 }
 
-async function linkAnnouncement(tx: Executor, doc: LinkableDocument, counts: LinkCounts, runId: string): Promise<void> {
+/** Annonce récente d'une autre source sur le même sujet (regroupement.ts), ou null. */
+async function sameSubjectNewsItem(tx: Executor, sourceId: string, doc: LinkableDocument, now: string): Promise<number | null> {
+  const since = new Date(Date.parse(now) - JOURS_REGROUPEMENT * 86_400_000).toISOString();
+  const candidates = await tx
+    .select({ id: newsItems.id, title: newsItems.title })
+    .from(newsItems)
+    .innerJoin(newsItemDocuments, and(eq(newsItemDocuments.newsItemId, newsItems.id), eq(newsItemDocuments.role, 'primary')))
+    .innerJoin(sourceDocuments, eq(sourceDocuments.id, newsItemDocuments.documentId))
+    .where(and(eq(newsItems.kind, 'annonce'), sql`${sourceDocuments.sourceId} <> ${sourceId}`, sql`${newsItems.firstSeenAt} >= ${since}`))
+    .orderBy(newsItems.id);
+  return candidates.find((c) => memeSujet(c.title, doc.title))?.id ?? null;
+}
+
+async function linkAnnouncement(tx: Executor, sourceId: string, doc: LinkableDocument, counts: LinkCounts, now: string, runId: string): Promise<void> {
   if ((await primaryNewsItem(tx, doc)) !== null) return;
+  if (await supportingNewsItem(tx, doc)) return;
+  const same = await sameSubjectNewsItem(tx, sourceId, doc, now);
+  if (same !== null) {
+    await tx.insert(newsItemDocuments).values({ newsItemId: same, documentId: doc.documentId, role: 'supporting' }).onConflictDoNothing();
+    counts.groupedDocuments++;
+    return;
+  }
   await createNewsItem(tx, { kind: 'annonce', title: doc.title, doc, runId });
   counts.newNewsItems++;
 }
@@ -212,7 +243,7 @@ export async function linkDocuments(
   now: string,
   runId: string,
 ): Promise<LinkCounts> {
-  const counts: LinkCounts = { newProducts: 0, newVersions: 0, newNewsItems: 0, caughtUpDocuments: 0 };
+  const counts: LinkCounts = { newProducts: 0, newVersions: 0, newNewsItems: 0, caughtUpDocuments: 0, groupedDocuments: 0 };
   const current = stored.map(fromStored);
   const caughtUp = await unlinkedDocuments(tx, source.id, current.map((doc) => doc.documentId));
 
@@ -229,9 +260,9 @@ export async function linkDocuments(
     return counts;
   }
   for (const doc of caughtUp) {
-    await linkAnnouncement(tx, doc, counts, runId);
+    await linkAnnouncement(tx, source.id, doc, counts, now, runId);
     counts.caughtUpDocuments++;
   }
-  for (const doc of current) await linkAnnouncement(tx, doc, counts, runId);
+  for (const doc of current) await linkAnnouncement(tx, source.id, doc, counts, now, runId);
   return counts;
 }

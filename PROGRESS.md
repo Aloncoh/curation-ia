@@ -2,6 +2,13 @@
 
 Évolution datée des jalons et des vérifications **réellement faites**. L'état courant est dans [STATE.md](STATE.md) ; les traces d'exécution détaillées sont en base.
 
+## 2026-11-05 — P6 lancé : regroupement multi-sources (bloc 1)
+
+- Plan de P6 validé par l'utilisateur (« Oui, lance P6 »). Bloc 1 réalisé ([ADR 0014](docs/decisions/0014-regroupement-multi-sources.md)) : à la collecte, une annonce sur le même sujet qu'une annonce récente d'une autre source la renforce au lieu de créer une actualité ; ses documents apparaissent dans les sources du post.
+- Mesuré sur la base locale (754 annonces) : la première règle donnait 35 paires dont 32 fausses ; la règle retenue en donne 3, toutes justes.
+- Tests : 783 au vert (dont 3 nouveaux : règle sur des titres réels, collecte de deux flux sur le même sujet, seconde collecte sans effet). Pas encore observé en ligne : il faut qu'une annonce arrive par deux sources.
+- Radar élargi le même jour : flux Google, Samsung, Intel, Shopify ; rubriques TechCrunch et The Verge pour Tesla, TSMC, Qualcomm, Broadcom, Oracle et LG.
+
 ## 2026-11-05 — P5 : mesures en ligne, logo animé
 
 - Logo central de l'accueil (maquette) : à chaque tour, ses yeux et sa lueur prennent la couleur de l'agent suivant (Nodi, Repo, Pyxo, Mova, Pulse, Radar) ; six couleurs relevées en navigateur, une par tour de 6 s.
