@@ -19,3 +19,7 @@ coverage/
 *.db-shm
 *.db-wal
 *.db-journal
+
+# Maquette copiée au build du site (apps/web/scripts/copier-maquette.mjs).
+apps/web/public/maquette/
+apps/web/public/assets/

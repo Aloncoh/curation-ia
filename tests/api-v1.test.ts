@@ -39,6 +39,23 @@ describe('visibilité et fil', () => {
     await expect(fil(ctx(), { curseur: 'pas-un-curseur' })).rejects.toBeInstanceOf(RequeteInvalide);
   });
 
+  it('retire du fil principal une version dépassée par une version plus récente publiée, pas du profil', async () => {
+    const c = t.database.client;
+    const ancienne = await ajouterActualite(c, 5, { statut: 'publie' });
+    const recente = await ajouterActualite(c, 6, { statut: 'publie' });
+    await c.execute(`insert into product (id, key, name, publisher, created_at) values (1, 'acme/widget', 'Widget', 'Acme', 'x')`);
+    for (const [v, post, d] of [['2.0', ancienne.postId, '2026-11-01T00:00:00.000Z'], ['2.1', recente.postId, '2026-11-02T00:00:00.000Z']] as const) {
+      const r = await c.execute({ sql: `insert into product_version (product_id, version, is_prerelease, released_at, created_at) values (1, ?, 0, ?, 'x') returning id`, args: [v, d] });
+      await c.execute({ sql: `insert into news_item_target (news_item_id, product_id, product_version_id) values ((select news_item_id from post where id = ?), 1, ?)`, args: [post, Number(r.rows[0]!.id)] });
+      await c.execute({ sql: `update news_item set announced_at = ? where id = (select news_item_id from post where id = ?)`, args: [d, post] });
+    }
+    const principal = (await fil(ctx({ mode: 'public' }))).publications.map((p) => p.id);
+    expect(principal).toContain(recente.postId);
+    expect(principal).not.toContain(ancienne.postId);
+    const compteId = String((await c.execute({ sql: 'select account_id from post where id = ?', args: [ancienne.postId] })).rows[0]!.account_id);
+    expect((await fil(ctx({ mode: 'public' }), { compte: compteId })).publications.map((p) => p.id)).toContain(ancienne.postId);
+  });
+
   it('présente les comptes dans la langue demandée, sans compteur', async () => {
     const c = await comptes(ctx({ langue: 'he' }));
     expect(c.comptes[0]).toMatchObject({ id: 'nodi', avatar: '/marque/agent-nodi.png' });

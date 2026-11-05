@@ -81,6 +81,22 @@ export function limiteValide(limite: unknown): number {
 const visibles = (mode: Mode) => (mode === 'public' ? `p.status = 'publie'` : `(p.status = 'publie' or (p.status = 'en_attente' and pp.post_id is not null))`);
 
 /**
+ * Version dépassée (2026-11-05, « le site ne donne pas envie ») : le fil principal s'ouvrait sur Claude Code 2.1.309,
+ * déjà remplacé par 2.1.318, suivi de ce dernier. Une publication de version est retirée du fil principal quand une
+ * version stable plus récente du même produit est publiée ; elle reste sur le profil de l'agent, dans l'historique et
+ * à son adresse, avec l'avis « remplacée par ». « Plus récente » : annoncée plus tard (date de la source, sinon
+ * première vue), comme l'ordre des versions publiées par une même source.
+ */
+const REMPLACEE = `select 1 from news_item_target t
+    join product_version pv on pv.id = t.product_version_id and pv.is_prerelease = 0
+    join news_item_target t2 on t2.product_id = t.product_id and t2.news_item_id <> t.news_item_id
+    join product_version pv2 on pv2.id = t2.product_version_id and pv2.is_prerelease = 0
+    join news_item n2 on n2.id = t2.news_item_id
+    join post p2 on p2.news_item_id = t2.news_item_id and p2.status = 'publie'
+    where t.news_item_id = p.news_item_id
+      and coalesce(n2.announced_at, n2.first_seen_at) > coalesce(n.announced_at, n.first_seen_at)`;
+
+/**
  * Identifiants d'une page du fil, sans charger le reste. Ordre : les publiées, de la plus récente à la plus ancienne,
  * puis (aperçu) les planifiées dans l'ordre du planning (jour Europe/Paris, rang), puis les reportées.
  */
@@ -97,9 +113,10 @@ export async function idsDuFil(client: Client, mode: Mode, o: { curseur?: string
             join news_item n on n.id = p.news_item_id and n.kind in ('annonce', 'version', 'decouverte', 'selection')
             left join publication_planifiee pp on pp.post_id = p.id
             where ${visibles(mode)} and (? is null or p.account_id = ?)
+              and (? is not null or not exists (${REMPLACEE}))
           ) where ? is null or cle > ? or (cle = ? and id > ?)
           order by cle, id limit ?`,
-    args: [o.compte ?? null, o.compte ?? null, apres?.cle ?? null, apres?.cle ?? null, apres?.cle ?? null, apres?.id ?? null, limite + 1],
+    args: [o.compte ?? null, o.compte ?? null, o.compte ?? null, apres?.cle ?? null, apres?.cle ?? null, apres?.cle ?? null, apres?.id ?? null, limite + 1],
   });
   const lignes = r.rows.slice(0, limite);
   const dernier = lignes[lignes.length - 1];
