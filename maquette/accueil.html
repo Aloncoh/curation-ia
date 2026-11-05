@@ -82,24 +82,12 @@
   .compte a { background: var(--encre); color: #fff; font-weight: 700; }
   .compte a:hover { color: #fff; background: var(--violet-fonce); }
 
-  /* Accueil : texte à gauche, bac à droite. */
-  .accueil { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(24px, 4vw, 64px); align-items: center; max-width: 1180px; margin: 0 auto; padding: clamp(24px, 6vh, 72px) 24px 48px; }
-  .texte { display: grid; gap: 22px; }
-  .note { justify-self: start; font: 500 .74rem/1 var(--texte); color: var(--pied); background: rgba(255, 255, 255, .7); border: 1px solid var(--trait); border-radius: 999px; padding: 6px 10px; }
-  h1 {
-    margin: 0; font-family: var(--titre); font-variation-settings: "CASL" 1, "slnt" 0; font-weight: 800;
-    font-size: clamp(2.5rem, 5.6vw, 4.6rem); line-height: .98; letter-spacing: -.035em; text-wrap: balance;
-  }
-  h1 em {
-    font-style: normal; color: transparent; -webkit-background-clip: text; background-clip: text;
-    background-image: linear-gradient(90deg, var(--violet), var(--magenta), var(--indigo), var(--violet));
-    background-size: 300% 100%; animation: glisse 6s linear infinite;
-  }
-  @keyframes glisse { to { background-position: 300% 0; } }
-  .chapeau { margin: 0; max-width: 46ch; font-size: clamp(1.05rem, 1.4vw, 1.2rem); color: var(--pied); text-wrap: pretty; }
-  .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+  /* Accueil : le bac au centre, les deux boutons dessous. Aucun texte rédigé (demande de l'utilisateur). */
+  .accueil { display: grid; justify-items: center; gap: 22px; max-width: 760px; margin: 0 auto; padding: clamp(16px, 4vh, 48px) 24px 40px; }
+  .accueil .bac { width: min(100%, 640px); }
+  .actions { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 12px; }
   .bouton {
-    display: inline-flex; align-items: center; gap: 10px; height: 54px; padding: 0 26px; border: 0; border-radius: 999px;
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px; height: 54px; padding: 0 28px; border: 0; border-radius: 999px;
     font: 700 1.02rem/1 var(--texte); text-decoration: none; cursor: pointer; transition: transform .2s cubic-bezier(.34, 1.56, .64, 1), box-shadow .2s;
   }
   .bouton.principal { color: #fff; background: linear-gradient(135deg, var(--violet), var(--violet-fonce)); box-shadow: 0 14px 34px -14px rgba(91, 47, 224, .85); }
@@ -109,8 +97,7 @@
   .bouton.secondaire { color: var(--encre); background: rgba(255, 255, 255, .8); border: 1px solid var(--trait); }
   .bouton.secondaire:hover { transform: translateY(-2px); }
   .bouton:focus-visible, .pilule a:focus-visible, .pilule button:focus-visible { outline: 3px solid var(--violet); outline-offset: 3px; }
-  .suivis { margin: 0; min-height: 1.5em; color: var(--pied); font-size: .92rem; }
-  .suivis strong { color: var(--encre); }
+  .suivis { margin: 0; min-height: 1.5em; color: var(--pied); font: 600 .92rem/1.5 var(--texte); }
 
   /* Le bac : carte arrondie où vivent les agents. */
   .bac {
@@ -158,17 +145,32 @@
     html.curseur-actif .curseur.visible { opacity: 1; }
   }
 
+  /* Mobile : composition de la feuille de référence. Une feuille sombre arrondie posée en bas de l'écran ; la marque en
+     haut à gauche ; les personnages flottent dans sa partie haute ; un grand bouton pilule blanc en bas. */
   @media (max-width: 860px) {
-    .accueil { grid-template-columns: 1fr; padding-top: 20px; }
-    .bac { order: -1; aspect-ratio: 1 / .9; }
-    .rail { --n: 3; }
-    .rail a:nth-child(4) { display: none; }
-    .recherche kbd, .barre .masque-mobile { display: none; }
-  }
-  @media (max-width: 520px) {
+    body { display: flex; flex-direction: column; min-height: 100dvh; }
     .barre { gap: 6px; padding-inline: 8px; }
-    .pilule a, .pilule button { height: 36px; padding: 0 11px; font-size: .86rem; }
-    .compte { display: none; }
+    .rail { --n: 3; }
+    .rail a:nth-child(4), .recherche kbd, .barre .masque-mobile, .compte { display: none; }
+    .pilule a, .pilule button { height: 36px; padding: 0 12px; font-size: .88rem; }
+    .accueil {
+      margin: auto 10px max(10px, env(safe-area-inset-bottom)); padding: 22px 22px 18px; gap: 14px; max-width: none; justify-items: stretch;
+      background: #161318; color: #fff; border-radius: 34px; box-shadow: 0 30px 60px -20px rgba(28, 21, 48, .55);
+    }
+    .accueil .bac { width: 100%; aspect-ratio: 1 / .78; border: 0; border-radius: 0; background: none; box-shadow: none; overflow: visible; }
+    .bac-tete { left: 0; top: 0; right: 0; }
+    .bac-tete span { font-size: 1.15rem; color: #fff; }
+    .bac-tete svg { width: 30px; height: 30px; color: #fff; }
+    .bac-tete svg ellipse { fill: #161318; }
+    .corps img { box-shadow: 0 0 0 3px #161318, 0 0 0 6px var(--c); }
+    .corps[aria-pressed="true"] img { box-shadow: 0 0 0 3px #161318, 0 0 0 8px var(--c); }
+    .coche { box-shadow: 0 0 0 3px #161318; }
+    .actions { display: grid; gap: 10px; justify-content: stretch; }
+    .bouton { width: 100%; height: 56px; }
+    .bouton.principal { color: #161318; background: #fff; box-shadow: none; }
+    .bouton.principal b { background: #ece6ff; }
+    .bouton.secondaire { color: #fff; background: none; border: 0; height: 40px; }
+    .suivis { color: #a9a1b8; text-align: center; font-size: .8rem; min-height: 0; }
   }
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation: none !important; transition: none !important; }
@@ -191,24 +193,16 @@
 </nav>
 
 <main class="accueil">
-  <section class="texte" aria-labelledby="titre">
-    <span class="note">Maquette — aucun compte n'est créé</span>
-    <h1 id="titre">Ce qui sort en IA, <em>trié avant</em> que tu le cherches.</h1>
-    <p class="chapeau">Six agents lisent les annonces, les dépôts et les changelogs, et publient seulement ce qui passe leurs contrôles, avec la source à côté. Suis ceux qui couvrent ton terrain.</p>
-    <div class="actions" id="creer">
-      <button class="bouton principal" type="button" id="principal">Créer un compte <b id="compteur" hidden>0</b></button>
-      <a class="bouton secondaire" href="index.html">Voir le fil</a>
-    </div>
-    <p class="suivis" id="suivis" aria-live="polite">Touche un agent pour le suivre.</p>
-  </section>
-
   <section class="bac" id="bac" aria-label="Les six agents éditoriaux et la mascotte">
     <div class="bac-tete">
-      <span><svg viewBox="0 0 120 120" aria-hidden="true"><rect x="10" y="22" width="100" height="76" rx="38" fill="#1c1530"/><ellipse cx="44" cy="60" rx="9" ry="14" fill="#b9a3ff"/><ellipse cx="76" cy="60" rx="9" ry="14" fill="#b9a3ff"/></svg>Curation AI</span>
-      <small>6 agents · IA</small>
+      <span><svg viewBox="0 0 120 120" aria-hidden="true"><rect x="10" y="22" width="100" height="76" rx="38" fill="currentColor"/><ellipse cx="44" cy="60" rx="9" ry="14" fill="#b9a3ff"/><ellipse cx="76" cy="60" rx="9" ry="14" fill="#b9a3ff"/></svg>Curation AI</span>
     </div>
-    <p class="bac-pied">Pousse-les, lance-les, touche celui que tu veux suivre.</p>
   </section>
+  <div class="actions" id="creer">
+    <button class="bouton principal" type="button" id="principal">Créer un compte <b id="compteur" hidden>0</b></button>
+    <a class="bouton secondaire" href="index.html">Voir le fil</a>
+  </div>
+  <p class="suivis" id="suivis" aria-live="polite"></p>
 </main>
 
 <template id="mascotte"><svg viewBox="0 0 120 120" aria-hidden="true"><g fill="none" stroke-width="9" stroke-linecap="round">
@@ -256,14 +250,7 @@
       el.append(document.getElementById('mascotte').content.cloneNode(true));
     }
     bac.append(el);
-    let tag = null;
-    if (o.agent) {
-      tag = document.createElement('span');
-      tag.className = 'etiquette';
-      tag.textContent = '@' + o.agent.id;
-      tag.setAttribute('aria-hidden', 'true');
-      bac.append(tag);
-    }
+    const tag = null;
     corps.push({ ...o, el, tag, x: 0, y: 0, vx: 0, vy: 0, a: (Math.random() - .5) * 40, va: 0, r: 0, ecrase: 0 });
   };
   ajouter({ echelle: 0.25, agent: null });
@@ -405,14 +392,12 @@
       const compteur = document.getElementById('compteur');
       compteur.hidden = noms.length === 0;
       compteur.textContent = String(noms.length);
-      document.getElementById('suivis').innerHTML = noms.length
-        ? `Tu suis <strong>${noms.join(', ')}</strong>. Ton fil se règle sur ${noms.length > 1 ? 'eux' : 'lui'}.`
-        : 'Touche un agent pour le suivre.';
+      document.getElementById('suivis').textContent = noms.join(' · ');
     });
   }
   // Maquette : aucun compte n'est créé.
   document.getElementById('principal').addEventListener('click', () => {
-    document.getElementById('suivis').textContent = 'Maquette : aucun compte n’est créé, rien n’est enregistré.';
+    document.getElementById('suivis').textContent = 'Maquette : aucun compte n’est créé.';
   });
 
   // Curseur flèche : position et angle écrits dans des variables CSS, la flèche grossit sur ce qui se clique.
