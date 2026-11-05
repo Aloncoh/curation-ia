@@ -13,6 +13,8 @@ export interface Controle {
   champ: string;
   code: string;
   detail?: string;
+  /** Champ retiré par l'élagage : l'écart n'est plus publié (recontrole.ts). */
+  retire?: boolean;
 }
 
 export interface ContexteControle {
