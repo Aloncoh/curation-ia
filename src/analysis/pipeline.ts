@@ -34,6 +34,12 @@ type EchecSortie = 'sortie_invalide' | 'sortie_tronquee' | 'refus';
 type Sortie<T> = { ok: true; valeur: T } | { ok: false; statut: EchecSortie };
 const BILAN_ECHEC = { sortie_invalide: 'invalides', sortie_tronquee: 'tronquees', refus: 'refus' } as const;
 
+/** Agent final : celui imposé par la source, sauf la sortie d'un modèle d'IA (Nodi), qui reste à Nodi même chez Radar. */
+export function compteRetenu<C extends string>(impose: C | null, propose: C): C {
+  if (!impose || (impose === 'radar' && propose === 'nodi')) return propose;
+  return impose;
+}
+
 export interface OptionsBrouillons {
   database: Database;
   modele: Modele;
@@ -291,8 +297,9 @@ export async function genererBrouillons(o: OptionsBrouillons) {
         }
         q = qualification.valeur;
       }
-      // Agent imposé par la source (sources.ts) : Radar pour les grandes entreprises, Nodi pour AI Search.
-      if (compteImpose && q.compte !== null) q = { ...q, compte: compteImpose };
+      // Agent imposé par la source (sources.ts) : Radar pour les grandes entreprises, Nodi pour AI Search. Seule exception :
+      // la sortie d'un modèle d'IA reste à Nodi, même publiée par une grande entreprise (chacun sa spécialité).
+      if (q.compte !== null) q = { ...q, compte: compteRetenu(compteImpose, q.compte) };
       // Recalculée aussi pour une qualification reprise : un garde-fou durci depuis s'applique sans rien repayer.
       const choix = deciderSelection(q, [titreCapture, texte]);
       if (choix.decision === 'ecarter') { await enregistrer('ecartee', q, null, null, choix.motif, undefined, choix); bilan.ecartees++; continue; }

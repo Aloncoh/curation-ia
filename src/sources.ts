@@ -147,6 +147,16 @@ export const SOURCES: SourceDefinition[] = [
   { ...flux('amazon-news', 'About Amazon — flux RSS officiel', 'https://www.aboutamazon.com/rss/feed.rss', 'www.aboutamazon.com'), compte: 'radar' },
   { ...flux('amd-press', 'AMD, communiqués — flux RSS officiel', 'https://ir.amd.com/news-events/press-releases/rss', 'ir.amd.com'), compte: 'radar' },
   { ...flux('meta-newsroom', 'Meta Newsroom — flux RSS officiel', 'https://about.fb.com/feed/', 'about.fb.com'), compte: 'radar' },
+  // Liste élargie par l'utilisateur le 2026-11-05 (Google, Intel, Samsung, Shopify, LG, TSMC, Qualcomm, Broadcom, Oracle,
+  // Tesla, Meta et le métavers). Flux vérifiés le même jour : Google, Samsung et Intel (communiqués) répondent ; Shopify
+  // publie ses communiqués par Newsfile, son diffuseur, faute de flux sur shopify.com. Différés, non contournés : TSMC,
+  // Qualcomm, Broadcom, Oracle et Tesla (403 ou aucun flux public) ; LG, dont le flux renvoie vers un site sans rapport.
+  { ...flux('google-blog', 'Google Blog — flux RSS officiel', 'https://blog.google/rss/', 'blog.google'), compte: 'radar' },
+  { ...flux('samsung-newsroom', 'Samsung Global Newsroom — flux RSS officiel', 'https://news.samsung.com/global/feed', 'news.samsung.com'), compte: 'radar' },
+  { ...flux('intel-press', 'Intel, communiqués — flux RSS officiel', 'https://www.intc.com/news-events/press-releases/rss', 'www.intc.com'), compte: 'radar' },
+  // Les entrées du flux Newsfile pointent vers www.newsfilecorp.com : les deux hôtes sont autorisés.
+  (() => { const f = flux('shopify-press', 'Shopify, communiqués (Newsfile) — flux RSS officiel', 'https://feeds.newsfilecorp.com/company/4130', 'feeds.newsfilecorp.com');
+    return { ...f, allowedHosts: [...f.allowedHosts, 'www.newsfilecorp.com'], config: { ...f.config, linkHosts: ['www.newsfilecorp.com'] }, compte: 'radar' as const }; })(),
   flux('mistral', 'Mistral AI — flux RSS officiel', 'https://mistral.ai/news/rss', 'mistral.ai'),
   flux('huggingface-blog', 'Hugging Face Blog — flux RSS officiel', 'https://huggingface.co/blog/feed.xml', 'huggingface.co'),
   flux('elevenlabs', 'ElevenLabs Blog — flux RSS officiel', 'https://elevenlabs.io/blog/rss.xml', 'elevenlabs.io'),

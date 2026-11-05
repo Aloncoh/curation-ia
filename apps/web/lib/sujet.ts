@@ -4,7 +4,7 @@
 // retrait, comme OpenAI, garde un monogramme), un dépôt GitHub sans marque connue donne son monogramme, jamais l'avatar
 // de son propriétaire, souvent un visage. Le logo
 // identifie le sujet ; il n'affirme aucun partenariat.
-import { siAmd, siAnthropic, siApple, siBlender, siCloudflare, siCursor, siDeepseek, siElevenlabs, siFigma, siGithub, siGooglegemini, siHuggingface, siMeta, siMistralai, siN8n, siNotion, siNvidia, siSuno, siTesla, siVercel, siYoutube, type SimpleIcon } from 'simple-icons';
+import { siAmd, siAnthropic, siApple, siBlender, siBroadcom, siCloudflare, siCursor, siDeepseek, siElevenlabs, siFigma, siGithub, siGoogle, siHuggingface, siIntel, siLg, siMeta, siMistralai, siN8n, siNotion, siNvidia, siQualcomm, siSamsung, siShopify, siSuno, siTesla, siVercel, siYoutube, type SimpleIcon } from 'simple-icons';
 import type { Publication } from '@curation/contrat';
 
 export interface Sujet {
@@ -24,7 +24,8 @@ export type Domaine = 'puces' | 'modele' | 'code' | 'design' | 'audio' | 'appare
 
 /** Domaine d'un éditeur, par son hôte ; un dépôt GitHub se classe par son nom (design ou code). */
 const DOMAINE_PAR_HOTE: Record<string, Domaine> = {
-  'nvidia.com': 'puces', 'amd.com': 'puces', 'apple.com': 'appareils', 'tesla.com': 'appareils', 'microsoft.com': 'cloud',
+  'nvidia.com': 'puces', 'amd.com': 'puces', 'intc.com': 'puces', 'intel.com': 'puces', 'qualcomm.com': 'puces', 'broadcom.com': 'puces', 'tsmc.com': 'puces',
+  'samsung.com': 'appareils', 'lg.com': 'appareils', 'shopify.com': 'cloud', 'newsfilecorp.com': 'cloud', 'oracle.com': 'cloud', 'apple.com': 'appareils', 'tesla.com': 'appareils', 'microsoft.com': 'cloud',
   'aboutamazon.com': 'cloud', 'fb.com': 'social', 'mistral.ai': 'modele', 'blog.google': 'modele', 'openai.com': 'modele',
   'anthropic.com': 'modele', 'claude.com': 'modele', 'huggingface.co': 'modele', 'deepseek.com': 'modele', 'youtube.com': 'modele',
   'figma.com': 'design', 'spline.design': 'design', 'blender.org': 'design', 'midjourney.com': 'design',
@@ -46,7 +47,7 @@ const EDITEURS: Record<string, Editeur> = {
   'figma.com': { nom: 'Figma', icone: siFigma },
   'cursor.com': { nom: 'Cursor', icone: siCursor, couleur: '#3b4cca' },
   'mistral.ai': { nom: 'Mistral AI', icone: siMistralai },
-  'blog.google': { nom: 'Google Gemini', icone: siGooglegemini },
+  'blog.google': { nom: 'Google', icone: siGoogle },
   'huggingface.co': { nom: 'Hugging Face', icone: siHuggingface },
   'elevenlabs.io': { nom: 'ElevenLabs', icone: siElevenlabs, couleur: '#5b5bd6' },
   'suno.com': { nom: 'Suno', icone: siSuno, couleur: '#e3407a' },
@@ -66,6 +67,17 @@ const EDITEURS: Record<string, Editeur> = {
   'amd.com': { nom: 'AMD', icone: siAmd },
   'fb.com': { nom: 'Meta', icone: siMeta },
   'tesla.com': { nom: 'Tesla', icone: siTesla },
+  'intc.com': { nom: 'Intel', icone: siIntel },
+  'intel.com': { nom: 'Intel', icone: siIntel },
+  'samsung.com': { nom: 'Samsung', icone: siSamsung, couleur: '#1428a0' },
+  'shopify.com': { nom: 'Shopify', icone: siShopify },
+  // Shopify diffuse ses communiqués par Newsfile : le sujet reste Shopify (seule entreprise suivie sur ce diffuseur).
+  'newsfilecorp.com': { nom: 'Shopify', icone: siShopify },
+  'qualcomm.com': { nom: 'Qualcomm', icone: siQualcomm },
+  'broadcom.com': { nom: 'Broadcom', icone: siBroadcom },
+  'lg.com': { nom: 'LG', icone: siLg },
+  'oracle.com': { nom: 'Oracle', icone: null, couleur: '#c74634' },
+  'tsmc.com': { nom: 'TSMC', icone: null, couleur: '#c8102e' },
   'spline.design': { nom: 'Spline', icone: null, couleur: '#7a5cff' },
   'vapi.ai': { nom: 'Vapi', icone: null, couleur: '#14b8a6' },
   'midjourney.com': { nom: 'Midjourney', icone: null, couleur: '#4f6bed' },
