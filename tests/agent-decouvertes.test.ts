@@ -8,7 +8,8 @@ import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import type { Modele } from '../src/analysis/modele.ts';
 import type { Resolver, Transport } from '../src/collect/safe-fetch.ts';
 import type { Montage } from '../src/media/montage.ts';
-import { deciderD1, ecritureSansEspaces, entreeDe, sansTermesInvalides, SYSTEME_D1, traiterDecouvertes, type GrilleD1 } from '../src/ressources/agent-decouvertes.ts';
+import { decouperCommandes, decouperPassages, deciderD1, ecritureSansEspaces, entreeDe, remplacerNumeros, sansTermesInvalides, SYSTEME_D1, traiterDecouvertes, type GrilleD1 } from '../src/ressources/agent-decouvertes.ts';
+import { contientMotPourMot, normaliserEspaces } from '../src/maquette/data.ts';
 import { executerCapture } from '../src/ressources/capture.ts';
 import type { EntreeRessource } from '../src/ressources/liste.ts';
 import { createTestDb, type TestDb } from './helpers/db.ts';
@@ -99,6 +100,8 @@ describe('grille d1 : le code décide', () => {
     expect(deciderD1(actif, { ...GRILLE, pour_construire: false }, texte).motif).toBe('hors_construire');
     expect(deciderD1(actif, { ...GRILLE, domaine: 'autre' }, texte).motif).toBe('hors_sujet');
     expect(deciderD1(actif, { ...GRILLE, utilite: { ...GRILLE.utilite, note: 'faible' } }, texte).motif).toBe('utilite_faible');
+    expect(deciderD1(actif, { ...GRILLE, utilite: { ...GRILLE.utilite, note: 'moyenne' } }, texte).motif).toBe('utilite_moyenne');
+    expect(deciderD1({ ...actif, full_name: 'someone/awesome-agents' }, null, texte).motif).toBe('liste_de_liens');
     expect(deciderD1(actif, { ...GRILLE, documentation: { note: 'absente', passages: [] } }, texte).motif).toBe('documentation_absente');
     expect(deciderD1(actif, { ...GRILLE, utilite: { ...GRILLE.utilite, passages: ['An invented sentence about the tool.'] } }, texte)).toEqual({ decision: 'approfondir', motif: 'passage_introuvable' });
   });
@@ -115,6 +118,26 @@ describe('grille d1 : le code décide', () => {
     expect(b.mots_cles.usages.map((u) => u.texte)).toEqual(['video editing']);
     expect(b.mots_cles.termes_proches).toHaveLength(1);
     expect(b.accroche).toBe('x');
+  });
+  it('passages numérotés : chacun se retrouve mot pour mot, aucun de moins de trois mots', () => {
+    const partie = normaliserEspaces(texte);
+    const passages = decouperPassages([texte, '| Shift | 5 |']);
+    expect(passages.length).toBeGreaterThan(3);
+    for (const p of passages) expect(contientMotPourMot(partie, p) || p.startsWith('|')).toBe(true);
+    expect(passages).not.toContain('| Shift | 5 |');
+  });
+  it('les numéros choisis deviennent le texte exact ; une commande citée comme passage est retirée', () => {
+    const commandes = decouperCommandes(texte);
+    expect(commandes).toContain('npx skills add exemple-org/demo-skills --skill anim');
+    const r = remplacerNumeros({ x: { passages: ['P1', '[P2]', 'C1'] }, demarrage: { commande: 'C1' } }, ['un deux trois', 'quatre cinq six'], commandes) as { x: { passages: string[] }; demarrage: { commande: string } };
+    expect(r.x.passages).toEqual(['un deux trois', 'quatre cinq six']);
+    expect(r.demarrage.commande).toBe(commandes[0]);
+  });
+  it('un repère trop long est retiré s’il en reste un ; un démarrage sans passages reprend ceux de ses étapes', () => {
+    const b = sansTermesInvalides({ reperes: [{ texte: 'court' }, { texte: 'x'.repeat(70) }], demarrage: { etapes: [{ texte: 'a', passages: ['P2'], commande: 'z' }], passages: [] } }) as { reperes: unknown[]; demarrage: { passages: string[]; etapes: object[] } };
+    expect(b.reperes).toHaveLength(1);
+    expect(b.demarrage.passages).toEqual(['P2']);
+    expect(b.demarrage.etapes[0]).toEqual({ texte: 'a', passages: ['P2'] });
   });
   it("l'entrée se reconstruit depuis la base, provenance comprise", () => {
     expect(entreeDe('github-ressource:Owner/Repo', 'Repo', JSON.stringify({ decouverte: { decouverteVia: 'via test' } }))).toMatchObject({ slug: 'gh-owner-repo', depot: 'Owner/Repo', compte: 'repo', decouverteVia: 'via test', decouverteAuto: true });

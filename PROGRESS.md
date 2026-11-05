@@ -2,6 +2,13 @@
 
 Évolution datée des jalons et des vérifications **réellement faites**. L'état courant est dans [STATE.md](STATE.md) ; les traces d'exécution détaillées sont en base.
 
+## 2026-11-05 — P6, bloc 2b : rédaction des découvertes améliorée (toujours coupée en ligne)
+
+- Cinq lots réels en local, mesurés un par un : 0 brouillon sans écart bloquant au départ, puis plus aucun écart bloquant de citation après le passage aux citations par numéro.
+- Causes trouvées et corrigées : citations recopiées inexactement (numéros de passage), mots-clés trop longs, clés en trop dans les étapes, commandes citées comme passages, lignes de tableau trop courtes, révision réécrite en français (message de révision en français), repères trop longs, démarrage sans passages, grille trop indulgente (listes « awesome », recherches personnelles, utilité moyenne).
+- Restent « à vérifier » : `contexte_a_relire` (une condition de la source absente du texte) et `copie_de_la_source`. Aucun brouillon publiable sans relecture ; la rédaction en ligne reste coupée.
+- Dépense cumulée des essais : 0,19 $, comptée dans la base locale seulement. Tests : 799 au vert.
+
 ## 2026-11-05 — P6, bloc 2b : grille d1 et rédaction des découvertes (construit, pas encore en ligne)
 
 - Sujets de découverte élargis à 17 à la demande de l'utilisateur (« pas seulement design et motion : skills, agents, IA… »).

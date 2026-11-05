@@ -241,7 +241,8 @@ export function controlerRessource(brut: unknown, captures: CaptureRessource[], 
     const cite = passages.join(' ');
     if (recopie(c.texte, texteSource)) a_verifier.push({ champ, code: 'copie_de_la_source' });
     for (const n of nombresDe(c.texte)) if (!nombresDe(cite).includes(n)) a_verifier.push({ champ, code: 'nombre_absent_des_citations', detail: n });
-    for (const nom of nomsPropres(c.texte)) if (!cite.includes(nom) && !nomsConnus.has(nom.toLowerCase())) a_verifier.push({ champ, code: 'soutien_nom_absent', detail: nom });
+    // Comme pour les actualités (src/analysis/controles.ts) : un nom écrit tel quel dans la source est attesté par elle.
+    for (const nom of nomsPropres(c.texte)) if (!cite.includes(nom) && !nomsConnus.has(nom.toLowerCase()) && !trouve(nom)) a_verifier.push({ champ, code: 'soutien_nom_absent', detail: nom });
     for (const p of passages) {
       // Le contexte se lit dans le document où le passage figure : une réserve d'un autre fichier ne le concerne pas.
       const partie = parties.find((x) => contientMotPourMot(x, p)) ?? texteSource;
