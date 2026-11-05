@@ -151,6 +151,20 @@ export const SOURCES: SourceDefinition[] = [
   // Tesla, Meta et le métavers). Flux vérifiés le même jour : Google, Samsung et Intel (communiqués) répondent ; Shopify
   // publie ses communiqués par Newsfile, son diffuseur, faute de flux sur shopify.com. Différés, non contournés : TSMC,
   // Qualcomm, Broadcom, Oracle et Tesla (403 ou aucun flux public) ; LG, dont le flux renvoie vers un site sans rapport.
+  // Pour les entreprises sans flux officiel lisible, demande de l'utilisateur du 2026-11-05 (« les sections tech des
+  // journaux ») : les rubriques par entreprise de TechCrunch et de The Verge, vérifiées le même jour (200, 10 à 20
+  // articles chacune). Ce sont des articles de presse : contenu externe attribué au journal, jamais présenté comme
+  // une annonce officielle. Les chaînes YouTube officielles ont été trouvées, mais leurs flux répondaient 404 ce jour-là.
+  ...([
+    ['tesla', 'Tesla'], ['tsmc', 'TSMC'], ['qualcomm', 'Qualcomm'], ['broadcom', 'Broadcom'], ['oracle', 'Oracle'], ['lg', 'LG'],
+  ] as const).map(([tag, nom]): FeedSource => ({
+    ...flux(`techcrunch-${tag}`, `TechCrunch, rubrique ${nom} — article de presse, contenu externe attribué`, `https://techcrunch.com/tag/${tag}/feed/`, 'techcrunch.com'),
+    fetchIntervalMinutes: 120, attribution: `TechCrunch (rubrique ${nom})`, compte: 'radar',
+  })),
+  ...([['tesla', 'Tesla'], ['lg', 'LG']] as const).map(([tag, nom]): FeedSource => ({
+    ...flux(`verge-${tag}`, `The Verge, rubrique ${nom} — article de presse, contenu externe attribué`, `https://www.theverge.com/rss/${tag}/index.xml`, 'www.theverge.com'),
+    fetchIntervalMinutes: 120, attribution: `The Verge (rubrique ${nom})`, compte: 'radar',
+  })),
   { ...flux('google-blog', 'Google Blog — flux RSS officiel', 'https://blog.google/rss/', 'blog.google'), compte: 'radar' },
   { ...flux('samsung-newsroom', 'Samsung Global Newsroom — flux RSS officiel', 'https://news.samsung.com/global/feed', 'news.samsung.com'), compte: 'radar' },
   { ...flux('intel-press', 'Intel, communiqués — flux RSS officiel', 'https://www.intc.com/news-events/press-releases/rss', 'www.intc.com'), compte: 'radar' },
