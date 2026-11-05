@@ -27,6 +27,10 @@ export { VERSION_DECOUVERTE } from './capture.ts';
 /** Fenêtre de création par défaut, et nombre maximal de candidats par passage (plafond de l'API sans jeton : 60 par heure). */
 export const JOURS_DEFAUT = 30;
 export const MAX_CANDIDATS_DEFAUT = 8;
+/** Candidats venus du registre officiel MCP (registre-mcp.ts) par passage, comptés à part pour ne pas être évincés. */
+export const MAX_CANDIDATS_REGISTRE = 4;
+/** Préfixe du sujet d'un candidat venu du registre officiel MCP : la mention de provenance le dit. */
+export const PREFIXE_REGISTRE = 'registre-mcp:';
 
 const NOM_DEPOT = /^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/;
 
@@ -105,7 +109,7 @@ export function versEntree(c: Candidat): EntreeRessource {
     depot: c.depot.full_name,
     chemins: ['README.md'],
     compte: 'repo',
-    decouverteVia: `Découverte automatique : recherche GitHub sur le sujet « ${c.sujet} », ${c.depot.stargazers_count} étoiles relevées le ${c.releveLe.slice(0, 10)} (information, pas un critère de qualité)`,
+    decouverteVia: `Découverte automatique : ${c.sujet.startsWith(PREFIXE_REGISTRE) ? `registre officiel MCP (serveur « ${c.sujet.slice(PREFIXE_REGISTRE.length)} »)` : `recherche GitHub sur le sujet « ${c.sujet} »`}, ${c.depot.stargazers_count} étoiles relevées le ${c.releveLe.slice(0, 10)} (information, pas un critère de qualité)`,
     decouverteAuto: true,
   };
 }

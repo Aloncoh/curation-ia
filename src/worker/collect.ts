@@ -2,6 +2,7 @@
 // Code entièrement déterministe : aucun modèle d'IA n'intervient ici.
 // Chaque changement d'état (début, fin réussie, échec) est écrit dans une seule transaction :
 // un arrêt brutal entre deux étapes ne laisse jamais de trace incohérente.
+import { HUGGINGFACE_HEADERS, parseModelesTendance } from '../collect/huggingface.ts';
 import { randomUUID } from 'node:crypto';
 import { eq } from 'drizzle-orm';
 import { linkDocuments } from '../catalog/link.ts';
@@ -67,6 +68,9 @@ export function adapterFor(definition: SourceDefinition): { url: string; headers
   if (definition.kind === 'github_releases') {
     const parse = (body: string) => ({ documents: parseReleases(body, definition.config), rejected: {} });
     return { url: releasesUrl(definition.config), headers: GITHUB_API_HEADERS, parse };
+  }
+  if (definition.kind === 'huggingface_models') {
+    return { url: definition.config.url, headers: HUGGINGFACE_HEADERS, parse: (body) => parseModelesTendance(body, definition.config) };
   }
   return { url: definition.config.url, headers: FEED_HEADERS, parse: (body) => parseFeedItems(body, definition.config) };
 }

@@ -2,6 +2,7 @@
 import { sql } from 'drizzle-orm';
 import type { FeedConfig } from './collect/feeds.ts';
 import type { GithubReleasesConfig } from './collect/github-releases.ts';
+import type { HuggingFaceModelsConfig } from './collect/huggingface.ts';
 import type { Database } from './db/client.ts';
 import { withBusyRetry } from './db/retry.ts';
 import { sources } from './db/schema.ts';
@@ -45,7 +46,13 @@ export interface FeedSource extends BaseSource {
   attribution?: string;
 }
 
-export type SourceDefinition = GithubReleasesSource | FeedSource;
+/** Modèles en tendance sur Hugging Face (API publique, P6 bloc 3) : porte d'entrée vers Nodi, page du modèle capturée ensuite. */
+export interface HuggingFaceModelsSource extends BaseSource {
+  kind: 'huggingface_models';
+  config: HuggingFaceModelsConfig;
+}
+
+export type SourceDefinition = GithubReleasesSource | FeedSource | HuggingFaceModelsSource;
 
 const githubReleases = (
   owner: string,
@@ -180,6 +187,17 @@ export const SOURCES: SourceDefinition[] = [
   // Pages d'état officielles : incidents et maintenances des API d'IA (incident daté, attribué à l'éditeur).
   { ...flux('claude-status', 'Claude Status — historique des incidents, flux RSS officiel', 'https://status.claude.com/history.rss', 'status.claude.com'), fetchIntervalMinutes: 60, compte: 'pulse' },
   { ...flux('openai-status', 'OpenAI Status — historique des incidents, flux RSS officiel', 'https://status.openai.com/history.rss', 'status.openai.com'), fetchIntervalMinutes: 60, compte: 'pulse' },
+  // Hugging Face (P6, bloc 3 ; accord de l'utilisateur du 2026-11-05) : les 20 modèles en tendance, signés par Nodi.
+  // API publique relevée le 2026-11-05 (200). Les modèles trop anciens sont écartés par l'âge maximal de l'analyse.
+  {
+    id: 'huggingface:modeles-tendance',
+    kind: 'huggingface_models',
+    name: 'Hugging Face — modèles en tendance (API publique)',
+    config: { url: 'https://huggingface.co/api/models?sort=trendingScore&limit=20', maxItems: 20 },
+    allowedHosts: ['huggingface.co'],
+    fetchIntervalMinutes: 360,
+    compte: 'nodi',
+  },
   flux('mistral', 'Mistral AI — flux RSS officiel', 'https://mistral.ai/news/rss', 'mistral.ai'),
   flux('huggingface-blog', 'Hugging Face Blog — flux RSS officiel', 'https://huggingface.co/blog/feed.xml', 'huggingface.co'),
   flux('elevenlabs', 'ElevenLabs Blog — flux RSS officiel', 'https://elevenlabs.io/blog/rss.xml', 'elevenlabs.io'),
