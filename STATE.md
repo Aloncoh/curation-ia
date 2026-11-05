@@ -37,7 +37,7 @@ _Nettoyé le 2026-11-05 à la demande de l'utilisateur : seul l'état actuel res
 
 ## En attente de l'utilisateur
 
-1. **Régénérer le jeton Turso** : il a été affiché par erreur dans la trace d'une commande le 2026-11-05 (ni fichier ni git). Après régénération : mettre à jour `.env.local` (lignes commentées), le secret GitHub `TURSO_AUTH_TOKEN` et la variable Vercel `DATABASE_AUTH_TOKEN`.
+1. **Jeton Turso** : affiché par erreur dans la trace d'une commande le 2026-11-05 (ni fichier ni git). Nouveau jeton déposé par l'utilisateur le même jour dans `.env.local`, le secret GitHub et la variable Vercel ; vérifié en local (`npm run etat` répond). Reste : **révoquer l'ancien jeton** sur Turso s'il ne l'est pas, et **redéployer le site** sur Vercel (une variable modifiée ne vaut que pour un nouveau déploiement).
 2. **Recherche** : relire le jeu `r1` (`src/recherche/reference.ts`) et donner un second jeu de requêtes non vu (le lexique a été réglé sur `r1`).
 3. **Usage « construire »** : liste témoin de bonnes découvertes (SPEC §10).
 4. **Domaine** du site (décision et dépense) ; démonstration V1.
