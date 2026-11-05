@@ -89,7 +89,7 @@ export function Post({ p, t, langue, complet = false, raison = null }: { p: Publ
   const sujet = sujetDe(p);
   const format = p.nature === 'selection' ? 'grille' : p.nature === 'actualite' && !complet ? 'courte' : 'grand';
   const couverture = (f: 'grand' | 'vignette') => sujet && (
-    <Couverture sujet={sujet} graine={p.id} agent={{ nom: p.compte.nom, avatar: p.compte.avatar }} format={f} etiquette={t.post.couverture(sujet.nom)} domaine={t.post.domaines[sujet.domaine]} />
+    <Couverture sujet={sujet} graine={p.id} agent={{ nom: p.compte.nom, avatar: p.compte.avatar }} format={f} etiquette={t.post.couverture(sujet.nom)} domaine={t.post.domaines[sujet.domaine]} fond={p.fond} />
   );
   return (
     <article className={`post format-${format}${complet ? ' complet' : ''}`} data-compte={p.compte.id} aria-label={t.post.publicationDe(p.compte.nom)}>

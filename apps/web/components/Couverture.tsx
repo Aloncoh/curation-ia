@@ -12,6 +12,8 @@ interface Props {
   etiquette: string;
   /** Étiquette du domaine, traduite (« Skill », « Puces »…). */
   domaine: string;
+  /** Fond fourni par l'utilisateur pour cet agent (lib/fonds.ts), avatar déjà dessiné dedans ; null : fond dessiné. */
+  fond?: string | null;
 }
 
 /** Illustration du domaine, dessinée en grand et en filigrane (traits sur une grille de 24). */
@@ -53,13 +55,19 @@ function Logo({ sujet }: { sujet: Sujet }) {
   return <span className="couv-monogramme" style={{ color: sujet.couleur }}>{l.lettres}</span>;
 }
 
-export function Couverture({ sujet, graine, agent, format, etiquette, domaine }: Props) {
+export function Couverture({ sujet, graine, agent, format, etiquette, domaine, fond = null }: Props) {
   return (
-    <figure className={`couverture couv-${format}`} dir="ltr" style={{ ['--sujet' as string]: sujet.couleur }} role="img" aria-label={etiquette}>
-      <Fond graine={graine} />
-      <svg className="couv-illustration" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-        {ILLUSTRATIONS[sujet.domaine].map((d, i) => <path key={i} d={d} />)}
-      </svg>
+    <figure className={`couverture couv-${format}${fond ? ' avec-fond' : ''}`} dir="ltr" style={{ ['--sujet' as string]: sujet.couleur }} role="img" aria-label={etiquette}>
+      {fond ? (
+        <img className="couv-photo" src={fond} alt="" width={1600} height={900} loading="lazy" decoding="async" />
+      ) : (
+        <>
+          <Fond graine={graine} />
+          <svg className="couv-illustration" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            {ILLUSTRATIONS[sujet.domaine].map((d, i) => <path key={i} d={d} />)}
+          </svg>
+        </>
+      )}
       {format === 'grand' && <span className="couv-domaine">{domaine}</span>}
       <span className="couv-logo"><Logo sujet={sujet} /></span>
       {format === 'grand' && (
@@ -68,7 +76,8 @@ export function Couverture({ sujet, graine, agent, format, etiquette, domaine }:
           {sujet.detail && <small>{sujet.detail}</small>}
         </span>
       )}
-      <span className="couv-agent" aria-hidden="true"><img src={agent.avatar} alt="" width={28} height={28} /></span>
+      {/* Le fond fourni porte déjà l'avatar de l'agent, en bas à droite. */}
+      {!fond && <span className="couv-agent" aria-hidden="true"><img src={agent.avatar} alt="" width={28} height={28} /></span>}
     </figure>
   );
 }

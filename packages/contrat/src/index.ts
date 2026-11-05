@@ -88,6 +88,8 @@ export const Publication = z.object({
   original: z.array(Bloc).nullable(),
   bouton: Bouton.nullable(),
   media: Media.nullable(),
+  /** Fond de couverture fourni pour l'agent (/marque/fond-…), null : couverture dessinée par le client. */
+  fond: z.string().nullable(),
   sources: Sources,
 });
 export type Publication = z.infer<typeof Publication>;

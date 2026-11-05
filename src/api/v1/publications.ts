@@ -7,6 +7,7 @@ import { existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import type { Client } from '@libsql/client';
 import { racineDepot } from '../../config.ts';
+import { fondDe } from './fonds.ts';
 import type { Bloc, Bouton, Compte, Langue, Media, Publication, Sources } from '../../../packages/contrat/src/index.ts';
 import { textesDe } from '../../../packages/textes/src/index.ts';
 import { actualitesDeLaMaquette, type MaquetteActualite } from '../../maquette/actualites.ts';
@@ -189,7 +190,7 @@ export function servirDansLaLangue(blocs: Bloc[], langue: Langue, traduction: Tr
 
 const TYPE_BOUTON: Record<string, Bouton['type']> = { 'Voir le dépôt': 'depot', Installer: 'installation', Télécharger: 'telechargement' };
 
-function depuisActualite(a: MaquetteActualite): Omit<Publication, 'compte' | 'langue' | 'traduction' | 'contenu' | 'original'> & { blocs: Bloc[] } {
+function depuisActualite(a: MaquetteActualite): Omit<Publication, 'compte' | 'langue' | 'traduction' | 'contenu' | 'original' | 'fond'> & { blocs: Bloc[] } {
   const passages = [a.accroche, a.description, a.ce_que_ca_permet, ...a.reperes]
     .filter((c): c is NonNullable<typeof c> => c !== null)
     .flatMap((c) => c.passages.map((texte) => ({ texte, trouve: !a.passages_introuvables.includes(texte) })));
@@ -357,7 +358,7 @@ export async function publicationsParIds(ctx: Contexte, ids: readonly number[]):
     // Texte alternatif : traduit s'il l'est sans écart ; le texte inscrit dans l'image reste en anglais (`lang`).
     const alt = traduction?.champs['media.alt'];
     const media = reste.media?.type === 'image' && alt && !traduction!.ecarts.has('media.alt') ? { ...reste.media, alt, alt_lang: ctx.langue } : reste.media;
-    publications.push({ ...reste, media, compte, ...servirDansLaLangue(blocs, ctx.langue, traduction) });
+    publications.push({ ...reste, media, compte, fond: fondDe(compte.id, reste.id), ...servirDansLaLangue(blocs, ctx.langue, traduction) });
   }
   return publications;
 }

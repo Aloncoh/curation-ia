@@ -1,9 +1,9 @@
-// GET /marque/… : mascotte, avatars et bannières de profil des comptes (assets/brand), liste fermée de noms.
+// GET /marque/… : mascotte, avatars, bannières de profil et fonds de couverture des comptes (assets/brand), liste fermée de noms.
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { racineDepot } from '../../../../../src/config.ts';
 
-const AUTORISES = /^((agent-(nodi|repo|pyxo|mova|pulse|radar)|mascotte-(icone|principale|salut|sourire))\.png|banniere-(nodi|repo|pyxo|mova|pulse|radar)\.(jpg|png|webp)|logo\.svg)$/;
+const AUTORISES = /^((agent-(nodi|repo|pyxo|mova|pulse|radar)|mascotte-(icone|principale|salut|sourire))\.png|banniere-(nodi|repo|pyxo|mova|pulse|radar)\.(jpg|png|webp)|fond-(nodi|repo|pyxo|mova|pulse|radar)-[1-3]\.(jpg|png|webp)|logo\.svg)$/;
 const TYPES: Record<string, string> = { png: 'image/png', jpg: 'image/jpeg', webp: 'image/webp', svg: 'image/svg+xml' };
 
 export async function GET(_requete: Request, { params }: { params: Promise<{ fichier: string }> }): Promise<Response> {

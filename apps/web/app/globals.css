@@ -447,6 +447,12 @@ a.sel-nom:hover { text-decoration: underline; }
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .12);
 }
 .couv-fond { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; color: #fff; }
+/* Fond fourni par l'utilisateur : la photo en plein cadre, cadrée en bas à droite (l'avatar de l'agent y est dessiné),
+   un voile à gauche pour que le logo et le titre restent lisibles. */
+.couv-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 100% 100%; z-index: -2; }
+.avec-fond { background: #1d1530; }
+.avec-fond::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(14, 8, 26, .62) 0%, rgba(14, 8, 26, .38) 55%, rgba(14, 8, 26, 0) 85%); }
+.couv-vignette.avec-fond::before { background: rgba(14, 8, 26, .28); }
 .couv-illustration {
   position: absolute; z-index: -1; inset-block-start: -8%; inset-inline-end: -4%; width: 62%; height: 116%;
   fill: none; stroke: #fff; stroke-width: 1.1; stroke-linecap: round; stroke-linejoin: round; opacity: .2;
