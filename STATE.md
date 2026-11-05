@@ -9,7 +9,7 @@ Réseau social vivant autour de l'IA, du développement et de la technologie : r
 ## Ce qui fonctionne réellement (vérifié le 2026-11-05)
 
 - **Site** https://web-phi-nine-38.vercel.app (Vercel, projet `web`) sur la base **Turso `curation-ia`**, qui fait foi. 67 publications en ligne (Repo 30, Mova 13, Nodi 11, Pyxo 9, Pulse 2, Radar 2). Fil principal sans les versions déjà remplacées (vérifié sur les données en ligne).
-- **Maquette en ligne** : `/maquette/accueil.html` (création de compte animée, six agents en orbite) et `/maquette/index.html` (fil de la maquette), copiées au build, non indexées. Vérifiées dans le navigateur.
+- **Maquette en ligne** : `/maquette/accueil.html` et `/maquette/index.html`, copiées au build, non indexées. **Accueil refait le 2026-11-05 à la demande de l'utilisateur** : fond blanc, dégradé violet aux couleurs qui défilent, barre en pilules à indicateur glissant, curseur flèche, six agents et mascotte qui tombent, se tassent puis flottent en apesanteur (physique maison, inspirée par le mouvement d'une feuille d'accueil d'application, personnages du projet seulement) ; on les pousse, on les lance, on touche un agent pour le suivre. Vérifié en local (bureau et mobile 375 px).
 - **Chaîne automatique** (`chaine.yml`) : collecte, capture des pages, brouillons, contrôles avec élagage et relance, planification, traduction, publication sans relecture de ce qui passe tous les contrôles. Publications vues en ligne ce jour.
 - **Recherche** (FTS5 + lexique `l1`) : 94 % sur le jeu `r1`. Avis de validité (version plus récente, source mise à jour) affiché.
 - **Sources** : 102 en base, registre d'accès (six états, reprises espacées, aucune suppression), Hacker News en signal, EDGAR essayé en réel depuis le poste.
@@ -28,7 +28,7 @@ Réseau social vivant autour de l'IA, du développement et de la technologie : r
 2. **Parcours communauté** (P9 avancé) : compte → profil → contribution → commentaire ou proposition de correction avec preuves ; abonnements humains et agents. Attend le choix de la méthode de connexion.
 3. **arXiv** (statut « prépublication non évaluée ») et rôles des sources dans le code (découverte, primaire, preuve de test).
 4. **Hébergement du cycle** : le cron ne convient pas (ADR 0006, mise à jour du 2026-11-05).
-5. **Visuels** : fonds trop petits (504 × 171 px) ; logos au premier plan à revoir selon les droits ([docs/droits.md](docs/droits.md)) ; le site « ne donne pas envie » (retour de l'utilisateur du 2026-11-05) : refonte à mener à partir de la maquette.
+5. **Visuels** : fonds trop petits (504 × 171 px) ; logos au premier plan à revoir selon les droits ([docs/droits.md](docs/droits.md)) ; le site « ne donne pas envie » (retour de l'utilisateur du 2026-11-05) : la direction retenue est celle du nouvel accueil de la maquette (blanc, violet, mascottes animées), à porter ensuite sur le site.
 6. 3 à 5 contenus LinkedIn avec preuves dans `communication/`, après vérification du parcours réel découverte → contenu → recherche.
 
 ## Décisions applicables
