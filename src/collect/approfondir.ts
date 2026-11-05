@@ -6,6 +6,7 @@
 import { randomUUID } from 'node:crypto';
 import type { Database } from '../db/client.ts';
 import { extrairePage, MOTS_MIN_PAGE } from '../ressources/selection/html.ts';
+import { AGE_MAX_JOURS } from '../selection/consignes.ts';
 import { SOURCES } from '../sources.ts';
 import { contentHash } from './normalize.ts';
 import { safeGet, SafeFetchError, type Resolver, type Transport } from './safe-fetch.ts';
@@ -21,21 +22,39 @@ export interface ResultatApprofondir {
   mots: number;
 }
 
+/** Pages capturées au plus par passage : la chaîne repasse toutes les heures, inutile de solliciter un site d'un coup. */
+export const MAX_PAGES_PAR_PASSAGE = 30;
+/** Une page refusée (403, délai…) n'est pas redemandée avant ce délai. */
+export const REESSAI_APRES_HEURES = 24;
+
 export async function approfondir(
   database: Database,
-  o: { now: () => string; timeoutMs: number; maxBytes: number; userAgent: string; deps?: { resolve?: Resolver; transport?: Transport } },
+  o: { now: () => string; timeoutMs: number; maxBytes: number; userAgent: string; ageMaxJours?: number; max?: number; deps?: { resolve?: Resolver; transport?: Transport } },
 ): Promise<ResultatApprofondir[]> {
   const { client } = database;
-  const r = await client.execute(`
+  const maintenant = Date.parse(o.now());
+  const depuis = new Date(maintenant - (o.ageMaxJours ?? AGE_MAX_JOURS) * 86_400_000).toISOString();
+  const reessai = new Date(maintenant - REESSAI_APRES_HEURES * 3_600_000).toISOString();
+  // Deux cas (demande de l'utilisateur du 2026-11-05, « capture les pages ») : une actualité déjà jugée « à approfondir »,
+  // et, avant toute analyse, une actualité récente dont le flux ne donne qu'un titre ou une accroche (Intel, AMD, Hugging
+  // Face, Higgsfield, Notion, résumés de TechCrunch ou d'Apple) : sans page, elle ne serait jamais analysée.
+  const r = await client.execute({
+    sql: `
     select n.id, doc.id as document_id, doc.url, doc.source_id, c.title, c.content, c.seq
-    from post_draft d
-    join news_item n on n.id = d.news_item_id and n.kind in ('annonce', 'version')
+    from news_item n
     join news_item_document nd on nd.news_item_id = n.id and nd.role = 'primary'
     join source_document doc on doc.id = nd.document_id
     join document_snapshot c on c.document_id = doc.id and c.seq = (select max(seq) from document_snapshot x where x.document_id = doc.id)
-    where (d.status = 'a_approfondir' or (d.status = 'ecartee' and d.rejection_reason = 'source_insuffisante'))
+    left join post_draft d on d.news_item_id = n.id
+    where n.kind in ('annonce', 'version')
+      and (d.status = 'a_approfondir' or (d.status = 'ecartee' and d.rejection_reason = 'source_insuffisante')
+           or (d.id is null and coalesce(n.announced_at, n.first_seen_at) >= ?))
       and length(c.content) < ${TEXTE_MIN_CAPTURE}
-    order by n.id`);
+      and not exists (select 1 from run x where x.kind = 'approfondir' and x.status = 'failed' and x.started_at >= ? and x.error_message like doc.url || ' — %')
+    order by d.id is not null desc, coalesce(n.announced_at, n.first_seen_at) desc, n.id desc
+    limit ?`,
+    args: [depuis, reessai, o.max ?? MAX_PAGES_PAR_PASSAGE],
+  });
   const resultats: ResultatApprofondir[] = [];
   for (const row of r.rows) {
     const newsItemId = Number(row.id);
@@ -46,7 +65,8 @@ export async function approfondir(
     const tracer = async (statut: 'succeeded' | 'failed', erreur: { kind: string; message: string } | null) =>
       client.execute({
         sql: `insert into run (id, kind, source_id, mode, worker_id, status, started_at, finished_at, error_kind, error_message) values (?, 'approfondir', ?, 'live', 'approfondir', ?, ?, ?, ?, ?)`,
-        args: [runId, String(row.source_id), statut, debut, o.now(), erreur?.kind ?? null, erreur?.message ?? null],
+        // L'adresse en tête du message : une page refusée n'est pas redemandée avant REESSAI_APRES_HEURES.
+        args: [runId, String(row.source_id), statut, debut, o.now(), erreur?.kind ?? null, erreur ? `${url} — ${erreur.message}` : null],
       });
     if (!source) {
       await tracer('failed', { kind: 'source_inconnue', message: 'source absente du registre' });
