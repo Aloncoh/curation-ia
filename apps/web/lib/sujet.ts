@@ -4,7 +4,7 @@
 // retrait, comme OpenAI, garde un monogramme), un dépôt GitHub sans marque connue donne son monogramme, jamais l'avatar
 // de son propriétaire, souvent un visage. Le logo
 // identifie le sujet ; il n'affirme aucun partenariat.
-import { siAmd, siAnthropic, siApple, siBlender, siBroadcom, siClaude, siCloudflare, siCursor, siDeepseek, siElevenlabs, siFigma, siGithub, siGoogle, siHuggingface, siIntel, siLg, siMeta, siMistralai, siN8n, siNotion, siNvidia, siQualcomm, siSamsung, siShopify, siSuno, siTesla, siVercel, siYoutube, type SimpleIcon } from 'simple-icons';
+import { siAmd, siAnthropic, siApple, siBlender, siBroadcom, siClaude, siCloudflare, siCursor, siDatabricks, siDeepseek, siElevenlabs, siFigma, siGithub, siGoogle, siHuggingface, siIntel, siLg, siMeta, siMistralai, siN8n, siNotion, siNvidia, siQualcomm, siSamsung, siShopify, siSuno, siTesla, siVercel, siYoutube, type SimpleIcon } from 'simple-icons';
 import type { Publication } from '@curation/contrat';
 
 export interface Sujet {
@@ -26,7 +26,7 @@ export type Domaine = 'puces' | 'modele' | 'code' | 'design' | 'audio' | 'appare
 const DOMAINE_PAR_HOTE: Record<string, Domaine> = {
   'nvidia.com': 'puces', 'amd.com': 'puces', 'intc.com': 'puces', 'intel.com': 'puces', 'qualcomm.com': 'puces', 'broadcom.com': 'puces', 'tsmc.com': 'puces',
   'samsung.com': 'appareils', 'lg.com': 'appareils', 'shopify.com': 'cloud', 'newsfilecorp.com': 'cloud', 'oracle.com': 'cloud', 'apple.com': 'appareils', 'tesla.com': 'appareils', 'microsoft.com': 'cloud',
-  'aboutamazon.com': 'cloud', 'fb.com': 'social', 'mistral.ai': 'modele', 'blog.google': 'modele', 'openai.com': 'modele',
+  'aboutamazon.com': 'cloud', 'databricks.com': 'cloud', 'aws.amazon.com': 'cloud', 'blog.cloudflare.com': 'cloud', 'fb.com': 'social', 'mistral.ai': 'modele', 'blog.google': 'modele', 'openai.com': 'modele',
   'anthropic.com': 'modele', 'claude.com': 'modele', 'huggingface.co': 'modele', 'deepseek.com': 'modele', 'youtube.com': 'modele',
   'figma.com': 'design', 'spline.design': 'design', 'blender.org': 'design', 'midjourney.com': 'design',
   'elevenlabs.io': 'audio', 'suno.com': 'audio', 'vapi.ai': 'audio',
@@ -87,6 +87,9 @@ const EDITEURS: Record<string, Editeur> = {
   'sketch.com': { nom: 'Sketch', icone: null, couleur: '#f7b500' },
   'modelcontextprotocol.io': { nom: 'Model Context Protocol', icone: null, couleur: '#3a3a44' },
   'gemini.google': { nom: 'Gemini', icone: null, couleur: '#4285f4' },
+  // Sources de Pulse (2026-11-05).
+  'databricks.com': { nom: 'Databricks', icone: siDatabricks },
+  'aws.amazon.com': { nom: 'AWS', icone: null, couleur: '#ff9900' },
 };
 
 /** Propriétaires de dépôts qui sont aussi des éditeurs connus : leur logo plutôt que leur avatar. */
@@ -132,7 +135,7 @@ const LOGOS: Record<string, string> = {
   DeepSeek: 'deepseek', Discord: 'discord', Figma: 'figma', Gemini: 'gemini', GitHub: 'github', Google: 'google',
   'Hugging Face': 'huggingface', 'Model Context Protocol': 'mcp', Meta: 'meta', Microsoft: 'microsoft', Midjourney: 'midjourney',
   'Mistral AI': 'mistral', n8n: 'n8n', Notion: 'notion', NVIDIA: 'nvidia', OpenAI: 'openai', Sketch: 'sketch', Suno: 'suno',
-  Vercel: 'vercel', YouTube: 'youtube',
+  Vercel: 'vercel', YouTube: 'youtube', AWS: 'aws',
 };
 export const logoDe = (nom: string): string | null => (LOGOS[nom] ? `/logos/${LOGOS[nom]}.svg` : null);
 

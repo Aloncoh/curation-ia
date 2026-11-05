@@ -171,6 +171,15 @@ export const SOURCES: SourceDefinition[] = [
   // Les entrées du flux Newsfile pointent vers www.newsfilecorp.com : les deux hôtes sont autorisés.
   (() => { const f = flux('shopify-press', 'Shopify, communiqués (Newsfile) — flux RSS officiel', 'https://feeds.newsfilecorp.com/company/4130', 'feeds.newsfilecorp.com');
     return { ...f, allowedHosts: [...f.allowedHosts, 'www.newsfilecorp.com'], config: { ...f.config, linkHosts: ['www.newsfilecorp.com'] }, compte: 'radar' as const }; })(),
+  // Pulse (demande de l'utilisateur du 2026-11-05, « ajoute des posts pour Pulse ») : exploitation, fiabilité,
+  // performances et données des services d'IA. Flux relevés le 2026-11-05 (200, entrées du jour ou de la veille).
+  { ...flux('cloudflare-blog', 'Cloudflare Blog — flux RSS officiel', 'https://blog.cloudflare.com/rss/', 'blog.cloudflare.com'), compte: 'pulse' },
+  { ...flux('databricks-blog', 'Databricks Blog — flux officiel', 'https://www.databricks.com/feed', 'www.databricks.com'), compte: 'pulse' },
+  { ...flux('aws-ml-blog', 'AWS Machine Learning Blog — flux RSS officiel', 'https://aws.amazon.com/blogs/machine-learning/feed/', 'aws.amazon.com'), compte: 'pulse' },
+  { ...flux('github-engineering', 'GitHub Blog, Engineering — flux RSS officiel', 'https://github.blog/engineering/feed/', 'github.blog'), compte: 'pulse' },
+  // Pages d'état officielles : incidents et maintenances des API d'IA (incident daté, attribué à l'éditeur).
+  { ...flux('claude-status', 'Claude Status — historique des incidents, flux RSS officiel', 'https://status.claude.com/history.rss', 'status.claude.com'), fetchIntervalMinutes: 60, compte: 'pulse' },
+  { ...flux('openai-status', 'OpenAI Status — historique des incidents, flux RSS officiel', 'https://status.openai.com/history.rss', 'status.openai.com'), fetchIntervalMinutes: 60, compte: 'pulse' },
   flux('mistral', 'Mistral AI — flux RSS officiel', 'https://mistral.ai/news/rss', 'mistral.ai'),
   flux('huggingface-blog', 'Hugging Face Blog — flux RSS officiel', 'https://huggingface.co/blog/feed.xml', 'huggingface.co'),
   flux('elevenlabs', 'ElevenLabs Blog — flux RSS officiel', 'https://elevenlabs.io/blog/rss.xml', 'elevenlabs.io'),
