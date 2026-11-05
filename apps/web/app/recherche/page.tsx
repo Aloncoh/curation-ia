@@ -5,7 +5,9 @@ import { textesDe, type Textes } from '@curation/textes';
 import type { ResultatRecherche } from '@curation/contrat';
 import { fil, recherche, RequeteInvalide } from '../../../../src/api/v1/index.ts';
 import { Cadre, Vide } from '../../components/Cadre.tsx';
+import { Couverture } from '../../components/Couverture.tsx';
 import { Post } from '../../components/Post.tsx';
+import { sujetDe } from '../../lib/sujet.ts';
 import { contexte, langueDeLaRequete } from '../../lib/serveur.ts';
 
 type Parametres = { searchParams: Promise<{ q?: string | string[]; tri?: string | string[] }> };
@@ -32,18 +34,25 @@ export default async function Recherche({ searchParams }: Parametres) {
   const tri = premier(sp.tri) === 'recents' ? 'recents' : 'pertinence';
 
   if (!q) {
-    const page = await fil(ctx, { limite: 30 });
-    const tuiles = page.publications.filter((p) => p.media?.type === 'image');
+    // Toutes les publications, chacune par sa couverture (fond de l'agent, logo et nom du sujet) ; une sélection, sans
+    // sujet unique, par son image. Mise à jour du 2026-11-05 : l'Explorer ne montrait que les montages des ressources.
+    const page = await fil(ctx, { limite: 40 });
     return (
       <Cadre langue={ctx.langue} rubrique="explorer">
         <h1 className="titre-page">{t.commun.explorer}</h1>
         <p className="intro-page">{t.recherche.exploreIntro}</p>
-        <div className="grille">
-          {tuiles.map((p) => p.media?.type === 'image' && (
-            <a key={p.id} className="tuile-explorer" href={`/p/${p.id}`} aria-label={t.post.publicationDe(p.compte.nom)}>
-              <img src={p.media.src} alt="" loading="lazy" />
-            </a>
-          ))}
+        <div className="grille grille-explorer">
+          {page.publications.map((p) => {
+            const sujet = sujetDe(p);
+            const visuel = sujet
+              ? <Couverture sujet={sujet} graine={p.id} agent={{ nom: p.compte.nom, avatar: p.compte.avatar }} format="grand" etiquette={t.post.couverture(sujet.nom)} domaine={t.post.domaines[sujet.domaine]} fond={p.fond} />
+              : p.media?.type === 'image' ? <img src={p.media.src} alt="" loading="lazy" /> : null;
+            return visuel && (
+              <a key={p.id} className="tuile-explorer" href={`/p/${p.id}`} aria-label={t.post.publicationDe(p.compte.nom)} data-compte={p.compte.id}>
+                {visuel}
+              </a>
+            );
+          })}
         </div>
       </Cadre>
     );

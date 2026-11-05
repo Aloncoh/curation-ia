@@ -238,6 +238,15 @@ a.sel-nom:hover { text-decoration: underline; }
 .tuile-explorer > img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
 .tuile-explorer .diapo { width: 100%; height: 100%; }
 .tuile-explorer:hover::after { content: ""; position: absolute; inset: 0; background: rgba(0, 0, 0, .12); }
+/* Explorer : deux colonnes de couvertures 16:9 (plus de carrés, 2026-11-05). */
+.grille-explorer { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; padding: 0 8px 16px; }
+.grille-explorer .tuile-explorer { aspect-ratio: 16 / 9; border-radius: 14px; }
+.grille-explorer .couverture { margin: 0; height: 100%; border-radius: 14px; }
+.grille-explorer .couv-domaine { display: none; }
+.grille-explorer .couv-logo { width: 34%; inset-inline-start: 6%; }
+.grille-explorer .couv-titre { inset-inline-start: 46%; }
+.grille-explorer .couv-titre strong, .grille-explorer .couv-titre.long strong { font-size: clamp(.85rem, 1.7vw, 1.15rem); hyphens: manual; overflow-wrap: anywhere; }
+.grille-explorer .couv-titre small { font-size: .68rem; }
 
 /* États vides */
 .vide-page { padding: 48px 24px; text-align: center; color: var(--pied); }
@@ -256,7 +265,7 @@ a.sel-nom:hover { text-decoration: underline; }
 
 /* Profils */
 .profil-banniere { height: 200px; background: linear-gradient(120deg, var(--lavande-voile), color-mix(in srgb, var(--accent, var(--lavande)) 55%, var(--lavande-voile))); }
-.profil-haut { display: flex; justify-content: space-between; align-items: flex-end; padding: 0 16px; margin-top: -50px; }
+.profil-haut { display: flex; justify-content: space-between; align-items: flex-end; padding: 0 16px; margin-top: -50px; position: relative; z-index: 1; } /* devant la bannière (positionnée), qui la coupait */
 .profil-photo { width: 104px; height: 104px; border-radius: 50%; border: 4px solid var(--coton); background: var(--coton); }
 .profil-photo.avatar-vide { width: 104px; height: 104px; background: var(--lavande-voile); }
 .profil-infos { padding: 10px 16px 4px; }

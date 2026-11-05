@@ -84,10 +84,11 @@ export function Post({ p, t, langue, complet = false, raison = null }: { p: Publ
   const dateTitre = dateLongue(p.date, langue);
   const prevue = p.statut !== 'publie';
   const bouton = p.bouton && hrefSur(p.bouton.url) ? p.bouton : null;
-  // Rythme du fil (décision du 2026-11-05) : une ressource en grand visuel, une sélection en grille d'images, une
-  // annonce courte avec sa vignette. Sur la page d'un post, la couverture et le média complet se suivent.
+  // Rythme du fil (décision du 2026-11-05) : une sélection en grille d'images, tout le reste en grand visuel. La vignette
+  // carrée des annonces courtes est retirée le même jour à la demande de l'utilisateur (« enlève les carrés »). Sur la
+  // page d'un post, la couverture et le média complet se suivent.
   const sujet = sujetDe(p);
-  const format = p.nature === 'selection' ? 'grille' : p.nature === 'actualite' && !complet ? 'courte' : 'grand';
+  const format = p.nature === 'selection' ? 'grille' : 'grand';
   const couverture = (f: 'grand' | 'vignette') => sujet && (
     <Couverture sujet={sujet} graine={p.id} agent={{ nom: p.compte.nom, avatar: p.compte.avatar }} format={f} etiquette={t.post.couverture(sujet.nom)} domaine={t.post.domaines[sujet.domaine]} fond={p.fond} />
   );
@@ -117,7 +118,6 @@ export function Post({ p, t, langue, complet = false, raison = null }: { p: Publ
         </header>
         {format === 'grand' && couverture('grand')}
         <div className="post-texte-ligne">
-        {format === 'courte' && couverture('vignette')}
         <TexteDuPost
           contenu={p.contenu}
           original={p.original}
