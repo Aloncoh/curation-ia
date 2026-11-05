@@ -71,6 +71,16 @@ const PRECISIONS_S3 = `Précisions sur le public :
 - Un public spécialisé mais réel (motion design, UX/UI, frontend, code review, automatisation) note 1 en impact, jamais 0 : la qualité d'une ressource ne dépend pas de la largeur de son public.
 - Un événement, un hommage, un webinaire ou une levée de fonds sans changement utilisable reste à 0 en nouveauté.`;
 
+/**
+ * Décision de l'utilisateur du 2026-11-05 (« big tech liée à l'IA ») : Radar couvre les grandes entreprises quand le
+ * sujet touche l'IA, et seulement alors. Constat qui l'a motivée : sur le premier cycle avec texte complet, tous les sujets
+ * Radar (partenariat de livraison, résultats d'AMD, montre Fitbit) partaient « hors périmètre ».
+ */
+const PRECISIONS_S5 = `Précisions sur les grandes entreprises (Apple, NVIDIA, AMD, Intel, TSMC, Qualcomm, Broadcom, Google, Microsoft, Amazon, Meta, Samsung, LG, Oracle, Tesla, Shopify…) :
+- Dans le périmètre seulement si le document relie explicitement le sujet à l'IA : puce ou accélérateur pour l'IA, centre de données ou capacité de calcul pour l'IA, résultats financiers dont le document détaille l'activité IA (ventes de puces IA, dépenses de calcul), produit qui intègre une fonction d'IA nommée, partenariat ou accord qui rend un service d'IA disponible, robotique ou conduite autonome. Sans ce lien écrit dans le document (livraison, sport, mécénat, montre, investissement local, nomination), impact 0.
+- Impact 2 quand le sujet change la capacité de calcul, les puces disponibles ou le prix d'accès aux modèles dont dépend notre public ; sinon 1.
+- Résultats financiers : nouveauté 1 (chiffres datés), utilité 1 (ce que les chiffres disent de l'offre ou de la demande de calcul pour l'IA), jamais 2. Le chiffre reste une affirmation de l'entreprise.`;
+
 export const VERSIONS_CONSIGNES: VersionConsignes[] = [
   { version: 's1', date: '2026-10-31', texte: GRILLE, exemples: [], changements: [] },
   {
@@ -98,6 +108,17 @@ export const VERSIONS_CONSIGNES: VersionConsignes[] = [
       { titre: 'Webhook IP ranges added to the Meta API', decision: 'publier', raison: 'Changement d’infrastructure concret à appliquer par ceux qui filtrent les webhooks.', avis: 3 },
     ],
     changements: [{ regle: 'Premiers exemples relus par l’utilisateur : trois actualités publiées après relecture.', avis: [1, 2, 3] }],
+  },
+  {
+    version: 's5',
+    date: '2026-11-05',
+    texte: `${GRILLE}\n\n${PRECISIONS_S2}\n\n${PRECISIONS_S3}\n\n${PRECISIONS_S5}`,
+    exemples: [
+      { titre: 'pull_request_target blocked by default December 2', decision: 'publier', raison: 'Changement de comportement par défaut daté, qui touche les dépôts publics de notre public.', avis: 1 },
+      { titre: 'Claude Code 2.1.314', decision: 'publier', raison: 'Version d’un assistant de code avec une nouvelle permission utilisable tout de suite.', avis: 2 },
+      { titre: 'Webhook IP ranges added to the Meta API', decision: 'publier', raison: 'Changement d’infrastructure concret à appliquer par ceux qui filtrent les webhooks.', avis: 3 },
+    ],
+    changements: [{ regle: 'Grandes entreprises dans le périmètre quand le sujet touche l’IA (décision de l’utilisateur du 2026-11-05, « big tech liée à l’IA ») : aucun avis humain en jeu.', avis: [] }],
   },
 ];
 

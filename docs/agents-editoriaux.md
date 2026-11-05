@@ -74,7 +74,7 @@ Chaque publication dit ce qui est annoncé, ce qui change, pour qui, la disponib
 
 | Compte | Couvre |
 |---|---|
-| Radar | annonces des grandes entreprises (produits, puces, robotique, disponibilités) |
+| Radar | annonces des grandes entreprises liées à l'IA (puces, calcul, résultats IA, produits à fonction d'IA, robotique) ; sans lien avec l'IA : hors périmètre (décision du 2026-11-05) |
 | Nodi | approfondissement des modèles et assistants IA |
 | Pyxo | développement, bibliothèques |
 | Repo | découvertes GitHub, skills, MCP |

@@ -105,7 +105,14 @@ describe('consignes versionnées', () => {
   });
   it('une version existante ne change jamais : toute retouche doit créer une nouvelle version', () => {
     const empreintes = Object.fromEntries(VERSIONS_CONSIGNES.map((v) => [v.version, createHash('sha256').update(texteConsignes(v)).digest('hex').slice(0, 16)]));
-    expect(empreintes).toEqual({ s1: '1a811916118e515c', s2: '567eb930e5f8a74f', s3: '2c448805d17fbcd3', s4: '1b96fae7f0e4ffee' });
+    expect(empreintes).toEqual({ s1: '1a811916118e515c', s2: '567eb930e5f8a74f', s3: '2c448805d17fbcd3', s4: '1b96fae7f0e4ffee', s5: 'ed40f92af2ed970e' });
+  });
+  it('s5 (décision du 2026-11-05) : la big tech entre dans le périmètre seulement liée à l’IA', () => {
+    const texte = texteConsignes(consignesActuelles());
+    expect(consignesActuelles().version).toBe('s5');
+    expect(texte).toContain("Dans le périmètre seulement si le document relie explicitement le sujet à l'IA");
+    expect(texte).toContain('Sans ce lien écrit dans le document (livraison, sport, mécénat, montre, investissement local, nomination), impact 0.');
+    expect(texte).toContain('Le chiffre reste une affirmation de l\'entreprise.');
   });
   it('les versions sont uniques et datées', () => {
     expect(new Set(VERSIONS_CONSIGNES.map((v) => v.version)).size).toBe(VERSIONS_CONSIGNES.length);

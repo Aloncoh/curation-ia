@@ -306,6 +306,8 @@ _Complément du 2026-10-30 : format occasionnel « Sélection » (liste de resso
 
 _Complément du 2026-10-30 : sixième compte, Radar (grandes entreprises tech). Les agents partagent la collecte ; une actualité a une publication principale. Règles : docs/agents-editoriaux.md §2.3 bis. Les six profils sont illustrés ; la publication automatique n'est pas construite._
 
+_Décision de l'utilisateur du 2026-11-05 : Radar couvre la **big tech liée à l'IA** (puces et accélérateurs, centres de données et calcul, résultats financiers détaillant l'activité IA, produits à fonction d'IA nommée, partenariats d'IA, robotique, conduite autonome). Une annonce d'une grande entreprise sans lien écrit avec l'IA reste hors périmètre. Consignes de sélection `s5`._
+
 ### 7.8 Niveaux de preuve et médias
 - Trois niveaux, conservés en base et signalés sur chaque publication par une seule ligne discrète, sans bloc « Niveau de preuve » (§6 bis) : **Test de la plateforme** (démonstration réellement exécutée : version, conditions, résultat, limites — P8), **Démonstration externe** (vidéo ou aperçu publié par le créateur, intégré ou utilisé avec autorisation, attribué et commenté — P7), **Analyse documentaire** (« Analyse IA à partir des sources — non testé par la plateforme »). En V1, seule l'analyse documentaire est publiée.
 - Une vidéo générée, une animation ou une maquette illustrative ne constitue jamais la preuve qu'un outil fonctionne.
