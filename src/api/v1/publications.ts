@@ -8,6 +8,7 @@ import { resolve } from 'node:path';
 import type { Client } from '@libsql/client';
 import { racineDepot } from '../../config.ts';
 import { fondDe } from './fonds.ts';
+import { lireValidite } from './validite.ts';
 import type { Bloc, Bouton, Compte, Langue, Media, Publication, Sources } from '../../../packages/contrat/src/index.ts';
 import { textesDe } from '../../../packages/textes/src/index.ts';
 import { actualitesDeLaMaquette, type MaquetteActualite } from '../../maquette/actualites.ts';
@@ -190,7 +191,7 @@ export function servirDansLaLangue(blocs: Bloc[], langue: Langue, traduction: Tr
 
 const TYPE_BOUTON: Record<string, Bouton['type']> = { 'Voir le dépôt': 'depot', Installer: 'installation', Télécharger: 'telechargement' };
 
-function depuisActualite(a: MaquetteActualite): Omit<Publication, 'compte' | 'langue' | 'traduction' | 'contenu' | 'original' | 'fond'> & { blocs: Bloc[] } {
+function depuisActualite(a: MaquetteActualite): Omit<Publication, 'compte' | 'langue' | 'traduction' | 'contenu' | 'original' | 'fond' | 'validite'> & { blocs: Bloc[] } {
   const passages = [a.accroche, a.description, a.ce_que_ca_permet, ...a.reperes]
     .filter((c): c is NonNullable<typeof c> => c !== null)
     .flatMap((c) => c.passages.map((texte) => ({ texte, trouve: !a.passages_introuvables.includes(texte) })));
@@ -328,13 +329,14 @@ export async function publicationsParIds(ctx: Contexte, ids: readonly number[]):
   if (liste.length === 0) return [];
   // Lectures indépendantes lancées ensemble : en ligne, chaque aller-retour vers la base compte (2026-11-05). Les
   // carrousels sont demandés pour toute la liste : seuls ceux des actualités existent.
-  const [{ actualites }, { ressources }, { selections }, comptes, carrousels, renforts] = await Promise.all([
+  const [{ actualites }, { ressources }, { selections }, comptes, carrousels, renforts, validites] = await Promise.all([
     actualitesDeLaMaquette(ctx.client, liste),
     ressourcesDeLaMaquette(ctx.client, maintenant, liste),
     selectionsDeLaMaquette(ctx.client, maintenant, liste),
     lireComptes(ctx.client, ctx.langue),
     lireCarrousels(ctx.client, liste),
     lireRenforts(ctx.client, liste),
+    lireValidite(ctx.client, liste),
   ]);
   const items = new Map<number, { item: ReturnType<typeof depuisActualite>; compte: string }>();
   for (const a of actualites) {
@@ -358,7 +360,8 @@ export async function publicationsParIds(ctx: Contexte, ids: readonly number[]):
     // Texte alternatif : traduit s'il l'est sans écart ; le texte inscrit dans l'image reste en anglais (`lang`).
     const alt = traduction?.champs['media.alt'];
     const media = reste.media?.type === 'image' && alt && !traduction!.ecarts.has('media.alt') ? { ...reste.media, alt, alt_lang: ctx.langue } : reste.media;
-    publications.push({ ...reste, media, compte, fond: fondDe(compte.id, reste.id), ...servirDansLaLangue(blocs, ctx.langue, traduction) });
+    const validite = validites.get(id) ?? { remplacee_par: null, source_mise_a_jour: null };
+    publications.push({ ...reste, media, compte, fond: fondDe(compte.id, reste.id), validite, ...servirDansLaLangue(blocs, ctx.langue, traduction) });
   }
   return publications;
 }

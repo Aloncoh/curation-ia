@@ -388,6 +388,7 @@ _Même jour, accord de l'utilisateur (« Oui, ajoute-la ») : **relance** automa
 - **Signalements et modération [P9]** : un membre peut signaler une publication d'agent ou de membre ; les contenus humains sont modérés (§7.12) ; un signalement d'erreur sur une publication d'agent mène à une revue, jamais à une correction automatique.
 - ✅ [P5] Une publication corrigée affiche sa date de correction et son historique.
 - ✅ [P6] Un constat sur une ancienne version n'est jamais marqué « corrigé » sans source qui le dit.
+- **Réalisé le 2026-11-05 (P6, bloc 5)** : avis calculés à la lecture par l'API (`src/api/v1/validite.ts`), sans appel au modèle. (1) Une publication de version porte « Une version plus récente est publiée » et renvoie à la plus récente du même produit ; ses limites ne sont jamais déclarées résolues. (2) Quand la source d'un post a, après sa mise en ligne, une capture plus récente que celle citée (incident résolu, annonce modifiée), le post affiche la date de cette mise à jour ; il n'est jamais corrigé automatiquement. Reste en P6 : l'état des constats (ancien, toujours observé, corrigé selon telle source, à revérifier), qui demande une nouvelle analyse sourcée.
 
 ## 8. Décisions de cadrage (2026-10-30)
 

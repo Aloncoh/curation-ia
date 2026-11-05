@@ -90,6 +90,11 @@ export const Publication = z.object({
   media: Media.nullable(),
   /** Fond de couverture fourni pour l'agent (/marque/fond-…), null : couverture dessinée par le client. */
   fond: z.string().nullable(),
+  /**
+   * Validité dans le temps (SPEC §7.16, P6) : version plus récente du même produit publiée (jamais un constat de
+   * correction), et date de la dernière mise à jour de la source après la capture citée (la publication n'est pas corrigée).
+   */
+  validite: z.object({ remplacee_par: z.object({ id: z.number().int().positive(), version: z.string() }).nullable(), source_mise_a_jour: z.string().nullable() }),
   sources: Sources,
 });
 export type Publication = z.infer<typeof Publication>;

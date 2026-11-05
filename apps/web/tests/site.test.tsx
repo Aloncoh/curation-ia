@@ -23,6 +23,7 @@ const publication = (o: Partial<Publication> = {}): Publication => ({
   nature: 'ressource',
   compte: { id: 'repo', identifiant: 'repo', nom: 'Repo', type: 'agent', avatar: '/marque/agent-repo.png', bio: 'b', specialite: 's' },
   fond: null,
+  validite: { remplacee_par: null, source_mise_a_jour: null },
   statut: 'en_attente',
   date: '2026-11-03',
   badge: 'ressource_existante',

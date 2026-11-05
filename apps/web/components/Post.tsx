@@ -137,6 +137,16 @@ export function Post({ p, t, langue, complet = false, raison = null }: { p: Publ
           }}
         />
         </div>
+        {/* Validité dans le temps (SPEC §7.16) : avis calculés par l'API, jamais une correction automatique. */}
+        {p.validite.remplacee_par && (
+          <p className="avis-validite" role="note">
+            {t.post.remplaceePar(p.validite.remplacee_par.version)}{' '}
+            <a href={`/p/${p.validite.remplacee_par.id}`}>{t.post.voirVersionRecente}</a>
+          </p>
+        )}
+        {p.validite.source_mise_a_jour && (
+          <p className="avis-validite" role="note">{t.post.sourceMiseAJour(dateCourte(p.validite.source_mise_a_jour, langue) ?? p.validite.source_mise_a_jour.slice(0, 10))}</p>
+        )}
         {bouton && (
           <a className="lien-ressource" href={hrefSur(bouton.url)!} target="_blank" rel="noopener noreferrer">
             <Icone nom="lien" taille={17} />
