@@ -22,7 +22,7 @@ export const MAX_TENTATIVES = 2;
 /** La réflexion du modèle compte dans ces plafonds ; une réponse tronquée repart une fois avec le double. */
 export const MAX_TOKENS = { qualification: 4_000, redaction: 12_000, revision: 12_000, relance: 12_000 };
 /** Brouillons « à vérifier » relancés au plus par lot (une seule relance par brouillon, payée sur le plafond du lot). */
-export const MAX_RELANCES_PAR_LOT = 5;
+export const MAX_RELANCES_PAR_LOT = 10;
 /** Renouvelé pendant chaque appel : un bail expiré signifie que le processus a disparu ou s'est arrêté, par exemple en veille. */
 export const DUREE_BAIL_MS = 15 * 60_000;
 /** Une capture plus longue ne part pas au modèle : son coût bloquerait le lot et son contrôle serait trop lent. */
