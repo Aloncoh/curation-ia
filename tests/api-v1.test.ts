@@ -3,7 +3,7 @@
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { PageFil, Publication } from '../packages/contrat/src/index.ts';
 import { compte, comptes, fiche as ficheApi, fil, publication, recherche, RequeteInvalide, type Contexte } from '../src/api/v1/index.ts';
-import { cibleCourte, lienSur } from '../src/api/v1/publications.ts';
+import { cibleCourte, lienSur, pageDuFil } from '../src/api/v1/publications.ts';
 import { createTestDb, type TestDb } from './helpers/db.ts';
 import { ajouterActualite, ajouterTraduction, contenuActualite, socle } from './helpers/publications.ts';
 
@@ -53,7 +53,7 @@ describe('visibilité et fil', () => {
     expect(principal).toContain(recente.postId);
     expect(principal).not.toContain(ancienne.postId);
     const compteId = String((await c.execute({ sql: 'select account_id from post where id = ?', args: [ancienne.postId] })).rows[0]!.account_id);
-    expect((await fil(ctx({ mode: 'public' }), { compte: compteId })).publications.map((p) => p.id)).toContain(ancienne.postId);
+    expect((await pageDuFil(ctx({ mode: 'public' }), { compte: compteId })).publications.map((p) => p.id)).toContain(ancienne.postId);
   });
 
   it('présente les comptes dans la langue demandée, sans compteur', async () => {

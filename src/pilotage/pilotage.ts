@@ -145,7 +145,32 @@ export async function lancerCycle(o: OptionsCycle): Promise<BilanCycle> {
   bilan.dernieres = { ...(precedent?.dernieres ?? {}) };
   for (const e of bilan.etapes) if (e.statut !== 'sautee' && e.debut) bilan.dernieres[e.nom] = e.debut;
   await ecrireCycle(o.database.client, bilan);
+  await tracerCycle(o.database.client, bilan, o.env.GITHUB_RUN_ID ? `github:${o.env.GITHUB_RUN_ID}` : `local:${process.pid}`);
   return bilan;
+}
+
+/**
+ * Trace durable de chaque cycle (2026-11-05) : le réglage `CLE_CYCLE` ne garde que le dernier, ce qui ne permet pas de
+ * mesurer la cadence réelle du cron GitHub (6 cycles planifiés en 25 h observés ce jour-là pour un cron horaire).
+ * Une ligne `run` (kind « cycle ») et une ligne `run_step` par étape ; un échec d'écriture ne fait pas échouer le cycle.
+ */
+async function tracerCycle(client: Pick<Client, 'execute'>, bilan: BilanCycle, origine: string): Promise<void> {
+  try {
+    const id = `cycle-${bilan.debut}-${Math.random().toString(36).slice(2, 8)}`;
+    const echec = bilan.etapes.some((e) => e.statut === 'echec');
+    await client.execute({
+      sql: `insert into run (id, kind, mode, worker_id, status, started_at, finished_at, error_kind) values (?, 'cycle', 'live', ?, ?, ?, ?, ?)`,
+      args: [id, origine, echec ? 'failed' : 'succeeded', bilan.debut, bilan.fin, bilan.statut === 'termine' ? null : bilan.statut],
+    });
+    for (const [i, e] of bilan.etapes.entries()) {
+      await client.execute({
+        sql: `insert into run_step (run_id, seq, name, status, started_at, finished_at, duration_ms, detail) values (?, ?, ?, ?, ?, ?, ?, ?)`,
+        args: [id, i + 1, e.nom, e.statut === 'echec' ? 'failed' : 'succeeded', e.debut ?? bilan.debut, e.debut ?? bilan.debut, e.duree_ms ?? 0, JSON.stringify({ statut: e.statut, motif: e.motif, code: e.code })],
+      });
+    }
+  } catch {
+    // La trace sert à la mesure ; le cycle lui-même est déjà enregistré dans CLE_CYCLE.
+  }
 }
 
 export interface Etat {

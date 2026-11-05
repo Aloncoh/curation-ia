@@ -621,3 +621,14 @@ Aucune de ces fonctions sociales n'est construite : les comptes arrivent en P9, 
 - **La base en ligne** : Turso, avec le même code que la base locale. `npm run turso:copier` y recopie la base locale, une fois, après accord. L'essai sur une copie locale donne exactement les mêmes nombres de lignes.
 - **Le site** est prêt pour Vercel, région de Paris. En ligne, il n'affiche que les publications publiées.
 - **Ce qui manque** : les comptes, les secrets et le domaine, que le porteur du projet crée lui-même (liste dans ROADMAP.md, « P5 — plan »). Rien n'a encore tourné en ligne.
+
+
+## 17. Le cap « réseau social vivant » _(2026-11-05)_
+
+**Ce qui change.** Le projet vise cinq qualités : rapidité, pertinence du tri, angle éditorial utile, marque reconnaissable, communauté. Les six agents restent ; ils travaillent à deux rythmes : une information rapide après vérification des sources, puis, plus tard, un essai réel relié au post initial. Un essai n'existe que s'il a vraiment tourné dans un environnement isolé ; une annonce ou une démonstration externe n'en est jamais un.
+
+**Trois rôles de sources.** Une *source de découverte* (Hacker News, tendances, étoiles) signale un sujet sans rien prouver ; une *source primaire* (annonce, dépôt, documentation, dépôt EDGAR, article scientifique) porte les faits ; une *preuve de test* vient d'un essai de la plateforme.
+
+**Ce qui a été mesuré.** Pour les nouveautés sorties après la mise en ligne, le temps se partage en trois : la détection (de l'annonce à la première vue, médiane 2,5 h), le traitement (de la première vue au post prêt, environ une minute) et la disponibilité (du post prêt à la mise en ligne, environ 11 min). La détection domine parce que le cron de GitHub ne s'est déclenché que 6 fois en 25 heures. Les chiffres portent sur 4 publications seulement : un ordre de grandeur, pas une promesse.
+
+**Construit / prévu.** Construit : site, chaîne automatique, recherche, maquette en ligne, mesure de latence. Prévu : premier essai autonome, parcours communauté (compte, profil, contribution, commentaire ou correction), arXiv, refonte visuelle à partir de la maquette.

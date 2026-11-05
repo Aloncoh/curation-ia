@@ -1,74 +1,61 @@
 # État du projet
 
-_Nettoyé le 2026-11-05 à la demande de l'utilisateur : seul l'état actuel reste ici. L'historique détaillé est dans PROGRESS.md, et la version complète précédente de ce fichier dans git (`git show 9e83d6b:STATE.md`)._
+_Réécrit le 2026-11-05 (cap « réseau social vivant », SPEC §0). Seul l'état actuel figure ici ; relevés et notes datés : [docs/historique.md](docs/historique.md) ; journal des jalons : [PROGRESS.md](PROGRESS.md)._
 
-## En bref
+## Cap
 
-- **Site en ligne** : https://web-phi-nine-38.vercel.app (Vercel, projet `web`, racine `apps/web`). Base **Turso `curation-ia`** (aws-eu-west-1) : elle fait foi ; la base locale `data/curation.db` ne reflète pas les publications.
-- **Chaîne automatique** : GitHub Actions (`.github/workflows/chaine.yml`), cron `7 * * * *`, active (`CHAINE_ACTIVE` = `oui`). Collecte, approfondissement (capture des pages), brouillons, contrôles avec élagage, relance, planification, découverte (toutes les 6 heures), traduction, publication. **Elle publie seule**, sans relecture, ce qui passe tous les contrôles (SPEC, décision du 2026-11-05).
-- **Jalons** : P0 à P2 réalisés ; P3 ouvert (critères d'évaluation non atteints) ; P4 réalisé ; P5 en ligne, reste à clore (délai de bout en bout mesuré sur des publications nées en ligne, domaine, démonstration) ; **P6 en cours**, blocs 1 à 5 réalisés.
-- **Dépôt** : `git@github.com:Aloncoh/curation-ia.git`, privé ; travail sur `p3-brouillons`, envoyé par `git push origin HEAD:main`. Tests : 824 au vert (2026-11-05).
+Réseau social vivant autour de l'IA, du développement et de la technologie : rapidité, pertinence du tri, angle éditorial utile, marque reconnaissable, communauté. Six agents (Nodi, Repo, Pyxo, Mova, Pulse, Radar), priorités inchangées. Volume et plafonds de dépense actuels conservés (voulus par l'utilisateur).
 
-## Publications en ligne (relevé du 2026-11-05, base Turso)
+## Ce qui fonctionne réellement (vérifié le 2026-11-05)
 
-| Compte | Rôle | Publiées | À vérifier |
-|---|---|---|---|
-| Repo | GitHub, open source, skills, MCP | 30 | 0 |
-| Mova | création, design, vidéo, 3D, musique | 12 | 1 |
-| Nodi | modèles et assistants IA | 9 | 7 |
-| Pyxo | outils de code, bibliothèques, agents | 6 | 7 |
-| Pulse | exploitation, fiabilité, données, incidents | 2 | 11 |
-| Radar | big tech liée à l'IA (décision du 2026-11-05) | 1 | 0 |
+- **Site** https://web-phi-nine-38.vercel.app (Vercel, projet `web`) sur la base **Turso `curation-ia`**, qui fait foi. 67 publications en ligne (Repo 30, Mova 13, Nodi 11, Pyxo 9, Pulse 2, Radar 2). Fil principal sans les versions déjà remplacées (vérifié sur les données en ligne).
+- **Maquette en ligne** : `/maquette/accueil.html` (création de compte animée, six agents en orbite) et `/maquette/index.html` (fil de la maquette), copiées au build, non indexées. Vérifiées dans le navigateur.
+- **Chaîne automatique** (`chaine.yml`) : collecte, capture des pages, brouillons, contrôles avec élagage et relance, planification, traduction, publication sans relecture de ce qui passe tous les contrôles. Publications vues en ligne ce jour.
+- **Recherche** (FTS5 + lexique `l1`) : 94 % sur le jeu `r1`. Avis de validité (version plus récente, source mise à jour) affiché.
+- **Sources** : 102 en base, registre d'accès (six états, reprises espacées, aucune suppression), Hacker News en signal, EDGAR essayé en réel depuis le poste.
+- **Tests** : 837 au vert.
 
-102 sources en base. 25 publications le 2026-11-05 sur un plafond de 50 par jour.
+## Construit, pas encore vérifié en ligne
 
-## Budget (DeepSeek Flash)
+- EDGAR dans la chaîne en ligne : attend le secret `CURATION_CONTACT_SEC`.
+- Prompt `p3-22` (aucune définition, aucune formule promotionnelle) : en place, effet à constater sur les prochains posts.
+- Trace durable de chaque cycle (`run` de type `cycle`) : en place, premier cycle tracé à venir.
+- Rédaction des découvertes : coupée en ligne (pas assez fiable).
 
-- Autorisé par l'utilisateur : **4 $ au total**. Dépensé et enregistré : **0,789 $** (dont 0,259 $ le 2026-11-05), plus 0,0099 $ de traduction de ressources du 2026-11-03 hors base.
-- Plafonds de la chaîne en ligne (relevés le 2026-11-05 avec l'accord de l'utilisateur) : 0,10 $ par cycle, 0,40 $ par jour, 3,95 $ au total. Rythme observé : 0,25 à 0,40 $ par jour ; prévenir l'utilisateur avant d'approcher des 4 $.
+## Reste à développer
 
-## Fait récemment (2026-11-05)
+1. **Essai autonome** (P8 avancé) : un outil, protocole réduit, runner GitHub éphémère sans secret, conteneur sans réseau, trace consultable, relié au post initial. Demande une migration (table des essais).
+2. **Parcours communauté** (P9 avancé) : compte → profil → contribution → commentaire ou proposition de correction avec preuves ; abonnements humains et agents. Attend le choix de la méthode de connexion.
+3. **arXiv** (statut « prépublication non évaluée ») et rôles des sources dans le code (découverte, primaire, preuve de test).
+4. **Hébergement du cycle** : le cron ne convient pas (ADR 0006, mise à jour du 2026-11-05).
+5. **Visuels** : fonds trop petits (504 × 171 px) ; logos au premier plan à revoir selon les droits ([docs/droits.md](docs/droits.md)) ; le site « ne donne pas envie » (retour de l'utilisateur du 2026-11-05) : refonte à mener à partir de la maquette.
+6. 3 à 5 contenus LinkedIn avec preuves dans `communication/`, après vérification du parcours réel découverte → contenu → recherche.
 
-- **Publication automatique** : élagage des champs secondaires en écart, puis relance par le modèle (10 brouillons par lot, une fois chacun), gardée seulement si tous les contrôles passent. Le reste demeure « à vérifier ».
-- **Radar** : sources big tech (officielles et presse attribuée : TechCrunch, The Verge) ; consignes `s5`, big tech seulement quand le sujet touche l'IA ; premier post publié (XREAL AURA, relu par l'utilisateur).
-- **Pulse** : six sources officielles (Cloudflare, Databricks, AWS ML, GitHub Engineering, états de Claude et d'OpenAI).
-- **Couvertures** : 18 fonds de l'utilisateur, vrais logos en couleur (svgl, simple-icons), flèches façon miniature YouTube.
-- **P6** : bloc 3, registre officiel MCP (Repo) et modèles en tendance de Hugging Face (Nodi) ; bloc 4, recherche évaluée de 54 % à 94 % (jeu `r1`), sans couche vectorielle (ADR 0008) ; bloc 5, avis de validité (version plus récente publiée, source mise à jour après le post), poussé, **déploiement Vercel à confirmer**.
+## Décisions applicables
+
+- Publication automatique de ce qui passe tous les contrôles ; le reste demeure « à vérifier ».
+- Budget DeepSeek autorisé : 4 $ au total (0,84 $ enregistré le 2026-11-05) ; plafonds en ligne 0,10 $ par cycle, 0,40 $ par jour, 3,95 $ au total ; prévenir avant d'approcher 4 $.
+- Radar : big tech seulement quand le sujet touche l'IA (consignes `s5`). Presse et Hacker News toujours attribués, jamais confirmation primaire.
+- Aucune source contournée (403, 429, robots.txt, Medium) ; une source bloquée est différée avec son motif.
+- Migrations de la base en ligne : avec l'accord de l'utilisateur.
 
 ## En attente de l'utilisateur
 
-1. **Secret GitHub `CURATION_CONTACT_SEC`** (valeur : l'adresse de contact fournie le 2026-11-05) à ajouter dans les secrets du dépôt, pour que la chaîne en ligne collecte EDGAR ; elle est déjà dans `.env.local`.
-2. **Recherche** : relire le jeu `r1` (`src/recherche/reference.ts`) et donner un second jeu de requêtes non vu (le lexique a été réglé sur `r1`).
-3. **Usage « construire »** : liste témoin de bonnes découvertes (SPEC §10).
-4. **Domaine** du site (décision et dépense) ; démonstration V1.
-5. **Sources** : X, Reddit, conditions restrictives (`docs/sources.md` §8.1) ; Tesla sans flux officiel (403, non contourné) ; flux des chaînes YouTube officielles à réessayer (404 le 2026-11-05).
-6. **Couvertures** : originaux des 18 fonds en haute définition, s'ils existent (même nom de fichier, aucun code à changer).
-7. **Avant le lancement public** : hébreu de l'interface relu par un locuteur natif ; interprétation « police du système » pour l'hébreu à confirmer ; droits d'usage de la mascotte ; style des montages (ADR 0007).
-8. **Plus tard** : comptes développeur mobile (Apple 99 USD/an, Google 25 USD) avant P9 bis ; tri des 47 ressources candidates (https://claude.ai/artifact/YGeV9JfuPUGTajUTzF9Yxb) ; corrections des 15 exemples de la page de revue (évaluation de P3).
-
-## Points de vigilance
-
-- **Jeton Turso** : affiché par erreur dans la trace d'une commande le 2026-11-05 ; remplacé par l'utilisateur le même jour (`.env.local`, secret GitHub, variable Vercel) et l'ancien révoqué. Vérifié après révocation : le site en ligne et l'accès local répondent.
-- **Registre d'accès des sources (2026-11-05, demande de l'utilisateur)** : six états distingués, reprises espacées (`Retry-After` respecté), aucune source supprimée ; Hacker News actif comme signal, article lié récupéré avec destination validée, robots.txt et redirections revalidées ; EDGAR prêt ; presse toujours attribuée (`p3-21`, contrôle `attribution_externe_manquante`) ; canaux de remplacement Microsoft et Tesla. Détail : `docs/sources.md` §2 ter, `npm run sources:registre`. Migration `0012` appliquée sur Turso le 2026-11-05 avec l'accord de l'utilisateur, code envoyé. EDGAR essayé en réel avec le client déclaré : 20 rapports 8-K pour NVIDIA et 20 pour Microsoft ; les 12 CIK confirmés sur sec.gov (noms des entreprises). Le même jour : 7 planifiées et 7 publiées après la reprise de la chaîne.
-- **Cron GitHub irrégulier** : aucun cycle de 03:28 à 12:14 UTC le 2026-11-05. Un cycle peut être lancé à la main (`npm run lancer -- --confirmer` avec les variables Turso et les plafonds), sans chevauchement grâce au bail.
-- **Brouillons bloqués** : écarts sur un champ principal (réserve de la source absente, accroche non conforme, chiffre de performance non attribué) ; Pulse en a 11.
-- **Découvertes** : la rédaction automatique des dépôts découverts reste coupée en ligne (`CURATION_MAX_DECOUVERTES` absente) tant qu'elle n'est pas assez fiable.
-- **Flux sans texte** (Intel, AMD, Notion, Higgsfield…) : leur page est capturée avant l'analyse, 30 par passage ; openai.com refuse la collecte (403), non contourné.
-
-## Prochaine action
-
-P6, suite : état des constats (ancien, toujours observé, corrigé selon telle source, à revérifier), incidents révisés par une nouvelle analyse, X et veille de profils, score de découverte. À proposer à l'utilisateur avant de commencer. Confirmer d'abord le déploiement du bloc 5 sur Vercel.
+1. **Méthode de connexion** des comptes (parcours communauté).
+2. **Migration** de la table des essais, au moment de l'essai.
+3. **Hébergement du cycle** : dépôt public, déclencheur externe ou processus permanent (ADR 0006).
+4. **Domaine** : disponibles le 2026-11-05 chez Vercel : `curationai.app` (9,99 $ la 1re année, 15 $ ensuite), `curationai.dev` (9,99 $, puis 13 $), `curationia.com` (12,03 $), `curationai.co` (29,99 $, puis 24,80 $), `getcuration.ai` (160 $ pour 2 ans) ; `curationai.fr`, `curationai.social`, `curation-ia.com`, `curationai.xyz` disponibles, prix non obtenus ; pris : `curationai.com`, `curation-ai.com`, `curationai.io`, `curationai.net`, `curation.ai`.
+5. **Droits** : mascotte, avatars, bannières, fonds ; logos au premier plan ([docs/droits.md](docs/droits.md) §4).
+6. Secret GitHub `CURATION_CONTACT_SEC` ; fonds en haute définition ; jeu de recherche non vu ; liste témoin « construire » ; X, Reddit, LMArena ; hébreu relu par un locuteur natif.
 
 ## Repères techniques
 
-- **Base en ligne depuis le poste** : les lignes `DATABASE_URL` et `DATABASE_AUTH_TOKEN` de `.env.local` restent **commentées**. Pour une commande voulue sur Turso : `env $(sed -n 's/^# \(DATABASE_[A-Z_]*=[^ ]*\)$/\1/p' .env.local) npm run -s <commande>`, telle quelle, sans guillemets autour de `$(…)` (sinon le shell affiche les valeurs). Ne jamais afficher `.env.local`.
-- Commandes utiles : `etat`, `couts`, `lancer -- --confirmer`, `publier -- --confirmer`, `approfondir`, `brouillons:recontroler`, `brouillons:planifier`, `recherche:evaluer`, `recherche:reindexer -- --confirmer`, `ressources -- decouvrir [--capturer]`.
-- Cache npm `~/.npm` d'un autre utilisateur → `npm install --cache <dossier temporaire>`.
-- Le hook GateGuard refuse la première commande Bash et la première modification de chaque fichier par séance : donner les informations demandées puis relancer.
-- Site : `npm run web:dev` (configuration `site` de `.claude/launch.json`) ; `npm run web:typecheck` (`next build` ne vérifie pas les types). Un module `'use client'` n'exporte que des composants.
-- `npm run maquette` régénère `maquette/donnees.js` et `maquette/recherche.js` ; les tests échouent s'ils sont périmés (parité du moteur de recherche).
-- `drizzle-kit generate` s'arrête sur une question si une colonne disparaît en même temps qu'une autre apparaît : le faire en deux migrations.
-- Worktree `.worktrees/mobile` (branche `mobile`, session mobile) : ne pas y écrire.
+- **Base en ligne depuis le poste** : lignes `DATABASE_*` de `.env.local` commentées ; commande : `env $(sed -n 's/^# \(DATABASE_[A-Z_]*=[^ ]*\)$/\1/p' .env.local) npm run -s <commande>`, sans guillemets autour de `$(…)`. Ne jamais afficher `.env.local`.
+- Commandes : `etat`, `couts`, `delais [-- --depuis <date>]`, `lancer -- --confirmer`, `publier -- --confirmer`, `approfondir`, `brouillons:recontroler`, `brouillons:planifier`, `recherche:evaluer`, `sources:registre`, `maquette` (régénère `maquette/donnees.js`).
+- Dépôt `git@github.com:Aloncoh/curation-ia.git` (privé), branche `p3-brouillons`, envoi par `git push origin HEAD:main` ; Vercel déploie `main`.
+- GateGuard refuse la première commande Bash et la première modification de chaque fichier par séance : donner les informations demandées puis relancer.
+- `npm run web:typecheck` (le build ne vérifie pas les types) ; `drizzle-kit generate` : une colonne qui disparaît et une qui apparaît se font en deux migrations.
+- Worktree `.worktrees/mobile` : ne pas y écrire.
 
 ## Reprise
 

@@ -66,3 +66,21 @@ Proposé, non construit :
 - ROADMAP P5 change si cette option est retenue, ainsi que le budget mensuel (2 à 5 de plus).
 - Un jeton GitHub sera nécessaire, créé par l'utilisateur.
 - Avant d'annoncer un délai, il faudra plusieurs jours de sonde sur la machine retenue et un premier lot réel.
+
+## Mise à jour du 2026-11-05 : le cron actuel ne convient pas (mesuré)
+
+**Mesures** (cap « réseau social vivant », SPEC §0 ; `npm run delais`) :
+
+- Cron `7 * * * *` de `chaine.yml`, actif depuis le 2026-11-04 : **6 exécutions planifiées en environ 25 h** sur la page Actions du dépôt (dont 3 sautées en 1 à 7 s), au lieu d'environ 25. Les cycles qui tournent durent 3 à 10 min.
+- Nouveautés annoncées après le premier cycle en ligne (2026-11-04 18:52 UTC) : 41 actualités, 6 publiées, **4 mesurables** (date à la minute). Détection : médiane 2,5 h (90e centile 21 h). Traitement : médiane 58 s (90e centile 14 min). Disponibilité : médiane 11 min (90e centile 15,6 h). Bout en bout : médiane 3,5 h ; 1 sur 4 sous une heure. Effectif trop faible pour une promesse, mais l'ordre de grandeur est net : la détection, donc la fréquence des cycles, domine.
+- Minutes GitHub Actions de novembre (page de facturation, 2026-11-05) : 0,83 $ brut, 0 $ facturé, dans les 2 000 minutes gratuites d'un compte GitHub Free pour un dépôt privé. Un cycle vraiment horaire de 6 à 10 min dépasserait ce quota (environ 4 300 à 7 200 min par mois).
+
+**Décision** : le cron actuel ne suffit ni pour la rapidité ni pour la régularité. Chaque cycle est désormais tracé en base (`run` de type `cycle`, `run_step` par étape) pour suivre la cadence réelle. Le changement d'hébergement engage une dépense ou la visibilité du code : il est soumis à l'utilisateur. Options :
+
+| Option | Effet attendu | Coût | Réserve |
+|---|---|---|---|
+| A. Dépôt public | minutes Actions gratuites sans quota ; cycle de détection court toutes les 15 min possible | 0 $ | le code devient lisible par tous (aucun secret n'y est, règle déjà appliquée) ; les déclenchements planifiés restent « au mieux » chez GitHub |
+| B. Déclencheur externe fiable (par exemple Cloudflare Workers, déclencheurs planifiés de l'offre gratuite) qui lance `workflow_dispatch` | horaire tenu | 0 $ (offre gratuite, à revérifier) + minutes Actions | compte à créer, jeton GitHub à déposer par l'utilisateur ; quota de minutes inchangé |
+| C. Petit processus permanent (option d'origine de cet ADR) | cycle de 60 s possible | environ 2 à 5 $ par mois (estimation du 2026-10-31, à revérifier) | compte et hébergement à créer |
+
+Recommandation : A, puis séparer un cycle court de détection (collecte seule) du cycle complet ; C seulement si la minute devient un objectif mesuré.

@@ -176,10 +176,66 @@ const ms = (v: number | null) => (v === null ? 'non mesuré' : `${Math.round(v)}
 const s = (v: number | null) => (v === null ? 'non mesuré' : `${v.toFixed(1)} s`);
 
 /** Rapport lisible. Chaque ligne donne son effectif : une médiane sur trois cas n'est pas une promesse. */
-export async function rapportDelais(client: Client, genereLe: string): Promise<string> {
+export interface LatenceDeploiement {
+  depuis: string | null;
+  annoncees: number;
+  publiees: number;
+  mesurables: number;
+  detection: { p50: number | null; p90: number | null };
+  traitement: { p50: number | null; p90: number | null };
+  disponibilite: { p50: number | null; p90: number | null };
+  bout_en_bout: { p50: number | null; p90: number | null };
+  sous_une_heure: number;
+  cycles_github: { n: number; ecart_p50_s: number | null; ecart_max_s: number | null };
+}
+
+/**
+ * Latence des nouveautés sorties après la mise en ligne de la chaîne (demande de l'utilisateur du 2026-11-05).
+ * Trois segments séparés, sur les seules publications dont la source donne une date à la minute :
+ * détection (annonce → première vue), traitement (première vue → post prêt), disponibilité (post prêt → en ligne).
+ * Point de départ : le premier cycle exécuté par GitHub Actions (worker « runner… »), sauf date donnée.
+ */
+export async function latenceApresDeploiement(client: Client, depuis?: string): Promise<LatenceDeploiement> {
+  const debut = depuis ?? ((await client.execute(`select min(started_at) as d from run where worker_id like 'runner%' or worker_id like 'github:%'`)).rows[0]?.d as string | null) ?? null;
+  const vide = { p50: null, p90: null };
+  if (!debut) return { depuis: null, annoncees: 0, publiees: 0, mesurables: 0, detection: vide, traitement: vide, disponibilite: vide, bout_en_bout: vide, sous_une_heure: 0, cycles_github: { n: 0, ecart_p50_s: null, ecart_max_s: null } };
+  const annoncees = Number((await client.execute({ sql: `select count(*) as n from news_item where announced_at >= ?`, args: [debut] })).rows[0]!.n);
+  const lignes = (await client.execute({
+    sql: `select n.announced_at, n.first_seen_at, p.created_at as pret, p.published_at
+          from post p join news_item n on n.id = p.news_item_id
+          where p.status = 'publie' and n.announced_at >= ?`,
+    args: [debut],
+  })).rows;
+  const mesurables = lignes.filter((l) => datePrecise(precisionDate(String(l.announced_at))) && secondes(String(l.announced_at), String(l.first_seen_at)) >= 0);
+  const serie = (f: (l: (typeof lignes)[number]) => number) => {
+    const v = mesurables.map(f).filter((x) => x >= 0);
+    return { p50: centile(v, 50), p90: centile(v, 90) };
+  };
+  const bout = mesurables.map((l) => secondes(String(l.announced_at), String(l.published_at)));
+  // Cadence réelle des cycles GitHub : écarts entre deux cycles tracés (run kind « cycle », origine github:…).
+  const cycles = (await client.execute({ sql: `select started_at from run where kind = 'cycle' and worker_id like 'github:%' and started_at >= ? order by started_at`, args: [debut] })).rows.map((r) => String(r.started_at));
+  const ecarts = cycles.slice(1).map((d, i) => secondes(cycles[i]!, d));
+  return {
+    depuis: debut,
+    annoncees,
+    publiees: lignes.length,
+    mesurables: mesurables.length,
+    detection: serie((l) => secondes(String(l.announced_at), String(l.first_seen_at))),
+    traitement: serie((l) => secondes(String(l.first_seen_at), String(l.pret))),
+    disponibilite: serie((l) => secondes(String(l.pret), String(l.published_at))),
+    bout_en_bout: { p50: centile(bout, 50), p90: centile(bout, 90) },
+    sous_une_heure: bout.filter((v) => v <= 3600).length,
+    cycles_github: { n: cycles.length, ecart_p50_s: centile(ecarts, 50), ecart_max_s: ecarts.length ? Math.max(...ecarts) : null },
+  };
+}
+
+const duree = (v: number | null) => (v === null ? 'non mesuré' : v < 120 ? `${Math.round(v)} s` : v < 7200 ? `${Math.round(v / 60)} min` : `${(v / 3600).toFixed(1)} h`);
+
+export async function rapportDelais(client: Client, genereLe: string, depuis?: string): Promise<string> {
   const sources = await parSource(client);
   const vues = await detections(client);
   const prep = await preparation(client);
+  const lat = await latenceApresDeploiement(client, depuis);
   const mesurables = vues.flatMap((d) => (d.delai_detection_s === null ? [] : [d.delai_detection_s]));
   const sousLaMinute = mesurables.filter((v) => v <= 60).length;
   const futures = vues.filter((d) => d.date_future).length;
@@ -223,6 +279,15 @@ export async function rapportDelais(client: Client, genereLe: string): Promise<s
     `- Publications mesurables : ${prep.bout_en_bout_n} sur ${prep.publiees}, celles dont la source donne une date assez précise.`,
     `- Médiane : ${s(prep.bout_en_bout_p50_s)} · 90e centile : ${s(prep.bout_en_bout_p90_s)} · sous 60 s : ${prep.bout_en_bout_sous_60_s} sur ${prep.bout_en_bout_n}.`,
     '- Seul ce chiffre, mesuré sur de vraies publications, dit si la minute est tenue : un cycle de collecte de 60 s ne le prouve pas.',
+    '',
+    '## Nouveautés sorties après la mise en ligne de la chaîne',
+    '',
+    lat.depuis === null ? '- Aucun cycle en ligne trouvé : non mesuré.' : `- Depuis ${lat.depuis} : ${lat.annoncees} actualité(s) annoncée(s), ${lat.publiees} publiée(s), ${lat.mesurables} avec une date à la minute.`,
+    `- Détection (annonce → première vue) : médiane ${duree(lat.detection.p50)} · 90e centile ${duree(lat.detection.p90)}.`,
+    `- Traitement (première vue → post prêt) : médiane ${duree(lat.traitement.p50)} · 90e centile ${duree(lat.traitement.p90)}.`,
+    `- Disponibilité (post prêt → en ligne) : médiane ${duree(lat.disponibilite.p50)} · 90e centile ${duree(lat.disponibilite.p90)}.`,
+    `- Bout en bout : médiane ${duree(lat.bout_en_bout.p50)} · 90e centile ${duree(lat.bout_en_bout.p90)} · sous une heure : ${lat.sous_une_heure} sur ${lat.mesurables}.`,
+    `- Cycles GitHub tracés : ${lat.cycles_github.n} · écart médian ${duree(lat.cycles_github.ecart_p50_s)} · plus long ${duree(lat.cycles_github.ecart_max_s)} (trace durable depuis le 2026-11-05).`,
     '',
   ].join('\n');
 }

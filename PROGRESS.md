@@ -2,6 +2,16 @@
 
 Évolution datée des jalons et des vérifications **réellement faites**. L'état courant est dans [STATE.md](STATE.md) ; les traces d'exécution détaillées sont en base.
 
+## 2026-11-05 — Cap « réseau social vivant » : consolidation, maquette en ligne, latence mesurée
+
+- Demande de l'utilisateur : pivot vers un réseau social vivant (SPEC §0), puis « le site actuellement ne donne pas envie » et « déploie la maquette aussi ».
+- Maquette en ligne sous `/maquette/` (copiée au build, `noindex`), vérifiée dans le navigateur sur le déploiement `916a515`.
+- Fil principal : les versions déjà remplacées n'y figurent plus (il s'ouvrait sur Claude Code 2.1.309 suivi de 2.1.318) ; vérifié sur les données Turso ; test ajouté.
+- Latence des nouveautés après la mise en ligne (`npm run delais`) : 4 publications mesurables ; détection médiane 2,5 h, traitement 58 s, disponibilité 11 min. Cron : 6 exécutions planifiées en 25 h. Décision dans l'ADR 0006 : le cron ne convient pas ; choix d'hébergement soumis à l'utilisateur. Chaque cycle est désormais tracé en base.
+- Prompt `p3-22` : aucune définition, même d'un terme rare ; aucune formule promotionnelle ; pas d'ouverture interchangeable.
+- STATE réécrit (état actuel seulement), historique dans `docs/historique.md`, ROADMAP allégée (P8 et P9 avancés), SPEC §0, `docs/droits.md` (logos au premier plan contraires aux conditions d'Anthropic, Google et ElevenLabs ; fonds de 504 × 171 px trop petits), domaines relevés chez Vercel.
+- Tests : 837 au vert ; types du site et du dépôt vérifiés.
+
 ## 2026-11-05 — P6, bloc 2b : rédaction des découvertes améliorée (toujours coupée en ligne)
 
 - Cinq lots réels en local, mesurés un par un : 0 brouillon sans écart bloquant au départ, puis plus aucun écart bloquant de citation après le passage aux citations par numéro.
