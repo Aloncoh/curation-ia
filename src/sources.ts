@@ -59,7 +59,7 @@ const githubReleases = (
   repo: string,
   perPage: number,
   product: Omit<ProductRef, 'repositoryUrl'>,
-  extra: Partial<Pick<GithubReleasesSource, 'maxResponseBytes'>> = {},
+  extra: Partial<Pick<GithubReleasesSource, 'maxResponseBytes' | 'compte'>> = {},
 ): GithubReleasesSource => ({
   id: `github-releases:${owner}/${repo}`,
   kind: 'github_releases',
@@ -187,6 +187,26 @@ export const SOURCES: SourceDefinition[] = [
   // Pages d'état officielles : incidents et maintenances des API d'IA (incident daté, attribué à l'éditeur).
   { ...flux('claude-status', 'Claude Status — historique des incidents, flux RSS officiel', 'https://status.claude.com/history.rss', 'status.claude.com'), fetchIntervalMinutes: 60, compte: 'pulse' },
   { ...flux('openai-status', 'OpenAI Status — historique des incidents, flux RSS officiel', 'https://status.openai.com/history.rss', 'status.openai.com'), fetchIntervalMinutes: 60, compte: 'pulse' },
+  // Radar et Pulse élargis (demande de l'utilisateur du 2026-11-05, « augmente les posts de Radar et Pulse ») ; chaque
+  // flux relevé le 2026-11-05 (200, entrées datées de la semaine). Écartés le même jour, avec leur motif : blog IA de
+  // Microsoft (410), Microsoft Research (403), Snowflake (page d'erreur, 403), Uber Engineering (406), LinkedIn
+  // Engineering (aucune entrée ; collecte interdite par ses conditions), SEC EDGAR (403 : la SEC exige que chaque client
+  // se déclare avec une adresse de contact ; décision de l'utilisateur), Hacker News (liens vers n'importe quel site,
+  // incompatible avec la liste blanche par source : signal à reprendre dans le score de découverte), Kafka et Flink sur
+  // GitHub (aucune release publiée : Flink suivi par PyPI), et les flux hébergés par Medium (Snowflake Builders,
+  // Netflix Tech Blog, Airbnb Engineering) : 500 pour notre client déclaré, 200 seulement pour un navigateur ; non
+  // contourné, différé.
+  { ...flux('nvidia-developer', 'NVIDIA Developer Blog — flux RSS officiel', 'https://developer.nvidia.com/blog/feed', 'developer.nvidia.com'), compte: 'radar' },
+  { ...flux('aws-whats-new', "AWS What's New — flux RSS officiel", 'https://aws.amazon.com/about-aws/whats-new/recent/feed/', 'aws.amazon.com'), compte: 'radar' },
+  { ...flux('apple-ml-research', 'Apple Machine Learning Research — flux RSS officiel', 'https://machinelearning.apple.com/rss.xml', 'machinelearning.apple.com'), compte: 'radar' },
+  { ...flux('confluent-blog', 'Confluent Blog — flux RSS officiel', 'https://www.confluent.io/rss.xml', 'www.confluent.io'), compte: 'pulse' },
+  ...([['pyspark', 'PySpark (Apache Spark)'], ['dbt-core', 'dbt Core'], ['polars', 'Polars'], ['duckdb', 'DuckDB'], ['apache-flink', 'PyFlink (Apache Flink)']] as const).map(([paquet, nom]): FeedSource => ({
+    ...flux(`pypi-${paquet}`, `${nom} — versions publiées sur PyPI, flux RSS officiel`, `https://pypi.org/rss/project/${paquet}/releases.xml`, 'pypi.org'),
+    compte: 'pulse',
+  })),
+  githubReleases('apache', 'airflow', 10, { key: 'apache/airflow', name: 'Apache Airflow', publisher: 'Apache Software Foundation', category: 'pipelines de données' }, { compte: 'pulse' }),
+  githubReleases('apache', 'iceberg', 10, { key: 'apache/iceberg', name: 'Apache Iceberg', publisher: 'Apache Software Foundation', category: 'pipelines de données' }, { compte: 'pulse' }),
+  githubReleases('mlflow', 'mlflow', 10, { key: 'mlflow/mlflow', name: 'MLflow', publisher: 'MLflow', category: 'MLOps' }, { compte: 'pulse' }),
   // Hugging Face (P6, bloc 3 ; accord de l'utilisateur du 2026-11-05) : les 20 modèles en tendance, signés par Nodi.
   // API publique relevée le 2026-11-05 (200). Les modèles trop anciens sont écartés par l'âge maximal de l'analyse.
   {
