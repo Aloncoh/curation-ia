@@ -255,7 +255,7 @@ export async function genererBrouillons(o: OptionsBrouillons) {
       const produitCatalogue = row.produit === null ? null : String(row.produit);
       const version = row.version === null ? null : String(row.version);
       const def = SOURCES.find((x) => x.name === String(row.source_nom));
-      const attribution = def?.kind === 'feed' ? (def.attribution ?? null) : null;
+      const attribution = def?.kind === 'feed' || def?.kind === 'hackernews' ? (def.attribution ?? null) : null;
       const doc = documentUtilisateur(titreCapture, texte, produitCatalogue, { source: String(row.source_nom), annonce: row.announced_at === null ? null : String(row.announced_at), attribution });
       const contexteControle = {
         typeInformation: row.information_type === null ? undefined : String(row.information_type),
@@ -264,6 +264,7 @@ export async function genererBrouillons(o: OptionsBrouillons) {
         dateAnnonce: row.announced_at === null ? null : String(row.announced_at),
         autresCaptures: await autresCaptures(client, newsItemId, Number(row.snapshot_id)),
         source: String(row.source_nom),
+        externe: attribution,
       };
       const controler = (x: Brouillon) => controlerBrouillon(x, [titreCapture, texte], String(row.title), version, contexteControle);
       const controles = controler(lu.data);
@@ -306,7 +307,7 @@ export async function genererBrouillons(o: OptionsBrouillons) {
       const texte = toPlainText(String(row.content), String(row.content_format));
       const annonce = row.announced_at === null ? null : String(row.announced_at);
       const def = SOURCES.find((x) => x.name === String(row.source_nom));
-      const attribution = def?.kind === 'feed' ? (def.attribution ?? null) : null;
+      const attribution = def?.kind === 'feed' || def?.kind === 'hackernews' ? (def.attribution ?? null) : null;
       const compteImpose = def?.compte ?? null;
       const doc = documentUtilisateur(titreCapture, texte, produit, { source: String(row.source_nom), annonce, attribution });
       const enregistrer = (status: string, q: Qualification | null, content: unknown, checks: unknown, motifRejet: string | null, diapositives?: DiapositiveResolue[], selection?: Selection) =>
@@ -395,6 +396,7 @@ export async function genererBrouillons(o: OptionsBrouillons) {
         dateAnnonce: row.announced_at === null ? null : String(row.announced_at),
         autresCaptures: await autresCaptures(client, id, Number(row.snapshot_id)),
         source: String(row.source_nom),
+        externe: attribution,
       };
       const controler = (x: Brouillon) => controlerBrouillon(x, [titreCapture, texte], titre, version, contexteControle);
       let b = redaction.valeur;

@@ -19,7 +19,8 @@ export type SourceFetcher = (
 export function createLiveFetcher(options: { timeoutMs: number; maxBytes: number; userAgent: string }): SourceFetcher {
   return async (url, headers, allowedHosts, limits) => {
     const policy: FetchPolicy = { allowedHosts, timeoutMs: options.timeoutMs, maxBytes: limits?.maxBytes ?? options.maxBytes };
-    const response = await safeGet(url, policy, { ...headers, 'user-agent': options.userAgent });
+    // Une source peut se déclarer autrement (EDGAR exige un client nommé avec une adresse de contact) : son en-tête l'emporte.
+    const response = await safeGet(url, policy, { 'user-agent': options.userAgent, ...headers });
     return { status: response.status, body: response.body.toString('utf8'), bytes: response.body.length };
   };
 }

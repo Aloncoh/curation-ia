@@ -27,6 +27,11 @@ export interface ContexteControle {
   autresCaptures?: string[];
   /** Nom de la source (« Figma, notes de version ») : un journal officiel atteste le nom de son produit sans le répéter. */
   source?: string;
+  /**
+   * Contenu externe (presse, vidéo d'un créateur, article signalé sur Hacker News ; 2026-11-05) : jamais une confirmation
+   * primaire ; la description doit attribuer ce qu'elle rapporte (« according to… », « reports »).
+   */
+  externe?: string | null;
 }
 
 export interface DiapositiveResolue {
@@ -197,6 +202,8 @@ export function controlerBrouillon(b: Brouillon, capture: string | string[], tit
     if (r.texte.length > LONGUEUR_MAX_REPERE) resultats.push({ champ: `reperes:${i}`, code: 'repere_trop_long' });
     if (sensationnel(r.texte)) resultats.push({ champ: `reperes:${i}`, code: 'diapositive_sensationnelle' });
   }
+  // Contenu externe (2026-11-05) : la description attribue ce qu'elle rapporte ; sinon, à vérifier.
+  if (contexte.externe && !ATTRIBUTION.test(b.description.texte)) resultats.push({ champ: 'description', code: 'attribution_externe_manquante', detail: contexte.externe });
   // Une annonce commerciale reste attribuée à son auteur, jamais présentée comme une performance vérifiée.
   if (typeInformation === 'affirmation_commerciale') {
     if (!ATTRIBUTION.test(b.description.texte)) resultats.push({ champ: 'description', code: 'attribution_manquante' });

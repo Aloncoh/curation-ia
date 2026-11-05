@@ -49,11 +49,14 @@ describe('cycle', () => {
 
   it('ne collecte que les sources dues et n\'approfondit qu\'une fois par heure', async () => {
     const c = t.database.client;
+    // Les sources différées (registre d'accès) ne sont jamais dues ; toutes les autres le sont au premier cycle.
+    const actives = SOURCES.filter((s) => !s.differee);
     const toutes = await sourcesDues(c, '2026-11-03T09:00:00.000Z');
-    expect(toutes).toHaveLength(SOURCES.length);
+    expect(toutes).toHaveLength(actives.length);
+    expect(actives.length).toBeLessThan(SOURCES.length);
     const f = faux();
     await lancerCycle({ database: t.database, executer: f.executer, env: PLAFONDS, confirme: true, maintenant: () => '2026-11-03T09:00:00.000Z' });
-    expect(f.appels[0]!.env.CURATION_ONLY_SOURCES!.split(',')).toHaveLength(SOURCES.length);
+    expect(f.appels[0]!.env.CURATION_ONLY_SOURCES!.split(',')).toHaveLength(actives.length);
     // Toutes les sources viennent de réussir : aucune n'est due 5 minutes plus tard, et l'approfondissement attend.
     for (const s of SOURCES) {
       await c.execute({ sql: `insert or ignore into source (id, kind, name, config, allowed_hosts, created_at) values (?, 'feed', ?, '{}', '[]', 'x')`, args: [s.id, s.id] });
@@ -63,6 +66,15 @@ describe('cycle', () => {
     const bilan = await lancerCycle({ database: t.database, executer: g.executer, env: PLAFONDS, confirme: true, maintenant: () => '2026-11-03T09:05:00.000Z' });
     expect(bilan.etapes.slice(0, 2).map((e) => [e.nom, e.statut])).toEqual([['collecte', 'sautee'], ['approfondissement', 'sautee']]);
     expect(g.appels.map((a) => a.nom)).not.toContain('approfondissement');
+  });
+
+  it('une source en attente de reprise (registre d’accès) n’est pas due avant sa date', async () => {
+    const c = t.database.client;
+    const id = SOURCES.find((s) => !s.differee)!.id;
+    await c.execute({ sql: `insert or ignore into source (id, kind, name, config, allowed_hosts, created_at) values (?, 'feed', ?, '{}', '[]', 'x')`, args: [id, id] });
+    await c.execute({ sql: `update source set reessai_apres = '2026-11-03T12:00:00.000Z' where id = ?`, args: [id] });
+    expect(await sourcesDues(c, '2026-11-03T09:00:00.000Z')).not.toContain(id);
+    expect(await sourcesDues(c, '2026-11-03T12:00:01.000Z')).toContain(id);
   });
 });
 

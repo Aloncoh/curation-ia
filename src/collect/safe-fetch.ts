@@ -47,12 +47,18 @@ export type FetchErrorKind =
 export class SafeFetchError extends Error {
   readonly kind: FetchErrorKind;
   readonly status: number | undefined;
+  /** En-tête `Retry-After` d'un 429 ou d'un 503, tel que reçu (registre d'accès, src/collect/acces.ts). */
+  readonly retryAfter: string | undefined;
+  /** En-tête `Location` d'une redirection refusée : jamais suivi ici ; l'appelant peut le revalider (src/collect/article-externe.ts). */
+  readonly location: string | undefined;
 
-  constructor(kind: FetchErrorKind, message: string, status?: number) {
+  constructor(kind: FetchErrorKind, message: string, status?: number, retryAfter?: string, location?: string) {
     super(message);
     this.name = 'SafeFetchError';
     this.kind = kind;
     this.status = status;
+    this.retryAfter = retryAfter;
+    this.location = location;
   }
 }
 
@@ -249,10 +255,12 @@ export async function safeGet(
     // Un 304 n'est pas une redirection : il répond à une requête conditionnelle et n'emmène nulle part.
     if (response.status === 304 && (headers['if-none-match'] !== undefined || headers['if-modified-since'] !== undefined)) return response;
     if (response.status >= 300 && response.status < 400) {
-      throw new SafeFetchError('redirect', `Redirection refusée (HTTP ${response.status})`, response.status);
+      const location = response.headers.location;
+      throw new SafeFetchError('redirect', `Redirection refusée (HTTP ${response.status})`, response.status, undefined, Array.isArray(location) ? location[0] : location);
     }
     if (response.status < 200 || response.status >= 300) {
-      throw new SafeFetchError('http_status', `Réponse HTTP ${response.status}`, response.status);
+      const retryAfter = response.headers['retry-after'];
+      throw new SafeFetchError('http_status', `Réponse HTTP ${response.status}`, response.status, Array.isArray(retryAfter) ? retryAfter[0] : retryAfter);
     }
     return response;
   } finally {

@@ -17,6 +17,16 @@ export const sources = sqliteTable('source', {
   lastErrorAt: text('last_error_at'),
   lastError: text('last_error'),
   createdAt: text('created_at').notNull(),
+  /**
+   * Registre d'accès (2026-11-05, src/collect/acces.ts) : refus_acces | restriction_contractuelle | erreur_temporaire |
+   * limitation_frequence | page_supprimee | absence_de_flux | ok ; null avant la première collecte. Un code HTTP seul ne
+   * dit rien des conditions juridiques : `restriction_contractuelle` ne vient que d'une lecture des conditions (sources.ts).
+   */
+  accesEtat: text('acces_etat'),
+  accesDetail: text('acces_detail'),
+  echecsConsecutifs: integer('echecs_consecutifs').notNull().default(0),
+  /** Pas de nouvelle tentative avant cette date (Retry-After d'un 429, reprises espacées après des erreurs). */
+  reessaiApres: text('reessai_apres'),
 });
 
 /** Document effectivement collecté, identifié par (source, identifiant externe). */

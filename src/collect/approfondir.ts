@@ -8,6 +8,7 @@ import type { Database } from '../db/client.ts';
 import { extrairePage, MOTS_MIN_PAGE } from '../ressources/selection/html.ts';
 import { AGE_MAX_JOURS } from '../selection/consignes.ts';
 import { SOURCES } from '../sources.ts';
+import { lireArticleExterne } from './article-externe.ts';
 import { contentHash } from './normalize.ts';
 import { safeGet, SafeFetchError, type Resolver, type Transport } from './safe-fetch.ts';
 
@@ -74,14 +75,26 @@ export async function approfondir(
       continue;
     }
     let html: string;
-    try {
-      const reponse = await safeGet(url, { allowedHosts: source.allowedHosts, timeoutMs: o.timeoutMs, maxBytes: o.maxBytes }, { 'user-agent': o.userAgent, accept: 'text/html' }, o.deps);
-      html = reponse.body.toString('utf8');
-    } catch (e) {
-      const motif = e instanceof Error ? e.message : String(e);
-      await tracer('failed', { kind: e instanceof SafeFetchError ? e.kind : 'erreur', message: motif.slice(0, 300) });
-      resultats.push({ newsItemId, url, statut: 'refusee', motif, mots: 0 });
-      continue;
+    if (source.kind === 'hackernews') {
+      // Article signalé par Hacker News : hôte quelconque, d'où des garde-fous propres (destination, robots.txt,
+      // redirections revalidées) ; un échec ne laisse aucun texte, et rien n'est analysé.
+      const article = await lireArticleExterne(url, { userAgent: o.userAgent, timeoutMs: o.timeoutMs, maxBytes: o.maxBytes, ...(o.deps ? { deps: o.deps } : {}) });
+      if (!article.ok) {
+        await tracer('failed', { kind: 'article_externe', message: article.motif.slice(0, 300) });
+        resultats.push({ newsItemId, url, statut: 'refusee', motif: article.motif, mots: 0 });
+        continue;
+      }
+      html = article.html;
+    } else {
+      try {
+        const reponse = await safeGet(url, { allowedHosts: source.allowedHosts, timeoutMs: o.timeoutMs, maxBytes: o.maxBytes }, { 'user-agent': o.userAgent, accept: 'text/html' }, o.deps);
+        html = reponse.body.toString('utf8');
+      } catch (e) {
+        const motif = e instanceof Error ? e.message : String(e);
+        await tracer('failed', { kind: e instanceof SafeFetchError ? e.kind : 'erreur', message: motif.slice(0, 300) });
+        resultats.push({ newsItemId, url, statut: 'refusee', motif, mots: 0 });
+        continue;
+      }
     }
     const page = extrairePage(html);
     if (page.mots < MOTS_MIN_PAGE) {

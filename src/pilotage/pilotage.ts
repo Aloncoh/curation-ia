@@ -68,9 +68,14 @@ export async function depenseDuJour(client: Pick<Client, 'execute'>, maintenant:
 
 /** Sources à collecter maintenant : jamais réussies, ou dont le dernier succès dépasse leur intervalle. */
 export async function sourcesDues(client: Pick<Client, 'execute'>, maintenant: string): Promise<string[]> {
-  const r = await client.execute('select id, last_success_at from source');
+  const r = await client.execute('select id, last_success_at, reessai_apres from source');
   const succes = new Map(r.rows.map((x) => [String(x.id), x.last_success_at === null ? null : String(x.last_success_at)]));
+  // Registre d'accès (src/collect/acces.ts) : une source différée ou en attente de reprise n'est pas due.
+  const reessai = new Map(r.rows.map((x) => [String(x.id), x.reessai_apres === null ? null : String(x.reessai_apres)]));
   return SOURCES.filter((s) => {
+    if (s.differee) return false;
+    const attente = reessai.get(s.id) ?? null;
+    if (attente !== null && attente > maintenant) return false;
     const dernier = succes.get(s.id) ?? null;
     if (dernier === null) return true;
     return Date.parse(maintenant) - Date.parse(dernier) >= (s.fetchIntervalMinutes ?? INTERVALLE_DEFAUT_MINUTES) * 60_000;

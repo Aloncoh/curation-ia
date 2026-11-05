@@ -2,6 +2,8 @@
 // Code entièrement déterministe : aucun modèle d'IA n'intervient ici.
 // Chaque changement d'état (début, fin réussie, échec) est écrit dans une seule transaction :
 // un arrêt brutal entre deux étapes ne laisse jamais de trace incohérente.
+import { HACKERNEWS_HEADERS, parseHackerNews } from '../collect/hackernews.ts';
+import { classerEchec, lireRetryAfter, prochainEssai } from '../collect/acces.ts';
 import { HUGGINGFACE_HEADERS, parseModelesTendance } from '../collect/huggingface.ts';
 import { randomUUID } from 'node:crypto';
 import { eq } from 'drizzle-orm';
@@ -69,16 +71,19 @@ export function adapterFor(definition: SourceDefinition): { url: string; headers
     const parse = (body: string) => ({ documents: parseReleases(body, definition.config), rejected: {} });
     return { url: releasesUrl(definition.config), headers: GITHUB_API_HEADERS, parse };
   }
+  if (definition.kind === 'hackernews') {
+    return { url: definition.config.url, headers: HACKERNEWS_HEADERS, parse: (body) => parseHackerNews(body, definition.config) };
+  }
   if (definition.kind === 'huggingface_models') {
     return { url: definition.config.url, headers: HUGGINGFACE_HEADERS, parse: (body) => parseModelesTendance(body, definition.config) };
   }
-  return { url: definition.config.url, headers: FEED_HEADERS, parse: (body) => parseFeedItems(body, definition.config) };
+  return { url: definition.config.url, headers: definition.userAgent ? { ...FEED_HEADERS, 'user-agent': definition.userAgent } : FEED_HEADERS, parse: (body) => parseFeedItems(body, definition.config) };
 }
 const LEASE_LOST_MESSAGE =
   "Bail perdu avant la fin : le job a été repris par un autre worker ou clos par la récupération (documents enregistrés de façon idempotente)";
 
-function classifyError(error: unknown): { kind: string; message: string } {
-  if (error instanceof SafeFetchError) return { kind: error.kind, message: error.message };
+function classifyError(error: unknown): { kind: string; message: string; status?: number | undefined; retryAfter?: string | undefined } {
+  if (error instanceof SafeFetchError) return { kind: error.kind, message: error.message, status: error.status, retryAfter: error.retryAfter };
   if (error instanceof SourceFormatError) return { kind: error.kind, message: error.message };
   return { kind: 'internal', message: error instanceof Error ? error.message : String(error) };
 }
@@ -87,9 +92,11 @@ export async function runCollect(options: CollectOptions): Promise<CollectSummar
   const { database, workerId } = options;
   const clock = options.clock ?? (() => new Date());
   const now = () => clock().toISOString();
-  const definitions = options.definitions ?? SOURCES;
+  const toutes = options.definitions ?? SOURCES;
+  // Une source différée reste synchronisée au registre (état, motif) mais n'est jamais mise en file.
+  const definitions = toutes.filter((def) => !def.differee);
 
-  await syncSources(database, definitions, now());
+  await syncSources(database, toutes, now());
   if (await isPaused(database.db)) return { paused: true, enqueued: 0, runs: [], skipped: [] };
 
   const enqueued = await enqueueCollectJobs(database.client, definitions.map((def) => def.id), now(), options.maxAttempts);
@@ -203,7 +210,7 @@ async function processJob(
           errorKind: kept ? null : 'lease_lost',
           errorMessage: kept ? null : LEASE_LOST_MESSAGE,
         });
-        if (kept) await tx.update(sources).set({ status: 'ok', lastSuccessAt: finishedAt }).where(eq(sources.id, job.sourceId));
+        if (kept) await tx.update(sources).set({ status: 'ok', lastSuccessAt: finishedAt, accesEtat: 'ok', accesDetail: null, echecsConsecutifs: 0, reessaiApres: null }).where(eq(sources.id, job.sourceId));
         return { counts, links, kept, possibleGap };
       }),
     );
@@ -219,7 +226,7 @@ async function processJob(
       errorMessage: outcome.kept ? null : LEASE_LOST_MESSAGE,
     };
   } catch (error) {
-    const { kind, message } = classifyError(error);
+    const { kind, message, status, retryAfter } = classifyError(error);
     const failSeq = ++seq;
     const failStart = stepStart;
     // Échec : étape, job, exécution et source dans une seule transaction ; la source n'est pas touchée si le bail est perdu.
@@ -232,7 +239,15 @@ async function processJob(
           await finishRun(tx, runId, { status: 'interrupted', finishedAt, errorKind: kind, errorMessage: `${message} — ${LEASE_LOST_MESSAGE}` });
         } else {
           await finishRun(tx, runId, { status: 'failed', finishedAt, errorKind: kind, errorMessage: message });
-          await tx.update(sources).set({ status: 'error', lastErrorAt: finishedAt, lastError: message }).where(eq(sources.id, job.sourceId));
+          // Registre d'accès : état observé, échecs consécutifs et date de reprise espacée (Retry-After respecté).
+          const [avant] = await tx.select({ echecs: sources.echecsConsecutifs }).from(sources).where(eq(sources.id, job.sourceId));
+          const echecs = (avant?.echecs ?? 0) + 1;
+          const etat = classerEchec({ kind, status });
+          const t = Date.parse(finishedAt);
+          await tx.update(sources).set({
+            status: 'error', lastErrorAt: finishedAt, lastError: message,
+            accesEtat: etat, accesDetail: message, echecsConsecutifs: echecs, reessaiApres: prochainEssai(etat, echecs, t, lireRetryAfter(retryAfter, t)),
+          }).where(eq(sources.id, job.sourceId));
         }
         return result;
       }),

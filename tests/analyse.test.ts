@@ -295,7 +295,7 @@ describe('tarifs', () => {
 
 describe('consigne de rédaction', () => {
   it('suit la règle de ton du 2026-11-02 : pairs, pas de définition des termes courants', () => {
-    expect(PROMPT_VERSION).toMatch(/^p3-20-/);
+    expect(PROMPT_VERSION).toMatch(/^p3-21-/);
     expect(SYSTEME_REDACTION).toContain("Ne définis jamais les termes courants (skill, MCP, agent, assistant de code, plugin, dépôt, open source, UX, UI, prompt, CLI, API, workflow, hook, LLM)");
     expect(SYSTEME_REDACTION).toContain('Commence directement par ce que le sujet permet de faire');
     expect(SYSTEME_REDACTION).not.toContain('tout terme technique');

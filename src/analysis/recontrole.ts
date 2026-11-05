@@ -3,6 +3,7 @@
 // détecté et le statut sont réécrits. Un brouillon devenu sans écart repasse `controle_automatique` (publication
 // `brouillon`) : `brouillons:planifier` le place ensuite. Rien n'est publié.
 import type { Database } from '../db/client.ts';
+import { SOURCES } from '../sources.ts';
 import { toPlainText } from '../maquette/data.ts';
 import { CODES_BLOQUANTS, controlerBrouillon } from './controles.ts';
 import { elaguer, revisionElaguee } from './elagage.ts';
@@ -46,6 +47,7 @@ export async function recontroler(database: Database, o: { now: string } = { now
       dateAnnonce: row.announced_at === null ? null : String(row.announced_at),
       autresCaptures: await autresCaptures(client, Number(row.news_item_id), Number(row.snapshot_id)),
       source: String(row.source_nom),
+      externe: (() => { const def = SOURCES.find((x) => x.name === String(row.source_nom)); return def?.kind === 'feed' || def?.kind === 'hackernews' ? (def.attribution ?? null) : null; })(),
     };
     const controler = (b: Brouillon) => controlerBrouillon(b, [String(row.snapshot_title), toPlainText(String(row.capture), String(row.content_format))], String(row.title), row.version === null ? null : String(row.version), contexte);
     const controles = controler(contenu);

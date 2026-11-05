@@ -2,6 +2,8 @@
 import { sql } from 'drizzle-orm';
 import type { FeedConfig } from './collect/feeds.ts';
 import type { GithubReleasesConfig } from './collect/github-releases.ts';
+import type { EtatAcces } from './collect/acces.ts';
+import type { HackerNewsConfig } from './collect/hackernews.ts';
 import type { HuggingFaceModelsConfig } from './collect/huggingface.ts';
 import type { Database } from './db/client.ts';
 import { withBusyRetry } from './db/retry.ts';
@@ -28,6 +30,12 @@ interface BaseSource {
   fetchIntervalMinutes: number | null;
   /** Taille maximale de la réponse pour cette source ; la valeur générale (CURATION_MAX_RESPONSE_BYTES) sinon. */
   maxResponseBytes?: number;
+  /**
+   * Source gardée au registre mais non collectée (2026-11-05 : on ne supprime pas une source, on la diffère), avec l'état
+   * constaté, le motif, la date et, s'il existe, le canal de remplacement. `restriction_contractuelle` seulement après
+   * lecture des conditions d'utilisation.
+   */
+  differee?: { etat: EtatAcces; motif: string; depuis: string; alternative?: string };
 }
 
 export interface GithubReleasesSource extends BaseSource {
@@ -44,6 +52,8 @@ export interface FeedSource extends BaseSource {
    * Absent pour un flux officiel.
    */
   attribution?: string;
+  /** Client déclaré propre à la source (EDGAR exige un nom et une adresse de contact) ; le client général sinon. */
+  userAgent?: string;
 }
 
 /** Modèles en tendance sur Hugging Face (API publique, P6 bloc 3) : porte d'entrée vers Nodi, page du modèle capturée ensuite. */
@@ -52,7 +62,15 @@ export interface HuggingFaceModelsSource extends BaseSource {
   config: HuggingFaceModelsConfig;
 }
 
-export type SourceDefinition = GithubReleasesSource | FeedSource | HuggingFaceModelsSource;
+/** Hacker News (2026-11-05) : signal de découverte ; l'article lié est récupéré à part, destination validée (article-externe.ts). */
+export interface HackerNewsSource extends BaseSource {
+  kind: 'hackernews';
+  config: HackerNewsConfig;
+  /** Nom auquel la rédaction attribue chaque affirmation : l'article est un contenu externe, pas une annonce officielle. */
+  attribution: string;
+}
+
+export type SourceDefinition = GithubReleasesSource | FeedSource | HuggingFaceModelsSource | HackerNewsSource;
 
 const githubReleases = (
   owner: string,
@@ -193,9 +211,16 @@ export const SOURCES: SourceDefinition[] = [
   // Engineering (aucune entrée ; collecte interdite par ses conditions), SEC EDGAR (403 : la SEC exige que chaque client
   // se déclare avec une adresse de contact ; décision de l'utilisateur), Hacker News (liens vers n'importe quel site,
   // incompatible avec la liste blanche par source : signal à reprendre dans le score de découverte), Kafka et Flink sur
-  // GitHub (aucune release publiée : Flink suivi par PyPI), et les flux hébergés par Medium (Snowflake Builders,
-  // Netflix Tech Blog, Airbnb Engineering) : 500 pour notre client déclaré, 200 seulement pour un navigateur ; non
-  // contourné, différé.
+  // GitHub (aucune release publiée : Flink suivi par PyPI). Les flux hébergés par Medium sont gardés au registre, différés.
+  ...([
+    ['snowflake-builders', 'Snowflake Builders Blog (publication Medium officielle) — flux RSS', 'https://medium.com/feed/snowflake', 'medium.com'],
+    ['netflix-tech', 'Netflix Tech Blog — flux RSS officiel (hébergé par Medium)', 'https://netflixtechblog.com/feed', 'netflixtechblog.com'],
+    ['airbnb-engineering', 'Airbnb Engineering (publication Medium officielle) — flux RSS', 'https://medium.com/feed/airbnb-engineering', 'medium.com'],
+  ] as const).map(([id, nom, url, hote]): FeedSource => ({
+    ...flux(id, nom, url, hote),
+    compte: 'pulse',
+    differee: { etat: 'refus_acces', motif: 'HTTP 500 pour notre client déclaré, 200 pour un navigateur (relevé le 2026-11-05) : refus observé, non contourné', depuis: '2026-11-05' },
+  })),
   { ...flux('nvidia-developer', 'NVIDIA Developer Blog — flux RSS officiel', 'https://developer.nvidia.com/blog/feed', 'developer.nvidia.com'), compte: 'radar' },
   { ...flux('aws-whats-new', "AWS What's New — flux RSS officiel", 'https://aws.amazon.com/about-aws/whats-new/recent/feed/', 'aws.amazon.com'), compte: 'radar' },
   { ...flux('apple-ml-research', 'Apple Machine Learning Research — flux RSS officiel', 'https://machinelearning.apple.com/rss.xml', 'machinelearning.apple.com'), compte: 'radar' },
@@ -207,6 +232,60 @@ export const SOURCES: SourceDefinition[] = [
   githubReleases('apache', 'airflow', 10, { key: 'apache/airflow', name: 'Apache Airflow', publisher: 'Apache Software Foundation', category: 'pipelines de données' }, { compte: 'pulse' }),
   githubReleases('apache', 'iceberg', 10, { key: 'apache/iceberg', name: 'Apache Iceberg', publisher: 'Apache Software Foundation', category: 'pipelines de données' }, { compte: 'pulse' }),
   githubReleases('mlflow', 'mlflow', 10, { key: 'mlflow/mlflow', name: 'MLflow', publisher: 'MLflow', category: 'MLOps' }, { compte: 'pulse' }),
+  // Canaux de remplacement trouvés le 2026-11-05 (demande de l'utilisateur : chercher une adresse officielle, une API ou un
+  // autre canal autorisé, sans contourner) : le blog IA de Microsoft a disparu (410) ; le blog principal et le blog
+  // Azure répondent (200). Tesla : flux officiel des communiqués aux investisseurs, 503 ce jour-là (erreur temporaire,
+  // reprise espacée par le registre d'accès).
+  { ...flux('microsoft-blog', 'Official Microsoft Blog — flux RSS officiel', 'https://blogs.microsoft.com/feed/', 'blogs.microsoft.com'), compte: 'radar' },
+  { ...flux('azure-blog', 'Microsoft Azure Blog — flux RSS officiel', 'https://azure.microsoft.com/en-us/blog/feed/', 'azure.microsoft.com'), compte: 'radar' },
+  { ...flux('tesla-ir', 'Tesla, communiqués aux investisseurs — flux RSS officiel', 'https://ir.tesla.com/rss/news-releases.xml', 'ir.tesla.com'), compte: 'radar' },
+  // SEC EDGAR (demande de l'utilisateur du 2026-11-05) : rapports 8-K des grandes entreprises, flux Atom officiels. La SEC
+  // exige un client déclaré avec une adresse de contact (403 sans elle) : variable CURATION_CONTACT_SEC, fournie par
+  // l'utilisateur ; sans elle, les sources restent différées. Numéros CIK à confirmer au premier relevé (nom de
+  // l'entreprise dans le flux).
+  ...([
+    ['nvidia', 'NVIDIA', '0001045810'], ['microsoft', 'Microsoft', '0000789019'], ['apple', 'Apple', '0000320193'], ['alphabet', 'Alphabet', '0001652044'],
+    ['amazon', 'Amazon', '0001018724'], ['meta', 'Meta', '0001326801'], ['amd', 'AMD', '0000002488'], ['intel', 'Intel', '0000050863'],
+    ['tesla', 'Tesla', '0001318605'], ['oracle', 'Oracle', '0001341439'], ['qualcomm', 'Qualcomm', '0000804328'], ['broadcom', 'Broadcom', '0001730168'],
+  ] as const).map(([id, nom, cik]): FeedSource => {
+    const contact = process.env.CURATION_CONTACT_SEC?.trim();
+    return {
+      ...flux(`sec-${id}`, `SEC EDGAR, rapports 8-K de ${nom} — flux Atom officiel`, `https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=${cik}&type=8-K&dateb=&owner=include&count=20&output=atom`, 'www.sec.gov'),
+      compte: 'radar',
+      fetchIntervalMinutes: 360,
+      ...(contact
+        ? { userAgent: `CURATION-AI ${contact}` }
+        : { differee: { etat: 'refus_acces' as const, motif: 'La SEC exige un client déclaré avec une adresse de contact (403 sans elle) : CURATION_CONTACT_SEC absente', depuis: '2026-11-05' } }),
+    };
+  }),
+  // Gardées au registre, non collectées (relevés du 2026-11-05) : état observé, motif et canal de remplacement.
+  ...([
+    ['microsoft-ai-blog', 'Microsoft AI Blog', 'https://blogs.microsoft.com/ai/feed/', 'blogs.microsoft.com', 'page_supprimee', 'HTTP 410 : flux supprimé par l’éditeur', 'feed:microsoft-blog, feed:microsoft-source'],
+    ['microsoft-research', 'Microsoft Research', 'https://www.microsoft.com/en-us/research/feed/', 'www.microsoft.com', 'refus_acces', 'HTTP 403 pour notre client déclaré', 'feed:microsoft-blog'],
+    ['tsmc-pr', 'TSMC, communiqués', 'https://pr.tsmc.com/english/rss', 'pr.tsmc.com', 'refus_acces', 'HTTP 403 pour notre client déclaré', 'feed:techcrunch-tsmc (presse attribuée)'],
+    ['qualcomm-ir', 'Qualcomm, communiqués aux investisseurs', 'https://investor.qualcomm.com/rss/news-releases.xml', 'investor.qualcomm.com', 'refus_acces', 'HTTP 403 pour notre client déclaré', 'feed:techcrunch-qualcomm (presse attribuée) ; EDGAR 8-K'],
+    ['broadcom-ir', 'Broadcom, communiqués aux investisseurs', 'https://investors.broadcom.com/rss/news-releases.xml', 'investors.broadcom.com', 'refus_acces', 'HTTP 403 pour notre client déclaré', 'feed:techcrunch-broadcom (presse attribuée) ; EDGAR 8-K'],
+    ['oracle-ai-blog', 'Oracle, blog IA et science des données', 'https://blogs.oracle.com/ai-and-datascience/rss', 'blogs.oracle.com', 'refus_acces', 'HTTP 403 pour notre client déclaré', 'feed:techcrunch-oracle (presse attribuée) ; EDGAR 8-K'],
+    ['lg-newsroom', 'LG Newsroom', 'https://lgnewsroom.com/feed/', 'lgnewsroom.com', 'absence_de_flux', 'HTTP 200 mais aucune entrée (www.lgnewsroom.com redirige ici)', 'feed:verge-lg, feed:techcrunch-lg (presse attribuée)'],
+    ['uber-engineering', 'Uber Engineering', 'https://www.uber.com/blog/engineering/rss/', 'www.uber.com', 'page_supprimee', 'HTTP 404 (406 la veille)', 'aucun trouvé'],
+    ['snowflake-blog', 'Snowflake Blog', 'https://www.snowflake.com/en/blog/rss.xml', 'www.snowflake.com', 'page_supprimee', 'redirection vers une page 404 ; /feed/ répond 403', 'feed:snowflake-builders (différé lui aussi)'],
+    ['linkedin-engineering', 'LinkedIn Engineering', 'https://www.linkedin.com/blog/engineering/feed', 'www.linkedin.com', 'absence_de_flux', 'HTTP 200 sans aucune entrée ; conditions d’utilisation non lues automatiquement (page rendue côté client)', 'posts transmis à la main par l’utilisateur'],
+  ] as const).map(([id, nom, url, hote, etat, motif, alternative]): FeedSource => ({
+    ...flux(id, `${nom} — gardé au registre, non collecté`, url, hote),
+    differee: { etat, motif, depuis: '2026-11-05', alternative },
+  })),
+  // Hacker News (demande de l'utilisateur du 2026-11-05) : histoires de la page d'accueil qui parlent d'IA, à 100 points
+  // au moins, lues par l'API de recherche publique (200 le 2026-11-05). Pas de compte imposé : le modèle choisit selon le
+  // sujet de l'article. L'article lié est capturé à part (approfondissement), jamais deviné.
+  {
+    id: 'hackernews:accueil-ia',
+    kind: 'hackernews',
+    name: 'Hacker News — page d’accueil, histoires sur l’IA (signal de découverte, API publique de recherche)',
+    config: { url: 'https://hn.algolia.com/api/v1/search?tags=front_page&hitsPerPage=60', maxItems: 15, pointsMin: 100 },
+    allowedHosts: ['hn.algolia.com'],
+    fetchIntervalMinutes: 60,
+    attribution: 'un article externe signalé sur Hacker News (son site d’origine fait foi, pas une annonce officielle)',
+  },
   // Hugging Face (P6, bloc 3 ; accord de l'utilisateur du 2026-11-05) : les 20 modèles en tendance, signés par Nodi.
   // API publique relevée le 2026-11-05 (200). Les modèles trop anciens sont écartés par l'âge maximal de l'analyse.
   {
@@ -251,6 +330,8 @@ export async function syncSources(database: Database, definitions: SourceDefinit
   await withBusyRetry(database.client, async () => {
     for (const def of definitions) {
       const config = def.kind === 'github_releases' ? { ...def.config, product: def.product } : { ...def.config };
+      // Une source différée reste au registre, inactive, avec son état et son motif ; elle n'est jamais supprimée.
+      const differee = def.differee ? { active: false, accesEtat: def.differee.etat, accesDetail: def.differee.motif } : { active: true };
       await database.db
         .insert(sources)
         .values({
@@ -260,7 +341,7 @@ export async function syncSources(database: Database, definitions: SourceDefinit
           config,
           allowedHosts: def.allowedHosts,
           fetchIntervalMinutes: def.fetchIntervalMinutes,
-          active: true,
+          ...differee,
           createdAt: now,
         })
         .onConflictDoUpdate({
@@ -271,6 +352,7 @@ export async function syncSources(database: Database, definitions: SourceDefinit
             config: sql`excluded.config`,
             allowedHosts: sql`excluded.allowed_hosts`,
             fetchIntervalMinutes: def.fetchIntervalMinutes,
+            ...differee,
           },
         });
     }

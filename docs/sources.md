@@ -46,6 +46,37 @@ Limites : Higgsfield (0 texte sur 285 entrées), Hugging Face Blog et Notion ne 
 
 **Reporté** : Google DeepMind répond en gzip même sans le demander. Le collecteur ne décompresse pas, et l'ajouter exige une limite contre les archives géantes.
 
+## 2 ter. Registre d'accès, canaux de remplacement et sources différées (2026-11-05)
+
+Demande de l'utilisateur du 2026-11-05 : aucun contournement, mais un traitement plus fin. Code : `src/collect/acces.ts` ; état courant : `npm run sources:registre` (lecture seule).
+
+**États distingués** (colonne `source.acces_etat`). Un code HTTP seul ne permet pas de conclure aux conditions juridiques d'utilisation.
+
+| État | Ce qui l'établit | Reprise |
+|---|---|---|
+| refus d'accès observé | 401, 403, 406, 451 reçus par notre client déclaré | tous les jours, puis plus rarement, une fois par semaine au plus |
+| restriction contractuelle | **seulement** après lecture des conditions d'utilisation, notée à la main (`differee` dans `sources.ts`) | aucune collecte |
+| erreur temporaire | 5xx, délai dépassé, erreur réseau | 15 min, puis le double à chaque échec, plafonné à 24 h |
+| limitation de fréquence | 429 | `Retry-After` respecté s'il existe ; au moins 30 min, puis le double |
+| page supprimée ou introuvable | 404, 410 | comme un refus |
+| absence de flux exploitable | réponse lisible sans entrée | comme un refus |
+
+Après huit échecs de suite, une tentative par semaine : **aucune source n'est supprimée ni abandonnée sur un incident**. Une source différée reste au registre (inactive) avec son état, son motif, sa date et son canal de remplacement.
+
+**Canaux de remplacement trouvés le 2026-11-05** (pages et flux officiels, sans contournement) :
+- Microsoft AI Blog (410) → Official Microsoft Blog et Azure Blog (200), en plus de Microsoft Source.
+- Tesla (tesla.com : 403) → flux officiel des communiqués aux investisseurs `ir.tesla.com` (503 ce jour-là : erreur temporaire, repris par le registre), presse attribuée (TechCrunch, The Verge), EDGAR 8-K.
+- TSMC, Qualcomm, Broadcom, Oracle (flux investisseurs ou blog : 403) → presse attribuée (rubriques TechCrunch) et EDGAR 8-K (sauf TSMC, émetteur étranger).
+- LG Newsroom (aucune entrée) → The Verge et TechCrunch (presse attribuée).
+
+**Presse seule accessible** : ses informations sont attribuées (« according to TechCrunch… ») et jamais présentées comme une confirmation primaire (consigne `p3-21`) ; une description qui n'attribue pas reste « à vérifier » (contrôle `attribution_externe_manquante`).
+
+**Hacker News** (actif, signal de découverte) : histoires de la page d'accueil sur l'IA, 100 points au moins, lues par l'API publique de recherche `hn.algolia.com` (vers laquelle HN renvoie). Le signal (titre, points, discussion) reste en métadonnées ; l'article lié est récupéré à part : destination https sur un vrai nom de domaine, adresses IP résolues vérifiées (plages privées, locales et de métadonnées refusées), robots.txt lu d'abord (RFC 9309 ; inaccessible : rien n'est demandé), trois redirections au plus, chacune revalidée. Robots.txt n'est pas une lecture des conditions d'utilisation, que le code ne peut pas faire. Un article inaccessible ne donne aucun texte : rien n'est analysé.
+
+**SEC EDGAR** (prêt, différé) : 8-K de 12 grandes entreprises, flux Atom officiels. La SEC exige un client déclaré avec une adresse de contact (403 sans elle) : variable `CURATION_CONTACT_SEC`, à fournir par l'utilisateur (local, secret GitHub). Numéros CIK à confirmer au premier relevé.
+
+**Différées** (gardées au registre, non collectées) : Microsoft Research (403), TSMC (403), Qualcomm et Broadcom investisseurs (403), blog IA d'Oracle (403), LG Newsroom (aucune entrée), Uber Engineering (404), blog Snowflake (page d'erreur), LinkedIn Engineering (aucune entrée ; conditions non lues automatiquement), publications hébergées par Medium : Snowflake Builders, Netflix Tech Blog, Airbnb Engineering (500 pour notre client déclaré, 200 pour un navigateur : refus observé, non contourné). Reddit : aucun accès autorisé. X : accès officiel payant, tarif à vérifier avant décision de l'utilisateur.
+
 ## 3. Sources candidates (P6)
 
 Statut de chaque ligne : **candidate (P6)**. Un code HTTP indique la réponse au contrôle du 2026-10-30. Les URL données sont les URL finales, puisque le collecteur ne suit aucune redirection.
