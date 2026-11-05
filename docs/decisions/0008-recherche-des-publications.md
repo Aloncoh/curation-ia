@@ -68,5 +68,22 @@ Contraintes : base SQLite via `@libsql/client`, Turso en ligne ; pas de base vec
 ## Actions
 
 1. [x] P5 : à la création de la base Turso, créer un index FTS5 et l'interroger. **Fait le 2026-11-05** sur la base hébergée `curation-ia` (aws-eu-west-1), avec `@libsql/client` : la table `recherche_publication` (FTS5) existe et `MATCH 'agent'` rend 26 lignes ; la recherche du site en ligne répond (27 résultats pour « agent »). Turso FTS n'est donc pas nécessaire.
-2. [ ] P6 : construire `rechercher`, l'index et le lexique ; constituer le jeu de requêtes avec l'utilisateur.
-3. [ ] P6 : mesurer, puis décider si une couche vectorielle est nécessaire.
+2. [x] P6 : construire `rechercher`, l'index et le lexique ; constituer le jeu de requêtes. **Fait le 2026-11-05** (bloc 4) : lexique `l1` dans `src/recherche/moteur.ts`, jeu `r1` de 36 requêtes dans `src/recherche/reference.ts`, dont les six de l'utilisateur. Jeu étiqueté par Claude Code sur les publications en ligne : **à relire par l'utilisateur**.
+3. [x] P6 : mesurer, puis décider si une couche vectorielle est nécessaire. **Mesuré le 2026-11-05** : voir ci-dessous. Décision : pas de couche vectorielle.
+
+## Évaluation du 2026-11-05 (P6, bloc 4)
+
+Commande : `npm run recherche:evaluer`, en lecture seule sur la base en ligne (60 publications publiées, 62 indexées). Une requête est réussie si une publication attendue figure dans les 5 premiers résultats.
+
+| Étape | Réussite | Écart principal |
+|---|---|---|
+| Couche 1 seule (index plein texte, tel que construit pour les ressources) | 19 sur 35 (54 %) | les actualités n'avaient ni nom ni mots-clés et passaient derrière les ressources ; aucune requête française ne trouvait un texte anglais |
+| Couches 1 et 2 : actualités indexées (produit comme nom, catégories, champs propres), lexique `l1` français-anglais, couverture partielle à partir de trois mots | 33 sur 35 (94 %) | « motion design » (aucune publication de motion au sens strict en ligne), « repo pour un Jarvis » |
+
+Changements de comportement, décidés pour cette évaluation :
+- **Couverture partielle** : jusqu'à deux mots, tous restent exigés ; à partir de trois, un mot peut manquer, avec un score proportionnel, et un résultat complet passe toujours devant.
+- **Lexique appliqué à la requête seulement** : chaque résultat trouvé par un équivalent le dit (« terme proche du lexique : « lunette » → « glasses » »). Les mots vides propres aux requêtes (« mon », « je veux ») ne touchent pas la normalisation partagée avec les contrôles.
+
+Limites, à ne pas oublier :
+- Le lexique a été écrit en regardant les échecs du même jeu : le taux de 94 % est optimiste. Il faut un second jeu, étiqueté par l'utilisateur et non vu pendant les réglages, avant de le tenir pour acquis.
+- La couche vectorielle reste possible plus tard, avec un nouvel ADR, si ce second jeu passe sous 80 %.

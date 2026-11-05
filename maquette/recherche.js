@@ -99,6 +99,8 @@ function contientExpression(texte        , expression        )          {
                       
                      
                 
+                                                   
+                   
                                     
  
 
@@ -118,6 +120,45 @@ const POIDS                                                              = {
 const PLAFOND_TEXTE_MOTS = 6;
 /** Le dernier mot de la requête vaut aussi comme début de mot à partir de cette longueur. */
 const LONGUEUR_MIN_PREFIXE = 3;
+
+/**
+ * Lexique versionné de termes proches appliqué à la requête (ADR 0008, deuxième couche ; P6 bloc 4, 2026-11-05) : les
+ * publications sont en anglais, les recherches souvent en français. Chaque mot de la requête vaut aussi pour ses
+ * équivalents ; un résultat trouvé ainsi le dit dans son explication. Liste courte, relue, à élargir avec l'évaluation.
+ */
+const VERSION_LEXIQUE = 'l1-2026-11-05';
+const LEXIQUE_BRUT                           = {
+  securiser: ['security', 'secure', 'vulnerability'], securite: ['security', 'secure'], securise: ['secure', 'security'],
+  vulnerabilite: ['vulnerability', 'cve', 'security'], faille: ['vulnerability', 'cve'],
+  saas: ['app', 'application'],
+  lunette: ['glasses'], casque: ['headset'],
+  musique: ['music', 'song'], chanson: ['song'], video: ['video'], image: ['image'],
+  memoire: ['memory'], souvenir: ['memory'],
+  tester: ['test', 'testing'], test: ['testing'],
+  application: ['app'], appli: ['app'], site: ['website', 'web'],
+  navigateur: ['browser'],
+  diapositive: ['slides', 'deck', 'presentation'], slide: ['deck', 'presentation'], presentation: ['slides', 'deck'],
+  dependance: ['dependency', 'dependabot'],
+  synthese: ['speech', 'synthesis', 'tts'], vocale: ['voice', 'speech'], vocal: ['voice', 'speech'], voix: ['voice', 'speech'],
+  locale: ['local', 'device'], local: ['device'],
+  supprimer: ['remove'], retirer: ['remove'],
+  tic: ['tics'], ecriture: ['writing'], ecrire: ['write', 'writing'],
+  planifier: ['plan', 'planning'], plan: ['planning'], coder: ['code', 'coding'],
+  generation: ['generate', 'generation', 'creation'], generer: ['generate'],
+  recherche: ['research'], scientifique: ['science', 'scientific'],
+  jarvis: ['assistant', 'voice'],
+  revue: ['review'], relecture: ['review'],
+  agent: ['agents'],
+  ia: ['ai'],
+  excel: ['spreadsheet'], tableur: ['spreadsheet'], powerpoint: ['slides', 'presentation'],
+};
+const LEXIQUE = new Map                  (
+  Object.entries(LEXIQUE_BRUT).map(([cle, valeurs]) => [normaliser(cle), [...new Set(valeurs.map(normaliser).filter((v) => v !== '' && v !== normaliser(cle)))]]),
+);
+/** Forme lisible d'un équivalent normalisé (« glasse » s'affiche « glasses »), pour l'explication. */
+const AFFICHAGE_LEXIQUE = new Map                (Object.values(LEXIQUE_BRUT).flat().map((v) => [normaliser(v), v]));
+/** Mots vides de la seule requête (« mon », « je veux ») : les retirer de l'index changerait les contrôles qui partagent la normalisation. */
+const MOTS_VIDES_REQUETE = new Set(['mon', 'ma', 'me', 'ton', 'ta', 'te', 'notre', 'nos', 'votre', 'vo', 'je', 'veux', 'voudrai', 'comment', 'faire', 'my', 'your', 'how', 'want', 'need', 'avant', 'before']);
 const LONGUEUR_EXTRAIT = 200;
 
 const LIEU                                 = {
@@ -133,12 +174,17 @@ const LIEU                                 = {
                                   
                  
                    
+                                                                             
+                        
  
 
 function preparerRequete(requete        )                  {
-  const mots = motsNormalises(requete);
+  const tous = motsNormalises(requete);
+  // Une requête faite seulement de mots vides de requête les garde : mieux vaut chercher « comment » que rien.
+  const utiles = tous.filter((m) => !MOTS_VIDES_REQUETE.has(m));
+  const mots = utiles.length > 0 ? utiles : tous;
   const dernier = mots[mots.length - 1];
-  return { mots, prefixe: dernier !== undefined && dernier.length >= LONGUEUR_MIN_PREFIXE };
+  return { mots, prefixe: dernier !== undefined && dernier.length >= LONGUEUR_MIN_PREFIXE, variantes: mots.map((m) => LEXIQUE.get(m) ?? []) };
 }
 
                          
@@ -147,17 +193,24 @@ function preparerRequete(requete        )                  {
                         
                                                                      
                       
+                                                                                              
+                                             
  
 
 function rapprocher(texte        , q                 )                {
   const mots = motsNormalises(texte);
   const n = q.mots.length;
   const completes           = [];
+  const proches                                    = [];
   const egal = (mot        , i        ) => {
     const attendu = q.mots[i] ;
     if (mot === attendu) return true;
     if (i === n - 1 && q.prefixe && mot.startsWith(attendu)) {
       completes.push(mot);
+      return true;
+    }
+    if (q.variantes[i]?.includes(mot)) {
+      proches.push({ mot: attendu, proche: AFFICHAGE_LEXIQUE.get(mot) ?? mot });
       return true;
     }
     return false;
@@ -170,7 +223,8 @@ function rapprocher(texte        , q                 )                {
     for (let i = 0; ok && i < n; i++) ok = egal(mots[debut + i] , i);
     expression = ok;
   }
-  return { expression, couverts, completes: [...new Set(completes)] };
+  const vus = new Set        ();
+  return { expression, couverts, completes: [...new Set(completes)], proches: proches.filter((p) => !vus.has(`${p.mot} ${p.proche}`) && vus.add(`${p.mot} ${p.proche}`)) };
 }
 
 const raisonValide = (raison               )                   => raison !== null && raison.trim().length > 0;
@@ -181,7 +235,8 @@ function extraitDe(texte        )         {
 }
 
 function expliquer(champ                , requete        , r               , q                 )         {
-  const complement = r.completes.length > 0 ? ` (« ${q.mots[q.mots.length - 1]} » complète « ${r.completes.join(' », « ')} »)` : '';
+  const complement = (r.completes.length > 0 ? ` (« ${q.mots[q.mots.length - 1]} » complète « ${r.completes.join(' », « ')} »)` : '')
+    + (r.proches.length > 0 ? ` (terme proche du lexique : ${r.proches.map((p) => `« ${p.mot} » → « ${p.proche} »`).join(', ')})` : '');
   if (r.expression) return q.mots.length > 1 ? `Expression « ${requete} » trouvée dans ${LIEU[champ]}${complement}.` : `Mot « ${requete} » trouvé dans ${LIEU[champ]}${complement}.`;
   const mots = [...r.couverts].sort((a, b) => a - b).map((i) => q.mots[i]);
   return `${mots.length > 1 ? 'Mots' : 'Mot'} « ${mots.join(' », « ')} » ${mots.length > 1 ? 'trouvés' : 'trouvé'} dans ${LIEU[champ]}${complement}.`;
@@ -220,9 +275,12 @@ function classerDocument(doc                   , q                 )            
     correspondances.push({ champ: 'texte', terme: requete, raison: expliquer('texte', requete, r, q), extrait: extraitDe(partie), poids });
   }
 
-  if (couverts.size < q.mots.length || correspondances.length === 0) return null;
+  // Couverture partielle admise depuis le 2026-11-05 pour les besoins de trois mots ou plus (« synthèse vocale locale ») :
+  // un mot peut manquer, score proportionnel à la part couverte ; un résultat qui couvre tout passe toujours devant.
+  // Jusqu'à deux mots, tous restent exigés : « motion comptable » ne doit rien remonter.
+  if (couverts.size < (q.mots.length >= 3 ? q.mots.length - 1 : q.mots.length) || correspondances.length === 0) return null;
   correspondances.sort((a, b) => b.poids - a.poids);
-  const score = [...meilleurParChamp.values()].reduce((s, p) => s + p, 0);
+  const score = Math.round([...meilleurParChamp.values()].reduce((s, p) => s + p, 0) * (couverts.size / q.mots.length));
   const nom = doc.motsCles.find((m) => m.champ === 'nom')?.terme ?? null;
   return {
     postId: doc.postId,
@@ -230,6 +288,7 @@ function classerDocument(doc                   , q                 )            
     jour: doc.jour,
     nom,
     score,
+    complet: couverts.size === q.mots.length,
     correspondances: correspondances.map(({ poids: _poids, ...c }) => c),
   };
 }
@@ -245,7 +304,8 @@ const parJour = (a                , b                )         => {
                                            
 
 /**
- * Classe et explique. Chaque mot de la requête doit être couvert par au moins un champ (ET logique) ; le score
+ * Classe et explique. Les résultats qui couvrent tous les mots de la requête passent devant ; à partir de trois mots,
+ * un mot peut manquer (voir classerDocument). Le score
  * additionne le meilleur poids de chaque champ, si bien que répéter un mot-clé n'augmente pas le score.
  */
 function classer(requete        , documents                     , tri      = 'pertinence')                   {
@@ -254,7 +314,7 @@ function classer(requete        , documents                     , tri      = 'pe
   const resultats = documents.map((d) => classerDocument(d, q)).filter((r)                      => r !== null);
   // Départage final par `postId`, pour un ordre stable d'une page à l'autre.
   const ordre = tri === 'recents' ? (a                , b                ) => parJour(a, b) || b.score - a.score : (a                , b                ) => b.score - a.score || parJour(a, b);
-  return resultats.sort((a, b) => ordre(a, b) || a.postId - b.postId);
+  return resultats.sort((a, b) => Number(b.complet) - Number(a.complet) || ordre(a, b) || a.postId - b.postId);
 }
 
 window.RECHERCHE = Object.freeze({ classer, preparerRequete, normaliser, motsNormalises, POIDS });

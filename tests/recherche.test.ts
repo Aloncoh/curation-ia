@@ -268,8 +268,10 @@ describe('rechercher', () => {
       await expect(rechercher(c, q, { mode: 'apercu' }), q).resolves.toBeDefined();
     }
     expect(await scalar(t.database, 'select count(*) from post')).toBe(PUBLICATIONS.length);
-    expect(requeteFts(['foo', 'bar'], true)).toBe('"foo" "bar"*');
-    expect(requeteFts(['a"b'], false)).toBe('"a""b"');
+    expect(requeteFts({ mots: ['foo', 'bar'], prefixe: true, variantes: [[], []] })).toBe('("foo") OR ("bar"*)');
+    expect(requeteFts({ mots: ['a"b'], prefixe: false, variantes: [[]] })).toBe('("a""b")');
+    // Les équivalents du lexique entrent comme alternatives, toujours entre guillemets.
+    expect(requeteFts({ mots: ['securiser'], prefixe: true, variantes: [['security', 'secure']] })).toBe('("securiser"* OR "security" OR "secure")');
     // « OR » devient un mot vide : la requête cherche motion, sans opérateur.
     expect((await rechercher(c, '"motion" OR *', { mode: 'apercu' })).requete_normalisee).toBe('motion');
   });
@@ -362,5 +364,27 @@ describe('commande chercher', () => {
     expect(JSON.parse(sortie.join('\n')).resultats.map((r: { nom: string }) => r.nom)).toEqual(['demo-anim']);
     expect(await chercher([], ctx())).toBe(1);
     expect(await chercher(['svg', '--curseur', 'faux'], ctx())).toBe(1);
+  });
+});
+
+describe('lexique et couverture partielle (P6 bloc 4, 2026-11-05)', () => {
+  const doc = (postId: number, textes: string[], motsCles: DocumentRecherche['motsCles'] = []): DocumentRecherche => ({ postId, revisionId: postId, jour: '2026-11-05', motsCles, textes });
+
+  it('une requête en français trouve un texte anglais par le lexique, et l’explication le dit', () => {
+    const r = classer('lunettes', [doc(1, ['XREAL AURA: wired XR glasses running Android XR']), doc(2, ['A new MacBook Pro display'])]);
+    expect(r.map((x) => x.postId)).toEqual([1]);
+    expect(r[0]!.correspondances[0]!.raison).toContain('terme proche du lexique : « lunette » → « glasses »');
+  });
+
+  it('jusqu’à deux mots, tous sont exigés ; à partir de trois, un peut manquer, et le résultat complet passe devant', () => {
+    expect(classer('motion comptable', [doc(1, ['Motion design tools for the web'])])).toEqual([]);
+    const r = classer('synthèse vocale locale', [doc(1, ['Speech for your phone, open weights']), doc(2, ['Voice speech synthesis that runs local on device'])]);
+    expect(r.map((x) => [x.postId, x.complet])).toEqual([[2, true], [1, false]]);
+  });
+
+  it('le produit et les catégories d’une actualité servent de nom et de catégorie : elle n’est plus évincée par les ressources', () => {
+    const actualite = doc(1, ['GitHub Copilot app adds Projects and desktop control'], [{ champ: 'nom', terme: 'GitHub Copilot app', raison: null, passage: null }]);
+    const ressource = doc(2, ['Works with Copilot and Cursor'], [{ champ: 'technologie', terme: 'Copilot', raison: null, passage: 'Works with Copilot' }]);
+    expect(classer('Copilot', [ressource, actualite])[0]!.postId).toBe(1);
   });
 });

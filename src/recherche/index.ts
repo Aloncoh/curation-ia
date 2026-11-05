@@ -2,6 +2,7 @@
 // Appelé dans la transaction qui planifie ou publie ; une nouvelle révision remplace la ligne, un retrait la supprime.
 import type { Transaction } from '@libsql/client';
 import { motsClesDesRevisions } from '../ressources/mots-cles.ts';
+import type { MotCleRecherche } from './moteur.ts';
 import { normaliser } from './normaliser.ts';
 
 /** Parties du contenu stocké qui forment le texte de la publication, dans l'ordre d'affichage. */
@@ -16,6 +17,12 @@ export function textesDePublication(contenu: unknown): string[] {
   return [
     ...texte(c.accroche),
     ...texte(c.description),
+    // Actualités (brouillon P3) : leurs champs propres, indexés depuis le 2026-11-05 (P6 bloc 4).
+    ...texte(c.nouveaute),
+    ...texte(c.ce_que_ca_permet),
+    ...texte(c.pour_qui),
+    ...liste(c.details),
+    ...texte(c.limites_connues),
     ...texte(c.interet),
     ...texte(c.exemple_usage),
     ...liste(demarrage.etapes),
@@ -29,6 +36,19 @@ export function textesDePublication(contenu: unknown): string[] {
         })
       : []),
   ].filter((t) => t.trim().length > 0);
+}
+
+/**
+ * Mots-clés tirés du contenu d'une actualité (P6 bloc 4, 2026-11-05) : son produit comme nom, ses catégories. Les
+ * ressources ont des mots-clés cités en base ; sans cela, une actualité passait toujours derrière elles. Valeurs du
+ * contenu enregistré, sans invention.
+ */
+export function motsClesDuContenu(contenu: unknown): MotCleRecherche[] {
+  const c = contenu && typeof contenu === 'object' ? (contenu as Record<string, unknown>) : {};
+  const mots: MotCleRecherche[] = [];
+  if (typeof c.produit === 'string' && c.produit.trim()) mots.push({ champ: 'nom', terme: c.produit.trim(), raison: null, passage: null });
+  if (Array.isArray(c.categories)) for (const x of c.categories) if (typeof x === 'string' && x.trim()) mots.push({ champ: 'categorie', terme: x.trim(), raison: null, passage: null });
+  return mots;
 }
 
 /** Retire la publication de l'index. */
@@ -54,8 +74,8 @@ export async function indexer(tx: Transaction, postId: number, revisionId: numbe
   await desindexer(tx, postId);
   if (!indexable) return false;
 
-  const motsCles = (await motsClesDesRevisions(tx, [revisionId])).get(revisionId) ?? [];
   const contenu: unknown = JSON.parse(String(ligne.content));
+  const motsCles = [...((await motsClesDesRevisions(tx, [revisionId])).get(revisionId) ?? []), ...motsClesDuContenu(contenu).map((m) => ({ ...m, termeNormalise: normaliser(m.terme) }))];
   const termes = (champs: string[]) => motsCles.filter((m) => champs.includes(m.champ)).map((m) => m.termeNormalise).join(' ');
   await tx.execute({
     sql: 'insert into recherche_publication (post_id, revision_id, nom, mots_cles, texte) values (?, ?, ?, ?, ?)',

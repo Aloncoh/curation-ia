@@ -380,6 +380,7 @@ _Même jour, accord de l'utilisateur (« Oui, ajoute-la ») : **relance** automa
 - **Moteur** : un module partagé classe les résultats ; l'index plein texte local (FTS5, essayé avec succès le 2026-11-02) fournit les candidats. Le même code sert l'API v1 commune au site et à l'application, puis la maquette.
 - **Visibilité** : avant P5, les publications en attente ne sont visibles qu'en mode aperçu, étiquetées « pas encore publié ». La recherche publique ne montre que les publications en ligne.
 - **Jalons** : le reste de §7.15 (toutes les publications, lexique global, évaluation sur le jeu de référence) reste en P6.
+- **Réalisé le 2026-11-05 (P6, bloc 4)** : actualités indexées comme les ressources, lexique global `l1` français-anglais, couverture partielle à partir de trois mots ; jeu de référence `r1` (36 requêtes, dont les six ci-dessus) : 94 % de requêtes réussies sur la base en ligne, au-dessus du seuil de 80 %. Jeu étiqueté par Claude Code, à relire par l'utilisateur ; pas de couche vectorielle (ADR 0008).
 
 ### 7.16 Validité dans le temps, corrections et signalements (décision de l'utilisateur, 2026-11-01)
 - **Corrections visibles [P5]** : une correction crée une révision datée, avec son motif affiché ; la version précédente reste consultable. Un retrait est daté et motivé.

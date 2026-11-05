@@ -1,6 +1,6 @@
 // Généré par « npm run maquette » — ne pas modifier à la main.
 window.DONNEES_MAQUETTE = {
-  "generated_at": "2026-11-04T11:34:47.234Z",
+  "generated_at": "2026-11-05T17:50:39.063Z",
   "note": "Actualités réellement collectées depuis des sources officielles, pas encore analysées ; les extraits sont des citations courtes de la source, attribuées et liées. Les exemples de publications sont rédigés par Claude Code pour la maquette, pas par l'agent du site : chaque passage cité est recherché mot pour mot dans la capture réelle.",
   "comptes": [
     {
@@ -1593,11 +1593,35 @@ window.DONNEES_MAQUETTE = {
   "exemples_introuvables": [],
   "sources": [
     {
+      "id": "feed:amazon-news",
+      "name": "About Amazon — flux RSS officiel",
+      "kind": "feed",
+      "status": "ok",
+      "last_success_at": "2026-11-04T22:44:14.917Z",
+      "last_error": null
+    },
+    {
+      "id": "feed:amd-press",
+      "name": "AMD, communiqués — flux RSS officiel",
+      "kind": "feed",
+      "status": "ok",
+      "last_success_at": "2026-11-04T22:44:15.152Z",
+      "last_error": null
+    },
+    {
+      "id": "feed:apple-newsroom",
+      "name": "Apple Newsroom — flux RSS officiel",
+      "kind": "feed",
+      "status": "ok",
+      "last_success_at": "2026-11-04T22:44:14.849Z",
+      "last_error": null
+    },
+    {
       "id": "feed:blender",
       "name": "Blender — flux RSS officiel",
       "kind": "feed",
       "status": "ok",
-      "last_success_at": "2026-11-04T11:08:01.648Z",
+      "last_success_at": "2026-11-04T22:44:19.592Z",
       "last_error": null
     },
     {
@@ -1605,7 +1629,7 @@ window.DONNEES_MAQUETTE = {
       "name": "Blog Comfy — flux RSS officiel",
       "kind": "feed",
       "status": "ok",
-      "last_success_at": "2026-11-04T11:08:00.565Z",
+      "last_success_at": "2026-11-04T22:44:19.406Z",
       "last_error": null
     },
     {
@@ -1613,7 +1637,7 @@ window.DONNEES_MAQUETTE = {
       "name": "Cursor Changelog — flux RSS officiel",
       "kind": "feed",
       "status": "ok",
-      "last_success_at": "2026-11-04T11:07:57.998Z",
+      "last_success_at": "2026-11-04T22:44:18.272Z",
       "last_error": null
     },
     {
@@ -1621,7 +1645,7 @@ window.DONNEES_MAQUETTE = {
       "name": "ElevenLabs Blog — flux RSS officiel",
       "kind": "feed",
       "status": "ok",
-      "last_success_at": "2026-11-04T11:07:57.044Z",
+      "last_success_at": "2026-11-04T22:44:17.166Z",
       "last_error": null
     },
     {
@@ -1629,7 +1653,7 @@ window.DONNEES_MAQUETTE = {
       "name": "Figma, notes de version — flux Atom officiel",
       "kind": "feed",
       "status": "ok",
-      "last_success_at": "2026-11-04T11:08:01.816Z",
+      "last_success_at": "2026-11-04T22:44:20.404Z",
       "last_error": null
     },
     {
@@ -1637,7 +1661,7 @@ window.DONNEES_MAQUETTE = {
       "name": "Gemini Notebook — flux RSS officiel",
       "kind": "feed",
       "status": "ok",
-      "last_success_at": "2026-11-04T11:07:58.750Z",
+      "last_success_at": "2026-11-04T22:44:18.798Z",
       "last_error": null
     },
     {
@@ -1645,7 +1669,15 @@ window.DONNEES_MAQUETTE = {
       "name": "GitHub Changelog — flux RSS officiel",
       "kind": "feed",
       "status": "ok",
-      "last_success_at": "2026-11-04T11:07:55.797Z",
+      "last_success_at": "2026-11-04T22:44:13.792Z",
+      "last_error": null
+    },
+    {
+      "id": "feed:google-blog",
+      "name": "Google Blog — flux RSS officiel",
+      "kind": "feed",
+      "status": "ok",
+      "last_success_at": "2026-11-05T00:17:21.900Z",
       "last_error": null
     },
     {
@@ -1653,7 +1685,7 @@ window.DONNEES_MAQUETTE = {
       "name": "Google The Keyword, Gemini — flux RSS officiel",
       "kind": "feed",
       "status": "ok",
-      "last_success_at": "2026-11-04T11:07:55.484Z",
+      "last_success_at": "2026-11-04T22:44:13.465Z",
       "last_error": null
     },
     {
@@ -1661,7 +1693,7 @@ window.DONNEES_MAQUETTE = {
       "name": "Higgsfield Blog — flux RSS officiel",
       "kind": "feed",
       "status": "ok",
-      "last_success_at": "2026-11-04T11:08:00.309Z",
+      "last_success_at": "2026-11-04T22:44:19.165Z",
       "last_error": null
     },
     {
@@ -1669,7 +1701,15 @@ window.DONNEES_MAQUETTE = {
       "name": "Hugging Face Blog — flux RSS officiel",
       "kind": "feed",
       "status": "ok",
-      "last_success_at": "2026-11-04T11:07:56.830Z",
+      "last_success_at": "2026-11-04T22:44:16.944Z",
+      "last_error": null
+    },
+    {
+      "id": "feed:intel-press",
+      "name": "Intel, communiqués — flux RSS officiel",
+      "kind": "feed",
+      "status": "ok",
+      "last_success_at": "2026-11-05T00:17:22.551Z",
       "last_error": null
     },
     {
@@ -1677,7 +1717,23 @@ window.DONNEES_MAQUETTE = {
       "name": "Blog MCP — flux RSS officiel",
       "kind": "feed",
       "status": "ok",
-      "last_success_at": "2026-11-04T11:08:05.230Z",
+      "last_success_at": "2026-11-04T22:44:25.046Z",
+      "last_error": null
+    },
+    {
+      "id": "feed:meta-newsroom",
+      "name": "Meta Newsroom — flux RSS officiel",
+      "kind": "feed",
+      "status": "ok",
+      "last_success_at": "2026-11-04T22:44:16.413Z",
+      "last_error": null
+    },
+    {
+      "id": "feed:microsoft-source",
+      "name": "Microsoft Source — flux RSS officiel",
+      "kind": "feed",
+      "status": "ok",
+      "last_success_at": "2026-11-04T22:44:14.769Z",
       "last_error": null
     },
     {
@@ -1685,7 +1741,7 @@ window.DONNEES_MAQUETTE = {
       "name": "Midjourney Updates — flux RSS officiel",
       "kind": "feed",
       "status": "ok",
-      "last_success_at": "2026-11-04T11:07:57.687Z",
+      "last_success_at": "2026-11-04T22:44:17.961Z",
       "last_error": null
     },
     {
@@ -1693,7 +1749,7 @@ window.DONNEES_MAQUETTE = {
       "name": "Mistral AI — flux RSS officiel",
       "kind": "feed",
       "status": "ok",
-      "last_success_at": "2026-11-04T11:07:56.370Z",
+      "last_success_at": "2026-11-04T22:44:16.611Z",
       "last_error": null
     },
     {
@@ -1701,7 +1757,7 @@ window.DONNEES_MAQUETTE = {
       "name": "Blog n8n — flux RSS officiel",
       "kind": "feed",
       "status": "ok",
-      "last_success_at": "2026-11-04T11:08:03.167Z",
+      "last_success_at": "2026-11-04T22:44:22.253Z",
       "last_error": null
     },
     {
@@ -1709,7 +1765,23 @@ window.DONNEES_MAQUETTE = {
       "name": "Notion What's New — flux RSS officiel",
       "kind": "feed",
       "status": "ok",
-      "last_success_at": "2026-11-04T11:07:58.303Z",
+      "last_success_at": "2026-11-04T22:44:18.432Z",
+      "last_error": null
+    },
+    {
+      "id": "feed:nvidia-blog",
+      "name": "NVIDIA Blog — flux RSS officiel",
+      "kind": "feed",
+      "status": "ok",
+      "last_success_at": "2026-11-04T22:44:14.482Z",
+      "last_error": null
+    },
+    {
+      "id": "feed:nvidia-newsroom",
+      "name": "NVIDIA Newsroom — flux RSS officiel",
+      "kind": "feed",
+      "status": "ok",
+      "last_success_at": "2026-11-04T22:44:14.330Z",
       "last_error": null
     },
     {
@@ -1717,7 +1789,23 @@ window.DONNEES_MAQUETTE = {
       "name": "OpenAI News — flux RSS officiel",
       "kind": "feed",
       "status": "ok",
-      "last_success_at": "2026-11-04T11:07:54.920Z",
+      "last_success_at": "2026-11-04T22:44:12.780Z",
+      "last_error": null
+    },
+    {
+      "id": "feed:samsung-newsroom",
+      "name": "Samsung Global Newsroom — flux RSS officiel",
+      "kind": "feed",
+      "status": "ok",
+      "last_success_at": "2026-11-05T00:17:22.480Z",
+      "last_error": null
+    },
+    {
+      "id": "feed:shopify-press",
+      "name": "Shopify, communiqués (Newsfile) — flux RSS officiel",
+      "kind": "feed",
+      "status": "ok",
+      "last_success_at": "2026-11-05T00:17:23.089Z",
       "last_error": null
     },
     {
@@ -1725,7 +1813,7 @@ window.DONNEES_MAQUETTE = {
       "name": "SIGGRAPH Blog — flux RSS officiel",
       "kind": "feed",
       "status": "ok",
-      "last_success_at": "2026-11-04T11:08:09.267Z",
+      "last_success_at": "2026-11-04T22:44:26.241Z",
       "last_error": null
     },
     {
@@ -1733,7 +1821,7 @@ window.DONNEES_MAQUETTE = {
       "name": "Sketch Changelog — flux Atom officiel",
       "kind": "feed",
       "status": "ok",
-      "last_success_at": "2026-11-04T11:08:02.811Z",
+      "last_success_at": "2026-11-04T22:44:21.877Z",
       "last_error": null
     },
     {
@@ -1741,7 +1829,7 @@ window.DONNEES_MAQUETTE = {
       "name": "Spline Changelog — flux RSS officiel",
       "kind": "feed",
       "status": "ok",
-      "last_success_at": "2026-11-04T11:08:02.122Z",
+      "last_success_at": "2026-11-04T22:44:21.006Z",
       "last_error": null
     },
     {
@@ -1749,7 +1837,55 @@ window.DONNEES_MAQUETTE = {
       "name": "Suno, notes de version — flux RSS officiel",
       "kind": "feed",
       "status": "ok",
-      "last_success_at": "2026-11-04T11:07:57.367Z",
+      "last_success_at": "2026-11-04T22:44:17.693Z",
+      "last_error": null
+    },
+    {
+      "id": "feed:techcrunch-broadcom",
+      "name": "TechCrunch, rubrique Broadcom — article de presse, contenu externe attribué",
+      "kind": "feed",
+      "status": "ok",
+      "last_success_at": "2026-11-05T06:33:20.485Z",
+      "last_error": null
+    },
+    {
+      "id": "feed:techcrunch-lg",
+      "name": "TechCrunch, rubrique LG — article de presse, contenu externe attribué",
+      "kind": "feed",
+      "status": "ok",
+      "last_success_at": "2026-11-05T06:33:20.912Z",
+      "last_error": null
+    },
+    {
+      "id": "feed:techcrunch-oracle",
+      "name": "TechCrunch, rubrique Oracle — article de presse, contenu externe attribué",
+      "kind": "feed",
+      "status": "ok",
+      "last_success_at": "2026-11-05T06:33:20.717Z",
+      "last_error": null
+    },
+    {
+      "id": "feed:techcrunch-qualcomm",
+      "name": "TechCrunch, rubrique Qualcomm — article de presse, contenu externe attribué",
+      "kind": "feed",
+      "status": "ok",
+      "last_success_at": "2026-11-05T06:33:20.311Z",
+      "last_error": null
+    },
+    {
+      "id": "feed:techcrunch-tesla",
+      "name": "TechCrunch, rubrique Tesla — article de presse, contenu externe attribué",
+      "kind": "feed",
+      "status": "ok",
+      "last_success_at": "2026-11-05T06:33:19.910Z",
+      "last_error": null
+    },
+    {
+      "id": "feed:techcrunch-tsmc",
+      "name": "TechCrunch, rubrique TSMC — article de presse, contenu externe attribué",
+      "kind": "feed",
+      "status": "ok",
+      "last_success_at": "2026-11-05T06:33:20.114Z",
       "last_error": null
     },
     {
@@ -1757,7 +1893,23 @@ window.DONNEES_MAQUETTE = {
       "name": "Vapi, What's New — flux RSS officiel",
       "kind": "feed",
       "status": "ok",
-      "last_success_at": "2026-11-04T11:08:04.714Z",
+      "last_success_at": "2026-11-04T22:44:24.491Z",
+      "last_error": null
+    },
+    {
+      "id": "feed:verge-lg",
+      "name": "The Verge, rubrique LG — article de presse, contenu externe attribué",
+      "kind": "feed",
+      "status": "ok",
+      "last_success_at": "2026-11-05T06:33:21.418Z",
+      "last_error": null
+    },
+    {
+      "id": "feed:verge-tesla",
+      "name": "The Verge, rubrique Tesla — article de presse, contenu externe attribué",
+      "kind": "feed",
+      "status": "ok",
+      "last_success_at": "2026-11-05T06:33:21.171Z",
       "last_error": null
     },
     {
@@ -1765,7 +1917,7 @@ window.DONNEES_MAQUETTE = {
       "name": "AI Search (YouTube, @theAIsearch) — vidéos de la chaîne, contenu externe attribué",
       "kind": "feed",
       "status": "ok",
-      "last_success_at": "2026-11-04T11:07:55.940Z",
+      "last_success_at": "2026-11-04T22:44:14.090Z",
       "last_error": null
     },
     {
@@ -1773,7 +1925,7 @@ window.DONNEES_MAQUETTE = {
       "name": "Claude Code — releases GitHub officielles",
       "kind": "github_releases",
       "status": "ok",
-      "last_success_at": "2026-11-04T11:07:51.934Z",
+      "last_success_at": "2026-11-04T22:44:10.211Z",
       "last_error": null
     },
     {
@@ -1781,7 +1933,7 @@ window.DONNEES_MAQUETTE = {
       "name": "Gemini CLI — releases GitHub officielles",
       "kind": "github_releases",
       "status": "ok",
-      "last_success_at": "2026-11-04T11:07:54.602Z",
+      "last_success_at": "2026-11-04T22:44:12.520Z",
       "last_error": null
     },
     {
@@ -1789,7 +1941,7 @@ window.DONNEES_MAQUETTE = {
       "name": "Codex CLI — releases GitHub officielles",
       "kind": "github_releases",
       "status": "ok",
-      "last_success_at": "2026-11-04T11:07:54.173Z",
+      "last_success_at": "2026-11-04T22:44:12.045Z",
       "last_error": null
     }
   ],
@@ -1876,6 +2028,21 @@ window.DONNEES_MAQUETTE = {
       "repository_url": "https://github.com/openai/codex",
       "versions": [
         {
+          "version": "0.168.0-alpha.2",
+          "is_prerelease": true,
+          "released_at": "2026-11-04T20:47:50.000Z"
+        },
+        {
+          "version": "0.167.0-alpha.3.1",
+          "is_prerelease": true,
+          "released_at": "2026-11-04T19:05:21.000Z"
+        },
+        {
+          "version": "0.167.0-alpha.5",
+          "is_prerelease": true,
+          "released_at": "2026-11-04T18:09:02.000Z"
+        },
+        {
           "version": "0.168.0-alpha.1",
           "is_prerelease": true,
           "released_at": "2026-11-04T02:54:53.000Z"
@@ -1959,6 +2126,16 @@ window.DONNEES_MAQUETTE = {
       "category": "assistant de code",
       "repository_url": "https://github.com/google-gemini/gemini-cli",
       "versions": [
+        {
+          "version": "0.67.0",
+          "is_prerelease": false,
+          "released_at": "2026-11-04T20:27:11.000Z"
+        },
+        {
+          "version": "0.68.0-preview.0",
+          "is_prerelease": true,
+          "released_at": "2026-11-04T19:49:22.000Z"
+        },
         {
           "version": "0.67.0-nightly.20261104.g89e9d25d6",
           "is_prerelease": true,
@@ -2089,6 +2266,382 @@ window.DONNEES_MAQUETTE = {
   ],
   "news_items": [
     {
+      "id": 777,
+      "kind": "annonce",
+      "title": "17 better ways Elon Musk could have wasted $446 million",
+      "announced_at": "2026-11-04T21:45:00.000Z",
+      "first_seen_at": "2026-11-05T06:33:21.144Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "AI",
+        "Electric Cars",
+        "Elon Musk",
+        "Policy"
+      ],
+      "source": {
+        "id": "feed:verge-tesla",
+        "name": "The Verge, rubrique Tesla — article de presse, contenu externe attribué",
+        "url": "https://www.theverge.com/ai-artificial-intelligence/1026878/not-even-good-at-being-rich"
+      },
+      "excerpt": "Dream bigger, babe. | Image: Cath Virginia / The Verge, Getty Images One of the basic problems of spending too much time on social media is that you are cooking your brain by reading posts from a pack of attention-seeking lunatics. If your…",
+      "capture": {
+        "content_hash": "dd11c686b0a3ea571098b6361927c748e0bbc1d4140047d2a3ab39a684c15a5c",
+        "captured_at": "2026-11-05T06:33:21.144Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 532,
+      "kind": "annonce",
+      "title": "Microsoft announces change to director slate for Annual Shareholders Meeting",
+      "announced_at": "2026-11-04T21:05:19.000Z",
+      "first_seen_at": "2026-11-04T22:44:14.763Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Company News",
+        "Press releases"
+      ],
+      "source": {
+        "id": "feed:microsoft-source",
+        "name": "Microsoft Source — flux RSS officiel",
+        "url": "https://news.microsoft.com/source/2026/11/04/microsoft-announces-change-to-director-slate-for-annual-shareholders-meeting"
+      },
+      "excerpt": "November 4, 2026 Category: Company News Microsoft announces change to director slate for Annual Shareholders Meeting Microsoft Stories | 1 minute Microsoft Corporation (NASDAQ: MSFT) announced that Emma N. Walmsley has notified the board of…",
+      "capture": {
+        "content_hash": "77ff55c0ef49a2e343476a6acac6f63758be9b4cb43aa9f1dcd3771a8e91b567",
+        "captured_at": "2026-11-04T22:44:14.763Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 504,
+      "kind": "version",
+      "title": "Gemini CLI 0.67.0",
+      "announced_at": "2026-11-04T20:27:11.000Z",
+      "first_seen_at": "2026-11-04T22:44:12.503Z",
+      "product": {
+        "key": "google/gemini-cli",
+        "name": "Gemini CLI",
+        "publisher": "Google",
+        "category": "assistant de code",
+        "repository_url": "https://github.com/google-gemini/gemini-cli"
+      },
+      "version": "0.67.0",
+      "categories": [],
+      "source": {
+        "id": "github-releases:google-gemini/gemini-cli",
+        "name": "Gemini CLI — releases GitHub officielles",
+        "url": "https://github.com/google-gemini/gemini-cli/releases/tag/v0.67.0"
+      },
+      "excerpt": "Changelog for v0.65.0 by @gemini-cli-robot in https://github.com/google-gemini/gemini-cli/pull/29853 chore(release): bump version to 0.67.0-nightly.20261020.gb041de017 by @gemini-cli-robot in…",
+      "capture": {
+        "content_hash": "240640a4b128f0bc8085aeadf80373eb02b938d2c29db2d625b0063e09d445c2",
+        "captured_at": "2026-11-04T22:44:12.503Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 509,
+      "kind": "annonce",
+      "title": "CodeQL 2.27.4 improves accuracy and query metadata",
+      "announced_at": "2026-11-04T20:04:52.000Z",
+      "first_seen_at": "2026-11-04T22:44:13.781Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Improvement",
+        "application security"
+      ],
+      "source": {
+        "id": "feed:github-changelog",
+        "name": "GitHub Changelog — flux RSS officiel",
+        "url": "https://github.blog/changelog/2026-11-04-codeql-2-27-4-improves-accuracy-and-query-metadata"
+      },
+      "excerpt": "CodeQL is the static analysis engine behind GitHub code scanning, which finds and remediates security issues in your code. We’ve recently released CodeQL 2.27.4 with query accuracy improvements across several languages, stronger security…",
+      "capture": {
+        "content_hash": "df7919bedce39c423dd96395f1ae219e5bb426a1e397c31ee845722c950cb1b5",
+        "captured_at": "2026-11-04T22:44:13.781Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 557,
+      "kind": "annonce",
+      "title": "When is Cyber Monday 2026? Here’s everything you need to know",
+      "announced_at": "2026-11-04T19:14:04.000Z",
+      "first_seen_at": "2026-11-04T22:44:14.910Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Retail"
+      ],
+      "source": {
+        "id": "feed:amazon-news",
+        "name": "About Amazon — flux RSS officiel",
+        "url": "https://www.aboutamazon.com/news/retail/when-is-amazon-cyber-monday-faq"
+      },
+      "excerpt": "Cyber Monday 2026 falls on November 30. Here’s what to expect, how to prepare, and how to save big on the year’s final major deal event.",
+      "capture": {
+        "content_hash": "d0ce5eb0c759c844a35337678e524be27f6a46fa24e561a7a4fb2a1ec67ff8db",
+        "captured_at": "2026-11-04T22:44:14.910Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 510,
+      "kind": "annonce",
+      "title": "GitHub Copilot is now available in Xcode’s coding assistant",
+      "announced_at": "2026-11-04T19:10:40.000Z",
+      "first_seen_at": "2026-11-04T22:44:13.781Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Release",
+        "copilot"
+      ],
+      "source": {
+        "id": "feed:github-changelog",
+        "name": "GitHub Changelog — flux RSS officiel",
+        "url": "https://github.blog/changelog/2026-11-04-github-copilot-is-now-available-in-xcodes-coding-assistant"
+      },
+      "excerpt": "You can now work with GitHub Copilot directly in Xcode’s built-in coding assistant, bringing Copilot into your native Xcode workflow. The integration is now in public preview, available starting with Xcode 27.3 beta. This gives you another…",
+      "capture": {
+        "content_hash": "1521ddd4b79b5a780109be0c837a16ebdcc847d566883595ad32be0ffd45417e",
+        "captured_at": "2026-11-04T22:44:13.781Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 596,
+      "kind": "annonce",
+      "title": "Watch Henry Cavill build a video game on his Googlebook",
+      "announced_at": "2026-11-04T18:00:00.000Z",
+      "first_seen_at": "2026-11-05T00:17:21.882Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Googlebook"
+      ],
+      "source": {
+        "id": "feed:google-blog",
+        "name": "Google Blog — flux RSS officiel",
+        "url": "https://blog.google/products-and-platforms/devices/googlebook/henry-cavill-mustache-protocol-video-game"
+      },
+      "excerpt": "The video shows the making of Henry Cavill's game, “Mustache Protocol.\"",
+      "capture": {
+        "content_hash": "e0e8abcbda08f76bb0c5bebeacaa867f9e54b0bc690773a7b735453511073699",
+        "captured_at": "2026-11-05T00:17:21.882Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 587,
+      "kind": "annonce",
+      "title": "Dharma Field Extractor: Any Document In, Structured Fields in JSON Out",
+      "announced_at": "2026-11-04T17:50:10.000Z",
+      "first_seen_at": "2026-11-04T22:44:16.936Z",
+      "product": null,
+      "version": null,
+      "categories": [],
+      "source": {
+        "id": "feed:huggingface-blog",
+        "name": "Hugging Face Blog — flux RSS officiel",
+        "url": "https://huggingface.co/blog/Dharma-AI/dharma-field-extractor"
+      },
+      "excerpt": null,
+      "capture": {
+        "content_hash": "bdc763f2ac2ef47bf48607dfab466b4429dbe5694f8b901212a3cb526200d6bd",
+        "captured_at": "2026-11-04T22:44:16.936Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 505,
+      "kind": "annonce",
+      "title": "OpenAI to acquire Pierre Computer Company, Inc.",
+      "announced_at": "2026-11-04T14:30:00.000Z",
+      "first_seen_at": "2026-11-04T22:44:12.767Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Company"
+      ],
+      "source": {
+        "id": "feed:openai-news",
+        "name": "OpenAI News — flux RSS officiel",
+        "url": "https://openai.com/index/openai-to-acquire-pierre"
+      },
+      "excerpt": "OpenAI will acquire Pierre Computer Company, expanding Codex’s tools for building, understanding, and reviewing code.",
+      "capture": {
+        "content_hash": "4c2972e3a83547bd6d6c06f4a08b25d5596b0630b32417ee373f32a924ee15dd",
+        "captured_at": "2026-11-04T22:44:12.767Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 558,
+      "kind": "annonce",
+      "title": "‘Keep your cool’: The advice Amazon CEO Andy Jassy's dad gave him that stuck for life",
+      "announced_at": "2026-11-04T14:00:13.000Z",
+      "first_seen_at": "2026-11-04T22:44:14.910Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Workplace"
+      ],
+      "source": {
+        "id": "feed:amazon-news",
+        "name": "About Amazon — flux RSS officiel",
+        "url": "https://www.aboutamazon.com/news/workplace/amazon-ceo-andy-jassy-dad-advice"
+      },
+      "excerpt": "At Amazon's “Bring Your Parents to Work Day,” Jassy shared some of his father's advice, which has helped shape how he leads.",
+      "capture": {
+        "content_hash": "3da59a965bbdcf0303b0c7c982dd5ec6ea5877f7b7e43a2eb255df79df8a7225",
+        "captured_at": "2026-11-04T22:44:14.910Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 559,
+      "kind": "annonce",
+      "title": "Amazon’s new Shop Direct Merchant Workspace makes it even easier for stores across the web to have their products discovered by customers on Alexa for Shopping and Amazon",
+      "announced_at": "2026-11-04T14:00:07.000Z",
+      "first_seen_at": "2026-11-04T22:44:14.910Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Retail"
+      ],
+      "source": {
+        "id": "feed:amazon-news",
+        "name": "About Amazon — flux RSS officiel",
+        "url": "https://www.aboutamazon.com/news/retail/amazon-shop-direct-merchant-workspace"
+      },
+      "excerpt": "Tens of millions of customers have already discovered hundreds of millions of products from stores across the web through Amazon’s Shop Direct. With the new Shop Direct Merchant Workspace, merchants have a fast, free direct AI connector…",
+      "capture": {
+        "content_hash": "11407be682915689e6d30d8a7fdd0f679991af82cc64986979f1fc809435b0bf",
+        "captured_at": "2026-11-04T22:44:14.910Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 597,
+      "kind": "annonce",
+      "title": "We're sharing our framework for building safer and more helpful AI for health.",
+      "announced_at": "2026-11-04T14:00:00.000Z",
+      "first_seen_at": "2026-11-05T00:17:21.882Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Health"
+      ],
+      "source": {
+        "id": "feed:google-blog",
+        "name": "Google Blog — flux RSS officiel",
+        "url": "https://blog.google/innovation-and-ai/technology/health/evaluating-health-ai-at-scale"
+      },
+      "excerpt": "Many of us have turned to AI with a health question or received care from a doctor who’s using it. The adoption of technology for health is accelerating and impacts bill…",
+      "capture": {
+        "content_hash": "23ffdeaa89936dce7fe72f67f69fb441bd84e37f51150a34c8b50f5f4c313b63",
+        "captured_at": "2026-11-05T00:17:21.882Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 589,
+      "kind": "annonce",
+      "title": "ElevenAgents integrates natively with leading contact center platforms to deliver enterprise-ready agents",
+      "announced_at": "2026-11-04T12:00:00.000Z",
+      "first_seen_at": "2026-11-04T22:44:17.150Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Product"
+      ],
+      "source": {
+        "id": "feed:elevenlabs",
+        "name": "ElevenLabs Blog — flux RSS officiel",
+        "url": "https://elevenlabs.io/blog/elevenagents-contact-center-integrations"
+      },
+      "excerpt": "ElevenAgents now integrates natively with NiCE, Genesys Cloud, Amazon Connect, and Five9, and connects to any other platform over SIP.",
+      "capture": {
+        "content_hash": "760edc615b219b5d5eac29a9f36d5dd7529ab44bb2adc1b8adbe9331b30e2777",
+        "captured_at": "2026-11-04T22:44:17.150Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 588,
+      "kind": "annonce",
+      "title": "AI voice agent pricing: What it costs for your business",
+      "announced_at": "2026-11-04T12:00:00.000Z",
+      "first_seen_at": "2026-11-04T22:44:17.150Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Resources"
+      ],
+      "source": {
+        "id": "feed:elevenlabs",
+        "name": "ElevenLabs Blog — flux RSS officiel",
+        "url": "https://elevenlabs.io/blog/ai-voice-agent-pricing-guide"
+      },
+      "excerpt": "See AI voice agent pricing from $0 to custom Enterprise, what sets your price per minute, and how to calculate ROI against staffing costs.",
+      "capture": {
+        "content_hash": "083d806adf5c4bea0580119ffac15be937eb9972d8ed0b3c901cec8eab771ef6",
+        "captured_at": "2026-11-04T22:44:17.150Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 590,
+      "kind": "annonce",
+      "title": "Meet Higgsfield Shorts: Create Shorts With an AI Presenter",
+      "announced_at": "2026-11-04T11:37:00.000Z",
+      "first_seen_at": "2026-11-04T22:44:19.151Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Editorials"
+      ],
+      "source": {
+        "id": "feed:higgsfield",
+        "name": "Higgsfield Blog — flux RSS officiel",
+        "url": "https://higgsfield.ai/blog/higgsfield-introduces-shorts-studio"
+      },
+      "excerpt": null,
+      "capture": {
+        "content_hash": "3a3d1073319c919a183c1b0d15786e020bf3c9813c66583c07a239c44230a6f4",
+        "captured_at": "2026-11-04T22:44:19.151Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 598,
+      "kind": "annonce",
+      "title": "Take a closer look at art with the Courtauld",
+      "announced_at": "2026-11-04T10:00:00.000Z",
+      "first_seen_at": "2026-11-05T00:17:21.882Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Arts & Culture"
+      ],
+      "source": {
+        "id": "feed:google-blog",
+        "name": "Google Blog — flux RSS officiel",
+        "url": "https://blog.google/company-news/outreach-and-initiatives/arts-culture/the-art-of-looking"
+      },
+      "excerpt": "Experts from the Courtauld discuss their digital partnership with Google Arts & Culture, demonstrating how ultra-high-resolution imagery brings gallery masterpieces into focus. Focusing on works like Paul Cézanne's still life, they explore…",
+      "capture": {
+        "content_hash": "641f4732cd732e1419f04f10c4ff9e06a3ac7253e79cec68f2986851cac47342",
+        "captured_at": "2026-11-05T00:17:21.882Z",
+        "mode": "live"
+      }
+    },
+    {
       "id": 489,
       "kind": "annonce",
       "title": "OpenAI's NEW GPT-ADA! GPT-6.2 Astra is Fable 5.5 Level?! Hy4 IS OUT, DeepSeek V5, & More! AI NEWS",
@@ -2106,6 +2659,52 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "53da78f3b2282fce362cdfdf0cefb9364932c17547df189aa135d1912381ab25",
         "captured_at": "2026-11-04T11:07:56.085Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 506,
+      "kind": "annonce",
+      "title": "A thousand fewer paths to root",
+      "announced_at": "2026-11-04T08:00:00.000Z",
+      "first_seen_at": "2026-11-04T22:44:12.767Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Security"
+      ],
+      "source": {
+        "id": "feed:openai-news",
+        "name": "OpenAI News — flux RSS officiel",
+        "url": "https://openai.com/index/a-thousand-fewer-paths-to-root"
+      },
+      "excerpt": "OpenAI built an autonomous pipeline that found, validated, and generated patches for 948 local privilege-escalation vulnerabilities in the Linux kernel.",
+      "capture": {
+        "content_hash": "860f633ed1c50919439cef824469454895b7cf0cd8ca7ab3755765ca60b4f702",
+        "captured_at": "2026-11-04T22:44:12.767Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 507,
+      "kind": "annonce",
+      "title": "Daybreak Red is now available in AWS GovCloud (US-East)",
+      "announced_at": "2026-11-04T07:00:00.000Z",
+      "first_seen_at": "2026-11-04T22:44:12.767Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Product"
+      ],
+      "source": {
+        "id": "feed:openai-news",
+        "name": "OpenAI News — flux RSS officiel",
+        "url": "https://openai.com/index/daybreak-red-aws-govcloud"
+      },
+      "excerpt": "Daybreak Red brings GPT-5.6 Cyber to approved customers in AWS GovCloud (US-East) through Amazon Bedrock for authorized cybersecurity work.",
+      "capture": {
+        "content_hash": "ba863181b9227e5526375edde77c58186a5fc7e3e3c1ec48ede5e74024e71e19",
+        "captured_at": "2026-11-04T22:44:12.767Z",
         "mode": "live"
       }
     },
@@ -2163,6 +2762,99 @@ window.DONNEES_MAQUETTE = {
       }
     },
     {
+      "id": 508,
+      "kind": "annonce",
+      "title": "DevRev delivers autonomous self-service with GPT-6.1 Sol",
+      "announced_at": "2026-11-04T00:00:00.000Z",
+      "first_seen_at": "2026-11-04T22:44:12.767Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Startup"
+      ],
+      "source": {
+        "id": "feed:openai-news",
+        "name": "OpenAI News — flux RSS officiel",
+        "url": "https://openai.com/index/devrev-enterprise-self-service"
+      },
+      "excerpt": "DevRev uses GPT-6.1 Sol to power Computer and Operator, balancing reasoning, speed, and cost for enterprise service.",
+      "capture": {
+        "content_hash": "d179a3d6b239fa3647e50652972344c6a0ada3bca71f6c73a28cc5ca6e2055cc",
+        "captured_at": "2026-11-04T22:44:12.767Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 567,
+      "kind": "annonce",
+      "title": "AMD Reports Third Quarter 2026 Financial Results",
+      "announced_at": "2026-11-03T21:15:00.000Z",
+      "first_seen_at": "2026-11-04T22:44:15.144Z",
+      "product": null,
+      "version": null,
+      "categories": [],
+      "source": {
+        "id": "feed:amd-press",
+        "name": "AMD, communiqués — flux RSS officiel",
+        "url": "https://ir.amd.com/news-events/press-releases/detail/1303/amd-reports-third-quarter-2026-financial-results"
+      },
+      "excerpt": null,
+      "capture": {
+        "content_hash": "32519052465a14ba9f5d4d9f243e7149fc8452500d2526baea7b6e59b9da5789",
+        "captured_at": "2026-11-04T22:44:15.144Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 616,
+      "kind": "annonce",
+      "title": "Upgraded Sleep Apnea Feature Now Available on Galaxy Ring Following Regulatory Approvals From US FDA and Korea MFDS",
+      "announced_at": "2026-11-03T21:00:00.000Z",
+      "first_seen_at": "2026-11-05T00:17:22.466Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Mobile",
+        "Press Releases",
+        "Galaxy Ring",
+        "Galaxy Watch9"
+      ],
+      "source": {
+        "id": "feed:samsung-newsroom",
+        "name": "Samsung Global Newsroom — flux RSS officiel",
+        "url": "https://news.samsung.com/global/upgraded-sleep-apnea-feature-now-available-on-galaxy-ring-following-regulatory-approvals-from-us-fda-and-korea-mfds"
+      },
+      "excerpt": "Samsung Electronics today announced that its updated Sleep Apnea feature1 is now available on Galaxy Watch and Ring.2 Following United States Food and Drug Administration (FDA) clearance in July, the updated feature has also received…",
+      "capture": {
+        "content_hash": "4273324af1a33738e2d520673a9e169fc811f8dd38361425107256d00e5649f5",
+        "captured_at": "2026-11-05T00:17:22.466Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 591,
+      "kind": "annonce",
+      "title": "7 AI Video Team Plans Compared: Pricing, Seats, and Shared Credits",
+      "announced_at": "2026-11-03T20:30:00.000Z",
+      "first_seen_at": "2026-11-04T22:44:19.151Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Comparisons"
+      ],
+      "source": {
+        "id": "feed:higgsfield",
+        "name": "Higgsfield Blog — flux RSS officiel",
+        "url": "https://higgsfield.ai/blog/ai-video-team-plans-compared"
+      },
+      "excerpt": null,
+      "capture": {
+        "content_hash": "90bb7d029c06cc2c824222352ae05aca1627b69366c08283d587a2e1ccaeb14f",
+        "captured_at": "2026-11-04T22:44:19.151Z",
+        "mode": "live"
+      }
+    },
+    {
       "id": 457,
       "kind": "annonce",
       "title": "Dependabot version updates support Agent Package Manager",
@@ -2183,6 +2875,167 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "267fea2ca6e59252256bc9299921e1e1d441b5139ec8996784daaa6a145404cc",
         "captured_at": "2026-11-04T10:22:59.637Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 560,
+      "kind": "annonce",
+      "title": "5 ways Amazon is investing in Wisconsin",
+      "announced_at": "2026-11-03T19:13:47.000Z",
+      "first_seen_at": "2026-11-04T22:44:14.910Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Community"
+      ],
+      "source": {
+        "id": "feed:amazon-news",
+        "name": "About Amazon — flux RSS officiel",
+        "url": "https://www.aboutamazon.com/news/community/amazon-investment-wisconsin-jobs-infrastructure-small-business"
+      },
+      "excerpt": "Amazon’s investments are boosting the Badger State’s economy while creating opportunities for those who call Wisconsin home.",
+      "capture": {
+        "content_hash": "15044764be48fa5c448cc69b6faead3d0e6c51feb710b7d25c1f7e71061645bd",
+        "captured_at": "2026-11-04T22:44:14.910Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 561,
+      "kind": "annonce",
+      "title": "5 ways Amazon is investing in Michigan",
+      "announced_at": "2026-11-03T19:11:57.000Z",
+      "first_seen_at": "2026-11-04T22:44:14.910Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Community"
+      ],
+      "source": {
+        "id": "feed:amazon-news",
+        "name": "About Amazon — flux RSS officiel",
+        "url": "https://www.aboutamazon.com/news/community/amazon-investment-michigan-jobs-infrastructure-small-business"
+      },
+      "excerpt": "Amazon’s investments are boosting the Great Lakes State’s economy while creating opportunities for those who call Michigan home.",
+      "capture": {
+        "content_hash": "9f290c32b3e5ba76b40ecdada314c08a579375326d84158eb888c222590af9bc",
+        "captured_at": "2026-11-04T22:44:14.910Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 562,
+      "kind": "annonce",
+      "title": "5 ways Amazon is investing in Oklahoma",
+      "announced_at": "2026-11-03T19:08:10.000Z",
+      "first_seen_at": "2026-11-04T22:44:14.910Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Community"
+      ],
+      "source": {
+        "id": "feed:amazon-news",
+        "name": "About Amazon — flux RSS officiel",
+        "url": "https://www.aboutamazon.com/news/community/amazon-investment-oklahoma-jobs-infrastructure-small-business"
+      },
+      "excerpt": "Amazon’s investments are boosting the Sooner State’s economy while creating opportunities for those who call Oklahoma home.",
+      "capture": {
+        "content_hash": "516682d110fbe7a4d456fb8cde501a9667a9e46bef497145fbf6adbe21a54cce",
+        "captured_at": "2026-11-04T22:44:14.910Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 563,
+      "kind": "annonce",
+      "title": "5 ways Amazon is investing in Kansas",
+      "announced_at": "2026-11-03T19:05:53.000Z",
+      "first_seen_at": "2026-11-04T22:44:14.910Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Community"
+      ],
+      "source": {
+        "id": "feed:amazon-news",
+        "name": "About Amazon — flux RSS officiel",
+        "url": "https://www.aboutamazon.com/news/community/amazon-investment-kansas-jobs-infrastructure-small-business"
+      },
+      "excerpt": "Amazon’s investments are boosting the Sunflower State’s economy while creating opportunities for those who call Kansas home.",
+      "capture": {
+        "content_hash": "c09292ebda3a2c9855a181f7888bee39efe91a9a027476ec0ea957ff72e392c6",
+        "captured_at": "2026-11-04T22:44:14.910Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 593,
+      "kind": "annonce",
+      "title": "7 Best Pika Alternatives for AI Video in 2026",
+      "announced_at": "2026-11-03T19:00:00.000Z",
+      "first_seen_at": "2026-11-04T22:44:19.151Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Comparisons"
+      ],
+      "source": {
+        "id": "feed:higgsfield",
+        "name": "Higgsfield Blog — flux RSS officiel",
+        "url": "https://higgsfield.ai/blog/best-pika-alternatives"
+      },
+      "excerpt": null,
+      "capture": {
+        "content_hash": "79df4edbe32896365e6bd662c6b41f7408d242a17120efb9d0b7627e699b7d55",
+        "captured_at": "2026-11-04T22:44:19.151Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 592,
+      "kind": "annonce",
+      "title": "10 Best RunwayML Alternatives in 2026",
+      "announced_at": "2026-11-03T19:00:00.000Z",
+      "first_seen_at": "2026-11-04T22:44:19.151Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Comparisons"
+      ],
+      "source": {
+        "id": "feed:higgsfield",
+        "name": "Higgsfield Blog — flux RSS officiel",
+        "url": "https://higgsfield.ai/blog/best-runway-ml-alternatives"
+      },
+      "excerpt": null,
+      "capture": {
+        "content_hash": "3150dea7efc8b33e65a1421547042d812f27ae252fbe15975379a04b23bce388",
+        "captured_at": "2026-11-04T22:44:19.151Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 537,
+      "kind": "annonce",
+      "title": "Redesigned Health app expands language support",
+      "announced_at": "2026-11-03T18:24:58.012Z",
+      "first_seen_at": "2026-11-04T22:44:14.836Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "QUICK READ"
+      ],
+      "source": {
+        "id": "feed:apple-newsroom",
+        "name": "Apple Newsroom — flux RSS officiel",
+        "url": "https://www.apple.com/newsroom/2026/11/redesigned-health-app-expands-language-support"
+      },
+      "excerpt": "Apple announced expanded language support for the redesigned Health app, bringing personalized health insights to millions of people worldwide.",
+      "capture": {
+        "content_hash": "44afdcdade2eae2e5b2fc564e8dc4ac15b8fe7ad31b5bb23ad9247f3951457d0",
+        "captured_at": "2026-11-04T22:44:14.836Z",
         "mode": "live"
       }
     },
@@ -2225,6 +3078,32 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "9d9586ce6d3ca06a8822ea888aa3960445fe3b71c009a29782b24f1c8255a2e7",
         "captured_at": "2026-11-04T10:23:00.712Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 514,
+      "kind": "annonce",
+      "title": "AI Is Changing How Semiconductor Fabs Work — and Engineers Are Moving Faster Because of It",
+      "announced_at": "2026-11-03T16:00:45.000Z",
+      "first_seen_at": "2026-11-04T22:44:14.469Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "AI",
+        "Agentic AI",
+        "Artificial Intelligence",
+        "CUDA"
+      ],
+      "source": {
+        "id": "feed:nvidia-blog",
+        "name": "NVIDIA Blog — flux RSS officiel",
+        "url": "https://blogs.nvidia.com/blog/ai-semiconductor-fabs"
+      },
+      "excerpt": "Demand for advanced chips is rising. The processes to build them are getting more complex. And the margin for error is shrinking. For engineers, understanding how a process change will behave, how a material will interact with a new step…",
+      "capture": {
+        "content_hash": "9483c41c8b9b5e1318012b953c8180795cb76c1b4c77a7fbeaf0acbbcb7b2d32",
+        "captured_at": "2026-11-04T22:44:14.469Z",
         "mode": "live"
       }
     },
@@ -2321,6 +3200,146 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "9fa56914dea11a36b40809b45808b3f13001553aabb0d59387441ab3b9b1b008",
         "captured_at": "2026-11-04T10:23:04.025Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 604,
+      "kind": "annonce",
+      "title": "Expanding AI educator training to new countries",
+      "announced_at": "2026-11-03T14:00:00.000Z",
+      "first_seen_at": "2026-11-05T00:17:21.882Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Learning & Education"
+      ],
+      "source": {
+        "id": "feed:google-blog",
+        "name": "Google Blog — flux RSS officiel",
+        "url": "https://blog.google/products-and-platforms/products/education/google-ai-educator-series-global-expansion-november-2026"
+      },
+      "excerpt": "An illustration featuring a stylized globe in the center with network lines connecting points across the world to various colorful icon badges, including graduation caps, award ribbons, and stylized figures.",
+      "capture": {
+        "content_hash": "d5c9e6dc4bb372d86de076250a0b721cbf1ebee364819731a6a39b89bbb1a0cc",
+        "captured_at": "2026-11-05T00:17:21.882Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 603,
+      "kind": "annonce",
+      "title": "Working collaboratively to fight scams in Asia Pacific",
+      "announced_at": "2026-11-03T14:00:00.000Z",
+      "first_seen_at": "2026-11-05T00:17:21.882Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Safety & Security",
+        "Google in Asia"
+      ],
+      "source": {
+        "id": "feed:google-blog",
+        "name": "Google Blog — flux RSS officiel",
+        "url": "https://blog.google/company-news/inside-google/around-the-globe/google-asia/fight-against-apac-scams"
+      },
+      "excerpt": "A woman using her smartphone, surrounded by graphic icons representing online security, privacy, and message alerts.",
+      "capture": {
+        "content_hash": "35a8d7e8a7e7ff3f330d1072258a98d9ce7809f935cb477cbd90db47b5d87d68",
+        "captured_at": "2026-11-05T00:17:21.882Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 602,
+      "kind": "annonce",
+      "title": "Designing responsible AI for learning",
+      "announced_at": "2026-11-03T14:00:00.000Z",
+      "first_seen_at": "2026-11-05T00:17:21.882Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Learning & Education"
+      ],
+      "source": {
+        "id": "feed:google-blog",
+        "name": "Google Blog — flux RSS officiel",
+        "url": "https://blog.google/products-and-platforms/products/education/ai-learning-era-updates-2026"
+      },
+      "excerpt": "A teacher pointing at a student's Chromebook screen while the student observes.",
+      "capture": {
+        "content_hash": "0e25679396f0cfddfce8b461e1932d6be2598c05b9a693ca515eeec9173bfa25",
+        "captured_at": "2026-11-05T00:17:21.882Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 601,
+      "kind": "annonce",
+      "title": "AI in the learning era",
+      "announced_at": "2026-11-03T14:00:00.000Z",
+      "first_seen_at": "2026-11-05T00:17:21.882Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Learning & Education"
+      ],
+      "source": {
+        "id": "feed:google-blog",
+        "name": "Google Blog — flux RSS officiel",
+        "url": "https://blog.google/products-and-platforms/products/education/ai-learning-era-2026"
+      },
+      "excerpt": "Read announcements from Google’s 2026 AI in the Learning Era event.",
+      "capture": {
+        "content_hash": "83b082305c6fd38bd24a4dc7e5312e3767db8b62c04731652ae7dae2dcd1d798",
+        "captured_at": "2026-11-05T00:17:21.882Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 600,
+      "kind": "annonce",
+      "title": "We’re providing funding for organizations building AI for teachers.",
+      "announced_at": "2026-11-03T14:00:00.000Z",
+      "first_seen_at": "2026-11-05T00:17:21.882Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Learning & Education",
+        "Google.org"
+      ],
+      "source": {
+        "id": "feed:google-blog",
+        "name": "Google Blog — flux RSS officiel",
+        "url": "https://blog.google/products-and-platforms/products/education/google-org-funding-ai-education"
+      },
+      "excerpt": "Google.org is funding five organizations to build AI tools for teachers. See how these initiatives support educators and students. Get the details.",
+      "capture": {
+        "content_hash": "4f2bb4d5f2a63b4b10b4bf4d8dbfcfea6bf670a6f0fda61881e36e4ccbd1d5b1",
+        "captured_at": "2026-11-05T00:17:21.882Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 599,
+      "kind": "annonce",
+      "title": "New research shows how Guided Learning supports students",
+      "announced_at": "2026-11-03T14:00:00.000Z",
+      "first_seen_at": "2026-11-05T00:17:21.882Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Learning & Education"
+      ],
+      "source": {
+        "id": "feed:google-blog",
+        "name": "Google Blog — flux RSS officiel",
+        "url": "https://blog.google/products-and-platforms/products/education/guided-learning-uk-japan"
+      },
+      "excerpt": "Four students huddled in a circle, all looking at a laptop together",
+      "capture": {
+        "content_hash": "ca43950b57bb56b32e3b7962b7567d691fcbc994b431a6fd63b213bc7ca44774",
+        "captured_at": "2026-11-05T00:17:21.882Z",
         "mode": "live"
       }
     },
@@ -2439,6 +3458,31 @@ window.DONNEES_MAQUETTE = {
       }
     },
     {
+      "id": 617,
+      "kind": "annonce",
+      "title": "[Video] Inside the Tech: Samsung Micro RGB TV",
+      "announced_at": "2026-11-03T08:00:00.000Z",
+      "first_seen_at": "2026-11-05T00:17:22.466Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "TVs & Displays",
+        "Micro RGB",
+        "VIDEO NEWS"
+      ],
+      "source": {
+        "id": "feed:samsung-newsroom",
+        "name": "Samsung Global Newsroom — flux RSS officiel",
+        "url": "https://news.samsung.com/global/video-inside-the-tech-samsung-micro-rgb-tv"
+      },
+      "excerpt": "The TV is often the centerpiece of the living room, and when it comes to big screens, every detail counts. Meet Samsung Micro RGB TV, with microscopic RGB LEDs under 100 μm creating a world of vivid, precise color. With a powerful AI engine…",
+      "capture": {
+        "content_hash": "10b2b30b0971af44a2edfb985d85b86b7cb978299ff3e5deb95fc34126abd081",
+        "captured_at": "2026-11-05T00:17:22.466Z",
+        "mode": "live"
+      }
+    },
+    {
       "id": 449,
       "kind": "annonce",
       "title": "Heimstaden is changing residential real estate management with AI",
@@ -2507,6 +3551,55 @@ window.DONNEES_MAQUETTE = {
       }
     },
     {
+      "id": 515,
+      "kind": "annonce",
+      "title": "Cities Worldwide Build and Scale AI Services With NVIDIA Physical and Agentic AI",
+      "announced_at": "2026-11-03T07:00:12.000Z",
+      "first_seen_at": "2026-11-04T22:44:14.469Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "AI",
+        "Agentic AI",
+        "AI Factory",
+        "Artificial Intelligence"
+      ],
+      "source": {
+        "id": "feed:nvidia-blog",
+        "name": "NVIDIA Blog — flux RSS officiel",
+        "url": "https://blogs.nvidia.com/blog/cities-physical-agentic-ai-applications"
+      },
+      "excerpt": "Cities generate enormous amounts of data from cameras, sensors and operational systems, but turning it into useful action — for planning, maintenance and public services — remains a challenge. Physical and agentic AI offer new ways to close…",
+      "capture": {
+        "content_hash": "0f390786416ea11c5ee428e8e6c2a34bed637020de8d2b4d2c53c7f8d489d18c",
+        "captured_at": "2026-11-04T22:44:14.469Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 605,
+      "kind": "annonce",
+      "title": "Advancing research and partnering with universities in Singapore",
+      "announced_at": "2026-11-03T04:30:00.000Z",
+      "first_seen_at": "2026-11-05T00:17:21.882Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Google Research"
+      ],
+      "source": {
+        "id": "feed:google-blog",
+        "name": "Google Blog — flux RSS officiel",
+        "url": "https://blog.google/innovation-and-ai/technology/research/partnering-singapore-advance-scientific-discovery"
+      },
+      "excerpt": "A light beam is focused through a lens into thin wires that pass through panels featuring increasingly complex patterns of blue dots, dashes, and other geometric shapes. The Google G is on the bottom left corner.",
+      "capture": {
+        "content_hash": "3118dd5b9b30eb5bb29ffa7f1b6f222d46945a08d0a6fdedd7b6f754ea337a6b",
+        "captured_at": "2026-11-05T00:17:21.882Z",
+        "mode": "live"
+      }
+    },
+    {
       "id": 446,
       "kind": "version",
       "title": "Claude Code 2.1.317",
@@ -2530,6 +3623,48 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "569637a5137e899ed4b4666b66eb68ee35d1a137029159aa4e6a6e510cc01cb2",
         "captured_at": "2026-11-04T10:22:55.515Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 595,
+      "kind": "annonce",
+      "title": "Introducing Spline Arena",
+      "announced_at": "2026-11-03T00:00:00.000Z",
+      "first_seen_at": "2026-11-04T22:44:20.994Z",
+      "product": null,
+      "version": null,
+      "categories": [],
+      "source": {
+        "id": "feed:spline",
+        "name": "Spline Changelog — flux RSS officiel",
+        "url": "https://spline.design/changelog/introducing-spline-arena"
+      },
+      "excerpt": "Spline Arena is a public leaderboard for how well AI models build in 3D. Two models get the same prompt and each builds a scene in Spline. You orbit both, vote blind for the better one, and every vote moves the rankings. Reach the day's…",
+      "capture": {
+        "content_hash": "65c1dbbed4b674cb3df1abab173292510c3bef332370e01a3e3c38f44403839b",
+        "captured_at": "2026-11-04T22:44:20.994Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 594,
+      "kind": "annonce",
+      "title": "Your prototype connections, now context for code layers",
+      "announced_at": "2026-11-03T00:00:00.000Z",
+      "first_seen_at": "2026-11-04T22:44:20.394Z",
+      "product": null,
+      "version": null,
+      "categories": [],
+      "source": {
+        "id": "feed:figma-release-notes",
+        "name": "Figma, notes de version — flux Atom officiel",
+        "url": "https://www.figma.com/release-notes?title=your-prototype-connections-now-context-for-code-layers"
+      },
+      "excerpt": "When you create a code layer from design frames, the agent now reads the prototype connections and interactions between them.",
+      "capture": {
+        "content_hash": "dd21b581e27db29dbc231f6d574ff270ab1af25947f38c297a460520cd9cc5b7",
+        "captured_at": "2026-11-04T22:44:20.394Z",
         "mode": "live"
       }
     },
@@ -2620,6 +3755,29 @@ window.DONNEES_MAQUETTE = {
       }
     },
     {
+      "id": 538,
+      "kind": "annonce",
+      "title": "Apple reports fourth quarter results",
+      "announced_at": "2026-11-02T21:30:04.319Z",
+      "first_seen_at": "2026-11-04T22:44:14.836Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "PRESS RELEASE"
+      ],
+      "source": {
+        "id": "feed:apple-newsroom",
+        "name": "Apple Newsroom — flux RSS officiel",
+        "url": "https://www.apple.com/newsroom/2026/11/apple-reports-fourth-quarter-results"
+      },
+      "excerpt": "Apple today announced financial results for its fiscal 2026 fourth quarter ended September 26, 2026.",
+      "capture": {
+        "content_hash": "a722fca9ba757dda951f941810f7b1ea2e054508ebb2279394257972a0103ef7",
+        "captured_at": "2026-11-04T22:44:14.836Z",
+        "mode": "live"
+      }
+    },
+    {
       "id": 486,
       "kind": "annonce",
       "title": "Why AI Video Generations Fail and How to Fix Every Common Error",
@@ -2662,6 +3820,29 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "8b8e7585d86b7672186a1d603632a86683e16682762955b1169ec28377902dd9",
         "captured_at": "2026-11-04T10:23:04.025Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 564,
+      "kind": "annonce",
+      "title": "Amazon CEO Andy Jassy: ‘I had to change how I worked, or I was going to be a lousy dad’",
+      "announced_at": "2026-11-02T18:12:51.000Z",
+      "first_seen_at": "2026-11-04T22:44:14.910Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Workplace"
+      ],
+      "source": {
+        "id": "feed:amazon-news",
+        "name": "About Amazon — flux RSS officiel",
+        "url": "https://www.aboutamazon.com/news/workplace/amazon-ceo-andy-jassy-work-life-balance"
+      },
+      "excerpt": "From Tuesday date nights to weekly breakfasts with his kids, Jassy shared the boundaries and traditions that keep his family close.",
+      "capture": {
+        "content_hash": "1486f797a329512468535fcc34558166ec59af4624337002200bbeaf1c43e6f1",
+        "captured_at": "2026-11-04T22:44:14.910Z",
         "mode": "live"
       }
     },
@@ -2712,6 +3893,56 @@ window.DONNEES_MAQUETTE = {
       }
     },
     {
+      "id": 533,
+      "kind": "annonce",
+      "title": "Lumen and Microsoft expand collaboration to co-sell enterprise AI-ready networks",
+      "announced_at": "2026-11-02T17:51:17.000Z",
+      "first_seen_at": "2026-11-04T22:44:14.763Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Company News",
+        "Press releases"
+      ],
+      "source": {
+        "id": "feed:microsoft-source",
+        "name": "Microsoft Source — flux RSS officiel",
+        "url": "https://news.microsoft.com/source/2026/11/02/lumen-and-microsoft-expand-collaboration-to-co-sell-enterprise-ai-ready-networks"
+      },
+      "excerpt": "November 2, 2026 Category: Company News Lumen and Microsoft expand collaboration to co-sell enterprise AI-ready networks Cloud and network expertise converge to accelerate how enterprises scale AI and prepare for the next generation of…",
+      "capture": {
+        "content_hash": "874d3a068ccd6b8d381219291ec909d4872640254e797c3879ccb1f9b2862a2b",
+        "captured_at": "2026-11-04T22:44:14.763Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 606,
+      "kind": "annonce",
+      "title": "The latest AI news we announced in October 2026",
+      "announced_at": "2026-11-02T17:45:00.000Z",
+      "first_seen_at": "2026-11-05T00:17:21.882Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Google DeepMind",
+        "Quantum computing",
+        "AI",
+        "Gemini App"
+      ],
+      "source": {
+        "id": "feed:google-blog",
+        "name": "Google Blog — flux RSS officiel",
+        "url": "https://blog.google/innovation-and-ai/technology/ai/google-ai-updates-october-2026"
+      },
+      "excerpt": "Animated carousel of images from AI posts in October",
+      "capture": {
+        "content_hash": "0dafd3059087f10cff4b05e57bffe443739ae21c8150e69343878c788d22c28f",
+        "captured_at": "2026-11-05T00:17:21.882Z",
+        "mode": "live"
+      }
+    },
+    {
       "id": 423,
       "kind": "annonce",
       "title": "The latest AI news we announced in October 2026",
@@ -2734,6 +3965,30 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "0dafd3059087f10cff4b05e57bffe443739ae21c8150e69343878c788d22c28f",
         "captured_at": "2026-11-02T20:12:12.873Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 607,
+      "kind": "annonce",
+      "title": "Google Messages, Phone by Google, and Google Contacts get new, updated icons.",
+      "announced_at": "2026-11-02T17:00:00.000Z",
+      "first_seen_at": "2026-11-05T00:17:21.882Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Android",
+        "Messages"
+      ],
+      "source": {
+        "id": "feed:google-blog",
+        "name": "Google Blog — flux RSS officiel",
+        "url": "https://blog.google/products-and-platforms/products/messages/updated-icons-messages-phone-contacts"
+      },
+      "excerpt": "Google is updating the icons for Messages, Phone, and Contacts with a sleeker, cohesive design. See the new look for your home screen.",
+      "capture": {
+        "content_hash": "800a7f1f836bf7ffdfada1651be05dea28d8c6f97eccabfd5c84f13cfba343a4",
+        "captured_at": "2026-11-05T00:17:21.882Z",
         "mode": "live"
       }
     },
@@ -2829,6 +4084,29 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "2923c9d6b6f9d0151039db1917a8a41a17794a147f27649e56b1bd52430fdd3b",
         "captured_at": "2026-11-02T20:12:12.545Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 565,
+      "kind": "annonce",
+      "title": "Is Amazon Grocery worth it? Yes—here’s what to know.",
+      "announced_at": "2026-11-02T14:00:05.000Z",
+      "first_seen_at": "2026-11-04T22:44:14.910Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Retail"
+      ],
+      "source": {
+        "id": "feed:amazon-news",
+        "name": "About Amazon — flux RSS officiel",
+        "url": "https://www.aboutamazon.com/news/retail/is-amazon-grocery-worth-it"
+      },
+      "excerpt": "With everyday low prices and Same-Day Delivery in more than 2,300 U.S. cities and towns, Amazon Grocery is helping customers save more and shop faster on fresh groceries and everyday essentials.",
+      "capture": {
+        "content_hash": "c2abeb2e2462ce8844852856a323a5bf9e8cc50b0e5b1d925d821f1a4d6e90c9",
+        "captured_at": "2026-11-04T22:44:14.910Z",
         "mode": "live"
       }
     },
@@ -2963,6 +4241,32 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "fd3751538c801411e1559e5b34ef7cbb88169fff8072e4ef986103c8c5187474",
         "captured_at": "2026-11-04T11:07:56.085Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 618,
+      "kind": "annonce",
+      "title": "Samsung Champions Young Olympians at Dakar 2026, First-Ever Olympic Event on African Continent",
+      "announced_at": "2026-11-02T08:00:00.000Z",
+      "first_seen_at": "2026-11-05T00:17:22.466Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Mobile",
+        "Press Releases",
+        "Dakar 2026",
+        "Galaxy Z Flip7 Olympic Edition"
+      ],
+      "source": {
+        "id": "feed:samsung-newsroom",
+        "name": "Samsung Global Newsroom — flux RSS officiel",
+        "url": "https://news.samsung.com/global/samsung-champions-young-olympians-at-dakar-2026-first-ever-olympic-event-on-african-continent"
+      },
+      "excerpt": "Samsung Electronics, a Worldwide Olympic and Paralympic Partner, today announced that it is bringing Galaxy technology and athlete-centered programming to the Youth Olympic Games Dakar 2026 to enrich the experience of young athletes during…",
+      "capture": {
+        "content_hash": "4c968b9a069b2b98f4e2738b5fda8ed131733abe0d8d76cd5a6ab6d9c366d8f4",
+        "captured_at": "2026-11-05T00:17:22.466Z",
         "mode": "live"
       }
     },
@@ -3216,6 +4520,52 @@ window.DONNEES_MAQUETTE = {
       }
     },
     {
+      "id": 608,
+      "kind": "annonce",
+      "title": "Google Fitbit Edge: On shelves now",
+      "announced_at": "2026-10-30T20:15:00.000Z",
+      "first_seen_at": "2026-11-05T00:17:21.882Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Fitbit"
+      ],
+      "source": {
+        "id": "feed:google-blog",
+        "name": "Google Blog — flux RSS officiel",
+        "url": "https://blog.google/products-and-platforms/devices/fitbit/google-fitbit-edge-on-shelves-now"
+      },
+      "excerpt": "Shop the new Google Fitbit Edge featuring a bright, large display and physical side buttons for easy control. Upgrade your fitness tracker today.",
+      "capture": {
+        "content_hash": "9e81fb3291cff4357214045af332f64597cbf073d8c6d7ffc4e9c717c9c2495b",
+        "captured_at": "2026-11-05T00:17:21.882Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 566,
+      "kind": "annonce",
+      "title": "Amazon data center communities: Here’s what’s happening near data centers across the US in 2026",
+      "announced_at": "2026-10-30T20:15:00.000Z",
+      "first_seen_at": "2026-11-04T22:44:14.910Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "AWS"
+      ],
+      "source": {
+        "id": "feed:amazon-news",
+        "name": "About Amazon — flux RSS officiel",
+        "url": "https://www.aboutamazon.com/news/aws/amazon-data-centers-locations-news"
+      },
+      "excerpt": "Get the latest updates on how Amazon supports small businesses, creates jobs, sets up sustainability initiatives, and develops educational programs near AWS data centers.",
+      "capture": {
+        "content_hash": "053cf40969e60e85850c4421c4592231b9ad7bb06e2f7ad2e8eb604c8db0fd27",
+        "captured_at": "2026-11-04T22:44:14.910Z",
+        "mode": "live"
+      }
+    },
+    {
       "id": 436,
       "kind": "annonce",
       "title": "How to Make Product Videos with AI in 2026 (Full Guide)",
@@ -3283,6 +4633,29 @@ window.DONNEES_MAQUETTE = {
       }
     },
     {
+      "id": 609,
+      "kind": "annonce",
+      "title": "We’ve received our first response from the Project Suncatcher prototype satellite.",
+      "announced_at": "2026-10-30T17:00:00.000Z",
+      "first_seen_at": "2026-11-05T00:17:21.882Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Google Research"
+      ],
+      "source": {
+        "id": "feed:google-blog",
+        "name": "Google Blog — flux RSS officiel",
+        "url": "https://blog.google/innovation-and-ai/models-and-research/google-research/project-suncatcher-satellite-response"
+      },
+      "excerpt": "Video showing the Project Suncatcher team explaining the project and reacting to the TPU-generated haiku",
+      "capture": {
+        "content_hash": "ead2b7d8de814c3ac7da2b8274f7867bf9f43860ab712968153ae54762a832f7",
+        "captured_at": "2026-11-05T00:17:21.882Z",
+        "mode": "live"
+      }
+    },
+    {
       "id": 441,
       "kind": "annonce",
       "title": "Throttling vs. Rate Limiting: Backoff Strategies for Workflows",
@@ -3303,6 +4676,56 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "35aa69be618de49f1832ab58e39a76d0c13980430121c2d8cec9172f09659b1a",
         "captured_at": "2026-11-02T20:12:19.031Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 610,
+      "kind": "annonce",
+      "title": "See who has access to your Gmail inbox in 2 minutes.",
+      "announced_at": "2026-10-30T16:00:00.000Z",
+      "first_seen_at": "2026-11-05T00:17:21.882Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Google Workspace",
+        "Safety & Security"
+      ],
+      "source": {
+        "id": "feed:google-blog",
+        "name": "Google Blog — flux RSS officiel",
+        "url": "https://blog.google/innovation-and-ai/technology/safety-security/google-security-checkup"
+      },
+      "excerpt": "Run a quick Google Security Checkup and protect your email with three quick and easy steps.",
+      "capture": {
+        "content_hash": "f41153414b52c951786583231c3886b707ce1bda868c6dccc6f256d184d2fa36",
+        "captured_at": "2026-11-05T00:17:21.882Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 516,
+      "kind": "annonce",
+      "title": "Things That Go Beep in the Night: Agentic AI Joins the Search for Extraterrestrial Signals",
+      "announced_at": "2026-10-30T15:00:10.000Z",
+      "first_seen_at": "2026-11-04T22:44:14.469Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "AI",
+        "Artificial Intelligence",
+        "Nemotron",
+        "NVIDIA Holoscan"
+      ],
+      "source": {
+        "id": "feed:nvidia-blog",
+        "name": "NVIDIA Blog — flux RSS officiel",
+        "url": "https://blogs.nvidia.com/blog/ai-joins-the-search-for-extraterrestrial-signals"
+      },
+      "excerpt": "While science fiction lore tells us that humans will meet extraterrestrial life in the form of little green men, the detail that should raise hairs this Halloween is this: the search for extraterrestrial intelligence took a major leap…",
+      "capture": {
+        "content_hash": "cd8ff83fa6ed882dcee3231926210e45c95028ba1e3d7784c98088bf91089c67",
+        "captured_at": "2026-11-04T22:44:14.469Z",
         "mode": "live"
       }
     },
@@ -3470,6 +4893,30 @@ window.DONNEES_MAQUETTE = {
       }
     },
     {
+      "id": 534,
+      "kind": "annonce",
+      "title": "Microsoft announces debt offerings",
+      "announced_at": "2026-10-30T00:04:23.000Z",
+      "first_seen_at": "2026-11-04T22:44:14.763Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Company News",
+        "Press releases"
+      ],
+      "source": {
+        "id": "feed:microsoft-source",
+        "name": "Microsoft Source — flux RSS officiel",
+        "url": "https://news.microsoft.com/source/2026/10/29/microsoft-announces-debt-offerings-7"
+      },
+      "excerpt": "October 29, 2026 Category: Company News Microsoft announces debt offerings Microsoft Source | 2 minutes REDMOND, Wash. — October 29, 2026 — Microsoft Corp. on October 29 announced the pricing of its offering of $25 billion aggregate…",
+      "capture": {
+        "content_hash": "53b9b3d779a36420fa660ff5208448caa9b0ed7b530650876ea0f3a5476ed237",
+        "captured_at": "2026-11-04T22:44:14.763Z",
+        "mode": "live"
+      }
+    },
+    {
       "id": 440,
       "kind": "annonce",
       "title": "Connect Google Drive to the Figma agent, available on all plans",
@@ -3561,6 +5008,27 @@ window.DONNEES_MAQUETTE = {
       }
     },
     {
+      "id": 636,
+      "kind": "annonce",
+      "title": "Intel Reports Third-Quarter 2026 Financial Results",
+      "announced_at": "2026-10-29T20:01:00.000Z",
+      "first_seen_at": "2026-11-05T00:17:22.543Z",
+      "product": null,
+      "version": null,
+      "categories": [],
+      "source": {
+        "id": "feed:intel-press",
+        "name": "Intel, communiqués — flux RSS officiel",
+        "url": "https://www.intc.com/news-events/press-releases/detail/1786/intel-reports-third-quarter-2026-financial-results"
+      },
+      "excerpt": null,
+      "capture": {
+        "content_hash": "70cca60da944a434768d33e8cc46e04fca7886ee9cac3950ee87e973ffc57435",
+        "captured_at": "2026-11-05T00:17:22.543Z",
+        "mode": "live"
+      }
+    },
+    {
       "id": 11,
       "kind": "version",
       "title": "Codex CLI 0.166.0",
@@ -3635,6 +5103,58 @@ window.DONNEES_MAQUETTE = {
       }
     },
     {
+      "id": 577,
+      "kind": "annonce",
+      "title": "L’avenir appartient à tous: Meta et INCA s’associent pour soutenir les personnes aveugles, sourdes et aveugles ou ayant une basse vision au Canada",
+      "announced_at": "2026-10-29T17:00:55.000Z",
+      "first_seen_at": "2026-11-04T22:44:16.402Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Canada Newsroom",
+        "Community Voices",
+        "Strengthening Communities",
+        "Accessibility"
+      ],
+      "source": {
+        "id": "feed:meta-newsroom",
+        "name": "Meta Newsroom — flux RSS officiel",
+        "url": "https://about.fb.com/news/2026/10/lavenir-appartient-a-tous-meta-et-inca-sassocient-pour-soutenir-les-personnes-aveugles-sourdes-et-aveugles-ou-ayant-une-basse-vision-au-canada"
+      },
+      "excerpt": "https://about.fb.com/wp-content/uploads/2026/10/cnib_x_meta___ms4_-_rev_4_picture_lockcc_fr-2160p.mp4 Nous croyons que l’avenir appartient à tous. C’est pourquoi Meta s’associe à INCA, un organisme à but non lucratif fondé en 1918 qui aide…",
+      "capture": {
+        "content_hash": "094379f1cd89cd1eba9cc90c1a57275b411efac52cd037b8b0ca5ce8cc80ad40",
+        "captured_at": "2026-11-04T22:44:16.402Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 578,
+      "kind": "annonce",
+      "title": "The Future Is for Everyone: Meta and CNIB Partner to Support Canadians Who Are Blind, Deafblind or Have Low Vision",
+      "announced_at": "2026-10-29T17:00:36.000Z",
+      "first_seen_at": "2026-11-04T22:44:16.402Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Canada Newsroom",
+        "Strengthening Communities",
+        "Social Good",
+        "The Future is for Everyone; Accessibility; AI Wearables"
+      ],
+      "source": {
+        "id": "feed:meta-newsroom",
+        "name": "Meta Newsroom — flux RSS officiel",
+        "url": "https://about.fb.com/news/2026/10/the-future-is-for-everyone-meta-and-cnib-partner-to-support-canadians-who-are-blind-deafblind-or-have-low-vision"
+      },
+      "excerpt": "https://about.fb.com/wp-content/uploads/2026/10/cnib_x_meta___ms4_-_rev_3_picture_lockcc_eng-2160p.mp4 We believe the future is for everyone. That’s why Meta is partnering with CNIB – a non-profit founded in 1918 that empowers Canadians…",
+      "capture": {
+        "content_hash": "465259af22a26f6bc86594f48893d8a1319baede4df912030483fe31da5d5653",
+        "captured_at": "2026-11-04T22:44:16.402Z",
+        "mode": "live"
+      }
+    },
+    {
       "id": 15,
       "kind": "annonce",
       "title": "An updated Model Spec for more capable and beneficial AI",
@@ -3658,6 +5178,29 @@ window.DONNEES_MAQUETTE = {
       }
     },
     {
+      "id": 611,
+      "kind": "annonce",
+      "title": "You can now generate, preview, and edit documents, PDFs, presentations, spreadsheets, and more directly in Gemini.",
+      "announced_at": "2026-10-29T16:15:00.000Z",
+      "first_seen_at": "2026-11-05T00:17:21.882Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Gemini App"
+      ],
+      "source": {
+        "id": "feed:google-blog",
+        "name": "Google Blog — flux RSS officiel",
+        "url": "https://blog.google/innovation-and-ai/products/gemini-app/edit-files-directly"
+      },
+      "excerpt": "Generate, edit, and preview PDFs or Docs directly in Gemini. Use the new full-screen editor to refine your files today. See what's new in Gemini.",
+      "capture": {
+        "content_hash": "c4e26e7784f5a09861bac809f1c691ae36dcca0384666e3eae8818bc1cb1f91a",
+        "captured_at": "2026-11-05T00:17:21.882Z",
+        "mode": "live"
+      }
+    },
+    {
       "id": 45,
       "kind": "annonce",
       "title": "You can now generate, preview, and edit documents, PDFs, presentations, spreadsheets, and more directly in Gemini.",
@@ -3677,6 +5220,103 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "c4e26e7784f5a09861bac809f1c691ae36dcca0384666e3eae8818bc1cb1f91a",
         "captured_at": "2026-11-04T10:22:59.192Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 517,
+      "kind": "annonce",
+      "title": "Into the Omniverse: How Developers Turn Ideas Into Simulations With Frontier AI Agents",
+      "announced_at": "2026-10-29T16:00:35.000Z",
+      "first_seen_at": "2026-11-04T22:44:14.469Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Robotics",
+        "Agentic AI",
+        "Into the Omniverse",
+        "NVIDIA Isaac Sim"
+      ],
+      "source": {
+        "id": "feed:nvidia-blog",
+        "name": "NVIDIA Blog — flux RSS officiel",
+        "url": "https://blogs.nvidia.com/blog/developers-simulation-frontier-ai-agents"
+      },
+      "excerpt": "Turning a simulation idea into a working application means assembling assets, connecting physics and rendering, and checking that the scene behaves as intended. Developers are combining frontier AI models with NVIDIA Omniverse libraries to…",
+      "capture": {
+        "content_hash": "6d82e78f1ec760a59d0bafed5dca9902766b33f9c998ac10b02a0a8c8b6fa81f",
+        "captured_at": "2026-11-04T22:44:14.469Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 614,
+      "kind": "annonce",
+      "title": "Gemini Notebook makes hundreds of textbooks available to help students learn even more.",
+      "announced_at": "2026-10-29T16:00:00.000Z",
+      "first_seen_at": "2026-11-05T00:17:21.882Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Learning & Education",
+        "Gemini Notebook"
+      ],
+      "source": {
+        "id": "feed:google-blog",
+        "name": "Google Blog — flux RSS officiel",
+        "url": "https://blog.google/innovation-and-ai/products/gemini-notebook/new-access-textbooks"
+      },
+      "excerpt": "Add textbooks from OpenStax and S Chand to Google Gemini Notebook. Generate custom study guides and quizzes now. See the available catalog.",
+      "capture": {
+        "content_hash": "837f057a960dbf58b129c1f65b2a661553c01ae41de887e3c2e9a703532da4e0",
+        "captured_at": "2026-11-05T00:17:21.882Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 613,
+      "kind": "annonce",
+      "title": "Celebrate Halloween with these tricks in Google Photos.",
+      "announced_at": "2026-10-29T16:00:00.000Z",
+      "first_seen_at": "2026-11-05T00:17:21.882Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Photos"
+      ],
+      "source": {
+        "id": "feed:google-blog",
+        "name": "Google Blog — flux RSS officiel",
+        "url": "https://blog.google/products-and-platforms/products/photos/halloween-tricks-2026"
+      },
+      "excerpt": "Use Ask Photos to find past costumes and edit spooky backgrounds in Google Photos. Try these festive tricks to perfect your Halloween snaps today.",
+      "capture": {
+        "content_hash": "86284c72413801058665d091e201a933afc2e0f351e87872bb7791d87738ecf1",
+        "captured_at": "2026-11-05T00:17:21.882Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 612,
+      "kind": "annonce",
+      "title": "Colorado students joined a Google hackathon to tackle energy grid challenges.",
+      "announced_at": "2026-10-29T16:00:00.000Z",
+      "first_seen_at": "2026-11-05T00:17:21.882Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Global Network",
+        "Sustainability"
+      ],
+      "source": {
+        "id": "feed:google-blog",
+        "name": "Google Blog — flux RSS officiel",
+        "url": "https://blog.google/company-news/outreach-and-initiatives/sustainability/colorado-impact-hackathon"
+      },
+      "excerpt": "Students at the Google Colorado Impact Hackathon built AI tools like SolarSnap to modernize the energy grid. See the winning innovations here.",
+      "capture": {
+        "content_hash": "3770f5b3ccb63bceabf08ffc484f54793ebbe65087e80f2c7b1d1605dbbad7d7",
+        "captured_at": "2026-11-05T00:17:21.882Z",
         "mode": "live"
       }
     },
@@ -3748,6 +5388,55 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "f91920ad4c2ad34a7e51f246aa44ef284b0b0665ae71027728040a9601bef42f",
         "captured_at": "2026-10-30T14:44:25.693Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 518,
+      "kind": "annonce",
+      "title": "Slice Into GFN Thursday: ‘Phantom Blade Zero’ Launches on GeForce NOW",
+      "announced_at": "2026-10-29T13:00:16.000Z",
+      "first_seen_at": "2026-11-04T22:44:14.469Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Gaming",
+        "Cloud Gaming",
+        "GeForce NOW"
+      ],
+      "source": {
+        "id": "feed:nvidia-blog",
+        "name": "NVIDIA Blog — flux RSS officiel",
+        "url": "https://blogs.nvidia.com/blog/geforce-now-thursday-phantom-blade-zero"
+      },
+      "excerpt": "This Halloween week, GFN Thursday is delivering a fresh batch of gaming treats. Something wicked this blade comes. S-GAME’s Phantom Blade Zero launches on GeForce NOW today, bringing a scarily good blend of martial arts and punk fantasy to…",
+      "capture": {
+        "content_hash": "35510ce23dfd1eff29a38a4846eaf7a588e8b30210b26f4f37cf02c818401e09",
+        "captured_at": "2026-11-04T22:44:14.469Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 615,
+      "kind": "annonce",
+      "title": "Equipping healthcare professionals with practical AI skills",
+      "announced_at": "2026-10-29T13:00:00.000Z",
+      "first_seen_at": "2026-11-05T00:17:21.882Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Health",
+        "Grow with Google"
+      ],
+      "source": {
+        "id": "feed:google-blog",
+        "name": "Google Blog — flux RSS officiel",
+        "url": "https://blog.google/innovation-and-ai/technology/health/google-ai-for-healthcare-professionals-certificate"
+      },
+      "excerpt": "Introduction of the Google AI for Healthcare Professionals Certificate",
+      "capture": {
+        "content_hash": "a7fbefdcf31b738c95dad3767a1b33c65c224877e4960e4d818ac6afa6376404",
+        "captured_at": "2026-11-05T00:17:21.882Z",
         "mode": "live"
       }
     },
@@ -3888,6 +5577,30 @@ window.DONNEES_MAQUETTE = {
       }
     },
     {
+      "id": 619,
+      "kind": "annonce",
+      "title": "Samsung Electronics Announces Third Quarter 2026 Results",
+      "announced_at": "2026-10-29T10:10:00.000Z",
+      "first_seen_at": "2026-11-05T00:17:22.466Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "More Stories",
+        "Press Releases"
+      ],
+      "source": {
+        "id": "feed:samsung-newsroom",
+        "name": "Samsung Global Newsroom — flux RSS officiel",
+        "url": "https://news.samsung.com/global/samsung-electronics-announces-third-quarter-2026-results"
+      },
+      "excerpt": "Samsung Electronics today reported financial results for the third quarter ended Sept. 30, 2026. The Company posted KRW 195.3 trillion in consolidated revenue, another all-time quarterly high, representing a quarter-on-quarter (QoQ)…",
+      "capture": {
+        "content_hash": "0b51cffd3496008f8d1c94de603f8149dd29c19bbfb0bfe88681cf0893b1ce1d",
+        "captured_at": "2026-11-05T00:17:22.466Z",
+        "mode": "live"
+      }
+    },
+    {
       "id": 16,
       "kind": "annonce",
       "title": "How we detect frontier model misalignment",
@@ -3949,8 +5662,8 @@ window.DONNEES_MAQUETTE = {
       },
       "excerpt": "Grid view in the web app now comes in three sizes — small, medium, and large. Go small when you want to scan a lot of documents at once. Go large when you need a proper look at each thumbnail before you open it. To change the size, click…",
       "capture": {
-        "content_hash": "145c5b91354a6d3a8886132dcc6532df13824f4fb47bfdb104fbd5e3977abbef",
-        "captured_at": "2026-11-04T10:23:07.503Z",
+        "content_hash": "9a0b8e2adce545e892f05c73a3305eb94aae80160a0b7b528192d339fb544841",
+        "captured_at": "2026-11-04T22:44:21.862Z",
         "mode": "live"
       }
     },
@@ -4106,6 +5819,75 @@ window.DONNEES_MAQUETTE = {
       }
     },
     {
+      "id": 511,
+      "kind": "annonce",
+      "title": "NVIDIA Sets Conference Call for Third-Quarter Financial Results",
+      "announced_at": "2026-10-28T21:00:00.000Z",
+      "first_seen_at": "2026-11-04T22:44:14.325Z",
+      "product": null,
+      "version": null,
+      "categories": [],
+      "source": {
+        "id": "feed:nvidia-newsroom",
+        "name": "NVIDIA Newsroom — flux RSS officiel",
+        "url": "https://nvidianews.nvidia.com/news/nvidia-sets-conference-call-for-third-quarter-financial-results-6928873"
+      },
+      "excerpt": "NVIDIA will host a conference call on Tuesday, November 17, at 2 p.m. PT (5 p.m. ET) to discuss its financial results for the third quarter of fiscal year 2027, which ended October 25, 2026.",
+      "capture": {
+        "content_hash": "a7931c4e2e60f4dc74d38afc4822f07c2d005cc3234e0717e8533b6c6c45680d",
+        "captured_at": "2026-11-04T22:44:14.325Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 535,
+      "kind": "annonce",
+      "title": "Microsoft announces first quarter results",
+      "announced_at": "2026-10-28T20:47:40.000Z",
+      "first_seen_at": "2026-11-04T22:44:14.763Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Company News",
+        "Press releases"
+      ],
+      "source": {
+        "id": "feed:microsoft-source",
+        "name": "Microsoft Source — flux RSS officiel",
+        "url": "https://news.microsoft.com/source/2026/10/28/microsoft-announces-first-quarter-results-2"
+      },
+      "excerpt": "October 28, 2026 Category: Company News Microsoft announces first quarter results Microsoft Source | 9 minutes REDMOND, Wash. — October 28, 2026 — Microsoft Corp. today announced the following results for the quarter ended September 30…",
+      "capture": {
+        "content_hash": "c9e770530a0ca627cb5e96a2efb78481c50211436a2407c30771e2190c946880",
+        "captured_at": "2026-11-04T22:44:14.763Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 536,
+      "kind": "annonce",
+      "title": "Microsoft earnings press release available on Investor Relations website",
+      "announced_at": "2026-10-28T20:08:01.000Z",
+      "first_seen_at": "2026-11-04T22:44:14.763Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Company News",
+        "Press releases"
+      ],
+      "source": {
+        "id": "feed:microsoft-source",
+        "name": "Microsoft Source — flux RSS officiel",
+        "url": "https://news.microsoft.com/source/2026/10/28/microsoft-earnings-press-release-available-on-investor-relations-website-31"
+      },
+      "excerpt": "October 28, 2026 Category: Company News Microsoft earnings press release available on Investor Relations website Microsoft Source | 1 minute REDMOND, Wash. — Oct. 28, 2026 — Microsoft Corp. on Wednesday announced that fiscal year 2027…",
+      "capture": {
+        "content_hash": "e65e8ff09a826a0634c6db15921358190f3ef2e15270894ac327a44ac39ba22d",
+        "captured_at": "2026-11-04T22:44:14.763Z",
+        "mode": "live"
+      }
+    },
+    {
       "id": 455,
       "kind": "annonce",
       "title": "Evernote turns AI-driven discovery into paid subscriptions",
@@ -4218,6 +6000,55 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "885224450dc6b9c17aae0cbb3ce9e0e0d289d1619ac0d637d65f2883c37a2921",
         "captured_at": "2026-11-04T10:22:59.192Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 539,
+      "kind": "annonce",
+      "title": "Apple unveils groundbreaking MacBook Pro with PROLED XDR Display",
+      "announced_at": "2026-10-28T17:09:28.430Z",
+      "first_seen_at": "2026-11-04T22:44:14.836Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "PRESS RELEASE"
+      ],
+      "source": {
+        "id": "feed:apple-newsroom",
+        "name": "Apple Newsroom — flux RSS officiel",
+        "url": "https://www.apple.com/newsroom/2026/10/apple-unveils-groundbreaking-macbook-pro-with-proled-xdr-display"
+      },
+      "excerpt": "Apple today introduced the all-new MacBook Pro with PROLED XDR Display featuring breakthrough tandem OLED technology.",
+      "capture": {
+        "content_hash": "9b74066ca957cb83ec37da5914a7bc70bdb4ac2ed3e0b6ebcd30e55759ca8385",
+        "captured_at": "2026-11-04T22:44:14.836Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 579,
+      "kind": "annonce",
+      "title": "Meta Partners With Five US Universities to Accelerate Medical and Scientific Breakthroughs",
+      "announced_at": "2026-10-28T17:00:49.000Z",
+      "first_seen_at": "2026-11-04T22:44:16.402Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Meta",
+        "Recent News",
+        "Sidebar - Featured",
+        "Technology and Innovation"
+      ],
+      "source": {
+        "id": "feed:meta-newsroom",
+        "name": "Meta Newsroom — flux RSS officiel",
+        "url": "https://about.fb.com/news/2026/10/meta-partners-with-five-us-universities-to-accelerate-medical-and-scientific-breakthroughs"
+      },
+      "excerpt": "We believe the future is for everyone, including America’s universities, professors, students, and the communities who benefit from their research. That’s why Meta is bringing Superintelligence models, research funding, and direct…",
+      "capture": {
+        "content_hash": "f5869d56dda3ec18f4bf156dcec50be9e2750b8e9496504d57ba3cf0a529e88f",
+        "captured_at": "2026-11-04T22:44:16.402Z",
         "mode": "live"
       }
     },
@@ -4546,6 +6377,32 @@ window.DONNEES_MAQUETTE = {
       }
     },
     {
+      "id": 519,
+      "kind": "annonce",
+      "title": "Thin, Light and Built for Everything: NVIDIA RTX Spark Windows Laptops Gain New Models, Agent Tools and Games",
+      "announced_at": "2026-10-28T15:00:46.000Z",
+      "first_seen_at": "2026-11-04T22:44:14.469Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "AI",
+        "Agentic AI",
+        "Artificial Intelligence",
+        "Gaming"
+      ],
+      "source": {
+        "id": "feed:nvidia-blog",
+        "name": "NVIDIA Blog — flux RSS officiel",
+        "url": "https://blogs.nvidia.com/blog/local-ai-rtx-spark-laptops-updates-models-agents-games"
+      },
+      "excerpt": "NVIDIA RTX Spark powers thin and light laptops built for everything that developers, creators and gamers do. RTX Spark laptops are now available from ASUS, Dell, HP, Lenovo, Microsoft and MSI. These powerful systems combine an NVIDIA…",
+      "capture": {
+        "content_hash": "f36b941ae962f847168d5369d5cf6ab18ecb1a8a7c79ac50827cb671af7c0e74",
+        "captured_at": "2026-11-04T22:44:14.469Z",
+        "mode": "live"
+      }
+    },
+    {
       "id": 89,
       "kind": "annonce",
       "title": "NVIDIA Nemotron 3.5 Transcribe and Granary v2: Intelligent Multilingual Transcription You Can Prompt and Adapt",
@@ -4563,6 +6420,32 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "2824ab32c9a865af6344b9e4724bff87adc9b774ac9b4ae1bde9a9f52bf43ae6",
         "captured_at": "2026-10-30T14:44:25.693Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 620,
+      "kind": "annonce",
+      "title": "Samsung Ranks No. 5 in Interbrand’s ‘Best Global Brands 2026’ for Seventh Consecutive Year",
+      "announced_at": "2026-10-28T13:39:00.000Z",
+      "first_seen_at": "2026-11-05T00:17:22.466Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "More Stories",
+        "Press Releases",
+        "Best Global Brands 2026",
+        "Interbrand"
+      ],
+      "source": {
+        "id": "feed:samsung-newsroom",
+        "name": "Samsung Global Newsroom — flux RSS officiel",
+        "url": "https://news.samsung.com/global/samsung-ranks-no-5-in-interbrands-best-global-brands-2026-for-seventh-consecutive-year"
+      },
+      "excerpt": "Samsung Electronics today announced that Interbrand, a global brand consultancy, ranked the company No. 5 on its annual “Best Global Brands” list for the seventh consecutive year, with a brand value of USD 105.2 billion. Samsung is the only…",
+      "capture": {
+        "content_hash": "bd8b040154e80f8e1d57411fd5d7a75cf019ca56090c291dcc387b3e475d4489",
+        "captured_at": "2026-11-05T00:17:22.466Z",
         "mode": "live"
       }
     },
@@ -4793,6 +6676,29 @@ window.DONNEES_MAQUETTE = {
       }
     },
     {
+      "id": 580,
+      "kind": "annonce",
+      "title": "Muse Is Now Available in Singapore: The World’s First Personal AI Agent Built for Everyone",
+      "announced_at": "2026-10-28T00:00:03.000Z",
+      "first_seen_at": "2026-11-04T22:44:16.402Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "APAC Newsroom"
+      ],
+      "source": {
+        "id": "feed:meta-newsroom",
+        "name": "Meta Newsroom — flux RSS officiel",
+        "url": "https://about.fb.com/news/2026/10/muse-is-now-available-in-singapore-the-worlds-first-personal-ai-agent-built-for-everyone"
+      },
+      "excerpt": "Following our global announcement of Muse, we are excited to share that Muse is now available in Singapore. https://about.fb.com/wp-content/uploads/2026/09/Introducing-Muse_Sizzle-Video.mp4 What Muse Can Do in Singapore Connectors are a big…",
+      "capture": {
+        "content_hash": "6a97b92bbf2274a59d6efcfab0244b67380a8df8a121b1e35663e07ff57555c9",
+        "captured_at": "2026-11-04T22:44:16.402Z",
+        "mode": "live"
+      }
+    },
+    {
       "id": 13,
       "kind": "version",
       "title": "Gemini CLI 0.66.0",
@@ -4962,6 +6868,48 @@ window.DONNEES_MAQUETTE = {
       }
     },
     {
+      "id": 637,
+      "kind": "annonce",
+      "title": "Intel and Oracle Plan Expanded Collaboration to Support Enterprise and Agentic AI on Oracle Cloud Infrastructure",
+      "announced_at": "2026-10-27T16:00:00.000Z",
+      "first_seen_at": "2026-11-05T00:17:22.543Z",
+      "product": null,
+      "version": null,
+      "categories": [],
+      "source": {
+        "id": "feed:intel-press",
+        "name": "Intel, communiqués — flux RSS officiel",
+        "url": "https://www.intc.com/news-events/press-releases/detail/1785/intel-and-oracle-plan-expanded-collaboration-to-support"
+      },
+      "excerpt": null,
+      "capture": {
+        "content_hash": "8e340f1c6a4a93490d6bcf18a22585debbf15bdcd013efce3a7d90a8e18f9b0b",
+        "captured_at": "2026-11-05T00:17:22.543Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 512,
+      "kind": "annonce",
+      "title": "NVIDIA and Oracle Expand NVIDIA Vera Rubin to Multi-Gigawatt Scale and Bring NVIDIA Vera CPU to Oracle Cloud Infrastructure",
+      "announced_at": "2026-10-27T16:00:00.000Z",
+      "first_seen_at": "2026-11-04T22:44:14.325Z",
+      "product": null,
+      "version": null,
+      "categories": [],
+      "source": {
+        "id": "feed:nvidia-newsroom",
+        "name": "NVIDIA Newsroom — flux RSS officiel",
+        "url": "https://nvidianews.nvidia.com/news/nvidia-and-oracle-expand-nvidia-vera-rubin-to-multi-gigawatt-scale-and-bring-nvidia-vera-cpu-to-oracle-cloud-infrastructure"
+      },
+      "excerpt": "NVIDIA and Oracle today announced plans to expand Oracle Cloud Infrastructure (OCI) Superclusters with NVIDIA Vera Rubin NVL72 systems to multi-gigawatt scale, supporting growing customer demand for AI training, inference and agentic…",
+      "capture": {
+        "content_hash": "8921b08a20033ffe79f73c9afed5ffa087ce202a65e63326a113008a02a02fe6",
+        "captured_at": "2026-11-04T22:44:14.325Z",
+        "mode": "live"
+      }
+    },
+    {
       "id": 209,
       "kind": "annonce",
       "title": "David Bianchi: Directing for a Top 10 Global DJ on Higgsfield",
@@ -4981,6 +6929,32 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "601624526f8ef9cdb309cbde9e58b29a3bd16b320bcc09dfd0dc6e1fc8058fdf",
         "captured_at": "2026-10-30T14:44:29.351Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 520,
+      "kind": "annonce",
+      "title": "How AI Is Changing the Pace of Discovery for Millions Living With Dementia",
+      "announced_at": "2026-10-27T15:00:20.000Z",
+      "first_seen_at": "2026-11-04T22:44:14.469Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "AI",
+        "Agentic AI",
+        "AI for Good",
+        "Healthcare and Life Sciences"
+      ],
+      "source": {
+        "id": "feed:nvidia-blog",
+        "name": "NVIDIA Blog — flux RSS officiel",
+        "url": "https://blogs.nvidia.com/blog/open-source-ai-tools-cbrain-dementia"
+      },
+      "excerpt": "There are 57 million people worldwide living with dementia today. For the researchers working to help them, the obstacle isn’t a lack of effort — it’s too much data, too few experts to synthesize it and a pace of discovery that can’t keep…",
+      "capture": {
+        "content_hash": "ab49053aaba638eec028b6cd58b0743c3aad3bbedd5465a017e7d5ef8db6b1ff",
+        "captured_at": "2026-11-04T22:44:14.469Z",
         "mode": "live"
       }
     },
@@ -5025,6 +6999,122 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "2975ee15a58e271a4ab1bcce3ae7a80fabc696ed1c013521c7211df644642af5",
         "captured_at": "2026-10-30T02:25:19.448Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 568,
+      "kind": "annonce",
+      "title": "AMD and Meta Advance Strategic Partnership to Power Meta’s Superintelligence Infrastructure",
+      "announced_at": "2026-10-27T13:20:00.000Z",
+      "first_seen_at": "2026-11-04T22:44:15.144Z",
+      "product": null,
+      "version": null,
+      "categories": [],
+      "source": {
+        "id": "feed:amd-press",
+        "name": "AMD, communiqués — flux RSS officiel",
+        "url": "https://ir.amd.com/news-events/press-releases/detail/1302/amd-and-meta-advance-strategic-partnership-to-power-metas-superintelligence-infrastructure"
+      },
+      "excerpt": null,
+      "capture": {
+        "content_hash": "36effdc616ecff7f4a9b4cc0c202ddef1f6ead6bb2e40a24b485919229ea10e0",
+        "captured_at": "2026-11-04T22:44:15.144Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 697,
+      "kind": "annonce",
+      "title": "Anduril, Qualcomm launch BlueChip, a new kind of US-made laptop",
+      "announced_at": "2026-10-27T13:00:00.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.251Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Government & Policy",
+        "Hardware",
+        "Startups",
+        "TC"
+      ],
+      "source": {
+        "id": "feed:techcrunch-qualcomm",
+        "name": "TechCrunch, rubrique Qualcomm — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2026/10/27/anduril-qualcomm-launch-bluechip-a-new-kind-of-us-made-laptop"
+      },
+      "excerpt": "Anduril founder Palmer Luckey is vowing to bring computer manufacturing back to the U.S., and by that he doesn't just mean assembly, but every individual component, some of which are exclusively made in China today.",
+      "capture": {
+        "content_hash": "b43300810d2d6aafcfb03e62186c3e2fe7caafab9aa2bb69df6329abe1eff699",
+        "captured_at": "2026-11-05T06:33:20.251Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 540,
+      "kind": "annonce",
+      "title": "Apple introduces the new 14-inch MacBook Pro with M6",
+      "announced_at": "2026-10-27T12:59:39.082Z",
+      "first_seen_at": "2026-11-04T22:44:14.836Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "PRESS RELEASE"
+      ],
+      "source": {
+        "id": "feed:apple-newsroom",
+        "name": "Apple Newsroom — flux RSS officiel",
+        "url": "https://www.apple.com/newsroom/2026/10/apple-introduces-the-new-14-inch-macbook-pro-with-m6"
+      },
+      "excerpt": "Apple today announced the new 14-inch MacBook Pro with M6, delivering more performance, powerful on-device AI capabilities, and faster connectivity.",
+      "capture": {
+        "content_hash": "67d90aa60a48ea3ee4ec5cc570c386115bcb1a9658eaa5ee9dc7391ceeea7d1c",
+        "captured_at": "2026-11-04T22:44:14.836Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 541,
+      "kind": "annonce",
+      "title": "Apple unveils new iMac with M6",
+      "announced_at": "2026-10-27T12:59:15.245Z",
+      "first_seen_at": "2026-11-04T22:44:14.836Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "PRESS RELEASE"
+      ],
+      "source": {
+        "id": "feed:apple-newsroom",
+        "name": "Apple Newsroom — flux RSS officiel",
+        "url": "https://www.apple.com/newsroom/2026/10/apple-unveils-new-imac-with-m6"
+      },
+      "excerpt": "Apple today announced the new iMac featuring the superfast M6, delivering even more performance and powerful AI capabilities.",
+      "capture": {
+        "content_hash": "f239ec8903f0b22bdf04c34dd7ead864bff647997fe3aba629276a9254060a7a",
+        "captured_at": "2026-11-04T22:44:14.836Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 542,
+      "kind": "annonce",
+      "title": "Apple Creator Studio adds powerful new AI features and even more creative tools",
+      "announced_at": "2026-10-27T12:58:45.444Z",
+      "first_seen_at": "2026-11-04T22:44:14.836Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "PRESS RELEASE"
+      ],
+      "source": {
+        "id": "feed:apple-newsroom",
+        "name": "Apple Newsroom — flux RSS officiel",
+        "url": "https://www.apple.com/newsroom/2026/10/apple-creator-studio-adds-powerful-new-ai-features-and-even-more-creative-tools"
+      },
+      "excerpt": "Apple introduces updates to Apple Creator Studio, the collection of creative apps designed to put studio-grade tools into the hands of creators.",
+      "capture": {
+        "content_hash": "862e415c3e009b142cf0031f817e77a01809fa72076fc10e2adf9435c9acf956",
+        "captured_at": "2026-11-04T22:44:14.836Z",
         "mode": "live"
       }
     },
@@ -5142,6 +7232,32 @@ window.DONNEES_MAQUETTE = {
       }
     },
     {
+      "id": 621,
+      "kind": "annonce",
+      "title": "[Hands-On] Comfort, Convenience, and More: A Day With Galaxy Buds On",
+      "announced_at": "2026-10-27T08:00:00.000Z",
+      "first_seen_at": "2026-11-05T00:17:22.466Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Mobile",
+        "Clip-on Design",
+        "Galaxy Buds On",
+        "Hands-On"
+      ],
+      "source": {
+        "id": "feed:samsung-newsroom",
+        "name": "Samsung Global Newsroom — flux RSS officiel",
+        "url": "https://news.samsung.com/global/hands-on-comfort-convenience-and-more-a-day-with-galaxy-buds-on"
+      },
+      "excerpt": "Earbuds have become an everyday essential for listening to music, taking calls, exercising, and working. With all-day use increasingly common, comfort and awareness of one’s surroundings are now just as important as sound quality. To meet…",
+      "capture": {
+        "content_hash": "43e7c866133e864585c1ffb89c547d2466676ca016ea71632d26cb2851bcdbba",
+        "captured_at": "2026-11-05T00:17:22.466Z",
+        "mode": "live"
+      }
+    },
+    {
       "id": 22,
       "kind": "annonce",
       "title": "OpenAI expands partnership with Oracle to bring its apps to ChatGPT",
@@ -5182,6 +7298,27 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "b55165abc2547d51cc86ba48e6e1022b77a6e840ae2ae8e275462c55269f6222",
         "captured_at": "2026-11-04T11:07:56.085Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 513,
+      "kind": "annonce",
+      "title": "NVIDIA and Meta to Expand Collaboration on Muse and Muse Family of Models Amid Robust Growth",
+      "announced_at": "2026-10-27T05:52:00.000Z",
+      "first_seen_at": "2026-11-04T22:44:14.325Z",
+      "product": null,
+      "version": null,
+      "categories": [],
+      "source": {
+        "id": "feed:nvidia-newsroom",
+        "name": "NVIDIA Newsroom — flux RSS officiel",
+        "url": "https://nvidianews.nvidia.com/news/nvidia-and-meta-to-expand-collaboration-on-muse-and-muse-family-of-models-amid-robust-growth"
+      },
+      "excerpt": "NVIDIA and Meta today announced they will partner to expand their work on Muse and the Muse family of models to improve inference and training performance, reflecting popular demand for useful AI agents.",
+      "capture": {
+        "content_hash": "45c56e171c120e264a4bf17a8630bfec02c37c5bc22c13d5f99c96f1a657cf4f",
+        "captured_at": "2026-11-04T22:44:14.325Z",
         "mode": "live"
       }
     },
@@ -5278,6 +7415,27 @@ window.DONNEES_MAQUETTE = {
       }
     },
     {
+      "id": 638,
+      "kind": "annonce",
+      "title": "Intel to Acquire Classiq to Create a Full-stack Quantum Computing Platform",
+      "announced_at": "2026-10-26T20:30:00.000Z",
+      "first_seen_at": "2026-11-05T00:17:22.543Z",
+      "product": null,
+      "version": null,
+      "categories": [],
+      "source": {
+        "id": "feed:intel-press",
+        "name": "Intel, communiqués — flux RSS officiel",
+        "url": "https://www.intc.com/news-events/press-releases/detail/1784/intel-to-acquire-classiq-to-create-a-full-stack-quantum"
+      },
+      "excerpt": null,
+      "capture": {
+        "content_hash": "9a189a9167ba4f4d3a7c32ce59e295b17307856b29839a6568def04a5c4038cd",
+        "captured_at": "2026-11-05T00:17:22.543Z",
+        "mode": "live"
+      }
+    },
+    {
       "id": 211,
       "kind": "annonce",
       "title": "6 Best AI Video Tools for Realistic Human Motion in 2026 (Tested and Compared)",
@@ -5297,6 +7455,29 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "a04b7fb632193ade0c74f9b10ace85ee7758c109c6178b9125f1b65882634478",
         "captured_at": "2026-10-30T14:44:29.351Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 543,
+      "kind": "annonce",
+      "title": "Siri AI is available in more languages starting today",
+      "announced_at": "2026-10-26T18:37:30.189Z",
+      "first_seen_at": "2026-11-04T22:44:14.836Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "QUICK READ"
+      ],
+      "source": {
+        "id": "feed:apple-newsroom",
+        "name": "Apple Newsroom — flux RSS officiel",
+        "url": "https://www.apple.com/newsroom/2026/10/siri-ai-is-available-in-more-languages-starting-today"
+      },
+      "excerpt": "With the 27.2 software updates released today, Siri AI is expanding to French, Japanese, Korean, Portuguese, and Spanish.",
+      "capture": {
+        "content_hash": "89b10dfc23fd73725f8a5d19140169d4ba0ba54aa6dada0c7156aea06c877488",
+        "captured_at": "2026-11-04T22:44:14.836Z",
         "mode": "live"
       }
     },
@@ -5371,6 +7552,55 @@ window.DONNEES_MAQUETTE = {
       }
     },
     {
+      "id": 544,
+      "kind": "annonce",
+      "title": "Apple gives iPad mini its biggest update ever",
+      "announced_at": "2026-10-26T13:00:22.904Z",
+      "first_seen_at": "2026-11-04T22:44:14.836Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "PRESS RELEASE"
+      ],
+      "source": {
+        "id": "feed:apple-newsroom",
+        "name": "Apple Newsroom — flux RSS officiel",
+        "url": "https://www.apple.com/newsroom/2026/10/apple-gives-ipad-mini-its-biggest-update-ever"
+      },
+      "excerpt": "Apple unveils the all-new iPad mini, featuring an OLED display in a thinner design, a leap in performance with A20 Pro, and water and dust resistance.",
+      "capture": {
+        "content_hash": "b936c59a863789146f728d2c5a6f46969ca5b007af6bf9c43975b2163a92aef7",
+        "captured_at": "2026-11-04T22:44:14.836Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 658,
+      "kind": "annonce",
+      "title": "Tesla turns to Turo to boost adoption of Full Self-Driving (Supervised)",
+      "announced_at": "2026-10-26T12:58:40.000Z",
+      "first_seen_at": "2026-11-05T06:33:19.821Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Transportation",
+        "FSD",
+        "full self-driving",
+        "Tesla"
+      ],
+      "source": {
+        "id": "feed:techcrunch-tesla",
+        "name": "TechCrunch, rubrique Tesla — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2026/10/26/tesla-turns-to-turo-to-boost-adoption-of-full-self-driving-supervised"
+      },
+      "excerpt": "Eligible Turo hosts will also get a one-month free trial of Tesla's FSD software.",
+      "capture": {
+        "content_hash": "a5529ac5d67675c55952aa7f41b75a0525b1816069089ace3bd21b225b1aa08e",
+        "captured_at": "2026-11-05T06:33:19.821Z",
+        "mode": "live"
+      }
+    },
+    {
       "id": 116,
       "kind": "annonce",
       "title": "How text to speech technology works: From text to natural voice",
@@ -5413,6 +7643,32 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "081db4f3981bf22208c9b2e72fcc9b28773b8f0e6084543a977bfa906dd113ed",
         "captured_at": "2026-10-30T02:25:19.448Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 622,
+      "kind": "annonce",
+      "title": "[Interview] Sound That Connects: 80 Years of Audio and the Future of Connected Experiences",
+      "announced_at": "2026-10-26T08:00:00.000Z",
+      "first_seen_at": "2026-11-05T00:17:22.466Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "More Products",
+        "80 Years of JBL",
+        "Bowers & Wilkins",
+        "HARMAN"
+      ],
+      "source": {
+        "id": "feed:samsung-newsroom",
+        "name": "Samsung Global Newsroom — flux RSS officiel",
+        "url": "https://news.samsung.com/global/interview-sound-that-connects-80-years-of-audio-and-the-future-of-connected-experiences"
+      },
+      "excerpt": "From concerts and cars to homes and headphones, high-quality sound enriches everyday experiences. For 80 years, JBL has evolved alongside changing listening habits while remaining deeply connected to music and culture. Meanwhile, Bowers &…",
+      "capture": {
+        "content_hash": "18307bbb5abbcb598be9769f5390dd9c576646417f523db063b03b6bb8a3bb55",
+        "captured_at": "2026-11-05T00:17:22.466Z",
         "mode": "live"
       }
     },
@@ -5848,6 +8104,32 @@ window.DONNEES_MAQUETTE = {
       }
     },
     {
+      "id": 581,
+      "kind": "annonce",
+      "title": "New Tools for the Admins Who Build Communities on Forum",
+      "announced_at": "2026-10-23T16:00:06.000Z",
+      "first_seen_at": "2026-11-04T22:44:16.402Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Facebook",
+        "Product News",
+        "Recent News",
+        "Sidebar - Featured"
+      ],
+      "source": {
+        "id": "feed:meta-newsroom",
+        "name": "Meta Newsroom — flux RSS officiel",
+        "url": "https://about.fb.com/news/2026/10/new-tools-for-the-admins-who-build-communities-on-forum"
+      },
+      "excerpt": "Earlier this year we announced Forum, the app for people who want to go deeper on Facebook Groups. Today we’re introducing new tools that make it easier for admins to manage and grow their communities. Running a group takes real work…",
+      "capture": {
+        "content_hash": "425f33b10532ceba9c5f4dad806271a7ebbcc904e250a459882d5212ef26895d",
+        "captured_at": "2026-11-04T22:44:16.402Z",
+        "mode": "live"
+      }
+    },
+    {
       "id": 53,
       "kind": "annonce",
       "title": "See what 5 builders are making with Gemini 4 Argon",
@@ -5940,6 +8222,55 @@ window.DONNEES_MAQUETTE = {
       }
     },
     {
+      "id": 623,
+      "kind": "annonce",
+      "title": "Inside JBL Playback Gallery: 80 Years of Sound Innovation",
+      "announced_at": "2026-10-23T08:00:00.000Z",
+      "first_seen_at": "2026-11-05T00:17:22.466Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "More Products",
+        "80 Years of JBL",
+        "Bowers & Wilkins",
+        "HARMAN"
+      ],
+      "source": {
+        "id": "feed:samsung-newsroom",
+        "name": "Samsung Global Newsroom — flux RSS officiel",
+        "url": "https://news.samsung.com/global/inside-jbl-playback-gallery-80-years-of-sound-innovation"
+      },
+      "excerpt": "To celebrate its 80th anniversary, JBL will host the JBL Playback Gallery at Project Space Line in Seoul from October 24 to 31. The exhibition traces the globally renowned audio brand’s evolution through eight decades of innovation…",
+      "capture": {
+        "content_hash": "35815e59f5c53b70af1daff278abffbc6e3406b23b0b96a6970dc364df4039a2",
+        "captured_at": "2026-11-05T00:17:22.466Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 545,
+      "kind": "annonce",
+      "title": "iPhone Duo arrives at Apple Store locations worldwide",
+      "announced_at": "2026-10-23T06:10:35.677Z",
+      "first_seen_at": "2026-11-04T22:44:14.836Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "PHOTOS"
+      ],
+      "source": {
+        "id": "feed:apple-newsroom",
+        "name": "Apple Newsroom — flux RSS officiel",
+        "url": "https://www.apple.com/newsroom/2026/10/iphone-duo-arrives-at-apple-store-locations-worldwide"
+      },
+      "excerpt": "On Friday, October 23, the highly anticipated iPhone Duo made its debut at Apple Store locations worldwide.",
+      "capture": {
+        "content_hash": "3c1829d102ed83a15cc37b6dfc7640f11ec923e9632ba81bceb6ecacb640d06d",
+        "captured_at": "2026-11-04T22:44:14.836Z",
+        "mode": "live"
+      }
+    },
+    {
       "id": 465,
       "kind": "annonce",
       "title": "Deepseek strikes again",
@@ -5957,6 +8288,32 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "e96945c3a4cb01d788c201da9a043d11d50e0de139542585a34941fe977bc943",
         "captured_at": "2026-11-04T10:22:59.770Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 521,
+      "kind": "annonce",
+      "title": "Kazakhstan Expands Compute for Its AI Future",
+      "announced_at": "2026-10-23T02:00:13.000Z",
+      "first_seen_at": "2026-11-04T22:44:14.469Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "AI Infrastructure",
+        "AI Factory",
+        "Artificial Intelligence",
+        "NVIDIA Rubin"
+      ],
+      "source": {
+        "id": "feed:nvidia-blog",
+        "name": "NVIDIA Blog — flux RSS officiel",
+        "url": "https://blogs.nvidia.com/blog/kazakhstan-ai-compute-ecosystem"
+      },
+      "excerpt": "Kazakhstan’s AI ecosystem is moving from infrastructure plans to deployment. The shift is visible across the full AI stack — from infrastructure to models to applications. The announcements below — coinciding with a visit to Astana by…",
+      "capture": {
+        "content_hash": "63adb55d9deba76949ebd8b2a6108b93ad9635232ba300aa66f5b4a8c11be2c2",
+        "captured_at": "2026-11-04T22:44:14.469Z",
         "mode": "live"
       }
     },
@@ -6118,6 +8475,84 @@ window.DONNEES_MAQUETTE = {
       }
     },
     {
+      "id": 778,
+      "kind": "annonce",
+      "title": "Sure, let’s smoosh SpaceX and Tesla together, who cares",
+      "announced_at": "2026-10-22T19:45:00.000Z",
+      "first_seen_at": "2026-11-05T06:33:21.144Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "AI",
+        "Analysis",
+        "Business",
+        "Electric Cars"
+      ],
+      "source": {
+        "id": "feed:verge-tesla",
+        "name": "The Verge, rubrique Tesla — article de presse, contenu externe attribué",
+        "url": "https://www.theverge.com/ai-artificial-intelligence/1016879/spacex-tesla-cursed-katamari"
+      },
+      "excerpt": "Mars not depicted. | Image: Cath Virginia / The Verge, Getty Images Oh sure, SpaceX's credit risk is pretty high because it's about to borrow another $40 billion to spend on Nvidia chips, but who cares about that? SpaceX and Tesla have…",
+      "capture": {
+        "content_hash": "64acb0d484a9f3b9324b269d80d7b208651135eaabc30ecfff9ca5f39d03eba6",
+        "captured_at": "2026-11-05T06:33:21.144Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 779,
+      "kind": "annonce",
+      "title": "Tesla driver using Full Self-Driving struck and killed a man crossing I-80",
+      "announced_at": "2026-10-22T18:07:02.000Z",
+      "first_seen_at": "2026-11-05T06:33:21.144Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Electric Cars",
+        "News",
+        "Tesla",
+        "Transportation"
+      ],
+      "source": {
+        "id": "feed:verge-tesla",
+        "name": "The Verge, rubrique Tesla — article de presse, contenu externe attribué",
+        "url": "https://www.theverge.com/transportation/1016928/tesla-fsd-pedestrian-fatal-accident-california"
+      },
+      "excerpt": "A 71-year-old man was fatally hit by a Tesla operating in Full Self-Driving (FSD) mode while crossing I-80 in Vallejo, CA around 2:30 AM on Thursday, reports the San Francisco Chronicle. The California Highway Patrol's statement to media…",
+      "capture": {
+        "content_hash": "e3b031900ec479b19c244eb271b2f990bf5423bc4ef4d64a66363d410d1c5bb3",
+        "captured_at": "2026-11-05T06:33:21.144Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 780,
+      "kind": "annonce",
+      "title": "Elon Musk says Tesla will sell 5 million cars by 2030 — math says otherwise",
+      "announced_at": "2026-10-22T17:42:52.000Z",
+      "first_seen_at": "2026-11-05T06:33:21.144Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Autonomous Cars",
+        "Electric Cars",
+        "Elon Musk",
+        "Tech"
+      ],
+      "source": {
+        "id": "feed:verge-tesla",
+        "name": "The Verge, rubrique Tesla — article de presse, contenu externe attribué",
+        "url": "https://www.theverge.com/transportation/1016055/elon-musk-tesla-5-million-cars-2030-reality-check"
+      },
+      "excerpt": "On Tesla's earnings call Wednesday, Elon Musk made one of his patented pie-in-the-sky predictions that typically sends his fans into paroxysms of ecstasy: 5 million vehicle deliveries by 2030. \"We were aiming for 5 million vehicles a year…",
+      "capture": {
+        "content_hash": "c934e953df6b576797425431c1a0ebf25bd0218b532e02aa60ddf777591f45b8",
+        "captured_at": "2026-11-05T06:33:21.144Z",
+        "mode": "live"
+      }
+    },
+    {
       "id": 312,
       "kind": "annonce",
       "title": "Hallucination Detection Methods for AI Agent Workflows",
@@ -6159,6 +8594,32 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "60d2e2e24ab4495b12cd23dc075752437c6b2bb414b1f78d9d7f8e750045f36e",
         "captured_at": "2026-10-30T14:44:32.783Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 659,
+      "kind": "annonce",
+      "title": "Tesla is prepping a Cybercab onslaught",
+      "announced_at": "2026-10-22T15:44:39.000Z",
+      "first_seen_at": "2026-11-05T06:33:19.821Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Transportation",
+        "cybercab",
+        "robotaxi",
+        "Tesla"
+      ],
+      "source": {
+        "id": "feed:techcrunch-tesla",
+        "name": "TechCrunch, rubrique Tesla — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2026/10/22/tesla-is-prepping-a-cybercab-onslaught"
+      },
+      "excerpt": "The company is looking to roll out the gold two-seater robotaxis to other U.S. cities this year, even as it goes mum on the number of paid rides.",
+      "capture": {
+        "content_hash": "99ec9ba89ac67c07cb99cac71f203f8a509ac0318057ba0c13e99ac7f5127f02",
+        "captured_at": "2026-11-05T06:33:19.821Z",
         "mode": "live"
       }
     },
@@ -6210,6 +8671,105 @@ window.DONNEES_MAQUETTE = {
       }
     },
     {
+      "id": 522,
+      "kind": "annonce",
+      "title": "NVIDIA Unveils Minerva to Bring End-to-End Observability for AI Factories",
+      "announced_at": "2026-10-22T15:00:02.000Z",
+      "first_seen_at": "2026-11-04T22:44:14.469Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "AI Infrastructure",
+        "AI Factory",
+        "GTC 2026"
+      ],
+      "source": {
+        "id": "feed:nvidia-blog",
+        "name": "NVIDIA Blog — flux RSS officiel",
+        "url": "https://blogs.nvidia.com/blog/minerva-platform-infrastructure"
+      },
+      "excerpt": "Launched today, NVIDIA Minerva is an AIOps platform built to help teams find problems earlier and keep AI factories productive. It brings together telemetry from infrastructure and AI workloads, then applies purpose-built AI models to turn…",
+      "capture": {
+        "content_hash": "7f235db578203777a8631ec31ced9119f3fd7d3cebb4dfd9d15cb87aff0efa58",
+        "captured_at": "2026-11-04T22:44:14.469Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 523,
+      "kind": "annonce",
+      "title": "Cloud Deployment Incoming: ‘Call of Duty: Modern Warfare 4’ Arrives on GeForce NOW",
+      "announced_at": "2026-10-22T13:00:20.000Z",
+      "first_seen_at": "2026-11-04T22:44:14.469Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Gaming",
+        "Cloud Gaming",
+        "GeForce NOW"
+      ],
+      "source": {
+        "id": "feed:nvidia-blog",
+        "name": "NVIDIA Blog — flux RSS officiel",
+        "url": "https://blogs.nvidia.com/blog/geforce-now-thursday-call-of-duty-modern-warfare-4"
+      },
+      "excerpt": "Lock in and load out this GFN Thursday. Call of Duty: Modern Warfare 4 arrives on GeForce NOW at launch, bringing a new campaign, multiplayer action and DMZ, high-stakes extraction mode to supported devices. The campaign also gets an…",
+      "capture": {
+        "content_hash": "8908df6f1a5dbca68e4619ebd5eb82781d2cfafca4250f4f0e280b2f99736276",
+        "captured_at": "2026-11-04T22:44:14.469Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 546,
+      "kind": "annonce",
+      "title": "Formula 1® United States Grand Prix™ streams live on Apple TV this weekend",
+      "announced_at": "2026-10-22T12:59:11.281Z",
+      "first_seen_at": "2026-11-04T22:44:14.836Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "UPDATE"
+      ],
+      "source": {
+        "id": "feed:apple-newsroom",
+        "name": "Apple Newsroom — flux RSS officiel",
+        "url": "https://www.apple.com/newsroom/2026/10/formula-1-united-states-grand-prix-streams-live-on-apple-tv-this-weekend"
+      },
+      "excerpt": "Formula 1® returns to the U.S. this weekend with the United States Grand Prix™, streaming in the U.S. exclusively on Apple TV.",
+      "capture": {
+        "content_hash": "0f74ff23f94ec16d0ec3519271d78d088bbe190a89e2521448013120f2f16eae",
+        "captured_at": "2026-11-04T22:44:14.836Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 781,
+      "kind": "annonce",
+      "title": "Just because Tesla’s Optimus is in production doesn’t mean it’s actually ready",
+      "announced_at": "2026-10-22T12:53:27.000Z",
+      "first_seen_at": "2026-11-05T06:33:21.144Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Electric Cars",
+        "Elon Musk",
+        "Robot",
+        "Tech"
+      ],
+      "source": {
+        "id": "feed:verge-tesla",
+        "name": "The Verge, rubrique Tesla — article de presse, contenu externe attribué",
+        "url": "https://www.theverge.com/tech/1016492/tesla-optimus-robots-production-musk-q3-earnings"
+      },
+      "excerpt": "On Tesla's earnings call Wednesday, CEO Elon Musk announced that the company had begun early production of its humanoid robot on its high-volume line in Fremont, California. Then he laid out what still needs work: the robot's hands, its…",
+      "capture": {
+        "content_hash": "6d67ad46a7327b1be058adc20b3861ca2539e345c5a748525876506c95e121fe",
+        "captured_at": "2026-11-05T06:33:21.144Z",
+        "mode": "live"
+      }
+    },
+    {
       "id": 118,
       "kind": "annonce",
       "title": "What is voice over? Definition, examples, and how it works",
@@ -6229,6 +8789,29 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "10db2ffe4bf4f3221f1ec538c330b532fb50437387dd6f6b7c4f5b4eaa20ed70",
         "captured_at": "2026-10-30T14:44:26.069Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 547,
+      "kind": "annonce",
+      "title": "Developers bring incredible new app experiences to iPhone Duo",
+      "announced_at": "2026-10-22T11:59:15.686Z",
+      "first_seen_at": "2026-11-04T22:44:14.836Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "UPDATE"
+      ],
+      "source": {
+        "id": "feed:apple-newsroom",
+        "name": "Apple Newsroom — flux RSS officiel",
+        "url": "https://www.apple.com/newsroom/2026/10/developers-bring-incredible-new-app-experiences-to-iphone-duo"
+      },
+      "excerpt": "Starting this Friday, iPhone Duo users can discover amazing apps and games optimized for the first foldable iPhone.",
+      "capture": {
+        "content_hash": "887b41b107e1978833dab433ed726ca753ecd8001d6a74da62ddc0b69f4cf003",
+        "captured_at": "2026-11-04T22:44:14.836Z",
         "mode": "live"
       }
     },
@@ -6275,6 +8858,162 @@ window.DONNEES_MAQUETTE = {
       }
     },
     {
+      "id": 524,
+      "kind": "annonce",
+      "title": "Leading European Financial Services Organizations Embrace Open Models to Build Proprietary Intelligence",
+      "announced_at": "2026-10-22T05:00:56.000Z",
+      "first_seen_at": "2026-11-04T22:44:14.469Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "AI",
+        "Financial Services",
+        "GTC 2026",
+        "NVIDIA Blackwell"
+      ],
+      "source": {
+        "id": "feed:nvidia-blog",
+        "name": "NVIDIA Blog — flux RSS officiel",
+        "url": "https://blogs.nvidia.com/blog/european-financial-services-organizations-open-models-proprietary-intelligence"
+      },
+      "excerpt": "At GTC Berlin, banks, payment companies and financial data providers are showing what production-scale intelligence looks like — built on NVIDIA accelerated computing, powered by open weight models and running on their own infrastructure…",
+      "capture": {
+        "content_hash": "4dc47081c449fcdc5096c53ce9744ab3e5e6a236ae27ebda6926bdf3e6af3da8",
+        "captured_at": "2026-11-04T22:44:14.469Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 525,
+      "kind": "annonce",
+      "title": "NVIDIA Cosmos Opens New Tools to Train, Evaluate and Deploy World Models",
+      "announced_at": "2026-10-22T05:00:27.000Z",
+      "first_seen_at": "2026-11-04T22:44:14.469Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "AI",
+        "Cosmos",
+        "GTC 2026",
+        "Physical AI"
+      ],
+      "source": {
+        "id": "feed:nvidia-blog",
+        "name": "NVIDIA Blog — flux RSS officiel",
+        "url": "https://blogs.nvidia.com/blog/cosmos-open-train-evaluate-deploy-world-models"
+      },
+      "excerpt": "To help developers rapidly build world models, which help physical AI systems understand and simulate the real world, NVIDIA has expanded the Cosmos platform with new training tools, simulation checkpoints and Cosmos Data Factory…",
+      "capture": {
+        "content_hash": "c4ae19fbd553754c8fdbbf53ee5c69279610a57fe28087e384a6a542536964fb",
+        "captured_at": "2026-11-04T22:44:14.469Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 526,
+      "kind": "annonce",
+      "title": "How Companies Are Using NVIDIA DSX to Break the Power Bottleneck",
+      "announced_at": "2026-10-22T05:00:25.000Z",
+      "first_seen_at": "2026-11-04T22:44:14.469Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "AI Infrastructure",
+        "AI Factory",
+        "GTC 2026",
+        "NVIDIA DSX"
+      ],
+      "source": {
+        "id": "feed:nvidia-blog",
+        "name": "NVIDIA Blog — flux RSS officiel",
+        "url": "https://blogs.nvidia.com/blog/dsx-power"
+      },
+      "excerpt": "Companies around the world are building on the NVIDIA DSX AI Factory Platform to plan, simulate and run the grid and the AI factory as one system, from the substation to the rack. Their adoption of the platform responds to an acute problem…",
+      "capture": {
+        "content_hash": "fd3d8dea3d15f79e8016c044e9afe29005b29fa5d12dd7a1728584de9f7201a6",
+        "captured_at": "2026-11-04T22:44:14.469Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 527,
+      "kind": "annonce",
+      "title": "NVIDIA Transforms European Retail, From Digital Discovery to Physical Operations",
+      "announced_at": "2026-10-22T05:00:23.000Z",
+      "first_seen_at": "2026-11-04T22:44:14.469Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "AI",
+        "GTC 2026",
+        "Nemotron",
+        "Retail and Consumer Packaged Goods"
+      ],
+      "source": {
+        "id": "feed:nvidia-blog",
+        "name": "NVIDIA Blog — flux RSS officiel",
+        "url": "https://blogs.nvidia.com/blog/european-retail-open-models-robotics"
+      },
+      "excerpt": "European retailers are using open models and physical intelligence across use cases — from a commerce platform cutting inference costs by 90% to to a fulfillment center where collaboration of different robotic fleets is simulated inside a…",
+      "capture": {
+        "content_hash": "2714ac867faed6cd623a9ee8361d8ebea5f5617dd1cdcf6264d55529b15f524a",
+        "captured_at": "2026-11-04T22:44:14.469Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 528,
+      "kind": "annonce",
+      "title": "Pioneers Across Europe Deploy NVIDIA Earth-2 Open Models to Power Real-World Weather and Climate Prediction",
+      "announced_at": "2026-10-22T05:00:19.000Z",
+      "first_seen_at": "2026-11-04T22:44:14.469Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "AI",
+        "Climate",
+        "GTC 2026",
+        "NVIDIA Earth-2"
+      ],
+      "source": {
+        "id": "feed:nvidia-blog",
+        "name": "NVIDIA Blog — flux RSS officiel",
+        "url": "https://blogs.nvidia.com/blog/europe-earth-2-open-models-weather-climate-prediction"
+      },
+      "excerpt": "Weather forecasts shape more than daily plans; timely weather information is crucial for energy producers, insurers and transport operators to plan around changing conditions. A global forecast can show a storm taking shape, but decisions…",
+      "capture": {
+        "content_hash": "d157449a6556afbd8bf2702b2d164a28399980862b5027a95bdead2cf9e47a39",
+        "captured_at": "2026-11-04T22:44:14.469Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 529,
+      "kind": "annonce",
+      "title": "NVIDIA Open Models Power a New Wave of European Public Sector Projects",
+      "announced_at": "2026-10-22T05:00:02.000Z",
+      "first_seen_at": "2026-11-04T22:44:14.469Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "AI",
+        "Agentic AI",
+        "GTC 2026",
+        "Nemotron"
+      ],
+      "source": {
+        "id": "feed:nvidia-blog",
+        "name": "NVIDIA Blog — flux RSS officiel",
+        "url": "https://blogs.nvidia.com/blog/european-public-sector-open-models"
+      },
+      "excerpt": "Governments need modern solutions to serve the public while keeping sensitive information under their control. Open models provide a path forward, letting governments evaluate them, adapt them to local languages and public services, run…",
+      "capture": {
+        "content_hash": "68fc1eae8587b15620750a350e9dcf6d7b18fddec5d8bc2435ad116f605bab2d",
+        "captured_at": "2026-11-04T22:44:14.469Z",
+        "mode": "live"
+      }
+    },
+    {
       "id": 6,
       "kind": "version",
       "title": "Claude Code 2.1.308",
@@ -6302,6 +9041,31 @@ window.DONNEES_MAQUETTE = {
       }
     },
     {
+      "id": 660,
+      "kind": "annonce",
+      "title": "Tesla says it will start selling Cybercabs by end of year",
+      "announced_at": "2026-10-22T00:17:54.000Z",
+      "first_seen_at": "2026-11-05T06:33:19.821Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Transportation",
+        "cybercab",
+        "Tesla"
+      ],
+      "source": {
+        "id": "feed:techcrunch-tesla",
+        "name": "TechCrunch, rubrique Tesla — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2026/10/21/tesla-says-it-will-start-selling-cybercabs-by-end-of-year"
+      },
+      "excerpt": "There is at least one obstacle that could throw off Tesla's Cybercab fleet plans. The NHTSA announced last month that it had opened an investigation into the Cybercab, just hours after the vehicles began operating on public streets in…",
+      "capture": {
+        "content_hash": "2674419016036d46ec052dd7897e371a9253cf69ec655b4fc721c0981bc8033b",
+        "captured_at": "2026-11-05T06:33:19.821Z",
+        "mode": "live"
+      }
+    },
+    {
       "id": 253,
       "kind": "annonce",
       "title": "New controls for Enterprise admins",
@@ -6319,6 +9083,32 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "2307dc8fbf4630ce3eb3299370363e2aecf82a26e252c1232cb5df636fafc378",
         "captured_at": "2026-10-30T14:44:30.964Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 782,
+      "kind": "annonce",
+      "title": "Tesla says customers can add their own vehicles to the robotaxi fleet next year — will it happen?",
+      "announced_at": "2026-10-21T23:36:31.000Z",
+      "first_seen_at": "2026-11-05T06:33:21.144Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Autonomous Cars",
+        "Electric Cars",
+        "Elon Musk",
+        "News"
+      ],
+      "source": {
+        "id": "feed:verge-tesla",
+        "name": "The Verge, rubrique Tesla — article de presse, contenu externe attribué",
+        "url": "https://www.theverge.com/transportation/1016118/tesla-robotaxi-customer-owned-vehicle-fleet-network-q3-2026-earnings"
+      },
+      "excerpt": "For years, Elon Musk has been making big promises to Tesla owners about unsupervised autonomous driving and the ability to add their own vehicles to the company's robotaxi fleet. During today's third-quarter earnings call, the company…",
+      "capture": {
+        "content_hash": "8e963dcc180b46a72d80f68399efb14492a42736eac1150465d68e2748c6db3a",
+        "captured_at": "2026-11-05T06:33:21.144Z",
         "mode": "live"
       }
     },
@@ -6346,6 +9136,58 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "66a262473916879861b552ccca696ff3cf9e5d4cda0f3bd4adc1089acff07220",
         "captured_at": "2026-10-30T02:25:16.856Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 661,
+      "kind": "annonce",
+      "title": "Tesla starts Optimus robot production in California as profit falls 43%",
+      "announced_at": "2026-10-21T20:33:09.000Z",
+      "first_seen_at": "2026-11-05T06:33:19.821Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Robotics",
+        "Transportation",
+        "Elon Musk",
+        "Tesla"
+      ],
+      "source": {
+        "id": "feed:techcrunch-tesla",
+        "name": "TechCrunch, rubrique Tesla — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2026/10/21/tesla-stars-optimus-robot-production-in-california-as-profit-falls-43"
+      },
+      "excerpt": "Tesla's revenue was flat and its expenses skyrocketed as it pressed the accelerator on its Optimus robots, AI, and autonomous driving.",
+      "capture": {
+        "content_hash": "929923bf10e82b9ff53e9ed5c2f8ade99a84cc8dab6b89f0bbdbdf9690066ea9",
+        "captured_at": "2026-11-05T06:33:19.821Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 783,
+      "kind": "annonce",
+      "title": "Not even flying Roadsters can lift Tesla’s flat Q3 revenues",
+      "announced_at": "2026-10-21T20:22:31.000Z",
+      "first_seen_at": "2026-11-05T06:33:21.144Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Electric Cars",
+        "Elon Musk",
+        "Tech",
+        "Tesla"
+      ],
+      "source": {
+        "id": "feed:verge-tesla",
+        "name": "The Verge, rubrique Tesla — article de presse, contenu externe attribué",
+        "url": "https://www.theverge.com/transportation/1015790/tesla-q3-2026-earnings-revenue-profit-roadster-spacex-merger"
+      },
+      "excerpt": "As the smoke clears from its outrageous Roadster demo, Tesla reported Q3 earnings on Wednesday - and the cold reality is that revenue has flatlined. Tesla said it earned $1.69 billion in net income on $28.0 billion in revenue in the quarter…",
+      "capture": {
+        "content_hash": "db73d077ce492e6644ceca0f33fe7d8cdab727c368db9c9a22a96fabc761f230",
+        "captured_at": "2026-11-05T06:33:21.144Z",
         "mode": "live"
       }
     },
@@ -6482,6 +9324,135 @@ window.DONNEES_MAQUETTE = {
       }
     },
     {
+      "id": 530,
+      "kind": "annonce",
+      "title": "Bringing the Spark to Europe: Local Intelligence Powers Next Wave of Agents",
+      "announced_at": "2026-10-21T10:50:37.000Z",
+      "first_seen_at": "2026-11-04T22:44:14.469Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "AI",
+        "Agentic AI",
+        "Artificial Intelligence",
+        "DGX Spark"
+      ],
+      "source": {
+        "id": "feed:nvidia-blog",
+        "name": "NVIDIA Blog — flux RSS officiel",
+        "url": "https://blogs.nvidia.com/blog/local-ai-gtc-rtx-dgx-spark-station-sync"
+      },
+      "excerpt": "At GTC Berlin, NVIDIA is showcasing its full lineup of local AI hardware. RTX Spark, which launched last week, powers personal agents on Windows PCs; DGX Spark supports developers building and scaling applications on Linux; and DGX Station…",
+      "capture": {
+        "content_hash": "7ff8af16072a47a442fea0c25ac12ccb763647f32b66eac693e3c0e71117f8cf",
+        "captured_at": "2026-11-04T22:44:14.469Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 531,
+      "kind": "annonce",
+      "title": "Google Cloud and NVIDIA Announce General Availability of NVIDIA Vera Rubin Infrastructure",
+      "announced_at": "2026-10-21T10:45:17.000Z",
+      "first_seen_at": "2026-11-04T22:44:14.469Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "AI Infrastructure",
+        "Cloud",
+        "Hardware",
+        "Networking"
+      ],
+      "source": {
+        "id": "feed:nvidia-blog",
+        "name": "NVIDIA Blog — flux RSS officiel",
+        "url": "https://blogs.nvidia.com/blog/google-cloud-vera-rubin-infrastructure"
+      },
+      "excerpt": "General availability of the instances is coming next month, with planned expansion of availability to Europe — bringing an integrated platform for training, inference and large-scale reinforcement learning to cloud customers. A5X instances…",
+      "capture": {
+        "content_hash": "d06646c8341a7103ccf6f6184933f82cf0126984c648e7587f1456b136143327",
+        "captured_at": "2026-11-04T22:44:14.469Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 626,
+      "kind": "annonce",
+      "title": "[Photo] Inside Samsung’s ‘Design Is an Act of Love’ Exhibition at Seoul Design Week 2026",
+      "announced_at": "2026-10-21T08:00:00.000Z",
+      "first_seen_at": "2026-11-05T00:17:22.466Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Design",
+        "Design is an Act of Love",
+        "OLED S95H",
+        "Samsung Design"
+      ],
+      "source": {
+        "id": "feed:samsung-newsroom",
+        "name": "Samsung Global Newsroom — flux RSS officiel",
+        "url": "https://news.samsung.com/global/photo-inside-samsungs-design-is-an-act-of-love-exhibition-at-seoul-design-week-2026"
+      },
+      "excerpt": "Samsung Electronics opened its “Design is an Act of Love” exhibition on October 15 at Dongdaemun Design Plaza (DDP) in Seoul as part of Seoul Design Week 2026, one of Korea’s leading design events running through October 25. Samsung…",
+      "capture": {
+        "content_hash": "683beecbd30a219bdef10ee4bddaa0001b5f7628c6525e5bf3a6a487ac796175",
+        "captured_at": "2026-11-05T00:17:22.466Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 625,
+      "kind": "annonce",
+      "title": "“Discover New Ways to Live Smarter”: Samsung Electronics Launches Samsung Week 2026 in 63 Countries",
+      "announced_at": "2026-10-21T08:00:00.000Z",
+      "first_seen_at": "2026-11-05T00:17:22.466Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "More Stories",
+        "Samsung Week",
+        "Samsung Week 2026"
+      ],
+      "source": {
+        "id": "feed:samsung-newsroom",
+        "name": "Samsung Global Newsroom — flux RSS officiel",
+        "url": "https://news.samsung.com/global/discover-new-ways-to-live-smarter-samsung-electronics-launches-samsung-week-2026-in-63-countries"
+      },
+      "excerpt": "To mark its founding, Samsung Electronics is holding its global Samsung Week 2026 promotion from October 12 to November 1 in 63 countries. Samsung Week is Samsung’s largest annual promotion for customers around the world. Now in its seventh…",
+      "capture": {
+        "content_hash": "9f3c02b00d87ea1724b4eeac7c96cc4fb79b04225b3a2b5a9df83df275a5b6ca",
+        "captured_at": "2026-11-05T00:17:22.466Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 624,
+      "kind": "annonce",
+      "title": "[Infographic] 80 Years of JBL: From Studios and Stages to Everyday Life",
+      "announced_at": "2026-10-21T08:00:00.000Z",
+      "first_seen_at": "2026-11-05T00:17:22.466Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "More Products",
+        "80 Years of JBL",
+        "HARMAN",
+        "infographic"
+      ],
+      "source": {
+        "id": "feed:samsung-newsroom",
+        "name": "Samsung Global Newsroom — flux RSS officiel",
+        "url": "https://news.samsung.com/global/infographic-80-years-of-jbl-from-studios-and-stages-to-everyday-life"
+      },
+      "excerpt": "The devices people use to listen to music and the ways they enjoy it have changed over time. How has JBL, the professional audio brand of HARMAN, a Samsung subsidiary, maintained its appeal amid these shifts? As JBL celebrates its 80th…",
+      "capture": {
+        "content_hash": "2d93ffd1c71f9e78deaa2f1f6c598d31891d136fe39a11c85f95a30609a50d78",
+        "captured_at": "2026-11-05T00:17:22.466Z",
+        "mode": "live"
+      }
+    },
+    {
       "id": 8,
       "kind": "version",
       "title": "Claude Code 2.1.306",
@@ -6505,6 +9476,58 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "5ff167a614e51bbc93224314b94eb0b9f99ab5b741dcdd7de3d564a14a8d200e",
         "captured_at": "2026-10-30T02:25:16.856Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 662,
+      "kind": "annonce",
+      "title": "SpaceX and Tesla boards form special committees to review merger",
+      "announced_at": "2026-10-20T22:57:57.000Z",
+      "first_seen_at": "2026-11-05T06:33:19.821Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Space",
+        "Transportation",
+        "SpaceX",
+        "Tesla"
+      ],
+      "source": {
+        "id": "feed:techcrunch-tesla",
+        "name": "TechCrunch, rubrique Tesla — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2026/10/20/spacex-and-tesla-boards-form-special-committees-to-review-merger"
+      },
+      "excerpt": "Elon Musk likes the idea but says he is not on either committee, which is made up of independent directors.",
+      "capture": {
+        "content_hash": "b22315cfcacc0026a241af15e1dae86da6460166924f5aee9a2b70ceefd6cfd2",
+        "captured_at": "2026-11-05T06:33:19.821Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 784,
+      "kind": "annonce",
+      "title": "Tesla and SpaceX are discussing a possible merger, Musk says",
+      "announced_at": "2026-10-20T21:30:24.000Z",
+      "first_seen_at": "2026-11-05T06:33:21.144Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Business",
+        "Electric Cars",
+        "Elon Musk",
+        "News"
+      ],
+      "source": {
+        "id": "feed:verge-tesla",
+        "name": "The Verge, rubrique Tesla — article de presse, contenu externe attribué",
+        "url": "https://www.theverge.com/science/1014984/spacex-tesla-merger-elon-musk-special-committees"
+      },
+      "excerpt": "Tesla and SpaceX have formed special committees to discuss a possible merger, Elon Musk said during the latter's third quarter earnings call Tuesday. Musk, who serves as CEO of both companies, said the special committees were formed at the…",
+      "capture": {
+        "content_hash": "aebad5bb767ac5ee187ecd1471eb3fbdf0457f121c110748284f4e060fbf9aa4",
+        "captured_at": "2026-11-05T06:33:21.144Z",
         "mode": "live"
       }
     },
@@ -6582,6 +9605,52 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "233a185aec6092760f285953f9600763fd75f08528e91074c5dbd72453c622f2",
         "captured_at": "2026-10-30T09:55:59.086Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 548,
+      "kind": "annonce",
+      "title": "Apple unveils the 2026 Designers of Tomorrow",
+      "announced_at": "2026-10-20T14:59:22.784Z",
+      "first_seen_at": "2026-11-04T22:44:14.836Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "UPDATE"
+      ],
+      "source": {
+        "id": "feed:apple-newsroom",
+        "name": "Apple Newsroom — flux RSS officiel",
+        "url": "https://www.apple.com/newsroom/2026/10/apple-unveils-the-2026-designers-of-tomorrow"
+      },
+      "excerpt": "Apple’s Designers of Tomorrow showcase returns to spotlight the best in emerging talent, this time focusing on the theme of presence.",
+      "capture": {
+        "content_hash": "0744b4b856627b7bef57855f1002aa83684eebc33ef04f44ed88a99d2c2342eb",
+        "captured_at": "2026-11-04T22:44:14.836Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 549,
+      "kind": "annonce",
+      "title": "Apple announces American Manufacturing Program partners for latest iPhone lineup",
+      "announced_at": "2026-10-20T12:00:22.992Z",
+      "first_seen_at": "2026-11-04T22:44:14.836Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "PRESS RELEASE"
+      ],
+      "source": {
+        "id": "feed:apple-newsroom",
+        "name": "Apple Newsroom — flux RSS officiel",
+        "url": "https://www.apple.com/newsroom/2026/10/apple-announces-american-manufacturing-program-partners-for-latest-iphone-lineup"
+      },
+      "excerpt": "Apple announced new and expanded partnerships with American companies that are supplying critical materials and components for iPhone Duo and iPhone 18 Pro.",
+      "capture": {
+        "content_hash": "4fd2a29286b350bd357f4b0e06f5acc46292ffbc801222b17eb3126a8fab789c",
+        "captured_at": "2026-11-04T22:44:14.836Z",
         "mode": "live"
       }
     },
@@ -6695,6 +9764,58 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "39bdaefe2e29f89783039e70a596aae39ac4d91f651f2126fee8b3c702824e04",
         "captured_at": "2026-10-30T14:44:32.783Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 627,
+      "kind": "annonce",
+      "title": "Tailored for Every Home: Samsung “The Brief” Goes Global With AI-Powered Home Appliances",
+      "announced_at": "2026-10-20T08:00:31.000Z",
+      "first_seen_at": "2026-11-05T00:17:22.466Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Home Appliances",
+        "AI Home Appliances",
+        "Bespoke AI",
+        "Home Companion"
+      ],
+      "source": {
+        "id": "feed:samsung-newsroom",
+        "name": "Samsung Global Newsroom — flux RSS officiel",
+        "url": "https://news.samsung.com/global/tailored-for-every-home-samsung-the-brief-goes-global-with-ai-powered-home-appliances"
+      },
+      "excerpt": "Samsung Electronics hosted “The Brief,” a series of home appliance tech seminars across five regions: the US, Europe, Latin America, Southwest Asia, and Southeast Asia. The event showcased AI-powered home appliance experiences reflecting…",
+      "capture": {
+        "content_hash": "9b2130c75d7a36edb9c145c5dc0b18b20643fc9c8467272f1290800c668efa31",
+        "captured_at": "2026-11-05T00:17:22.466Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 628,
+      "kind": "annonce",
+      "title": "Samsung Art Store Unveils Curated Collection From Art Basel Paris 2026",
+      "announced_at": "2026-10-20T08:00:00.000Z",
+      "first_seen_at": "2026-11-05T00:17:22.466Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Press Releases",
+        "TVs & Displays",
+        "Art Basel",
+        "Art Basel Paris 2026"
+      ],
+      "source": {
+        "id": "feed:samsung-newsroom",
+        "name": "Samsung Global Newsroom — flux RSS officiel",
+        "url": "https://news.samsung.com/global/samsung-art-store-unveils-curated-collection-from-art-basel-paris-2026"
+      },
+      "excerpt": "▲ “Poppies #4” by Elene Shatberashvili on Samsung OLED S95H1 Samsung Electronics, a global display leader and provider of the Official Art TV of Art Basel, today announced the expansion of its Art Basel collection on Samsung Art Store with…",
+      "capture": {
+        "content_hash": "57eb640478d555dfa302676e4c38823079527afe562f0aa4372629464b8740c1",
+        "captured_at": "2026-11-05T00:17:22.466Z",
         "mode": "live"
       }
     },
@@ -6848,6 +9969,31 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "d6fa3262ad7eceb29fa3947a31e6d92e2bfad0f9c61b991fbb0af0b38f69777f",
         "captured_at": "2026-10-30T02:25:16.856Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 629,
+      "kind": "annonce",
+      "title": "Samsung Electronics Expands SSD Brand Campaign Across Global Landmarks",
+      "announced_at": "2026-10-19T17:20:00.000Z",
+      "first_seen_at": "2026-11-05T00:17:22.466Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Semiconductors",
+        "Choose the sure thing",
+        "SSD"
+      ],
+      "source": {
+        "id": "feed:samsung-newsroom",
+        "name": "Samsung Global Newsroom — flux RSS officiel",
+        "url": "https://news.samsung.com/global/samsung-electronics-expands-ssd-brand-campaign-across-global-landmarks"
+      },
+      "excerpt": "Samsung Electronics is expanding its SSD brand campaign, “Choose the sure thing,” across major global landmarks in New York, London, and Hong Kong, creating more opportunities to connect with consumers around the world. The campaign has…",
+      "capture": {
+        "content_hash": "64b1799df7037599eabf4cac80725e2b5053f728d69427f74648996115c48909",
+        "captured_at": "2026-11-05T00:17:22.466Z",
         "mode": "live"
       }
     },
@@ -7027,6 +10173,32 @@ window.DONNEES_MAQUETTE = {
       }
     },
     {
+      "id": 663,
+      "kind": "annonce",
+      "title": "TechCrunch Mobility: Rivian’s next act",
+      "announced_at": "2026-10-18T16:05:00.000Z",
+      "first_seen_at": "2026-11-05T06:33:19.821Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Transportation",
+        "Tesla",
+        "Rivian",
+        "RJ Scaringe"
+      ],
+      "source": {
+        "id": "feed:techcrunch-tesla",
+        "name": "TechCrunch, rubrique Tesla — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2026/10/18/techcrunch-mobility-rivians-next-act"
+      },
+      "excerpt": "Welcome back to TechCrunch Mobility, your hub for the future of transportation and now, more than ever, the role AI is playing in it.",
+      "capture": {
+        "content_hash": "e37bcb2821ebc117d50f94f58c887b6d89b60fe65e7562c17bbc6cf7a1f71ba6",
+        "captured_at": "2026-11-05T06:33:19.821Z",
+        "mode": "live"
+      }
+    },
+    {
       "id": 503,
       "kind": "annonce",
       "title": "DeepSeek V4.1 Flash 1017 Is INSANE! Best Open Model EVER?! (Fully Tested)",
@@ -7065,6 +10237,32 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "d814f2e8c126e718bd7dbb84f6d083db1a4079d8d6f37b72c96fe3ef1ce9a903",
         "captured_at": "2026-11-04T10:22:59.770Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 785,
+      "kind": "annonce",
+      "title": "Tesla driver says he was asleep and using FSD when he crashed into highway patrol cars",
+      "announced_at": "2026-10-16T20:49:04.000Z",
+      "first_seen_at": "2026-11-05T06:33:21.144Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Electric Cars",
+        "News",
+        "Tesla",
+        "Transportation"
+      ],
+      "source": {
+        "id": "feed:verge-tesla",
+        "name": "The Verge, rubrique Tesla — article de presse, contenu externe attribué",
+        "url": "https://www.theverge.com/transportation/1013280/tesla-chp-fsd-crash"
+      },
+      "excerpt": "After this horrific crash involving a Tesla driver who said he was asleep and using the driver assist mode, the California Highway Patrol warns that \"Despite its name, full self-driving is not fully autonomous. Technology does not relieve…",
+      "capture": {
+        "content_hash": "18fa90f579da7b346a9dda354d2417b1ccfd3909b9285d282b9e3ae468dd4fc4",
+        "captured_at": "2026-11-05T06:33:21.144Z",
         "mode": "live"
       }
     },
@@ -7117,6 +10315,32 @@ window.DONNEES_MAQUETTE = {
       }
     },
     {
+      "id": 786,
+      "kind": "annonce",
+      "title": "The incredible flying Tesla Roadster is just for show",
+      "announced_at": "2026-10-16T14:15:29.000Z",
+      "first_seen_at": "2026-11-05T06:33:21.144Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Electric Cars",
+        "Elon Musk",
+        "Science",
+        "Space"
+      ],
+      "source": {
+        "id": "feed:verge-tesla",
+        "name": "The Verge, rubrique Tesla — article de presse, contenu externe attribué",
+        "url": "https://www.theverge.com/transportation/1012783/tesla-roadster-flying-stunt-production-reality-musk"
+      },
+      "excerpt": "Last night, Elon Musk gave the people what they want: a car driving vertically up a multistory ramp, launching off the edge, executing a midair \"kickflip\" over a lineup of Teslas, and landing via cold-gas thrusters. That's what the people…",
+      "capture": {
+        "content_hash": "d1191b205fd034455b4eee6c9f877da8042e4b41468ea4a87087bed15bc5fa4a",
+        "captured_at": "2026-11-05T06:33:21.144Z",
+        "mode": "live"
+      }
+    },
+    {
       "id": 365,
       "kind": "annonce",
       "title": "DAC at SIGGRAPH 2026: Exhibitions, Experiments, and Community Conversations",
@@ -7139,6 +10363,32 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "e00e65b3c6fd88eaa9971bbf5f5b326934e509f8b97fa38f2ff7560f777fba50",
         "captured_at": "2026-10-30T14:44:36.354Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 664,
+      "kind": "annonce",
+      "title": "Tesla reveals SpaceX-powered Roadster that flies and falls with style",
+      "announced_at": "2026-10-16T01:17:43.000Z",
+      "first_seen_at": "2026-11-05T06:33:19.821Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Transportation",
+        "Elon Musk",
+        "Tesla",
+        "Tesla Roadster"
+      ],
+      "source": {
+        "id": "feed:techcrunch-tesla",
+        "name": "TechCrunch, rubrique Tesla — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2026/10/15/tesla-reveals-spacex-powered-roadster-that-flies-and-falls-with-style"
+      },
+      "excerpt": "The new car used thrusters to leap over a Cybercab, Cybertruck, Tesla Semi, Model Y, and Model 3 at a demo in Texas.",
+      "capture": {
+        "content_hash": "2a5d4fa58ccc9308919cb4d8412ab744600e73c23f76270fe6190a7d1829cbac",
+        "captured_at": "2026-11-05T06:33:19.821Z",
         "mode": "live"
       }
     },
@@ -7325,6 +10575,29 @@ window.DONNEES_MAQUETTE = {
       }
     },
     {
+      "id": 550,
+      "kind": "annonce",
+      "title": "Open up to new possibilities with iPhone Duo",
+      "announced_at": "2026-10-15T12:59:28.566Z",
+      "first_seen_at": "2026-11-04T22:44:14.836Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "UPDATE"
+      ],
+      "source": {
+        "id": "feed:apple-newsroom",
+        "name": "Apple Newsroom — flux RSS officiel",
+        "url": "https://www.apple.com/newsroom/2026/10/open-up-to-new-possibilities-with-iphone-duo"
+      },
+      "excerpt": "Beginning Friday, October 16, at 5 a.m. PT, customers can pre-order iPhone Duo on apple.com and in the Apple Store app.",
+      "capture": {
+        "content_hash": "0266939018f106da6bf8783b7e07b0fa89756ac18628abf3fec5c780a5866062",
+        "captured_at": "2026-11-04T22:44:14.836Z",
+        "mode": "live"
+      }
+    },
+    {
       "id": 68,
       "kind": "annonce",
       "title": "Introducing Timestral",
@@ -7346,6 +10619,32 @@ window.DONNEES_MAQUETTE = {
       }
     },
     {
+      "id": 630,
+      "kind": "annonce",
+      "title": "Samsung Presents ‘Design Is an Act of Love’ at Seoul Design Week 2026",
+      "announced_at": "2026-10-15T10:00:00.000Z",
+      "first_seen_at": "2026-11-05T00:17:22.466Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Design",
+        "Press Releases",
+        "Design is an Act of Love",
+        "OLED S95H"
+      ],
+      "source": {
+        "id": "feed:samsung-newsroom",
+        "name": "Samsung Global Newsroom — flux RSS officiel",
+        "url": "https://news.samsung.com/global/samsung-presents-design-is-an-act-of-love-at-seoul-design-week-2026"
+      },
+      "excerpt": "Samsung Electronics today announced that it is presenting its “Design is an Act of Love” exhibition at Seoul Design Week 2026, taking place in Seoul, Korea. The exhibition features 14 artworks inspired by Samsung products, displayed on the…",
+      "capture": {
+        "content_hash": "29902dcb2be515e5734d61b49bb91c4896ae4d45a2d520df9e3898b5d82dc5aa",
+        "captured_at": "2026-11-05T00:17:22.466Z",
+        "mode": "live"
+      }
+    },
+    {
       "id": 102,
       "kind": "annonce",
       "title": "Apertus 1.5 Release Notes",
@@ -7363,6 +10662,81 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "da7da6632a49a1f64ddb2ee992d5824002d0b980d6a899cde56cf6ee29d3c286",
         "captured_at": "2026-10-30T14:44:25.693Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 631,
+      "kind": "annonce",
+      "title": "From Smart City to Race Circuit: Samsung’s The Wall in Control Rooms",
+      "announced_at": "2026-10-15T08:00:00.000Z",
+      "first_seen_at": "2026-11-05T00:17:22.466Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "TVs & Displays",
+        "Control Room",
+        "Smart City",
+        "The Wall"
+      ],
+      "source": {
+        "id": "feed:samsung-newsroom",
+        "name": "Samsung Global Newsroom — flux RSS officiel",
+        "url": "https://news.samsung.com/global/from-smart-city-to-race-circuit-samsungs-the-wall-in-control-rooms"
+      },
+      "excerpt": "On the front lines of crisis management, where timely decisions are critical, control rooms are evolving to meet the demands of today’s highly connected society. Moving beyond traditional monitoring, they have become centralized hubs that…",
+      "capture": {
+        "content_hash": "32200bce6ddbdd25f09756d4aba9a7a778db61c5d41079f5b7d1e79ace7a7c2c",
+        "captured_at": "2026-11-05T00:17:22.466Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 632,
+      "kind": "annonce",
+      "title": "Samsung Hosts Silicon Valley Future Wireless Summit 2026",
+      "announced_at": "2026-10-15T06:00:00.000Z",
+      "first_seen_at": "2026-11-05T00:17:22.466Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Press Releases",
+        "Technology",
+        "6G",
+        "AI-RAN"
+      ],
+      "source": {
+        "id": "feed:samsung-newsroom",
+        "name": "Samsung Global Newsroom — flux RSS officiel",
+        "url": "https://news.samsung.com/global/samsung-hosts-silicon-valley-future-wireless-summit-2026"
+      },
+      "excerpt": "Samsung Electronics today announced that it is bringing together global telecommunications industry partners at the Samsung Research America campus in Mountain View, California for the Silicon Valley Future Wireless Summit 2026 on Oct. 15…",
+      "capture": {
+        "content_hash": "8e4539ed40157e84cadd41cd2a75bfa958b4e80b337704c3c25d675e6f0bae67",
+        "captured_at": "2026-11-05T00:17:22.466Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 582,
+      "kind": "annonce",
+      "title": "More Than Three Quarters of Small Business Owners Say AI Makes Them More Productive, But Most Need More Guidance",
+      "announced_at": "2026-10-15T00:50:50.000Z",
+      "first_seen_at": "2026-11-04T22:44:16.402Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "APAC Newsroom"
+      ],
+      "source": {
+        "id": "feed:meta-newsroom",
+        "name": "Meta Newsroom — flux RSS officiel",
+        "url": "https://about.fb.com/news/2026/10/more-than-three-quarters-of-small-business-owners-say-ai-makes-them-more-productive-but-most-need-more-guidance"
+      },
+      "excerpt": "Today, we’re releasing findings from a new YouGov study we commissioned of almost 4,000 small business owners across nine APAC markets: Australia, Singapore, Vietnam, Indonesia, Taiwan, India, Thailand, Japan and Hong Kong, on how AI is…",
+      "capture": {
+        "content_hash": "109646d0b9317af5085caa2e58af27718219f2f059d1c5cc76cb21c3dba21750",
+        "captured_at": "2026-11-04T22:44:16.402Z",
         "mode": "live"
       }
     },
@@ -7456,6 +10830,154 @@ window.DONNEES_MAQUETTE = {
       }
     },
     {
+      "id": 633,
+      "kind": "annonce",
+      "title": "Samsung Expands Language Support Across AI Experiences on Galaxy",
+      "announced_at": "2026-10-14T21:00:00.000Z",
+      "first_seen_at": "2026-11-05T00:17:22.466Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Mobile",
+        "Bixby",
+        "Galaxy AI"
+      ],
+      "source": {
+        "id": "feed:samsung-newsroom",
+        "name": "Samsung Global Newsroom — flux RSS officiel",
+        "url": "https://news.samsung.com/global/samsung-expands-language-support-across-ai-experiences-on-galaxy"
+      },
+      "excerpt": "Samsung is expanding language support for Galaxy AI and Bixby, bringing these experiences to more users in their own language. Galaxy AI is expanding language support across more of its features, starting with those that translate…",
+      "capture": {
+        "content_hash": "8e9e554864b816ef87ef4c68bd4ee6084802adb9c2b232fc4338d2c1e9050a09",
+        "captured_at": "2026-11-05T00:17:22.466Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 551,
+      "kind": "annonce",
+      "title": "Bünyamin Aydın’s new collection, “From Earth to Sky,” soars with iPad Pro",
+      "announced_at": "2026-10-14T17:39:29.065Z",
+      "first_seen_at": "2026-11-04T22:44:14.836Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "UPDATE"
+      ],
+      "source": {
+        "id": "feed:apple-newsroom",
+        "name": "Apple Newsroom — flux RSS officiel",
+        "url": "https://www.apple.com/newsroom/2026/10/bunyamin-aydins-new-collection-from-earth-to-sky-soars-with-ipad-pro"
+      },
+      "excerpt": "Bünyamin Aydın brought together Turkish heritage, rock influences, and futurism for a landmark fashion show in Cappadocia shot on iPhone 18 Pro Max.",
+      "capture": {
+        "content_hash": "8e7b84bc48d325f86e661cfd1f880b54b97c92b41244a8dfffde42bdb1b9bbbb",
+        "captured_at": "2026-11-04T22:44:14.836Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 583,
+      "kind": "annonce",
+      "title": "Meta, Milan’s Pinacoteca di Brera, and EssilorLuxottica Expand Access to Art Through AI Glasses",
+      "announced_at": "2026-10-14T16:00:57.000Z",
+      "first_seen_at": "2026-11-04T22:44:16.402Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Homepage - Hidden",
+        "Newsroom for Europe, Middle East and Africa"
+      ],
+      "source": {
+        "id": "feed:meta-newsroom",
+        "name": "Meta Newsroom — flux RSS officiel",
+        "url": "https://about.fb.com/news/2026/10/meta-milans-pinacoteca-di-brera-and-essilorluxottica-expand-access-to-art-through-ai-glasses"
+      },
+      "excerpt": "https://about.fb.com/wp-content/uploads/2026/10/Global-sub-ENG-Sensing-Art-video-2.mp4 Today, Meta, Pinacoteca di Brera and EssilorLuxottica are proud to launch “Sensing Art – Discovering Masterpieces Beyond What Meets the Eye.” This pilot…",
+      "capture": {
+        "content_hash": "e2fe951de0631b0c8973b988ef46e31a74b6d32a3292196b7bbdb57640c48ea5",
+        "captured_at": "2026-11-04T22:44:16.402Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 584,
+      "kind": "annonce",
+      "title": "Now You Can Invite Anyone to a WhatsApp Call",
+      "announced_at": "2026-10-14T14:24:37.000Z",
+      "first_seen_at": "2026-11-04T22:44:16.402Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Product News",
+        "Recent News",
+        "Sidebar - Featured",
+        "WhatsApp"
+      ],
+      "source": {
+        "id": "feed:meta-newsroom",
+        "name": "Meta Newsroom — flux RSS officiel",
+        "url": "https://about.fb.com/news/2026/10/introducing-whatsapp-guest-calling"
+      },
+      "excerpt": "Today we’re making WhatsApp calling more open than ever. With guest calling, you can now invite anyone to join a WhatsApp call — even if they don’t have a WhatsApp account. That means free, end-to-end encrypted calls for everyone with no…",
+      "capture": {
+        "content_hash": "5c550b70028fc2339f7a9bbcf4b8fbeba2b78c85229652827675ba97a406aa70",
+        "captured_at": "2026-11-04T22:44:16.402Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 585,
+      "kind": "annonce",
+      "title": "Farah Khan at Edits Film Festival: “Content breakthroughs come from spontaneity, relatability and realness”",
+      "announced_at": "2026-10-14T11:39:32.000Z",
+      "first_seen_at": "2026-11-04T22:44:16.402Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Homepage - Hidden",
+        "India Newsroom"
+      ],
+      "source": {
+        "id": "feed:meta-newsroom",
+        "name": "Meta Newsroom — flux RSS officiel",
+        "url": "https://about.fb.com/news/2026/10/farah-khan-at-edits-film-festival-content-breakthroughs-come-from-spontaneity-relatability-and-realness"
+      },
+      "excerpt": "Today the curtains came down on the Edits Film Festival in Mumbai, in the presence of filmmaker Farah Khan, festival judges Ahsaas Channa, Dolly Singh, Nikhil Taneja and Rajeev Masand and over 100 content creators in the audience. The…",
+      "capture": {
+        "content_hash": "4151538c0c468f16094cc7d4d7ab1686b9d0491ea367862447a1b60a76abc7c0",
+        "captured_at": "2026-11-04T22:44:16.402Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 634,
+      "kind": "annonce",
+      "title": "Samsung Health Makes Sleep Coaching Easier To Start and Tailors Weekly Guidance",
+      "announced_at": "2026-10-14T08:00:00.000Z",
+      "first_seen_at": "2026-11-05T00:17:22.466Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Mobile",
+        "Press Releases",
+        "Galaxy Watch",
+        "Running Coach"
+      ],
+      "source": {
+        "id": "feed:samsung-newsroom",
+        "name": "Samsung Global Newsroom — flux RSS officiel",
+        "url": "https://news.samsung.com/global/samsung-health-makes-sleep-coaching-easier-to-start-and-tailors-weekly-guidance"
+      },
+      "excerpt": "Samsung Electronics today announced a major update to the Samsung Health app, making Sleep Coaching1 even easier to start by lowering the data requirement to begin. The update also delivers more personalized sleep guidance and expanded…",
+      "capture": {
+        "content_hash": "7462ff36ac9b0b59798c09bef5dca53ab3d8fad6055b04e55a4389de85bf1a2e",
+        "captured_at": "2026-11-05T00:17:22.466Z",
+        "mode": "live"
+      }
+    },
+    {
       "id": 223,
       "kind": "annonce",
       "title": "Nvidia VFX Nodes for Video Upscaling, Frame Generation and SDR-to-HDR, for VFX Professionals",
@@ -7521,6 +11043,32 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "4a527d54d13f9995dbaca944325f7f2cad13801cbf9d55079479f70056b71815",
         "captured_at": "2026-10-30T14:44:32.783Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 586,
+      "kind": "annonce",
+      "title": "Your Algorithm, Your Words: New Ways to Shape What You See on Facebook",
+      "announced_at": "2026-10-13T16:00:29.000Z",
+      "first_seen_at": "2026-11-04T22:44:16.402Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Facebook",
+        "Product News",
+        "Recent News",
+        "Sidebar - Featured"
+      ],
+      "source": {
+        "id": "feed:meta-newsroom",
+        "name": "Meta Newsroom — flux RSS officiel",
+        "url": "https://about.fb.com/news/2026/10/introducing-your-algorithm-facebook"
+      },
+      "excerpt": "Facebook is at its best when it helps you find and do more of what you’re actually into. Now we’re putting you in the driver’s seat. New AI-powered tools let you tell Facebook, in your own words, what you want to see in Feed and Reels, and…",
+      "capture": {
+        "content_hash": "a3491f05934cdf24076df735f6e104a0d2b11458078fc4235b848262e66e0c8c",
+        "captured_at": "2026-11-04T22:44:16.402Z",
         "mode": "live"
       }
     },
@@ -7614,8 +11162,152 @@ window.DONNEES_MAQUETTE = {
       },
       "excerpt": "It’s a wrap! Yet another edition of the main Blender event of the year happened in the heart of Amsterdam, catching the very latest warm days of September. As is now tradition, BCON26 brought together artists, developers and contributors…",
       "capture": {
-        "content_hash": "722261777c124d71ae45c3d13b9b19f9cf1a61247540ee2d002875a0547e4550",
-        "captured_at": "2026-11-04T11:08:01.641Z",
+        "content_hash": "5afea65bf9a207ea48e459316e63b405e2e17fbd79311c1fdbf9f1636f3cceb4",
+        "captured_at": "2026-11-04T22:44:19.583Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 757,
+      "kind": "annonce",
+      "title": "Apple’s new smart home lineup includes a smart lock, thermostat, and video doorbells",
+      "announced_at": "2026-10-13T13:37:19.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.852Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Gadgets",
+        "Hardware",
+        "Apple",
+        "LG"
+      ],
+      "source": {
+        "id": "feed:techcrunch-lg",
+        "name": "TechCrunch, rubrique LG — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2026/10/13/apples-new-smart-home-line-up-includes-a-smart-lock-thermostat-and-video-doorbells"
+      },
+      "excerpt": "The new devices work with HomeView, the company's new smart home hub which can be used to control accessories and interact with apps.",
+      "capture": {
+        "content_hash": "168f59973c0a5c1ecfe2ce28ece8bd79b9df2913d5f5d9d6462794f834508817",
+        "captured_at": "2026-11-05T06:33:20.852Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 787,
+      "kind": "annonce",
+      "title": "The new Apple Home Collection includes a video doorbell, smart lock, and more",
+      "announced_at": "2026-10-13T13:00:00.000Z",
+      "first_seen_at": "2026-11-05T06:33:21.386Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Apple",
+        "LG",
+        "Smart Home",
+        "Tech"
+      ],
+      "source": {
+        "id": "feed:verge-lg",
+        "name": "The Verge, rubrique LG — article de presse, contenu externe attribué",
+        "url": "https://www.theverge.com/tech/1009680/apple-home-collection-doorbell-lock-camera-smart-home-announced"
+      },
+      "excerpt": "The Apple Home Collection includes a door lock, security cameras, thermostats, and home sensors. | Image: Apple Apple has partnered with LG Electronics and Schneider Electric to launch the Apple Home Collection, an assortment of smart home…",
+      "capture": {
+        "content_hash": "2ece5d64dadf719b41ffe030a4f5189358a6f0f4d608fc89151242d06621a464",
+        "captured_at": "2026-11-05T06:33:21.386Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 552,
+      "kind": "annonce",
+      "title": "Meet Apple HomeView, a new way to enjoy entertainment and manage the home",
+      "announced_at": "2026-10-13T12:59:16.617Z",
+      "first_seen_at": "2026-11-04T22:44:14.836Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "PRESS RELEASE"
+      ],
+      "source": {
+        "id": "feed:apple-newsroom",
+        "name": "Apple Newsroom — flux RSS officiel",
+        "url": "https://www.apple.com/newsroom/2026/10/meet-apple-homeview-a-new-way-to-enjoy-entertainment-and-manage-the-home"
+      },
+      "excerpt": "Apple today introduced Apple HomeView, designed to be central to the home and personal to everyone in it.",
+      "capture": {
+        "content_hash": "bd541980093a23a5df7ad87f0fe582b430bb74b7113c3cb52df29139ce304b5d",
+        "captured_at": "2026-11-04T22:44:14.836Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 553,
+      "kind": "annonce",
+      "title": "Apple unveils the new Apple TV 4K, supercharged by Siri AI",
+      "announced_at": "2026-10-13T12:58:10.680Z",
+      "first_seen_at": "2026-11-04T22:44:14.836Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "PRESS RELEASE"
+      ],
+      "source": {
+        "id": "feed:apple-newsroom",
+        "name": "Apple Newsroom — flux RSS officiel",
+        "url": "https://www.apple.com/newsroom/2026/10/apple-unveils-the-new-apple-tv-4k"
+      },
+      "excerpt": "Apple today announced the next generation of Apple TV 4K, delivering its most immersive home theater experience yet.",
+      "capture": {
+        "content_hash": "d460f0c0672a631108f818f65edb5b53d0b00276e6c711ff4c35d4fa1db5cd77",
+        "captured_at": "2026-11-04T22:44:14.836Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 554,
+      "kind": "annonce",
+      "title": "Apple announces the next generation of HomePod mini",
+      "announced_at": "2026-10-13T12:57:08.267Z",
+      "first_seen_at": "2026-11-04T22:44:14.836Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "PRESS RELEASE"
+      ],
+      "source": {
+        "id": "feed:apple-newsroom",
+        "name": "Apple Newsroom — flux RSS officiel",
+        "url": "https://www.apple.com/newsroom/2026/10/apple-announces-the-next-generation-of-homepod-mini"
+      },
+      "excerpt": "Apple today announced HomePod mini 2, featuring Siri AI, gorgeous new colors, and enhanced audio experiences.",
+      "capture": {
+        "content_hash": "fd1df33fdd591885f98dfd2dc18cd462abf73f6c114ebebffa97d0f2dfa32ccf",
+        "captured_at": "2026-11-04T22:44:14.836Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 555,
+      "kind": "annonce",
+      "title": "Introducing Apple Home Collection, a new lineup of smart home accessories",
+      "announced_at": "2026-10-13T12:56:12.276Z",
+      "first_seen_at": "2026-11-04T22:44:14.836Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "PRESS RELEASE"
+      ],
+      "source": {
+        "id": "feed:apple-newsroom",
+        "name": "Apple Newsroom — flux RSS officiel",
+        "url": "https://www.apple.com/newsroom/2026/10/introducing-apple-home-collection-a-new-lineup-of-smart-home-accessories"
+      },
+      "excerpt": "Apple today announced Apple Home Collection, a new lineup of smart home accessories built in collaboration with LG Electronics and Schneider Electric.",
+      "capture": {
+        "content_hash": "5bde6afd9745a4edf4d1ac248f3088e95b7c32fea152de30a691a38a66376d66",
+        "captured_at": "2026-11-04T22:44:14.836Z",
         "mode": "live"
       }
     },
@@ -7704,6 +11396,27 @@ window.DONNEES_MAQUETTE = {
       }
     },
     {
+      "id": 639,
+      "kind": "annonce",
+      "title": "Intel Accelerates Open Infrastructure for the Agentic AI Era",
+      "announced_at": "2026-10-12T19:32:00.000Z",
+      "first_seen_at": "2026-11-05T00:17:22.543Z",
+      "product": null,
+      "version": null,
+      "categories": [],
+      "source": {
+        "id": "feed:intel-press",
+        "name": "Intel, communiqués — flux RSS officiel",
+        "url": "https://www.intc.com/news-events/press-releases/detail/1783/intel-accelerates-open-infrastructure-for-the-agentic-ai-era"
+      },
+      "excerpt": null,
+      "capture": {
+        "content_hash": "f376b39599447c7943b3d0c01c1e689cfc600081247006003c5bd04c216a674a",
+        "captured_at": "2026-11-05T00:17:22.543Z",
+        "mode": "live"
+      }
+    },
+    {
       "id": 321,
       "kind": "annonce",
       "title": "11 Best DevOps Automation Tools for Engineering Teams",
@@ -7724,6 +11437,50 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "08f8882e0843467ae11979a8226d738a1756c4fa4664b934c2067b21f6048c82",
         "captured_at": "2026-11-04T10:23:07.865Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 556,
+      "kind": "annonce",
+      "title": "App Store Indie Games Week kicks off today",
+      "announced_at": "2026-10-12T13:59:49.734Z",
+      "first_seen_at": "2026-11-04T22:44:14.836Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "UPDATE"
+      ],
+      "source": {
+        "id": "feed:apple-newsroom",
+        "name": "Apple Newsroom — flux RSS officiel",
+        "url": "https://www.apple.com/newsroom/2026/10/app-store-indie-games-week-kicks-off-today"
+      },
+      "excerpt": "Today, Indie Games Week lights up the App Store with a celebration of the catalog of imaginative games made by independent teams with big dreams.",
+      "capture": {
+        "content_hash": "0e11b63b139191232c3be51b18bb028505b3b1e41081a01dba6e337fc1af084c",
+        "captured_at": "2026-11-04T22:44:14.836Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 569,
+      "kind": "annonce",
+      "title": "Introducing AMD Helion, Agentic AI Compute at Rack Scale",
+      "announced_at": "2026-10-12T13:00:00.000Z",
+      "first_seen_at": "2026-11-04T22:44:15.144Z",
+      "product": null,
+      "version": null,
+      "categories": [],
+      "source": {
+        "id": "feed:amd-press",
+        "name": "AMD, communiqués — flux RSS officiel",
+        "url": "https://ir.amd.com/news-events/press-releases/detail/1301/introducing-amd-helion-agentic-ai-compute-at-rack-scale"
+      },
+      "excerpt": null,
+      "capture": {
+        "content_hash": "5ee1fb90839a80dbe93153cc8485dca2dbfa2409648cceb95f58e59f233f8cbb",
+        "captured_at": "2026-11-04T22:44:15.144Z",
         "mode": "live"
       }
     },
@@ -7766,6 +11523,58 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "01de03da607ed31c6065b86b7dcb96c0f7a85c3c0ee9a5ec858faeb35069d424",
         "captured_at": "2026-11-04T10:22:59.770Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 788,
+      "kind": "annonce",
+      "title": "LG’s RGB LED TV is good for certain situations, but an OLED is better",
+      "announced_at": "2026-10-10T13:00:00.000Z",
+      "first_seen_at": "2026-11-05T06:33:21.386Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Gadgets",
+        "LG",
+        "Reviews",
+        "Tech"
+      ],
+      "source": {
+        "id": "feed:verge-lg",
+        "name": "The Verge, rubrique LG — article de presse, contenu externe attribué",
+        "url": "https://www.theverge.com/tech/1008957/lg-mrgb95b-rgb-led-tv-review"
+      },
+      "excerpt": "The LG’s picture is bright and punchy, but its panel is very reflective. When it comes to TVs, the LG name has long been synonymous with OLEDs, continually leading Samsung and Sony as the top OLED manufacturer. But 2026 is all about RGB LED…",
+      "capture": {
+        "content_hash": "0c51986c73b77e50f8d1b0f325f2a56f605a535a582d71047d401d0770881d58",
+        "captured_at": "2026-11-05T06:33:21.386Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 665,
+      "kind": "annonce",
+      "title": "Tesla renames ‘Full Self-Driving’ to ‘Tesla Assisted Driving’ in Europe",
+      "announced_at": "2026-10-09T16:07:26.000Z",
+      "first_seen_at": "2026-11-05T06:33:19.821Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Transportation",
+        "Elon Musk",
+        "FSD",
+        "full self-driving"
+      ],
+      "source": {
+        "id": "feed:techcrunch-tesla",
+        "name": "TechCrunch, rubrique Tesla — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2026/10/09/tesla-renames-full-self-driving-to-tesla-assisted-driving-in-europe"
+      },
+      "excerpt": "The name change is enough for Germany's transport minister to start advocating for Europe-wide adoption of the driver assistance software.",
+      "capture": {
+        "content_hash": "edd85daed13abb653d24ad342d598227ba27c4e36babb863136f5ca16e66b4ae",
+        "captured_at": "2026-11-05T06:33:19.821Z",
         "mode": "live"
       }
     },
@@ -7887,6 +11696,30 @@ window.DONNEES_MAQUETTE = {
       }
     },
     {
+      "id": 635,
+      "kind": "annonce",
+      "title": "Samsung Electronics Announces Earnings Guidance for Third Quarter 2026",
+      "announced_at": "2026-10-08T07:49:06.000Z",
+      "first_seen_at": "2026-11-05T00:17:22.466Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "More Stories",
+        "Press Releases"
+      ],
+      "source": {
+        "id": "feed:samsung-newsroom",
+        "name": "Samsung Global Newsroom — flux RSS officiel",
+        "url": "https://news.samsung.com/global/samsung-electronics-announces-earnings-guidance-for-third-quarter-2026"
+      },
+      "excerpt": "Samsung Electronics today announced its earnings guidance for the third quarter of 2026. · Consolidated Sales: Approximately 195 trillion Korean won · Consolidated Operating Profit: Approximately 107.40 trillion Korean won The above…",
+      "capture": {
+        "content_hash": "8a4eb1c93be3a64c9c837c2f0d0437837a93d0ad764c458494273fba0b0d6793",
+        "captured_at": "2026-11-05T00:17:22.466Z",
+        "mode": "live"
+      }
+    },
+    {
       "id": 225,
       "kind": "annonce",
       "title": "Gemini Nano Banana 2.1 is now available via Partner Nodes",
@@ -7904,6 +11737,74 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "55cc060f8254aedc0134ad33cfd1e19943f8c8157b492dc97333070d3c0cdc9f",
         "captured_at": "2026-10-30T14:44:29.596Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 758,
+      "kind": "annonce",
+      "title": "Apple is reportedly partnering with LG to launch a smart lock, thermostat, and doorbell",
+      "announced_at": "2026-10-06T22:53:09.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.852Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Gadgets",
+        "Hardware",
+        "Apple",
+        "In Brief"
+      ],
+      "source": {
+        "id": "feed:techcrunch-lg",
+        "name": "TechCrunch, rubrique LG — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2026/10/06/apple-is-reportedly-partnering-with-lg-to-launch-a-smart-lock-thermostat-and-doorbell"
+      },
+      "excerpt": "Apple appears poised to push into the smart home market with a slate of new devices and a key partner.",
+      "capture": {
+        "content_hash": "2383e38de1d0dc5e4cf05bde5cd35de025b5922595d2a3324ee9f0f7ef568e94",
+        "captured_at": "2026-11-05T06:33:20.852Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 570,
+      "kind": "annonce",
+      "title": "AMD to Report Fiscal Third Quarter 2026 Financial Results",
+      "announced_at": "2026-10-06T20:15:00.000Z",
+      "first_seen_at": "2026-11-04T22:44:15.144Z",
+      "product": null,
+      "version": null,
+      "categories": [],
+      "source": {
+        "id": "feed:amd-press",
+        "name": "AMD, communiqués — flux RSS officiel",
+        "url": "https://ir.amd.com/news-events/press-releases/detail/1300/amd-to-report-fiscal-third-quarter-2026-financial-results"
+      },
+      "excerpt": null,
+      "capture": {
+        "content_hash": "9094be459c5646b173d65e3a8b497f6227b33ce2923042c74defcc2a9c48cd47",
+        "captured_at": "2026-11-04T22:44:15.144Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 640,
+      "kind": "annonce",
+      "title": "Intel to Report Third-Quarter 2026 Financial Results",
+      "announced_at": "2026-10-06T20:01:00.000Z",
+      "first_seen_at": "2026-11-05T00:17:22.543Z",
+      "product": null,
+      "version": null,
+      "categories": [],
+      "source": {
+        "id": "feed:intel-press",
+        "name": "Intel, communiqués — flux RSS officiel",
+        "url": "https://www.intc.com/news-events/press-releases/detail/1782/intel-to-report-third-quarter-2026-financial-results"
+      },
+      "excerpt": null,
+      "capture": {
+        "content_hash": "637a884bd652ccfadcad1be557e1d3306a11c92e26b02671beafb82e9f7f05fd",
+        "captured_at": "2026-11-05T00:17:22.543Z",
         "mode": "live"
       }
     },
@@ -8085,6 +11986,32 @@ window.DONNEES_MAQUETTE = {
       }
     },
     {
+      "id": 666,
+      "kind": "annonce",
+      "title": "TechCrunch Mobility: Reining in robotaxis",
+      "announced_at": "2026-10-04T16:05:00.000Z",
+      "first_seen_at": "2026-11-05T06:33:19.821Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Startups",
+        "Transportation",
+        "Tesla",
+        "techcrunch mobility"
+      ],
+      "source": {
+        "id": "feed:techcrunch-tesla",
+        "name": "TechCrunch, rubrique Tesla — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2026/10/04/techcrunch-mobility-reining-in-robotaxis"
+      },
+      "excerpt": "Welcome back to TechCrunch Mobility, your hub for the future of transportation and now, more than ever, the role AI is playing in it.",
+      "capture": {
+        "content_hash": "94855173f5ce51eb01aeda5c15edf89f5eb62e40603ff499c3e31f2bd2e08437",
+        "captured_at": "2026-11-05T06:33:19.821Z",
+        "mode": "live"
+      }
+    },
+    {
       "id": 470,
       "kind": "annonce",
       "title": "Gemini 4, GPT 6.1, Plasma conjecture, Napoleon code solved, OpenAI Dots, Claude Sonnet 5.5: AI NEWS",
@@ -8128,6 +12055,58 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "247cc48bb9706091c6fe3549008e6bdb0d818c71e62c583e9302c6e556305674",
         "captured_at": "2026-10-30T09:55:59.086Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 667,
+      "kind": "annonce",
+      "title": "Tesla sustains its EV sales momentum despite US troubles",
+      "announced_at": "2026-10-02T13:39:23.000Z",
+      "first_seen_at": "2026-11-05T06:33:19.821Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Transportation",
+        "electric vehicles",
+        "EVs",
+        "Tesla"
+      ],
+      "source": {
+        "id": "feed:techcrunch-tesla",
+        "name": "TechCrunch, rubrique Tesla — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2026/10/02/tesla-sustains-its-ev-sales-momentum-despite-us-troubles"
+      },
+      "excerpt": "The company delivered more than 486,000 EVs in the third quarter, down from last year's record but moving in a positive direction.",
+      "capture": {
+        "content_hash": "faf4aed047a9acef0b1a1868d388ed2a49c976391644ffceec9d426f686fae62",
+        "captured_at": "2026-11-05T06:33:19.821Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 668,
+      "kind": "annonce",
+      "title": "Robotaxi operators will face fines for blocking first responders",
+      "announced_at": "2026-10-02T00:57:57.000Z",
+      "first_seen_at": "2026-11-05T06:33:19.821Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Transportation",
+        "Tesla",
+        "autonomous vehicles",
+        "Waymo"
+      ],
+      "source": {
+        "id": "feed:techcrunch-tesla",
+        "name": "TechCrunch, rubrique Tesla — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2026/10/01/robotaxi-operators-will-face-fines-for-blocking-first-responders"
+      },
+      "excerpt": "A new California law places new rules on autonomous vehicles operators.",
+      "capture": {
+        "content_hash": "07d5931997dd02779c4bc235a62bb3f9745564f213314f0eb2985608a4eac3d0",
+        "captured_at": "2026-11-05T06:33:19.821Z",
         "mode": "live"
       }
     },
@@ -8242,6 +12221,31 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "be38c260817e80aa8d19a044edebfd24a2ddac756846affc2937a20e3d7f10f9",
         "captured_at": "2026-10-30T09:55:59.086Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 669,
+      "kind": "annonce",
+      "title": "One year later, Tesla and Musk still don’t have a good definition of ‘abundance’",
+      "announced_at": "2026-10-01T15:50:10.000Z",
+      "first_seen_at": "2026-11-05T06:33:19.821Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Transportation",
+        "Tesla",
+        "Elon Musk"
+      ],
+      "source": {
+        "id": "feed:techcrunch-tesla",
+        "name": "TechCrunch, rubrique Tesla — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2026/10/01/one-year-later-tesla-and-musk-are-still-dont-have-a-good-definition-of-abundance"
+      },
+      "excerpt": "The CEO promised to get more specific about his vision. But the details are still absent.",
+      "capture": {
+        "content_hash": "135985e95e85fc05fff6220de7627a05a77bef0cf69732a057dbef344d693542",
+        "captured_at": "2026-11-05T06:33:19.821Z",
         "mode": "live"
       }
     },
@@ -8452,6 +12456,32 @@ window.DONNEES_MAQUETTE = {
       }
     },
     {
+      "id": 670,
+      "kind": "annonce",
+      "title": "Tesla secures $30B in new credit lines as it looks to scale Cybercab, Optimus",
+      "announced_at": "2026-09-29T21:20:12.000Z",
+      "first_seen_at": "2026-11-05T06:33:19.821Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Transportation",
+        "cybercab",
+        "Elon Musk",
+        "In Brief"
+      ],
+      "source": {
+        "id": "feed:techcrunch-tesla",
+        "name": "TechCrunch, rubrique Tesla — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2026/09/29/tesla-secures-30b-in-new-credit-lines-as-it-looks-to-scale-cybercab-optimus"
+      },
+      "excerpt": "The company says it won't draw on the new debt facilities this year, as it has already planned at least $25 billion in capital expenditures.",
+      "capture": {
+        "content_hash": "4a5e3aa2963df7930f52ab02eba90590407d58e408b0fdeacdc2a59edb8acb71",
+        "captured_at": "2026-11-05T06:33:19.821Z",
+        "mode": "live"
+      }
+    },
+    {
       "id": 344,
       "kind": "annonce",
       "title": "The Official Ruby SDK for MCP Reaches Tier 1",
@@ -8469,6 +12499,53 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "3831f9b9f56f88f88dba4cc83f6c1bd864371d88b8edeb7ac7eed68ca9123782",
         "captured_at": "2026-11-04T10:23:10.321Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 571,
+      "kind": "annonce",
+      "title": "AMD to Acquire World Labs to Advance the Future of AI Compute",
+      "announced_at": "2026-09-28T20:05:00.000Z",
+      "first_seen_at": "2026-11-04T22:44:15.144Z",
+      "product": null,
+      "version": null,
+      "categories": [],
+      "source": {
+        "id": "feed:amd-press",
+        "name": "AMD, communiqués — flux RSS officiel",
+        "url": "https://ir.amd.com/news-events/press-releases/detail/1299/amd-to-acquire-world-labs-to-advance-the-future-of-ai-compute"
+      },
+      "excerpt": null,
+      "capture": {
+        "content_hash": "d68e6c61587d96772759e205736010fd799d91f1ed19094ae6fb96fd510de47e",
+        "captured_at": "2026-11-04T22:44:15.144Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 671,
+      "kind": "annonce",
+      "title": "Tesla delays Roadster 2 event again due to bad weather",
+      "announced_at": "2026-09-28T19:27:27.000Z",
+      "first_seen_at": "2026-11-05T06:33:19.821Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Transportation",
+        "Tesla",
+        "Roadster",
+        "Elon Musk"
+      ],
+      "source": {
+        "id": "feed:techcrunch-tesla",
+        "name": "TechCrunch, rubrique Tesla — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2026/09/28/tesla-delays-roadster-2-event-again-due-to-bad-weather"
+      },
+      "excerpt": "Tesla says the event \"can only be held outdoors,\" as it's expected to show the car flying in some form using SpaceX thrusters.",
+      "capture": {
+        "content_hash": "d1d4ab53b3964e9677ccb69f0366c6d8489ae7926d158c6d29859bbc37e1df1b",
+        "captured_at": "2026-11-05T06:33:19.821Z",
         "mode": "live"
       }
     },
@@ -8553,8 +12630,34 @@ window.DONNEES_MAQUETTE = {
       },
       "excerpt": "This year we are celebrating 20 years of making Open Movies. 17 titles, all different and beautiful in their own way. We want to thank you for being a part of this journey – without the community support, all of these projects would not be…",
       "capture": {
-        "content_hash": "20f63d8c9ea783406722d19e1f046e1cd80c729644137e76bb68a19b93011bc3",
-        "captured_at": "2026-11-04T11:08:01.641Z",
+        "content_hash": "eab10505ed6f554019588bea70c517184a454ab9379946f56e7d85d6e6678c71",
+        "captured_at": "2026-11-04T22:44:19.583Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 672,
+      "kind": "annonce",
+      "title": "Tesla finally moves to electrify trucking after a decade of work and delays",
+      "announced_at": "2026-09-25T15:24:50.000Z",
+      "first_seen_at": "2026-11-05T06:33:19.821Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Transportation",
+        "Tesla",
+        "Elon Musk",
+        "Tesla Semi"
+      ],
+      "source": {
+        "id": "feed:techcrunch-tesla",
+        "name": "TechCrunch, rubrique Tesla — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2026/09/25/tesla-finally-moves-to-electrify-trucking-after-a-decade-of-work-and-delays"
+      },
+      "excerpt": "Tesla's Semi truck, with a 500-mile range, is about to hit the road in big numbers, with the company saying it plans to make 50,000 units a year.",
+      "capture": {
+        "content_hash": "bb6216a3c86e10d698736d2671b87e66bb6ad9c68116fcf677ea8e8a44a92edc",
+        "captured_at": "2026-11-05T06:33:19.821Z",
         "mode": "live"
       }
     },
@@ -8599,6 +12702,32 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "318c1a0ca299c92c3b0ac4cd1098bf34f07bc881e9b9bedecf58efcc0f6230c6",
         "captured_at": "2026-10-30T14:44:27.288Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 737,
+      "kind": "annonce",
+      "title": "Oracle sends force majeure notice on its New Mexico Stargate data center",
+      "announced_at": "2026-09-24T18:11:44.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.640Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "AI",
+        "stargate",
+        "data centers",
+        "oracle"
+      ],
+      "source": {
+        "id": "feed:techcrunch-oracle",
+        "name": "TechCrunch, rubrique Oracle — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2026/09/24/oracle-sends-force-majeure-notice-on-its-new-mexico-stargate-data-center"
+      },
+      "excerpt": "The notice would allow Oracle to delay payments should the facility miss its 2028 target to come online.",
+      "capture": {
+        "content_hash": "1e43705faa37363e8aebc85b3825a5fea2ea442388aa49d3f3a1b73c3f85bb85",
+        "captured_at": "2026-11-05T06:33:20.640Z",
         "mode": "live"
       }
     },
@@ -8764,6 +12893,31 @@ window.DONNEES_MAQUETTE = {
       }
     },
     {
+      "id": 698,
+      "kind": "annonce",
+      "title": "Qualcomm launches two new smartphone chips with emphasis on AI",
+      "announced_at": "2026-09-22T20:00:00.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.251Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "AI",
+        "Hardware",
+        "Qualcomm"
+      ],
+      "source": {
+        "id": "feed:techcrunch-qualcomm",
+        "name": "TechCrunch, rubrique Qualcomm — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2026/09/22/qualcomm-launches-two-new-smartphone-chips-with-emphasis-on-ai"
+      },
+      "excerpt": "Qualcomm said that its new top chip can run 30B mixture-of-expert model locally.",
+      "capture": {
+        "content_hash": "7b27542c0644fba6696b328f9ac4e13e53ee17cfda904090a9049b4f7e6206f1",
+        "captured_at": "2026-11-05T06:33:20.251Z",
+        "mode": "live"
+      }
+    },
+    {
       "id": 230,
       "kind": "annonce",
       "title": "Making the MiniMax H3 Video VAE 2x Faster",
@@ -8826,8 +12980,8 @@ window.DONNEES_MAQUETTE = {
       },
       "excerpt": "A donation to the Blender Development Fund has always been a non-targeted form of support that the Blender project further distributes as it sees fit. This will stay the same: the established process brings balance to development…",
       "capture": {
-        "content_hash": "605103c1542b571a6bfc24d2b664188a01d744bce18953c9cb1ce87deda9c238",
-        "captured_at": "2026-11-04T11:08:01.641Z",
+        "content_hash": "a3e502788390d25609e1d6f4400b238d12248ff5485107af7393b9f3252a007c",
+        "captured_at": "2026-11-04T22:44:19.583Z",
         "mode": "live"
       }
     },
@@ -8891,6 +13045,32 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "8dd79368be922b311323b89c55cf4e3abe14d1485a1ddc09ea44540cca9a72c4",
         "captured_at": "2026-11-04T10:22:59.770Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 789,
+      "kind": "annonce",
+      "title": "It’s not just LG. Every TV company is spying on you",
+      "announced_at": "2026-09-19T13:00:00.000Z",
+      "first_seen_at": "2026-11-05T06:33:21.386Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Gadgets",
+        "LG",
+        "Tech",
+        "TVs"
+      ],
+      "source": {
+        "id": "feed:verge-lg",
+        "name": "The Verge, rubrique LG — article de presse, contenu externe attribué",
+        "url": "https://www.theverge.com/tech/997682/every-tv-company-is-spying"
+      },
+      "excerpt": "The TV in your living room knows more about you than you realize. | Photo by John Higgins / The Verge The TV world has been a pot of controversy thanks to a two-hour-and-15-minute video from Gamers Nexus claiming LG TVs are nefariously…",
+      "capture": {
+        "content_hash": "8a29a927081b85766efcbe4d43017ed19514d6a22b4ca230d318ec8f7ca215c0",
+        "captured_at": "2026-11-05T06:33:21.386Z",
         "mode": "live"
       }
     },
@@ -8959,6 +13139,32 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "ea972886ab5c7faa6867663f1e852e48405833e1adf775360a243f3616516cef",
         "captured_at": "2026-10-30T14:44:30.964Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 673,
+      "kind": "annonce",
+      "title": "US automakers could soon be forced to include AM radio for free",
+      "announced_at": "2026-09-16T22:37:08.000Z",
+      "first_seen_at": "2026-11-05T06:33:19.821Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Transportation",
+        "Rivian",
+        "Tesla",
+        "Ford"
+      ],
+      "source": {
+        "id": "feed:techcrunch-tesla",
+        "name": "TechCrunch, rubrique Tesla — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2026/09/16/us-automakers-could-soon-be-forced-to-include-am-radio-for-free"
+      },
+      "excerpt": "The House of Representatives, in rare bipartisan support, overwhelmingly approved legislation that would require new vehicles to include AM radio.",
+      "capture": {
+        "content_hash": "1c86535c62bfb9d1540d3e6e03db376f7e3f5ec58acb7af3a621b2e52a68879c",
+        "captured_at": "2026-11-05T06:33:19.821Z",
         "mode": "live"
       }
     },
@@ -9152,8 +13358,34 @@ window.DONNEES_MAQUETTE = {
       },
       "excerpt": "This update includes all the great features in our Florence release, enhancements for macOS 27 Golden Gate, along with minor improvements and bug fixes. Changes Document windows now use the system corner radius, matching the rest of macOS…",
       "capture": {
-        "content_hash": "f0a2eef4b02a3c51754c0ac0b644a994fa1f0f117775df9b2a19ee115b6d87cc",
-        "captured_at": "2026-11-04T10:23:07.503Z",
+        "content_hash": "39576fa937e71e0eb2a06915f79de2479fcc90f82e5e0e074dd4c8ff7ebd157a",
+        "captured_at": "2026-11-04T22:44:21.862Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 738,
+      "kind": "annonce",
+      "title": "Larry Ellison cancels $7.5 billion sale of Oracle stock",
+      "announced_at": "2026-09-13T20:49:38.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.640Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Fundraising",
+        "In Brief",
+        "oracle",
+        "Larry Ellison"
+      ],
+      "source": {
+        "id": "feed:techcrunch-oracle",
+        "name": "TechCrunch, rubrique Oracle — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2026/09/13/larry-ellison-cancels-7-5-billion-sale-of-oracle-stock"
+      },
+      "excerpt": "Oracle had previously disclosed that Ellison planned to sell 50 million shares worth around $7.5 billion.",
+      "capture": {
+        "content_hash": "904589872743944d85d9e0f7624c0a31fa97aad5c4074d09f4fd82b7c20bff77",
+        "captured_at": "2026-11-05T06:33:20.640Z",
         "mode": "live"
       }
     },
@@ -9175,6 +13407,58 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "36e59643605d0655d68f5c8f48f01b19b26a2bbb60e3a6dce360072a48bbb0bc",
         "captured_at": "2026-11-04T10:22:59.770Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 674,
+      "kind": "annonce",
+      "title": "Tesla says it will finally unveil the second-generation Roadster on October 1",
+      "announced_at": "2026-09-12T19:21:19.000Z",
+      "first_seen_at": "2026-11-05T06:33:19.821Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Transportation",
+        "In Brief",
+        "Tesla",
+        "Roadster"
+      ],
+      "source": {
+        "id": "feed:techcrunch-tesla",
+        "name": "TechCrunch, rubrique Tesla — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2026/09/12/tesla-says-it-will-finally-unveil-the-second-generation-roadster-on-october-1"
+      },
+      "excerpt": "Tesla’s halo sports car was first announced in November 2017.",
+      "capture": {
+        "content_hash": "ffe1d372ac5e3dab1c34e8320a7234fae5fe067f45335bd8b7b7f02199573de9",
+        "captured_at": "2026-11-05T06:33:19.821Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 790,
+      "kind": "annonce",
+      "title": "LG responds to TV spying allegations",
+      "announced_at": "2026-09-12T15:19:44.000Z",
+      "first_seen_at": "2026-11-05T06:33:21.386Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Gadgets",
+        "LG",
+        "News",
+        "Privacy"
+      ],
+      "source": {
+        "id": "feed:verge-lg",
+        "name": "The Verge, rubrique LG — article de presse, contenu externe attribué",
+        "url": "https://www.theverge.com/tech/994333/lg-responds-to-tv-spying-allegations"
+      },
+      "excerpt": "Earlier this week, Gamers Nexus, Level1Techs, and independent security researchers detailed some alarming findings about how LG's TVs are logging and uploading data on its users. Now the company is pushing back against those allegations…",
+      "capture": {
+        "content_hash": "60ead23de3eedf4e2a913a475321683acc2cf0345e90d913a025cd72fa462eb3",
+        "captured_at": "2026-11-05T06:33:21.386Z",
         "mode": "live"
       }
     },
@@ -9334,6 +13618,53 @@ window.DONNEES_MAQUETTE = {
       }
     },
     {
+      "id": 791,
+      "kind": "annonce",
+      "title": "LG TVs caught spying even when offline or on standby",
+      "announced_at": "2026-09-08T11:30:05.000Z",
+      "first_seen_at": "2026-11-05T06:33:21.386Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Gadgets",
+        "LG",
+        "News",
+        "Privacy"
+      ],
+      "source": {
+        "id": "feed:verge-lg",
+        "name": "The Verge, rubrique LG — article de presse, contenu externe attribué",
+        "url": "https://www.theverge.com/tech/991190/lg-tv-spying-standby-recording-wi-fi-scanning-gamers-nexus"
+      },
+      "excerpt": "The LG G5 OLED is one of the TVs tested by Gamers Nexus. | Photo by John Higgins / The Verge LG smart TVs are almost constantly logging and uploading data about owners and their homes, even when offline or on standby mode, according to a…",
+      "capture": {
+        "content_hash": "ddcfdc540ef6ee71c37e610f7628b30e46f0b7cc8edbb6107534ea274571ede6",
+        "captured_at": "2026-11-05T06:33:21.386Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 641,
+      "kind": "annonce",
+      "title": "Intel Foundry and ASML Collaborate to Accelerate Industry Readiness for High NA EUV",
+      "announced_at": "2026-09-08T06:03:00.000Z",
+      "first_seen_at": "2026-11-05T00:17:22.543Z",
+      "product": null,
+      "version": null,
+      "categories": [],
+      "source": {
+        "id": "feed:intel-press",
+        "name": "Intel, communiqués — flux RSS officiel",
+        "url": "https://www.intc.com/news-events/press-releases/detail/1781/intel-foundry-and-asml-collaborate-to-accelerate-industry"
+      },
+      "excerpt": null,
+      "capture": {
+        "content_hash": "5531e84f57cd295488dca3fb2c9dfdcbca55baa0bc5b19a87b5058329e9a578b",
+        "captured_at": "2026-11-05T00:17:22.543Z",
+        "mode": "live"
+      }
+    },
+    {
       "id": 331,
       "kind": "annonce",
       "title": "September 7, 2026",
@@ -9351,6 +13682,58 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "ee473a9f7972043d7ad10be09675f42f7ef3e963e88596972491a4e122d89aca",
         "captured_at": "2026-10-30T14:44:34.353Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 675,
+      "kind": "annonce",
+      "title": "TechCrunch Mobility: Tesla Cybercab hits the road — and a snag",
+      "announced_at": "2026-09-06T16:08:00.000Z",
+      "first_seen_at": "2026-11-05T06:33:19.821Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Transportation",
+        "techcrunch mobility",
+        "cybercab",
+        "robotaxi"
+      ],
+      "source": {
+        "id": "feed:techcrunch-tesla",
+        "name": "TechCrunch, rubrique Tesla — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2026/09/06/techcrunch-mobility-tesla-cybercab-hits-the-road-and-a-snag"
+      },
+      "excerpt": "Welcome back to TechCrunch Mobility, your hub for the future of transportation and now, more than ever, the role AI is playing in it.",
+      "capture": {
+        "content_hash": "02cc4a38b98cc28d5dddef136aac5028c729b6a57e2d5c20d3ca6dc0b62b4a83",
+        "captured_at": "2026-11-05T06:33:19.821Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 676,
+      "kind": "annonce",
+      "title": "What will Apple’s John Ternus era look like?",
+      "announced_at": "2026-09-04T17:18:00.000Z",
+      "first_seen_at": "2026-11-05T06:33:19.821Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "AI",
+        "John Ternus",
+        "Tim Cook",
+        "Tesla"
+      ],
+      "source": {
+        "id": "feed:techcrunch-tesla",
+        "name": "TechCrunch, rubrique Tesla — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/video/what-will-apples-john-ternus-era-look-like"
+      },
+      "excerpt": "It’s officially the Ternus era at Apple. Tim Cook stepped down as CEO this week, handing the company to former hardware chief John Ternus, whose first memo promised a “huge launch next week” — timing that puts Apple’s next iPhone event on…",
+      "capture": {
+        "content_hash": "3ac06f0027fb6332fbe07c2734dcef3b42e784a0fceb9cf89864c35641009bb5",
+        "captured_at": "2026-11-05T06:33:19.821Z",
         "mode": "live"
       }
     },
@@ -9443,6 +13826,32 @@ window.DONNEES_MAQUETTE = {
       }
     },
     {
+      "id": 699,
+      "kind": "annonce",
+      "title": "Qualcomm backs Ultrahuman in $70M round on bet to turn smart rings into computers",
+      "announced_at": "2026-09-03T17:00:00.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.251Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Startups",
+        "Hardware",
+        "Biotech & Health",
+        "Nexus Venture Partners"
+      ],
+      "source": {
+        "id": "feed:techcrunch-qualcomm",
+        "name": "TechCrunch, rubrique Qualcomm — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2026/09/03/qualcomm-backs-ultrahuman-in-70m-round-on-bet-to-turn-smart-rings-into-computers"
+      },
+      "excerpt": "Ultrahuman is targeting a $200 million annual revenue run rate by January 2027 as it builds a new Qualcomm-powered smart ring.",
+      "capture": {
+        "content_hash": "3d7333b08162228a517771d53c528cc9367495398eecd85b42f0c347dadfdfb6",
+        "captured_at": "2026-11-05T06:33:20.251Z",
+        "mode": "live"
+      }
+    },
+    {
       "id": 265,
       "kind": "annonce",
       "title": "Control opacity at scale",
@@ -9511,6 +13920,32 @@ window.DONNEES_MAQUETTE = {
       }
     },
     {
+      "id": 792,
+      "kind": "annonce",
+      "title": "Homey just made the smart home controller I hoped Apple would",
+      "announced_at": "2026-09-01T17:00:00.000Z",
+      "first_seen_at": "2026-11-05T06:33:21.386Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "IFA 2026",
+        "LG",
+        "News",
+        "Smart Home"
+      ],
+      "source": {
+        "id": "feed:verge-lg",
+        "name": "The Verge, rubrique LG — article de presse, contenu externe attribué",
+        "url": "https://www.theverge.com/tech/987462/homey-lg-smart-portal-smart-home-controller-price-specs-release-date"
+      },
+      "excerpt": "Homey’s new tactile touchscreen controller has a rotary dial for controlling lights, climate, music and more. Smart homes have gotten really good at making things really complicated. Turning on a light can involve multiple steps, compared…",
+      "capture": {
+        "content_hash": "636237bc0f15695a7e42317d0fcbd302797ef7ca67a438ff4604b255cf8d49cf",
+        "captured_at": "2026-11-05T06:33:21.386Z",
+        "mode": "live"
+      }
+    },
+    {
       "id": 266,
       "kind": "annonce",
       "title": "Updates to generative plugins and shaders",
@@ -9549,6 +13984,27 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "0e9a3a700dbc68b2f27eeb76b1ebcfac3b9f31fe9f941c2cbba26f822efdeeb2",
         "captured_at": "2026-11-02T20:12:16.154Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 572,
+      "kind": "annonce",
+      "title": "AMD, Cisco and HUMAIN Expand Saudi Arabia’s AI Infrastructure as AMD Instinct Systems Go Live",
+      "announced_at": "2026-08-31T11:15:00.000Z",
+      "first_seen_at": "2026-11-04T22:44:15.144Z",
+      "product": null,
+      "version": null,
+      "categories": [],
+      "source": {
+        "id": "feed:amd-press",
+        "name": "AMD, communiqués — flux RSS officiel",
+        "url": "https://ir.amd.com/news-events/press-releases/detail/1298/amd-cisco-and-humain-expand-saudi-arabias-ai-infrastructure-as-amd-instinct-systems-go-live"
+      },
+      "excerpt": null,
+      "capture": {
+        "content_hash": "226e09879effc802972b036afb5e84b74f265c5fe4ef6eec0925b652d34c0c40",
+        "captured_at": "2026-11-04T22:44:15.144Z",
         "mode": "live"
       }
     },
@@ -9816,8 +14272,8 @@ window.DONNEES_MAQUETTE = {
       },
       "excerpt": "For our third major update of 2026, we’re upgrading Stacks with more sizing and layout options, and expanding support for effects and shadows in more places. We’re calling this update Florence. It requires macOS 15 Sequoia or later, which…",
       "capture": {
-        "content_hash": "2aa5d666ea08fe4807c2b306fe04a64de0358c58424cdcbb5fcba653780fda55",
-        "captured_at": "2026-11-04T10:23:07.503Z",
+        "content_hash": "16c229ca7a0065373116500dbdf8ad2dbe9b06207b4729bcbff031ef0ba69d17",
+        "captured_at": "2026-11-04T22:44:21.862Z",
         "mode": "live"
       }
     },
@@ -9839,6 +14295,31 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "e394657d2bba184d8097062b03998fded9c1657105156b43b5d5b7d19f4e18dd",
         "captured_at": "2026-10-30T14:44:30.964Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 717,
+      "kind": "annonce",
+      "title": "OpenAI’s Jalapeño chip is built for fast inference at scale, benchmarks show",
+      "announced_at": "2026-08-25T14:22:04.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.434Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "AI",
+        "Broadcom",
+        "OpenAI"
+      ],
+      "source": {
+        "id": "feed:techcrunch-broadcom",
+        "name": "TechCrunch, rubrique Broadcom — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2026/08/25/openais-jalapeno-chip-is-built-for-fast-inference-at-scale-benchmarks-show"
+      },
+      "excerpt": "Tested on SemiAnalysis’ InferenceX benchmark, Jalapeño registered both more tokens per user and more throughput per kilowatt than the currently available state-of-the art.",
+      "capture": {
+        "content_hash": "c13215281d6fbf03cc34644453b3161d4f10294a11c2627e7cc15b3db35e2c1b",
+        "captured_at": "2026-11-05T06:33:20.434Z",
         "mode": "live"
       }
     },
@@ -10039,6 +14520,31 @@ window.DONNEES_MAQUETTE = {
       }
     },
     {
+      "id": 793,
+      "kind": "annonce",
+      "title": "LG’s new OLED breakthrough can boost display lifespans",
+      "announced_at": "2026-08-20T09:11:26.000Z",
+      "first_seen_at": "2026-11-05T06:33:21.386Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "LG",
+        "News",
+        "Tech"
+      ],
+      "source": {
+        "id": "feed:verge-lg",
+        "name": "The Verge, rubrique LG — article de presse, contenu externe attribué",
+        "url": "https://www.theverge.com/tech/982609/lg-oled-panel-flipp-display-technology"
+      },
+      "excerpt": "LG Display unveiled the new FLiPP panel process at IMID 2026 on August 19th. | Image: LG Display LG Display has unveiled a new OLED manufacturing method that reportedly results in panels that are brighter, longer-lasting, more efficient…",
+      "capture": {
+        "content_hash": "9251ecec336bbf43f747c35747fece81fc7b2079507da54764ce92b9d72c21c6",
+        "captured_at": "2026-11-05T06:33:21.386Z",
+        "mode": "live"
+      }
+    },
+    {
       "id": 238,
       "kind": "annonce",
       "title": "Comfy H3 Sync Sound Community Challenge!",
@@ -10056,6 +14562,27 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "6b62c1ac97167b63fc8da3ad4db9384522d6ea2a1f12d1f20d802d9d44ff8769",
         "captured_at": "2026-10-30T14:44:29.596Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 573,
+      "kind": "annonce",
+      "title": "AMD Appoints Tim Ryan to Board of Directors",
+      "announced_at": "2026-08-19T20:15:00.000Z",
+      "first_seen_at": "2026-11-04T22:44:15.144Z",
+      "product": null,
+      "version": null,
+      "categories": [],
+      "source": {
+        "id": "feed:amd-press",
+        "name": "AMD, communiqués — flux RSS officiel",
+        "url": "https://ir.amd.com/news-events/press-releases/detail/1297/amd-appoints-tim-ryan-to-board-of-directors"
+      },
+      "excerpt": null,
+      "capture": {
+        "content_hash": "bd15315cd5d2b2752618d29803d4c045fdf0b4629ca1e93642bcfcf5b74978cd",
+        "captured_at": "2026-11-04T22:44:15.144Z",
         "mode": "live"
       }
     },
@@ -10124,6 +14651,27 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "6950d60c0458f2a70c2e1a336474b5cf4b24a32eeefd0d439123adb22ececdf0",
         "captured_at": "2026-10-30T14:44:27.727Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 642,
+      "kind": "annonce",
+      "title": "Intel Corporation to Participate in Upcoming Investor Conference",
+      "announced_at": "2026-08-18T20:30:00.000Z",
+      "first_seen_at": "2026-11-05T00:17:22.543Z",
+      "product": null,
+      "version": null,
+      "categories": [],
+      "source": {
+        "id": "feed:intel-press",
+        "name": "Intel, communiqués — flux RSS officiel",
+        "url": "https://www.intc.com/news-events/press-releases/detail/1780/intel-corporation-to-participate-in-upcoming-investor"
+      },
+      "excerpt": null,
+      "capture": {
+        "content_hash": "1da33cb0704bdd5cc0b02433b9a018b8c0df840ed98eba374147005df574c45c",
+        "captured_at": "2026-11-05T00:17:22.543Z",
         "mode": "live"
       }
     },
@@ -10280,6 +14828,48 @@ window.DONNEES_MAQUETTE = {
       }
     },
     {
+      "id": 643,
+      "kind": "annonce",
+      "title": "Intel Announces Upsize and Pricing of $20 Billion Common Stock Offering",
+      "announced_at": "2026-08-11T06:36:00.000Z",
+      "first_seen_at": "2026-11-05T00:17:22.543Z",
+      "product": null,
+      "version": null,
+      "categories": [],
+      "source": {
+        "id": "feed:intel-press",
+        "name": "Intel, communiqués — flux RSS officiel",
+        "url": "https://www.intc.com/news-events/press-releases/detail/1779/intel-announces-upsize-and-pricing-of-20-billion-common"
+      },
+      "excerpt": null,
+      "capture": {
+        "content_hash": "15fcbc984207352c3873b8d9c2f30e092caf7c5fa957093ed24e0c23ac181ea8",
+        "captured_at": "2026-11-05T00:17:22.543Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 644,
+      "kind": "annonce",
+      "title": "Intel Announces Proposed $15 Billion Common Stock Offering",
+      "announced_at": "2026-08-10T11:45:00.000Z",
+      "first_seen_at": "2026-11-05T00:17:22.543Z",
+      "product": null,
+      "version": null,
+      "categories": [],
+      "source": {
+        "id": "feed:intel-press",
+        "name": "Intel, communiqués — flux RSS officiel",
+        "url": "https://www.intc.com/news-events/press-releases/detail/1778/intel-announces-proposed-15-billion-common-stock-offering"
+      },
+      "excerpt": null,
+      "capture": {
+        "content_hash": "627ae3c88f0873013e9022dbdcc5562c116db82421dd028211afbcc6dce4c774",
+        "captured_at": "2026-11-05T00:17:22.543Z",
+        "mode": "live"
+      }
+    },
+    {
       "id": 335,
       "kind": "annonce",
       "title": "August 10, 2026",
@@ -10297,6 +14887,27 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "1cdca2fc2d152c834dd18eef9ddfebd1179cf2b67405f0b33bf56cfbe43231b6",
         "captured_at": "2026-10-30T14:44:34.353Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 645,
+      "kind": "annonce",
+      "title": "Intel Announces Leadership Appointment to Strengthen Customer Engagement and Accelerate Growth",
+      "announced_at": "2026-08-07T17:30:00.000Z",
+      "first_seen_at": "2026-11-05T00:17:22.543Z",
+      "product": null,
+      "version": null,
+      "categories": [],
+      "source": {
+        "id": "feed:intel-press",
+        "name": "Intel, communiqués — flux RSS officiel",
+        "url": "https://www.intc.com/news-events/press-releases/detail/1777/intel-announces-leadership-appointment-to-strengthen"
+      },
+      "excerpt": null,
+      "capture": {
+        "content_hash": "c096fa9c3a342a4f66d2a76b4c042e8723919aad4310256b7a44b97182a251ec",
+        "captured_at": "2026-11-05T00:17:22.543Z",
         "mode": "live"
       }
     },
@@ -10344,6 +14955,48 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "69868c5626a12e00129d7f99145b0c0bee60e15157a2b11fbb57bd6a25713af1",
         "captured_at": "2026-10-30T14:45:28.694Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 574,
+      "kind": "annonce",
+      "title": "AMD Acquires Taalas to Advance Compute Solutions for Rapidly Growing AI Inference Market",
+      "announced_at": "2026-08-06T20:05:00.000Z",
+      "first_seen_at": "2026-11-04T22:44:15.144Z",
+      "product": null,
+      "version": null,
+      "categories": [],
+      "source": {
+        "id": "feed:amd-press",
+        "name": "AMD, communiqués — flux RSS officiel",
+        "url": "https://ir.amd.com/news-events/press-releases/detail/1296/amd-acquires-taalas-to-advance-compute-solutions-for-rapidly-growing-ai-inference-market"
+      },
+      "excerpt": null,
+      "capture": {
+        "content_hash": "e750f05b9e0d1eed1f1e290a4c37519571f2c302ce6bfd0c623fd2ab3d20911c",
+        "captured_at": "2026-11-04T22:44:15.144Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 575,
+      "kind": "annonce",
+      "title": "AMD Reports Second Quarter 2026 Financial Results",
+      "announced_at": "2026-08-04T20:15:00.000Z",
+      "first_seen_at": "2026-11-04T22:44:15.144Z",
+      "product": null,
+      "version": null,
+      "categories": [],
+      "source": {
+        "id": "feed:amd-press",
+        "name": "AMD, communiqués — flux RSS officiel",
+        "url": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results"
+      },
+      "excerpt": null,
+      "capture": {
+        "content_hash": "faff128062e706b8da502dde545d46f6e45087bc02848fb7b6cdf34ff8a53f5a",
+        "captured_at": "2026-11-04T22:44:15.144Z",
         "mode": "live"
       }
     },
@@ -10605,6 +15258,32 @@ window.DONNEES_MAQUETTE = {
       }
     },
     {
+      "id": 794,
+      "kind": "annonce",
+      "title": "Microsoft pressures LG into killing unwanted McAfee ads",
+      "announced_at": "2026-07-24T09:20:09.000Z",
+      "first_seen_at": "2026-11-05T06:33:21.386Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "LG",
+        "Microsoft",
+        "News",
+        "Tech"
+      ],
+      "source": {
+        "id": "feed:verge-lg",
+        "name": "The Verge, rubrique LG — article de presse, contenu externe attribué",
+        "url": "https://www.theverge.com/tech/970489/lg-mcafee-ads-windows-microsoft-crackdown"
+      },
+      "excerpt": "Microsoft has intervened to stop Windows 11 users with LG monitors from being bombarded with annoying McAfee trial pop-ups. In response to complaints about the LG bloatware, Microsoft's Windows chief, Pavan Davuluri, said that LG has agreed…",
+      "capture": {
+        "content_hash": "59f087a9ac07ea0daa4bfe76f337b73a27d21121e28eb543144911a13fe57a1b",
+        "captured_at": "2026-11-05T06:33:21.386Z",
+        "mode": "live"
+      }
+    },
+    {
       "id": 384,
       "kind": "annonce",
       "title": "Workers, now in your Notion credits dashboard",
@@ -10622,6 +15301,48 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "94d85bfe9dad96f95b9733a7828adbf8283935ff23a91ea13bbc68f3a7f23e41",
         "captured_at": "2026-10-30T14:45:28.694Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 646,
+      "kind": "annonce",
+      "title": "Intel Reports Second-Quarter 2026 Financial Results",
+      "announced_at": "2026-07-23T20:01:00.000Z",
+      "first_seen_at": "2026-11-05T00:17:22.543Z",
+      "product": null,
+      "version": null,
+      "categories": [],
+      "source": {
+        "id": "feed:intel-press",
+        "name": "Intel, communiqués — flux RSS officiel",
+        "url": "https://www.intc.com/news-events/press-releases/detail/1776/intel-reports-second-quarter-2026-financial-results"
+      },
+      "excerpt": null,
+      "capture": {
+        "content_hash": "97950bd2c4048d01808749ea38e000f553a2c6ffc5b6cab79dfd1b33cf91f4ed",
+        "captured_at": "2026-11-05T00:17:22.543Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 576,
+      "kind": "annonce",
+      "title": "AAI 2026: AMD Delivers Full-Stack Compute for the Agentic AI Era",
+      "announced_at": "2026-07-23T18:30:00.000Z",
+      "first_seen_at": "2026-11-04T22:44:15.144Z",
+      "product": null,
+      "version": null,
+      "categories": [],
+      "source": {
+        "id": "feed:amd-press",
+        "name": "AMD, communiqués — flux RSS officiel",
+        "url": "https://ir.amd.com/news-events/press-releases/detail/1294/aai-2026-amd-delivers-full-stack-compute-for-the-agentic-ai-era"
+      },
+      "excerpt": null,
+      "capture": {
+        "content_hash": "78504c895d1ed2ab4e422f117a4b2233e670c72f625edcf8907be52c923f79ac",
+        "captured_at": "2026-11-04T22:44:15.144Z",
         "mode": "live"
       }
     },
@@ -10696,6 +15417,27 @@ window.DONNEES_MAQUETTE = {
       }
     },
     {
+      "id": 647,
+      "kind": "annonce",
+      "title": "Intel and Fortinet Collaborate to Advance Cybersecurity Innovation and Strengthen Global Supply Chain Resilience",
+      "announced_at": "2026-07-21T13:00:00.000Z",
+      "first_seen_at": "2026-11-05T00:17:22.543Z",
+      "product": null,
+      "version": null,
+      "categories": [],
+      "source": {
+        "id": "feed:intel-press",
+        "name": "Intel, communiqués — flux RSS officiel",
+        "url": "https://www.intc.com/news-events/press-releases/detail/1775/intel-and-fortinet-collaborate-to-advance-cybersecurity"
+      },
+      "excerpt": null,
+      "capture": {
+        "content_hash": "9ebe44963fc7cbf04a1a2f79fb981943336afc7c89ebfc6731728a2cc477f251",
+        "captured_at": "2026-11-05T00:17:22.543Z",
+        "mode": "live"
+      }
+    },
+    {
       "id": 140,
       "kind": "annonce",
       "title": "Duration Slider on Web",
@@ -10717,6 +15459,32 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "da1957867f7256b3c80b2c94cc084e382abe3550cdfe15f694f3ca515f570759",
         "captured_at": "2026-10-30T14:44:26.631Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 795,
+      "kind": "annonce",
+      "title": "LG’s monitors come with an unwanted addition for Windows: McAfee pop-up ads",
+      "announced_at": "2026-07-20T16:14:58.000Z",
+      "first_seen_at": "2026-11-05T06:33:21.386Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "LG",
+        "Microsoft",
+        "News",
+        "Privacy"
+      ],
+      "source": {
+        "id": "feed:verge-lg",
+        "name": "The Verge, rubrique LG — article de presse, contenu externe attribué",
+        "url": "https://www.theverge.com/tech/967983/lg-monitors-mcafee-adware-gamers-nexus"
+      },
+      "excerpt": "This LG 34GX900A-B is one of the monitors found auto-installing LG’s app on users’ PCs. | Image: LG A video from Gamers Nexus explains how, after connecting a new LG UltraGear monitor to a PC running Windows 11 for the first time, Windows…",
+      "capture": {
+        "content_hash": "e5f697eea135344561861b108b8a163e0ccaa1cff27ef71949d00833915bf33b",
+        "captured_at": "2026-11-05T06:33:21.386Z",
         "mode": "live"
       }
     },
@@ -10851,8 +15619,8 @@ window.DONNEES_MAQUETTE = {
       },
       "excerpt": "Blender Foundation and the online community proudly present Blender 5.2 LTS! Blender 5.2 LTS splash artwork by Joanna Kobierska, featuring the now-extinct Panthera spelaea. Download this .blend file What’s new Blender 5.2 LTS brings a great…",
       "capture": {
-        "content_hash": "24212fe123f682dd257566989bdb741f096ea3cb6b27d59f08121589516a5e1e",
-        "captured_at": "2026-11-04T11:08:01.641Z",
+        "content_hash": "7b3bd9b07beaba35c660b2ed71a0fd22079b674f54447215fdcfe091b20d6816",
+        "captured_at": "2026-11-04T22:44:19.583Z",
         "mode": "live"
       }
     },
@@ -10874,8 +15642,8 @@ window.DONNEES_MAQUETTE = {
       },
       "excerpt": "Introducing two big productivity boosts for the web app — a Command Bar to help you navigate and work faster, and an all-new notifications experience to help you stay on top of what’s happening in your Workspace. A Command Bar for the web…",
       "capture": {
-        "content_hash": "064b35db8db6bd2193a33bc7e1a1170e4ffdaa95462184ff1cd725f1e47aaffa",
-        "captured_at": "2026-11-04T10:23:07.503Z",
+        "content_hash": "b3dad86cef16c0c870a97ef21cb2a1cd499b1b4b8f19a623277d78049f8d839a",
+        "captured_at": "2026-11-04T22:44:21.862Z",
         "mode": "live"
       }
     },
@@ -10897,8 +15665,8 @@ window.DONNEES_MAQUETTE = {
       },
       "excerpt": "This update contains all the great features in our Edinburgh release, along with minor improvements and bug fixes. Improvements You can now choose “Export group contents only” for any Slice layer inside any kind of group, including frames…",
       "capture": {
-        "content_hash": "1b094d90be28a6c14d5f11cde38d2f6561953dde62ba4ffe543848f7f2b1d348",
-        "captured_at": "2026-11-04T10:23:07.503Z",
+        "content_hash": "6551495fcc2e20a2efeb742ac9e73d70b0c4221dbf62cee82469e901018cd7da",
+        "captured_at": "2026-11-04T22:44:21.862Z",
         "mode": "live"
       }
     },
@@ -11013,6 +15781,32 @@ window.DONNEES_MAQUETTE = {
       }
     },
     {
+      "id": 718,
+      "kind": "annonce",
+      "title": "Apple to produce Made in America wireless chips with Broadcom",
+      "announced_at": "2026-07-08T14:43:00.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.434Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Enterprise",
+        "Hardware",
+        "In Brief",
+        "wireless chips"
+      ],
+      "source": {
+        "id": "feed:techcrunch-broadcom",
+        "name": "TechCrunch, rubrique Broadcom — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2026/07/08/apple-to-produce-made-in-america-wireless-chips-with-broadcom"
+      },
+      "excerpt": "Apple has signed a $30 billion+ multiyear deal with Broadcom to design and produce more than 15 billion U.S.-made custom wireless connectivity chips for Apple products.",
+      "capture": {
+        "content_hash": "25e71a636595bf31f56eef57d106d2f57d4061a50be1d13d96e87012766f376d",
+        "captured_at": "2026-11-05T06:33:20.434Z",
+        "mode": "live"
+      }
+    },
+    {
       "id": 80,
       "kind": "annonce",
       "title": "Introducing Robostral Navigate",
@@ -11123,8 +15917,34 @@ window.DONNEES_MAQUETTE = {
       },
       "excerpt": "It’s been almost a week since the International Animation Film Festival and Market of Annecy wrapped up. Like last year, the Blender delegation was small: Fiona and Francesco representing Blender at various events, plus a couple of Blender…",
       "capture": {
-        "content_hash": "4c0e33c35a5d0d473087857d3eb3d3df1d504b2ead5868b3e895ef10f7e86488",
-        "captured_at": "2026-11-04T11:08:01.641Z",
+        "content_hash": "95b584bbcc9aff57201bf595b1eb3fa011d531bfc886eb67b2200fea766dc353",
+        "captured_at": "2026-11-04T22:44:19.583Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 677,
+      "kind": "annonce",
+      "title": "Thiel Capital’s Jack Selby nabs stakes in hot startups like Etched through Arizona connections",
+      "announced_at": "2026-07-02T21:57:10.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.061Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Venture",
+        "Hardware",
+        "fundraising",
+        "arizona"
+      ],
+      "source": {
+        "id": "feed:techcrunch-tsmc",
+        "name": "TechCrunch, rubrique TSMC — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2026/07/02/thiel-capitals-jack-selby-nabs-stakes-in-hot-startups-like-etched-through-arizona-connections"
+      },
+      "excerpt": "Selby's VC firm, Copper Sky Capital, is currently raising a $300 million second fund, according to a regulatory filing.",
+      "capture": {
+        "content_hash": "ba62102029c08c3716d0b7e0051efbb057555d2b39400addc481eebbe0422244",
+        "captured_at": "2026-11-05T06:33:20.061Z",
         "mode": "live"
       }
     },
@@ -11329,6 +16149,32 @@ window.DONNEES_MAQUETTE = {
       }
     },
     {
+      "id": 719,
+      "kind": "annonce",
+      "title": "OpenAI unveils its first custom chip, built by Broadcom",
+      "announced_at": "2026-06-24T14:54:46.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.434Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "AI",
+        "Broadcom",
+        "semiconductors",
+        "OpenAI"
+      ],
+      "source": {
+        "id": "feed:techcrunch-broadcom",
+        "name": "TechCrunch, rubrique Broadcom — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2026/06/24/openai-unveils-its-first-custom-chip-built-by-broadcom"
+      },
+      "excerpt": "Named Jalapeño, the new processor was designed specifically for the unique needs of OpenAI's inference systems.",
+      "capture": {
+        "content_hash": "aa300f9b1d1498f736c35cb170981356c0b3efaa0a50b92f6f23e0e6ef68620a",
+        "captured_at": "2026-11-05T06:33:20.434Z",
+        "mode": "live"
+      }
+    },
+    {
       "id": 82,
       "kind": "annonce",
       "title": "Bringing more control over your connectors",
@@ -11390,8 +16236,8 @@ window.DONNEES_MAQUETTE = {
       },
       "excerpt": "Our second 2026 update — Edinburgh — introduces multi-paste, perceptual and vibrant gradients, big performance improvements for symbols and replacing Libraries, and some handy prototype player options. Multi-paste and more predictable paste…",
       "capture": {
-        "content_hash": "b586dcf7d34981b30ef95a522c61b5997c643c9b0173457ea62e525f92aae464",
-        "captured_at": "2026-11-04T10:23:07.503Z",
+        "content_hash": "de2f8184a9fff758dac4a9e94fb053f17a9623b8d67df9cc7bbc60ebc79d2781",
+        "captured_at": "2026-11-04T22:44:21.862Z",
         "mode": "live"
       }
     },
@@ -11506,6 +16352,32 @@ window.DONNEES_MAQUETTE = {
       }
     },
     {
+      "id": 700,
+      "kind": "annonce",
+      "title": "Qualcomm wants to be the chip inside whatever replaces your smartphone, and it just announced two products toward that end",
+      "announced_at": "2026-06-16T18:22:24.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.251Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Hardware",
+        "Qualcomm",
+        "mixed reality",
+        "SMART Glasses"
+      ],
+      "source": {
+        "id": "feed:techcrunch-qualcomm",
+        "name": "TechCrunch, rubrique Qualcomm — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2026/06/16/qualcomm-wants-to-be-the-chip-inside-whatever-replaces-your-smartphone-and-it-just-announced-two-products-toward-that-end"
+      },
+      "excerpt": "Qualcomm CEO Cristiano Amon said Tuesday that the company is working on over 40 different AI wearable devices — including jewelry, earbuds with cameras, pins, and watches — a sign of how aggressively the chipmaker is betting that the next…",
+      "capture": {
+        "content_hash": "4a8ea4add62e42996b720e583834c9fc17585cd809842188ebaef88857c8a7fc",
+        "captured_at": "2026-11-05T06:33:20.251Z",
+        "mode": "live"
+      }
+    },
+    {
       "id": 342,
       "kind": "annonce",
       "title": "June 15, 2026",
@@ -11548,6 +16420,58 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "187862b9ea692a7ca0c6b92f4ce11d876c50310167639ebc06556d2fa4513adf",
         "captured_at": "2026-10-30T14:44:26.631Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 739,
+      "kind": "annonce",
+      "title": "Oracle warns of security bug that hackers abused to breach 100+ companies",
+      "announced_at": "2026-06-11T20:27:25.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.640Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Security",
+        "hackers",
+        "oracle",
+        "hacking"
+      ],
+      "source": {
+        "id": "feed:techcrunch-oracle",
+        "name": "TechCrunch, rubrique Oracle — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2026/06/11/oracle-warns-of-security-bug-that-hackers-abused-to-breach-100-companies"
+      },
+      "excerpt": "The tech giant warned of a security flaw that a cybercrime gang said it's exploiting as part of a mass-hacking campaign. Google said it notified more than 100 organizations that had potentially vulnerable servers.",
+      "capture": {
+        "content_hash": "fc3d60667606471cc803f1b574852113841a5924b1e48b32c18d6791af97a643",
+        "captured_at": "2026-11-05T06:33:20.640Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 740,
+      "kind": "annonce",
+      "title": "Cybercriminals claim breach of Oracle PeopleSoft servers at 100-plus organizations",
+      "announced_at": "2026-06-10T21:33:32.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.640Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Security",
+        "hackers",
+        "oracle",
+        "hacking"
+      ],
+      "source": {
+        "id": "feed:techcrunch-oracle",
+        "name": "TechCrunch, rubrique Oracle — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2026/06/10/cybercriminals-claim-breach-of-oracle-peoplesoft-servers-at-100-plus-organizations"
+      },
+      "excerpt": "The ShinyHunters hacking gang claims to have compromised the Oracle PeopleSoft servers of more than 100 organizations, including many universities.",
+      "capture": {
+        "content_hash": "3a4f46dbfb82253a1e643dae5f29025366e271e375da92cba018cd2c22166fe7",
+        "captured_at": "2026-11-05T06:33:20.640Z",
         "mode": "live"
       }
     },
@@ -11595,8 +16519,8 @@ window.DONNEES_MAQUETTE = {
       },
       "excerpt": "The world of animation will soon gather in Annecy, and Blender is coming along. Just like in previous years, a small part of the Blender team will attend the Annecy International Animation Film Festival (June 21–27, 2026) to host a…",
       "capture": {
-        "content_hash": "a3b640fa573f6b5d435b235752b7602b2dd2154c7eb77a52d38ce05dbf07d1a8",
-        "captured_at": "2026-11-04T11:08:01.641Z",
+        "content_hash": "e13100b881737db1da4c543236e23a81431ef3262ca5106faf2292d72b162e70",
+        "captured_at": "2026-11-04T22:44:19.583Z",
         "mode": "live"
       }
     },
@@ -11710,6 +16634,32 @@ window.DONNEES_MAQUETTE = {
       }
     },
     {
+      "id": 796,
+      "kind": "annonce",
+      "title": "LG will release the first 1000Hz, 1080p gaming monitor this year",
+      "announced_at": "2026-05-19T01:10:12.000Z",
+      "first_seen_at": "2026-11-05T06:33:21.386Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Gaming",
+        "LG",
+        "News",
+        "PC Gaming"
+      ],
+      "source": {
+        "id": "feed:verge-lg",
+        "name": "The Verge, rubrique LG — article de presse, contenu externe attribué",
+        "url": "https://www.theverge.com/games/933204/lg-1000hz-1080p-ultragear-25g590b"
+      },
+      "excerpt": "If you just can't choose between refresh rate and resolution, LG's next gaming monitor could solve your problem, as the UltraGear 25G590B monitor is the first one announced that will be capable of a native 1000Hz refresh rate at 1,920 x…",
+      "capture": {
+        "content_hash": "4b80cad51ac936d5027b441ddb24b0aa7988d27ba8d1834cff4d3cf1e5df8343",
+        "captured_at": "2026-11-05T06:33:21.386Z",
+        "mode": "live"
+      }
+    },
+    {
       "id": 390,
       "kind": "annonce",
       "title": "3.5: Notion Developer Platform",
@@ -11727,6 +16677,32 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "cc6dd5530800a6dfcec6e9bd7dd309d25f9f5718bf21f7e520da6323d46856b0",
         "captured_at": "2026-10-30T14:45:28.694Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 741,
+      "kind": "annonce",
+      "title": "Laid-off Oracle workers tried to negotiate better severance. Oracle said no.",
+      "announced_at": "2026-05-08T22:59:05.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.640Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Enterprise",
+        "AI",
+        "TC",
+        "severence"
+      ],
+      "source": {
+        "id": "feed:techcrunch-oracle",
+        "name": "TechCrunch, rubrique Oracle — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2026/05/08/laid-off-oracle-workers-tried-to-negotiate-better-severance-oracle-said-no"
+      },
+      "excerpt": "Some found out they didn't qualify for WARN Act protections like two-months notice because the company had classified them as remote workers.",
+      "capture": {
+        "content_hash": "c37705f9ba44536abfbe17e1ef7f94f96a463b65bf0d4c83749545e3d57547cf",
+        "captured_at": "2026-11-05T06:33:20.640Z",
         "mode": "live"
       }
     },
@@ -11773,6 +16749,32 @@ window.DONNEES_MAQUETTE = {
       }
     },
     {
+      "id": 678,
+      "kind": "annonce",
+      "title": "ASML CEO Christophe Fouquet on his company’s monopoly: no one is coming for us",
+      "announced_at": "2026-05-05T20:06:40.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.061Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "AI",
+        "nvidia",
+        "TSMC",
+        "ASML"
+      ],
+      "source": {
+        "id": "feed:techcrunch-tsmc",
+        "name": "TechCrunch, rubrique TSMC — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2026/05/05/asml-ceo-christophe-fouquet-no-one-is-coming-for-us"
+      },
+      "excerpt": "Christophe Fouquet, who became ASML's CEO in 2024 after more than a decade at the company, sat down with this editor on the rooftop deck of his Beverly Hills hotel Tuesday morning ahead of his appearance at the Milken Institute Global…",
+      "capture": {
+        "content_hash": "849406aecadcc073e88ee2d9ed5201d9159fea8da5eddb4e66d365e56f58bc8b",
+        "captured_at": "2026-11-05T06:33:20.061Z",
+        "mode": "live"
+      }
+    },
+    {
       "id": 393,
       "kind": "annonce",
       "title": "New Custom Agent controls for admins",
@@ -11811,8 +16813,34 @@ window.DONNEES_MAQUETTE = {
       },
       "excerpt": "This update contains all the great features in our Dublin release, along with minor improvements and bug fixes. Fixes Fixes a bug that caused Sketch to freeze up and use a lot of memory. Fixes a bug that could cause changes in a document…",
       "capture": {
-        "content_hash": "e77435ea0f2c074b085405f7c8323235420aa04625999d54a8d35d0ee8638990",
-        "captured_at": "2026-11-04T10:23:07.503Z",
+        "content_hash": "4410afff18bd4ce29ef722511f44daab2caca4b011505efad9cdf3476afb6da0",
+        "captured_at": "2026-11-04T22:44:21.862Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 701,
+      "kind": "annonce",
+      "title": "OpenAI could be making a phone with AI agents replacing apps",
+      "announced_at": "2026-04-27T13:08:59.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.251Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "AI",
+        "Hardware",
+        "Qualcomm",
+        "smartphone"
+      ],
+      "source": {
+        "id": "feed:techcrunch-qualcomm",
+        "name": "TechCrunch, rubrique Qualcomm — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2026/04/27/openai-could-be-making-a-phone-with-ai-agents-replacing-apps"
+      },
+      "excerpt": "There have been plenty of rumors about OpenAI's hardware plans, which involve launching a pair of earbuds. A new note from industry analyst Ming-Chi Kuo suggests that the AI company might be working on a phone in collaboration with…",
+      "capture": {
+        "content_hash": "48a725eb7f5608d69dd21f9c97ee4b6876c1e35b7cad43e62095bc24733751b6",
+        "captured_at": "2026-11-05T06:33:20.251Z",
         "mode": "live"
       }
     },
@@ -11834,8 +16862,34 @@ window.DONNEES_MAQUETTE = {
       },
       "excerpt": "This update contains all the great features in our Dublin release, along with minor improvements and bug fixes. Improvements The Color Variable lists in the Color panel are now taller, so you can see more variables at a glance without…",
       "capture": {
-        "content_hash": "a2aa8f00d21517f207ec09a5c948372f2213a488c6bdf649314c93ba74e04b68",
-        "captured_at": "2026-11-04T10:23:07.503Z",
+        "content_hash": "82d8e43e7bf039fbca93e1ea66fd2566b5e613203c20913bfdb433e895b35655",
+        "captured_at": "2026-11-04T22:44:21.862Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 702,
+      "kind": "annonce",
+      "title": "Snap gets closer to releasing new AI glasses after years-long hiatus",
+      "announced_at": "2026-04-10T12:00:00.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.251Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Hardware",
+        "Qualcomm",
+        "AR",
+        "Snap"
+      ],
+      "source": {
+        "id": "feed:techcrunch-qualcomm",
+        "name": "TechCrunch, rubrique Qualcomm — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2026/04/10/snap-gets-closer-to-releasing-new-ai-glasses-after-years-long-hiatus"
+      },
+      "excerpt": "Specs has long been teasing the next version of its augmented reality glasses. A new partnership with Qualcomm promises some movement in that department.",
+      "capture": {
+        "content_hash": "e5cb62ff8fa9ed0136b56a4ea87f6d9197e8c273983152ad5b25cbf2bd997114",
+        "captured_at": "2026-11-05T06:33:20.251Z",
         "mode": "live"
       }
     },
@@ -11861,6 +16915,32 @@ window.DONNEES_MAQUETTE = {
       }
     },
     {
+      "id": 720,
+      "kind": "annonce",
+      "title": "Anthropic ups compute deal with Google and Broadcom amid skyrocketing demand",
+      "announced_at": "2026-04-07T16:05:56.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.434Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Enterprise",
+        "AI",
+        "Broadcom",
+        "Google"
+      ],
+      "source": {
+        "id": "feed:techcrunch-broadcom",
+        "name": "TechCrunch, rubrique Broadcom — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2026/04/07/anthropic-compute-deal-google-broadcom-tpus"
+      },
+      "excerpt": "Anthropic bulked up its compute deal with Google and Broadcom as the company has seen its run-rate revenue surge to $30 billion.",
+      "capture": {
+        "content_hash": "3be3d68fa8b1edb9412514ded63abb857c06a58f79a1867d7a260038cfe7faaa",
+        "captured_at": "2026-11-05T06:33:20.434Z",
+        "mode": "live"
+      }
+    },
+    {
       "id": 297,
       "kind": "annonce",
       "title": "New in Sketch: Selection colors, independent borders, and more",
@@ -11878,8 +16958,34 @@ window.DONNEES_MAQUETTE = {
       },
       "excerpt": "For our first major Mac update of 2026, we’re ticking off a list of long-standing feature requests — from selection colors and independent borders, to corner smoothing controls and an all-new eyedropper tool with color variable support…",
       "capture": {
-        "content_hash": "13bd700c39d9dff66f7a83885bdd5e58e02bcec18fb941402e5e0357b56dbd24",
-        "captured_at": "2026-11-04T10:23:07.503Z",
+        "content_hash": "50f1d1554c15ae3ce28469aa9b547bfd14c37b98ff12d193e267e274f94d23b4",
+        "captured_at": "2026-11-04T22:44:21.862Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 742,
+      "kind": "annonce",
+      "title": "Iran threatens ‘Stargate’ AI data centers",
+      "announced_at": "2026-04-06T18:06:28.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.640Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Enterprise",
+        "TC",
+        "AI",
+        "Government & Policy"
+      ],
+      "source": {
+        "id": "feed:techcrunch-oracle",
+        "name": "TechCrunch, rubrique Oracle — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2026/04/06/iran-threatens-stargate-ai-data-centers"
+      },
+      "excerpt": "Iran said it will target U.S.-linked data centers with new missile strikes, as the war between the U.S. and Iran escalates.",
+      "capture": {
+        "content_hash": "123a0b9300bb2c343e654f94e90174758bb3033487fdea774614c63dcfb64206",
+        "captured_at": "2026-11-05T06:33:20.640Z",
         "mode": "live"
       }
     },
@@ -11967,8 +17073,8 @@ window.DONNEES_MAQUETTE = {
       },
       "excerpt": "We’ve been busy making lots of small improvements to the web app — especially across our developer handoff tools. The layer list in the web app now shows the same icons as the Mac app, reflects hidden and locked layer states, and you can…",
       "capture": {
-        "content_hash": "6387d402ee9a44fd513df1083febdf3cf4b5a3fe6874fac7d0f6a4e3dd732675",
-        "captured_at": "2026-11-04T10:23:07.503Z",
+        "content_hash": "603cba596c48c18866114cb350d66e805d6aba45db33fcfb1c88a1d95e3e699d",
+        "captured_at": "2026-11-04T22:44:21.862Z",
         "mode": "live"
       }
     },
@@ -11994,6 +17100,32 @@ window.DONNEES_MAQUETTE = {
       }
     },
     {
+      "id": 703,
+      "kind": "annonce",
+      "title": "Qualcomm’s partnership with Neura Robotics is just the beginning",
+      "announced_at": "2026-03-09T15:58:11.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.251Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "AI",
+        "Robotics",
+        "Qualcomm",
+        "nvidia"
+      ],
+      "source": {
+        "id": "feed:techcrunch-qualcomm",
+        "name": "TechCrunch, rubrique Qualcomm — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2026/03/09/qualcomms-partnership-with-neura-robotics-is-just-the-beginning"
+      },
+      "excerpt": "Neura Robotics is going to build new robots on top of Qualcomm's new IQ10 processors that were released at CES.",
+      "capture": {
+        "content_hash": "a51a9511ec9494cbb4fcdc16cbb9edacafb2c937a95e74cfc0690403c714e8b6",
+        "captured_at": "2026-11-05T06:33:20.251Z",
+        "mode": "live"
+      }
+    },
+    {
       "id": 354,
       "kind": "annonce",
       "title": "The 2026 MCP Roadmap",
@@ -12011,6 +17143,29 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "d3ed6d3100837467bf0cac3cdd33199b51e74173670789e25ffd6445632c8044",
         "captured_at": "2026-10-30T14:44:35.046Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 648,
+      "kind": "annonce",
+      "title": "Automatic Securities Disposition Plans Adopted by Shopify Chief Executive Officer",
+      "announced_at": "2026-03-06T22:00:00.000Z",
+      "first_seen_at": "2026-11-05T00:17:23.075Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "en"
+      ],
+      "source": {
+        "id": "feed:shopify-press",
+        "name": "Shopify, communiqués (Newsfile) — flux RSS officiel",
+        "url": "https://www.newsfilecorp.com/release/286446/Automatic-Securities-Disposition-Plans-Adopted-by-Shopify-Chief-Executive-Officer"
+      },
+      "excerpt": "Internet, Everywhere--(Newsfile Corp. - March 6, 2026) - Shopify Inc. (NASDAQ, TSX: SHOP) announced today that Tobias Lütke, Shopify's Chief Executive Officer, has entered into an automatic securities disposition plan to sell Class A…",
+      "capture": {
+        "content_hash": "05136f52e5217f6675cf2514731ff4abb31ad1a287e9fc57eebd2b86e182f6e5",
+        "captured_at": "2026-11-05T00:17:23.075Z",
         "mode": "live"
       }
     },
@@ -12039,6 +17194,84 @@ window.DONNEES_MAQUETTE = {
       }
     },
     {
+      "id": 743,
+      "kind": "annonce",
+      "title": "TikTok down for some in US, thanks to second Oracle outage since sale",
+      "announced_at": "2026-03-03T22:33:57.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.640Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Social",
+        "oracle",
+        "TikTok",
+        "In Brief"
+      ],
+      "source": {
+        "id": "feed:techcrunch-oracle",
+        "name": "TechCrunch, rubrique Oracle — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2026/03/03/tiktok-down-for-some-in-u-s-thanks-to-second-oracle-outage-since-sale"
+      },
+      "excerpt": "TikTok experienced a similar outage just days after ByteDance divested the app's U.S. operations.",
+      "capture": {
+        "content_hash": "376807c0b9be8c7ed3eb63ccfa554ac6372af55f5be18ae1557daf38b0f62112",
+        "captured_at": "2026-11-05T06:33:20.640Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 744,
+      "kind": "annonce",
+      "title": "The billion-dollar infrastructure deals powering the AI boom",
+      "announced_at": "2026-02-28T20:41:55.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.640Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "AI",
+        "Softbank",
+        "evergreens",
+        "stargate"
+      ],
+      "source": {
+        "id": "feed:techcrunch-oracle",
+        "name": "TechCrunch, rubrique Oracle — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2026/02/28/billion-dollar-infrastructure-deals-ai-boom-data-centers-openai-oracle-nvidia-microsoft-google-meta"
+      },
+      "excerpt": "Here's everything we know about the biggest AI infrastructure projects, including major spending from Meta, Oracle, Microsoft, Google, and OpenAI.",
+      "capture": {
+        "content_hash": "4451192b7aad207c4026cd702eefa3e9fc71f39e111de9ea46b1bb54c0c0c75f",
+        "captured_at": "2026-11-05T06:33:20.640Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 704,
+      "kind": "annonce",
+      "title": "India’s Sarvam wants to bring its AI models to feature phones, cars, and smart glasses",
+      "announced_at": "2026-02-18T13:01:04.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.251Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Hardware",
+        "AI",
+        "Sarvam",
+        "India AI Impact Summit 2026"
+      ],
+      "source": {
+        "id": "feed:techcrunch-qualcomm",
+        "name": "TechCrunch, rubrique Qualcomm — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2026/02/18/indias-sarvam-wants-to-bring-its-ai-models-to-feature-phones-cars-and-smart-glasses"
+      },
+      "excerpt": "The company is using edge models that take up only megabytes of space, can run on most phones with existing processors, and can work offline.",
+      "capture": {
+        "content_hash": "7d2bb7bdce1d3089ae087e19a5f9f9eb23de134e54b248dd19f4af0fe48b6359",
+        "captured_at": "2026-11-05T06:33:20.251Z",
+        "mode": "live"
+      }
+    },
+    {
       "id": 299,
       "kind": "annonce",
       "title": "Design to Code Skill for AI Agents",
@@ -12056,8 +17289,57 @@ window.DONNEES_MAQUETTE = {
       },
       "excerpt": "We’ve launched an agents repo for AI agents that work with Sketch. The repo contains skills — reusable workflows that help agents complete specific tasks more effectively. Our first skill, sketch-design-to-code, helps AI agents like Claude…",
       "capture": {
-        "content_hash": "50eaf726328bbbe66354e5d1b97ff508fca8035cb5042826143a103e1f2851fe",
-        "captured_at": "2026-11-04T10:23:07.503Z",
+        "content_hash": "ad6edbcd7fd493eb8d10f57d5204d0ab08738db38404fc4137a395731b7f20f4",
+        "captured_at": "2026-11-04T22:44:21.862Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 649,
+      "kind": "annonce",
+      "title": "Shopify's Standout 2025: The Launchpad for a New Era of Commerce in 2026",
+      "announced_at": "2026-02-11T12:00:00.000Z",
+      "first_seen_at": "2026-11-05T00:17:23.075Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "en"
+      ],
+      "source": {
+        "id": "feed:shopify-press",
+        "name": "Shopify, communiqués (Newsfile) — flux RSS officiel",
+        "url": "https://www.newsfilecorp.com/release/283507/Shopifys-Standout-2025-The-Launchpad-for-a-New-Era-of-Commerce-in-2026"
+      },
+      "excerpt": "$11.6B in revenue, $2B in free cash flow and the launch of a $2B share repurchase program Internet, Everywhere--(Newsfile Corp. - February 11, 2026) - Shopify Inc. (NASDAQ, TSX: SHOP) announced today financial results for the quarter and…",
+      "capture": {
+        "content_hash": "5ca7a54637f93ecfdfbad48043d5c5d137d4cf5dd4f8a8f165a63ece53972414",
+        "captured_at": "2026-11-05T00:17:23.075Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 745,
+      "kind": "annonce",
+      "title": "Amazon and Google are winning the AI capex race — but what’s the prize?",
+      "announced_at": "2026-02-05T22:43:11.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.640Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "AI",
+        "Meta",
+        "oracle",
+        "Microsoft"
+      ],
+      "source": {
+        "id": "feed:techcrunch-oracle",
+        "name": "TechCrunch, rubrique Oracle — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2026/02/05/amazon-and-google-are-winning-the-ai-capex-race-but-whats-the-prize"
+      },
+      "excerpt": "In 2026, Amazon plans to spend $200 billion in capex. Google is just behind at $175 billion to $185 billion. It's a lot of money!",
+      "capture": {
+        "content_hash": "56323ee15c0e9e991c156c64a00a6845f044014929a05ae3d7a3bcad542ffc87",
+        "captured_at": "2026-11-05T06:33:20.640Z",
         "mode": "live"
       }
     },
@@ -12083,6 +17365,55 @@ window.DONNEES_MAQUETTE = {
       }
     },
     {
+      "id": 650,
+      "kind": "annonce",
+      "title": "Shopify to Announce Fourth-Quarter and Full-Year 2025 Financial Results February 11, 2026",
+      "announced_at": "2026-01-28T12:00:00.000Z",
+      "first_seen_at": "2026-11-05T00:17:23.075Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "en"
+      ],
+      "source": {
+        "id": "feed:shopify-press",
+        "name": "Shopify, communiqués (Newsfile) — flux RSS officiel",
+        "url": "https://www.newsfilecorp.com/release/281865/Shopify-to-Announce-FourthQuarter-and-FullYear-2025-Financial-Results-February-11-2026"
+      },
+      "excerpt": "Internet, Everywhere--(Newsfile Corp. - January 28, 2026) - Shopify Inc. (NASDAQ, TSX: SHOP) plans to announce financial results for the quarter and year ended December 31, 2025, before markets open on Wednesday, February 11, 2026…",
+      "capture": {
+        "content_hash": "4658e4b9f220306cd54f4eea350067cea7cdbf0a490bd6a80113ad28d0bfb0b8",
+        "captured_at": "2026-11-05T00:17:23.075Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 746,
+      "kind": "annonce",
+      "title": "What you should know about the owners of US TikTok",
+      "announced_at": "2026-01-28T03:27:06.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.640Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Apps",
+        "Social",
+        "TikTok",
+        "bytedance"
+      ],
+      "source": {
+        "id": "feed:techcrunch-oracle",
+        "name": "TechCrunch, rubrique Oracle — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2026/01/27/what-you-should-know-about-the-owners-of-us-tiktok"
+      },
+      "excerpt": "The newly formed entity, “TikTok USDS Joint Venture LLC,” licenses TikTok’s recommendation algorithm from ByteDance and independently manages content moderation, and oversees data protection, algorithm security, and software controls.",
+      "capture": {
+        "content_hash": "e921a23fc0ae8d2c20639814cc90aac6d5d1ea4db2f601a7e2524b39cccafb0b",
+        "captured_at": "2026-11-05T06:33:20.640Z",
+        "mode": "live"
+      }
+    },
+    {
       "id": 300,
       "kind": "annonce",
       "title": "Get full control over what you share with Previews",
@@ -12100,8 +17431,8 @@ window.DONNEES_MAQUETTE = {
       },
       "excerpt": "With previews in the web app, you can choose which pages or prototypes from a document to share — and keep the rest hidden. There’s no need to copy work to a clean document, or worry about clients digging through the “Rough Ideas” page. You…",
       "capture": {
-        "content_hash": "dbe25609746a8fda535d12fc6be19a3263880bbe36fa91c8733f6595e436e31c",
-        "captured_at": "2026-11-04T10:23:07.503Z",
+        "content_hash": "1c0a13398ab595ddac66d3f29002bed7837b90865b4864a004a9391a80fb43ee",
+        "captured_at": "2026-11-04T22:44:21.862Z",
         "mode": "live"
       }
     },
@@ -12123,8 +17454,8 @@ window.DONNEES_MAQUETTE = {
       },
       "excerpt": "With our first-party Slack integration you can connect your Workspace and see rich previews of any document or comment link you share. We already show link previews in Slack for public documents, but now you’ll see them for private…",
       "capture": {
-        "content_hash": "612539f14b0816169da639146e95525864034c508c7f934bb5365bc626c9c9d2",
-        "captured_at": "2026-11-04T10:23:07.503Z",
+        "content_hash": "bfc08a27cb562a2487bd9523d25efccac89392a71c4a28bc5ea853a65114a69f",
+        "captured_at": "2026-11-04T22:44:21.862Z",
         "mode": "live"
       }
     },
@@ -12146,8 +17477,8 @@ window.DONNEES_MAQUETTE = {
       },
       "excerpt": "You can now quickly select multiple documents or folders in your Workspace, move them by dragging them to another folder, create a new folder from your selection, or even archive them. When you select multiple documents or folders (by…",
       "capture": {
-        "content_hash": "8009f416b94fa47ddb0b87f857cf2eb21add9d19aa2d859ae717d185bf6c60a8",
-        "captured_at": "2026-11-04T10:23:07.503Z",
+        "content_hash": "d35a543d4e2c41fb9a2e21a8f6217789cbc550c0eb828cedee482bfcbc77db20",
+        "captured_at": "2026-11-04T22:44:21.862Z",
         "mode": "live"
       }
     },
@@ -12169,8 +17500,8 @@ window.DONNEES_MAQUETTE = {
       },
       "excerpt": "When you’re inspecting designs in the web app, we now show a full layer list for the document. Now it’s easier than ever to understand a document’s structure and hierarchy, find specific layers, copy their CSS and export them. Along with…",
       "capture": {
-        "content_hash": "62455bfc7c454846fa076dbc036d9cab7e2c8f0d300795a4d490b9163334fe87",
-        "captured_at": "2026-11-04T10:23:07.503Z",
+        "content_hash": "403e18538578bebf620bb0dfba56829f52483665edbddf49b995707937b71ab3",
+        "captured_at": "2026-11-04T22:44:21.862Z",
         "mode": "live"
       }
     },
@@ -12213,8 +17544,8 @@ window.DONNEES_MAQUETTE = {
       },
       "excerpt": "This update brings bug and crash fixes, plus all the great features from our Copenhagen release. Fixes Fixes a bug that meant the Inspector showed an opacity field for text colors using color variables, which was different to every other…",
       "capture": {
-        "content_hash": "a2f41da71c1f39c6905be24d5920ad8d2b30939f76e0625186b8f75e00a90835",
-        "captured_at": "2026-11-04T10:23:07.503Z",
+        "content_hash": "96beac149af451bd58c4130d35b0babca9b81d6c75126f93af60b86701af81a6",
+        "captured_at": "2026-11-04T22:44:21.862Z",
         "mode": "live"
       }
     },
@@ -12240,6 +17571,32 @@ window.DONNEES_MAQUETTE = {
       }
     },
     {
+      "id": 679,
+      "kind": "annonce",
+      "title": "A timeline of the US semiconductor market in 2025",
+      "announced_at": "2026-01-21T22:46:13.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.061Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Enterprise",
+        "Hardware",
+        "AI",
+        "Intel"
+      ],
+      "source": {
+        "id": "feed:techcrunch-tsmc",
+        "name": "TechCrunch, rubrique TSMC — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2026/01/21/a-timeline-of-the-u-s-semiconductor-market-in-2025"
+      },
+      "excerpt": "From leadership changes at legacy semiconductor companies to wishy washy policy around chip exports, a lot happened last year.",
+      "capture": {
+        "content_hash": "5569b8e0e35cce883955ae7142a9a65dd2bc91e603d7189fef2f655df256651a",
+        "captured_at": "2026-11-05T06:33:20.061Z",
+        "mode": "live"
+      }
+    },
+    {
       "id": 305,
       "kind": "annonce",
       "title": "2025.3.3",
@@ -12257,8 +17614,8 @@ window.DONNEES_MAQUETTE = {
       },
       "excerpt": "This update brings improvements and bug fixes, plus all the great features from our Copenhagen release. Improvements When in Scale mode, the Layout section of the Inspector now shows a more relevant title to make it clear that you’re in…",
       "capture": {
-        "content_hash": "52a11691315d9e08dbc6c7ee0acdcf470fa6fe48ed5c7174d731d0c53d0c2cba",
-        "captured_at": "2026-11-04T10:23:07.503Z",
+        "content_hash": "222a02daecfeb53ff4ffe5a295e53392bec43ab2196a8c59b1e8a417a684c41d",
+        "captured_at": "2026-11-04T22:44:21.862Z",
         "mode": "live"
       }
     },
@@ -12284,6 +17641,110 @@ window.DONNEES_MAQUETTE = {
       }
     },
     {
+      "id": 759,
+      "kind": "annonce",
+      "title": "I watched LG’s new home robot CLOiD do laundry but I have questions",
+      "announced_at": "2026-01-08T19:04:00.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.852Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Robotics",
+        "ces 2026",
+        "home robots",
+        "LG"
+      ],
+      "source": {
+        "id": "feed:techcrunch-lg",
+        "name": "TechCrunch, rubrique LG — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2026/01/08/i-watched-lgs-new-home-robot-cloid-do-laundry-but-i-have-questions"
+      },
+      "excerpt": "CES is always chock-full of robots, and this year electronics giant LG announced a new bot, dubbed CLOiD, that it claims will revolutionize household chores (as in, you won't have to do them anymore).",
+      "capture": {
+        "content_hash": "70a066f7711e8ac0aa44eedde92a93bbc8b71a84bd1472ce3fd4c1f15136c634",
+        "captured_at": "2026-11-05T06:33:20.852Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 760,
+      "kind": "annonce",
+      "title": "LG’s new OLED TV is just 9mm thick",
+      "announced_at": "2026-01-05T12:13:11.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.852Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Gadgets",
+        "LG",
+        "oled",
+        "tv"
+      ],
+      "source": {
+        "id": "feed:techcrunch-lg",
+        "name": "TechCrunch, rubrique LG — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2026/01/05/lgs-new-oled-tv-is-just-9mm-thick"
+      },
+      "excerpt": "This year LG is showing off its manufacturing chops at CES with a new Wallpaper OLED TV that is just 9mm thick.",
+      "capture": {
+        "content_hash": "3a3009d0228da9ad19b13d5caa3010b7120f80041fc5647be063e9547e4a0d14",
+        "captured_at": "2026-11-05T06:33:20.852Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 747,
+      "kind": "annonce",
+      "title": "Paramount renews bid for Warner Bros, ensuring $40B Larry Ellison backing",
+      "announced_at": "2025-12-22T19:53:33.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.640Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Media & Entertainment",
+        "Larry Ellison",
+        "Paramount Skydance",
+        "warner brothers"
+      ],
+      "source": {
+        "id": "feed:techcrunch-oracle",
+        "name": "TechCrunch, rubrique Oracle — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2025/12/22/paramount-renews-bid-for-warner-bros-ensuring-40-billion-larry-ellison-backing"
+      },
+      "excerpt": "It's the latest attempt by one major Hollywood superpower to acquire another.",
+      "capture": {
+        "content_hash": "d7c82aada353737a08625eb95bc81e2e6aee1378fe224f57040182ab16a87104",
+        "captured_at": "2026-11-05T06:33:20.640Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 748,
+      "kind": "annonce",
+      "title": "Hacks, thefts, and disruption: The worst data breaches of 2025",
+      "announced_at": "2025-12-19T14:09:03.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.640Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Security",
+        "oracle",
+        "south korea",
+        "cybersecurity"
+      ],
+      "source": {
+        "id": "feed:techcrunch-oracle",
+        "name": "TechCrunch, rubrique Oracle — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2025/12/19/hacks-thefts-and-disruption-the-worst-data-breaches-of-2025"
+      },
+      "excerpt": "TechCrunch looks back at the biggest data breaches, disruptive cyberattacks, and damaging hacks of 2025, from the raiding of U.S. government databases to a hack every month in South Korea.",
+      "capture": {
+        "content_hash": "90251e788b025dd01a8918354d75bd5eba6e507d7b108152a55fe65dcdb049f2",
+        "captured_at": "2026-11-05T06:33:20.640Z",
+        "mode": "live"
+      }
+    },
+    {
       "id": 357,
       "kind": "annonce",
       "title": "Exploring the Future of MCP Transports",
@@ -12301,6 +17762,32 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "989ebd7b0209b8f6bc6398f5b31120d4821a98d228fc065eddff99bb26c125b5",
         "captured_at": "2026-10-30T14:44:35.046Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 749,
+      "kind": "annonce",
+      "title": "TikTok agrees to deal to cede control of US business to American investor group",
+      "announced_at": "2025-12-19T00:56:44.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.640Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Social",
+        "tiktok sale",
+        "bytedance",
+        "Donald Trump"
+      ],
+      "source": {
+        "id": "feed:techcrunch-oracle",
+        "name": "TechCrunch, rubrique Oracle — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2025/12/18/tiktok-agrees-to-deal-to-cede-control-of-u-s-business-to-american-investor-group"
+      },
+      "excerpt": "The deal closes a long-running drama in which U.S. authorities have sought to compel ByteDance to divest.",
+      "capture": {
+        "content_hash": "408fc0ae4e08d5f57ae86d98dfa1786f5cce9019fbed98ef8367467f64fd5e29",
+        "captured_at": "2026-11-05T06:33:20.640Z",
         "mode": "live"
       }
     },
@@ -12367,8 +17854,8 @@ window.DONNEES_MAQUETTE = {
       },
       "excerpt": "This update brings improvements and bug fixes, plus all the great features from our Copenhagen release. Improvements Color hex fields in the Inspector now support CSS color names. We also support clear and transparent, which both render…",
       "capture": {
-        "content_hash": "37bc2cfdf74f2ec1dc8420691b200c61cb2e5fcdc70914ec730cd067ff7ec58d",
-        "captured_at": "2026-11-04T10:23:07.503Z",
+        "content_hash": "1c053c3c357accc50ad590b287ac6730c0aee259842d5d2eb0ef39d96494af22",
+        "captured_at": "2026-11-04T22:44:21.862Z",
         "mode": "live"
       }
     },
@@ -12411,6 +17898,29 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "677f9ff46afa86674eb4f24bbed411c6a5c4e718cef878e690fa710028e0fbd5",
         "captured_at": "2026-10-30T14:44:35.046Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 651,
+      "kind": "annonce",
+      "title": "Shopify Merchants Achieve Record-Breaking $14.6 Billion in Black Friday-Cyber Monday Sales",
+      "announced_at": "2025-12-02T12:58:00.000Z",
+      "first_seen_at": "2026-11-05T00:17:23.075Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "en"
+      ],
+      "source": {
+        "id": "feed:shopify-press",
+        "name": "Shopify, communiqués (Newsfile) — flux RSS officiel",
+        "url": "https://www.newsfilecorp.com/release/276618/Shopify-Merchants-Achieve-RecordBreaking-14.6-Billion-in-Black-FridayCyber-Monday-Sales"
+      },
+      "excerpt": "Internet, Everywhere--(Newsfile Corp. - December 2, 2025) - Shopify Inc. (NASDAQ: SHOP) (TSX: SHOP) announced today that merchants achieved a record $14.6 billion in sales* over Black Friday-Cyber Monday (BFCM) weekend - up 27% from last…",
+      "capture": {
+        "content_hash": "62d4637c2728151b494d47fe6e3edef24038f6c683421a4fba8a93f224d01e13",
+        "captured_at": "2026-11-05T00:17:23.075Z",
         "mode": "live"
       }
     },
@@ -12474,8 +17984,8 @@ window.DONNEES_MAQUETTE = {
       },
       "excerpt": "This update brings performance improvements and bug fixes, plus all the great features from our Copenhagen release. Improvements We’ve improved performance in the Inspector when you edit layers with Symbol overrides. We’ve improved the…",
       "capture": {
-        "content_hash": "26eb046c5084a968cc73e09b9593955c4513b235a1f10a72b8d889b5f41ca2a7",
-        "captured_at": "2026-11-04T10:23:07.503Z",
+        "content_hash": "205c2e5657094cb1e2f8e7822110b73ff8ed9c7acf93c06a02bf68481dfe2b62",
+        "captured_at": "2026-11-04T22:44:21.862Z",
         "mode": "live"
       }
     },
@@ -12562,8 +18072,8 @@ window.DONNEES_MAQUETTE = {
       },
       "excerpt": "Our third — and final — major update of 2025 is here. It brings a fresh design with an all-new Inspector, wrap for stacks, one-click image background removal, and more flexible way to organize your Workspace. We’ve named this release…",
       "capture": {
-        "content_hash": "d3d28287e1fb61d8679ef401b6363c368fc91c118c4baefcf2bf76a4fcedc545",
-        "captured_at": "2026-11-04T10:23:07.503Z",
+        "content_hash": "ac1ef06f1952892b8e0fd7e64225f1382ebffc412d940e98ef3ebf2255d64c6d",
+        "captured_at": "2026-11-04T22:44:21.862Z",
         "mode": "live"
       }
     },
@@ -12588,6 +18098,32 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "e94ef3ed72b034976420d4b70254d2d187bff23603c81b066b0c25bd28e4a6b4",
         "captured_at": "2026-10-30T14:44:28.834Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 750,
+      "kind": "annonce",
+      "title": "Is Wall Street losing faith in AI?",
+      "announced_at": "2025-11-08T20:53:00.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.640Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "AI",
+        "Microsoft",
+        "oracle",
+        "NASDAQ"
+      ],
+      "source": {
+        "id": "feed:techcrunch-oracle",
+        "name": "TechCrunch, rubrique Oracle — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2025/11/08/is-wall-street-losing-faith-in-ai"
+      },
+      "excerpt": "A rough week for tech stocks might signal a loss of investor confidence in artificial intelligence.",
+      "capture": {
+        "content_hash": "7da39b1412cd4147976d0c9cfe9022d43d9342d531982dae88915aa5692ac243",
+        "captured_at": "2026-11-05T06:33:20.640Z",
         "mode": "live"
       }
     },
@@ -12617,6 +18153,55 @@ window.DONNEES_MAQUETTE = {
       }
     },
     {
+      "id": 705,
+      "kind": "annonce",
+      "title": "Nvidia, Qualcomm join US, Indian VCs to help build India’s next deep tech startups",
+      "announced_at": "2025-11-05T03:30:00.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.251Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Startups",
+        "Space",
+        "Venture",
+        "AI"
+      ],
+      "source": {
+        "id": "feed:techcrunch-qualcomm",
+        "name": "TechCrunch, rubrique Qualcomm — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2025/11/04/nvidia-qualcomm-join-u-s-indian-vcs-to-help-build-indias-next-deep-tech-startups"
+      },
+      "excerpt": "Qualcomm Ventures has joined six Indian venture firms, collectively adding more than $850 million to boost India’s deep tech ecosystem.",
+      "capture": {
+        "content_hash": "569262032af0d746e84993a1909208ba49b328e41d44706e725211f53f3950f6",
+        "captured_at": "2026-11-05T06:33:20.251Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 652,
+      "kind": "annonce",
+      "title": "Shopify Beats Across the Board: Q3 Shows Growth, Efficiency, Brand Wins",
+      "announced_at": "2025-11-04T12:00:00.000Z",
+      "first_seen_at": "2026-11-05T00:17:23.075Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "en"
+      ],
+      "source": {
+        "id": "feed:shopify-press",
+        "name": "Shopify, communiqués (Newsfile) — flux RSS officiel",
+        "url": "https://www.newsfilecorp.com/release/273069/Shopify-Beats-Across-the-Board-Q3-Shows-Growth-Efficiency-Brand-Wins"
+      },
+      "excerpt": "Internet, Everywhere--(Newsfile Corp. - November 4, 2025) - Shopify Inc. (NASDAQ, TSX: SHOP) announced today financial results for the quarter ended September 30, 2025. Shopify achieved 32% revenue growth and 18% free cash flow margin…",
+      "capture": {
+        "content_hash": "62beaf76ce4a003a929d96e21413b6ea925a80c8bdcc59f3b2fcfe7ea086549e",
+        "captured_at": "2026-11-05T00:17:23.075Z",
+        "mode": "live"
+      }
+    },
+    {
       "id": 363,
       "kind": "annonce",
       "title": "Server Instructions: Giving LLMs a user manual for your server",
@@ -12634,6 +18219,32 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "a9a9b04ae0b10fce9b77e8509e36d3a5b53d2eef59df531442922d82348d7b30",
         "captured_at": "2026-10-30T14:44:35.046Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 751,
+      "kind": "annonce",
+      "title": "AWS exceeds Wall Street’s expectations as demand for cloud infra remains high",
+      "announced_at": "2025-10-31T16:59:18.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.640Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Enterprise",
+        "AI",
+        "Amazon",
+        "cloud infrastructure"
+      ],
+      "source": {
+        "id": "feed:techcrunch-oracle",
+        "name": "TechCrunch, rubrique Oracle — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2025/10/31/aws-exceeds-wall-streets-expectations-as-demand-for-cloud-infra-remains-high"
+      },
+      "excerpt": "AWS continues to see strong demand as companies gobble up its cloud infrastructure services in the age of AI.",
+      "capture": {
+        "content_hash": "5ff5b5a5f71a3a81a48385c326d60427af5e97875d21922848230456a2896d64",
+        "captured_at": "2026-11-05T06:33:20.640Z",
         "mode": "live"
       }
     },
@@ -12664,6 +18275,55 @@ window.DONNEES_MAQUETTE = {
       }
     },
     {
+      "id": 721,
+      "kind": "annonce",
+      "title": "OpenAI and Broadcom partner on AI hardware",
+      "announced_at": "2025-10-14T15:27:47.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.434Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "AI",
+        "Startups",
+        "Enterprise",
+        "AI infrastrcuture"
+      ],
+      "source": {
+        "id": "feed:techcrunch-broadcom",
+        "name": "TechCrunch, rubrique Broadcom — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2025/10/14/openai-and-broadcom-partner-on-ai-hardware"
+      },
+      "excerpt": "OpenAI will purchase 10 gigawatts' worth of AI accelerator hardware from semiconductor Broadcom.",
+      "capture": {
+        "content_hash": "e77c59a892701fb4b96466ed47960fd77c2838312975d3ae9756c35fb15a8f4c",
+        "captured_at": "2026-11-05T06:33:20.434Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 653,
+      "kind": "annonce",
+      "title": "Shopify to Announce Third-Quarter 2025 Financial Results November 4, 2025",
+      "announced_at": "2025-10-14T11:00:00.000Z",
+      "first_seen_at": "2026-11-05T00:17:23.075Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "en"
+      ],
+      "source": {
+        "id": "feed:shopify-press",
+        "name": "Shopify, communiqués (Newsfile) — flux RSS officiel",
+        "url": "https://www.newsfilecorp.com/release/270184/Shopify-to-Announce-ThirdQuarter-2025-Financial-Results-November-4-2025"
+      },
+      "excerpt": "Internet, Everywhere--(Newsfile Corp. - October 14, 2025) - Shopify Inc. (NASDAQ, TSX: SHOP) plans to announce financial results for the quarter ended September 30, 2025, before markets open on Tuesday, November 4, 2025. Shopify's…",
+      "capture": {
+        "content_hash": "ef899006d00111ca814c5a70e13c5bca9d1e17070cac33c63618d3f66e735076",
+        "captured_at": "2026-11-05T00:17:23.075Z",
+        "mode": "live"
+      }
+    },
+    {
       "id": 199,
       "kind": "annonce",
       "title": "Nano Banana is coming to Google Search, NotebookLM and Photos.",
@@ -12690,6 +18350,84 @@ window.DONNEES_MAQUETTE = {
       }
     },
     {
+      "id": 752,
+      "kind": "annonce",
+      "title": "‘Dozens’ of organizations had data stolen in Oracle-linked hacks",
+      "announced_at": "2025-10-09T17:19:26.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.640Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Security",
+        "extortion",
+        "cyberattack",
+        "data breach"
+      ],
+      "source": {
+        "id": "feed:techcrunch-oracle",
+        "name": "TechCrunch, rubrique Oracle — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2025/10/09/dozens-of-organizations-had-data-stolen-in-oracle-linked-hacks"
+      },
+      "excerpt": "The mass-hacks targeting Oracle E-Business customers is the latest hacking campaign by Clop, an extortion group known for abusing security flaws in enterprise products to steal large amounts of sensitive data.",
+      "capture": {
+        "content_hash": "c84de698e35743bfb08f1bb88f55ac459074ea942eae21229e5f782b192be9a4",
+        "captured_at": "2026-11-05T06:33:20.640Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 753,
+      "kind": "annonce",
+      "title": "Clop hackers caught exploiting Oracle zero-day bug to steal executives’ personal data",
+      "announced_at": "2025-10-06T17:07:40.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.640Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Security",
+        "oracle",
+        "cybersecurity",
+        "ransomware"
+      ],
+      "source": {
+        "id": "feed:techcrunch-oracle",
+        "name": "TechCrunch, rubrique Oracle — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2025/10/06/clop-hackers-caught-exploiting-oracle-zero-day-bug-to-steal-executives-personal-data"
+      },
+      "excerpt": "Oracle fixes another security flaw that Clop hackers were using to steal sensitive personal information about executives as part of a mass-extortion campaign.",
+      "capture": {
+        "content_hash": "4ed3fbc25251e9882deca53f0753104f70e54a8776d5bfb9a38f5eaf53541f5f",
+        "captured_at": "2026-11-05T06:33:20.640Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 754,
+      "kind": "annonce",
+      "title": "Hackers are sending extortion emails to executives after claiming Oracle apps’ data breach",
+      "announced_at": "2025-10-02T14:57:07.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.640Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Security",
+        "extortion",
+        "ransomware",
+        "cybersecurity"
+      ],
+      "source": {
+        "id": "feed:techcrunch-oracle",
+        "name": "TechCrunch, rubrique Oracle — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2025/10/02/hackers-are-sending-extortion-emails-to-executives-after-claiming-oracle-apps-data-breach"
+      },
+      "excerpt": "Google says hackers associated with the Clop ransomware gang are emailing executives at multiple organizations claiming to have stolen their personal information from a suite of Oracle E-Business apps.",
+      "capture": {
+        "content_hash": "7c54a444d78b68d12fc3d8618df9b06459d8fc9909e7867a6d865ad9c42a842b",
+        "captured_at": "2026-11-05T06:33:20.640Z",
+        "mode": "live"
+      }
+    },
+    {
       "id": 279,
       "kind": "annonce",
       "title": "AI Image Generation in Hana",
@@ -12707,6 +18445,58 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "f71576f57eea966bced9e4f1f5ca1e88818aa427dad620b938c4514902f899be",
         "captured_at": "2026-10-30T14:44:31.260Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 755,
+      "kind": "annonce",
+      "title": "What’s behind the massive AI data center headlines?",
+      "announced_at": "2025-09-26T19:40:24.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.640Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "AI",
+        "oracle",
+        "nvidia",
+        "stargate"
+      ],
+      "source": {
+        "id": "feed:techcrunch-oracle",
+        "name": "TechCrunch, rubrique Oracle — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2025/09/26/whats-behind-the-massive-ai-data-center-headlines"
+      },
+      "excerpt": "This week on Equity, Anthony Ha and Max Zeff go beyond the headlines to break down what's really going on in these AI infrastructure deals.",
+      "capture": {
+        "content_hash": "03405490e013589197bfebadc06abef625cba9c908f519b0e8938977e8e9d196",
+        "captured_at": "2026-11-05T06:33:20.640Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 756,
+      "kind": "annonce",
+      "title": "It isn’t your imagination: Google Cloud is flooding the zone",
+      "announced_at": "2025-09-25T04:41:36.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.640Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "AI",
+        "Francis deSouza",
+        "Anthropic",
+        "OpenAI"
+      ],
+      "source": {
+        "id": "feed:techcrunch-oracle",
+        "name": "TechCrunch, rubrique Oracle — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2025/09/24/it-isnt-your-imagination-google-cloud-is-flooding-the-zone"
+      },
+      "excerpt": "While the industry's biggest players cement ever-tighter partnerships, Google is hell-bent on capturing the next generation of AI companies before they become too big to court.",
+      "capture": {
+        "content_hash": "76e97b10523ef0f4e9aca157dc4b2cd76762f6ed33365a546754cd9b9923f212",
+        "captured_at": "2026-11-05T06:33:20.640Z",
         "mode": "live"
       }
     },
@@ -12774,6 +18564,104 @@ window.DONNEES_MAQUETTE = {
       }
     },
     {
+      "id": 654,
+      "kind": "annonce",
+      "title": "Shopify Delivers Another Exceptional Quarter in Q2",
+      "announced_at": "2025-08-06T11:00:00.000Z",
+      "first_seen_at": "2026-11-05T00:17:23.075Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "en"
+      ],
+      "source": {
+        "id": "feed:shopify-press",
+        "name": "Shopify, communiqués (Newsfile) — flux RSS officiel",
+        "url": "https://www.newsfilecorp.com/release/261416/Shopify-Delivers-Another-Exceptional-Quarter-in-Q2"
+      },
+      "excerpt": "Internet, Everywhere--(Newsfile Corp. - August 6, 2025) - Shopify Inc. (NASDAQ, TSX: SHOP) announced today financial results for the quarter ended June 30, 2025. Shopify achieved 31% revenue growth and 16% free cash flow margin, marking…",
+      "capture": {
+        "content_hash": "8ce94e4d4a30590af1a2696b4af4a59e036fe985a47b750b3f738ddfe3bd6929",
+        "captured_at": "2026-11-05T00:17:23.075Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 680,
+      "kind": "annonce",
+      "title": "Trump says he’ll announce semiconductor and chip tariffs",
+      "announced_at": "2025-08-05T15:07:12.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.061Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Enterprise",
+        "TC",
+        "Hardware",
+        "AI"
+      ],
+      "source": {
+        "id": "feed:techcrunch-tsmc",
+        "name": "TechCrunch, rubrique TSMC — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2025/08/05/trump-says-hell-announce-semiconductor-and-chip-tariffs"
+      },
+      "excerpt": "This announcement comes as the Trump administration is also mulling over its approach to AI chip export restrictions.",
+      "capture": {
+        "content_hash": "6f3c7a5112d26d64b7004f555fb8e2b601ddf291b8f204a14b9e365803d52e7e",
+        "captured_at": "2026-11-05T06:33:20.061Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 655,
+      "kind": "annonce",
+      "title": "Shopify to Announce Second-Quarter 2025 Financial Results August 6, 2025",
+      "announced_at": "2025-07-16T11:00:00.000Z",
+      "first_seen_at": "2026-11-05T00:17:23.075Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "en"
+      ],
+      "source": {
+        "id": "feed:shopify-press",
+        "name": "Shopify, communiqués (Newsfile) — flux RSS officiel",
+        "url": "https://www.newsfilecorp.com/release/258905/Shopify-to-Announce-SecondQuarter-2025-Financial-Results-August-6-2025"
+      },
+      "excerpt": "Internet, Everywhere--(Newsfile Corp. - July 16, 2025) - Shopify Inc. (NASDAQ, TSX: SHOP) plans to announce financial results for the quarter ended June 30, 2025, before markets open on Wednesday, August 6, 2025. Shopify's management team…",
+      "capture": {
+        "content_hash": "7681bee1916ba01d57859c508a0b78e98d29a9ee1edda212c0791b63ea5f7893",
+        "captured_at": "2026-11-05T00:17:23.075Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 761,
+      "kind": "annonce",
+      "title": "GM to challenge China’s LFP monopoly with upgraded battery factory",
+      "announced_at": "2025-07-14T16:04:11.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.852Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Transportation",
+        "Climate",
+        "electric vehicles",
+        "GM"
+      ],
+      "source": {
+        "id": "feed:techcrunch-lg",
+        "name": "TechCrunch, rubrique LG — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2025/07/14/gm-to-challenge-chinas-lfp-monopoly-with-upgraded-battery-factory"
+      },
+      "excerpt": "The factory’s overhaul will give U.S. LFP production a significant boost.",
+      "capture": {
+        "content_hash": "abae4b20735ee97aa01d05ff864ed64c96c63818c211865882307d3a78ae96ba",
+        "captured_at": "2026-11-05T06:33:20.852Z",
+        "mode": "live"
+      }
+    },
+    {
       "id": 283,
       "kind": "annonce",
       "title": "3D Transforms, Auto Layout, Liquid Glass and Video Layers in Hana",
@@ -12795,6 +18683,81 @@ window.DONNEES_MAQUETTE = {
       }
     },
     {
+      "id": 706,
+      "kind": "annonce",
+      "title": "Nothing launches its most expensive flagship yet, Phone (3)",
+      "announced_at": "2025-07-01T17:30:00.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.251Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Hardware",
+        "Gadgets",
+        "Qualcomm",
+        "smartphone"
+      ],
+      "source": {
+        "id": "feed:techcrunch-qualcomm",
+        "name": "TechCrunch, rubrique Qualcomm — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2025/07/01/nothing-launches-its-most-expensive-flagship-phone-3"
+      },
+      "excerpt": "Nothing launched its newest flagship phone after a two-year gap. At an event in London, the company unveiled the Phone (3), which starts at $799 and aims to take on bigwigs like Samsung and Apple.",
+      "capture": {
+        "content_hash": "4dbf449f60a0cd222ffadacbb21697927d0d08ebd6b6adf33ae8f47bb25ed625",
+        "captured_at": "2026-11-05T06:33:20.251Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 681,
+      "kind": "annonce",
+      "title": "SoftBank reportedly looking to launch a trillion-dollar AI and robotics industrial complex",
+      "announced_at": "2025-06-20T15:22:06.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.061Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Enterprise",
+        "AI",
+        "Robotics",
+        "artificial intelligence"
+      ],
+      "source": {
+        "id": "feed:techcrunch-tsmc",
+        "name": "TechCrunch, rubrique TSMC — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2025/06/20/softbank-reportedly-looking-to-launch-a-trillion-dollar-ai-and-robotics-industrial-complex"
+      },
+      "excerpt": "The investing conglomerate is looking to team up with TSMC on the initiative as SoftBank continues to pour money into AI.",
+      "capture": {
+        "content_hash": "8b008b60e75d30d0993b17bc24821df717eec6ac20f63fcc963af65fb20d0fc3",
+        "captured_at": "2026-11-05T06:33:20.061Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 656,
+      "kind": "annonce",
+      "title": "Shopify Announces Results of its 2025 Annual Meeting of Shareholders",
+      "announced_at": "2025-06-18T11:00:00.000Z",
+      "first_seen_at": "2026-11-05T00:17:23.075Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "en"
+      ],
+      "source": {
+        "id": "feed:shopify-press",
+        "name": "Shopify, communiqués (Newsfile) — flux RSS officiel",
+        "url": "https://www.newsfilecorp.com/release/255882/Shopify-Announces-Results-of-its-2025-Annual-Meeting-of-Shareholders"
+      },
+      "excerpt": "Internet, Everywhere--(Newsfile Corp. - June 18, 2025) - Shopify Inc. (NASDAQ, TSX: SHOP), announced today the results of its annual meeting of shareholders held on June 17, 2025. All director nominees were elected to the Board of Directors…",
+      "capture": {
+        "content_hash": "639bead21d6cb57d7a31305a5ba0a79656a9e2697e5305ba67d157a32860599e",
+        "captured_at": "2026-11-05T00:17:23.075Z",
+        "mode": "live"
+      }
+    },
+    {
       "id": 284,
       "kind": "annonce",
       "title": "Video Exports in Hana & Stroke Trimming Animation",
@@ -12812,6 +18775,58 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "404728d043e89fc69cc8d2dfc8d51ef1f44021985e4f673f472c37fb898629dd",
         "captured_at": "2026-10-30T14:44:31.260Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 707,
+      "kind": "annonce",
+      "title": "Qualcomm to acquire semiconductor firm Alphawave Semi for $2.4B",
+      "announced_at": "2025-06-09T13:48:24.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.251Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "AI",
+        "Enterprise",
+        "In Brief",
+        "Mergers and Acquisitions"
+      ],
+      "source": {
+        "id": "feed:techcrunch-qualcomm",
+        "name": "TechCrunch, rubrique Qualcomm — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2025/06/09/qualcomm-acquires-semiconductor-firm-alphawave-semi-for-2-4b"
+      },
+      "excerpt": "Qualcomm has acquired Alphawave Semi, a U.K.-based semiconductor company focused on high-speed data center connectivity, for around $2.4 billion.",
+      "capture": {
+        "content_hash": "3f0fc11f32c98dbaba18ab5e80e473e57c7744436baa0535c023d10fcd68d9d3",
+        "captured_at": "2026-11-05T06:33:20.251Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 708,
+      "kind": "annonce",
+      "title": "Android chipmaker Qualcomm fixes three zero-days exploited by hackers",
+      "announced_at": "2025-06-03T18:59:57.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.251Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Security",
+        "Android",
+        "Google",
+        "Qualcomm"
+      ],
+      "source": {
+        "id": "feed:techcrunch-qualcomm",
+        "name": "TechCrunch, rubrique Qualcomm — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2025/06/03/phone-chipmaker-qualcomm-fixes-three-zero-days-exploited-by-hackers"
+      },
+      "excerpt": "Google's Threat Analysis Group, which investigates government-backed hacks, was credited with the discovery of the zero-days.",
+      "capture": {
+        "content_hash": "cd3a94cd69717e2bf290fac0764f464552407272dcd3a7320d85f6f6e5ba51c5",
+        "captured_at": "2026-11-05T06:33:20.251Z",
         "mode": "live"
       }
     },
@@ -12858,6 +18873,29 @@ window.DONNEES_MAQUETTE = {
       }
     },
     {
+      "id": 657,
+      "kind": "annonce",
+      "title": "Merchant Success Drives Shopify's Excellent Q1 - Delivering Strong Revenue Growth AND Profitability",
+      "announced_at": "2025-05-08T11:00:00.000Z",
+      "first_seen_at": "2026-11-05T00:17:23.075Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "en"
+      ],
+      "source": {
+        "id": "feed:shopify-press",
+        "name": "Shopify, communiqués (Newsfile) — flux RSS officiel",
+        "url": "https://www.newsfilecorp.com/release/251266/Merchant-Success-Drives-Shopifys-Excellent-Q1-Delivering-Strong-Revenue-Growth-AND-Profitability"
+      },
+      "excerpt": "Internet, Everywhere--(Newsfile Corp. - May 8, 2025) - Shopify Inc. (NASDAQ, TSX: SHOP) announced today financial results for the quarter ended March 31, 2025. Shopify achieved 27% revenue growth and 15% free cash flow margin. Shopify has…",
+      "capture": {
+        "content_hash": "c92ad6fa6938bbe7d19829a3c4929376e95a5a2c2c1747e49d62dea16f7c2ec3",
+        "captured_at": "2026-11-05T00:17:23.075Z",
+        "mode": "live"
+      }
+    },
+    {
       "id": 287,
       "kind": "annonce",
       "title": "Hana - a canvas for interactive design",
@@ -12875,6 +18913,84 @@ window.DONNEES_MAQUETTE = {
       "capture": {
         "content_hash": "7d87cfa186f2b186e50ae455f23fee96f971b4da9c1e03cafc7c86b89a85a71a",
         "captured_at": "2026-10-30T14:44:31.260Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 682,
+      "kind": "annonce",
+      "title": "US may fine TSMC $1B over chip allegedly used in Huawei AI processor",
+      "announced_at": "2025-04-09T15:31:42.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.061Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Government & Policy",
+        "AI",
+        "Huawei",
+        "microchips"
+      ],
+      "source": {
+        "id": "feed:techcrunch-tsmc",
+        "name": "TechCrunch, rubrique TSMC — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2025/04/09/us-may-fine-tsmc-1b-over-chip-allegedly-used-in-huawei-ai-processor"
+      },
+      "excerpt": "Taiwan Semiconductor Manufacturing Company (TSMC) may have to pay a fine of $1 billion or more to resolve a U.S. export control investigation related to a chip it made that was used in a Huawei AI processor, according to a report by…",
+      "capture": {
+        "content_hash": "0440664a6f91a86d94fe487891bba81470a3c7b5a3782dc1903f5768f5b5e36f",
+        "captured_at": "2026-11-05T06:33:20.061Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 683,
+      "kind": "annonce",
+      "title": "Intel and TSMC are reportedly launching a joint chipmaking venture",
+      "announced_at": "2025-04-03T20:25:46.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.061Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Enterprise",
+        "AI",
+        "Intel",
+        "chips"
+      ],
+      "source": {
+        "id": "feed:techcrunch-tsmc",
+        "name": "TechCrunch, rubrique TSMC — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2025/04/03/intel-and-tsmc-are-reportedly-launching-a-joint-chipmaking-venture"
+      },
+      "excerpt": "Semiconductor giants Intel and TSMC are reportedly teaming up. The two firms are said to have reached a tentative agreement to create a joint venture that will operate Intel’s chipmaking facilities, according to The Information. TSMC will…",
+      "capture": {
+        "content_hash": "a0f46467255a8f9ade2d6b63e9d6cbe8e4f293030fcffe496cfed03c5963a300",
+        "captured_at": "2026-11-05T06:33:20.061Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 709,
+      "kind": "annonce",
+      "title": "Qualcomm acquires generative AI division of Vietnamese startup VinAI",
+      "announced_at": "2025-04-01T15:10:12.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.251Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Enterprise",
+        "AI",
+        "Fundraising",
+        "Qualcomm"
+      ],
+      "source": {
+        "id": "feed:techcrunch-qualcomm",
+        "name": "TechCrunch, rubrique Qualcomm — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2025/04/01/qualcomm-acquires-generative-ai-division-of-vietnamese-startup-vinai"
+      },
+      "excerpt": "Qualcomm has acquired the generative AI division of VinAI, an AI research company headquartered in Hanoi, for an undisclosed amount, the companies announced on Monday. The move marks Qualcomm’s continued expansion into the AI tooling…",
+      "capture": {
+        "content_hash": "3f290e011b2af93a3cda359a5f0d7c658567f5a44ba9eef13546e869026aead9",
+        "captured_at": "2026-11-05T06:33:20.251Z",
         "mode": "live"
       }
     },
@@ -12898,24 +19014,2553 @@ window.DONNEES_MAQUETTE = {
         "captured_at": "2026-10-30T14:44:31.260Z",
         "mode": "live"
       }
+    },
+    {
+      "id": 722,
+      "kind": "annonce",
+      "title": "Broadcom urges VMware customers to patch ‘emergency’ zero-day bugs under active exploitation",
+      "announced_at": "2025-03-05T14:53:26.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.434Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Security",
+        "Broadcom",
+        "security",
+        "vmware"
+      ],
+      "source": {
+        "id": "feed:techcrunch-broadcom",
+        "name": "TechCrunch, rubrique Broadcom — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2025/03/05/broadcom-urges-vmware-customers-to-patch-emergency-zero-day-bugs-under-active-exploitation"
+      },
+      "excerpt": "Security experts warn of ‘huge impact’ of actively exploited hypervisor flaws that allow sandbox escape",
+      "capture": {
+        "content_hash": "828017f119c6ab465092f731ecbf6773fb6277e7546e8151c4c5a85416928715",
+        "captured_at": "2026-11-05T06:33:20.434Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 684,
+      "kind": "annonce",
+      "title": "TSMC pledges to spend $100B on US chip facilities",
+      "announced_at": "2025-03-03T19:40:00.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.061Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Hardware",
+        "AI",
+        "TSMC",
+        "Chips Act"
+      ],
+      "source": {
+        "id": "feed:techcrunch-tsmc",
+        "name": "TechCrunch, rubrique TSMC — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2025/03/03/tsmc-pledges-to-spend-100b-on-us-chip-facilities"
+      },
+      "excerpt": "Chipmaker TSMC said that it aims to invest “at least” $100 billion in chip manufacturing plants in the U.S. over the next four years as part of an effort to expand the company’s network of semiconductor factories. President Donald Trump…",
+      "capture": {
+        "content_hash": "bd784d4201a9ddef1ab98775e68866f6dfede60828ae49fa3bc0410d72ec569e",
+        "captured_at": "2026-11-05T06:33:20.061Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 723,
+      "kind": "annonce",
+      "title": "Broadcom, TSMC reportedly exploring deals that would split up Intel",
+      "announced_at": "2025-02-16T19:02:43.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.434Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Hardware",
+        "Government & Policy",
+        "Broadcom",
+        "Intel"
+      ],
+      "source": {
+        "id": "feed:techcrunch-broadcom",
+        "name": "TechCrunch, rubrique Broadcom — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2025/02/16/broadcom-tsmc-reportedly-exploring-deals-that-would-split-up-intel"
+      },
+      "excerpt": "Broadcom and Taiwan Semiconductor Manufacturing Company (TSMC) are separately exploring deals to take over parts of Intel, according to a report in The Wall Street Journal. Broadcom is reportedly considering an acquisition of Intel’s…",
+      "capture": {
+        "content_hash": "bd6c5924d11bb5718e2db948e82b6dd9c1057dd7c08e9621c51598b91210c540",
+        "captured_at": "2026-11-05T06:33:20.434Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 685,
+      "kind": "annonce",
+      "title": "Broadcom, TSMC reportedly exploring deals that would split up Intel",
+      "announced_at": "2025-02-16T19:02:43.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.061Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Hardware",
+        "Government & Policy",
+        "Broadcom",
+        "Intel"
+      ],
+      "source": {
+        "id": "feed:techcrunch-tsmc",
+        "name": "TechCrunch, rubrique TSMC — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2025/02/16/broadcom-tsmc-reportedly-exploring-deals-that-would-split-up-intel"
+      },
+      "excerpt": "Broadcom and Taiwan Semiconductor Manufacturing Company (TSMC) are separately exploring deals to take over parts of Intel, according to a report in The Wall Street Journal. Broadcom is reportedly considering an acquisition of Intel’s…",
+      "capture": {
+        "content_hash": "bd6c5924d11bb5718e2db948e82b6dd9c1057dd7c08e9621c51598b91210c540",
+        "captured_at": "2026-11-05T06:33:20.061Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 686,
+      "kind": "annonce",
+      "title": "Biden administration adds 14 Chinese firms to trade block list",
+      "announced_at": "2025-01-15T19:06:37.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.061Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Hardware",
+        "Government & Policy",
+        "China",
+        "Huawei"
+      ],
+      "source": {
+        "id": "feed:techcrunch-tsmc",
+        "name": "TechCrunch, rubrique TSMC — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2025/01/15/biden-administration-adds-14-additional-chinese-firms-to-trade-blacklist"
+      },
+      "excerpt": "Days after pushing for sweeping AI chip export restriction, the Biden administration has added 14 Chinese companies to its restricted trade list. Sophgo is, perhaps, the highest-profile addition. An entity of Bitmain, the firm sparked…",
+      "capture": {
+        "content_hash": "eb5079cd2eba924203a2a9576225be8db207fb030e300cdd2835397c1ef5003d",
+        "captured_at": "2026-11-05T06:33:20.061Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 710,
+      "kind": "annonce",
+      "title": "Flying Flea electric motorcycles will feature connected services powered by Qualcomm",
+      "announced_at": "2025-01-06T20:04:28.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.251Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Transportation",
+        "flying flea",
+        "electric motorcycles",
+        "CES"
+      ],
+      "source": {
+        "id": "feed:techcrunch-qualcomm",
+        "name": "TechCrunch, rubrique Qualcomm — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2025/01/06/flying-flea-electric-motorcycles-will-feature-connected-services-powered-by-qualcomm"
+      },
+      "excerpt": "Flying Flea is the latest electric two-wheeler manufacturer to embrace the connected vehicle trend. At CES 2025, Flying Flea shared plans to integrate some of Qualcomm’s Snapdragon products into its upcoming line of motorcycles, bringing…",
+      "capture": {
+        "content_hash": "e4969de81db43e2515b838c15d72e37130988cd92134849a0c42ba4bd9074651",
+        "captured_at": "2026-11-05T06:33:20.251Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 762,
+      "kind": "annonce",
+      "title": "Will.i.am is flogging electronics again",
+      "announced_at": "2025-01-06T18:15:28.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.852Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Hardware",
+        "Media & Entertainment",
+        "Gadgets",
+        "CES"
+      ],
+      "source": {
+        "id": "feed:techcrunch-lg",
+        "name": "TechCrunch, rubrique LG — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2025/01/06/will-i-am-is-flogging-electronics-again"
+      },
+      "excerpt": "Will.i.am’s history with consumer tech has been — let’s just say “spotty.” The musician/entrepreneur loves gadgets, this much we can say for certain. For his latest trick, the Black Eyed Pea is returning as LG’s “Experiential Architect” in…",
+      "capture": {
+        "content_hash": "08e3644ed0ef104edcf79dbdb1273fc3e2db4d03f9618601e91b42ddfd06325f",
+        "captured_at": "2026-11-05T06:33:20.852Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 711,
+      "kind": "annonce",
+      "title": "Qualcomm brings its Snapdragon X chips to mid-range Windows laptops and desktops",
+      "announced_at": "2025-01-06T16:00:30.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.251Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Enterprise",
+        "Hardware",
+        "AI",
+        "Qualcomm"
+      ],
+      "source": {
+        "id": "feed:techcrunch-qualcomm",
+        "name": "TechCrunch, rubrique Qualcomm — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2025/01/06/qualcomm-brings-its-snapdragon-x-chips-to-more-affordable-windows-laptops-and-desktops"
+      },
+      "excerpt": "Qualcomm is making a move for the mid-range PC market with a new system-on-chip. At the Consumer Electronics Show in Las Vegas, Qualcomm unveiled Snapdragon X, the latest chip in its Snapdragon X Series of PC processors. The company claims…",
+      "capture": {
+        "content_hash": "b4149192a609f4779863877a538262d00f470704646f0cbf76830aaa7c6f172c",
+        "captured_at": "2026-11-05T06:33:20.251Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 763,
+      "kind": "annonce",
+      "title": "CES 2025: What to expect from the year’s first and biggest tech show",
+      "announced_at": "2025-01-02T17:40:55.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.852Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Robotics",
+        "Hardware",
+        "Transportation",
+        "Amazon"
+      ],
+      "source": {
+        "id": "feed:techcrunch-lg",
+        "name": "TechCrunch, rubrique LG — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2025/01/02/ces-2025-what-to-expect-from-the-years-first-and-biggest-tech-show"
+      },
+      "excerpt": "CES 2025 officially kicks off in Las Vegas on the morning of Tuesday, January 7 and runs through the end of the day on January 10. The “official” dates are specific to when the floor of the Las Vegas Convention Center is open to attendees…",
+      "capture": {
+        "content_hash": "662650b4e0f64a037fdda8ca37e0c6841b29f49f7753bb1bbd97816822e88399",
+        "captured_at": "2026-11-05T06:33:20.852Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 764,
+      "kind": "annonce",
+      "title": "LG mounts planters on a lamp for apartment growing",
+      "announced_at": "2024-12-27T18:26:26.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.852Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Hardware",
+        "plants",
+        "LG",
+        "CES"
+      ],
+      "source": {
+        "id": "feed:techcrunch-lg",
+        "name": "TechCrunch, rubrique LG — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2024/12/27/lg-mounts-planters-on-a-lamp-for-apartment-growing"
+      },
+      "excerpt": "LG may have the earliest big press conference of CES, but the Korean electronics giant still can’t help announcing a bunch of products ahead of the show. As ever, the pile of news is a mixed bag with a few interesting additions. These plant…",
+      "capture": {
+        "content_hash": "1fa56111aaf52c34852b14ee060f16bc28ebab9a9ede989f61c531a702985bc6",
+        "captured_at": "2026-11-05T06:33:20.852Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 724,
+      "kind": "annonce",
+      "title": "Apple reportedly developing AI server chip with Broadcom",
+      "announced_at": "2024-12-11T16:44:53.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.434Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "AI",
+        "Apple",
+        "Broadcom",
+        "AI chips"
+      ],
+      "source": {
+        "id": "feed:techcrunch-broadcom",
+        "name": "TechCrunch, rubrique Broadcom — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2024/12/11/apple-reportedly-developing-ai-server-chip-with-broadcom"
+      },
+      "excerpt": "Apple is working with semiconductor company Broadcom on its first server chip designed to handle AI applications, according to The Information, which cited three people with knowledge of the project. Apple is known for designing its own…",
+      "capture": {
+        "content_hash": "3bf81eb58f7426e12c65be003ee6ced7c4add5528d32f2a66327a880dec7c980",
+        "captured_at": "2026-11-05T06:33:20.434Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 687,
+      "kind": "annonce",
+      "title": "TSMC reportedly halts advanced chip shipments to Chinese companies",
+      "announced_at": "2024-11-10T19:30:49.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.061Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Hardware",
+        "AI",
+        "Government & Policy",
+        "TSMC"
+      ],
+      "source": {
+        "id": "feed:techcrunch-tsmc",
+        "name": "TechCrunch, rubrique TSMC — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2024/11/10/tsmc-reportedly-halts-advanced-chip-shipments-to-chinese-companies"
+      },
+      "excerpt": "After a chip manufactured by Taiwan Semiconductor Manufacturing Company (TSMC) was found inside a Huawei processor, the U.S. Department of Commerce has ordered the company to halt shipments of advanced chips to Chinese customers, according…",
+      "capture": {
+        "content_hash": "cbb4c75145d3f1df19a70dc6d907ab79b573c5ecffb295c14d5bf4ad8dbf0ef6",
+        "captured_at": "2026-11-05T06:33:20.061Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 712,
+      "kind": "annonce",
+      "title": "Arm reportedly cancels Qualcomm design license",
+      "announced_at": "2024-10-23T18:00:37.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.251Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Hardware",
+        "In Brief",
+        "ARM",
+        "Qualcomm"
+      ],
+      "source": {
+        "id": "feed:techcrunch-qualcomm",
+        "name": "TechCrunch, rubrique Qualcomm — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2024/10/23/arm-reportedly-cancels-qualcomm-design-license"
+      },
+      "excerpt": "In a move that could profoundly affect an already beleaguered global supply chain, Arm has reportedly issued Qualcomm a 60-day notice of cancelation for chip design licensing. The move, reported by Bloomberg, would have an impact on a…",
+      "capture": {
+        "content_hash": "49a206ca82efdc8f78521116c72660ace520c707ddd7b5f49ceca88880cf8202",
+        "captured_at": "2026-11-05T06:33:20.251Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 713,
+      "kind": "annonce",
+      "title": "Hackers targeted Android users by exploiting zero-day bug in Qualcomm chips",
+      "announced_at": "2024-10-09T15:50:32.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.251Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Security",
+        "Google",
+        "Qualcomm",
+        "bugs"
+      ],
+      "source": {
+        "id": "feed:techcrunch-qualcomm",
+        "name": "TechCrunch, rubrique Qualcomm — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2024/10/09/hackers-were-targeting-android-users-with-qualcomm-zero-day"
+      },
+      "excerpt": "Security researchers at Google and Amnesty International discovered hackers exploiting the bug in an active hacking campaign.",
+      "capture": {
+        "content_hash": "d0863eaa4781e5e1ff62902dc56dd31b74ef15c529545b362e355d3edb406942",
+        "captured_at": "2026-11-05T06:33:20.251Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 714,
+      "kind": "annonce",
+      "title": "Qualcomm may be trying to buy Intel",
+      "announced_at": "2024-09-21T16:35:36.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.251Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "TC",
+        "Hardware",
+        "Intel",
+        "Qualcomm"
+      ],
+      "source": {
+        "id": "feed:techcrunch-qualcomm",
+        "name": "TechCrunch, rubrique Qualcomm — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2024/09/21/qualcomm-may-be-trying-to-buy-intel"
+      },
+      "excerpt": "Chipmaker Qualcomm is trying to buy rival Intel, according to multiple reports. The Wall Street Journal broke the news late Friday that Qualcomm had approached Intel about a takeover. The New York Times subsequently corroborated the story…",
+      "capture": {
+        "content_hash": "ac61602a8ca012894aaa2bdd70a21644655d48f5c473fd45dd916b7273b127c5",
+        "captured_at": "2026-11-05T06:33:20.251Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 715,
+      "kind": "annonce",
+      "title": "Chipmaker Qualcomm lays off hundreds of workers in San Diego",
+      "announced_at": "2024-09-19T22:10:58.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.251Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Security",
+        "Layoff Tracker",
+        "cybersecurity",
+        "san diego"
+      ],
+      "source": {
+        "id": "feed:techcrunch-qualcomm",
+        "name": "TechCrunch, rubrique Qualcomm — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2024/09/19/chipmaker-qualcomm-lays-off-hundreds-of-workers-in-san-diego"
+      },
+      "excerpt": "This is the chipmaker's second round of layoffs over the past year, while the company recorded billions in revenue.",
+      "capture": {
+        "content_hash": "a2d2c52e757b775458118890dcdf82e1e6e8d469a13caf02274e443f61693067",
+        "captured_at": "2026-11-05T06:33:20.251Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 716,
+      "kind": "annonce",
+      "title": "Hackers could spy on cell phone users by abusing 5G baseband flaws, researchers say",
+      "announced_at": "2024-08-07T15:30:00.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.251Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Security",
+        "Qualcomm",
+        "Samsung",
+        "baseband"
+      ],
+      "source": {
+        "id": "feed:techcrunch-qualcomm",
+        "name": "TechCrunch, rubrique Qualcomm — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2024/08/07/hackers-could-spy-on-cellphone-users-by-abusing-5g-baseband-flaws-researchers-say"
+      },
+      "excerpt": "Security researchers found a dozen vulnerabilities in 5G baseband chips found in phones made by Google, OPPO, OnePlus, Motorola, and Samsung.",
+      "capture": {
+        "content_hash": "3cf0c7e5a1b69c867ccf7adef23a93028e7f0d9159b32e2e2023e7c5b14ddfd1",
+        "captured_at": "2026-11-05T06:33:20.251Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 765,
+      "kind": "annonce",
+      "title": "LG acquires smart home platform Athom to bring third-party connectivity to its ThinQ ecosytem",
+      "announced_at": "2024-07-03T13:59:09.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.852Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Hardware",
+        "LG",
+        "smart home"
+      ],
+      "source": {
+        "id": "feed:techcrunch-lg",
+        "name": "TechCrunch, rubrique LG — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2024/07/03/lg-acquires-smart-home-platform-athom-to-bring-third-party-connectivity-to-its-thinq-ecosytem"
+      },
+      "excerpt": "LG has acquired an 80% stake in Athom, a Dutch smart home company and maker of the Homey smart home hub. According to LG’s announcement, it will purchase the remaining 20% of Athom within the next three years. However, the financial terms…",
+      "capture": {
+        "content_hash": "afc5301ab4e15223c3d70bc915af62eb74bacb9ccbc07c6e3d8f142fb8cf2532",
+        "captured_at": "2026-11-05T06:33:20.852Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 688,
+      "kind": "annonce",
+      "title": "China’s $47B semiconductor fund puts chip sovereignty front and center",
+      "announced_at": "2024-05-28T21:15:42.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.061Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "AI",
+        "Hardware",
+        "semiconductors",
+        "Chips Act"
+      ],
+      "source": {
+        "id": "feed:techcrunch-tsmc",
+        "name": "TechCrunch, rubrique TSMC — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2024/05/28/chinas-47b-semiconductor-fund-puts-chip-sovereignty-front-and-center"
+      },
+      "excerpt": "China has closed a third state-backed investment fund to bolster its semiconductor industry and reduce reliance on other nations, both for using and manufacturing wafers — prioritizing what is called chip sovereignty. China’s National…",
+      "capture": {
+        "content_hash": "2b4cbcd4fdc2b1cb7d5ae671ad0de6f0f784a070a8d4a108a0cd6540a29a7c27",
+        "captured_at": "2026-11-05T06:33:20.061Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 689,
+      "kind": "annonce",
+      "title": "China tensions underline US investment in TSMC",
+      "announced_at": "2024-04-08T18:13:38.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.061Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Hardware",
+        "AI",
+        "Government & Policy",
+        "China"
+      ],
+      "source": {
+        "id": "feed:techcrunch-tsmc",
+        "name": "TechCrunch, rubrique TSMC — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2024/04/08/china-tensions-underline-us-investment-in-tsmc"
+      },
+      "excerpt": "The United States Department of Commerce Monday proposed investing as much as $6.6 billion to fund a third Taiwan Semiconductor Manufacturing Company Limited (TSMC) fab in Arizona. The funding would arrive by way of the CHIPS and Science…",
+      "capture": {
+        "content_hash": "9cf630cd856d02935f02afe9deceafc52938de95cafb666c5fb40bc6f7e124da",
+        "captured_at": "2026-11-05T06:33:20.061Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 690,
+      "kind": "annonce",
+      "title": "Could Congress actually pass a data privacy law?",
+      "announced_at": "2024-04-08T14:22:53.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.061Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Government & Policy",
+        "AI",
+        "Startups",
+        "TSMC"
+      ],
+      "source": {
+        "id": "feed:techcrunch-tsmc",
+        "name": "TechCrunch, rubrique TSMC — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/podcast/could-congress-actually-pass-a-data-privacy-law"
+      },
+      "excerpt": "Hello, and welcome back to Equity, a podcast about the business of startups, where we unpack the numbers and nuance behind the headlines. This is our Monday show, where we dig into the weekend and take a peek at the week that is to come…",
+      "capture": {
+        "content_hash": "6bff6c780f5071c092600a70fdcbe0c385b17e0bdf41d38251549a85c82f6656",
+        "captured_at": "2026-11-05T06:33:20.061Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 691,
+      "kind": "annonce",
+      "title": "US to award TSMC $6.6B in grants, $5B in loans to step up chip manufacturing in Arizona",
+      "announced_at": "2024-04-08T13:07:15.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.061Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Government & Policy",
+        "Hardware",
+        "semiconductors",
+        "TSMC"
+      ],
+      "source": {
+        "id": "feed:techcrunch-tsmc",
+        "name": "TechCrunch, rubrique TSMC — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2024/04/08/us-to-award-tsmc-6-6b-in-grants-5b-in-loans-to-step-up-chip-manufacturing-in-arizona"
+      },
+      "excerpt": "TSMC is getting the grant under the CHIPS Act, in the latest step by the U.S. to reshore domestic chip manufacturing.",
+      "capture": {
+        "content_hash": "36619a4d242cad5da97d72c5e743751bc7dddb72b75b292ed36445747444ce2c",
+        "captured_at": "2026-11-05T06:33:20.061Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 725,
+      "kind": "annonce",
+      "title": "KKR to acquire VMware’s end user computing biz from Broadcom for $4B",
+      "announced_at": "2024-02-26T14:46:36.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.434Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Enterprise",
+        "Broadcom",
+        "vmware",
+        "Mergers and Acquisitions"
+      ],
+      "source": {
+        "id": "feed:techcrunch-broadcom",
+        "name": "TechCrunch, rubrique Broadcom — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2024/02/26/kkr-to-acquire-broadcoms-end-user-computing-biz-for-4b"
+      },
+      "excerpt": "We’ve already started to see big M&A, as in multibillion-dollar deals, finally pick up this year after a slow period last year. Today, KKR added to that growing total when it announced it was going to acquire Broadcom’s end user computing…",
+      "capture": {
+        "content_hash": "c07a651499c736423c8a3a73a93725012cef025c1faea82eb81c0474877cec4b",
+        "captured_at": "2026-11-05T06:33:20.434Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 766,
+      "kind": "annonce",
+      "title": "LG’s IT arm taps Tiger Global-backed QuickNode for web3 pursuit",
+      "announced_at": "2023-11-07T15:38:49.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.852Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Crypto",
+        "LG",
+        "south korea",
+        "crypto"
+      ],
+      "source": {
+        "id": "feed:techcrunch-lg",
+        "name": "TechCrunch, rubrique LG — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2023/11/07/lgs-it-arm-taps-tiger-global-backed-quicknode-for-crypto-pursuit"
+      },
+      "excerpt": "Despite crypto’s badly tarnished reputation following FTX’s collapse, some large corporations are warmly embracing its underlying distributed ledger technology. LG CNS, the IT solutions subsidiary of the South Korean conglomerate, has…",
+      "capture": {
+        "content_hash": "0122b18f436baf90014496c5c29145fa43b344dc738a9a3661a31872799fc6a8",
+        "captured_at": "2026-11-05T06:33:20.852Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 726,
+      "kind": "annonce",
+      "title": "With deadline looming, Broadcom tries to push $61B VMware deal over finish line",
+      "announced_at": "2023-10-30T15:40:28.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.434Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Enterprise",
+        "Broadcom",
+        "vmware",
+        "Mergers and Acquisitions"
+      ],
+      "source": {
+        "id": "feed:techcrunch-broadcom",
+        "name": "TechCrunch, rubrique Broadcom — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2023/10/30/with-deadline-looming-broadcom-tries-to-push-61b-vmware-deal-over-finish-line"
+      },
+      "excerpt": "Broadcom announced its intention to buy VMware for $61 billion in May 2022. After clearing a number of regulatory hurdles, including the U.S., UK and European Union, it announced in August that the deal would close today. But this morning…",
+      "capture": {
+        "content_hash": "f303225eaed10a642019e632d1a1d693d2333e2aceb2b7297ae47a1f1f601d97",
+        "captured_at": "2026-11-05T06:33:20.434Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 767,
+      "kind": "annonce",
+      "title": "Amazon Luna app launches on LG smart TVs",
+      "announced_at": "2023-08-24T04:41:55.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.852Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Gadgets",
+        "Gaming",
+        "LG",
+        "cloud gaming"
+      ],
+      "source": {
+        "id": "feed:techcrunch-lg",
+        "name": "TechCrunch, rubrique LG — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2023/08/23/amazon-luna-app-launches-on-lg-smart-tvs"
+      },
+      "excerpt": "LG is teaming up with Amazon to bring the Amazon Luna cloud-based game streaming service to its smart TVs. Amazon announced on its blog that the Amazon Luna app is now available on LG’s smart TV models launched between 2021 and 2023 and…",
+      "capture": {
+        "content_hash": "119fb34de3231b4bf5908b3102f662960ba750658bcf37a3afe7b90569d33a9e",
+        "captured_at": "2026-11-05T06:33:20.852Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 727,
+      "kind": "annonce",
+      "title": "UK provisionally approves Broadcom’s $69B VMware acquisition",
+      "announced_at": "2023-07-19T10:24:20.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.434Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Enterprise",
+        "Government & Policy",
+        "Broadcom",
+        "vmware"
+      ],
+      "source": {
+        "id": "feed:techcrunch-broadcom",
+        "name": "TechCrunch, rubrique Broadcom — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2023/07/19/uk-provisionally-approves-broadcoms-69b-vmware-acquisition"
+      },
+      "excerpt": "The U.K.’s competition authority has said that it plans to greenlight Broadcom’s $69 billion bid for virtualization software giant VMware. The news comes exactly a week after the European Commission (EC) approved the deal, which pretty much…",
+      "capture": {
+        "content_hash": "b44da46bfadc4acf81a345ec3efe60db4f83b7e0b6bb285d07b26f0756f0b00b",
+        "captured_at": "2026-11-05T06:33:20.434Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 728,
+      "kind": "annonce",
+      "title": "Europe greenlights Broadcom’s $61B VMware acquisition",
+      "announced_at": "2023-07-12T10:52:47.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.434Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Enterprise",
+        "Government & Policy",
+        "vmware",
+        "Broadcom"
+      ],
+      "source": {
+        "id": "feed:techcrunch-broadcom",
+        "name": "TechCrunch, rubrique Broadcom — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2023/07/12/europe-greenlights-broadcoms-61b-vmware-acquisition"
+      },
+      "excerpt": "The European Commission (EC) has formally approved Broadcom’s $61 billion bid for virtualization software giant VMware, with the caveat that Broadcom fulfills certain ongoing commitments around access and interoperability. The megabucks…",
+      "capture": {
+        "content_hash": "b348fe4eb4c89a406dde0b1cda441b2fdbd4b4f6d68f36fe8fe3d2896fc89c2a",
+        "captured_at": "2026-11-05T06:33:20.434Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 692,
+      "kind": "annonce",
+      "title": "TSMC confirms data breach after LockBit cyberattack on third-party supplier",
+      "announced_at": "2023-06-30T13:10:16.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.061Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Security",
+        "lockbit",
+        "ransomware",
+        "data breach"
+      ],
+      "source": {
+        "id": "feed:techcrunch-tsmc",
+        "name": "TechCrunch, rubrique TSMC — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2023/06/30/tsmc-confirms-data-breach-after-lockbit-cyberattack-on-third-party-supplier"
+      },
+      "excerpt": "Taiwan Semiconductor Manufacturing Company (TSMC), the world’s largest contract chipmaker, has confirmed it’s experienced a data breach after being listed as a victim by the LockBit ransomware gang. The Russia-linked LockBit ransomware gang…",
+      "capture": {
+        "content_hash": "fd71a55a478927861be8c8a2d5bea989709ef63f72d09998b55b610bf6353af1",
+        "captured_at": "2026-11-05T06:33:20.061Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 729,
+      "kind": "annonce",
+      "title": "Apple partners with Broadcom to build 5G components in the United States",
+      "announced_at": "2023-05-23T13:24:37.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.434Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Gadgets",
+        "Hardware",
+        "Broadcom",
+        "Apple"
+      ],
+      "source": {
+        "id": "feed:techcrunch-broadcom",
+        "name": "TechCrunch, rubrique Broadcom — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2023/05/23/apple-partners-with-broadcom-to-build-5g-components-in-the-united-states"
+      },
+      "excerpt": "Apple today announced a multibillion-dollar deal with Broadcom to build some wireless components in the United States. Under the terms of the agreement, Broadcom will design and build 5G components, including FBAR filters, in its…",
+      "capture": {
+        "content_hash": "f0dc9364aadbd6e1d081fc03f36101bdbc6211cfee3be744f1bf062ef22bc528",
+        "captured_at": "2026-11-05T06:33:20.434Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 730,
+      "kind": "annonce",
+      "title": "UK competition authority moves forward with in-depth probe of $61B Broadcom-VMware deal",
+      "announced_at": "2023-03-29T14:54:02.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.434Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Enterprise",
+        "Broadcom",
+        "vmware",
+        "Mergers and Acquisitions"
+      ],
+      "source": {
+        "id": "feed:techcrunch-broadcom",
+        "name": "TechCrunch, rubrique Broadcom — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2023/03/29/u-k-competition-authority-moves-forward-with-in-depth-probe-of-61b-broadcom-vmware-deal"
+      },
+      "excerpt": "After putting Broadcom on notice last week that it was concerned that the proposed $61 billion Broadcom-VMware deal could adversely affect competition in the server market, the U.K. Competition and Markets Authority (CMA) announced today…",
+      "capture": {
+        "content_hash": "4b79991c49a786438b7faef1db15ba950f8df9f58f04d2aedb10b39c37a3576f",
+        "captured_at": "2026-11-05T06:33:20.434Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 731,
+      "kind": "annonce",
+      "title": "UK competition authority is concerned about the $61B Broadcom-VMware deal",
+      "announced_at": "2023-03-22T18:34:02.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.434Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Enterprise",
+        "Broadcom",
+        "vmware",
+        "Competition and Markets Authority"
+      ],
+      "source": {
+        "id": "feed:techcrunch-broadcom",
+        "name": "TechCrunch, rubrique Broadcom — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2023/03/22/uk-competition-authority-is-concerned-about-the-61b-broadcom-vmware-deal"
+      },
+      "excerpt": "The U.K. Competition and Markets Authority (CMA) expressed concern today that the $61 billion Broadcom-VMware deal announced last year could result in more expensive servers for U.K. businesses. “We are concerned this deal could allow…",
+      "capture": {
+        "content_hash": "ae0ea940e3d0a97bd4f0c8bdcf3a308f06fe1e819bdd23c523357da5f6f07895",
+        "captured_at": "2026-11-05T06:33:20.434Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 732,
+      "kind": "annonce",
+      "title": "EU to probe $61B Broadcom-VMware deal over competition concerns",
+      "announced_at": "2022-12-20T22:30:47.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.434Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Enterprise",
+        "Broadcom",
+        "vmware",
+        "Mergers and Acquisitions"
+      ],
+      "source": {
+        "id": "feed:techcrunch-broadcom",
+        "name": "TechCrunch, rubrique Broadcom — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2022/12/20/eu-to-probe-61b-broadcom-vmware-deal-over-competition-concerns"
+      },
+      "excerpt": "When Broadcom announced it was spending an eye-popping $61 billion for VMware in May, it seemed only a matter of time before the deal caught the attention of regulators, especially in Europe and the U.K. And sure enough, this week the EU…",
+      "capture": {
+        "content_hash": "03f2e0df9baa482b6ce53f75e98275f2617d366af663b37ac95844a701bd3c57",
+        "captured_at": "2026-11-05T06:33:20.434Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 733,
+      "kind": "annonce",
+      "title": "Broadcom’s proposed $61B VMware acquisition scrutinized by UK regulators",
+      "announced_at": "2022-11-21T12:03:43.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.434Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Enterprise",
+        "Government & Policy",
+        "Broadcom",
+        "vmware"
+      ],
+      "source": {
+        "id": "feed:techcrunch-broadcom",
+        "name": "TechCrunch, rubrique Broadcom — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2022/11/21/broadcoms-proposed-61b-vmware-acquisition-scrutinized-by-uk-regulators"
+      },
+      "excerpt": "The U.K.’s Competition and Markets Authority (CMA) is initiating an investigation into Broadcom’s proposed $61 billion deal to buy virtualization software giant VMware. The news comes shortly after reports that the European Commission (EC)…",
+      "capture": {
+        "content_hash": "67edc7d025615260e2fb42bb1a1b81de130a05eb3ad7425aa9e7792f54d7bcf7",
+        "captured_at": "2026-11-05T06:33:20.434Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 693,
+      "kind": "annonce",
+      "title": "TSMC to produce 3-nanometer chips at its Arizona factory",
+      "announced_at": "2022-11-21T06:28:15.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.061Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Hardware",
+        "taiwan",
+        "semiconductor",
+        "TSMC"
+      ],
+      "source": {
+        "id": "feed:techcrunch-tsmc",
+        "name": "TechCrunch, rubrique TSMC — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2022/11/20/tsmc-3-nanometer-arizona"
+      },
+      "excerpt": "TSMC founder Morris Chang said today that the semiconductor giant and Apple supplier will build 3-nanometer chips at its factory in Arizona, though final plans are not ready yet. The factory is currently under construction, with plans to…",
+      "capture": {
+        "content_hash": "8c0e5aac256f95b7b206397fdc984bb9eab8e424d50ef3cad41bb6690b0ec6c6",
+        "captured_at": "2026-11-05T06:33:20.061Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 694,
+      "kind": "annonce",
+      "title": "Nvidia touts a slower chip for China to avoid US ban",
+      "announced_at": "2022-11-08T04:02:39.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.061Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Hardware",
+        "Government & Policy",
+        "alibaba",
+        "China"
+      ],
+      "source": {
+        "id": "feed:techcrunch-tsmc",
+        "name": "TechCrunch, rubrique TSMC — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2022/11/07/nvidia-us-china-ban-alternative"
+      },
+      "excerpt": "Two months after the U.S. choked off China’s access to two of Nvidia’s high-end microchips, the American semiconductor design giant unveiled a substitute with a reduced processing speed for its second-largest market. The Nvidia A800 graphic…",
+      "capture": {
+        "content_hash": "22cb32acbb8fd4040e2c60a05edf1cb5634480920de23aedb8ddbb7ad805294c",
+        "captured_at": "2026-11-05T06:33:20.061Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 768,
+      "kind": "annonce",
+      "title": "Say goodbye to the notch? OTI raises $55M for technology to remove screen obstructions",
+      "announced_at": "2022-10-26T13:00:10.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.852Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Startups",
+        "Hardware",
+        "OTI Lumionics",
+        "Samsung"
+      ],
+      "source": {
+        "id": "feed:techcrunch-lg",
+        "name": "TechCrunch, rubrique LG — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2022/10/26/say-goodbye-to-the-notch-oti-raises-55m-for-technology-to-remove-screen-obstructions"
+      },
+      "excerpt": "OTI Lumionics, an eye-catching startup out of Canada that has been working on display materials for device makers to create uninterrupted, full-view displays on their devices without the need for “notches” or cut-outs to account for camera…",
+      "capture": {
+        "content_hash": "3ba50baeb13d3c75e9f1dcce399a020ccb66d8499e67ebb805a39daaf7a9d3a4",
+        "captured_at": "2026-11-05T06:33:20.852Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 769,
+      "kind": "annonce",
+      "title": "Dynamic Island might push phonemakers to better use status bar",
+      "announced_at": "2022-09-14T13:00:05.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.852Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Apps",
+        "Hardware",
+        "Android",
+        "Apple"
+      ],
+      "source": {
+        "id": "feed:techcrunch-lg",
+        "name": "TechCrunch, rubrique LG — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2022/09/14/dynamic-island-might-push-phonemakers-to-better-use-status-bar"
+      },
+      "excerpt": "When Apple debuted “the notch” with iPhone X, it got harsh reactions from plenty of people, but the company stood by it and even embraced it. Now with the iPhone 14 Pro, we’ve got “Dynamic Island” — a reshaped cutout that uses software to…",
+      "capture": {
+        "content_hash": "2cc034c7eacc78e5ca03fe48005c37b2b3e83c5a02129ef555307366ebc61114",
+        "captured_at": "2026-11-05T06:33:20.852Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 734,
+      "kind": "annonce",
+      "title": "UK’s FocalPoint raises $17M for its software-based approach to repairing the flaws of GPS",
+      "announced_at": "2022-09-08T10:22:45.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.434Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Enterprise",
+        "Startups",
+        "Security",
+        "Hardware"
+      ],
+      "source": {
+        "id": "feed:techcrunch-broadcom",
+        "name": "TechCrunch, rubrique Broadcom — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2022/09/08/focalpoint-gps-series-c"
+      },
+      "excerpt": "GPS in its many regional flavors has become a ubiquitous feature in phones, smart watches, cars and other connected devices, but for all the location-based features that it helps enable (mapping being the most obvious) it has a lot of…",
+      "capture": {
+        "content_hash": "c8695e2fbf5ae9be0a0baf7ad99b1d7b03dc7d074f768db0805d0ae26fb377f3",
+        "captured_at": "2026-11-05T06:33:20.434Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 735,
+      "kind": "annonce",
+      "title": "DriveNets connects with $262M as demand booms for its cloud-based alternative to network routers",
+      "announced_at": "2022-08-17T10:59:09.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.434Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Enterprise",
+        "Startups",
+        "AT&T",
+        "Broadcom"
+      ],
+      "source": {
+        "id": "feed:techcrunch-broadcom",
+        "name": "TechCrunch, rubrique Broadcom — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2022/08/17/drivenets-connects-with-262m-as-demand-booms-for-its-cloud-based-alternative-to-network-routers"
+      },
+      "excerpt": "Internet usage continues to skyrocket, with 29.3 billion networked devices projected to be in use by 2023 and the growth rate currently at around 10%. Today, an enterprise startup called DriveNets that’s built a more cost-effective way for…",
+      "capture": {
+        "content_hash": "812391b95d81b092f4ad725c54746bd21bc1491996e1ebda01c52be8a8fd36a6",
+        "captured_at": "2026-11-05T06:33:20.434Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 736,
+      "kind": "annonce",
+      "title": "Group of security companies launches open source project to ease data sharing",
+      "announced_at": "2022-08-10T16:45:00.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.434Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Security",
+        "Enterprise",
+        "Broadcom",
+        "open source"
+      ],
+      "source": {
+        "id": "feed:techcrunch-broadcom",
+        "name": "TechCrunch, rubrique Broadcom — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2022/08/10/group-of-security-companies-launches-open-source-project-to-ease-data-sharing"
+      },
+      "excerpt": "It’s long been known that security is not a problem that companies, even large corporations, can solve on their own. It takes a community working together to battle the kinds of problems that companies are facing today when it comes to…",
+      "capture": {
+        "content_hash": "a58e06d31bbe19298b965eafcf35095b6442a825d010df8b66331b25f65d186e",
+        "captured_at": "2026-11-05T06:33:20.434Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 770,
+      "kind": "annonce",
+      "title": "Seedtag, the ex-Googler-founded, cookie-free, AI-based adtech startup, taps $250M+ in funding",
+      "announced_at": "2022-07-27T12:32:10.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.852Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Startups",
+        "AI",
+        "Google",
+        "Marketing"
+      ],
+      "source": {
+        "id": "feed:techcrunch-lg",
+        "name": "TechCrunch, rubrique LG — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2022/07/27/seedtag-the-ex-googler-founded-cookie-free-ai-based-adtech-startup-taps-250m-in-funding"
+      },
+      "excerpt": "As regulation, platform dynamics and consumer choice continue to eat into the adtech stalwart known as cookies, it’s leaving a gap in the market for advertising solutions that can work well without relying on cookie functionality. Today, an…",
+      "capture": {
+        "content_hash": "739747290e153f7092b6eec4fbfd322cafb545513349686773d2902539e7696d",
+        "captured_at": "2026-11-05T06:33:20.852Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 771,
+      "kind": "annonce",
+      "title": "Why GM profits dropped 40% in the second quarter",
+      "announced_at": "2022-07-26T15:04:34.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.852Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Transportation",
+        "Fintech",
+        "Lithium",
+        "Cadillac Lyriq"
+      ],
+      "source": {
+        "id": "feed:techcrunch-lg",
+        "name": "TechCrunch, rubrique LG — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2022/07/26/why-gm-profits-dropped-40-in-the-second-quarter"
+      },
+      "excerpt": "General Motors said Tuesday it’s moving to take more control over its supply chain in response to a dismal second quarter that saw profits fall 40% year over year as it shifts more toward EVs. The automaker reported second-quarter net…",
+      "capture": {
+        "content_hash": "15bb405e14102d3c49590bc5cdfb534142d14ec26f61a94be064949c6d0fa33c",
+        "captured_at": "2026-11-05T06:33:20.852Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 772,
+      "kind": "annonce",
+      "title": "Ford adds battery capacity, LFP chemistry to scale global EV business",
+      "announced_at": "2022-07-21T13:40:04.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.852Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Transportation",
+        "electric vehicles",
+        "EV",
+        "EVs"
+      ],
+      "source": {
+        "id": "feed:techcrunch-lg",
+        "name": "TechCrunch, rubrique LG — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2022/07/21/ford-adds-battery-capacity-lfp-chemistry-to-scale-global-ev-business"
+      },
+      "excerpt": "Ford said Thursday it has shored up its battery supply chain as part of its global strategy to sell more than 2 million EVs annually by 2026. The automaker, which is investing $50 billion to scale its battery-electric portfolio through…",
+      "capture": {
+        "content_hash": "0e334ee04e62125e8b878b0e453a6adb9955f200c77d914bcfad8e6bec73cfdc",
+        "captured_at": "2026-11-05T06:33:20.852Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 773,
+      "kind": "annonce",
+      "title": "UK signs its first data sharing deal post-Brexit, with South Korea",
+      "announced_at": "2022-07-05T17:28:02.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.852Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "TC",
+        "Google",
+        "mastercard",
+        "Microsoft"
+      ],
+      "source": {
+        "id": "feed:techcrunch-lg",
+        "name": "TechCrunch, rubrique LG — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2022/07/05/uk-signs-its-first-data-sharing-deal-post-brexit-with-south-korea"
+      },
+      "excerpt": "Six years on from the referendum where the United Kingdom voted to leave the EU, and in the midst of an apparent government meltdown, the country is announcing its first international data sharing deal: It’s inked an agreement with South…",
+      "capture": {
+        "content_hash": "6b5f451a40d279c1e1035c3dab967976064ad4938e73e24b3f494d7b4445de26",
+        "captured_at": "2026-11-05T06:33:20.852Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 695,
+      "kind": "annonce",
+      "title": "Samsung Electronics starts 3-nanometer chip production ahead of TSMC",
+      "announced_at": "2022-06-30T08:59:06.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.061Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Enterprise",
+        "chips",
+        "semiconductor",
+        "TSMC"
+      ],
+      "source": {
+        "id": "feed:techcrunch-tsmc",
+        "name": "TechCrunch, rubrique TSMC — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2022/06/30/samsung-electronics-starts-3-nanometer-chip-production-ahead-of-tsmc"
+      },
+      "excerpt": "Samsung Electronics said Thursday it has kicked off mass production of 3-nanometer chips, becoming the first company to do so globally, as it aims to beat Taiwan Semiconductor Manufacturing Co, or TSMC, the world’s most advanced foundry…",
+      "capture": {
+        "content_hash": "05ca63fc115f19b37b0388a433e87829bf7f97e03e33e3107a40f46aa2481efb",
+        "captured_at": "2026-11-05T06:33:20.061Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 774,
+      "kind": "annonce",
+      "title": "What’s the ‘secret sauce’ behind Croatian EV maker Rimac?",
+      "announced_at": "2022-06-25T16:00:52.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.852Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Transportation",
+        "Goldman Sachs",
+        "electric vehicles",
+        "electronics"
+      ],
+      "source": {
+        "id": "feed:techcrunch-lg",
+        "name": "TechCrunch, rubrique LG — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2022/06/25/whats-the-secret-sauce-behind-croatian-ev-maker-rimac"
+      },
+      "excerpt": "Rimac Group made headlines after raising a Series D round that valued the Croatian startup at $2.2 billion, prompting the question: How has it succeeded where so many other EV makers have struggled?",
+      "capture": {
+        "content_hash": "3288c146c760c54cca265502af73f159f65696605cdb71ebae3b76bb58aa780e",
+        "captured_at": "2026-11-05T06:33:20.852Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 775,
+      "kind": "annonce",
+      "title": "LG Nova announces its Mission for the Future startup selectees",
+      "announced_at": "2022-06-20T16:03:44.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.852Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Enterprise",
+        "LG",
+        "LG Nova",
+        "Tripp"
+      ],
+      "source": {
+        "id": "feed:techcrunch-lg",
+        "name": "TechCrunch, rubrique LG — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2022/06/20/mission-for-the-future-lg-nova-selectees"
+      },
+      "excerpt": "In January, I got under the skin of LG Nova — electronics and appliances giant LG’s internal startup incubator — and its search for a different way of doing a corporate accelerator. Today, NOVA (short for North American Innovation Center)…",
+      "capture": {
+        "content_hash": "21eac97df00632ffe310fe0cdd9d6b456c96a0cbb1218f1888cf7084286c3464",
+        "captured_at": "2026-11-05T06:33:20.852Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 776,
+      "kind": "annonce",
+      "title": "Egyptian fintech Paymob raises $50M led by PayPal Ventures and Kora Capital",
+      "announced_at": "2022-05-09T07:04:11.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.852Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "Fintech",
+        "Startups",
+        "PayPal",
+        "Kora Capital"
+      ],
+      "source": {
+        "id": "feed:techcrunch-lg",
+        "name": "TechCrunch, rubrique LG — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2022/05/09/egyptian-fintech-paymob-raises-50m-led-by-paypal-ventures-and-kora-capital"
+      },
+      "excerpt": "Egyptian fintech Paymob, which enables merchants to accept digital payments online and in-store, announced today it has raised $50 million in Series B funding. PayPal Ventures, the global corporate venture arm of PayPal, New-York-based…",
+      "capture": {
+        "content_hash": "16b40205551c2b11b94dd5f4184ef1d4f127420ff9e0ace45647815472f04ac5",
+        "captured_at": "2026-11-05T06:33:20.852Z",
+        "mode": "live"
+      }
+    },
+    {
+      "id": 696,
+      "kind": "annonce",
+      "title": "Nvidia launches a new GPU architecture and the Grace CPU Superchip",
+      "announced_at": "2022-03-22T15:45:37.000Z",
+      "first_seen_at": "2026-11-05T06:33:20.061Z",
+      "product": null,
+      "version": null,
+      "categories": [
+        "AI",
+        "Enterprise",
+        "amd",
+        "Cloud Computing"
+      ],
+      "source": {
+        "id": "feed:techcrunch-tsmc",
+        "name": "TechCrunch, rubrique TSMC — article de presse, contenu externe attribué",
+        "url": "https://techcrunch.com/2022/03/22/nvidia-launches-a-new-gpu-architecture-and-the-grace-cpu-superchip"
+      },
+      "excerpt": "At its annual GTC conference for AI developers, Nvidia today announced its next-gen Hopper GPU architecture and the Hopper H100 GPU, as well as a new data center chip that combines the GPU with a high-performance CPU, which Nvidia calls the…",
+      "capture": {
+        "content_hash": "35de4e36f62878aea2b07deca30f20724ad307a8ac328bd14f77ddfc6d388cbf",
+        "captured_at": "2026-11-05T06:33:20.061Z",
+        "mode": "live"
+      }
     }
   ],
   "excluded_not_live": 0,
   "ressources": [
     {
-      "post_id": 1,
-      "revision_id": 151,
-      "slug": "frontend-design",
-      "nom": "frontend-design",
-      "compte": "mova",
+      "post_id": 9,
+      "revision_id": 181,
+      "slug": "marketingskills",
+      "nom": "Marketing Skills",
+      "compte": "repo",
       "statut": "en_attente",
       "etiquette": "pas encore publié",
       "planning": {
-        "jour": "2026-11-03",
+        "jour": "2026-11-04",
         "rang": 7,
         "etat": "prevue",
         "utilise_reserve": false,
         "motif": null
+      },
+      "statut_sortie": "ressource_existante",
+      "badge": "Ressource existante",
+      "origine": {
+        "code": "claude_code_developpement",
+        "texte": "Rédigé pendant le développement par Claude Code, assistant de programmation, pas par l'agent du site ; vérifié par les contrôles du code"
+      },
+      "mention": "Analyse IA à partir des sources — non testé par la plateforme",
+      "accroche": {
+        "texte": "Marketing Skills: CRO, copywriting, SEO and email sequences handled by your code agent",
+        "passages": [
+          "Marketing skills for Claude Code and AI agents.",
+          "CRO, copywriting, SEO, analytics, and growth engineering.",
+          "create or optimize an email sequence"
+        ]
+      },
+      "description": {
+        "texte": "Corey Haines' marketing collection. Your agent identifies the task at hand—a page to convert, an email sequence, pricing or a Google Ads campaign—and applies the appropriate method.",
+        "passages": [
+          "A collection of AI agent skills focused on marketing tasks.",
+          "Built by Corey Haines.",
+          "your agent can recognize when you're working on a marketing task and apply the right frameworks and best practices",
+          "help with conversion optimization, copywriting, SEO, analytics, and growth engineering.",
+          "When the user wants to create or optimize an email sequence, drip campaign",
+          "When the user wants help with pricing decisions, packaging, or monetization strategy.",
+          "When the user wants help with paid advertising campaigns on Google Ads"
+        ]
+      },
+      "interet": {
+        "texte": "Everything rests on a shared product document: you set product, audience and positioning once with product-marketing, and each skill rereads it before acting.",
+        "passages": [
+          "Skills reference each other and build on shared context.",
+          "When the user wants to create or update their product marketing context document",
+          "every other skill checks it first to understand your product, audience, and positioning before doing anything"
+        ]
+      },
+      "exemple_usage": {
+        "texte": "Ask to optimize a landing page for conversion: the agent relies on the cro skill.",
+        "passages": [
+          "Once installed, just ask your agent to help with marketing tasks",
+          "Help me optimize this landing page for conversions",
+          "Uses cro skill"
+        ]
+      },
+      "demarrage": {
+        "etapes": [
+          {
+            "texte": "npx skills add coreyhaines31/marketingskills",
+            "passages": [
+              "Use npx skills to install skills directly",
+              "npx skills add coreyhaines31/marketingskills"
+            ]
+          },
+          {
+            "texte": "Launched from Claude Code: add -a claude-code, otherwise it won't read them",
+            "passages": [
+              "If you run the command from inside an agent session (e.g., asking Claude Code to install the skills for you)",
+              "may only install to the universal .agents/skills/ directory, which Claude Code does not read",
+              "npx skills add coreyhaines31/marketingskills -a claude-code"
+            ]
+          },
+          {
+            "texte": "Fill in product-marketing, then hand its tasks to the agent",
+            "passages": [
+              "When the user wants to create or update their product marketing context document",
+              "Once installed, just ask your agent to help with marketing tasks"
+            ]
+          }
+        ],
+        "commande": "npx skills add coreyhaines31/marketingskills",
+        "passages": [
+          "Use npx skills to install skills directly",
+          "When the user wants to create or update their product marketing context document",
+          "Once installed, just ask your agent to help with marketing tasks"
+        ],
+        "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
+      },
+      "compatibilites": [
+        {
+          "texte": "Claude Code, Codex, Cursor, Windsurf and any agent compatible with Agent Skills.",
+          "passages": [
+            "Works with Claude Code, OpenAI Codex, Cursor, Windsurf, and any agent that supports the Agent Skills spec."
+          ]
+        }
+      ],
+      "limites": [],
+      "licence_locale": null,
+      "reperes": [
+        {
+          "texte": "MIT licensed, freely reusable",
+          "passages": [
+            "MIT - Use these however you want."
+          ]
+        },
+        {
+          "texte": "For Claude Code, Codex, Cursor and Windsurf",
+          "passages": [
+            "Works with Claude Code, OpenAI Codex, Cursor, Windsurf"
+          ]
+        },
+        {
+          "texte": "Also: A/B tests, churn, sales pipeline",
+          "passages": [
+            "ab-testing - Experiment design",
+            "churn-prevention - Cancel flows, save offers, dunning, payment recovery",
+            "revops - Lead lifecycle, scoring, routing, pipeline management"
+          ]
+        }
+      ],
+      "bouton": {
+        "libelle": "Voir le dépôt",
+        "url": "https://github.com/coreyhaines31/marketingskills",
+        "aria_label": "Voir le dépôt coreyhaines31/marketingskills sur GitHub (nouvel onglet)",
+        "verifie_le": "2026-11-04T22:40:56.361Z",
+        "motif": "reponse_api"
+      },
+      "etat_depot": {
+        "full_name": "coreyhaines31/marketingskills",
+        "html_url": "https://github.com/coreyhaines31/marketingskills",
+        "etoiles": 57957,
+        "etoiles_au": "2026-11-02T12:15:47.595Z",
+        "cree_le": "2026-01-15T19:45:23Z",
+        "dernier_push": "2026-10-31T00:53:07Z",
+        "jours_sans_push": 2,
+        "inactif": false,
+        "licence": "MIT",
+        "archive": false,
+        "fork": false,
+        "parent": null,
+        "date_ajout_skill": null
+      },
+      "visuel": {
+        "src": "medias/montages/ressources/marketingskills.jpg",
+        "alt": "Marketing Skills: CRO, copywriting, SEO and email sequences handled by your code agent. Étape 1 : npx skills add coreyhaines31/marketingskills. Étape 2 : Launched from Claude Code: add -a claude-code, otherwise it won't read them. Étape 3 : Fill in product-marketing, then hand its tasks to the agent",
+        "gabarit": "etapes",
+        "mention": "Illustration — ne prouve pas le fonctionnement"
+      },
+      "captures": [
+        {
+          "document": "depot",
+          "snapshot_id": 453,
+          "capture_le": "2026-11-02T12:15:47.595Z",
+          "url": "https://github.com/coreyhaines31/marketingskills",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:README.md",
+          "snapshot_id": 454,
+          "capture_le": "2026-11-02T12:15:47.595Z",
+          "url": "https://github.com/coreyhaines31/marketingskills/blob/main/README.md",
+          "mode": "live"
+        }
+      ],
+      "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
+      "importe_le": "2026-11-04T22:40:49.499Z"
+    },
+    {
+      "post_id": 12,
+      "revision_id": 183,
+      "slug": "find-skills",
+      "nom": "find-skills",
+      "compte": "repo",
+      "statut": "en_attente",
+      "etiquette": "pas encore publié",
+      "planning": {
+        "jour": "2026-11-04",
+        "rang": 8,
+        "etat": "prevue",
+        "utilise_reserve": false,
+        "motif": null
+      },
+      "statut_sortie": "ressource_existante",
+      "badge": "Ressource existante",
+      "origine": {
+        "code": "claude_code_developpement",
+        "texte": "Rédigé pendant le développement par Claude Code, assistant de programmation, pas par l'agent du site ; vérifié par les contrôles du code"
+      },
+      "mention": "Analyse IA à partir des sources — non testé par la plateforme",
+      "accroche": {
+        "texte": "find-skills: your agent can find and install the skill it's missing",
+        "passages": [
+          "This skill helps you discover and install skills from the open agent skills ecosystem."
+        ]
+      },
+      "description": {
+        "texte": "Ask \"find a skill for X\", or just \"how do I do X\". The agent checks the skills.sh ranking and, if it can't find what it needs, runs npx skills find. It comes back with the skill, its source and the install command.",
+        "passages": [
+          "Says \"find a skill for X\" or \"is there a skill for X\"",
+          "Asks \"how do I do X\" where X might be a common task with an existing skill",
+          "Before running a CLI search, check the skills.sh leaderboard",
+          "If the leaderboard doesn't cover the user's need, run the find command:",
+          "The install count and source",
+          "The install command they can run"
+        ]
+      },
+      "interet": {
+        "texte": "It doesn't recommend a skill based on a search result alone: it first checks the install count and the source. And if nothing exists, it offers to write your own with npx skills init.",
+        "passages": [
+          "Do not recommend a skill based solely on search results.",
+          "Install count — Prefer skills with 1K+ installs.",
+          "Source reputation — Official sources (vercel-labs, anthropics, microsoft) are more trustworthy than unknown authors.",
+          "Suggest the user could create their own skill with npx skills init"
+        ]
+      },
+      "exemple_usage": {
+        "texte": "Want to speed up your React app: the agent can run npx skills find react performance and suggest a skill with its install command.",
+        "passages": [
+          "User asks \"how do I make my React app faster?\" → npx skills find react performance",
+          "The install command they can run"
+        ]
+      },
+      "demarrage": {
+        "etapes": [
+          {
+            "texte": "Add find-skills with npx skills add (Node.js 22.20 or later).",
+            "passages": [
+              "Requires Node.js 22.20 or later.",
+              "npx skills add <package> - Install a skill from GitHub or other sources"
+            ]
+          },
+          {
+            "texte": "Then just ask, for example \"find a skill for …\"; no command needed.",
+            "passages": [
+              "Says \"find a skill for X\" or \"is there a skill for X\""
+            ]
+          }
+        ],
+        "commande": null,
+        "passages": [
+          "Requires Node.js 22.20 or later.",
+          "See the installation reference for source formats, private repositories, and all options."
+        ],
+        "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
+      },
+      "compatibilites": [
+        {
+          "texte": "Claude Code, Codex, Cursor, OpenCode and 75 other agents.",
+          "passages": [
+            "Supports OpenCode, Claude Code, Codex, Cursor, and 75 more."
+          ]
+        }
+      ],
+      "limites": [
+        {
+          "texte": "If it installs for you, it's global and without confirmation (-g -y): read the skill before accepting.",
+          "passages": [
+            "If the user wants to proceed, you can install the skill for them:",
+            "The -g flag installs globally (user-level) and -y skips confirmation prompts."
+          ]
+        }
+      ],
+      "licence_locale": null,
+      "reperes": [
+        {
+          "texte": "Triggered by plain requests, no syntax",
+          "passages": [
+            "Says \"find a skill for X\" or \"is there a skill for X\""
+          ]
+        },
+        {
+          "texte": "Never suggests a skill without checking installs and source",
+          "passages": [
+            "Do not recommend a skill based solely on search results.",
+            "Install count — Prefer skills with 1K+ installs.",
+            "Source reputation — Official sources (vercel-labs, anthropics, microsoft) are more trustworthy than unknown authors."
+          ]
+        },
+        {
+          "texte": "Nothing matches? It offers to create one",
+          "passages": [
+            "Suggest the user could create their own skill with npx skills init"
+          ]
+        }
+      ],
+      "bouton": {
+        "libelle": "Voir le dépôt",
+        "url": "https://github.com/vercel-labs/skills/tree/main/skills/find-skills",
+        "aria_label": "Voir le dépôt vercel-labs/skills sur GitHub (nouvel onglet)",
+        "verifie_le": "2026-11-04T22:40:57.081Z",
+        "motif": "reponse_api"
+      },
+      "etat_depot": {
+        "full_name": "vercel-labs/skills",
+        "html_url": "https://github.com/vercel-labs/skills",
+        "etoiles": 37731,
+        "etoiles_au": "2026-11-02T12:15:50.450Z",
+        "cree_le": "2026-01-14T21:31:18Z",
+        "dernier_push": "2026-10-30T20:14:22Z",
+        "jours_sans_push": 2,
+        "inactif": false,
+        "licence": "MIT",
+        "archive": false,
+        "fork": false,
+        "parent": null,
+        "date_ajout_skill": null
+      },
+      "visuel": {
+        "src": "medias/montages/ressources/find-skills.jpg",
+        "alt": "find-skills: your agent can find and install the skill it's missing. Étape 1 : Add find-skills with npx skills add (Node.js 22.20 or later).. Étape 2 : Then just ask, for example \"find a skill for …\"; no command needed.",
+        "gabarit": "etapes",
+        "mention": "Illustration — ne prouve pas le fonctionnement"
+      },
+      "captures": [
+        {
+          "document": "depot",
+          "snapshot_id": 459,
+          "capture_le": "2026-11-02T12:15:50.450Z",
+          "url": "https://github.com/vercel-labs/skills",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:skills/find-skills/SKILL.md",
+          "snapshot_id": 460,
+          "capture_le": "2026-11-02T12:15:50.450Z",
+          "url": "https://github.com/vercel-labs/skills/blob/main/skills/find-skills/SKILL.md",
+          "mode": "live"
+        },
+        {
+          "document": "dossier:skills/find-skills",
+          "snapshot_id": 461,
+          "capture_le": "2026-11-02T12:15:50.450Z",
+          "url": "https://github.com/vercel-labs/skills/tree/main/skills/find-skills",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:README.md",
+          "snapshot_id": 462,
+          "capture_le": "2026-11-02T12:15:50.450Z",
+          "url": "https://github.com/vercel-labs/skills/blob/main/README.md",
+          "mode": "live"
+        }
+      ],
+      "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
+      "importe_le": "2026-11-04T22:40:49.499Z"
+    },
+    {
+      "post_id": 16,
+      "revision_id": 187,
+      "slug": "planning-with-files",
+      "nom": "planning-with-files",
+      "compte": "repo",
+      "statut": "en_attente",
+      "etiquette": "pas encore publié",
+      "planning": {
+        "jour": "2026-11-04",
+        "rang": 9,
+        "etat": "prevue",
+        "utilise_reserve": false,
+        "motif": null
+      },
+      "statut_sortie": "ressource_existante",
+      "badge": "Ressource existante",
+      "origine": {
+        "code": "claude_code_developpement",
+        "texte": "Rédigé pendant le développement par Claude Code, assistant de programmation, pas par l'agent du site ; vérifié par les contrôles du code"
+      },
+      "mention": "Analyse IA à partir des sources — non testé par la plateforme",
+      "accroche": {
+        "texte": "planning-with-files keeps your agent's plan on disk, and the task resumes after a /clear",
+        "passages": [
+          "Persistent file-based planning for AI coding agents and long-running tasks.",
+          "Crash-proof markdown plans, session recovery after /clear and compaction"
+        ]
+      },
+      "description": {
+        "texte": "The plan lives in three Markdown files in the project, not only in context: task_plan.md for the phases, findings.md for discoveries and decisions, progress.md for the log. After a /clear, a compaction or a crash, the agent rereads them and restarts from the current phase.",
+        "passages": [
+          "The plan lives on disk in task_plan.md, findings.md, and progress.md, not only in the context window.",
+          "Markdown on disk is the shared state between agents.",
+          "task_plan.md ← phases + checkboxes; the resume point after /clear",
+          "findings.md ← research notes and decisions, appended as you go",
+          "progress.md ← session log and test results",
+          "That is the difference between an agent that forgets after /clear, compaction or a crash and one that resumes at the current phase."
+        ]
+      },
+      "interet": {
+        "texte": "Hooks reinject the plan at the start of each turn: over a long session, the goal and phase status stay in front of the model. Optionally, the agent is held while a phase is still in progress, with a cap so the session is never blocked, on the tools that allow it.",
+        "passages": [
+          "A hook that fires every turn",
+          "Because the plan is re-injected at the start of each turn from disk, the goals and phase status stay in the model's attention window as the conversation grows.",
+          "Gated mode: the Stop gate holds the stop only while an in_progress phase remains, with a block cap and stall detection so an incomplete plan alone never traps a session",
+          "Optional gated mode can request continuation only on a host that supports the required Stop behavior."
+        ]
+      },
+      "exemple_usage": {
+        "texte": "Validate the approach in plan mode, have it written in phases into task_plan.md, then start execution. If the conversation is cleared along the way, the agent doesn't lose the thread: it rereads the files and picks up where it left off.",
+        "passages": [
+          "Plan mode is where you design and approve the approach before execution.",
+          "after accepting a plan-mode plan, tell the agent to write it into task_plan.md as phases",
+          "then execute in normal mode",
+          "after a /clear or a new session the skill re-reads project files from disk"
+        ]
+      },
+      "demarrage": {
+        "etapes": [
+          {
+            "texte": "In Claude Code: /plugin marketplace add OthmanAdi/planning-with-files",
+            "passages": [
+              "Claude Code, plugin route (ships everything: skill, hooks, slash commands):",
+              "/plugin marketplace add OthmanAdi/planning-with-files"
+            ]
+          },
+          {
+            "texte": "Then /plugin install planning-with-files@planning-with-files",
+            "passages": [
+              "/plugin install planning-with-files@planning-with-files",
+              "Claude Code, plugin route (ships everything: skill, hooks, slash commands):"
+            ]
+          },
+          {
+            "texte": "Type /plan, or simply ask the agent for a plan",
+            "passages": [
+              "Trigger it by typing /plan (plugin) or asking the agent to"
+            ]
+          }
+        ],
+        "commande": "npx skills add OthmanAdi/planning-with-files --skill planning-with-files -g",
+        "passages": [
+          "npx skills add OthmanAdi/planning-with-files --skill planning-with-files -g",
+          "Claude Code, plugin route (ships everything: skill, hooks, slash commands):"
+        ],
+        "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
+      },
+      "compatibilites": [
+        {
+          "texte": "Native plugins for Claude Code, Codex CLI, OpenCode and others; 60+ agents via npx skills add, without hooks on some.",
+          "passages": [
+            "with native plugins for Claude Code, Codex CLI, Qoder CLI, Pi, Hermes Agent, OpenCode and DeepSeek Harness.",
+            "Installs across 60+ agents via the Agent Skills standard",
+            "SKILL.md discovery via npx skills add; the pattern without lifecycle hooks"
+          ]
+        }
+      ],
+      "limites": [],
+      "licence_locale": null,
+      "reperes": [
+        {
+          "texte": "Autonomous mode: fewer reminders, fewer tokens burned",
+          "passages": [
+            "Autonomous loops burn tokens on recitation",
+            "Autonomous mode drops the per-tool-call recitation and replaces the raw progress tail with a fixed-shape ledger summary"
+          ]
+        },
+        {
+          "texte": "Multi-agent: an orchestrator holds the plan",
+          "passages": [
+            "One orchestrator owns task_plan.md and the shared summaries; every worker appends to its own ledger or assigned file."
+          ]
+        },
+        {
+          "texte": "For Claude Code, Codex, Cursor and 60+ agents",
+          "passages": [
+            "Install from npm, the Claude Code plugin marketplace, or npx skills. Codex, Cursor, OpenCode, 60+ agents."
+          ]
+        }
+      ],
+      "bouton": {
+        "libelle": "Voir le dépôt",
+        "url": "https://github.com/OthmanAdi/planning-with-files",
+        "aria_label": "Voir le dépôt OthmanAdi/planning-with-files sur GitHub (nouvel onglet)",
+        "verifie_le": "2026-11-04T22:40:59.171Z",
+        "motif": "reponse_api"
+      },
+      "etat_depot": {
+        "full_name": "OthmanAdi/planning-with-files",
+        "html_url": "https://github.com/OthmanAdi/planning-with-files",
+        "etoiles": 27824,
+        "etoiles_au": "2026-11-02T12:15:53.678Z",
+        "cree_le": "2026-01-03T07:37:28Z",
+        "dernier_push": "2026-10-30T20:57:42Z",
+        "jours_sans_push": 2,
+        "inactif": false,
+        "licence": "MIT",
+        "archive": false,
+        "fork": false,
+        "parent": null,
+        "date_ajout_skill": null
+      },
+      "visuel": {
+        "src": "medias/montages/ressources/planning-with-files.jpg",
+        "alt": "planning-with-files keeps your agent's plan on disk, and the task resumes after a /clear. Étape 1 : In Claude Code: /plugin marketplace add OthmanAdi/planning-with-files. Étape 2 : Then /plugin install planning-with-files@planning-with-files. Étape 3 : Type /plan, or simply ask the agent for a plan",
+        "gabarit": "etapes",
+        "mention": "Illustration — ne prouve pas le fonctionnement"
+      },
+      "captures": [
+        {
+          "document": "depot",
+          "snapshot_id": 471,
+          "capture_le": "2026-11-02T12:15:53.678Z",
+          "url": "https://github.com/OthmanAdi/planning-with-files",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:README.md",
+          "snapshot_id": 472,
+          "capture_le": "2026-11-02T12:15:53.678Z",
+          "url": "https://github.com/OthmanAdi/planning-with-files/blob/master/README.md",
+          "mode": "live"
+        }
+      ],
+      "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
+      "importe_le": "2026-11-04T22:40:49.499Z"
+    },
+    {
+      "post_id": 17,
+      "revision_id": 188,
+      "slug": "stop-slop",
+      "nom": "stop-slop",
+      "compte": "repo",
+      "statut": "en_attente",
+      "etiquette": "pas encore publié",
+      "planning": {
+        "jour": "2026-11-04",
+        "rang": 10,
+        "etat": "prevue",
+        "utilise_reserve": false,
+        "motif": null
+      },
+      "statut_sortie": "ressource_existante",
+      "badge": "Ressource existante",
+      "origine": {
+        "code": "claude_code_developpement",
+        "texte": "Rédigé pendant le développement par Claude Code, assistant de programmation, pas par l'agent du site ; vérifié par les contrôles du code"
+      },
+      "mention": "Analyse IA à partir des sources — non testé par la plateforme",
+      "accroche": {
+        "texte": "stop-slop tracks down AI writing tics in your texts and makes them disappear",
+        "passages": [
+          "A skill for removing AI tells from prose.",
+          "This skill teaches Claude (or any LLM) to catch and remove them."
+        ]
+      },
+      "description": {
+        "texte": "Predictable formulas, stock constructions, mechanical rhythm: stop-slop teaches Claude, or any LLM, to spot them and remove them.",
+        "passages": [
+          "AI writing has patterns. Predictable phrases, structures, rhythms.",
+          "This skill teaches Claude (or any LLM) to catch and remove them."
+        ]
+      },
+      "interet": {
+        "texte": "The rules are firm: no corporate jargon, no adverbs, no passive voice, no binary oppositions, no em dash. Each family of tics has its own reference file, loaded only when needed.",
+        "passages": [
+          "Banned phrases - Throat-clearing openers, emphasis crutches, business jargon, all adverbs, vague declaratives, meta-commentary.",
+          "Structural clichés - Binary contrasts, negative listings, dramatic fragmentation, rhetorical setups, false agency, narrator-from-a-distance voice, passive voice.",
+          "Sentence-level rules - No Wh- sentence starters, no em dashes, no staccato fragmentation, no lazy extremes, active voice required.",
+          "Reference files load on demand.",
+          "phrases.md # Phrases to remove",
+          "structures.md # Structural patterns to avoid"
+        ]
+      },
+      "exemple_usage": {
+        "texte": "A post written with Claude that sounds too AI: run it through stop-slop before publishing.",
+        "passages": [
+          "This skill teaches Claude (or any LLM) to catch and remove them."
+        ]
+      },
+      "demarrage": {
+        "etapes": [
+          {
+            "texte": "Claude Code: add the folder as a skill",
+            "passages": [
+              "Claude Code: Add this folder as a skill."
+            ]
+          },
+          {
+            "texte": "API: include SKILL.md in the system prompt",
+            "passages": [
+              "API calls: Include SKILL.md in your system prompt."
+            ]
+          }
+        ],
+        "commande": null,
+        "passages": [
+          "Claude Code: Add this folder as a skill.",
+          "API calls: Include SKILL.md in your system prompt. Reference files load on demand."
+        ],
+        "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
+      },
+      "compatibilites": [
+        {
+          "texte": "Claude Code, Claude projects, custom instructions or API calls.",
+          "passages": [
+            "Claude Code: Add this folder as a skill.",
+            "Claude Projects: Upload SKILL.md and reference files to project knowledge.",
+            "Custom instructions: Copy core rules from SKILL.md.",
+            "API calls: Include SKILL.md in your system prompt."
+          ]
+        }
+      ],
+      "limites": [],
+      "licence_locale": null,
+      "reperes": [
+        {
+          "texte": "Rated 1-10 per dimension; below 35/50, revise",
+          "passages": [
+            "Rate 1-10 on each dimension:",
+            "Below 35/50: revise."
+          ]
+        },
+        {
+          "texte": "Before/after examples provided with the rules",
+          "passages": [
+            "examples.md # Before/after transformations"
+          ]
+        },
+        {
+          "texte": "Claude Code, Claude projects, custom instructions or API",
+          "passages": [
+            "Claude Code: Add this folder as a skill.",
+            "Claude Projects: Upload SKILL.md and reference files to project knowledge.",
+            "Custom instructions: Copy core rules from SKILL.md.",
+            "API calls: Include SKILL.md in your system prompt."
+          ]
+        }
+      ],
+      "bouton": {
+        "libelle": "Voir le dépôt",
+        "url": "https://github.com/hardikpandya/stop-slop",
+        "aria_label": "Voir le dépôt hardikpandya/stop-slop sur GitHub (nouvel onglet)",
+        "verifie_le": "2026-11-04T22:40:59.554Z",
+        "motif": "reponse_api"
+      },
+      "etat_depot": {
+        "full_name": "hardikpandya/stop-slop",
+        "html_url": "https://github.com/hardikpandya/stop-slop",
+        "etoiles": 18542,
+        "etoiles_au": "2026-11-02T12:15:54.354Z",
+        "cree_le": "2026-01-11T12:00:59Z",
+        "dernier_push": "2026-03-17T18:50:39Z",
+        "jours_sans_push": 229,
+        "inactif": true,
+        "licence": "MIT",
+        "archive": false,
+        "fork": false,
+        "parent": null,
+        "date_ajout_skill": null
+      },
+      "visuel": {
+        "src": "medias/montages/ressources/stop-slop.jpg",
+        "alt": "stop-slop tracks down AI writing tics in your texts and makes them disappear. Étape 1 : Claude Code: add the folder as a skill. Étape 2 : API: include SKILL.md in the system prompt",
+        "gabarit": "etapes",
+        "mention": "Illustration — ne prouve pas le fonctionnement"
+      },
+      "captures": [
+        {
+          "document": "depot",
+          "snapshot_id": 473,
+          "capture_le": "2026-11-02T12:15:54.354Z",
+          "url": "https://github.com/hardikpandya/stop-slop",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:README.md",
+          "snapshot_id": 474,
+          "capture_le": "2026-11-02T12:15:54.354Z",
+          "url": "https://github.com/hardikpandya/stop-slop/blob/main/README.md",
+          "mode": "live"
+        }
+      ],
+      "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
+      "importe_le": "2026-11-04T22:40:49.499Z"
+    },
+    {
+      "post_id": 18,
+      "revision_id": 189,
+      "slug": "improve-codebase-architecture",
+      "nom": "improve-codebase-architecture (Matt Pocock)",
+      "compte": "repo",
+      "statut": "en_attente",
+      "etiquette": "pas encore publié",
+      "planning": {
+        "jour": "2026-11-04",
+        "rang": 11,
+        "etat": "prevue",
+        "utilise_reserve": false,
+        "motif": null
+      },
+      "statut_sortie": "ressource_existante",
+      "badge": "Ressource existante",
+      "origine": {
+        "code": "claude_code_developpement",
+        "texte": "Rédigé pendant le développement par Claude Code, assistant de programmation, pas par l'agent du site ; vérifié par les contrôles du code"
+      },
+      "mention": "Analyse IA à partir des sources — non testé par la plateforme",
+      "accroche": {
+        "texte": "improve-codebase-architecture spots the modules to deepen for more testable code",
+        "passages": [
+          "Surface architectural friction and propose deepening opportunities: refactors that turn shallow modules into deep ones.",
+          "The aim is testability and AI-navigability."
+        ]
+      },
+      "description": {
+        "texte": "Matt Pocock's skill starts from the files that recur most in commit history and looks there for shallow modules, those whose interface is almost as complex as the implementation. It suggests deepening them: more behavior behind a simple interface, code that is easier to test and to navigate for AI.",
+        "passages": [
+          "walk back a good stretch of the commit history (git log --oneline) to find the codebase's hot spots, the files and areas that keep coming up",
+          "Where are modules shallow, with an interface nearly as complex as the implementation?",
+          "The best modules are deep. They allow a lot of functionality to be accessed through a simple interface.",
+          "The aim is testability and AI-navigability."
+        ]
+      },
+      "interet": {
+        "texte": "The suggestions arrive in an HTML report: for each one, the problem, the solution, a before/after diagram and a recommendation level. You pick one, and the agent digs into it with you before proposing any interface. Decisions already recorded in your ADRs are not called into question.",
+        "passages": [
+          "present them as a visual HTML report",
+          "Files: which files/modules are involved Problem: why the current architecture is causing friction Solution: plain English description of what would change",
+          "Before / After diagram: side-by-side, custom-drawn, illustrating the shallowness and the deepening",
+          "Recommendation strength: one of Strong, Worth exploring, Speculative, rendered as a badge",
+          "Do NOT propose interfaces yet.",
+          "Once the user picks a candidate, call the Skill tool with \"grilling\" to walk the decision tree with them",
+          "ADRs in docs/adr/ record decisions this command should not re-litigate."
+        ]
+      },
+      "exemple_usage": {
+        "texte": "The author recommends running it every few days. On old code, it finds real leads without untangling everything for you.",
+        "passages": [
+          "I recommend running it on your codebase once every few days.",
+          "on a genuinely old codebase it will find real candidates, but it won't untangle the mud for you."
+        ]
+      },
+      "demarrage": {
+        "etapes": [
+          {
+            "texte": "Install: claude plugin install mattpocock-skills@claude-plugins-official",
+            "passages": [
+              "claude plugin install mattpocock-skills@claude-plugins-official",
+              "I see with Claude Code, Codex, and other coding agents"
+            ]
+          },
+          {
+            "texte": "Then /setup-matt-pocock-skills, once per repository",
+            "passages": [
+              "Run once per repo before using the other engineering skills."
+            ]
+          },
+          {
+            "texte": "The skill only runs if you type /improve-codebase-architecture",
+            "passages": [
+              "User-invoked skills are reachable only when you type them"
+            ]
+          }
+        ],
+        "commande": "claude plugin install mattpocock-skills@claude-plugins-official",
+        "passages": [
+          "claude plugin install mattpocock-skills@claude-plugins-official",
+          "Run once per repo before using the other engineering skills."
+        ],
+        "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
+      },
+      "compatibilites": [
+        {
+          "texte": "Claude Code, Codex, GitHub Copilot and Gemini CLI.",
+          "passages": [
+            "I see with Claude Code, Codex, and other coding agents",
+            "<strong>GitHub Copilot</strong> (CLI and VS Code)",
+            "<strong>Gemini CLI</strong> (manual updates)"
+          ]
+        }
+      ],
+      "limites": [],
+      "licence_locale": null,
+      "reperes": [
+        {
+          "texte": "Report written to the temporary folder, outside the repository",
+          "passages": [
+            "Write a self-contained HTML file to the OS temp directory so nothing lands in the repo."
+          ]
+        },
+        {
+          "texte": "A deletion test to flush out hollow modules",
+          "passages": [
+            "Apply the deletion test to anything you suspect is shallow"
+          ]
+        },
+        {
+          "texte": "A lead set aside for a real reason can become an ADR",
+          "passages": [
+            "Want me to record this as an ADR so future architecture reviews don't re-suggest it?"
+          ]
+        }
+      ],
+      "bouton": {
+        "libelle": "Voir le dépôt",
+        "url": "https://github.com/mattpocock/skills/tree/main/skills/engineering/improve-codebase-architecture",
+        "aria_label": "Voir le dépôt mattpocock/skills sur GitHub (nouvel onglet)",
+        "verifie_le": "2026-11-04T22:40:59.943Z",
+        "motif": "reponse_api"
+      },
+      "etat_depot": {
+        "full_name": "mattpocock/skills",
+        "html_url": "https://github.com/mattpocock/skills",
+        "etoiles": 309698,
+        "etoiles_au": "2026-11-02T12:15:51.625Z",
+        "cree_le": "2026-02-03T11:15:53Z",
+        "dernier_push": "2026-11-01T11:42:33Z",
+        "jours_sans_push": 1,
+        "inactif": false,
+        "licence": "MIT",
+        "archive": false,
+        "fork": false,
+        "parent": null,
+        "date_ajout_skill": null
+      },
+      "visuel": {
+        "src": "medias/montages/ressources/improve-codebase-architecture.jpg",
+        "alt": "improve-codebase-architecture spots the modules to deepen for more testable code. Étape 1 : Install: claude plugin install mattpocock-skills@claude-plugins-official. Étape 2 : Then /setup-matt-pocock-skills, once per repository. Étape 3 : The skill only runs if you type /improve-codebase-architecture",
+        "gabarit": "etapes",
+        "mention": "Illustration — ne prouve pas le fonctionnement"
+      },
+      "captures": [
+        {
+          "document": "depot",
+          "snapshot_id": 463,
+          "capture_le": "2026-11-02T12:15:51.625Z",
+          "url": "https://github.com/mattpocock/skills",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:skills/engineering/improve-codebase-architecture/SKILL.md",
+          "snapshot_id": 475,
+          "capture_le": "2026-11-02T12:15:54.977Z",
+          "url": "https://github.com/mattpocock/skills/blob/main/skills/engineering/improve-codebase-architecture/SKILL.md",
+          "mode": "live"
+        },
+        {
+          "document": "dossier:skills/engineering/improve-codebase-architecture",
+          "snapshot_id": 476,
+          "capture_le": "2026-11-02T12:15:54.977Z",
+          "url": "https://github.com/mattpocock/skills/tree/main/skills/engineering/improve-codebase-architecture",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:README.md",
+          "snapshot_id": 466,
+          "capture_le": "2026-11-02T12:15:51.625Z",
+          "url": "https://github.com/mattpocock/skills/blob/main/README.md",
+          "mode": "live"
+        }
+      ],
+      "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
+      "importe_le": "2026-11-04T22:40:49.499Z"
+    },
+    {
+      "post_id": 19,
+      "revision_id": 190,
+      "slug": "skill-creator",
+      "nom": "skill-creator",
+      "compte": "repo",
+      "statut": "en_attente",
+      "etiquette": "pas encore publié",
+      "planning": {
+        "jour": "2026-11-04",
+        "rang": 12,
+        "etat": "prevue",
+        "utilise_reserve": false,
+        "motif": null
+      },
+      "statut_sortie": "ressource_existante",
+      "badge": "Ressource existante",
+      "origine": {
+        "code": "claude_code_developpement",
+        "texte": "Rédigé pendant le développement par Claude Code, assistant de programmation, pas par l'agent du site ; vérifié par les contrôles du code"
+      },
+      "mention": "Analyse IA à partir des sources — non testé par la plateforme",
+      "accroche": {
+        "texte": "skill-creator: Anthropic's skill that writes, tests, and refines your own skills",
+        "passages": [
+          "This repository contains Anthropic's implementation of skills for Claude",
+          "A skill for creating new skills and iteratively improving them."
+        ]
+      },
+      "description": {
+        "texte": "Describe what you want to automate: skill-creator frames the need, drafts a first version, tests it on realistic requests, and has you review the results. It can also take an existing skill and improve it.",
+        "passages": [
+          "A skill for creating new skills and iteratively improving them.",
+          "Create a few test prompts and run claude-with-access-to-the-skill on them",
+          "Help the user evaluate the results both qualitatively and quantitatively",
+          "Use when users want to create a skill from scratch, edit, or optimize an existing skill"
+        ]
+      },
+      "interet": {
+        "texte": "Each test runs with and without the skill, or against its previous version. A review page gathers the responses to annotate and a quantified comparison: success rate, duration, tokens. It also reworks the description so the skill triggers at the right time.",
+        "passages": [
+          "For each test case, spawn two subagents in the same turn — one with the skill, one without.",
+          "Improving an existing skill: the old version.",
+          "This produces benchmark.json and benchmark.md with pass_rate, time, and tokens for each configuration",
+          "'Outputs' lets you click through each test case and leave feedback, 'Benchmark' shows the quantitative comparison.",
+          "optimize a skill's description for better triggering accuracy"
+        ]
+      },
+      "exemple_usage": {
+        "texte": "Have you honed a method with Claude? Say \"turn this into a skill\": it can pick up the steps from the conversation, ask you a few questions, write the SKILL.md, and suggest two or three test requests.",
+        "passages": [
+          "(e.g., they say \"turn this into a skill\")",
+          "extract answers from the conversation history first — the tools used, the sequence of steps, corrections the user made, input/output formats observed.",
+          "Proactively ask questions about edge cases, input/output formats, example files, success criteria, and dependencies.",
+          "Each skill is self-contained in its own folder with a SKILL.md file containing the instructions and metadata that Claude uses.",
+          "come up with 2-3 realistic test prompts — the kind of thing a real user would actually say."
+        ]
+      },
+      "demarrage": {
+        "etapes": [
+          {
+            "texte": "Add the repository as a plugin catalog in Claude Code.",
+            "passages": [
+              "You can register this repository as a Claude Code Plugin marketplace by running the following command in Claude Code"
+            ]
+          },
+          {
+            "texte": "Install example-skills: /plugin install example-skills@anthropic-agent-skills",
+            "passages": [
+              "/plugin install example-skills@anthropic-agent-skills",
+              "\"./skills/mcp-builder\", \"./skills/skill-creator\", \"./skills/slack-gif-creator\""
+            ]
+          },
+          {
+            "texte": "Then simply name the skill in your request.",
+            "passages": [
+              "After installing the plugin, you can use the skill by just mentioning it."
+            ]
+          }
+        ],
+        "commande": "/plugin marketplace add anthropics/skills",
+        "passages": [
+          "You can register this repository as a Claude Code Plugin marketplace by running the following command in Claude Code"
+        ],
+        "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
+      },
+      "compatibilites": [
+        {
+          "texte": "Full version in Claude Code; in Claude.ai, a lighter version, without sub-agents or quantified comparison.",
+          "passages": [
+            "You can register this repository as a Claude Code Plugin marketplace",
+            "because Claude.ai doesn't have subagents, some mechanics change.",
+            "Skip the quantitative benchmarking"
+          ]
+        }
+      ],
+      "limites": [
+        {
+          "texte": "Each test runs twice, with and without the skill: plan for double the model calls.",
+          "passages": [
+            "For each test case, spawn two subagents in the same turn — one with the skill, one without."
+          ]
+        }
+      ],
+      "licence_locale": {
+        "texte": "The skill's folder has its own license: Apache 2.0.",
+        "passages": [
+          "Apache License Version 2.0, January 2004"
+        ]
+      },
+      "reperes": [
+        {
+          "texte": "A skill for creating and improving other skills",
+          "passages": [
+            "A skill for creating new skills and iteratively improving them."
+          ]
+        },
+        {
+          "texte": "A/B runs: one subagent with, one without",
+          "passages": [
+            "For each test case, spawn two subagents in the same turn — one with the skill, one without."
+          ]
+        },
+        {
+          "texte": "A description that helps Claude pick the skill at the right time",
+          "passages": [
+            "optimize a skill's description for better triggering accuracy",
+            "Skills appear in Claude's available_skills list with their name + description"
+          ]
+        }
+      ],
+      "bouton": {
+        "libelle": "Voir le dépôt",
+        "url": "https://github.com/anthropics/skills/tree/main/skills/skill-creator",
+        "aria_label": "Voir le dépôt anthropics/skills sur GitHub (nouvel onglet)",
+        "verifie_le": "2026-11-04T22:41:00.194Z",
+        "motif": "reponse_api"
+      },
+      "etat_depot": {
+        "full_name": "anthropics/skills",
+        "html_url": "https://github.com/anthropics/skills",
+        "etoiles": 186700,
+        "etoiles_au": "2026-11-02T18:42:26.169Z",
+        "cree_le": "2025-09-22T15:53:31Z",
+        "dernier_push": "2026-10-28T19:20:39Z",
+        "jours_sans_push": 4,
+        "inactif": false,
+        "licence": null,
+        "archive": false,
+        "fork": false,
+        "parent": null,
+        "date_ajout_skill": null
+      },
+      "visuel": {
+        "src": "medias/montages/ressources/skill-creator.jpg",
+        "alt": "skill-creator: Anthropic's skill that writes, tests, and refines your own skills. Étape 1 : Add the repository as a plugin catalog in Claude Code.. Étape 2 : Install example-skills: /plugin install example-skills@anthropic-agent-skills. Étape 3 : Then simply name the skill in your request.",
+        "gabarit": "etapes",
+        "mention": "Illustration — ne prouve pas le fonctionnement"
+      },
+      "captures": [
+        {
+          "document": "depot",
+          "snapshot_id": 484,
+          "capture_le": "2026-11-02T18:42:26.169Z",
+          "url": "https://github.com/anthropics/skills",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:skills/skill-creator/SKILL.md",
+          "snapshot_id": 477,
+          "capture_le": "2026-11-02T12:15:55.900Z",
+          "url": "https://github.com/anthropics/skills/blob/main/skills/skill-creator/SKILL.md",
+          "mode": "live"
+        },
+        {
+          "document": "dossier:skills/skill-creator",
+          "snapshot_id": 478,
+          "capture_le": "2026-11-02T12:15:55.900Z",
+          "url": "https://github.com/anthropics/skills/tree/main/skills/skill-creator",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:skills/skill-creator/LICENSE.txt",
+          "snapshot_id": 479,
+          "capture_le": "2026-11-02T12:15:55.900Z",
+          "url": "https://github.com/anthropics/skills/blob/main/skills/skill-creator/LICENSE.txt",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:README.md",
+          "snapshot_id": 424,
+          "capture_le": "2026-11-02T12:15:38.384Z",
+          "url": "https://github.com/anthropics/skills/blob/main/README.md",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:.claude-plugin/marketplace.json",
+          "snapshot_id": 485,
+          "capture_le": "2026-11-02T18:42:26.169Z",
+          "url": "https://github.com/anthropics/skills/blob/main/.claude-plugin/marketplace.json",
+          "mode": "live"
+        }
+      ],
+      "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
+      "importe_le": "2026-11-04T22:40:49.499Z"
+    },
+    {
+      "post_id": 21,
+      "revision_id": 158,
+      "slug": "ecc",
+      "nom": "ECC (Everything Claude Code)",
+      "compte": "repo",
+      "statut": "en_attente",
+      "etiquette": "pas encore publié",
+      "planning": {
+        "jour": "2026-11-04",
+        "rang": 13,
+        "etat": "prevue",
+        "utilise_reserve": false,
+        "motif": null
+      },
+      "statut_sortie": "ressource_existante",
+      "badge": "Ressource existante",
+      "origine": {
+        "code": "claude_code_developpement",
+        "texte": "Rédigé pendant le développement par Claude Code, assistant de programmation, pas par l'agent du site ; vérifié par les contrôles du code"
+      },
+      "mention": "Analyse IA à partir des sources — non testé par la plateforme",
+      "accroche": {
+        "texte": "ECC installs a working method into your coding agent, instead of restating it in every prompt",
+        "passages": [
+          "Instead of rebuilding that process in every prompt, you install it once and make it part of how your agent works."
+        ]
+      },
+      "description": {
+        "texte": "Plan before coding, verify through tests, keep what matters: ECC brings together 71 agents, 314 skills, hooks and session summaries so this process becomes part of how your agent works. Today it works best with Claude Code, with native plugins for Codex and Qoder and more limited adapters for Cursor, OpenCode or Gemini.",
+        "passages": [
+          "Access to 71 agents, 314 skills, and 98 legacy command shims, plus hooks, rules, memory, continuous learning, and AgentShield security scanning.",
+          "it plans before it builds, verifies changes with tests, reviews its own work from a fresh context, remembers what matters",
+          "Sessions are distilled into summaries, instincts, and reusable skills",
+          "make it part of how your agent works",
+          "It works best with Claude Code today, has native Codex and Qoder plugin paths, and provides capability-limited adapters for Cursor, OpenCode, Gemini, Zed, GitHub Copilot, Antigravity, Qwen, and other harnesses."
+        ]
+      },
+      "interet": {
+        "texte": "The plan becomes a document to approve before the first line, TDD requires a failing test before implementation, and hooks add checks that no longer depend on the prompt. These hooks run shell commands on your machine: install ECC only from the official repository or the npm package ecc-universal, since unofficial copies may contain malware.",
+        "passages": [
+          "Plans become editable artifacts before implementation starts",
+          "TDD becomes a gated RED -> GREEN -> REFACTOR workflow with evidence",
+          "capture RED evidence before implementation",
+          "Hooks can enforce deterministic checks outside the prompt",
+          "Hooks can run shell commands",
+          "Install ECC only from verified channels: the GitHub repository github.com/affaan-m/ECC, the npm packages ecc-universal and ecc-agentshield",
+          "Third-party re-uploads and unofficial mirrors are not maintained or reviewed by the project and may contain malware."
+        ]
+      },
+      "exemple_usage": {
+        "texte": "For a new feature, depending on the repository: /ecc:plan with the request, plan approval, then tdd-workflow has a failing test written before implementing. Then comes a review in a fresh context and a check of the build, lint, types and tests.",
+        "passages": [
+          "/ecc:plan \"Add usage-based billing alerts\" -> confirm or edit the plan -> activate tdd-workflow -> capture RED evidence before implementation",
+          "implement until GREEN -> review from fresh context -> fix findings with regression tests -> verify build, lint, types, and tests"
+        ]
+      },
+      "demarrage": {
+        "etapes": [
+          {
+            "texte": "Run npx ecc-universal@2.2.3 setup (Node.js 18 or later required)",
+            "passages": [
+              "Claude Code plugin setup, updates, scope changes, and hook-profile changes: `bash npx ecc-universal@2.2.3 setup `",
+              "The universal package requires Node.js 18 or newer."
+            ]
+          },
+          {
+            "texte": "Choose the scope and hook profile; you can rerun to change them",
+            "passages": [
+              "For a typical personal setup, choose Global user, choose Standard hooks, and confirm.",
+              "Rerun the same command whenever you want to update ECC, change scope, or change its hook profile."
+            ]
+          }
+        ],
+        "commande": "npx ecc-universal@2.2.3 setup",
+        "passages": [
+          "This setup wizard currently configures the Claude Code plugin; use the multi-harness wizard below for Codex or Kimi Code.",
+          "A version pin is not a security audit or an integrity check."
+        ],
+        "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
+      },
+      "compatibilites": [
+        {
+          "texte": "Setup wizard for the Claude Code plugin: Git and Claude Code 2.1 or later required",
+          "passages": [
+            "This setup wizard currently configures the Claude Code plugin",
+            "requires Git and Claude Code 2.1 or newer on PATH."
+          ]
+        }
+      ],
+      "limites": [
+        {
+          "texte": "Hooks can run shell commands and MCP servers can hold credentials: treat them as executable code, and install only from official sources.",
+          "passages": [
+            "Hooks can run shell commands, MCP servers can hold credentials",
+            "Treat all three as executable configuration.",
+            "Install ECC only from verified channels"
+          ]
+        }
+      ],
+      "licence_locale": null,
+      "reperes": [
+        {
+          "texte": "Review by an agent in a fresh context",
+          "passages": [
+            "A fresh-context reviewer looks for regressions and blind spots"
+          ]
+        },
+        {
+          "texte": "AgentShield audits the agent's own setup",
+          "passages": [
+            "AgentShield scans the harness itself as an attack surface",
+            "these commands require an already installed, reviewed AgentShield binary from ecc-agentshield"
+          ]
+        },
+        {
+          "texte": "Sessions can become instincts and reusable skills",
+          "passages": [
+            "Sessions are distilled into summaries, instincts, and reusable skills"
+          ]
+        }
+      ],
+      "bouton": {
+        "libelle": "Voir le dépôt",
+        "url": "https://github.com/affaan-m/ECC",
+        "aria_label": "Voir le dépôt affaan-m/ECC sur GitHub (nouvel onglet)",
+        "verifie_le": "2026-11-03T07:15:22.376Z",
+        "motif": "capture_recente"
+      },
+      "etat_depot": {
+        "full_name": "affaan-m/ECC",
+        "html_url": "https://github.com/affaan-m/ECC",
+        "etoiles": 295309,
+        "etoiles_au": "2026-11-02T15:44:08.245Z",
+        "cree_le": "2026-01-18T00:51:51Z",
+        "dernier_push": "2026-11-02T04:56:08Z",
+        "jours_sans_push": 0,
+        "inactif": false,
+        "licence": "MIT",
+        "archive": false,
+        "fork": false,
+        "parent": null,
+        "date_ajout_skill": null
+      },
+      "visuel": {
+        "src": "medias/montages/ressources/ecc.jpg",
+        "alt": "ECC installs a working method into your coding agent, instead of restating it in every prompt. Étape 1 : Run npx ecc-universal@2.2.3 setup (Node.js 18 or later required). Étape 2 : Choose the scope and hook profile; you can rerun to change them",
+        "gabarit": "etapes",
+        "mention": "Illustration — ne prouve pas le fonctionnement"
+      },
+      "captures": [
+        {
+          "document": "depot",
+          "snapshot_id": 482,
+          "capture_le": "2026-11-02T15:44:08.245Z",
+          "url": "https://github.com/affaan-m/ECC",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:README.md",
+          "snapshot_id": 483,
+          "capture_le": "2026-11-02T15:44:08.245Z",
+          "url": "https://github.com/affaan-m/ECC/blob/main/README.md",
+          "mode": "live"
+        }
+      ],
+      "decouverte_via": "Ressource ajoutée par l'utilisateur le 2026-11-02, hors du fil X d'origine",
+      "importe_le": "2026-11-03T07:15:18.913Z"
+    },
+    {
+      "post_id": 1,
+      "revision_id": 192,
+      "slug": "frontend-design",
+      "nom": "frontend-design",
+      "compte": "repo",
+      "statut": "en_attente",
+      "etiquette": "pas encore publié",
+      "planning": {
+        "jour": "2026-11-05",
+        "rang": 1,
+        "etat": "prevue",
+        "utilise_reserve": false,
+        "motif": "reprogrammee_avant_p5"
       },
       "statut_sortie": "ressource_existante",
       "badge": "Ressource existante",
@@ -13031,8 +21676,8 @@ window.DONNEES_MAQUETTE = {
         "libelle": "Voir le dépôt",
         "url": "https://github.com/anthropics/skills/tree/main/skills/frontend-design",
         "aria_label": "Voir le dépôt anthropics/skills sur GitHub (nouvel onglet)",
-        "verifie_le": "2026-11-03T07:15:34.040Z",
-        "motif": "capture_recente"
+        "verifie_le": "2026-11-04T22:48:47.845Z",
+        "motif": "reponse_api"
       },
       "etat_depot": {
         "full_name": "anthropics/skills",
@@ -13100,22 +21745,22 @@ window.DONNEES_MAQUETTE = {
         }
       ],
       "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
-      "importe_le": "2026-11-03T07:15:31.762Z"
+      "importe_le": "2026-11-04T22:48:42.854Z"
     },
     {
       "post_id": 2,
-      "revision_id": 132,
+      "revision_id": 176,
       "slug": "agent-browser",
       "nom": "agent-browser",
-      "compte": "radar",
+      "compte": "repo",
       "statut": "en_attente",
       "etiquette": "pas encore publié",
       "planning": {
-        "jour": "2026-11-03",
-        "rang": 8,
+        "jour": "2026-11-05",
+        "rang": 2,
         "etat": "prevue",
         "utilise_reserve": false,
-        "motif": null
+        "motif": "reprogrammee_avant_p5"
       },
       "statut_sortie": "ressource_existante",
       "badge": "Ressource existante",
@@ -13210,8 +21855,8 @@ window.DONNEES_MAQUETTE = {
         "libelle": "Voir le dépôt",
         "url": "https://github.com/vercel-labs/agent-browser",
         "aria_label": "Voir le dépôt vercel-labs/agent-browser sur GitHub (nouvel onglet)",
-        "verifie_le": "2026-11-03T07:14:55.289Z",
-        "motif": "capture_recente"
+        "verifie_le": "2026-11-04T22:40:54.738Z",
+        "motif": "reponse_api"
       },
       "etat_depot": {
         "full_name": "vercel-labs/agent-browser",
@@ -13251,7 +21896,797 @@ window.DONNEES_MAQUETTE = {
         }
       ],
       "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
-      "importe_le": "2026-11-03T07:14:49.047Z"
+      "importe_le": "2026-11-04T22:40:49.499Z"
+    },
+    {
+      "post_id": 5,
+      "revision_id": 193,
+      "slug": "ui-ux-pro-max",
+      "nom": "UI UX Pro Max",
+      "compte": "repo",
+      "statut": "en_attente",
+      "etiquette": "pas encore publié",
+      "planning": {
+        "jour": "2026-11-05",
+        "rang": 3,
+        "etat": "prevue",
+        "utilise_reserve": false,
+        "motif": "reprogrammee_avant_p5"
+      },
+      "statut_sortie": "ressource_existante",
+      "badge": "Ressource existante",
+      "origine": {
+        "code": "claude_code_developpement",
+        "texte": "Rédigé pendant le développement par Claude Code, assistant de programmation, pas par l'agent du site ; vérifié par les contrôles du code"
+      },
+      "mention": "Analyse IA à partir des sources — non testé par la plateforme",
+      "accroche": {
+        "texte": "UI UX Pro Max gives your agent a design system tailored to your product before it codes the interface",
+        "passages": [
+          "Industry-specific design system generation",
+          "The skill activates automatically when you request UI/UX work."
+        ]
+      },
+      "description": {
+        "texte": "Ask for a landing page or a dashboard: the skill activates on its own, starts from your product type and outputs the page structure, style, colors, typography and effects. It draws on 79 styles, 192 product types, palettes and font pairs.",
+        "passages": [
+          "The skill activates automatically when you request UI/UX work.",
+          "Build a landing page for my SaaS product",
+          "Create a dashboard for healthcare analytics",
+          "Pattern + Style + Colors + Typography + Effects",
+          "Full access to 79 searchable UI styles (50 active), 192 product types, color palettes, and curated font pairings."
+        ]
+      },
+      "interet": {
+        "texte": "Each proposal comes with its anti-patterns and a pre-delivery checklist: no emoji as icons, cursor-pointer on every clickable element. Palettes follow the sector, and the purple-pink \"AI\" gradients are banned for a bank.",
+        "passages": [
+          "+ Anti-patterns to avoid + Pre-delivery checklist",
+          "No emojis as icons (use SVG: Heroicons/Lucide)",
+          "cursor-pointer on all clickable elements",
+          "Industry-specific palettes aligned 1:1 with the 192 product types",
+          "What NOT to do (e.g., \"AI purple/pink gradients\" for banking)"
+        ]
+      },
+      "exemple_usage": {
+        "texte": "In the repository example, a spa landing page gets a Soft UI Evolution style, pale pink and sage green accented with gold, Cormorant Garamond with Montserrat, no neon or abrupt animations.",
+        "passages": [
+          "Build a landing page for my beauty spa",
+          "STYLE: Soft UI Evolution",
+          "Primary: #E8B4B8 (Soft Pink)",
+          "Secondary: #A8D5BA (Sage Green)",
+          "Notes: Calming palette with gold accents for luxury feel",
+          "TYPOGRAPHY: Cormorant Garamond / Montserrat",
+          "Bright neon colors + Harsh animations + Dark mode + AI purple/pink gradients"
+        ]
+      },
+      "demarrage": {
+        "etapes": [
+          {
+            "texte": "In the project: npx ui-ux-pro-max-cli init --ai claude (or cursor, copilot)",
+            "passages": [
+              "skip the global install entirely:",
+              "cd /path/to/your/project uipro init --ai claude",
+              "uipro init --ai claude # Claude Code uipro init --ai cursor # Cursor",
+              "uipro init --ai copilot # GitHub Copilot"
+            ]
+          },
+          {
+            "texte": "Then ask for the interface you want, the skill takes over.",
+            "passages": [
+              "The skill activates automatically when you request UI/UX work.",
+              "Build a landing page for my SaaS product"
+            ]
+          }
+        ],
+        "commande": "npx ui-ux-pro-max-cli init --ai claude",
+        "passages": [
+          "Use a Node version manager (recommended), or skip the global install entirely:",
+          "Or use the CLI installer:"
+        ],
+        "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
+      },
+      "compatibilites": [
+        {
+          "texte": "About twenty agents depending on the repository, including Claude Code, Cursor, Windsurf, Codex CLI and GitHub Copilot.",
+          "passages": [
+            "Supported: Claude Code, Cursor, Windsurf, Antigravity, Codex CLI, Continue, Gemini CLI, OpenCode, Qoder, CodeBuddy, Droid (Factory), KiloCode, Warp, Augment, CodeWhale, ZCode, Kimi Code, Amazon Q Developer, OpenClaw, GitHub Copilot"
+          ]
+        }
+      ],
+      "limites": [
+        {
+          "texte": "The core is under MIT license; logos, banners and generated visuals are not, they fall under a separate Premium offer (uupm.cc).",
+          "passages": [
+            "This project is licensed under the MIT License.",
+            "Extended Brand Design Skills: Goes beyond UI/UX to include Brand Identity generation, Logo Design, Corporate Identity Programs (CIP), Banners, Presentation Slides, and custom Iconography.",
+            "Advanced Asset Creation: Deep integration with AI-powered image generation to create real visual assets, not just placeholders.",
+            "For more details on upgrading to the Premium tier, visit uupm.cc."
+          ]
+        }
+      ],
+      "licence_locale": null,
+      "reperes": [
+        {
+          "texte": "Rules per stack, from React and Vue to SwiftUI and Flutter",
+          "passages": [
+            "Tech Stacks - React, Next.js, Astro, Vue",
+            "SwiftUI, React Native, Flutter, HTML+Tailwind"
+          ]
+        },
+        {
+          "texte": "119 UX rules, accessibility included",
+          "passages": [
+            "119 UX Guidelines - Best practices, anti-patterns, accessibility rules"
+          ]
+        },
+        {
+          "texte": "Works with Claude Code, Cursor, Copilot and more",
+          "passages": [
+            "Supported: Claude Code, Cursor, Windsurf, Antigravity, Codex CLI, Continue, Gemini CLI, OpenCode, Qoder, CodeBuddy, Droid (Factory), KiloCode, Warp, Augment, CodeWhale, ZCode, Kimi Code, Amazon Q Developer, OpenClaw, GitHub Copilot"
+          ]
+        }
+      ],
+      "bouton": {
+        "libelle": "Voir le dépôt",
+        "url": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill",
+        "aria_label": "Voir le dépôt nextlevelbuilder/ui-ux-pro-max-skill sur GitHub (nouvel onglet)",
+        "verifie_le": "2026-11-04T22:48:48.162Z",
+        "motif": "reponse_api"
+      },
+      "etat_depot": {
+        "full_name": "nextlevelbuilder/ui-ux-pro-max-skill",
+        "html_url": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill",
+        "etoiles": 144059,
+        "etoiles_au": "2026-11-02T12:15:44.563Z",
+        "cree_le": "2025-11-30T11:36:31Z",
+        "dernier_push": "2026-11-01T07:04:29Z",
+        "jours_sans_push": 1,
+        "inactif": false,
+        "licence": "MIT",
+        "archive": false,
+        "fork": false,
+        "parent": null,
+        "date_ajout_skill": null
+      },
+      "visuel": {
+        "src": "medias/montages/ressources/ui-ux-pro-max.jpg",
+        "alt": "UI UX Pro Max gives your agent a design system tailored to your product before it codes the interface. Étape 1 : In the project: npx ui-ux-pro-max-cli init --ai claude (or cursor, copilot). Étape 2 : Then ask for the interface you want, the skill takes over.",
+        "gabarit": "etapes",
+        "mention": "Illustration — ne prouve pas le fonctionnement"
+      },
+      "captures": [
+        {
+          "document": "depot",
+          "snapshot_id": 443,
+          "capture_le": "2026-11-02T12:15:44.563Z",
+          "url": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:README.md",
+          "snapshot_id": 444,
+          "capture_le": "2026-11-02T12:15:44.563Z",
+          "url": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill/blob/main/README.md",
+          "mode": "live"
+        }
+      ],
+      "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
+      "importe_le": "2026-11-04T22:48:42.854Z"
+    },
+    {
+      "post_id": 3,
+      "revision_id": 177,
+      "slug": "react-best-practices",
+      "nom": "React Best Practices (Vercel)",
+      "compte": "repo",
+      "statut": "en_attente",
+      "etiquette": "pas encore publié",
+      "planning": {
+        "jour": "2026-11-05",
+        "rang": 4,
+        "etat": "prevue",
+        "utilise_reserve": false,
+        "motif": "reprogrammee_avant_p5"
+      },
+      "statut_sortie": "ressource_existante",
+      "badge": "Ressource existante",
+      "origine": {
+        "code": "claude_code_developpement",
+        "texte": "Rédigé pendant le développement par Claude Code, assistant de programmation, pas par l'agent du site ; vérifié par les contrôles du code"
+      },
+      "mention": "Analyse IA à partir des sources — non testé par la plateforme",
+      "accroche": {
+        "texte": "React Best Practices: Vercel's 70 React and Next.js performance rules, applied by your agent",
+        "passages": [
+          "React and Next.js performance optimization guidelines from Vercel Engineering.",
+          "Contains 70 rules across 8 categories, prioritized by impact to guide automated refactoring and code generation."
+        ]
+      },
+      "description": {
+        "texte": "Vercel Engineering condenses its React and Next.js performance rules there. The agent uses them whenever it writes, reviews or refactors a component, a Next.js page or data loading.",
+        "passages": [
+          "React and Next.js performance optimization guidelines from Vercel Engineering.",
+          "This skill should be used when writing, reviewing, or refactoring React/Next.js code to ensure optimal performance patterns.",
+          "Triggers on tasks involving React components, Next.js pages, data fetching, bundle optimization, or performance improvements."
+        ]
+      },
+      "interet": {
+        "texte": "The rules are ranked by impact: the agent tackles cascading requests and bundle weight first, before re-renders or JavaScript micro-optimizations.",
+        "passages": [
+          "prioritized by impact to guide automated refactoring and code generation.",
+          "Eliminating Waterfalls | CRITICAL | async-",
+          "Bundle Size Optimization | CRITICAL | bundle-",
+          "Re-render Optimization | MEDIUM | rerender-",
+          "JavaScript Performance | LOW-MEDIUM | js-"
+        ]
+      },
+      "exemple_usage": {
+        "texte": "A Next.js page chains two independent requests? Ask the agent to optimize it: the async-parallel rule runs them together with Promise.all().",
+        "passages": [
+          "Help me optimize this Next.js page",
+          "async-parallel - Use Promise.all() for independent operations"
+        ]
+      },
+      "demarrage": {
+        "etapes": [
+          {
+            "texte": "The command installs Vercel's entire collection, not just this skill: npx skills add vercel-labs/agent-skills",
+            "passages": [
+              "npx skills add vercel-labs/agent-skills"
+            ]
+          }
+        ],
+        "commande": "npx skills add vercel-labs/agent-skills",
+        "passages": [
+          "npx skills add vercel-labs/agent-skills",
+          "Skills are automatically available once installed."
+        ],
+        "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
+      },
+      "compatibilites": [],
+      "limites": [],
+      "licence_locale": {
+        "texte": "The skill's header declares the MIT license.",
+        "passages": [
+          "license: MIT metadata: author: vercel"
+        ]
+      },
+      "reperes": [
+        {
+          "texte": "For each rule, the faulty code and its fix",
+          "passages": [
+            "Incorrect code example with explanation",
+            "Correct code example with explanation"
+          ]
+        },
+        {
+          "texte": "Server side: React.cache(), LRU cache and after()",
+          "passages": [
+            "server-cache-react - Use React.cache() for per-request deduplication",
+            "server-cache-lru - Use LRU cache for cross-request caching",
+            "server-after-nonblocking - Use after() for non-blocking operations"
+          ]
+        },
+        {
+          "texte": "Client side: SWR and deduplicated event listeners",
+          "passages": [
+            "client-swr-dedup - Use SWR for automatic request deduplication",
+            "client-event-listeners - Deduplicate global event listeners"
+          ]
+        }
+      ],
+      "bouton": {
+        "libelle": "Voir le dépôt",
+        "url": "https://github.com/vercel-labs/agent-skills/tree/main/skills/react-best-practices",
+        "aria_label": "Voir le dépôt vercel-labs/agent-skills sur GitHub (nouvel onglet)",
+        "verifie_le": "2026-11-04T22:40:55.120Z",
+        "motif": "reponse_api"
+      },
+      "etat_depot": {
+        "full_name": "vercel-labs/agent-skills",
+        "html_url": "https://github.com/vercel-labs/agent-skills",
+        "etoiles": 33391,
+        "etoiles_au": "2026-11-02T12:15:40.327Z",
+        "cree_le": "2025-12-08T19:10:06Z",
+        "dernier_push": "2026-10-28T19:17:28Z",
+        "jours_sans_push": 4,
+        "inactif": false,
+        "licence": null,
+        "archive": false,
+        "fork": false,
+        "parent": null,
+        "date_ajout_skill": null
+      },
+      "visuel": {
+        "src": "medias/montages/ressources/react-best-practices.jpg",
+        "alt": "React Best Practices: Vercel's 70 React and Next.js performance rules, applied by your agent. npx skills add vercel-labs/agent-skills",
+        "gabarit": "terminal_annote",
+        "mention": "Illustration — ne prouve pas le fonctionnement"
+      },
+      "captures": [
+        {
+          "document": "depot",
+          "snapshot_id": 427,
+          "capture_le": "2026-11-02T12:15:40.327Z",
+          "url": "https://github.com/vercel-labs/agent-skills",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:skills/react-best-practices/SKILL.md",
+          "snapshot_id": 428,
+          "capture_le": "2026-11-02T12:15:40.327Z",
+          "url": "https://github.com/vercel-labs/agent-skills/blob/main/skills/react-best-practices/SKILL.md",
+          "mode": "live"
+        },
+        {
+          "document": "dossier:skills/react-best-practices",
+          "snapshot_id": 429,
+          "capture_le": "2026-11-02T12:15:40.327Z",
+          "url": "https://github.com/vercel-labs/agent-skills/tree/main/skills/react-best-practices",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:README.md",
+          "snapshot_id": 430,
+          "capture_le": "2026-11-02T12:15:40.327Z",
+          "url": "https://github.com/vercel-labs/agent-skills/blob/main/README.md",
+          "mode": "live"
+        }
+      ],
+      "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
+      "importe_le": "2026-11-04T22:40:49.499Z"
+    },
+    {
+      "post_id": 4,
+      "revision_id": 178,
+      "slug": "skills-documents",
+      "nom": "Skills de documents docx, xlsx, pptx, pdf",
+      "compte": "repo",
+      "statut": "en_attente",
+      "etiquette": "pas encore publié",
+      "planning": {
+        "jour": "2026-11-05",
+        "rang": 5,
+        "etat": "prevue",
+        "utilise_reserve": false,
+        "motif": "reprogrammee_avant_p5"
+      },
+      "statut_sortie": "ressource_existante",
+      "badge": "Ressource existante",
+      "origine": {
+        "code": "claude_code_developpement",
+        "texte": "Rédigé pendant le développement par Claude Code, assistant de programmation, pas par l'agent du site ; vérifié par les contrôles du code"
+      },
+      "mention": "Analyse IA à partir des sources — non testé par la plateforme",
+      "accroche": {
+        "texte": "Anthropic document skills: Claude creates and edits Word files, spreadsheets, slides and PDF files",
+        "passages": [
+          "This repository contains Anthropic's implementation of skills for Claude.",
+          "create, read, edit, or manipulate Word documents (.docx files)",
+          "Use this skill any time a spreadsheet file is the primary input or output.",
+          "creating slide decks, pitch decks, or presentations",
+          "Use this skill whenever the user wants to do anything with PDF files."
+        ]
+      },
+      "description": {
+        "texte": "The four skills that power Claude's document functions, one per format: docx, xlsx, pptx and pdf. Word report, spreadsheet with formulas, presentation, PDF form: Claude relies on them to deliver a clean file. According to Anthropic, a reference for complex skills used in production.",
+        "passages": [
+          "We've also included the document creation & editing skills that power Claude's document capabilities under the hood in the skills/docx, skills/pdf, skills/pptx, and skills/xlsx subfolders.",
+          "This repository contains Anthropic's implementation of skills for Claude.",
+          "If the user asks for a 'report', 'memo', 'letter', 'template', or similar deliverable as a Word or .docx file, use this skill.",
+          "adding columns, computing formulas, formatting, charting, cleaning messy data",
+          "creating slide decks, pitch decks, or presentations",
+          "If you need to fill out a PDF form, read FORMS.md and follow its instructions.",
+          "we wanted to share these with developers as a reference for more complex skills that are actively used in a production AI application"
+        ]
+      },
+      "interet": {
+        "texte": "Each skill picks its method based on the task, lists the known library pitfalls and requires checking the produced file. For a spreadsheet, LibreOffice recalculates all formulas, and nothing goes out while an error remains.",
+        "passages": [
+          "A .docx is a ZIP archive of XML files. Choose your approach by task:",
+          "The model knows the API; these are the footguns:",
+          "After writing a .docx, render it and look at it:",
+          "LibreOffice computes every formula, the file is rewritten in place",
+          "Never ship while recalc.py reports errors_found."
+        ]
+      },
+      "exemple_usage": {
+        "texte": "Once the document-skills plugin is installed, just ask Claude Code to use the PDF skill to extract a file's form fields.",
+        "passages": [
+          "if you install the document-skills plugin from the marketplace, you can ask Claude Code to do something like",
+          "Use the PDF skill to extract the form fields from path/to/some-file.pdf"
+        ]
+      },
+      "demarrage": {
+        "etapes": [
+          {
+            "texte": "Add the catalog: /plugin marketplace add anthropics/skills",
+            "passages": [
+              "You can register this repository as a Claude Code Plugin marketplace by running the following command in Claude Code",
+              "/plugin marketplace add anthropics/skills"
+            ]
+          },
+          {
+            "texte": "Install: /plugin install document-skills@anthropic-agent-skills",
+            "passages": [
+              "Alternatively, directly install either Plugin via:",
+              "/plugin install document-skills@anthropic-agent-skills"
+            ]
+          }
+        ],
+        "commande": "/plugin install document-skills@anthropic-agent-skills",
+        "passages": [
+          "/plugin install document-skills@anthropic-agent-skills",
+          "/plugin marketplace add anthropics/skills",
+          "After installing the plugin, you can use the skill by just mentioning it."
+        ],
+        "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
+      },
+      "compatibilites": [],
+      "limites": [
+        {
+          "texte": "Code viewable but not free: the license reserves these skills for Anthropic's services and forbids copying, modifying or redistributing them.",
+          "passages": [
+            "These are source-available, not open source",
+            "is governed by your agreement with Anthropic regarding use of Anthropic's services.",
+            "Extract these materials from the Services or retain copies of these materials outside the Services",
+            "Create derivative works based on these materials",
+            "Distribute, sublicense, or transfer these materials to any third party"
+          ]
+        }
+      ],
+      "licence_locale": {
+        "texte": "Not open source: each skill's LICENSE.txt states a proprietary Anthropic license.",
+        "passages": [
+          "license: Proprietary. LICENSE.txt has complete terms",
+          "© 2025 Anthropic, PBC. All rights reserved."
+        ]
+      },
+      "reperes": [
+        {
+          "texte": "Word: tracked changes, then a clean accepted copy",
+          "passages": [
+            "working with tracked changes or comments",
+            "To produce a clean copy with all tracked changes accepted:"
+          ]
+        },
+        {
+          "texte": "Presentations converted to images for review",
+          "passages": [
+            "Convert presentations to individual slide images for visual inspection:"
+          ]
+        },
+        {
+          "texte": "Finance: one assumption per cell, unless stated otherwise",
+          "passages": [
+            "Unless the user says otherwise, or the existing file already does something else.",
+            "every assumption in its own labeled cell, referenced by the formulas that use it"
+          ]
+        }
+      ],
+      "bouton": {
+        "libelle": "Voir le dépôt",
+        "url": "https://github.com/anthropics/skills",
+        "aria_label": "Voir le dépôt anthropics/skills sur GitHub (nouvel onglet)",
+        "verifie_le": "2026-11-04T22:40:55.385Z",
+        "motif": "reponse_api"
+      },
+      "etat_depot": {
+        "full_name": "anthropics/skills",
+        "html_url": "https://github.com/anthropics/skills",
+        "etoiles": 186700,
+        "etoiles_au": "2026-11-02T18:42:26.169Z",
+        "cree_le": "2025-09-22T15:53:31Z",
+        "dernier_push": "2026-10-28T19:20:39Z",
+        "jours_sans_push": 4,
+        "inactif": false,
+        "licence": null,
+        "archive": false,
+        "fork": false,
+        "parent": null,
+        "date_ajout_skill": null
+      },
+      "visuel": {
+        "src": "medias/montages/ressources/skills-documents.jpg",
+        "alt": "Anthropic document skills: Claude creates and edits Word files, spreadsheets, slides and PDF files. Étape 1 : Add the catalog: /plugin marketplace add anthropics/skills. Étape 2 : Install: /plugin install document-skills@anthropic-agent-skills",
+        "gabarit": "etapes",
+        "mention": "Illustration — ne prouve pas le fonctionnement"
+      },
+      "captures": [
+        {
+          "document": "depot",
+          "snapshot_id": 484,
+          "capture_le": "2026-11-02T18:42:26.169Z",
+          "url": "https://github.com/anthropics/skills",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:skills/docx/SKILL.md",
+          "snapshot_id": 431,
+          "capture_le": "2026-11-02T12:15:43.875Z",
+          "url": "https://github.com/anthropics/skills/blob/main/skills/docx/SKILL.md",
+          "mode": "live"
+        },
+        {
+          "document": "dossier:skills/docx",
+          "snapshot_id": 432,
+          "capture_le": "2026-11-02T12:15:43.875Z",
+          "url": "https://github.com/anthropics/skills/tree/main/skills/docx",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:skills/docx/LICENSE.txt",
+          "snapshot_id": 433,
+          "capture_le": "2026-11-02T12:15:43.875Z",
+          "url": "https://github.com/anthropics/skills/blob/main/skills/docx/LICENSE.txt",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:skills/xlsx/SKILL.md",
+          "snapshot_id": 434,
+          "capture_le": "2026-11-02T12:15:43.875Z",
+          "url": "https://github.com/anthropics/skills/blob/main/skills/xlsx/SKILL.md",
+          "mode": "live"
+        },
+        {
+          "document": "dossier:skills/xlsx",
+          "snapshot_id": 435,
+          "capture_le": "2026-11-02T12:15:43.875Z",
+          "url": "https://github.com/anthropics/skills/tree/main/skills/xlsx",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:skills/xlsx/LICENSE.txt",
+          "snapshot_id": 436,
+          "capture_le": "2026-11-02T12:15:43.875Z",
+          "url": "https://github.com/anthropics/skills/blob/main/skills/xlsx/LICENSE.txt",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:skills/pptx/SKILL.md",
+          "snapshot_id": 437,
+          "capture_le": "2026-11-02T12:15:43.875Z",
+          "url": "https://github.com/anthropics/skills/blob/main/skills/pptx/SKILL.md",
+          "mode": "live"
+        },
+        {
+          "document": "dossier:skills/pptx",
+          "snapshot_id": 438,
+          "capture_le": "2026-11-02T12:15:43.875Z",
+          "url": "https://github.com/anthropics/skills/tree/main/skills/pptx",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:skills/pptx/LICENSE.txt",
+          "snapshot_id": 439,
+          "capture_le": "2026-11-02T12:15:43.875Z",
+          "url": "https://github.com/anthropics/skills/blob/main/skills/pptx/LICENSE.txt",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:skills/pdf/SKILL.md",
+          "snapshot_id": 440,
+          "capture_le": "2026-11-02T12:15:43.875Z",
+          "url": "https://github.com/anthropics/skills/blob/main/skills/pdf/SKILL.md",
+          "mode": "live"
+        },
+        {
+          "document": "dossier:skills/pdf",
+          "snapshot_id": 441,
+          "capture_le": "2026-11-02T12:15:43.875Z",
+          "url": "https://github.com/anthropics/skills/tree/main/skills/pdf",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:skills/pdf/LICENSE.txt",
+          "snapshot_id": 442,
+          "capture_le": "2026-11-02T12:15:43.875Z",
+          "url": "https://github.com/anthropics/skills/blob/main/skills/pdf/LICENSE.txt",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:README.md",
+          "snapshot_id": 424,
+          "capture_le": "2026-11-02T12:15:38.384Z",
+          "url": "https://github.com/anthropics/skills/blob/main/README.md",
+          "mode": "live"
+        }
+      ],
+      "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
+      "importe_le": "2026-11-04T22:40:49.499Z"
+    },
+    {
+      "post_id": 6,
+      "revision_id": 179,
+      "slug": "webapp-testing",
+      "nom": "webapp-testing",
+      "compte": "repo",
+      "statut": "en_attente",
+      "etiquette": "pas encore publié",
+      "planning": {
+        "jour": "2026-11-05",
+        "rang": 6,
+        "etat": "prevue",
+        "utilise_reserve": false,
+        "motif": "reprogrammee_avant_p5"
+      },
+      "statut_sortie": "ressource_existante",
+      "badge": "Ressource existante",
+      "origine": {
+        "code": "claude_code_developpement",
+        "texte": "Rédigé pendant le développement par Claude Code, assistant de programmation, pas par l'agent du site ; vérifié par les contrôles du code"
+      },
+      "mention": "Analyse IA à partir des sources — non testé par la plateforme",
+      "accroche": {
+        "texte": "webapp-testing: Claude tests your local web app with Playwright",
+        "passages": [
+          "This repository contains Anthropic's implementation of skills for Claude",
+          "Toolkit for interacting with and testing local web applications using Playwright"
+        ]
+      },
+      "description": {
+        "texte": "Anthropic's skill writes Playwright scripts in Python to check the front end, debug the interface, take screenshots, and read browser logs.",
+        "passages": [
+          "This repository contains Anthropic's implementation of skills for Claude",
+          "To test local web applications, write native Python Playwright scripts.",
+          "Supports verifying frontend functionality, debugging UI behavior, capturing browser screenshots, and viewing browser logs."
+        ]
+      },
+      "interet": {
+        "texte": "A helper starts the app's servers, back end and front end included, then runs the test. Claude calls it as is, without loading its code into the context. On a dynamic app, it waits for loading to finish, observes the rendered page, and derives its selectors from it before acting.",
+        "passages": [
+          "scripts/with_server.py - Manages server lifecycle (supports multiple servers)",
+          "Multiple servers (e.g., backend + frontend)",
+          "They exist to be called directly as black-box scripts rather than ingested into your context window.",
+          "Navigate and wait for networkidle",
+          "Take screenshot or inspect DOM",
+          "Identify selectors from rendered state",
+          "Execute actions with discovered selectors"
+        ]
+      },
+      "exemple_usage": {
+        "texte": "Testing a form on an app with a back end and front end: the helper starts both servers, the page opens headless, the script waits for loading to finish, then inspects the DOM.",
+        "passages": [
+          "Multiple servers (e.g., backend + frontend)",
+          "Always launch chromium in headless mode",
+          "Navigate and wait for networkidle",
+          "Inspect rendered DOM"
+        ]
+      },
+      "demarrage": {
+        "etapes": [
+          {
+            "texte": "Add the catalog: /plugin marketplace add anthropics/skills",
+            "passages": [
+              "You can register this repository as a Claude Code Plugin marketplace by running the following command in Claude Code",
+              "/plugin marketplace add anthropics/skills"
+            ]
+          },
+          {
+            "texte": "Install example-skills: /plugin install example-skills@anthropic-agent-skills",
+            "passages": [
+              "/plugin install example-skills@anthropic-agent-skills",
+              "\"./skills/theme-factory\", \"./skills/web-artifacts-builder\", \"./skills/webapp-testing\""
+            ]
+          },
+          {
+            "texte": "Mention webapp-testing in the request",
+            "passages": [
+              "After installing the plugin, you can use the skill by just mentioning it."
+            ]
+          }
+        ],
+        "commande": "/plugin marketplace add anthropics/skills",
+        "passages": [
+          "/plugin marketplace add anthropics/skills",
+          "Then, to install a specific set of skills"
+        ],
+        "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
+      },
+      "compatibilites": [],
+      "limites": [],
+      "licence_locale": {
+        "texte": "Apache 2.0: this skill has its own license, in the LICENSE.txt file in its folder",
+        "passages": [
+          "Apache License Version 2.0, January 2004",
+          "license: Complete terms in LICENSE.txt"
+        ]
+      },
+      "reperes": [
+        {
+          "texte": "Example provided to list buttons, links, and fields",
+          "passages": [
+            "element_discovery.py - Discovering buttons, links, and inputs on a page"
+          ]
+        },
+        {
+          "texte": "Static HTML pages read without a server",
+          "passages": [
+            "Read HTML file directly to identify selectors",
+            "static_html_automation.py - Using file:// URLs for local HTML"
+          ]
+        },
+        {
+          "texte": "Selectors by text, role, CSS, or ID",
+          "passages": [
+            "Use descriptive selectors: text=, role=, CSS selectors, or IDs"
+          ]
+        }
+      ],
+      "bouton": {
+        "libelle": "Voir le dépôt",
+        "url": "https://github.com/anthropics/skills/tree/main/skills/webapp-testing",
+        "aria_label": "Voir le dépôt anthropics/skills sur GitHub (nouvel onglet)",
+        "verifie_le": "2026-11-04T22:40:55.709Z",
+        "motif": "reponse_api"
+      },
+      "etat_depot": {
+        "full_name": "anthropics/skills",
+        "html_url": "https://github.com/anthropics/skills",
+        "etoiles": 186700,
+        "etoiles_au": "2026-11-02T18:42:26.169Z",
+        "cree_le": "2025-09-22T15:53:31Z",
+        "dernier_push": "2026-10-28T19:20:39Z",
+        "jours_sans_push": 4,
+        "inactif": false,
+        "licence": null,
+        "archive": false,
+        "fork": false,
+        "parent": null,
+        "date_ajout_skill": null
+      },
+      "visuel": {
+        "src": "medias/montages/ressources/webapp-testing.jpg",
+        "alt": "webapp-testing: Claude tests your local web app with Playwright. Étape 1 : Add the catalog: /plugin marketplace add anthropics/skills. Étape 2 : Install example-skills: /plugin install example-skills@anthropic-agent-skills. Étape 3 : Mention webapp-testing in the request",
+        "gabarit": "etapes",
+        "mention": "Illustration — ne prouve pas le fonctionnement"
+      },
+      "captures": [
+        {
+          "document": "depot",
+          "snapshot_id": 484,
+          "capture_le": "2026-11-02T18:42:26.169Z",
+          "url": "https://github.com/anthropics/skills",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:skills/webapp-testing/SKILL.md",
+          "snapshot_id": 445,
+          "capture_le": "2026-11-02T12:15:45.443Z",
+          "url": "https://github.com/anthropics/skills/blob/main/skills/webapp-testing/SKILL.md",
+          "mode": "live"
+        },
+        {
+          "document": "dossier:skills/webapp-testing",
+          "snapshot_id": 446,
+          "capture_le": "2026-11-02T12:15:45.443Z",
+          "url": "https://github.com/anthropics/skills/tree/main/skills/webapp-testing",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:skills/webapp-testing/LICENSE.txt",
+          "snapshot_id": 447,
+          "capture_le": "2026-11-02T12:15:45.443Z",
+          "url": "https://github.com/anthropics/skills/blob/main/skills/webapp-testing/LICENSE.txt",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:README.md",
+          "snapshot_id": 424,
+          "capture_le": "2026-11-02T12:15:38.384Z",
+          "url": "https://github.com/anthropics/skills/blob/main/README.md",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:.claude-plugin/marketplace.json",
+          "snapshot_id": 485,
+          "capture_le": "2026-11-02T18:42:26.169Z",
+          "url": "https://github.com/anthropics/skills/blob/main/.claude-plugin/marketplace.json",
+          "mode": "live"
+        }
+      ],
+      "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
+      "importe_le": "2026-11-04T22:40:49.499Z"
     },
     {
       "post_id": 7,
@@ -13262,11 +22697,11 @@ window.DONNEES_MAQUETTE = {
       "statut": "en_attente",
       "etiquette": "pas encore publié",
       "planning": {
-        "jour": "2026-11-03",
-        "rang": 9,
+        "jour": "2026-11-05",
+        "rang": 7,
         "etat": "prevue",
         "utilise_reserve": false,
-        "motif": null
+        "motif": "reprogrammee_avant_p5"
       },
       "statut_sortie": "ressource_existante",
       "badge": "Ressource existante",
@@ -13455,18 +22890,18 @@ window.DONNEES_MAQUETTE = {
     },
     {
       "post_id": 8,
-      "revision_id": 152,
+      "revision_id": 180,
       "slug": "obsidian-skills",
       "nom": "Obsidian Skills",
-      "compte": "nodi",
+      "compte": "repo",
       "statut": "en_attente",
       "etiquette": "pas encore publié",
       "planning": {
-        "jour": "2026-11-03",
-        "rang": 10,
+        "jour": "2026-11-05",
+        "rang": 8,
         "etat": "prevue",
         "utilise_reserve": false,
-        "motif": null
+        "motif": "reprogrammee_avant_p5"
       },
       "statut_sortie": "ressource_existante",
       "badge": "Ressource existante",
@@ -13574,8 +23009,8 @@ window.DONNEES_MAQUETTE = {
         "libelle": "Voir le dépôt",
         "url": "https://github.com/kepano/obsidian-skills",
         "aria_label": "Voir le dépôt kepano/obsidian-skills sur GitHub (nouvel onglet)",
-        "verifie_le": "2026-11-03T07:15:22.341Z",
-        "motif": "capture_recente"
+        "verifie_le": "2026-11-04T22:40:55.994Z",
+        "motif": "reponse_api"
       },
       "etat_depot": {
         "full_name": "kepano/obsidian-skills",
@@ -13615,594 +23050,7 @@ window.DONNEES_MAQUETTE = {
         }
       ],
       "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
-      "importe_le": "2026-11-03T07:15:18.913Z"
-    },
-    {
-      "post_id": 11,
-      "revision_id": 130,
-      "slug": "superpowers",
-      "nom": "Superpowers",
-      "compte": "pyxo",
-      "statut": "en_attente",
-      "etiquette": "pas encore publié",
-      "planning": {
-        "jour": "2026-11-03",
-        "rang": 11,
-        "etat": "prevue",
-        "utilise_reserve": false,
-        "motif": null
-      },
-      "statut_sortie": "ressource_existante",
-      "badge": "Ressource existante",
-      "origine": {
-        "code": "claude_code_developpement",
-        "texte": "Rédigé pendant le développement par Claude Code, assistant de programmation, pas par l'agent du site ; vérifié par les contrôles du code"
-      },
-      "mention": "Analyse IA à partir des sources — non testé par la plateforme",
-      "accroche": {
-        "texte": "Superpowers makes your coding agent scope, plan, test, and review before it delivers",
-        "passages": [
-          "Superpowers is a complete software development methodology for your coding agents",
-          "Enforces RED-GREEN-REFACTOR: write failing test, watch it fail",
-          "Critical issues block progress.",
-          "brainstorming - Activates before building anything.",
-          "writing-plans - Activates with approved design.",
-          "test-driven-development - Activates during implementation.",
-          "requesting-code-review - Activates between tasks.",
-          "finishing-a-development-branch - Activates when tasks complete."
-        ]
-      },
-      "description": {
-        "texte": "Superpowers imposes a real method on your coding agent. It doesn't rush into the code: it asks what you're trying to do, shows you the spec in readable chunks, then builds an implementation plan once the design is approved. Skills trigger on their own, with no command to type.",
-        "passages": [
-          "Superpowers is a complete software development methodology for your coding agents, built on top of a set of composable skills and some initial instructions that make sure your agent uses them.",
-          "it doesn't just jump into trying to write code. Instead, it steps back and asks you what you're really trying to do.",
-          "Once it's teased a spec out of the conversation, it shows it to you in chunks short enough to actually read and digest.",
-          "After you've signed off on the design, your agent puts together an implementation plan",
-          "because the skills trigger automatically, you don't need to do anything special"
-        ]
-      },
-      "interet": {
-        "texte": "The plan splits the work into 2- to 5-minute tasks, with files, code, and checks. TDD is strict: code written before its test is deleted. Between tasks, a review ranks issues by severity, and a critical issue blocks the next step. According to the author, the agent can thus run autonomously for a few hours without straying from the plan.",
-        "passages": [
-          "Breaks work into bite-sized tasks (2-5 minutes each). Every task has exact file paths, complete code, verification steps.",
-          "Enforces RED-GREEN-REFACTOR: write failing test, watch it fail, write minimal code, watch it pass, commit.",
-          "It emphasizes true red/green TDD, YAGNI (You Aren't Gonna Need It), and DRY.",
-          "Deletes code written before tests.",
-          "Reviews against plan, reports issues by severity. Critical issues block progress.",
-          "It's not uncommon for your agent to work autonomously for a couple hours at a time without deviating from the plan you put together."
-        ]
-      },
-      "exemple_usage": {
-        "texte": "For a new feature: brainstorming pins down the request, writing-plans breaks it into small tasks, then implementation starts with a failing test, before the minimal code.",
-        "passages": [
-          "Draws out what you actually want, and why, through questions that get you describing it",
-          "writing-plans - Activates with approved design. Breaks work into bite-sized tasks",
-          "Enforces RED-GREEN-REFACTOR: write failing test, watch it fail, write minimal code, watch it pass, commit."
-        ]
-      },
-      "demarrage": {
-        "etapes": [
-          {
-            "texte": "In Claude Code: /plugin install superpowers@claude-plugins-official",
-            "passages": [
-              "Getting Started Claude Code",
-              "Install the plugin from Anthropic's official marketplace",
-              "/plugin install superpowers@claude-plugins-official"
-            ]
-          },
-          {
-            "texte": "Other agents: a separate install for each, depending on the repository",
-            "passages": [
-              "Installation differs by harness. If you use more than one, install Superpowers separately for each one."
-            ]
-          }
-        ],
-        "commande": "/plugin install superpowers@claude-plugins-official",
-        "passages": [
-          "Installation differs by harness. If you use more than one, install Superpowers separately for each one.",
-          "Install the plugin from Anthropic's official marketplace"
-        ],
-        "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
-      },
-      "compatibilites": [
-        {
-          "texte": "Claude Code, Codex, Cursor, Gemini CLI, GitHub Copilot CLI and about ten others.",
-          "passages": [
-            "Claude Code Antigravity Codex App Codex CLI Cursor Devin CLI Factory Droid Gemini CLI GitHub Copilot CLI Grok Build CLI Kimi Code OpenCode Pi Qwen Code Hermes Agent Muse"
-          ]
-        }
-      ],
-      "limites": [],
-      "licence_locale": null,
-      "reperes": [
-        {
-          "texte": "A fresh sub-agent per task, reviewed every time",
-          "passages": [
-            "dispatches a fresh subagent per task with a review after each"
-          ]
-        },
-        {
-          "texte": "4-phase debugging to trace back to the root cause",
-          "passages": [
-            "systematic-debugging - 4-phase root cause process"
-          ]
-        },
-        {
-          "texte": "Each project isolated on its own branch",
-          "passages": [
-            "using-git-worktrees - Activates after design approval. Creates isolated workspace on new branch"
-          ]
-        }
-      ],
-      "bouton": {
-        "libelle": "Voir le dépôt",
-        "url": "https://github.com/obra/superpowers",
-        "aria_label": "Voir le dépôt obra/superpowers sur GitHub (nouvel onglet)",
-        "verifie_le": "2026-11-03T07:11:54.821Z",
-        "motif": "capture_recente"
-      },
-      "etat_depot": {
-        "full_name": "obra/superpowers",
-        "html_url": "https://github.com/obra/superpowers",
-        "etoiles": 310943,
-        "etoiles_au": "2026-11-02T12:15:49.227Z",
-        "cree_le": "2025-10-09T19:45:18Z",
-        "dernier_push": "2026-10-29T23:35:34Z",
-        "jours_sans_push": 3,
-        "inactif": false,
-        "licence": "MIT",
-        "archive": false,
-        "fork": false,
-        "parent": null,
-        "date_ajout_skill": null
-      },
-      "visuel": {
-        "src": "medias/montages/ressources/superpowers.jpg",
-        "alt": "Superpowers makes your coding agent scope, plan, test, and review before it delivers. Étape 1 : In Claude Code: /plugin install superpowers@claude-plugins-official. Étape 2 : Other agents: a separate install for each, depending on the repository",
-        "gabarit": "etapes",
-        "mention": "Illustration — ne prouve pas le fonctionnement"
-      },
-      "captures": [
-        {
-          "document": "depot",
-          "snapshot_id": 457,
-          "capture_le": "2026-11-02T12:15:49.227Z",
-          "url": "https://github.com/obra/superpowers",
-          "mode": "live"
-        },
-        {
-          "document": "fichier:README.md",
-          "snapshot_id": 458,
-          "capture_le": "2026-11-02T12:15:49.227Z",
-          "url": "https://github.com/obra/superpowers/blob/main/README.md",
-          "mode": "live"
-        }
-      ],
-      "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
-      "importe_le": "2026-11-03T07:11:53.355Z"
-    },
-    {
-      "post_id": 3,
-      "revision_id": 135,
-      "slug": "react-best-practices",
-      "nom": "React Best Practices (Vercel)",
-      "compte": "mova",
-      "statut": "en_attente",
-      "etiquette": "pas encore publié",
-      "planning": {
-        "jour": "2026-11-03",
-        "rang": 12,
-        "etat": "prevue",
-        "utilise_reserve": false,
-        "motif": null
-      },
-      "statut_sortie": "ressource_existante",
-      "badge": "Ressource existante",
-      "origine": {
-        "code": "claude_code_developpement",
-        "texte": "Rédigé pendant le développement par Claude Code, assistant de programmation, pas par l'agent du site ; vérifié par les contrôles du code"
-      },
-      "mention": "Analyse IA à partir des sources — non testé par la plateforme",
-      "accroche": {
-        "texte": "React Best Practices: Vercel's 70 React and Next.js performance rules, applied by your agent",
-        "passages": [
-          "React and Next.js performance optimization guidelines from Vercel Engineering.",
-          "Contains 70 rules across 8 categories, prioritized by impact to guide automated refactoring and code generation."
-        ]
-      },
-      "description": {
-        "texte": "Vercel Engineering condenses its React and Next.js performance rules there. The agent uses them whenever it writes, reviews or refactors a component, a Next.js page or data loading.",
-        "passages": [
-          "React and Next.js performance optimization guidelines from Vercel Engineering.",
-          "This skill should be used when writing, reviewing, or refactoring React/Next.js code to ensure optimal performance patterns.",
-          "Triggers on tasks involving React components, Next.js pages, data fetching, bundle optimization, or performance improvements."
-        ]
-      },
-      "interet": {
-        "texte": "The rules are ranked by impact: the agent tackles cascading requests and bundle weight first, before re-renders or JavaScript micro-optimizations.",
-        "passages": [
-          "prioritized by impact to guide automated refactoring and code generation.",
-          "Eliminating Waterfalls | CRITICAL | async-",
-          "Bundle Size Optimization | CRITICAL | bundle-",
-          "Re-render Optimization | MEDIUM | rerender-",
-          "JavaScript Performance | LOW-MEDIUM | js-"
-        ]
-      },
-      "exemple_usage": {
-        "texte": "A Next.js page chains two independent requests? Ask the agent to optimize it: the async-parallel rule runs them together with Promise.all().",
-        "passages": [
-          "Help me optimize this Next.js page",
-          "async-parallel - Use Promise.all() for independent operations"
-        ]
-      },
-      "demarrage": {
-        "etapes": [
-          {
-            "texte": "The command installs Vercel's entire collection, not just this skill: npx skills add vercel-labs/agent-skills",
-            "passages": [
-              "npx skills add vercel-labs/agent-skills"
-            ]
-          }
-        ],
-        "commande": "npx skills add vercel-labs/agent-skills",
-        "passages": [
-          "npx skills add vercel-labs/agent-skills",
-          "Skills are automatically available once installed."
-        ],
-        "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
-      },
-      "compatibilites": [],
-      "limites": [],
-      "licence_locale": {
-        "texte": "The skill's header declares the MIT license.",
-        "passages": [
-          "license: MIT metadata: author: vercel"
-        ]
-      },
-      "reperes": [
-        {
-          "texte": "For each rule, the faulty code and its fix",
-          "passages": [
-            "Incorrect code example with explanation",
-            "Correct code example with explanation"
-          ]
-        },
-        {
-          "texte": "Server side: React.cache(), LRU cache and after()",
-          "passages": [
-            "server-cache-react - Use React.cache() for per-request deduplication",
-            "server-cache-lru - Use LRU cache for cross-request caching",
-            "server-after-nonblocking - Use after() for non-blocking operations"
-          ]
-        },
-        {
-          "texte": "Client side: SWR and deduplicated event listeners",
-          "passages": [
-            "client-swr-dedup - Use SWR for automatic request deduplication",
-            "client-event-listeners - Deduplicate global event listeners"
-          ]
-        }
-      ],
-      "bouton": {
-        "libelle": "Voir le dépôt",
-        "url": "https://github.com/vercel-labs/agent-skills/tree/main/skills/react-best-practices",
-        "aria_label": "Voir le dépôt vercel-labs/agent-skills sur GitHub (nouvel onglet)",
-        "verifie_le": "2026-11-03T07:14:55.308Z",
-        "motif": "capture_recente"
-      },
-      "etat_depot": {
-        "full_name": "vercel-labs/agent-skills",
-        "html_url": "https://github.com/vercel-labs/agent-skills",
-        "etoiles": 33391,
-        "etoiles_au": "2026-11-02T12:15:40.327Z",
-        "cree_le": "2025-12-08T19:10:06Z",
-        "dernier_push": "2026-10-28T19:17:28Z",
-        "jours_sans_push": 4,
-        "inactif": false,
-        "licence": null,
-        "archive": false,
-        "fork": false,
-        "parent": null,
-        "date_ajout_skill": null
-      },
-      "visuel": {
-        "src": "medias/montages/ressources/react-best-practices.jpg",
-        "alt": "React Best Practices: Vercel's 70 React and Next.js performance rules, applied by your agent. npx skills add vercel-labs/agent-skills",
-        "gabarit": "terminal_annote",
-        "mention": "Illustration — ne prouve pas le fonctionnement"
-      },
-      "captures": [
-        {
-          "document": "depot",
-          "snapshot_id": 427,
-          "capture_le": "2026-11-02T12:15:40.327Z",
-          "url": "https://github.com/vercel-labs/agent-skills",
-          "mode": "live"
-        },
-        {
-          "document": "fichier:skills/react-best-practices/SKILL.md",
-          "snapshot_id": 428,
-          "capture_le": "2026-11-02T12:15:40.327Z",
-          "url": "https://github.com/vercel-labs/agent-skills/blob/main/skills/react-best-practices/SKILL.md",
-          "mode": "live"
-        },
-        {
-          "document": "dossier:skills/react-best-practices",
-          "snapshot_id": 429,
-          "capture_le": "2026-11-02T12:15:40.327Z",
-          "url": "https://github.com/vercel-labs/agent-skills/tree/main/skills/react-best-practices",
-          "mode": "live"
-        },
-        {
-          "document": "fichier:README.md",
-          "snapshot_id": 430,
-          "capture_le": "2026-11-02T12:15:40.327Z",
-          "url": "https://github.com/vercel-labs/agent-skills/blob/main/README.md",
-          "mode": "live"
-        }
-      ],
-      "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
-      "importe_le": "2026-11-03T07:14:49.047Z"
-    },
-    {
-      "post_id": 4,
-      "revision_id": 153,
-      "slug": "skills-documents",
-      "nom": "Skills de documents docx, xlsx, pptx, pdf",
-      "compte": "radar",
-      "statut": "en_attente",
-      "etiquette": "pas encore publié",
-      "planning": {
-        "jour": "2026-11-03",
-        "rang": 13,
-        "etat": "prevue",
-        "utilise_reserve": false,
-        "motif": null
-      },
-      "statut_sortie": "ressource_existante",
-      "badge": "Ressource existante",
-      "origine": {
-        "code": "claude_code_developpement",
-        "texte": "Rédigé pendant le développement par Claude Code, assistant de programmation, pas par l'agent du site ; vérifié par les contrôles du code"
-      },
-      "mention": "Analyse IA à partir des sources — non testé par la plateforme",
-      "accroche": {
-        "texte": "Anthropic document skills: Claude creates and edits Word files, spreadsheets, slides and PDF files",
-        "passages": [
-          "This repository contains Anthropic's implementation of skills for Claude.",
-          "create, read, edit, or manipulate Word documents (.docx files)",
-          "Use this skill any time a spreadsheet file is the primary input or output.",
-          "creating slide decks, pitch decks, or presentations",
-          "Use this skill whenever the user wants to do anything with PDF files."
-        ]
-      },
-      "description": {
-        "texte": "The four skills that power Claude's document functions, one per format: docx, xlsx, pptx and pdf. Word report, spreadsheet with formulas, presentation, PDF form: Claude relies on them to deliver a clean file. According to Anthropic, a reference for complex skills used in production.",
-        "passages": [
-          "We've also included the document creation & editing skills that power Claude's document capabilities under the hood in the skills/docx, skills/pdf, skills/pptx, and skills/xlsx subfolders.",
-          "This repository contains Anthropic's implementation of skills for Claude.",
-          "If the user asks for a 'report', 'memo', 'letter', 'template', or similar deliverable as a Word or .docx file, use this skill.",
-          "adding columns, computing formulas, formatting, charting, cleaning messy data",
-          "creating slide decks, pitch decks, or presentations",
-          "If you need to fill out a PDF form, read FORMS.md and follow its instructions.",
-          "we wanted to share these with developers as a reference for more complex skills that are actively used in a production AI application"
-        ]
-      },
-      "interet": {
-        "texte": "Each skill picks its method based on the task, lists the known library pitfalls and requires checking the produced file. For a spreadsheet, LibreOffice recalculates all formulas, and nothing goes out while an error remains.",
-        "passages": [
-          "A .docx is a ZIP archive of XML files. Choose your approach by task:",
-          "The model knows the API; these are the footguns:",
-          "After writing a .docx, render it and look at it:",
-          "LibreOffice computes every formula, the file is rewritten in place",
-          "Never ship while recalc.py reports errors_found."
-        ]
-      },
-      "exemple_usage": {
-        "texte": "Once the document-skills plugin is installed, just ask Claude Code to use the PDF skill to extract a file's form fields.",
-        "passages": [
-          "if you install the document-skills plugin from the marketplace, you can ask Claude Code to do something like",
-          "Use the PDF skill to extract the form fields from path/to/some-file.pdf"
-        ]
-      },
-      "demarrage": {
-        "etapes": [
-          {
-            "texte": "Add the catalog: /plugin marketplace add anthropics/skills",
-            "passages": [
-              "You can register this repository as a Claude Code Plugin marketplace by running the following command in Claude Code",
-              "/plugin marketplace add anthropics/skills"
-            ]
-          },
-          {
-            "texte": "Install: /plugin install document-skills@anthropic-agent-skills",
-            "passages": [
-              "Alternatively, directly install either Plugin via:",
-              "/plugin install document-skills@anthropic-agent-skills"
-            ]
-          }
-        ],
-        "commande": "/plugin install document-skills@anthropic-agent-skills",
-        "passages": [
-          "/plugin install document-skills@anthropic-agent-skills",
-          "/plugin marketplace add anthropics/skills",
-          "After installing the plugin, you can use the skill by just mentioning it."
-        ],
-        "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
-      },
-      "compatibilites": [],
-      "limites": [
-        {
-          "texte": "Code viewable but not free: the license reserves these skills for Anthropic's services and forbids copying, modifying or redistributing them.",
-          "passages": [
-            "These are source-available, not open source",
-            "is governed by your agreement with Anthropic regarding use of Anthropic's services.",
-            "Extract these materials from the Services or retain copies of these materials outside the Services",
-            "Create derivative works based on these materials",
-            "Distribute, sublicense, or transfer these materials to any third party"
-          ]
-        }
-      ],
-      "licence_locale": {
-        "texte": "Not open source: each skill's LICENSE.txt states a proprietary Anthropic license.",
-        "passages": [
-          "license: Proprietary. LICENSE.txt has complete terms",
-          "© 2025 Anthropic, PBC. All rights reserved."
-        ]
-      },
-      "reperes": [
-        {
-          "texte": "Word: tracked changes, then a clean accepted copy",
-          "passages": [
-            "working with tracked changes or comments",
-            "To produce a clean copy with all tracked changes accepted:"
-          ]
-        },
-        {
-          "texte": "Presentations converted to images for review",
-          "passages": [
-            "Convert presentations to individual slide images for visual inspection:"
-          ]
-        },
-        {
-          "texte": "Finance: one assumption per cell, unless stated otherwise",
-          "passages": [
-            "Unless the user says otherwise, or the existing file already does something else.",
-            "every assumption in its own labeled cell, referenced by the formulas that use it"
-          ]
-        }
-      ],
-      "bouton": {
-        "libelle": "Voir le dépôt",
-        "url": "https://github.com/anthropics/skills",
-        "aria_label": "Voir le dépôt anthropics/skills sur GitHub (nouvel onglet)",
-        "verifie_le": "2026-11-03T07:15:22.350Z",
-        "motif": "capture_recente"
-      },
-      "etat_depot": {
-        "full_name": "anthropics/skills",
-        "html_url": "https://github.com/anthropics/skills",
-        "etoiles": 186700,
-        "etoiles_au": "2026-11-02T18:42:26.169Z",
-        "cree_le": "2025-09-22T15:53:31Z",
-        "dernier_push": "2026-10-28T19:20:39Z",
-        "jours_sans_push": 4,
-        "inactif": false,
-        "licence": null,
-        "archive": false,
-        "fork": false,
-        "parent": null,
-        "date_ajout_skill": null
-      },
-      "visuel": {
-        "src": "medias/montages/ressources/skills-documents.jpg",
-        "alt": "Anthropic document skills: Claude creates and edits Word files, spreadsheets, slides and PDF files. Étape 1 : Add the catalog: /plugin marketplace add anthropics/skills. Étape 2 : Install: /plugin install document-skills@anthropic-agent-skills",
-        "gabarit": "etapes",
-        "mention": "Illustration — ne prouve pas le fonctionnement"
-      },
-      "captures": [
-        {
-          "document": "depot",
-          "snapshot_id": 484,
-          "capture_le": "2026-11-02T18:42:26.169Z",
-          "url": "https://github.com/anthropics/skills",
-          "mode": "live"
-        },
-        {
-          "document": "fichier:skills/docx/SKILL.md",
-          "snapshot_id": 431,
-          "capture_le": "2026-11-02T12:15:43.875Z",
-          "url": "https://github.com/anthropics/skills/blob/main/skills/docx/SKILL.md",
-          "mode": "live"
-        },
-        {
-          "document": "dossier:skills/docx",
-          "snapshot_id": 432,
-          "capture_le": "2026-11-02T12:15:43.875Z",
-          "url": "https://github.com/anthropics/skills/tree/main/skills/docx",
-          "mode": "live"
-        },
-        {
-          "document": "fichier:skills/docx/LICENSE.txt",
-          "snapshot_id": 433,
-          "capture_le": "2026-11-02T12:15:43.875Z",
-          "url": "https://github.com/anthropics/skills/blob/main/skills/docx/LICENSE.txt",
-          "mode": "live"
-        },
-        {
-          "document": "fichier:skills/xlsx/SKILL.md",
-          "snapshot_id": 434,
-          "capture_le": "2026-11-02T12:15:43.875Z",
-          "url": "https://github.com/anthropics/skills/blob/main/skills/xlsx/SKILL.md",
-          "mode": "live"
-        },
-        {
-          "document": "dossier:skills/xlsx",
-          "snapshot_id": 435,
-          "capture_le": "2026-11-02T12:15:43.875Z",
-          "url": "https://github.com/anthropics/skills/tree/main/skills/xlsx",
-          "mode": "live"
-        },
-        {
-          "document": "fichier:skills/xlsx/LICENSE.txt",
-          "snapshot_id": 436,
-          "capture_le": "2026-11-02T12:15:43.875Z",
-          "url": "https://github.com/anthropics/skills/blob/main/skills/xlsx/LICENSE.txt",
-          "mode": "live"
-        },
-        {
-          "document": "fichier:skills/pptx/SKILL.md",
-          "snapshot_id": 437,
-          "capture_le": "2026-11-02T12:15:43.875Z",
-          "url": "https://github.com/anthropics/skills/blob/main/skills/pptx/SKILL.md",
-          "mode": "live"
-        },
-        {
-          "document": "dossier:skills/pptx",
-          "snapshot_id": 438,
-          "capture_le": "2026-11-02T12:15:43.875Z",
-          "url": "https://github.com/anthropics/skills/tree/main/skills/pptx",
-          "mode": "live"
-        },
-        {
-          "document": "fichier:skills/pptx/LICENSE.txt",
-          "snapshot_id": 439,
-          "capture_le": "2026-11-02T12:15:43.875Z",
-          "url": "https://github.com/anthropics/skills/blob/main/skills/pptx/LICENSE.txt",
-          "mode": "live"
-        },
-        {
-          "document": "fichier:skills/pdf/SKILL.md",
-          "snapshot_id": 440,
-          "capture_le": "2026-11-02T12:15:43.875Z",
-          "url": "https://github.com/anthropics/skills/blob/main/skills/pdf/SKILL.md",
-          "mode": "live"
-        },
-        {
-          "document": "dossier:skills/pdf",
-          "snapshot_id": 441,
-          "capture_le": "2026-11-02T12:15:43.875Z",
-          "url": "https://github.com/anthropics/skills/tree/main/skills/pdf",
-          "mode": "live"
-        },
-        {
-          "document": "fichier:skills/pdf/LICENSE.txt",
-          "snapshot_id": 442,
-          "capture_le": "2026-11-02T12:15:43.875Z",
-          "url": "https://github.com/anthropics/skills/blob/main/skills/pdf/LICENSE.txt",
-          "mode": "live"
-        },
-        {
-          "document": "fichier:README.md",
-          "snapshot_id": 424,
-          "capture_le": "2026-11-02T12:15:38.384Z",
-          "url": "https://github.com/anthropics/skills/blob/main/README.md",
-          "mode": "live"
-        }
-      ],
-      "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
-      "importe_le": "2026-11-03T07:15:18.913Z"
+      "importe_le": "2026-11-04T22:40:49.499Z"
     },
     {
       "post_id": 10,
@@ -14213,11 +23061,11 @@ window.DONNEES_MAQUETTE = {
       "statut": "en_attente",
       "etiquette": "pas encore publié",
       "planning": {
-        "jour": "2026-11-03",
-        "rang": 14,
+        "jour": "2026-11-05",
+        "rang": 9,
         "etat": "prevue",
         "utilise_reserve": false,
-        "motif": null
+        "motif": "reprogrammee_avant_p5"
       },
       "statut_sortie": "ressource_existante",
       "badge": "Ressource existante",
@@ -14371,19 +23219,184 @@ window.DONNEES_MAQUETTE = {
       "importe_le": "2026-11-03T07:14:49.047Z"
     },
     {
-      "post_id": 13,
-      "revision_id": 154,
-      "slug": "grill-me",
-      "nom": "grill-me (Matt Pocock)",
-      "compte": "nodi",
+      "post_id": 11,
+      "revision_id": 182,
+      "slug": "superpowers",
+      "nom": "Superpowers",
+      "compte": "repo",
       "statut": "en_attente",
       "etiquette": "pas encore publié",
       "planning": {
-        "jour": "2026-11-03",
-        "rang": 15,
+        "jour": "2026-11-05",
+        "rang": 10,
         "etat": "prevue",
         "utilise_reserve": false,
-        "motif": null
+        "motif": "reprogrammee_avant_p5"
+      },
+      "statut_sortie": "ressource_existante",
+      "badge": "Ressource existante",
+      "origine": {
+        "code": "claude_code_developpement",
+        "texte": "Rédigé pendant le développement par Claude Code, assistant de programmation, pas par l'agent du site ; vérifié par les contrôles du code"
+      },
+      "mention": "Analyse IA à partir des sources — non testé par la plateforme",
+      "accroche": {
+        "texte": "Superpowers makes your coding agent scope, plan, test, and review before it delivers",
+        "passages": [
+          "Superpowers is a complete software development methodology for your coding agents",
+          "Enforces RED-GREEN-REFACTOR: write failing test, watch it fail",
+          "Critical issues block progress.",
+          "brainstorming - Activates before building anything.",
+          "writing-plans - Activates with approved design.",
+          "test-driven-development - Activates during implementation.",
+          "requesting-code-review - Activates between tasks.",
+          "finishing-a-development-branch - Activates when tasks complete."
+        ]
+      },
+      "description": {
+        "texte": "Superpowers imposes a real method on your coding agent. It doesn't rush into the code: it asks what you're trying to do, shows you the spec in readable chunks, then builds an implementation plan once the design is approved. Skills trigger on their own, with no command to type.",
+        "passages": [
+          "Superpowers is a complete software development methodology for your coding agents, built on top of a set of composable skills and some initial instructions that make sure your agent uses them.",
+          "it doesn't just jump into trying to write code. Instead, it steps back and asks you what you're really trying to do.",
+          "Once it's teased a spec out of the conversation, it shows it to you in chunks short enough to actually read and digest.",
+          "After you've signed off on the design, your agent puts together an implementation plan",
+          "because the skills trigger automatically, you don't need to do anything special"
+        ]
+      },
+      "interet": {
+        "texte": "The plan splits the work into 2- to 5-minute tasks, with files, code, and checks. TDD is strict: code written before its test is deleted. Between tasks, a review ranks issues by severity, and a critical issue blocks the next step. According to the author, the agent can thus run autonomously for a few hours without straying from the plan.",
+        "passages": [
+          "Breaks work into bite-sized tasks (2-5 minutes each). Every task has exact file paths, complete code, verification steps.",
+          "Enforces RED-GREEN-REFACTOR: write failing test, watch it fail, write minimal code, watch it pass, commit.",
+          "It emphasizes true red/green TDD, YAGNI (You Aren't Gonna Need It), and DRY.",
+          "Deletes code written before tests.",
+          "Reviews against plan, reports issues by severity. Critical issues block progress.",
+          "It's not uncommon for your agent to work autonomously for a couple hours at a time without deviating from the plan you put together."
+        ]
+      },
+      "exemple_usage": {
+        "texte": "For a new feature: brainstorming pins down the request, writing-plans breaks it into small tasks, then implementation starts with a failing test, before the minimal code.",
+        "passages": [
+          "Draws out what you actually want, and why, through questions that get you describing it",
+          "writing-plans - Activates with approved design. Breaks work into bite-sized tasks",
+          "Enforces RED-GREEN-REFACTOR: write failing test, watch it fail, write minimal code, watch it pass, commit."
+        ]
+      },
+      "demarrage": {
+        "etapes": [
+          {
+            "texte": "In Claude Code: /plugin install superpowers@claude-plugins-official",
+            "passages": [
+              "Getting Started Claude Code",
+              "Install the plugin from Anthropic's official marketplace",
+              "/plugin install superpowers@claude-plugins-official"
+            ]
+          },
+          {
+            "texte": "Other agents: a separate install for each, depending on the repository",
+            "passages": [
+              "Installation differs by harness. If you use more than one, install Superpowers separately for each one."
+            ]
+          }
+        ],
+        "commande": "/plugin install superpowers@claude-plugins-official",
+        "passages": [
+          "Installation differs by harness. If you use more than one, install Superpowers separately for each one.",
+          "Install the plugin from Anthropic's official marketplace"
+        ],
+        "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
+      },
+      "compatibilites": [
+        {
+          "texte": "Claude Code, Codex, Cursor, Gemini CLI, GitHub Copilot CLI and about ten others.",
+          "passages": [
+            "Claude Code Antigravity Codex App Codex CLI Cursor Devin CLI Factory Droid Gemini CLI GitHub Copilot CLI Grok Build CLI Kimi Code OpenCode Pi Qwen Code Hermes Agent Muse"
+          ]
+        }
+      ],
+      "limites": [],
+      "licence_locale": null,
+      "reperes": [
+        {
+          "texte": "A fresh sub-agent per task, reviewed every time",
+          "passages": [
+            "dispatches a fresh subagent per task with a review after each"
+          ]
+        },
+        {
+          "texte": "4-phase debugging to trace back to the root cause",
+          "passages": [
+            "systematic-debugging - 4-phase root cause process"
+          ]
+        },
+        {
+          "texte": "Each project isolated on its own branch",
+          "passages": [
+            "using-git-worktrees - Activates after design approval. Creates isolated workspace on new branch"
+          ]
+        }
+      ],
+      "bouton": {
+        "libelle": "Voir le dépôt",
+        "url": "https://github.com/obra/superpowers",
+        "aria_label": "Voir le dépôt obra/superpowers sur GitHub (nouvel onglet)",
+        "verifie_le": "2026-11-04T22:40:56.723Z",
+        "motif": "reponse_api"
+      },
+      "etat_depot": {
+        "full_name": "obra/superpowers",
+        "html_url": "https://github.com/obra/superpowers",
+        "etoiles": 310943,
+        "etoiles_au": "2026-11-02T12:15:49.227Z",
+        "cree_le": "2025-10-09T19:45:18Z",
+        "dernier_push": "2026-10-29T23:35:34Z",
+        "jours_sans_push": 3,
+        "inactif": false,
+        "licence": "MIT",
+        "archive": false,
+        "fork": false,
+        "parent": null,
+        "date_ajout_skill": null
+      },
+      "visuel": {
+        "src": "medias/montages/ressources/superpowers.jpg",
+        "alt": "Superpowers makes your coding agent scope, plan, test, and review before it delivers. Étape 1 : In Claude Code: /plugin install superpowers@claude-plugins-official. Étape 2 : Other agents: a separate install for each, depending on the repository",
+        "gabarit": "etapes",
+        "mention": "Illustration — ne prouve pas le fonctionnement"
+      },
+      "captures": [
+        {
+          "document": "depot",
+          "snapshot_id": 457,
+          "capture_le": "2026-11-02T12:15:49.227Z",
+          "url": "https://github.com/obra/superpowers",
+          "mode": "live"
+        },
+        {
+          "document": "fichier:README.md",
+          "snapshot_id": 458,
+          "capture_le": "2026-11-02T12:15:49.227Z",
+          "url": "https://github.com/obra/superpowers/blob/main/README.md",
+          "mode": "live"
+        }
+      ],
+      "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
+      "importe_le": "2026-11-04T22:40:49.499Z"
+    },
+    {
+      "post_id": 13,
+      "revision_id": 184,
+      "slug": "grill-me",
+      "nom": "grill-me (Matt Pocock)",
+      "compte": "repo",
+      "statut": "en_attente",
+      "etiquette": "pas encore publié",
+      "planning": {
+        "jour": "2026-11-05",
+        "rang": 11,
+        "etat": "prevue",
+        "utilise_reserve": false,
+        "motif": "reprogrammee_avant_p5"
       },
       "statut_sortie": "ressource_existante",
       "badge": "Ressource existante",
@@ -14476,8 +23489,8 @@ window.DONNEES_MAQUETTE = {
         "libelle": "Voir le dépôt",
         "url": "https://github.com/mattpocock/skills",
         "aria_label": "Voir le dépôt mattpocock/skills sur GitHub (nouvel onglet)",
-        "verifie_le": "2026-11-03T07:15:22.356Z",
-        "motif": "capture_recente"
+        "verifie_le": "2026-11-04T22:40:57.317Z",
+        "motif": "reponse_api"
       },
       "etat_depot": {
         "full_name": "mattpocock/skills",
@@ -14531,22 +23544,22 @@ window.DONNEES_MAQUETTE = {
         }
       ],
       "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
-      "importe_le": "2026-11-03T07:15:18.913Z"
+      "importe_le": "2026-11-04T22:40:49.499Z"
     },
     {
       "post_id": 14,
-      "revision_id": 139,
+      "revision_id": 185,
       "slug": "claude-mem",
       "nom": "claude-mem",
-      "compte": "pyxo",
+      "compte": "repo",
       "statut": "en_attente",
       "etiquette": "pas encore publié",
       "planning": {
-        "jour": "2026-11-03",
-        "rang": 16,
+        "jour": "2026-11-05",
+        "rang": 12,
         "etat": "prevue",
         "utilise_reserve": false,
-        "motif": null
+        "motif": "reprogrammee_avant_p5"
       },
       "statut_sortie": "ressource_existante",
       "badge": "Ressource existante",
@@ -14648,8 +23661,8 @@ window.DONNEES_MAQUETTE = {
         "libelle": "Voir le dépôt",
         "url": "https://github.com/thedotmack/claude-mem",
         "aria_label": "Voir le dépôt thedotmack/claude-mem sur GitHub (nouvel onglet)",
-        "verifie_le": "2026-11-03T07:14:55.328Z",
-        "motif": "capture_recente"
+        "verifie_le": "2026-11-04T22:40:58.093Z",
+        "motif": "reponse_api"
       },
       "etat_depot": {
         "full_name": "thedotmack/claude-mem",
@@ -14689,22 +23702,22 @@ window.DONNEES_MAQUETTE = {
         }
       ],
       "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
-      "importe_le": "2026-11-03T07:14:49.047Z"
+      "importe_le": "2026-11-04T22:40:49.499Z"
     },
     {
-      "post_id": 5,
-      "revision_id": 155,
-      "slug": "ui-ux-pro-max",
-      "nom": "UI UX Pro Max",
-      "compte": "mova",
+      "post_id": 15,
+      "revision_id": 186,
+      "slug": "humanizer",
+      "nom": "Humanizer",
+      "compte": "repo",
       "statut": "en_attente",
       "etiquette": "pas encore publié",
       "planning": {
-        "jour": "2026-11-03",
-        "rang": 17,
+        "jour": "2026-11-05",
+        "rang": 13,
         "etat": "prevue",
         "utilise_reserve": false,
-        "motif": null
+        "motif": "reprogrammee_avant_p5"
       },
       "statut_sortie": "ressource_existante",
       "badge": "Ressource existante",
@@ -14714,126 +23727,127 @@ window.DONNEES_MAQUETTE = {
       },
       "mention": "Analyse IA à partir des sources — non testé par la plateforme",
       "accroche": {
-        "texte": "UI UX Pro Max gives your agent a design system tailored to your product before it codes the interface",
+        "texte": "Humanizer removes AI writing tics from a text without changing what it says",
         "passages": [
-          "Industry-specific design system generation",
-          "The skill activates automatically when you request UI/UX work."
+          "Agent skill that removes signs of AI-generated writing from text",
+          "Humanizer makes AI-written text sound like a person wrote it, without changing what it says."
         ]
       },
       "description": {
-        "texte": "Ask for a landing page or a dashboard: the skill activates on its own, starts from your product type and outputs the page structure, style, colors, typography and effects. It draws on 79 styles, 192 product types, palettes and font pairs.",
+        "texte": "Paste a text or give a file path: Humanizer spots AI writing tics, from the most obvious to the most subtle, then rewrites the prose. On a file, it only touches the text: code, data and frontmatter stay in place.",
         "passages": [
-          "The skill activates automatically when you request UI/UX work.",
-          "Build a landing page for my SaaS product",
-          "Create a dashboard for healthcare analytics",
-          "Pattern + Style + Colors + Typography + Effects",
-          "Full access to 79 searchable UI styles (50 active), 192 product types, color palettes, and curated font pairings."
+          "Humanizer makes AI-written text sound like a person wrote it, without changing what it says.",
+          "To rewrite a file, give Humanizer its path",
+          "Humanizer marks every tell it finds, strongest first.",
+          "Point it at a file and it changes only the prose, leaving code, data, frontmatter, and link targets alone."
         ]
       },
       "interet": {
-        "texte": "Each proposal comes with its anti-patterns and a pre-delivery checklist: no emoji as icons, cursor-pointer on every clickable element. Palettes follow the sector, and the purple-pink \"AI\" gradients are banned for a bank.",
+        "texte": "It invents nothing: if a name, number or date is missing, it asks. On a pasted text, you see its first draft, what still sounds artificial, then the final version. Attach two or three paragraphs of your own and it picks up your rhythm, vocabulary and punctuation.",
         "passages": [
-          "+ Anti-patterns to avoid + Pre-delivery checklist",
-          "No emojis as icons (use SVG: Heroicons/Lucide)",
-          "cursor-pointer on all clickable elements",
-          "Industry-specific palettes aligned 1:1 with the 192 product types",
-          "What NOT to do (e.g., \"AI purple/pink gradients\" for banking)"
+          "It does not make things up.",
+          "A name, number, date, quote, citation, or other factual detail must come from the source or the writer",
+          "if a sentence needs a detail that is missing, Humanizer asks instead of inventing one",
+          "When you paste text, Humanizer shows its work: the first rewrite, a short critique of anything that still sounds artificial, and the final version.",
+          "If you want the rewrite to sound more like you, include a sample",
+          "paste 2-3 paragraphs of your own writing",
+          "Humanizer follows the sample's rhythm, word choice, punctuation, and deliberate quirks"
         ]
       },
       "exemple_usage": {
-        "texte": "In the repository example, a spa landing page gets a Soft UI Evolution style, pale pink and sage green accented with gold, Cormorant Garamond with Montserrat, no neon or abrupt animations.",
+        "texte": "In the repository's example, an announcement loses its emoji, its \"It's not just a feature…\" and its \"Let that sink in.\", then starts without detour: \"Shared drafts are out today.\"",
         "passages": [
-          "Build a landing page for my beauty spa",
-          "STYLE: Soft UI Evolution",
-          "Primary: #E8B4B8 (Soft Pink)",
-          "Secondary: #A8D5BA (Sage Green)",
-          "Notes: Calming palette with gold accents for luxury feel",
-          "TYPOGRAPHY: Cormorant Garamond / Montserrat",
-          "Bright neon colors + Harsh animations + Dark mode + AI purple/pink gradients"
+          "I'm thrilled to announce that shared drafts are finally here! 🚀",
+          "It's not just a feature; it's a whole new way to collaborate.",
+          "It's available today on every plan, completely free. Let that sink in.",
+          "Shared drafts are out today."
         ]
       },
       "demarrage": {
         "etapes": [
           {
-            "texte": "In the project: npx ui-ux-pro-max-cli init --ai claude (or cursor, copilot)",
+            "texte": "Not before Claude Code 2.1.142: /plugin marketplace add blader/humanizer",
             "passages": [
-              "skip the global install entirely:",
-              "cd /path/to/your/project uipro init --ai claude",
-              "uipro init --ai claude # Claude Code uipro init --ai cursor # Cursor",
-              "uipro init --ai copilot # GitHub Copilot"
+              "/plugin marketplace add blader/humanizer /plugin install humanizer@humanizer",
+              "It needs Claude Code 2.1.142 or newer"
             ]
           },
           {
-            "texte": "Then ask for the interface you want, the skill takes over.",
+            "texte": "Then /plugin install humanizer@humanizer, not on an older version",
             "passages": [
-              "The skill activates automatically when you request UI/UX work.",
-              "Build a landing page for my SaaS product"
+              "/plugin marketplace add blader/humanizer /plugin install humanizer@humanizer"
+            ]
+          },
+          {
+            "texte": "Codex: npx skills add blader/humanizer --global --agent codex",
+            "passages": [
+              "npx skills add blader/humanizer --global --agent codex"
+            ]
+          },
+          {
+            "texte": "Then /humanizer and the text; for a file, its path, no command",
+            "passages": [
+              "Once installed, the skill answers to /humanizer.",
+              "To rewrite a file, give Humanizer its path",
+              "Humanize the prose in docs/launch-post.md"
             ]
           }
         ],
-        "commande": "npx ui-ux-pro-max-cli init --ai claude",
+        "commande": "/plugin marketplace add blader/humanizer\n/plugin install humanizer@humanizer",
         "passages": [
-          "Use a Node version manager (recommended), or skip the global install entirely:",
-          "Or use the CLI installer:"
+          "/plugin marketplace add blader/humanizer /plugin install humanizer@humanizer",
+          "The plugin answers to /humanizer:humanizer.",
+          "It needs Claude Code 2.1.142 or newer"
         ],
         "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
       },
       "compatibilites": [
         {
-          "texte": "About twenty agents depending on the repository, including Claude Code, Cursor, Windsurf, Codex CLI and GitHub Copilot.",
+          "texte": "Claude Code, Codex and any skills-compatible agent; the Skills CLI install also covers Gemini CLI, GitHub Copilot and Windsurf, according to the repository.",
           "passages": [
-            "Supported: Claude Code, Cursor, Windsurf, Antigravity, Codex CLI, Continue, Gemini CLI, OpenCode, Qoder, CodeBuddy, Droid (Factory), KiloCode, Warp, Augment, CodeWhale, ZCode, Kimi Code, Amazon Q Developer, OpenClaw, GitHub Copilot"
+            "it works in Claude Code, Codex, and any other agent that supports skills",
+            "This installs Humanizer for every agent the Skills CLI supports, including Gemini CLI, GitHub Copilot, and Windsurf."
           ]
         }
       ],
-      "limites": [
-        {
-          "texte": "The core is under MIT license; logos, banners and generated visuals are not, they fall under a separate Premium offer (uupm.cc).",
-          "passages": [
-            "This project is licensed under the MIT License.",
-            "Extended Brand Design Skills: Goes beyond UI/UX to include Brand Identity generation, Logo Design, Corporate Identity Programs (CIP), Banners, Presentation Slides, and custom Iconography.",
-            "Advanced Asset Creation: Deep integration with AI-powered image generation to create real visual assets, not just placeholders.",
-            "For more details on upgrading to the Premium tier, visit uupm.cc."
-          ]
-        }
-      ],
+      "limites": [],
       "licence_locale": null,
       "reperes": [
         {
-          "texte": "Rules per stack, from React and Vue to SwiftUI and Flutter",
+          "texte": "26 patterns checked, according to the repository",
           "passages": [
-            "Tech Stacks - React, Next.js, Astro, Vue",
-            "SwiftUI, React Native, Flutter, HTML+Tailwind"
+            "Humanizer checks for 26 patterns in all.",
+            "It is built on Wikipedia's Signs of AI writing, the guide Wikipedia editors use to catch AI-generated text"
           ]
         },
         {
-          "texte": "119 UX rules, accessibility included",
+          "texte": "Do not try to fool AI detectors",
           "passages": [
-            "119 UX Guidelines - Best practices, anti-patterns, accessibility rules"
+            "Getting past AI detectors is not a goal, and detectors still flag most of its output."
           ]
         },
         {
-          "texte": "Works with Claude Code, Cursor, Copilot and more",
+          "texte": "Claude Code, Codex and other agents, per the repository",
           "passages": [
-            "Supported: Claude Code, Cursor, Windsurf, Antigravity, Codex CLI, Continue, Gemini CLI, OpenCode, Qoder, CodeBuddy, Droid (Factory), KiloCode, Warp, Augment, CodeWhale, ZCode, Kimi Code, Amazon Q Developer, OpenClaw, GitHub Copilot"
+            "it works in Claude Code, Codex, and any other agent that supports skills"
           ]
         }
       ],
       "bouton": {
         "libelle": "Voir le dépôt",
-        "url": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill",
-        "aria_label": "Voir le dépôt nextlevelbuilder/ui-ux-pro-max-skill sur GitHub (nouvel onglet)",
-        "verifie_le": "2026-11-03T07:15:34.056Z",
-        "motif": "capture_recente"
+        "url": "https://github.com/blader/humanizer",
+        "aria_label": "Voir le dépôt blader/humanizer sur GitHub (nouvel onglet)",
+        "verifie_le": "2026-11-04T22:40:58.519Z",
+        "motif": "reponse_api"
       },
       "etat_depot": {
-        "full_name": "nextlevelbuilder/ui-ux-pro-max-skill",
-        "html_url": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill",
-        "etoiles": 144059,
-        "etoiles_au": "2026-11-02T12:15:44.563Z",
-        "cree_le": "2025-11-30T11:36:31Z",
-        "dernier_push": "2026-11-01T07:04:29Z",
-        "jours_sans_push": 1,
+        "full_name": "blader/humanizer",
+        "html_url": "https://github.com/blader/humanizer",
+        "etoiles": 63799,
+        "etoiles_au": "2026-11-02T12:15:52.912Z",
+        "cree_le": "2026-01-18T05:30:15Z",
+        "dernier_push": "2026-10-28T07:17:33Z",
+        "jours_sans_push": 5,
         "inactif": false,
         "licence": "MIT",
         "archive": false,
@@ -14842,222 +23856,29 @@ window.DONNEES_MAQUETTE = {
         "date_ajout_skill": null
       },
       "visuel": {
-        "src": "medias/montages/ressources/ui-ux-pro-max.jpg",
-        "alt": "UI UX Pro Max gives your agent a design system tailored to your product before it codes the interface. Étape 1 : In the project: npx ui-ux-pro-max-cli init --ai claude (or cursor, copilot). Étape 2 : Then ask for the interface you want, the skill takes over.",
+        "src": "medias/montages/ressources/humanizer.jpg",
+        "alt": "Humanizer removes AI writing tics from a text without changing what it says. Étape 1 : Not before Claude Code 2.1.142: /plugin marketplace add blader/humanizer. Étape 2 : Then /plugin install humanizer@humanizer, not on an older version. Étape 3 : Codex: npx skills add blader/humanizer --global --agent codex. Étape 4 : Then /humanizer and the text; for a file, its path, no command",
         "gabarit": "etapes",
         "mention": "Illustration — ne prouve pas le fonctionnement"
       },
       "captures": [
         {
           "document": "depot",
-          "snapshot_id": 443,
-          "capture_le": "2026-11-02T12:15:44.563Z",
-          "url": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill",
+          "snapshot_id": 469,
+          "capture_le": "2026-11-02T12:15:52.912Z",
+          "url": "https://github.com/blader/humanizer",
           "mode": "live"
         },
         {
           "document": "fichier:README.md",
-          "snapshot_id": 444,
-          "capture_le": "2026-11-02T12:15:44.563Z",
-          "url": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill/blob/main/README.md",
+          "snapshot_id": 470,
+          "capture_le": "2026-11-02T12:15:52.912Z",
+          "url": "https://github.com/blader/humanizer/blob/main/README.md",
           "mode": "live"
         }
       ],
       "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
-      "importe_le": "2026-11-03T07:15:31.762Z"
-    },
-    {
-      "post_id": 6,
-      "revision_id": 141,
-      "slug": "webapp-testing",
-      "nom": "webapp-testing",
-      "compte": "radar",
-      "statut": "en_attente",
-      "etiquette": "pas encore publié",
-      "planning": {
-        "jour": "2026-11-03",
-        "rang": 18,
-        "etat": "prevue",
-        "utilise_reserve": false,
-        "motif": null
-      },
-      "statut_sortie": "ressource_existante",
-      "badge": "Ressource existante",
-      "origine": {
-        "code": "claude_code_developpement",
-        "texte": "Rédigé pendant le développement par Claude Code, assistant de programmation, pas par l'agent du site ; vérifié par les contrôles du code"
-      },
-      "mention": "Analyse IA à partir des sources — non testé par la plateforme",
-      "accroche": {
-        "texte": "webapp-testing: Claude tests your local web app with Playwright",
-        "passages": [
-          "This repository contains Anthropic's implementation of skills for Claude",
-          "Toolkit for interacting with and testing local web applications using Playwright"
-        ]
-      },
-      "description": {
-        "texte": "Anthropic's skill writes Playwright scripts in Python to check the front end, debug the interface, take screenshots, and read browser logs.",
-        "passages": [
-          "This repository contains Anthropic's implementation of skills for Claude",
-          "To test local web applications, write native Python Playwright scripts.",
-          "Supports verifying frontend functionality, debugging UI behavior, capturing browser screenshots, and viewing browser logs."
-        ]
-      },
-      "interet": {
-        "texte": "A helper starts the app's servers, back end and front end included, then runs the test. Claude calls it as is, without loading its code into the context. On a dynamic app, it waits for loading to finish, observes the rendered page, and derives its selectors from it before acting.",
-        "passages": [
-          "scripts/with_server.py - Manages server lifecycle (supports multiple servers)",
-          "Multiple servers (e.g., backend + frontend)",
-          "They exist to be called directly as black-box scripts rather than ingested into your context window.",
-          "Navigate and wait for networkidle",
-          "Take screenshot or inspect DOM",
-          "Identify selectors from rendered state",
-          "Execute actions with discovered selectors"
-        ]
-      },
-      "exemple_usage": {
-        "texte": "Testing a form on an app with a back end and front end: the helper starts both servers, the page opens headless, the script waits for loading to finish, then inspects the DOM.",
-        "passages": [
-          "Multiple servers (e.g., backend + frontend)",
-          "Always launch chromium in headless mode",
-          "Navigate and wait for networkidle",
-          "Inspect rendered DOM"
-        ]
-      },
-      "demarrage": {
-        "etapes": [
-          {
-            "texte": "Add the catalog: /plugin marketplace add anthropics/skills",
-            "passages": [
-              "You can register this repository as a Claude Code Plugin marketplace by running the following command in Claude Code",
-              "/plugin marketplace add anthropics/skills"
-            ]
-          },
-          {
-            "texte": "Install example-skills: /plugin install example-skills@anthropic-agent-skills",
-            "passages": [
-              "/plugin install example-skills@anthropic-agent-skills",
-              "\"./skills/theme-factory\", \"./skills/web-artifacts-builder\", \"./skills/webapp-testing\""
-            ]
-          },
-          {
-            "texte": "Mention webapp-testing in the request",
-            "passages": [
-              "After installing the plugin, you can use the skill by just mentioning it."
-            ]
-          }
-        ],
-        "commande": "/plugin marketplace add anthropics/skills",
-        "passages": [
-          "/plugin marketplace add anthropics/skills",
-          "Then, to install a specific set of skills"
-        ],
-        "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
-      },
-      "compatibilites": [],
-      "limites": [],
-      "licence_locale": {
-        "texte": "Apache 2.0: this skill has its own license, in the LICENSE.txt file in its folder",
-        "passages": [
-          "Apache License Version 2.0, January 2004",
-          "license: Complete terms in LICENSE.txt"
-        ]
-      },
-      "reperes": [
-        {
-          "texte": "Example provided to list buttons, links, and fields",
-          "passages": [
-            "element_discovery.py - Discovering buttons, links, and inputs on a page"
-          ]
-        },
-        {
-          "texte": "Static HTML pages read without a server",
-          "passages": [
-            "Read HTML file directly to identify selectors",
-            "static_html_automation.py - Using file:// URLs for local HTML"
-          ]
-        },
-        {
-          "texte": "Selectors by text, role, CSS, or ID",
-          "passages": [
-            "Use descriptive selectors: text=, role=, CSS selectors, or IDs"
-          ]
-        }
-      ],
-      "bouton": {
-        "libelle": "Voir le dépôt",
-        "url": "https://github.com/anthropics/skills/tree/main/skills/webapp-testing",
-        "aria_label": "Voir le dépôt anthropics/skills sur GitHub (nouvel onglet)",
-        "verifie_le": "2026-11-03T07:14:55.337Z",
-        "motif": "capture_recente"
-      },
-      "etat_depot": {
-        "full_name": "anthropics/skills",
-        "html_url": "https://github.com/anthropics/skills",
-        "etoiles": 186700,
-        "etoiles_au": "2026-11-02T18:42:26.169Z",
-        "cree_le": "2025-09-22T15:53:31Z",
-        "dernier_push": "2026-10-28T19:20:39Z",
-        "jours_sans_push": 4,
-        "inactif": false,
-        "licence": null,
-        "archive": false,
-        "fork": false,
-        "parent": null,
-        "date_ajout_skill": null
-      },
-      "visuel": {
-        "src": "medias/montages/ressources/webapp-testing.jpg",
-        "alt": "webapp-testing: Claude tests your local web app with Playwright. Étape 1 : Add the catalog: /plugin marketplace add anthropics/skills. Étape 2 : Install example-skills: /plugin install example-skills@anthropic-agent-skills. Étape 3 : Mention webapp-testing in the request",
-        "gabarit": "etapes",
-        "mention": "Illustration — ne prouve pas le fonctionnement"
-      },
-      "captures": [
-        {
-          "document": "depot",
-          "snapshot_id": 484,
-          "capture_le": "2026-11-02T18:42:26.169Z",
-          "url": "https://github.com/anthropics/skills",
-          "mode": "live"
-        },
-        {
-          "document": "fichier:skills/webapp-testing/SKILL.md",
-          "snapshot_id": 445,
-          "capture_le": "2026-11-02T12:15:45.443Z",
-          "url": "https://github.com/anthropics/skills/blob/main/skills/webapp-testing/SKILL.md",
-          "mode": "live"
-        },
-        {
-          "document": "dossier:skills/webapp-testing",
-          "snapshot_id": 446,
-          "capture_le": "2026-11-02T12:15:45.443Z",
-          "url": "https://github.com/anthropics/skills/tree/main/skills/webapp-testing",
-          "mode": "live"
-        },
-        {
-          "document": "fichier:skills/webapp-testing/LICENSE.txt",
-          "snapshot_id": 447,
-          "capture_le": "2026-11-02T12:15:45.443Z",
-          "url": "https://github.com/anthropics/skills/blob/main/skills/webapp-testing/LICENSE.txt",
-          "mode": "live"
-        },
-        {
-          "document": "fichier:README.md",
-          "snapshot_id": 424,
-          "capture_le": "2026-11-02T12:15:38.384Z",
-          "url": "https://github.com/anthropics/skills/blob/main/README.md",
-          "mode": "live"
-        },
-        {
-          "document": "fichier:.claude-plugin/marketplace.json",
-          "snapshot_id": 485,
-          "capture_le": "2026-11-02T18:42:26.169Z",
-          "url": "https://github.com/anthropics/skills/blob/main/.claude-plugin/marketplace.json",
-          "mode": "live"
-        }
-      ],
-      "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
-      "importe_le": "2026-11-03T07:14:49.047Z"
+      "importe_le": "2026-11-04T22:40:49.499Z"
     },
     {
       "post_id": 20,
@@ -15068,11 +23889,11 @@ window.DONNEES_MAQUETTE = {
       "statut": "en_attente",
       "etiquette": "pas encore publié",
       "planning": {
-        "jour": "2026-11-03",
-        "rang": 19,
+        "jour": "2026-11-05",
+        "rang": 14,
         "etat": "prevue",
         "utilise_reserve": false,
-        "motif": null
+        "motif": "reprogrammee_avant_p5"
       },
       "statut_sortie": "ressource_existante",
       "badge": "Ressource existante",
@@ -15231,1424 +24052,899 @@ window.DONNEES_MAQUETTE = {
       ],
       "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
       "importe_le": "2026-11-03T07:14:49.047Z"
-    },
-    {
-      "post_id": 15,
-      "revision_id": 156,
-      "slug": "humanizer",
-      "nom": "Humanizer",
-      "compte": "nodi",
-      "statut": "en_attente",
-      "etiquette": "pas encore publié",
-      "planning": {
-        "jour": "2026-11-03",
-        "rang": 20,
-        "etat": "prevue",
-        "utilise_reserve": false,
-        "motif": null
-      },
-      "statut_sortie": "ressource_existante",
-      "badge": "Ressource existante",
-      "origine": {
-        "code": "claude_code_developpement",
-        "texte": "Rédigé pendant le développement par Claude Code, assistant de programmation, pas par l'agent du site ; vérifié par les contrôles du code"
-      },
-      "mention": "Analyse IA à partir des sources — non testé par la plateforme",
-      "accroche": {
-        "texte": "Humanizer removes AI writing tics from a text without changing what it says",
-        "passages": [
-          "Agent skill that removes signs of AI-generated writing from text",
-          "Humanizer makes AI-written text sound like a person wrote it, without changing what it says."
-        ]
-      },
-      "description": {
-        "texte": "Paste a text or give a file path: Humanizer spots AI writing tics, from the most obvious to the most subtle, then rewrites the prose. On a file, it only touches the text: code, data and frontmatter stay in place.",
-        "passages": [
-          "Humanizer makes AI-written text sound like a person wrote it, without changing what it says.",
-          "To rewrite a file, give Humanizer its path",
-          "Humanizer marks every tell it finds, strongest first.",
-          "Point it at a file and it changes only the prose, leaving code, data, frontmatter, and link targets alone."
-        ]
-      },
-      "interet": {
-        "texte": "It invents nothing: if a name, number or date is missing, it asks. On a pasted text, you see its first draft, what still sounds artificial, then the final version. Attach two or three paragraphs of your own and it picks up your rhythm, vocabulary and punctuation.",
-        "passages": [
-          "It does not make things up.",
-          "A name, number, date, quote, citation, or other factual detail must come from the source or the writer",
-          "if a sentence needs a detail that is missing, Humanizer asks instead of inventing one",
-          "When you paste text, Humanizer shows its work: the first rewrite, a short critique of anything that still sounds artificial, and the final version.",
-          "If you want the rewrite to sound more like you, include a sample",
-          "paste 2-3 paragraphs of your own writing",
-          "Humanizer follows the sample's rhythm, word choice, punctuation, and deliberate quirks"
-        ]
-      },
-      "exemple_usage": {
-        "texte": "In the repository's example, an announcement loses its emoji, its \"It's not just a feature…\" and its \"Let that sink in.\", then starts without detour: \"Shared drafts are out today.\"",
-        "passages": [
-          "I'm thrilled to announce that shared drafts are finally here! 🚀",
-          "It's not just a feature; it's a whole new way to collaborate.",
-          "It's available today on every plan, completely free. Let that sink in.",
-          "Shared drafts are out today."
-        ]
-      },
-      "demarrage": {
-        "etapes": [
-          {
-            "texte": "Not before Claude Code 2.1.142: /plugin marketplace add blader/humanizer",
-            "passages": [
-              "/plugin marketplace add blader/humanizer /plugin install humanizer@humanizer",
-              "It needs Claude Code 2.1.142 or newer"
-            ]
-          },
-          {
-            "texte": "Then /plugin install humanizer@humanizer, not on an older version",
-            "passages": [
-              "/plugin marketplace add blader/humanizer /plugin install humanizer@humanizer"
-            ]
-          },
-          {
-            "texte": "Codex: npx skills add blader/humanizer --global --agent codex",
-            "passages": [
-              "npx skills add blader/humanizer --global --agent codex"
-            ]
-          },
-          {
-            "texte": "Then /humanizer and the text; for a file, its path, no command",
-            "passages": [
-              "Once installed, the skill answers to /humanizer.",
-              "To rewrite a file, give Humanizer its path",
-              "Humanize the prose in docs/launch-post.md"
-            ]
-          }
-        ],
-        "commande": "/plugin marketplace add blader/humanizer\n/plugin install humanizer@humanizer",
-        "passages": [
-          "/plugin marketplace add blader/humanizer /plugin install humanizer@humanizer",
-          "The plugin answers to /humanizer:humanizer.",
-          "It needs Claude Code 2.1.142 or newer"
-        ],
-        "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
-      },
-      "compatibilites": [
-        {
-          "texte": "Claude Code, Codex and any skills-compatible agent; the Skills CLI install also covers Gemini CLI, GitHub Copilot and Windsurf, according to the repository.",
-          "passages": [
-            "it works in Claude Code, Codex, and any other agent that supports skills",
-            "This installs Humanizer for every agent the Skills CLI supports, including Gemini CLI, GitHub Copilot, and Windsurf."
-          ]
-        }
-      ],
-      "limites": [],
-      "licence_locale": null,
-      "reperes": [
-        {
-          "texte": "26 patterns checked, according to the repository",
-          "passages": [
-            "Humanizer checks for 26 patterns in all.",
-            "It is built on Wikipedia's Signs of AI writing, the guide Wikipedia editors use to catch AI-generated text"
-          ]
-        },
-        {
-          "texte": "Do not try to fool AI detectors",
-          "passages": [
-            "Getting past AI detectors is not a goal, and detectors still flag most of its output."
-          ]
-        },
-        {
-          "texte": "Claude Code, Codex and other agents, per the repository",
-          "passages": [
-            "it works in Claude Code, Codex, and any other agent that supports skills"
-          ]
-        }
-      ],
-      "bouton": {
-        "libelle": "Voir le dépôt",
-        "url": "https://github.com/blader/humanizer",
-        "aria_label": "Voir le dépôt blader/humanizer sur GitHub (nouvel onglet)",
-        "verifie_le": "2026-11-03T07:15:22.365Z",
-        "motif": "capture_recente"
-      },
-      "etat_depot": {
-        "full_name": "blader/humanizer",
-        "html_url": "https://github.com/blader/humanizer",
-        "etoiles": 63799,
-        "etoiles_au": "2026-11-02T12:15:52.912Z",
-        "cree_le": "2026-01-18T05:30:15Z",
-        "dernier_push": "2026-10-28T07:17:33Z",
-        "jours_sans_push": 5,
-        "inactif": false,
-        "licence": "MIT",
-        "archive": false,
-        "fork": false,
-        "parent": null,
-        "date_ajout_skill": null
-      },
-      "visuel": {
-        "src": "medias/montages/ressources/humanizer.jpg",
-        "alt": "Humanizer removes AI writing tics from a text without changing what it says. Étape 1 : Not before Claude Code 2.1.142: /plugin marketplace add blader/humanizer. Étape 2 : Then /plugin install humanizer@humanizer, not on an older version. Étape 3 : Codex: npx skills add blader/humanizer --global --agent codex. Étape 4 : Then /humanizer and the text; for a file, its path, no command",
-        "gabarit": "etapes",
-        "mention": "Illustration — ne prouve pas le fonctionnement"
-      },
-      "captures": [
-        {
-          "document": "depot",
-          "snapshot_id": 469,
-          "capture_le": "2026-11-02T12:15:52.912Z",
-          "url": "https://github.com/blader/humanizer",
-          "mode": "live"
-        },
-        {
-          "document": "fichier:README.md",
-          "snapshot_id": 470,
-          "capture_le": "2026-11-02T12:15:52.912Z",
-          "url": "https://github.com/blader/humanizer/blob/main/README.md",
-          "mode": "live"
-        }
-      ],
-      "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
-      "importe_le": "2026-11-03T07:15:18.913Z"
-    },
-    {
-      "post_id": 16,
-      "revision_id": 144,
-      "slug": "planning-with-files",
-      "nom": "planning-with-files",
-      "compte": "pyxo",
-      "statut": "en_attente",
-      "etiquette": "pas encore publié",
-      "planning": {
-        "jour": "2026-11-04",
-        "rang": 1,
-        "etat": "prevue",
-        "utilise_reserve": false,
-        "motif": null
-      },
-      "statut_sortie": "ressource_existante",
-      "badge": "Ressource existante",
-      "origine": {
-        "code": "claude_code_developpement",
-        "texte": "Rédigé pendant le développement par Claude Code, assistant de programmation, pas par l'agent du site ; vérifié par les contrôles du code"
-      },
-      "mention": "Analyse IA à partir des sources — non testé par la plateforme",
-      "accroche": {
-        "texte": "planning-with-files keeps your agent's plan on disk, and the task resumes after a /clear",
-        "passages": [
-          "Persistent file-based planning for AI coding agents and long-running tasks.",
-          "Crash-proof markdown plans, session recovery after /clear and compaction"
-        ]
-      },
-      "description": {
-        "texte": "The plan lives in three Markdown files in the project, not only in context: task_plan.md for the phases, findings.md for discoveries and decisions, progress.md for the log. After a /clear, a compaction or a crash, the agent rereads them and restarts from the current phase.",
-        "passages": [
-          "The plan lives on disk in task_plan.md, findings.md, and progress.md, not only in the context window.",
-          "Markdown on disk is the shared state between agents.",
-          "task_plan.md ← phases + checkboxes; the resume point after /clear",
-          "findings.md ← research notes and decisions, appended as you go",
-          "progress.md ← session log and test results",
-          "That is the difference between an agent that forgets after /clear, compaction or a crash and one that resumes at the current phase."
-        ]
-      },
-      "interet": {
-        "texte": "Hooks reinject the plan at the start of each turn: over a long session, the goal and phase status stay in front of the model. Optionally, the agent is held while a phase is still in progress, with a cap so the session is never blocked, on the tools that allow it.",
-        "passages": [
-          "A hook that fires every turn",
-          "Because the plan is re-injected at the start of each turn from disk, the goals and phase status stay in the model's attention window as the conversation grows.",
-          "Gated mode: the Stop gate holds the stop only while an in_progress phase remains, with a block cap and stall detection so an incomplete plan alone never traps a session",
-          "Optional gated mode can request continuation only on a host that supports the required Stop behavior."
-        ]
-      },
-      "exemple_usage": {
-        "texte": "Validate the approach in plan mode, have it written in phases into task_plan.md, then start execution. If the conversation is cleared along the way, the agent doesn't lose the thread: it rereads the files and picks up where it left off.",
-        "passages": [
-          "Plan mode is where you design and approve the approach before execution.",
-          "after accepting a plan-mode plan, tell the agent to write it into task_plan.md as phases",
-          "then execute in normal mode",
-          "after a /clear or a new session the skill re-reads project files from disk"
-        ]
-      },
-      "demarrage": {
-        "etapes": [
-          {
-            "texte": "In Claude Code: /plugin marketplace add OthmanAdi/planning-with-files",
-            "passages": [
-              "Claude Code, plugin route (ships everything: skill, hooks, slash commands):",
-              "/plugin marketplace add OthmanAdi/planning-with-files"
-            ]
-          },
-          {
-            "texte": "Then /plugin install planning-with-files@planning-with-files",
-            "passages": [
-              "/plugin install planning-with-files@planning-with-files",
-              "Claude Code, plugin route (ships everything: skill, hooks, slash commands):"
-            ]
-          },
-          {
-            "texte": "Type /plan, or simply ask the agent for a plan",
-            "passages": [
-              "Trigger it by typing /plan (plugin) or asking the agent to"
-            ]
-          }
-        ],
-        "commande": "npx skills add OthmanAdi/planning-with-files --skill planning-with-files -g",
-        "passages": [
-          "npx skills add OthmanAdi/planning-with-files --skill planning-with-files -g",
-          "Claude Code, plugin route (ships everything: skill, hooks, slash commands):"
-        ],
-        "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
-      },
-      "compatibilites": [
-        {
-          "texte": "Native plugins for Claude Code, Codex CLI, OpenCode and others; 60+ agents via npx skills add, without hooks on some.",
-          "passages": [
-            "with native plugins for Claude Code, Codex CLI, Qoder CLI, Pi, Hermes Agent, OpenCode and DeepSeek Harness.",
-            "Installs across 60+ agents via the Agent Skills standard",
-            "SKILL.md discovery via npx skills add; the pattern without lifecycle hooks"
-          ]
-        }
-      ],
-      "limites": [],
-      "licence_locale": null,
-      "reperes": [
-        {
-          "texte": "Autonomous mode: fewer reminders, fewer tokens burned",
-          "passages": [
-            "Autonomous loops burn tokens on recitation",
-            "Autonomous mode drops the per-tool-call recitation and replaces the raw progress tail with a fixed-shape ledger summary"
-          ]
-        },
-        {
-          "texte": "Multi-agent: an orchestrator holds the plan",
-          "passages": [
-            "One orchestrator owns task_plan.md and the shared summaries; every worker appends to its own ledger or assigned file."
-          ]
-        },
-        {
-          "texte": "For Claude Code, Codex, Cursor and 60+ agents",
-          "passages": [
-            "Install from npm, the Claude Code plugin marketplace, or npx skills. Codex, Cursor, OpenCode, 60+ agents."
-          ]
-        }
-      ],
-      "bouton": {
-        "libelle": "Voir le dépôt",
-        "url": "https://github.com/OthmanAdi/planning-with-files",
-        "aria_label": "Voir le dépôt OthmanAdi/planning-with-files sur GitHub (nouvel onglet)",
-        "verifie_le": "2026-11-03T07:14:55.349Z",
-        "motif": "capture_recente"
-      },
-      "etat_depot": {
-        "full_name": "OthmanAdi/planning-with-files",
-        "html_url": "https://github.com/OthmanAdi/planning-with-files",
-        "etoiles": 27824,
-        "etoiles_au": "2026-11-02T12:15:53.678Z",
-        "cree_le": "2026-01-03T07:37:28Z",
-        "dernier_push": "2026-10-30T20:57:42Z",
-        "jours_sans_push": 2,
-        "inactif": false,
-        "licence": "MIT",
-        "archive": false,
-        "fork": false,
-        "parent": null,
-        "date_ajout_skill": null
-      },
-      "visuel": {
-        "src": "medias/montages/ressources/planning-with-files.jpg",
-        "alt": "planning-with-files keeps your agent's plan on disk, and the task resumes after a /clear. Étape 1 : In Claude Code: /plugin marketplace add OthmanAdi/planning-with-files. Étape 2 : Then /plugin install planning-with-files@planning-with-files. Étape 3 : Type /plan, or simply ask the agent for a plan",
-        "gabarit": "etapes",
-        "mention": "Illustration — ne prouve pas le fonctionnement"
-      },
-      "captures": [
-        {
-          "document": "depot",
-          "snapshot_id": 471,
-          "capture_le": "2026-11-02T12:15:53.678Z",
-          "url": "https://github.com/OthmanAdi/planning-with-files",
-          "mode": "live"
-        },
-        {
-          "document": "fichier:README.md",
-          "snapshot_id": 472,
-          "capture_le": "2026-11-02T12:15:53.678Z",
-          "url": "https://github.com/OthmanAdi/planning-with-files/blob/master/README.md",
-          "mode": "live"
-        }
-      ],
-      "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
-      "importe_le": "2026-11-03T07:14:49.047Z"
-    },
-    {
-      "post_id": 9,
-      "revision_id": 145,
-      "slug": "marketingskills",
-      "nom": "Marketing Skills",
-      "compte": "mova",
-      "statut": "en_attente",
-      "etiquette": "pas encore publié",
-      "planning": {
-        "jour": "2026-11-04",
-        "rang": 2,
-        "etat": "prevue",
-        "utilise_reserve": false,
-        "motif": null
-      },
-      "statut_sortie": "ressource_existante",
-      "badge": "Ressource existante",
-      "origine": {
-        "code": "claude_code_developpement",
-        "texte": "Rédigé pendant le développement par Claude Code, assistant de programmation, pas par l'agent du site ; vérifié par les contrôles du code"
-      },
-      "mention": "Analyse IA à partir des sources — non testé par la plateforme",
-      "accroche": {
-        "texte": "Marketing Skills: CRO, copywriting, SEO and email sequences handled by your code agent",
-        "passages": [
-          "Marketing skills for Claude Code and AI agents.",
-          "CRO, copywriting, SEO, analytics, and growth engineering.",
-          "create or optimize an email sequence"
-        ]
-      },
-      "description": {
-        "texte": "Corey Haines' marketing collection. Your agent identifies the task at hand—a page to convert, an email sequence, pricing or a Google Ads campaign—and applies the appropriate method.",
-        "passages": [
-          "A collection of AI agent skills focused on marketing tasks.",
-          "Built by Corey Haines.",
-          "your agent can recognize when you're working on a marketing task and apply the right frameworks and best practices",
-          "help with conversion optimization, copywriting, SEO, analytics, and growth engineering.",
-          "When the user wants to create or optimize an email sequence, drip campaign",
-          "When the user wants help with pricing decisions, packaging, or monetization strategy.",
-          "When the user wants help with paid advertising campaigns on Google Ads"
-        ]
-      },
-      "interet": {
-        "texte": "Everything rests on a shared product document: you set product, audience and positioning once with product-marketing, and each skill rereads it before acting.",
-        "passages": [
-          "Skills reference each other and build on shared context.",
-          "When the user wants to create or update their product marketing context document",
-          "every other skill checks it first to understand your product, audience, and positioning before doing anything"
-        ]
-      },
-      "exemple_usage": {
-        "texte": "Ask to optimize a landing page for conversion: the agent relies on the cro skill.",
-        "passages": [
-          "Once installed, just ask your agent to help with marketing tasks",
-          "Help me optimize this landing page for conversions",
-          "Uses cro skill"
-        ]
-      },
-      "demarrage": {
-        "etapes": [
-          {
-            "texte": "npx skills add coreyhaines31/marketingskills",
-            "passages": [
-              "Use npx skills to install skills directly",
-              "npx skills add coreyhaines31/marketingskills"
-            ]
-          },
-          {
-            "texte": "Launched from Claude Code: add -a claude-code, otherwise it won't read them",
-            "passages": [
-              "If you run the command from inside an agent session (e.g., asking Claude Code to install the skills for you)",
-              "may only install to the universal .agents/skills/ directory, which Claude Code does not read",
-              "npx skills add coreyhaines31/marketingskills -a claude-code"
-            ]
-          },
-          {
-            "texte": "Fill in product-marketing, then hand its tasks to the agent",
-            "passages": [
-              "When the user wants to create or update their product marketing context document",
-              "Once installed, just ask your agent to help with marketing tasks"
-            ]
-          }
-        ],
-        "commande": "npx skills add coreyhaines31/marketingskills",
-        "passages": [
-          "Use npx skills to install skills directly",
-          "When the user wants to create or update their product marketing context document",
-          "Once installed, just ask your agent to help with marketing tasks"
-        ],
-        "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
-      },
-      "compatibilites": [
-        {
-          "texte": "Claude Code, Codex, Cursor, Windsurf and any agent compatible with Agent Skills.",
-          "passages": [
-            "Works with Claude Code, OpenAI Codex, Cursor, Windsurf, and any agent that supports the Agent Skills spec."
-          ]
-        }
-      ],
-      "limites": [],
-      "licence_locale": null,
-      "reperes": [
-        {
-          "texte": "MIT licensed, freely reusable",
-          "passages": [
-            "MIT - Use these however you want."
-          ]
-        },
-        {
-          "texte": "For Claude Code, Codex, Cursor and Windsurf",
-          "passages": [
-            "Works with Claude Code, OpenAI Codex, Cursor, Windsurf"
-          ]
-        },
-        {
-          "texte": "Also: A/B tests, churn, sales pipeline",
-          "passages": [
-            "ab-testing - Experiment design",
-            "churn-prevention - Cancel flows, save offers, dunning, payment recovery",
-            "revops - Lead lifecycle, scoring, routing, pipeline management"
-          ]
-        }
-      ],
-      "bouton": {
-        "libelle": "Voir le dépôt",
-        "url": "https://github.com/coreyhaines31/marketingskills",
-        "aria_label": "Voir le dépôt coreyhaines31/marketingskills sur GitHub (nouvel onglet)",
-        "verifie_le": "2026-11-03T07:14:55.353Z",
-        "motif": "capture_recente"
-      },
-      "etat_depot": {
-        "full_name": "coreyhaines31/marketingskills",
-        "html_url": "https://github.com/coreyhaines31/marketingskills",
-        "etoiles": 57957,
-        "etoiles_au": "2026-11-02T12:15:47.595Z",
-        "cree_le": "2026-01-15T19:45:23Z",
-        "dernier_push": "2026-10-31T00:53:07Z",
-        "jours_sans_push": 2,
-        "inactif": false,
-        "licence": "MIT",
-        "archive": false,
-        "fork": false,
-        "parent": null,
-        "date_ajout_skill": null
-      },
-      "visuel": {
-        "src": "medias/montages/ressources/marketingskills.jpg",
-        "alt": "Marketing Skills: CRO, copywriting, SEO and email sequences handled by your code agent. Étape 1 : npx skills add coreyhaines31/marketingskills. Étape 2 : Launched from Claude Code: add -a claude-code, otherwise it won't read them. Étape 3 : Fill in product-marketing, then hand its tasks to the agent",
-        "gabarit": "etapes",
-        "mention": "Illustration — ne prouve pas le fonctionnement"
-      },
-      "captures": [
-        {
-          "document": "depot",
-          "snapshot_id": 453,
-          "capture_le": "2026-11-02T12:15:47.595Z",
-          "url": "https://github.com/coreyhaines31/marketingskills",
-          "mode": "live"
-        },
-        {
-          "document": "fichier:README.md",
-          "snapshot_id": 454,
-          "capture_le": "2026-11-02T12:15:47.595Z",
-          "url": "https://github.com/coreyhaines31/marketingskills/blob/main/README.md",
-          "mode": "live"
-        }
-      ],
-      "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
-      "importe_le": "2026-11-03T07:14:49.047Z"
-    },
-    {
-      "post_id": 12,
-      "revision_id": 157,
-      "slug": "find-skills",
-      "nom": "find-skills",
-      "compte": "radar",
-      "statut": "en_attente",
-      "etiquette": "pas encore publié",
-      "planning": {
-        "jour": "2026-11-04",
-        "rang": 3,
-        "etat": "prevue",
-        "utilise_reserve": false,
-        "motif": null
-      },
-      "statut_sortie": "ressource_existante",
-      "badge": "Ressource existante",
-      "origine": {
-        "code": "claude_code_developpement",
-        "texte": "Rédigé pendant le développement par Claude Code, assistant de programmation, pas par l'agent du site ; vérifié par les contrôles du code"
-      },
-      "mention": "Analyse IA à partir des sources — non testé par la plateforme",
-      "accroche": {
-        "texte": "find-skills: your agent can find and install the skill it's missing",
-        "passages": [
-          "This skill helps you discover and install skills from the open agent skills ecosystem."
-        ]
-      },
-      "description": {
-        "texte": "Ask \"find a skill for X\", or just \"how do I do X\". The agent checks the skills.sh ranking and, if it can't find what it needs, runs npx skills find. It comes back with the skill, its source and the install command.",
-        "passages": [
-          "Says \"find a skill for X\" or \"is there a skill for X\"",
-          "Asks \"how do I do X\" where X might be a common task with an existing skill",
-          "Before running a CLI search, check the skills.sh leaderboard",
-          "If the leaderboard doesn't cover the user's need, run the find command:",
-          "The install count and source",
-          "The install command they can run"
-        ]
-      },
-      "interet": {
-        "texte": "It doesn't recommend a skill based on a search result alone: it first checks the install count and the source. And if nothing exists, it offers to write your own with npx skills init.",
-        "passages": [
-          "Do not recommend a skill based solely on search results.",
-          "Install count — Prefer skills with 1K+ installs.",
-          "Source reputation — Official sources (vercel-labs, anthropics, microsoft) are more trustworthy than unknown authors.",
-          "Suggest the user could create their own skill with npx skills init"
-        ]
-      },
-      "exemple_usage": {
-        "texte": "Want to speed up your React app: the agent can run npx skills find react performance and suggest a skill with its install command.",
-        "passages": [
-          "User asks \"how do I make my React app faster?\" → npx skills find react performance",
-          "The install command they can run"
-        ]
-      },
-      "demarrage": {
-        "etapes": [
-          {
-            "texte": "Add find-skills with npx skills add (Node.js 22.20 or later).",
-            "passages": [
-              "Requires Node.js 22.20 or later.",
-              "npx skills add <package> - Install a skill from GitHub or other sources"
-            ]
-          },
-          {
-            "texte": "Then just ask, for example \"find a skill for …\"; no command needed.",
-            "passages": [
-              "Says \"find a skill for X\" or \"is there a skill for X\""
-            ]
-          }
-        ],
-        "commande": null,
-        "passages": [
-          "Requires Node.js 22.20 or later.",
-          "See the installation reference for source formats, private repositories, and all options."
-        ],
-        "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
-      },
-      "compatibilites": [
-        {
-          "texte": "Claude Code, Codex, Cursor, OpenCode and 75 other agents.",
-          "passages": [
-            "Supports OpenCode, Claude Code, Codex, Cursor, and 75 more."
-          ]
-        }
-      ],
-      "limites": [
-        {
-          "texte": "If it installs for you, it's global and without confirmation (-g -y): read the skill before accepting.",
-          "passages": [
-            "If the user wants to proceed, you can install the skill for them:",
-            "The -g flag installs globally (user-level) and -y skips confirmation prompts."
-          ]
-        }
-      ],
-      "licence_locale": null,
-      "reperes": [
-        {
-          "texte": "Triggered by plain requests, no syntax",
-          "passages": [
-            "Says \"find a skill for X\" or \"is there a skill for X\""
-          ]
-        },
-        {
-          "texte": "Never suggests a skill without checking installs and source",
-          "passages": [
-            "Do not recommend a skill based solely on search results.",
-            "Install count — Prefer skills with 1K+ installs.",
-            "Source reputation — Official sources (vercel-labs, anthropics, microsoft) are more trustworthy than unknown authors."
-          ]
-        },
-        {
-          "texte": "Nothing matches? It offers to create one",
-          "passages": [
-            "Suggest the user could create their own skill with npx skills init"
-          ]
-        }
-      ],
-      "bouton": {
-        "libelle": "Voir le dépôt",
-        "url": "https://github.com/vercel-labs/skills/tree/main/skills/find-skills",
-        "aria_label": "Voir le dépôt vercel-labs/skills sur GitHub (nouvel onglet)",
-        "verifie_le": "2026-11-03T07:15:22.370Z",
-        "motif": "capture_recente"
-      },
-      "etat_depot": {
-        "full_name": "vercel-labs/skills",
-        "html_url": "https://github.com/vercel-labs/skills",
-        "etoiles": 37731,
-        "etoiles_au": "2026-11-02T12:15:50.450Z",
-        "cree_le": "2026-01-14T21:31:18Z",
-        "dernier_push": "2026-10-30T20:14:22Z",
-        "jours_sans_push": 2,
-        "inactif": false,
-        "licence": "MIT",
-        "archive": false,
-        "fork": false,
-        "parent": null,
-        "date_ajout_skill": null
-      },
-      "visuel": {
-        "src": "medias/montages/ressources/find-skills.jpg",
-        "alt": "find-skills: your agent can find and install the skill it's missing. Étape 1 : Add find-skills with npx skills add (Node.js 22.20 or later).. Étape 2 : Then just ask, for example \"find a skill for …\"; no command needed.",
-        "gabarit": "etapes",
-        "mention": "Illustration — ne prouve pas le fonctionnement"
-      },
-      "captures": [
-        {
-          "document": "depot",
-          "snapshot_id": 459,
-          "capture_le": "2026-11-02T12:15:50.450Z",
-          "url": "https://github.com/vercel-labs/skills",
-          "mode": "live"
-        },
-        {
-          "document": "fichier:skills/find-skills/SKILL.md",
-          "snapshot_id": 460,
-          "capture_le": "2026-11-02T12:15:50.450Z",
-          "url": "https://github.com/vercel-labs/skills/blob/main/skills/find-skills/SKILL.md",
-          "mode": "live"
-        },
-        {
-          "document": "dossier:skills/find-skills",
-          "snapshot_id": 461,
-          "capture_le": "2026-11-02T12:15:50.450Z",
-          "url": "https://github.com/vercel-labs/skills/tree/main/skills/find-skills",
-          "mode": "live"
-        },
-        {
-          "document": "fichier:README.md",
-          "snapshot_id": 462,
-          "capture_le": "2026-11-02T12:15:50.450Z",
-          "url": "https://github.com/vercel-labs/skills/blob/main/README.md",
-          "mode": "live"
-        }
-      ],
-      "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
-      "importe_le": "2026-11-03T07:15:18.913Z"
-    },
-    {
-      "post_id": 21,
-      "revision_id": 158,
-      "slug": "ecc",
-      "nom": "ECC (Everything Claude Code)",
-      "compte": "repo",
-      "statut": "en_attente",
-      "etiquette": "pas encore publié",
-      "planning": {
-        "jour": "2026-11-04",
-        "rang": 4,
-        "etat": "prevue",
-        "utilise_reserve": false,
-        "motif": null
-      },
-      "statut_sortie": "ressource_existante",
-      "badge": "Ressource existante",
-      "origine": {
-        "code": "claude_code_developpement",
-        "texte": "Rédigé pendant le développement par Claude Code, assistant de programmation, pas par l'agent du site ; vérifié par les contrôles du code"
-      },
-      "mention": "Analyse IA à partir des sources — non testé par la plateforme",
-      "accroche": {
-        "texte": "ECC installs a working method into your coding agent, instead of restating it in every prompt",
-        "passages": [
-          "Instead of rebuilding that process in every prompt, you install it once and make it part of how your agent works."
-        ]
-      },
-      "description": {
-        "texte": "Plan before coding, verify through tests, keep what matters: ECC brings together 71 agents, 314 skills, hooks and session summaries so this process becomes part of how your agent works. Today it works best with Claude Code, with native plugins for Codex and Qoder and more limited adapters for Cursor, OpenCode or Gemini.",
-        "passages": [
-          "Access to 71 agents, 314 skills, and 98 legacy command shims, plus hooks, rules, memory, continuous learning, and AgentShield security scanning.",
-          "it plans before it builds, verifies changes with tests, reviews its own work from a fresh context, remembers what matters",
-          "Sessions are distilled into summaries, instincts, and reusable skills",
-          "make it part of how your agent works",
-          "It works best with Claude Code today, has native Codex and Qoder plugin paths, and provides capability-limited adapters for Cursor, OpenCode, Gemini, Zed, GitHub Copilot, Antigravity, Qwen, and other harnesses."
-        ]
-      },
-      "interet": {
-        "texte": "The plan becomes a document to approve before the first line, TDD requires a failing test before implementation, and hooks add checks that no longer depend on the prompt. These hooks run shell commands on your machine: install ECC only from the official repository or the npm package ecc-universal, since unofficial copies may contain malware.",
-        "passages": [
-          "Plans become editable artifacts before implementation starts",
-          "TDD becomes a gated RED -> GREEN -> REFACTOR workflow with evidence",
-          "capture RED evidence before implementation",
-          "Hooks can enforce deterministic checks outside the prompt",
-          "Hooks can run shell commands",
-          "Install ECC only from verified channels: the GitHub repository github.com/affaan-m/ECC, the npm packages ecc-universal and ecc-agentshield",
-          "Third-party re-uploads and unofficial mirrors are not maintained or reviewed by the project and may contain malware."
-        ]
-      },
-      "exemple_usage": {
-        "texte": "For a new feature, depending on the repository: /ecc:plan with the request, plan approval, then tdd-workflow has a failing test written before implementing. Then comes a review in a fresh context and a check of the build, lint, types and tests.",
-        "passages": [
-          "/ecc:plan \"Add usage-based billing alerts\" -> confirm or edit the plan -> activate tdd-workflow -> capture RED evidence before implementation",
-          "implement until GREEN -> review from fresh context -> fix findings with regression tests -> verify build, lint, types, and tests"
-        ]
-      },
-      "demarrage": {
-        "etapes": [
-          {
-            "texte": "Run npx ecc-universal@2.2.3 setup (Node.js 18 or later required)",
-            "passages": [
-              "Claude Code plugin setup, updates, scope changes, and hook-profile changes: `bash npx ecc-universal@2.2.3 setup `",
-              "The universal package requires Node.js 18 or newer."
-            ]
-          },
-          {
-            "texte": "Choose the scope and hook profile; you can rerun to change them",
-            "passages": [
-              "For a typical personal setup, choose Global user, choose Standard hooks, and confirm.",
-              "Rerun the same command whenever you want to update ECC, change scope, or change its hook profile."
-            ]
-          }
-        ],
-        "commande": "npx ecc-universal@2.2.3 setup",
-        "passages": [
-          "This setup wizard currently configures the Claude Code plugin; use the multi-harness wizard below for Codex or Kimi Code.",
-          "A version pin is not a security audit or an integrity check."
-        ],
-        "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
-      },
-      "compatibilites": [
-        {
-          "texte": "Setup wizard for the Claude Code plugin: Git and Claude Code 2.1 or later required",
-          "passages": [
-            "This setup wizard currently configures the Claude Code plugin",
-            "requires Git and Claude Code 2.1 or newer on PATH."
-          ]
-        }
-      ],
-      "limites": [
-        {
-          "texte": "Hooks can run shell commands and MCP servers can hold credentials: treat them as executable code, and install only from official sources.",
-          "passages": [
-            "Hooks can run shell commands, MCP servers can hold credentials",
-            "Treat all three as executable configuration.",
-            "Install ECC only from verified channels"
-          ]
-        }
-      ],
-      "licence_locale": null,
-      "reperes": [
-        {
-          "texte": "Review by an agent in a fresh context",
-          "passages": [
-            "A fresh-context reviewer looks for regressions and blind spots"
-          ]
-        },
-        {
-          "texte": "AgentShield audits the agent's own setup",
-          "passages": [
-            "AgentShield scans the harness itself as an attack surface",
-            "these commands require an already installed, reviewed AgentShield binary from ecc-agentshield"
-          ]
-        },
-        {
-          "texte": "Sessions can become instincts and reusable skills",
-          "passages": [
-            "Sessions are distilled into summaries, instincts, and reusable skills"
-          ]
-        }
-      ],
-      "bouton": {
-        "libelle": "Voir le dépôt",
-        "url": "https://github.com/affaan-m/ECC",
-        "aria_label": "Voir le dépôt affaan-m/ECC sur GitHub (nouvel onglet)",
-        "verifie_le": "2026-11-03T07:15:22.376Z",
-        "motif": "capture_recente"
-      },
-      "etat_depot": {
-        "full_name": "affaan-m/ECC",
-        "html_url": "https://github.com/affaan-m/ECC",
-        "etoiles": 295309,
-        "etoiles_au": "2026-11-02T15:44:08.245Z",
-        "cree_le": "2026-01-18T00:51:51Z",
-        "dernier_push": "2026-11-02T04:56:08Z",
-        "jours_sans_push": 0,
-        "inactif": false,
-        "licence": "MIT",
-        "archive": false,
-        "fork": false,
-        "parent": null,
-        "date_ajout_skill": null
-      },
-      "visuel": {
-        "src": "medias/montages/ressources/ecc.jpg",
-        "alt": "ECC installs a working method into your coding agent, instead of restating it in every prompt. Étape 1 : Run npx ecc-universal@2.2.3 setup (Node.js 18 or later required). Étape 2 : Choose the scope and hook profile; you can rerun to change them",
-        "gabarit": "etapes",
-        "mention": "Illustration — ne prouve pas le fonctionnement"
-      },
-      "captures": [
-        {
-          "document": "depot",
-          "snapshot_id": 482,
-          "capture_le": "2026-11-02T15:44:08.245Z",
-          "url": "https://github.com/affaan-m/ECC",
-          "mode": "live"
-        },
-        {
-          "document": "fichier:README.md",
-          "snapshot_id": 483,
-          "capture_le": "2026-11-02T15:44:08.245Z",
-          "url": "https://github.com/affaan-m/ECC/blob/main/README.md",
-          "mode": "live"
-        }
-      ],
-      "decouverte_via": "Ressource ajoutée par l'utilisateur le 2026-11-02, hors du fil X d'origine",
-      "importe_le": "2026-11-03T07:15:18.913Z"
-    },
-    {
-      "post_id": 17,
-      "revision_id": 159,
-      "slug": "stop-slop",
-      "nom": "stop-slop",
-      "compte": "nodi",
-      "statut": "en_attente",
-      "etiquette": "pas encore publié",
-      "planning": {
-        "jour": "2026-11-04",
-        "rang": 5,
-        "etat": "prevue",
-        "utilise_reserve": false,
-        "motif": null
-      },
-      "statut_sortie": "ressource_existante",
-      "badge": "Ressource existante",
-      "origine": {
-        "code": "claude_code_developpement",
-        "texte": "Rédigé pendant le développement par Claude Code, assistant de programmation, pas par l'agent du site ; vérifié par les contrôles du code"
-      },
-      "mention": "Analyse IA à partir des sources — non testé par la plateforme",
-      "accroche": {
-        "texte": "stop-slop tracks down AI writing tics in your texts and makes them disappear",
-        "passages": [
-          "A skill for removing AI tells from prose.",
-          "This skill teaches Claude (or any LLM) to catch and remove them."
-        ]
-      },
-      "description": {
-        "texte": "Predictable formulas, stock constructions, mechanical rhythm: stop-slop teaches Claude, or any LLM, to spot them and remove them.",
-        "passages": [
-          "AI writing has patterns. Predictable phrases, structures, rhythms.",
-          "This skill teaches Claude (or any LLM) to catch and remove them."
-        ]
-      },
-      "interet": {
-        "texte": "The rules are firm: no corporate jargon, no adverbs, no passive voice, no binary oppositions, no em dash. Each family of tics has its own reference file, loaded only when needed.",
-        "passages": [
-          "Banned phrases - Throat-clearing openers, emphasis crutches, business jargon, all adverbs, vague declaratives, meta-commentary.",
-          "Structural clichés - Binary contrasts, negative listings, dramatic fragmentation, rhetorical setups, false agency, narrator-from-a-distance voice, passive voice.",
-          "Sentence-level rules - No Wh- sentence starters, no em dashes, no staccato fragmentation, no lazy extremes, active voice required.",
-          "Reference files load on demand.",
-          "phrases.md # Phrases to remove",
-          "structures.md # Structural patterns to avoid"
-        ]
-      },
-      "exemple_usage": {
-        "texte": "A post written with Claude that sounds too AI: run it through stop-slop before publishing.",
-        "passages": [
-          "This skill teaches Claude (or any LLM) to catch and remove them."
-        ]
-      },
-      "demarrage": {
-        "etapes": [
-          {
-            "texte": "Claude Code: add the folder as a skill",
-            "passages": [
-              "Claude Code: Add this folder as a skill."
-            ]
-          },
-          {
-            "texte": "API: include SKILL.md in the system prompt",
-            "passages": [
-              "API calls: Include SKILL.md in your system prompt."
-            ]
-          }
-        ],
-        "commande": null,
-        "passages": [
-          "Claude Code: Add this folder as a skill.",
-          "API calls: Include SKILL.md in your system prompt. Reference files load on demand."
-        ],
-        "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
-      },
-      "compatibilites": [
-        {
-          "texte": "Claude Code, Claude projects, custom instructions or API calls.",
-          "passages": [
-            "Claude Code: Add this folder as a skill.",
-            "Claude Projects: Upload SKILL.md and reference files to project knowledge.",
-            "Custom instructions: Copy core rules from SKILL.md.",
-            "API calls: Include SKILL.md in your system prompt."
-          ]
-        }
-      ],
-      "limites": [],
-      "licence_locale": null,
-      "reperes": [
-        {
-          "texte": "Rated 1-10 per dimension; below 35/50, revise",
-          "passages": [
-            "Rate 1-10 on each dimension:",
-            "Below 35/50: revise."
-          ]
-        },
-        {
-          "texte": "Before/after examples provided with the rules",
-          "passages": [
-            "examples.md # Before/after transformations"
-          ]
-        },
-        {
-          "texte": "Claude Code, Claude projects, custom instructions or API",
-          "passages": [
-            "Claude Code: Add this folder as a skill.",
-            "Claude Projects: Upload SKILL.md and reference files to project knowledge.",
-            "Custom instructions: Copy core rules from SKILL.md.",
-            "API calls: Include SKILL.md in your system prompt."
-          ]
-        }
-      ],
-      "bouton": {
-        "libelle": "Voir le dépôt",
-        "url": "https://github.com/hardikpandya/stop-slop",
-        "aria_label": "Voir le dépôt hardikpandya/stop-slop sur GitHub (nouvel onglet)",
-        "verifie_le": "2026-11-03T07:15:22.382Z",
-        "motif": "capture_recente"
-      },
-      "etat_depot": {
-        "full_name": "hardikpandya/stop-slop",
-        "html_url": "https://github.com/hardikpandya/stop-slop",
-        "etoiles": 18542,
-        "etoiles_au": "2026-11-02T12:15:54.354Z",
-        "cree_le": "2026-01-11T12:00:59Z",
-        "dernier_push": "2026-03-17T18:50:39Z",
-        "jours_sans_push": 229,
-        "inactif": true,
-        "licence": "MIT",
-        "archive": false,
-        "fork": false,
-        "parent": null,
-        "date_ajout_skill": null
-      },
-      "visuel": {
-        "src": "medias/montages/ressources/stop-slop.jpg",
-        "alt": "stop-slop tracks down AI writing tics in your texts and makes them disappear. Étape 1 : Claude Code: add the folder as a skill. Étape 2 : API: include SKILL.md in the system prompt",
-        "gabarit": "etapes",
-        "mention": "Illustration — ne prouve pas le fonctionnement"
-      },
-      "captures": [
-        {
-          "document": "depot",
-          "snapshot_id": 473,
-          "capture_le": "2026-11-02T12:15:54.354Z",
-          "url": "https://github.com/hardikpandya/stop-slop",
-          "mode": "live"
-        },
-        {
-          "document": "fichier:README.md",
-          "snapshot_id": 474,
-          "capture_le": "2026-11-02T12:15:54.354Z",
-          "url": "https://github.com/hardikpandya/stop-slop/blob/main/README.md",
-          "mode": "live"
-        }
-      ],
-      "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
-      "importe_le": "2026-11-03T07:15:18.913Z"
-    },
-    {
-      "post_id": 18,
-      "revision_id": 149,
-      "slug": "improve-codebase-architecture",
-      "nom": "improve-codebase-architecture (Matt Pocock)",
-      "compte": "pyxo",
-      "statut": "en_attente",
-      "etiquette": "pas encore publié",
-      "planning": {
-        "jour": "2026-11-04",
-        "rang": 6,
-        "etat": "prevue",
-        "utilise_reserve": false,
-        "motif": null
-      },
-      "statut_sortie": "ressource_existante",
-      "badge": "Ressource existante",
-      "origine": {
-        "code": "claude_code_developpement",
-        "texte": "Rédigé pendant le développement par Claude Code, assistant de programmation, pas par l'agent du site ; vérifié par les contrôles du code"
-      },
-      "mention": "Analyse IA à partir des sources — non testé par la plateforme",
-      "accroche": {
-        "texte": "improve-codebase-architecture spots the modules to deepen for more testable code",
-        "passages": [
-          "Surface architectural friction and propose deepening opportunities: refactors that turn shallow modules into deep ones.",
-          "The aim is testability and AI-navigability."
-        ]
-      },
-      "description": {
-        "texte": "Matt Pocock's skill starts from the files that recur most in commit history and looks there for shallow modules, those whose interface is almost as complex as the implementation. It suggests deepening them: more behavior behind a simple interface, code that is easier to test and to navigate for AI.",
-        "passages": [
-          "walk back a good stretch of the commit history (git log --oneline) to find the codebase's hot spots, the files and areas that keep coming up",
-          "Where are modules shallow, with an interface nearly as complex as the implementation?",
-          "The best modules are deep. They allow a lot of functionality to be accessed through a simple interface.",
-          "The aim is testability and AI-navigability."
-        ]
-      },
-      "interet": {
-        "texte": "The suggestions arrive in an HTML report: for each one, the problem, the solution, a before/after diagram and a recommendation level. You pick one, and the agent digs into it with you before proposing any interface. Decisions already recorded in your ADRs are not called into question.",
-        "passages": [
-          "present them as a visual HTML report",
-          "Files: which files/modules are involved Problem: why the current architecture is causing friction Solution: plain English description of what would change",
-          "Before / After diagram: side-by-side, custom-drawn, illustrating the shallowness and the deepening",
-          "Recommendation strength: one of Strong, Worth exploring, Speculative, rendered as a badge",
-          "Do NOT propose interfaces yet.",
-          "Once the user picks a candidate, call the Skill tool with \"grilling\" to walk the decision tree with them",
-          "ADRs in docs/adr/ record decisions this command should not re-litigate."
-        ]
-      },
-      "exemple_usage": {
-        "texte": "The author recommends running it every few days. On old code, it finds real leads without untangling everything for you.",
-        "passages": [
-          "I recommend running it on your codebase once every few days.",
-          "on a genuinely old codebase it will find real candidates, but it won't untangle the mud for you."
-        ]
-      },
-      "demarrage": {
-        "etapes": [
-          {
-            "texte": "Install: claude plugin install mattpocock-skills@claude-plugins-official",
-            "passages": [
-              "claude plugin install mattpocock-skills@claude-plugins-official",
-              "I see with Claude Code, Codex, and other coding agents"
-            ]
-          },
-          {
-            "texte": "Then /setup-matt-pocock-skills, once per repository",
-            "passages": [
-              "Run once per repo before using the other engineering skills."
-            ]
-          },
-          {
-            "texte": "The skill only runs if you type /improve-codebase-architecture",
-            "passages": [
-              "User-invoked skills are reachable only when you type them"
-            ]
-          }
-        ],
-        "commande": "claude plugin install mattpocock-skills@claude-plugins-official",
-        "passages": [
-          "claude plugin install mattpocock-skills@claude-plugins-official",
-          "Run once per repo before using the other engineering skills."
-        ],
-        "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
-      },
-      "compatibilites": [
-        {
-          "texte": "Claude Code, Codex, GitHub Copilot and Gemini CLI.",
-          "passages": [
-            "I see with Claude Code, Codex, and other coding agents",
-            "<strong>GitHub Copilot</strong> (CLI and VS Code)",
-            "<strong>Gemini CLI</strong> (manual updates)"
-          ]
-        }
-      ],
-      "limites": [],
-      "licence_locale": null,
-      "reperes": [
-        {
-          "texte": "Report written to the temporary folder, outside the repository",
-          "passages": [
-            "Write a self-contained HTML file to the OS temp directory so nothing lands in the repo."
-          ]
-        },
-        {
-          "texte": "A deletion test to flush out hollow modules",
-          "passages": [
-            "Apply the deletion test to anything you suspect is shallow"
-          ]
-        },
-        {
-          "texte": "A lead set aside for a real reason can become an ADR",
-          "passages": [
-            "Want me to record this as an ADR so future architecture reviews don't re-suggest it?"
-          ]
-        }
-      ],
-      "bouton": {
-        "libelle": "Voir le dépôt",
-        "url": "https://github.com/mattpocock/skills/tree/main/skills/engineering/improve-codebase-architecture",
-        "aria_label": "Voir le dépôt mattpocock/skills sur GitHub (nouvel onglet)",
-        "verifie_le": "2026-11-03T07:14:55.372Z",
-        "motif": "capture_recente"
-      },
-      "etat_depot": {
-        "full_name": "mattpocock/skills",
-        "html_url": "https://github.com/mattpocock/skills",
-        "etoiles": 309698,
-        "etoiles_au": "2026-11-02T12:15:51.625Z",
-        "cree_le": "2026-02-03T11:15:53Z",
-        "dernier_push": "2026-11-01T11:42:33Z",
-        "jours_sans_push": 1,
-        "inactif": false,
-        "licence": "MIT",
-        "archive": false,
-        "fork": false,
-        "parent": null,
-        "date_ajout_skill": null
-      },
-      "visuel": {
-        "src": "medias/montages/ressources/improve-codebase-architecture.jpg",
-        "alt": "improve-codebase-architecture spots the modules to deepen for more testable code. Étape 1 : Install: claude plugin install mattpocock-skills@claude-plugins-official. Étape 2 : Then /setup-matt-pocock-skills, once per repository. Étape 3 : The skill only runs if you type /improve-codebase-architecture",
-        "gabarit": "etapes",
-        "mention": "Illustration — ne prouve pas le fonctionnement"
-      },
-      "captures": [
-        {
-          "document": "depot",
-          "snapshot_id": 463,
-          "capture_le": "2026-11-02T12:15:51.625Z",
-          "url": "https://github.com/mattpocock/skills",
-          "mode": "live"
-        },
-        {
-          "document": "fichier:skills/engineering/improve-codebase-architecture/SKILL.md",
-          "snapshot_id": 475,
-          "capture_le": "2026-11-02T12:15:54.977Z",
-          "url": "https://github.com/mattpocock/skills/blob/main/skills/engineering/improve-codebase-architecture/SKILL.md",
-          "mode": "live"
-        },
-        {
-          "document": "dossier:skills/engineering/improve-codebase-architecture",
-          "snapshot_id": 476,
-          "capture_le": "2026-11-02T12:15:54.977Z",
-          "url": "https://github.com/mattpocock/skills/tree/main/skills/engineering/improve-codebase-architecture",
-          "mode": "live"
-        },
-        {
-          "document": "fichier:README.md",
-          "snapshot_id": 466,
-          "capture_le": "2026-11-02T12:15:51.625Z",
-          "url": "https://github.com/mattpocock/skills/blob/main/README.md",
-          "mode": "live"
-        }
-      ],
-      "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
-      "importe_le": "2026-11-03T07:14:49.047Z"
-    },
-    {
-      "post_id": 19,
-      "revision_id": 160,
-      "slug": "skill-creator",
-      "nom": "skill-creator",
-      "compte": "radar",
-      "statut": "en_attente",
-      "etiquette": "pas encore publié",
-      "planning": {
-        "jour": "2026-11-04",
-        "rang": 7,
-        "etat": "prevue",
-        "utilise_reserve": false,
-        "motif": null
-      },
-      "statut_sortie": "ressource_existante",
-      "badge": "Ressource existante",
-      "origine": {
-        "code": "claude_code_developpement",
-        "texte": "Rédigé pendant le développement par Claude Code, assistant de programmation, pas par l'agent du site ; vérifié par les contrôles du code"
-      },
-      "mention": "Analyse IA à partir des sources — non testé par la plateforme",
-      "accroche": {
-        "texte": "skill-creator: Anthropic's skill that writes, tests, and refines your own skills",
-        "passages": [
-          "This repository contains Anthropic's implementation of skills for Claude",
-          "A skill for creating new skills and iteratively improving them."
-        ]
-      },
-      "description": {
-        "texte": "Describe what you want to automate: skill-creator frames the need, drafts a first version, tests it on realistic requests, and has you review the results. It can also take an existing skill and improve it.",
-        "passages": [
-          "A skill for creating new skills and iteratively improving them.",
-          "Create a few test prompts and run claude-with-access-to-the-skill on them",
-          "Help the user evaluate the results both qualitatively and quantitatively",
-          "Use when users want to create a skill from scratch, edit, or optimize an existing skill"
-        ]
-      },
-      "interet": {
-        "texte": "Each test runs with and without the skill, or against its previous version. A review page gathers the responses to annotate and a quantified comparison: success rate, duration, tokens. It also reworks the description so the skill triggers at the right time.",
-        "passages": [
-          "For each test case, spawn two subagents in the same turn — one with the skill, one without.",
-          "Improving an existing skill: the old version.",
-          "This produces benchmark.json and benchmark.md with pass_rate, time, and tokens for each configuration",
-          "'Outputs' lets you click through each test case and leave feedback, 'Benchmark' shows the quantitative comparison.",
-          "optimize a skill's description for better triggering accuracy"
-        ]
-      },
-      "exemple_usage": {
-        "texte": "Have you honed a method with Claude? Say \"turn this into a skill\": it can pick up the steps from the conversation, ask you a few questions, write the SKILL.md, and suggest two or three test requests.",
-        "passages": [
-          "(e.g., they say \"turn this into a skill\")",
-          "extract answers from the conversation history first — the tools used, the sequence of steps, corrections the user made, input/output formats observed.",
-          "Proactively ask questions about edge cases, input/output formats, example files, success criteria, and dependencies.",
-          "Each skill is self-contained in its own folder with a SKILL.md file containing the instructions and metadata that Claude uses.",
-          "come up with 2-3 realistic test prompts — the kind of thing a real user would actually say."
-        ]
-      },
-      "demarrage": {
-        "etapes": [
-          {
-            "texte": "Add the repository as a plugin catalog in Claude Code.",
-            "passages": [
-              "You can register this repository as a Claude Code Plugin marketplace by running the following command in Claude Code"
-            ]
-          },
-          {
-            "texte": "Install example-skills: /plugin install example-skills@anthropic-agent-skills",
-            "passages": [
-              "/plugin install example-skills@anthropic-agent-skills",
-              "\"./skills/mcp-builder\", \"./skills/skill-creator\", \"./skills/slack-gif-creator\""
-            ]
-          },
-          {
-            "texte": "Then simply name the skill in your request.",
-            "passages": [
-              "After installing the plugin, you can use the skill by just mentioning it."
-            ]
-          }
-        ],
-        "commande": "/plugin marketplace add anthropics/skills",
-        "passages": [
-          "You can register this repository as a Claude Code Plugin marketplace by running the following command in Claude Code"
-        ],
-        "mention_commande": "Commande citée de la documentation, non exécutée par la plateforme"
-      },
-      "compatibilites": [
-        {
-          "texte": "Full version in Claude Code; in Claude.ai, a lighter version, without sub-agents or quantified comparison.",
-          "passages": [
-            "You can register this repository as a Claude Code Plugin marketplace",
-            "because Claude.ai doesn't have subagents, some mechanics change.",
-            "Skip the quantitative benchmarking"
-          ]
-        }
-      ],
-      "limites": [
-        {
-          "texte": "Each test runs twice, with and without the skill: plan for double the model calls.",
-          "passages": [
-            "For each test case, spawn two subagents in the same turn — one with the skill, one without."
-          ]
-        }
-      ],
-      "licence_locale": {
-        "texte": "The skill's folder has its own license: Apache 2.0.",
-        "passages": [
-          "Apache License Version 2.0, January 2004"
-        ]
-      },
-      "reperes": [
-        {
-          "texte": "A skill for creating and improving other skills",
-          "passages": [
-            "A skill for creating new skills and iteratively improving them."
-          ]
-        },
-        {
-          "texte": "A/B runs: one subagent with, one without",
-          "passages": [
-            "For each test case, spawn two subagents in the same turn — one with the skill, one without."
-          ]
-        },
-        {
-          "texte": "A description that helps Claude pick the skill at the right time",
-          "passages": [
-            "optimize a skill's description for better triggering accuracy",
-            "Skills appear in Claude's available_skills list with their name + description"
-          ]
-        }
-      ],
-      "bouton": {
-        "libelle": "Voir le dépôt",
-        "url": "https://github.com/anthropics/skills/tree/main/skills/skill-creator",
-        "aria_label": "Voir le dépôt anthropics/skills sur GitHub (nouvel onglet)",
-        "verifie_le": "2026-11-03T07:15:22.389Z",
-        "motif": "capture_recente"
-      },
-      "etat_depot": {
-        "full_name": "anthropics/skills",
-        "html_url": "https://github.com/anthropics/skills",
-        "etoiles": 186700,
-        "etoiles_au": "2026-11-02T18:42:26.169Z",
-        "cree_le": "2025-09-22T15:53:31Z",
-        "dernier_push": "2026-10-28T19:20:39Z",
-        "jours_sans_push": 4,
-        "inactif": false,
-        "licence": null,
-        "archive": false,
-        "fork": false,
-        "parent": null,
-        "date_ajout_skill": null
-      },
-      "visuel": {
-        "src": "medias/montages/ressources/skill-creator.jpg",
-        "alt": "skill-creator: Anthropic's skill that writes, tests, and refines your own skills. Étape 1 : Add the repository as a plugin catalog in Claude Code.. Étape 2 : Install example-skills: /plugin install example-skills@anthropic-agent-skills. Étape 3 : Then simply name the skill in your request.",
-        "gabarit": "etapes",
-        "mention": "Illustration — ne prouve pas le fonctionnement"
-      },
-      "captures": [
-        {
-          "document": "depot",
-          "snapshot_id": 484,
-          "capture_le": "2026-11-02T18:42:26.169Z",
-          "url": "https://github.com/anthropics/skills",
-          "mode": "live"
-        },
-        {
-          "document": "fichier:skills/skill-creator/SKILL.md",
-          "snapshot_id": 477,
-          "capture_le": "2026-11-02T12:15:55.900Z",
-          "url": "https://github.com/anthropics/skills/blob/main/skills/skill-creator/SKILL.md",
-          "mode": "live"
-        },
-        {
-          "document": "dossier:skills/skill-creator",
-          "snapshot_id": 478,
-          "capture_le": "2026-11-02T12:15:55.900Z",
-          "url": "https://github.com/anthropics/skills/tree/main/skills/skill-creator",
-          "mode": "live"
-        },
-        {
-          "document": "fichier:skills/skill-creator/LICENSE.txt",
-          "snapshot_id": 479,
-          "capture_le": "2026-11-02T12:15:55.900Z",
-          "url": "https://github.com/anthropics/skills/blob/main/skills/skill-creator/LICENSE.txt",
-          "mode": "live"
-        },
-        {
-          "document": "fichier:README.md",
-          "snapshot_id": 424,
-          "capture_le": "2026-11-02T12:15:38.384Z",
-          "url": "https://github.com/anthropics/skills/blob/main/README.md",
-          "mode": "live"
-        },
-        {
-          "document": "fichier:.claude-plugin/marketplace.json",
-          "snapshot_id": 485,
-          "capture_le": "2026-11-02T18:42:26.169Z",
-          "url": "https://github.com/anthropics/skills/blob/main/.claude-plugin/marketplace.json",
-          "mode": "live"
-        }
-      ],
-      "decouverte_via": "Liste transmise par l'utilisateur le 2026-11-02, tirée d'un fil X de @Slonski_rt (contenu externe attribué ; chiffres d'installation du fil non vérifiés)",
-      "importe_le": "2026-11-03T07:15:18.913Z"
     }
   ],
-  "ressources_non_planifiees": [],
+  "ressources_non_planifiees": [
+    {
+      "post_id": 93,
+      "slug": "gh-alchaincyf-huashu-motion",
+      "nom": "huashu-motion",
+      "statut": "rejete",
+      "motifs": [
+        {
+          "code": "citation_trop_courte",
+          "champ": "accroche",
+          "detail": "让你的agent一键直出商业级产品宣传片：会作曲，能指着画面改。"
+        },
+        {
+          "code": "citation_trop_courte",
+          "champ": "interet",
+          "detail": "画面用代码写，GSAP、Canvas、Three.js、SVG，浏览器能画的都能用；不调用视频生成模型，每一帧只由代码和时间决定。"
+        },
+        {
+          "code": "citation_trop_courte",
+          "champ": "interet",
+          "detail": "没有私有格式，片子就是一个网页，带走就能用。"
+        },
+        {
+          "code": "citation_trop_courte",
+          "champ": "interet",
+          "detail": "拿21支真实的发布片（Apple、Nothing、GoPro、Google、Vercel、Linear、Anthropic等），用FFmpeg逐支量切点、节拍、响度和能量曲线；"
+        },
+        {
+          "code": "citation_trop_courte",
+          "champ": "interet",
+          "detail": "拆了142支高互动的发布片和动效片，按产品类型整理出20种运动语言，每种写清楚它在说什么、适合什么产品；"
+        },
+        {
+          "code": "citation_trop_courte",
+          "champ": "interet",
+          "detail": "每支片子开工前先写一张节奏单：3秒内要有钩子，中段要有一次爆发，最响的那一下前面先停一拍。"
+        },
+        {
+          "code": "citation_trop_courte",
+          "champ": "exemple_usage",
+          "detail": "「做一支发布片，要口播，用我自己的录音：voice.m4a」"
+        },
+        {
+          "code": "citation_trop_courte",
+          "champ": "exemple_usage",
+          "detail": "逐字对齐，画面落在说到的那个词上，自动出字幕，配乐在说话时让位"
+        },
+        {
+          "code": "citation_trop_courte",
+          "champ": "demarrage.etapes:2",
+          "detail": "缺什么跑om doctor就知道，这些都可以直接让agent帮你装。"
+        },
+        {
+          "code": "citation_trop_courte",
+          "champ": "compatibilites:1",
+          "detail": "Node 22以上。"
+        },
+        {
+          "code": "citation_trop_courte",
+          "champ": "compatibilites:1",
+          "detail": "Chrome（或Chromium、Edge）：截帧、检查、导出都用你电脑上已经装好的浏览器，不额外下载渲染器。"
+        },
+        {
+          "code": "citation_trop_courte",
+          "champ": "compatibilites:1",
+          "detail": "FFmpeg：导出视频、合成配乐要用。"
+        },
+        {
+          "code": "citation_trop_courte",
+          "champ": "limites:0",
+          "detail": "目前只在macOS上实测过。Codex的沙箱会拦本地预览和浏览器，遇到时手动批准一下。"
+        },
+        {
+          "code": "citation_trop_courte",
+          "champ": "limites:1",
+          "detail": "它听不见。agent靠谱面、能量曲线和频谱图检查配乐，最后一耳朵还得是你的。"
+        },
+        {
+          "code": "citation_trop_courte",
+          "champ": "limites:2",
+          "detail": "它不会凭空生成真人和实拍。画面全是代码画的；要真人、实拍，用你自己的素材，它负责合成和包装。"
+        },
+        {
+          "code": "citation_trop_courte",
+          "champ": "reperes:0",
+          "detail": "om share会出一个分享包：一张10MB以内的GIF（开头加片尾，可以直接当README头图、发X），和一份写好发帖文案、README头图代码的share.md。"
+        },
+        {
+          "code": "citation_trop_courte",
+          "champ": "reperes:1",
+          "detail": "示范谱 | 3份，skills/huashu-motion/references/scores/"
+        },
+        {
+          "code": "citation_trop_courte",
+          "champ": "reperes:1",
+          "detail": "字体（中文500–900字重、衬线、展示字体） | 27款，fonts/"
+        },
+        {
+          "code": "citation_trop_courte",
+          "champ": "reperes:2",
+          "detail": "代码和文档：MIT。随便用，随便改，随便造。"
+        },
+        {
+          "code": "citation_trop_courte",
+          "champ": "reperes:2",
+          "detail": "例外：「豆子花叔」角色（runtime/clip/lib/toon.js里的角色绘制，以及它在storytime模板和示范片里的形象）是花叔的卡通形象，只用于本项目的示范，不随MIT授权用于其他用途。"
+        },
+        {
+          "code": "citation_trop_courte",
+          "champ": "mots_cles.technologies:0",
+          "detail": "画面用代码写，GSAP、Canvas、Three.js、SVG，浏览器能画的都能用"
+        },
+        {
+          "code": "citation_trop_courte",
+          "champ": "mots_cles.technologies:1",
+          "detail": "画面用代码写，GSAP、Canvas、Three.js、SVG，浏览器能画的都能用"
+        },
+        {
+          "code": "citation_trop_courte",
+          "champ": "mots_cles.technologies:2",
+          "detail": "agent按节奏单先写一份谱（ABC记谱法，纯文本的乐谱）"
+        },
+        {
+          "code": "citation_trop_courte",
+          "champ": "mots_cles.technologies:3",
+          "detail": "FFmpeg：导出视频、合成配乐要用。"
+        },
+        {
+          "code": "citation_trop_courte",
+          "champ": "mots_cles.technologies:4",
+          "detail": "跟Claude Code、Codex这些agent说一句「给我的产品做个30秒的发布片」"
+        },
+        {
+          "code": "citation_trop_courte",
+          "champ": "demarrage",
+          "detail": "缺什么跑om doctor就知道，这些都可以直接让agent帮你装。"
+        },
+        {
+          "code": "citation_trop_courte",
+          "champ": "mots_cles.usages:0",
+          "detail": "让你的agent一键直出商业级产品宣传片：会作曲，能指着画面改。"
+        },
+        {
+          "code": "citation_trop_courte",
+          "champ": "mots_cles.usages:1",
+          "detail": "按C，在画面上点一下，写下要改什么。"
+        },
+        {
+          "code": "citation_trop_courte",
+          "champ": "mots_cles.usages:2",
+          "detail": "做发布片用的是作曲家模式：agent按节奏单先写一份谱（ABC记谱法，纯文本的乐谱），谱里的标记对齐每个场景"
+        },
+        {
+          "code": "citation_trop_courte",
+          "champ": "mots_cles.usages:3",
+          "detail": "「把data/funnel.csv做成30秒解说，讲清楚为什么注册率翻倍了」"
+        },
+        {
+          "code": "citation_trop_courte",
+          "champ": "mots_cles.usages:4",
+          "detail": "口播：系统音色念稿，或者用你自己的录音；逐字对齐，画面可以落在某个词上。"
+        },
+        {
+          "code": "citation_trop_courte",
+          "champ": "mots_cles.usages:5",
+          "detail": "「导出GIF」「要透明底」「做成网页分享」"
+        },
+        {
+          "code": "citation_trop_courte",
+          "champ": "mots_cles.usages:5",
+          "detail": "MP4、MOV（透明）、WebM、GIF；或者导出一个带播放器和源码的分享页"
+        },
+        {
+          "code": "technologie_introuvable",
+          "champ": "mots_cles.technologies:2",
+          "detail": "ABC notation"
+        },
+        {
+          "code": "benchmark_non_attribue",
+          "champ": "accroche"
+        },
+        {
+          "code": "benchmark_non_attribue",
+          "champ": "description"
+        },
+        {
+          "code": "benchmark_non_attribue",
+          "champ": "exemple_usage"
+        },
+        {
+          "code": "benchmark_non_attribue",
+          "champ": "limites:1"
+        },
+        {
+          "code": "benchmark_non_attribue",
+          "champ": "reperes:1"
+        },
+        {
+          "code": "etape_trop_longue",
+          "champ": "demarrage.etapes:1",
+          "detail": "119 caractères, 80 au plus"
+        }
+      ]
+    },
+    {
+      "post_id": 94,
+      "slug": "gh-jakeschincariol-day-trader-skill",
+      "nom": "day-trader-skill",
+      "statut": "a_verifier",
+      "motifs": [
+        {
+          "code": "soutien_nom_absent",
+          "champ": "description",
+          "detail": "Congress"
+        },
+        {
+          "code": "copie_de_la_source",
+          "champ": "interet"
+        },
+        {
+          "code": "nombre_absent_des_citations",
+          "champ": "exemple_usage",
+          "detail": "5"
+        },
+        {
+          "code": "nombre_absent_des_citations",
+          "champ": "exemple_usage",
+          "detail": "1"
+        },
+        {
+          "code": "nombre_absent_des_citations",
+          "champ": "exemple_usage",
+          "detail": "5.000"
+        },
+        {
+          "code": "nombre_absent_des_citations",
+          "champ": "exemple_usage",
+          "detail": "50"
+        },
+        {
+          "code": "soutien_nom_absent",
+          "champ": "exemple_usage",
+          "detail": "Tesla"
+        },
+        {
+          "code": "soutien_nom_absent",
+          "champ": "demarrage.etapes:0",
+          "detail": "Claude"
+        },
+        {
+          "code": "soutien_nom_absent",
+          "champ": "demarrage.etapes:1",
+          "detail": "Claude"
+        },
+        {
+          "code": "soutien_nom_absent",
+          "champ": "demarrage.etapes:1",
+          "detail": "Code"
+        },
+        {
+          "code": "soutien_nom_absent",
+          "champ": "demarrage.etapes:3",
+          "detail": "SEC"
+        },
+        {
+          "code": "soutien_nom_absent",
+          "champ": "compatibilites:0",
+          "detail": "Python"
+        },
+        {
+          "code": "copie_de_la_source",
+          "champ": "limites:1"
+        }
+      ]
+    },
+    {
+      "post_id": 95,
+      "slug": "gh-jakeschincariol-founder-skill",
+      "nom": "founder-skill",
+      "statut": "rejete",
+      "motifs": [
+        {
+          "code": "citation_introuvable",
+          "champ": "mots_cles.usages:1",
+          "detail": "so you know how to launch, how to market and how to actually make money, before you spend thousands of dollars finding out the hard way."
+        },
+        {
+          "code": "usage_sans_passage",
+          "champ": "mots_cles.usages:1",
+          "detail": "valider un business"
+        },
+        {
+          "code": "soutien_nom_absent",
+          "champ": "interet",
+          "detail": "CFO"
+        },
+        {
+          "code": "copie_de_la_source",
+          "champ": "exemple_usage"
+        },
+        {
+          "code": "soutien_nom_absent",
+          "champ": "exemple_usage",
+          "detail": "CFO"
+        },
+        {
+          "code": "contexte_a_relire",
+          "champ": "exemple_usage",
+          "detail": "/founder-launch starts with exactly that test."
+        },
+        {
+          "code": "copie_de_la_source",
+          "champ": "demarrage.etapes:0"
+        },
+        {
+          "code": "soutien_nom_absent",
+          "champ": "demarrage.etapes:1",
+          "detail": "Claude"
+        },
+        {
+          "code": "soutien_nom_absent",
+          "champ": "demarrage.etapes:1",
+          "detail": "Code"
+        },
+        {
+          "code": "copie_de_la_source",
+          "champ": "demarrage.etapes:3"
+        },
+        {
+          "code": "soutien_nom_absent",
+          "champ": "limites:0",
+          "detail": "Hormozi"
+        },
+        {
+          "code": "soutien_nom_absent",
+          "champ": "limites:0",
+          "detail": "Thiel"
+        },
+        {
+          "code": "soutien_nom_absent",
+          "champ": "limites:0",
+          "detail": "Jobs"
+        }
+      ]
+    },
+    {
+      "post_id": 96,
+      "slug": "gh-gathin23-cleanyourtv",
+      "nom": "cleanyourtv",
+      "statut": "rejete",
+      "motifs": [
+        {
+          "code": "citation_trop_courte",
+          "champ": "description",
+          "detail": "Disable"
+        },
+        {
+          "code": "soutien_nom_absent",
+          "champ": "description",
+          "detail": "Google"
+        },
+        {
+          "code": "soutien_nom_absent",
+          "champ": "compatibilites:0",
+          "detail": "Google"
+        },
+        {
+          "code": "soutien_nom_absent",
+          "champ": "limites:0",
+          "detail": "Samsung"
+        },
+        {
+          "code": "soutien_nom_absent",
+          "champ": "limites:0",
+          "detail": "Roku"
+        },
+        {
+          "code": "soutien_nom_absent",
+          "champ": "limites:0",
+          "detail": "Vizio"
+        },
+        {
+          "code": "soutien_nom_absent",
+          "champ": "limites:0",
+          "detail": "Hisense"
+        },
+        {
+          "code": "soutien_nom_absent",
+          "champ": "limites:0",
+          "detail": "VIDAA"
+        },
+        {
+          "code": "soutien_nom_absent",
+          "champ": "limites:1",
+          "detail": "TCL"
+        },
+        {
+          "code": "contexte_a_relire",
+          "champ": "limites:1",
+          "detail": "They refuse to install any launcher at all; their lists say so in the header."
+        },
+        {
+          "code": "contexte_a_relire",
+          "champ": "limites:2",
+          "detail": "And on the 2015 Fire TV Box (Fire OS 5) even that half fails: every pm route is refused."
+        }
+      ]
+    },
+    {
+      "post_id": 97,
+      "slug": "gh-wangzan101-mika",
+      "nom": "Mika",
+      "statut": "rejete",
+      "motifs": [
+        {
+          "code": "citation_introuvable",
+          "champ": "description",
+          "detail": "Opening apps, tapping, typing and scrolling happen on that separate screen"
+        },
+        {
+          "code": "technologie_introuvable",
+          "champ": "mots_cles.technologies:2",
+          "detail": "OpenAI-compatible endpoint"
+        }
+      ]
+    },
+    {
+      "post_id": 98,
+      "slug": "gh-simbasjungles-free-my-tv",
+      "nom": "free-my-tv",
+      "statut": "rejete",
+      "motifs": [
+        {
+          "code": "popularite_invoquee",
+          "champ": "interet"
+        },
+        {
+          "code": "soutien_nom_absent",
+          "champ": "demarrage.etapes:0",
+          "detail": "USB"
+        },
+        {
+          "code": "contexte_a_relire",
+          "champ": "demarrage.etapes:0",
+          "detail": "On the TV, turn on developer mode: Settings → System → About → press Android TV OS build 7 times."
+        },
+        {
+          "code": "contexte_a_relire",
+          "champ": "demarrage.etapes:0",
+          "detail": "You need a Google TV or Android TV (Android 8 or newer) and a computer on the same Wi-Fi."
+        },
+        {
+          "code": "nombre_absent_des_citations",
+          "champ": "reperes:0",
+          "detail": "3"
+        },
+        {
+          "code": "nombre_absent_des_citations",
+          "champ": "reperes:0",
+          "detail": "5"
+        }
+      ]
+    },
+    {
+      "post_id": 99,
+      "slug": "gh-onehumanbeing-esp32-iphone-agent",
+      "nom": "esp32-iphone-agent",
+      "statut": "rejete",
+      "motifs": [
+        {
+          "code": "citation_introuvable",
+          "champ": "mots_cles.technologies:5",
+          "detail": "C10"
+        },
+        {
+          "code": "citation_trop_courte",
+          "champ": "mots_cles.technologies:5",
+          "detail": "C10"
+        },
+        {
+          "code": "nombre_absent_des_citations",
+          "champ": "accroche",
+          "detail": "3"
+        },
+        {
+          "code": "copie_de_la_source",
+          "champ": "interet"
+        },
+        {
+          "code": "copie_de_la_source",
+          "champ": "exemple_usage"
+        },
+        {
+          "code": "copie_de_la_source",
+          "champ": "demarrage.etapes:0"
+        },
+        {
+          "code": "contexte_a_relire",
+          "champ": "demarrage.etapes:0",
+          "detail": "| Install arduino-cli, the ESP32 core 3.3.x and NimBLE-Arduino 2.5.x, then: `bash arduino-cli lib install \"NimBLE-Arduino@2.5.1\" hardware/flash.sh # optional: [serial port] [--debug] ` Always build with flash.sh: it applies the BLE buffer sizes in"
+        },
+        {
+          "code": "contexte_a_relire",
+          "champ": "demarrage.etapes:1",
+          "detail": "| Install arduino-cli, the ESP32 core 3.3.x and NimBLE-Arduino 2.5.x, then: `bash arduino-cli lib install \"NimBLE-Arduino@2.5.1\" hardware/flash.sh # optional: [serial port] [--debug] ` Always build with flash.sh: it applies the BLE buffer sizes in"
+        },
+        {
+          "code": "contexte_a_relire",
+          "champ": "demarrage.etapes:2",
+          "detail": "Easiest: join the TestFlight beta on your iPhone and install ESP32 Agent from there, then go to step 3."
+        },
+        {
+          "code": "contexte_a_relire",
+          "champ": "demarrage.etapes:2",
+          "detail": "Or build it yourself: `bash cp ios/Config/Local.xcconfig.example ios/Config/Local.xcconfig # set DEVELOPMENT_TEAM and IA_BUNDLE_ID open ios/IPhoneAgent.xcodeproj # run the IPhoneAgent scheme on your iPhone ` The project is generated with XcodeGen from ios/project.yml (cd ios &&"
+        },
+        {
+          "code": "contexte_a_relire",
+          "champ": "compatibilites:0",
+          "detail": "| Part | Notes | |---|---| | ESP32-S3 board | Tested with a Seeed Studio XIAO ESP32S3 (plain version, 8 MB PSRAM; not Sense, not Plus)."
+        },
+        {
+          "code": "contexte_a_relire",
+          "champ": "compatibilites:0",
+          "detail": "Any ESP32-S3 with native USB on its USB-C port and PSRAM should work."
+        },
+        {
+          "code": "copie_de_la_source",
+          "champ": "compatibilites:1"
+        },
+        {
+          "code": "contexte_a_relire",
+          "champ": "compatibilites:1",
+          "detail": "| | iPhone | iOS 18 or later, with cellular data (the Wi-Fi is taken by the board's hotspot)."
+        },
+        {
+          "code": "contexte_a_relire",
+          "champ": "compatibilites:2",
+          "detail": "| | Vision model | Any OpenAI-compatible chat API that accepts images: a cloud API or your own server."
+        },
+        {
+          "code": "contexte_a_relire",
+          "champ": "limites:1",
+          "detail": "BLE carries about 300-500 kbps, so the screen is mirrored small (480×1040, ≤5 fps); each step takes a few seconds, most of it the model."
+        }
+      ]
+    },
+    {
+      "post_id": 100,
+      "slug": "gh-leonxlnx-earshot",
+      "nom": "earshot",
+      "statut": "rejete",
+      "motifs": [
+        {
+          "code": "citation_introuvable",
+          "champ": "demarrage",
+          "detail": "Claude Code, Claude projects, custom instructions or API calls."
+        },
+        {
+          "code": "copie_de_la_source",
+          "champ": "description"
+        },
+        {
+          "code": "copie_de_la_source",
+          "champ": "interet"
+        },
+        {
+          "code": "contexte_a_relire",
+          "champ": "demarrage.etapes:0",
+          "detail": "git clone https://github.com/Leonxlnx/earshot && cd earshot python -m venv .venv .venv/bin/python -m pip install torch --index-url https://download.pytorch.org/whl/cpu"
+        },
+        {
+          "code": "contexte_a_relire",
+          "champ": "compatibilites:1",
+          "detail": "mcp | the same tools as an MCP server for Claude Code and other agents"
+        },
+        {
+          "code": "contexte_a_relire",
+          "champ": "compatibilites:1",
+          "detail": "On a slow machine start Claude Code with MCP_TIMEOUT=60000."
+        },
+        {
+          "code": "copie_de_la_source",
+          "champ": "limites:0"
+        },
+        {
+          "code": "copie_de_la_source",
+          "champ": "limites:2"
+        },
+        {
+          "code": "nombre_absent_des_citations",
+          "champ": "reperes:0",
+          "detail": "56"
+        }
+      ]
+    },
+    {
+      "post_id": 101,
+      "slug": "gh-haydenschmitty-floorplan",
+      "nom": "floorplan",
+      "statut": "rejete",
+      "motifs": [
+        {
+          "code": "citation_introuvable",
+          "champ": "reperes:2",
+          "detail": "Or edit floorplan/architecture.json and floorplan/descriptions/ yourself."
+        },
+        {
+          "code": "copie_de_la_source",
+          "champ": "description"
+        },
+        {
+          "code": "copie_de_la_source",
+          "champ": "exemple_usage"
+        },
+        {
+          "code": "contexte_a_relire",
+          "champ": "compatibilites:1",
+          "detail": "Point it at a monorepo, a subfolder of one, or a plain folder that holds several repos side by side."
+        },
+        {
+          "code": "contexte_a_relire",
+          "champ": "compatibilites:2",
+          "detail": "Languages: TypeScript, JavaScript, Python, Go, Rust, Java, Kotlin, Scala, plus Vue, Svelte and Astro files, with lighter support for others."
+        },
+        {
+          "code": "contexte_a_relire",
+          "champ": "limites:2",
+          "detail": "It uses your Claude or ChatGPT plan like any other task."
+        }
+      ]
+    },
+    {
+      "post_id": 102,
+      "slug": "gh-microsoft-tokeneconomizer",
+      "nom": "TokenEconomizer",
+      "statut": "rejete",
+      "motifs": [
+        {
+          "code": "citation_introuvable",
+          "champ": "interet",
+          "detail": "A tool that goes unused over p* prompts spread across at least *m sessions, or over s* sessions of any length (*p = 10, m* = 2, *s* = 5), is left out of the next sessions through the agent's own settings."
+        },
+        {
+          "code": "copie_de_la_source",
+          "champ": "description"
+        },
+        {
+          "code": "contexte_a_relire",
+          "champ": "demarrage.etapes:0",
+          "detail": "Run these commands in the folder where you want to keep the clone."
+        },
+        {
+          "code": "copie_de_la_source",
+          "champ": "demarrage.etapes:3"
+        },
+        {
+          "code": "copie_de_la_source",
+          "champ": "compatibilites:0"
+        },
+        {
+          "code": "contexte_a_relire",
+          "champ": "limites:0",
+          "detail": "Micro-skills is off by default, because its proposer adds model calls and how much it saves depends on the repository and the work you do there."
+        },
+        {
+          "code": "copie_de_la_source",
+          "champ": "limites:3"
+        },
+        {
+          "code": "repere_trop_long",
+          "champ": "reperes:1"
+        }
+      ]
+    },
+    {
+      "post_id": 103,
+      "slug": "gh-openmoss-moss-image",
+      "nom": "MOSS-Image",
+      "statut": "rejete",
+      "motifs": [
+        {
+          "code": "citation_trop_courte",
+          "champ": "demarrage.etapes:2",
+          "detail": "custom_pipeline=\"pipeline_moss_image\","
+        },
+        {
+          "code": "citation_trop_courte",
+          "champ": "demarrage.etapes:2",
+          "detail": "trust_remote_code=True,"
+        },
+        {
+          "code": "citation_trop_courte",
+          "champ": "reperes:0",
+          "detail": "| Shift | 5 |"
+        },
+        {
+          "code": "citation_trop_courte",
+          "champ": "demarrage",
+          "detail": "custom_pipeline=\"pipeline_moss_image\","
+        },
+        {
+          "code": "citation_trop_courte",
+          "champ": "demarrage",
+          "detail": "trust_remote_code=True,"
+        },
+        {
+          "code": "terme_proche_redondant",
+          "champ": "mots_cles.termes_proches:4",
+          "detail": "ComfyUI"
+        }
+      ]
+    },
+    {
+      "post_id": 104,
+      "slug": "gh-mw00-project-maya",
+      "nom": "project-maya",
+      "statut": "a_verifier",
+      "motifs": [
+        {
+          "code": "nombre_absent_des_citations",
+          "champ": "description",
+          "detail": "5.3"
+        },
+        {
+          "code": "nombre_absent_des_citations",
+          "champ": "description",
+          "detail": "4.1"
+        },
+        {
+          "code": "nombre_absent_des_citations",
+          "champ": "description",
+          "detail": "1017"
+        },
+        {
+          "code": "nombre_absent_des_citations",
+          "champ": "description",
+          "detail": "3.1"
+        },
+        {
+          "code": "contexte_a_relire",
+          "champ": "compatibilites:0",
+          "detail": "NVIDIA, compute capability 7.0 or newer (V100, RTX 20 and newer): one, or up to 16 that share the model."
+        },
+        {
+          "code": "contexte_a_relire",
+          "champ": "compatibilites:1",
+          "detail": "Linux (x86-64; a CPU with AVX2 is best), the NVIDIA driver, CUDA 12.x (CUDA 13 works for RTX 20 and newer, not for the V100 or Pascal), g++, Python 3.10+."
+        },
+        {
+          "code": "contexte_a_relire",
+          "champ": "compatibilites:1",
+          "detail": "32 GB runs it."
+        }
+      ]
+    },
+    {
+      "post_id": 105,
+      "slug": "gh-qybaihe-bla",
+      "nom": "bla",
+      "statut": "rejete",
+      "motifs": [
+        {
+          "code": "citation_introuvable",
+          "champ": "compatibilites:1",
+          "detail": "# Node.js ^22.23.4 or 24.x recommended (REA red-team needs zlib.zstd on 22.23+)"
+        },
+        {
+          "code": "citation_introuvable",
+          "champ": "mots_cles.technologies:2",
+          "detail": "# Node.js ^22.23.4 or 24.x recommended"
+        },
+        {
+          "code": "contexte_a_relire",
+          "champ": "compatibilites:1",
+          "detail": "Wabt/tshark/Node 24 are optional — they unlock empirical red-team probes (npm run redteam:rea), not protection itself."
+        },
+        {
+          "code": "contexte_a_relire",
+          "champ": "limites:5",
+          "detail": "Token/$ columns are internal estimates derived from BLA's catalog of REA limits — they are not the same as the empirical REA process measurements above (those are byte-level analyzer failures with real error strings)."
+        },
+        {
+          "code": "benchmark_non_attribue",
+          "champ": "limites:5"
+        }
+      ]
+    },
+    {
+      "post_id": 106,
+      "slug": "gh-shaongitbd-doory",
+      "nom": "doory",
+      "statut": "a_verifier",
+      "motifs": [
+        {
+          "code": "contexte_a_relire",
+          "champ": "accroche",
+          "detail": "There is no paid plan, you don't need an account to start, and you can run it on your own server with Docker or without it."
+        },
+        {
+          "code": "contexte_a_relire",
+          "champ": "description",
+          "detail": "You start from a template or a blank page, edit everything on it, and export PNG, JPG, SVG, PDF, MP4 or GIF."
+        },
+        {
+          "code": "contexte_a_relire",
+          "champ": "limites:2",
+          "detail": "Image values may be public https URLs, which the server copies into your uploads while URL_IMAGE_UPLOADS is on (the default; set it to false to turn off URL images for the assistant and the API alike)."
+        }
+      ]
+    },
+    {
+      "post_id": 107,
+      "slug": "gh-helixdb-helix-foundry",
+      "nom": "helix-foundry",
+      "statut": "a_verifier",
+      "motifs": [
+        {
+          "code": "contexte_a_relire",
+          "champ": "demarrage.etapes:1",
+          "detail": "With Docker running, paste this into your agent"
+        },
+        {
+          "code": "copie_de_la_source",
+          "champ": "compatibilites:1"
+        }
+      ]
+    },
+    {
+      "post_id": 108,
+      "slug": "gh-deeplethe-solid-glass",
+      "nom": "solid-glass",
+      "statut": "a_verifier",
+      "motifs": [
+        {
+          "code": "repere_trop_long",
+          "champ": "reperes:0"
+        }
+      ]
+    },
+    {
+      "post_id": 109,
+      "slug": "gh-denissergeevitch-ex-ussr-kinship-research",
+      "nom": "ex-ussr-kinship-research",
+      "statut": "a_verifier",
+      "motifs": [
+        {
+          "code": "contexte_a_relire",
+          "champ": "demarrage.etapes:0",
+          "detail": "With Node.js installed, you can use the optional Skills CLI: `bash npx skills add https://github.com/DenisSergeevitch/ex-ussr-kinship-research ` The CLI lets you choose your agent and installs into the current project by default; add -g for a personal installation across"
+        },
+        {
+          "code": "contexte_a_relire",
+          "champ": "demarrage.etapes:1",
+          "detail": "~/.claude/skills/ex-ussr-kinship-research ` For a single project, put the folder in .claude/skills/ inside the repository."
+        },
+        {
+          "code": "contexte_a_relire",
+          "champ": "compatibilites:1",
+          "detail": "The optional scan_montage.py helper needs Pillow; build_pdf.py needs a Chromium-based browser."
+        },
+        {
+          "code": "contexte_a_relire",
+          "champ": "limites:0",
+          "detail": "The skill's instructions are written in Russian, but the agent talks to you in your language: English, Ukrainian, Russian, Polish, German and so on."
+        },
+        {
+          "code": "contexte_a_relire",
+          "champ": "limites:2",
+          "detail": "Installing tree applications, configuring MCP connections and automatically synchronizing external trees are outside the skill's scope."
+        },
+        {
+          "code": "copie_de_la_source",
+          "champ": "limites:3"
+        },
+        {
+          "code": "copie_de_la_source",
+          "champ": "limites:4"
+        }
+      ]
+    }
+  ],
   "recherche": [
     {
-      "postId": 1,
-      "revisionId": 151,
-      "jour": "2026-11-03",
+      "postId": 9,
+      "revisionId": 181,
+      "jour": "2026-11-04",
       "motsCles": [
         {
           "champ": "nom",
-          "terme": "frontend-design",
+          "terme": "Marketing Skills",
           "raison": null,
           "passage": null
         },
@@ -16660,1528 +24956,138 @@ window.DONNEES_MAQUETTE = {
         },
         {
           "champ": "usage",
-          "terme": "design d'interface",
+          "terme": "optimisation des conversions",
           "raison": null,
-          "passage": "Guidance for distinctive, intentional visual design when building new UI or reshaping an existing one."
+          "passage": "When the user wants to optimize, improve, or increase conversions on any marketing page or form"
         },
         {
           "champ": "usage",
-          "terme": "direction artistique",
+          "terme": "rédaction marketing",
           "raison": null,
-          "passage": "Helps with aesthetic direction, typography, and making choices that don't read as templated defaults."
+          "passage": "When the user wants to write, rewrite, or improve marketing copy for any page"
         },
         {
           "champ": "usage",
-          "terme": "typographie",
+          "terme": "référencement naturel (SEO)",
           "raison": null,
-          "passage": "Typography carries the personality of the page."
+          "passage": "When the user wants to audit, review, or diagnose SEO issues on their site."
         },
         {
           "champ": "usage",
-          "terme": "rédaction d'interface",
+          "terme": "séquences d'e-mails",
           "raison": null,
-          "passage": "Bring the same intentionality and minimalism to copywriting that you would bring to spacing and color."
+          "passage": "When the user wants to create or optimize an email sequence, drip campaign, automated email flow"
         },
         {
           "champ": "usage",
-          "terme": "accessibilité",
+          "terme": "suivi analytique",
           "raison": null,
-          "passage": "visible keyboard focus, reduced motion respected, visually accessible"
+          "passage": "When the user wants to set up, improve, or audit analytics tracking and measurement."
         },
         {
           "champ": "usage",
-          "terme": "motion design",
+          "terme": "campagnes publicitaires",
           "raison": null,
-          "passage": "Motion that answers a person's action (opening, expanding, confirming) is welcome when it shows what changed."
-        },
-        {
-          "champ": "technologie",
-          "terme": "CSS",
-          "raison": null,
-          "passage": "When writing the code, be careful of structuring your CSS selector specificities."
+          "passage": "When the user wants help with paid advertising campaigns on Google Ads, Meta (Facebook/Instagram), LinkedIn, Twitter/X"
         },
         {
           "champ": "technologie",
           "terme": "Claude Code",
           "raison": null,
-          "passage": "You can register this repository as a Claude Code Plugin marketplace"
-        },
-        {
-          "champ": "technologie",
-          "terme": "Agent Skills",
-          "raison": null,
-          "passage": "For information about the Agent Skills standard, see agentskills.io."
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "front-end",
-          "raison": "Autre graphie de frontend, premier mot du nom frontend-design.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "design web",
-          "raison": "Le skill traite le design d'interface des pages web, haut de page (hero) et CSS compris.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "identité visuelle",
-          "raison": "La direction artistique du skill vise une identité visuelle propre à chaque projet.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "interface utilisateur",
-          "raison": "Le design d'interface s'applique à l'interface utilisateur (UI) d'un site ou d'une application.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "polices de caractères",
-          "raison": "Pour la typographie, le skill conseille une ou deux familles de polices bien distinctes.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "microcopie",
-          "raison": "La rédaction d'interface couvre les textes courts : boutons, messages d'erreur, écrans vides.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "animations d'interface",
-          "raison": "Le skill conseille de limiter les animations automatiques à un seul moment orchestré et d'animer surtout les réponses aux actions ; ce n'est pas un outil d'animation.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "design responsive",
-          "raison": "Le design d'interface du skill doit tenir jusqu'au mobile, sans l'annoncer.",
-          "passage": null
-        }
-      ],
-      "textes": [
-        "frontend-design pushes Claude toward interfaces that don't look like everyone else's",
-        "Anthropic's skill gives Claude a real artistic direction for creating or redoing an interface. Palette, typography and layout are chosen for the brief, not pulled from the default settings you see everywhere.",
-        "Claude first writes a short design plan, rereads it against the brief, and only then codes. The skill also names the current clichés of AI-generated designs: cream background with terracotta accent, rounded cards all identical. Claude avoids them when the brief leaves the choice open, and follows them if the brief asks for them.",
-        "Visual choices start from the subject: a toy for girls aged 8 to 11 won't have the aesthetic of a dashboard for financial analysts.",
-        "In Claude Code, add the repository as a marketplace",
-        "Install example-skills: /plugin install example-skills@anthropic-agent-skills",
-        "Then mention frontend-design in the request",
-        "Claude Code, and already included in Claude.ai's paid plans according to the repository."
-      ]
-    },
-    {
-      "postId": 2,
-      "revisionId": 132,
-      "jour": "2026-11-03",
-      "motsCles": [
-        {
-          "champ": "nom",
-          "terme": "agent-browser",
-          "raison": null,
-          "passage": null
-        },
-        {
-          "champ": "categorie",
-          "terme": "agents et automatisation",
-          "raison": null,
-          "passage": null
-        },
-        {
-          "champ": "usage",
-          "terme": "automatisation de navigateur",
-          "raison": null,
-          "passage": "Browser automation CLI for AI agents"
-        },
-        {
-          "champ": "usage",
-          "terme": "test d'applications web",
-          "raison": null,
-          "passage": "Use agent-browser to test the login flow."
-        },
-        {
-          "champ": "usage",
-          "terme": "remplissage de formulaires",
-          "raison": null,
-          "passage": "Fill by ref"
-        },
-        {
-          "champ": "usage",
-          "terme": "capture d'écran",
-          "raison": null,
-          "passage": "Annotated screenshot with numbered element labels"
-        },
-        {
-          "champ": "usage",
-          "terme": "audit d'accessibilité",
-          "raison": null,
-          "passage": "Run an axe-core accessibility audit against the current page or a URL."
-        },
-        {
-          "champ": "usage",
-          "terme": "lecture de pages web",
-          "raison": null,
-          "passage": "Fetch agent-readable text, or read rendered active-tab DOM"
-        },
-        {
-          "champ": "technologie",
-          "terme": "Rust",
-          "raison": null,
-          "passage": "Fast native Rust CLI."
-        },
-        {
-          "champ": "technologie",
-          "terme": "Chrome",
-          "raison": null,
-          "passage": "Uses Chrome (from Chrome for Testing) by default."
-        },
-        {
-          "champ": "technologie",
-          "terme": "MCP",
-          "raison": null,
-          "passage": "agent-browser mcp # Start an MCP stdio server"
-        },
-        {
-          "champ": "technologie",
-          "terme": "Chrome DevTools Protocol",
-          "raison": null,
-          "passage": "Connect to an existing browser via Chrome DevTools Protocol:"
-        },
-        {
-          "champ": "technologie",
-          "terme": "axe-core",
-          "raison": null,
-          "passage": "Run an axe-core accessibility audit against the current page or a URL."
-        },
-        {
-          "champ": "technologie",
-          "terme": "React DevTools",
-          "raison": null,
-          "passage": "React commands require the React DevTools hook, installed at launch with --enable react-devtools."
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "automatisation web",
-          "raison": "Expression voisine d'automatisation de navigateur, pour les mêmes tâches sur des sites.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "navigateur headless",
-          "raison": "Par défaut, agent-browser lance le navigateur sans fenêtre visible (mode headless) ; l'option --headed l'affiche.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "extraction de contenu web",
-          "raison": "Proche de la lecture de pages web : la commande read récupère le texte lisible d'une page ou d'une URL.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "tests end-to-end",
-          "raison": "Avec agent-browser, un agent peut parcourir une application de bout en bout, comme une connexion ; ce n'est pas un framework de tests avec assertions.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "a11y",
-          "raison": "Abréviation anglaise d'accessibilité ; c'est aussi le nom de la commande d'audit d'accessibilité.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "Model Context Protocol",
-          "raison": "Nom complet du protocole MCP ; agent-browser peut démarrer un serveur de ce type.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "agent web",
-          "raison": "Un agent d'IA qui agit sur des sites a besoin d'une automatisation de navigateur, ce que fournit l'outil.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "skill Claude Code",
-          "raison": "agent-browser fournit un skill pour Claude Code et d'autres assistants de code, ajouté avec npx skills add.",
-          "passage": null
-        }
-      ],
-      "textes": [
-        "agent-browser, from Vercel Labs: a real browser that your agent controls from the command line",
-        "A native Rust CLI: the agent opens a page, reads the text, clicks, fills a field and takes a screenshot. According to the repository, the skill works with Claude Code, Codex, Cursor or Gemini CLI, and the tool also runs as an MCP server.",
-        "snapshot returns the accessibility tree with a reference per element (@e1, @e2): the agent clicks or fills by reference, without querying the DOM again. Note: nothing is restricted by default: allowed domains and an action policy must be enabled by you.",
-        "Ask your agent to test the login flow with agent-browser: it reads --help, picks up the form fields and fills them in.",
-        "npm install -g agent-browser, then agent-browser install to fetch Chrome, only the first time."
-      ]
-    },
-    {
-      "postId": 7,
-      "revisionId": 133,
-      "jour": "2026-11-03",
-      "motsCles": [
-        {
-          "champ": "nom",
-          "terme": "mcp-builder",
-          "raison": null,
-          "passage": null
-        },
-        {
-          "champ": "categorie",
-          "terme": "MCP et skills",
-          "raison": null,
-          "passage": null
-        },
-        {
-          "champ": "usage",
-          "terme": "créer un serveur MCP",
-          "raison": null,
-          "passage": "Create MCP (Model Context Protocol) servers that enable LLMs to interact with external services through well-designed tools."
-        },
-        {
-          "champ": "usage",
-          "terme": "intégrer une API externe",
-          "raison": null,
-          "passage": "Use when building MCP servers to integrate external APIs or services"
-        },
-        {
-          "champ": "usage",
-          "terme": "outils pour agents",
-          "raison": null,
-          "passage": "Clear, descriptive tool names help agents find the right tools quickly."
-        },
-        {
-          "champ": "usage",
-          "terme": "évaluer un serveur MCP",
-          "raison": null,
-          "passage": "Use evaluations to test whether LLMs can effectively use your MCP server to answer realistic, complex questions."
-        },
-        {
-          "champ": "technologie",
-          "terme": "Model Context Protocol",
-          "raison": null,
-          "passage": "Create MCP (Model Context Protocol) servers that enable LLMs to interact with external services through well-designed tools."
-        },
-        {
-          "champ": "technologie",
-          "terme": "TypeScript",
-          "raison": null,
-          "passage": "The TypeScript SDK has two major versions."
-        },
-        {
-          "champ": "technologie",
-          "terme": "Python",
-          "raison": null,
-          "passage": "whether in Python (FastMCP) or Node/TypeScript (MCP SDK)"
-        },
-        {
-          "champ": "technologie",
-          "terme": "FastMCP",
-          "raison": null,
-          "passage": "whether in Python (FastMCP) or Node/TypeScript (MCP SDK)"
-        },
-        {
-          "champ": "technologie",
-          "terme": "MCP Inspector",
-          "raison": null,
-          "passage": "Test with MCP Inspector: npx @modelcontextprotocol/inspector"
-        },
-        {
-          "champ": "technologie",
-          "terme": "Claude Code",
-          "raison": null,
-          "passage": "You can register this repository as a Claude Code Plugin marketplace"
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "connecteur d'API",
-          "raison": "mcp-builder guide l'écriture d'un serveur qui relie un LLM à l'API d'un service externe.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "protocole MCP",
-          "raison": "Traduction de Model Context Protocol, le protocole des serveurs que guide mcp-builder.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "agents IA",
-          "raison": "Les outils d'un serveur créé avec mcp-builder sont appelés par des agents IA.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "Agent Skills",
-          "raison": "mcp-builder est un skill du dépôt d'Anthropic consacré aux Agent Skills, chargé par Claude.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "skill Claude",
-          "raison": "mcp-builder est un skill que Claude charge pour guider la création d'un serveur MCP.",
-          "passage": null
-        }
-      ],
-      "textes": [
-        "With mcp-builder, Claude takes your MCP server from API study through evaluations",
-        "Anthropic's skill for connecting an external API to an MCP server, in TypeScript or Python with FastMCP. Claude runs four phases: API study, implementation, review and testing with MCP Inspector, then evaluations.",
-        "Everything is designed for the agent that will call the tools: prefixed, action-oriented names, short descriptions, targeted and paginable results, errors that say what to do next.",
-        "Once the server is done, the guide has you write 10 realistic questions, with no destructive operation, to see whether an LLM really uses it well.",
-        "In Claude Code, add the repository as a marketplace",
-        "Install example-skills: /plugin install example-skills@anthropic-agent-skills",
-        "Then mention mcp-builder in the request",
-        "According to the guide, every new TypeScript server starts from SDK v2."
-      ]
-    },
-    {
-      "postId": 8,
-      "revisionId": 152,
-      "jour": "2026-11-03",
-      "motsCles": [
-        {
-          "champ": "nom",
-          "terme": "Obsidian Skills",
-          "raison": null,
-          "passage": null
-        },
-        {
-          "champ": "categorie",
-          "terme": "MCP et skills",
-          "raison": null,
-          "passage": null
-        },
-        {
-          "champ": "usage",
-          "terme": "piloter un coffre Obsidian",
-          "raison": null,
-          "passage": "Interact with Obsidian vaults via the Obsidian CLI including plugin and theme development"
-        },
-        {
-          "champ": "usage",
-          "terme": "édition Markdown",
-          "raison": null,
-          "passage": "Create and edit Obsidian Flavored Markdown (.md) with wikilinks, embeds, callouts, properties"
-        },
-        {
-          "champ": "usage",
-          "terme": "vues filtrées Obsidian Bases",
-          "raison": null,
-          "passage": "Create and edit Obsidian Bases (.base) with views, filters, formulas, and summaries"
-        },
-        {
-          "champ": "usage",
-          "terme": "canevas visuel JSON Canvas",
-          "raison": null,
-          "passage": "Create and edit JSON Canvas files (.canvas) with nodes, edges, groups, and connections"
-        },
-        {
-          "champ": "usage",
-          "terme": "nettoyer une page web",
-          "raison": null,
-          "passage": "Extract clean markdown from web pages using Defuddle"
-        },
-        {
-          "champ": "usage",
-          "terme": "notes Markdown depuis JSON/CSV",
-          "raison": null,
-          "passage": "Render Markdown templates from JSON or CSV data using Knap, including batch file generation"
-        },
-        {
-          "champ": "technologie",
-          "terme": "Markdown",
-          "raison": null,
-          "passage": "open formats including Markdown, Bases, JSON Canvas"
-        },
-        {
-          "champ": "technologie",
-          "terme": "JSON Canvas",
-          "raison": null,
-          "passage": "Create and edit JSON Canvas files (.canvas)"
-        },
-        {
-          "champ": "technologie",
-          "terme": "Obsidian CLI",
-          "raison": null,
-          "passage": "Interact with Obsidian vaults via the Obsidian CLI"
-        },
-        {
-          "champ": "technologie",
-          "terme": "Claude Code",
-          "raison": null,
-          "passage": "any skills-compatible agent, including Claude Code, Codex, and Open Code"
+          "passage": "Marketing skills for Claude Code and AI agents."
         },
         {
           "champ": "technologie",
           "terme": "Codex",
           "raison": null,
-          "passage": "Copy the skills/ directory into your Codex skills path"
-        },
-        {
-          "champ": "technologie",
-          "terme": "OpenCode",
-          "raison": null,
-          "passage": "OpenCode auto-discovers all SKILL.md files under ~/.opencode/skills/."
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "Claude Skills",
-          "raison": "pour Claude Code, le dépôt renvoie à la documentation officielle des Claude Skills.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "Agent Skills",
-          "raison": "Obsidian Skills suit la spécification Agent Skills, un format de skills commun à plusieurs agents.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "wikilinks",
-          "raison": "la syntaxe Markdown d'Obsidian comprend les wikilinks, des liens entre fichiers du coffre.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "économie de tokens",
-          "raison": "le skill defuddle d'Obsidian Skills retire le superflu des pages web pour économiser des tokens.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "modèles de fichiers",
-          "raison": "le skill knap remplit des modèles Markdown à partir de données JSON ou CSV.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "base de connaissances Markdown",
-          "raison": "un coffre Obsidian est un dossier de fichiers Markdown que ces skills apprennent à l'agent à créer et modifier.",
-          "passage": null
-        }
-      ],
-      "textes": [
-        "Obsidian Skills teaches your agent Obsidian's formats and its CLI",
-        "Your agent writes notes with wikilinks, callouts and properties, builds Bases with views, filters and formulas, and constructs JSON Canvas canvases, directly in your vault. It works with Claude Code, Codex and OpenCode.",
-        "Two skills go beyond notes: defuddle reduces a web page to clean Markdown to save tokens, knap generates files in series from JSON or CSV. The repository follows the Agent Skills specification, so the same skills serve all your compatible agents.",
-        "Fetch an article with defuddle, then file it in the vault as a note with properties and wikilinks.",
-        "In Claude Code: /plugin marketplace add kepano/obsidian-skills",
-        "Then /plugin install obsidian@obsidian-skills",
-        "Or with npx: npx skills add https://github.com/kepano/obsidian-skills",
-        "Claude Code, Codex, OpenCode and any skills-compatible agent."
-      ]
-    },
-    {
-      "postId": 11,
-      "revisionId": 130,
-      "jour": "2026-11-03",
-      "motsCles": [
-        {
-          "champ": "nom",
-          "terme": "Superpowers",
-          "raison": null,
-          "passage": null
-        },
-        {
-          "champ": "categorie",
-          "terme": "MCP et skills",
-          "raison": null,
-          "passage": null
-        },
-        {
-          "champ": "usage",
-          "terme": "méthode de développement",
-          "raison": null,
-          "passage": "Superpowers is a complete software development methodology for your coding agents"
-        },
-        {
-          "champ": "usage",
-          "terme": "cadrer un besoin",
-          "raison": null,
-          "passage": "Draws out what you actually want, and why, through questions that get you describing it"
-        },
-        {
-          "champ": "usage",
-          "terme": "plan d'implémentation",
-          "raison": null,
-          "passage": "your agent puts together an implementation plan"
-        },
-        {
-          "champ": "usage",
-          "terme": "écrire les tests d'abord",
-          "raison": null,
-          "passage": "Test-Driven Development - Write tests first, always"
-        },
-        {
-          "champ": "usage",
-          "terme": "revue de code",
-          "raison": null,
-          "passage": "requesting-code-review - Activates between tasks. Reviews against plan, reports issues by severity."
-        },
-        {
-          "champ": "usage",
-          "terme": "déléguer à des sous-agents",
-          "raison": null,
-          "passage": "dispatches a fresh subagent per task with a review after each"
-        },
-        {
-          "champ": "technologie",
-          "terme": "Claude Code",
-          "raison": null,
-          "passage": "Getting Started Claude Code"
-        },
-        {
-          "champ": "technologie",
-          "terme": "Codex",
-          "raison": null,
-          "passage": "Superpowers is available via the official Codex plugin marketplace"
+          "passage": "Install via Codex's plugin system"
         },
         {
           "champ": "technologie",
           "terme": "Cursor",
           "raison": null,
-          "passage": "In Cursor Agent chat, install from marketplace"
+          "passage": "Works with Claude Code, OpenAI Codex, Cursor, Windsurf"
         },
         {
           "champ": "technologie",
-          "terme": "Gemini CLI",
+          "terme": "Windsurf",
           "raison": null,
-          "passage": "gemini extensions install https://github.com/obra/superpowers"
-        },
-        {
-          "champ": "technologie",
-          "terme": "GitHub Copilot CLI",
-          "raison": null,
-          "passage": "copilot plugin install superpowers@superpowers-marketplace"
-        },
-        {
-          "champ": "technologie",
-          "terme": "git worktrees",
-          "raison": null,
-          "passage": "using-git-worktrees - Activates after design approval. Creates isolated workspace on new branch"
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "TDD",
-          "raison": "Superpowers impose le TDD : un test qui échoue est écrit avant le code.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "test-driven development",
-          "raison": "nom anglais du développement piloté par les tests, au cœur de Superpowers.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "débogage",
-          "raison": "Superpowers inclut un skill de débogage systématique en quatre phases.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "subagents",
-          "raison": "terme anglais des sous-agents auxquels Superpowers peut confier chaque tâche du plan.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "spécification",
-          "raison": "Superpowers tire une spécification de la conversation avant d'écrire le code.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "code review",
-          "raison": "terme anglais de la revue de code que Superpowers fait pendant l'exécution du plan.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "agent de code",
-          "raison": "Superpowers est une méthode de travail pour les agents de code.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "plugin Claude Code",
-          "raison": "Superpowers s'installe comme plugin dans Claude Code et dans d'autres agents.",
-          "passage": null
-        }
-      ],
-      "textes": [
-        "Superpowers makes your coding agent scope, plan, test, and review before it delivers",
-        "Superpowers imposes a real method on your coding agent. It doesn't rush into the code: it asks what you're trying to do, shows you the spec in readable chunks, then builds an implementation plan once the design is approved. Skills trigger on their own, with no command to type.",
-        "The plan splits the work into 2- to 5-minute tasks, with files, code, and checks. TDD is strict: code written before its test is deleted. Between tasks, a review ranks issues by severity, and a critical issue blocks the next step. According to the author, the agent can thus run autonomously for a few hours without straying from the plan.",
-        "For a new feature: brainstorming pins down the request, writing-plans breaks it into small tasks, then implementation starts with a failing test, before the minimal code.",
-        "In Claude Code: /plugin install superpowers@claude-plugins-official",
-        "Other agents: a separate install for each, depending on the repository",
-        "Claude Code, Codex, Cursor, Gemini CLI, GitHub Copilot CLI and about ten others."
-      ]
-    },
-    {
-      "postId": 3,
-      "revisionId": 135,
-      "jour": "2026-11-03",
-      "motsCles": [
-        {
-          "champ": "nom",
-          "terme": "React Best Practices (Vercel)",
-          "raison": null,
-          "passage": null
-        },
-        {
-          "champ": "categorie",
-          "terme": "MCP et skills",
-          "raison": null,
-          "passage": null
-        },
-        {
-          "champ": "usage",
-          "terme": "optimisation des performances",
-          "raison": null,
-          "passage": "React and Next.js performance optimization guidelines from Vercel Engineering."
-        },
-        {
-          "champ": "usage",
-          "terme": "revue de code",
-          "raison": null,
-          "passage": "Reviewing code for performance issues"
-        },
-        {
-          "champ": "usage",
-          "terme": "refactorisation",
-          "raison": null,
-          "passage": "Refactoring existing React/Next.js code"
-        },
-        {
-          "champ": "usage",
-          "terme": "taille du bundle",
-          "raison": null,
-          "passage": "Optimizing bundle size or load times"
-        },
-        {
-          "champ": "usage",
-          "terme": "chargement des données",
-          "raison": null,
-          "passage": "Implementing data fetching (client or server-side)"
-        },
-        {
-          "champ": "usage",
-          "terme": "temps de chargement",
-          "raison": null,
-          "passage": "Optimizing bundle size or load times"
-        },
-        {
-          "champ": "technologie",
-          "terme": "React",
-          "raison": null,
-          "passage": "Comprehensive performance optimization guide for React and Next.js applications, maintained by Vercel."
-        },
-        {
-          "champ": "technologie",
-          "terme": "Next.js",
-          "raison": null,
-          "passage": "Comprehensive performance optimization guide for React and Next.js applications, maintained by Vercel."
-        },
-        {
-          "champ": "technologie",
-          "terme": "JavaScript",
-          "raison": null,
-          "passage": "JavaScript Performance | LOW-MEDIUM | js-"
-        },
-        {
-          "champ": "technologie",
-          "terme": "RSC",
-          "raison": null,
-          "passage": "Avoid module-level mutable request state in RSC/SSR"
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "vercel-react-best-practices",
-          "raison": "Nom technique du skill React Best Practices, donné par le champ name de son fichier SKILL.md.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "performance web",
-          "raison": "Les règles visent la rapidité des applications React, côté navigateur comme côté serveur.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "requêtes en cascade",
-          "raison": "Traduit waterfalls : des attentes successives qui ralentissent une application React.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "chargement différé",
-          "raison": "Des règles sur la taille du bundle conseillent de charger les composants lourds à la demande (next/dynamic).",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "rendus inutiles",
-          "raison": "Une catégorie de règles React aide à éviter les re-rendus superflus des composants.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "mémoïsation",
-          "raison": "Des règles React conseillent d'isoler les calculs coûteux dans des composants mémoïsés, et d'éviter la mémoïsation pour les valeurs simples.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "SWR",
-          "raison": "Une seule règle cite la bibliothèque SWR, pour dédoublonner les requêtes lors du chargement des données côté client.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "Suspense",
-          "raison": "Une seule règle React cite Suspense, pour afficher le contenu au fur et à mesure de son chargement (streaming).",
-          "passage": null
-        }
-      ],
-      "textes": [
-        "React Best Practices: Vercel's 70 React and Next.js performance rules, applied by your agent",
-        "Vercel Engineering condenses its React and Next.js performance rules there. The agent uses them whenever it writes, reviews or refactors a component, a Next.js page or data loading.",
-        "The rules are ranked by impact: the agent tackles cascading requests and bundle weight first, before re-renders or JavaScript micro-optimizations.",
-        "A Next.js page chains two independent requests? Ask the agent to optimize it: the async-parallel rule runs them together with Promise.all().",
-        "The command installs Vercel's entire collection, not just this skill: npx skills add vercel-labs/agent-skills"
-      ]
-    },
-    {
-      "postId": 4,
-      "revisionId": 153,
-      "jour": "2026-11-03",
-      "motsCles": [
-        {
-          "champ": "nom",
-          "terme": "Skills de documents docx, xlsx, pptx, pdf",
-          "raison": null,
-          "passage": null
-        },
-        {
-          "champ": "categorie",
-          "terme": "MCP et skills",
-          "raison": null,
-          "passage": null
-        },
-        {
-          "champ": "usage",
-          "terme": "créer des documents Word",
-          "raison": null,
-          "passage": "create, read, edit, or manipulate Word documents (.docx files)"
-        },
-        {
-          "champ": "usage",
-          "terme": "tableurs et formules",
-          "raison": null,
-          "passage": "open, read, edit, or fix an existing .xlsx, .xlsm, .xltx, .csv, or .tsv file (e.g., adding columns, computing formulas, formatting, charting, cleaning messy data)"
-        },
-        {
-          "champ": "usage",
-          "terme": "créer des présentations",
-          "raison": null,
-          "passage": "creating slide decks, pitch decks, or presentations"
-        },
-        {
-          "champ": "usage",
-          "terme": "fusionner des PDF",
-          "raison": null,
-          "passage": "combining or merging multiple PDFs into one, splitting PDFs apart"
-        },
-        {
-          "champ": "usage",
-          "terme": "remplir des formulaires PDF",
-          "raison": null,
-          "passage": "filling PDF forms"
-        },
-        {
-          "champ": "usage",
-          "terme": "suivi des modifications",
-          "raison": null,
-          "passage": "working with tracked changes or comments"
-        },
-        {
-          "champ": "technologie",
-          "terme": "Python",
-          "raison": null,
-          "passage": "This guide covers essential PDF processing operations using Python libraries and command-line tools."
-        },
-        {
-          "champ": "technologie",
-          "terme": "JavaScript",
-          "raison": null,
-          "passage": "Write a docx (npm) script"
-        },
-        {
-          "champ": "technologie",
-          "terme": "LibreOffice",
-          "raison": null,
-          "passage": "LibreOffice computes every formula, the file is rewritten in place"
-        },
-        {
-          "champ": "technologie",
-          "terme": "openpyxl",
-          "raison": null,
-          "passage": "openpyxl writes formulas as strings with no cached values."
-        },
-        {
-          "champ": "technologie",
-          "terme": "pptxgenjs",
-          "raison": null,
-          "passage": "Write a pptxgenjs script"
-        },
-        {
-          "champ": "technologie",
-          "terme": "pypdf",
-          "raison": null,
-          "passage": "from pypdf import PdfReader, PdfWriter"
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "bureautique",
-          "raison": "ces skills traitent les formats de bureautique docx, xlsx, pptx et pdf",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "Excel",
-          "raison": "le skill xlsx produit des classeurs .xlsx, le format des tableurs Excel",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "PowerPoint",
-          "raison": "le skill pptx crée et modifie des présentations .pptx destinées à PowerPoint",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "diaporama",
-          "raison": "autre nom d'une présentation, que le skill pptx sait créer et modifier",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "rapport",
-          "raison": "le skill docx couvre aussi les rapports, mémos et lettres au format Word",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "OCR",
-          "raison": "le skill pdf décrit l'OCR pour rendre cherchables les PDF numérisés",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "Claude Code",
-          "raison": "les skills s'installent dans Claude Code par la marketplace de plugins",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "Agent Skills",
-          "raison": "le dépôt renvoie au standard Agent Skills, dont ces skills suivent le format (SKILL.md) ; leur licence les limite toutefois aux services d'Anthropic",
-          "passage": null
-        }
-      ],
-      "textes": [
-        "Anthropic document skills: Claude creates and edits Word files, spreadsheets, slides and PDF files",
-        "The four skills that power Claude's document functions, one per format: docx, xlsx, pptx and pdf. Word report, spreadsheet with formulas, presentation, PDF form: Claude relies on them to deliver a clean file. According to Anthropic, a reference for complex skills used in production.",
-        "Each skill picks its method based on the task, lists the known library pitfalls and requires checking the produced file. For a spreadsheet, LibreOffice recalculates all formulas, and nothing goes out while an error remains.",
-        "Once the document-skills plugin is installed, just ask Claude Code to use the PDF skill to extract a file's form fields.",
-        "Add the catalog: /plugin marketplace add anthropics/skills",
-        "Install: /plugin install document-skills@anthropic-agent-skills",
-        "Code viewable but not free: the license reserves these skills for Anthropic's services and forbids copying, modifying or redistributing them."
-      ]
-    },
-    {
-      "postId": 10,
-      "revisionId": 137,
-      "jour": "2026-11-03",
-      "motsCles": [
-        {
-          "champ": "nom",
-          "terme": "Scientific Agent Skills (K-Dense)",
-          "raison": null,
-          "passage": null
-        },
-        {
-          "champ": "categorie",
-          "terme": "MCP et skills",
-          "raison": null,
-          "passage": null
-        },
-        {
-          "champ": "usage",
-          "terme": "recherche scientifique",
-          "raison": null,
-          "passage": "A collection of 177 scientific and research skills for AI agents, created by K-Dense."
-        },
-        {
-          "champ": "usage",
-          "terme": "analyse génomique",
-          "raison": null,
-          "passage": "Bioinformatics & Genomics - Sequence analysis, single-cell RNA-seq, pooled CRISPR screens"
-        },
-        {
-          "champ": "usage",
-          "terme": "découverte de médicaments",
-          "raison": null,
-          "passage": "Cheminformatics & Drug Discovery - Molecular property prediction, virtual screening, ADMET analysis, molecular docking"
-        },
-        {
-          "champ": "usage",
-          "terme": "bases de données scientifiques",
-          "raison": null,
-          "passage": "The Database Lookup skill documents 80 databases with public, registered, or licensed access"
-        },
-        {
-          "champ": "usage",
-          "terme": "analyse de données",
-          "raison": null,
-          "passage": "Data Analysis & Visualization - Statistical analysis, network analysis, time series, publication-quality figures"
-        },
-        {
-          "champ": "usage",
-          "terme": "rédaction scientifique",
-          "raison": null,
-          "passage": "Scientific Communication - Evidence-traceable writing, confidential authorized peer review, literature synthesis"
+          "passage": "Works with Claude Code, OpenAI Codex, Cursor, Windsurf"
         },
         {
           "champ": "technologie",
           "terme": "Agent Skills",
           "raison": null,
-          "passage": "The collection follows the open Agent Skills standard"
-        },
-        {
-          "champ": "technologie",
-          "terme": "Python",
-          "raison": null,
-          "passage": "While the agent can use any Python package or API on its own"
-        },
-        {
-          "champ": "technologie",
-          "terme": "RDKit",
-          "raison": null,
-          "passage": "Explicitly defined, version-aware workflows for RDKit, Scanpy, PyTorch Lightning, scikit-learn"
-        },
-        {
-          "champ": "technologie",
-          "terme": "Scanpy",
-          "raison": null,
-          "passage": "Explicitly defined, version-aware workflows for RDKit, Scanpy, PyTorch Lightning, scikit-learn"
-        },
-        {
-          "champ": "technologie",
-          "terme": "scikit-learn",
-          "raison": null,
-          "passage": "Explicitly defined, version-aware workflows for RDKit, Scanpy, PyTorch Lightning, scikit-learn"
-        },
-        {
-          "champ": "technologie",
-          "terme": "Biopython",
-          "raison": null,
-          "passage": "Multi-database packages such as BioServices, Biopython, and gget add further coverage"
+          "passage": "any agent that supports the Agent Skills spec"
         },
         {
           "champ": "terme_proche",
-          "terme": "Claude Scientific Skills",
-          "raison": "Ancien nom du dépôt scientific-agent-skills, qui a changé de nom pour s'ouvrir à d'autres agents que Claude.",
+          "terme": "copywriting",
+          "raison": "terme anglais de la rédaction marketing, un usage central de Marketing Skills.",
           "passage": null
         },
         {
           "champ": "terme_proche",
-          "terme": "bioinformatique",
-          "raison": "Domaine couvert par plusieurs skills d'analyse génomique : séquences, cellules uniques, variants.",
+          "terme": "CRO",
+          "raison": "sigle anglais de l'optimisation des conversions, cité dans la description de Marketing Skills.",
           "passage": null
         },
         {
           "champ": "terme_proche",
-          "terme": "chémoinformatique",
-          "raison": "Domaine couvert par les skills de découverte de médicaments, avec RDKit notamment.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "recherche clinique",
-          "raison": "Des skills servent la recherche scientifique sur les essais et les variants, sans diagnostic ni traitement.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "visualisation scientifique",
-          "raison": "Plusieurs skills d'analyse de données produisent des figures dignes d'une publication.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "skills pour Claude Code",
-          "raison": "Ces skills au format Agent Skills s'installent notamment dans Claude Code.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "science assistée par IA",
-          "raison": "Scientific Agent Skills met un agent IA au service de la recherche scientifique.",
-          "passage": null
-        }
-      ],
-      "textes": [
-        "Scientific Agent Skills: 177 skills for doing research with Claude Code, Cursor or Codex",
-        "Biology, chemistry, medicine, physics, data analysis: each K-Dense skill aligns your agent with a specific package, database or method, including the domain's conventions and checks.",
-        "The most useful piece: Database Lookup documents 80 databases (PubChem, ChEMBL, UniProt, ClinicalTrials.gov…), with the right endpoints, pagination and provenance. A single request is then enough to chain a whole pipeline.",
-        "In the repository example, a single request to classify EGFR inhibitors: the agent queries ChEMBL, analyzes structure-activity relationships with RDKit, looks for resistance mechanisms in PubMed, then delivers charts and a report.",
-        "With GitHub CLI 2.90.0+: gh skill install, only the useful skills.",
-        "Dependencies are installed separately, depending on each skill.",
-        "A skill can make your agent execute arbitrary code and K-Dense does not guarantee an exhaustive review: read SKILL.md before installing.",
-        "Repository under MIT, but each skill has its own license, which may add conditions."
-      ]
-    },
-    {
-      "postId": 13,
-      "revisionId": 154,
-      "jour": "2026-11-03",
-      "motsCles": [
-        {
-          "champ": "nom",
-          "terme": "grill-me (Matt Pocock)",
-          "raison": null,
-          "passage": null
-        },
-        {
-          "champ": "categorie",
-          "terme": "MCP et skills",
-          "raison": null,
-          "passage": null
-        },
-        {
-          "champ": "usage",
-          "terme": "affiner un plan",
-          "raison": null,
-          "passage": "A relentless interview to sharpen a plan or design."
-        },
-        {
-          "champ": "usage",
-          "terme": "entretien de conception",
-          "raison": null,
-          "passage": "Get relentlessly interviewed about a plan or design until every branch of the design tree is resolved."
-        },
-        {
-          "champ": "usage",
-          "terme": "questions détaillées",
-          "raison": null,
-          "passage": "getting the agent to ask you detailed questions about what you're building."
-        },
-        {
-          "champ": "usage",
-          "terme": "s'aligner avec l'agent",
-          "raison": null,
-          "passage": "They help you align with the agent before you get started"
-        },
-        {
-          "champ": "usage",
-          "terme": "préparer une décision",
-          "raison": null,
-          "passage": "Interview the user relentlessly about a plan, decision, or idea until every branch of the design tree is resolved."
-        },
-        {
-          "champ": "usage",
-          "terme": "cadrage de projet",
-          "raison": null,
-          "passage": "They help you align with the agent before you get started, and think deeply about the change you're making."
-        },
-        {
-          "champ": "technologie",
-          "terme": "Claude Code",
-          "raison": null,
-          "passage": "fix common failure modes I see with Claude Code, Codex, and other coding agents."
-        },
-        {
-          "champ": "technologie",
-          "terme": "Codex",
-          "raison": null,
-          "passage": "codex plugin marketplace add mattpocock/skills"
-        },
-        {
-          "champ": "technologie",
-          "terme": "GitHub Copilot",
-          "raison": null,
-          "passage": "copilot plugin install mattpocock-skills@mattpocock"
-        },
-        {
-          "champ": "technologie",
-          "terme": "Gemini CLI",
-          "raison": null,
-          "passage": "gemini skills install https://github.com/mattpocock/skills.git --path skills/productivity"
-        },
-        {
-          "champ": "technologie",
-          "terme": "Cursor",
-          "raison": null,
-          "passage": "cursor, opencode, devin, windsurf, amp, pi"
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "grilling",
-          "raison": "grill-me délègue l'entretien au skill grilling du même dépôt.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "grill-with-docs",
-          "raison": "Skill du même auteur pour le code : même entretien que grill-me, avec en plus un glossaire et des ADR.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "interview",
-          "raison": "Le dépôt décrit ce skill comme une interview sans relâche sur un plan.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "malentendu",
-          "raison": "Ce skill vise le décalage entre ce que l'on veut et ce que l'agent comprend.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "clarifier ses besoins",
-          "raison": "Le skill fait préciser ses attentes par des questions détaillées, avant que l'agent commence.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "challenger un plan",
-          "raison": "grill-me sert à affiner un plan en le soumettant aux questions de l'agent.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "productivité",
-          "raison": "Le dépôt range ce skill dans sa section Productivity, parmi ses outils généraux.",
-          "passage": null
-        }
-      ],
-      "textes": [
-        "grill-me: your agent questions you about a plan until every branch is resolved, not before",
-        "Before launching anything, you flip the roles: the agent asks you precise questions about your plan, decision or idea, and digs into every branch until it is settled. Matt Pocock intends it for non-code topics.",
-        "You align with the agent before it starts working, instead of finding out afterward that it misunderstood. For code, the grill-with-docs variant runs the same interview and builds the project vocabulary along the way.",
-        "A launch to scope out, a team trade-off to prepare: type /grill-me, describe the plan, then answer until nothing is left unclear.",
-        "In Claude Code, install the mattpocock-skills plugin.",
-        "It does not start on its own: type /grill-me, then describe your plan.",
-        "Claude Code, Codex and other agents; any model, according to the author."
-      ]
-    },
-    {
-      "postId": 14,
-      "revisionId": 139,
-      "jour": "2026-11-03",
-      "motsCles": [
-        {
-          "champ": "nom",
-          "terme": "claude-mem",
-          "raison": null,
-          "passage": null
-        },
-        {
-          "champ": "categorie",
-          "terme": "agents et automatisation",
-          "raison": null,
-          "passage": null
-        },
-        {
-          "champ": "usage",
-          "terme": "mémoire entre sessions",
-          "raison": null,
-          "passage": "Context survives across sessions"
-        },
-        {
-          "champ": "usage",
-          "terme": "résumés de session",
-          "raison": null,
-          "passage": "generating semantic summaries, and making them available to future sessions"
-        },
-        {
-          "champ": "usage",
-          "terme": "recherche dans l'historique",
-          "raison": null,
-          "passage": "Query your project history with natural language"
-        },
-        {
-          "champ": "usage",
-          "terme": "injection de contexte",
-          "raison": null,
-          "passage": "Fine-grained control over what context gets injected"
-        },
-        {
-          "champ": "usage",
-          "terme": "économie de tokens",
-          "raison": null,
-          "passage": "~10x token savings by filtering before fetching details"
-        },
-        {
-          "champ": "usage",
-          "terme": "mémoire de projet",
-          "raison": null,
-          "passage": "maintain continuity of knowledge about projects"
-        },
-        {
-          "champ": "technologie",
-          "terme": "Claude Code",
-          "raison": null,
-          "passage": "Claude Code: Latest version with plugin support"
-        },
-        {
-          "champ": "technologie",
-          "terme": "Codex",
-          "raison": null,
-          "passage": "Or install for T3 Code (Codex and Claude Code providers):"
-        },
-        {
-          "champ": "technologie",
-          "terme": "OpenCode",
-          "raison": null,
-          "passage": "This works with OpenCode 1.3.4 or later, including OpenCode 2."
-        },
-        {
-          "champ": "technologie",
-          "terme": "MCP",
-          "raison": null,
-          "passage": "intelligent memory search through 4 MCP tools"
-        },
-        {
-          "champ": "technologie",
-          "terme": "SQLite",
-          "raison": null,
-          "passage": "SQLite Database - Stores sessions, observations, summaries"
-        },
-        {
-          "champ": "technologie",
-          "terme": "Chroma",
-          "raison": null,
-          "passage": "Chroma Vector Database - Hybrid semantic + keyword search"
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "mémoire persistante",
-          "raison": "claude-mem se présente comme un système de mémoire persistante pour Claude Code.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "mémoire à long terme",
-          "raison": "le dépôt de claude-mem se range sous le sujet long-term-memory, la mémoire à long terme d'un agent.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "continuité de projet",
-          "raison": "claude-mem aide Claude à garder le fil d'un projet quand une session se termine.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "RAG",
-          "raison": "le dépôt de claude-mem se classe sous le sujet rag : il retrouve des informations passées et les injecte dans le contexte.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "recherche sémantique",
-          "raison": "claude-mem combine recherche par mots-clés et recherche sémantique ; il utilise en interne la base vectorielle Chroma, sans être lui-même une base vectorielle.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "plugin Claude Code",
-          "raison": "claude-mem s'installe comme plugin de Claude Code, par npx ou par la place de marché de plugins.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "agent de code",
-          "raison": "claude-mem sert de mémoire à des agents de code comme Claude Code, Codex ou OpenCode.",
-          "passage": null
-        }
-      ],
-      "textes": [
-        "claude-mem gives Claude Code a memory that persists from one session to the next",
-        "During the session, it records what the agent does, compresses it into summaries, and injects the useful context back into the next one. You pick a project back up without re-explaining everything.",
-        "To find information, the agent first reads a compact index, then loads only the useful notes: about ten times fewer tokens, according to the authors.",
-        "In the docs: search for \"authentication bug\" among the fixes, then retrieve only two observations.",
-        "npx claude-mem install or the Claude Code plugin marketplace, then restart. Not npm install -g, which only installs the library.",
-        "Node.js 20.0.0 or newer.",
-        "The claude-mem service offered at install is free for 30 days; after that, memory runs on your Anthropic subscription, unless you have an OpenRouter or Gemini subscription or key."
-      ]
-    },
-    {
-      "postId": 5,
-      "revisionId": 155,
-      "jour": "2026-11-03",
-      "motsCles": [
-        {
-          "champ": "nom",
-          "terme": "UI UX Pro Max",
-          "raison": null,
-          "passage": null
-        },
-        {
-          "champ": "categorie",
-          "terme": "MCP et skills",
-          "raison": null,
-          "passage": null
-        },
-        {
-          "champ": "usage",
-          "terme": "design d'interface",
-          "raison": null,
-          "passage": "An AI skill that provides design intelligence for building professional UI/UX across multiple platforms and frameworks."
-        },
-        {
-          "champ": "usage",
-          "terme": "design system",
-          "raison": null,
-          "passage": "Industry-specific design system generation"
-        },
-        {
-          "champ": "usage",
           "terme": "landing page",
-          "raison": null,
-          "passage": "Build a landing page for my SaaS product"
-        },
-        {
-          "champ": "usage",
-          "terme": "palette de couleurs",
-          "raison": null,
-          "passage": "Industry-specific palettes aligned 1:1 with the 192 product types"
-        },
-        {
-          "champ": "usage",
-          "terme": "association de polices",
-          "raison": null,
-          "passage": "Curated typography combinations with Google Fonts imports"
-        },
-        {
-          "champ": "usage",
-          "terme": "tableau de bord",
-          "raison": null,
-          "passage": "Create a dashboard for healthcare analytics"
-        },
-        {
-          "champ": "technologie",
-          "terme": "React",
-          "raison": null,
-          "passage": "Tech Stacks - React, Next.js, Astro, Vue"
-        },
-        {
-          "champ": "technologie",
-          "terme": "Next.js",
-          "raison": null,
-          "passage": "Tech Stacks - React, Next.js, Astro, Vue"
-        },
-        {
-          "champ": "technologie",
-          "terme": "Vue",
-          "raison": null,
-          "passage": "Tech Stacks - React, Next.js, Astro, Vue"
-        },
-        {
-          "champ": "technologie",
-          "terme": "Tailwind",
-          "raison": null,
-          "passage": "let it default to HTML + Tailwind"
-        },
-        {
-          "champ": "technologie",
-          "terme": "SwiftUI",
-          "raison": null,
-          "passage": "SwiftUI, React Native, Flutter, HTML+Tailwind"
-        },
-        {
-          "champ": "technologie",
-          "terme": "Flutter",
-          "raison": null,
-          "passage": "SwiftUI, React Native, Flutter, HTML+Tailwind"
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "interface utilisateur",
-          "raison": "UI signifie interface utilisateur, le sujet même de UI UX Pro Max.",
+          "raison": "nom anglais de la page d'atterrissage, dont Marketing Skills aide à optimiser les conversions.",
           "passage": null
         },
         {
           "champ": "terme_proche",
-          "terme": "expérience utilisateur",
-          "raison": "UX signifie expérience utilisateur ; UI UX Pro Max en donne des règles.",
+          "terme": "emailing",
+          "raison": "conception et rédaction de séquences d'e-mails marketing (skill emails) ; Marketing Skills n'envoie pas les e-mails lui-même.",
           "passage": null
         },
         {
           "champ": "terme_proche",
-          "terme": "page d'atterrissage",
-          "raison": "Traduction française de landing page, un usage décrit par le dépôt.",
+          "terme": "référencement IA",
+          "raison": "le skill ai-seo de Marketing Skills vise la présence dans les réponses des moteurs de recherche IA.",
           "passage": null
         },
         {
           "champ": "terme_proche",
-          "terme": "charte graphique",
-          "raison": "Comme une charte graphique, le design system fixe les couleurs, les polices et le style d'un projet.",
+          "terme": "tests A/B",
+          "raison": "le skill ab-testing de Marketing Skills aide à concevoir et mener des expériences A/B.",
           "passage": null
         },
         {
           "champ": "terme_proche",
-          "terme": "polices d'écriture",
-          "raison": "Les polices d'écriture sont l'objet des associations de polices proposées.",
+          "terme": "growth marketing",
+          "raison": "marketing de croissance, un thème du dépôt Marketing Skills, qui couvre le growth engineering.",
           "passage": null
         },
         {
           "champ": "terme_proche",
-          "terme": "accessibilité",
-          "raison": "Les règles d'UX de UI UX Pro Max comprennent des règles d'accessibilité, sans la garantir.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "ergonomie",
-          "raison": "En français, l'ergonomie d'interface recouvre une bonne part de l'UX visée par UI UX Pro Max.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "refonte visuelle",
-          "raison": "Le dépôt propose une consigne pour que l'assistant refasse le thème d'une app existante avec UI UX Pro Max.",
+          "terme": "SaaS",
+          "raison": "Marketing Skills vise notamment le marketing des logiciels SaaS, par exemple avec le skill marketing-ideas.",
           "passage": null
         }
       ],
       "textes": [
-        "UI UX Pro Max gives your agent a design system tailored to your product before it codes the interface",
-        "Ask for a landing page or a dashboard: the skill activates on its own, starts from your product type and outputs the page structure, style, colors, typography and effects. It draws on 79 styles, 192 product types, palettes and font pairs.",
-        "Each proposal comes with its anti-patterns and a pre-delivery checklist: no emoji as icons, cursor-pointer on every clickable element. Palettes follow the sector, and the purple-pink \"AI\" gradients are banned for a bank.",
-        "In the repository example, a spa landing page gets a Soft UI Evolution style, pale pink and sage green accented with gold, Cormorant Garamond with Montserrat, no neon or abrupt animations.",
-        "In the project: npx ui-ux-pro-max-cli init --ai claude (or cursor, copilot)",
-        "Then ask for the interface you want, the skill takes over.",
-        "About twenty agents depending on the repository, including Claude Code, Cursor, Windsurf, Codex CLI and GitHub Copilot.",
-        "The core is under MIT license; logos, banners and generated visuals are not, they fall under a separate Premium offer (uupm.cc)."
+        "Marketing Skills: CRO, copywriting, SEO and email sequences handled by your code agent",
+        "Corey Haines' marketing collection. Your agent identifies the task at hand—a page to convert, an email sequence, pricing or a Google Ads campaign—and applies the appropriate method.",
+        "Everything rests on a shared product document: you set product, audience and positioning once with product-marketing, and each skill rereads it before acting.",
+        "Ask to optimize a landing page for conversion: the agent relies on the cro skill.",
+        "npx skills add coreyhaines31/marketingskills",
+        "Launched from Claude Code: add -a claude-code, otherwise it won't read them",
+        "Fill in product-marketing, then hand its tasks to the agent",
+        "Claude Code, Codex, Cursor, Windsurf and any agent compatible with Agent Skills."
       ]
     },
     {
-      "postId": 6,
-      "revisionId": 141,
-      "jour": "2026-11-03",
+      "postId": 12,
+      "revisionId": 183,
+      "jour": "2026-11-04",
       "motsCles": [
         {
           "champ": "nom",
-          "terme": "webapp-testing",
+          "terme": "find-skills",
           "raison": null,
           "passage": null
         },
@@ -18193,495 +25099,115 @@ window.DONNEES_MAQUETTE = {
         },
         {
           "champ": "usage",
-          "terme": "tests d'applications web",
+          "terme": "recherche de skills",
           "raison": null,
-          "passage": "testing local web applications using Playwright"
+          "passage": "Search for skills interactively or by keyword"
         },
         {
           "champ": "usage",
-          "terme": "tests d'interface",
+          "terme": "installation de skills",
           "raison": null,
-          "passage": "Supports verifying frontend functionality"
+          "passage": "Install a skill from GitHub or other sources"
         },
         {
           "champ": "usage",
-          "terme": "débogage d'interface",
+          "terme": "découverte de skills",
           "raison": null,
-          "passage": "debugging UI behavior"
+          "passage": "This skill helps you discover and install skills from the open agent skills ecosystem."
         },
         {
           "champ": "usage",
-          "terme": "captures d'écran",
+          "terme": "extension d'un agent",
           "raison": null,
-          "passage": "capturing browser screenshots"
+          "passage": "Expresses interest in extending agent capabilities"
         },
         {
           "champ": "usage",
-          "terme": "journaux du navigateur",
+          "terme": "création de skill",
           "raison": null,
-          "passage": "viewing browser logs"
-        },
-        {
-          "champ": "usage",
-          "terme": "automatisation de navigateur",
-          "raison": null,
-          "passage": "To create an automation script, include only Playwright logic"
+          "passage": "Suggest the user could create their own skill with npx skills init"
         },
         {
           "champ": "technologie",
-          "terme": "Playwright",
+          "terme": "npx",
           "raison": null,
-          "passage": "write native Python Playwright scripts"
+          "passage": "The Skills CLI (npx skills) is the package manager for the open agent skills ecosystem."
         },
         {
           "champ": "technologie",
-          "terme": "Python",
+          "terme": "Node.js",
           "raison": null,
-          "passage": "write native Python Playwright scripts"
-        },
-        {
-          "champ": "technologie",
-          "terme": "Chromium",
-          "raison": null,
-          "passage": "Always launch chromium in headless mode"
-        },
-        {
-          "champ": "technologie",
-          "terme": "HTML",
-          "raison": null,
-          "passage": "Read HTML file directly to identify selectors"
-        },
-        {
-          "champ": "technologie",
-          "terme": "DOM",
-          "raison": null,
-          "passage": "Take screenshot or inspect DOM"
+          "passage": "Requires Node.js 22.20 or later."
         },
         {
           "champ": "technologie",
           "terme": "Claude Code",
           "raison": null,
-          "passage": "You can register this repository as a Claude Code Plugin marketplace"
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "tests end-to-end",
-          "raison": "Le skill pilote un vrai navigateur avec Playwright, mais pour des scripts ponctuels, sans suite de tests ni intégration continue.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "navigateur headless",
-          "raison": "Le skill lance Chromium en headless pour ses scripts Playwright.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "sélecteurs CSS",
-          "raison": "Le skill repère les éléments par des sélecteurs, dont les sélecteurs CSS, après inspection du DOM.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "front-end",
-          "raison": "Le skill sert aux tests d'interface du front-end, lancé en local avec le back-end si besoin.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "tests UI",
-          "raison": "Formulation anglaise courante pour les tests d'interface et le débogage d'interface du skill.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "logs console",
-          "raison": "Les logs de la console font partie des journaux du navigateur que le skill peut relever.",
-          "passage": null
-        }
-      ],
-      "textes": [
-        "webapp-testing: Claude tests your local web app with Playwright",
-        "Anthropic's skill writes Playwright scripts in Python to check the front end, debug the interface, take screenshots, and read browser logs.",
-        "A helper starts the app's servers, back end and front end included, then runs the test. Claude calls it as is, without loading its code into the context. On a dynamic app, it waits for loading to finish, observes the rendered page, and derives its selectors from it before acting.",
-        "Testing a form on an app with a back end and front end: the helper starts both servers, the page opens headless, the script waits for loading to finish, then inspects the DOM.",
-        "Add the catalog: /plugin marketplace add anthropics/skills",
-        "Install example-skills: /plugin install example-skills@anthropic-agent-skills",
-        "Mention webapp-testing in the request"
-      ]
-    },
-    {
-      "postId": 20,
-      "revisionId": 142,
-      "jour": "2026-11-03",
-      "motsCles": [
-        {
-          "champ": "nom",
-          "terme": "Claudeception",
-          "raison": null,
-          "passage": null
-        },
-        {
-          "champ": "categorie",
-          "terme": "MCP et skills",
-          "raison": null,
-          "passage": null
-        },
-        {
-          "champ": "usage",
-          "terme": "apprentissage continu",
-          "raison": null,
-          "passage": "A Claude Code skill for autonomous skill extraction and continuous learning."
-        },
-        {
-          "champ": "usage",
-          "terme": "extraction de skills",
-          "raison": null,
-          "passage": "Or explicitly request skill extraction"
-        },
-        {
-          "champ": "usage",
-          "terme": "solutions réutilisables entre sessions",
-          "raison": null,
-          "passage": "it saves that knowledge as a new skill"
-        },
-        {
-          "champ": "usage",
-          "terme": "solutions de débogage",
-          "raison": null,
-          "passage": "Just completed debugging and discovered a non-obvious solution"
-        },
-        {
-          "champ": "usage",
-          "terme": "rétrospective de session",
-          "raison": null,
-          "passage": "Trigger a learning retrospective"
-        },
-        {
-          "champ": "usage",
-          "terme": "création automatique de skills",
-          "raison": null,
-          "passage": "A Claude Code skill for autonomous skill extraction and continuous learning."
-        },
-        {
-          "champ": "technologie",
-          "terme": "Claude Code",
-          "raison": null,
-          "passage": "Claude Code has a native skills system."
-        },
-        {
-          "champ": "technologie",
-          "terme": "UserPromptSubmit",
-          "raison": null,
-          "passage": "{ \"hooks\": { \"UserPromptSubmit\": [ { \"hooks\": [ { \"type\": \"command\", \"command\": \"~/.claude/hooks/claudeception-activator.sh\" } ] } ] } }"
-        },
-        {
-          "champ": "technologie",
-          "terme": "YAML",
-          "raison": null,
-          "passage": "Extracted skills are markdown files with YAML frontmatter"
-        },
-        {
-          "champ": "technologie",
-          "terme": "Markdown",
-          "raison": null,
-          "passage": "Extracted skills are markdown files with YAML frontmatter"
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "mémoire d'agent",
-          "raison": "Claudeception donne à Claude Code une forme de mémoire : les solutions trouvées restent sous forme de skills, pas un historique des conversations.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "auto-amélioration",
-          "raison": "Claudeception vise un agent qui progresse en travaillant, en écrivant ses propres skills.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "base de connaissances",
-          "raison": "Claudeception peut constituer au fil du temps une bibliothèque de skills propre à l'utilisateur ou au projet.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "méta-skill",
-          "raison": "le dépôt présente Claudeception comme un méta-skill, un skill qui sert à acquérir d'autres skills.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "solutions de débogage réutilisables",
-          "raison": "Claudeception n'est pas un outil de débogage : il retient les solutions trouvées pendant le débogage pour les réutiliser.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "agent de code",
-          "raison": "Claudeception s'adresse aux agents de code comme Claude Code, pour qu'ils gardent d'une session à l'autre les solutions trouvées.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "retour d'expérience",
-          "raison": "la rétrospective de session de Claudeception peut transformer un retour d'expérience en skill réutilisable.",
-          "passage": null
-        }
-      ],
-      "textes": [
-        "Claudeception turns every hard-won solution from Claude Code into a skill that reloads on its own",
-        "An hour on an obscure error, the agent finally finds the fix, the session closes, and next time it all starts over. With Claudeception, the debugging technique, workaround, or project quirk discovered along the way becomes a skill, loaded automatically as soon as a similar problem comes back.",
-        "It sorts: only what required real research, will be reused, has a clear trigger, and actually worked becomes a skill. And the description is written to be found again: the exact error, not \"database issues\".",
-        "Example from the repository: a resolved PrismaClientKnownRequestError (too many connections in serverless) can become a skill whose description reuses the exact error. When it reappears, the agent finds it again.",
-        "Clone the repository into ~/.claude/skills/claudeception.",
-        "Optional: the hook, added to settings.json, makes each session evaluated",
-        "After debugging: /claudeception, with no skill if nothing is worth keeping",
-        "Claude Code, through its native skills system.",
-        "It is a fork, with no pushes for several months at the time of the capture."
-      ]
-    },
-    {
-      "postId": 15,
-      "revisionId": 156,
-      "jour": "2026-11-03",
-      "motsCles": [
-        {
-          "champ": "nom",
-          "terme": "Humanizer",
-          "raison": null,
-          "passage": null
-        },
-        {
-          "champ": "categorie",
-          "terme": "MCP et skills",
-          "raison": null,
-          "passage": null
-        },
-        {
-          "champ": "usage",
-          "terme": "réécrire un texte IA",
-          "raison": null,
-          "passage": "Humanizer makes AI-written text sound like a person wrote it"
-        },
-        {
-          "champ": "usage",
-          "terme": "humaniser un texte",
-          "raison": null,
-          "passage": "Please humanize this text"
-        },
-        {
-          "champ": "usage",
-          "terme": "tics d'écriture IA",
-          "raison": null,
-          "passage": "Agent skill that removes signs of AI-generated writing from text"
-        },
-        {
-          "champ": "usage",
-          "terme": "imiter son style",
-          "raison": null,
-          "passage": "If you want the rewrite to sound more like you, include a sample"
-        },
-        {
-          "champ": "usage",
-          "terme": "réécrire un document",
-          "raison": null,
-          "passage": "To rewrite a file, give Humanizer its path"
-        },
-        {
-          "champ": "usage",
-          "terme": "relecture de style",
-          "raison": null,
-          "passage": "Humanizer edits for human readers."
-        },
-        {
-          "champ": "technologie",
-          "terme": "Claude Code",
-          "raison": null,
-          "passage": "it works in Claude Code, Codex, and any other agent that supports skills"
+          "passage": "Supports OpenCode, Claude Code, Codex, Cursor, and 75 more."
         },
         {
           "champ": "technologie",
           "terme": "Codex",
           "raison": null,
-          "passage": "it works in Claude Code, Codex, and any other agent that supports skills"
+          "passage": "Supports OpenCode, Claude Code, Codex, Cursor, and 75 more."
         },
         {
           "champ": "technologie",
-          "terme": "Claude.ai",
+          "terme": "Cursor",
           "raison": null,
-          "passage": "Download this repository as a ZIP (Code → Download ZIP) and upload it as a skill in Settings."
+          "passage": "Supports OpenCode, Claude Code, Codex, Cursor, and 75 more."
         },
         {
           "champ": "technologie",
-          "terme": "Claude Desktop",
+          "terme": "OpenCode",
           "raison": null,
-          "passage": "Download this repository as a ZIP (Code → Download ZIP) and upload it as a skill in Settings."
+          "passage": "Supports OpenCode, Claude Code, Codex, Cursor, and 75 more."
         },
         {
-          "champ": "technologie",
+          "champ": "terme_proche",
           "terme": "Skills CLI",
-          "raison": null,
-          "passage": "This installs Humanizer for every agent the Skills CLI supports"
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "texte généré par IA",
-          "raison": "Humanizer réécrit les textes générés par une IA pour qu'ils se lisent comme écrits par une personne.",
+          "raison": "find-skills s'appuie sur l'outil npx skills, que sa fiche appelle Skills CLI et présente comme le gestionnaire de paquets des skills.",
           "passage": null
         },
         {
           "champ": "terme_proche",
-          "terme": "style d'écriture",
-          "raison": "Humanizer peut suivre le style d'écriture d'un échantillon fourni : rythme, vocabulaire, ponctuation.",
+          "terme": "skills.sh",
+          "raison": "Annuaire en ligne de skills que find-skills demande de consulter avant toute recherche.",
           "passage": null
         },
         {
           "champ": "terme_proche",
-          "terme": "ton naturel",
-          "raison": "Humanizer vise le ton d'un texte écrit par une personne, sans tournures automatiques.",
+          "terme": "compétences d'agent",
+          "raison": "Traduction française de agent skills, ce que find-skills recherche et installe.",
           "passage": null
         },
         {
           "champ": "terme_proche",
-          "terme": "signes d'écriture IA",
-          "raison": "Humanizer recherche les signes listés par « Signs of AI writing », le guide de Wikipedia pour repérer les textes générés par une IA.",
+          "terme": "trouver un skill",
+          "raison": "Traduction de find a skill, la demande qui déclenche find-skills selon sa fiche.",
           "passage": null
         },
         {
           "champ": "terme_proche",
-          "terme": "Agent Skills",
-          "raison": "Humanizer s'installe comme skill dans Claude Code, Codex et les autres agents qui les gèrent.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "rédaction",
-          "raison": "Humanizer retouche la rédaction d'un texte en visant à ne pas changer ce qu'il dit.",
+          "terme": "assistant de code",
+          "raison": "find-skills étend un assistant de code IA comme Claude Code, Codex ou Cursor.",
           "passage": null
         }
       ],
       "textes": [
-        "Humanizer removes AI writing tics from a text without changing what it says",
-        "Paste a text or give a file path: Humanizer spots AI writing tics, from the most obvious to the most subtle, then rewrites the prose. On a file, it only touches the text: code, data and frontmatter stay in place.",
-        "It invents nothing: if a name, number or date is missing, it asks. On a pasted text, you see its first draft, what still sounds artificial, then the final version. Attach two or three paragraphs of your own and it picks up your rhythm, vocabulary and punctuation.",
-        "In the repository's example, an announcement loses its emoji, its \"It's not just a feature…\" and its \"Let that sink in.\", then starts without detour: \"Shared drafts are out today.\"",
-        "Not before Claude Code 2.1.142: /plugin marketplace add blader/humanizer",
-        "Then /plugin install humanizer@humanizer, not on an older version",
-        "Codex: npx skills add blader/humanizer --global --agent codex",
-        "Then /humanizer and the text; for a file, its path, no command",
-        "Claude Code, Codex and any skills-compatible agent; the Skills CLI install also covers Gemini CLI, GitHub Copilot and Windsurf, according to the repository."
-      ]
-    },
-    {
-      "postId": 63,
-      "revisionId": 113,
-      "jour": "2026-11-03",
-      "motsCles": [],
-      "textes": [
-        "Agent SDK",
-        "Cursor's Agent SDK turns an agent into a code folder you can test and deploy",
-        "An agent becomes a folder you keep in version control: the prompt lives in a file, each tool is a typed action, skills are loaded on demand. You test it with evals, run it locally in a playground, then deploy with one command that builds it, gives it a URL and hosts it. Agents can also wake on pull request, comment and CI events, on Slack mentions and DMs, on webhooks or on a schedule. Each conversation keeps its own session, so a follow-up on a PR or a Slack thread picks up where it left off.\n\nThe interesting part is not the hosting, it's the loop: replay a real pull request as signed payloads, turn it into fixtures, assert on which tools ran and with what input. Four starters ship as templates: security reviewer, owners-policy approver, PR autofixer, Linear or Jira triager.",
-        "An agent ships as a project rather than a config blob. Prompts, tools, skills, MCP connections and channels each get their own place on disk, two commands validate and inspect what the SDK found, and evals are part of the same folder.",
-        "Build once, run the same agent locally with a playground or hosted by Cursor, with the same logs and evals in both places. Deploy builds it, gives it a URL and starts it, and secrets plus integrations stay in the dashboard.",
-        "People writing bots that answer in pull requests and Slack threads and need to check their behaviour before shipping, either on Cursor or on their own infrastructure.",
-        "An agent is a project",
-        "Deploy builds it and gives it a URL",
-        "Replay a real PR as payloads"
-      ]
-    },
-    {
-      "postId": 74,
-      "revisionId": 124,
-      "jour": "2026-11-03",
-      "motsCles": [],
-      "textes": [
-        "Remote MCP, native PBR and more",
-        "Spline's MCP server now runs in the cloud, no editor open",
-        "Ask ChatGPT, Claude or Cursor for a scene and get a real Spline file back, ready to open and keep editing. Handy when you want to sketch a 3D idea straight from the chat you're already in. The same update pushes PBR materials, booleans and timeline animations into the native iOS and Android exports, adds camera and light keyframes, and makes big files behave in Hana. A batch of interaction fixes comes along.",
-        "The MCP server moves to the cloud, and the native mobile exports pick up the material, boolean and timeline features.",
-        "Generate a scene from a chat prompt and get an editable Spline file without launching the app; on mobile, native builds now carry PBR materials, booleans and timeline animations.",
-        "Designers and builders who work from ChatGPT, Claude or Cursor and want a 3D starting point they can keep editing in Spline.",
-        "MCP server now in the cloud",
-        "PBR, booleans, timeline on mobile",
-        "Camera and light keyframes"
-      ]
-    },
-    {
-      "postId": 82,
-      "revisionId": 164,
-      "jour": "2026-11-03",
-      "motsCles": [],
-      "textes": [
-        "Le Chonk: Built for Coders, Trusted by Defenders.",
-        "Mistral Large 4 (Le Chonk): open weights for agentic coding and defense",
-        "Le Chonk is Mistral's 1-trillion-parameter multimodal model, and the weights are now out. Coding and defensive security got the bulk of the reinforcement learning push, with three reasoning modes to trade cost against depth. You can point it at a repo, run it in a terminal loop, or host it yourself.",
-        "The preview shipped earlier and the team kept scaling RL; three extra weeks moved coding results and token efficiency, and reasoning got cheaper to run. Weights and a license are published alongside.",
-        "Frontier-level coding with far fewer tokens spent per task, which matters once agents run at scale. On the defensive side it hunts and patches vulnerabilities without bailing out of legitimate work. Reasoning effort is selectable per request.",
-        "Teams building coding agents, security teams that want to stay in control instead of handing off triage, and organizations that need to own and host the model rather than rent it through an API.",
-        "Live-traffic monitoring showed the model declining black-box attacks on real targets but a possible uplift for conducting real attacks, so guardrails are being revised and the red-teaming variant stays gated behind vetting and contractual safeguards.",
-        "Weights out, three reasoning modes",
-        "47% fewer tokens per task, Mistral says",
-        "Cyber Index at 51%"
-      ]
-    },
-    {
-      "postId": 83,
-      "revisionId": 165,
-      "jour": "2026-11-03",
-      "motsCles": [],
-      "textes": [
-        "Build and manage Connected Apps in one place",
-        "Google opens a preview of its Connected Apps Platform for Gemini and Search.",
-        "Developers get one place to build an app once and put it in front of people searching or chatting with Gemini. You integrate through a cloud-hosted MCP server or Android MCP with the AppFunctions APIs, then register, test and submit the app in the Google Connected Console. Before review you pick where it goes live: Search, the Gemini app, or both. After launch you follow traffic, latency and error rates, and keep hold of the branding with verified logos and authenticated accounts. Access is still in preview and opens in stages, with more developers, markets and Google products promised later.",
-        "A single console for building, testing, submitting and monitoring Connected Apps, plus a choice of where each one appears.",
-        "Ship one integration and cover both surfaces, then watch how it behaves once live.",
-        "App developers who want their product inside Search and the Gemini app during the preview phase.",
-        "It's a staged preview, with more developers and markets added later.",
-        "Build once, reach Gemini and Search",
-        "Register, test and submit in one console",
-        "Track traffic, latency and errors"
-      ]
-    },
-    {
-      "postId": 84,
-      "revisionId": 166,
-      "jour": "2026-11-03",
-      "motsCles": [],
-      "textes": [
-        "Gemini 4 Carbon: our next frontier model",
-        "Gemini 4 Carbon: a model built for long-horizon agentic work and cyber defense",
-        "Carbon is aimed at harder engineering runs that stretch out over time, and at the security work that comes with them: finding flaws, checking which ones are actually exploitable, and patching the root cause. Google says its teams have watched it keep going across multi-step jobs on large codebases and low-level systems. It ships into a small group of cyber defenders first, then more trusted partners, with developer and consumer access later. Intro pricing matches Argon.",
-        "Google positions it as its strongest model so far, with 88.2% on SEC-bench Pro, 54.8% on ExploitGym and 71.0% on CWE-bench, and claims a firm lead on the first. On WebDev Arena it sits at #4 with 1768 after a jump of 89 elo points.",
-        "Sustained multi-step runs rather than single prompts: the model keeps working through dead ends instead of stalling. Google also reports less overreach and less under-service on plan execution, with discrepancies surfaced to the user before it acts.",
-        "Security defenders first, then trusted partners; developers and product teams follow once access opens up.",
-        "Rollout starts narrow, so developers, businesses and consumers can only get it once access widens.",
-        "Built for sustained agentic workflows",
-        "88.2% on SEC-bench Pro",
-        "$2 in / $10 out per million tokens"
-      ]
-    },
-    {
-      "postId": 88,
-      "revisionId": 170,
-      "jour": "2026-11-03",
-      "motsCles": [],
-      "textes": [
-        "Voxtral 3",
-        "Voxtral 3 turns calls into a working voice agent: listen, reason, act, speak.",
-        "It gives you a speech stack for agents that hold a real conversation and finish the job. One model listens, a general model such as Mistral Small decides and calls tools, and the TTS speaks back in the mood of what came before. Swap out any of the three — LLM, voice, language — and the agent still stands. Run it through Mistral's API in Europe or on hardware you control.",
-        "The release bundles new speech-to-text and text-to-speech models with a voice agent SDK built on LiveKit. Voxtral Mini TTS 3 adds context-aware voices that shift emotion, pacing and emphasis, plus voice cloning and custom prompt instruction following. Transcribe 3 adds diarization, context biasing and end-of-turn prediction.",
-        "Mid-call, an agent can pull an identity check, a bill balance or a booking through function calling, web search and retrieval over your own systems. Calls go over SIP; browsers and apps connect over WebRTC; and the telephony, IVR and contact-center tools you already run stay in place. Domain vocabulary lands correctly without fine-tuning, thanks to context biasing.",
-        "Teams building contact-center agents, service desks, virtual assistants and hands-free copilots, especially those with data-residency constraints.",
-        "Turns under one second",
-        "35+ languages, 50+ dialects",
-        "EU-hosted or self-deployed"
+        "find-skills: your agent can find and install the skill it's missing",
+        "Ask \"find a skill for X\", or just \"how do I do X\". The agent checks the skills.sh ranking and, if it can't find what it needs, runs npx skills find. It comes back with the skill, its source and the install command.",
+        "It doesn't recommend a skill based on a search result alone: it first checks the install count and the source. And if nothing exists, it offers to write your own with npx skills init.",
+        "Want to speed up your React app: the agent can run npx skills find react performance and suggest a skill with its install command.",
+        "Add find-skills with npx skills add (Node.js 22.20 or later).",
+        "Then just ask, for example \"find a skill for …\"; no command needed.",
+        "Claude Code, Codex, Cursor, OpenCode and 75 other agents.",
+        "If it installs for you, it's global and without confirmation (-g -y): read the skill before accepting."
       ]
     },
     {
       "postId": 16,
-      "revisionId": 144,
+      "revisionId": 187,
       "jour": "2026-11-04",
       "motsCles": [
         {
@@ -18829,13 +25355,13 @@ window.DONNEES_MAQUETTE = {
       ]
     },
     {
-      "postId": 9,
-      "revisionId": 145,
+      "postId": 17,
+      "revisionId": 188,
       "jour": "2026-11-04",
       "motsCles": [
         {
           "champ": "nom",
-          "terme": "Marketing Skills",
+          "terme": "stop-slop",
           "raison": null,
           "passage": null
         },
@@ -18847,253 +25373,378 @@ window.DONNEES_MAQUETTE = {
         },
         {
           "champ": "usage",
-          "terme": "optimisation des conversions",
+          "terme": "tics d'écriture IA",
           "raison": null,
-          "passage": "When the user wants to optimize, improve, or increase conversions on any marketing page or form"
+          "passage": "A skill for removing AI tells from prose."
         },
         {
           "champ": "usage",
-          "terme": "rédaction marketing",
+          "terme": "réécrire un texte IA",
           "raison": null,
-          "passage": "When the user wants to write, rewrite, or improve marketing copy for any page"
+          "passage": "This skill teaches Claude (or any LLM) to catch and remove them."
         },
         {
           "champ": "usage",
-          "terme": "référencement naturel (SEO)",
+          "terme": "révision de texte",
           "raison": null,
-          "passage": "When the user wants to audit, review, or diagnose SEO issues on their site."
+          "passage": "Below 35/50: revise."
         },
         {
           "champ": "usage",
-          "terme": "séquences d'e-mails",
+          "terme": "clichés d'écriture",
           "raison": null,
-          "passage": "When the user wants to create or optimize an email sequence, drip campaign, automated email flow"
+          "passage": "Structural clichés - Binary contrasts, negative listings, dramatic fragmentation, rhetorical setups, false agency, narrator-from-a-distance voice, passive voice."
         },
         {
           "champ": "usage",
-          "terme": "suivi analytique",
+          "terme": "formules à bannir",
           "raison": null,
-          "passage": "When the user wants to set up, improve, or audit analytics tracking and measurement."
+          "passage": "Banned phrases - Throat-clearing openers, emphasis crutches, business jargon, all adverbs, vague declaratives, meta-commentary."
         },
         {
           "champ": "usage",
-          "terme": "campagnes publicitaires",
+          "terme": "grille de relecture",
           "raison": null,
-          "passage": "When the user wants help with paid advertising campaigns on Google Ads, Meta (Facebook/Instagram), LinkedIn, Twitter/X"
+          "passage": "Rate 1-10 on each dimension:"
         },
         {
           "champ": "technologie",
           "terme": "Claude Code",
           "raison": null,
-          "passage": "Marketing skills for Claude Code and AI agents."
+          "passage": "Claude Code: Add this folder as a skill."
+        },
+        {
+          "champ": "technologie",
+          "terme": "Claude Projects",
+          "raison": null,
+          "passage": "Claude Projects: Upload SKILL.md and reference files to project knowledge."
+        },
+        {
+          "champ": "technologie",
+          "terme": "SKILL.md",
+          "raison": null,
+          "passage": "SKILL.md # Core instructions"
+        },
+        {
+          "champ": "technologie",
+          "terme": "LLM",
+          "raison": null,
+          "passage": "This skill teaches Claude (or any LLM) to catch and remove them."
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "texte généré par IA",
+          "raison": "stop-slop retire d'un texte généré par une IA les tics d'écriture IA qui le trahissent.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "écriture naturelle",
+          "raison": "stop-slop retire les tournures prévisibles de l'IA pour une écriture plus naturelle.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "style d'écriture",
+          "raison": "stop-slop agit sur le style d'écriture : formules, constructions et rythme des phrases.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "ton naturel",
+          "raison": "stop-slop cherche un ton direct et humain, sans formules automatiques.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "relecture",
+          "raison": "stop-slop sert à relire un texte pour en retirer les tics d'écriture IA.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "rédaction",
+          "raison": "stop-slop sert à la rédaction : révision de texte et chasse aux clichés d'écriture.",
+          "passage": null
+        }
+      ],
+      "textes": [
+        "stop-slop tracks down AI writing tics in your texts and makes them disappear",
+        "Predictable formulas, stock constructions, mechanical rhythm: stop-slop teaches Claude, or any LLM, to spot them and remove them.",
+        "The rules are firm: no corporate jargon, no adverbs, no passive voice, no binary oppositions, no em dash. Each family of tics has its own reference file, loaded only when needed.",
+        "A post written with Claude that sounds too AI: run it through stop-slop before publishing.",
+        "Claude Code: add the folder as a skill",
+        "API: include SKILL.md in the system prompt",
+        "Claude Code, Claude projects, custom instructions or API calls."
+      ]
+    },
+    {
+      "postId": 18,
+      "revisionId": 189,
+      "jour": "2026-11-04",
+      "motsCles": [
+        {
+          "champ": "nom",
+          "terme": "improve-codebase-architecture (Matt Pocock)",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "MCP et skills",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "usage",
+          "terme": "architecture logicielle",
+          "raison": null,
+          "passage": "Surface architectural friction and propose deepening opportunities"
+        },
+        {
+          "champ": "usage",
+          "terme": "refactorisation",
+          "raison": null,
+          "passage": "refactors that turn shallow modules into deep ones"
+        },
+        {
+          "champ": "usage",
+          "terme": "testabilité",
+          "raison": null,
+          "passage": "The aim is testability and AI-navigability."
+        },
+        {
+          "champ": "usage",
+          "terme": "maintenabilité",
+          "raison": null,
+          "passage": "Deepening a module pays off by making future changes to it easier"
+        },
+        {
+          "champ": "usage",
+          "terme": "revue d'architecture",
+          "raison": null,
+          "passage": "surveys a codebase for deepening opportunities and hands you the candidates"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Claude Code",
+          "raison": null,
+          "passage": "I see with Claude Code, Codex, and other coding agents"
         },
         {
           "champ": "technologie",
           "terme": "Codex",
           "raison": null,
-          "passage": "Install via Codex's plugin system"
+          "passage": "I see with Claude Code, Codex, and other coding agents"
         },
         {
           "champ": "technologie",
-          "terme": "Cursor",
+          "terme": "GitHub Copilot",
           "raison": null,
-          "passage": "Works with Claude Code, OpenAI Codex, Cursor, Windsurf"
+          "passage": "<strong>GitHub Copilot</strong> (CLI and VS Code)"
         },
         {
           "champ": "technologie",
-          "terme": "Windsurf",
+          "terme": "Gemini CLI",
           "raison": null,
-          "passage": "Works with Claude Code, OpenAI Codex, Cursor, Windsurf"
+          "passage": "<strong>Gemini CLI</strong> (manual updates)"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Git",
+          "raison": null,
+          "passage": "walk back a good stretch of the commit history (git log --oneline)"
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "refactoring",
+          "raison": "Mot anglais courant pour la refactorisation, usage central du skill.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "dette technique",
+          "raison": "La refactorisation vise un code devenu dur à faire évoluer, ce qu'on nomme souvent dette technique.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "module profond",
+          "raison": "La refactorisation proposée transforme des modules superficiels en modules profonds.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "couplage",
+          "raison": "Le skill cherche les modules fortement couplés qui débordent les uns sur les autres, comme pistes de refactorisation.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "big ball of mud",
+          "raison": "Le dépôt présente ce skill dans sa section « We Built A Ball Of Mud » : un code enchevêtré, où il cherche des pistes de refactorisation.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "code spaghetti",
+          "raison": "Nom courant d'un code enchevêtré : le skill y cherche des pistes de refactorisation, sans le démêler à votre place.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "domain-driven design",
+          "raison": "Le skill entretient le vocabulaire du domaine (GLOSSARY.md), notion issue du domain-driven design.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "glossaire du domaine",
+          "raison": "Le skill lit et met à jour le glossaire du projet, sans être un outil de glossaire.",
+          "passage": null
+        }
+      ],
+      "textes": [
+        "improve-codebase-architecture spots the modules to deepen for more testable code",
+        "Matt Pocock's skill starts from the files that recur most in commit history and looks there for shallow modules, those whose interface is almost as complex as the implementation. It suggests deepening them: more behavior behind a simple interface, code that is easier to test and to navigate for AI.",
+        "The suggestions arrive in an HTML report: for each one, the problem, the solution, a before/after diagram and a recommendation level. You pick one, and the agent digs into it with you before proposing any interface. Decisions already recorded in your ADRs are not called into question.",
+        "The author recommends running it every few days. On old code, it finds real leads without untangling everything for you.",
+        "Install: claude plugin install mattpocock-skills@claude-plugins-official",
+        "Then /setup-matt-pocock-skills, once per repository",
+        "The skill only runs if you type /improve-codebase-architecture",
+        "Claude Code, Codex, GitHub Copilot and Gemini CLI."
+      ]
+    },
+    {
+      "postId": 19,
+      "revisionId": 190,
+      "jour": "2026-11-04",
+      "motsCles": [
+        {
+          "champ": "nom",
+          "terme": "skill-creator",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "MCP et skills",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "usage",
+          "terme": "créer un skill",
+          "raison": null,
+          "passage": "Use when users want to create a skill from scratch"
+        },
+        {
+          "champ": "usage",
+          "terme": "améliorer un skill",
+          "raison": null,
+          "passage": "modify and improve existing skills"
+        },
+        {
+          "champ": "usage",
+          "terme": "évaluer un skill",
+          "raison": null,
+          "passage": "run evals to test a skill"
+        },
+        {
+          "champ": "usage",
+          "terme": "benchmark de skills",
+          "raison": null,
+          "passage": "benchmark skill performance with variance analysis"
+        },
+        {
+          "champ": "usage",
+          "terme": "optimiser la description",
+          "raison": null,
+          "passage": "optimize a skill's description for better triggering accuracy"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Claude Code",
+          "raison": null,
+          "passage": "You can register this repository as a Claude Code Plugin marketplace"
         },
         {
           "champ": "technologie",
           "terme": "Agent Skills",
           "raison": null,
-          "passage": "any agent that supports the Agent Skills spec"
+          "passage": "For information about the Agent Skills standard, see agentskills.io."
+        },
+        {
+          "champ": "technologie",
+          "terme": "Python",
+          "raison": null,
+          "passage": "The package_skill.py script works anywhere with Python and a filesystem."
+        },
+        {
+          "champ": "technologie",
+          "terme": "Claude.ai",
+          "raison": null,
+          "passage": "because Claude.ai doesn't have subagents, some mechanics change."
         },
         {
           "champ": "terme_proche",
-          "terme": "copywriting",
-          "raison": "terme anglais de la rédaction marketing, un usage central de Marketing Skills.",
+          "terme": "prompt engineering",
+          "raison": "Rédiger les instructions d'un skill puis les tester sur des demandes types relève du prompt engineering.",
           "passage": null
         },
         {
           "champ": "terme_proche",
-          "terme": "CRO",
-          "raison": "sigle anglais de l'optimisation des conversions, cité dans la description de Marketing Skills.",
+          "terme": "evals",
+          "raison": "Les evals sont les jeux de tests que skill-creator lance pour évaluer un skill.",
           "passage": null
         },
         {
           "champ": "terme_proche",
-          "terme": "landing page",
-          "raison": "nom anglais de la page d'atterrissage, dont Marketing Skills aide à optimiser les conversions.",
+          "terme": "comparaison A/B",
+          "raison": "skill-creator propose une comparaison à l'aveugle entre deux versions d'un skill.",
           "passage": null
         },
         {
           "champ": "terme_proche",
-          "terme": "emailing",
-          "raison": "conception et rédaction de séquences d'e-mails marketing (skill emails) ; Marketing Skills n'envoie pas les e-mails lui-même.",
+          "terme": "fichier SKILL.md",
+          "raison": "Chaque skill est un dossier avec un fichier SKILL.md, que skill-creator aide à rédiger.",
           "passage": null
         },
         {
           "champ": "terme_proche",
-          "terme": "référencement IA",
-          "raison": "le skill ai-seo de Marketing Skills vise la présence dans les réponses des moteurs de recherche IA.",
+          "terme": "sous-agents",
+          "raison": "Pour évaluer un skill, skill-creator lance des sous-agents, d'autres agents exécutés en parallèle, un par test, avec et sans le skill.",
           "passage": null
         },
         {
           "champ": "terme_proche",
-          "terme": "tests A/B",
-          "raison": "le skill ab-testing de Marketing Skills aide à concevoir et mener des expériences A/B.",
+          "terme": "workflow réutilisable",
+          "raison": "skill-creator peut transformer une façon de faire tirée d'une conversation en skill réutilisable.",
           "passage": null
         },
         {
           "champ": "terme_proche",
-          "terme": "growth marketing",
-          "raison": "marketing de croissance, un thème du dépôt Marketing Skills, qui couvre le growth engineering.",
+          "terme": "déclenchement d'un skill",
+          "raison": "Optimiser la description règle le déclenchement : le moment où Claude choisit d'utiliser le skill.",
           "passage": null
         },
         {
           "champ": "terme_proche",
-          "terme": "SaaS",
-          "raison": "Marketing Skills vise notamment le marketing des logiciels SaaS, par exemple avec le skill marketing-ideas.",
+          "terme": "plugin Claude Code",
+          "raison": "Le dépôt de skill-creator s'ajoute à Claude Code comme catalogue de plugins.",
           "passage": null
         }
       ],
       "textes": [
-        "Marketing Skills: CRO, copywriting, SEO and email sequences handled by your code agent",
-        "Corey Haines' marketing collection. Your agent identifies the task at hand—a page to convert, an email sequence, pricing or a Google Ads campaign—and applies the appropriate method.",
-        "Everything rests on a shared product document: you set product, audience and positioning once with product-marketing, and each skill rereads it before acting.",
-        "Ask to optimize a landing page for conversion: the agent relies on the cro skill.",
-        "npx skills add coreyhaines31/marketingskills",
-        "Launched from Claude Code: add -a claude-code, otherwise it won't read them",
-        "Fill in product-marketing, then hand its tasks to the agent",
-        "Claude Code, Codex, Cursor, Windsurf and any agent compatible with Agent Skills."
-      ]
-    },
-    {
-      "postId": 12,
-      "revisionId": 157,
-      "jour": "2026-11-04",
-      "motsCles": [
-        {
-          "champ": "nom",
-          "terme": "find-skills",
-          "raison": null,
-          "passage": null
-        },
-        {
-          "champ": "categorie",
-          "terme": "MCP et skills",
-          "raison": null,
-          "passage": null
-        },
-        {
-          "champ": "usage",
-          "terme": "recherche de skills",
-          "raison": null,
-          "passage": "Search for skills interactively or by keyword"
-        },
-        {
-          "champ": "usage",
-          "terme": "installation de skills",
-          "raison": null,
-          "passage": "Install a skill from GitHub or other sources"
-        },
-        {
-          "champ": "usage",
-          "terme": "découverte de skills",
-          "raison": null,
-          "passage": "This skill helps you discover and install skills from the open agent skills ecosystem."
-        },
-        {
-          "champ": "usage",
-          "terme": "extension d'un agent",
-          "raison": null,
-          "passage": "Expresses interest in extending agent capabilities"
-        },
-        {
-          "champ": "usage",
-          "terme": "création de skill",
-          "raison": null,
-          "passage": "Suggest the user could create their own skill with npx skills init"
-        },
-        {
-          "champ": "technologie",
-          "terme": "npx",
-          "raison": null,
-          "passage": "The Skills CLI (npx skills) is the package manager for the open agent skills ecosystem."
-        },
-        {
-          "champ": "technologie",
-          "terme": "Node.js",
-          "raison": null,
-          "passage": "Requires Node.js 22.20 or later."
-        },
-        {
-          "champ": "technologie",
-          "terme": "Claude Code",
-          "raison": null,
-          "passage": "Supports OpenCode, Claude Code, Codex, Cursor, and 75 more."
-        },
-        {
-          "champ": "technologie",
-          "terme": "Codex",
-          "raison": null,
-          "passage": "Supports OpenCode, Claude Code, Codex, Cursor, and 75 more."
-        },
-        {
-          "champ": "technologie",
-          "terme": "Cursor",
-          "raison": null,
-          "passage": "Supports OpenCode, Claude Code, Codex, Cursor, and 75 more."
-        },
-        {
-          "champ": "technologie",
-          "terme": "OpenCode",
-          "raison": null,
-          "passage": "Supports OpenCode, Claude Code, Codex, Cursor, and 75 more."
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "Skills CLI",
-          "raison": "find-skills s'appuie sur l'outil npx skills, que sa fiche appelle Skills CLI et présente comme le gestionnaire de paquets des skills.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "skills.sh",
-          "raison": "Annuaire en ligne de skills que find-skills demande de consulter avant toute recherche.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "compétences d'agent",
-          "raison": "Traduction française de agent skills, ce que find-skills recherche et installe.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "trouver un skill",
-          "raison": "Traduction de find a skill, la demande qui déclenche find-skills selon sa fiche.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "assistant de code",
-          "raison": "find-skills étend un assistant de code IA comme Claude Code, Codex ou Cursor.",
-          "passage": null
-        }
-      ],
-      "textes": [
-        "find-skills: your agent can find and install the skill it's missing",
-        "Ask \"find a skill for X\", or just \"how do I do X\". The agent checks the skills.sh ranking and, if it can't find what it needs, runs npx skills find. It comes back with the skill, its source and the install command.",
-        "It doesn't recommend a skill based on a search result alone: it first checks the install count and the source. And if nothing exists, it offers to write your own with npx skills init.",
-        "Want to speed up your React app: the agent can run npx skills find react performance and suggest a skill with its install command.",
-        "Add find-skills with npx skills add (Node.js 22.20 or later).",
-        "Then just ask, for example \"find a skill for …\"; no command needed.",
-        "Claude Code, Codex, Cursor, OpenCode and 75 other agents.",
-        "If it installs for you, it's global and without confirmation (-g -y): read the skill before accepting."
+        "skill-creator: Anthropic's skill that writes, tests, and refines your own skills",
+        "Describe what you want to automate: skill-creator frames the need, drafts a first version, tests it on realistic requests, and has you review the results. It can also take an existing skill and improve it.",
+        "Each test runs with and without the skill, or against its previous version. A review page gathers the responses to annotate and a quantified comparison: success rate, duration, tokens. It also reworks the description so the skill triggers at the right time.",
+        "Have you honed a method with Claude? Say \"turn this into a skill\": it can pick up the steps from the conversation, ask you a few questions, write the SKILL.md, and suggest two or three test requests.",
+        "Add the repository as a plugin catalog in Claude Code.",
+        "Install example-skills: /plugin install example-skills@anthropic-agent-skills",
+        "Then simply name the skill in your request.",
+        "Full version in Claude Code; in Claude.ai, a lighter version, without sub-agents or quantified comparison.",
+        "Each test runs twice, with and without the skill: plan for double the model calls."
       ]
     },
     {
@@ -19246,401 +25897,8 @@ window.DONNEES_MAQUETTE = {
       ]
     },
     {
-      "postId": 17,
-      "revisionId": 159,
-      "jour": "2026-11-04",
-      "motsCles": [
-        {
-          "champ": "nom",
-          "terme": "stop-slop",
-          "raison": null,
-          "passage": null
-        },
-        {
-          "champ": "categorie",
-          "terme": "MCP et skills",
-          "raison": null,
-          "passage": null
-        },
-        {
-          "champ": "usage",
-          "terme": "tics d'écriture IA",
-          "raison": null,
-          "passage": "A skill for removing AI tells from prose."
-        },
-        {
-          "champ": "usage",
-          "terme": "réécrire un texte IA",
-          "raison": null,
-          "passage": "This skill teaches Claude (or any LLM) to catch and remove them."
-        },
-        {
-          "champ": "usage",
-          "terme": "révision de texte",
-          "raison": null,
-          "passage": "Below 35/50: revise."
-        },
-        {
-          "champ": "usage",
-          "terme": "clichés d'écriture",
-          "raison": null,
-          "passage": "Structural clichés - Binary contrasts, negative listings, dramatic fragmentation, rhetorical setups, false agency, narrator-from-a-distance voice, passive voice."
-        },
-        {
-          "champ": "usage",
-          "terme": "formules à bannir",
-          "raison": null,
-          "passage": "Banned phrases - Throat-clearing openers, emphasis crutches, business jargon, all adverbs, vague declaratives, meta-commentary."
-        },
-        {
-          "champ": "usage",
-          "terme": "grille de relecture",
-          "raison": null,
-          "passage": "Rate 1-10 on each dimension:"
-        },
-        {
-          "champ": "technologie",
-          "terme": "Claude Code",
-          "raison": null,
-          "passage": "Claude Code: Add this folder as a skill."
-        },
-        {
-          "champ": "technologie",
-          "terme": "Claude Projects",
-          "raison": null,
-          "passage": "Claude Projects: Upload SKILL.md and reference files to project knowledge."
-        },
-        {
-          "champ": "technologie",
-          "terme": "SKILL.md",
-          "raison": null,
-          "passage": "SKILL.md # Core instructions"
-        },
-        {
-          "champ": "technologie",
-          "terme": "LLM",
-          "raison": null,
-          "passage": "This skill teaches Claude (or any LLM) to catch and remove them."
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "texte généré par IA",
-          "raison": "stop-slop retire d'un texte généré par une IA les tics d'écriture IA qui le trahissent.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "écriture naturelle",
-          "raison": "stop-slop retire les tournures prévisibles de l'IA pour une écriture plus naturelle.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "style d'écriture",
-          "raison": "stop-slop agit sur le style d'écriture : formules, constructions et rythme des phrases.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "ton naturel",
-          "raison": "stop-slop cherche un ton direct et humain, sans formules automatiques.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "relecture",
-          "raison": "stop-slop sert à relire un texte pour en retirer les tics d'écriture IA.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "rédaction",
-          "raison": "stop-slop sert à la rédaction : révision de texte et chasse aux clichés d'écriture.",
-          "passage": null
-        }
-      ],
-      "textes": [
-        "stop-slop tracks down AI writing tics in your texts and makes them disappear",
-        "Predictable formulas, stock constructions, mechanical rhythm: stop-slop teaches Claude, or any LLM, to spot them and remove them.",
-        "The rules are firm: no corporate jargon, no adverbs, no passive voice, no binary oppositions, no em dash. Each family of tics has its own reference file, loaded only when needed.",
-        "A post written with Claude that sounds too AI: run it through stop-slop before publishing.",
-        "Claude Code: add the folder as a skill",
-        "API: include SKILL.md in the system prompt",
-        "Claude Code, Claude projects, custom instructions or API calls."
-      ]
-    },
-    {
-      "postId": 18,
-      "revisionId": 149,
-      "jour": "2026-11-04",
-      "motsCles": [
-        {
-          "champ": "nom",
-          "terme": "improve-codebase-architecture (Matt Pocock)",
-          "raison": null,
-          "passage": null
-        },
-        {
-          "champ": "categorie",
-          "terme": "MCP et skills",
-          "raison": null,
-          "passage": null
-        },
-        {
-          "champ": "usage",
-          "terme": "architecture logicielle",
-          "raison": null,
-          "passage": "Surface architectural friction and propose deepening opportunities"
-        },
-        {
-          "champ": "usage",
-          "terme": "refactorisation",
-          "raison": null,
-          "passage": "refactors that turn shallow modules into deep ones"
-        },
-        {
-          "champ": "usage",
-          "terme": "testabilité",
-          "raison": null,
-          "passage": "The aim is testability and AI-navigability."
-        },
-        {
-          "champ": "usage",
-          "terme": "maintenabilité",
-          "raison": null,
-          "passage": "Deepening a module pays off by making future changes to it easier"
-        },
-        {
-          "champ": "usage",
-          "terme": "revue d'architecture",
-          "raison": null,
-          "passage": "surveys a codebase for deepening opportunities and hands you the candidates"
-        },
-        {
-          "champ": "technologie",
-          "terme": "Claude Code",
-          "raison": null,
-          "passage": "I see with Claude Code, Codex, and other coding agents"
-        },
-        {
-          "champ": "technologie",
-          "terme": "Codex",
-          "raison": null,
-          "passage": "I see with Claude Code, Codex, and other coding agents"
-        },
-        {
-          "champ": "technologie",
-          "terme": "GitHub Copilot",
-          "raison": null,
-          "passage": "<strong>GitHub Copilot</strong> (CLI and VS Code)"
-        },
-        {
-          "champ": "technologie",
-          "terme": "Gemini CLI",
-          "raison": null,
-          "passage": "<strong>Gemini CLI</strong> (manual updates)"
-        },
-        {
-          "champ": "technologie",
-          "terme": "Git",
-          "raison": null,
-          "passage": "walk back a good stretch of the commit history (git log --oneline)"
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "refactoring",
-          "raison": "Mot anglais courant pour la refactorisation, usage central du skill.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "dette technique",
-          "raison": "La refactorisation vise un code devenu dur à faire évoluer, ce qu'on nomme souvent dette technique.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "module profond",
-          "raison": "La refactorisation proposée transforme des modules superficiels en modules profonds.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "couplage",
-          "raison": "Le skill cherche les modules fortement couplés qui débordent les uns sur les autres, comme pistes de refactorisation.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "big ball of mud",
-          "raison": "Le dépôt présente ce skill dans sa section « We Built A Ball Of Mud » : un code enchevêtré, où il cherche des pistes de refactorisation.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "code spaghetti",
-          "raison": "Nom courant d'un code enchevêtré : le skill y cherche des pistes de refactorisation, sans le démêler à votre place.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "domain-driven design",
-          "raison": "Le skill entretient le vocabulaire du domaine (GLOSSARY.md), notion issue du domain-driven design.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "glossaire du domaine",
-          "raison": "Le skill lit et met à jour le glossaire du projet, sans être un outil de glossaire.",
-          "passage": null
-        }
-      ],
-      "textes": [
-        "improve-codebase-architecture spots the modules to deepen for more testable code",
-        "Matt Pocock's skill starts from the files that recur most in commit history and looks there for shallow modules, those whose interface is almost as complex as the implementation. It suggests deepening them: more behavior behind a simple interface, code that is easier to test and to navigate for AI.",
-        "The suggestions arrive in an HTML report: for each one, the problem, the solution, a before/after diagram and a recommendation level. You pick one, and the agent digs into it with you before proposing any interface. Decisions already recorded in your ADRs are not called into question.",
-        "The author recommends running it every few days. On old code, it finds real leads without untangling everything for you.",
-        "Install: claude plugin install mattpocock-skills@claude-plugins-official",
-        "Then /setup-matt-pocock-skills, once per repository",
-        "The skill only runs if you type /improve-codebase-architecture",
-        "Claude Code, Codex, GitHub Copilot and Gemini CLI."
-      ]
-    },
-    {
-      "postId": 19,
-      "revisionId": 160,
-      "jour": "2026-11-04",
-      "motsCles": [
-        {
-          "champ": "nom",
-          "terme": "skill-creator",
-          "raison": null,
-          "passage": null
-        },
-        {
-          "champ": "categorie",
-          "terme": "MCP et skills",
-          "raison": null,
-          "passage": null
-        },
-        {
-          "champ": "usage",
-          "terme": "créer un skill",
-          "raison": null,
-          "passage": "Use when users want to create a skill from scratch"
-        },
-        {
-          "champ": "usage",
-          "terme": "améliorer un skill",
-          "raison": null,
-          "passage": "modify and improve existing skills"
-        },
-        {
-          "champ": "usage",
-          "terme": "évaluer un skill",
-          "raison": null,
-          "passage": "run evals to test a skill"
-        },
-        {
-          "champ": "usage",
-          "terme": "benchmark de skills",
-          "raison": null,
-          "passage": "benchmark skill performance with variance analysis"
-        },
-        {
-          "champ": "usage",
-          "terme": "optimiser la description",
-          "raison": null,
-          "passage": "optimize a skill's description for better triggering accuracy"
-        },
-        {
-          "champ": "technologie",
-          "terme": "Claude Code",
-          "raison": null,
-          "passage": "You can register this repository as a Claude Code Plugin marketplace"
-        },
-        {
-          "champ": "technologie",
-          "terme": "Agent Skills",
-          "raison": null,
-          "passage": "For information about the Agent Skills standard, see agentskills.io."
-        },
-        {
-          "champ": "technologie",
-          "terme": "Python",
-          "raison": null,
-          "passage": "The package_skill.py script works anywhere with Python and a filesystem."
-        },
-        {
-          "champ": "technologie",
-          "terme": "Claude.ai",
-          "raison": null,
-          "passage": "because Claude.ai doesn't have subagents, some mechanics change."
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "prompt engineering",
-          "raison": "Rédiger les instructions d'un skill puis les tester sur des demandes types relève du prompt engineering.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "evals",
-          "raison": "Les evals sont les jeux de tests que skill-creator lance pour évaluer un skill.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "comparaison A/B",
-          "raison": "skill-creator propose une comparaison à l'aveugle entre deux versions d'un skill.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "fichier SKILL.md",
-          "raison": "Chaque skill est un dossier avec un fichier SKILL.md, que skill-creator aide à rédiger.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "sous-agents",
-          "raison": "Pour évaluer un skill, skill-creator lance des sous-agents, d'autres agents exécutés en parallèle, un par test, avec et sans le skill.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "workflow réutilisable",
-          "raison": "skill-creator peut transformer une façon de faire tirée d'une conversation en skill réutilisable.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "déclenchement d'un skill",
-          "raison": "Optimiser la description règle le déclenchement : le moment où Claude choisit d'utiliser le skill.",
-          "passage": null
-        },
-        {
-          "champ": "terme_proche",
-          "terme": "plugin Claude Code",
-          "raison": "Le dépôt de skill-creator s'ajoute à Claude Code comme catalogue de plugins.",
-          "passage": null
-        }
-      ],
-      "textes": [
-        "skill-creator: Anthropic's skill that writes, tests, and refines your own skills",
-        "Describe what you want to automate: skill-creator frames the need, drafts a first version, tests it on realistic requests, and has you review the results. It can also take an existing skill and improve it.",
-        "Each test runs with and without the skill, or against its previous version. A review page gathers the responses to annotate and a quantified comparison: success rate, duration, tokens. It also reworks the description so the skill triggers at the right time.",
-        "Have you honed a method with Claude? Say \"turn this into a skill\": it can pick up the steps from the conversation, ask you a few questions, write the SKILL.md, and suggest two or three test requests.",
-        "Add the repository as a plugin catalog in Claude Code.",
-        "Install example-skills: /plugin install example-skills@anthropic-agent-skills",
-        "Then simply name the skill in your request.",
-        "Full version in Claude Code; in Claude.ai, a lighter version, without sub-agents or quantified comparison.",
-        "Each test runs twice, with and without the skill: plan for double the model calls."
-      ]
-    },
-    {
       "postId": 25,
-      "revisionId": 161,
+      "revisionId": 191,
       "jour": "2026-11-04",
       "motsCles": [
         {
@@ -20199,6 +26457,23 @@ window.DONNEES_MAQUETTE = {
       ]
     },
     {
+      "postId": 63,
+      "revisionId": 113,
+      "jour": "2026-11-04",
+      "motsCles": [],
+      "textes": [
+        "Agent SDK",
+        "Cursor's Agent SDK turns an agent into a code folder you can test and deploy",
+        "An agent becomes a folder you keep in version control: the prompt lives in a file, each tool is a typed action, skills are loaded on demand. You test it with evals, run it locally in a playground, then deploy with one command that builds it, gives it a URL and hosts it. Agents can also wake on pull request, comment and CI events, on Slack mentions and DMs, on webhooks or on a schedule. Each conversation keeps its own session, so a follow-up on a PR or a Slack thread picks up where it left off.\n\nThe interesting part is not the hosting, it's the loop: replay a real pull request as signed payloads, turn it into fixtures, assert on which tools ran and with what input. Four starters ship as templates: security reviewer, owners-policy approver, PR autofixer, Linear or Jira triager.",
+        "An agent ships as a project rather than a config blob. Prompts, tools, skills, MCP connections and channels each get their own place on disk, two commands validate and inspect what the SDK found, and evals are part of the same folder.",
+        "Build once, run the same agent locally with a playground or hosted by Cursor, with the same logs and evals in both places. Deploy builds it, gives it a URL and starts it, and secrets plus integrations stay in the dashboard.",
+        "People writing bots that answer in pull requests and Slack threads and need to check their behaviour before shipping, either on Cursor or on their own infrastructure.",
+        "An agent is a project",
+        "Deploy builds it and gives it a URL",
+        "Replay a real PR as payloads"
+      ]
+    },
+    {
       "postId": 69,
       "revisionId": 119,
       "jour": "2026-11-04",
@@ -20251,6 +26526,23 @@ window.DONNEES_MAQUETTE = {
       ]
     },
     {
+      "postId": 74,
+      "revisionId": 124,
+      "jour": "2026-11-04",
+      "motsCles": [],
+      "textes": [
+        "Remote MCP, native PBR and more",
+        "Spline's MCP server now runs in the cloud, no editor open",
+        "Ask ChatGPT, Claude or Cursor for a scene and get a real Spline file back, ready to open and keep editing. Handy when you want to sketch a 3D idea straight from the chat you're already in. The same update pushes PBR materials, booleans and timeline animations into the native iOS and Android exports, adds camera and light keyframes, and makes big files behave in Hana. A batch of interaction fixes comes along.",
+        "The MCP server moves to the cloud, and the native mobile exports pick up the material, boolean and timeline features.",
+        "Generate a scene from a chat prompt and get an editable Spline file without launching the app; on mobile, native builds now carry PBR materials, booleans and timeline animations.",
+        "Designers and builders who work from ChatGPT, Claude or Cursor and want a 3D starting point they can keep editing in Spline.",
+        "MCP server now in the cloud",
+        "PBR, booleans, timeline on mobile",
+        "Camera and light keyframes"
+      ]
+    },
+    {
       "postId": 76,
       "revisionId": 126,
       "jour": "2026-11-04",
@@ -20266,6 +26558,2010 @@ window.DONNEES_MAQUETTE = {
         "Three new prefixes for webhook deliveries",
         "Listed in the Meta API hooks field",
         "Covers all plans, Enterprise Cloud included"
+      ]
+    },
+    {
+      "postId": 82,
+      "revisionId": 164,
+      "jour": "2026-11-04",
+      "motsCles": [],
+      "textes": [
+        "Le Chonk: Built for Coders, Trusted by Defenders.",
+        "Mistral Large 4 (Le Chonk): open weights for agentic coding and defense",
+        "Le Chonk is Mistral's 1-trillion-parameter multimodal model, and the weights are now out. Coding and defensive security got the bulk of the reinforcement learning push, with three reasoning modes to trade cost against depth. You can point it at a repo, run it in a terminal loop, or host it yourself.",
+        "The preview shipped earlier and the team kept scaling RL; three extra weeks moved coding results and token efficiency, and reasoning got cheaper to run. Weights and a license are published alongside.",
+        "Frontier-level coding with far fewer tokens spent per task, which matters once agents run at scale. On the defensive side it hunts and patches vulnerabilities without bailing out of legitimate work. Reasoning effort is selectable per request.",
+        "Teams building coding agents, security teams that want to stay in control instead of handing off triage, and organizations that need to own and host the model rather than rent it through an API.",
+        "Live-traffic monitoring showed the model declining black-box attacks on real targets but a possible uplift for conducting real attacks, so guardrails are being revised and the red-teaming variant stays gated behind vetting and contractual safeguards.",
+        "Weights out, three reasoning modes",
+        "47% fewer tokens per task, Mistral says",
+        "Cyber Index at 51%"
+      ]
+    },
+    {
+      "postId": 83,
+      "revisionId": 165,
+      "jour": "2026-11-04",
+      "motsCles": [],
+      "textes": [
+        "Build and manage Connected Apps in one place",
+        "Google opens a preview of its Connected Apps Platform for Gemini and Search.",
+        "Developers get one place to build an app once and put it in front of people searching or chatting with Gemini. You integrate through a cloud-hosted MCP server or Android MCP with the AppFunctions APIs, then register, test and submit the app in the Google Connected Console. Before review you pick where it goes live: Search, the Gemini app, or both. After launch you follow traffic, latency and error rates, and keep hold of the branding with verified logos and authenticated accounts. Access is still in preview and opens in stages, with more developers, markets and Google products promised later.",
+        "A single console for building, testing, submitting and monitoring Connected Apps, plus a choice of where each one appears.",
+        "Ship one integration and cover both surfaces, then watch how it behaves once live.",
+        "App developers who want their product inside Search and the Gemini app during the preview phase.",
+        "It's a staged preview, with more developers and markets added later.",
+        "Build once, reach Gemini and Search",
+        "Register, test and submit in one console",
+        "Track traffic, latency and errors"
+      ]
+    },
+    {
+      "postId": 84,
+      "revisionId": 166,
+      "jour": "2026-11-04",
+      "motsCles": [],
+      "textes": [
+        "Gemini 4 Carbon: our next frontier model",
+        "Gemini 4 Carbon: a model built for long-horizon agentic work and cyber defense",
+        "Carbon is aimed at harder engineering runs that stretch out over time, and at the security work that comes with them: finding flaws, checking which ones are actually exploitable, and patching the root cause. Google says its teams have watched it keep going across multi-step jobs on large codebases and low-level systems. It ships into a small group of cyber defenders first, then more trusted partners, with developer and consumer access later. Intro pricing matches Argon.",
+        "Google positions it as its strongest model so far, with 88.2% on SEC-bench Pro, 54.8% on ExploitGym and 71.0% on CWE-bench, and claims a firm lead on the first. On WebDev Arena it sits at #4 with 1768 after a jump of 89 elo points.",
+        "Sustained multi-step runs rather than single prompts: the model keeps working through dead ends instead of stalling. Google also reports less overreach and less under-service on plan execution, with discrepancies surfaced to the user before it acts.",
+        "Security defenders first, then trusted partners; developers and product teams follow once access opens up.",
+        "Rollout starts narrow, so developers, businesses and consumers can only get it once access widens.",
+        "Built for sustained agentic workflows",
+        "88.2% on SEC-bench Pro",
+        "$2 in / $10 out per million tokens"
+      ]
+    },
+    {
+      "postId": 88,
+      "revisionId": 170,
+      "jour": "2026-11-04",
+      "motsCles": [],
+      "textes": [
+        "Voxtral 3",
+        "Voxtral 3 turns calls into a working voice agent: listen, reason, act, speak.",
+        "It gives you a speech stack for agents that hold a real conversation and finish the job. One model listens, a general model such as Mistral Small decides and calls tools, and the TTS speaks back in the mood of what came before. Swap out any of the three — LLM, voice, language — and the agent still stands. Run it through Mistral's API in Europe or on hardware you control.",
+        "The release bundles new speech-to-text and text-to-speech models with a voice agent SDK built on LiveKit. Voxtral Mini TTS 3 adds context-aware voices that shift emotion, pacing and emphasis, plus voice cloning and custom prompt instruction following. Transcribe 3 adds diarization, context biasing and end-of-turn prediction.",
+        "Mid-call, an agent can pull an identity check, a bill balance or a booking through function calling, web search and retrieval over your own systems. Calls go over SIP; browsers and apps connect over WebRTC; and the telephony, IVR and contact-center tools you already run stay in place. Domain vocabulary lands correctly without fine-tuning, thanks to context biasing.",
+        "Teams building contact-center agents, service desks, virtual assistants and hands-free copilots, especially those with data-residency constraints.",
+        "Turns under one second",
+        "35+ languages, 50+ dialects",
+        "EU-hosted or self-deployed"
+      ]
+    },
+    {
+      "postId": 1,
+      "revisionId": 192,
+      "jour": "2026-11-05",
+      "motsCles": [
+        {
+          "champ": "nom",
+          "terme": "frontend-design",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "MCP et skills",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "usage",
+          "terme": "design d'interface",
+          "raison": null,
+          "passage": "Guidance for distinctive, intentional visual design when building new UI or reshaping an existing one."
+        },
+        {
+          "champ": "usage",
+          "terme": "direction artistique",
+          "raison": null,
+          "passage": "Helps with aesthetic direction, typography, and making choices that don't read as templated defaults."
+        },
+        {
+          "champ": "usage",
+          "terme": "typographie",
+          "raison": null,
+          "passage": "Typography carries the personality of the page."
+        },
+        {
+          "champ": "usage",
+          "terme": "rédaction d'interface",
+          "raison": null,
+          "passage": "Bring the same intentionality and minimalism to copywriting that you would bring to spacing and color."
+        },
+        {
+          "champ": "usage",
+          "terme": "accessibilité",
+          "raison": null,
+          "passage": "visible keyboard focus, reduced motion respected, visually accessible"
+        },
+        {
+          "champ": "usage",
+          "terme": "motion design",
+          "raison": null,
+          "passage": "Motion that answers a person's action (opening, expanding, confirming) is welcome when it shows what changed."
+        },
+        {
+          "champ": "technologie",
+          "terme": "CSS",
+          "raison": null,
+          "passage": "When writing the code, be careful of structuring your CSS selector specificities."
+        },
+        {
+          "champ": "technologie",
+          "terme": "Claude Code",
+          "raison": null,
+          "passage": "You can register this repository as a Claude Code Plugin marketplace"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Agent Skills",
+          "raison": null,
+          "passage": "For information about the Agent Skills standard, see agentskills.io."
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "front-end",
+          "raison": "Autre graphie de frontend, premier mot du nom frontend-design.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "design web",
+          "raison": "Le skill traite le design d'interface des pages web, haut de page (hero) et CSS compris.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "identité visuelle",
+          "raison": "La direction artistique du skill vise une identité visuelle propre à chaque projet.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "interface utilisateur",
+          "raison": "Le design d'interface s'applique à l'interface utilisateur (UI) d'un site ou d'une application.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "polices de caractères",
+          "raison": "Pour la typographie, le skill conseille une ou deux familles de polices bien distinctes.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "microcopie",
+          "raison": "La rédaction d'interface couvre les textes courts : boutons, messages d'erreur, écrans vides.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "animations d'interface",
+          "raison": "Le skill conseille de limiter les animations automatiques à un seul moment orchestré et d'animer surtout les réponses aux actions ; ce n'est pas un outil d'animation.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "design responsive",
+          "raison": "Le design d'interface du skill doit tenir jusqu'au mobile, sans l'annoncer.",
+          "passage": null
+        }
+      ],
+      "textes": [
+        "frontend-design pushes Claude toward interfaces that don't look like everyone else's",
+        "Anthropic's skill gives Claude a real artistic direction for creating or redoing an interface. Palette, typography and layout are chosen for the brief, not pulled from the default settings you see everywhere.",
+        "Claude first writes a short design plan, rereads it against the brief, and only then codes. The skill also names the current clichés of AI-generated designs: cream background with terracotta accent, rounded cards all identical. Claude avoids them when the brief leaves the choice open, and follows them if the brief asks for them.",
+        "Visual choices start from the subject: a toy for girls aged 8 to 11 won't have the aesthetic of a dashboard for financial analysts.",
+        "In Claude Code, add the repository as a marketplace",
+        "Install example-skills: /plugin install example-skills@anthropic-agent-skills",
+        "Then mention frontend-design in the request",
+        "Claude Code, and already included in Claude.ai's paid plans according to the repository."
+      ]
+    },
+    {
+      "postId": 2,
+      "revisionId": 176,
+      "jour": "2026-11-05",
+      "motsCles": [
+        {
+          "champ": "nom",
+          "terme": "agent-browser",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "agents et automatisation",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "usage",
+          "terme": "automatisation de navigateur",
+          "raison": null,
+          "passage": "Browser automation CLI for AI agents"
+        },
+        {
+          "champ": "usage",
+          "terme": "test d'applications web",
+          "raison": null,
+          "passage": "Use agent-browser to test the login flow."
+        },
+        {
+          "champ": "usage",
+          "terme": "remplissage de formulaires",
+          "raison": null,
+          "passage": "Fill by ref"
+        },
+        {
+          "champ": "usage",
+          "terme": "capture d'écran",
+          "raison": null,
+          "passage": "Annotated screenshot with numbered element labels"
+        },
+        {
+          "champ": "usage",
+          "terme": "audit d'accessibilité",
+          "raison": null,
+          "passage": "Run an axe-core accessibility audit against the current page or a URL."
+        },
+        {
+          "champ": "usage",
+          "terme": "lecture de pages web",
+          "raison": null,
+          "passage": "Fetch agent-readable text, or read rendered active-tab DOM"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Rust",
+          "raison": null,
+          "passage": "Fast native Rust CLI."
+        },
+        {
+          "champ": "technologie",
+          "terme": "Chrome",
+          "raison": null,
+          "passage": "Uses Chrome (from Chrome for Testing) by default."
+        },
+        {
+          "champ": "technologie",
+          "terme": "MCP",
+          "raison": null,
+          "passage": "agent-browser mcp # Start an MCP stdio server"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Chrome DevTools Protocol",
+          "raison": null,
+          "passage": "Connect to an existing browser via Chrome DevTools Protocol:"
+        },
+        {
+          "champ": "technologie",
+          "terme": "axe-core",
+          "raison": null,
+          "passage": "Run an axe-core accessibility audit against the current page or a URL."
+        },
+        {
+          "champ": "technologie",
+          "terme": "React DevTools",
+          "raison": null,
+          "passage": "React commands require the React DevTools hook, installed at launch with --enable react-devtools."
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "automatisation web",
+          "raison": "Expression voisine d'automatisation de navigateur, pour les mêmes tâches sur des sites.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "navigateur headless",
+          "raison": "Par défaut, agent-browser lance le navigateur sans fenêtre visible (mode headless) ; l'option --headed l'affiche.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "extraction de contenu web",
+          "raison": "Proche de la lecture de pages web : la commande read récupère le texte lisible d'une page ou d'une URL.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "tests end-to-end",
+          "raison": "Avec agent-browser, un agent peut parcourir une application de bout en bout, comme une connexion ; ce n'est pas un framework de tests avec assertions.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "a11y",
+          "raison": "Abréviation anglaise d'accessibilité ; c'est aussi le nom de la commande d'audit d'accessibilité.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "Model Context Protocol",
+          "raison": "Nom complet du protocole MCP ; agent-browser peut démarrer un serveur de ce type.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "agent web",
+          "raison": "Un agent d'IA qui agit sur des sites a besoin d'une automatisation de navigateur, ce que fournit l'outil.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "skill Claude Code",
+          "raison": "agent-browser fournit un skill pour Claude Code et d'autres assistants de code, ajouté avec npx skills add.",
+          "passage": null
+        }
+      ],
+      "textes": [
+        "agent-browser, from Vercel Labs: a real browser that your agent controls from the command line",
+        "A native Rust CLI: the agent opens a page, reads the text, clicks, fills a field and takes a screenshot. According to the repository, the skill works with Claude Code, Codex, Cursor or Gemini CLI, and the tool also runs as an MCP server.",
+        "snapshot returns the accessibility tree with a reference per element (@e1, @e2): the agent clicks or fills by reference, without querying the DOM again. Note: nothing is restricted by default: allowed domains and an action policy must be enabled by you.",
+        "Ask your agent to test the login flow with agent-browser: it reads --help, picks up the form fields and fills them in.",
+        "npm install -g agent-browser, then agent-browser install to fetch Chrome, only the first time."
+      ]
+    },
+    {
+      "postId": 5,
+      "revisionId": 193,
+      "jour": "2026-11-05",
+      "motsCles": [
+        {
+          "champ": "nom",
+          "terme": "UI UX Pro Max",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "MCP et skills",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "usage",
+          "terme": "design d'interface",
+          "raison": null,
+          "passage": "An AI skill that provides design intelligence for building professional UI/UX across multiple platforms and frameworks."
+        },
+        {
+          "champ": "usage",
+          "terme": "design system",
+          "raison": null,
+          "passage": "Industry-specific design system generation"
+        },
+        {
+          "champ": "usage",
+          "terme": "landing page",
+          "raison": null,
+          "passage": "Build a landing page for my SaaS product"
+        },
+        {
+          "champ": "usage",
+          "terme": "palette de couleurs",
+          "raison": null,
+          "passage": "Industry-specific palettes aligned 1:1 with the 192 product types"
+        },
+        {
+          "champ": "usage",
+          "terme": "association de polices",
+          "raison": null,
+          "passage": "Curated typography combinations with Google Fonts imports"
+        },
+        {
+          "champ": "usage",
+          "terme": "tableau de bord",
+          "raison": null,
+          "passage": "Create a dashboard for healthcare analytics"
+        },
+        {
+          "champ": "technologie",
+          "terme": "React",
+          "raison": null,
+          "passage": "Tech Stacks - React, Next.js, Astro, Vue"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Next.js",
+          "raison": null,
+          "passage": "Tech Stacks - React, Next.js, Astro, Vue"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Vue",
+          "raison": null,
+          "passage": "Tech Stacks - React, Next.js, Astro, Vue"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Tailwind",
+          "raison": null,
+          "passage": "let it default to HTML + Tailwind"
+        },
+        {
+          "champ": "technologie",
+          "terme": "SwiftUI",
+          "raison": null,
+          "passage": "SwiftUI, React Native, Flutter, HTML+Tailwind"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Flutter",
+          "raison": null,
+          "passage": "SwiftUI, React Native, Flutter, HTML+Tailwind"
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "interface utilisateur",
+          "raison": "UI signifie interface utilisateur, le sujet même de UI UX Pro Max.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "expérience utilisateur",
+          "raison": "UX signifie expérience utilisateur ; UI UX Pro Max en donne des règles.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "page d'atterrissage",
+          "raison": "Traduction française de landing page, un usage décrit par le dépôt.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "charte graphique",
+          "raison": "Comme une charte graphique, le design system fixe les couleurs, les polices et le style d'un projet.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "polices d'écriture",
+          "raison": "Les polices d'écriture sont l'objet des associations de polices proposées.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "accessibilité",
+          "raison": "Les règles d'UX de UI UX Pro Max comprennent des règles d'accessibilité, sans la garantir.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "ergonomie",
+          "raison": "En français, l'ergonomie d'interface recouvre une bonne part de l'UX visée par UI UX Pro Max.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "refonte visuelle",
+          "raison": "Le dépôt propose une consigne pour que l'assistant refasse le thème d'une app existante avec UI UX Pro Max.",
+          "passage": null
+        }
+      ],
+      "textes": [
+        "UI UX Pro Max gives your agent a design system tailored to your product before it codes the interface",
+        "Ask for a landing page or a dashboard: the skill activates on its own, starts from your product type and outputs the page structure, style, colors, typography and effects. It draws on 79 styles, 192 product types, palettes and font pairs.",
+        "Each proposal comes with its anti-patterns and a pre-delivery checklist: no emoji as icons, cursor-pointer on every clickable element. Palettes follow the sector, and the purple-pink \"AI\" gradients are banned for a bank.",
+        "In the repository example, a spa landing page gets a Soft UI Evolution style, pale pink and sage green accented with gold, Cormorant Garamond with Montserrat, no neon or abrupt animations.",
+        "In the project: npx ui-ux-pro-max-cli init --ai claude (or cursor, copilot)",
+        "Then ask for the interface you want, the skill takes over.",
+        "About twenty agents depending on the repository, including Claude Code, Cursor, Windsurf, Codex CLI and GitHub Copilot.",
+        "The core is under MIT license; logos, banners and generated visuals are not, they fall under a separate Premium offer (uupm.cc)."
+      ]
+    },
+    {
+      "postId": 3,
+      "revisionId": 177,
+      "jour": "2026-11-05",
+      "motsCles": [
+        {
+          "champ": "nom",
+          "terme": "React Best Practices (Vercel)",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "MCP et skills",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "usage",
+          "terme": "optimisation des performances",
+          "raison": null,
+          "passage": "React and Next.js performance optimization guidelines from Vercel Engineering."
+        },
+        {
+          "champ": "usage",
+          "terme": "revue de code",
+          "raison": null,
+          "passage": "Reviewing code for performance issues"
+        },
+        {
+          "champ": "usage",
+          "terme": "refactorisation",
+          "raison": null,
+          "passage": "Refactoring existing React/Next.js code"
+        },
+        {
+          "champ": "usage",
+          "terme": "taille du bundle",
+          "raison": null,
+          "passage": "Optimizing bundle size or load times"
+        },
+        {
+          "champ": "usage",
+          "terme": "chargement des données",
+          "raison": null,
+          "passage": "Implementing data fetching (client or server-side)"
+        },
+        {
+          "champ": "usage",
+          "terme": "temps de chargement",
+          "raison": null,
+          "passage": "Optimizing bundle size or load times"
+        },
+        {
+          "champ": "technologie",
+          "terme": "React",
+          "raison": null,
+          "passage": "Comprehensive performance optimization guide for React and Next.js applications, maintained by Vercel."
+        },
+        {
+          "champ": "technologie",
+          "terme": "Next.js",
+          "raison": null,
+          "passage": "Comprehensive performance optimization guide for React and Next.js applications, maintained by Vercel."
+        },
+        {
+          "champ": "technologie",
+          "terme": "JavaScript",
+          "raison": null,
+          "passage": "JavaScript Performance | LOW-MEDIUM | js-"
+        },
+        {
+          "champ": "technologie",
+          "terme": "RSC",
+          "raison": null,
+          "passage": "Avoid module-level mutable request state in RSC/SSR"
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "vercel-react-best-practices",
+          "raison": "Nom technique du skill React Best Practices, donné par le champ name de son fichier SKILL.md.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "performance web",
+          "raison": "Les règles visent la rapidité des applications React, côté navigateur comme côté serveur.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "requêtes en cascade",
+          "raison": "Traduit waterfalls : des attentes successives qui ralentissent une application React.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "chargement différé",
+          "raison": "Des règles sur la taille du bundle conseillent de charger les composants lourds à la demande (next/dynamic).",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "rendus inutiles",
+          "raison": "Une catégorie de règles React aide à éviter les re-rendus superflus des composants.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "mémoïsation",
+          "raison": "Des règles React conseillent d'isoler les calculs coûteux dans des composants mémoïsés, et d'éviter la mémoïsation pour les valeurs simples.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "SWR",
+          "raison": "Une seule règle cite la bibliothèque SWR, pour dédoublonner les requêtes lors du chargement des données côté client.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "Suspense",
+          "raison": "Une seule règle React cite Suspense, pour afficher le contenu au fur et à mesure de son chargement (streaming).",
+          "passage": null
+        }
+      ],
+      "textes": [
+        "React Best Practices: Vercel's 70 React and Next.js performance rules, applied by your agent",
+        "Vercel Engineering condenses its React and Next.js performance rules there. The agent uses them whenever it writes, reviews or refactors a component, a Next.js page or data loading.",
+        "The rules are ranked by impact: the agent tackles cascading requests and bundle weight first, before re-renders or JavaScript micro-optimizations.",
+        "A Next.js page chains two independent requests? Ask the agent to optimize it: the async-parallel rule runs them together with Promise.all().",
+        "The command installs Vercel's entire collection, not just this skill: npx skills add vercel-labs/agent-skills"
+      ]
+    },
+    {
+      "postId": 4,
+      "revisionId": 178,
+      "jour": "2026-11-05",
+      "motsCles": [
+        {
+          "champ": "nom",
+          "terme": "Skills de documents docx, xlsx, pptx, pdf",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "MCP et skills",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "usage",
+          "terme": "créer des documents Word",
+          "raison": null,
+          "passage": "create, read, edit, or manipulate Word documents (.docx files)"
+        },
+        {
+          "champ": "usage",
+          "terme": "tableurs et formules",
+          "raison": null,
+          "passage": "open, read, edit, or fix an existing .xlsx, .xlsm, .xltx, .csv, or .tsv file (e.g., adding columns, computing formulas, formatting, charting, cleaning messy data)"
+        },
+        {
+          "champ": "usage",
+          "terme": "créer des présentations",
+          "raison": null,
+          "passage": "creating slide decks, pitch decks, or presentations"
+        },
+        {
+          "champ": "usage",
+          "terme": "fusionner des PDF",
+          "raison": null,
+          "passage": "combining or merging multiple PDFs into one, splitting PDFs apart"
+        },
+        {
+          "champ": "usage",
+          "terme": "remplir des formulaires PDF",
+          "raison": null,
+          "passage": "filling PDF forms"
+        },
+        {
+          "champ": "usage",
+          "terme": "suivi des modifications",
+          "raison": null,
+          "passage": "working with tracked changes or comments"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Python",
+          "raison": null,
+          "passage": "This guide covers essential PDF processing operations using Python libraries and command-line tools."
+        },
+        {
+          "champ": "technologie",
+          "terme": "JavaScript",
+          "raison": null,
+          "passage": "Write a docx (npm) script"
+        },
+        {
+          "champ": "technologie",
+          "terme": "LibreOffice",
+          "raison": null,
+          "passage": "LibreOffice computes every formula, the file is rewritten in place"
+        },
+        {
+          "champ": "technologie",
+          "terme": "openpyxl",
+          "raison": null,
+          "passage": "openpyxl writes formulas as strings with no cached values."
+        },
+        {
+          "champ": "technologie",
+          "terme": "pptxgenjs",
+          "raison": null,
+          "passage": "Write a pptxgenjs script"
+        },
+        {
+          "champ": "technologie",
+          "terme": "pypdf",
+          "raison": null,
+          "passage": "from pypdf import PdfReader, PdfWriter"
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "bureautique",
+          "raison": "ces skills traitent les formats de bureautique docx, xlsx, pptx et pdf",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "Excel",
+          "raison": "le skill xlsx produit des classeurs .xlsx, le format des tableurs Excel",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "PowerPoint",
+          "raison": "le skill pptx crée et modifie des présentations .pptx destinées à PowerPoint",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "diaporama",
+          "raison": "autre nom d'une présentation, que le skill pptx sait créer et modifier",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "rapport",
+          "raison": "le skill docx couvre aussi les rapports, mémos et lettres au format Word",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "OCR",
+          "raison": "le skill pdf décrit l'OCR pour rendre cherchables les PDF numérisés",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "Claude Code",
+          "raison": "les skills s'installent dans Claude Code par la marketplace de plugins",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "Agent Skills",
+          "raison": "le dépôt renvoie au standard Agent Skills, dont ces skills suivent le format (SKILL.md) ; leur licence les limite toutefois aux services d'Anthropic",
+          "passage": null
+        }
+      ],
+      "textes": [
+        "Anthropic document skills: Claude creates and edits Word files, spreadsheets, slides and PDF files",
+        "The four skills that power Claude's document functions, one per format: docx, xlsx, pptx and pdf. Word report, spreadsheet with formulas, presentation, PDF form: Claude relies on them to deliver a clean file. According to Anthropic, a reference for complex skills used in production.",
+        "Each skill picks its method based on the task, lists the known library pitfalls and requires checking the produced file. For a spreadsheet, LibreOffice recalculates all formulas, and nothing goes out while an error remains.",
+        "Once the document-skills plugin is installed, just ask Claude Code to use the PDF skill to extract a file's form fields.",
+        "Add the catalog: /plugin marketplace add anthropics/skills",
+        "Install: /plugin install document-skills@anthropic-agent-skills",
+        "Code viewable but not free: the license reserves these skills for Anthropic's services and forbids copying, modifying or redistributing them."
+      ]
+    },
+    {
+      "postId": 6,
+      "revisionId": 179,
+      "jour": "2026-11-05",
+      "motsCles": [
+        {
+          "champ": "nom",
+          "terme": "webapp-testing",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "MCP et skills",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "usage",
+          "terme": "tests d'applications web",
+          "raison": null,
+          "passage": "testing local web applications using Playwright"
+        },
+        {
+          "champ": "usage",
+          "terme": "tests d'interface",
+          "raison": null,
+          "passage": "Supports verifying frontend functionality"
+        },
+        {
+          "champ": "usage",
+          "terme": "débogage d'interface",
+          "raison": null,
+          "passage": "debugging UI behavior"
+        },
+        {
+          "champ": "usage",
+          "terme": "captures d'écran",
+          "raison": null,
+          "passage": "capturing browser screenshots"
+        },
+        {
+          "champ": "usage",
+          "terme": "journaux du navigateur",
+          "raison": null,
+          "passage": "viewing browser logs"
+        },
+        {
+          "champ": "usage",
+          "terme": "automatisation de navigateur",
+          "raison": null,
+          "passage": "To create an automation script, include only Playwright logic"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Playwright",
+          "raison": null,
+          "passage": "write native Python Playwright scripts"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Python",
+          "raison": null,
+          "passage": "write native Python Playwright scripts"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Chromium",
+          "raison": null,
+          "passage": "Always launch chromium in headless mode"
+        },
+        {
+          "champ": "technologie",
+          "terme": "HTML",
+          "raison": null,
+          "passage": "Read HTML file directly to identify selectors"
+        },
+        {
+          "champ": "technologie",
+          "terme": "DOM",
+          "raison": null,
+          "passage": "Take screenshot or inspect DOM"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Claude Code",
+          "raison": null,
+          "passage": "You can register this repository as a Claude Code Plugin marketplace"
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "tests end-to-end",
+          "raison": "Le skill pilote un vrai navigateur avec Playwright, mais pour des scripts ponctuels, sans suite de tests ni intégration continue.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "navigateur headless",
+          "raison": "Le skill lance Chromium en headless pour ses scripts Playwright.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "sélecteurs CSS",
+          "raison": "Le skill repère les éléments par des sélecteurs, dont les sélecteurs CSS, après inspection du DOM.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "front-end",
+          "raison": "Le skill sert aux tests d'interface du front-end, lancé en local avec le back-end si besoin.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "tests UI",
+          "raison": "Formulation anglaise courante pour les tests d'interface et le débogage d'interface du skill.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "logs console",
+          "raison": "Les logs de la console font partie des journaux du navigateur que le skill peut relever.",
+          "passage": null
+        }
+      ],
+      "textes": [
+        "webapp-testing: Claude tests your local web app with Playwright",
+        "Anthropic's skill writes Playwright scripts in Python to check the front end, debug the interface, take screenshots, and read browser logs.",
+        "A helper starts the app's servers, back end and front end included, then runs the test. Claude calls it as is, without loading its code into the context. On a dynamic app, it waits for loading to finish, observes the rendered page, and derives its selectors from it before acting.",
+        "Testing a form on an app with a back end and front end: the helper starts both servers, the page opens headless, the script waits for loading to finish, then inspects the DOM.",
+        "Add the catalog: /plugin marketplace add anthropics/skills",
+        "Install example-skills: /plugin install example-skills@anthropic-agent-skills",
+        "Mention webapp-testing in the request"
+      ]
+    },
+    {
+      "postId": 7,
+      "revisionId": 133,
+      "jour": "2026-11-05",
+      "motsCles": [
+        {
+          "champ": "nom",
+          "terme": "mcp-builder",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "MCP et skills",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "usage",
+          "terme": "créer un serveur MCP",
+          "raison": null,
+          "passage": "Create MCP (Model Context Protocol) servers that enable LLMs to interact with external services through well-designed tools."
+        },
+        {
+          "champ": "usage",
+          "terme": "intégrer une API externe",
+          "raison": null,
+          "passage": "Use when building MCP servers to integrate external APIs or services"
+        },
+        {
+          "champ": "usage",
+          "terme": "outils pour agents",
+          "raison": null,
+          "passage": "Clear, descriptive tool names help agents find the right tools quickly."
+        },
+        {
+          "champ": "usage",
+          "terme": "évaluer un serveur MCP",
+          "raison": null,
+          "passage": "Use evaluations to test whether LLMs can effectively use your MCP server to answer realistic, complex questions."
+        },
+        {
+          "champ": "technologie",
+          "terme": "Model Context Protocol",
+          "raison": null,
+          "passage": "Create MCP (Model Context Protocol) servers that enable LLMs to interact with external services through well-designed tools."
+        },
+        {
+          "champ": "technologie",
+          "terme": "TypeScript",
+          "raison": null,
+          "passage": "The TypeScript SDK has two major versions."
+        },
+        {
+          "champ": "technologie",
+          "terme": "Python",
+          "raison": null,
+          "passage": "whether in Python (FastMCP) or Node/TypeScript (MCP SDK)"
+        },
+        {
+          "champ": "technologie",
+          "terme": "FastMCP",
+          "raison": null,
+          "passage": "whether in Python (FastMCP) or Node/TypeScript (MCP SDK)"
+        },
+        {
+          "champ": "technologie",
+          "terme": "MCP Inspector",
+          "raison": null,
+          "passage": "Test with MCP Inspector: npx @modelcontextprotocol/inspector"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Claude Code",
+          "raison": null,
+          "passage": "You can register this repository as a Claude Code Plugin marketplace"
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "connecteur d'API",
+          "raison": "mcp-builder guide l'écriture d'un serveur qui relie un LLM à l'API d'un service externe.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "protocole MCP",
+          "raison": "Traduction de Model Context Protocol, le protocole des serveurs que guide mcp-builder.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "agents IA",
+          "raison": "Les outils d'un serveur créé avec mcp-builder sont appelés par des agents IA.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "Agent Skills",
+          "raison": "mcp-builder est un skill du dépôt d'Anthropic consacré aux Agent Skills, chargé par Claude.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "skill Claude",
+          "raison": "mcp-builder est un skill que Claude charge pour guider la création d'un serveur MCP.",
+          "passage": null
+        }
+      ],
+      "textes": [
+        "With mcp-builder, Claude takes your MCP server from API study through evaluations",
+        "Anthropic's skill for connecting an external API to an MCP server, in TypeScript or Python with FastMCP. Claude runs four phases: API study, implementation, review and testing with MCP Inspector, then evaluations.",
+        "Everything is designed for the agent that will call the tools: prefixed, action-oriented names, short descriptions, targeted and paginable results, errors that say what to do next.",
+        "Once the server is done, the guide has you write 10 realistic questions, with no destructive operation, to see whether an LLM really uses it well.",
+        "In Claude Code, add the repository as a marketplace",
+        "Install example-skills: /plugin install example-skills@anthropic-agent-skills",
+        "Then mention mcp-builder in the request",
+        "According to the guide, every new TypeScript server starts from SDK v2."
+      ]
+    },
+    {
+      "postId": 8,
+      "revisionId": 180,
+      "jour": "2026-11-05",
+      "motsCles": [
+        {
+          "champ": "nom",
+          "terme": "Obsidian Skills",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "MCP et skills",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "usage",
+          "terme": "piloter un coffre Obsidian",
+          "raison": null,
+          "passage": "Interact with Obsidian vaults via the Obsidian CLI including plugin and theme development"
+        },
+        {
+          "champ": "usage",
+          "terme": "édition Markdown",
+          "raison": null,
+          "passage": "Create and edit Obsidian Flavored Markdown (.md) with wikilinks, embeds, callouts, properties"
+        },
+        {
+          "champ": "usage",
+          "terme": "vues filtrées Obsidian Bases",
+          "raison": null,
+          "passage": "Create and edit Obsidian Bases (.base) with views, filters, formulas, and summaries"
+        },
+        {
+          "champ": "usage",
+          "terme": "canevas visuel JSON Canvas",
+          "raison": null,
+          "passage": "Create and edit JSON Canvas files (.canvas) with nodes, edges, groups, and connections"
+        },
+        {
+          "champ": "usage",
+          "terme": "nettoyer une page web",
+          "raison": null,
+          "passage": "Extract clean markdown from web pages using Defuddle"
+        },
+        {
+          "champ": "usage",
+          "terme": "notes Markdown depuis JSON/CSV",
+          "raison": null,
+          "passage": "Render Markdown templates from JSON or CSV data using Knap, including batch file generation"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Markdown",
+          "raison": null,
+          "passage": "open formats including Markdown, Bases, JSON Canvas"
+        },
+        {
+          "champ": "technologie",
+          "terme": "JSON Canvas",
+          "raison": null,
+          "passage": "Create and edit JSON Canvas files (.canvas)"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Obsidian CLI",
+          "raison": null,
+          "passage": "Interact with Obsidian vaults via the Obsidian CLI"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Claude Code",
+          "raison": null,
+          "passage": "any skills-compatible agent, including Claude Code, Codex, and Open Code"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Codex",
+          "raison": null,
+          "passage": "Copy the skills/ directory into your Codex skills path"
+        },
+        {
+          "champ": "technologie",
+          "terme": "OpenCode",
+          "raison": null,
+          "passage": "OpenCode auto-discovers all SKILL.md files under ~/.opencode/skills/."
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "Claude Skills",
+          "raison": "pour Claude Code, le dépôt renvoie à la documentation officielle des Claude Skills.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "Agent Skills",
+          "raison": "Obsidian Skills suit la spécification Agent Skills, un format de skills commun à plusieurs agents.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "wikilinks",
+          "raison": "la syntaxe Markdown d'Obsidian comprend les wikilinks, des liens entre fichiers du coffre.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "économie de tokens",
+          "raison": "le skill defuddle d'Obsidian Skills retire le superflu des pages web pour économiser des tokens.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "modèles de fichiers",
+          "raison": "le skill knap remplit des modèles Markdown à partir de données JSON ou CSV.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "base de connaissances Markdown",
+          "raison": "un coffre Obsidian est un dossier de fichiers Markdown que ces skills apprennent à l'agent à créer et modifier.",
+          "passage": null
+        }
+      ],
+      "textes": [
+        "Obsidian Skills teaches your agent Obsidian's formats and its CLI",
+        "Your agent writes notes with wikilinks, callouts and properties, builds Bases with views, filters and formulas, and constructs JSON Canvas canvases, directly in your vault. It works with Claude Code, Codex and OpenCode.",
+        "Two skills go beyond notes: defuddle reduces a web page to clean Markdown to save tokens, knap generates files in series from JSON or CSV. The repository follows the Agent Skills specification, so the same skills serve all your compatible agents.",
+        "Fetch an article with defuddle, then file it in the vault as a note with properties and wikilinks.",
+        "In Claude Code: /plugin marketplace add kepano/obsidian-skills",
+        "Then /plugin install obsidian@obsidian-skills",
+        "Or with npx: npx skills add https://github.com/kepano/obsidian-skills",
+        "Claude Code, Codex, OpenCode and any skills-compatible agent."
+      ]
+    },
+    {
+      "postId": 10,
+      "revisionId": 137,
+      "jour": "2026-11-05",
+      "motsCles": [
+        {
+          "champ": "nom",
+          "terme": "Scientific Agent Skills (K-Dense)",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "MCP et skills",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "usage",
+          "terme": "recherche scientifique",
+          "raison": null,
+          "passage": "A collection of 177 scientific and research skills for AI agents, created by K-Dense."
+        },
+        {
+          "champ": "usage",
+          "terme": "analyse génomique",
+          "raison": null,
+          "passage": "Bioinformatics & Genomics - Sequence analysis, single-cell RNA-seq, pooled CRISPR screens"
+        },
+        {
+          "champ": "usage",
+          "terme": "découverte de médicaments",
+          "raison": null,
+          "passage": "Cheminformatics & Drug Discovery - Molecular property prediction, virtual screening, ADMET analysis, molecular docking"
+        },
+        {
+          "champ": "usage",
+          "terme": "bases de données scientifiques",
+          "raison": null,
+          "passage": "The Database Lookup skill documents 80 databases with public, registered, or licensed access"
+        },
+        {
+          "champ": "usage",
+          "terme": "analyse de données",
+          "raison": null,
+          "passage": "Data Analysis & Visualization - Statistical analysis, network analysis, time series, publication-quality figures"
+        },
+        {
+          "champ": "usage",
+          "terme": "rédaction scientifique",
+          "raison": null,
+          "passage": "Scientific Communication - Evidence-traceable writing, confidential authorized peer review, literature synthesis"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Agent Skills",
+          "raison": null,
+          "passage": "The collection follows the open Agent Skills standard"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Python",
+          "raison": null,
+          "passage": "While the agent can use any Python package or API on its own"
+        },
+        {
+          "champ": "technologie",
+          "terme": "RDKit",
+          "raison": null,
+          "passage": "Explicitly defined, version-aware workflows for RDKit, Scanpy, PyTorch Lightning, scikit-learn"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Scanpy",
+          "raison": null,
+          "passage": "Explicitly defined, version-aware workflows for RDKit, Scanpy, PyTorch Lightning, scikit-learn"
+        },
+        {
+          "champ": "technologie",
+          "terme": "scikit-learn",
+          "raison": null,
+          "passage": "Explicitly defined, version-aware workflows for RDKit, Scanpy, PyTorch Lightning, scikit-learn"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Biopython",
+          "raison": null,
+          "passage": "Multi-database packages such as BioServices, Biopython, and gget add further coverage"
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "Claude Scientific Skills",
+          "raison": "Ancien nom du dépôt scientific-agent-skills, qui a changé de nom pour s'ouvrir à d'autres agents que Claude.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "bioinformatique",
+          "raison": "Domaine couvert par plusieurs skills d'analyse génomique : séquences, cellules uniques, variants.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "chémoinformatique",
+          "raison": "Domaine couvert par les skills de découverte de médicaments, avec RDKit notamment.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "recherche clinique",
+          "raison": "Des skills servent la recherche scientifique sur les essais et les variants, sans diagnostic ni traitement.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "visualisation scientifique",
+          "raison": "Plusieurs skills d'analyse de données produisent des figures dignes d'une publication.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "skills pour Claude Code",
+          "raison": "Ces skills au format Agent Skills s'installent notamment dans Claude Code.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "science assistée par IA",
+          "raison": "Scientific Agent Skills met un agent IA au service de la recherche scientifique.",
+          "passage": null
+        }
+      ],
+      "textes": [
+        "Scientific Agent Skills: 177 skills for doing research with Claude Code, Cursor or Codex",
+        "Biology, chemistry, medicine, physics, data analysis: each K-Dense skill aligns your agent with a specific package, database or method, including the domain's conventions and checks.",
+        "The most useful piece: Database Lookup documents 80 databases (PubChem, ChEMBL, UniProt, ClinicalTrials.gov…), with the right endpoints, pagination and provenance. A single request is then enough to chain a whole pipeline.",
+        "In the repository example, a single request to classify EGFR inhibitors: the agent queries ChEMBL, analyzes structure-activity relationships with RDKit, looks for resistance mechanisms in PubMed, then delivers charts and a report.",
+        "With GitHub CLI 2.90.0+: gh skill install, only the useful skills.",
+        "Dependencies are installed separately, depending on each skill.",
+        "A skill can make your agent execute arbitrary code and K-Dense does not guarantee an exhaustive review: read SKILL.md before installing.",
+        "Repository under MIT, but each skill has its own license, which may add conditions."
+      ]
+    },
+    {
+      "postId": 11,
+      "revisionId": 182,
+      "jour": "2026-11-05",
+      "motsCles": [
+        {
+          "champ": "nom",
+          "terme": "Superpowers",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "MCP et skills",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "usage",
+          "terme": "méthode de développement",
+          "raison": null,
+          "passage": "Superpowers is a complete software development methodology for your coding agents"
+        },
+        {
+          "champ": "usage",
+          "terme": "cadrer un besoin",
+          "raison": null,
+          "passage": "Draws out what you actually want, and why, through questions that get you describing it"
+        },
+        {
+          "champ": "usage",
+          "terme": "plan d'implémentation",
+          "raison": null,
+          "passage": "your agent puts together an implementation plan"
+        },
+        {
+          "champ": "usage",
+          "terme": "écrire les tests d'abord",
+          "raison": null,
+          "passage": "Test-Driven Development - Write tests first, always"
+        },
+        {
+          "champ": "usage",
+          "terme": "revue de code",
+          "raison": null,
+          "passage": "requesting-code-review - Activates between tasks. Reviews against plan, reports issues by severity."
+        },
+        {
+          "champ": "usage",
+          "terme": "déléguer à des sous-agents",
+          "raison": null,
+          "passage": "dispatches a fresh subagent per task with a review after each"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Claude Code",
+          "raison": null,
+          "passage": "Getting Started Claude Code"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Codex",
+          "raison": null,
+          "passage": "Superpowers is available via the official Codex plugin marketplace"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Cursor",
+          "raison": null,
+          "passage": "In Cursor Agent chat, install from marketplace"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Gemini CLI",
+          "raison": null,
+          "passage": "gemini extensions install https://github.com/obra/superpowers"
+        },
+        {
+          "champ": "technologie",
+          "terme": "GitHub Copilot CLI",
+          "raison": null,
+          "passage": "copilot plugin install superpowers@superpowers-marketplace"
+        },
+        {
+          "champ": "technologie",
+          "terme": "git worktrees",
+          "raison": null,
+          "passage": "using-git-worktrees - Activates after design approval. Creates isolated workspace on new branch"
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "TDD",
+          "raison": "Superpowers impose le TDD : un test qui échoue est écrit avant le code.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "test-driven development",
+          "raison": "nom anglais du développement piloté par les tests, au cœur de Superpowers.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "débogage",
+          "raison": "Superpowers inclut un skill de débogage systématique en quatre phases.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "subagents",
+          "raison": "terme anglais des sous-agents auxquels Superpowers peut confier chaque tâche du plan.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "spécification",
+          "raison": "Superpowers tire une spécification de la conversation avant d'écrire le code.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "code review",
+          "raison": "terme anglais de la revue de code que Superpowers fait pendant l'exécution du plan.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "agent de code",
+          "raison": "Superpowers est une méthode de travail pour les agents de code.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "plugin Claude Code",
+          "raison": "Superpowers s'installe comme plugin dans Claude Code et dans d'autres agents.",
+          "passage": null
+        }
+      ],
+      "textes": [
+        "Superpowers makes your coding agent scope, plan, test, and review before it delivers",
+        "Superpowers imposes a real method on your coding agent. It doesn't rush into the code: it asks what you're trying to do, shows you the spec in readable chunks, then builds an implementation plan once the design is approved. Skills trigger on their own, with no command to type.",
+        "The plan splits the work into 2- to 5-minute tasks, with files, code, and checks. TDD is strict: code written before its test is deleted. Between tasks, a review ranks issues by severity, and a critical issue blocks the next step. According to the author, the agent can thus run autonomously for a few hours without straying from the plan.",
+        "For a new feature: brainstorming pins down the request, writing-plans breaks it into small tasks, then implementation starts with a failing test, before the minimal code.",
+        "In Claude Code: /plugin install superpowers@claude-plugins-official",
+        "Other agents: a separate install for each, depending on the repository",
+        "Claude Code, Codex, Cursor, Gemini CLI, GitHub Copilot CLI and about ten others."
+      ]
+    },
+    {
+      "postId": 13,
+      "revisionId": 184,
+      "jour": "2026-11-05",
+      "motsCles": [
+        {
+          "champ": "nom",
+          "terme": "grill-me (Matt Pocock)",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "MCP et skills",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "usage",
+          "terme": "affiner un plan",
+          "raison": null,
+          "passage": "A relentless interview to sharpen a plan or design."
+        },
+        {
+          "champ": "usage",
+          "terme": "entretien de conception",
+          "raison": null,
+          "passage": "Get relentlessly interviewed about a plan or design until every branch of the design tree is resolved."
+        },
+        {
+          "champ": "usage",
+          "terme": "questions détaillées",
+          "raison": null,
+          "passage": "getting the agent to ask you detailed questions about what you're building."
+        },
+        {
+          "champ": "usage",
+          "terme": "s'aligner avec l'agent",
+          "raison": null,
+          "passage": "They help you align with the agent before you get started"
+        },
+        {
+          "champ": "usage",
+          "terme": "préparer une décision",
+          "raison": null,
+          "passage": "Interview the user relentlessly about a plan, decision, or idea until every branch of the design tree is resolved."
+        },
+        {
+          "champ": "usage",
+          "terme": "cadrage de projet",
+          "raison": null,
+          "passage": "They help you align with the agent before you get started, and think deeply about the change you're making."
+        },
+        {
+          "champ": "technologie",
+          "terme": "Claude Code",
+          "raison": null,
+          "passage": "fix common failure modes I see with Claude Code, Codex, and other coding agents."
+        },
+        {
+          "champ": "technologie",
+          "terme": "Codex",
+          "raison": null,
+          "passage": "codex plugin marketplace add mattpocock/skills"
+        },
+        {
+          "champ": "technologie",
+          "terme": "GitHub Copilot",
+          "raison": null,
+          "passage": "copilot plugin install mattpocock-skills@mattpocock"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Gemini CLI",
+          "raison": null,
+          "passage": "gemini skills install https://github.com/mattpocock/skills.git --path skills/productivity"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Cursor",
+          "raison": null,
+          "passage": "cursor, opencode, devin, windsurf, amp, pi"
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "grilling",
+          "raison": "grill-me délègue l'entretien au skill grilling du même dépôt.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "grill-with-docs",
+          "raison": "Skill du même auteur pour le code : même entretien que grill-me, avec en plus un glossaire et des ADR.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "interview",
+          "raison": "Le dépôt décrit ce skill comme une interview sans relâche sur un plan.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "malentendu",
+          "raison": "Ce skill vise le décalage entre ce que l'on veut et ce que l'agent comprend.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "clarifier ses besoins",
+          "raison": "Le skill fait préciser ses attentes par des questions détaillées, avant que l'agent commence.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "challenger un plan",
+          "raison": "grill-me sert à affiner un plan en le soumettant aux questions de l'agent.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "productivité",
+          "raison": "Le dépôt range ce skill dans sa section Productivity, parmi ses outils généraux.",
+          "passage": null
+        }
+      ],
+      "textes": [
+        "grill-me: your agent questions you about a plan until every branch is resolved, not before",
+        "Before launching anything, you flip the roles: the agent asks you precise questions about your plan, decision or idea, and digs into every branch until it is settled. Matt Pocock intends it for non-code topics.",
+        "You align with the agent before it starts working, instead of finding out afterward that it misunderstood. For code, the grill-with-docs variant runs the same interview and builds the project vocabulary along the way.",
+        "A launch to scope out, a team trade-off to prepare: type /grill-me, describe the plan, then answer until nothing is left unclear.",
+        "In Claude Code, install the mattpocock-skills plugin.",
+        "It does not start on its own: type /grill-me, then describe your plan.",
+        "Claude Code, Codex and other agents; any model, according to the author."
+      ]
+    },
+    {
+      "postId": 14,
+      "revisionId": 185,
+      "jour": "2026-11-05",
+      "motsCles": [
+        {
+          "champ": "nom",
+          "terme": "claude-mem",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "agents et automatisation",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "usage",
+          "terme": "mémoire entre sessions",
+          "raison": null,
+          "passage": "Context survives across sessions"
+        },
+        {
+          "champ": "usage",
+          "terme": "résumés de session",
+          "raison": null,
+          "passage": "generating semantic summaries, and making them available to future sessions"
+        },
+        {
+          "champ": "usage",
+          "terme": "recherche dans l'historique",
+          "raison": null,
+          "passage": "Query your project history with natural language"
+        },
+        {
+          "champ": "usage",
+          "terme": "injection de contexte",
+          "raison": null,
+          "passage": "Fine-grained control over what context gets injected"
+        },
+        {
+          "champ": "usage",
+          "terme": "économie de tokens",
+          "raison": null,
+          "passage": "~10x token savings by filtering before fetching details"
+        },
+        {
+          "champ": "usage",
+          "terme": "mémoire de projet",
+          "raison": null,
+          "passage": "maintain continuity of knowledge about projects"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Claude Code",
+          "raison": null,
+          "passage": "Claude Code: Latest version with plugin support"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Codex",
+          "raison": null,
+          "passage": "Or install for T3 Code (Codex and Claude Code providers):"
+        },
+        {
+          "champ": "technologie",
+          "terme": "OpenCode",
+          "raison": null,
+          "passage": "This works with OpenCode 1.3.4 or later, including OpenCode 2."
+        },
+        {
+          "champ": "technologie",
+          "terme": "MCP",
+          "raison": null,
+          "passage": "intelligent memory search through 4 MCP tools"
+        },
+        {
+          "champ": "technologie",
+          "terme": "SQLite",
+          "raison": null,
+          "passage": "SQLite Database - Stores sessions, observations, summaries"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Chroma",
+          "raison": null,
+          "passage": "Chroma Vector Database - Hybrid semantic + keyword search"
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "mémoire persistante",
+          "raison": "claude-mem se présente comme un système de mémoire persistante pour Claude Code.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "mémoire à long terme",
+          "raison": "le dépôt de claude-mem se range sous le sujet long-term-memory, la mémoire à long terme d'un agent.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "continuité de projet",
+          "raison": "claude-mem aide Claude à garder le fil d'un projet quand une session se termine.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "RAG",
+          "raison": "le dépôt de claude-mem se classe sous le sujet rag : il retrouve des informations passées et les injecte dans le contexte.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "recherche sémantique",
+          "raison": "claude-mem combine recherche par mots-clés et recherche sémantique ; il utilise en interne la base vectorielle Chroma, sans être lui-même une base vectorielle.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "plugin Claude Code",
+          "raison": "claude-mem s'installe comme plugin de Claude Code, par npx ou par la place de marché de plugins.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "agent de code",
+          "raison": "claude-mem sert de mémoire à des agents de code comme Claude Code, Codex ou OpenCode.",
+          "passage": null
+        }
+      ],
+      "textes": [
+        "claude-mem gives Claude Code a memory that persists from one session to the next",
+        "During the session, it records what the agent does, compresses it into summaries, and injects the useful context back into the next one. You pick a project back up without re-explaining everything.",
+        "To find information, the agent first reads a compact index, then loads only the useful notes: about ten times fewer tokens, according to the authors.",
+        "In the docs: search for \"authentication bug\" among the fixes, then retrieve only two observations.",
+        "npx claude-mem install or the Claude Code plugin marketplace, then restart. Not npm install -g, which only installs the library.",
+        "Node.js 20.0.0 or newer.",
+        "The claude-mem service offered at install is free for 30 days; after that, memory runs on your Anthropic subscription, unless you have an OpenRouter or Gemini subscription or key."
+      ]
+    },
+    {
+      "postId": 15,
+      "revisionId": 186,
+      "jour": "2026-11-05",
+      "motsCles": [
+        {
+          "champ": "nom",
+          "terme": "Humanizer",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "MCP et skills",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "usage",
+          "terme": "réécrire un texte IA",
+          "raison": null,
+          "passage": "Humanizer makes AI-written text sound like a person wrote it"
+        },
+        {
+          "champ": "usage",
+          "terme": "humaniser un texte",
+          "raison": null,
+          "passage": "Please humanize this text"
+        },
+        {
+          "champ": "usage",
+          "terme": "tics d'écriture IA",
+          "raison": null,
+          "passage": "Agent skill that removes signs of AI-generated writing from text"
+        },
+        {
+          "champ": "usage",
+          "terme": "imiter son style",
+          "raison": null,
+          "passage": "If you want the rewrite to sound more like you, include a sample"
+        },
+        {
+          "champ": "usage",
+          "terme": "réécrire un document",
+          "raison": null,
+          "passage": "To rewrite a file, give Humanizer its path"
+        },
+        {
+          "champ": "usage",
+          "terme": "relecture de style",
+          "raison": null,
+          "passage": "Humanizer edits for human readers."
+        },
+        {
+          "champ": "technologie",
+          "terme": "Claude Code",
+          "raison": null,
+          "passage": "it works in Claude Code, Codex, and any other agent that supports skills"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Codex",
+          "raison": null,
+          "passage": "it works in Claude Code, Codex, and any other agent that supports skills"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Claude.ai",
+          "raison": null,
+          "passage": "Download this repository as a ZIP (Code → Download ZIP) and upload it as a skill in Settings."
+        },
+        {
+          "champ": "technologie",
+          "terme": "Claude Desktop",
+          "raison": null,
+          "passage": "Download this repository as a ZIP (Code → Download ZIP) and upload it as a skill in Settings."
+        },
+        {
+          "champ": "technologie",
+          "terme": "Skills CLI",
+          "raison": null,
+          "passage": "This installs Humanizer for every agent the Skills CLI supports"
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "texte généré par IA",
+          "raison": "Humanizer réécrit les textes générés par une IA pour qu'ils se lisent comme écrits par une personne.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "style d'écriture",
+          "raison": "Humanizer peut suivre le style d'écriture d'un échantillon fourni : rythme, vocabulaire, ponctuation.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "ton naturel",
+          "raison": "Humanizer vise le ton d'un texte écrit par une personne, sans tournures automatiques.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "signes d'écriture IA",
+          "raison": "Humanizer recherche les signes listés par « Signs of AI writing », le guide de Wikipedia pour repérer les textes générés par une IA.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "Agent Skills",
+          "raison": "Humanizer s'installe comme skill dans Claude Code, Codex et les autres agents qui les gèrent.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "rédaction",
+          "raison": "Humanizer retouche la rédaction d'un texte en visant à ne pas changer ce qu'il dit.",
+          "passage": null
+        }
+      ],
+      "textes": [
+        "Humanizer removes AI writing tics from a text without changing what it says",
+        "Paste a text or give a file path: Humanizer spots AI writing tics, from the most obvious to the most subtle, then rewrites the prose. On a file, it only touches the text: code, data and frontmatter stay in place.",
+        "It invents nothing: if a name, number or date is missing, it asks. On a pasted text, you see its first draft, what still sounds artificial, then the final version. Attach two or three paragraphs of your own and it picks up your rhythm, vocabulary and punctuation.",
+        "In the repository's example, an announcement loses its emoji, its \"It's not just a feature…\" and its \"Let that sink in.\", then starts without detour: \"Shared drafts are out today.\"",
+        "Not before Claude Code 2.1.142: /plugin marketplace add blader/humanizer",
+        "Then /plugin install humanizer@humanizer, not on an older version",
+        "Codex: npx skills add blader/humanizer --global --agent codex",
+        "Then /humanizer and the text; for a file, its path, no command",
+        "Claude Code, Codex and any skills-compatible agent; the Skills CLI install also covers Gemini CLI, GitHub Copilot and Windsurf, according to the repository."
+      ]
+    },
+    {
+      "postId": 20,
+      "revisionId": 142,
+      "jour": "2026-11-05",
+      "motsCles": [
+        {
+          "champ": "nom",
+          "terme": "Claudeception",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "categorie",
+          "terme": "MCP et skills",
+          "raison": null,
+          "passage": null
+        },
+        {
+          "champ": "usage",
+          "terme": "apprentissage continu",
+          "raison": null,
+          "passage": "A Claude Code skill for autonomous skill extraction and continuous learning."
+        },
+        {
+          "champ": "usage",
+          "terme": "extraction de skills",
+          "raison": null,
+          "passage": "Or explicitly request skill extraction"
+        },
+        {
+          "champ": "usage",
+          "terme": "solutions réutilisables entre sessions",
+          "raison": null,
+          "passage": "it saves that knowledge as a new skill"
+        },
+        {
+          "champ": "usage",
+          "terme": "solutions de débogage",
+          "raison": null,
+          "passage": "Just completed debugging and discovered a non-obvious solution"
+        },
+        {
+          "champ": "usage",
+          "terme": "rétrospective de session",
+          "raison": null,
+          "passage": "Trigger a learning retrospective"
+        },
+        {
+          "champ": "usage",
+          "terme": "création automatique de skills",
+          "raison": null,
+          "passage": "A Claude Code skill for autonomous skill extraction and continuous learning."
+        },
+        {
+          "champ": "technologie",
+          "terme": "Claude Code",
+          "raison": null,
+          "passage": "Claude Code has a native skills system."
+        },
+        {
+          "champ": "technologie",
+          "terme": "UserPromptSubmit",
+          "raison": null,
+          "passage": "{ \"hooks\": { \"UserPromptSubmit\": [ { \"hooks\": [ { \"type\": \"command\", \"command\": \"~/.claude/hooks/claudeception-activator.sh\" } ] } ] } }"
+        },
+        {
+          "champ": "technologie",
+          "terme": "YAML",
+          "raison": null,
+          "passage": "Extracted skills are markdown files with YAML frontmatter"
+        },
+        {
+          "champ": "technologie",
+          "terme": "Markdown",
+          "raison": null,
+          "passage": "Extracted skills are markdown files with YAML frontmatter"
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "mémoire d'agent",
+          "raison": "Claudeception donne à Claude Code une forme de mémoire : les solutions trouvées restent sous forme de skills, pas un historique des conversations.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "auto-amélioration",
+          "raison": "Claudeception vise un agent qui progresse en travaillant, en écrivant ses propres skills.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "base de connaissances",
+          "raison": "Claudeception peut constituer au fil du temps une bibliothèque de skills propre à l'utilisateur ou au projet.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "méta-skill",
+          "raison": "le dépôt présente Claudeception comme un méta-skill, un skill qui sert à acquérir d'autres skills.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "solutions de débogage réutilisables",
+          "raison": "Claudeception n'est pas un outil de débogage : il retient les solutions trouvées pendant le débogage pour les réutiliser.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "agent de code",
+          "raison": "Claudeception s'adresse aux agents de code comme Claude Code, pour qu'ils gardent d'une session à l'autre les solutions trouvées.",
+          "passage": null
+        },
+        {
+          "champ": "terme_proche",
+          "terme": "retour d'expérience",
+          "raison": "la rétrospective de session de Claudeception peut transformer un retour d'expérience en skill réutilisable.",
+          "passage": null
+        }
+      ],
+      "textes": [
+        "Claudeception turns every hard-won solution from Claude Code into a skill that reloads on its own",
+        "An hour on an obscure error, the agent finally finds the fix, the session closes, and next time it all starts over. With Claudeception, the debugging technique, workaround, or project quirk discovered along the way becomes a skill, loaded automatically as soon as a similar problem comes back.",
+        "It sorts: only what required real research, will be reused, has a clear trigger, and actually worked becomes a skill. And the description is written to be found again: the exact error, not \"database issues\".",
+        "Example from the repository: a resolved PrismaClientKnownRequestError (too many connections in serverless) can become a skill whose description reuses the exact error. When it reappears, the agent finds it again.",
+        "Clone the repository into ~/.claude/skills/claudeception.",
+        "Optional: the hook, added to settings.json, makes each session evaluated",
+        "After debugging: /claudeception, with no skill if nothing is worth keeping",
+        "Claude Code, through its native skills system.",
+        "It is a fork, with no pushes for several months at the time of the capture."
       ]
     }
   ],
@@ -20598,7 +28894,7 @@ window.DONNEES_MAQUETTE = {
   "selections": [
     {
       "post_id": 25,
-      "revision_id": 161,
+      "revision_id": 191,
       "slug": "selection-design-web",
       "nature": "selection",
       "nom": "Sélection design web",
@@ -20607,7 +28903,7 @@ window.DONNEES_MAQUETTE = {
       "etiquette": "pas encore publié",
       "planning": {
         "jour": "2026-11-04",
-        "rang": 8,
+        "rang": 14,
         "etat": "prevue",
         "utilise_reserve": false,
         "motif": null
@@ -20639,8 +28935,8 @@ window.DONNEES_MAQUETTE = {
           },
           "lien": {
             "resultat": "verifie",
-            "motif": "capture_recente",
-            "verifie_le": "2026-11-02T21:17:45.565Z"
+            "motif": "reponse_directe",
+            "verifie_le": "2026-11-04T22:41:00.422Z"
           }
         },
         {
@@ -20658,8 +28954,8 @@ window.DONNEES_MAQUETTE = {
           },
           "lien": {
             "resultat": "verifie",
-            "motif": "capture_recente",
-            "verifie_le": "2026-11-02T21:17:48.483Z"
+            "motif": "reponse_directe",
+            "verifie_le": "2026-11-04T22:41:00.422Z"
           }
         },
         {
@@ -20677,7 +28973,7 @@ window.DONNEES_MAQUETTE = {
           "lien": {
             "resultat": "verifie",
             "motif": "capture_recente",
-            "verifie_le": "2026-11-02T21:17:46.395Z"
+            "verifie_le": "2026-11-04T10:10:56.702Z"
           }
         },
         {
@@ -20695,8 +28991,8 @@ window.DONNEES_MAQUETTE = {
           },
           "lien": {
             "resultat": "verifie",
-            "motif": "capture_recente",
-            "verifie_le": "2026-11-02T21:17:44.966Z"
+            "motif": "reponse_directe",
+            "verifie_le": "2026-11-04T22:41:00.422Z"
           }
         },
         {
@@ -20714,8 +29010,8 @@ window.DONNEES_MAQUETTE = {
           },
           "lien": {
             "resultat": "verifie",
-            "motif": "capture_recente",
-            "verifie_le": "2026-11-02T21:17:51.399Z"
+            "motif": "reponse_directe",
+            "verifie_le": "2026-11-04T22:41:00.422Z"
           }
         },
         {
@@ -20734,8 +29030,8 @@ window.DONNEES_MAQUETTE = {
           },
           "lien": {
             "resultat": "verifie",
-            "motif": "capture_recente",
-            "verifie_le": "2026-11-02T21:17:50.244Z"
+            "motif": "reponse_directe",
+            "verifie_le": "2026-11-04T22:41:00.422Z"
           }
         }
       ],
@@ -20789,8 +29085,8 @@ window.DONNEES_MAQUETTE = {
         },
         {
           "document": "recent-design:page-accueil",
-          "snapshot_id": 552,
-          "capture_le": "2026-11-02T21:17:46.395Z"
+          "snapshot_id": 632,
+          "capture_le": "2026-11-04T10:10:56.702Z"
         },
         {
           "document": "recent-design:robots",
@@ -20799,8 +29095,8 @@ window.DONNEES_MAQUETTE = {
         },
         {
           "document": "recent-design:apercu",
-          "snapshot_id": 567,
-          "capture_le": "2026-11-02T21:21:04.529Z"
+          "snapshot_id": 648,
+          "capture_le": "2026-11-04T10:12:32.715Z"
         },
         {
           "document": "motionsites:page-accueil",
@@ -20849,7 +29145,7 @@ window.DONNEES_MAQUETTE = {
         }
       ],
       "decouverte_via": "Liste de sites transmise par l'utilisateur le 2026-11-02, repérée dans un post X dont l'auteur n'est pas identifié (contenu externe attribué ; affirmations du post non reprises)",
-      "importe_le": "2026-11-03T07:15:44.383Z"
+      "importe_le": "2026-11-04T22:41:00.422Z"
     },
     {
       "post_id": 91,
@@ -20862,7 +29158,7 @@ window.DONNEES_MAQUETTE = {
       "etiquette": "pas encore publié",
       "planning": {
         "jour": "2026-11-04",
-        "rang": 9,
+        "rang": 15,
         "etat": "prevue",
         "utilise_reserve": false,
         "motif": null
@@ -21248,7 +29544,7 @@ window.DONNEES_MAQUETTE = {
       "etiquette": "pas encore publié",
       "planning": {
         "jour": "2026-11-04",
-        "rang": 10,
+        "rang": 16,
         "etat": "prevue",
         "utilise_reserve": false,
         "motif": null
@@ -21410,10 +29706,10 @@ window.DONNEES_MAQUETTE = {
       "verification": "verifie",
       "passages_introuvables": [],
       "planning": {
-        "jour": "2026-11-03",
+        "jour": "2026-11-04",
         "rang": 4,
         "etat": "prevue",
-        "utilise_reserve": true,
+        "utilise_reserve": false,
         "priorite": 2
       },
       "kind": "annonce",
@@ -21503,7 +29799,7 @@ window.DONNEES_MAQUETTE = {
       "passages_introuvables": [],
       "planning": {
         "jour": "2026-11-04",
-        "rang": 11,
+        "rang": 17,
         "etat": "prevue",
         "utilise_reserve": true,
         "priorite": 3
@@ -21604,7 +29900,7 @@ window.DONNEES_MAQUETTE = {
       "passages_introuvables": [],
       "planning": {
         "jour": "2026-11-04",
-        "rang": 12,
+        "rang": 18,
         "etat": "prevue",
         "utilise_reserve": true,
         "priorite": 3
@@ -21683,7 +29979,7 @@ window.DONNEES_MAQUETTE = {
       "passages_introuvables": [],
       "planning": {
         "jour": "2026-11-04",
-        "rang": 13,
+        "rang": 19,
         "etat": "prevue",
         "utilise_reserve": true,
         "priorite": 3
@@ -21780,10 +30076,10 @@ window.DONNEES_MAQUETTE = {
       "verification": "verifie",
       "passages_introuvables": [],
       "planning": {
-        "jour": "2026-11-03",
+        "jour": "2026-11-04",
         "rang": 5,
         "etat": "prevue",
-        "utilise_reserve": true,
+        "utilise_reserve": false,
         "priorite": 2
       },
       "kind": "annonce",
@@ -21872,7 +30168,7 @@ window.DONNEES_MAQUETTE = {
       "passages_introuvables": [],
       "planning": {
         "jour": "2026-11-04",
-        "rang": 14,
+        "rang": 20,
         "etat": "prevue",
         "utilise_reserve": true,
         "priorite": 3
@@ -21964,7 +30260,7 @@ window.DONNEES_MAQUETTE = {
       "verification": "verifie",
       "passages_introuvables": [],
       "planning": {
-        "jour": "2026-11-03",
+        "jour": "2026-11-04",
         "rang": 1,
         "etat": "prevue",
         "utilise_reserve": true,
@@ -22067,7 +30363,7 @@ window.DONNEES_MAQUETTE = {
       "verification": "verifie",
       "passages_introuvables": [],
       "planning": {
-        "jour": "2026-11-03",
+        "jour": "2026-11-04",
         "rang": 6,
         "etat": "prevue",
         "utilise_reserve": false,
@@ -22166,10 +30462,10 @@ window.DONNEES_MAQUETTE = {
       "verification": "verifie",
       "passages_introuvables": [],
       "planning": {
-        "jour": "2026-11-03",
+        "jour": "2026-11-04",
         "rang": 2,
         "etat": "prevue",
-        "utilise_reserve": true,
+        "utilise_reserve": false,
         "priorite": 1
       },
       "kind": "annonce",
@@ -22262,10 +30558,10 @@ window.DONNEES_MAQUETTE = {
       "verification": "verifie",
       "passages_introuvables": [],
       "planning": {
-        "jour": "2026-11-03",
+        "jour": "2026-11-04",
         "rang": 3,
         "etat": "prevue",
-        "utilise_reserve": true,
+        "utilise_reserve": false,
         "priorite": 1
       },
       "kind": "annonce",

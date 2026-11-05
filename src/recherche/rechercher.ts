@@ -6,8 +6,8 @@ import type { Client } from '@libsql/client';
 import { z } from 'zod';
 import { motsClesDesRevisions } from '../ressources/mots-cles.ts';
 import { jourParis } from '../ressources/planification.ts';
-import { textesDePublication } from './index.ts';
-import { classer, preparerRequete, type Correspondance, type DocumentRecherche, type Tri } from './moteur.ts';
+import { motsClesDuContenu, textesDePublication } from './index.ts';
+import { classer, preparerRequete, type Correspondance, type DocumentRecherche, type RequetePreparee, type Tri } from './moteur.ts';
 
 export const TAILLE_PAGE = 20;
 export const TAILLE_PAGE_MAX = 50;
@@ -74,8 +74,12 @@ function lireCurseur(curseur: string, attendu: string): number {
 const ecrireCurseur = (rang: number, e: string) => Buffer.from(JSON.stringify({ r: rang, e })).toString('base64url');
 
 /** Requête FTS5 construite par le code : mots normalisés entre guillemets, jamais la saisie brute. */
-export function requeteFts(mots: string[], prefixe: boolean): string {
-  return mots.map((m, i) => `"${m.replace(/"/g, '""')}"${prefixe && i === mots.length - 1 ? '*' : ''}`).join(' ');
+export function requeteFts(q: RequetePreparee): string {
+  const terme = (m: string) => `"${m.replace(/"/g, '""')}"`;
+  // Chaque mot ou l'un de ses équivalents du lexique ; les mots entre eux en OU : le classement exige ensuite la couverture.
+  return q.mots
+    .map((m, i) => `(${[`${terme(m)}${q.prefixe && i === q.mots.length - 1 ? '*' : ''}`, ...(q.variantes[i] ?? []).map(terme)].join(' OR ')})`)
+    .join(' OR ');
 }
 
 export async function rechercher(client: Client, requete: unknown, options: OptionsRecherche = {}): Promise<ReponseRecherche> {
@@ -101,7 +105,7 @@ export async function rechercher(client: Client, requete: unknown, options: Opti
           join post_revision rv on rv.id = c.revision_id and rv.post_id = p.id
           left join publication_planifiee pp on pp.post_id = p.id
           where ${statuts}`,
-    args: [requeteFts(q.mots, q.prefixe)],
+    args: [requeteFts(q)],
   });
   const revisions = candidats.rows.map((r) => Number(r.revision_id));
   const motsCles = await motsClesDesRevisions(client, revisions);
@@ -113,7 +117,7 @@ export async function rechercher(client: Client, requete: unknown, options: Opti
       revisionId: Number(r.revision_id),
       // Jour civil Europe/Paris, comme le plafond : jamais la sous-chaîne UTC de `published_at`.
       jour: r.published_at != null ? jourParis(String(r.published_at)) : r.jour == null ? null : String(r.jour),
-      motsCles: motsCles.get(Number(r.revision_id)) ?? [],
+      motsCles: [...(motsCles.get(Number(r.revision_id)) ?? []), ...motsClesDuContenu(JSON.parse(String(r.content)))],
       textes: textesDePublication(JSON.parse(String(r.content))),
     };
   });

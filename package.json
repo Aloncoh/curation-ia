@@ -30,6 +30,8 @@
     "test": "vitest run",
     "sonde": "node src/cli/sonde.ts",
     "delais": "node src/cli/delais.ts",
+    "recherche:evaluer": "node src/cli/recherche-evaluer.ts",
+    "recherche:reindexer": "node src/cli/recherche-reindexer.ts",
     "selection": "node src/cli/selection.ts",
     "montage": "node src/cli/montage.ts",
     "budget": "node src/cli/budget.ts",

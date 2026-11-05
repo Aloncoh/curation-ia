@@ -221,7 +221,7 @@ M3 construit le 2026-11-03 et validé par l'utilisateur (« je valide tout »), 
 - **Hugging Face, modèles en tendance** : nouveau type de source `huggingface_models` (`src/collect/huggingface.ts`), 20 modèles par relevé, signés par Nodi ; la popularité reste dans les métadonnées, jamais dans la capture lue par le modèle ; la page du modèle est capturée avant l'analyse. Essai réel : 20 documents, 18 actualités, 21 pages capturées sur 26 (cartes de modèle de 179 à 10 737 mots).
 - Tests : 817 passent. Applications Hugging Face (Spaces) non branchées : ce ne sont pas des dépôts GitHub, à reprendre si utile.
 
-Suite de P6 proposée : bloc 4, recherche et évaluation des deux usages (ROADMAP « P6 — ordre proposé ») ; à soumettre à l'utilisateur avant de commencer. La chaîne en ligne tourne seule (élagage, relance, plafonds 0,10 $ par cycle et 0,40 $ par jour, total 4 $).
+**P6, bloc 4 (recherche) réalisé le 2026-11-05** : `npm run recherche:evaluer` (jeu `r1`, 36 requêtes) passe de 54 % à 94 % sur la base en ligne après indexation des actualités, lexique `l1` et couverture partielle ; base réindexée (`npm run recherche:reindexer -- --confirmer`, 62 publications). Pas de couche vectorielle (ADR 0008, section « Évaluation du 2026-11-05 »). **À faire avec l'utilisateur** : relire le jeu `r1` et fournir un second jeu non vu (le lexique a été réglé sur `r1`) ; fournir la liste témoin de bonnes découvertes pour l'évaluation de l'usage « construire » (SPEC §10), seule partie du bloc 4 qui dépend de lui. La chaîne en ligne tourne seule (élagage, relance, plafonds 0,10 $ par cycle et 0,40 $ par jour, total 4 $).
 
 ## Repères techniques
 
