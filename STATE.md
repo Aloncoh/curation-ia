@@ -216,7 +216,7 @@ M3 construit le 2026-11-03 et validé par l'utilisateur (« je valide tout »), 
 
 ## Prochaine action
 
-L'utilisateur crée lui-même, dans l'ordre : compte Vercel, compte Turso (base `curation-ai`, `aws-eu-west-1`), dépôt GitHub privé, secrets et variables (noms exacts dans ROADMAP.md, « P5 — plan »), domaine. Ensuite, avec son accord : `npm run turso:copier -- --confirmer`, premier envoi du code, un cycle lancé à la main, vérification en ligne, puis `CHAINE_ACTIVE` = `oui`. Confirmer aussi l'interprétation de la police hébraïque. Aucun appel payant sans plafonds explicites et `--confirmer`.
+_Mise à jour le 2026-11-05 : la mise en ligne (P5) est faite ; l'ancienne prochaine action est dépassée._ P6, bloc 3 proposé à l'utilisateur : registre MCP officiel (registry.modelcontextprotocol.io, 200 le 2026-11-05) et Hugging Face (API publique des modèles et Spaces en tendance, 200 le même jour) comme portes d'entrée vers la chaîne des découvertes, sans appel payant à la collecte. En attente de son accord avant implémentation. La chaîne en ligne tourne seule (élagage, relance, plafonds 0,10 $ par cycle et 0,40 $ par jour, total 4 $).
 
 ## Repères techniques
 
