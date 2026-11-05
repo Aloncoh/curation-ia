@@ -31,7 +31,9 @@ jobs:
       DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
       CURATION_MODELE: deepseek-flash
       # Plafonds explicites. Sans variable de dépôt pour le total et le jour, les étapes payantes sont sautées.
-      CURATION_MAX_ACTUALITES: '10'
+      # 30 par cycle (2026-11-05) : le cron de GitHub saute des heures entières (aucun cycle de 03:28 à 12:14 UTC), et 10
+      # ne suffisaient pas à suivre ~150 actualités en attente. Les plafonds par exécution, jour et total restent inchangés.
+      CURATION_MAX_ACTUALITES: '30'
       CURATION_MAX_TRADUCTIONS: '20'
       # CURATION_MAX_DECOUVERTES : absent tant que la rédaction des découvertes n'est pas assez fiable (essai du 2026-11-05 :
       # 0 publiable sur 5) ; sans elle, l'étape payante « redaction_decouvertes » est sautée. La recherche reste active.
