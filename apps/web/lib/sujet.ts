@@ -13,7 +13,7 @@ export interface Sujet {
   /** Ligne secondaire : le propriétaire d'un dépôt, l'éditeur d'un produit. */
   detail: string | null;
   /** Logo vectoriel (24 × 24), ou image (avatar GitHub), ou monogramme. */
-  logo: { type: 'svg'; chemin: string } | { type: 'image'; src: string } | { type: 'monogramme'; lettres: string } | { type: 'tuiles'; formes: { d: string; couleur: string }[] };
+  logo: { type: 'svg'; chemin: string } | { type: 'image'; src: string } | { type: 'monogramme'; lettres: string };
   /** Couleur de la marque, base de la palette de la couverture. */
   couleur: string;
   /** Domaine du sujet : l'illustration en filigrane et l'étiquette de la couverture. */
@@ -61,7 +61,7 @@ const EDITEURS: Record<string, Editeur> = {
   'deepseek.com': { nom: 'DeepSeek', icone: siDeepseek },
   'youtube.com': { nom: 'YouTube', icone: siYoutube },
   'openai.com': { nom: 'OpenAI', icone: null, couleur: '#10a37f' },
-  // Grandes entreprises (Radar). Microsoft et Amazon ne figurent plus dans la bibliothèque : monogramme.
+  // Grandes entreprises (Radar). Microsoft : logo svgl (LOGOS) ; Amazon, absent des deux bibliothèques : monogramme.
   'apple.com': { nom: 'Apple', icone: siApple, couleur: '#3a3a44' },
   'microsoft.com': { nom: 'Microsoft', icone: null, couleur: '#0078d4' },
   'aboutamazon.com': { nom: 'Amazon', icone: null, couleur: '#ff9900' },
@@ -83,6 +83,10 @@ const EDITEURS: Record<string, Editeur> = {
   'spline.design': { nom: 'Spline', icone: null, couleur: '#7a5cff', image: '/logos/spline.webp' },
   'vapi.ai': { nom: 'Vapi', icone: null, couleur: '#14b8a6' },
   'midjourney.com': { nom: 'Midjourney', icone: null, couleur: '#4f6bed' },
+  'discord.com': { nom: 'Discord', icone: null, couleur: '#5865f2' },
+  'sketch.com': { nom: 'Sketch', icone: null, couleur: '#f7b500' },
+  'modelcontextprotocol.io': { nom: 'Model Context Protocol', icone: null, couleur: '#3a3a44' },
+  'gemini.google': { nom: 'Gemini', icone: null, couleur: '#4285f4' },
 };
 
 /** Propriétaires de dépôts qui sont aussi des éditeurs connus : leur logo plutôt que leur avatar. */
@@ -92,6 +96,21 @@ const PROPRIETAIRES: Record<string, Editeur> = {
   vercel: { nom: 'Vercel', icone: siVercel, couleur: '#3a3a44' },
   cloudflare: EDITEURS['cloudflare.com']!,
   huggingface: EDITEURS['huggingface.co']!,
+  anthropic: EDITEURS['anthropic.com']!,
+  openai: EDITEURS['openai.com']!,
+  google: EDITEURS['blog.google']!,
+  'google-gemini': { nom: 'Gemini', icone: null, couleur: '#4285f4' },
+  microsoft: EDITEURS['microsoft.com']!,
+  mistralai: EDITEURS['mistral.ai']!,
+  figma: EDITEURS['figma.com']!,
+  'n8n-io': EDITEURS['n8n.io']!,
+  discord: { nom: 'Discord', icone: null, couleur: '#5865f2' },
+  modelcontextprotocol: { nom: 'Model Context Protocol', icone: null, couleur: '#3a3a44' },
+  github: EDITEURS['github.blog']!,
+  'deepseek-ai': EDITEURS['deepseek.com']!,
+  'meta-llama': EDITEURS['fb.com']!,
+  facebookresearch: EDITEURS['fb.com']!,
+  nvidia: EDITEURS['nvidia.com']!,
 };
 
 /** Couleur stable tirée d'un nom, pour un dépôt sans marque : jamais la même pour deux noms voisins. */
@@ -103,19 +122,23 @@ export function couleurDe(nom: string): string {
 
 const monogramme = (nom: string) => nom.replace(/[^\p{L}\p{N} ]/gu, ' ').trim().split(/\s+/).slice(0, 2).map((m) => m[0]!.toUpperCase()).join('') || '?';
 
-/** Logo de Microsoft, absent de la bibliothèque : ses quatre carrés, couleurs et proportions publiques. */
-const MICROSOFT: Sujet['logo'] = {
-  type: 'tuiles',
-  formes: [
-    { d: 'M1 1h10.5v10.5H1z', couleur: '#f25022' },
-    { d: 'M12.5 1H23v10.5H12.5z', couleur: '#7fba00' },
-    { d: 'M1 12.5h10.5V23H1z', couleur: '#00a4ef' },
-    { d: 'M12.5 12.5H23V23H12.5z', couleur: '#ffb900' },
-  ],
+/**
+ * Logos officiels en couleur (demande de l'utilisateur du 2026-11-05 : « le vrai logo des marques »), copiés dans
+ * public/logos depuis la bibliothèque svgl (svgl.app, variante claire, relevés et relus le 2026-11-05). Une marque
+ * absente de svgl garde son logo simple-icons, à sa couleur. Le logo identifie le sujet ; il n'affirme aucun partenariat.
+ */
+const LOGOS: Record<string, string> = {
+  Anthropic: 'anthropic', Apple: 'apple', Blender: 'blender', Claude: 'claude', Cloudflare: 'cloudflare', Cursor: 'cursor',
+  DeepSeek: 'deepseek', Discord: 'discord', Figma: 'figma', Gemini: 'gemini', GitHub: 'github', Google: 'google',
+  'Hugging Face': 'huggingface', 'Model Context Protocol': 'mcp', Meta: 'meta', Microsoft: 'microsoft', Midjourney: 'midjourney',
+  'Mistral AI': 'mistral', n8n: 'n8n', Notion: 'notion', NVIDIA: 'nvidia', OpenAI: 'openai', Sketch: 'sketch', Suno: 'suno',
+  Vercel: 'vercel', YouTube: 'youtube',
 };
+export const logoDe = (nom: string): string | null => (LOGOS[nom] ? `/logos/${LOGOS[nom]}.svg` : null);
 
 function depuisEditeur(e: Editeur, detail: string | null): Omit<Sujet, 'domaine'> {
-  if (e.nom === 'Microsoft') return { nom: e.nom, detail, couleur: '#0078d4', logo: MICROSOFT };
+  const fichier = logoDe(e.nom);
+  if (fichier) return { nom: e.nom, detail, couleur: e.couleur ?? (e.icone ? `#${e.icone.hex}` : couleurDe(e.nom)), logo: { type: 'image', src: fichier } };
   if (e.image) return { nom: e.nom, detail, couleur: e.couleur ?? couleurDe(e.nom), logo: { type: 'image', src: e.image } };
   const couleur = e.couleur ?? (e.icone ? `#${e.icone.hex}` : couleurDe(e.nom));
   return { nom: e.nom, detail, couleur, logo: e.icone ? { type: 'svg', chemin: e.icone.path } : { type: 'monogramme', lettres: monogramme(e.nom) } };
@@ -145,7 +168,7 @@ export function sujetDe(p: Pick<Publication, 'bouton' | 'sources' | 'nature'>): 
     if (connu) return { ...depuisEditeur(connu, `${connu.nom} · GitHub`), nom: nomDepot, domaine: domaineDe(h, nomDepot) };
     // Pas d'avatar du propriétaire : c'est souvent un visage (décision de l'utilisateur du 2026-11-05, « enlève les
     // visages »). Le vrai logo de la plateforme qui l'héberge (demande du 2026-11-05) ; le nom du dépôt nomme le sujet.
-    return { nom: nomDepot, detail: `${proprietaire} · GitHub`, couleur: '#24292f', logo: { type: 'svg', chemin: siGithub.path }, domaine: domaineDe(h, nomDepot) };
+    return { nom: nomDepot, detail: `${proprietaire} · GitHub`, couleur: '#24292f', logo: { type: 'image', src: logoDe('GitHub')! }, domaine: domaineDe(h, nomDepot) };
   }
   const editeur = EDITEURS[h] ?? Object.entries(EDITEURS).find(([cle]) => h.endsWith(`.${cle}`))?.[1];
   const domaine = domaineDe(h, '');

@@ -87,7 +87,6 @@ function Fleches({ graine }: { graine: number }) {
 
 function Logo({ sujet }: { sujet: Sujet }) {
   const l = sujet.logo;
-  if (l.type === 'tuiles') return <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">{l.formes.map((f) => <path key={f.d} d={f.d} fill={f.couleur} />)}</svg>;
   if (l.type === 'svg') return <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d={l.chemin} fill={sujet.couleur} /></svg>;
   if (l.type === 'image') return <img src={l.src} alt="" width={160} height={160} loading="lazy" />;
   return <span className="couv-monogramme" style={{ color: sujet.couleur }}>{l.lettres}</span>;
