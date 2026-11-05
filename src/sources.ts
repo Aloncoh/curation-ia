@@ -241,8 +241,8 @@ export const SOURCES: SourceDefinition[] = [
   { ...flux('tesla-ir', 'Tesla, communiqués aux investisseurs — flux RSS officiel', 'https://ir.tesla.com/rss/news-releases.xml', 'ir.tesla.com'), compte: 'radar' },
   // SEC EDGAR (demande de l'utilisateur du 2026-11-05) : rapports 8-K des grandes entreprises, flux Atom officiels. La SEC
   // exige un client déclaré avec une adresse de contact (403 sans elle) : variable CURATION_CONTACT_SEC, fournie par
-  // l'utilisateur ; sans elle, les sources restent différées. Numéros CIK à confirmer au premier relevé (nom de
-  // l'entreprise dans le flux).
+  // l'utilisateur ; sans elle, les sources restent différées. Les 12 numéros CIK ont été confirmés sur sec.gov le
+  // 2026-11-05 (nom de l'entreprise dans le flux).
   ...([
     ['nvidia', 'NVIDIA', '0001045810'], ['microsoft', 'Microsoft', '0000789019'], ['apple', 'Apple', '0000320193'], ['alphabet', 'Alphabet', '0001652044'],
     ['amazon', 'Amazon', '0001018724'], ['meta', 'Meta', '0001326801'], ['amd', 'AMD', '0000002488'], ['intel', 'Intel', '0000050863'],

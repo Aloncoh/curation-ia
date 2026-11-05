@@ -37,20 +37,19 @@ _Nettoyé le 2026-11-05 à la demande de l'utilisateur : seul l'état actuel res
 
 ## En attente de l'utilisateur
 
-1. **Migration de la base en ligne** (bloquant, préparé le 2026-11-05) : `drizzle/0012_acces_sources.sql` ajoute quatre colonnes à `source` (registre d'accès). Refusée par le contrôle des permissions (modification de production) : il faut l'accord de l'utilisateur, puis `npm run db:migrate` sur Turso, **avant** d'envoyer le code (sinon la chaîne en ligne refuse de tourner : « Base pas à jour »). Code prêt et testé en local (836 tests), **non poussé**.
-2. **Adresse de contact SEC** (`CURATION_CONTACT_SEC`, dans `.env.local` et en secret GitHub) pour activer les 12 sources EDGAR, déjà déclarées.
-3. **Recherche** : relire le jeu `r1` (`src/recherche/reference.ts`) et donner un second jeu de requêtes non vu (le lexique a été réglé sur `r1`).
-4. **Usage « construire »** : liste témoin de bonnes découvertes (SPEC §10).
-5. **Domaine** du site (décision et dépense) ; démonstration V1.
-6. **Sources** : X, Reddit, conditions restrictives (`docs/sources.md` §8.1) ; Tesla sans flux officiel (403, non contourné) ; flux des chaînes YouTube officielles à réessayer (404 le 2026-11-05).
-7. **Couvertures** : originaux des 18 fonds en haute définition, s'ils existent (même nom de fichier, aucun code à changer).
-8. **Avant le lancement public** : hébreu de l'interface relu par un locuteur natif ; interprétation « police du système » pour l'hébreu à confirmer ; droits d'usage de la mascotte ; style des montages (ADR 0007).
-9. **Plus tard** : comptes développeur mobile (Apple 99 USD/an, Google 25 USD) avant P9 bis ; tri des 47 ressources candidates (https://claude.ai/artifact/YGeV9JfuPUGTajUTzF9Yxb) ; corrections des 15 exemples de la page de revue (évaluation de P3).
+1. **Secret GitHub `CURATION_CONTACT_SEC`** (valeur : l'adresse de contact fournie le 2026-11-05) à ajouter dans les secrets du dépôt, pour que la chaîne en ligne collecte EDGAR ; elle est déjà dans `.env.local`.
+2. **Recherche** : relire le jeu `r1` (`src/recherche/reference.ts`) et donner un second jeu de requêtes non vu (le lexique a été réglé sur `r1`).
+3. **Usage « construire »** : liste témoin de bonnes découvertes (SPEC §10).
+4. **Domaine** du site (décision et dépense) ; démonstration V1.
+5. **Sources** : X, Reddit, conditions restrictives (`docs/sources.md` §8.1) ; Tesla sans flux officiel (403, non contourné) ; flux des chaînes YouTube officielles à réessayer (404 le 2026-11-05).
+6. **Couvertures** : originaux des 18 fonds en haute définition, s'ils existent (même nom de fichier, aucun code à changer).
+7. **Avant le lancement public** : hébreu de l'interface relu par un locuteur natif ; interprétation « police du système » pour l'hébreu à confirmer ; droits d'usage de la mascotte ; style des montages (ADR 0007).
+8. **Plus tard** : comptes développeur mobile (Apple 99 USD/an, Google 25 USD) avant P9 bis ; tri des 47 ressources candidates (https://claude.ai/artifact/YGeV9JfuPUGTajUTzF9Yxb) ; corrections des 15 exemples de la page de revue (évaluation de P3).
 
 ## Points de vigilance
 
 - **Jeton Turso** : affiché par erreur dans la trace d'une commande le 2026-11-05 ; remplacé par l'utilisateur le même jour (`.env.local`, secret GitHub, variable Vercel) et l'ancien révoqué. Vérifié après révocation : le site en ligne et l'accès local répondent.
-- **Registre d'accès des sources (2026-11-05, demande de l'utilisateur)** : six états distingués, reprises espacées (`Retry-After` respecté), aucune source supprimée ; Hacker News actif comme signal, article lié récupéré avec destination validée, robots.txt et redirections revalidées ; EDGAR prêt ; presse toujours attribuée (`p3-21`, contrôle `attribution_externe_manquante`) ; canaux de remplacement Microsoft et Tesla. Détail : `docs/sources.md` §2 ter, `npm run sources:registre`.
+- **Registre d'accès des sources (2026-11-05, demande de l'utilisateur)** : six états distingués, reprises espacées (`Retry-After` respecté), aucune source supprimée ; Hacker News actif comme signal, article lié récupéré avec destination validée, robots.txt et redirections revalidées ; EDGAR prêt ; presse toujours attribuée (`p3-21`, contrôle `attribution_externe_manquante`) ; canaux de remplacement Microsoft et Tesla. Détail : `docs/sources.md` §2 ter, `npm run sources:registre`. Migration `0012` appliquée sur Turso le 2026-11-05 avec l'accord de l'utilisateur, code envoyé. EDGAR essayé en réel avec le client déclaré : 20 rapports 8-K pour NVIDIA et 20 pour Microsoft ; les 12 CIK confirmés sur sec.gov (noms des entreprises). Le même jour : 7 planifiées et 7 publiées après la reprise de la chaîne.
 - **Cron GitHub irrégulier** : aucun cycle de 03:28 à 12:14 UTC le 2026-11-05. Un cycle peut être lancé à la main (`npm run lancer -- --confirmer` avec les variables Turso et les plafonds), sans chevauchement grâce au bail.
 - **Brouillons bloqués** : écarts sur un champ principal (réserve de la source absente, accroche non conforme, chiffre de performance non attribué) ; Pulse en a 11.
 - **Découvertes** : la rédaction automatique des dépôts découverts reste coupée en ligne (`CURATION_MAX_DECOUVERTES` absente) tant qu'elle n'est pas assez fiable.
