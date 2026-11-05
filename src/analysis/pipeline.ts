@@ -12,6 +12,7 @@ import { toPlainText } from '../maquette/data.ts';
 import { BudgetInsuffisant, marquerErreur, reserver, solder, type Plafonds } from './budget.ts';
 import { CODES_BLOQUANTS, controlerBrouillon, diapositivesDe, moinsDeTroisMots, type DiapositiveResolue } from './controles.ts';
 import { estReprenable, schemaSortie, type Modele, type RequeteModele } from './modele.ts';
+import { elaguer, revisionElaguee } from './elagage.ts';
 import { documentUtilisateur, messageRevision, PROMPT_VERSION, SYSTEME_QUALIFICATION, SYSTEME_REDACTION } from './prompts.ts';
 import { consignesActuelles, deciderSelection, passagesRetrouves, preselection, type Selection } from '../selection/consignes.ts';
 import { creerPublication, NIVEAU_PREUVE_V1, synchroniserComptes } from './publication.ts';
@@ -19,7 +20,9 @@ import { Brouillon, Qualification } from './schemas.ts';
 
 export const MAX_TENTATIVES = 2;
 /** La réflexion du modèle compte dans ces plafonds ; une réponse tronquée repart une fois avec le double. */
-export const MAX_TOKENS = { qualification: 4_000, redaction: 12_000, revision: 12_000 };
+export const MAX_TOKENS = { qualification: 4_000, redaction: 12_000, revision: 12_000, relance: 12_000 };
+/** Brouillons « à vérifier » relancés au plus par lot (une seule relance par brouillon, payée sur le plafond du lot). */
+export const MAX_RELANCES_PAR_LOT = 5;
 /** Renouvelé pendant chaque appel : un bail expiré signifie que le processus a disparu ou s'est arrêté, par exemple en veille. */
 export const DUREE_BAIL_MS = 15 * 60_000;
 /** Une capture plus longue ne part pas au modèle : son coût bloquerait le lot et son contrôle serait trop lent. */
@@ -131,6 +134,29 @@ async function ouvrirExecution(client: Client, o: OptionsBrouillons, runId: stri
   }
 }
 
+/** Brouillons « à vérifier » encore jamais relancés, dont la publication attend toujours : les plus récents d'abord. */
+async function aRelancer(client: Client, limite: number) {
+  const r = await client.execute({
+    sql: `select d.id, d.news_item_id, d.snapshot_id, d.information_type, d.content, n.title, n.announced_at, v.version, pr.name as produit,
+            c.title as snapshot_title, c.content as capture, c.content_format, s.name as source_nom
+          from post_draft d
+          join post p on p.news_item_id = d.news_item_id and p.status = 'a_verifier'
+          join news_item n on n.id = d.news_item_id and n.kind in ('annonce', 'version')
+          join document_snapshot c on c.id = d.snapshot_id
+          join source_document doc on doc.id = c.document_id
+          join source s on s.id = doc.source_id
+          left join news_item_target t on t.news_item_id = n.id
+          left join product_version v on v.id = t.product_version_id
+          left join product pr on pr.id = t.product_id
+          where d.status = 'a_verifier' and d.content is not null
+            and not exists (select 1 from llm_call x where x.news_item_id = d.news_item_id and x.stage = 'relance')
+          order by d.created_at desc, d.id desc
+          limit ?`,
+    args: [limite],
+  });
+  return r.rows;
+}
+
 export async function genererBrouillons(o: OptionsBrouillons) {
   const client = o.database.client;
   const horloge = o.clock ?? (() => new Date());
@@ -214,8 +240,52 @@ export async function genererBrouillons(o: OptionsBrouillons) {
 
   let statut = 'terminee';
   let motif: string | null = null;
-  const bilan = { revisions_gardees: 0, ecartees: 0, anciennes: 0, a_approfondir: 0, invalides: 0, tronquees: 0, refus: 0, rejetees: 0, a_verifier: 0, controlees: 0, sans_texte: 0, trop_longues: 0, qualifications_reprises: 0 };
+  const bilan = { relances: 0, relances_publiables: 0, revisions_gardees: 0, ecartees: 0, anciennes: 0, a_approfondir: 0, invalides: 0, tronquees: 0, refus: 0, rejetees: 0, a_verifier: 0, controlees: 0, sans_texte: 0, trop_longues: 0, qualifications_reprises: 0 };
   try {
+    // Relance (décision de l'utilisateur du 2026-11-05) : avant les nouveaux sujets, quelques brouillons restés « à
+    // vérifier » reçoivent une seconde révision guidée par leurs écarts. Elle n'est gardée que si elle passe tous les
+    // contrôles, au besoin après élagage des champs secondaires ; sinon rien ne change. Un brouillon n'est relancé qu'une fois.
+    for (const row of await aRelancer(client, MAX_RELANCES_PAR_LOT)) {
+      const newsItemId = Number(row.news_item_id);
+      const { date_annonce, nature, categories, produit: produitBrouillon, version_cible, niveau_preuve, ...reste } = JSON.parse(String(row.content)) as Record<string, unknown>;
+      const lu = Brouillon.safeParse(reste);
+      if (!lu.success) continue;
+      const titreCapture = String(row.snapshot_title);
+      const texte = toPlainText(String(row.capture), String(row.content_format));
+      const produitCatalogue = row.produit === null ? null : String(row.produit);
+      const version = row.version === null ? null : String(row.version);
+      const def = SOURCES.find((x) => x.name === String(row.source_nom));
+      const attribution = def?.kind === 'feed' ? (def.attribution ?? null) : null;
+      const doc = documentUtilisateur(titreCapture, texte, produitCatalogue, { source: String(row.source_nom), annonce: row.announced_at === null ? null : String(row.announced_at), attribution });
+      const contexteControle = {
+        typeInformation: row.information_type === null ? undefined : String(row.information_type),
+        produit: produitCatalogue ?? (produitBrouillon as string | null),
+        produitCatalogue: produitCatalogue !== null,
+        dateAnnonce: row.announced_at === null ? null : String(row.announced_at),
+        autresCaptures: await autresCaptures(client, newsItemId, Number(row.snapshot_id)),
+        source: String(row.source_nom),
+      };
+      const controler = (x: Brouillon) => controlerBrouillon(x, [titreCapture, texte], String(row.title), version, contexteControle);
+      const controles = controler(lu.data);
+      if (controles.length === 0 || controles.some((c) => CODES_BLOQUANTS.has(c.code))) continue;
+      bilan.relances++;
+      const relance = await appeler(newsItemId, 'relance', SYSTEME_REDACTION, messageRevision(doc, lu.data, controles), Brouillon);
+      if (!relance.ok) continue;
+      const apres = controler(relance.valeur);
+      const elague = apres.length > 0 ? elaguer(relance.valeur, apres) : null;
+      const final = apres.length === 0 ? relance.valeur : elague && controler(elague.brouillon).length === 0 ? elague.brouillon : null;
+      if (!final) continue;
+      const contenu = { ...final, date_annonce, nature, categories, produit: produitBrouillon, version_cible, niveau_preuve };
+      // La relance réussie remplace le contenu du brouillon ; les écarts de la version précédente restent, marqués retirés.
+      const ecarts = [...controles, ...(elague && apres.length > 0 ? apres : [])].map((c) => ({ ...c, retire: true }));
+      const revision = await revisionElaguee(client, newsItemId, Number(row.id), final, now());
+      await ecrire(() => client.batch([
+        { sql: `update post_draft set status = 'controle_automatique', content = ?, checks = ?, rejection_reason = null where id = ? and status = 'a_verifier'`, args: [JSON.stringify(contenu), JSON.stringify(ecarts), Number(row.id)] },
+        ...revision,
+        { sql: `update post set status = 'brouillon' where news_item_id = ? and status = 'a_verifier'`, args: [newsItemId] },
+      ], 'write'));
+      bilan.relances_publiables++;
+    }
     const { lignes, sansTexte, tropLongues } = await aTraiter(client, o.maxItems, o.sources);
     bilan.sans_texte = sansTexte;
     bilan.trop_longues = tropLongues;

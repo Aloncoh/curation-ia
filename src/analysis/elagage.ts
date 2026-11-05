@@ -4,7 +4,9 @@
 // champ de moins qu'un champ mal cité »). L'accroche, la description, la nouveauté et les limites connues ne sont jamais
 // retirées : un écart sur l'un d'eux, ou un écart global (produit, captures, type d'information), laisse le brouillon à
 // vérifier. Retirer une limite gommerait une réserve de la source.
-import type { Controle } from './controles.ts';
+import type { InStatement } from '@libsql/client';
+import type { Database } from '../db/client.ts';
+import { diapositivesDe, type Controle } from './controles.ts';
 import type { Brouillon } from './schemas.ts';
 
 /** Champs simples qu'on peut retirer sans que le post perde son sujet ni une réserve. */
@@ -57,4 +59,34 @@ export function elaguer(b: Brouillon, controles: readonly Controle[]): { brouill
   };
   const retires = [...champs, ...LISTES_RETIRABLES.flatMap((l) => [...indices[l]].sort((x, y) => x - y).map((i) => `${l}:${i}`))];
   return { brouillon, retires };
+}
+
+/**
+ * Nouvelle révision de la publication encore à vérifier, avec le brouillon élagué ou relancé (« une mise à jour ajoute une
+ * révision ») : mêmes sources que la révision précédente, et carrousel refait avec les seuls champs gardés.
+ */
+export async function revisionElaguee(client: Database['client'], newsItemId: number, draftId: number, b: Brouillon, now: string): Promise<InStatement[]> {
+  const r = await client.execute({
+    sql: `select p.id, rv.id as revision_id, rv.seq, rv.content from post p
+          join post_revision rv on rv.post_id = p.id and rv.seq = (select max(seq) from post_revision x where x.post_id = p.id)
+          where p.news_item_id = ? and p.status = 'a_verifier'`,
+    args: [newsItemId],
+  });
+  const p = r.rows[0];
+  if (!p) return [];
+  const postId = Number(p.id);
+  const contenu = { ...(JSON.parse(String(p.content)) as Record<string, unknown>), ...b };
+  const diapositives = diapositivesDe(b);
+  return [
+    { sql: `insert into post_revision (post_id, seq, draft_id, content, created_at) values (?, ?, ?, ?, ?)`, args: [postId, Number(p.seq) + 1, draftId, JSON.stringify(contenu), now] },
+    {
+      sql: `insert into post_source (revision_id, document_id, snapshot_id)
+            select (select id from post_revision where post_id = ? and seq = ?), document_id, snapshot_id from post_source where revision_id = ?`,
+      args: [postId, Number(p.seq) + 1, Number(p.revision_id)],
+    },
+    {
+      sql: `update media_asset set content = ?, alt_text = ? where post_id = ? and origin = 'generated'`,
+      args: [JSON.stringify({ forme: 'carrousel', diapositives }), `Carrousel. ${diapositives.map((d) => `${d.libelle} : ${d.texte}`).join(' ')}`, postId],
+    },
+  ];
 }

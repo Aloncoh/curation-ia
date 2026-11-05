@@ -960,9 +960,32 @@ describe('budget et pipeline, sans réseau', () => {
     expect(texte).toContain('- **Coût** : Non renseigné');
     expect(texte).toContain('## Actualités sans brouillon');
     expect(texte).toContain('- ecartee (hors_perimetre)');
-    // Qualification, rédaction et reprise guidée par les écarts pour le premier sujet ; qualification seule pour le second.
-    const facture = 4 * coutMicroUsd('claude-opus-5-5', 100, 100);
-    expect(texte).toContain(`**Coût enregistré** : ${(facture / 1_000_000).toFixed(4)} $ sur 4 appel(s)`);
+    // Qualification, rédaction et reprise guidée par les écarts pour le premier sujet ; au second lot, sa relance (ratée :
+    // la réponse n'est pas un brouillon, rien ne change) puis la qualification seule du second sujet.
+    const facture = 5 * coutMicroUsd('claude-opus-5-5', 100, 100);
+    expect(texte).toContain(`**Coût enregistré** : ${(facture / 1_000_000).toFixed(4)} $ sur 5 appel(s)`);
+  });
+
+  it('relance : un brouillon à vérifier corrigé au lot suivant passe les contrôles et sa publication repart, une seule fois', async () => {
+    const client = t.database.client;
+    await lancer(faux(redige(() => 'ce passage inventé est absent de la capture')), 10_000_000, 10_000_000, { maxItems: 1 });
+    const ligne = (await client.execute(`select d.id, d.news_item_id, p.id as post_id from post_draft d join post p on p.news_item_id = d.news_item_id where d.status = 'a_verifier'`)).rows[0]!;
+    const avant = { id: Number(ligne.id), news_item_id: Number(ligne.news_item_id), post_id: Number(ligne.post_id) };
+    const m = faux(async (r) => (r.systeme === SYSTEME_QUALIFICATION ? reponse(ecarte) : redige(debut)(r)));
+    expect(await genererBrouillons({ database: t.database, modele: m, nomModele: 'claude-opus-5-5', maxItems: 1, capRunMicroUsd: 10_000_000, capTotalMicroUsd: 10_000_000 })).toMatchObject({ relances: 1, relances_publiables: 1 });
+    const brouillon = (await client.execute({ sql: `select status, checks from post_draft where id = ?`, args: [avant.id] })).rows[0]!;
+    expect(brouillon.status).toBe('controle_automatique');
+    // Les écarts de la première version restent consultables, marqués retirés.
+    expect((JSON.parse(String(brouillon.checks)) as { code: string; retire?: boolean }[]).every((c) => c.retire)).toBe(true);
+    expect((await client.execute({ sql: `select status from post where id = ?`, args: [avant.post_id] })).rows[0]!.status).toBe('brouillon');
+    const revisions = (await client.execute({ sql: `select seq from post_revision where post_id = ? order by seq`, args: [avant.post_id] })).rows.map((x) => x.seq);
+    expect(revisions).toEqual([1, 2]);
+    expect((await client.execute({ sql: `select count(*) as n from post_source ps join post_revision rv on rv.id = ps.revision_id where rv.post_id = ? and rv.seq = 2`, args: [avant.post_id] })).rows[0]!.n).toBe(1);
+    // Jamais relancé deux fois : un troisième lot n'appelle plus le modèle pour lui.
+    const relances = async () => Number((await client.execute({ sql: `select count(*) as n from llm_call where stage = 'relance' and news_item_id = ?`, args: [avant.news_item_id] })).rows[0]!.n);
+    expect(await relances()).toBe(1);
+    await genererBrouillons({ database: t.database, modele: m, nomModele: 'claude-opus-5-5', maxItems: 1, capRunMicroUsd: 10_000_000, capTotalMicroUsd: 10_000_000 });
+    expect(await relances()).toBe(1);
   });
 
   const executionActive = async (bail: string) => {

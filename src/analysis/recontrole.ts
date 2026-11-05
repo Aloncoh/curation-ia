@@ -4,9 +4,8 @@
 // `brouillon`) : `brouillons:planifier` le place ensuite. Rien n'est publié.
 import type { Database } from '../db/client.ts';
 import { toPlainText } from '../maquette/data.ts';
-import type { InStatement } from '@libsql/client';
-import { CODES_BLOQUANTS, controlerBrouillon, diapositivesDe } from './controles.ts';
-import { elaguer } from './elagage.ts';
+import { CODES_BLOQUANTS, controlerBrouillon } from './controles.ts';
+import { elaguer, revisionElaguee } from './elagage.ts';
 import { autresCaptures } from './pipeline.ts';
 import type { Brouillon } from './schemas.ts';
 
@@ -74,32 +73,3 @@ export async function recontroler(database: Database, o: { now: string } = { now
   return bilan;
 }
 
-/**
- * Nouvelle révision de la publication encore à vérifier, avec le brouillon élagué (« une mise à jour ajoute une
- * révision ») : mêmes sources que la révision précédente, et carrousel refait avec les seuls champs gardés.
- */
-async function revisionElaguee(client: Database['client'], newsItemId: number, draftId: number, b: Brouillon, now: string): Promise<InStatement[]> {
-  const r = await client.execute({
-    sql: `select p.id, rv.id as revision_id, rv.seq, rv.content from post p
-          join post_revision rv on rv.post_id = p.id and rv.seq = (select max(seq) from post_revision x where x.post_id = p.id)
-          where p.news_item_id = ? and p.status = 'a_verifier'`,
-    args: [newsItemId],
-  });
-  const p = r.rows[0];
-  if (!p) return [];
-  const postId = Number(p.id);
-  const contenu = { ...(JSON.parse(String(p.content)) as Record<string, unknown>), ...b };
-  const diapositives = diapositivesDe(b);
-  return [
-    { sql: `insert into post_revision (post_id, seq, draft_id, content, created_at) values (?, ?, ?, ?, ?)`, args: [postId, Number(p.seq) + 1, draftId, JSON.stringify(contenu), now] },
-    {
-      sql: `insert into post_source (revision_id, document_id, snapshot_id)
-            select (select id from post_revision where post_id = ? and seq = ?), document_id, snapshot_id from post_source where revision_id = ?`,
-      args: [postId, Number(p.seq) + 1, Number(p.revision_id)],
-    },
-    {
-      sql: `update media_asset set content = ?, alt_text = ? where post_id = ? and origin = 'generated'`,
-      args: [JSON.stringify({ forme: 'carrousel', diapositives }), `Carrousel. ${diapositives.map((d) => `${d.libelle} : ${d.texte}`).join(' ')}`, postId],
-    },
-  ];
-}
