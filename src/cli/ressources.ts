@@ -1,5 +1,6 @@
 // Chaîne des ressources pour construire (ADR 0011). Sous-commandes :
 //   npm run ressources -- capturer [slug] [--depuis <heures>] [--forcer]   capture par l'API GitHub, sans jeton
+//   npm run ressources -- decouvrir [--jours N] [--max N] [--capturer]     découverte automatique (P6), seuil d'étoiles réglable
 //   npm run ressources -- source <slug>                                    écrit data/ressources/captures/<slug>.md
 //   npm run ressources -- verifier <fichier.json>                          contrôles déterministes d'un brouillon
 //   npm run ressources -- chercher "<requête>" [--recents] [--json]         recherche en mode aperçu, correspondances expliquées
@@ -8,6 +9,7 @@
 //   npm run ressources -- selection <capturer | apercus | source | verifier | importer> …  sélections de sites (ADR 0011, complément du 2026-11-02)
 import { capturer } from '../ressources/commandes/capturer.ts';
 import { chercher } from '../ressources/commandes/chercher.ts';
+import { decouvrir } from '../ressources/commandes/decouvrir.ts';
 import type { ContexteCommande } from '../ressources/commandes/contexte.ts';
 import { importer } from '../ressources/commandes/importer.ts';
 import { planning } from '../ressources/commandes/planning.ts';
@@ -16,7 +18,7 @@ import { source } from '../ressources/commandes/source.ts';
 import { verifier } from '../ressources/commandes/verifier.ts';
 import { runCommand } from './shared.ts';
 
-const COMMANDES: Record<string, (args: string[], ctx: ContexteCommande) => Promise<number>> = { capturer, source, verifier, importer, chercher, planning, selection };
+const COMMANDES: Record<string, (args: string[], ctx: ContexteCommande) => Promise<number>> = { capturer, source, verifier, importer, chercher, planning, selection, decouvrir };
 
 await runCommand(async ({ config, database }) => {
   const [nom, ...args] = process.argv.slice(2);

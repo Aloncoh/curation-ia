@@ -17,6 +17,8 @@ export interface EntreeRessource {
   remarque?: string;
   /** Provenance propre à l'entrée quand elle ne vient pas du fil d'origine ; sinon `DECOUVERTE_VIA`. */
   decouverteVia?: string;
+  /** Trouvée par la découverte automatique (decouverte.ts), pas choisie par l'utilisateur : jamais « à publier » d'office. */
+  decouverteAuto?: boolean;
 }
 
 /** Version de la liste, reprise dans `selection_decision.consignes_version`. */

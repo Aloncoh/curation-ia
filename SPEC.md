@@ -240,7 +240,7 @@ Les exigences 7.1 à 7.8 sont **[V1]** sauf mention contraire ; 7.3 ter et 7.9 �
 - ✅ Le seuil ne bloque jamais une annonce officielle : release, changelog ou billet d'éditeur suivent §7.3 bis.
 - ✅ Une raison fondée sur les étoiles empêche la publication, comme pour une actualité.
 - ✅ Licence inconnue : « Non renseigné », jamais « libre » ni « gratuit » par déduction.
-- **Choix restant** : la valeur du seuil, et si un dépôt sous le seuil peut entrer autrement (§11).
+- **Seuil décidé par l'utilisateur le 2026-11-05 : 100 étoiles** (réglage `decouverte.seuil_etoiles`). Choix restant : si un dépôt sous le seuil peut entrer autrement (§11).
 
 **Chaîne des ressources** (décision de l'utilisateur, 2026-11-02 ; [ADR 0011](docs/decisions/0011-chaine-des-ressources.md)). Avancée avant P6 pour une liste fournie par l'utilisateur ; la découverte automatique, le seuil et la grille `d1` restent en P6, la publication réelle en P5.
 - **Une publication par ressource retenue.** Le texte, rédigé avec nos mots, est un post court qui va à l'essentiel : ce que fait la ressource, son intérêt, ce qui la distingue ; démarrage, compatibilités ou limites seulement s'ils comptent, jamais en rubrique systématique (retours du 2026-11-02). Chaque affirmation est citée mot pour mot. Rien n'est présenté comme testé.

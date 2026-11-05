@@ -2,6 +2,13 @@
 
 Évolution datée des jalons et des vérifications **réellement faites**. L'état courant est dans [STATE.md](STATE.md) ; les traces d'exécution détaillées sont en base.
 
+## 2026-11-05 — P6, bloc 2a : découverte automatique de dépôts GitHub
+
+- Seuil choisi par l'utilisateur : 100 étoiles, lu dans le réglage `decouverte.seuil_etoiles` (SPEC §7.3 ter mise à jour).
+- `npm run ressources -- decouvrir` : recherche GitHub sur six sujets (skills, MCP, Claude Code, agents), dépôts créés depuis 30 jours ; le code revérifie le seuil et écarte archives, forks et dépôts connus. Avec `--capturer`, les candidats entrent dans la chaîne des ressources pour Repo, décision `approfondir` (motif `grille_d1_a_faire`) : rien n'est rédigé ni publié.
+- Essai réel en local : 60 dépôts trouvés, 8 candidats listés, 4 capturés (`day-trader-skill`, `pixelfx`, `founder-skill`, `huashu-motion`). Constat : la recherche par sujet ramène aussi des dépôts hors sujet (un outil pour téléviseurs étiqueté `claude-code`) : c'est le rôle de la grille `d1`.
+- Tests : 788 au vert (5 nouveaux).
+
 ## 2026-11-05 — P6 lancé : regroupement multi-sources (bloc 1)
 
 - Plan de P6 validé par l'utilisateur (« Oui, lance P6 »). Bloc 1 réalisé ([ADR 0014](docs/decisions/0014-regroupement-multi-sources.md)) : à la collecte, une annonce sur le même sujet qu'une annonce récente d'une autre source la renforce au lieu de créer une actualité ; ses documents apparaissent dans les sources du post.

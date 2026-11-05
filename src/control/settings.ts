@@ -27,6 +27,8 @@ export const REGLAGES_PAR_DEFAUT = {
   'ressources.seuil_nouvelle_sortie_jours': 14,
   'ressources.inactivite_jours': 90,
   'ressources.validite_lien_jours': 7,
+  /** Étoiles minimales d'un dépôt pour entrer dans la découverte automatique (SPEC §7.3 ter ; 100, décision de l'utilisateur du 2026-11-05). */
+  'decouverte.seuil_etoiles': 100,
 } as const;
 export type CleReglage = keyof typeof REGLAGES_PAR_DEFAUT;
 

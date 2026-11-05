@@ -18,6 +18,9 @@ import { toPlainText } from '../maquette/data.ts';
 import { moinsDeTroisMots } from '../analysis/controles.ts';
 import { documentPrincipal, dossierDeSkill, RESSOURCES, sourceIdDe, VERSION_LISTE, type EntreeRessource } from './liste.ts';
 
+/** Version des consignes des découvertes automatiques (decouverte.ts la reprend). */
+export const VERSION_DECOUVERTE = 'decouverte-1';
+
 export const HOTES_RESSOURCES = ['api.github.com', 'raw.githubusercontent.com'] as const;
 export const KIND_SOURCE = 'github-ressource';
 export const DELAI_MS = 15_000;
@@ -381,18 +384,19 @@ async function tracerDecision(
   d: { decision: 'publier' | 'ecarter' | 'approfondir'; motif: string },
   snapshotId: number | null,
   now: string,
+  version: string = VERSION_LISTE,
 ): Promise<void> {
   const actives = await tx
     .select({ id: selectionDecisions.id, decision: selectionDecisions.decision, motif: selectionDecisions.motif, snapshotId: selectionDecisions.snapshotId })
     .from(selectionDecisions)
-    .where(and(eq(selectionDecisions.newsItemId, newsItemId), eq(selectionDecisions.juge, 'code'), eq(selectionDecisions.consignesVersion, VERSION_LISTE), isNull(selectionDecisions.remplaceeLe)));
+    .where(and(eq(selectionDecisions.newsItemId, newsItemId), eq(selectionDecisions.juge, 'code'), eq(selectionDecisions.consignesVersion, version), isNull(selectionDecisions.remplaceeLe)));
   if (actives.some((a) => a.decision === d.decision && a.motif === d.motif && a.snapshotId === snapshotId)) return;
   for (const a of actives) await tx.update(selectionDecisions).set({ remplaceeLe: now }).where(eq(selectionDecisions.id, a.id));
   await tx.insert(selectionDecisions).values({
     newsItemId,
     origine: 'regles',
     juge: 'code',
-    consignesVersion: VERSION_LISTE,
+    consignesVersion: version,
     decision: d.decision,
     criteres: null,
     motif: d.motif,
@@ -552,9 +556,11 @@ export async function executerCapture(o: OptionsCapture): Promise<BilanCapture> 
               ? { decision: 'approfondir' as const, motif: 'chemin_principal_absent' }
               : moinsDeTroisMots(texteDeFichier(principal.doc.content, principal.doc.contentFormat))
                 ? { decision: 'approfondir' as const, motif: 'capture_trop_courte' }
-                : { decision: 'publier' as const, motif: 'liste_utilisateur' };
+                : e.decouverteAuto
+                  ? { decision: 'approfondir' as const, motif: 'grille_d1_a_faire' }
+                  : { decision: 'publier' as const, motif: 'liste_utilisateur' };
           bilan.decision = decision;
-          if (newsItemId !== undefined) await tracerDecision(tx, newsItemId, decision, snapshotId, capturee);
+          if (newsItemId !== undefined) await tracerDecision(tx, newsItemId, decision, snapshotId, capturee, e.decouverteAuto ? VERSION_DECOUVERTE : VERSION_LISTE);
           if (newsItemId === undefined) {
             bilan.resultat = 'echec';
             bilan.erreur = `chemin principal absent (${documentPrincipal(e)}) : aucune actualité créée`;
