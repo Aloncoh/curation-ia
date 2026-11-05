@@ -274,7 +274,15 @@ export async function genererBrouillons(o: OptionsBrouillons) {
       const apres = controler(relance.valeur);
       const elague = apres.length > 0 ? elaguer(relance.valeur, apres) : null;
       const final = apres.length === 0 ? relance.valeur : elague && controler(elague.brouillon).length === 0 ? elague.brouillon : null;
-      if (!final) continue;
+      if (!final) {
+        // Relance non gardée : ses écarts restants sont notés sur l'appel, pour savoir ce qui bloque encore.
+        const restants = [...new Set(apres.map((c) => `${c.champ}:${c.code}`))].join(', ');
+        await ecrire(() => client.execute({
+          sql: `update llm_call set error = ? where id = (select max(id) from llm_call where run_id = ? and news_item_id = ? and stage = 'relance')`,
+          args: [`relance non gardée, écarts restants : ${restants}`.slice(0, 500), runId, newsItemId],
+        }));
+        continue;
+      }
       const contenu = { ...final, date_annonce, nature, categories, produit: produitBrouillon, version_cible, niveau_preuve };
       // La relance réussie remplace le contenu du brouillon ; les écarts de la version précédente restent, marqués retirés.
       const ecarts = [...controles, ...(elague && apres.length > 0 ? apres : [])].map((c) => ({ ...c, retire: true }));
