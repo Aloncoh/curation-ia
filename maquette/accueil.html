@@ -47,8 +47,22 @@
   .orbite-trace { position: absolute; width: calc(var(--rayon-orbite) * 2); aspect-ratio: 1; border-radius: 50%; border: 1px dashed rgba(166, 139, 255, .35); opacity: 0; animation: apparait .8s ease 1.6s both; }
   .mascotte {
     position: relative; width: 34%; aspect-ratio: 1; border-radius: 30%; z-index: 2;
-    background: url(../assets/brand/logo.svg) center / contain no-repeat; border-radius: 50%; filter: drop-shadow(0 0 28px rgba(108, 71, 232, .6));
-    animation: eclot .9s cubic-bezier(.34, 1.56, .64, 1) .1s both, flotte 4s ease-in-out 1.2s infinite, soi 6s ease-in-out 1.6s infinite;
+    border-radius: 50%; filter: drop-shadow(0 0 28px color-mix(in srgb, var(--teinte) 60%, transparent));
+    animation: eclot .9s cubic-bezier(.34, 1.56, .64, 1) .1s both, flotte 4s ease-in-out 1.2s infinite, soi 6s ease-in-out 1.6s infinite, teinte 36s linear 1.6s infinite;
+  }
+  .mascotte svg { width: 100%; height: 100%; display: block; }
+  .mascotte .oeil { fill: var(--teinte, #a68bff); }
+  /* À chaque tour sur elle-même, la mascotte prend la couleur de l'agent suivant (yeux et lueur), dans l'ordre de
+     l'orbite : Nodi, Repo, Pyxo, Mova, Pulse, Radar. Le changement tombe pendant le tour (70 % de « soi »). */
+  @property --teinte { syntax: "<color>"; inherits: true; initial-value: #2fd49a; }
+  @keyframes teinte {
+    0%, 11.2% { --teinte: #2fd49a; }
+    12.2%, 27.9% { --teinte: #ff8f4d; }
+    28.9%, 44.5% { --teinte: #4fb0ff; }
+    45.5%, 61.2% { --teinte: #b886ff; }
+    62.2%, 77.9% { --teinte: #ffbe3b; }
+    78.9%, 94.5% { --teinte: #2fd0c8; }
+    95.5%, 100% { --teinte: #2fd49a; }
   }
   @keyframes eclot { 0% { transform: scale(0) rotate(-20deg); opacity: 0; } 100% { transform: scale(1) rotate(0); opacity: 1; } }
   @keyframes soi {
@@ -129,7 +143,7 @@
   .fini .agent > span { animation: contre 45s linear infinite !important; }
   .fini .halo { animation: pivote 40s linear infinite !important; opacity: 1; }
   .fini .ciel { animation: pivote 240s linear infinite !important; }
-  .fini .mascotte { animation: flotte 4s ease-in-out infinite, soi 6s ease-in-out infinite !important; }
+  .fini .mascotte { animation: flotte 4s ease-in-out infinite, soi 6s ease-in-out infinite, teinte 36s linear infinite !important; }
   .fini .agent img { animation: vie var(--duree, 7s) ease-in-out infinite !important; }
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation-delay: 0s !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
@@ -152,7 +166,19 @@
   <div class="noyau">
     <span class="onde" aria-hidden="true"></span><span class="onde" aria-hidden="true"></span>
     <span class="orbite-trace" aria-hidden="true"></span>
-    <div class="mascotte" role="img" aria-label="Logo de Curation AI"></div>
+    <div class="mascotte" role="img" aria-label="Logo de Curation AI"><svg viewBox="0 0 120 120" aria-hidden="true"><g fill="none" stroke-width="9" stroke-linecap="round">
+  <path d="M66.09 10.37 A50 50 0 0 1 99.93 29.91" stroke="#1fa77a"/>
+  <path d="M106.03 40.46 A50 50 0 0 1 106.03 79.54" stroke="#e8732f"/>
+  <path d="M99.93 90.09 A50 50 0 0 1 66.09 109.63" stroke="#2f8fd8"/>
+  <path d="M53.91 109.63 A50 50 0 0 1 20.07 90.09" stroke="#9a5cf0"/>
+  <path d="M13.97 79.54 A50 50 0 0 1 13.97 40.46" stroke="#d99a12"/>
+  <path d="M20.07 29.91 A50 50 0 0 1 53.91 10.37" stroke="#12a6a0"/>
+</g>
+<rect x="27" y="37" width="66" height="46" rx="23" fill="#141019" stroke="#3a2b55" stroke-width="2"/>
+<ellipse cx="46" cy="60" rx="7" ry="11" class="oeil"/>
+<ellipse cx="74" cy="60" rx="7" ry="11" class="oeil"/>
+<ellipse cx="44" cy="55" rx="2.2" ry="3.2" fill="#efe8ff"/>
+<ellipse cx="72" cy="55" rx="2.2" ry="3.2" fill="#efe8ff"/></svg></div>
     <nav class="orbite" aria-label="Les six agents éditoriaux">
       <a class="agent" href="#" style="--a: -90deg; --d: 1.0s; --c: #1fa77a" data-a="nodi"><span><img style="--duree: 6.2s" src="../assets/brand/agent-nodi.png" alt=""><b>@nodi</b><small>Modèles IA et assistants</small></span></a>
       <a class="agent" href="#" style="--a: -30deg; --d: 1.15s; --c: #e8732f" data-a="repo"><span><img style="--duree: 7.4s" src="../assets/brand/agent-repo.png" alt=""><b>@repo</b><small>Skills, MCP et GitHub</small></span></a>
