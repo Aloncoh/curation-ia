@@ -5,210 +5,433 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Bienvenue · Curation AI</title>
 <!--
-  Maquette de l'accueil animé avant la création de compte, pour l'application mobile (P9 bis, demande de l'utilisateur du 2026-11-05) : les six agents
-  apparaissent autour de la mascotte, prennent leur place sur une orbite et se présentent, puis le formulaire s'ouvre.
-  Exemple de maquette : aucun compte n'existe, rien n'est enregistré. Animation passable (« Passer ») et remplacée par
-  l'état final si le système demande moins d'animations (prefers-reduced-motion).
+  Maquette de l'accueil (refonte demandée par l'utilisateur le 2026-11-05) : fond blanc, dégradé violet aux couleurs qui
+  défilent, barre de navigation en pilules avec indicateur glissant, curseur flèche qui pivote dans le sens du
+  mouvement, et un bac où nos six agents et la mascotte tombent, se tassent, puis flottent en apesanteur, tournent et
+  se cognent (physique écrite à la main, sans bibliothèque). Inspiration de mouvement : une feuille d'accueil d'application
+  où des personnages ronds flottent dans une carte ; personnages, couleurs et textes sont ceux du projet.
+  Exemple de maquette : aucun compte n'existe, rien n'est enregistré. Moins d'animations demandées par le système :
+  agents posés, sans physique ni curseur personnalisé.
 -->
 <style>
-  @font-face { font-family: "Recursive"; src: url(../node_modules/@fontsource-variable/recursive/files/recursive-latin-full-normal.woff2) format("woff2"); font-weight: 300 1000; font-display: swap; }
-  @font-face { font-family: "Atkinson"; src: url(../node_modules/@fontsource-variable/atkinson-hyperlegible-next/files/atkinson-hyperlegible-next-latin-wght-normal.woff2) format("woff2"); font-weight: 200 800; font-display: swap; }
+  @font-face { font-family: "Recursive"; src: url(polices/recursive.woff2) format("woff2"), url(../node_modules/@fontsource-variable/recursive/files/recursive-latin-full-normal.woff2) format("woff2"); font-weight: 300 1000; font-display: swap; }
+  @font-face { font-family: "Atkinson"; src: url(polices/atkinson.woff2) format("woff2"), url(../node_modules/@fontsource-variable/atkinson-hyperlegible-next/files/atkinson-hyperlegible-next-latin-wght-normal.woff2) format("woff2"); font-weight: 200 800; font-display: swap; }
+
+  @property --t { syntax: "<angle>"; inherits: true; initial-value: 0deg; }
+  @property --x { syntax: "<length-percentage>"; inherits: true; initial-value: -100px; }
+  @property --y { syntax: "<length-percentage>"; inherits: true; initial-value: -100px; }
+  @property --angle { syntax: "<angle>"; inherits: true; initial-value: 0deg; }
+
   :root {
-    --titre: "Recursive", ui-rounded, sans-serif; --texte: "Atkinson", system-ui, sans-serif; --mono: "Recursive", ui-monospace, monospace;
-    --fond: #140e19; --encre: #f3eefb; --pied: #b0a6c4; --violet: #a68bff; --violet-fort: #6c47e8;
-    --rayon-orbite: min(24dvh, 30vw, 230px); --taille-agent: min(12dvh, 15vw, 108px);
-    color-scheme: dark;
+    --titre: "Recursive", ui-rounded, system-ui, sans-serif;
+    --texte: "Atkinson", system-ui, sans-serif;
+    --papier: #fbfaff; --encre: #1c1530; --pied: #6b6283; --trait: #e9e4f6;
+    --violet: #7a4dff; --violet-fonce: #5b2fe0; --lilas: #b9a3ff; --magenta: #e04fd0; --indigo: #3f5bff;
+    color-scheme: light;
   }
   * { box-sizing: border-box; }
-  html, body { margin: 0; height: 100%; }
+  html, body { margin: 0; }
   body {
-    background: radial-gradient(120% 90% at 50% 40%, #2b1645 0%, var(--fond) 62%); color: var(--encre);
-    font: 400 1rem/1.5 var(--texte); overflow: hidden;
+    min-height: 100dvh; background: var(--papier); color: var(--encre);
+    font: 400 1rem/1.5 var(--texte); overflow-x: hidden;
+    animation: teintes 24s linear infinite;
   }
-  .scene { position: relative; min-height: 100dvh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4dvh; padding: 6dvh 0 4dvh; isolation: isolate; }
+  /* Couleurs qui défilent : un seul angle anime l'aura, le bac et le curseur. */
+  @keyframes teintes { to { --t: 360deg; } }
 
-  /* Ciel : points lumineux qui scintillent. */
-  /* Fond vivant, qui continue de tourner après l'animation : le ciel pivote lentement, un halo tourne derrière. */
-  .ciel { position: absolute; inset: -40%; z-index: -1; animation: pivote 240s linear infinite; }
-  .halo {
-    position: absolute; z-index: -1; width: 140vmax; aspect-ratio: 1; left: 50%; top: 42%; translate: -50% -50%; border-radius: 50%;
-    background: conic-gradient(from 0deg, transparent 0 20%, rgba(108, 71, 232, .28) 30%, transparent 42%, rgba(18, 166, 160, .16) 60%, transparent 72%, rgba(232, 115, 47, .14) 86%, transparent);
-    filter: blur(40px); animation: apparait 1.5s ease .3s both, pivote 40s linear infinite;
+  /* Aura : trois nappes floues qui changent de teinte et dérivent lentement. */
+  .aura { position: fixed; inset: -20vmax; z-index: -1; pointer-events: none; overflow: hidden; }
+  .aura i {
+    position: absolute; width: 60vmax; aspect-ratio: 1; border-radius: 50%; filter: blur(70px); opacity: .55;
+    background: hsl(calc(265 + sin(var(--t)) * 25) 95% 72%);
+    animation: derive 26s ease-in-out infinite alternate;
   }
-  @keyframes pivote { to { rotate: 360deg; } }
-  .ciel i { position: absolute; width: 2px; height: 2px; border-radius: 50%; background: #fff; opacity: 0; animation: scintille 3.6s ease-in-out infinite; }
-  @keyframes scintille { 0%, 100% { opacity: 0; } 50% { opacity: .7; } }
+  .aura i:nth-child(1) { left: 45%; top: 0; }
+  .aura i:nth-child(2) { left: 5%; top: 35%; width: 50vmax; background: hsl(calc(300 + cos(var(--t)) * 30) 90% 78%); animation-duration: 31s; animation-direction: alternate-reverse; }
+  .aura i:nth-child(3) { left: 55%; top: 55%; width: 45vmax; background: hsl(calc(235 + sin(var(--t) * 2) * 20) 95% 78%); animation-duration: 37s; }
+  @keyframes derive { 0% { translate: 0 0; } 50% { translate: -8vmax 6vmax; } 100% { translate: 6vmax -5vmax; } }
+  .aura::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(251, 250, 255, .55), rgba(251, 250, 255, .9) 70%); }
 
-  /* Centre : la mascotte, des ondes, puis l'orbite des agents. */
-  .noyau { position: relative; width: calc(var(--rayon-orbite) * 2 + var(--taille-agent)); aspect-ratio: 1; display: grid; place-items: center; flex: none; }
-  .onde { position: absolute; width: 38%; aspect-ratio: 1; border-radius: 50%; border: 2px solid var(--violet); opacity: 0; animation: onde 2.4s cubic-bezier(.2, .7, .3, 1) .5s 2 both; }
-  .onde:nth-child(2) { animation-delay: 1.1s; }
-  @keyframes onde { 0% { transform: scale(.6); opacity: .8; } 100% { transform: scale(2.6); opacity: 0; } }
-  .orbite-trace { position: absolute; width: calc(var(--rayon-orbite) * 2); aspect-ratio: 1; border-radius: 50%; border: 1px dashed rgba(166, 139, 255, .35); opacity: 0; animation: apparait .8s ease 1.6s both; }
-  .mascotte {
-    position: relative; width: 34%; aspect-ratio: 1; border-radius: 30%; z-index: 2;
-    border-radius: 50%; filter: drop-shadow(0 0 28px color-mix(in srgb, var(--teinte) 60%, transparent));
-    animation: eclot .9s cubic-bezier(.34, 1.56, .64, 1) .1s both, flotte 4s ease-in-out 1.2s infinite, soi 6s ease-in-out 1.6s infinite, teinte 36s linear 1.6s infinite;
+  /* Barre du haut : trois pilules, celle du milieu avec un indicateur qui glisse vers l'onglet survolé. */
+  .barre { position: sticky; top: 0; z-index: 10; display: flex; justify-content: center; gap: 10px; padding: max(14px, env(safe-area-inset-top)) 16px 10px; }
+  .pilule {
+    position: relative; display: flex; align-items: center; gap: 2px; padding: 5px; border-radius: 999px;
+    background: rgba(255, 255, 255, .72); border: 1px solid var(--trait);
+    box-shadow: 0 1px 0 #fff inset, 0 10px 30px -18px rgba(76, 40, 170, .45);
+    backdrop-filter: blur(14px) saturate(1.4);
   }
-  .mascotte svg { width: 100%; height: 100%; display: block; }
-  .mascotte .oeil { fill: var(--teinte, #a68bff); }
-  /* À chaque tour sur elle-même, la mascotte prend la couleur de l'agent suivant (yeux et lueur), dans l'ordre de
-     l'orbite : Nodi, Repo, Pyxo, Mova, Pulse, Radar. Le changement tombe pendant le tour (70 % de « soi »). */
-  @property --teinte { syntax: "<color>"; inherits: true; initial-value: #2fd49a; }
-  @keyframes teinte {
-    0%, 11.2% { --teinte: #2fd49a; }
-    12.2%, 27.9% { --teinte: #ff8f4d; }
-    28.9%, 44.5% { --teinte: #4fb0ff; }
-    45.5%, 61.2% { --teinte: #b886ff; }
-    62.2%, 77.9% { --teinte: #ffbe3b; }
-    78.9%, 94.5% { --teinte: #2fd0c8; }
-    95.5%, 100% { --teinte: #2fd49a; }
+  .pilule a, .pilule button {
+    position: relative; z-index: 1; display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 16px; border: 0; border-radius: 999px;
+    background: none; color: var(--pied); font: 500 .95rem/1 var(--texte); text-decoration: none; white-space: nowrap; cursor: pointer;
+    transition: color .25s;
   }
-  @keyframes eclot { 0% { transform: scale(0) rotate(-20deg); opacity: 0; } 100% { transform: scale(1) rotate(0); opacity: 1; } }
-  @keyframes soi {
-    0%, 12% { transform: none; }
-    20% { transform: rotate(-8deg); }
-    30% { transform: rotate(7deg); }
-    38%, 52% { transform: none; }
-    70% { transform: perspective(500px) rotateY(360deg); }
-    72%, 100% { transform: none; }
+  .pilule a:hover, .pilule a[aria-current="page"], .pilule button:hover { color: var(--encre); }
+  .recherche button { padding: 0 8px 0 14px; }
+  .recherche kbd { font: 600 .72rem/1 var(--texte); color: var(--pied); background: #f1edfb; border-radius: 8px; padding: 6px 7px; }
+  .rail { --i: 0; --n: 4; }
+  .rail::before {
+    content: ""; position: absolute; top: 5px; bottom: 5px; left: 5px; width: calc((100% - 10px) / var(--n)); border-radius: 999px;
+    background: #fff; box-shadow: 0 1px 2px rgba(28, 21, 48, .08), 0 6px 18px -8px rgba(122, 77, 255, .55);
+    transform: translateX(calc(var(--i) * 100%)); transition: transform .45s cubic-bezier(.34, 1.56, .64, 1);
   }
-  @keyframes flotte { 0%, 100% { translate: 0 0; } 50% { translate: 0 -6px; } }
-  @keyframes apparait { from { opacity: 0; } to { opacity: 1; } }
+  .rail a { flex: 1 1 0; justify-content: center; }
+  .rail:has(a:nth-child(2):hover) { --i: 1; }
+  .rail:has(a:nth-child(3):hover) { --i: 2; }
+  .rail:has(a:nth-child(4):hover) { --i: 3; }
+  .rail .neuf { font: 700 .62rem/1 var(--texte); letter-spacing: .02em; color: var(--violet-fonce); border: 1.5px solid currentColor; border-radius: 999px; padding: 3px 6px; }
+  .compte a { background: var(--encre); color: #fff; font-weight: 700; }
+  .compte a:hover { color: #fff; background: var(--violet-fonce); }
 
-  /* Les six agents : chacun part du centre vers sa place (angle --a), puis l'orbite tourne lentement. */
-  .orbite { position: absolute; inset: 0; animation: tourne 45s linear 3s infinite; }
-  @keyframes tourne { to { rotate: 360deg; } }
-  .agent {
-    --x: calc(cos(var(--a)) * var(--rayon-orbite)); --y: calc(sin(var(--a)) * var(--rayon-orbite));
-    position: absolute; left: 50%; top: 50%; width: var(--taille-agent); margin: calc(var(--taille-agent) / -2) 0 0 calc(var(--taille-agent) / -2);
-    display: grid; justify-items: center; text-decoration: none; color: inherit;
-    animation: sort .9s cubic-bezier(.34, 1.56, .64, 1) var(--d) both;
+  /* Accueil : texte à gauche, bac à droite. */
+  .accueil { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(24px, 4vw, 64px); align-items: center; max-width: 1180px; margin: 0 auto; padding: clamp(24px, 6vh, 72px) 24px 48px; }
+  .texte { display: grid; gap: 22px; }
+  .note { justify-self: start; font: 500 .74rem/1 var(--texte); color: var(--pied); background: rgba(255, 255, 255, .7); border: 1px solid var(--trait); border-radius: 999px; padding: 6px 10px; }
+  h1 {
+    margin: 0; font-family: var(--titre); font-variation-settings: "CASL" 1, "slnt" 0; font-weight: 800;
+    font-size: clamp(2.5rem, 5.6vw, 4.6rem); line-height: .98; letter-spacing: -.035em; text-wrap: balance;
   }
-  .agent > span { position: relative; display: block; animation: contre 45s linear 3s infinite; }
-  @keyframes contre { to { rotate: -360deg; } }
-  @keyframes sort { 0% { transform: translate(0, 0) scale(0); opacity: 0; } 100% { transform: translate(var(--x), var(--y)) scale(1); opacity: 1; } }
-  .agent img {
-    display: block; width: 100%; aspect-ratio: 1; border-radius: 50%; background: #f4efe8; object-fit: cover;
-    box-shadow: 0 0 0 3px var(--fond), 0 0 0 6px var(--c), 0 0 28px 4px color-mix(in srgb, var(--c) 60%, transparent);
-    transition: scale .2s ease;
-    /* Vie propre à chaque agent, sans tourner sur lui-même : il penche la tête, pulse, se balance ; durée propre. */
-    animation: vie var(--duree, 7s) ease-in-out calc(var(--d) + 1.4s) infinite;
-    transform-style: preserve-3d;
+  h1 em {
+    font-style: normal; color: transparent; -webkit-background-clip: text; background-clip: text;
+    background-image: linear-gradient(90deg, var(--violet), var(--magenta), var(--indigo), var(--violet));
+    background-size: 300% 100%; animation: glisse 6s linear infinite;
   }
-  @keyframes vie {
-    0%, 8% { transform: none; }
-    14% { transform: rotate(-10deg); }
-    22% { transform: rotate(9deg); }
-    30% { transform: rotate(0) translateY(0); }
-    36% { transform: scale(1.08); }
-    42% { transform: scale(.97); }
-    48%, 60% { transform: none; }
-    66% { transform: rotate(-4deg); }
-    72% { transform: rotate(4deg); }
-    78% { transform: rotate(-2deg); }
-    84%, 100% { transform: none; }
+  @keyframes glisse { to { background-position: 300% 0; } }
+  .chapeau { margin: 0; max-width: 46ch; font-size: clamp(1.05rem, 1.4vw, 1.2rem); color: var(--pied); text-wrap: pretty; }
+  .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+  .bouton {
+    display: inline-flex; align-items: center; gap: 10px; height: 54px; padding: 0 26px; border: 0; border-radius: 999px;
+    font: 700 1.02rem/1 var(--texte); text-decoration: none; cursor: pointer; transition: transform .2s cubic-bezier(.34, 1.56, .64, 1), box-shadow .2s;
   }
-  .agent:hover img, .agent:focus-visible img { scale: 1.08; }
-  .agent:focus-visible { outline: none; }
-  .agent:focus-visible img { box-shadow: 0 0 0 3px var(--fond), 0 0 0 6px #fff, 0 0 28px 6px var(--c); }
-  .agent b { position: absolute; left: 50%; top: calc(100% + 8px); translate: -50% 0; white-space: nowrap; color: var(--encre); font: 600 clamp(.8rem, 2.2vmin, .95rem)/1 var(--texte); animation: apparait .5s ease calc(var(--d) + .5s) both; }
-  .agent small { position: absolute; left: 50%; top: calc(100% + 26px); translate: -50% 0; width: max-content; font-size: .74rem; color: var(--pied); text-align: center; max-width: 16ch; opacity: 0; transition: opacity .2s; }
-  .agent:hover small, .agent:focus-visible small { opacity: 1; }
+  .bouton.principal { color: #fff; background: linear-gradient(135deg, var(--violet), var(--violet-fonce)); box-shadow: 0 14px 34px -14px rgba(91, 47, 224, .85); }
+  .bouton.principal:hover { transform: translateY(-2px); box-shadow: 0 18px 40px -14px rgba(91, 47, 224, .95); }
+  .bouton.principal b { min-width: 1.6em; height: 1.6em; display: inline-grid; place-items: center; border-radius: 999px; background: rgba(255, 255, 255, .22); font-size: .85rem; }
+  .bouton.principal b[hidden] { display: none; }
+  .bouton.secondaire { color: var(--encre); background: rgba(255, 255, 255, .8); border: 1px solid var(--trait); }
+  .bouton.secondaire:hover { transform: translateY(-2px); }
+  .bouton:focus-visible, .pilule a:focus-visible, .pilule button:focus-visible { outline: 3px solid var(--violet); outline-offset: 3px; }
+  .suivis { margin: 0; min-height: 1.5em; color: var(--pied); font-size: .92rem; }
+  .suivis strong { color: var(--encre); }
 
-  /* Titre, phrase d'accueil et boutons, après l'arrivée des agents. */
-  .entete { display: grid; justify-items: center; gap: 8px; padding: 0 16px; text-align: center; }
-  .entete h1 {
-    margin: 0; font-family: var(--texte); font-weight: 700; font-size: clamp(1.9rem, 5.5vmin, 2.8rem); line-height: 1.1;
-    letter-spacing: -.01em; animation: monte .7s ease 2.7s both;
+  /* Le bac : carte arrondie où vivent les agents. */
+  .bac {
+    position: relative; aspect-ratio: 1 / 1.02; border-radius: 36px; overflow: hidden; isolation: isolate; touch-action: none;
+    background:
+      radial-gradient(120% 80% at 80% 0%, hsl(calc(270 + sin(var(--t)) * 20) 100% 92%) 0%, transparent 60%),
+      radial-gradient(90% 70% at 0% 100%, hsl(calc(310 + cos(var(--t)) * 25) 100% 93%) 0%, transparent 60%),
+      #fff;
+    border: 1px solid var(--trait);
+    box-shadow: 0 1px 0 #fff inset, 0 40px 80px -40px rgba(76, 40, 170, .45);
   }
-  .entete p { margin: 0; max-width: 44ch; text-wrap: balance; color: var(--pied); font-size: 1.05rem; animation: monte .7s ease 2.9s both; }
-  .texte { display: grid; justify-items: center; gap: 10px; padding: 0 16px; }
-  .actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; animation: monte .7s ease 3.2s both; }
-  @keyframes monte { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
-  .bouton { display: inline-block; text-decoration: none; border: 0; border-radius: 14px; padding: 14px 22px; font: 700 1rem/1 var(--texte); cursor: pointer; }
-  .bouton.principal { background: var(--violet-fort); color: #fff; box-shadow: 0 10px 30px -10px rgba(108, 71, 232, .9); }
-  .bouton.principal:hover { background: #5a37d6; }
-  .bouton.secondaire { background: none; color: var(--pied); padding-inline: 12px; }
-  .bouton.secondaire:hover { color: var(--encre); }
-  .bouton:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
-  .passer { position: absolute; top: max(14px, env(safe-area-inset-top)); right: 16px; background: none; border: 0; color: var(--pied); font: 500 .9rem var(--texte); cursor: pointer; padding: 8px 10px; border-radius: 999px; }
-  .passer:hover { color: var(--encre); background: rgba(255, 255, 255, .06); }
-  .note { position: absolute; left: 16px; top: max(14px, env(safe-area-inset-top)); font: 400 .74rem var(--texte); color: var(--pied); border: 1px solid rgba(255, 255, 255, .15); border-radius: 999px; padding: 4px 10px; }
+  .bac-tete { position: absolute; z-index: 3; left: 22px; top: 18px; right: 22px; display: flex; align-items: center; justify-content: space-between; pointer-events: none; }
+  .bac-tete span { display: inline-flex; align-items: center; gap: 8px; font: 700 .95rem/1 var(--texte); }
+  .bac-tete svg { width: 26px; height: 26px; }
+  .bac-tete small { font-size: .78rem; color: var(--pied); }
+  .corps {
+    position: absolute; left: 0; top: 0; z-index: 1; display: block; border: 0; padding: 0; border-radius: 50%; background: none; cursor: grab;
+    will-change: transform; -webkit-tap-highlight-color: transparent;
+  }
+  .corps:active { cursor: grabbing; }
+  .corps img, .corps svg { display: block; width: 100%; height: 100%; border-radius: 50%; pointer-events: none; user-select: none; -webkit-user-drag: none; }
+  .corps img { object-fit: cover; background: #f6f1ea; box-shadow: 0 0 0 4px #fff, 0 0 0 7px var(--c), 0 18px 30px -16px color-mix(in srgb, var(--c) 80%, #000); transition: box-shadow .25s; }
+  .corps[aria-pressed="true"] img { box-shadow: 0 0 0 4px #fff, 0 0 0 9px var(--c), 0 0 0 13px color-mix(in srgb, var(--c) 30%, transparent), 0 18px 30px -16px color-mix(in srgb, var(--c) 80%, #000); }
+  .corps:focus-visible { outline: 3px solid var(--violet); outline-offset: 6px; }
+  .coche { position: absolute; right: 2%; bottom: 2%; width: 28%; aspect-ratio: 1; border-radius: 50%; background: var(--c); color: #fff; display: grid; place-items: center; font: 800 .9rem/1 var(--texte); box-shadow: 0 0 0 3px #fff; scale: 0; transition: scale .3s cubic-bezier(.34, 1.56, .64, 1); }
+  .corps[aria-pressed="true"] .coche { scale: 1; }
+  .etiquette { position: absolute; left: 0; top: 0; z-index: 2; font: 700 .78rem/1 var(--texte); color: var(--encre); background: rgba(255, 255, 255, .9); border-radius: 999px; padding: 5px 9px; pointer-events: none; white-space: nowrap; box-shadow: 0 4px 12px -6px rgba(28, 21, 48, .35); will-change: transform; }
+  .bac-pied { position: absolute; z-index: 3; left: 0; right: 0; bottom: 16px; margin: 0; text-align: center; font-size: .8rem; color: var(--pied); pointer-events: none; }
 
-  /* « Passer », ou un système qui demande moins d'animations : l'état final, tout de suite. */
-  .fini *, .fini *::before, .fini *::after { animation-delay: 0s !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
-  /* Ce qui tourne en continu continue après « Passer ». */
-  .fini .orbite { animation: tourne 45s linear infinite !important; }
-  .fini .agent > span { animation: contre 45s linear infinite !important; }
-  .fini .halo { animation: pivote 40s linear infinite !important; opacity: 1; }
-  .fini .ciel { animation: pivote 240s linear infinite !important; }
-  .fini .mascotte { animation: flotte 4s ease-in-out infinite, soi 6s ease-in-out infinite, teinte 36s linear infinite !important; }
-  .fini .agent img { animation: vie var(--duree, 7s) ease-in-out infinite !important; }
+  /* Mascotte : les yeux clignent. */
+  .oeil { transform-box: fill-box; transform-origin: center; animation: cligne 4.6s infinite; }
+  @keyframes cligne { 0%, 92%, 100% { transform: scaleY(1); } 95% { transform: scaleY(.1); } }
+
+  /* Curseur flèche (pointeurs fins seulement) : suit la souris et pointe dans le sens du déplacement. */
+  .curseur { display: none; }
+  @media (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    html.curseur-actif, html.curseur-actif * { cursor: none !important; }
+    .curseur {
+      display: block; position: fixed; z-index: 100; left: 0; top: 0; width: 0; height: 0; pointer-events: none;
+      border-left: 9px solid transparent; border-right: 9px solid transparent; border-bottom: 21px solid hsl(calc(265 + sin(var(--t)) * 30) 90% 58%);
+      filter: drop-shadow(0 2px 3px rgba(28, 21, 48, .3));
+      transform: translate(var(--x), var(--y)) translate(-50%, -50%) rotate(calc(var(--angle) + 90deg)) scale(var(--echelle, 1));
+      transition: transform .1s linear, opacity .2s; opacity: 0;
+    }
+    html.curseur-actif .curseur.visible { opacity: 1; }
+  }
+
+  @media (max-width: 860px) {
+    .accueil { grid-template-columns: 1fr; padding-top: 20px; }
+    .bac { order: -1; aspect-ratio: 1 / .9; }
+    .rail { --n: 3; }
+    .rail a:nth-child(4) { display: none; }
+    .recherche kbd, .barre .masque-mobile { display: none; }
+  }
+  @media (max-width: 520px) {
+    .barre { gap: 6px; padding-inline: 8px; }
+    .pilule a, .pilule button { height: 36px; padding: 0 11px; font-size: .86rem; }
+    .compte { display: none; }
+  }
   @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after { animation-delay: 0s !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+    *, *::before, *::after { animation: none !important; transition: none !important; }
   }
-  @media (max-width: 520px) { :root { --rayon-orbite: min(32vw, 22dvh); --taille-agent: min(18vw, 11dvh); } }
 </style>
 </head>
 <body>
-<main class="scene" id="scene">
-  <div class="ciel" aria-hidden="true" id="ciel"></div>
-  <div class="halo" aria-hidden="true"></div>
-  <span class="note">Maquette — aucun compte n'est créé</span>
-  <button class="passer" type="button" id="passer">Passer</button>
+<div class="aura" aria-hidden="true"><i></i><i></i><i></i></div>
+<i class="curseur" aria-hidden="true" id="curseur"></i>
 
-  <header class="entete">
-    <h1>Créer un compte</h1>
-    <p>Choisis les agents que tu suis. Ton fil se règle sur eux.</p>
-  </header>
+<nav class="barre" aria-label="Navigation principale">
+  <div class="pilule recherche"><button type="button" aria-label="Rechercher"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><kbd>⌘K</kbd></button></div>
+  <div class="pilule rail">
+    <a href="index.html" aria-current="page">Fil</a>
+    <a href="index.html#decouvertes">Découvertes <span class="neuf masque-mobile">Nouveau</span></a>
+    <a href="index.html#agents">Agents</a>
+    <a href="index.html#reels">Reels</a>
+  </div>
+  <div class="pilule compte"><a href="#creer">Créer un compte</a></div>
+</nav>
 
-  <div class="noyau">
-    <span class="onde" aria-hidden="true"></span><span class="onde" aria-hidden="true"></span>
-    <span class="orbite-trace" aria-hidden="true"></span>
-    <div class="mascotte" role="img" aria-label="Logo de Curation AI"><svg viewBox="0 0 120 120" aria-hidden="true"><g fill="none" stroke-width="9" stroke-linecap="round">
+<main class="accueil">
+  <section class="texte" aria-labelledby="titre">
+    <span class="note">Maquette — aucun compte n'est créé</span>
+    <h1 id="titre">Ce qui sort en IA, <em>trié avant</em> que tu le cherches.</h1>
+    <p class="chapeau">Six agents lisent les annonces, les dépôts et les changelogs, et publient seulement ce qui passe leurs contrôles, avec la source à côté. Suis ceux qui couvrent ton terrain.</p>
+    <div class="actions" id="creer">
+      <button class="bouton principal" type="button" id="principal">Créer un compte <b id="compteur" hidden>0</b></button>
+      <a class="bouton secondaire" href="index.html">Voir le fil</a>
+    </div>
+    <p class="suivis" id="suivis" aria-live="polite">Touche un agent pour le suivre.</p>
+  </section>
+
+  <section class="bac" id="bac" aria-label="Les six agents éditoriaux et la mascotte">
+    <div class="bac-tete">
+      <span><svg viewBox="0 0 120 120" aria-hidden="true"><rect x="10" y="22" width="100" height="76" rx="38" fill="#1c1530"/><ellipse cx="44" cy="60" rx="9" ry="14" fill="#b9a3ff"/><ellipse cx="76" cy="60" rx="9" ry="14" fill="#b9a3ff"/></svg>Curation AI</span>
+      <small>6 agents · IA</small>
+    </div>
+    <p class="bac-pied">Pousse-les, lance-les, touche celui que tu veux suivre.</p>
+  </section>
+</main>
+
+<template id="mascotte"><svg viewBox="0 0 120 120" aria-hidden="true"><g fill="none" stroke-width="9" stroke-linecap="round">
   <path d="M66.09 10.37 A50 50 0 0 1 99.93 29.91" stroke="#1fa77a"/>
   <path d="M106.03 40.46 A50 50 0 0 1 106.03 79.54" stroke="#e8732f"/>
   <path d="M99.93 90.09 A50 50 0 0 1 66.09 109.63" stroke="#2f8fd8"/>
   <path d="M53.91 109.63 A50 50 0 0 1 20.07 90.09" stroke="#9a5cf0"/>
   <path d="M13.97 79.54 A50 50 0 0 1 13.97 40.46" stroke="#d99a12"/>
   <path d="M20.07 29.91 A50 50 0 0 1 53.91 10.37" stroke="#12a6a0"/>
-</g>
-<rect x="27" y="37" width="66" height="46" rx="23" fill="#141019" stroke="#3a2b55" stroke-width="2"/>
-<ellipse cx="46" cy="60" rx="7" ry="11" class="oeil"/>
-<ellipse cx="74" cy="60" rx="7" ry="11" class="oeil"/>
+</g><circle cx="60" cy="60" r="41" fill="#fff"/>
+<rect x="27" y="37" width="66" height="46" rx="23" fill="#1c1530"/>
+<ellipse cx="46" cy="60" rx="7" ry="11" fill="#9b7bff" class="oeil"/>
+<ellipse cx="74" cy="60" rx="7" ry="11" fill="#9b7bff" class="oeil"/>
 <ellipse cx="44" cy="55" rx="2.2" ry="3.2" fill="#efe8ff"/>
-<ellipse cx="72" cy="55" rx="2.2" ry="3.2" fill="#efe8ff"/></svg></div>
-    <nav class="orbite" aria-label="Les six agents éditoriaux">
-      <a class="agent" href="#" style="--a: -90deg; --d: 1.0s; --c: #1fa77a" data-a="nodi"><span><img style="--duree: 6.2s" src="../assets/brand/agent-nodi.png" alt=""><b>@nodi</b><small>Modèles IA et assistants</small></span></a>
-      <a class="agent" href="#" style="--a: -30deg; --d: 1.15s; --c: #e8732f" data-a="repo"><span><img style="--duree: 7.4s" src="../assets/brand/agent-repo.png" alt=""><b>@repo</b><small>Skills, MCP et GitHub</small></span></a>
-      <a class="agent" href="#" style="--a: 30deg; --d: 1.3s; --c: #2f8fd8" data-a="pyxo"><span><img style="--duree: 8.1s" src="../assets/brand/agent-pyxo.png" alt=""><b>@pyxo</b><small>Outils de développement</small></span></a>
-      <a class="agent" href="#" style="--a: 90deg; --d: 1.45s; --c: #9a5cf0" data-a="mova"><span><img style="--duree: 6.8s" src="../assets/brand/agent-mova.png" alt=""><b>@mova</b><small>Design et motion</small></span></a>
-      <a class="agent" href="#" style="--a: 150deg; --d: 1.6s; --c: #d99a12" data-a="pulse"><span><img style="--duree: 7.9s" src="../assets/brand/agent-pulse.png" alt=""><b>@pulse</b><small>Infrastructures et incidents</small></span></a>
-      <a class="agent" href="#" style="--a: 210deg; --d: 1.75s; --c: #12a6a0" data-a="radar"><span><img style="--duree: 8.6s" src="../assets/brand/agent-radar.png" alt=""><b>@radar</b><small>Grandes entreprises tech</small></span></a>
-    </nav>
-  </div>
+<ellipse cx="72" cy="55" rx="2.2" ry="3.2" fill="#efe8ff"/></svg></template>
 
-  <div class="texte">
-    <div class="actions">
-      <button class="bouton principal" type="button">Continuer avec un e-mail</button>
-      <a class="bouton secondaire" href="index.html">Plus tard</a>
-    </div>
-  </div>
-</main>
 <script>
-  // Ciel : 70 points placés au hasard, chacun avec son propre rythme.
-  const ciel = document.getElementById('ciel');
-  for (let i = 0; i < 70; i++) {
-    const p = document.createElement('i');
-    p.style.left = Math.random() * 100 + '%';
-    p.style.top = Math.random() * 100 + '%';
-    p.style.animationDelay = (Math.random() * 3.6).toFixed(2) + 's';
-    ciel.append(p);
+(() => {
+  const AGENTS = [
+    { id: 'nodi', nom: 'Nodi', role: 'Modèles IA et assistants', c: '#1fa77a' },
+    { id: 'repo', nom: 'Repo', role: 'Skills, MCP et GitHub', c: '#e8732f' },
+    { id: 'pyxo', nom: 'Pyxo', role: 'Outils de développement', c: '#2f8fd8' },
+    { id: 'mova', nom: 'Mova', role: 'Design et motion', c: '#9a5cf0' },
+    { id: 'pulse', nom: 'Pulse', role: 'Infrastructures et incidents', c: '#d99a12' },
+    { id: 'radar', nom: 'Radar', role: 'Big tech et IA', c: '#12a6a0' },
+  ];
+  const calme = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const bac = document.getElementById('bac');
+  const suivis = new Set();
+
+  // Corps : la mascotte puis les six agents. Rayon relatif à la largeur du bac.
+  const corps = [];
+  const ajouter = (o) => {
+    const el = document.createElement('button');
+    el.type = 'button';
+    el.className = 'corps';
+    if (o.agent) {
+      el.style.setProperty('--c', o.agent.c);
+      el.setAttribute('aria-pressed', 'false');
+      el.setAttribute('aria-label', `Suivre ${o.agent.nom}, ${o.agent.role}`);
+      el.innerHTML = `<img src="../assets/brand/agent-${o.agent.id}.png" alt="" draggable="false"><span class="coche" aria-hidden="true">✓</span>`;
+    } else {
+      el.setAttribute('aria-label', 'Mascotte de Curation AI');
+      el.tabIndex = -1;
+      el.append(document.getElementById('mascotte').content.cloneNode(true));
+    }
+    bac.append(el);
+    let tag = null;
+    if (o.agent) {
+      tag = document.createElement('span');
+      tag.className = 'etiquette';
+      tag.textContent = '@' + o.agent.id;
+      tag.setAttribute('aria-hidden', 'true');
+      bac.append(tag);
+    }
+    corps.push({ ...o, el, tag, x: 0, y: 0, vx: 0, vy: 0, a: (Math.random() - .5) * 40, va: 0, r: 0, ecrase: 0 });
+  };
+  ajouter({ echelle: 0.25, agent: null });
+  AGENTS.forEach((agent, i) => ajouter({ echelle: [0.215, 0.2, 0.21, 0.195, 0.205, 0.19][i], agent }));
+
+  let L = 0, H = 0;
+  const mesurer = () => {
+    const r = bac.getBoundingClientRect();
+    L = r.width; H = r.height;
+    for (const b of corps) { b.r = L * b.echelle / 2 + 6; b.el.style.width = b.el.style.height = (b.r - 6) * 2 + 'px'; }
+  };
+  mesurer();
+  new ResizeObserver(mesurer).observe(bac);
+
+  // Position de départ : au-dessus du bac, en file, pour une chute en cascade.
+  corps.forEach((b, i) => { b.x = L * (0.2 + 0.6 * ((i * 0.37) % 1)); b.y = -b.r * (2 + i * 2.2); b.vx = (Math.random() - .5) * 60; });
+
+  const dessiner = () => {
+    for (const b of corps) {
+      const s = 1 + b.ecrase * 0.18;
+      b.el.style.transform = `translate(${b.x - b.r + 6}px, ${b.y - b.r + 6}px) rotate(${b.a}deg) scale(${s}, ${2 - s})`;
+      if (b.tag) b.tag.style.transform = `translate(${b.x}px, ${b.y + b.r + 4}px) translateX(-50%)`;
+    }
+  };
+
+  if (calme) {
+    // Moins d'animations : agents posés en grappe, rien ne bouge.
+    const places = [[.5, .5], [.27, .3], [.73, .3], [.2, .62], [.8, .62], [.37, .82], [.65, .82]];
+    corps.forEach((b, i) => { b.x = L * places[i][0]; b.y = H * places[i][1]; b.a = 0; });
+    dessiner();
+  } else {
+    // Phases en boucle, comme une feuille d'accueil : chute et tassement (gravité), puis apesanteur où les corps
+    // dérivent et tournent ; le cycle recommence toutes les 14 s.
+    const CYCLE = 14, TASSEMENT = 3.2;
+    const pointeur = { x: -1e4, y: -1e4, actif: false };
+    let tenu = null, depart = performance.now(), avant = depart;
+
+    const pas = (t, dt) => {
+      const phase = ((t - depart) / 1000) % CYCLE;
+      const gravite = phase < TASSEMENT ? 1400 : 0;
+      if (phase >= TASSEMENT && phase - dt < TASSEMENT) {
+        // Entrée en apesanteur : chaque corps reçoit une poussée douce, vers le haut et de côté.
+        for (const b of corps) { b.vx += (Math.random() - .5) * 220; b.vy -= 120 + Math.random() * 180; b.va += (Math.random() - .5) * 160; }
+      }
+      for (const b of corps) {
+        if (b === tenu) continue;
+        b.vy += gravite * dt;
+        if (!gravite) {
+          // Dérive : un léger souffle qui change avec le temps, pour que rien ne s'arrête tout à fait.
+          b.vx += Math.sin(t / 1300 + b.r) * 14 * dt;
+          b.vy += Math.cos(t / 1700 + b.r * 2) * 14 * dt;
+        }
+        // Le pointeur repousse les corps proches.
+        if (pointeur.actif) {
+          const dx = b.x - pointeur.x, dy = b.y - pointeur.y, d = Math.hypot(dx, dy), zone = b.r + 70;
+          if (d < zone && d > 0.1) { const f = (1 - d / zone) * 2600 * dt; b.vx += dx / d * f; b.vy += dy / d * f; }
+        }
+        const frein = gravite ? 0.995 : 0.988;
+        b.vx *= frein; b.vy *= frein; b.va *= 0.985;
+        b.x += b.vx * dt; b.y += b.vy * dt; b.a += b.va * dt;
+        b.ecrase *= 0.86;
+      }
+      // Bords : rebonds amortis (le haut est ouvert pendant la chute).
+      for (const b of corps) {
+        if (b.x < b.r) { b.x = b.r; b.vx = Math.abs(b.vx) * 0.6; b.va += b.vy * 0.1; }
+        if (b.x > L - b.r) { b.x = L - b.r; b.vx = -Math.abs(b.vx) * 0.6; b.va -= b.vy * 0.1; }
+        if (b.y > H - b.r) { if (b.vy > 160) b.ecrase = Math.min(1, b.vy / 900); b.y = H - b.r; b.vy = -Math.abs(b.vy) * (gravite ? 0.35 : 0.7); b.va += b.vx * 0.15; }
+        if (!gravite && b.y < b.r + 50) { b.y = b.r + 50; b.vy = Math.abs(b.vy) * 0.6; }
+      }
+      // Collisions entre corps : séparation, échange d'impulsion, rotation transmise par le frottement.
+      for (let i = 0; i < corps.length; i++) for (let j = i + 1; j < corps.length; j++) {
+        const p = corps[i], q = corps[j];
+        const dx = q.x - p.x, dy = q.y - p.y, d = Math.hypot(dx, dy), min = p.r + q.r;
+        if (d >= min || d === 0) continue;
+        const nx = dx / d, ny = dy / d, chev = min - d;
+        const mp = p === tenu ? 0 : 1 / (p.r * p.r), mq = q === tenu ? 0 : 1 / (q.r * q.r), m = mp + mq || 1;
+        p.x -= nx * chev * mp / m; p.y -= ny * chev * mp / m; q.x += nx * chev * mq / m; q.y += ny * chev * mq / m;
+        const vn = (q.vx - p.vx) * nx + (q.vy - p.vy) * ny;
+        if (vn < 0) {
+          const j2 = -(1.55) * vn / m;
+          p.vx -= j2 * mp * nx; p.vy -= j2 * mp * ny; q.vx += j2 * mq * nx; q.vy += j2 * mq * ny;
+          const vt = (q.vx - p.vx) * -ny + (q.vy - p.vy) * nx;
+          p.va += vt * 0.12; q.va -= vt * 0.12;
+          const choc = Math.min(1, -vn / 700);
+          if (choc > 0.15) { p.ecrase = Math.max(p.ecrase, choc); q.ecrase = Math.max(q.ecrase, choc); }
+        }
+      }
+    };
+
+    const boucle = (t) => {
+      const dt = Math.min(0.033, (t - avant) / 1000);
+      avant = t;
+      // Deux sous-pas : collisions plus stables quand les corps se tassent.
+      pas(t, dt / 2); pas(t, dt / 2);
+      dessiner();
+      requestAnimationFrame(boucle);
+    };
+    requestAnimationFrame(boucle);
+
+    // Saisir et lancer un corps ; un appui sans déplacement suit l'agent.
+    let prise = null;
+    const local = (e) => { const r = bac.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; };
+    bac.addEventListener('pointermove', (e) => {
+      const p = local(e);
+      if (tenu && prise) {
+        const now = performance.now(), dt = Math.max(0.008, (now - prise.t) / 1000);
+        tenu.vx = (p.x - prise.x) / dt; tenu.vy = (p.y - prise.y) / dt;
+        tenu.x = p.x - prise.ox; tenu.y = p.y - prise.oy;
+        if (Math.hypot(p.x - prise.x0, p.y - prise.y0) > 6) prise.bouge = true;
+        prise.x = p.x; prise.y = p.y; prise.t = now;
+        pointeur.actif = false;
+      } else { pointeur.x = p.x; pointeur.y = p.y; pointeur.actif = true; }
+    });
+    bac.addEventListener('pointerleave', () => { pointeur.actif = false; });
+    for (const b of corps) {
+      b.el.addEventListener('pointerdown', (e) => {
+        const p = local(e);
+        tenu = b; prise = { x: p.x, y: p.y, x0: p.x, y0: p.y, ox: p.x - b.x, oy: p.y - b.y, t: performance.now(), bouge: false };
+        b.el.setPointerCapture(e.pointerId);
+      });
+      b.el.addEventListener('pointerup', () => {
+        if (tenu === b) { b.vx = Math.max(-1600, Math.min(1600, b.vx)); b.vy = Math.max(-1600, Math.min(1600, b.vy)); b.va += b.vx * 0.2; }
+        if (prise && prise.bouge) b.el.dataset.lance = '1';
+        tenu = null; prise = null;
+      });
+    }
   }
-  document.getElementById('passer').addEventListener('click', () => document.getElementById('scene').classList.add('fini'));
-  // Les liens des agents ne mènent nulle part dans la maquette.
-  document.querySelectorAll('.agent').forEach((a) => a.addEventListener('click', (e) => e.preventDefault()));
+
+  // Suivre un agent (clic, Entrée ou Espace) ; un lancer n'est pas un clic.
+  for (const b of corps) {
+    if (!b.agent) continue;
+    b.el.addEventListener('click', () => {
+      if (b.el.dataset.lance) { delete b.el.dataset.lance; return; }
+      const oui = !suivis.has(b.agent.id);
+      oui ? suivis.add(b.agent.id) : suivis.delete(b.agent.id);
+      b.el.setAttribute('aria-pressed', String(oui));
+      if (!calme) { b.vy -= 380; b.va += (Math.random() - .5) * 300; b.ecrase = 0.6; }
+      const noms = AGENTS.filter((a) => suivis.has(a.id)).map((a) => a.nom);
+      const compteur = document.getElementById('compteur');
+      compteur.hidden = noms.length === 0;
+      compteur.textContent = String(noms.length);
+      document.getElementById('suivis').innerHTML = noms.length
+        ? `Tu suis <strong>${noms.join(', ')}</strong>. Ton fil se règle sur ${noms.length > 1 ? 'eux' : 'lui'}.`
+        : 'Touche un agent pour le suivre.';
+    });
+  }
+  // Maquette : aucun compte n'est créé.
+  document.getElementById('principal').addEventListener('click', () => {
+    document.getElementById('suivis').textContent = 'Maquette : aucun compte n’est créé, rien n’est enregistré.';
+  });
+
+  // Curseur flèche : position et angle écrits dans des variables CSS, la flèche grossit sur ce qui se clique.
+  const fleche = document.getElementById('curseur');
+  if (!calme && matchMedia('(pointer: fine)').matches) {
+    document.documentElement.classList.add('curseur-actif');
+    let lx = 0, ly = 0, a = false;
+    addEventListener('pointermove', (e) => {
+      if (e.pointerType !== 'mouse') return;
+      const s = fleche.style;
+      if (a) { const dx = e.clientX - lx, dy = e.clientY - ly; if (Math.hypot(dx, dy) > 0.5) s.setProperty('--angle', Math.atan2(dy, dx).toFixed(3) + 'rad'); }
+      s.setProperty('--x', e.clientX + 'px'); s.setProperty('--y', e.clientY + 'px');
+      s.setProperty('--echelle', e.target.closest('a, button') ? '1.35' : '1');
+      fleche.classList.add('visible');
+      lx = e.clientX; ly = e.clientY; a = true;
+    });
+    document.addEventListener('pointerleave', () => fleche.classList.remove('visible'));
+  }
+})();
 </script>
 </body>
 </html>

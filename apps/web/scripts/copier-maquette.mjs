@@ -30,4 +30,9 @@ for (const nom of readdirSync(join(racine, 'maquette'))) {
 for (const nom of readdirSync(join(racine, 'assets', 'brand'))) {
   if (/\.(png|webp|svg|jpg)$/.test(nom)) cpSync(join(racine, 'assets', 'brand', nom), join(marque, nom));
 }
+// Polices de la maquette : lues dans node_modules en local, servies depuis maquette/polices/ en ligne.
+const polices = join(cible, 'polices');
+mkdirSync(polices, { recursive: true });
+cpSync(join(racine, 'node_modules/@fontsource-variable/recursive/files/recursive-latin-full-normal.woff2'), join(polices, 'recursive.woff2'));
+cpSync(join(racine, 'node_modules/@fontsource-variable/atkinson-hyperlegible-next/files/atkinson-hyperlegible-next-latin-wght-normal.woff2'), join(polices, 'atkinson.woff2'));
 console.log(`Maquette copiée dans ${cible}`);
