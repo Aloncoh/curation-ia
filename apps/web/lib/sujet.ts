@@ -4,7 +4,7 @@
 // retrait, comme OpenAI, garde un monogramme), un dépôt GitHub sans marque connue donne son monogramme, jamais l'avatar
 // de son propriétaire, souvent un visage. Le logo
 // identifie le sujet ; il n'affirme aucun partenariat.
-import { siAmd, siAnthropic, siApple, siBlender, siBroadcom, siCloudflare, siCursor, siDeepseek, siElevenlabs, siFigma, siGithub, siGoogle, siHuggingface, siIntel, siLg, siMeta, siMistralai, siN8n, siNotion, siNvidia, siQualcomm, siSamsung, siShopify, siSuno, siTesla, siVercel, siYoutube, type SimpleIcon } from 'simple-icons';
+import { siAmd, siAnthropic, siApple, siBlender, siBroadcom, siClaude, siCloudflare, siCursor, siDeepseek, siElevenlabs, siFigma, siGithub, siGoogle, siHuggingface, siIntel, siLg, siMeta, siMistralai, siN8n, siNotion, siNvidia, siQualcomm, siSamsung, siShopify, siSuno, siTesla, siVercel, siYoutube, type SimpleIcon } from 'simple-icons';
 import type { Publication } from '@curation/contrat';
 
 export interface Sujet {
@@ -13,7 +13,7 @@ export interface Sujet {
   /** Ligne secondaire : le propriétaire d'un dépôt, l'éditeur d'un produit. */
   detail: string | null;
   /** Logo vectoriel (24 × 24), ou image (avatar GitHub), ou monogramme. */
-  logo: { type: 'svg'; chemin: string } | { type: 'image'; src: string } | { type: 'monogramme'; lettres: string };
+  logo: { type: 'svg'; chemin: string } | { type: 'image'; src: string } | { type: 'monogramme'; lettres: string } | { type: 'tuiles'; formes: { d: string; couleur: string }[] };
   /** Couleur de la marque, base de la palette de la couverture. */
   couleur: string;
   /** Domaine du sujet : l'illustration en filigrane et l'étiquette de la couverture. */
@@ -38,11 +38,12 @@ function domaineDe(h: string, nom: string): Domaine {
   return DOMAINE_PAR_HOTE[h] ?? Object.entries(DOMAINE_PAR_HOTE).find(([cle]) => h.endsWith(`.${cle}`))?.[1] ?? 'code';
 }
 
-interface Editeur { nom: string; icone: SimpleIcon | null; couleur?: string }
+/** `image` : logo hors bibliothèque, copié dans public/logos depuis le compte officiel de la marque. */
+interface Editeur { nom: string; icone: SimpleIcon | null; couleur?: string; image?: string }
 
 const EDITEURS: Record<string, Editeur> = {
   'anthropic.com': { nom: 'Anthropic', icone: siAnthropic, couleur: '#d97757' },
-  'claude.com': { nom: 'Claude', icone: siAnthropic, couleur: '#d97757' },
+  'claude.com': { nom: 'Claude', icone: siClaude, couleur: '#d97757' },
   'github.blog': { nom: 'GitHub', icone: siGithub, couleur: '#6e40c9' },
   'figma.com': { nom: 'Figma', icone: siFigma },
   'cursor.com': { nom: 'Cursor', icone: siCursor, couleur: '#3b4cca' },
@@ -78,7 +79,8 @@ const EDITEURS: Record<string, Editeur> = {
   'lg.com': { nom: 'LG', icone: siLg },
   'oracle.com': { nom: 'Oracle', icone: null, couleur: '#c74634' },
   'tsmc.com': { nom: 'TSMC', icone: null, couleur: '#c8102e' },
-  'spline.design': { nom: 'Spline', icone: null, couleur: '#7a5cff' },
+  // Avatar de l'organisation GitHub officielle splinetool (relevé le 2026-11-05) ; Vapi n'en a pas : monogramme.
+  'spline.design': { nom: 'Spline', icone: null, couleur: '#7a5cff', image: '/logos/spline.webp' },
   'vapi.ai': { nom: 'Vapi', icone: null, couleur: '#14b8a6' },
   'midjourney.com': { nom: 'Midjourney', icone: null, couleur: '#4f6bed' },
 };
@@ -101,7 +103,20 @@ export function couleurDe(nom: string): string {
 
 const monogramme = (nom: string) => nom.replace(/[^\p{L}\p{N} ]/gu, ' ').trim().split(/\s+/).slice(0, 2).map((m) => m[0]!.toUpperCase()).join('') || '?';
 
+/** Logo de Microsoft, absent de la bibliothèque : ses quatre carrés, couleurs et proportions publiques. */
+const MICROSOFT: Sujet['logo'] = {
+  type: 'tuiles',
+  formes: [
+    { d: 'M1 1h10.5v10.5H1z', couleur: '#f25022' },
+    { d: 'M12.5 1H23v10.5H12.5z', couleur: '#7fba00' },
+    { d: 'M1 12.5h10.5V23H1z', couleur: '#00a4ef' },
+    { d: 'M12.5 12.5H23V23H12.5z', couleur: '#ffb900' },
+  ],
+};
+
 function depuisEditeur(e: Editeur, detail: string | null): Omit<Sujet, 'domaine'> {
+  if (e.nom === 'Microsoft') return { nom: e.nom, detail, couleur: '#0078d4', logo: MICROSOFT };
+  if (e.image) return { nom: e.nom, detail, couleur: e.couleur ?? couleurDe(e.nom), logo: { type: 'image', src: e.image } };
   const couleur = e.couleur ?? (e.icone ? `#${e.icone.hex}` : couleurDe(e.nom));
   return { nom: e.nom, detail, couleur, logo: e.icone ? { type: 'svg', chemin: e.icone.path } : { type: 'monogramme', lettres: monogramme(e.nom) } };
 }
@@ -129,8 +144,8 @@ export function sujetDe(p: Pick<Publication, 'bouton' | 'sources' | 'nature'>): 
     const nomDepot = (type === 'tree' || type === 'blob') && chemin.length ? chemin.at(-1)! : depot ?? proprietaire;
     if (connu) return { ...depuisEditeur(connu, `${connu.nom} · GitHub`), nom: nomDepot, domaine: domaineDe(h, nomDepot) };
     // Pas d'avatar du propriétaire : c'est souvent un visage (décision de l'utilisateur du 2026-11-05, « enlève les
-    // visages »). Le monogramme du dépôt, aux couleurs du propriétaire, nomme le sujet.
-    return { nom: nomDepot, detail: `${proprietaire} · GitHub`, couleur: couleurDe(proprietaire), logo: { type: 'monogramme', lettres: monogramme(nomDepot) }, domaine: domaineDe(h, nomDepot) };
+    // visages »). Le vrai logo de la plateforme qui l'héberge (demande du 2026-11-05) ; le nom du dépôt nomme le sujet.
+    return { nom: nomDepot, detail: `${proprietaire} · GitHub`, couleur: '#24292f', logo: { type: 'svg', chemin: siGithub.path }, domaine: domaineDe(h, nomDepot) };
   }
   const editeur = EDITEURS[h] ?? Object.entries(EDITEURS).find(([cle]) => h.endsWith(`.${cle}`))?.[1];
   const domaine = domaineDe(h, '');

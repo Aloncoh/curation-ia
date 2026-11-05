@@ -48,8 +48,46 @@ function Fond({ graine }: { graine: number }) {
   );
 }
 
+/** Pointe d'une flèche en `(x, y)`, orientée depuis le point de contrôle `(cx, cy)` ; renvoie aussi la base du trait. */
+function pointe(cx: number, cy: number, x: number, y: number) {
+  const l = Math.hypot(x - cx, y - cy);
+  const [ux, uy] = [(x - cx) / l, (y - cy) / l];
+  const [bx, by] = [x - ux * 12, y - uy * 12];
+  const f = (n: number) => n.toFixed(1);
+  return { base: `${f(bx)} ${f(by)}`, tete: `M${f(x)} ${f(y)}L${f(bx - uy * 8.5)} ${f(by + ux * 8.5)}L${f(bx + uy * 8.5)} ${f(by - ux * 8.5)}Z` };
+}
+
+/** Flèches façon miniature YouTube (demande de l'utilisateur du 2026-11-05), qui désignent le logo du sujet ; la variante
+ *  et la couleur dépendent de la graine, pour que deux posts voisins ne se ressemblent pas. Repère : 160 × 90, logo à
+ *  x 11–59, y 21–69. */
+function Fleches({ graine }: { graine: number }) {
+  const variante = graine % 3;
+  const couleur = graine % 2 ? '#ffd20a' : '#ff2d2d';
+  const traits: { d: string; tete: string }[] = [];
+  const fleche = (x0: number, y0: number, cx: number, cy: number, x: number, y: number) => {
+    const p = pointe(cx, cy, x, y);
+    traits.push({ d: `M${x0} ${y0}Q${cx} ${cy} ${p.base}`, tete: p.tete });
+  };
+  if (variante === 0) fleche(98, 9, 80, 3, 61, 19);
+  else fleche(102, 85, 80, 89, 61, 71);
+  // Le cercle passe autour de la tuile du logo (coins arrondis compris), sans toucher le titre (x ≥ 69).
+  const cercle = variante === 2 ? 'M35 14C54 13 67 27 67 45C67 63 53 76 35 76C17 76 3 63 3 45C3 29 14 16 31 14.5' : null;
+  return (
+    <svg className="couv-fleches" viewBox="0 0 160 90" aria-hidden="true" focusable="false">
+      {[{ trait: '#fff', large: 9 }, { trait: couleur, large: 5 }].map(({ trait, large }) => (
+        <g key={trait} stroke={trait} strokeWidth={large} strokeLinecap="round" strokeLinejoin="round">
+          {cercle && <path d={cercle} fill="none" />}
+          {traits.map((t, i) => <path key={i} d={t.d} fill="none" />)}
+          {traits.map((t, i) => <path key={`t${i}`} d={t.tete} fill={trait} />)}
+        </g>
+      ))}
+    </svg>
+  );
+}
+
 function Logo({ sujet }: { sujet: Sujet }) {
   const l = sujet.logo;
+  if (l.type === 'tuiles') return <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">{l.formes.map((f) => <path key={f.d} d={f.d} fill={f.couleur} />)}</svg>;
   if (l.type === 'svg') return <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d={l.chemin} fill={sujet.couleur} /></svg>;
   if (l.type === 'image') return <img src={l.src} alt="" width={160} height={160} loading="lazy" />;
   return <span className="couv-monogramme" style={{ color: sujet.couleur }}>{l.lettres}</span>;
@@ -70,6 +108,7 @@ export function Couverture({ sujet, graine, agent, format, etiquette, domaine, f
       )}
       {format === 'grand' && <span className="couv-domaine">{domaine}</span>}
       <span className="couv-logo"><Logo sujet={sujet} /></span>
+      {format === 'grand' && <Fleches graine={graine} />}
       {format === 'grand' && (
         <span className={`couv-titre${sujet.nom.length > 13 ? ' long' : ''}`}>
           <strong>{sujet.nom}</strong>

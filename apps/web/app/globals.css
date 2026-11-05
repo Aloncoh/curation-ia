@@ -479,6 +479,8 @@ a.sel-nom:hover { text-decoration: underline; }
   border-radius: 24%; box-shadow: 0 18px 40px -14px rgba(0, 0, 0, .55);
 }
 .couv-logo svg { width: 58%; height: 58%; }
+/* Flèches de montage, par-dessus le fond et sous le logo et le titre. */
+.couv-fleches { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; filter: drop-shadow(0 3px 4px rgba(0, 0, 0, .45)); }
 .couv-logo img { width: 100%; height: 100%; object-fit: cover; }
 .couv-monogramme { font: 800 clamp(1.6rem, 7vw, 3.4rem)/1 var(--display); letter-spacing: -.02em; }
 .couv-titre { position: absolute; inset-inline-start: 43%; inset-inline-end: 6%; inset-block-start: 50%; transform: translateY(-50%); display: grid; gap: 4px; text-shadow: 0 2px 14px rgba(0, 0, 0, .35); }
