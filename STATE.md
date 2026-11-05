@@ -216,7 +216,12 @@ M3 construit le 2026-11-03 et validé par l'utilisateur (« je valide tout »), 
 
 ## Prochaine action
 
-_Mise à jour le 2026-11-05 : la mise en ligne (P5) est faite ; l'ancienne prochaine action est dépassée._ P6, bloc 3 proposé à l'utilisateur : registre MCP officiel (registry.modelcontextprotocol.io, 200 le 2026-11-05) et Hugging Face (API publique des modèles et Spaces en tendance, 200 le même jour) comme portes d'entrée vers la chaîne des découvertes, sans appel payant à la collecte. En attente de son accord avant implémentation. La chaîne en ligne tourne seule (élagage, relance, plafonds 0,10 $ par cycle et 0,40 $ par jour, total 4 $).
+**P6, bloc 3 réalisé le 2026-11-05** (accord de l'utilisateur, « Oui, bloc 3 ») :
+- **Registre officiel MCP** (`src/ressources/registre-mcp.ts`) branché sur la découverte : serveurs mis à jour pendant la fenêtre, dernière version, dépôt GitHub propre, même seuil de 100 étoiles (recherche GitHub groupée), 4 candidats au plus par passage, signés par Repo, mention « registre officiel MCP (serveur « … ») ». Essai réel : 154 serveurs récents avec dépôt, 2 au-dessus du seuil, tous deux candidats (autonomous-ai/openharness, dinglebear-ai/unraid). La chaîne les capture à son étape « decouverte » (toutes les 6 heures).
+- **Hugging Face, modèles en tendance** : nouveau type de source `huggingface_models` (`src/collect/huggingface.ts`), 20 modèles par relevé, signés par Nodi ; la popularité reste dans les métadonnées, jamais dans la capture lue par le modèle ; la page du modèle est capturée avant l'analyse. Essai réel : 20 documents, 18 actualités, 21 pages capturées sur 26 (cartes de modèle de 179 à 10 737 mots).
+- Tests : 817 passent. Applications Hugging Face (Spaces) non branchées : ce ne sont pas des dépôts GitHub, à reprendre si utile.
+
+Suite de P6 proposée : bloc 4, recherche et évaluation des deux usages (ROADMAP « P6 — ordre proposé ») ; à soumettre à l'utilisateur avant de commencer. La chaîne en ligne tourne seule (élagage, relance, plafonds 0,10 $ par cycle et 0,40 $ par jour, total 4 $).
 
 ## Repères techniques
 
