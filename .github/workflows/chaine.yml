@@ -33,6 +33,8 @@ jobs:
       # Plafonds explicites. Sans variable de dépôt pour le total et le jour, les étapes payantes sont sautées.
       CURATION_MAX_ACTUALITES: '10'
       CURATION_MAX_TRADUCTIONS: '20'
+      # CURATION_MAX_DECOUVERTES : absent tant que la rédaction des découvertes n'est pas assez fiable (essai du 2026-11-05 :
+      # 0 publiable sur 5) ; sans elle, l'étape payante « redaction_decouvertes » est sautée. La recherche reste active.
       CURATION_PLAFOND_EXECUTION_USD: '0.05'
       CURATION_PLAFOND_JOUR_USD: ${{ vars.CURATION_PLAFOND_JOUR_USD }}
       CURATION_PLAFOND_TOTAL_USD: ${{ vars.CURATION_PLAFOND_TOTAL_USD }}

@@ -3,7 +3,10 @@
 // la page. Mode `public` : seulement `publie` ; mode `apercu` (avant P5) : aussi `en_attente` planifiées.
 // Tout texte vient de la base et reste une donnée : le site l'insère comme texte, jamais comme HTML, et seuls les liens
 // https sûrs deviennent cliquables (ADR 0003).
+import { existsSync } from 'node:fs';
+import { resolve } from 'node:path';
 import type { Client } from '@libsql/client';
+import { racineDepot } from '../../config.ts';
 import type { Bloc, Bouton, Compte, Langue, Media, Publication, Sources } from '../../../packages/contrat/src/index.ts';
 import { textesDe } from '../../../packages/textes/src/index.ts';
 import { actualitesDeLaMaquette, type MaquetteActualite } from '../../maquette/actualites.ts';
@@ -212,11 +215,19 @@ function depuisActualite(a: MaquetteActualite): Omit<Publication, 'compte' | 'la
   };
 }
 
+/**
+ * Le montage existe-t-il sur ce serveur ? Un montage rendu ailleurs (un cycle GitHub Actions, P6) n'arrive pas avec le
+ * site : sans lui, la publication garde sa couverture au lieu d'une image cassée.
+ */
+function visuelPresent(src: string): boolean {
+  return existsSync(resolve(racineDepot(), 'maquette', src));
+}
+
 function depuisRessource(r: MaquetteRessource): ReturnType<typeof depuisActualite> {
   const passages = [r.accroche, r.description, r.interet, ...r.reperes].filter(Boolean).flatMap((c) => c.passages.map((texte) => ({ texte, trouve: true })));
   const url = r.bouton ? lienSur(r.bouton.url) : null;
   const type = r.bouton ? TYPE_BOUTON[r.bouton.libelle] : undefined;
-  const media: Media | null = r.visuel ? { type: 'image', src: `/${r.visuel.src}`, alt: r.visuel.alt, alt_lang: 'en', largeur: 1080, hauteur: 1350, lang: 'en', credit: null } : null;
+  const media: Media | null = r.visuel && visuelPresent(r.visuel.src) ? { type: 'image', src: `/${r.visuel.src}`, alt: r.visuel.alt, alt_lang: 'en', largeur: 1080, hauteur: 1350, lang: 'en', credit: null } : null;
   return {
     id: r.post_id,
     revision_id: r.revision_id,

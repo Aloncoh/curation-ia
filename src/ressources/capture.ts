@@ -310,12 +310,14 @@ export function creerLecteur(o: OptionsLecteur, tracer: (t: TraceRequete) => Pro
 export async function synchroniserSourcesRessources(database: Database, entrees: readonly EntreeRessource[], now: string): Promise<void> {
   const parDepot = new Map<string, string[]>();
   for (const e of entrees) parDepot.set(e.depot, [...(parDepot.get(e.depot) ?? []), e.slug]);
+  const decouvertes = new Map(entrees.filter((e) => e.decouverteAuto).map((e) => [e.depot, { slug: e.slug, nom: e.nom, decouverteVia: e.decouverteVia ?? null }]));
   await withBusyRetry(database.client, async () => {
     for (const [depot, slugs] of parDepot) {
       const valeurs = {
         kind: KIND_SOURCE,
         name: `${depot} — dépôt GitHub (ressources pour construire)`,
-        config: { depot, ressources: slugs },
+        // Une découverte automatique garde son entrée (nom, provenance) : la rédaction la reconstruit sans la liste du code.
+        config: { depot, ressources: slugs, ...(decouvertes.get(depot) ? { decouverte: decouvertes.get(depot) } : {}) },
         allowedHosts: [...HOTES_RESSOURCES],
         fetchIntervalMinutes: null,
       };

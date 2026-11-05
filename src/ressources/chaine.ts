@@ -38,6 +38,7 @@ import { etatDepot, statutSortie } from './statut.ts';
 import { composerMontageRessource, DOSSIER_VISUELS, produireVisuel, type IssueVisuel, type Rendeur } from './visuel.ts';
 
 export const ORIGINE_DEVELOPPEMENT = 'claude_code_developpement';
+export const ORIGINE_AGENT = 'agent_site';
 export const MODELE_IMPORT = 'claude-code';
 export const PROMPT_IMPORT = `ressources-${CONSIGNES_RESSOURCES}`;
 export const RAISON_IMPORT = 'import ressources, aucun appel au modèle';
@@ -74,6 +75,11 @@ export interface OptionsImport {
   transport?: Transport;
   resolve?: Resolver;
   horloge?: () => Date;
+  /**
+   * Brouillon rédigé par l'agent du site (découvertes, P6) : origine, modèle et version du prompt réels, et l'exécution
+   * payante qui l'a produit. Absent : brouillon écrit pendant le développement par Claude Code.
+   */
+  redaction?: { modele: string; prompt: string; runId: string };
 }
 
 /** Texte d'origine, affiché partout où la publication apparaît. */
@@ -192,7 +198,7 @@ async function preparer(fichier: string, o: OptionsImport, maintenant: Date, reg
       statut_sortie: statutSortie(m.created_at, depot.captureLe, reglages.seuil),
       etat_depot: etatDepot(m, depot.captureLe, reglages.inactivite),
       compte: entree.compte,
-      origine: ORIGINE_DEVELOPPEMENT,
+      origine: o.redaction ? ORIGINE_AGENT : ORIGINE_DEVELOPPEMENT,
       niveau_preuve: NIVEAU_PREUVE_V1,
       mention: MENTION_IA,
       captures: captures.map((c) => ({ document: c.document, snapshot_id: c.snapshotId, capture_le: c.captureLe })),
@@ -267,7 +273,7 @@ async function ecrire(
   c: Chaine | null,
   statut: 'en_attente' | 'a_verifier' | 'rejete',
   motifs: ControleStocke[],
-  o: { runId: string; now: string; aujourdhui: string; reglages: ReglagesPlanning },
+  o: { runId: string; now: string; aujourdhui: string; reglages: ReglagesPlanning; redaction?: OptionsImport['redaction'] },
 ): Promise<{ postId: number | null; placement: Placement | null }> {
   const entree = p.entree!;
   const statutBrouillon = statut === 'en_attente' ? 'controle_automatique' : statut;
@@ -280,7 +286,7 @@ async function ecrire(
             model = excluded.model, prompt_version = excluded.prompt_version, content = excluded.content, checks = excluded.checks,
             origine = excluded.origine, created_at = excluded.created_at
           returning id`,
-    args: [p.newsItemId, o.runId, statutBrouillon, entree.compte, rejet, p.snapshotPrincipal, MODELE_IMPORT, PROMPT_IMPORT, p.contenu === null ? null : JSON.stringify(p.contenu), JSON.stringify(motifs), ORIGINE_DEVELOPPEMENT, o.now],
+    args: [p.newsItemId, o.runId, statutBrouillon, entree.compte, rejet, p.snapshotPrincipal, o.redaction?.modele ?? MODELE_IMPORT, o.redaction?.prompt ?? PROMPT_IMPORT, p.contenu === null ? null : JSON.stringify(p.contenu), JSON.stringify(motifs), o.redaction ? ORIGINE_AGENT : ORIGINE_DEVELOPPEMENT, o.now],
   });
   const draftId = Number(draft.rows[0]!.id);
   // Sans contenu valide (schéma refusé), seul le brouillon garde la trace du refus ; une publication antérieure est retirée du planning et de l'index.
@@ -438,7 +444,10 @@ export async function importerBrouillons(o: OptionsImport): Promise<BilanFichier
 
   const aEcrire = prepares.filter((p) => !p.inchange && p.newsItemId !== null && p.entree !== undefined);
   let runId: string | null = null;
-  if (aEcrire.length > 0) {
+  if (aEcrire.length > 0 && o.redaction) {
+    await synchroniserComptes(client, now);
+    runId = o.redaction.runId;
+  } else if (aEcrire.length > 0) {
     await synchroniserComptes(client, now);
     runId = randomUUID();
     await withBusyRetry(client, () =>
@@ -477,7 +486,7 @@ export async function importerBrouillons(o: OptionsImport): Promise<BilanFichier
     const c = !bloque && montage ? await poursuivre(p, montage, rendus, o) : null;
     const motifs = [...p.controles, ...(c?.motifs ?? [])];
     const statut = bloque ? 'rejete' : motifs.length > 0 ? 'a_verifier' : 'en_attente';
-    const r = await transaction(client, (tx) => ecrire(tx, p, c, statut, motifs, { runId: runId!, now, aujourdhui, reglages: planning }));
+    const r = await transaction(client, (tx) => ecrire(tx, p, c, statut, motifs, { runId: runId!, now, aujourdhui, reglages: planning, ...(o.redaction ? { redaction: o.redaction } : {}) }));
     bilan.statut = p.contenu === null ? null : statut;
     bilan.postId = r.postId;
     bilan.motifs = motifs;

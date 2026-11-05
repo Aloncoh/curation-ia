@@ -12,8 +12,17 @@ import { safeGet, type Resolver, type Transport } from '../collect/safe-fetch.ts
 import { DELAI_MS, TAILLE_MAX } from './capture.ts';
 import type { EntreeRessource } from './liste.ts';
 
-/** Sujets cherchés, un par requête : skills, MCP et outils d'agents (rôle de Repo). Liste versionnée, à élargir. */
-export const SUJETS_DECOUVERTE = ['claude-skills', 'agent-skills', 'mcp-server', 'model-context-protocol', 'claude-code', 'ai-agents'] as const;
+/**
+ * Sujets cherchés, un par requête. Élargis le 2026-11-05 à la demande de l'utilisateur (« trouve tous les autres sujets,
+ * pas seulement design et motion : skills, agents, IA… ») : skills, MCP, agents, modèles et outils IA, code assisté,
+ * automatisation, RAG, voix, image et vidéo générées, design et motion. Liste versionnée, à élargir.
+ */
+export const SUJETS_DECOUVERTE = [
+  'claude-skills', 'agent-skills', 'mcp-server', 'model-context-protocol', 'claude-code', 'ai-agents', 'llm', 'generative-ai',
+  'ai-coding', 'ai-tools', 'rag', 'workflow-automation', 'voice-ai', 'text-to-image', 'text-to-video', 'design-systems', 'motion-design',
+] as const;
+/** Plafond de la recherche sans jeton : 10 requêtes par minute ; une pause entre deux requêtes le respecte. */
+export const PAUSE_RECHERCHE_MS = 6_500;
 export { VERSION_DECOUVERTE } from './capture.ts';
 /** Fenêtre de création par défaut, et nombre maximal de candidats par passage (plafond de l'API sans jeton : 60 par heure). */
 export const JOURS_DEFAUT = 30;
@@ -83,12 +92,15 @@ export function trierCandidats(
   return { candidats: candidats.slice(0, o.max), ecartes };
 }
 
+/** Identifiant stable d'une découverte, tiré de `propriétaire/dépôt`. */
+export const slugDecouverte = (depot: string): string =>
+  `gh-${depot.replace('/', '-')}`.toLowerCase().replace(/[^a-z0-9-]+/g, '-').replace(/-+/g, '-').replace(/-$/, '');
+
 /** Entrée de la chaîne des ressources pour un candidat : README comme document principal, signée par Repo. */
 export function versEntree(c: Candidat): EntreeRessource {
-  const [proprietaire, nom] = c.depot.full_name.split('/') as [string, string];
-  const slug = `gh-${proprietaire}-${nom}`.toLowerCase().replace(/[^a-z0-9-]+/g, '-').replace(/-+/g, '-').replace(/-$/, '');
+  const nom = c.depot.full_name.split('/')[1]!;
   return {
-    slug,
+    slug: slugDecouverte(c.depot.full_name),
     nom,
     depot: c.depot.full_name,
     chemins: ['README.md'],
@@ -105,6 +117,8 @@ export interface OptionsRecherche {
   sujets?: readonly string[];
   transport?: Transport;
   resolve?: Resolver;
+  /** Tests : pause sans attente réelle. */
+  attendre?: (ms: number) => Promise<void>;
 }
 
 /** Une requête par sujet, à la suite (plafond de la recherche sans jeton : 10 par minute). Un sujet en échec n'arrête pas les autres. */
@@ -112,7 +126,9 @@ export async function chercherDepots(o: OptionsRecherche): Promise<{ trouves: { 
   const trouves: { depot: DepotTrouve; sujet: string }[] = [];
   const erreurs: { sujet: string; message: string }[] = [];
   let illisibles = 0;
-  for (const sujet of o.sujets ?? SUJETS_DECOUVERTE) {
+  const sujets = o.sujets ?? SUJETS_DECOUVERTE;
+  for (const [i, sujet] of sujets.entries()) {
+    if (i > 0) await (o.attendre ?? ((ms: number) => new Promise((r) => setTimeout(r, ms))))(PAUSE_RECHERCHE_MS);
     try {
       const reponse = await safeGet(
         urlRecherche(sujet, o.seuil, o.depuis),

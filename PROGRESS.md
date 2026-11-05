@@ -2,6 +2,15 @@
 
 Évolution datée des jalons et des vérifications **réellement faites**. L'état courant est dans [STATE.md](STATE.md) ; les traces d'exécution détaillées sont en base.
 
+## 2026-11-05 — P6, bloc 2b : grille d1 et rédaction des découvertes (construit, pas encore en ligne)
+
+- Sujets de découverte élargis à 17 à la demande de l'utilisateur (« pas seulement design et motion : skills, agents, IA… »).
+- Agent des découvertes : grille `d1` notée par le modèle avec passages, décision du code, rédaction r2, une révision, import dans la chaîne des ressources. Étapes `decouverte` (toutes les 6 h) et `redaction_decouvertes` (payante) ajoutées au cycle. Un montage absent du serveur n'est plus servi comme image cassée : la publication garde sa couverture.
+- Essai réel en local (DeepSeek Flash, 6,7 centimes, comptés dans la base locale seulement) :
+  - grille : 8 dépôts notés, coût moyen 0,2 centime ; 2 écartés par le code avant tout appel (README en chinois) ; 2 outils pour téléviseurs retenus à tort, d'où le champ `domaine` ajouté (prompt `d1-2`) ;
+  - rédaction : causes des refus enregistrées par champ ; mots-clés trop longs corrigés (retirés par le code, consigne précisée) ; restent des citations introuvables et des noms ou chiffres absents des citations. 0 brouillon publiable sur 5 : rien n'a été publié.
+- En ligne : la rédaction payante reste coupée tant que le taux de réussite est insuffisant. Tests : voir le dernier passage de la suite.
+
 ## 2026-11-05 — P6, bloc 2a : découverte automatique de dépôts GitHub
 
 - Seuil choisi par l'utilisateur : 100 étoiles, lu dans le réglage `decouverte.seuil_etoiles` (SPEC §7.3 ter mise à jour).

@@ -14,7 +14,7 @@ beforeEach(async () => {
 });
 afterEach(() => t.cleanup());
 
-const PLAFONDS = { CURATION_MODELE: 'deepseek-flash', DEEPSEEK_API_KEY: 'cle-de-test', CURATION_MAX_ACTUALITES: '20', CURATION_MAX_TRADUCTIONS: '40', CURATION_PLAFOND_EXECUTION_USD: '0.05', CURATION_PLAFOND_TOTAL_USD: '3.99', CURATION_PLAFOND_JOUR_USD: '0.20' };
+const PLAFONDS = { CURATION_MODELE: 'deepseek-flash', DEEPSEEK_API_KEY: 'cle-de-test', CURATION_MAX_ACTUALITES: '20', CURATION_MAX_TRADUCTIONS: '40', CURATION_MAX_DECOUVERTES: '3', CURATION_PLAFOND_EXECUTION_USD: '0.05', CURATION_PLAFOND_TOTAL_USD: '3.99', CURATION_PLAFOND_JOUR_USD: '0.20' };
 
 function faux(codes: Partial<Record<Etape['nom'], number>> = {}) {
   const appels: { nom: string; env: Record<string, string> }[] = [];
@@ -22,7 +22,7 @@ function faux(codes: Partial<Record<Etape['nom'], number>> = {}) {
 }
 
 describe('cycle', () => {
-  it('enchaîne les sept étapes dans l\'ordre et enregistre son bilan', async () => {
+  it('enchaîne les neuf étapes dans l\'ordre et enregistre son bilan', async () => {
     const f = faux({ collecte: 1 });
     const bilan = await lancerCycle({ database: t.database, executer: f.executer, env: PLAFONDS, confirme: true, maintenant: () => '2026-11-03T09:02:00.000Z' });
     expect(f.appels.map((a) => a.nom)).toEqual(ETAPES.map((e) => e.nom));
@@ -43,7 +43,7 @@ describe('cycle', () => {
   it('saute les étapes payantes sans modèle, clé ou plafonds', async () => {
     const f = faux();
     const bilan = await lancerCycle({ database: t.database, executer: f.executer, env: { CURATION_MODELE: 'deepseek-flash' }, confirme: true });
-    expect(f.appels.map((a) => a.nom)).toEqual(['collecte', 'approfondissement', 'controles', 'planification', 'publication']);
+    expect(f.appels.map((a) => a.nom)).toEqual(['collecte', 'approfondissement', 'controles', 'planification', 'decouverte', 'publication']);
     expect(bilan.etapes.find((e) => e.nom === 'brouillons')!.motif).toContain('DEEPSEEK_API_KEY');
   });
 

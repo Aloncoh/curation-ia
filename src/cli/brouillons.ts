@@ -2,25 +2,13 @@
 // Une exécution = un lancement de cette commande. Aucune valeur par défaut : les plafonds sont décidés par l'utilisateur.
 // runCommand charge .env.local avant ces contrôles, vérifie le schéma de la base et masque les secrets dans les erreurs.
 // Modèle retenu par l'utilisateur le 2026-11-01 : DeepSeek V4.1 Flash (ADR 0009) ; un modèle Claude reste accepté.
-import { estReprenable, estReprenableDeepSeek, modeleAnthropic, modeleDeepSeek, type Modele } from '../analysis/modele.ts';
+import { fournisseur, usdEnv } from '../analysis/fournisseur.ts';
 import { genererBrouillons } from '../analysis/pipeline.ts';
 import { TARIFS } from '../analysis/tarifs.ts';
 import { AGE_MAX_JOURS } from '../selection/consignes.ts';
 import { runCommand } from './shared.ts';
 
-const usd = (nom: string) => {
-  const v = Number(process.env[nom]);
-  if (!process.env[nom] || !Number.isFinite(v) || v <= 0) throw new Error(`${nom} manquant ou invalide : plafond en dollars requis.`);
-  return Math.floor(v * 1_000_000);
-};
-
-/** Fournisseur déduit du nom du modèle : chacun a sa clé et sa règle de reprise. */
-function fournisseur(nomModele: string): { cle: string; client: (cle: string) => Modele; reprenable: (e: unknown) => boolean } | null {
-  if (nomModele.startsWith('claude-')) return { cle: 'ANTHROPIC_API_KEY', client: () => modeleAnthropic(), reprenable: estReprenable };
-  // Sans raisonnement : le réglage mesuré lors de la comparaison réelle du 2026-11-01.
-  if (nomModele.startsWith('deepseek-')) return { cle: 'DEEPSEEK_API_KEY', client: (cle) => modeleDeepSeek({ cle, raisonnement: 'none' }), reprenable: estReprenableDeepSeek };
-  return null;
-}
+const usd = usdEnv;
 
 await runCommand(async ({ database }) => {
   if (!process.argv.includes('--confirmer')) { console.error('Refus : ajouter --confirmer. Cette commande engage une dépense réelle.'); return 1; }
