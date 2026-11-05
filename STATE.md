@@ -1,6 +1,8 @@
 # État du projet
 
-_Mis à jour le 2026-11-03 (début d'après-midi) : **P5 préparé en local** (GitHub Actions toutes les 5 minutes, décision de l'utilisateur) ; rien n'est déployé ; P4 réalisé ; P3 toujours ouvert._
+_Mis à jour le 2026-11-05 : **P5 en ligne** (https://web-phi-nine-38.vercel.app, Turso, chaîne GitHub Actions toutes les heures) ; reste à clore : délai de bout en bout sur des publications nées après la mise en ligne, domaine (décision et dépense de l'utilisateur), démonstration. Nouveau logo et accueil animé (maquette) poussés le 2026-11-05 ; P4 réalisé ; P3 toujours ouvert._
+
+- **Mesures du 2026-11-05 (base en ligne, lecture seule)** : FTS5 fonctionne sur Turso ; `npm run delais` donne 35 publiées, dont 4 mesurables de bout en bout, médiane 521 051 s (environ 6 jours). Ce chiffre mesure le rattrapage du stock copié, pas la chaîne : il faut des actualités sorties après la mise en ligne.
 
 ## P5 — chaîne en ligne (préparé le 2026-11-03, en attente des comptes de l'utilisateur)
 
@@ -20,7 +22,7 @@ _Mis à jour le 2026-11-03 (début d'après-midi) : **P5 préparé en local** (G
 - **À créer par l'utilisateur** : voir ROADMAP.md, section « P5 — plan » (Vercel, Turso `curation-ai` en `aws-eu-west-1`, dépôt privé, secrets `TURSO_DATABASE_URL`, `TURSO_AUTH_TOKEN`, `DEEPSEEK_API_KEY`, variables `CURATION_PLAFOND_JOUR_USD`, `CURATION_PLAFOND_TOTAL_USD`, `CHAINE_ACTIVE`, variables Vercel `DATABASE_URL`, `DATABASE_AUTH_TOKEN`, domaine).
 - **Risques** :
   - releases GitHub lues sans jeton (60 requêtes par heure et par adresse) sur des runners partagés ;
-  - FTS5 jamais essayé sur Turso (ADR 0008) : la copie le dira ;
+  - ~~FTS5 jamais essayé sur Turso~~ : essayé le 2026-11-05, il fonctionne sur la base hébergée (ADR 0008) ;
   - workflow de vérification jamais lancé sous Linux ;
   - versions des actions (`checkout@v5`, `setup-node@v5`) à confirmer au premier lancement.
 

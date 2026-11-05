@@ -2,6 +2,13 @@
 
 Évolution datée des jalons et des vérifications **réellement faites**. L'état courant est dans [STATE.md](STATE.md) ; les traces d'exécution détaillées sont en base.
 
+## 2026-11-05 — P5 : mesures en ligne, logo animé
+
+- Logo central de l'accueil (maquette) : à chaque tour, ses yeux et sa lueur prennent la couleur de l'agent suivant (Nodi, Repo, Pyxo, Mova, Pulse, Radar) ; six couleurs relevées en navigateur, une par tour de 6 s.
+- `logo.svg` ajouté aux fichiers déployés ; vérifié en ligne (200, `image/svg+xml`). 778 tests au vert. Poussé sur `main` (`1380db3`).
+- FTS5 essayé sur la base Turso hébergée : il fonctionne (ADR 0008).
+- `npm run delais` sur la base en ligne : 4 publications mesurables sur 35, médiane d'environ 6 jours, due au stock copié. Le délai réel de la chaîne reste non mesuré.
+
 ## 2026-10-30 — P0 Cadrage (terminé)
 
 - Dossier vide vérifié ; outils : Node 24.16.0, npm 11.13.0, git 2.39.5, SQLite 3.45.3 (CLI) ; ni Docker, ni Homebrew, ni PostgreSQL.

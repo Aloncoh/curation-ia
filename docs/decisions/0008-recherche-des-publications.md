@@ -67,6 +67,6 @@ Contraintes : base SQLite via `@libsql/client`, Turso en ligne ; pas de base vec
 
 ## Actions
 
-1. [ ] P5 : à la création de la base Turso, créer un index FTS5 et l'interroger. Sinon, essayer Turso FTS, et noter le résultat ici.
+1. [x] P5 : à la création de la base Turso, créer un index FTS5 et l'interroger. **Fait le 2026-11-05** sur la base hébergée `curation-ia` (aws-eu-west-1), avec `@libsql/client` : la table `recherche_publication` (FTS5) existe et `MATCH 'agent'` rend 26 lignes ; la recherche du site en ligne répond (27 résultats pour « agent »). Turso FTS n'est donc pas nécessaire.
 2. [ ] P6 : construire `rechercher`, l'index et le lexique ; constituer le jeu de requêtes avec l'utilisateur.
 3. [ ] P6 : mesurer, puis décider si une couche vectorielle est nécessaire.
