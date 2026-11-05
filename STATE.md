@@ -37,17 +37,17 @@ _Nettoyé le 2026-11-05 à la demande de l'utilisateur : seul l'état actuel res
 
 ## En attente de l'utilisateur
 
-1. **Jeton Turso** : affiché par erreur dans la trace d'une commande le 2026-11-05 (ni fichier ni git). Nouveau jeton déposé par l'utilisateur le même jour dans `.env.local`, le secret GitHub et la variable Vercel ; vérifié en local (`npm run etat` répond). Reste : **révoquer l'ancien jeton** sur Turso s'il ne l'est pas, et **redéployer le site** sur Vercel (une variable modifiée ne vaut que pour un nouveau déploiement).
-2. **Recherche** : relire le jeu `r1` (`src/recherche/reference.ts`) et donner un second jeu de requêtes non vu (le lexique a été réglé sur `r1`).
-3. **Usage « construire »** : liste témoin de bonnes découvertes (SPEC §10).
-4. **Domaine** du site (décision et dépense) ; démonstration V1.
-5. **Sources** : X, Reddit, conditions restrictives (`docs/sources.md` §8.1) ; Tesla sans flux officiel (403, non contourné) ; flux des chaînes YouTube officielles à réessayer (404 le 2026-11-05).
-6. **Couvertures** : originaux des 18 fonds en haute définition, s'ils existent (même nom de fichier, aucun code à changer).
-7. **Avant le lancement public** : hébreu de l'interface relu par un locuteur natif ; interprétation « police du système » pour l'hébreu à confirmer ; droits d'usage de la mascotte ; style des montages (ADR 0007).
-8. **Plus tard** : comptes développeur mobile (Apple 99 USD/an, Google 25 USD) avant P9 bis ; tri des 47 ressources candidates (https://claude.ai/artifact/YGeV9JfuPUGTajUTzF9Yxb) ; corrections des 15 exemples de la page de revue (évaluation de P3).
+1. **Recherche** : relire le jeu `r1` (`src/recherche/reference.ts`) et donner un second jeu de requêtes non vu (le lexique a été réglé sur `r1`).
+2. **Usage « construire »** : liste témoin de bonnes découvertes (SPEC §10).
+3. **Domaine** du site (décision et dépense) ; démonstration V1.
+4. **Sources** : X, Reddit, conditions restrictives (`docs/sources.md` §8.1) ; Tesla sans flux officiel (403, non contourné) ; flux des chaînes YouTube officielles à réessayer (404 le 2026-11-05).
+5. **Couvertures** : originaux des 18 fonds en haute définition, s'ils existent (même nom de fichier, aucun code à changer).
+6. **Avant le lancement public** : hébreu de l'interface relu par un locuteur natif ; interprétation « police du système » pour l'hébreu à confirmer ; droits d'usage de la mascotte ; style des montages (ADR 0007).
+7. **Plus tard** : comptes développeur mobile (Apple 99 USD/an, Google 25 USD) avant P9 bis ; tri des 47 ressources candidates (https://claude.ai/artifact/YGeV9JfuPUGTajUTzF9Yxb) ; corrections des 15 exemples de la page de revue (évaluation de P3).
 
 ## Points de vigilance
 
+- **Jeton Turso** : affiché par erreur dans la trace d'une commande le 2026-11-05 ; remplacé par l'utilisateur le même jour (`.env.local`, secret GitHub, variable Vercel) et l'ancien révoqué. Vérifié après révocation : le site en ligne et l'accès local répondent.
 - **Cron GitHub irrégulier** : aucun cycle de 03:28 à 12:14 UTC le 2026-11-05. Un cycle peut être lancé à la main (`npm run lancer -- --confirmer` avec les variables Turso et les plafonds), sans chevauchement grâce au bail.
 - **Brouillons bloqués** : écarts sur un champ principal (réserve de la source absente, accroche non conforme, chiffre de performance non attribué) ; Pulse en a 11.
 - **Découvertes** : la rédaction automatique des dépôts découverts reste coupée en ligne (`CURATION_MAX_DECOUVERTES` absente) tant qu'elle n'est pas assez fiable.
