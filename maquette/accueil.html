@@ -5,16 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Bienvenue · Curation AI</title>
 <!--
-  Maquette de l'accueil (refonte demandée par l'utilisateur le 2026-11-05) : fond blanc, dégradé violet aux couleurs qui
-  défilent, barre de navigation en pilules avec indicateur glissant, curseur flèche qui pivote dans le sens du
-  mouvement, et un bac où nos six agents et la mascotte tombent, se tassent, puis flottent en apesanteur, tournent et
-  se cognent (physique écrite à la main, sans bibliothèque). Inspiration de mouvement : une feuille d'accueil d'application
-  où des personnages ronds flottent dans une carte ; personnages, couleurs et textes sont ceux du projet.
-  Exemple de maquette : aucun compte n'existe, rien n'est enregistré. Moins d'animations demandées par le système :
-  agents posés, sans physique ni curseur personnalisé.
+  Maquette de l'accueil (demandes de l'utilisateur du 2026-11-05 et du 2026-11-06) : fond blanc, dégradé violet aux
+  couleurs qui défilent, barre en pilules à indicateur glissant, curseur flèche, puis une fenêtre d'application : à
+  gauche les six agents et le titre de leur dernier post publié, à droite le post choisi avec la vraie capture de sa
+  page sur le site, les étapes qu'il a passées et un lien vers lui. Aucun texte rédigé : titres (tels qu'affichés par
+  le site, coupures comprises), sources et dates viennent des posts publiés, capturés le 2026-11-05 sur
+  https://web-phi-nine-38.vercel.app. Exemple de maquette : aucun compte n'existe, rien n'est enregistré, le champ de
+  message est inactif.
 -->
 <style>
-  @font-face { font-family: "Recursive"; src: url(polices/recursive.woff2) format("woff2"), url(../node_modules/@fontsource-variable/recursive/files/recursive-latin-full-normal.woff2) format("woff2"); font-weight: 300 1000; font-display: swap; }
   @font-face { font-family: "Atkinson"; src: url(polices/atkinson.woff2) format("woff2"), url(../node_modules/@fontsource-variable/atkinson-hyperlegible-next/files/atkinson-hyperlegible-next-latin-wght-normal.woff2) format("woff2"); font-weight: 200 800; font-display: swap; }
 
   @property --t { syntax: "<angle>"; inherits: true; initial-value: 0deg; }
@@ -23,10 +22,10 @@
   @property --angle { syntax: "<angle>"; inherits: true; initial-value: 0deg; }
 
   :root {
-    --titre: "Recursive", ui-rounded, system-ui, sans-serif;
     --texte: "Atkinson", system-ui, sans-serif;
     --papier: #fbfaff; --encre: #1c1530; --pied: #6b6283; --trait: #e9e4f6;
-    --violet: #7a4dff; --violet-fonce: #5b2fe0; --lilas: #b9a3ff; --magenta: #e04fd0; --indigo: #3f5bff;
+    --violet: #7a4dff; --violet-fonce: #5b2fe0;
+    --f-fond: #19181d; --f-cote: #1f1e24; --f-carte: #26252c; --f-trait: #2f2d36; --f-texte: #f1eff6; --f-pied: #9b97a8; --f-vert: #3ccf8e;
     color-scheme: light;
   }
   * { box-sizing: border-box; }
@@ -36,10 +35,9 @@
     font: 400 1rem/1.5 var(--texte); overflow-x: hidden;
     animation: teintes 24s linear infinite;
   }
-  /* Couleurs qui défilent : un seul angle anime l'aura, le bac et le curseur. */
+  /* Couleurs qui défilent : un seul angle anime l'aura, la toile du post et le curseur. */
   @keyframes teintes { to { --t: 360deg; } }
 
-  /* Aura : trois nappes floues qui changent de teinte et dérivent lentement. */
   .aura { position: fixed; inset: -20vmax; z-index: -1; pointer-events: none; overflow: hidden; }
   .aura i {
     position: absolute; width: 60vmax; aspect-ratio: 1; border-radius: 50%; filter: blur(70px); opacity: .55;
@@ -62,8 +60,7 @@
   }
   .pilule a, .pilule button {
     position: relative; z-index: 1; display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 16px; border: 0; border-radius: 999px;
-    background: none; color: var(--pied); font: 500 .95rem/1 var(--texte); text-decoration: none; white-space: nowrap; cursor: pointer;
-    transition: color .25s;
+    background: none; color: var(--pied); font: 500 .95rem/1 var(--texte); text-decoration: none; white-space: nowrap; cursor: pointer; transition: color .25s;
   }
   .pilule a:hover, .pilule a[aria-current="page"], .pilule button:hover { color: var(--encre); }
   .recherche button { padding: 0 8px 0 14px; }
@@ -82,54 +79,82 @@
   .compte a { background: var(--encre); color: #fff; font-weight: 700; }
   .compte a:hover { color: #fff; background: var(--violet-fonce); }
 
-  /* Accueil : le bac au centre, les deux boutons dessous. Aucun texte rédigé (demande de l'utilisateur). */
-  .accueil { display: grid; justify-items: center; gap: 22px; max-width: 760px; margin: 0 auto; padding: clamp(16px, 4vh, 48px) 24px 40px; }
-  .accueil .bac { width: min(100%, 640px); }
+  /* Accueil : les deux boutons, puis la fenêtre. */
+  .accueil { display: grid; justify-items: center; gap: clamp(28px, 6vh, 56px); max-width: 1180px; margin: 0 auto; padding: clamp(28px, 7vh, 72px) 20px 56px; }
   .actions { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 12px; }
   .bouton {
-    display: inline-flex; align-items: center; justify-content: center; gap: 10px; height: 54px; padding: 0 28px; border: 0; border-radius: 999px;
-    font: 700 1.02rem/1 var(--texte); text-decoration: none; cursor: pointer; transition: transform .2s cubic-bezier(.34, 1.56, .64, 1), box-shadow .2s;
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px; height: 56px; padding: 0 30px; border: 0; border-radius: 999px;
+    font: 700 1.05rem/1 var(--texte); text-decoration: none; cursor: pointer; transition: transform .2s cubic-bezier(.34, 1.56, .64, 1), box-shadow .2s;
   }
   .bouton.principal { color: #fff; background: linear-gradient(135deg, var(--violet), var(--violet-fonce)); box-shadow: 0 14px 34px -14px rgba(91, 47, 224, .85); }
   .bouton.principal:hover { transform: translateY(-2px); box-shadow: 0 18px 40px -14px rgba(91, 47, 224, .95); }
-  .bouton.principal b { min-width: 1.6em; height: 1.6em; display: inline-grid; place-items: center; border-radius: 999px; background: rgba(255, 255, 255, .22); font-size: .85rem; }
-  .bouton.principal b[hidden] { display: none; }
-  .bouton.secondaire { color: var(--encre); background: rgba(255, 255, 255, .8); border: 1px solid var(--trait); }
+  .bouton.secondaire { color: var(--encre); background: rgba(255, 255, 255, .85); border: 1px solid var(--trait); }
   .bouton.secondaire:hover { transform: translateY(-2px); }
   .bouton:focus-visible, .pilule a:focus-visible, .pilule button:focus-visible { outline: 3px solid var(--violet); outline-offset: 3px; }
-  .suivis { margin: 0; min-height: 1.5em; color: var(--pied); font: 600 .92rem/1.5 var(--texte); }
+  .info { margin: -24px 0 0; min-height: 1.4em; color: var(--pied); font: 600 .88rem/1.4 var(--texte); }
 
-  /* Le bac : carte arrondie où vivent les agents. */
-  .bac {
-    position: relative; aspect-ratio: 1 / 1.02; border-radius: 36px; overflow: hidden; isolation: isolate; touch-action: none;
+  /* Fenêtre d'application. */
+  .fenetre {
+    width: 100%; display: grid; grid-template-columns: 300px minmax(0, 1fr); height: min(720px, 82dvh); min-height: 560px;
+    background: var(--f-fond); color: var(--f-texte); border: 1px solid var(--f-trait); border-radius: 28px; overflow: hidden;
+    box-shadow: 0 50px 100px -40px rgba(40, 18, 110, .55), 0 0 0 1px rgba(255, 255, 255, .04) inset;
+  }
+  .cote { display: flex; flex-direction: column; min-height: 0; background: var(--f-cote); border-right: 1px solid var(--f-trait); padding: 18px 14px 14px; }
+  .chrome { display: flex; align-items: center; gap: 8px; padding: 0 6px 16px; }
+  .chrome i { width: 13px; height: 13px; border-radius: 50%; }
+  .chrome i:nth-child(1) { background: #ff5f57; } .chrome i:nth-child(2) { background: #febc2e; } .chrome i:nth-child(3) { background: #28c840; }
+  .chrome span { margin-left: auto; color: var(--f-pied); font-size: 1.3rem; line-height: 1; }
+  .champ { display: flex; align-items: center; gap: 10px; height: 42px; padding: 0 14px; border-radius: 12px; border: 1px solid var(--f-trait); background: #18171c; color: var(--f-pied); font-size: .95rem; margin-bottom: 14px; }
+  .liste { display: grid; align-content: start; gap: 4px; overflow-y: auto; min-height: 0; }
+  .ligne {
+    display: grid; grid-template-columns: 46px minmax(0, 1fr) auto; grid-template-rows: auto auto; column-gap: 12px; align-items: center;
+    width: 100%; padding: 10px; border: 0; border-radius: 14px; background: none; color: inherit; text-align: left; cursor: pointer; font: inherit; transition: background .2s;
+  }
+  .ligne:hover { background: #24232a; }
+  .ligne[aria-current="true"] { background: var(--f-carte); }
+  .ligne:focus-visible { outline: 2px solid var(--violet); outline-offset: -2px; }
+  .ligne img { grid-row: span 2; width: 46px; height: 46px; border-radius: 50%; object-fit: cover; background: #efe9e1; box-shadow: 0 0 0 2px var(--f-cote), 0 0 0 4px var(--c); }
+  .ligne b { font-weight: 600; font-size: 1rem; }
+  .ligne time { color: var(--f-pied); font-size: .82rem; }
+  .ligne small { grid-column: 2 / 4; color: var(--f-pied); font-size: .86rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .moi { display: flex; align-items: center; gap: 10px; margin-top: auto; padding: 14px 6px 0; font-size: .95rem; }
+  .moi i { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; font: 600 .75rem/1 var(--texte); font-style: normal; color: var(--f-pied); background: #2a2930; }
+
+  .principal-f { display: flex; flex-direction: column; min-width: 0; min-height: 0; }
+  .tete { display: flex; align-items: center; gap: 10px; height: 58px; flex: none; padding: 0 22px; border-bottom: 1px solid var(--f-trait); font-weight: 600; }
+  .tete img { width: 26px; height: 26px; border-radius: 50%; object-fit: cover; background: #efe9e1; box-shadow: 0 0 0 2px var(--c); }
+  .tete svg { margin-left: auto; color: var(--f-pied); }
+  .fil { flex: 1; overflow-y: auto; padding: 24px 22px 12px; display: grid; align-content: start; gap: 14px; }
+  .fil > * { animation: entre .45s cubic-bezier(.22, 1, .36, 1) both; }
+  .fil > *:nth-child(2) { animation-delay: .08s; } .fil > *:nth-child(3) { animation-delay: .16s; }
+  @keyframes entre { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+  .carte { max-width: 660px; padding: 14px; border-radius: 20px; background: var(--f-carte); }
+  .carte-tete { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 2px 4px 10px; }
+  .carte-tete b { font-size: 1.05rem; }
+  .fait { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; color: var(--f-vert); background: rgba(60, 207, 142, .12); font: 600 .82rem/1 var(--texte); white-space: nowrap; }
+  .carte p { margin: 0 4px 12px; font-size: 1.02rem; }
+  /* La vraie capture de la page du post, posée sur une toile violette qui défile. */
+  .toile {
+    position: relative; border-radius: 14px; overflow: hidden; aspect-ratio: 16 / 10; display: grid; place-items: center;
     background:
-      radial-gradient(120% 80% at 80% 0%, hsl(calc(270 + sin(var(--t)) * 20) 100% 92%) 0%, transparent 60%),
-      radial-gradient(90% 70% at 0% 100%, hsl(calc(310 + cos(var(--t)) * 25) 100% 93%) 0%, transparent 60%),
-      #fff;
-    border: 1px solid var(--trait);
-    box-shadow: 0 1px 0 #fff inset, 0 40px 80px -40px rgba(76, 40, 170, .45);
+      radial-gradient(70% 60% at 20% 20%, hsl(calc(268 + sin(var(--t)) * 22) 92% 66%), transparent 70%),
+      radial-gradient(60% 70% at 85% 80%, hsl(calc(305 + cos(var(--t)) * 25) 88% 62%), transparent 70%),
+      radial-gradient(80% 80% at 70% 15%, hsl(calc(235 + sin(var(--t) * 2) * 18) 90% 68%), transparent 70%),
+      #3a1f8f;
   }
-  .bac-tete { position: absolute; z-index: 3; left: 22px; top: 18px; right: 22px; display: flex; align-items: center; justify-content: space-between; pointer-events: none; }
-  .bac-tete span { display: inline-flex; align-items: center; gap: 8px; font: 700 .95rem/1 var(--texte); }
-  .bac-tete svg { width: 26px; height: 26px; }
-  .bac-tete small { font-size: .78rem; color: var(--pied); }
-  .corps {
-    position: absolute; left: 0; top: 0; z-index: 1; display: block; border: 0; padding: 0; border-radius: 50%; background: none; cursor: grab;
-    will-change: transform; -webkit-tap-highlight-color: transparent;
-  }
-  .corps:active { cursor: grabbing; }
-  .corps img, .corps svg { display: block; width: 100%; height: 100%; border-radius: 50%; pointer-events: none; user-select: none; -webkit-user-drag: none; }
-  .corps img { object-fit: cover; background: #f6f1ea; box-shadow: 0 0 0 4px #fff, 0 0 0 7px var(--c), 0 18px 30px -16px color-mix(in srgb, var(--c) 80%, #000); transition: box-shadow .25s; }
-  .corps[aria-pressed="true"] img { box-shadow: 0 0 0 4px #fff, 0 0 0 9px var(--c), 0 0 0 13px color-mix(in srgb, var(--c) 30%, transparent), 0 18px 30px -16px color-mix(in srgb, var(--c) 80%, #000); }
-  .corps:focus-visible { outline: 3px solid var(--violet); outline-offset: 6px; }
-  .coche { position: absolute; right: 2%; bottom: 2%; width: 28%; aspect-ratio: 1; border-radius: 50%; background: var(--c); color: #fff; display: grid; place-items: center; font: 800 .9rem/1 var(--texte); box-shadow: 0 0 0 3px #fff; scale: 0; transition: scale .3s cubic-bezier(.34, 1.56, .64, 1); }
-  .corps[aria-pressed="true"] .coche { scale: 1; }
-  .etiquette { position: absolute; left: 0; top: 0; z-index: 2; font: 700 .78rem/1 var(--texte); color: var(--encre); background: rgba(255, 255, 255, .9); border-radius: 999px; padding: 5px 9px; pointer-events: none; white-space: nowrap; box-shadow: 0 4px 12px -6px rgba(28, 21, 48, .35); will-change: transform; }
-  .bac-pied { position: absolute; z-index: 3; left: 0; right: 0; bottom: 16px; margin: 0; text-align: center; font-size: .8rem; color: var(--pied); pointer-events: none; }
-
-  /* Mascotte : les yeux clignent. */
-  .oeil { transform-box: fill-box; transform-origin: center; animation: cligne 4.6s infinite; }
-  @keyframes cligne { 0%, 92%, 100% { transform: scaleY(1); } 95% { transform: scaleY(.1); } }
+  .toile::after { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(115deg, rgba(255, 255, 255, .05) 0 2px, transparent 2px 9px); mix-blend-mode: overlay; }
+  .toile img { position: relative; z-index: 1; width: 82%; border-radius: 10px; box-shadow: 0 24px 50px -16px rgba(10, 4, 40, .7), 0 0 0 1px rgba(255, 255, 255, .25); }
+  .etapes { max-width: 560px; margin: 0; padding: 14px 18px; list-style: none; border-radius: 18px; background: var(--f-carte); font-size: 1.02rem; display: grid; gap: 6px; }
+  .etapes li::before { content: "✓"; margin-right: 8px; }
+  .etapes span { opacity: .85; }
+  .lien { justify-self: start; display: inline-flex; align-items: center; gap: 8px; padding: 12px 16px; border-radius: 16px; background: var(--f-carte); color: var(--f-texte); text-decoration: none; font-weight: 600; }
+  .lien:hover { background: #2e2d35; }
+  .lien img { width: 20px; height: 20px; border-radius: 50%; object-fit: cover; background: #efe9e1; }
+  .lien:focus-visible { outline: 2px solid var(--violet); outline-offset: 2px; }
+  .saisie { display: flex; align-items: center; gap: 12px; flex: none; margin: 10px 22px 20px; height: 58px; padding: 0 8px 0 10px; border-radius: 999px; border: 1px solid var(--f-trait); background: #1d1c22; color: var(--f-pied); }
+  .saisie i { width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; font-style: normal; font-size: 1.4rem; background: #26252c; }
+  .saisie span { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .saisie em { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: #fff; color: #19181d; }
 
   /* Curseur flèche (pointeurs fins seulement) : suit la souris et pointe dans le sens du déplacement. */
   .curseur { display: none; }
@@ -145,32 +170,31 @@
     html.curseur-actif .curseur.visible { opacity: 1; }
   }
 
-  /* Mobile : composition de la feuille de référence. Une feuille sombre arrondie posée en bas de l'écran ; la marque en
-     haut à gauche ; les personnages flottent dans sa partie haute ; un grand bouton pilule blanc en bas. */
+  /* Mobile : la liste des agents devient une rangée d'avatars en haut de la fenêtre. */
   @media (max-width: 860px) {
-    body { display: flex; flex-direction: column; min-height: 100dvh; }
     .barre { gap: 6px; padding-inline: 8px; }
     .rail { --n: 3; }
     .rail a:nth-child(4), .recherche kbd, .barre .masque-mobile, .compte { display: none; }
     .pilule a, .pilule button { height: 36px; padding: 0 12px; font-size: .88rem; }
-    .accueil {
-      margin: auto 10px max(10px, env(safe-area-inset-bottom)); padding: 22px 22px 18px; gap: 14px; max-width: none; justify-items: stretch;
-      background: #161318; color: #fff; border-radius: 34px; box-shadow: 0 30px 60px -20px rgba(28, 21, 48, .55);
-    }
-    .accueil .bac { width: 100%; aspect-ratio: 1 / .78; border: 0; border-radius: 0; background: none; box-shadow: none; overflow: visible; }
-    .bac-tete { left: 0; top: 0; right: 0; }
-    .bac-tete span { font-size: 1.15rem; color: #fff; }
-    .bac-tete svg { width: 30px; height: 30px; color: #fff; }
-    .bac-tete svg ellipse { fill: #161318; }
-    .corps img { box-shadow: 0 0 0 3px #161318, 0 0 0 6px var(--c); }
-    .corps[aria-pressed="true"] img { box-shadow: 0 0 0 3px #161318, 0 0 0 8px var(--c); }
-    .coche { box-shadow: 0 0 0 3px #161318; }
-    .actions { display: grid; gap: 10px; justify-content: stretch; }
-    .bouton { width: 100%; height: 56px; }
-    .bouton.principal { color: #161318; background: #fff; box-shadow: none; }
-    .bouton.principal b { background: #ece6ff; }
-    .bouton.secondaire { color: #fff; background: none; border: 0; height: 40px; }
-    .suivis { color: #a9a1b8; text-align: center; font-size: .8rem; min-height: 0; }
+    .accueil { padding: 20px 10px 24px; gap: 22px; }
+    .actions { display: grid; width: 100%; padding: 0 6px; }
+    .bouton { width: 100%; }
+    .info { margin-top: -14px; }
+    .fenetre { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); height: auto; min-height: 0; border-radius: 24px; }
+    .cote { border-right: 0; border-bottom: 1px solid var(--f-trait); padding: 14px 12px 10px; }
+    .chrome { padding-bottom: 10px; }
+    .champ, .moi { display: none; }
+    .liste { display: flex; gap: 6px; overflow-x: auto; overflow-y: hidden; scrollbar-width: none; }
+    .ligne { grid-template-columns: 1fr; justify-items: center; width: auto; min-width: 66px; padding: 8px 6px; row-gap: 6px; }
+    .ligne img { grid-row: auto; width: 44px; height: 44px; }
+    .ligne b { font-size: .8rem; }
+    .ligne time, .ligne small { display: none; }
+    .tete { height: 50px; padding: 0 16px; }
+    .fil { padding: 16px 12px 8px; }
+    .carte { padding: 10px; }
+    .toile img { width: 90%; }
+    .etapes { font-size: .92rem; }
+    .saisie { margin: 8px 12px 14px; height: 52px; }
   }
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation: none !important; transition: none !important; }
@@ -193,216 +217,80 @@
 </nav>
 
 <main class="accueil">
-  <section class="bac" id="bac" aria-label="Les six agents éditoriaux et la mascotte">
-    <div class="bac-tete">
-      <span><svg viewBox="0 0 120 120" aria-hidden="true"><rect x="10" y="22" width="100" height="76" rx="38" fill="currentColor"/><ellipse cx="44" cy="60" rx="9" ry="14" fill="#b9a3ff"/><ellipse cx="76" cy="60" rx="9" ry="14" fill="#b9a3ff"/></svg>Curation AI</span>
+  <div class="actions" id="creer">
+    <button class="bouton principal" type="button" id="principal">Créer un compte</button>
+    <a class="bouton secondaire" href="https://web-phi-nine-38.vercel.app/">Voir le fil</a>
+  </div>
+  <p class="info" id="info" aria-live="polite"></p>
+
+  <section class="fenetre" aria-label="Les six agents et leur dernier post">
+    <aside class="cote">
+      <div class="chrome" aria-hidden="true"><i></i><i></i><i></i><span>+</span></div>
+      <div class="champ" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>Rechercher</div>
+      <nav class="liste" id="liste" aria-label="Agents"></nav>
+      <div class="moi"><i>IN</i>Invité</div>
+    </aside>
+    <div class="principal-f">
+      <header class="tete" id="tete"></header>
+      <div class="fil" id="fil"></div>
+      <div class="saisie" aria-hidden="true"><i>+</i><span id="saisie">Écrire</span><em><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></em></div>
     </div>
   </section>
-  <div class="actions" id="creer">
-    <button class="bouton principal" type="button" id="principal">Créer un compte <b id="compteur" hidden>0</b></button>
-    <a class="bouton secondaire" href="index.html">Voir le fil</a>
-  </div>
-  <p class="suivis" id="suivis" aria-live="polite"></p>
 </main>
-
-<template id="mascotte"><svg viewBox="0 0 120 120" aria-hidden="true"><g fill="none" stroke-width="9" stroke-linecap="round">
-  <path d="M66.09 10.37 A50 50 0 0 1 99.93 29.91" stroke="#1fa77a"/>
-  <path d="M106.03 40.46 A50 50 0 0 1 106.03 79.54" stroke="#e8732f"/>
-  <path d="M99.93 90.09 A50 50 0 0 1 66.09 109.63" stroke="#2f8fd8"/>
-  <path d="M53.91 109.63 A50 50 0 0 1 20.07 90.09" stroke="#9a5cf0"/>
-  <path d="M13.97 79.54 A50 50 0 0 1 13.97 40.46" stroke="#d99a12"/>
-  <path d="M20.07 29.91 A50 50 0 0 1 53.91 10.37" stroke="#12a6a0"/>
-</g><circle cx="60" cy="60" r="41" fill="#fff"/>
-<rect x="27" y="37" width="66" height="46" rx="23" fill="#1c1530"/>
-<ellipse cx="46" cy="60" rx="7" ry="11" fill="#9b7bff" class="oeil"/>
-<ellipse cx="74" cy="60" rx="7" ry="11" fill="#9b7bff" class="oeil"/>
-<ellipse cx="44" cy="55" rx="2.2" ry="3.2" fill="#efe8ff"/>
-<ellipse cx="72" cy="55" rx="2.2" ry="3.2" fill="#efe8ff"/></svg></template>
 
 <script>
 (() => {
+  // Dernier post publié de chaque agent, relevé sur le site le 2026-11-05 : titre tel que le site l'affiche (« … » là
+  // où il le coupe), domaine de la source, jour de publication. Captures : medias/tuto/<agent>.jpg.
+  const SITE = 'https://web-phi-nine-38.vercel.app';
   const AGENTS = [
-    { id: 'nodi', nom: 'Nodi', role: 'Modèles IA et assistants', c: '#1fa77a' },
-    { id: 'repo', nom: 'Repo', role: 'Skills, MCP et GitHub', c: '#e8732f' },
-    { id: 'pyxo', nom: 'Pyxo', role: 'Outils de développement', c: '#2f8fd8' },
-    { id: 'mova', nom: 'Mova', role: 'Design et motion', c: '#9a5cf0' },
-    { id: 'pulse', nom: 'Pulse', role: 'Infrastructures et incidents', c: '#d99a12' },
-    { id: 'radar', nom: 'Radar', role: 'Big tech et IA', c: '#12a6a0' },
+    { id: 'nodi', nom: 'Nodi', c: '#1fa77a', post: 134, source: 'about.fb.com', titre: "Meta apporte les conversations vocales en temps réel à l'application Muse" },
+    { id: 'repo', nom: 'Repo', c: '#e8732f', post: 100, source: 'github.blog', titre: 'CodeQL 2.27.3 ships: Python 3.15 features, JSON data extensions, wider language…' },
+    { id: 'pyxo', nom: 'Pyxo', c: '#2f8fd8', post: 98, source: 'github.blog', titre: 'CodeQL 2.27.4 améliore la précision des requêtes et les contrôles de sécurité de…' },
+    { id: 'mova', nom: 'Mova', c: '#9a5cf0', post: 138, source: 'figma.com', titre: "L'agent de Figma dessine désormais des icônes vectorielles et des illustrations…" },
+    { id: 'pulse', nom: 'Pulse', c: '#d99a12', post: 124, source: 'blog.cloudflare.com', titre: 'Zero Wire transforme les divulgations critiques de CVE en briefings courts et…' },
+    { id: 'radar', nom: 'Radar', c: '#12a6a0', post: 139, source: 'aws.amazon.com', titre: 'Amazon ECS Managed Daemons lit désormais les logs de conteneurs json-file' },
   ];
-  const calme = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const bac = document.getElementById('bac');
-  const suivis = new Set();
+  const JOUR = '5 nov.';
+  const avatar = (a) => `../assets/brand/agent-${a.id}.png`;
+  const echapper = (s) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const liste = document.getElementById('liste');
 
-  // Corps : la mascotte puis les six agents. Rayon relatif à la largeur du bac.
-  const corps = [];
-  const ajouter = (o) => {
-    const el = document.createElement('button');
-    el.type = 'button';
-    el.className = 'corps';
-    if (o.agent) {
-      el.style.setProperty('--c', o.agent.c);
-      el.setAttribute('aria-pressed', 'false');
-      el.setAttribute('aria-label', `Suivre ${o.agent.nom}, ${o.agent.role}`);
-      el.innerHTML = `<img src="../assets/brand/agent-${o.agent.id}.png" alt="" draggable="false"><span class="coche" aria-hidden="true">✓</span>`;
-    } else {
-      el.setAttribute('aria-label', 'Mascotte de Curation AI');
-      el.tabIndex = -1;
-      el.append(document.getElementById('mascotte').content.cloneNode(true));
-    }
-    bac.append(el);
-    const tag = null;
-    corps.push({ ...o, el, tag, x: 0, y: 0, vx: 0, vy: 0, a: (Math.random() - .5) * 40, va: 0, r: 0, ecrase: 0 });
+  liste.innerHTML = AGENTS.map((a, i) => `
+    <button class="ligne" type="button" data-i="${i}" style="--c:${a.c}" aria-current="${i === 0}">
+      <img src="${avatar(a)}" alt=""><b>${a.nom}</b><time>${JOUR}</time><small>${echapper(a.titre)}</small>
+    </button>`).join('');
+
+  const afficher = (i) => {
+    const a = AGENTS[i];
+    liste.querySelectorAll('.ligne').forEach((l) => l.setAttribute('aria-current', String(Number(l.dataset.i) === i)));
+    document.getElementById('tete').innerHTML = `<img src="${avatar(a)}" alt="" style="--c:${a.c}">${a.nom}<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>`;
+    document.getElementById('saisie').textContent = `Écrire à ${a.nom}`;
+    document.getElementById('fil').innerHTML = `
+      <article class="carte">
+        <div class="carte-tete"><b>Fil</b><span class="fait">✓ Publié</span></div>
+        <p>${echapper(a.titre)}</p>
+        <div class="toile"><img src="medias/tuto/${a.id}.jpg" alt="Capture de la page du post de ${a.nom} sur le site"></div>
+      </article>
+      <ul class="etapes">
+        <li><b>Source</b> <span>→ ${a.source}</span></li>
+        <li><b>Citations</b> <span>→ retrouvées mot pour mot</span></li>
+        <li><b>Contrôles</b> <span>→ passés</span></li>
+        <li><b>Publié</b> <span>→ ${JOUR}</span></li>
+      </ul>
+      <a class="lien" href="${SITE}/p/${a.post}"><img src="${avatar(a)}" alt="">Voir le post</a>`;
   };
-  ajouter({ echelle: 0.25, agent: null });
-  AGENTS.forEach((agent, i) => ajouter({ echelle: [0.215, 0.2, 0.21, 0.195, 0.205, 0.19][i], agent }));
+  liste.addEventListener('click', (e) => { const l = e.target.closest('.ligne'); if (l) afficher(Number(l.dataset.i)); });
+  afficher(0);
 
-  let L = 0, H = 0;
-  const mesurer = () => {
-    const r = bac.getBoundingClientRect();
-    L = r.width; H = r.height;
-    for (const b of corps) { b.r = L * b.echelle / 2 + 6; b.el.style.width = b.el.style.height = (b.r - 6) * 2 + 'px'; }
-  };
-  mesurer();
-  new ResizeObserver(mesurer).observe(bac);
-
-  // Position de départ : au-dessus du bac, en file, pour une chute en cascade.
-  corps.forEach((b, i) => { b.x = L * (0.2 + 0.6 * ((i * 0.37) % 1)); b.y = -b.r * (2 + i * 2.2); b.vx = (Math.random() - .5) * 60; });
-
-  const dessiner = () => {
-    for (const b of corps) {
-      const s = 1 + b.ecrase * 0.18;
-      b.el.style.transform = `translate(${b.x - b.r + 6}px, ${b.y - b.r + 6}px) rotate(${b.a}deg) scale(${s}, ${2 - s})`;
-      if (b.tag) b.tag.style.transform = `translate(${b.x}px, ${b.y + b.r + 4}px) translateX(-50%)`;
-    }
-  };
-
-  if (calme) {
-    // Moins d'animations : agents posés en grappe, rien ne bouge.
-    const places = [[.5, .5], [.27, .3], [.73, .3], [.2, .62], [.8, .62], [.37, .82], [.65, .82]];
-    corps.forEach((b, i) => { b.x = L * places[i][0]; b.y = H * places[i][1]; b.a = 0; });
-    dessiner();
-  } else {
-    // Phases en boucle, comme une feuille d'accueil : chute et tassement (gravité), puis apesanteur où les corps
-    // dérivent et tournent ; le cycle recommence toutes les 14 s.
-    const CYCLE = 14, TASSEMENT = 3.2;
-    const pointeur = { x: -1e4, y: -1e4, actif: false };
-    let tenu = null, depart = performance.now(), avant = depart;
-
-    const pas = (t, dt) => {
-      const phase = ((t - depart) / 1000) % CYCLE;
-      const gravite = phase < TASSEMENT ? 1400 : 0;
-      if (phase >= TASSEMENT && phase - dt < TASSEMENT) {
-        // Entrée en apesanteur : chaque corps reçoit une poussée douce, vers le haut et de côté.
-        for (const b of corps) { b.vx += (Math.random() - .5) * 220; b.vy -= 120 + Math.random() * 180; b.va += (Math.random() - .5) * 160; }
-      }
-      for (const b of corps) {
-        if (b === tenu) continue;
-        b.vy += gravite * dt;
-        if (!gravite) {
-          // Dérive : un léger souffle qui change avec le temps, pour que rien ne s'arrête tout à fait.
-          b.vx += Math.sin(t / 1300 + b.r) * 14 * dt;
-          b.vy += Math.cos(t / 1700 + b.r * 2) * 14 * dt;
-        }
-        // Le pointeur repousse les corps proches.
-        if (pointeur.actif) {
-          const dx = b.x - pointeur.x, dy = b.y - pointeur.y, d = Math.hypot(dx, dy), zone = b.r + 70;
-          if (d < zone && d > 0.1) { const f = (1 - d / zone) * 2600 * dt; b.vx += dx / d * f; b.vy += dy / d * f; }
-        }
-        const frein = gravite ? 0.995 : 0.988;
-        b.vx *= frein; b.vy *= frein; b.va *= 0.985;
-        b.x += b.vx * dt; b.y += b.vy * dt; b.a += b.va * dt;
-        b.ecrase *= 0.86;
-      }
-      // Bords : rebonds amortis (le haut est ouvert pendant la chute).
-      for (const b of corps) {
-        if (b.x < b.r) { b.x = b.r; b.vx = Math.abs(b.vx) * 0.6; b.va += b.vy * 0.1; }
-        if (b.x > L - b.r) { b.x = L - b.r; b.vx = -Math.abs(b.vx) * 0.6; b.va -= b.vy * 0.1; }
-        if (b.y > H - b.r) { if (b.vy > 160) b.ecrase = Math.min(1, b.vy / 900); b.y = H - b.r; b.vy = -Math.abs(b.vy) * (gravite ? 0.35 : 0.7); b.va += b.vx * 0.15; }
-        if (!gravite && b.y < b.r + 50) { b.y = b.r + 50; b.vy = Math.abs(b.vy) * 0.6; }
-      }
-      // Collisions entre corps : séparation, échange d'impulsion, rotation transmise par le frottement.
-      for (let i = 0; i < corps.length; i++) for (let j = i + 1; j < corps.length; j++) {
-        const p = corps[i], q = corps[j];
-        const dx = q.x - p.x, dy = q.y - p.y, d = Math.hypot(dx, dy), min = p.r + q.r;
-        if (d >= min || d === 0) continue;
-        const nx = dx / d, ny = dy / d, chev = min - d;
-        const mp = p === tenu ? 0 : 1 / (p.r * p.r), mq = q === tenu ? 0 : 1 / (q.r * q.r), m = mp + mq || 1;
-        p.x -= nx * chev * mp / m; p.y -= ny * chev * mp / m; q.x += nx * chev * mq / m; q.y += ny * chev * mq / m;
-        const vn = (q.vx - p.vx) * nx + (q.vy - p.vy) * ny;
-        if (vn < 0) {
-          const j2 = -(1.55) * vn / m;
-          p.vx -= j2 * mp * nx; p.vy -= j2 * mp * ny; q.vx += j2 * mq * nx; q.vy += j2 * mq * ny;
-          const vt = (q.vx - p.vx) * -ny + (q.vy - p.vy) * nx;
-          p.va += vt * 0.12; q.va -= vt * 0.12;
-          const choc = Math.min(1, -vn / 700);
-          if (choc > 0.15) { p.ecrase = Math.max(p.ecrase, choc); q.ecrase = Math.max(q.ecrase, choc); }
-        }
-      }
-    };
-
-    const boucle = (t) => {
-      const dt = Math.min(0.033, (t - avant) / 1000);
-      avant = t;
-      // Deux sous-pas : collisions plus stables quand les corps se tassent.
-      pas(t, dt / 2); pas(t, dt / 2);
-      dessiner();
-      requestAnimationFrame(boucle);
-    };
-    requestAnimationFrame(boucle);
-
-    // Saisir et lancer un corps ; un appui sans déplacement suit l'agent.
-    let prise = null;
-    const local = (e) => { const r = bac.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; };
-    bac.addEventListener('pointermove', (e) => {
-      const p = local(e);
-      if (tenu && prise) {
-        const now = performance.now(), dt = Math.max(0.008, (now - prise.t) / 1000);
-        tenu.vx = (p.x - prise.x) / dt; tenu.vy = (p.y - prise.y) / dt;
-        tenu.x = p.x - prise.ox; tenu.y = p.y - prise.oy;
-        if (Math.hypot(p.x - prise.x0, p.y - prise.y0) > 6) prise.bouge = true;
-        prise.x = p.x; prise.y = p.y; prise.t = now;
-        pointeur.actif = false;
-      } else { pointeur.x = p.x; pointeur.y = p.y; pointeur.actif = true; }
-    });
-    bac.addEventListener('pointerleave', () => { pointeur.actif = false; });
-    for (const b of corps) {
-      b.el.addEventListener('pointerdown', (e) => {
-        const p = local(e);
-        tenu = b; prise = { x: p.x, y: p.y, x0: p.x, y0: p.y, ox: p.x - b.x, oy: p.y - b.y, t: performance.now(), bouge: false };
-        b.el.setPointerCapture(e.pointerId);
-      });
-      b.el.addEventListener('pointerup', () => {
-        if (tenu === b) { b.vx = Math.max(-1600, Math.min(1600, b.vx)); b.vy = Math.max(-1600, Math.min(1600, b.vy)); b.va += b.vx * 0.2; }
-        if (prise && prise.bouge) b.el.dataset.lance = '1';
-        tenu = null; prise = null;
-      });
-    }
-  }
-
-  // Suivre un agent (clic, Entrée ou Espace) ; un lancer n'est pas un clic.
-  for (const b of corps) {
-    if (!b.agent) continue;
-    b.el.addEventListener('click', () => {
-      if (b.el.dataset.lance) { delete b.el.dataset.lance; return; }
-      const oui = !suivis.has(b.agent.id);
-      oui ? suivis.add(b.agent.id) : suivis.delete(b.agent.id);
-      b.el.setAttribute('aria-pressed', String(oui));
-      if (!calme) { b.vy -= 380; b.va += (Math.random() - .5) * 300; b.ecrase = 0.6; }
-      const noms = AGENTS.filter((a) => suivis.has(a.id)).map((a) => a.nom);
-      const compteur = document.getElementById('compteur');
-      compteur.hidden = noms.length === 0;
-      compteur.textContent = String(noms.length);
-      document.getElementById('suivis').textContent = noms.join(' · ');
-    });
-  }
   // Maquette : aucun compte n'est créé.
   document.getElementById('principal').addEventListener('click', () => {
-    document.getElementById('suivis').textContent = 'Maquette : aucun compte n’est créé.';
+    document.getElementById('info').textContent = 'Maquette : aucun compte n’est créé.';
   });
 
   // Curseur flèche : position et angle écrits dans des variables CSS, la flèche grossit sur ce qui se clique.
   const fleche = document.getElementById('curseur');
-  if (!calme && matchMedia('(pointer: fine)').matches) {
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches && matchMedia('(pointer: fine)').matches) {
     document.documentElement.classList.add('curseur-actif');
     let lx = 0, ly = 0, a = false;
     addEventListener('pointermove', (e) => {
