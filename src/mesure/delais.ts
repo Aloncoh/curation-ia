@@ -186,6 +186,45 @@ export interface Releve {
   publiee: string;
   /** De l'annonce à la mise en ligne. */
   minutes: number;
+  /** L'actualité s'appuie sur une source primaire (document de rôle « primary »). */
+  primaire: boolean;
+}
+
+/** Relevé sans annonce datée (skills, outils repérés) : du repérage à la mise en ligne. */
+export interface ReleveRepere {
+  publication: number;
+  compte: string;
+  /** Type de l'actualité : annonce, decouverte, selection, version. */
+  type: string;
+  vue: string;
+  prete: string;
+  publiee: string;
+  minutes: number;
+  primaire: boolean;
+}
+
+const PRIMAIRE = `exists (select 1 from news_item_document d where d.news_item_id = n.id and d.role = 'primary') as primaire`;
+
+/**
+ * Le post publié d'un agent le plus rapide du repérage à la mise en ligne (repérage, post prêt et mise en ligne dans cet
+ * ordre). Les types préférés passent avant les autres (un skill avant une annonce pour Repo) ; null s'il n'y a rien.
+ */
+export async function plusRapideDuRepere(client: Client, compte: string, preferes: readonly string[] = []): Promise<ReleveRepere | null> {
+  const lignes = (await client.execute({
+    sql: `select p.id, n.kind, n.first_seen_at, p.created_at, p.published_at, ${PRIMAIRE}
+            from post p join news_item n on n.id = p.news_item_id
+           where p.status = 'publie' and p.published_at is not null and p.account_id = ?`,
+    args: [compte],
+  })).rows;
+  const candidats: ReleveRepere[] = [];
+  for (const l of lignes) {
+    const [vue, prete, publiee] = [l.first_seen_at, l.created_at, l.published_at].map(String) as [string, string, string];
+    const t = [vue, prete, publiee].map((d) => Date.parse(d));
+    if (t.some(Number.isNaN) || t[1]! < t[0]! || t[2]! < t[1]!) continue;
+    candidats.push({ publication: Number(l.id), compte, type: String(l.kind), vue, prete, publiee, minutes: Math.round((t[2]! - t[0]!) / 60000), primaire: Boolean(Number(l.primaire)) });
+  }
+  const rang = (x: ReleveRepere) => (preferes.includes(x.type) ? 0 : 1);
+  return candidats.sort((a, b) => rang(a) - rang(b) || a.minutes - b.minutes || b.publication - a.publication)[0] ?? null;
 }
 
 /**
@@ -195,7 +234,7 @@ export interface Releve {
  */
 export async function relevesMesurables(client: Client): Promise<Releve[]> {
   const lignes = (await client.execute(
-    `select p.id, p.account_id, n.announced_at, n.first_seen_at, p.created_at, p.published_at
+    `select p.id, p.account_id, n.announced_at, n.first_seen_at, p.created_at, p.published_at, ${PRIMAIRE}
        from post p join news_item n on n.id = p.news_item_id
       where p.status = 'publie' and p.published_at is not null and n.announced_at is not null`,
   )).rows;
@@ -205,7 +244,7 @@ export async function relevesMesurables(client: Client): Promise<Releve[]> {
     if (!datePrecise(precisionDate(annonce))) continue;
     const t = [annonce, vue, prete, publiee].map((d) => Date.parse(d));
     if (t.some(Number.isNaN) || t.some((x, i) => i > 0 && x < t[i - 1]!)) continue;
-    releves.push({ publication: Number(l.id), compte: String(l.account_id), annonce, vue, prete, publiee, minutes: Math.round((t[3]! - t[0]!) / 60000) });
+    releves.push({ publication: Number(l.id), compte: String(l.account_id), annonce, vue, prete, publiee, minutes: Math.round((t[3]! - t[0]!) / 60000), primaire: Boolean(Number(l.primaire)) });
   }
   return releves.sort((a, b) => a.minutes - b.minutes || b.publication - a.publication);
 }

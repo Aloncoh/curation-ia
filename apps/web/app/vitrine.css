@@ -200,11 +200,16 @@
   & .agents-grille .bulle-titre { -webkit-line-clamp: 3; font-size: .93rem; }
 
   /* Le relevé horodaté d'un vrai post, comme un ticket : bords perforés, chiffres en « mono ». */
-  & .releve-section { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(24px, 5vw, 64px); align-items: center; }
-  & .releve-texte h2 { margin-bottom: 14px; }
-  & .releve { justify-self: end; rotate: -.8deg; }
+  & .releve-section { display: grid; gap: 26px; }
+  & .releve-texte h2 { margin-bottom: 10px; }
+  & .tickets { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr) minmax(0, 1fr); gap: 22px; align-items: start; }
+  & .tickets .releve:nth-child(1) { rotate: -.6deg; } & .tickets .releve:nth-child(2) { rotate: .5deg; margin-top: 18px; } & .tickets .releve:nth-child(3) { rotate: -.4deg; margin-top: 6px; }
+  & .releve.petit { padding: 22px 20px 18px; }
+  & .releve.petit li { grid-template-columns: minmax(0, 1fr); }
+  & .releve.petit time { grid-row: auto; font-size: .82rem; }
+  & .releve.petit .releve-titre { font-size: 1rem; }
   & .releve {
-    width: min(600px, 100%); padding: 26px 26px 22px; background: #fff; color: var(--v-encre);
+    width: 100%; padding: 26px 26px 22px; background: #fff; color: var(--v-encre);
     box-shadow: 0 30px 60px -40px rgba(60, 30, 140, .6);
     -webkit-mask: radial-gradient(circle 6px at 50% 0, #0000 98%, #000) top / 18px 51% repeat-x, radial-gradient(circle 6px at 50% 100%, #0000 98%, #000) bottom / 18px 51% repeat-x;
     mask: radial-gradient(circle 6px at 50% 0, #0000 98%, #000) top / 18px 51% repeat-x, radial-gradient(circle 6px at 50% 100%, #0000 98%, #000) bottom / 18px 51% repeat-x;
@@ -221,12 +226,6 @@
   & .releve li span a { color: var(--v-violet-fonce); }
   & .releve footer { margin-top: 4px; padding-top: 14px; border-top: 2px dashed #cfc6e6; font-weight: 700; font-variation-settings: "MONO" 1; font-size: .95rem; }
   & .mesure { margin: 0; max-width: 26em; color: var(--v-pied); font-size: .9rem; line-height: 1.5; }
-  & .mesure.petite { margin-top: 14px; font-size: .8rem; }
-  & .autres-cas { list-style: none; margin: 18px 0 0; padding: 0; display: grid; gap: 8px; max-width: 30em; }
-  & .autres-cas a { display: grid; grid-template-columns: 24px minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 8px 12px; border-radius: 14px; background: #fff; border: 1px solid var(--v-trait); color: var(--v-encre); text-decoration: none; }
-  & .autres-cas img { width: 24px; height: 24px; border-radius: 50%; object-fit: cover; background: #efe9e1; }
-  & .autres-cas span { font-size: .86rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  & .autres-cas b { font-size: .86rem; font-variation-settings: "MONO" 1; color: var(--v-violet-fonce); }
 
   /* Fin de page : l'inscription, une fois. */
   & .fin { display: flex; flex-wrap: wrap; align-items: center; gap: 22px; padding-top: 34px; border-top: 1px solid var(--v-trait); }
@@ -270,8 +269,9 @@
     & .fil-f { padding: 16px 12px 8px; }
     & .carte { padding: 10px; }
     & .saisie { margin: 8px 12px 14px; height: 52px; }
-    & .releve-section { grid-template-columns: minmax(0, 1fr); }
-    & .releve { padding: 22px 18px 18px; justify-self: stretch; rotate: none; }
+    & .tickets { grid-template-columns: minmax(0, 1fr); }
+    & .tickets .releve { rotate: none !important; margin-top: 0 !important; }
+    & .releve { padding: 22px 18px 18px; }
     & .releve li { grid-template-columns: minmax(0, 1fr); }
     & .releve time { grid-row: auto; font-size: .84rem; }
   }

@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { SafeFetchError, safeGet, type TransportResponse } from '../src/collect/safe-fetch.ts';
-import { centile, precisionDate, rapportDelais, relevesMesurables } from '../src/mesure/delais.ts';
+import { centile, plusRapideDuRepere, precisionDate, rapportDelais, relevesMesurables } from '../src/mesure/delais.ts';
 import { hubWebsub, lancerSonde, type Interrogateur } from '../src/mesure/sonde.ts';
 import { SOURCES } from '../src/sources.ts';
 import { createTestDb, type TestDb } from './helpers/db.ts';
@@ -274,6 +274,24 @@ describe('rapport des délais', () => {
     const r = await relevesMesurables(c);
     expect(r.map((x) => [x.publication, x.minutes])).toEqual([[4, 40], [1, 299]]);
     expect(r[0]).toMatchObject({ compte: 'nodi', annonce: cas[3][1], vue: cas[3][2], prete: cas[3][3], publiee: cas[3][4] });
+  });
+
+  it('relevé d’un agent sans annonce datée : du repérage à la mise en ligne, types préférés d’abord', async () => {
+    const c = t.database.client;
+    await c.execute(`insert into account (id, handle, display_name, type, avatar, bio, specialty, provisional, created_at) values ('repo', 'repo', 'Repo', 'agent', 'a', 'b', 's', 1, 'x')`);
+    const cas = [
+      // id, type, vue, prête, en ligne
+      [1, 'annonce', '2026-11-05T10:00:00.000Z', '2026-11-05T10:02:00.000Z', '2026-11-05T10:03:00.000Z'], // 3 min, mais pas un skill
+      [2, 'decouverte', '2026-11-05T11:00:00.000Z', '2026-11-05T11:06:00.000Z', '2026-11-05T11:12:00.000Z'], // 12 min, skill
+      [3, 'decouverte', '2026-11-05T12:00:00.000Z', '2026-11-05T11:00:00.000Z', '2026-11-05T12:30:00.000Z'], // prêt avant le repérage : écarté
+    ] as const;
+    for (const [id, type, vue, prete, enLigne] of cas) {
+      await c.execute({ sql: `insert into news_item (id, kind, title, first_seen_at, status) values (?, ?, 't', ?, 'collected')`, args: [id, type, vue] });
+      await c.execute({ sql: `insert into post (account_id, news_item_id, evidence_level, status, created_at, published_at) values ('repo', ?, 'documentary_analysis', 'publie', ?, ?)`, args: [id, prete, enLigne] });
+    }
+    expect(await plusRapideDuRepere(c, 'repo', ['decouverte', 'selection'])).toMatchObject({ publication: 2, type: 'decouverte', minutes: 12, primaire: false });
+    expect(await plusRapideDuRepere(c, 'repo')).toMatchObject({ publication: 1, minutes: 3 });
+    expect(await plusRapideDuRepere(c, 'mova')).toBeNull();
   });
 
   it('relevés de l’accueil : rien sans post aux heures précises', async () => {

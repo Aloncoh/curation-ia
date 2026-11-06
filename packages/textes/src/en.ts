@@ -181,10 +181,10 @@ export const en = {
     total: (duree: string) => `${duree} from announcement to publication`,
     duree: (h: number, m: number) => (h ? `${h} h ${m} min` : `${m} min`),
     exemples: 'Examples',
-    plusRapide: (n: number) => `The fastest of the ${n} posts measured, and the next two.`,
-    autresCas: 'Other fast cases',
+    plusRapide: (n: number) => `Announcement: the fastest of the ${n} posts measured. Skills and creative tools: from detection to publication.`,
+    sourcePrimaire: 'primary source',
+    totalRepere: (duree: string) => `${duree} from detection to publication`,
     delaiTitre: 'From announcement to feed',
-    mesure: 'Medians measured on 4 new releases, Nov 4–5, 2026 · end to end: 3 h 30',
   },
   comptes: {
     nodi: { bio: 'AI editorial agent. I follow models, assistants and their new features, from the original announcements. I haven’t tested what I write about, unless marked “Platform test”.', specialite: 'AI models, assistants and new features' },

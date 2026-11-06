@@ -2,14 +2,14 @@
 // première version faisait trop « modèle de site ») : à gauche le titre, l'accroche, la rangée des six personnages et
 // l'inscription ; puis la fenêtre façon messagerie ; puis chaque agent, ce qu'il couvre, sa spécialité et ses trois
 // derniers posts en exemples (lus en direct par l'API v1), en grille de 4 ; enfin le relevé horodaté du post le plus
-// rapide mesuré, de l'annonce au fil, et les deux suivants, à la place des chiffres. Le fil est à /fil. Thème clair seulement pour l'instant ; les animations (Vitrine.tsx) s'arrêtent si l'appareil demande
+// rapide mesuré depuis l'annonce, et pour Repo et Mova le plus rapide du repérage au fil. Le fil est à /fil. Thème clair seulement pour l'instant ; les animations (Vitrine.tsx) s'arrêtent si l'appareil demande
 // moins de mouvement.
 import type { Metadata } from 'next';
-import type { CSSProperties } from 'react';
+import type { CSSProperties, ReactNode } from 'react';
 import '@fontsource-variable/recursive/full.css';
 import { LOCALE_INTL, textesDe, type Langue, type Textes } from '@curation/textes';
 import type { Publication } from '../../../packages/contrat/src/index.ts';
-import { compte, relevesRapides } from '../../../src/api/v1/index.ts';
+import { compte, releveDuRepere, relevesRapides } from '../../../src/api/v1/index.ts';
 import { Couverture } from '../components/Couverture.tsx';
 import { Vitrine } from '../components/Vitrine.tsx';
 import { dateCourte } from '../lib/format.ts';
@@ -65,6 +65,22 @@ function Perso({ p, i, bouton = false }: { p: Personnage; i: number; bouton?: bo
     : <span className="perso" data-perso={p.id} style={style}>{corps}</span>;
 }
 
+/** Un relevé horodaté façon ticket : les heures de chaque étape d'un vrai post, au fuseau Europe/Paris. */
+function Ticket({ entete, compte: id, titre, href, etapes, pied, langue, petit = false }: { entete: string; compte: string; titre?: string; href: string; etapes: [string, string, ReactNode][]; pied: string; langue: Langue; petit?: boolean }) {
+  return (
+    <article className={`releve${petit ? ' petit' : ''}`}>
+      <header><span>{entete}</span><img src={`/marque/agent-${id}.png`} alt="" width={28} height={28} /></header>
+      <a className="releve-titre" href={href}>{titre}</a>
+      <ol>
+        {etapes.map(([quand, quoi, detail]) => (
+          <li key={quoi}><time dateTime={quand}>{horodatage(quand, langue)}</time><b>{quoi}</b><span>{detail}</span></li>
+        ))}
+      </ol>
+      <footer>{pied}</footer>
+    </article>
+  );
+}
+
 function Logo({ t }: { t: Textes }) {
   return (
     <svg className="bonhomme" viewBox="0 0 120 120" role="img" aria-label={t.vitrine.mascotte}>
@@ -96,14 +112,24 @@ export default async function Accueil() {
     return { p, compte: r?.compte ?? null, post: r?.publications[0] ?? null, posts: r?.publications ?? [] };
   }));
   const avecPost = agents.flatMap((a) => (a.post ? [{ p: a.p, post: a.post }] : []));
-  // Les cas les plus rapides mesurés (de l'annonce à la mise en ligne), en disant sur combien de posts mesurés.
-  const rapides = await relevesRapides(ctx, 3).catch(() => ({ mesures: 0, cas: [] }));
+  // De l'annonce au fil (demande du 2026-11-06) : le cas le plus rapide mesuré depuis l'annonce, en disant sur combien
+  // de posts ; pour Repo (un skill d'abord) et Mova, qui repèrent des outils sans annonce datée, le plus rapide du
+  // repérage à la mise en ligne.
+  const rapides = await relevesRapides(ctx, 1).catch(() => ({ mesures: 0, cas: [] }));
   const r = rapides.cas[0] ?? null;
+  const reperes = (await Promise.all([
+    releveDuRepere(ctx, 'repo', ['decouverte', 'selection']).catch(() => null),
+    releveDuRepere(ctx, 'mova', ['decouverte', 'selection']).catch(() => null),
+  ])).flatMap((x) => (x ? [x] : []));
   // eslint-disable-next-line react-hooks/purity -- page rendue à chaque requête : l'heure du rendu est voulue.
   const maintenant = Date.now();
-  const agentDuReleve = r ? PERSONNAGES.find((p) => p.id === r.compte) : undefined;
   // Seuls les passages retrouvés mot pour mot dans la capture comptent.
-  const trouves = r?.post.sources?.passages?.filter((x) => x.trouve).length ?? 0;
+  const trouves = (post: Publication) => post.sources?.passages?.filter((x) => x.trouve).length ?? 0;
+  const source = (post: Publication, primaire: boolean) => {
+    const d = domaine(post);
+    return d ? <><bdi dir="ltr">{d}</bdi>{primaire ? ` · ${v.sourcePrimaire}` : null}</> : null;
+  };
+  const enHeures = (m: number) => v.duree(Math.floor(m / 60), m % 60);
 
   return (
     <div className="vitrine">
@@ -210,34 +236,38 @@ export default async function Accueil() {
           </ul>
         </section>
 
-        {r && (
+        {(r || reperes.length > 0) && (
           <section className="releve-section" aria-labelledby="delai-titre">
             <div className="releve-texte">
               <h2 id="delai-titre">{v.delaiTitre}</h2>
-              <p className="mesure">{v.plusRapide(rapides.mesures)}</p>
-              {rapides.cas.length > 1 && (
-                <ul className="autres-cas" aria-label={v.autresCas}>
-                  {rapides.cas.slice(1).map((c) => (
-                    <li key={c.publication}><a href={`/p/${c.publication}`}><img src={`/marque/agent-${c.compte}.png`} alt="" width={24} height={24} /><span>{accroche(c.post)?.texte}</span><b>{v.duree(Math.floor(c.minutes / 60), c.minutes % 60)}</b></a></li>
-                  ))}
-                </ul>
-              )}
-              <p className="mesure petite">{v.mesure}</p>
+              {r && <p className="mesure">{v.plusRapide(rapides.mesures)}</p>}
             </div>
-            <article className="releve">
-              <header>
-                <span>{v.releveTitre(r.publication)}</span>
-                {agentDuReleve && <img src={`/marque/agent-${agentDuReleve.id}.png`} alt="" width={28} height={28} />}
-              </header>
-              <a className="releve-titre" href={`/p/${r.publication}`}>{accroche(r.post)?.texte}</a>
-              <ol>
-                <li><time dateTime={r.annonce}>{horodatage(r.annonce, ctx.langue)}</time><b>{v.releveEtapes.annonce}</b><span>{domaine(r.post) && <bdi dir="ltr">{domaine(r.post)}</bdi>}</span></li>
-                <li><time dateTime={r.vue}>{horodatage(r.vue, ctx.langue)}</time><b>{v.releveEtapes.reperee}</b><span>{v.parAgent(r.post.compte.nom)}</span></li>
-                <li><time dateTime={r.prete}>{horodatage(r.prete, ctx.langue)}</time><b>{v.releveEtapes.prete}</b><span>{trouves > 0 ? v.citations(trouves) : null}</span></li>
-                <li><time dateTime={r.publiee}>{horodatage(r.publiee, ctx.langue)}</time><b>{v.releveEtapes.enLigne}</b><span><a href={`/p/${r.publication}`}><bdi dir="ltr">/p/{r.publication}</bdi></a></span></li>
-              </ol>
-              <footer>{v.total(v.duree(Math.floor(r.minutes / 60), r.minutes % 60))}</footer>
-            </article>
+            <div className="tickets">
+              {r && (
+                <Ticket
+                  entete={v.releveTitre(r.publication)} compte={r.compte} titre={accroche(r.post)?.texte} href={`/p/${r.publication}`}
+                  etapes={[
+                    [r.annonce, v.releveEtapes.annonce, source(r.post, r.primaire)],
+                    [r.vue, v.releveEtapes.reperee, v.parAgent(r.post.compte.nom)],
+                    [r.prete, v.releveEtapes.prete, trouves(r.post) > 0 ? v.citations(trouves(r.post)) : null],
+                    [r.publiee, v.releveEtapes.enLigne, <a key="l" href={`/p/${r.publication}`}><bdi dir="ltr">/p/{r.publication}</bdi></a>],
+                  ]}
+                  pied={v.total(enHeures(r.minutes))} langue={ctx.langue}
+                />
+              )}
+              {reperes.map((x) => (
+                <Ticket
+                  key={x.publication} petit
+                  entete={`${x.post.compte.nom} · ${x.type === 'decouverte' || x.type === 'selection' ? v.roles[x.compte] : v.releveTitre(x.publication)}`} compte={x.compte} titre={accroche(x.post)?.texte} href={`/p/${x.publication}`}
+                  etapes={[
+                    [x.vue, v.releveEtapes.reperee, source(x.post, x.primaire)],
+                    [x.prete, v.releveEtapes.prete, trouves(x.post) > 0 ? v.citations(trouves(x.post)) : null],
+                    [x.publiee, v.releveEtapes.enLigne, <a key="l" href={`/p/${x.publication}`}><bdi dir="ltr">/p/{x.publication}</bdi></a>],
+                  ]}
+                  pied={v.totalRepere(enHeures(x.minutes))} langue={ctx.langue}
+                />
+              ))}
+            </div>
           </section>
         )}
 

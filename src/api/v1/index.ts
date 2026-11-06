@@ -5,7 +5,7 @@ import { Fiche, PageFil, ReponseCompte, ReponseComptes, ReponseRecherche, type L
 import { ficheParId } from './fiche.ts';
 import { rechercher } from '../../recherche/rechercher.ts';
 import { lireComptes, pageDuFil, publicationParId, publicationsParIds, type Contexte } from './publications.ts';
-import { relevesMesurables, type Releve } from '../../mesure/delais.ts';
+import { plusRapideDuRepere, relevesMesurables, type Releve, type ReleveRepere } from '../../mesure/delais.ts';
 
 export { RequeteInvalide } from '../../recherche/rechercher.ts';
 export { decoderCurseur, limiteValide, publicationParId, type Contexte, type Mode } from './publications.ts';
@@ -66,4 +66,12 @@ export async function relevesRapides(ctx: Contexte, n = 3): Promise<{ mesures: n
     if (post) cas.push({ ...r, post });
   }
   return { mesures: tous.length, cas };
+}
+
+/** Pour un agent sans annonce datée (skills, outils) : son post le plus rapide du repérage à la mise en ligne. */
+export async function releveDuRepere(ctx: Contexte, compte: string, preferes: readonly string[] = []): Promise<(ReleveRepere & { post: Publication }) | null> {
+  const r = await plusRapideDuRepere(ctx.client, compte, preferes);
+  if (!r) return null;
+  const post = await publicationParId(ctx, r.publication);
+  return post ? { ...r, post } : null;
 }
