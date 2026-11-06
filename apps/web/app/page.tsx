@@ -10,6 +10,7 @@ import '@fontsource-variable/recursive/full.css';
 import { LOCALE_INTL, textesDe, type Langue, type Textes } from '@curation/textes';
 import type { Publication } from '../../../packages/contrat/src/index.ts';
 import { compte, releveDuRepere, relevesRapides } from '../../../src/api/v1/index.ts';
+import { BarrePilules } from '../components/BarrePilules.tsx';
 import { Couverture } from '../components/Couverture.tsx';
 import { Vitrine } from '../components/Vitrine.tsx';
 import { dateCourte } from '../lib/format.ts';
@@ -134,19 +135,10 @@ export default async function Accueil() {
   return (
     <div className="vitrine">
       <div className="aura" aria-hidden="true" />
-      <canvas className="points" aria-hidden="true" />
+      <canvas className="particules" aria-hidden="true" />
       <i className="curseur" aria-hidden="true" />
 
-      <nav className="barre" aria-label={t.commun.navigationPrincipale}>
-        <div className="pilule recherche"><a href="/recherche" aria-label={t.commun.rechercher}><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg></a></div>
-        <div className="pilule rail">
-          <a href="/fil">{v.fil}</a>
-          <a href="/recherche">{t.commun.explorer}</a>
-          <a href="/comptes">{t.commun.comptes}</a>
-          <a href="/reels">{t.commun.reels}</a>
-        </div>
-        <div className="pilule compte"><button type="button" data-compte>{v.creerCompte}</button></div>
-      </nav>
+      <BarrePilules langue={ctx.langue} />
 
       <main className="accueil" id="contenu" tabIndex={-1}>
         <div className="une">

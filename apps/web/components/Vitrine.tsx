@@ -24,7 +24,7 @@ export function Vitrine({ bientot }: { bientot: string }) {
 
     // Comptes : pas encore de création de compte, on le dit à côté du bouton.
     racine.querySelectorAll<HTMLElement>('[data-compte]').forEach((b) => ecouter(b, 'click', () => {
-      const zone = b.closest('.une-texte, .fin')?.querySelector('.info') ?? racine.querySelector('.une-texte .info');
+      const zone = b.closest('.une-texte, .fin, .fil-agents')?.querySelector('.info') ?? racine.querySelector('.une-texte .info, .info');
       if (zone) zone.textContent = bientot;
     }));
 
@@ -32,7 +32,9 @@ export function Vitrine({ bientot }: { bientot: string }) {
     const rail = racine.querySelector<HTMLElement>('.rail');
     const barre = racine.querySelector<HTMLElement>('.barre');
     if (rail) {
-      const caler = (a: HTMLElement | null) => {
+      const courant = rail.querySelector<HTMLElement>('[aria-current="page"]');
+      const caler = (cible: HTMLElement | null) => {
+        const a = cible ?? courant;
         rail.classList.toggle('montre', !!a);
         if (!a) return;
         rail.style.setProperty('--ix', `${a.offsetLeft}px`);
@@ -41,6 +43,8 @@ export function Vitrine({ bientot }: { bientot: string }) {
       rail.querySelectorAll<HTMLElement>('a').forEach((a) => { ecouter(a, 'mouseenter', () => caler(a)); ecouter(a, 'focus', () => caler(a)); });
       ecouter(rail, 'mouseleave', () => caler(null));
       ecouter(rail, 'focusout', (e: FocusEvent) => { if (!rail.contains(e.relatedTarget as Node)) caler(null); });
+      caler(null);
+      document.fonts?.ready.then(() => caler(null));
       requestAnimationFrame(() => rail.classList.add('pret'));
     }
     const majBarre = () => barre?.classList.toggle('defilee', scrollY > 4);
@@ -143,7 +147,7 @@ export function Vitrine({ bientot }: { bientot: string }) {
 
     // Champ de particules façon Antigravity : grille irrégulière de petits traits pâles ; autour du pointeur, un anneau
     // les écarte, les allonge et les oriente vers l'extérieur. Sans souris, l'anneau se promène seul.
-    const toile = racine.querySelector<HTMLCanvasElement>('.points');
+    const toile = racine.querySelector<HTMLCanvasElement>('.particules');
     const cx = toile?.getContext('2d');
     if (toile && cx) {
       let L = 0, H = 0;

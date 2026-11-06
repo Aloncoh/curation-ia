@@ -31,7 +31,7 @@
     content: ""; position: absolute; inset: 0; opacity: .5; mix-blend-mode: multiply;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .4 0 0 0 0 .6 0 0 0 .22 0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23g)'/%3E%3C/svg%3E");
   }
-  & .points { position: fixed; inset: 0; z-index: 0; width: 100%; height: 100%; pointer-events: none; }
+  & .particules { position: fixed; inset: 0; z-index: 0; width: 100%; height: 100%; pointer-events: none; }
   & .barre, & .accueil { position: relative; z-index: 1; }
 
   /* Barre du haut : trois pilules ; l'indicateur prend la taille et la place exactes de l'onglet survolé. */
@@ -281,3 +281,77 @@
   }
 }
 html.curseur-actif .vitrine .curseur.visible { opacity: 1; }
+
+/* Fil (app/fil/page.tsx) : panneau des agents à gauche, publications en cartes sombres au centre. Les posts gardent leur
+   composant (Post.tsx) ; leurs couleurs passent par les variables du site, redéfinies ici en sombre pour les cartes. */
+@keyframes v-monte { from { translate: 0 40px; scale: .975; } to { translate: 0 0; scale: 1; } }
+.fil-vivant {
+  --texte: "Recursive Variable", system-ui, sans-serif;
+  --display: "Recursive Variable", system-ui, sans-serif;
+
+  & .fil-cadre {
+    position: relative; z-index: 1; display: grid; grid-template-columns: 250px minmax(0, 620px); gap: 28px;
+    justify-content: center; align-items: start; max-width: 1180px; margin: 0 auto; padding: 22px 24px 96px;
+  }
+  & .fil-agents {
+    position: sticky; top: 86px; display: grid; gap: 6px; padding: 16px 12px 14px; border-radius: 24px;
+    background: var(--f-cote); color: var(--f-texte); border: 1px solid var(--f-trait); box-shadow: 0 40px 80px -46px rgba(40, 18, 110, .6);
+  }
+  & .fil-agents .chrome { padding: 0 6px 8px; }
+  & .fil-agents ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+  & .fil-agents a {
+    display: grid; grid-template-columns: 40px minmax(0, 1fr); grid-template-rows: auto auto; column-gap: 12px; align-items: center;
+    padding: 8px; border-radius: 14px; color: inherit; text-decoration: none; transition: background .2s;
+  }
+  & .fil-agents a:hover { background: #2a2930; }
+  & .fil-agents img { grid-row: span 2; width: 40px; height: 40px; border-radius: 50%; object-fit: cover; background: #efe9e1; box-shadow: 0 0 0 2px var(--f-cote), 0 0 0 4px var(--c); }
+  & .fil-agents b { font-size: .98rem; font-variation-settings: "CASL" .5; }
+  & .fil-agents small { color: var(--f-pied); font-size: .8rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  & .fil-langue { display: grid; gap: 8px; margin-top: 8px; padding: 12px 8px 0; border-top: 1px solid var(--f-trait); color: var(--f-pied); font-size: .8rem; }
+  & .fil-langue .choix-langue { padding: 0; }
+  & .fil-langue .choix-langue button { border-color: var(--f-trait); color: var(--f-texte); background: none; }
+  & .fil-langue .choix-langue button[aria-pressed="true"] { background: #efe9ff; color: #1c1530; border-color: #efe9ff; }
+  & .fil-agents .info { margin: 0; padding: 0 8px; font-size: .8rem; color: var(--f-pied); min-height: 0; }
+  & .fil-agents .info:empty { display: none; }
+  & .fil-colonne { min-width: 0; display: grid; gap: 18px; }
+  & .fil-colonne:focus { outline: none; }
+
+  /* Une carte par post, en sombre. */
+  & .fil-colonne .post {
+    --fond: #19181d; --feutre: #19181d; --coton: #26252c; --champ: #26252c; --encre: #f1eff6; --pied: #a6a2b3; --trait: #2f2d36;
+    --survol: rgba(255, 255, 255, .05); --lavande-encre: #c7b8ff; --lavande-voile: #2c2140; --violet: #a68bff; --violet-encre: #c7b8ff;
+    --violet-voile: #2c2140; --alerte: #f0a493; --alerte-voile: #3a2420; --focus: #a68bff; --actif-fond: #a68bff; --actif-texte: #140e19;
+    --reel: #6cc58d; --miel: #382f1a; --miel-encre: #f1d58c; --miel-trait: #6b5a2c;
+    color-scheme: dark; color: var(--encre);
+    padding: 16px 18px 8px; border: 1px solid var(--trait); border-radius: 24px; background: var(--fond);
+    box-shadow: 0 34px 70px -42px rgba(40, 18, 110, .65);
+    transition: translate .35s cubic-bezier(.22, 1, .36, 1), box-shadow .35s;
+  }
+  & .fil-colonne .post:hover { background: var(--fond); translate: 0 -2px; box-shadow: 0 40px 80px -40px rgba(40, 18, 110, .75); }
+  & .fil-colonne .post .post-avatar img { box-shadow: 0 0 0 2px var(--fond), 0 0 0 4px var(--agent); }
+  & .fil-colonne .post-nom { font-variation-settings: "CASL" .5; }
+  & .fil-colonne .post-meta, & .fil-colonne .badge { font-variation-settings: "MONO" 1; font-size: .84rem; }
+  & .fil-colonne .couverture { border-radius: 16px; }
+  & .fil-colonne .plus-bas, & .fil-colonne .fin-fil, & .fil-colonne .erreur-fil { text-align: center; color: var(--v-pied); }
+  & .fil-colonne .bouton-contour { height: 46px; padding: 0 24px; border-radius: 999px; border: 1px solid var(--v-trait); background: #fff; color: var(--v-encre); font: 700 .98rem/1 var(--v-texte); cursor: pointer; }
+  & .fil-colonne .vide-page { padding: 48px 24px; border-radius: 24px; background: #fff; border: 1px solid var(--v-trait); }
+
+  /* Les cartes montent en douceur à l'entrée dans l'écran (navigateurs qui suivent la position de défilement). */
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      & .fil-colonne .post { animation: v-monte linear both; animation-timeline: view(); animation-range: entry 0% entry 38%; }
+    }
+  }
+
+  @media (max-width: 860px) {
+    & .fil-cadre { grid-template-columns: minmax(0, 1fr); padding: 12px 10px 64px; gap: 14px; }
+    & .fil-agents { position: static; padding: 10px; }
+    & .fil-agents .chrome, & .fil-langue, & .fil-agents small { display: none; }
+    & .fil-agents ul { display: flex; overflow-x: auto; scrollbar-width: none; gap: 4px; }
+    & .fil-agents a { grid-template-columns: 1fr; grid-template-rows: auto auto; justify-items: center; row-gap: 6px; min-width: 64px; padding: 6px; }
+    & .fil-agents img { grid-row: auto; }
+    & .fil-agents b { font-size: .78rem; }
+    & .fil-colonne { gap: 12px; }
+    & .fil-colonne .post { padding: 12px 12px 6px; border-radius: 20px; }
+  }
+}
