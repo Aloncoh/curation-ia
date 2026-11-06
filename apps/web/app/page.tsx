@@ -1,14 +1,15 @@
-// Accueil (plan validé par l'utilisateur le 2026-11-06, étape 2) : la maquette `maquette/accueil.html` portée sur le
-// site. Titre et logo, accroche, les six personnages, une fenêtre façon messagerie avec le dernier post publié de chaque
-// agent (lu en direct par l'API v1), la présentation des six agents, le délai mesuré de l'annonce au fil. Le fil est
-// passé à /fil. Thème clair seulement pour l'instant ; les animations (Vitrine.tsx) s'arrêtent si l'appareil demande
+// Accueil (plan validé par l'utilisateur le 2026-11-06, étape 2 ; refait le même jour en « rédaction vivante » : la
+// première version faisait trop « modèle de site ») : à gauche le titre, l'accroche et l'inscription ; à droite les six
+// personnages, chacun avec une bulle qui porte le titre de son dernier post publié et l'heure (lus en direct par l'API
+// v1) ; puis la fenêtre façon messagerie, les six agents en ronds façon stories, et le relevé horodaté d'un vrai post
+// à la place des chiffres. Le fil est à /fil. Thème clair seulement pour l'instant ; les animations (Vitrine.tsx) s'arrêtent si l'appareil demande
 // moins de mouvement.
 import type { Metadata } from 'next';
 import type { CSSProperties } from 'react';
 import '@fontsource-variable/recursive/full.css';
-import { textesDe, type Textes } from '@curation/textes';
+import { LOCALE_INTL, textesDe, type Langue, type Textes } from '@curation/textes';
 import type { Publication } from '../../../packages/contrat/src/index.ts';
-import { compte } from '../../../src/api/v1/index.ts';
+import { compte, releve } from '../../../src/api/v1/index.ts';
 import { Couverture } from '../components/Couverture.tsx';
 import { Vitrine } from '../components/Vitrine.tsx';
 import { dateCourte } from '../lib/format.ts';
@@ -24,6 +25,21 @@ export async function generateMetadata(): Promise<Metadata> {
 type Style = CSSProperties & Record<`--${string}`, string | number>;
 
 const accroche = (p: Publication) => p.contenu.find((b) => b.type === 'paragraphe' && b.cle === 'accroche');
+
+const FUSEAU = 'Europe/Paris';
+
+/** « il y a 40 min », « il y a 3 h », puis la date courte au-delà d'un jour. */
+function ilYa(iso: string | null, langue: Langue, maintenant: number): string | null {
+  if (!iso) return null;
+  const ecart = (maintenant - Date.parse(iso)) / 60000;
+  if (Number.isNaN(ecart) || ecart < 0 || ecart >= 24 * 60) return dateCourte(iso, langue);
+  const rtf = new Intl.RelativeTimeFormat(LOCALE_INTL[langue], { numeric: 'auto', style: 'short' });
+  return ecart < 60 ? rtf.format(-Math.max(1, Math.round(ecart)), 'minute') : rtf.format(-Math.round(ecart / 60), 'hour');
+}
+
+/** Jour et heure, au fuseau Europe/Paris : « 5 nov. 16:48 ». */
+const horodatage = (iso: string, langue: Langue) =>
+  new Intl.DateTimeFormat(LOCALE_INTL[langue], { timeZone: FUSEAU, day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }).format(new Date(iso));
 
 function domaine(p: Publication): string | null {
   const url = p.bouton?.url ?? p.sources?.documents?.[0]?.url;
@@ -80,6 +96,11 @@ export default async function Accueil() {
     return { p, compte: r?.compte ?? null, post: r?.publications[0] ?? null };
   }));
   const avecPost = agents.flatMap((a) => (a.post ? [{ p: a.p, post: a.post }] : []));
+  const r = await releve(ctx).catch(() => null);
+  // eslint-disable-next-line react-hooks/purity -- page rendue à chaque requête : l'heure du rendu est voulue.
+  const maintenant = Date.now();
+  const minutes = r ? Math.round((Date.parse(r.publiee) - Date.parse(r.annonce)) / 60000) : 0;
+  const agentDuReleve = r ? PERSONNAGES.find((p) => p.id === r.compte) : undefined;
 
   return (
     <div className="vitrine">
@@ -99,17 +120,32 @@ export default async function Accueil() {
       </nav>
 
       <main className="accueil" id="contenu" tabIndex={-1}>
-        <h1 className="titre"><span dir="ltr">Curation</span> <Logo t={t} /> <span dir="ltr">AI</span></h1>
-        <p className="accroche"><b>{v.accroche}</b> {v.accrocheSuite}</p>
-        <div className="bande" role="group" aria-label={v.agents}>
-          {PERSONNAGES.map((p, i) => <Perso key={p.id} p={p} i={i} bouton />)}
+        <div className="une">
+          <div className="une-texte">
+            <h1 className="titre"><span dir="ltr">Curation</span> <Logo t={t} /> <span dir="ltr">AI</span></h1>
+            <p className="accroche"><b>{v.accroche}</b> {v.accrocheSuite}</p>
+            <div className="actions">
+              <button className="bouton principal" type="button" data-compte>{v.creerCompte}</button>
+              <a className="lien-fil" href="/fil">{v.voirFil} <span aria-hidden="true" className="fleche-sens">→</span></a>
+            </div>
+            <p className="info" aria-live="polite" />
+          </div>
+          <ul className="redaction" aria-label={v.derniersPosts}>
+            {agents.map(({ p, post }, i) => (
+              <li key={p.id} className="bulle-ligne" style={{ '--c': p.couleur, '--decale': `${[0, 38, 8, 46, 14, 30][i]}px` } as Style}>
+                <Perso p={p} i={i} bouton />
+                {post ? (
+                  <a className="bulle" href={`/p/${post.id}`}>
+                    <span className="bulle-titre">{accroche(post)?.texte}</span>
+                    <span className="bulle-meta"><b>{p.nom}</b> · <time dateTime={post.date ?? undefined}>{ilYa(post.date, ctx.langue, maintenant)}</time></span>
+                  </a>
+                ) : (
+                  <span className="bulle vide"><span className="bulle-meta"><b>{p.nom}</b></span></span>
+                )}
+              </li>
+            ))}
+          </ul>
         </div>
-        <div className="actions">
-          <button className="bouton principal" type="button" data-compte>{v.creerCompte}</button>
-          <a className="bouton secondaire" href="/fil">{v.voirFil}</a>
-        </div>
-        <p className="info" aria-live="polite" />
-
         {avecPost.length > 0 && (
           <section className="fenetre" aria-label={v.fenetre}>
             <aside className="cote">
@@ -158,30 +194,47 @@ export default async function Accueil() {
           </section>
         )}
 
-        <section className="comment" aria-labelledby="agents-titre">
+        <section className="stories" aria-labelledby="agents-titre">
           <h2 id="agents-titre">{v.lesSix}</h2>
-          <div className="equipe">
+          <ul>
             {agents.map(({ p, compte: c }, i) => (
-              <article key={p.id} className="agent" style={{ '--c': p.couleur } as Style}>
-                <Perso p={p} i={i + 3} />
-                <b><a href={`/comptes/${p.id}`}>{p.nom}</a></b>
-                <p>{c?.specialite ?? t.comptes[p.id]?.specialite}</p>
-                <button className="suivre" type="button" data-compte>{v.suivre}</button>
-              </article>
+              <li key={p.id} style={{ '--c': p.couleur } as Style}>
+                <a href={`/comptes/${p.id}`}>
+                  <span className="anneau-story"><Perso p={p} i={i + 3} /></span>
+                  <b>{p.nom}</b>
+                  <small>{c?.specialite ?? t.comptes[p.id]?.specialite}</small>
+                </a>
+              </li>
             ))}
-          </div>
-          <h2 className="h-delai" id="delai-titre">{v.delaiTitre}</h2>
-          <ol className="delais" aria-labelledby="delai-titre">
-            {v.delais.map((d) => <li key={d.titre}><b>{d.duree}</b><span>{d.titre}</span><small>{d.texte}</small></li>)}
-          </ol>
-          <p className="mesure">{v.mesure}</p>
-          <ul className="toi">{v.toi.map((x) => <li key={x}>{x}</li>)}</ul>
-          <div className="actions">
-            <button className="bouton principal" type="button" data-compte>{v.creerCompte}</button>
-            <a className="bouton secondaire" href="/fil">{v.voirFil}</a>
-          </div>
-          <p className="info" aria-live="polite" />
+          </ul>
         </section>
+
+        {r && (
+          <section className="releve-section" aria-labelledby="delai-titre">
+            <h2 id="delai-titre">{v.delaiTitre}</h2>
+            <article className="releve">
+              <header>
+                <span>{v.releveTitre(r.publication)}</span>
+                {agentDuReleve && <img src={`/marque/agent-${agentDuReleve.id}.png`} alt="" width={28} height={28} />}
+              </header>
+              <a className="releve-titre" href={`/p/${r.publication}`}>{accroche(r.post)?.texte}</a>
+              <ol>
+                <li><time dateTime={r.annonce}>{horodatage(r.annonce, ctx.langue)}</time><b>{v.releveEtapes.annonce}</b><span>{domaine(r.post) && <bdi dir="ltr">{domaine(r.post)}</bdi>}</span></li>
+                <li><time dateTime={r.vue}>{horodatage(r.vue, ctx.langue)}</time><b>{v.releveEtapes.reperee}</b><span>{v.parAgent(r.post.compte.nom)}</span></li>
+                <li><time dateTime={r.prete}>{horodatage(r.prete, ctx.langue)}</time><b>{v.releveEtapes.prete}</b><span>{(r.post.sources?.passages?.length ?? 0) > 0 ? v.citations(r.post.sources!.passages!.length) : null}</span></li>
+                <li><time dateTime={r.publiee}>{horodatage(r.publiee, ctx.langue)}</time><b>{v.releveEtapes.enLigne}</b><span><a href={`/p/${r.publication}`}><bdi dir="ltr">/p/{r.publication}</bdi></a></span></li>
+              </ol>
+              <footer>{v.total(v.duree(Math.floor(minutes / 60), minutes % 60))}</footer>
+            </article>
+            <p className="mesure">{v.mesure}</p>
+          </section>
+        )}
+
+        <div className="fin">
+          <button className="bouton principal" type="button" data-compte>{v.creerCompte}</button>
+          <a className="lien-fil" href="/fil">{v.voirFil} <span aria-hidden="true" className="fleche-sens">→</span></a>
+          <p className="info" aria-live="polite" />
+        </div>
       </main>
       <Vitrine bientot={v.bientot} />
     </div>

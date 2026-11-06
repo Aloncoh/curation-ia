@@ -1,10 +1,11 @@
 // API v1 (ADR 0010) : fonctions de lecture utilisées par les routes /api/v1 et par les pages du site, sans accès propre
 // à la base côté site. Chaque réponse est validée par le contrat (packages/contrat) avant d'être servie.
 import type { Client } from '@libsql/client';
-import { Fiche, PageFil, ReponseCompte, ReponseComptes, ReponseRecherche, type Langue } from '../../../packages/contrat/src/index.ts';
+import { Fiche, PageFil, ReponseCompte, ReponseComptes, ReponseRecherche, type Langue, type Publication } from '../../../packages/contrat/src/index.ts';
 import { ficheParId } from './fiche.ts';
 import { rechercher } from '../../recherche/rechercher.ts';
 import { lireComptes, pageDuFil, publicationParId, publicationsParIds, type Contexte } from './publications.ts';
+import { dernierReleve, type Releve } from '../../mesure/delais.ts';
 
 export { RequeteInvalide } from '../../recherche/rechercher.ts';
 export { decoderCurseur, limiteValide, publicationParId, type Contexte, type Mode } from './publications.ts';
@@ -54,3 +55,11 @@ export async function recherche(ctx: Contexte, requete: unknown, o: { tri?: 'per
 }
 
 export type { Langue };
+
+/** Relevé horodaté du dernier post publié aux heures précises (accueil, 2026-11-06), avec la publication visible. */
+export async function releve(ctx: Contexte): Promise<(Releve & { post: Publication }) | null> {
+  const r = await dernierReleve(ctx.client);
+  if (!r) return null;
+  const post = await publicationParId(ctx, r.publication);
+  return post ? { ...r, post } : null;
+}

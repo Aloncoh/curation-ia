@@ -176,6 +176,38 @@ const ms = (v: number | null) => (v === null ? 'non mesuré' : `${Math.round(v)}
 const s = (v: number | null) => (v === null ? 'non mesuré' : `${v.toFixed(1)} s`);
 
 /** Rapport lisible. Chaque ligne donne son effectif : une médiane sur trois cas n'est pas une promesse. */
+/** Relevé horodaté d'un post réel, pour l'accueil (2026-11-06) : annonce, repérage, post prêt, mise en ligne. */
+export interface Releve {
+  publication: number;
+  compte: string;
+  annonce: string;
+  vue: string;
+  prete: string;
+  publiee: string;
+}
+
+/**
+ * Le post publié le plus récent dont toutes les heures sont connues et cohérentes : annonce datée à la minute ou à la
+ * seconde (une heure ronde ou une date au jour ne permet pas de mesurer), puis repérage, post prêt et mise en ligne
+ * dans cet ordre. Null s'il n'y en a pas.
+ */
+export async function dernierReleve(client: Client): Promise<Releve | null> {
+  const lignes = (await client.execute(
+    `select p.id, p.account_id, n.announced_at, n.first_seen_at, p.created_at, p.published_at
+       from post p join news_item n on n.id = p.news_item_id
+      where p.status = 'publie' and p.published_at is not null and n.announced_at is not null
+      order by p.published_at desc, p.id desc limit 200`,
+  )).rows;
+  for (const l of lignes) {
+    const [annonce, vue, prete, publiee] = [l.announced_at, l.first_seen_at, l.created_at, l.published_at].map(String) as [string, string, string, string];
+    if (!datePrecise(precisionDate(annonce))) continue;
+    const t = [annonce, vue, prete, publiee].map((d) => Date.parse(d));
+    if (t.some(Number.isNaN) || t.some((x, i) => i > 0 && x < t[i - 1]!)) continue;
+    return { publication: Number(l.id), compte: String(l.account_id), annonce, vue, prete, publiee };
+  }
+  return null;
+}
+
 export interface LatenceDeploiement {
   depuis: string | null;
   annoncees: number;

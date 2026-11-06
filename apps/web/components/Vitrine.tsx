@@ -1,7 +1,7 @@
 'use client';
 // Animations et interactions de l'accueil (app/page.tsx), reprises de la maquette `maquette/accueil.html` : champ de
 // particules autour du pointeur, curseur flèche, indicateur de la barre calé sur l'onglet, barre pleine au défilement,
-// personnages qui regardent, se présentent et se déplacent, onglets de la fenêtre, boutons de compte (bientôt).
+// personnages de la rédaction qui regardent, se présentent tour à tour et se dandinent, onglets de la fenêtre, boutons de compte (bientôt).
 // Tout s'arrête si l'appareil demande moins de mouvement ; le curseur normal revient dès qu'on navigue au clavier.
 import { useEffect, useRef } from 'react';
 
@@ -24,7 +24,7 @@ export function Vitrine({ bientot }: { bientot: string }) {
 
     // Comptes : pas encore de création de compte, on le dit à côté du bouton.
     racine.querySelectorAll<HTMLElement>('[data-compte]').forEach((b) => ecouter(b, 'click', () => {
-      const zone = b.closest('section')?.querySelector(':scope > .info') ?? racine.querySelector('.accueil > .info');
+      const zone = b.closest('.une-texte, .fin')?.querySelector('.info') ?? racine.querySelector('.une-texte .info');
       if (zone) zone.textContent = bientot;
     }));
 
@@ -68,17 +68,17 @@ export function Vitrine({ bientot }: { bientot: string }) {
 
     // Personnages : regarder (-1 gauche, 1 droite), se présenter, se déplacer.
     const regarder = (el: HTMLElement, r: number) => el.style.setProperty('--r', String(r));
-    const bande = [...racine.querySelectorAll<HTMLElement>('.bande .perso')];
-    const cartes = [...racine.querySelectorAll<HTMLElement>('.agent .perso')];
+    const bande = [...racine.querySelectorAll<HTMLElement>('.redaction .perso')];
+    const cartes = [...racine.querySelectorAll<HTMLElement>('.stories .perso')];
     let vedette = -1;
     const presenter = (i: number) => { bande.forEach((e, k) => e.classList.toggle('vedette', k === i)); vedette = i; if (bande[i]) regarder(bande[i], 0); };
     bande.forEach((e, i) => { ecouter(e, 'click', () => presenter(i)); ecouter(e, 'mouseenter', () => presenter(i)); });
 
-    // Cartes des agents qui apparaissent au défilement.
+    // Stories des agents qui apparaissent au défilement.
     const observateur = 'IntersectionObserver' in window && !calme
       ? new IntersectionObserver((entrees) => entrees.forEach((x) => { if (x.isIntersecting) { x.target.classList.add('vue'); observateur?.unobserve(x.target); } }), { rootMargin: '0px 0px -10% 0px' })
       : null;
-    racine.querySelectorAll('.agent').forEach((a) => (observateur ? observateur.observe(a) : a.classList.add('vue')));
+    racine.querySelectorAll('.stories li').forEach((a) => (observateur ? observateur.observe(a) : a.classList.add('vue')));
     if (observateur) nettoyages.push(() => observateur.disconnect());
 
     const fin = () => { nettoyages.forEach((f) => f()); minuteries.forEach((id) => clearTimeout(id)); };
@@ -95,7 +95,7 @@ export function Vitrine({ bientot }: { bientot: string }) {
     bande.forEach((e, i) => {
       let pos = 0;
       const marcher = () => {
-        const m = innerWidth < 860 ? 10 : 34;
+        const m = innerWidth < 860 ? 6 : 12;
         let cible = Math.round((hasard() * 2 - 1) * m);
         if (Math.abs(cible - pos) < m * 0.4) cible = pos > 0 ? -Math.round(m * 0.6) : Math.round(m * 0.6);
         const duree = Math.max(0.7, Math.abs(cible - pos) / 38);
