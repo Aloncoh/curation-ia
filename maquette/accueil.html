@@ -100,9 +100,8 @@
   /* Six personnages plats : une silhouette de couleur, deux yeux en pilule qui glissent pour faire tourner la tête. */
   .bande { display: flex; justify-content: center; align-items: flex-end; gap: clamp(14px, 3vw, 30px); padding: 6px 0 30px; }
   .perso { position: relative; width: 66px; height: 66px; padding: 0; border: 0; background: none; cursor: pointer; animation: flotte 3.2s ease-in-out infinite; animation-delay: var(--d); }
-  .perso svg { width: 100%; height: 100%; overflow: visible; display: block; transition: transform .45s cubic-bezier(.34, 1.56, .64, 1); transform: translateY(var(--saut, 0)) scale(var(--taille, 1)); }
+  .perso svg { width: 100%; height: 100%; overflow: visible; display: block; filter: drop-shadow(0 6px 10px rgba(60, 30, 120, .2)); transition: transform .45s cubic-bezier(.34, 1.56, .64, 1); transform: translateY(var(--saut, 0)) scale(var(--taille, 1)); }
   .perso .forme { transform-box: fill-box; transform-origin: center; transition: transform .5s cubic-bezier(.22, 1, .36, 1); transform: scaleX(var(--sx, 1)); }
-  .perso .yeux { transition: transform .5s cubic-bezier(.22, 1, .36, 1); transform: translateX(var(--ox, 0px)); }
   .perso .yeux rect { transform-box: fill-box; transform-origin: center; animation: cligne var(--cl, 4.4s) infinite; }
   .perso:focus-visible { outline: 3px solid var(--violet); outline-offset: 6px; border-radius: 50%; }
   .perso span { position: absolute; left: 50%; top: calc(100% + 8px); translate: -50% 0; font: 700 .82rem/1 var(--texte); color: var(--encre); white-space: nowrap; opacity: 0; transition: opacity .3s; pointer-events: none; }
@@ -110,7 +109,9 @@
   .perso.vedette span { opacity: 1; }
   @keyframes flotte { 0%, 100% { translate: 0 0; } 50% { translate: 0 -6px; } }
   @keyframes cligne { 0%, 93%, 100% { transform: scaleY(1); } 96% { transform: scaleY(.12); } }
-  .bonhomme .yeux { transition: transform .6s cubic-bezier(.22, 1, .36, 1); transform: translateX(var(--ox, 0px)); }
+  .bonhomme .yeux, .perso .yeux { transition: transform .55s cubic-bezier(.22, 1, .36, 1); transform: translateX(var(--ox, 0px)); }
+  .bonhomme .visage, .perso .visage { transition: transform .55s cubic-bezier(.22, 1, .36, 1); transform: translateX(var(--vx, 0px)); }
+  .bonhomme .anneau { transform-box: view-box; transform-origin: 60px 60px; transition: transform .8s cubic-bezier(.22, 1, .36, 1); transform: rotate(var(--rot, 0deg)); }
   .bonhomme .yeux rect { transform-box: fill-box; transform-origin: center; animation: cligne 5s infinite; }
 
   /* Fenêtre d'application. */
@@ -239,7 +240,7 @@
 </nav>
 
 <main class="accueil">
-  <h1 class="titre">Curation <svg class="bonhomme" id="bonhomme" viewBox="0 0 100 100" role="img" aria-label="Mascotte de Curation AI"><circle cx="50" cy="50" r="48" fill="#1c1530"/><g class="yeux"><rect x="33" y="34" width="11" height="30" rx="5.5" fill="#b9a3ff"/><rect x="56" y="34" width="11" height="30" rx="5.5" fill="#b9a3ff"/></g></svg> AI</h1>
+  <h1 class="titre">Curation <svg class="bonhomme" id="bonhomme" viewBox="0 0 120 120" role="img" aria-label="Mascotte de Curation AI"><defs><clipPath id="visiere-logo"><rect x="27" y="37" width="66" height="46" rx="23"/></clipPath></defs><g class="anneau" fill="none" stroke-width="9" stroke-linecap="round"><path d="M66.09 10.37 A50 50 0 0 1 99.93 29.91" stroke="#1fa77a"/><path d="M106.03 40.46 A50 50 0 0 1 106.03 79.54" stroke="#e8732f"/><path d="M99.93 90.09 A50 50 0 0 1 66.09 109.63" stroke="#2f8fd8"/><path d="M53.91 109.63 A50 50 0 0 1 20.07 90.09" stroke="#9a5cf0"/><path d="M13.97 79.54 A50 50 0 0 1 13.97 40.46" stroke="#d99a12"/><path d="M20.07 29.91 A50 50 0 0 1 53.91 10.37" stroke="#12a6a0"/></g><circle cx="60" cy="60" r="41" fill="#fff"/><g class="visage"><rect x="27" y="37" width="66" height="46" rx="23" fill="#1c1530"/><g clip-path="url(#visiere-logo)"><g class="yeux"><rect x="39" y="49" width="14" height="22" rx="7" fill="#9b7bff"/><rect x="67" y="49" width="14" height="22" rx="7" fill="#9b7bff"/></g></g></g></svg> AI</h1>
   <div class="bande" id="bande" aria-label="Les six agents éditoriaux"></div>
   <div class="actions" id="creer">
     <button class="bouton principal" type="button" id="principal">Créer un compte</button>
@@ -337,14 +338,19 @@
 // la tête vient des yeux qui glissent et de la forme qui se resserre. Tour à tour, un agent saute et dit son nom.
 (() => {
   const calme = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const yeux = '<g class="yeux"><rect x="35" y="44" width="10" height="22" rx="5" fill="#fff"/><rect x="55" y="44" width="10" height="22" rx="5" fill="#fff"/></g>';
+  // Logos plats des six agents, redessinés d'après leurs planches (assets/brand/) : tête crème, visière noire, yeux de
+  // leur couleur, traits propres. Les yeux glissent dans la visière, la visière suit un peu : la tête semble tourner.
+  const C = '#efe6da', N = '#16141b';
+  const visiere = (id, x, y, l, h, couleur, ey = 0) => `<defs><clipPath id="v-${id}"><rect x="${x}" y="${y}" width="${l}" height="${h}" rx="${h / 2}"/></clipPath></defs>
+    <g class="visage"><rect x="${x}" y="${y}" width="${l}" height="${h}" rx="${h / 2}" fill="${N}"/>
+    <g clip-path="url(#v-${id})"><g class="yeux"><rect x="${x + l * 0.24}" y="${y + h * 0.24 + ey}" width="${l * 0.15}" height="${h * 0.52}" rx="${l * 0.075}" fill="${couleur}"/><rect x="${x + l * 0.61}" y="${y + h * 0.24 + ey}" width="${l * 0.15}" height="${h * 0.52}" rx="${l * 0.075}" fill="${couleur}"/></g></g></g>`;
   const PERSOS = [
-    { nom: 'Nodi', c: '#1fa77a', forme: '<rect x="62" y="4" width="10" height="22" rx="5" fill="#f26a3d"/><rect x="12" y="20" width="76" height="70" rx="30" fill="#1fa77a"/>' },
-    { nom: 'Repo', c: '#e8732f', forme: '<path d="M20 44 L24 8 L48 28 Z M80 44 L76 8 L52 28 Z" fill="#e8732f" stroke="#e8732f" stroke-width="8" stroke-linejoin="round"/><circle cx="50" cy="58" r="37" fill="#e8732f"/>' },
-    { nom: 'Pyxo', c: '#2f8fd8', forme: '<path d="M20 32 L12 16 L32 24 Z M80 32 L88 16 L68 24 Z" fill="#2f8fd8" stroke="#2f8fd8" stroke-width="6" stroke-linejoin="round"/><rect x="12" y="22" width="76" height="68" rx="36" fill="#2f8fd8"/><ellipse cx="12" cy="66" rx="9" ry="16" fill="#2577bd"/><ellipse cx="88" cy="66" rx="9" ry="16" fill="#2577bd"/><path d="M45 72 L55 72 L50 79 Z" fill="#ffd36b" stroke="#ffd36b" stroke-width="3" stroke-linejoin="round"/>' },
-    { nom: 'Mova', c: '#9a5cf0', forme: '<circle cx="38" cy="22" r="9" fill="#c4a1ff"/><circle cx="52" cy="17" r="10" fill="#c4a1ff"/><circle cx="65" cy="23" r="8" fill="#c4a1ff"/><path d="M70 88 C88 96 106 86 104 70 C102 58 86 56 84 67 C83 74 92 76 94 70" fill="none" stroke="#7d45d6" stroke-width="7" stroke-linecap="round"/><circle cx="48" cy="58" r="36" fill="#9a5cf0"/>' },
-    { nom: 'Pulse', c: '#d99a12', forme: '<path d="M12 60 L8 38 L24 42 L20 18 L38 30 L46 6 L56 28 L70 10 L72 34 L90 24 L84 44 L94 50 L88 62 Z" fill="#b8820e" stroke="#b8820e" stroke-width="5" stroke-linejoin="round"/><circle cx="50" cy="62" r="33" fill="#d99a12"/>' },
-    { nom: 'Radar', c: '#12a6a0', forme: '<circle cx="16" cy="48" r="18" fill="#4cc9c0"/><circle cx="84" cy="48" r="18" fill="#4cc9c0"/><circle cx="50" cy="58" r="33" fill="#12a6a0"/>' },
+    { nom: 'Nodi', c: '#1fa77a', dessin: `<rect x="61" y="6" width="11" height="20" rx="4" fill="#f26a3d"/><circle cx="10" cy="54" r="9" fill="${N}"/><circle cx="90" cy="54" r="9" fill="${N}"/><rect x="12" y="20" width="76" height="68" rx="30" fill="${C}"/>`, v: ['nodi', 21, 33, 58, 40, '#3ef0a8'] },
+    { nom: 'Repo', c: '#e8732f', dessin: `<path d="M16 48 L22 6 L48 30 Z M84 48 L78 6 L52 30 Z" fill="#f07a2e" stroke="#f07a2e" stroke-width="6" stroke-linejoin="round"/><path d="M24 40 L27 18 L40 30 Z M76 40 L73 18 L60 30 Z" fill="${N}"/><ellipse cx="50" cy="60" rx="38" ry="33" fill="${C}"/>`, v: ['repo', 22, 42, 56, 38, '#4fc8ff'] },
+    { nom: 'Pyxo', c: '#2f8fd8', dessin: `<path d="M18 36 L10 14 L32 26 Z M82 36 L90 14 L68 26 Z" fill="#3e63d6" stroke="#3e63d6" stroke-width="5" stroke-linejoin="round"/><ellipse cx="50" cy="58" rx="38" ry="34" fill="${C}"/><path d="M26 34 Q50 20 74 34 Q62 30 50 40 Q38 30 26 34 Z" fill="#3e63d6"/>`, v: ['pyxo', 22, 40, 56, 38, '#4fb0ff'] },
+    { nom: 'Mova', c: '#9a5cf0', dessin: `<circle cx="42" cy="18" r="10" fill="#f2836b"/><circle cx="56" cy="16" r="9" fill="#b48cff"/><circle cx="66" cy="24" r="7" fill="#f2836b"/><circle cx="50" cy="58" r="37" fill="${C}"/><circle cx="88" cy="58" r="9" fill="none" stroke="#b48cff" stroke-width="6"/>`, v: ['mova', 20, 40, 56, 38, '#c39bff'] },
+    { nom: 'Pulse', c: '#d99a12', dessin: `<path d="M8 60 L4 40 L18 42 L14 20 L32 30 L38 8 L50 26 L62 8 L68 30 L86 20 L82 42 L96 40 L92 60 Z" fill="#25364f" stroke="#25364f" stroke-width="5" stroke-linejoin="round"/><circle cx="20" cy="32" r="3" fill="#ffc847"/><circle cx="50" cy="20" r="3" fill="#ffc847"/><circle cx="80" cy="32" r="3" fill="#ffc847"/><circle cx="26" cy="36" r="8" fill="${C}"/><circle cx="74" cy="36" r="8" fill="${C}"/><ellipse cx="50" cy="60" rx="35" ry="32" fill="${C}"/><circle cx="50" cy="83" r="4" fill="${N}"/>`, v: ['pulse', 22, 42, 56, 34, '#ffc847'] },
+    { nom: 'Radar', c: '#12a6a0', dessin: `<ellipse cx="16" cy="50" rx="16" ry="22" fill="${C}"/><ellipse cx="84" cy="50" rx="16" ry="22" fill="${C}"/><ellipse cx="17" cy="50" rx="10" ry="15" fill="#3a3a42"/><ellipse cx="83" cy="50" rx="10" ry="15" fill="#3a3a42"/><path d="M6 42 Q8 34 14 31 M94 42 Q92 34 86 31" fill="none" stroke="#40e8d8" stroke-width="3" stroke-linecap="round"/><circle cx="50" cy="54" r="33" fill="${C}"/><path d="M46 76 Q46 92 56 94" fill="none" stroke="#cdbfac" stroke-width="13" stroke-linecap="round"/><path d="M46 76 Q46 92 56 94" fill="none" stroke="${C}" stroke-width="9" stroke-linecap="round"/><circle cx="57" cy="94" r="3.5" fill="none" stroke="#40e8d8" stroke-width="2"/>`, v: ['radar', 24, 36, 52, 34, '#40e8d8'] },
   ];
   const bande = document.getElementById('bande');
   const elements = PERSOS.map((p, i) => {
@@ -354,12 +360,12 @@
     b.style.setProperty('--d', (-i * 0.53).toFixed(2) + 's');
     b.style.setProperty('--cl', (3.6 + (i * 0.7) % 2.4).toFixed(2) + 's');
     b.setAttribute('aria-label', p.nom);
-    b.innerHTML = `<svg viewBox="0 0 100 100" aria-hidden="true"><g class="forme">${p.forme}</g>${yeux}</svg><span>${p.nom}</span>`;
+    b.innerHTML = `<svg viewBox="0 0 100 100" aria-hidden="true"><g class="forme">${p.dessin}</g>${visiere(...p.v)}</svg><span>${p.nom}</span>`;
     bande.append(b);
     return b;
   });
   // Regarder : -1 (gauche) à 1 (droite). Les yeux glissent, la forme se resserre un peu, comme une tête qui tourne.
-  const regarder = (el, r) => { el.style.setProperty('--ox', (r * 10).toFixed(1) + 'px'); el.style.setProperty('--sx', (1 - Math.abs(r) * 0.07).toFixed(3)); };
+  const regarder = (el, r) => { el.style.setProperty('--ox', (r * 9).toFixed(1) + 'px'); el.style.setProperty('--vx', (r * 3).toFixed(1) + 'px'); el.style.setProperty('--sx', (1 - Math.abs(r) * 0.05).toFixed(3)); };
   const bonhomme = document.getElementById('bonhomme');
   let vedette = -1;
   const presenter = (i) => {
@@ -374,7 +380,7 @@
     const tourne = () => { if (i !== vedette) regarder(e, [-1, -0.5, 0, 0.5, 1][Math.floor(Math.random() * 5)]); setTimeout(tourne, 1400 + Math.random() * 2200); };
     setTimeout(tourne, 400 + i * 250);
   });
-  const tourneMascotte = () => { bonhomme.style.setProperty('--ox', ([-9, 0, 9][Math.floor(Math.random() * 3)]) + 'px'); setTimeout(tourneMascotte, 1600 + Math.random() * 1800); };
+  const tourneMascotte = () => { const r = [-1, 0, 1][Math.floor(Math.random() * 3)]; bonhomme.style.setProperty('--ox', r * 9 + 'px'); bonhomme.style.setProperty('--vx', r * 3 + 'px'); bonhomme.style.setProperty('--rot', r * 14 + 'deg'); setTimeout(tourneMascotte, 1600 + Math.random() * 1800); };
   setTimeout(tourneMascotte, 900);
   // Présentation : un agent après l'autre, toutes les 2,6 s.
   let suivant = 0;
