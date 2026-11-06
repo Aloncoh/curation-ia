@@ -31,9 +31,16 @@ Réseau social vivant autour de l'IA, du développement et de la technologie : r
 5. **Visuels** : fonds trop petits (504 × 171 px) ; logos au premier plan à revoir selon les droits ([docs/droits.md](docs/droits.md)) ; le site « ne donne pas envie » (retour de l'utilisateur du 2026-11-05) : la direction retenue est celle du nouvel accueil de la maquette (blanc, violet, mascottes animées), à porter ensuite sur le site.
 6. 3 à 5 contenus LinkedIn avec preuves dans `communication/`, après vérification du parcours réel découverte → contenu → recherche.
 
-## Prochaine action (décidée par l'utilisateur le 2026-11-06)
+## Prochaine action (plan validé par l'utilisateur le 2026-11-06, en questions à choix)
 
-**Refonte du vrai site** (`apps/web`) : le fil du réseau social et la page principale des posts prennent le design de la fenêtre façon messagerie de l'accueil de la maquette (`maquette/accueil.html`) : colonne des agents à gauche (avatar, nom, date, dernier post), post au centre en carte (titre, visuel, étapes de vérification, lien), barre de saisie en bas. Fond blanc et dégradé violet, barre en pilules à indicateur glissant, curseur flèche. Accueil validé par l'utilisateur (« ils sont très bien faits »). Aucun texte rédigé ajouté (« ça fait trop »). Proposer le plan en quelques lignes avant d'implémenter.
+Ordre, avec mise en ligne et vérification à chaque étape, sur ordinateur d'abord :
+1. ~~Barre du haut~~ (fait le 2026-11-06 : indicateur calé sur l'onglet, fond plein au défilement).
+2. **Accueil sur le vrai site** (`/`, depuis `maquette/accueil.html`), audit d'accessibilité WCAG 2.2 AA (contrastes, textes alternatifs, clavier, libellés clairs, mouvement réduit), retrait des promesses non prouvées (« tout ce qui sort » → « ce qui sort »). « Voir le fil » mène à l'inscription.
+3. **Pied de page et quatre pages légales** : mentions légales, confidentialité (page RGPD), cookies, CGU ; d'après les sources officielles (CNIL, Légifrance, loi israélienne), cases à remplir par l'utilisateur, « à faire relire ». Contact dans une variable Vercel, jamais versionné. « © 2026 [nom]. Tous droits réservés. », portée précisée dans les CGU (marque, design, code, base de données ; citations, logos et captures à leurs titulaires ; aspiration interdite). Nom de marque centralisé (nom définitif pas encore choisi). Ni politique de remboursement ni bandeau de cookies tant qu'inutiles (seul cookie : la langue).
+4. **Inscription** : e-mail et « Continuer avec Google / GitHub / Apple » ; phrase sur les données, case CGU non cochée, « Continuer sans compte » vers le fil. Boutons inactifs d'abord ; puis GitHub et Google, puis e-mail, Apple plus tard (dépense). Comptes créés par l'utilisateur ; migration avec son accord.
+5. **Fil** (`/fil`) : montrer d'abord deux versions côte à côte (colonne de cartes ou fenêtre), l'utilisateur choisit.
+6. **Page d'un post**, dans la forme retenue ; les posts restent publics.
+7. **Réglages** : Votre compte (dont suppression du compte), Sécurité, Notifications, Système (Affichage système / clair / sombre ; Langue fr / en / he ; Animations normales / réduites ; Texte : taille et police lisible ; Cookies), Centre d'aide (liens, texte dicté par l'utilisateur). Thème clair d'abord, sombre ensuite.
 
 ## Décisions applicables
 

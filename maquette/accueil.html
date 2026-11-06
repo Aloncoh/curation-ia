@@ -42,13 +42,18 @@
   .aura { position: fixed; inset: 0; z-index: -1; pointer-events: none; background: #f4f1fb; }
   .aura::after { content: ""; position: absolute; inset: 0; opacity: .5; mix-blend-mode: multiply; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .4 0 0 0 0 .6 0 0 0 .22 0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23g)'/%3E%3C/svg%3E"); }
 
-  /* Barre du haut : trois pilules, celle du milieu avec un indicateur qui glisse vers l'onglet survolé. */
-  .barre { position: sticky; top: 0; z-index: 10; display: flex; justify-content: center; gap: 10px; padding: max(14px, env(safe-area-inset-top)) 16px 10px; }
+  /* Barre du haut : trois pilules, celle du milieu avec un indicateur qui prend la taille et la place exactes de
+     l'onglet choisi ou survolé (mesurées en JS). Dès qu'on défile, la barre prend un fond plein et une fine ombre :
+     plus rien ne transparaît derrière. */
+  .barre {
+    position: sticky; top: 0; z-index: 10; display: flex; justify-content: center; gap: 10px; padding: max(14px, env(safe-area-inset-top)) 16px 10px;
+    transition: background-color .25s, box-shadow .25s;
+  }
+  .barre.defilee { background: var(--papier); box-shadow: 0 1px 0 var(--trait), 0 10px 24px -20px rgba(60, 30, 140, .45); }
   .pilule {
     position: relative; display: flex; align-items: center; gap: 2px; padding: 5px; border-radius: 999px;
-    background: rgba(255, 255, 255, .72); border: 1px solid var(--trait);
-    box-shadow: 0 1px 0 #fff inset, 0 10px 30px -18px rgba(76, 40, 170, .45);
-    backdrop-filter: blur(14px) saturate(1.4);
+    background: #fff; border: 1px solid var(--trait);
+    box-shadow: 0 10px 30px -18px rgba(76, 40, 170, .45);
   }
   .pilule a, .pilule button {
     position: relative; z-index: 1; display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 16px; border: 0; border-radius: 999px;
@@ -57,16 +62,14 @@
   .pilule a:hover, .pilule a[aria-current="page"], .pilule button:hover { color: var(--encre); }
   .recherche button { padding: 0 8px 0 14px; }
   .recherche kbd { font: 600 .72rem/1 var(--texte); color: var(--pied); background: #f1edfb; border-radius: 8px; padding: 6px 7px; }
-  .rail { --i: 0; --n: 4; }
   .rail::before {
-    content: ""; position: absolute; top: 5px; bottom: 5px; left: 5px; width: calc((100% - 10px) / var(--n)); border-radius: 999px;
-    background: #fff; box-shadow: 0 1px 2px rgba(28, 21, 48, .08), 0 6px 18px -8px rgba(122, 77, 255, .55);
-    transform: translateX(calc(var(--i) * 100%)); transition: transform .45s cubic-bezier(.34, 1.56, .64, 1);
+    content: ""; position: absolute; top: 5px; bottom: 5px; left: 0; width: var(--iw, 0px); border-radius: 999px;
+    background: #efe9ff; box-shadow: 0 0 0 1px rgba(122, 77, 255, .18) inset;
+    transform: translateX(var(--ix, 5px)); transition: transform .42s cubic-bezier(.34, 1.4, .64, 1), width .42s cubic-bezier(.34, 1.4, .64, 1);
   }
-  .rail a { flex: 1 1 0; justify-content: center; }
-  .rail:has(a:nth-child(2):hover) { --i: 1; }
-  .rail:has(a:nth-child(3):hover) { --i: 2; }
-  .rail:has(a:nth-child(4):hover) { --i: 3; }
+  .rail:not(.pret)::before { transition: none; }
+  .rail a { flex: none; justify-content: center; }
+  .rail a[aria-current="page"] { color: var(--violet-fonce); font-weight: 600; }
   .rail .neuf { font: 700 .62rem/1 var(--texte); letter-spacing: .02em; color: var(--violet-fonce); border: 1.5px solid currentColor; border-radius: 999px; padding: 3px 6px; }
   .compte a { background: var(--encre); color: #fff; font-weight: 700; }
   .compte a:hover { color: #fff; background: var(--violet-fonce); }
@@ -272,7 +275,6 @@
   /* Mobile : la liste des agents devient une rangée d'avatars en haut de la fenêtre. */
   @media (max-width: 860px) {
     .barre { gap: 6px; padding-inline: 8px; }
-    .rail { --n: 3; }
     .rail a:nth-child(4), .recherche kbd, .barre .masque-mobile, .compte { display: none; }
     .pilule a, .pilule button { height: 36px; padding: 0 12px; font-size: .88rem; }
     .accueil { padding: 20px 10px 24px; gap: 22px; }
@@ -423,6 +425,26 @@
   };
   liste.addEventListener('click', (e) => { const l = e.target.closest('.ligne'); if (l) afficher(Number(l.dataset.i)); });
   afficher(0);
+
+  // Barre : l'indicateur se cale sur l'onglet survolé ou ayant le focus, et revient sur l'onglet courant.
+  const rail = document.querySelector('.rail');
+  const courant = rail.querySelector('[aria-current="page"]');
+  const caler = (a) => {
+    if (!a || !a.offsetWidth) return;
+    rail.style.setProperty('--ix', a.offsetLeft + 'px');
+    rail.style.setProperty('--iw', a.offsetWidth + 'px');
+  };
+  caler(courant);
+  requestAnimationFrame(() => rail.classList.add('pret'));
+  rail.querySelectorAll('a').forEach((a) => { a.addEventListener('mouseenter', () => caler(a)); a.addEventListener('focus', () => caler(a)); });
+  rail.addEventListener('mouseleave', () => caler(courant));
+  rail.addEventListener('focusout', (e) => { if (!rail.contains(e.relatedTarget)) caler(courant); });
+  addEventListener('resize', () => caler(courant));
+  document.fonts?.ready.then(() => caler(courant));
+  const barre = document.querySelector('.barre');
+  const majBarre = () => barre.classList.toggle('defilee', scrollY > 4);
+  addEventListener('scroll', majBarre, { passive: true });
+  majBarre();
 
   // Maquette : aucun compte n'est créé.
   document.getElementById('principal').addEventListener('click', () => {
