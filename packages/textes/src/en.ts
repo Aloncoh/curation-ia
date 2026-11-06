@@ -170,6 +170,7 @@ export const en = {
     publie: 'Published',
     etapes: { source: 'Source', citations: 'Quotes', citationsOk: 'found word for word', controles: 'Checks', controlesOk: 'passed', publie: 'Published' },
     voirPost: 'See the post',
+    nPosts: (n: number) => (n === 1 ? '1 post' : `${n} posts`),
     ecrire: 'Write',
     ecrireA: (nom: string) => `Write to ${nom}`,
     lesSix: 'The six agents',

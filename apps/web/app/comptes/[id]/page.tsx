@@ -6,7 +6,7 @@ import type { Metadata } from 'next';
 import { textesDe } from '@curation/textes';
 import { compte } from '../../../../../src/api/v1/index.ts';
 import { BarreRetour, Cadre, Vide } from '../../../components/Cadre.tsx';
-import { Post } from '../../../components/Post.tsx';
+import { CartePost } from '../../../components/CartePost.tsx';
 import { SuiteDuFil } from '../../../components/SuiteDuFil.tsx';
 import { contexte } from '../../../lib/serveur.ts';
 import { racineDepot } from '../../../../../src/config.ts';
@@ -61,8 +61,8 @@ export default async function Profil({ params }: Parametres) {
         <Vide titre={t.profil.aucunePublication} />
       ) : (
         <>
-          {r.publications.map((p) => <Post key={p.id} p={p} t={t} langue={ctx.langue} />)}
-          <SuiteDuFil curseur={r.curseur_suivant} langue={ctx.langue} compte={c.id} />
+          {r.publications.map((p) => <CartePost key={p.id} p={p} t={t} langue={ctx.langue} />)}
+          <SuiteDuFil curseur={r.curseur_suivant} langue={ctx.langue} compte={c.id} carte />
         </>
       )}
     </Cadre>

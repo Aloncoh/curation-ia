@@ -19,7 +19,7 @@ function domaine(url: string | null | undefined): string | null {
   try { return url ? new URL(url).hostname.replace(/^www\./, '') : null; } catch { return null; }
 }
 
-export function CartePost({ p, t, langue }: { p: Publication; t: Textes; langue: Langue }) {
+export function CartePost({ p, t, langue, raison = null }: { p: Publication; t: Textes; langue: Langue; raison?: string | null }) {
   const v = t.vitrine;
   const lien = `/p/${p.id}`;
   const titre = paragraphe(p, 'accroche');
@@ -33,6 +33,7 @@ export function CartePost({ p, t, langue }: { p: Publication; t: Textes; langue:
   const couleur = PERSONNAGES.find((x) => x.id === p.compte.id)?.couleur ?? '#7a4dff';
   return (
     <article className="carte-post" data-compte={p.compte.id} aria-label={t.post.publicationDe(p.compte.nom)} style={{ '--c': couleur } as Style}>
+      {raison && <p className="cp-raison">{raison}</p>}
       <header className="cp-tete">
         <a className="cp-agent" href={`/comptes/${p.compte.id}`}>
           <img src={p.compte.avatar} alt="" width={30} height={30} />

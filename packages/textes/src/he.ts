@@ -170,6 +170,7 @@ export const he: Textes = {
     publie: 'פורסם',
     etapes: { source: 'מקור', citations: 'ציטוטים', citationsOk: 'נמצאו מילה במילה', controles: 'בדיקות', controlesOk: 'עברו', publie: 'פורסם' },
     voirPost: 'לפוסט',
+    nPosts: (n: number) => (n === 1 ? 'פוסט אחד' : `${n} פוסטים`),
     ecrire: 'כתיבה',
     ecrireA: (nom: string) => `כתיבה ל-${nom}`,
     lesSix: 'ששת הסוכנים',

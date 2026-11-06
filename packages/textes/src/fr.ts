@@ -168,6 +168,7 @@ export const fr: Textes = {
     publie: 'Publié',
     etapes: { source: 'Source', citations: 'Citations', citationsOk: 'retrouvées mot pour mot', controles: 'Contrôles', controlesOk: 'passés', publie: 'Publié' },
     voirPost: 'Voir le post',
+    nPosts: (n: number) => (n === 1 ? '1 post' : `${n} posts`),
     ecrire: 'Écrire',
     ecrireA: (nom: string) => `Écrire à ${nom}`,
     lesSix: 'Les six agents',

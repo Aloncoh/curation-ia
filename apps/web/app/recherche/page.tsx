@@ -6,7 +6,7 @@ import type { ResultatRecherche } from '@curation/contrat';
 import { fil, recherche, RequeteInvalide } from '../../../../src/api/v1/index.ts';
 import { Cadre, Vide } from '../../components/Cadre.tsx';
 import { Couverture } from '../../components/Couverture.tsx';
-import { Post } from '../../components/Post.tsx';
+import { CartePost } from '../../components/CartePost.tsx';
 import { sujetDe } from '../../lib/sujet.ts';
 import { contexte, langueDeLaRequete } from '../../lib/serveur.ts';
 
@@ -34,25 +34,35 @@ export default async function Recherche({ searchParams }: Parametres) {
   const tri = premier(sp.tri) === 'recents' ? 'recents' : 'pertinence';
 
   if (!q) {
-    // Toutes les publications, chacune par sa couverture (fond de l'agent, logo et nom du sujet) ; une sélection, sans
-    // sujet unique, par son image. Mise à jour du 2026-11-05 : l'Explorer ne montrait que les montages des ressources.
-    const page = await fil(ctx, { limite: 40 });
+    // Un rendu par sujet (2026-11-06, demande de l'utilisateur : « trop de doublons ») : la couverture du sujet, son nom
+    // et le nombre de posts, qui mène à la recherche de ce sujet ; une sélection sans sujet unique garde son image.
+    const page = await fil(ctx, { limite: 50 });
+    const sujets = new Map<string, { sujet: NonNullable<ReturnType<typeof sujetDe>>; p: (typeof page.publications)[number]; n: number }>();
+    const autres: (typeof page.publications)[number][] = [];
+    for (const p of page.publications) {
+      const sujet = sujetDe(p);
+      if (!sujet) { if (p.media?.type === 'image') autres.push(p); continue; }
+      const deja = sujets.get(sujet.nom);
+      if (deja) deja.n++;
+      else sujets.set(sujet.nom, { sujet, p, n: 1 });
+    }
     return (
       <Cadre langue={ctx.langue} rubrique="explorer">
         <h1 className="titre-page">{t.commun.explorer}</h1>
         <p className="intro-page">{t.recherche.exploreIntro}</p>
-        <div className="grille grille-explorer">
-          {page.publications.map((p) => {
-            const sujet = sujetDe(p);
-            const visuel = sujet
-              ? <Couverture sujet={sujet} graine={p.id} agent={{ nom: p.compte.nom, avatar: p.compte.avatar }} format="grand" etiquette={t.post.couverture(sujet.nom)} domaine={t.post.domaines[sujet.domaine]} fond={p.fond} />
-              : p.media?.type === 'image' ? <img src={p.media.src} alt="" loading="lazy" /> : null;
-            return visuel && (
-              <a key={p.id} className="tuile-explorer" href={`/p/${p.id}`} aria-label={t.post.publicationDe(p.compte.nom)} data-compte={p.compte.id}>
-                {visuel}
-              </a>
-            );
-          })}
+        <div className="grille-sujets">
+          {[...sujets.values()].map(({ sujet, p, n }) => (
+            <a key={sujet.nom} className="tuile-sujet" href={`/recherche?${new URLSearchParams({ q: sujet.nom })}`} data-compte={p.compte.id}>
+              <Couverture sujet={sujet} graine={p.id} agent={{ nom: p.compte.nom, avatar: p.compte.avatar }} format="grand" etiquette={t.post.couverture(sujet.nom)} domaine={t.post.domaines[sujet.domaine]} fond={p.fond} />
+              <span><b>{sujet.nom}</b><small>{t.vitrine.nPosts(n)}</small></span>
+            </a>
+          ))}
+          {autres.map((p) => p.media?.type === 'image' && (
+            <a key={p.id} className="tuile-sujet" href={`/p/${p.id}`} data-compte={p.compte.id}>
+              <img src={p.media.src} alt={p.media.alt} loading="lazy" />
+              <span><b>{p.compte.nom}</b><small>{t.vitrine.nPosts(1)}</small></span>
+            </a>
+          ))}
         </div>
       </Cadre>
     );
@@ -83,7 +93,7 @@ export default async function Recherche({ searchParams }: Parametres) {
             {lienTri('recents', t.recherche.recents)}
           </nav>
           <p className="compte-resultats" role="status">{t.recherche.resultats(reponse.total)}</p>
-          {reponse.resultats.map((r) => <Post key={r.publication.id} p={r.publication} t={t} langue={ctx.langue} raison={raison(r, t)} />)}
+          {reponse.resultats.map((r) => <CartePost key={r.publication.id} p={r.publication} t={t} langue={ctx.langue} raison={raison(r, t)} />)}
         </>
       )}
     </Cadre>
