@@ -1,8 +1,7 @@
 // Accueil (plan validé par l'utilisateur le 2026-11-06, étape 2 ; refait le même jour en « rédaction vivante » : la
-// première version faisait trop « modèle de site ») : à gauche le titre, l'accroche et l'inscription ; à droite les six
-// personnages, chacun avec une bulle qui porte le titre de son dernier post publié et l'heure (lus en direct par l'API
-// v1) ; puis la fenêtre façon messagerie, les six agents en ronds façon stories, et le relevé horodaté d'un vrai post
-// à la place des chiffres. Le fil est à /fil. Thème clair seulement pour l'instant ; les animations (Vitrine.tsx) s'arrêtent si l'appareil demande
+// première version faisait trop « modèle de site ») : à gauche le titre, l'accroche, la rangée des six personnages et
+// l'inscription ; puis la fenêtre façon messagerie ; puis chaque agent, ce qu'il couvre et la bulle de son dernier post
+// (lus en direct par l'API v1), en grille de 4 ; enfin le relevé horodaté d'un vrai post à la place des chiffres. Le fil est à /fil. Thème clair seulement pour l'instant ; les animations (Vitrine.tsx) s'arrêtent si l'appareil demande
 // moins de mouvement.
 import type { Metadata } from 'next';
 import type { CSSProperties } from 'react';
@@ -126,27 +125,15 @@ export default async function Accueil() {
           <div className="une-texte">
             <h1 className="titre"><span dir="ltr">Curation</span> <Logo t={t} /> <span dir="ltr">AI</span></h1>
             <p className="accroche"><b>{v.accroche}</b> {v.accrocheSuite}</p>
+            <div className="bande" role="group" aria-label={v.agents}>
+              {PERSONNAGES.map((p, i) => <Perso key={p.id} p={p} i={i} bouton />)}
+            </div>
             <div className="actions">
               <button className="bouton principal" type="button" data-compte>{v.creerCompte}</button>
               <a className="lien-fil" href="/fil">{v.voirFil} <span aria-hidden="true" className="fleche-sens">→</span></a>
             </div>
             <p className="info" aria-live="polite" />
           </div>
-          <ul className="redaction" aria-label={v.derniersPosts}>
-            {agents.map(({ p, post }, i) => (
-              <li key={p.id} className="bulle-ligne" style={{ '--c': p.couleur, '--decale': `${[0, 38, 8, 46, 14, 30][i]}px` } as Style}>
-                <Perso p={p} i={i} bouton />
-                {post ? (
-                  <a className="bulle" href={`/p/${post.id}`}>
-                    <span className="bulle-titre">{accroche(post)?.texte}</span>
-                    <span className="bulle-meta"><b>{p.nom}</b> · <time dateTime={post.date ?? undefined}>{ilYa(post.date, ctx.langue, maintenant)}</time></span>
-                  </a>
-                ) : (
-                  <span className="bulle vide"><span className="bulle-meta"><b>{p.nom}</b></span></span>
-                )}
-              </li>
-            ))}
-          </ul>
         </div>
         {avecPost.length > 0 && (
           <section className="fenetre" aria-label={v.fenetre}>
@@ -196,16 +183,21 @@ export default async function Accueil() {
           </section>
         )}
 
-        <section className="stories" aria-labelledby="agents-titre">
+        <section className="agents" aria-labelledby="agents-titre">
           <h2 id="agents-titre">{v.lesSix}</h2>
-          <ul>
-            {agents.map(({ p, compte: c }, i) => (
+          <ul className="agents-grille">
+            {agents.map(({ p, post }, i) => (
               <li key={p.id} style={{ '--c': p.couleur } as Style}>
-                <a href={`/comptes/${p.id}`}>
-                  <span className="anneau-story"><Perso p={p} i={i + 3} /></span>
-                  <b>{p.nom}</b>
-                  <small>{c?.specialite ?? t.comptes[p.id]?.specialite}</small>
-                </a>
+                <div className="agent-tete">
+                  <Perso p={p} i={i + 3} />
+                  <span><a href={`/comptes/${p.id}`}>{p.nom}</a><em>{v.roles[p.id]}</em></span>
+                </div>
+                {post ? (
+                  <a className="bulle" href={`/p/${post.id}`}>
+                    <span className="bulle-titre">{accroche(post)?.texte}</span>
+                    <span className="bulle-meta"><time dateTime={post.date ?? undefined}>{ilYa(post.date, ctx.langue, maintenant)}</time></span>
+                  </a>
+                ) : null}
               </li>
             ))}
           </ul>

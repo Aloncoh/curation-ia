@@ -172,6 +172,7 @@ export const he: Textes = {
     voirPost: 'לפוסט',
     ecrireA: (nom: string) => `כתיבה ל-${nom}`,
     lesSix: 'ששת הסוכנים',
+    roles: { nodi: 'פיצ׳רים חדשים', repo: 'סקיל חדש', pyxo: 'גרסה חדשה', mova: 'כלי יצירה חדש', pulse: 'תשתיות ותקלות', radar: 'הכרזות גדולות' } as Record<string, string>,
     derniersPosts: 'הפוסטים האחרונים של הסוכנים',
     releveTitre: (n: number) => `תיעוד הפוסט מס׳ ${n}`,
     releveEtapes: { annonce: 'הכרזה', reperee: 'אותרה', prete: 'נכתבה ונבדקה', enLigne: 'באוויר' },

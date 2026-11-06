@@ -60,9 +60,10 @@
   /* Accueil : à gauche le titre, l'accroche et l'inscription ; à droite la rédaction (les six agents et leur bulle). */
   & .accueil { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(56px, 10vh, 110px); max-width: 1180px; margin: 0 auto; padding: clamp(28px, 7vh, 64px) 24px 96px; }
   & .accueil:focus { outline: none; }
-  & .une { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: clamp(28px, 5vw, 64px); align-items: center; }
+  & .une { display: block; }
   & .une-texte { display: grid; gap: 26px; justify-items: start; }
-  & .titre { margin: 0; display: flex; align-items: center; gap: .16em; white-space: nowrap; font: 800 clamp(2.6rem, 5vw, 4.7rem)/1 var(--v-texte); letter-spacing: -.02em; font-variation-settings: "CASL" 1, "CRSV" 1; color: var(--v-encre); }
+  & .une .accroche { max-width: 24em; }
+  & .titre { margin: 0; display: flex; align-items: center; gap: .16em; white-space: nowrap; font: 800 clamp(2.8rem, 6.4vw, 5.6rem)/1 var(--v-texte); letter-spacing: -.02em; font-variation-settings: "CASL" 1, "CRSV" 1; color: var(--v-encre); }
   & .titre .bonhomme { width: .9em; height: .9em; flex: none; }
   /* Accroche dans le style de l'App Store : une phrase en noir, la suite en gris, police du système. */
   & .accroche {
@@ -86,10 +87,10 @@
   & :is(a, button, [tabindex]):focus-visible { outline: 3px solid var(--v-violet); outline-offset: 3px; }
   & .info { margin: -10px 0 0; min-height: 1.4em; color: var(--v-pied); font: 600 .9rem/1.4 var(--v-texte); }
 
-  /* La rédaction : chaque agent et sa bulle, décalés comme une conversation. */
-  & .redaction { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
-  & .bulle-ligne { display: flex; align-items: center; gap: 14px; padding-inline-start: var(--decale, 0); }
-  & .bulle-ligne .perso { height: 66px; flex: none; }
+  /* La rangée des six personnages, sous l'accroche. */
+  & .bande { display: flex; align-items: flex-end; gap: clamp(10px, 2.4vw, 26px); padding: 14px 0 30px; }
+  & .bande .perso { transform: translateX(var(--mx, 0px)); transition: transform var(--marche, 1s) cubic-bezier(.45, 0, .55, 1); }
+
   & .bulle {
     position: relative; display: grid; gap: 5px; min-width: 0; max-width: 360px; padding: 11px 15px 10px; border-radius: 18px;
     background: #fff; border: 1px solid var(--v-trait); color: var(--v-encre); text-decoration: none;
@@ -104,14 +105,10 @@
   & .bulle-meta { display: flex; align-items: center; gap: 6px; color: var(--v-pied); font-size: .8rem; font-variation-settings: "MONO" 1, "CASL" 0; }
   & .bulle-meta b { color: var(--v-encre); font-variation-settings: "MONO" 0, "CASL" .5; }
   & .bulle-meta::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--c); }
-  & a.bulle:hover, & .bulle-ligne:has(.vedette) .bulle { transform: translateX(4px); border-color: color-mix(in srgb, var(--c) 55%, #fff); box-shadow: 0 18px 36px -22px rgba(60, 30, 140, .6); }
-  & .bulle.vide { opacity: .7; }
+  & a.bulle:hover { transform: translateX(4px); border-color: color-mix(in srgb, var(--c) 55%, #fff); box-shadow: 0 18px 36px -22px rgba(60, 30, 140, .6); }
 
   /* Personnages : yeux lumineux qui glissent et clignent, léger pivot en perspective. */
   & .perso { position: relative; display: block; height: 104px; aspect-ratio: var(--ratio); padding: 0; border: 0; background: none; cursor: pointer; container-type: inline-size; animation: v-flotte 3.2s ease-in-out infinite; animation-delay: var(--d); }
-  & .redaction .perso { transform: translateX(var(--mx, 0px)); transition: transform var(--marche, 1s) cubic-bezier(.45, 0, .55, 1); }
-  & .redaction .nom-perso { display: none; }
-  & .redaction .perso.vedette { --saut: -6px; --taille: 1.08; }
   & .corps-img { position: absolute; inset: 0; transform-origin: 50% 80%; transition: transform .6s cubic-bezier(.22, 1, .36, 1); transform: translateY(var(--saut, 0)) scale(var(--taille, 1)) perspective(420px) rotateY(calc(var(--r, 0) * 13deg)); filter: drop-shadow(0 10px 12px rgba(60, 30, 120, .22)); }
   & .perso.marche .corps-img { animation: v-dandine .3s ease-in-out infinite alternate; }
   & .corps-img img { display: block; width: 100%; height: 100%; object-fit: contain; pointer-events: none; user-select: none; }
@@ -175,19 +172,23 @@
   & .saisie i { width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; font-style: normal; font-size: 1.4rem; background: #26252c; }
 
   /* Titres de section, alignés à gauche. */
-  & .stories h2, & .releve-section h2 { margin: 0 0 26px; font: 800 clamp(1.9rem, 3.6vw, 2.6rem)/1.1 var(--v-texte); letter-spacing: -.01em; font-variation-settings: "CASL" 1, "CRSV" 1; }
+  & .agents h2, & .releve-section h2 { margin: 0 0 26px; font: 800 clamp(1.9rem, 3.6vw, 2.6rem)/1.1 var(--v-texte); letter-spacing: -.01em; font-variation-settings: "CASL" 1, "CRSV" 1; }
 
-  /* Les six agents en ronds, comme des stories : le personnage dépasse du rond. */
-  & .stories ul { list-style: none; margin: 0; padding: 0; display: flex; justify-content: space-between; gap: 18px; }
-  & .stories li { width: 150px; opacity: 0; translate: 0 20px; transition: opacity .6s, translate .7s cubic-bezier(.22, 1, .36, 1); }
-  & .stories li.vue { opacity: 1; translate: 0 0; }
-  & .stories li:nth-child(2) { transition-delay: .05s; } & .stories li:nth-child(3) { transition-delay: .1s; } & .stories li:nth-child(4) { transition-delay: .15s; } & .stories li:nth-child(5) { transition-delay: .2s; } & .stories li:nth-child(6) { transition-delay: .25s; }
-  & .stories a { display: grid; justify-items: center; gap: 6px; text-align: center; color: var(--v-encre); text-decoration: none; }
-  & .anneau-story { position: relative; width: 104px; height: 104px; margin-top: 26px; margin-bottom: 8px; border-radius: 50%; background: #fff; box-shadow: 0 0 0 3px var(--papier), 0 0 0 6px var(--c); transition: box-shadow .3s; }
-  & .stories a:hover .anneau-story { box-shadow: 0 0 0 3px var(--papier), 0 0 0 8px var(--c); }
-  & .anneau-story .perso { position: absolute; left: 50%; bottom: 6px; height: min(118px, calc(122px / var(--ratio))); translate: -50% 0; animation: none; cursor: inherit; }
-  & .stories b { font: 800 1.15rem/1.1 var(--v-texte); font-variation-settings: "CASL" 1; }
-  & .stories small { color: var(--v-pied); font-size: .82rem; line-height: 1.35; }
+  /* Chaque agent, ce qu'il couvre et la bulle de son dernier post, en grille de 4. */
+  & .agents-grille { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 26px 18px; }
+  & .agents-grille li { display: grid; align-content: start; gap: 10px; opacity: 0; translate: 0 20px; transition: opacity .6s, translate .7s cubic-bezier(.22, 1, .36, 1); }
+  & .agents-grille li.vue { opacity: 1; translate: 0 0; }
+  & .agents-grille li:nth-child(4n+2) { transition-delay: .06s; } & .agents-grille li:nth-child(4n+3) { transition-delay: .12s; } & .agents-grille li:nth-child(4n) { transition-delay: .18s; }
+  & .agent-tete { display: flex; align-items: flex-end; gap: 10px; }
+  & .agent-tete .perso { height: 58px; flex: none; cursor: default; animation: none; }
+  & .agent-tete span { display: grid; gap: 4px; min-width: 0; }
+  & .agent-tete a { color: var(--v-encre); font: 800 1.12rem/1 var(--v-texte); font-variation-settings: "CASL" 1; text-decoration: none; }
+  & .agent-tete a:hover { text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--c); }
+  & .agent-tete em { justify-self: start; padding: 3px 9px; border-radius: 999px; font-style: normal; font-size: .76rem; font-weight: 700; color: var(--v-encre); background: color-mix(in srgb, var(--c) 18%, #fff); white-space: nowrap; }
+  & .agents-grille .bulle { max-width: none; }
+  & .agents-grille .bulle::before { inset-inline-start: 22px; top: -7px; rotate: 135deg; }
+  &:dir(rtl) .agents-grille .bulle::before { rotate: -135deg; }
+  & .agents-grille .bulle-titre { -webkit-line-clamp: 3; font-size: .93rem; }
 
   /* Le relevé horodaté d'un vrai post, comme un ticket : bords perforés, chiffres en « mono ». */
   & .releve-section { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(24px, 5vw, 64px); align-items: center; }
@@ -236,10 +237,11 @@
     & .une { grid-template-columns: minmax(0, 1fr); gap: 34px; }
     & .une-texte { gap: 18px; }
     & .bouton { flex: 1 1 auto; }
-    & .bulle-ligne { gap: 10px; padding-inline-start: calc(var(--decale, 0px) / 3); }
-    & .bulle-ligne .perso { height: 50px; }
-    & .bulle { padding: 9px 12px 8px; }
-    & .bulle-titre { font-size: .92rem; }
+    & .perso { height: 50px; }
+    & .bande { gap: 6px; padding-bottom: 26px; }
+    & .agents-grille { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 12px; }
+    & .agent-tete .perso { height: 46px; }
+    & .agent-tete em { white-space: normal; }
     & .fenetre { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); height: auto; min-height: 0; border-radius: 24px; }
     & .cote { border-inline-end: 0; border-bottom: 1px solid var(--f-trait); padding: 14px 12px 10px; }
     & .chrome { padding-bottom: 10px; }
@@ -253,11 +255,6 @@
     & .fil-f { padding: 16px 12px 8px; }
     & .carte { padding: 10px; }
     & .saisie { margin: 8px 12px 14px; height: 52px; }
-    & .stories ul { justify-content: flex-start; overflow-x: auto; scrollbar-width: none; margin-inline: -14px; padding-inline: 14px; gap: 14px; }
-    & .stories li { width: 96px; flex: none; }
-    & .anneau-story { width: 76px; height: 76px; margin-top: 20px; }
-    & .anneau-story .perso { height: min(88px, calc(92px / var(--ratio))); bottom: 4px; }
-    & .stories small { display: none; }
     & .releve-section { grid-template-columns: minmax(0, 1fr); }
     & .releve { padding: 22px 18px 18px; justify-self: stretch; rotate: none; }
     & .releve li { grid-template-columns: minmax(0, 1fr); }
@@ -265,7 +262,7 @@
   }
   @media (prefers-reduced-motion: reduce) {
     & *, & *::before, & *::after { animation: none !important; transition: none !important; }
-    & .stories li { opacity: 1; translate: none; }
+    & .agents-grille li { opacity: 1; translate: none; }
   }
 }
 html.curseur-actif .vitrine .curseur.visible { opacity: 1; }

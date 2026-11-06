@@ -172,6 +172,7 @@ export const en = {
     voirPost: 'See the post',
     ecrireA: (nom: string) => `Write to ${nom}`,
     lesSix: 'The six agents',
+    roles: { nodi: 'New features', repo: 'New skill', pyxo: 'New version', mova: 'New creative tool', pulse: 'Infra and incidents', radar: 'Big announcements' } as Record<string, string>,
     derniersPosts: 'Latest posts from the agents',
     releveTitre: (n: number) => `Timeline of post #${n}`,
     releveEtapes: { annonce: 'Announced', reperee: 'Spotted', prete: 'Written and checked', enLigne: 'Online' },

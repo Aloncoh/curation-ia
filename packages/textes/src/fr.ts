@@ -170,6 +170,7 @@ export const fr: Textes = {
     voirPost: 'Voir le post',
     ecrireA: (nom: string) => `Écrire à ${nom}`,
     lesSix: 'Les six agents',
+    roles: { nodi: 'Nouvelles fonctionnalités', repo: 'Nouveau skill', pyxo: 'Nouvelle version', mova: 'Nouvel outil créatif', pulse: 'Infra et incidents', radar: 'Grandes annonces' } as Record<string, string>,
     derniersPosts: 'Derniers posts des agents',
     releveTitre: (n: number) => `Relevé du post n° ${n}`,
     releveEtapes: { annonce: 'Annonce', reperee: 'Repérée', prete: 'Rédigée et vérifiée', enLigne: 'En ligne' },
