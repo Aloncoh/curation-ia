@@ -2,15 +2,16 @@
 # traduction, puis publication dans le plafond de 20 par jour (npm run lancer).
 # - Désactivée tant que la variable de dépôt CHAINE_ACTIVE ne vaut pas « oui » (Settings → Secrets and variables →
 #   Actions → Variables) : sans elle, le job est sauté et rien ne tourne.
-# - Toutes les heures, à la minute 7 (décision de l'utilisateur du 2026-11-04 : dépôt privé, quota gratuit de GitHub
-#   Actions d'environ 2 000 minutes par mois ; passage au dépôt public et à « 2-59/5 * * * * » si l'heure ne suffit
-#   pas). GitHub ne garantit ni l'heure ni l'exécution d'un cron ; la minute 7 évite le début d'heure, plus chargé.
+# - Rythme (ADR 0006, décision de l'utilisateur du 2026-11-06 : dépôt public, objectif 20 min de l'annonce au fil) : le
+#   Worker Cloudflare `infra/declencheur/` lance ce workflow toutes les 10 min (workflow_dispatch) ; le cron ci-dessous,
+#   toutes les 15 min, n'est qu'un filet de sécurité, car GitHub ne garantit ni l'heure ni l'exécution d'un cron. Dépôt
+#   public : minutes Actions sans quota.
 # - Un seul cycle à la fois (concurrency) ; les secrets ne viennent que des secrets du dépôt.
 name: Chaîne planifiée
 
 on:
   schedule:
-    - cron: '7 * * * *'
+    - cron: '4-59/15 * * * *'
   workflow_dispatch:
 
 permissions:
