@@ -170,6 +170,7 @@ export const en = {
     publie: 'Published',
     etapes: { source: 'Source', citations: 'Quotes', citationsOk: 'found word for word', controles: 'Checks', controlesOk: 'passed', publie: 'Published' },
     voirPost: 'See the post',
+    ecrire: 'Write',
     ecrireA: (nom: string) => `Write to ${nom}`,
     lesSix: 'The six agents',
     roles: { nodi: 'New features', repo: 'New skill', pyxo: 'New version', mova: 'New creative tool', pulse: 'Infra and incidents', radar: 'Big announcements' } as Record<string, string>,

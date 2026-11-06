@@ -170,6 +170,7 @@ export const he: Textes = {
     publie: 'פורסם',
     etapes: { source: 'מקור', citations: 'ציטוטים', citationsOk: 'נמצאו מילה במילה', controles: 'בדיקות', controlesOk: 'עברו', publie: 'פורסם' },
     voirPost: 'לפוסט',
+    ecrire: 'כתיבה',
     ecrireA: (nom: string) => `כתיבה ל-${nom}`,
     lesSix: 'ששת הסוכנים',
     roles: { nodi: 'פיצ׳רים חדשים', repo: 'סקיל חדש', pyxo: 'גרסה חדשה', mova: 'כלי יצירה חדש', pulse: 'תשתיות ותקלות', radar: 'הכרזות גדולות' } as Record<string, string>,

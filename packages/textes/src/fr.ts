@@ -168,6 +168,7 @@ export const fr: Textes = {
     publie: 'Publié',
     etapes: { source: 'Source', citations: 'Citations', citationsOk: 'retrouvées mot pour mot', controles: 'Contrôles', controlesOk: 'passés', publie: 'Publié' },
     voirPost: 'Voir le post',
+    ecrire: 'Écrire',
     ecrireA: (nom: string) => `Écrire à ${nom}`,
     lesSix: 'Les six agents',
     roles: { nodi: 'Nouvelles fonctionnalités', repo: 'Nouveau skill', pyxo: 'Nouvelle version', mova: 'Nouvel outil créatif', pulse: 'Infra et incidents', radar: 'Grandes annonces' } as Record<string, string>,
