@@ -38,7 +38,7 @@ export async function Cadre({ langue, rubrique, requete = '', children }: { lang
           <span dir="ltr">Curation AI</span>
         </a>
         <nav className="nav" aria-label={t.commun.navigationPrincipale}>
-          {lien('/', 'accueil', t.commun.accueil, 'accueil')}
+          {lien('/fil', 'accueil', t.commun.accueil, 'accueil')}
           {lien('/recherche', 'explorer', t.commun.explorer, 'explorer')}
           {lien('/notifications', 'notifications', t.commun.notifications, 'notifications')}
           {lien('/messages', 'messages', t.commun.messages, 'messages')}
@@ -102,7 +102,7 @@ export function BarreRetour({ titre, langue }: { titre: string; langue: Langue }
   const t = textesDe(langue);
   return (
     <div className="barre-retour">
-      <a href="/" aria-label={t.commun.retourAccueil}><Icone nom="retour" taille={20} className="icone-sens" /></a>
+      <a href="/fil" aria-label={t.commun.retourAccueil}><Icone nom="retour" taille={20} className="icone-sens" /></a>
       <h1>{titre}</h1>
     </div>
   );

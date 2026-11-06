@@ -1,4 +1,4 @@
-// Audit d'accessibilité du site local (SPEC §7.4) : axe-core sur le fil, une publication, un profil et une recherche,
+// Audit d'accessibilité du site local (SPEC §7.4) : axe-core sur l'accueil, le fil, une publication, un profil et une recherche,
 // dans les trois langues, à 375 px et à 1280 px de large, en thème clair et sombre. Le serveur doit tourner (`npm run web:dev`).
 // Usage : node apps/web/scripts/audit-axe.ts [http://localhost:3000] ; sortie : JSON des violations par page.
 import { readFileSync } from 'node:fs';
@@ -12,7 +12,7 @@ const axe = readFileSync(createRequire(import.meta.url).resolve('axe-core/axe.mi
 const fil = (await (await fetch(`${base}/api/v1/fil`)).json()) as { publications: { id: number; nature: string }[] };
 const premiere = fil.publications[0]?.id;
 const selection = fil.publications.find((p) => p.nature === 'selection')?.id;
-const pages = ['/', ...(premiere ? [`/p/${premiere}`, `/p/${premiere}/fiche`] : []), ...(selection ? [`/p/${selection}`] : []), '/comptes/mova', '/comptes', '/recherche?q=motion%20design', '/recherche', '/notifications', '/messages', '/reels', '/profil'];
+const pages = ['/', '/fil', ...(premiere ? [`/p/${premiere}`, `/p/${premiere}/fiche`] : []), ...(selection ? [`/p/${selection}`] : []), '/comptes/mova', '/comptes', '/recherche?q=motion%20design', '/recherche', '/notifications', '/messages', '/reels', '/profil'];
 const navigateur = await chromium.launch({ channel: process.env.CURATION_CHROME ?? 'chrome', headless: true });
 const rapport: { langue: string; theme: string; largeur: number; page: string; violations: { id: string; impact: string | null; noeuds: number; exemple: string }[]; regles_passees: number }[] = [];
 try {

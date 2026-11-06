@@ -297,3 +297,10 @@ DeepSeek Flash, 30 actualités, 34 appels, 0,0125 $ (budget autorisé 4 $). 19 �
 - Site en ligne sur Vercel (https://web-phi-nine-38.vercel.app), base Turso `curation-ia` copiée et vérifiée (`npm run etat`), 34 publications publiées à la demande de l'utilisateur (plafond relevé à 50).
 - Premier cycle GitHub Actions réussi (déclenché à la main) : 29 sources collectées, 10 sujets rédigés (4 écartés, 1 invalide, 5 à vérifier, 0 publié), 4 traductions ; durée 6 min 15 s, au-dessus de l'estimation de 2,5 min : à remesurer sur les cycles horaires.
 - Audit axe-core en ligne (`node apps/web/scripts/audit-axe.ts https://web-phi-nine-38.vercel.app`) : 0 violation sur 144 vues (12 pages dont les 4 rubriques réservées aux membres, 3 langues, 375 et 1 280 px, thèmes clair et sombre).
+
+## 2026-11-06 — Refonte, étape 2 : l'accueil sur le vrai site
+
+- `/` devient l'accueil repris de la maquette (titre et logo animé, accroche, six personnages qui regardent, se présentent et se déplacent, fenêtre façon messagerie avec le dernier post publié de chaque agent lu par l'API v1, présentation des six agents, délai mesuré de l'annonce au fil) ; le fil passe à `/fil` (« Accueil » et « Retour » du cadre y mènent). Textes en anglais, français et hébreu (hébreu à faire relire). « Créer un compte » et « Suivre » annoncent « bientôt » : aucune création de compte n'existe.
+- Accessibilité : contrastes calculés (4,69 à 15,69:1), onglets de la fenêtre au clavier (flèches), curseur normal rendu dès qu'on utilise le clavier, animations coupées si l'appareil demande moins de mouvement.
+- **Vérifié** : types, 837 tests, `next build`, captures locales à 1 366 et 375 px, audit axe-core (`apps/web/scripts/audit-axe.ts`, accueil et `/fil` ajoutés) : 156 vues, 0 violation sur l'accueil et le fil ; 12 vues avec une alerte ancienne sur `/recherche` (`label-content-name-mismatch`), non traitée ici.
+
