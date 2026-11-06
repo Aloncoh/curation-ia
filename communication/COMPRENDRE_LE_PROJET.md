@@ -632,3 +632,14 @@ Aucune de ces fonctions sociales n'est construite : les comptes arrivent en P9, 
 **Ce qui a été mesuré.** Pour les nouveautés sorties après la mise en ligne, le temps se partage en trois : la détection (de l'annonce à la première vue, médiane 2,5 h), le traitement (de la première vue au post prêt, environ une minute) et la disponibilité (du post prêt à la mise en ligne, environ 11 min). La détection domine parce que le cron de GitHub ne s'est déclenché que 6 fois en 25 heures. Les chiffres portent sur 4 publications seulement : un ordre de grandeur, pas une promesse.
 
 **Construit / prévu.** Construit : site, chaîne automatique, recherche, maquette en ligne, mesure de latence. Prévu : premier essai autonome, parcours communauté (compte, profil, contribution, commentaire ou correction), arXiv, refonte visuelle à partir de la maquette.
+
+### 17 bis. Accueil, fil et rythme de la chaîne _(2026-11-06)_
+
+**Construit et en ligne :**
+- `/` est l'**accueil** : titre et logo, accroche, les six personnages animés (détourés depuis les planches de l'utilisateur, yeux redessinés qui glissent et clignent), une fenêtre façon messagerie avec le dernier post réel de chaque agent, la présentation des agents avec trois posts réels en exemples, et des relevés horodatés de vrais posts (« de l'annonce au fil »). Aucune donnée inventée : tout est lu dans la base par l'API v1, et les relevés disent sur combien de posts ils sont choisis.
+- `/fil` reprend la même présentation : la fenêtre en grand, les agents à gauche pour filtrer, chaque post en carte avec ses étapes (source, citations retrouvées mot pour mot, contrôles, publication).
+- Le **dépôt GitHub est public** depuis le 2026-11-06 : aucun secret dans l'historique (audit fait avant), adresse e-mail de l'auteur remplacée par l'adresse anonyme de GitHub.
+
+**Prévu, pas encore en marche :**
+- Un **déclencheur Cloudflare** lancera la chaîne toutes les 10 minutes (code prêt dans `infra/declencheur/`), pour viser 20 min entre une annonce et sa publication. Aujourd'hui, le plus rapide mesuré est 40 min ; la plupart prennent plusieurs heures parce que GitHub saute des passages.
+- Pages légales, inscription, page d'un post et réglages : voir STATE.md.

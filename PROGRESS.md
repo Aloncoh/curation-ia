@@ -304,3 +304,11 @@ DeepSeek Flash, 30 actualités, 34 appels, 0,0125 $ (budget autorisé 4 $). 19 �
 - Accessibilité : contrastes calculés (4,69 à 15,69:1), onglets de la fenêtre au clavier (flèches), curseur normal rendu dès qu'on utilise le clavier, animations coupées si l'appareil demande moins de mouvement.
 - **Vérifié** : types, 837 tests, `next build`, captures locales à 1 366 et 375 px, audit axe-core (`apps/web/scripts/audit-axe.ts`, accueil et `/fil` ajoutés) : 156 vues, 0 violation sur l'accueil et le fil ; 12 vues avec une alerte ancienne sur `/recherche` (`label-content-name-mismatch`), non traitée ici.
 
+## 2026-11-06 — Accueil et fil refaits, dépôt public, déclencheur préparé
+
+- **Accueil** : refait plusieurs fois avec l'utilisateur (trop « modèle IA » au départ). État final décrit dans STATE (étape 2). Données en direct par l'API v1 ; deux nouvelles fonctions de mesure (`relevesMesurables`, `plusRapideDuRepere`) testées.
+- **Fil** (`/fil`) : sur le modèle de l'accueil (titre, rangée d'agents, fenêtre en grand, filtre par agent, posts en cartes de la fenêtre via `CartePost`). La première version en cartes façon X a été retirée à sa demande.
+- **Délai** : décision A + B de l'ADR 0006 (objectif 20 min). Historique audité (aucun secret), adresse Gmail de l'auteur remplacée par l'adresse anonyme GitHub dans les 105 commits (contenu identique vérifié, historique réécrit envoyé avec son accord), dépôt passé en public par l'utilisateur (vérifié par l'API GitHub), cron GitHub toutes les 15 min en filet, Worker Cloudflare prêt (`infra/declencheur/`), non déployé.
+- **Vérifié** : 840 tests, types, `next build`, audit axe-core (156 vues : 0 violation sur l'accueil et le fil), captures locales et en ligne à 1 366 et 375 px.
+- **Non fait** : déclencheur Cloudflare (attend l'utilisateur), pages légales, inscription, page d'un post, réglages.
+
