@@ -184,28 +184,30 @@ export interface Releve {
   vue: string;
   prete: string;
   publiee: string;
+  /** De l'annonce à la mise en ligne. */
+  minutes: number;
 }
 
 /**
- * Le post publié le plus récent dont toutes les heures sont connues et cohérentes : annonce datée à la minute ou à la
- * seconde (une heure ronde ou une date au jour ne permet pas de mesurer), puis repérage, post prêt et mise en ligne
- * dans cet ordre. Null s'il n'y en a pas.
+ * Les posts publiés dont toutes les heures sont connues et cohérentes, du plus rapide au plus lent : annonce datée à la
+ * minute ou à la seconde (une heure ronde ou une date au jour ne permet pas de mesurer), puis repérage, post prêt et
+ * mise en ligne dans cet ordre. L'accueil montre les plus rapides, en disant sur combien de posts mesurés.
  */
-export async function dernierReleve(client: Client): Promise<Releve | null> {
+export async function relevesMesurables(client: Client): Promise<Releve[]> {
   const lignes = (await client.execute(
     `select p.id, p.account_id, n.announced_at, n.first_seen_at, p.created_at, p.published_at
        from post p join news_item n on n.id = p.news_item_id
-      where p.status = 'publie' and p.published_at is not null and n.announced_at is not null
-      order by p.published_at desc, p.id desc limit 200`,
+      where p.status = 'publie' and p.published_at is not null and n.announced_at is not null`,
   )).rows;
+  const releves: Releve[] = [];
   for (const l of lignes) {
     const [annonce, vue, prete, publiee] = [l.announced_at, l.first_seen_at, l.created_at, l.published_at].map(String) as [string, string, string, string];
     if (!datePrecise(precisionDate(annonce))) continue;
     const t = [annonce, vue, prete, publiee].map((d) => Date.parse(d));
     if (t.some(Number.isNaN) || t.some((x, i) => i > 0 && x < t[i - 1]!)) continue;
-    return { publication: Number(l.id), compte: String(l.account_id), annonce, vue, prete, publiee };
+    releves.push({ publication: Number(l.id), compte: String(l.account_id), annonce, vue, prete, publiee, minutes: Math.round((t[3]! - t[0]!) / 60000) });
   }
-  return null;
+  return releves.sort((a, b) => a.minutes - b.minutes || b.publication - a.publication);
 }
 
 export interface LatenceDeploiement {

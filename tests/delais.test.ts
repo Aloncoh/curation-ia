@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { SafeFetchError, safeGet, type TransportResponse } from '../src/collect/safe-fetch.ts';
-import { centile, dernierReleve, precisionDate, rapportDelais } from '../src/mesure/delais.ts';
+import { centile, precisionDate, rapportDelais, relevesMesurables } from '../src/mesure/delais.ts';
 import { hubWebsub, lancerSonde, type Interrogateur } from '../src/mesure/sonde.ts';
 import { SOURCES } from '../src/sources.ts';
 import { createTestDb, type TestDb } from './helpers/db.ts';
@@ -257,24 +257,27 @@ describe('rapport des délais', () => {
     expect(r).toContain('Médiane : 45.0 s · 90e centile : 120.0 s · sous 60 s : 1 sur 2.');
   });
 
-  it('relevé de l’accueil : le post le plus récent aux heures précises et dans l’ordre', async () => {
+  it('relevés de l’accueil : posts aux heures précises et dans l’ordre, du plus rapide au plus lent', async () => {
     const c = t.database.client;
     await c.execute(`insert into account (id, handle, display_name, type, avatar, bio, specialty, provisional, created_at) values ('nodi', 'nodi', 'Nodi', 'agent', 'a', 'b', 's', 1, 'x')`);
     const cas = [
       // id, annonce, vue, prête, en ligne
-      [1, '2026-11-05T15:48:50.000Z', '2026-11-05T18:50:26.000Z', '2026-11-05T18:58:49.000Z', '2026-11-05T20:47:20.000Z'], // retenu
-      [2, '2026-11-05T17:00:00.000Z', '2026-11-05T18:50:17.000Z', '2026-11-05T18:58:18.000Z', '2026-11-06T01:00:00.000Z'], // heure ronde
-      [3, '2026-11-05T19:30:12.000Z', '2026-11-05T18:50:00.000Z', '2026-11-05T19:00:00.000Z', '2026-11-06T02:00:00.000Z'], // annonce après le repérage
+      [1, '2026-11-05T15:48:50.000Z', '2026-11-05T18:50:26.000Z', '2026-11-05T18:58:49.000Z', '2026-11-05T20:47:20.000Z'], // 4 h 58 min 30 s, arrondi à 299 min
+      [2, '2026-11-05T17:00:00.000Z', '2026-11-05T17:10:00.000Z', '2026-11-05T17:12:00.000Z', '2026-11-05T17:20:00.000Z'], // heure ronde : écarté
+      [3, '2026-11-05T19:30:12.000Z', '2026-11-05T18:50:00.000Z', '2026-11-05T19:00:00.000Z', '2026-11-06T02:00:00.000Z'], // annonce après le repérage : écarté
+      [4, '2026-11-05T10:00:40.000Z', '2026-11-05T10:20:00.000Z', '2026-11-05T10:26:00.000Z', '2026-11-05T10:40:40.000Z'], // 40 min
     ] as const;
     for (const [id, annonce, vue, prete, enLigne] of cas) {
       await c.execute({ sql: `insert into news_item (id, kind, title, first_seen_at, announced_at, status) values (?, 'annonce', 't', ?, ?, 'collected')`, args: [id, vue, annonce] });
       await c.execute({ sql: `insert into post (account_id, news_item_id, evidence_level, status, created_at, published_at) values ('nodi', ?, 'documentary_analysis', 'publie', ?, ?)`, args: [id, prete, enLigne] });
     }
-    expect(await dernierReleve(c)).toEqual({ publication: 1, compte: 'nodi', annonce: cas[0][1], vue: cas[0][2], prete: cas[0][3], publiee: cas[0][4] });
+    const r = await relevesMesurables(c);
+    expect(r.map((x) => [x.publication, x.minutes])).toEqual([[4, 40], [1, 299]]);
+    expect(r[0]).toMatchObject({ compte: 'nodi', annonce: cas[3][1], vue: cas[3][2], prete: cas[3][3], publiee: cas[3][4] });
   });
 
-  it('relevé de l’accueil : rien sans post aux heures précises', async () => {
-    expect(await dernierReleve(t.database.client)).toBeNull();
+  it('relevés de l’accueil : rien sans post aux heures précises', async () => {
+    expect(await relevesMesurables(t.database.client)).toEqual([]);
   });
 
   it('sans publication, le bout en bout reste non mesuré', async () => {

@@ -1,14 +1,15 @@
 // Accueil (plan validé par l'utilisateur le 2026-11-06, étape 2 ; refait le même jour en « rédaction vivante » : la
 // première version faisait trop « modèle de site ») : à gauche le titre, l'accroche, la rangée des six personnages et
-// l'inscription ; puis la fenêtre façon messagerie ; puis chaque agent, ce qu'il couvre et la bulle de son dernier post
-// (lus en direct par l'API v1), en grille de 4 ; enfin le relevé horodaté d'un vrai post à la place des chiffres. Le fil est à /fil. Thème clair seulement pour l'instant ; les animations (Vitrine.tsx) s'arrêtent si l'appareil demande
+// l'inscription ; puis la fenêtre façon messagerie ; puis chaque agent, ce qu'il couvre, sa spécialité et ses trois
+// derniers posts en exemples (lus en direct par l'API v1), en grille de 4 ; enfin le relevé horodaté du post le plus
+// rapide mesuré, de l'annonce au fil, et les deux suivants, à la place des chiffres. Le fil est à /fil. Thème clair seulement pour l'instant ; les animations (Vitrine.tsx) s'arrêtent si l'appareil demande
 // moins de mouvement.
 import type { Metadata } from 'next';
 import type { CSSProperties } from 'react';
 import '@fontsource-variable/recursive/full.css';
 import { LOCALE_INTL, textesDe, type Langue, type Textes } from '@curation/textes';
 import type { Publication } from '../../../packages/contrat/src/index.ts';
-import { compte, releve } from '../../../src/api/v1/index.ts';
+import { compte, relevesRapides } from '../../../src/api/v1/index.ts';
 import { Couverture } from '../components/Couverture.tsx';
 import { Vitrine } from '../components/Vitrine.tsx';
 import { dateCourte } from '../lib/format.ts';
@@ -91,14 +92,15 @@ export default async function Accueil() {
   const v = t.vitrine;
   // Dernier post publié de chaque agent, et sa spécialité, lus en direct ; un agent sans post reste dans la liste.
   const agents = await Promise.all(PERSONNAGES.map(async (p) => {
-    const r = await compte(ctx, p.id, { limite: 1 }).catch(() => null);
-    return { p, compte: r?.compte ?? null, post: r?.publications[0] ?? null };
+    const r = await compte(ctx, p.id, { limite: 3 }).catch(() => null);
+    return { p, compte: r?.compte ?? null, post: r?.publications[0] ?? null, posts: r?.publications ?? [] };
   }));
   const avecPost = agents.flatMap((a) => (a.post ? [{ p: a.p, post: a.post }] : []));
-  const r = await releve(ctx).catch(() => null);
+  // Les cas les plus rapides mesurés (de l'annonce à la mise en ligne), en disant sur combien de posts mesurés.
+  const rapides = await relevesRapides(ctx, 3).catch(() => ({ mesures: 0, cas: [] }));
+  const r = rapides.cas[0] ?? null;
   // eslint-disable-next-line react-hooks/purity -- page rendue à chaque requête : l'heure du rendu est voulue.
   const maintenant = Date.now();
-  const minutes = r ? Math.round((Date.parse(r.publiee) - Date.parse(r.annonce)) / 60000) : 0;
   const agentDuReleve = r ? PERSONNAGES.find((p) => p.id === r.compte) : undefined;
   // Seuls les passages retrouvés mot pour mot dans la capture comptent.
   const trouves = r?.post.sources?.passages?.filter((x) => x.trouve).length ?? 0;
@@ -186,18 +188,23 @@ export default async function Accueil() {
         <section className="agents" aria-labelledby="agents-titre">
           <h2 id="agents-titre">{v.lesSix}</h2>
           <ul className="agents-grille">
-            {agents.map(({ p, post }, i) => (
+            {agents.map(({ p, compte: c, posts }, i) => (
               <li key={p.id} style={{ '--c': p.couleur } as Style}>
                 <div className="agent-tete">
                   <Perso p={p} i={i + 3} />
                   <span><a href={`/comptes/${p.id}`}>{p.nom}</a><em>{v.roles[p.id]}</em></span>
                 </div>
-                {post ? (
-                  <a className="bulle" href={`/p/${post.id}`}>
-                    <span className="bulle-titre">{accroche(post)?.texte}</span>
-                    <span className="bulle-meta"><time dateTime={post.date ?? undefined}>{ilYa(post.date, ctx.langue, maintenant)}</time></span>
-                  </a>
-                ) : null}
+                <p className="specialite">{c?.specialite ?? t.comptes[p.id]?.specialite}</p>
+                {posts.length > 0 && (
+                  <div className="exemples">
+                    <small>{v.exemples}</small>
+                    <ul>
+                      {posts.map((x) => (
+                        <li key={x.id}><a href={`/p/${x.id}`}><span>{accroche(x)?.texte}</span><time dateTime={x.date ?? undefined}>{ilYa(x.date, ctx.langue, maintenant)}</time></a></li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </li>
             ))}
           </ul>
@@ -207,7 +214,15 @@ export default async function Accueil() {
           <section className="releve-section" aria-labelledby="delai-titre">
             <div className="releve-texte">
               <h2 id="delai-titre">{v.delaiTitre}</h2>
-              <p className="mesure">{v.mesure}</p>
+              <p className="mesure">{v.plusRapide(rapides.mesures)}</p>
+              {rapides.cas.length > 1 && (
+                <ul className="autres-cas" aria-label={v.autresCas}>
+                  {rapides.cas.slice(1).map((c) => (
+                    <li key={c.publication}><a href={`/p/${c.publication}`}><img src={`/marque/agent-${c.compte}.png`} alt="" width={24} height={24} /><span>{accroche(c.post)?.texte}</span><b>{v.duree(Math.floor(c.minutes / 60), c.minutes % 60)}</b></a></li>
+                  ))}
+                </ul>
+              )}
+              <p className="mesure petite">{v.mesure}</p>
             </div>
             <article className="releve">
               <header>
@@ -221,7 +236,7 @@ export default async function Accueil() {
                 <li><time dateTime={r.prete}>{horodatage(r.prete, ctx.langue)}</time><b>{v.releveEtapes.prete}</b><span>{trouves > 0 ? v.citations(trouves) : null}</span></li>
                 <li><time dateTime={r.publiee}>{horodatage(r.publiee, ctx.langue)}</time><b>{v.releveEtapes.enLigne}</b><span><a href={`/p/${r.publication}`}><bdi dir="ltr">/p/{r.publication}</bdi></a></span></li>
               </ol>
-              <footer>{v.total(v.duree(Math.floor(minutes / 60), minutes % 60))}</footer>
+              <footer>{v.total(v.duree(Math.floor(r.minutes / 60), r.minutes % 60))}</footer>
             </article>
           </section>
         )}

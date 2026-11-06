@@ -5,7 +5,7 @@ import { Fiche, PageFil, ReponseCompte, ReponseComptes, ReponseRecherche, type L
 import { ficheParId } from './fiche.ts';
 import { rechercher } from '../../recherche/rechercher.ts';
 import { lireComptes, pageDuFil, publicationParId, publicationsParIds, type Contexte } from './publications.ts';
-import { dernierReleve, type Releve } from '../../mesure/delais.ts';
+import { relevesMesurables, type Releve } from '../../mesure/delais.ts';
 
 export { RequeteInvalide } from '../../recherche/rechercher.ts';
 export { decoderCurseur, limiteValide, publicationParId, type Contexte, type Mode } from './publications.ts';
@@ -56,10 +56,14 @@ export async function recherche(ctx: Contexte, requete: unknown, o: { tri?: 'per
 
 export type { Langue };
 
-/** Relevé horodaté du dernier post publié aux heures précises (accueil, 2026-11-06), avec la publication visible. */
-export async function releve(ctx: Contexte): Promise<(Releve & { post: Publication }) | null> {
-  const r = await dernierReleve(ctx.client);
-  if (!r) return null;
-  const post = await publicationParId(ctx, r.publication);
-  return post ? { ...r, post } : null;
+/** Les relevés les plus rapides (accueil, 2026-11-06), avec leur publication visible, et le nombre de posts mesurés. */
+export async function relevesRapides(ctx: Contexte, n = 3): Promise<{ mesures: number; cas: (Releve & { post: Publication })[] }> {
+  const tous = await relevesMesurables(ctx.client);
+  const cas: (Releve & { post: Publication })[] = [];
+  for (const r of tous) {
+    if (cas.length >= n) break;
+    const post = await publicationParId(ctx, r.publication);
+    if (post) cas.push({ ...r, post });
+  }
+  return { mesures: tous.length, cas };
 }
