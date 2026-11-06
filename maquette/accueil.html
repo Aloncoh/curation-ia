@@ -93,6 +93,17 @@
   .bouton:focus-visible, .pilule a:focus-visible, .pilule button:focus-visible { outline: 3px solid var(--violet); outline-offset: 3px; }
   .info { margin: -24px 0 0; min-height: 1.4em; color: var(--pied); font: 600 .88rem/1.4 var(--texte); }
 
+  /* Scène 3D : les agents flottent au-dessus du fond, sans cadre ; la toile est transparente. */
+  .scene3d { position: relative; width: min(100%, 1100px); height: clamp(380px, 58vh, 560px); margin-bottom: -18px; touch-action: pan-y; }
+  .scene3d canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  .nom-agent {
+    position: absolute; left: 50%; bottom: 6%; translate: -50% 0; padding: 8px 16px; border-radius: 999px;
+    background: rgba(255, 255, 255, .85); border: 1px solid var(--trait); box-shadow: 0 10px 30px -14px rgba(76, 40, 170, .5);
+    font: 700 1rem/1 var(--texte); color: var(--encre); opacity: 0; transition: opacity .35s, transform .35s; transform: translateY(6px); pointer-events: none;
+  }
+  .nom-agent.visible { opacity: 1; transform: none; }
+  .nom-agent i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 8px; background: var(--c, var(--violet)); box-shadow: 0 0 10px var(--c, var(--violet)); }
+
   /* Fenêtre d'application. */
   .fenetre {
     width: 100%; display: grid; grid-template-columns: 300px minmax(0, 1fr); height: min(720px, 82dvh); min-height: 560px;
@@ -189,6 +200,7 @@
     .ligne img { grid-row: auto; width: 44px; height: 44px; }
     .ligne b { font-size: .8rem; }
     .ligne time, .ligne small { display: none; }
+    .scene3d { height: 360px; margin-bottom: -8px; }
     .tete { height: 50px; padding: 0 16px; }
     .fil { padding: 16px 12px 8px; }
     .carte { padding: 10px; }
@@ -217,6 +229,10 @@
 </nav>
 
 <main class="accueil">
+  <section class="scene3d" id="scene3d" aria-label="Les six agents éditoriaux">
+    <canvas id="toile3d"></canvas>
+    <span class="nom-agent" id="nom-agent" aria-live="polite"></span>
+  </section>
   <div class="actions" id="creer">
     <button class="bouton principal" type="button" id="principal">Créer un compte</button>
     <a class="bouton secondaire" href="https://web-phi-nine-38.vercel.app/">Voir le fil</a>
@@ -305,6 +321,336 @@
     document.addEventListener('pointerleave', () => fleche.classList.remove('visible'));
   }
 })();
+</script>
+
+<script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/" } }</script>
+<script type="module">
+// Agents en 3D (demande de l'utilisateur du 2026-11-06 : « pense en 3D, qu'ils puissent tourner sur eux, pas en
+// jetons »). Chaque agent est modélisé ici à partir de formes simples, d'après les planches de assets/brand/ : corps
+// crème brillant, visière noire vernie, yeux lumineux, et ses traits propres (antenne de Nodi, oreilles et queue de
+// Repo, ailes de Pyxo, crête et queue spirale de Mova, piquants de Pulse, oreilles et trompe de Radar). Ils flottent,
+// tournent sur eux-mêmes, se cognent doucement, et viennent tour à tour se présenter au premier plan.
+import * as THREE from 'three';
+import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+
+const scene3d = document.getElementById('scene3d');
+const canvas = document.getElementById('toile3d');
+const etiquette = document.getElementById('nom-agent');
+const calme = matchMedia('(prefers-reduced-motion: reduce)').matches || new URLSearchParams(location.search).has('fixe');
+
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 0.92;
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+const scene = new THREE.Scene();
+scene.environment = new THREE.PMREMGenerator(renderer).fromScene(new RoomEnvironment(), 0.04).texture;
+scene.environmentIntensity = 0.55;
+const camera = new THREE.PerspectiveCamera(32, 1, 0.1, 100);
+camera.position.set(0, 1.0, 11);
+camera.lookAt(0, 0.1, 0);
+
+scene.add(new THREE.HemisphereLight(0xffffff, 0xd9ccff, 0.55));
+const soleil = new THREE.DirectionalLight(0xffffff, 1.7);
+soleil.position.set(4, 9, 6);
+soleil.castShadow = true;
+soleil.shadow.mapSize.set(1024, 1024);
+Object.assign(soleil.shadow.camera, { left: -9, right: 9, top: 9, bottom: -9 });
+soleil.shadow.radius = 6;
+scene.add(soleil);
+const rim = new THREE.DirectionalLight(0xb9a3ff, 1.4);
+rim.position.set(-6, 3, -4);
+scene.add(rim);
+const sol = new THREE.Mesh(new THREE.PlaneGeometry(40, 40), new THREE.ShadowMaterial({ opacity: 0.16, color: 0x3b1d8f }));
+sol.rotation.x = -Math.PI / 2;
+sol.position.y = -2.4;
+sol.receiveShadow = true;
+scene.add(sol);
+
+// Matières communes.
+const creme = new THREE.MeshPhysicalMaterial({ color: 0xe9dccb, roughness: 0.38, clearcoat: 0.7, clearcoatRoughness: 0.25 });
+const sombre = new THREE.MeshPhysicalMaterial({ color: 0x1c1b21, roughness: 0.45, clearcoat: 0.4 });
+const verre = new THREE.MeshPhysicalMaterial({ color: 0x07070a, roughness: 0.08, metalness: 0.1, clearcoat: 1, clearcoatRoughness: 0.05 });
+const mat = (color, o = {}) => new THREE.MeshPhysicalMaterial({ color, roughness: 0.4, clearcoat: 0.6, ...o });
+const lumiere = (color, intensite = 0.9) => new THREE.MeshStandardMaterial({ color, emissive: color, emissiveIntensity: intensite, roughness: 0.3 });
+
+const maille = (geo, matiere, x = 0, y = 0, z = 0) => {
+  const m = new THREE.Mesh(geo, matiere);
+  m.position.set(x, y, z);
+  m.castShadow = true;
+  return m;
+};
+const sphere = (r, matiere, x, y, z, sx = 1, sy = 1, sz = 1) => { const m = maille(new THREE.SphereGeometry(r, 40, 28), matiere, x, y, z); m.scale.set(sx, sy, sz); return m; };
+const capsule = (r, l, matiere, x, y, z) => maille(new THREE.CapsuleGeometry(r, l, 8, 20), matiere, x, y, z);
+
+// Tête commune : coque arrondie, visière en dôme, deux yeux en capsule qui suivent la courbe, un reflet chacun.
+function tete(couleurYeux, { largeur = 1.3, hauteur = 1.05, profondeur = 1.05, arrondi = 0.46 } = {}) {
+  const g = new THREE.Group();
+  g.add(maille(new RoundedBoxGeometry(largeur, hauteur, profondeur, 6, arrondi), creme));
+  g.add(sphere(1, verre, 0, -0.03, profondeur / 2 - 0.14, largeur * 0.45, hauteur * 0.4, 0.26));
+  const yeux = [];
+  for (const s of [-1, 1]) {
+    const oeil = capsule(0.095, 0.15, lumiere(couleurYeux), s * 0.21, 0.0, profondeur / 2 + 0.1);
+    oeil.scale.z = 0.45;
+    oeil.rotation.y = s * 0.32;
+    g.add(oeil);
+    yeux.push(oeil);
+    g.add(sphere(0.028, new THREE.MeshBasicMaterial({ color: 0xffffff }), s * 0.2 - 0.03, 0.07, profondeur / 2 + 0.15));
+  }
+  g.userData.yeux = yeux;
+  return g;
+}
+// Corps : buste crème et pattes à bouts sombres (2 pour Nodi et Pyxo, 4 pour les autres).
+function corps(pattes) {
+  const g = new THREE.Group();
+  g.add(sphere(0.46, creme, 0, -0.78, -0.05, 1.05, 0.8, 0.95));
+  const places = pattes === 2 ? [[-0.28, 0.1], [0.28, 0.1]] : [[-0.34, 0.28], [0.34, 0.28], [-0.34, -0.32], [0.34, -0.32]];
+  for (const [x, z] of places) {
+    g.add(capsule(0.13, 0.12, creme, x, -1.08, z * 0.85));
+    g.add(sphere(0.15, sombre, x, -1.24, z * 0.85 + 0.03, 1, 0.6, 1.15));
+  }
+  return g;
+}
+
+const AGENTS = {
+  nodi(c) {
+    const g = new THREE.Group();
+    const t = tete(c);
+    const antenne = maille(new RoundedBoxGeometry(0.16, 0.36, 0.16, 3, 0.06), mat(0xf26a3d), 0.12, 0.66, -0.05);
+    antenne.rotation.z = -0.15;
+    t.add(antenne);
+    for (const s of [-1, 1]) { const d = maille(new THREE.CylinderGeometry(0.2, 0.2, 0.1, 32), sombre, s * 0.68, 0, 0); d.rotation.z = Math.PI / 2; t.add(d); }
+    g.add(t, corps(2));
+    const bras = capsule(0.12, 0.38, creme, 0.68, -0.6, 0.05);
+    bras.rotation.z = -2.2;
+    bras.add(sphere(0.13, sombre, 0, 0.3, 0));
+    g.add(bras);
+    g.userData = { tete: t, bras };
+    return g;
+  },
+  repo(c) {
+    const g = new THREE.Group();
+    const t = tete(c, { largeur: 1.2, hauteur: 1.0, arrondi: 0.48 });
+    for (const s of [-1, 1]) {
+      const oreille = maille(new THREE.ConeGeometry(0.3, 0.72, 4), mat(0xf07a2e), s * 0.4, 0.68, -0.05);
+      oreille.rotation.set(0, Math.PI / 4, s * -0.35);
+      const dedans = maille(new THREE.ConeGeometry(0.2, 0.5, 4), sombre, 0, -0.03, 0.08);
+      oreille.add(dedans);
+      t.add(oreille);
+    }
+    g.add(t, corps(4));
+    const queue = new THREE.Group();
+    const teintes = [creme, mat(0xf07a2e), sombre, mat(0xf07a2e), creme];
+    teintes.forEach((m, i) => queue.add(sphere(0.26 - i * 0.025, m, 0, i * 0.24, -i * 0.12)));
+    queue.position.set(0.45, -1.1, -0.6);
+    queue.rotation.x = -0.6;
+    g.add(queue);
+    g.userData = { tete: t, queue };
+    return g;
+  },
+  pyxo(c) {
+    const g = new THREE.Group();
+    const t = tete(c, { largeur: 1.25, hauteur: 1.0, arrondi: 0.48 });
+    const bleu = mat(0x3e63d6);
+    for (const s of [-1, 1]) {
+      const touffe = maille(new THREE.ConeGeometry(0.16, 0.42, 16), bleu, s * 0.42, 0.62, 0);
+      touffe.rotation.z = s * -0.45;
+      t.add(touffe);
+    }
+    t.add(sphere(0.12, bleu, 0, 0.52, 0.32, 1.6, 0.5, 0.6));
+    g.add(t, corps(2));
+    const ailes = [];
+    for (const s of [-1, 1]) {
+      const aile = sphere(0.42, bleu, s * 0.66, -0.9, -0.05, 0.35, 0.95, 0.75);
+      aile.rotation.z = s * 0.35;
+      g.add(aile);
+      ailes.push(aile);
+    }
+    g.add(sphere(0.07, lumiere(c, 1.8), 0, -0.62, 0.48, 1.4, 0.6, 0.5));
+    g.userData = { tete: t, ailes };
+    return g;
+  },
+  mova(c) {
+    const g = new THREE.Group();
+    const t = tete(c);
+    const corail = mat(0xf2836b), violet = mat(0xb48cff);
+    [[corail, 0, 0.62, 0.05, 0.3], [violet, 0.18, 0.58, -0.18, 0.22], [corail, -0.16, 0.56, -0.3, 0.18]].forEach(([m, x, y, z, r]) => t.add(sphere(r, m, x, y, z, 0.45, 1.2, 1)));
+    for (const s of [-1, 1]) { const anneau = maille(new THREE.TorusGeometry(0.18, 0.07, 16, 40), violet, s * 0.66, 0, 0); anneau.rotation.y = Math.PI / 2; t.add(anneau); }
+    g.add(t, corps(4));
+    const points = [];
+    for (let i = 0; i <= 40; i++) { const a = i / 40 * Math.PI * 3.2, r = 0.55 * (1 - i / 48); points.push(new THREE.Vector3(0.1, Math.sin(a) * r, -Math.cos(a) * r - 0.4)); }
+    const queue = maille(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(points), 80, 0.09, 12), mat(0x2bb39a), 0.2, -1.0, -0.55);
+    g.add(queue);
+    g.userData = { tete: t, queue };
+    return g;
+  },
+  pulse(c) {
+    const g = new THREE.Group();
+    const t = tete(c, { largeur: 1.3, hauteur: 1.05, arrondi: 0.5 });
+    const marine = mat(0x25364f, { roughness: 0.3 });
+    for (let i = 0; i < 16; i++) {
+      const a = -Math.PI * 0.85 + (i % 8) * (Math.PI * 1.7 / 7), rang = i < 8 ? 0 : 1;
+      const r = 0.72 + rang * 0.12;
+      const pique = sphere(0.24, marine, Math.cos(a) * r * 0.9, 0.15 + Math.sin(a) * r * 0.5 + rang * 0.1, -0.35 - rang * 0.28, 0.55, 0.55, 1.3);
+      pique.lookAt(pique.position.clone().multiplyScalar(2).setZ(-2));
+      pique.add(sphere(0.12, lumiere(0xffc847, 1.2), 0, 0, 0.18, 0.5, 0.5, 0.6));
+      t.add(pique);
+    }
+    for (const s of [-1, 1]) { const o = maille(new THREE.TorusGeometry(0.14, 0.07, 14, 30), creme, s * 0.5, 0.56, 0.05); t.add(o); }
+    t.add(sphere(0.2, creme, 0, -0.26, 0.6, 1.2, 0.8, 0.9));
+    t.add(sphere(0.08, sombre, 0, -0.2, 0.78));
+    g.add(t, corps(4));
+    g.userData = { tete: t };
+    return g;
+  },
+  radar(c) {
+    const g = new THREE.Group();
+    const t = tete(c);
+    const turquoise = lumiere(0x40e8d8, 1.2);
+    const oreilles = [];
+    for (const s of [-1, 1]) {
+      const pivot = new THREE.Group();
+      pivot.position.set(s * 0.62, 0.1, -0.05);
+      const o = sphere(0.62, creme, s * 0.34, 0, -0.05, 0.85, 1, 0.2);
+      o.add(sphere(0.62, sombre, 0, -0.02, 0.35, 0.72, 0.78, 0.6));
+      const bord = maille(new THREE.TorusGeometry(0.5, 0.03, 10, 50, Math.PI * 0.8), turquoise, s * 0.06, 0, 0);
+      bord.position.set(s * 0.34, 0, 0.08);
+      bord.rotation.set(0, 0, s > 0 ? -0.9 : Math.PI - 2.2);
+      pivot.add(o, bord);
+      t.add(pivot);
+      oreilles.push(pivot);
+    }
+    const trompe = new THREE.CatmullRomCurve3([new THREE.Vector3(0, -0.3, 0.55), new THREE.Vector3(0, -0.62, 0.72), new THREE.Vector3(0, -0.85, 0.66), new THREE.Vector3(0.04, -0.95, 0.85)]);
+    t.add(maille(new THREE.TubeGeometry(trompe, 40, 0.13, 16), creme));
+    const bout = maille(new THREE.TorusGeometry(0.12, 0.035, 10, 30), turquoise, 0.04, -0.95, 0.86);
+    bout.rotation.x = 0.4;
+    t.add(bout);
+    g.add(t, corps(4));
+    g.userData = { tete: t, oreilles };
+    return g;
+  },
+};
+const LISTE = [
+  { id: 'nodi', nom: 'Nodi', c: 0x3ef0a8, css: '#1fa77a' },
+  { id: 'repo', nom: 'Repo', c: 0x4fc8ff, css: '#e8732f' },
+  { id: 'pyxo', nom: 'Pyxo', c: 0x4fb0ff, css: '#2f8fd8' },
+  { id: 'mova', nom: 'Mova', c: 0xc39bff, css: '#9a5cf0' },
+  { id: 'pulse', nom: 'Pulse', c: 0xffc847, css: '#d99a12' },
+  { id: 'radar', nom: 'Radar', c: 0x40e8d8, css: '#12a6a0' },
+];
+
+// Disposition de repos : un arc devant la caméra ; chaque agent dérive autour de sa place.
+const agents = LISTE.map((a, i) => {
+  const g = AGENTS[a.id](a.c);
+  g.traverse((o) => { if (o.isMesh) o.castShadow = true; });
+  const ang = (i / LISTE.length) * Math.PI * 2;
+  const place = new THREE.Vector3(Math.cos(ang) * 4.4, 0.75 + Math.sin(ang * 2) * 0.55, Math.sin(ang) * 1.5 - 1);
+  g.position.copy(place);
+  g.scale.setScalar(0.01);
+  scene.add(g);
+  return { ...a, g, place, ang, vitesse: new THREE.Vector3(), tour: Math.random() * Math.PI * 2, vtour: (0.35 + Math.random() * 0.3) * (i % 2 ? 1 : -1), phase: Math.random() * 10, cligne: 2 + Math.random() * 4 };
+});
+
+const taille = () => {
+  const { width, height } = scene3d.getBoundingClientRect();
+  renderer.setSize(width, height, false);
+  camera.aspect = width / height;
+  // Écran étroit : la caméra recule pour garder les six agents dans le cadre.
+  camera.position.z = width < 640 ? 17 : 11;
+  camera.updateProjectionMatrix();
+  // Écartement : 70 % de la demi-largeur visible, plafonné, pour occuper la scène sans sortir du cadre.
+  const demi = camera.position.z * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) * camera.aspect;
+  const ecart = Math.min(6.4, demi * 0.7);
+  for (const a of agents) a.place.x = Math.cos(a.ang) * ecart;
+};
+new ResizeObserver(taille).observe(scene3d);
+taille();
+
+// Présentation : toutes les 4,2 s, l'agent suivant vient au premier plan, fait un tour complet sur lui-même, puis repart.
+let vedette = -1, debutVedette = 0, prochaine = 1.6;
+const presenter = (i, t) => {
+  vedette = i; debutVedette = t;
+  const a = agents[i];
+  etiquette.innerHTML = `<i style="--c:${a.css}"></i>${a.nom}`;
+  etiquette.style.setProperty('--c', a.css);
+  etiquette.classList.add('visible');
+};
+const souris = new THREE.Vector2(0, 0);
+scene3d.addEventListener('pointermove', (e) => { const r = scene3d.getBoundingClientRect(); souris.set((e.clientX - r.left) / r.width * 2 - 1, -((e.clientY - r.top) / r.height * 2 - 1)); });
+const rayon = new THREE.Raycaster();
+scene3d.addEventListener('click', (e) => {
+  const r = scene3d.getBoundingClientRect();
+  rayon.setFromCamera(new THREE.Vector2((e.clientX - r.left) / r.width * 2 - 1, -((e.clientY - r.top) / r.height * 2 - 1)), camera);
+  const touche = rayon.intersectObjects(agents.map((a) => a.g), true)[0];
+  if (!touche) return;
+  const i = agents.findIndex((a) => { let o = touche.object; while (o && o !== a.g) o = o.parent; return o === a.g; });
+  if (i >= 0) { presenter(i, horloge.getElapsedTime()); prochaine = horloge.getElapsedTime() + 4.2; }
+});
+
+const horloge = new THREE.Clock();
+const devant = new THREE.Vector3(0, 0.6, 3.2);
+const vise = new THREE.Vector3();
+function anime() {
+  const dt = Math.min(horloge.getDelta(), 0.05), t = horloge.elapsedTime;
+  if (!calme && t > prochaine) { presenter((vedette + 1) % agents.length, t); prochaine = t + 4.2; }
+  const progres = vedette >= 0 ? (t - debutVedette) / 4.2 : 1;
+  if (progres > 0.86) etiquette.classList.remove('visible');
+
+  agents.forEach((a, i) => {
+    const enVedette = i === vedette && progres < 0.9;
+    // Cible : sa place qui dérive doucement (apesanteur), ou le premier plan pour la vedette.
+    vise.copy(a.place).add(new THREE.Vector3(Math.sin(t * 0.5 + a.phase) * 0.45, Math.sin(t * 0.8 + a.phase * 2) * 0.35, Math.cos(t * 0.4 + a.phase) * 0.3));
+    if (enVedette) vise.copy(devant);
+    // Ressort amorti vers la cible.
+    a.vitesse.addScaledVector(vise.clone().sub(a.g.position), (enVedette ? 9 : 4) * dt).multiplyScalar(1 - 2.6 * dt);
+    a.g.position.addScaledVector(a.vitesse, dt);
+    const echelle = enVedette ? 1.6 : 1.15;
+    a.g.scale.setScalar(THREE.MathUtils.lerp(a.g.scale.x, echelle, 4 * dt));
+
+    // Rotation sur lui-même : continue au repos ; pour la vedette, un tour complet qui finit face à la caméra.
+    if (enVedette) {
+      const e = Math.min(1, progres / 0.6), lisse = e < 0.5 ? 4 * e * e * e : 1 - Math.pow(-2 * e + 2, 3) / 2;
+      a.g.rotation.y = a.tourDepart + (Math.PI * 2 - (a.tourDepart % (Math.PI * 2))) * lisse;
+    } else {
+      a.tour += a.vtour * dt;
+      a.g.rotation.y = a.tour;
+      a.tourDepart = a.tour;
+    }
+    a.g.rotation.x = Math.sin(t * 0.7 + a.phase) * 0.12;
+    a.g.rotation.z = Math.sin(t * 0.55 + a.phase * 1.3) * 0.1;
+
+    // La tête suit la souris ; les yeux clignent.
+    const ud = a.g.userData;
+    ud.tete.rotation.y = THREE.MathUtils.lerp(ud.tete.rotation.y, souris.x * 0.35, 3 * dt);
+    ud.tete.rotation.x = THREE.MathUtils.lerp(ud.tete.rotation.x, -souris.y * 0.2, 3 * dt);
+    const c = (t + a.phase) % a.cligne;
+    for (const oeil of ud.tete.userData.yeux) oeil.scale.y = c < 0.12 ? 0.15 : 1;
+    // Traits animés : le bras de Nodi salue, les ailes de Pyxo battent, la queue de Repo et de Mova balance, les oreilles de Radar remuent.
+    if (ud.bras) ud.bras.rotation.z = -2.2 + Math.sin(t * 6) * 0.35;
+    if (ud.ailes) ud.ailes.forEach((w, k) => (w.rotation.z = (k ? 1 : -1) * (0.35 + Math.sin(t * 7 + a.phase) * 0.35)));
+    if (ud.queue) ud.queue.rotation.y = Math.sin(t * 2 + a.phase) * 0.4;
+    if (ud.oreilles) ud.oreilles.forEach((o, k) => (o.rotation.y = (k ? -1 : 1) * Math.sin(t * 2.4 + a.phase) * 0.25));
+  });
+
+  // Les agents se repoussent quand ils se touchent.
+  for (let i = 0; i < agents.length; i++) for (let j = i + 1; j < agents.length; j++) {
+    const p = agents[i].g.position, q = agents[j].g.position, d = p.distanceTo(q), min = 1.9 * (agents[i].g.scale.x + agents[j].g.scale.x) / 2;
+    if (d < min && d > 0.001) { const n = q.clone().sub(p).normalize().multiplyScalar((min - d) / 2); p.sub(n); q.add(n); }
+  }
+  renderer.render(scene, camera);
+  if (!calme) requestAnimationFrame(anime);
+}
+if (calme) {
+  // Moins d'animations : chacun à sa place, face à la caméra, une seule image.
+  agents.forEach((a) => { a.g.position.copy(a.place); a.g.rotation.set(0, -a.place.x * 0.08, 0); a.g.scale.setScalar(1.15); });
+  renderer.render(scene, camera);
+} else {
+  requestAnimationFrame(anime);
+}
 </script>
 </body>
 </html>
