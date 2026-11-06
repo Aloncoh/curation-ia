@@ -84,3 +84,12 @@ Proposé, non construit :
 | C. Petit processus permanent (option d'origine de cet ADR) | cycle de 60 s possible | environ 2 à 5 $ par mois (estimation du 2026-10-31, à revérifier) | compte et hébergement à créer |
 
 Recommandation : A, puis séparer un cycle court de détection (collecte seule) du cycle complet ; C seulement si la minute devient un objectif mesuré.
+
+## Décision du 2026-11-06 : options A et B (choix de l'utilisateur)
+
+L'utilisateur juge 40 min trop long pour une annonce et fixe l'objectif à **20 min** de l'annonce au fil. Il choisit :
+
+- **A. Dépôt public.** Avant le passage : audit de tout l'historique (clés, jetons, adresses de base, adresses e-mail, téléphones) : rien trouvé dans les fichiers ; l'adresse Gmail de l'auteur, présente dans les 105 commits, a été remplacée par l'adresse anonyme fournie par GitHub (`git filter-branch`, contenu identique vérifié, historique réécrit envoyé sur `main` avec son accord). Les prochains commits utilisent cette adresse (configuration locale du dépôt). Le changement de visibilité se fait dans les réglages GitHub, par l'utilisateur.
+- **B. Déclencheur externe** : Worker Cloudflare planifié (`infra/declencheur/`) qui lance `chaine.yml` toutes les 10 min par `workflow_dispatch`. Offre Workers Free lue le 2026-11-06 : 5 déclencheurs cron par compte, 10 ms de CPU par exécution, 50 sous-requêtes. Le jeton GitHub (accès limité à ce dépôt, droit d'écriture sur Actions) est saisi par l'utilisateur avec `wrangler secret put`. Le `concurrency` du workflow empêche deux cycles simultanés.
+
+Les plafonds de dépense (0,10 $ par cycle, 0,40 $ par jour, 3,95 $ au total) ne changent pas : des cycles plus fréquents traitent les mêmes actualités plus tôt, ils n'en traitent pas davantage. À mesurer après mise en route : délai de détection et part des cycles sans nouveauté.
