@@ -181,9 +181,9 @@ export const en = {
     total: (duree: string) => `${duree} from announcement to publication`,
     duree: (h: number, m: number) => (h ? `${h} h ${m} min` : `${m} min`),
     exemples: 'Examples',
-    plusRapide: (n: number) => `Announcement: the fastest of the ${n} posts measured. Skills and creative tools: from detection to publication.`,
+    plusRapide: (n: number) => `Announcement: the fastest of the ${n} posts measured. Skills and creative tools: from detection to the checked post.`,
     sourcePrimaire: 'primary source',
-    totalRepere: (duree: string) => `${duree} from detection to publication`,
+    totalVerifie: (duree: string) => `${duree} from detection to checked post`,
     delaiTitre: 'From announcement to feed',
   },
   comptes: {

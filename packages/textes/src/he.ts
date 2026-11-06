@@ -181,9 +181,9 @@ export const he: Textes = {
     total: (duree: string) => `${duree} מההכרזה ועד הפרסום`,
     duree: (h: number, m: number) => (h ? `${h} ש׳ ${m} דק׳` : `${m} דק׳`),
     exemples: 'דוגמאות',
-    plusRapide: (n: number) => `הכרזה: המהירה ביותר מבין ${n} הפוסטים שנמדדו. סקילים וכלי יצירה: מהאיתור ועד הפרסום.`,
+    plusRapide: (n: number) => `הכרזה: המהירה ביותר מבין ${n} הפוסטים שנמדדו. סקילים וכלי יצירה: מהאיתור ועד פוסט שנבדק.`,
     sourcePrimaire: 'מקור ראשוני',
-    totalRepere: (duree: string) => `${duree} מהאיתור ועד הפרסום`,
+    totalVerifie: (duree: string) => `${duree} מהאיתור ועד פוסט שנבדק`,
     delaiTitre: 'מההכרזה לפיד',
   },
   comptes: {

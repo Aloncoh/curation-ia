@@ -264,7 +264,7 @@ export default async function Accueil() {
                     [x.prete, v.releveEtapes.prete, trouves(x.post) > 0 ? v.citations(trouves(x.post)) : null],
                     [x.publiee, v.releveEtapes.enLigne, <a key="l" href={`/p/${x.publication}`}><bdi dir="ltr">/p/{x.publication}</bdi></a>],
                   ]}
-                  pied={v.totalRepere(enHeures(x.minutes))} langue={ctx.langue}
+                  pied={v.totalVerifie(enHeures(x.minutesVerifie))} langue={ctx.langue}
                 />
               ))}
             </div>

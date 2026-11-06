@@ -289,7 +289,7 @@ describe('rapport des délais', () => {
       await c.execute({ sql: `insert into news_item (id, kind, title, first_seen_at, status) values (?, ?, 't', ?, 'collected')`, args: [id, type, vue] });
       await c.execute({ sql: `insert into post (account_id, news_item_id, evidence_level, status, created_at, published_at) values ('repo', ?, 'documentary_analysis', 'publie', ?, ?)`, args: [id, prete, enLigne] });
     }
-    expect(await plusRapideDuRepere(c, 'repo', ['decouverte', 'selection'])).toMatchObject({ publication: 2, type: 'decouverte', minutes: 12, primaire: false });
+    expect(await plusRapideDuRepere(c, 'repo', ['decouverte', 'selection'])).toMatchObject({ publication: 2, type: 'decouverte', minutes: 12, minutesVerifie: 6, primaire: false });
     expect(await plusRapideDuRepere(c, 'repo')).toMatchObject({ publication: 1, minutes: 3 });
     expect(await plusRapideDuRepere(c, 'mova')).toBeNull();
   });

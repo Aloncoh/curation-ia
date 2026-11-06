@@ -199,7 +199,10 @@ export interface ReleveRepere {
   vue: string;
   prete: string;
   publiee: string;
+  /** Du repérage à la mise en ligne. */
   minutes: number;
+  /** Du repérage au post rédigé et vérifié : le travail de l'agent, hors attente de publication. */
+  minutesVerifie: number;
   primaire: boolean;
 }
 
@@ -221,7 +224,7 @@ export async function plusRapideDuRepere(client: Client, compte: string, prefere
     const [vue, prete, publiee] = [l.first_seen_at, l.created_at, l.published_at].map(String) as [string, string, string];
     const t = [vue, prete, publiee].map((d) => Date.parse(d));
     if (t.some(Number.isNaN) || t[1]! < t[0]! || t[2]! < t[1]!) continue;
-    candidats.push({ publication: Number(l.id), compte, type: String(l.kind), vue, prete, publiee, minutes: Math.round((t[2]! - t[0]!) / 60000), primaire: Boolean(Number(l.primaire)) });
+    candidats.push({ publication: Number(l.id), compte, type: String(l.kind), vue, prete, publiee, minutes: Math.round((t[2]! - t[0]!) / 60000), minutesVerifie: Math.round((t[1]! - t[0]!) / 60000), primaire: Boolean(Number(l.primaire)) });
   }
   const rang = (x: ReleveRepere) => (preferes.includes(x.type) ? 0 : 1);
   return candidats.sort((a, b) => rang(a) - rang(b) || a.minutes - b.minutes || b.publication - a.publication)[0] ?? null;

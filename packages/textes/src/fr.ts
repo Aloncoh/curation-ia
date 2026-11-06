@@ -179,9 +179,9 @@ export const fr: Textes = {
     total: (duree: string) => `${duree} de l’annonce à la mise en ligne`,
     duree: (h: number, m: number) => (h ? `${h} h ${String(m).padStart(2, '0')}` : `${m} min`),
     exemples: 'Exemples',
-    plusRapide: (n: number) => `Annonce : le plus rapide des ${n} posts mesurés. Skills et outils créatifs : du repérage à la mise en ligne.`,
+    plusRapide: (n: number) => `Annonce : le plus rapide des ${n} posts mesurés. Skills et outils créatifs : du repérage au post vérifié.`,
     sourcePrimaire: 'source primaire',
-    totalRepere: (duree: string) => `${duree} du repérage à la mise en ligne`,
+    totalVerifie: (duree: string) => `${duree} du repérage au post vérifié`,
     delaiTitre: 'De l’annonce au fil',
   },
   comptes: {
