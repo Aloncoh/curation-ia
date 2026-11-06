@@ -190,7 +190,9 @@
   & .stories small { color: var(--v-pied); font-size: .82rem; line-height: 1.35; }
 
   /* Le relevé horodaté d'un vrai post, comme un ticket : bords perforés, chiffres en « mono ». */
-  & .releve-section { display: grid; justify-items: start; }
+  & .releve-section { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(24px, 5vw, 64px); align-items: center; }
+  & .releve-texte h2 { margin-bottom: 14px; }
+  & .releve { justify-self: end; rotate: -.8deg; }
   & .releve {
     width: min(600px, 100%); padding: 26px 26px 22px; background: #fff; color: var(--v-encre);
     box-shadow: 0 30px 60px -40px rgba(60, 30, 140, .6);
@@ -208,7 +210,7 @@
   & .releve li span { color: var(--v-pied); font-size: .9rem; }
   & .releve li span a { color: var(--v-violet-fonce); }
   & .releve footer { margin-top: 4px; padding-top: 14px; border-top: 2px dashed #cfc6e6; font-weight: 700; font-variation-settings: "MONO" 1; font-size: .95rem; }
-  & .mesure { margin: 14px 0 0; color: var(--v-pied); font-size: .84rem; }
+  & .mesure { margin: 0; max-width: 26em; color: var(--v-pied); font-size: .9rem; line-height: 1.5; }
 
   /* Fin de page : l'inscription, une fois. */
   & .fin { display: flex; flex-wrap: wrap; align-items: center; gap: 22px; padding-top: 34px; border-top: 1px solid var(--v-trait); }
@@ -256,7 +258,8 @@
     & .anneau-story { width: 76px; height: 76px; margin-top: 20px; }
     & .anneau-story .perso { height: min(88px, calc(92px / var(--ratio))); bottom: 4px; }
     & .stories small { display: none; }
-    & .releve { padding: 22px 18px 18px; }
+    & .releve-section { grid-template-columns: minmax(0, 1fr); }
+    & .releve { padding: 22px 18px 18px; justify-self: stretch; rotate: none; }
     & .releve li { grid-template-columns: minmax(0, 1fr); }
     & .releve time { grid-row: auto; font-size: .84rem; }
   }

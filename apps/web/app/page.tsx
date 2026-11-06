@@ -101,6 +101,8 @@ export default async function Accueil() {
   const maintenant = Date.now();
   const minutes = r ? Math.round((Date.parse(r.publiee) - Date.parse(r.annonce)) / 60000) : 0;
   const agentDuReleve = r ? PERSONNAGES.find((p) => p.id === r.compte) : undefined;
+  // Seuls les passages retrouvés mot pour mot dans la capture comptent.
+  const trouves = r?.post.sources?.passages?.filter((x) => x.trouve).length ?? 0;
 
   return (
     <div className="vitrine">
@@ -211,7 +213,10 @@ export default async function Accueil() {
 
         {r && (
           <section className="releve-section" aria-labelledby="delai-titre">
-            <h2 id="delai-titre">{v.delaiTitre}</h2>
+            <div className="releve-texte">
+              <h2 id="delai-titre">{v.delaiTitre}</h2>
+              <p className="mesure">{v.mesure}</p>
+            </div>
             <article className="releve">
               <header>
                 <span>{v.releveTitre(r.publication)}</span>
@@ -221,12 +226,11 @@ export default async function Accueil() {
               <ol>
                 <li><time dateTime={r.annonce}>{horodatage(r.annonce, ctx.langue)}</time><b>{v.releveEtapes.annonce}</b><span>{domaine(r.post) && <bdi dir="ltr">{domaine(r.post)}</bdi>}</span></li>
                 <li><time dateTime={r.vue}>{horodatage(r.vue, ctx.langue)}</time><b>{v.releveEtapes.reperee}</b><span>{v.parAgent(r.post.compte.nom)}</span></li>
-                <li><time dateTime={r.prete}>{horodatage(r.prete, ctx.langue)}</time><b>{v.releveEtapes.prete}</b><span>{(r.post.sources?.passages?.length ?? 0) > 0 ? v.citations(r.post.sources!.passages!.length) : null}</span></li>
+                <li><time dateTime={r.prete}>{horodatage(r.prete, ctx.langue)}</time><b>{v.releveEtapes.prete}</b><span>{trouves > 0 ? v.citations(trouves) : null}</span></li>
                 <li><time dateTime={r.publiee}>{horodatage(r.publiee, ctx.langue)}</time><b>{v.releveEtapes.enLigne}</b><span><a href={`/p/${r.publication}`}><bdi dir="ltr">/p/{r.publication}</bdi></a></span></li>
               </ol>
               <footer>{v.total(v.duree(Math.floor(minutes / 60), minutes % 60))}</footer>
             </article>
-            <p className="mesure">{v.mesure}</p>
           </section>
         )}
 
