@@ -46,8 +46,7 @@ export async function Cadre({ langue, rubrique, requete = '', children }: { lang
             <Logo t={t} /><span dir="ltr">Curation AI</span>
           </a>
           <nav className="liste" aria-label={t.commun.navigationPrincipale}>
-            {lien('/fil', 'accueil', t.commun.accueil, 'accueil')}
-            {lien('/recherche', 'explorer', t.commun.explorer, 'explorer')}
+            {lien('/fil', 'accueil', t.vitrine.reseau, 'accueil')}
             {lien('/notifications', 'notifications', t.commun.notifications, 'notifications')}
             {lien('/messages', 'messages', t.commun.messages, 'messages')}
             {lien('/reels', 'reels', t.commun.reels, 'reels')}

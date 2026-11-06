@@ -186,7 +186,7 @@
   & .agent-tete a:hover { text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--c); }
   & .agent-tete em { justify-self: start; padding: 3px 9px; border-radius: 999px; font-style: normal; font-size: .76rem; font-weight: 700; color: var(--v-encre); background: color-mix(in srgb, var(--c) 18%, #fff); white-space: nowrap; }
   & .specialite { align-self: start; margin: 0; color: var(--v-pied); font-size: .86rem; line-height: 1.4; }
-  & .exemples { display: grid; gap: 6px; padding: 12px 12px 10px; border-radius: 16px; background: #fff; border: 1px solid var(--v-trait); box-shadow: 0 14px 30px -26px rgba(60, 30, 140, .5); }
+  & .exemples { align-self: start; display: grid; gap: 6px; padding: 12px 12px 10px; border-radius: 16px; background: #fff; border: 1px solid var(--v-trait); box-shadow: 0 14px 30px -26px rgba(60, 30, 140, .5); }
   & .exemples small { color: var(--v-pied); font-size: .72rem; text-transform: uppercase; letter-spacing: .07em; font-variation-settings: "MONO" 1; }
   & .exemples ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
   & .exemples li + li { border-top: 1px solid #efeaf8; }
@@ -345,12 +345,15 @@ html.curseur-actif .vitrine .curseur.visible { opacity: 1; }
 
   /* Explorer : un rendu par sujet, avec son nom et le nombre de posts. */
   & .grille-sujets { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
-  & .tuile-sujet { display: grid; gap: 8px; padding: 8px 8px 12px; border-radius: 20px; background: var(--f-carte); border: 1px solid #312f38; color: var(--f-texte); text-decoration: none; transition: translate .25s, border-color .25s; }
+  & .tuile-sujet { display: grid; align-content: start; gap: 8px; padding: 8px 8px 12px; border-radius: 20px; background: var(--f-carte); border: 1px solid #312f38; color: var(--f-texte); text-decoration: none; transition: translate .25s, border-color .25s; }
   & .tuile-sujet:hover { translate: 0 -3px; border-color: #4a4656; }
   & .tuile-sujet .couverture, & .tuile-sujet img { margin: 0; border-radius: 14px; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
   /* Le nom du sujet est écrit sous l'image : on ne garde sur la couverture que le logo, centré. */
   & .tuile-sujet .couv-titre, & .tuile-sujet .couv-domaine { display: none; }
   & .tuile-sujet .couv-logo { width: 34%; inset-inline-start: 33%; }
+  /* En haut de l'accueil du réseau : les sujets en bande qui défile de côté. */
+  & .bande-sujets { display: flex; overflow-x: auto; scrollbar-width: thin; scroll-snap-type: x proximity; padding-bottom: 6px; }
+  & .bande-sujets .tuile-sujet { flex: 0 0 190px; scroll-snap-align: start; }
   & .tuile-sujet span { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; padding: 0 6px; }
   & .tuile-sujet b { font-weight: 700; }
   & .tuile-sujet small { color: var(--f-pied); font-size: .8rem; white-space: nowrap; }

@@ -1,8 +1,9 @@
-// Barre du haut de l'accueil et du fil (2026-11-06) : recherche, onglets en pilule avec un indicateur qui glisse vers
+// Barre du haut de la page de présentation (2026-11-06) : recherche, onglets en pilule (« Réseau » remplace « Fil » et
+// « Explorer », doublons selon l'utilisateur) avec un indicateur qui glisse vers
 // l'onglet survolé ou courant (Vitrine.tsx), et « Créer un compte ». Styles : app/vitrine.css.
 import { textesDe, type Langue } from '@curation/textes';
 
-export type Onglet = 'fil' | 'explorer' | 'comptes' | 'reels' | null;
+export type Onglet = 'reseau' | 'comptes' | 'reels' | null;
 
 export function BarrePilules({ langue, courant = null }: { langue: Langue; courant?: Onglet }) {
   const t = textesDe(langue);
@@ -17,8 +18,7 @@ export function BarrePilules({ langue, courant = null }: { langue: Langue; coura
         </a>
       </div>
       <div className="pilule rail">
-        {onglet('/fil', 'fil', t.vitrine.fil)}
-        {onglet('/recherche', 'explorer', t.commun.explorer)}
+        {onglet('/fil', 'reseau', t.vitrine.reseau)}
         {onglet('/comptes', 'comptes', t.commun.comptes)}
         {onglet('/reels', 'reels', t.commun.reels)}
       </div>

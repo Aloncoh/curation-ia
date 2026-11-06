@@ -1,13 +1,12 @@
-// Recherche et Explorer (SPEC §7.15, §6 bis) : sans requête, la recherche et des publications en grille ; avec une
-// requête, les publications trouvées, chacune avec la raison qui la fait remonter. Aucun résultat n'est inventé.
+// Recherche (SPEC §7.15) : les publications trouvées, chacune avec la raison qui la fait remonter ; sans requête, renvoi
+// à l'accueil du réseau, qui porte aussi les sujets. Aucun résultat n'est inventé.
 import type { Metadata } from 'next';
 import { textesDe, type Textes } from '@curation/textes';
 import type { ResultatRecherche } from '@curation/contrat';
-import { fil, recherche, RequeteInvalide } from '../../../../src/api/v1/index.ts';
+import { redirect } from 'next/navigation';
+import { recherche, RequeteInvalide } from '../../../../src/api/v1/index.ts';
 import { Cadre, Vide } from '../../components/Cadre.tsx';
-import { Couverture } from '../../components/Couverture.tsx';
 import { CartePost } from '../../components/CartePost.tsx';
-import { sujetDe } from '../../lib/sujet.ts';
 import { contexte, langueDeLaRequete } from '../../lib/serveur.ts';
 
 type Parametres = { searchParams: Promise<{ q?: string | string[]; tri?: string | string[] }> };
@@ -33,40 +32,9 @@ export default async function Recherche({ searchParams }: Parametres) {
   const q = premier(sp.q).trim().slice(0, 200);
   const tri = premier(sp.tri) === 'recents' ? 'recents' : 'pertinence';
 
-  if (!q) {
-    // Un rendu par sujet (2026-11-06, demande de l'utilisateur : « trop de doublons ») : la couverture du sujet, son nom
-    // et le nombre de posts, qui mène à la recherche de ce sujet ; une sélection sans sujet unique garde son image.
-    const page = await fil(ctx, { limite: 50 });
-    const sujets = new Map<string, { sujet: NonNullable<ReturnType<typeof sujetDe>>; p: (typeof page.publications)[number]; n: number }>();
-    const autres: (typeof page.publications)[number][] = [];
-    for (const p of page.publications) {
-      const sujet = sujetDe(p);
-      if (!sujet) { if (p.media?.type === 'image') autres.push(p); continue; }
-      const deja = sujets.get(sujet.nom);
-      if (deja) deja.n++;
-      else sujets.set(sujet.nom, { sujet, p, n: 1 });
-    }
-    return (
-      <Cadre langue={ctx.langue} rubrique="explorer">
-        <h1 className="titre-page">{t.commun.explorer}</h1>
-        <p className="intro-page">{t.recherche.exploreIntro}</p>
-        <div className="grille-sujets">
-          {[...sujets.values()].map(({ sujet, p, n }) => (
-            <a key={sujet.nom} className="tuile-sujet" href={`/recherche?${new URLSearchParams({ q: sujet.nom })}`} data-compte={p.compte.id}>
-              <Couverture sujet={sujet} graine={p.id} agent={{ nom: p.compte.nom, avatar: p.compte.avatar }} format="grand" etiquette={t.post.couverture(sujet.nom)} domaine={t.post.domaines[sujet.domaine]} fond={p.fond} />
-              <span><b>{sujet.nom}</b><small>{t.vitrine.nPosts(n)}</small></span>
-            </a>
-          ))}
-          {autres.map((p) => p.media?.type === 'image' && (
-            <a key={p.id} className="tuile-sujet" href={`/p/${p.id}`} data-compte={p.compte.id}>
-              <img src={p.media.src} alt={p.media.alt} loading="lazy" />
-              <span><b>{p.compte.nom}</b><small>{t.vitrine.nPosts(1)}</small></span>
-            </a>
-          ))}
-        </div>
-      </Cadre>
-    );
-  }
+  // Sans requête, plus de page Explorer à part (2026-11-06, « Fil et Explorer sont des doublons ») : l'accueil du réseau
+  // montre les sujets puis les posts.
+  if (!q) redirect('/fil');
 
   let reponse = null;
   let invalide = false;
