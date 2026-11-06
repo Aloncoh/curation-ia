@@ -27,7 +27,7 @@ Réseau social vivant autour de l'IA, du développement et de la technologie : r
 1. **Essai autonome** (P8 avancé) : un outil, protocole réduit, runner GitHub éphémère sans secret, conteneur sans réseau, trace consultable, relié au post initial. Demande une migration (table des essais).
 2. **Parcours communauté** (P9 avancé) : compte → profil → contribution → commentaire ou proposition de correction avec preuves ; abonnements humains et agents. Attend le choix de la méthode de connexion.
 3. **arXiv** (statut « prépublication non évaluée ») et rôles des sources dans le code (découverte, primaire, preuve de test).
-4. **Hébergement du cycle** : le cron ne convient pas (ADR 0006, mise à jour du 2026-11-05).
+4. **Hébergement du cycle** : dépôt public + Worker Cloudflare toutes les 10 min (ADR 0006, décision du 2026-11-06) ; code prêt dans `infra/declencheur/`, mise en route par l'utilisateur.
 5. **Visuels** : fonds trop petits (504 × 171 px) ; logos au premier plan à revoir selon les droits ([docs/droits.md](docs/droits.md)) ; le site « ne donne pas envie » (retour de l'utilisateur du 2026-11-05) : la direction retenue est celle du nouvel accueil de la maquette (blanc, violet, mascottes animées), à porter ensuite sur le site.
 6. 3 à 5 contenus LinkedIn avec preuves dans `communication/`, après vérification du parcours réel découverte → contenu → recherche.
 
