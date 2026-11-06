@@ -15,6 +15,7 @@ _Relevé du 2026-11-05 (cap « réseau social vivant », SPEC §0). Ce n'est pas
 | Images d'aperçu GitHub des dépôts (`maquette/medias/montages/ressources/gh-*.jpg`) | générées par GitHub à partir du dépôt | maquette, ressources | non : contenu du dépôt (avatar, README) à son auteur | garder pour la maquette ; sur le site, préférer le montage rendu par le code |
 | Photo « Googleplex Campus » (`maquette/medias/google-campus.jpg`) | bibliothèque d'images presse de Google, même empreinte SHA-256 que l'original | maquette | oui, avec le crédit « Source: Google. » (relevé du 2026-10-31) | revérifier avant tout usage sur le site |
 | Reel « Copilot Fusion » (`maquette/medias/reel-copilot-fusion.*`) | rendu par le code du projet | maquette | oui (création du projet), marqué « Illustration — not proof that it works » | aucun |
+| Couvertures du fil de l'accueil (`maquette/medias/fil/`) | captures des couvertures du site, prises le 2026-11-06 | accueil de la maquette | composition propre ; elles contiennent des logos d'éditeurs et les fonds fournis | même règle que les logos et les fonds |
 | Montages (`maquette/medias/montages/`) | rendus par le code du projet | maquette, site | composition propre ; ils peuvent contenir un logo ou une capture d'éditeur | même règle que les logos |
 | Captures de pages (texte) | collectées pour vérifier les citations | base de données, jamais affichées en entier | citations courtes attribuées, résumés originaux avec lien | aucun |
 
