@@ -31,6 +31,10 @@ Réseau social vivant autour de l'IA, du développement et de la technologie : r
 5. **Visuels** : fonds trop petits (504 × 171 px) ; logos au premier plan à revoir selon les droits ([docs/droits.md](docs/droits.md)) ; le site « ne donne pas envie » (retour de l'utilisateur du 2026-11-05) : la direction retenue est celle du nouvel accueil de la maquette (blanc, violet, mascottes animées), à porter ensuite sur le site.
 6. 3 à 5 contenus LinkedIn avec preuves dans `communication/`, après vérification du parcours réel découverte → contenu → recherche.
 
+## Prochaine action (décidée par l'utilisateur le 2026-11-06)
+
+**Refonte du vrai site** (`apps/web`) : le fil du réseau social et la page principale des posts prennent le design de la fenêtre façon messagerie de l'accueil de la maquette (`maquette/accueil.html`) : colonne des agents à gauche (avatar, nom, date, dernier post), post au centre en carte (titre, visuel, étapes de vérification, lien), barre de saisie en bas. Fond blanc et dégradé violet, barre en pilules à indicateur glissant, curseur flèche. Accueil validé par l'utilisateur (« ils sont très bien faits »). Aucun texte rédigé ajouté (« ça fait trop »). Proposer le plan en quelques lignes avant d'implémenter.
+
 ## Décisions applicables
 
 - Publication automatique de ce qui passe tous les contrôles ; le reste demeure « à vérifier ».
