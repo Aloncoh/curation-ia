@@ -1,0 +1,16 @@
+# Déclencheur externe de la chaîne (ADR 0006, option B, décidée par l'utilisateur le 2026-11-06) : un Worker Cloudflare
+# planifié lance le workflow GitHub « chaine.yml » toutes les 10 minutes (heure UTC), parce que le cron de GitHub saute
+# des heures entières. Offre Workers Free (lue le 2026-11-06) : 5 déclencheurs cron par compte, 10 ms de CPU par
+# exécution, 50 sous-requêtes ; l'attente réseau ne compte pas dans le CPU. Le jeton GitHub n'est jamais ici :
+# `npx wrangler secret put GITHUB_TOKEN`, saisi par l'utilisateur.
+name = "curation-declencheur"
+main = "src/index.js"
+compatibility_date = "2026-10-01"
+
+[triggers]
+crons = ["*/10 * * * *"]
+
+[vars]
+DEPOT = "Aloncoh/curation-ia"
+FLUX = "chaine.yml"
+BRANCHE = "main"
