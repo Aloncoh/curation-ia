@@ -24,7 +24,7 @@ export function Vitrine({ bientot }: { bientot: string }) {
 
     // Comptes : pas encore de création de compte, on le dit à côté du bouton.
     racine.querySelectorAll<HTMLElement>('[data-compte]').forEach((b) => ecouter(b, 'click', () => {
-      const zone = b.closest('.une-texte, .fin, .fil-agents')?.querySelector('.info') ?? racine.querySelector('.une-texte .info, .info');
+      const zone = b.closest('.une-texte, .fin, .cote')?.querySelector('.info') ?? racine.querySelector('.une-texte .info, .info');
       if (zone) zone.textContent = bientot;
     }));
 
