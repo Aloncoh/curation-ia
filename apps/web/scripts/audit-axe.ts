@@ -12,7 +12,7 @@ const axe = readFileSync(createRequire(import.meta.url).resolve('axe-core/axe.mi
 const fil = (await (await fetch(`${base}/api/v1/fil`)).json()) as { publications: { id: number; nature: string }[] };
 const premiere = fil.publications[0]?.id;
 const selection = fil.publications.find((p) => p.nature === 'selection')?.id;
-const pages = ['/', '/fil', '/recherche', ...(premiere ? [`/p/${premiere}`, `/p/${premiere}/fiche`] : []), ...(selection ? [`/p/${selection}`] : []), '/comptes/mova', '/comptes', '/recherche?q=motion%20design', '/recherche', '/notifications', '/messages', '/reels', '/profil'];
+const pages = ['/', '/fil', '/recherche', '/reglages', ...(premiere ? [`/p/${premiere}`, `/p/${premiere}/fiche`] : []), ...(selection ? [`/p/${selection}`] : []), '/comptes/mova', '/comptes', '/recherche?q=motion%20design', '/recherche', '/notifications', '/messages', '/reels', '/profil'];
 const navigateur = await chromium.launch({ channel: process.env.CURATION_CHROME ?? 'chrome', headless: true });
 const rapport: { langue: string; theme: string; largeur: number; page: string; violations: { id: string; impact: string | null; noeuds: number; exemple: string }[]; regles_passees: number }[] = [];
 try {

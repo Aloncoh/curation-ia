@@ -9,6 +9,7 @@ import type { Textes } from '@curation/textes';
 import { dateCourte, hrefSur } from '../lib/format.ts';
 import { PERSONNAGES } from '../lib/personnages.ts';
 import { sujetDe } from '../lib/sujet.ts';
+import { BarreActions } from './BarreActions.tsx';
 import { Couverture } from './Couverture.tsx';
 
 type Style = CSSProperties & Record<`--${string}`, string>;
@@ -77,6 +78,11 @@ export function CartePost({ p, t, langue, raison = null }: { p: Publication; t: 
           </a>
         )}
       </div>
+      <BarreActions
+        lien={lien}
+        titre={titre?.texte ?? t.post.publicationDe(p.compte.nom)}
+        l={{ actions: t.post.actions, commenter: v.commenter, jaime: v.jaime, partager: t.post.partager, lienCopie: t.post.lienCopie, aucunCommentaire: t.post.aucunCommentaire, avecCompte: v.avecCompte }}
+      />
       <p className="cp-mention">{t.post.mentionIA}</p>
     </article>
   );

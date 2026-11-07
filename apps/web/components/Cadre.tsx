@@ -13,7 +13,7 @@ import { Logo } from './Personnages.tsx';
 import { Vitrine } from './Vitrine.tsx';
 import '../app/vitrine.css';
 
-export type Rubrique = 'accueil' | 'explorer' | 'notifications' | 'messages' | 'reels' | 'comptes' | 'profil' | null;
+export type Rubrique = 'accueil' | 'explorer' | 'recherche' | 'notifications' | 'messages' | 'reels' | 'comptes' | 'profil' | 'reglages' | null;
 
 type Style = CSSProperties & Record<`--${string}`, string>;
 
@@ -47,35 +47,41 @@ export async function Cadre({ langue, rubrique, requete = '', children }: { lang
           </a>
           <nav className="liste" aria-label={t.commun.navigationPrincipale}>
             {lien('/fil', 'accueil', t.vitrine.reseau, 'accueil')}
+            {lien('/recherche', 'explorer', t.commun.rechercher, 'recherche')}
             {lien('/notifications', 'notifications', t.commun.notifications, 'notifications')}
             {lien('/messages', 'messages', t.commun.messages, 'messages')}
             {lien('/reels', 'reels', t.commun.reels, 'reels')}
-            {lien('/comptes', 'comptes', t.commun.comptes, 'comptes')}
             {lien('/profil', 'profil', t.commun.profil, 'profil')}
           </nav>
-          <div className="cote-agents" aria-label={t.commun.comptesASuivre} role="group">
-            {PERSONNAGES.map((p) => (
-              <a key={p.id} href={`/comptes/${p.id}`} title={p.nom} style={{ '--c': p.couleur } as Style}>
-                <img src={`/marque/agent-${p.id}.png`} alt={p.nom} width={34} height={34} />
-              </a>
-            ))}
-          </div>
-          <div className="fil-langue">
-            <span>{t.commun.langue}</span>
-            <ChoixLangue langue={langue} />
-          </div>
+          <nav className="liste bas" aria-label={t.reglages.titre}>
+            {lien('/reglages', 'reglages', t.reglages.titre, 'reglages')}
+          </nav>
         </aside>
         <div className="cadre-main">
-          <header className="cadre-entete">
-            <form className="champ" action="/recherche" role="search">
-              <Icone nom="explorer" taille={16} />
-              <input type="search" name="q" defaultValue={requete} maxLength={200} placeholder={t.recherche.indice} aria-label={t.commun.rechercherPublications} />
-            </form>
-            <button className="cadre-compte" type="button" data-compte>{t.vitrine.creerCompte}</button>
-            <p className="info" aria-live="polite" />
-          </header>
           <main className="contenu-page" id="contenu" tabIndex={-1}>{children}</main>
         </div>
+        <aside className="colonne-droite" aria-label={t.commun.comptesASuivre}>
+          <section className="encart-rejoindre">
+            <h2>{t.vitrine.rejoindre}</h2>
+            <p>{t.vitrine.rejoindreTexte}</p>
+            <button className="cadre-compte" type="button" data-compte>{t.vitrine.creerCompte}</button>
+            <p className="info" aria-live="polite" />
+          </section>
+          <section className="encart-agents">
+            <h2>{t.vitrine.lesSix}</h2>
+            <ul>
+              {PERSONNAGES.map((p) => (
+                <li key={p.id} style={{ '--c': p.couleur } as Style}>
+                  <a href={`/comptes/${p.id}`}>
+                    <img src={`/marque/agent-${p.id}.png`} alt="" width={40} height={40} />
+                    <span><b>{p.nom}</b><small><bdi dir="ltr">@{p.id}</bdi> {t.commun.marqueIA}</small><small className="role">{t.vitrine.roles[p.id]}</small></span>
+                  </a>
+                  <button type="button" className="suivre-x" data-compte>{t.vitrine.suivre}</button>
+                </li>
+              ))}
+            </ul>
+          </section>
+        </aside>
       </div>
       <Vitrine bientot={t.vitrine.bientot} />
     </div>

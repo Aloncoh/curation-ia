@@ -13,7 +13,8 @@ export function Vitrine({ bientot }: { bientot: string }) {
   useEffect(() => {
     const racine = ancre.current?.closest<HTMLElement>('.vitrine');
     if (!racine) return;
-    const calme = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // Mouvement réduit : réglage de l'appareil, ou choix fait dans Réglages (classe posée sur <html> par app/layout.tsx).
+    const calme = matchMedia('(prefers-reduced-motion: reduce)').matches || document.documentElement.classList.contains('mouvement-reduit');
     const nettoyages: (() => void)[] = [];
     const ecouter = (cible: EventTarget, type: string, f: (e: never) => void, o?: AddEventListenerOptions) => {
       cible.addEventListener(type, f as EventListener, o);
@@ -24,7 +25,7 @@ export function Vitrine({ bientot }: { bientot: string }) {
 
     // Comptes : pas encore de création de compte, on le dit à côté du bouton.
     racine.querySelectorAll<HTMLElement>('[data-compte]').forEach((b) => ecouter(b, 'click', () => {
-      const zone = b.closest('.une-texte, .fin, .cadre-entete')?.querySelector('.info') ?? racine.querySelector('.une-texte .info, .info');
+      const zone = b.closest('.une-texte, .fin')?.querySelector('.info') ?? racine.querySelector('.une-texte .info, .encart-rejoindre .info, .info');
       if (zone) zone.textContent = bientot;
     }));
 
