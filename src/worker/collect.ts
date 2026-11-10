@@ -33,6 +33,11 @@ export interface CollectOptions {
   clock?: () => Date;
   /** Nombre de files de travail en parallèle (1 par défaut). */
   concurrence?: number;
+  /**
+   * Durée au-delà de laquelle aucun nouveau job n'est pris (2026-11-10) : l'étape de collecte est tuée à 10 min et un
+   * cycle s'arrête à la première étape en échec. Les sources non atteintes restent en file pour le cycle suivant.
+   */
+  dureeMaxMs?: number;
   /** Points d'arrêt pour les tests d'arrêt brutal (jamais utilisés en mode réel). */
   hooks?: { insideStoreTransaction?: () => Promise<void> };
 }
@@ -53,7 +58,8 @@ export interface RunSummary extends StoreCounts {
 export interface SkippedSource {
   sourceId: string;
   sourceName: string;
-  reason: 'retry_scheduled' | 'leased_elsewhere';
+  /** reportee : job jamais tenté, laissé au cycle suivant par la durée maximale de la collecte. */
+  reason: 'retry_scheduled' | 'leased_elsewhere' | 'reportee';
   availableAt: string | null;
   lastError: string | null;
 }
@@ -108,9 +114,11 @@ export async function runCollect(options: CollectOptions): Promise<CollectSummar
   // de l'étape (cycles en échec les 8 et 9 novembre), surtout à cause des allers-retours vers la base distante. Chaque
   // file a son identifiant de worker et réserve ses jobs par bail : un job n'est jamais traité deux fois.
   const files = Math.max(1, options.concurrence ?? 1);
+  const echeance = options.dureeMaxMs === undefined ? null : Date.parse(now()) + options.dureeMaxMs;
   await Promise.all(Array.from({ length: files }, async (_, i) => {
     const id = files === 1 ? workerId : `${workerId}-${i + 1}`;
     for (;;) {
+      if (echeance !== null && Date.parse(now()) >= echeance) break;
       await recoverExpiredLeases(database.client, now());
       // La réservation échoue d'elle-même si la pause est active (condition dans la même instruction SQL).
       const job = await claimNextJob(database.client, id, now(), options.leaseMs, definitions.map((def) => def.id));
@@ -137,7 +145,7 @@ async function skippedSources(database: Database, definitions: SourceDefinition[
     skipped.push({
       sourceId: def.id,
       sourceName: def.name,
-      reason: job.status === 'leased' ? 'leased_elsewhere' : 'retry_scheduled',
+      reason: job.status === 'leased' ? 'leased_elsewhere' : job.last_error === null ? 'reportee' : 'retry_scheduled',
       availableAt: job.status === 'pending' ? String(job.available_at) : null,
       lastError: job.last_error === null ? null : String(job.last_error),
     });

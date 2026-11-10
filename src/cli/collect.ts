@@ -33,6 +33,8 @@ await runCommand(async ({ config, database }) => {
     // Une seule file (2026-11-10) : l'essai à 8 files a échoué sur la base en ligne (écriture d'une exécution refusée) ;
     // à reprendre après correction de la cause.
     concurrence: 1,
+    // 7 min au plus (étape tuée à 10 min ; une écriture en base prend jusqu'à 10 s) : le reste passe au cycle suivant.
+    dureeMaxMs: fixture ? undefined : 7 * 60_000,
     hooks: hold > 0 ? { insideStoreTransaction: () => sleep(hold) } : undefined,
   });
 
@@ -53,7 +55,9 @@ await runCommand(async ({ config, database }) => {
     console.log(
       skip.reason === 'retry_scheduled'
         ? `⏸ ${skip.sourceName} : non collectée — nouvelle tentative programmée à ${skip.availableAt}${skip.lastError ? ` (dernière erreur : ${skip.lastError})` : ''}`
-        : `⏸ ${skip.sourceName} : non collectée — job en cours dans un autre processus`,
+        : skip.reason === 'reportee'
+          ? `⏭ ${skip.sourceName} : reportée au cycle suivant (durée maximale de la collecte atteinte)`
+          : `⏸ ${skip.sourceName} : non collectée — job en cours dans un autre processus`,
     );
   }
   if (summary.paused) {
@@ -61,6 +65,9 @@ await runCommand(async ({ config, database }) => {
   } else if (summary.runs.length === 0) {
     console.log('Aucun job disponible : une autre collecte est peut-être en cours, ou une nouvelle tentative est programmée plus tard.');
   }
-  const retried = summary.skipped.some((skip) => skip.reason === 'retry_scheduled');
-  return summary.runs.some((run) => run.status === 'failed') || retried ? 1 : 0;
+  // Code 1 seulement si toutes les collectes ont échoué (2026-11-10, 266 sources) : une source isolée en panne garde son
+  // motif et sa reprise espacée au registre des accès, sans marquer tout le cycle en échec.
+  const echecs = summary.runs.filter((run) => run.status === 'failed').length;
+  if (echecs > 0) console.log(`${echecs} source(s) en échec sur ${summary.runs.length} ; détail au registre : npm run sources:registre`);
+  return summary.runs.length > 0 && echecs === summary.runs.length ? 1 : 0;
 });
