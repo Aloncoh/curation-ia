@@ -2,6 +2,24 @@
 
 Évolution datée des jalons et des vérifications **réellement faites**. L'état courant est dans [STATE.md](STATE.md) ; les traces d'exécution détaillées sont en base.
 
+## 2026-11-10 (soir) — Vidéos des sources sous les posts
+
+- Demande : « ajouter des vidéos en dessous des posts visibles » ; option choisie : « Vidéos des sources ».
+- Mesure avant développement, sur la base en ligne : seules 12 publications sur 123 citent une adresse vidéo dans leurs sources, et ces adresses ne sont pas toutes des vidéos du sujet.
+- Détection construite (`src/media/video-source.ts`) :
+  - lecteur YouTube ou Vimeo intégré, ou balise `<video>` de la page ;
+  - ou la source elle-même quand c'est une vidéo YouTube ;
+  - seuls un identifiant ou une adresse https sont gardés, jamais du HTML.
+- Rattachement : média `external_embed`, sans migration. L'origine existait déjà dans le schéma. Les six lectures du « dernier média » l'excluent, donc le montage reste le média principal.
+- Affichage : bouton à notre identité, lecteur d'origine seulement après le clic. Présent dans le fil et sur la page du post. Mention fr/en/he : éditeur, hébergeur réel, lien vers la page d'origine.
+- Tests : 862 passent (8 nouveaux, sur données fabriquées). Types du cœur et du site vérifiés.
+- **Essai réel :**
+  - aperçu puis écriture sur la base en ligne : 5 vidéos sur 131 posts (n° 134, 158, 209, 235 et 243) ;
+  - en ligne : la vidéo YouTube du n° 209 se lit dans la page ;
+  - le fichier Meta du n° 134 se charge (aucune requête avant le clic) ;
+  - le fil montre 2 blocs vidéo.
+- Mise au point : le `main` local datait d'avant la réécriture de l'historique (ses 30 commits sont sur GitHub). Il est réaligné sur `origin/main` et l'ancien est gardé dans `ancien-main-local`.
+
 ## 2026-11-10 — Couverture élargie des six agents, chaîne rétablie jusqu'au fil
 
 - **Claude Fable 5.2** confirmé à la source primaire : page d'Anthropic du 9 novembre 2026, et `claude-fable-5-2` dans la documentation des modèles. Parcours retracé :

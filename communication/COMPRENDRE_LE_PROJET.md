@@ -669,6 +669,15 @@ Aucune de ces fonctions sociales n'est construite : les comptes arrivent en P9, 
 - **Rédaction des découvertes réactivée**, 2 par cycle. Un élément secondaire fautif (une limite trop proche du texte source, par exemple) est retiré au lieu de bloquer tout le post. Un texte principal fautif laisse le post « à vérifier » : rien de faux n'est publié.
 - **Une alerte** apparaît à chaque cycle si la file des découvertes vieillit sans être traitée (`npm run etat`). Le bilan par agent (sources actives, dernière collecte, candidats, publications) : `npm run couverture`.
 
+**Vidéos des sources sous les posts** _(construit et vérifié en ligne le 2026-11-10)_ :
+
+Quand l'éditeur a placé une vidéo dans sa page, elle s'affiche sous le post, dans le fil comme sur la page du post. Il peut s'agir d'un lecteur YouTube ou Vimeo, ou d'une vidéo de son propre site. Une source qui est elle-même une vidéo YouTube compte aussi.
+
+- **Aucune copie :** c'est le lecteur de l'hébergeur d'origine qui joue la vidéo, et il ne se charge qu'au clic.
+- **Attribution :** la vidéo est attribuée à l'éditeur, avec un lien vers sa page.
+- **Étape du cycle :** l'étape « videos » examine les posts récents.
+- **Couverture :** 5 posts sur 131 en ont une aujourd'hui. Les liens vidéo écrits dans un texte sont ignorés, faute de savoir s'ils montrent le produit.
+
 **Limites connues :**
 - arXiv reste différé : flux vide hors des heures d'annonce, et son API est interdite aux robots.
 - X n'est pas branché (décision en attente).

@@ -40,6 +40,15 @@ Réseau social vivant autour de l'IA, du développement et de la technologie : r
 - **Mova** : deux dossiers par étapes en ligne, vidéo (12 dépôts, n° 245) et 3D et Blender (8 dépôts, n° 246). Visuel refait le 2026-11-10 en cartes à notre identité : une carte de feutre cousue par ressource, avec la mascotte de Mova, un accessoire dessiné par étape (12 scènes différentes), l'étape, le nom et l'auteur. Aucune image de tiers ; images et lignes `media_asset` remplacées, statut et planning des posts inchangés.
 - **Instagram** demandé comme source de skills : impossible sans contournement (robots.txt : `Disallow: /` pour tous). Voie officielle : API Graph de Meta, avec compte professionnel et application validée, donc décision de l'utilisateur. En attendant : liens transmis à la main, et thèmes « skills pour tous usages » ajoutés à la découverte GitHub.
 - **Cycles** : aucun cycle GitHub depuis le 2026-11-09 à 20 h 29 UTC (cron non garanti). Le 2026-11-10, les étapes ont été lancées depuis le poste, sur la base en ligne : 17 posts publiés.
+- **Vidéos des sources sous les posts** (décision de l'utilisateur du 2026-11-10, option « Vidéos des sources ») :
+  - la vidéo que l'éditeur a placée dans sa page (lecteur YouTube ou Vimeo, ou balise `<video>`) est rattachée au post comme média `external_embed` ;
+  - le montage reste le média principal ;
+  - affichage sous le post, dans le fil et sur la page du post ;
+  - rien n'est chargé chez l'hébergeur avant le clic ; YouTube passe par youtube-nocookie ;
+  - la vidéo est attribuée à l'éditeur, avec un lien vers la page d'origine ;
+  - nouvelle étape `videos` du cycle (posts des 3 derniers jours) ; rattrapage : `npm run videos -- --tous --confirmer` ;
+  - 5 vidéos sur 131 posts en ligne (Meta ×3, AWS, NVIDIA/YouTube), vérifiées dans le navigateur.
+  - Limite : les liens vidéo écrits dans un texte (README, « Watch the recording ») sont ignorés.
 - **Dépense** : 1,60 $ sur 4 $ ; 0,31 $ le 2026-11-10.
 
 ## Construit, pas encore vérifié en ligne
