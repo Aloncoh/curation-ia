@@ -691,10 +691,13 @@ describe('budget et pipeline, sans réseau', () => {
     expect(illisible.appels).toBe(2);
     expect((await client.execute(`select status from post_draft`)).rows[0]).toMatchObject({ status: 'sortie_invalide' });
     expect((await client.execute(`select count(*) as n from llm_call where error like 'sortie illisible : JSON illisible%'`)).rows[0]!.n).toBe(2);
-    // Motif noté : pas de nouvelle reprise.
-    const rien = faux(redige(debut));
-    await lancer(rien, 10_000_000, 10_000_000, { maxItems: 1 });
-    expect((await client.execute(`select status from post_draft where news_item_id = (select news_item_id from llm_call limit 1)`)).rows[0]).toMatchObject({ status: 'sortie_invalide' });
+    // Trois motifs notés : plus de reprise.
+    const premier = Number((await client.execute(`select news_item_id from llm_call limit 1`)).rows[0]!.news_item_id);
+    const motifs = async () => Number((await client.execute({ sql: `select count(*) as n from llm_call where news_item_id = ? and error like 'sortie illisible%'`, args: [premier] })).rows[0]!.n);
+    await lancer(illisible, 10_000_000, 10_000_000, { maxItems: 1 });
+    expect(await motifs()).toBe(4);
+    await lancer(illisible, 10_000_000, 10_000_000, { maxItems: 1 });
+    expect(await motifs()).toBe(4);
     // Ancienne sortie illisible, sans motif (avant le 2026-11-10) : reprise une fois et remplacée.
     await client.execute(`update llm_call set error = null`);
     await client.execute(`update post_draft set created_at = strftime('%Y-%m-%dT%H:%M:%fZ', 'now') where status = 'sortie_invalide'`);

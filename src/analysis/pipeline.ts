@@ -16,7 +16,7 @@ import { elaguer, revisionElaguee } from './elagage.ts';
 import { documentUtilisateur, messageRevision, PROMPT_VERSION, SYSTEME_QUALIFICATION, SYSTEME_REDACTION } from './prompts.ts';
 import { consignesActuelles, deciderSelection, passagesRetrouves, preselection, type Selection } from '../selection/consignes.ts';
 import { creerPublication, NIVEAU_PREUVE_V1, synchroniserComptes } from './publication.ts';
-import { Brouillon, Qualification } from './schemas.ts';
+import { Brouillon, DIAPOSITIVES, Qualification } from './schemas.ts';
 
 export const MAX_TENTATIVES = 2;
 /** La réflexion du modèle compte dans ces plafonds ; une réponse tronquée repart une fois avec le double. */
@@ -38,6 +38,26 @@ type Sortie<T> = { ok: true; valeur: T } | { ok: false; statut: EchecSortie };
 const BILAN_ECHEC = { sortie_invalide: 'invalides', sortie_tronquee: 'tronquees', refus: 'refus' } as const;
 
 /**
+ * Écarts récurrents relevés le 2026-11-10 grâce aux motifs (dont l'annonce de Claude Fable 5.2) : un champ cité rendu
+ * `{ "texte": null }` au lieu de `null` quand la source ne dit rien (le coût), et une clé de diapositive inventée. On
+ * retire seulement : un champ cité sans texte devient absent, une diapositive inconnue est ôtée. Rien n'est ajouté.
+ */
+export function normaliserSortie(brut: unknown): unknown {
+  if (!brut || typeof brut !== 'object' || Array.isArray(brut)) return brut;
+  const o: Record<string, unknown> = { ...(brut as Record<string, unknown>) };
+  for (const [cle, v] of Object.entries(o)) {
+    if (v && typeof v === 'object' && !Array.isArray(v) && 'texte' in v && 'passages' in v) {
+      const texte = (v as { texte: unknown }).texte;
+      if (texte === null || (typeof texte === 'string' && texte.trim() === '')) o[cle] = null;
+    }
+  }
+  // Liste rendue null au lieu de vide (relevé réel : `details`) ; une clé absente n'est jamais ajoutée.
+  for (const cle of ['details', 'questions_a_tester']) if (cle in o && o[cle] === null) o[cle] = [];
+  if (Array.isArray(o.diapositives)) o.diapositives = o.diapositives.filter((d) => (DIAPOSITIVES as readonly unknown[]).includes(d));
+  return o;
+}
+
+/**
  * Lit la sortie JSON du modèle selon le schéma. Le motif d'un refus est court et lisible (chemin et message du premier
  * écart), sans recopier la sortie : il sert à repérer les erreurs récurrentes.
  */
@@ -48,7 +68,7 @@ export function lireSortie<T>(texte: string, schema: z.ZodType<T>): { ok: true; 
   } catch (e) {
     return { ok: false, motif: `JSON illisible (${e instanceof Error ? e.message.slice(0, 80) : 'erreur'})` };
   }
-  const r = schema.safeParse(brut);
+  const r = schema.safeParse(normaliserSortie(brut));
   if (r.success) return { ok: true, valeur: r.data };
   const ecarts = r.error.issues.slice(0, 3).map((i) => `${i.path.join('.') || '(racine)'} : ${i.message}`.slice(0, 90));
   return { ok: false, motif: `${ecarts.join(' ; ')}${r.error.issues.length > 3 ? ` (+${r.error.issues.length - 3})` : ''}` };
@@ -100,9 +120,9 @@ async function aTraiter(client: Client, limite: number, sources?: readonly strin
           left join post_draft d on d.news_item_id = n.id
           -- Une découverte (liste de ressources, ADR 0011) n'est jamais qualifiée avec la grille des actualités.
           where n.kind not in ('decouverte', 'selection') and (d.id is null or d.status = 'qualifiee' or (d.status = 'a_approfondir' and d.snapshot_id <> c.id)
-            -- Sortie illisible récente sans motif noté (avant le 2026-11-10) : reprise une fois, avec le nouvel essai.
+            -- Sortie illisible récente : reprise tant que moins de 3 motifs sont notés (deux essais par passage).
             or (d.status = 'sortie_invalide' and d.created_at > strftime('%Y-%m-%dT%H:%M:%fZ', 'now', '-4 days')
-                and not exists (select 1 from llm_call l where l.news_item_id = n.id and l.error like 'sortie illisible%')))
+                and (select count(*) from llm_call l where l.news_item_id = n.id and l.error like 'sortie illisible%') < 3))
           -- Grosses annonces d'abord (2026-11-10) : un sujet repris par plusieurs sources passe avant un sujet isolé.
           order by d.id is not null desc,
             (select count(*) from news_item_document x where x.news_item_id = n.id) > 1 desc,

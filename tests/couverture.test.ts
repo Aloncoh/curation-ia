@@ -52,6 +52,9 @@ describe('sortie illisible du modèle', () => {
     expect(manque.ok).toBe(false);
     if (!manque.ok) expect(manque.motif).toMatch(/^etapes : /);
     const json = lireSortie('{"titre":', schema);
+    // Champ cité sans texte : absent ; diapositive inconnue : ôtée (relevés réels du 2026-11-10).
+    const avecCout = z.object({ cout: z.object({ texte: z.string(), passages: z.array(z.string()) }).nullable(), diapositives: z.array(z.enum(['accroche', 'cout'])) });
+    expect(lireSortie('{"cout":{"texte":null,"passages":[]},"diapositives":["accroche","inventee"]}', avecCout)).toEqual({ ok: true, valeur: { cout: null, diapositives: ['accroche'] } });
     expect(!json.ok && json.motif.startsWith('JSON illisible')).toBe(true);
   });
 });
