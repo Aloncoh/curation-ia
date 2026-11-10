@@ -684,6 +684,24 @@ describe('budget et pipeline, sans réseau', () => {
     expect(await lancer(m, 10_000_000, 10_000_000, { maxItems: 1 })).toMatchObject({ statut: 'terminee', controlees: 1 });
   });
 
+  it('sortie illisible : motif noté, une nouvelle demande, puis reprise une fois des anciennes sans motif', async () => {
+    const client = t.database.client;
+    const illisible = faux(async () => reponse('{pas du json'));
+    await lancer(illisible, 10_000_000, 10_000_000, { maxItems: 1 });
+    expect(illisible.appels).toBe(2);
+    expect((await client.execute(`select status from post_draft`)).rows[0]).toMatchObject({ status: 'sortie_invalide' });
+    expect((await client.execute(`select count(*) as n from llm_call where error like 'sortie illisible : JSON illisible%'`)).rows[0]!.n).toBe(2);
+    // Motif noté : pas de nouvelle reprise.
+    const rien = faux(redige(debut));
+    await lancer(rien, 10_000_000, 10_000_000, { maxItems: 1 });
+    expect((await client.execute(`select status from post_draft where news_item_id = (select news_item_id from llm_call limit 1)`)).rows[0]).toMatchObject({ status: 'sortie_invalide' });
+    // Ancienne sortie illisible, sans motif (avant le 2026-11-10) : reprise une fois et remplacée.
+    await client.execute(`update llm_call set error = null`);
+    await client.execute(`update post_draft set created_at = strftime('%Y-%m-%dT%H:%M:%fZ', 'now') where status = 'sortie_invalide'`);
+    await lancer(faux(redige(debut)), 10_000_000, 10_000_000, { maxItems: 5 });
+    expect((await client.execute(`select count(*) as n from post_draft where status = 'sortie_invalide'`)).rows[0]!.n).toBe(0);
+  });
+
   it('un sujet à approfondir repasse quand une nouvelle capture arrive, pas avant', async () => {
     const client = t.database.client;
     await lancer(faux(async (r) => (r.systeme === SYSTEME_QUALIFICATION ? qualifiee(r, { type_information: 'non_confirmee' }) : redige(debut)(r))), 10_000_000, 10_000_000, { maxItems: 5 });

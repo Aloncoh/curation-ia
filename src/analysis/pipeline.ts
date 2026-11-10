@@ -348,7 +348,8 @@ export async function genererBrouillons(o: OptionsBrouillons) {
                     on conflict(news_item_id) do update set run_id = excluded.run_id, status = excluded.status, account = excluded.account, rejection_reason = excluded.rejection_reason,
                       information_type = excluded.information_type, snapshot_id = excluded.snapshot_id, model = excluded.model, prompt_version = excluded.prompt_version,
                       content = excluded.content, checks = excluded.checks, created_at = excluded.created_at
-                    where post_draft.status in ('qualifiee', 'a_approfondir')
+                    -- sortie_invalide : reprise une fois (2026-11-10), voir aTraiter.
+                    where post_draft.status in ('qualifiee', 'a_approfondir', 'sortie_invalide')
                     returning id`,
               args: [id, runId, status, q?.compte ?? null, motifRejet, q?.type_information ?? null, Number(row.snapshot_id), o.nomModele, PROMPT_VERSION,
                 content ? JSON.stringify(content) : null, checks ? JSON.stringify(checks) : null, now()],
