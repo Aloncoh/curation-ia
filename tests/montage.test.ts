@@ -196,3 +196,25 @@ describe('contrôle de la mise en page rendue', () => {
     expect(defautsMiseEnPage({ ...correct, ...ecart })).toEqual([defaut]);
   });
 });
+
+describe('dossier par étapes en cartes (2026-11-10)', async () => {
+  const { CREDIT_CARTES } = await import('../src/media/montage.ts');
+  const carte = (nom: string, etape: 'production' | 'son' = 'production') => ({ etape, nom, auteur: 'auteur' });
+  const dossier = (m: Partial<Montage> = {}) => montage({ gabarit: 'selection', image: null, titre: '4 agent skills to make a video', cartes: [carte('A'), carte('B'), carte('C'), carte('D', 'son')], mascotte: 'data:image/webp;base64,AAAA', source: CREDIT_CARTES, ...m });
+
+  it('accepte des cartes dessinées, sans aperçu ni image de tiers', () => {
+    expect(defautsMontage(dossier())).toEqual([]);
+    expect(defautsMontage(dossier({ mascotte: 'https://exemple.com/m.webp' }))).toContain('image_non_locale');
+    expect(defautsMontage(dossier({ source: 'autre' }))).toContain('credit_absent');
+    expect(defautsMontage(dossier({ cartes: [carte('A'), carte('B')] }))).toContain('cartes_hors_limites');
+  });
+
+  it('chaque carte porte l’étape, le nom et l’auteur ; deux cartes voisines d’une étape ont des scènes différentes', () => {
+    const html = htmlMontage(dossier(), { avatar: 'data:image/png;base64,AAAA', polices: '', nomCompte: 'Mova' });
+    expect(html.match(/class="carte-outil"/g)).toHaveLength(4);
+    expect(html).toContain('<span class="etape-outil">Video</span><span class="nom-outil">A</span><span class="auteur-outil">auteur</span>');
+    const scenes = [...html.matchAll(/<svg viewBox="0 0 200 120"[^>]*>(.*?)<\/svg>/g)].map((x) => x[1]);
+    expect(new Set(scenes.slice(0, 3)).size).toBe(3);
+    expect(texteAlternatif(dossier())).toContain('Sound : D, par auteur');
+  });
+});

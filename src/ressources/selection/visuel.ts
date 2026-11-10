@@ -5,7 +5,7 @@ import { createHash } from 'node:crypto';
 import { existsSync, readFileSync } from 'node:fs';
 import { MENTION_ILLUSTRATION } from '../../analysis/publication.ts';
 import { normaliserEspaces } from '../../maquette/data.ts';
-import { APERCUS_MAX, CREDIT_APERCUS, type Montage } from '../../media/montage.ts';
+import { APERCUS_MAX, CARTES_MAX, CREDIT_APERCUS, CREDIT_CARTES, type Montage } from '../../media/montage.ts';
 import { normaliser } from '../../recherche/normaliser.ts';
 import type { LigneMotCle } from '../mots-cles.ts';
 import type { CapturesSelection } from './capture.ts';
@@ -13,6 +13,7 @@ import type { EntreeSelection } from './liste.ts';
 import type { BrouillonSelection } from './schemas.ts';
 
 export const SURTITRE_SELECTION = 'Selection';
+export const SURTITRE_DOSSIER = 'Toolkit';
 
 const JOUR_PARIS = new Intl.DateTimeFormat('en-GB', { dateStyle: 'long', timeZone: 'Europe/Paris' });
 
@@ -77,7 +78,20 @@ export function piedSelection(apercus: ApercuRetenu[]): string {
  * aperçu. Un site sans aperçu garde sa case, marquée « Aperçu indisponible ». Au-delà de six ressources (sélection du
  * 2026-11-04, dix dépôts), la grille montre les six premières dans l'ordre du texte ; toutes restent dans le texte.
  */
-export function composerMontageSelection(b: BrouillonSelection, entree: Pick<EntreeSelection, 'compte'>, apercus: ApercuRetenu[]): Montage {
+export function composerMontageSelection(b: BrouillonSelection, entree: Pick<EntreeSelection, 'compte'> & Partial<Pick<EntreeSelection, 'sites'>>, apercus: ApercuRetenu[]): Montage {
+  // Dossier par étapes (2026-11-10) : des cartes dessinées par nous, une par ressource, au lieu des captures de pages.
+  const etapes = new Map((entree.sites ?? []).filter((s) => s.etape).map((s) => [s.slug, s.etape!]));
+  const mascotte = `maquette/medias/agents/${entree.compte}.webp`;
+  if (etapes.size > 0 && b.ressources.every((r) => etapes.has(r.site)) && existsSync(mascotte)) {
+    return {
+      id: b.slug, gabarit: 'selection', compte: entree.compte, titre: b.accroche.texte, surtitre: SURTITRE_DOSSIER,
+      image: null, apres: null, etiquettes: [], lignes: [], etapes: [], loupe: null,
+      cartes: b.ressources.slice(0, CARTES_MAX).map((r) => ({ etape: etapes.get(r.site)!, nom: r.nom, auteur: new URL(r.url).pathname.split('/').filter(Boolean)[0] ?? r.nom })),
+      mascotte: `data:image/webp;base64,${readFileSync(mascotte).toString('base64')}`,
+      source: CREDIT_CARTES,
+      mention: MENTION_ILLUSTRATION,
+    };
+  }
   const parSite = new Map(apercus.map((a) => [a.site, a]));
   return {
     id: b.slug,

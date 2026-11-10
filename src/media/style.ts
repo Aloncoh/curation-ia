@@ -82,5 +82,32 @@ html, body { background: #fff; }
 .apercu .cadre.vide { display: grid; place-items: center; background: rgba(255, 253, 248, .55); box-shadow: none; }
 .indisponible { font: 700 34px/1.1 'Atkinson', sans-serif; opacity: .7; }
 .nom-site { align-self: flex-start; max-width: 100%; padding: 8px 20px 10px; border-radius: 999px; background: var(--encre); color: #faf2e0; font: 700 32px/1.1 'Atkinson', sans-serif; white-space: nowrap; overflow: hidden; text-overflow: clip; }
+/* Dossier par étapes (2026-11-10) : une carte de feutre cousue par ressource ; la scène est dessinée par nous (accessoire
+   de l'étape au trait d'encre et mascotte de l'agent), jamais une image de tiers. */
+.cartes { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 1fr; gap: 18px 20px; padding: 0 0 106px; list-style: none; }
+.carte-outil { --scene: #f7ab79; display: flex; flex-direction: column; min-height: 0; padding: 9px; border-radius: 22px; background: var(--papier); outline: 3px dashed var(--encre); outline-offset: -5px; box-shadow: 0 18px 30px -18px rgba(29, 27, 35, .55); }
+.carte-outil:nth-child(3n+1) { transform: rotate(-.7deg); }
+.carte-outil:nth-child(3n) { transform: rotate(.6deg); }
+.carte-outil[data-etape="storyboard"] { --scene: #f7ab79; }
+.carte-outil[data-etape="production"] { --scene: #7cc4f5; }
+.carte-outil[data-etape="animation"] { --scene: #7fe0bd; }
+.carte-outil[data-etape="effets"] { --scene: #f5c04e; }
+.carte-outil[data-etape="son"] { --scene: #6fe3dc; }
+.carte-outil[data-etape="blender"] { --scene: #f7ab79; }
+.carte-outil[data-etape="web3d"] { --scene: #7cc4f5; }
+.carte-outil[data-etape="images"] { --scene: #f5c04e; }
+.scene { position: relative; flex: 1; min-height: 0; border-radius: 15px; overflow: hidden; background: radial-gradient(120% 90% at 70% 0%, rgba(255, 255, 255, .7), transparent 60%), var(--scene); }
+.scene svg { position: absolute; right: 2%; top: 7%; width: 70%; height: 86%; overflow: visible; }
+.scene .acc * { fill: none; stroke: var(--encre); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+.scene .acc .plein { fill: var(--papier); }
+.scene .acc .clair { fill: rgba(255, 255, 255, .75); }
+.scene .acc .encre { fill: var(--encre); }
+.scene .acc .trait { stroke-width: 8; }
+.mascotte { position: absolute; left: 10px; bottom: -6px; height: 70%; filter: drop-shadow(0 6px 6px rgba(29, 27, 35, .3)); }
+.infos { display: flex; flex-direction: column; gap: 3px; padding: 9px 6px 3px; }
+.etape-outil { display: flex; align-items: center; gap: 8px; font: 600 17px/1 'Recursive', monospace; font-variation-settings: 'MONO' 1, 'CASL' 0; letter-spacing: .08em; text-transform: uppercase; }
+.etape-outil::before { content: ""; width: 12px; height: 12px; border-radius: 50%; background: var(--scene); box-shadow: 0 0 0 2.5px var(--encre); }
+.nom-outil { font: 880 27px/1.02 'Recursive', sans-serif; font-variation-settings: 'CASL' 1, 'MONO' 0; letter-spacing: -.015em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.auteur-outil { font: 500 17px/1.1 'Recursive', monospace; font-variation-settings: 'MONO' 1, 'CASL' 0; color: rgba(29, 27, 35, .62); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .pied { position: absolute; z-index: 6; left: 0; right: 0; bottom: 0; display: flex; justify-content: space-between; gap: 24px; padding: 16px var(--marge) 18px; background: var(--papier); font: 400 24px/1.2 'Atkinson', sans-serif; }
 `;

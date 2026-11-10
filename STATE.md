@@ -37,7 +37,7 @@ Réseau social vivant autour de l'IA, du développement et de la technologie : r
 - **Fable 5.2** :
   - en ligne : « Mythos 5.2 sur Bedrock » (n° 214) et « Fable 5.2 dans GitHub Copilot » (n° 223) ;
   - l'annonce principale (n° 1449, avec la page d'Anthropic en appui) est rédigée, mais « à vérifier » : « 5.2 » absent des citations retenues, à reprendre par la relance.
-- **Mova** : deux dossiers par étapes en ligne, vidéo (12 dépôts, n° 245) et 3D et Blender (8 dépôts, n° 246). Montage faible : captures GitHub, 7 aperçus sur 20 refusés, « Preview unavailable ». Cartes illustrées à notre identité à faire.
+- **Mova** : deux dossiers par étapes en ligne, vidéo (12 dépôts, n° 245) et 3D et Blender (8 dépôts, n° 246). Visuel refait le 2026-11-10 en cartes à notre identité : une carte de feutre cousue par ressource, avec la mascotte de Mova, un accessoire dessiné par étape (12 scènes différentes), l'étape, le nom et l'auteur. Aucune image de tiers ; images et lignes `media_asset` remplacées, statut et planning des posts inchangés.
 - **Instagram** demandé comme source de skills : impossible sans contournement (robots.txt : `Disallow: /` pour tous). Voie officielle : API Graph de Meta, avec compte professionnel et application validée, donc décision de l'utilisateur. En attendant : liens transmis à la main, et thèmes « skills pour tous usages » ajoutés à la découverte GitHub.
 - **Cycles** : aucun cycle GitHub depuis le 2026-11-09 à 20 h 29 UTC (cron non garanti). Le 2026-11-10, les étapes ont été lancées depuis le poste, sur la base en ligne : 17 posts publiés.
 - **Dépense** : 1,60 $ sur 4 $ ; 0,31 $ le 2026-11-10.
