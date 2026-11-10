@@ -48,6 +48,19 @@ export const Media = z.discriminatedUnion('type', [
 ]);
 export type Media = z.infer<typeof Media>;
 
+/**
+ * Vidéo placée par l'éditeur dans la source du post (2026-11-10) : contenu externe attribué, jamais produit par la
+ * plateforme. `integration` : lecteur YouTube sans cookies, Vimeo sans suivi, ou fichier vidéo https de la page d'origine.
+ */
+export const VideoSource = z.object({
+  fournisseur: z.enum(['youtube', 'vimeo', 'fichier']),
+  integration: z.string(),
+  page: z.string(),
+  editeur: z.string(),
+  titre: z.string().nullable(),
+});
+export type VideoSource = z.infer<typeof VideoSource>;
+
 export const Bouton = z.object({
   type: z.enum(['depot', 'installation', 'telechargement', 'source']),
   url: z.string(),
@@ -88,6 +101,8 @@ export const Publication = z.object({
   original: z.array(Bloc).nullable(),
   bouton: Bouton.nullable(),
   media: Media.nullable(),
+  /** Vidéo de la source affichée sous le post ; absente des anciens clients (facultative). */
+  video: VideoSource.nullable().optional(),
   /** Fond de couverture fourni pour l'agent (/marque/fond-…), null : couverture dessinée par le client. */
   fond: z.string().nullable(),
   /**

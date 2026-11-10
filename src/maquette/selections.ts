@@ -126,7 +126,7 @@ export async function selectionsDeLaMaquette(executeur: Lecteur, generatedAt: st
       const etape = SELECTIONS.find((s) => s.slug === String(contenu.slug))?.sites.find((s) => s.slug === String(x.site))?.etape ?? null;
       return { site: String(x.site), nom: String(x.nom), url: affichable, libelle_lien: String(x.libelle_lien), hote, etape, explication: x.explication, lien: lien ? { resultat: lien.resultat, motif: lien.motif, verifie_le: lien.verifie_le } : null };
     });
-    const media = await executeur.execute({ sql: 'select alt_text, notice, content from media_asset where post_id = ? order by id desc limit 1', args: [postId] });
+    const media = await executeur.execute({ sql: `select alt_text, notice, content from media_asset where post_id = ? and origin <> 'external_embed' order by id desc limit 1`, args: [postId] });
     const m = media.rows[0];
     const mc = m?.content ? (JSON.parse(String(m.content)) as { fichier?: string; gabarit?: string; droits_a_verifier?: boolean; motif_droits?: string }) : null;
     const rel = mc?.fichier ? relative('maquette', mc.fichier) : null;

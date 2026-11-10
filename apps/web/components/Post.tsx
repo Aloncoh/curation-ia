@@ -11,6 +11,7 @@ import { Couverture } from './Couverture.tsx';
 import { sujetDe } from '../lib/sujet.ts';
 import { Icone } from './Icone.tsx';
 import { TexteDuPost } from './TexteDuPost.tsx';
+import { VideoDuPost } from './VideoDuPost.tsx';
 
 function Media({ p, langue }: { p: Publication; langue: Langue }) {
   const m = p.media;
@@ -158,6 +159,13 @@ export function Post({ p, t, langue, complet = false, raison = null }: { p: Publ
           </a>
         )}
         {(complet || format === 'grille' || !sujet) && <Media p={p} langue={langue} />}
+        {/* Vidéo de la source, sous le post dans le fil comme sur sa page (décision de l'utilisateur du 2026-11-10). */}
+        {p.video && hrefSur(p.video.page) && (
+          <VideoDuPost
+            video={{ ...p.video, page: hrefSur(p.video.page)! }}
+            libelles={{ lire: t.post.video.lire, lecteur: t.post.video.lecteur(p.video.editeur), externe: t.post.video.externe(p.video.editeur), pageOrigine: t.post.video.pageOrigine, nouvelOnglet: t.commun.nouvelOnglet }}
+          />
+        )}
         <ActionsDuPost
           id={id}
           lien={lien}

@@ -136,7 +136,7 @@ async function lireExistant(client: Client, newsItemId: number): Promise<{ exist
   const postId = Number(post.id);
   const rv = await client.execute({ sql: 'select id, seq, content from post_revision where post_id = ? order by seq desc limit 1', args: [postId] });
   const pp = await client.execute({ sql: 'select 1 from publication_planifiee where post_id = ?', args: [postId] });
-  const media = await client.execute({ sql: `select content from media_asset where post_id = ? order by id desc limit 1`, args: [postId] });
+  const media = await client.execute({ sql: `select content from media_asset where post_id = ? and origin <> 'external_embed' order by id desc limit 1`, args: [postId] });
   const boutons = await client.execute({ sql: 'select resultat, verifie_le from post_bouton where post_id = ?', args: [postId] });
   const fichierMedia = media.rows[0]?.content ? (JSON.parse(String(media.rows[0].content)) as { fichier?: unknown }).fichier : null;
   return {

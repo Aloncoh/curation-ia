@@ -9,6 +9,7 @@ import type { Client } from '@libsql/client';
 import { racineDepot } from '../../config.ts';
 import { fondDe } from './fonds.ts';
 import { lireValidite } from './validite.ts';
+import { lireVideos } from '../../media/videos-posts.ts';
 import type { Bloc, Bouton, Compte, Langue, Media, Publication, Sources } from '../../../packages/contrat/src/index.ts';
 import { textesDe } from '../../../packages/textes/src/index.ts';
 import { actualitesDeLaMaquette, type MaquetteActualite } from '../../maquette/actualites.ts';
@@ -295,7 +296,7 @@ function depuisSelection(x: MaquetteSelection): ReturnType<typeof depuisActualit
 async function lireCarrousels(client: Client, ids: number[]): Promise<Map<number, { libelle: string; texte: string }[]>> {
   if (ids.length === 0) return new Map();
   const r = await client.execute({
-    sql: `select post_id, content from media_asset where id in (select max(id) from media_asset where post_id in (${ids.map(() => '?').join(', ')}) group by post_id)`,
+    sql: `select post_id, content from media_asset where id in (select max(id) from media_asset where origin <> 'external_embed' and post_id in (${ids.map(() => '?').join(', ')}) group by post_id)`,
     args: ids,
   });
   const carrousels = new Map<number, { libelle: string; texte: string }[]>();
@@ -346,7 +347,7 @@ export async function publicationsParIds(ctx: Contexte, ids: readonly number[]):
   if (liste.length === 0) return [];
   // Lectures indépendantes lancées ensemble : en ligne, chaque aller-retour vers la base compte (2026-11-05). Les
   // carrousels sont demandés pour toute la liste : seuls ceux des actualités existent.
-  const [{ actualites }, { ressources }, { selections }, comptes, carrousels, renforts, validites] = await Promise.all([
+  const [{ actualites }, { ressources }, { selections }, comptes, carrousels, renforts, validites, videos] = await Promise.all([
     actualitesDeLaMaquette(ctx.client, liste),
     ressourcesDeLaMaquette(ctx.client, maintenant, liste),
     selectionsDeLaMaquette(ctx.client, maintenant, liste),
@@ -354,6 +355,7 @@ export async function publicationsParIds(ctx: Contexte, ids: readonly number[]):
     lireCarrousels(ctx.client, liste),
     lireRenforts(ctx.client, liste),
     lireValidite(ctx.client, liste),
+    lireVideos(ctx.client, liste),
   ]);
   const items = new Map<number, { item: ReturnType<typeof depuisActualite>; compte: string }>();
   for (const a of actualites) {
@@ -378,7 +380,9 @@ export async function publicationsParIds(ctx: Contexte, ids: readonly number[]):
     const alt = traduction?.champs['media.alt'];
     const media = reste.media?.type === 'image' && alt && !traduction!.ecarts.has('media.alt') ? { ...reste.media, alt, alt_lang: ctx.langue } : reste.media;
     const validite = validites.get(id) ?? { remplacee_par: null, source_mise_a_jour: null };
-    publications.push({ ...reste, media, compte, fond: fondDe(compte.id, reste.id), validite, ...servirDansLaLangue(blocs, ctx.langue, traduction) });
+    const v = videos.get(id);
+    const video = v ? { fournisseur: v.fournisseur, integration: v.integration, page: v.page, editeur: v.editeur, titre: v.titre } : null;
+    publications.push({ ...reste, media, video, compte, fond: fondDe(compte.id, reste.id), validite, ...servirDansLaLangue(blocs, ctx.langue, traduction) });
   }
   return publications;
 }

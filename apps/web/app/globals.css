@@ -177,6 +177,22 @@ a.sel-nom:hover { text-decoration: underline; }
 .lien-ressource .lr-fleche { color: var(--pied); }
 
 /* Média : toute la largeur de la colonne du texte, coins légèrement arrondis, un filet. */
+/* Vidéo de la source sous le post (2026-11-10) : bouton à notre identité tant qu'on ne lance pas, lecteur d'origine ensuite. */
+.post-video { margin: 10px 0 2px; }
+.pv-cadre { position: relative; aspect-ratio: 16 / 9; border-radius: 14px; overflow: hidden; border: 1px solid var(--trait); background: #1a1224; }
+.pv-cadre iframe, .pv-cadre video { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; background: #000; }
+.pv-lancer { position: absolute; inset: 0; display: flex; align-items: flex-end; gap: 14px; padding: 18px; border: 0; cursor: pointer; text-align: start; color: #fff;
+  background: radial-gradient(120% 90% at 85% 10%, color-mix(in srgb, var(--violet) 70%, transparent), transparent 60%), linear-gradient(160deg, #2a1d3b, #140e19); }
+.pv-lancer:hover .pv-icone, .pv-lancer:focus-visible .pv-icone { transform: scale(1.06); background: #fff; color: var(--violet-encre); }
+.pv-lancer:focus-visible { outline: 3px solid var(--focus); outline-offset: -3px; }
+.pv-icone { flex: none; display: grid; place-items: center; width: 58px; height: 58px; border-radius: 50%; background: var(--violet); color: #fff; box-shadow: 0 8px 22px -8px rgba(0,0,0,.6); transition: transform .18s ease, background .18s ease; }
+.pv-texte { display: grid; gap: 3px; min-width: 0; }
+.pv-libelle { font: 800 .78rem/1 var(--texte); letter-spacing: .04em; text-transform: uppercase; opacity: .85; }
+.pv-titre { font: 700 1.02rem/1.25 var(--display); overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.pv-editeur { font: 600 .78rem/1 var(--texte); opacity: .75; }
+.pv-credit { margin-top: 6px; font: .78rem/1.4 var(--texte); color: var(--pied); }
+.pv-credit a { color: var(--violet-encre); font-weight: 700; }
+@media (prefers-reduced-motion: reduce) { .pv-icone { transition: none; } }
 .post-media { margin: 8px 0 2px; border-radius: 14px; overflow: hidden; border: 1px solid var(--trait); background: var(--visage); position: relative; }
 .post-media > img { width: 100%; height: auto; }
 .credit { position: absolute; right: 8px; bottom: 8px; z-index: 2; font: 600 .7rem/1 var(--texte); color: #fff; background: rgba(0, 0, 0, .55); padding: 4px 7px; border-radius: 6px; }

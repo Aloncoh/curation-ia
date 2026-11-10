@@ -45,6 +45,8 @@ export const fr: Textes = {
     /** Étapes d'un dossier (sélection organisée par étapes, 2026-11-10). */
     etapes: { storyboard: 'Storyboard et scénario', production: 'Production vidéo', animation: 'Animation et motion', effets: 'Effets visuels', son: 'Son et musique', blender: 'Blender', web3d: '3D sur le web', images: 'Images et rendu' },
     aucuneLimite: 'Aucune limite indiquée par la source.',
+    /** Vidéo placée par l'éditeur dans la source (2026-11-10) : contenu externe, chargé seulement au clic. */
+    video: { lire: 'Lire la vidéo', lecteur: (editeur: string) => `Vidéo de ${editeur}`, externe: (editeur: string) => `Vidéo publiée par ${editeur} — contenu externe, non produit par la plateforme. Elle se charge depuis ${editeur} quand vous la lancez.`, pageOrigine: 'Page d’origine' },
     mentionIA: 'Analyse IA à partir des sources — non testé par la plateforme',
     sources: 'Sources',
     masquerSources: 'Masquer les sources',

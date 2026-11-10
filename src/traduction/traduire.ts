@@ -75,7 +75,7 @@ const NATURE_DE: Record<string, Nature> = { annonce: 'actualite', version: 'actu
 
 /** Texte alternatif de la dernière image d'une publication ; un carrousel de diapositives n'en a pas besoin. */
 export async function texteAlternatif(client: Client, postId: number): Promise<string | null> {
-  const r = await client.execute({ sql: 'select alt_text, content from media_asset where post_id = ? order by id desc limit 1', args: [postId] });
+  const r = await client.execute({ sql: `select alt_text, content from media_asset where post_id = ? and origin <> 'external_embed' order by id desc limit 1`, args: [postId] });
   const m = r.rows[0];
   if (!m || m.alt_text === null) return null;
   const forme = m.content ? (JSON.parse(String(m.content)) as { forme?: string }).forme : null;

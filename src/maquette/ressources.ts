@@ -115,7 +115,7 @@ export async function ressourcesDeLaMaquette(executeur: Lecteur, generatedAt: st
   const [tousBoutons, tousMedias, toutesCaptures] = postIds.length
     ? await Promise.all([
         executeur.execute({ sql: `select post_id, revision_id, libelle, url, resultat, motif, verifie_le from post_bouton where post_id in (${place(postIds.length)}) order by verifie_le`, args: postIds }),
-        executeur.execute({ sql: `select post_id, alt_text, notice, content from media_asset where id in (select max(id) from media_asset where post_id in (${place(postIds.length)}) group by post_id)`, args: postIds }),
+        executeur.execute({ sql: `select post_id, alt_text, notice, content from media_asset where id in (select max(id) from media_asset where origin <> 'external_embed' and post_id in (${place(postIds.length)}) group by post_id)`, args: postIds }),
         snapshotIds.length
           ? executeur.execute({ sql: `select c.id, d.url, r.mode from document_snapshot c join source_document d on d.id = c.document_id left join run r on r.id = c.run_id where c.id in (${place(snapshotIds.length)})`, args: snapshotIds })
           : Promise.resolve({ rows: [] as Record<string, unknown>[] }),

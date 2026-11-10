@@ -43,7 +43,7 @@ describe('cycle', () => {
   it('saute les étapes payantes sans modèle, clé ou plafonds', async () => {
     const f = faux();
     const bilan = await lancerCycle({ database: t.database, executer: f.executer, env: { CURATION_MODELE: 'deepseek-flash' }, confirme: true });
-    expect(f.appels.map((a) => a.nom)).toEqual(['collecte', 'approfondissement', 'controles', 'planification', 'decouverte', 'publication']);
+    expect(f.appels.map((a) => a.nom)).toEqual(['collecte', 'approfondissement', 'controles', 'planification', 'decouverte', 'videos', 'publication']);
     expect(bilan.etapes.find((e) => e.nom === 'brouillons')!.motif).toContain('DEEPSEEK_API_KEY');
   });
 

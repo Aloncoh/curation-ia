@@ -12,7 +12,7 @@ import { jourParis } from '../ressources/planification.ts';
 import { SOURCES } from '../sources.ts';
 
 export interface Etape {
-  nom: 'collecte' | 'approfondissement' | 'brouillons' | 'controles' | 'planification' | 'decouverte' | 'redaction_decouvertes' | 'traduction' | 'publication';
+  nom: 'collecte' | 'approfondissement' | 'brouillons' | 'controles' | 'planification' | 'decouverte' | 'redaction_decouvertes' | 'traduction' | 'videos' | 'publication';
   script: string;
   args: string[];
   /** Variables exigées : sans elles, l'étape est sautée (étapes payantes). */
@@ -33,6 +33,8 @@ export const ETAPES: readonly Etape[] = [
   { nom: 'decouverte', script: 'src/cli/ressources.ts', args: ['decouvrir', '--capturer'], cadenceMinutes: 360 },
   { nom: 'redaction_decouvertes', script: 'src/cli/ressources.ts', args: ['rediger', '--confirmer'], exige: ['CURATION_MODELE', 'DEEPSEEK_API_KEY', 'CURATION_MAX_DECOUVERTES', 'CURATION_PLAFOND_EXECUTION_USD', 'CURATION_PLAFOND_TOTAL_USD', 'CURATION_PLAFOND_JOUR_USD'], payante: true },
   { nom: 'traduction', script: 'src/cli/traduire.ts', args: ['--confirmer'], exige: ['CURATION_MODELE', 'DEEPSEEK_API_KEY', 'CURATION_MAX_TRADUCTIONS', 'CURATION_PLAFOND_EXECUTION_USD', 'CURATION_PLAFOND_TOTAL_USD', 'CURATION_PLAFOND_JOUR_USD'], payante: true },
+  // Vidéo de la source rattachée aux posts récents (décision de l'utilisateur du 2026-11-10), avant leur publication.
+  { nom: 'videos', script: 'src/cli/videos.ts', args: ['--confirmer'] },
   { nom: 'publication', script: 'src/cli/publier.ts', args: ['--confirmer'] },
 ];
 

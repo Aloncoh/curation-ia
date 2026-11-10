@@ -49,7 +49,8 @@
     "web:build": "next build apps/web",
     "web:start": "next start apps/web --port 3000",
     "web:typecheck": "tsc --noEmit -p apps/web",
-    "couverture": "node src/cli/couverture.ts"
+    "couverture": "node src/cli/couverture.ts",
+    "videos": "node src/cli/videos.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "1.3.0",
