@@ -47,7 +47,7 @@ export const he: Textes = {
     /** Étapes d'un dossier (sélection organisée par étapes, 2026-11-10). */
     etapes: { storyboard: 'סטוריבורד ותסריט', production: 'הפקת וידאו', animation: 'אנימציה ותנועה', effets: 'אפקטים חזותיים', son: 'סאונד ומוזיקה', blender: 'Blender', web3d: 'תלת־ממד ברשת', images: 'תמונות ורינדור' },
     aucuneLimite: 'המקור לא מציין מגבלות.',
-    video: { lire: 'הפעלת הסרטון', lecteur: (editeur: string) => `סרטון מאת ${editeur}`, externe: (editeur: string) => `סרטון שפורסם על ידי ${editeur} — תוכן חיצוני שלא הופק על ידי הפלטפורמה. הוא נטען מ־${editeur} כשמפעילים אותו.`, pageOrigine: 'הדף המקורי' },
+    video: { lire: 'הפעלת הסרטון', lecteur: (editeur: string) => `סרטון מאת ${editeur}`, externe: (editeur: string, hebergeur: string) => `סרטון שפורסם על ידי ${editeur} — תוכן חיצוני שלא הופק על ידי הפלטפורמה. הוא נטען מ־${hebergeur} כשמפעילים אותו.`, pageOrigine: 'הדף המקורי' },
     mentionIA: 'ניתוח AI על סמך המקורות — לא נבדק על ידי הפלטפורמה',
     sources: 'מקורות',
     masquerSources: 'הסתרת המקורות',

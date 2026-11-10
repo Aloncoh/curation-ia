@@ -40,6 +40,22 @@ function Media({ p, langue }: { p: Publication; langue: Langue }) {
   );
 }
 
+const HEBERGEURS = { youtube: 'YouTube', vimeo: 'Vimeo' } as const;
+
+/** Vidéo de la source sous un post (page du post et carte du fil) : rien si absente ou si sa page n'est pas en https. */
+export function VideoDeLaSource({ p, t }: { p: Publication; t: Textes }) {
+  const v = p.video;
+  const page = v ? hrefSur(v.page) : null;
+  if (!v || !page) return null;
+  const hebergeur = v.fournisseur === 'fichier' ? v.editeur : HEBERGEURS[v.fournisseur];
+  return (
+    <VideoDuPost
+      video={{ ...v, page }}
+      libelles={{ lire: t.post.video.lire, lecteur: t.post.video.lecteur(v.editeur), externe: t.post.video.externe(v.editeur, hebergeur), pageOrigine: t.post.video.pageOrigine, nouvelOnglet: t.commun.nouvelOnglet }}
+    />
+  );
+}
+
 function PanneauSources({ p, t, langue }: { p: Publication; t: Textes; langue: Langue }) {
   const s = p.sources;
   return (
@@ -160,12 +176,7 @@ export function Post({ p, t, langue, complet = false, raison = null }: { p: Publ
         )}
         {(complet || format === 'grille' || !sujet) && <Media p={p} langue={langue} />}
         {/* Vidéo de la source, sous le post dans le fil comme sur sa page (décision de l'utilisateur du 2026-11-10). */}
-        {p.video && hrefSur(p.video.page) && (
-          <VideoDuPost
-            video={{ ...p.video, page: hrefSur(p.video.page)! }}
-            libelles={{ lire: t.post.video.lire, lecteur: t.post.video.lecteur(p.video.editeur), externe: t.post.video.externe(p.video.editeur), pageOrigine: t.post.video.pageOrigine, nouvelOnglet: t.commun.nouvelOnglet }}
-          />
-        )}
+        <VideoDeLaSource p={p} t={t} />
         <ActionsDuPost
           id={id}
           lien={lien}

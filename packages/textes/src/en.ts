@@ -47,7 +47,7 @@ export const en = {
     /** Étapes d'un dossier (sélection organisée par étapes, 2026-11-10). */
     etapes: { storyboard: 'Storyboard and script', production: 'Video production', animation: 'Animation and motion', effets: 'Visual effects', son: 'Sound and music', blender: 'Blender', web3d: '3D on the web', images: 'Images and rendering' },
     aucuneLimite: 'No limits stated by the source.',
-    video: { lire: 'Play video', lecteur: (editeur: string) => `Video from ${editeur}`, externe: (editeur: string) => `Video published by ${editeur} — external content, not produced by the platform. It loads from ${editeur} when you play it.`, pageOrigine: 'Original page' },
+    video: { lire: 'Play video', lecteur: (editeur: string) => `Video from ${editeur}`, externe: (editeur: string, hebergeur: string) => `Video published by ${editeur} — external content, not produced by the platform. It loads from ${hebergeur} when you play it.`, pageOrigine: 'Original page' },
     mentionIA: 'AI analysis based on the sources — not tested by the platform',
     sources: 'Sources',
     masquerSources: 'Hide sources',

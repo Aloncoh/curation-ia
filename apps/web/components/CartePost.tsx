@@ -11,6 +11,7 @@ import { PERSONNAGES } from '../lib/personnages.ts';
 import { sujetDe } from '../lib/sujet.ts';
 import { BarreActions } from './BarreActions.tsx';
 import { Couverture } from './Couverture.tsx';
+import { VideoDeLaSource } from './Post.tsx';
 
 type Style = CSSProperties & Record<`--${string}`, string>;
 
@@ -51,6 +52,8 @@ export function CartePost({ p, t, langue, raison = null }: { p: Publication; t: 
         </a>
       )}
       {texte && <p className="cp-texte" lang={p.langue}>{texte.texte}</p>}
+      {/* Vidéo de la source, visible dans le fil (décision de l'utilisateur du 2026-11-10). */}
+      <VideoDeLaSource p={p} t={t} />
       {p.traduction && <p className="cp-note">{t.post.traductionAuto(t.langues.nomsDans[p.langue_originale])}</p>}
 
       {/* Validité dans le temps (SPEC §7.16) : avis calculés par l'API, jamais une correction automatique. */}
