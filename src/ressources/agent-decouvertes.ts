@@ -202,16 +202,54 @@ async function enAttente(client: Client, max: number): Promise<{ newsItemId: num
   return [...reprises, ...r.rows.map((x) => ({ newsItemId: Number(x.id), titre: String(x.title), sourceId: String(x.source_id), config: String(x.config), grilleFaite: false }))];
 }
 
+/** Listes élagables d'un brouillon de ressource, avec le nombre d'éléments qu'elles doivent garder. */
+const ELAGABLES: Record<string, number> = { limites: 0, compatibilites: 0, reperes: 1, 'demarrage.etapes': 1 };
+/** Écarts qui ne portent pas sur un texte : recalculés par l'import après élagage (visuel tiré des étapes). */
+const ECARTS_RECALCULES = new Set(['visuel_absent']);
+
+/**
+ * Retire les éléments secondaires signalés (`limites:1`, `demarrage.etapes:2`…) ; null si un écart touche un champ
+ * principal ou si une liste tomberait sous son minimum. Rien n'est réécrit : un élément est gardé tel quel ou retiré.
+ */
+export function elaguerRessource(brouillon: Record<string, unknown>, motifs: readonly { champ: string; code: string }[]): Record<string, unknown> | null {
+  const aRetirer = new Map<string, Set<number>>();
+  for (const m of motifs) {
+    if (ECARTS_RECALCULES.has(m.code)) continue;
+    const r = /^(.+):(\d+)$/.exec(m.champ);
+    if (!r || !(r[1]! in ELAGABLES)) return null;
+    aRetirer.set(r[1]!, (aRetirer.get(r[1]!) ?? new Set()).add(Number(r[2])));
+  }
+  if (aRetirer.size === 0) return null;
+  const copie = structuredClone(brouillon);
+  for (const [chemin, indices] of aRetirer) {
+    const parties = chemin.split('.');
+    const parent = parties.slice(0, -1).reduce<Record<string, unknown> | undefined>((o, p) => (o?.[p] as Record<string, unknown> | undefined), copie);
+    const cle = parties.at(-1)!;
+    const liste = parent?.[cle];
+    if (!Array.isArray(liste)) return null;
+    const reste = liste.filter((_, i) => !indices.has(i));
+    if (reste.length < ELAGABLES[chemin]!) return null;
+    parent![cle] = reste;
+  }
+  return copie;
+}
+
+const COMPTES_DECOUVERTE = new Set(['nodi', 'repo', 'pyxo', 'mova', 'pulse', 'radar']);
+
 /** Entrée de ressource reconstruite depuis la base : la découverte n'est pas dans la liste du code. */
 export function entreeDe(sourceId: string, titre: string, config: string): EntreeRessource {
   const depot = sourceId.slice(SOURCE_PREFIXE.length);
   let via: string | null = null;
+  let compte: EntreeRessource['compte'] = 'repo';
   try {
-    via = (JSON.parse(config) as { decouverte?: { decouverteVia?: string | null } }).decouverte?.decouverteVia ?? null;
+    const d = (JSON.parse(config) as { decouverte?: { decouverteVia?: string | null; compte?: string } }).decouverte;
+    via = d?.decouverteVia ?? null;
+    // Agent du thème qui a trouvé le dépôt (plan par agent, 2026-11-10) ; Repo si absent ou inconnu.
+    if (d?.compte && COMPTES_DECOUVERTE.has(d.compte)) compte = d.compte as EntreeRessource['compte'];
   } catch {
     via = null;
   }
-  return { slug: slugDecouverte(depot), nom: titre, depot, chemins: ['README.md'], compte: 'repo', decouverteVia: via ?? 'Découverte automatique : recherche GitHub (contenu externe, non testé par la plateforme)', decouverteAuto: true };
+  return { slug: slugDecouverte(depot), nom: titre, depot, chemins: ['README.md'], compte, decouverteVia: via ?? 'Découverte automatique : recherche GitHub (contenu externe, non testé par la plateforme)', decouverteAuto: true };
 }
 
 /** Texte citable : description du dépôt (API GitHub) et README, tels que capturés. */
@@ -465,6 +503,22 @@ export async function traiterDecouvertes(o: OptionsDecouvertes): Promise<BilanDe
     }
     if (revisees.length > 0) {
       const apres = new Map((await importer(revisees)).map((b) => [b.slug, b]));
+      bilan.importees = bilan.importees.map((b) => apres.get(b.slug) ?? b);
+    }
+
+    // Élagage, une fois, sans appel (2026-11-10, essai réel : un brouillon bloqué par une seule limite recopiée) : les
+    // éléments secondaires encore signalés sont retirés si le reste suffit ; un champ principal fautif ne s'élague pas.
+    const elagues: string[] = [];
+    for (const b of bilan.importees.filter((x) => x.issue === 'a_verifier' && x.slug && redigees.has(x.slug))) {
+      const r = redigees.get(b.slug!)!;
+      const actuel = JSON.parse(readFileSync(r.fichier, 'utf8')) as Record<string, unknown>;
+      const elague = elaguerRessource(actuel, b.motifs);
+      if (!elague) continue;
+      writeFileSync(r.fichier, JSON.stringify(elague, null, 2));
+      elagues.push(r.fichier);
+    }
+    if (elagues.length > 0) {
+      const apres = new Map((await importer(elagues)).map((b) => [b.slug, b]));
       bilan.importees = bilan.importees.map((b) => apres.get(b.slug) ?? b);
     }
   } catch (e) {

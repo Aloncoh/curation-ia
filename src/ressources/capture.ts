@@ -310,7 +310,7 @@ export function creerLecteur(o: OptionsLecteur, tracer: (t: TraceRequete) => Pro
 export async function synchroniserSourcesRessources(database: Database, entrees: readonly EntreeRessource[], now: string): Promise<void> {
   const parDepot = new Map<string, string[]>();
   for (const e of entrees) parDepot.set(e.depot, [...(parDepot.get(e.depot) ?? []), e.slug]);
-  const decouvertes = new Map(entrees.filter((e) => e.decouverteAuto).map((e) => [e.depot, { slug: e.slug, nom: e.nom, decouverteVia: e.decouverteVia ?? null }]));
+  const decouvertes = new Map(entrees.filter((e) => e.decouverteAuto).map((e) => [e.depot, { slug: e.slug, nom: e.nom, decouverteVia: e.decouverteVia ?? null, compte: e.compte }]));
   await withBusyRetry(database.client, async () => {
     for (const [depot, slugs] of parDepot) {
       const valeurs = {

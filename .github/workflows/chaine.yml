@@ -30,6 +30,9 @@ jobs:
       DATABASE_URL: ${{ secrets.TURSO_DATABASE_URL }}
       DATABASE_AUTH_TOKEN: ${{ secrets.TURSO_AUTH_TOKEN }}
       DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+      # Jeton intégré de l'exécution (lecture seule, permissions ci-dessus), envoyé seulement à api.github.com : 1 000
+      # requêtes par heure au lieu de 60, recherche 30 par minute au lieu de 10 (documentation GitHub, 2026-11-10).
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # Adresse de contact exigée par la SEC pour déclarer le client EDGAR (2026-11-05) ; absente : sources EDGAR différées.
       CURATION_CONTACT_SEC: ${{ secrets.CURATION_CONTACT_SEC }}
       CURATION_MODELE: deepseek-flash
@@ -38,8 +41,10 @@ jobs:
       # ne suffisaient pas à suivre ~150 actualités en attente. Les plafonds par exécution, jour et total restent inchangés.
       CURATION_MAX_ACTUALITES: '30'
       CURATION_MAX_TRADUCTIONS: '20'
-      # CURATION_MAX_DECOUVERTES : absent tant que la rédaction des découvertes n'est pas assez fiable (essai du 2026-11-05 :
-      # 0 publiable sur 5) ; sans elle, l'étape payante « redaction_decouvertes » est sautée. La recherche reste active.
+      # Rédaction des découvertes réactivée progressivement le 2026-11-10 : 2 par cycle. Essai du 2026-11-05 : 0 publiable sur
+      # 5 ; lots réels du 2026-11-10 après motif des sorties illisibles et élagage des éléments secondaires : 1 planifié sur
+      # 6 rédigés, les autres « à vérifier » (rien de faux publié), pour 0,063 $ les 10 dépôts notés.
+      CURATION_MAX_DECOUVERTES: '2'
       # Plafonds relevés le 2026-11-05 avec l'accord de l'utilisateur (« tu peux déplacer le plafond, je t'autorise ») :
       # 0,10 $ par cycle (30 actualités et 5 relances tiennent), 0,40 $ par jour. Le total autorisé reste 4 $ (variable du dépôt).
       CURATION_PLAFOND_EXECUTION_USD: '0.10'

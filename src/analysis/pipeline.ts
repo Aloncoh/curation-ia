@@ -37,6 +37,23 @@ type EchecSortie = 'sortie_invalide' | 'sortie_tronquee' | 'refus';
 type Sortie<T> = { ok: true; valeur: T } | { ok: false; statut: EchecSortie };
 const BILAN_ECHEC = { sortie_invalide: 'invalides', sortie_tronquee: 'tronquees', refus: 'refus' } as const;
 
+/**
+ * Lit la sortie JSON du modèle selon le schéma. Le motif d'un refus est court et lisible (chemin et message du premier
+ * écart), sans recopier la sortie : il sert à repérer les erreurs récurrentes.
+ */
+export function lireSortie<T>(texte: string, schema: z.ZodType<T>): { ok: true; valeur: T } | { ok: false; motif: string } {
+  let brut: unknown;
+  try {
+    brut = JSON.parse(texte);
+  } catch (e) {
+    return { ok: false, motif: `JSON illisible (${e instanceof Error ? e.message.slice(0, 80) : 'erreur'})` };
+  }
+  const r = schema.safeParse(brut);
+  if (r.success) return { ok: true, valeur: r.data };
+  const ecarts = r.error.issues.slice(0, 3).map((i) => `${i.path.join('.') || '(racine)'} : ${i.message}`.slice(0, 90));
+  return { ok: false, motif: `${ecarts.join(' ; ')}${r.error.issues.length > 3 ? ` (+${r.error.issues.length - 3})` : ''}` };
+}
+
 /** Agent final : celui imposé par la source, sauf la sortie d'un modèle d'IA (Nodi), qui reste à Nodi même chez Radar. */
 export function compteRetenu<C extends string>(impose: C | null, propose: C): C {
   if (!impose || (impose === 'radar' && propose === 'nodi')) return propose;
@@ -82,8 +99,14 @@ async function aTraiter(client: Client, limite: number, sources?: readonly strin
           left join product pr on pr.id = t.product_id
           left join post_draft d on d.news_item_id = n.id
           -- Une découverte (liste de ressources, ADR 0011) n'est jamais qualifiée avec la grille des actualités.
-          where n.kind not in ('decouverte', 'selection') and (d.id is null or d.status = 'qualifiee' or (d.status = 'a_approfondir' and d.snapshot_id <> c.id))
-          order by d.id is not null desc, coalesce(n.announced_at, n.first_seen_at) desc, n.id desc`,
+          where n.kind not in ('decouverte', 'selection') and (d.id is null or d.status = 'qualifiee' or (d.status = 'a_approfondir' and d.snapshot_id <> c.id)
+            -- Sortie illisible récente sans motif noté (avant le 2026-11-10) : reprise une fois, avec le nouvel essai.
+            or (d.status = 'sortie_invalide' and d.created_at > strftime('%Y-%m-%dT%H:%M:%fZ', 'now', '-4 days')
+                and not exists (select 1 from llm_call l where l.news_item_id = n.id and l.error like 'sortie illisible%')))
+          -- Grosses annonces d'abord (2026-11-10) : un sujet repris par plusieurs sources passe avant un sujet isolé.
+          order by d.id is not null desc,
+            (select count(*) from news_item_document x where x.news_item_id = n.id) > 1 desc,
+            coalesce(n.announced_at, n.first_seen_at) desc, n.id desc`,
   );
   const lignesSource = sources?.length ? r.rows.filter((row) => sources.includes(String(row.source_id))) : r.rows;
   const tailleAdmise = lignesSource.filter((row) => String(row.content).length + String(row.snapshot_title).length <= LONGUEUR_MAX_CAPTURE);
@@ -224,11 +247,14 @@ export async function genererBrouillons(o: OptionsBrouillons) {
           continue;
         }
         if (r.stop !== 'end_turn') return { ok: false, statut: 'sortie_invalide' };
-        try {
-          return { ok: true, valeur: schema.parse(JSON.parse(r.texte)) };
-        } catch {
-          return { ok: false, statut: 'sortie_invalide' };
-        }
+        const lu = lireSortie(r.texte, schema);
+        if (lu.ok) return { ok: true, valeur: lu.valeur };
+        // Sortie illisible (2026-11-10 : 21 brouillons perdus en 3 jours, dont l'annonce de Claude Fable 5.2, sans motif
+        // gardé) : le motif est noté sur l'appel, puis la même demande est refaite une fois, réservée au budget comme la première.
+        await ecrire(() => client.execute({ sql: 'update llm_call set error = ? where id = ?', args: [`sortie illisible : ${lu.motif}`.slice(0, 300), id] }));
+        // Seules la qualification et la rédaction sont redemandées : sans elles, le sujet est perdu ; une révision ou une
+        // relance ratée laisse le brouillon tel quel.
+        if (attempt === MAX_TENTATIVES || (stage !== 'qualification' && stage !== 'redaction')) return { ok: false, statut: 'sortie_invalide' };
       } catch (e) {
         await ecrire(() => marquerErreur(client, id, redactSecrets(e instanceof Error ? e.message : String(e)), now()));
         if (!reprendre(e) || attempt === MAX_TENTATIVES) throw e;

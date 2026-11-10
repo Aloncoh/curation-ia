@@ -31,6 +31,8 @@ export interface CollectOptions {
   retryBackoffMs: number;
   definitions?: SourceDefinition[];
   clock?: () => Date;
+  /** Nombre de files de travail en parallèle (1 par défaut). */
+  concurrence?: number;
   /** Points d'arrêt pour les tests d'arrêt brutal (jamais utilisés en mode réel). */
   hooks?: { insideStoreTransaction?: () => Promise<void> };
 }
@@ -102,13 +104,20 @@ export async function runCollect(options: CollectOptions): Promise<CollectSummar
   const enqueued = await enqueueCollectJobs(database.client, definitions.map((def) => def.id), now(), options.maxAttempts);
   const summaries: RunSummary[] = [];
 
-  for (;;) {
-    await recoverExpiredLeases(database.client, now());
-    // La réservation échoue d'elle-même si la pause est active (condition dans la même instruction SQL).
-    const job = await claimNextJob(database.client, workerId, now(), options.leaseMs, definitions.map((def) => def.id));
-    if (!job) break;
-    summaries.push(await processJob(options, job, findDefinition(job.sourceId, definitions), now));
-  }
+  // Plusieurs files de travail en parallèle (2026-11-10) : la collecte séquentielle de ~170 sources dépassait les 10 min
+  // de l'étape (cycles en échec les 8 et 9 novembre), surtout à cause des allers-retours vers la base distante. Chaque
+  // file a son identifiant de worker et réserve ses jobs par bail : un job n'est jamais traité deux fois.
+  const files = Math.max(1, options.concurrence ?? 1);
+  await Promise.all(Array.from({ length: files }, async (_, i) => {
+    const id = files === 1 ? workerId : `${workerId}-${i + 1}`;
+    for (;;) {
+      await recoverExpiredLeases(database.client, now());
+      // La réservation échoue d'elle-même si la pause est active (condition dans la même instruction SQL).
+      const job = await claimNextJob(database.client, id, now(), options.leaseMs, definitions.map((def) => def.id));
+      if (!job) break;
+      summaries.push(await processJob({ ...options, workerId: id }, job, findDefinition(job.sourceId, definitions), now));
+    }
+  }));
   const paused = await isPaused(database.db);
   const skipped = paused ? [] : await skippedSources(database, definitions, summaries);
   return { paused, enqueued, runs: summaries, skipped };

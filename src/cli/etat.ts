@@ -3,6 +3,7 @@
 import { describeDatabaseUrl } from '../config.ts';
 import { lireReglageEntier } from '../control/settings.ts';
 import { etatDeLaChaine } from '../pilotage/pilotage.ts';
+import { etatFileDecouvertes } from '../mesure/couverture.ts';
 import { runCommand } from './shared.ts';
 
 const usd = (micro: number) => `${(micro / 1_000_000).toFixed(4)} $`;
@@ -17,4 +18,8 @@ await runCommand(async ({ config, database }) => {
   const c = e.dernier_cycle;
   console.log(c ? `Dernier cycle : ${c.debut} → ${c.fin} (${c.statut}) — ${c.etapes.map((x) => `${x.nom} ${x.statut}${x.motif ? ` (${x.motif})` : ''}`).join(' ; ')}` : 'Dernier cycle : aucun');
   console.log(`Dépense enregistrée (tous modèles) : ${usd(e.depense_micro_usd)} — détail : npm run couts`);
+  // File des découvertes (2026-11-10) : une file qui vieillit sans traitement est signalée à chaque cycle.
+  const f = await etatFileDecouvertes(database.client, new Date().toISOString());
+  console.log(`Découvertes en attente : ${f.enAttente} (plus ancienne : ${f.plusAncienne ?? 'aucune'}) ; ${f.grillesNoteesDepuis24h} notée(s) depuis 24 h — détail par agent : npm run couverture`);
+  if (f.alerte) console.log(`::warning::${f.alerte}`);
 });

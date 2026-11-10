@@ -12,6 +12,63 @@ export interface FeedConfig {
   maxItems: number;
   /** Hôtes autorisés pour le lien d'une entrée (https uniquement) : un lien ailleurs est refusé et compté. */
   linkHosts: string[];
+  /**
+   * Plan de site (sitemap.xml) au lieu d'un flux, pour un éditeur sans flux (Anthropic, 2026-11-10) : seules les pages
+   * dont le chemin commence par un des préfixes sont gardées, les plus récemment modifiées d'abord.
+   */
+  plan?: { prefixes: string[] };
+}
+
+/**
+ * Lit un plan de site : chaque page autorisée devient un document sans contenu (la page est capturée ensuite par
+ * l'approfondissement). `lastmod` est une date de modification, pas de publication : elle est gardée en métadonnée et
+ * la date d'annonce reste inconnue (null), lue plus tard dans la page.
+ */
+export function parseSitemap(body: string, config: Pick<FeedConfig, 'maxItems' | 'linkHosts'> & { plan: { prefixes: string[] } }): ParsedFeed {
+  if (!/<urlset[\s>]/.test(body)) throw new SourceFormatError('Plan de site illisible (pas de <urlset>)');
+  const entries = [...body.matchAll(/<url>([\s\S]*?)<\/url>/g)];
+  if (entries.length > MAX_FEED_ENTRIES * 4) throw new SourceFormatError(`Plan de site trop long : ${entries.length} pages`);
+  const rejected: Record<string, number> = {};
+  const candidates: { url: string; externalId: string; lastmod: string | null }[] = [];
+  const seen = new Set<string>();
+  for (const [, bloc] of entries) {
+    const loc = decodeHtmlEntities(/<loc>\s*([^<]+?)\s*<\/loc>/.exec(bloc ?? '')?.[1] ?? '');
+    const link = checkLink(loc || null, config.linkHosts);
+    if ('reason' in link) {
+      rejected[link.reason] = (rejected[link.reason] ?? 0) + 1;
+      continue;
+    }
+    const chemin = new URL(link.url).pathname;
+    if (!config.plan.prefixes.some((p) => chemin.startsWith(p))) {
+      rejected.hors_rubrique = (rejected.hors_rubrique ?? 0) + 1;
+      continue;
+    }
+    const externalId = normalizeUrl(link.url);
+    if (seen.has(externalId)) continue;
+    seen.add(externalId);
+    const brut = /<lastmod>\s*([^<]+?)\s*<\/lastmod>/.exec(bloc ?? '')?.[1];
+    candidates.push({ url: link.url, externalId, lastmod: brut ? isoDate(new Date(brut)) : null });
+  }
+  if (candidates.length === 0) throw new SourceFormatError('Plan de site sans page exploitable');
+  candidates.sort((a, b) => (b.lastmod ?? '').localeCompare(a.lastmod ?? ''));
+  const documents = candidates.slice(0, config.maxItems).map(({ url, externalId, lastmod }): CollectedDocument => {
+    // Titre provisoire tiré de l'adresse ; le titre de la page vient de sa capture.
+    const slug = new URL(url).pathname.split('/').filter(Boolean).pop() ?? '';
+    const title = cleanTitle(slug.replace(/-/g, ' ').replace(/^./, (c) => c.toUpperCase())) || url;
+    return {
+      externalId,
+      url,
+      normalizedUrl: externalId,
+      title,
+      version: null,
+      announcedAt: null,
+      content: '',
+      contentFormat: 'html',
+      contentHash: contentHash({ title, version: null, content: '' }),
+      metadata: { modifieLe: lastmod, plan: true },
+    };
+  });
+  return { documents, rejected };
 }
 
 /** Au-delà, le flux est refusé avant analyse : le temps d'analyse de la bibliothèque croît plus vite que le nombre d'entrées. */
@@ -104,7 +161,8 @@ function isoDate(date: Date | null | undefined): string | null {
  * diffère souvent du lien) ; une entrée sans lien https vers un hôte autorisé est refusée et comptée.
  * Le contenu reste une donnée, jamais une instruction.
  */
-export function parseFeedItems(body: string, config: Pick<FeedConfig, 'maxItems' | 'linkHosts'>): ParsedFeed {
+export function parseFeedItems(body: string, config: Pick<FeedConfig, 'maxItems' | 'linkHosts' | 'plan'>): ParsedFeed {
+  if (config.plan) return parseSitemap(body, { ...config, plan: config.plan });
   const entries = body.match(/<(?:item|entry)[\s>/]/g)?.length ?? 0;
   if (entries > MAX_FEED_ENTRIES) throw new SourceFormatError(`Flux trop long : ${entries} entrées (maximum ${MAX_FEED_ENTRIES})`);
 

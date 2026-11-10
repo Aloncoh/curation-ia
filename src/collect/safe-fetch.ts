@@ -204,6 +204,17 @@ function abortable<T>(promise: Promise<T>, signal: AbortSignal): Promise<T> {
   });
 }
 
+/**
+ * Jeton intégré de GitHub Actions (`GITHUB_TOKEN`, fourni par GitHub à chaque exécution, aucun secret à créer) : ajouté
+ * seulement pour `api.github.com` en https, et seulement avec le transport réel. Limites vérifiées le 2026-11-10 dans la
+ * documentation officielle : 1 000 requêtes par heure et par dépôt (60 sans jeton), recherche 30 par minute (10 sans).
+ */
+export function avecJetonGithub(url: URL, headers: Record<string, string>, reel: boolean): Record<string, string> {
+  const jeton = process.env.GITHUB_TOKEN;
+  if (!reel || !jeton || url.protocol !== 'https:' || url.hostname !== 'api.github.com' || headers.authorization) return headers;
+  return { ...headers, authorization: `Bearer ${jeton}` };
+}
+
 export async function safeGet(
   rawUrl: string,
   policy: FetchPolicy,
@@ -242,7 +253,7 @@ export async function safeGet(
       response = await (deps.transport ?? httpsTransport)({
         url,
         address: first,
-        headers,
+        headers: avecJetonGithub(url, headers, deps.transport === undefined),
         signal: controller.signal,
         maxBytes: policy.maxBytes,
       });

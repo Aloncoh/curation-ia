@@ -8,6 +8,7 @@ import type { HuggingFaceModelsConfig } from './collect/huggingface.ts';
 import type { Database } from './db/client.ts';
 import { withBusyRetry } from './db/retry.ts';
 import { sources } from './db/schema.ts';
+import { sourcesElargies } from './sources-elargies.ts';
 
 /** Produit déclaré par une source : sa clé canonique est son identité stable. */
 export interface ProductRef {
@@ -316,6 +317,8 @@ export const SOURCES: SourceDefinition[] = [
   flux('vapi', "Vapi, What's New — flux RSS officiel", 'https://docs.vapi.ai/whats-new.rss', 'docs.vapi.ai'),
   flux('mcp-blog', 'Blog MCP — flux RSS officiel', 'https://blog.modelcontextprotocol.io/index.xml', 'blog.modelcontextprotocol.io'),
   flux('siggraph', 'SIGGRAPH Blog — flux RSS officiel', 'https://blog.siggraph.org/feed/', 'blog.siggraph.org'),
+  // Élargissement du 2026-11-10 (six agents, flux vérifiés en réel) : src/sources-elargies.ts.
+  ...sourcesElargies(githubReleases),
 ];
 
 /** Restreint les sources à une liste d'identifiants (variable CURATION_ONLY_SOURCES) ; toutes sinon. */

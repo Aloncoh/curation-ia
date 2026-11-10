@@ -531,3 +531,254 @@ Apple Newsroom : aucune condition d'usage éditorial sur la page d'annonce du Ma
 | Apple | autorisation écrite demandée | non utilisable sans accord |
 
 Ces lectures ne sont pas un avis juridique.
+
+### 3.12 Élargissement du 2026-11-10 (six agents)
+
+Demande de l'utilisateur : « élargis la couverture des six agents… pour chaque ajout, indique ce qu'il apporte et vérifie qu'il collecte réellement ». Chaque flux a été interrogé le 2026-11-10 depuis le poste : réponse 200 sans redirection, lu par notre analyseur, dernière entrée de moins de 120 jours, robots.txt respecté. Les versions GitHub (API, jeton d'Actions) et les deux sources Hacker News (hôte injoignable depuis le poste ce jour-là) sont vérifiées à la première collecte en ligne. Code : `src/sources-elargies.ts`. Bilan par agent en ligne : `npm run couverture`.
+
+| Agent | Source | Apport | Vérification du 2026-11-10 |
+|---|---|---|---|
+| Mova | `https://code.blender.org/feed/` | Blender Developers Blog | 10 entrées, dernière il y a 7 j |
+| Mova | `https://feeds.feedburner.com/Blendernation` | BlenderNation : add-ons et actualité Blender | 10 entrées, dernière il y a 1 j |
+| Mova | `https://css-tricks.com/feed/` | CSS-Tricks | 15 entrées, dernière il y a 1 j |
+| Mova | `https://www.figma.com/blog/feed/atom.xml` | Figma | 20 entrées, dernière il y a 0 j |
+| Mova | `BabylonJS/Babylon.js` | Versions de BabylonJS/Babylon.js | à la première collecte en ligne |
+| Mova | `blender/blender` | Versions de blender/blender | à la première collecte en ligne |
+| Mova | `comfyanonymous/ComfyUI` | Versions de comfyanonymous/ComfyUI | à la première collecte en ligne |
+| Mova | `godotengine/godot` | Versions de godotengine/godot | à la première collecte en ligne |
+| Mova | `greensock/GSAP` | Versions de greensock/GSAP | à la première collecte en ligne |
+| Mova | `motiondivision/motion` | Versions de motiondivision/motion | à la première collecte en ligne |
+| Mova | `mrdoob/three.js` | Versions de mrdoob/three.js | à la première collecte en ligne |
+| Mova | `pmndrs/react-three-fiber` | Versions de pmndrs/react-three-fiber | à la première collecte en ligne |
+| Mova | `remotion-dev/remotion` | Versions de remotion-dev/remotion | à la première collecte en ligne |
+| Mova | `https://godotengine.org/rss.xml` | Godot | 15 entrées, dernière il y a 1 j |
+| Mova | `https://huggingface.co/api/models?author=black-forest-labs&sort=createdAt&direction=-1&limit=10` | Catalogue Hugging Face de black-forest-labs : modèles image, vidéo, voix | 10 entrées, dernière il y a 26 j |
+| Mova | `https://huggingface.co/api/models?author=Lightricks&sort=createdAt&direction=-1&limit=10` | Catalogue Hugging Face de Lightricks : modèles image, vidéo, voix | 10 entrées, dernière il y a 13 j |
+| Mova | `https://huggingface.co/api/models?author=stabilityai&sort=createdAt&direction=-1&limit=10` | Catalogue Hugging Face de stabilityai : modèles image, vidéo, voix | 10 entrées, dernière il y a 15 j |
+| Mova | `https://huggingface.co/api/models?author=Wan-AI&sort=createdAt&direction=-1&limit=10` | Catalogue Hugging Face de Wan-AI : modèles image, vidéo, voix | 10 entrées, dernière il y a 96 j |
+| Mova | `https://motionographer.com/feed/` | Motionographer : motion design | 10 entrées, dernière il y a 1 j |
+| Mova | `https://www.smashingmagazine.com/feed/` | Smashing Magazine | 20 entrées, dernière il y a 4 j |
+| Mova | `https://spline.design/blog/rss.xml` | Spline : 3D web | 20 entrées, dernière il y a 7 j |
+| Mova | `https://stability.ai/news-updates?format=rss` | Stability AI : modèles image, vidéo, audio | 20 entrées, dernière il y a 77 j |
+| Mova | `https://www.unrealengine.com/rss?lang=en-US` | Unreal Engine | 10 entrées, dernière il y a 6 j |
+| Mova | `https://webkit.org/feed/` | WebKit : CSS, animation, WebGPU | 10 entrées, dernière il y a 5 j |
+| Nodi | `https://allenai.org/rss.xml` | Ai2 : modèles ouverts OLMo, Tülu | 20 entrées, dernière il y a 4 j |
+| Nodi | `https://www.amazon.science/index.rss` | Amazon Science : modèles Nova, recherche | 20 entrées, dernière il y a 5 j |
+| Nodi | `https://www.anthropic.com/sitemap.xml` | Anthropic : annonces, recherche, lancements (aucun flux officiel) | 20 entrées, dernière il y a 0 j |
+| Nodi | `https://deepmind.google/blog/rss.xml` | Google DeepMind : modèles Gemini, Veo, recherche | 20 entrées, dernière il y a 5 j |
+| Nodi | `huggingface/transformers` | Versions de huggingface/transformers | à la première collecte en ligne |
+| Nodi | `https://research.google/blog/rss/` | Google Research : publications et modèles | 20 entrées, dernière il y a 0 j |
+| Nodi | `https://huggingface.co/api/models?author=allenai&sort=createdAt&direction=-1&limit=10` | Catalogue Hugging Face de allenai : nouveaux modèles publiés | 10 entrées, dernière il y a 5 j |
+| Nodi | `https://huggingface.co/api/models?author=apple&sort=createdAt&direction=-1&limit=10` | Catalogue Hugging Face de apple : nouveaux modèles publiés | 10 entrées, dernière il y a 50 j |
+| Nodi | `https://huggingface.co/api/models?author=baidu&sort=createdAt&direction=-1&limit=10` | Catalogue Hugging Face de baidu : nouveaux modèles publiés | 10 entrées, dernière il y a 15 j |
+| Nodi | `https://huggingface.co/api/models?author=ByteDance-Seed&sort=createdAt&direction=-1&limit=10` | Catalogue Hugging Face de ByteDance-Seed : nouveaux modèles publiés | 10 entrées, dernière il y a 4 j |
+| Nodi | `https://huggingface.co/api/models?author=CohereLabs&sort=createdAt&direction=-1&limit=10` | Catalogue Hugging Face de CohereLabs : nouveaux modèles publiés | 10 entrées, dernière il y a 63 j |
+| Nodi | `https://huggingface.co/api/models?author=deepseek-ai&sort=createdAt&direction=-1&limit=10` | Catalogue Hugging Face de deepseek-ai : nouveaux modèles publiés | 10 entrées, dernière il y a 24 j |
+| Nodi | `https://huggingface.co/api/models?author=google&sort=createdAt&direction=-1&limit=10` | Catalogue Hugging Face de google : nouveaux modèles publiés | 10 entrées, dernière il y a 57 j |
+| Nodi | `https://huggingface.co/api/models?author=ibm-granite&sort=createdAt&direction=-1&limit=10` | Catalogue Hugging Face de ibm-granite : nouveaux modèles publiés | 10 entrées, dernière il y a 12 j |
+| Nodi | `https://huggingface.co/api/models?author=internlm&sort=createdAt&direction=-1&limit=10` | Catalogue Hugging Face de internlm : nouveaux modèles publiés | 10 entrées, dernière il y a 4 j |
+| Nodi | `https://huggingface.co/api/models?author=kyutai&sort=createdAt&direction=-1&limit=10` | Catalogue Hugging Face de kyutai : nouveaux modèles publiés | 10 entrées, dernière il y a 36 j |
+| Nodi | `https://huggingface.co/api/models?author=LiquidAI&sort=createdAt&direction=-1&limit=10` | Catalogue Hugging Face de LiquidAI : nouveaux modèles publiés | 10 entrées, dernière il y a 14 j |
+| Nodi | `https://huggingface.co/api/models?author=microsoft&sort=createdAt&direction=-1&limit=10` | Catalogue Hugging Face de microsoft : nouveaux modèles publiés | 10 entrées, dernière il y a 11 j |
+| Nodi | `https://huggingface.co/api/models?author=MiniMaxAI&sort=createdAt&direction=-1&limit=10` | Catalogue Hugging Face de MiniMaxAI : nouveaux modèles publiés | 10 entrées, dernière il y a 24 j |
+| Nodi | `https://huggingface.co/api/models?author=mistralai&sort=createdAt&direction=-1&limit=10` | Catalogue Hugging Face de mistralai : nouveaux modèles publiés | 10 entrées, dernière il y a 26 j |
+| Nodi | `https://huggingface.co/api/models?author=moonshotai&sort=createdAt&direction=-1&limit=10` | Catalogue Hugging Face de moonshotai : nouveaux modèles publiés | 10 entrées, dernière il y a 8 j |
+| Nodi | `https://huggingface.co/api/models?author=nvidia&sort=createdAt&direction=-1&limit=10` | Catalogue Hugging Face de nvidia : nouveaux modèles publiés | 10 entrées, dernière il y a 5 j |
+| Nodi | `https://huggingface.co/api/models?author=Qwen&sort=createdAt&direction=-1&limit=10` | Catalogue Hugging Face de Qwen : nouveaux modèles publiés | 10 entrées, dernière il y a 32 j |
+| Nodi | `https://huggingface.co/api/models?author=stepfun-ai&sort=createdAt&direction=-1&limit=10` | Catalogue Hugging Face de stepfun-ai : nouveaux modèles publiés | 10 entrées, dernière il y a 27 j |
+| Nodi | `https://huggingface.co/api/models?author=tencent&sort=createdAt&direction=-1&limit=10` | Catalogue Hugging Face de tencent : nouveaux modèles publiés | 10 entrées, dernière il y a 3 j |
+| Nodi | `https://huggingface.co/api/models?author=zai-org&sort=createdAt&direction=-1&limit=10` | Catalogue Hugging Face de zai-org : nouveaux modèles publiés | 10 entrées, dernière il y a 77 j |
+| Nodi | `https://www.interconnects.ai/feed` | Interconnects : modèles ouverts | 20 entrées, dernière il y a 6 j |
+| Nodi | `https://latent.space/feed` | Latent Space : entretiens IA | 20 entrées, dernière il y a 0 j |
+| Nodi | `https://research.nvidia.com/rss.xml` | NVIDIA Research | 10 entrées, dernière il y a 0 j |
+| Nodi | `https://thezvi.substack.com/feed` | Don’t Worry About the Vase : revue hebdomadaire IA | 20 entrées, dernière il y a 1 j |
+| Nodi | `https://www.together.ai/blog/rss.xml` | Together AI : modèles ouverts servis | 20 entrées, dernière il y a 6 j |
+| Pulse | `https://aws.amazon.com/blogs/aws/feed/` | AWS News Blog | 20 entrées, dernière il y a 1 j |
+| Pulse | `https://clickhouse.com/rss.xml` | ClickHouse | 20 entrées, dernière il y a 1 j |
+| Pulse | `https://developers.cloudflare.com/changelog/rss/index.xml` | Cloudflare : changelog développeurs | 20 entrées, dernière il y a 0 j |
+| Pulse | `https://www.cloudflarestatus.com/history.rss` | Statut Cloudflare : incidents | 20 entrées, dernière il y a -8 j |
+| Pulse | `https://www.cncf.io/feed/` | CNCF | 10 entrées, dernière il y a 1 j |
+| Pulse | `https://www.getdbt.com/blog/feed.xml` | dbt Labs | 20 entrées, dernière il y a 4 j |
+| Pulse | `https://www.docker.com/feed/` | Docker | 10 entrées, dernière il y a 4 j |
+| Pulse | `https://dropbox.tech/feed` | Dropbox Tech | 10 entrées, dernière il y a 5 j |
+| Pulse | `https://duckdb.org/feed.xml` | DuckDB | 10 entrées, dernière il y a 0 j |
+| Pulse | `https://fly.io/blog/feed.xml` | Fly.io | 20 entrées, dernière il y a 4 j |
+| Pulse | `https://cloudblog.withgoogle.com/rss/` | Google Cloud Blog | 20 entrées, dernière il y a 0 j |
+| Pulse | `https://status.cloud.google.com/en/feed.atom` | Statut Google Cloud : incidents | 1 entrées, dernière il y a 5 j |
+| Pulse | `BerriAI/litellm` | Versions de BerriAI/litellm | à la première collecte en ligne |
+| Pulse | `chroma-core/chroma` | Versions de chroma-core/chroma | à la première collecte en ligne |
+| Pulse | `ClickHouse/ClickHouse` | Versions de ClickHouse/ClickHouse | à la première collecte en ligne |
+| Pulse | `docker/compose` | Versions de docker/compose | à la première collecte en ligne |
+| Pulse | `duckdb/duckdb` | Versions de duckdb/duckdb | à la première collecte en ligne |
+| Pulse | `grafana/grafana` | Versions de grafana/grafana | à la première collecte en ligne |
+| Pulse | `kubernetes/kubernetes` | Versions de kubernetes/kubernetes | à la première collecte en ligne |
+| Pulse | `langfuse/langfuse` | Versions de langfuse/langfuse | à la première collecte en ligne |
+| Pulse | `qdrant/qdrant` | Versions de qdrant/qdrant | à la première collecte en ligne |
+| Pulse | `ray-project/ray` | Versions de ray-project/ray | à la première collecte en ligne |
+| Pulse | `sgl-project/sglang` | Versions de sgl-project/sglang | à la première collecte en ligne |
+| Pulse | `vllm-project/vllm` | Versions de vllm-project/vllm | à la première collecte en ligne |
+| Pulse | `https://www.githubstatus.com/history.rss` | Statut GitHub : incidents | 20 entrées, dernière il y a 0 j |
+| Pulse | `https://grafana.com/blog/index.xml` | Grafana Labs | 10 entrées, dernière il y a 1 j |
+| Pulse | `https://www.hashicorp.com/blog/feed.xml` | HashiCorp | 20 entrées, dernière il y a 7 j |
+| Pulse | `https://kubernetes.io/feed.xml` | Kubernetes | 20 entrées, dernière il y a 12 j |
+| Pulse | `https://engineering.fb.com/feed/` | Meta Engineering | 9 entrées, dernière il y a 1 j |
+| Pulse | `https://neon.com/blog/rss.xml` | Neon | 20 entrées, dernière il y a 5 j |
+| Pulse | `https://www.pinecone.io/rss/` | Pinecone | 20 entrées, dernière il y a 4 j |
+| Pulse | `https://www.postgresql.org/news.rss` | PostgreSQL | 10 entrées, dernière il y a 1 j |
+| Pulse | `https://pytorch.org/feed/` | PyTorch | 10 entrées, dernière il y a 5 j |
+| Pulse | `https://redis.io/blog/feed/` | Redis | 20 entrées, dernière il y a 1 j |
+| Pulse | `https://replicate.com/blog/rss` | Replicate | 20 entrées, dernière il y a 7 j |
+| Pulse | `https://slack.engineering/feed/` | Slack Engineering | 8 entrées, dernière il y a 119 j |
+| Pulse | `https://engineering.atspotify.com/feed` | Spotify Engineering | 5 entrées, dernière il y a 1 j |
+| Pulse | `https://supabase.com/rss.xml` | Supabase | 20 entrées, dernière il y a 7 j |
+| Pulse | `https://www.vercel-status.com/history.rss` | Statut Vercel : incidents | 20 entrées, dernière il y a 5 j |
+| Pyxo | `https://developer.android.com/static/blog/atom.xml` | Android Developers | 20 entrées, dernière il y a 4 j |
+| Pyxo | `https://astro.build/rss.xml` | Astro | 20 entrées, dernière il y a 10 j |
+| Pyxo | `https://bun.com/rss.xml` | Bun | 20 entrées, dernière il y a 19 j |
+| Pyxo | `https://developer.chrome.com/static/blog/feed.xml` | Chrome for Developers | 10 entrées, dernière il y a 34 j |
+| Pyxo | `https://deno.com/feed` | Deno | 20 entrées, dernière il y a 32 j |
+| Pyxo | `Aider-AI/aider` | Versions de Aider-AI/aider | à la première collecte en ligne |
+| Pyxo | `anthropics/anthropic-sdk-python` | Versions de anthropics/anthropic-sdk-python | à la première collecte en ligne |
+| Pyxo | `astral-sh/ruff` | Versions de astral-sh/ruff | à la première collecte en ligne |
+| Pyxo | `astral-sh/uv` | Versions de astral-sh/uv | à la première collecte en ligne |
+| Pyxo | `block/goose` | Versions de block/goose | à la première collecte en ligne |
+| Pyxo | `cline/cline` | Versions de cline/cline | à la première collecte en ligne |
+| Pyxo | `continuedev/continue` | Versions de continuedev/continue | à la première collecte en ligne |
+| Pyxo | `crewAIInc/crewAI` | Versions de crewAIInc/crewAI | à la première collecte en ligne |
+| Pyxo | `denoland/deno` | Versions de denoland/deno | à la première collecte en ligne |
+| Pyxo | `ggml-org/llama.cpp` | Versions de ggml-org/llama.cpp | à la première collecte en ligne |
+| Pyxo | `langchain-ai/langchain` | Versions de langchain-ai/langchain | à la première collecte en ligne |
+| Pyxo | `langchain-ai/langgraph` | Versions de langchain-ai/langgraph | à la première collecte en ligne |
+| Pyxo | `microsoft/autogen` | Versions de microsoft/autogen | à la première collecte en ligne |
+| Pyxo | `microsoft/TypeScript` | Versions de microsoft/TypeScript | à la première collecte en ligne |
+| Pyxo | `nodejs/node` | Versions de nodejs/node | à la première collecte en ligne |
+| Pyxo | `ollama/ollama` | Versions de ollama/ollama | à la première collecte en ligne |
+| Pyxo | `open-webui/open-webui` | Versions de open-webui/open-webui | à la première collecte en ligne |
+| Pyxo | `openai/openai-python` | Versions de openai/openai-python | à la première collecte en ligne |
+| Pyxo | `oven-sh/bun` | Versions de oven-sh/bun | à la première collecte en ligne |
+| Pyxo | `pydantic/pydantic-ai` | Versions de pydantic/pydantic-ai | à la première collecte en ligne |
+| Pyxo | `run-llama/llama_index` | Versions de run-llama/llama_index | à la première collecte en ligne |
+| Pyxo | `sst/opencode` | Versions de sst/opencode | à la première collecte en ligne |
+| Pyxo | `vercel/ai` | Versions de vercel/ai | à la première collecte en ligne |
+| Pyxo | `vercel/next.js` | Versions de vercel/next.js | à la première collecte en ligne |
+| Pyxo | `zed-industries/zed` | Versions de zed-industries/zed | à la première collecte en ligne |
+| Pyxo | `https://github.blog/ai-and-ml/feed/` | GitHub Blog, IA et ML | 10 entrées, dernière il y a 3 j |
+| Pyxo | `https://go.dev/blog/feed.atom` | Go | 10 entrées, dernière il y a 6 j |
+| Pyxo | `https://developers.googleblog.com/feeds/posts/default/` | Google for Developers : API Gemini, outils | 20 entrées, dernière il y a None j |
+| Pyxo | `https://blog.jetbrains.com/ai/feed/` | JetBrains AI | 12 entrées, dernière il y a 5 j |
+| Pyxo | `https://blog.jetbrains.com/kotlin/feed/` | Kotlin | 12 entrées, dernière il y a 4 j |
+| Pyxo | `https://hacks.mozilla.org/feed/` | Mozilla Hacks | 20 entrées, dernière il y a 78 j |
+| Pyxo | `https://nodejs.org/en/feed/blog.xml` | Node.js | 20 entrées, dernière il y a 5 j |
+| Pyxo | `https://ollama.com/blog/rss.xml` | Ollama : modèles locaux | 20 entrées, dernière il y a 17 j |
+| Pyxo | `https://blog.python.org/feeds/posts/default` | Python | 20 entrées, dernière il y a 15 j |
+| Pyxo | `https://react.dev/rss.xml` | React | 20 entrées, dernière il y a 62 j |
+| Pyxo | `https://replit.com/blog/feed.xml` | Replit : agent de code | 20 entrées, dernière il y a 13 j |
+| Pyxo | `https://blog.rust-lang.org/feed.xml` | Rust | 10 entrées, dernière il y a 7 j |
+| Pyxo | `https://simonwillison.net/atom/everything/` | Simon Willison : essais pratiques des modèles | 20 entrées, dernière il y a 0 j |
+| Pyxo | `https://sourcegraph.com/blog/feed.rss` | Sourcegraph / Amp | 20 entrées, dernière il y a 0 j |
+| Pyxo | `https://stackoverflow.blog/feed/` | Stack Overflow Blog | 20 entrées, dernière il y a 0 j |
+| Pyxo | `https://svelte.dev/blog/rss.xml` | Svelte | 20 entrées, dernière il y a 40 j |
+| Pyxo | `https://www.swift.org/atom.xml` | Swift | 20 entrées, dernière il y a 5 j |
+| Pyxo | `https://devblogs.microsoft.com/typescript/feed/` | TypeScript | 10 entrées, dernière il y a 21 j |
+| Pyxo | `https://vercel.com/atom` | Vercel : blog et annonces | 20 entrées, dernière il y a 0 j |
+| Pyxo | `https://code.visualstudio.com/feed.xml` | VS Code : notes de version, fonctions IA | 20 entrées, dernière il y a -1 j |
+| Pyxo | `https://web.dev/static/blog/feed.xml` | web.dev | 10 entrées, dernière il y a 39 j |
+| Pyxo | `https://zed.dev/blog.rss` | Zed : éditeur et agents | 20 entrées, dernière il y a 55 j |
+| Radar | `https://newsroom.arm.com/feed` | Arm | 6 entrées, dernière il y a 5 j |
+| Radar | `https://arstechnica.com/ai/feed/` | Ars Technica, IA | 20 entrées, dernière il y a 1 j |
+| Radar | `https://spectrum.ieee.org/feeds/topic/artificial-intelligence.rss` | IEEE Spectrum, IA | 20 entrées, dernière il y a 1 j |
+| Radar | `https://spectrum.ieee.org/feeds/topic/robotics.rss` | IEEE Spectrum, robotique | 20 entrées, dernière il y a 1 j |
+| Radar | `https://www.technologyreview.com/topic/artificial-intelligence/feed` | MIT Technology Review, IA | 10 entrées, dernière il y a 1 j |
+| Radar | `https://www.therobotreport.com/feed/` | The Robot Report | 15 entrées, dernière il y a 0 j |
+| Radar | `https://www.salesforce.com/news/feed/` | Salesforce : agents en entreprise | 10 entrées, dernière il y a 4 j |
+| Radar | `https://newsletter.semianalysis.com/feed` | SemiAnalysis : puces et centres de données | 20 entrées, dernière il y a 3 j |
+| Radar | `https://www.servethehome.com/feed/` | ServeTheHome : serveurs, accélérateurs | 6 entrées, dernière il y a 0 j |
+| Radar | `https://techcrunch.com/category/artificial-intelligence/feed/` | TechCrunch, IA | 20 entrées, dernière il y a 0 j |
+| Radar | `https://www.tomshardware.com/feeds.xml` | Tom’s Hardware : puces, GPU | 20 entrées, dernière il y a 0 j |
+| Radar | `https://www.theverge.com/rss/ai-artificial-intelligence/index.xml` | The Verge, IA | 10 entrées, dernière il y a 0 j |
+| Radar | `https://waymo.com/blog/rss.xml` | Waymo | 20 entrées, dernière il y a 5 j |
+| Radar | `https://www.wired.com/feed/tag/ai/latest/rss` | Wired, IA | 10 entrées, dernière il y a 0 j |
+| Repo | `anthropics/claude-agent-sdk-python` | Versions de anthropics/claude-agent-sdk-python | à la première collecte en ligne |
+| Repo | `anthropics/claude-agent-sdk-typescript` | Versions de anthropics/claude-agent-sdk-typescript | à la première collecte en ligne |
+| Repo | `browser-use/browser-use` | Versions de browser-use/browser-use | à la première collecte en ligne |
+| Repo | `github/github-mcp-server` | Versions de github/github-mcp-server | à la première collecte en ligne |
+| Repo | `microsoft/playwright-mcp` | Versions de microsoft/playwright-mcp | à la première collecte en ligne |
+| Repo | `modelcontextprotocol/inspector` | Versions de modelcontextprotocol/inspector | à la première collecte en ligne |
+| Repo | `modelcontextprotocol/python-sdk` | Versions de modelcontextprotocol/python-sdk | à la première collecte en ligne |
+| Repo | `modelcontextprotocol/typescript-sdk` | Versions de modelcontextprotocol/typescript-sdk | à la première collecte en ligne |
+| Repo | `n8n-io/n8n` | Versions de n8n-io/n8n | à la première collecte en ligne |
+| Repo | `openai/openai-agents-python` | Versions de openai/openai-agents-python | à la première collecte en ligne |
+| Repo | `upstash/context7` | Versions de upstash/context7 | à la première collecte en ligne |
+| Repo | `https://www.producthunt.com/feed` | Product Hunt : nouveaux produits | 20 entrées, dernière il y a 1 j |
+| Repo | Show HN récents (API Algolia) | Projets présentés par leurs auteurs, 30 points | à la première collecte en ligne |
+| Nodi | Histoires HN récentes, 80 points (API Algolia) | Hacker News au-delà de la page d'accueil | à la première collecte en ligne |
+
+Écartés le 2026-11-10, avec leur motif (aucun contournement) :
+
+- `https://blog.adobe.com/en/feed` (Adobe : Firefly, Creative Cloud) : HTTP 404
+- `https://www.ai21.com/feed/` (AI21 : modèles Jamba) : redirection 301 → https://www.ai21.com
+- `https://blog.angular.dev/feed` (Angular) : HTTP 500
+- `https://export.arxiv.org/api/query?search_query=cat:cs.CL&sortBy=submittedDate&sortOrder=descending&max_results=15` (arXiv cs.CL) : robots.txt : disallow /
+- `https://www.awwwards.com/blog/rss/` (Awwwards : design web) : Flux RSS/Atom illisible
+- `https://bfl.ai/blog/rss.xml` (Black Forest Labs : FLUX) : HTTP 404
+- `https://bostondynamics.com/feed/` (Boston Dynamics) : Flux sans aucune entrée
+- `https://www.cerebras.ai/blog/rss.xml` (Cerebras) : HTTP 404
+- `https://feeds2.feedburner.com/cgchannel/nHpU` (CG Channel : outils 3D et VFX) : dernière entrée il y a 772 j
+- `https://tympanus.net/codrops/feed/` (Codrops : effets web, WebGL, motion) : HTTP 403
+- `https://cohere.com/blog/rss.xml` (Cohere : modèles Command, Embed) : redirection 307 → /blog
+- `https://80.lv/feed` (80 Level : 3D, jeux, VFX) : robots.txt : disallow /feed
+- `https://fireworks.ai/blog/rss.xml` (Fireworks AI) : HTTP 404
+- `https://www.framer.com/updates/rss.xml` (Framer : nouveautés) : HTTP 404
+- `https://groq.com/feed` (Groq) : HTTP 404
+- `https://huggingface.co/api/models?author=01-ai&sort=createdAt&direction=-1&limit=10` (Catalogue Hugging Face de 01-ai : nouveaux modèles publiés) : dernière entrée il y a 811 j
+- `https://huggingface.co/api/models?author=ai21labs&sort=createdAt&direction=-1&limit=10` (Catalogue Hugging Face de ai21labs : nouveaux modèles publiés) : dernière entrée il y a 308 j
+- `https://huggingface.co/api/models?author=hexgrad&sort=createdAt&direction=-1&limit=10` (Catalogue Hugging Face de hexgrad : modèles image, vidéo, voix) : dernière entrée il y a 621 j
+- `https://huggingface.co/api/models?author=HuggingFaceTB&sort=createdAt&direction=-1&limit=10` (Catalogue Hugging Face de HuggingFaceTB : nouveaux modèles publiés) : dernière entrée il y a 200 j
+- `https://huggingface.co/api/models?author=meta-llama&sort=createdAt&direction=-1&limit=10` (Catalogue Hugging Face de meta-llama : nouveaux modèles publiés) : dernière entrée il y a 561 j
+- `https://huggingface.co/api/models?author=nari-labs&sort=createdAt&direction=-1&limit=10` (Catalogue Hugging Face de nari-labs : nouveaux modèles publiés) : dernière entrée il y a 360 j
+- `https://huggingface.co/api/models?author=openai&sort=createdAt&direction=-1&limit=10` (Catalogue Hugging Face de openai : nouveaux modèles publiés) : dernière entrée il y a 206 j
+- `https://huggingface.co/papers/rss` (Hugging Face Daily Papers) : HTTP 401
+- `https://huggingface.co/api/models?author=ResembleAI&sort=createdAt&direction=-1&limit=10` (Catalogue Hugging Face de ResembleAI : modèles image, vidéo, voix) : dernière entrée il y a 166 j
+- `https://huggingface.co/api/models?author=sesame&sort=createdAt&direction=-1&limit=10` (Catalogue Hugging Face de sesame : nouveaux modèles publiés) : dernière entrée il y a 614 j
+- `https://status.huggingface.co/history.rss` (Statut Hugging Face) : redirection 301 → https://status.huggingface.co/
+- `https://huggingface.co/api/models?author=tencent-hunyuan&sort=createdAt&direction=-1&limit=10` (Catalogue Hugging Face de tencent-hunyuan : modèles image, vidéo, voix) : Réponse Hugging Face sans aucun modèle
+- `https://huggingface.co/api/models?author=xai-org&sort=createdAt&direction=-1&limit=10` (Catalogue Hugging Face de xai-org : nouveaux modèles publiés) : dernière entrée il y a 444 j
+- `https://hn.algolia.com/api/v1/search_by_date?tags=story&numericFilters=points%3E80&hitsPerPage=60` (Hacker News au-delà de la page d’accueil : histoires récentes sur l’IA, 80 points) : fetch failed
+- `https://hn.algolia.com/api/v1/search_by_date?tags=show_hn&hitsPerPage=60` (Show HN : projets présentés par leurs auteurs) : fetch failed
+- `https://newsroom.ibm.com/press-releases?pagetemplate=rss` (IBM) : HTTP 404
+- `https://ideogram.ai/blog/rss.xml` (Ideogram) : HTTP 404
+- `https://www.krea.ai/blog/rss.xml` (Krea) : HTTP 404
+- `https://www.langchain.com/blog/rss` (LangChain : agents) : redirection 301 → /blog
+- `https://www.liquid.ai/blog/rss.xml` (Liquid AI : modèles LFM) : HTTP 404
+- `https://www.llamaindex.ai/blog/feed` (LlamaIndex) : HTTP 404
+- `https://lmstudio.ai/blog/rss.xml` (LM Studio : exécution locale) : HTTP 404
+- `https://lumalabs.ai/blog/rss.xml` (Luma : vidéo et 3D) : redirection 308 → /news
+- `https://ai.meta.com/blog/rss/` (Meta AI : Llama, recherche) : HTTP 400
+- `https://investors.micron.com/rss/news-releases.xml` (Micron) : HTTP 403
+- `https://updates.midjourney.com/rss/` (Midjourney : mises à jour) : HTTP 404
+- `https://modal.com/blog/feed.xml` (Modal : GPU sans serveur) : HTTP 404
+- `https://www.microsoft.com/en-us/research/feed/` (Microsoft Research : modèles Phi, recherche) : HTTP 400
+- `https://www.netlify.com/blog/index.xml` (Netlify) : HTTP 404
+- `https://developers.openai.com/changelog/rss.xml` (OpenAI : journal des changements de l’API) : HTTP 404
+- `https://www.oracle.com/news/rss/` (Oracle) : HTTP 404
+- `https://www.perplexity.ai/hub/blog/rss.xml` (Perplexity) : HTTP 404
+- `https://www.qualcomm.com/news/rss` (Qualcomm) : HTTP 404
+- `https://qwenlm.github.io/blog/index.xml` (Qwen (Alibaba) : sorties de modèles) : dernière entrée il y a 413 j
+- `https://rive.app/blog/rss.xml` (Rive : animation interactive) : HTTP 404
+- `https://runway.com/news/rss.xml` (Runway : modèles vidéo) : HTTP 404
+- `https://news.sap.com/feed/` (SAP) : robots.txt : disallow /
+- `https://www.snowflake.com/feed/` (Snowflake) : robots.txt : disallow */feed/$
+- `https://stripe.com/blog/feed.rss` (Stripe) : HTTP 400
+- `https://www.theregister.com/software/ai_ml/headlines.atom` (The Register, IA) : robots.txt : disallow /
+- `https://discourse.threejs.org/c/showcase/7.rss` (Forum three.js : réalisations) : robots.txt : disallow /c/*.rss
+- `https://www.uber.com/blog/engineering/rss/` (Uber Engineering) : HTTP 404
+- `https://unity.com/blog/rss` (Unity) : robots.txt : disallow /blog/rss
+- `https://venturebeat.com/category/ai/feed/` (VentureBeat, IA) : HTTP 429
+- `https://vercel.com/changelog/rss.xml` (Vercel : changelog) : redirection 308 → /atom
+- `https://vite.dev/blog.rss` (Vite) : dernière entrée il y a 140 j
+- `https://www.warp.dev/blog/rss.xml` (Warp : terminal et agents) : HTTP 404
+- `https://weaviate.io/blog/rss.xml` (Weaviate) : robots.txt : disallow /blog/rss.xml
+- `https://windsurf.com/changelog/rss.xml` (Windsurf : changelog) : redirection 307 → /changelog
+- `https://x.ai/news/rss.xml` (xAI : modèles Grok) : HTTP 404
+- arXiv : `rss.arxiv.org` sans entrée hors des heures d'annonce, environ 400 entrées par jour sans ordre d'intérêt ; `export.arxiv.org/api` interdit par robots.txt. Différé ; piste : Hugging Face Daily Papers, dont le flux répond 401.
+- `github.com/<dépôt>/releases.atom` : interdit par robots.txt de github.com (`Disallow: /*.atom$`) ; les versions passent par l'API.

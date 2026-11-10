@@ -30,6 +30,8 @@ await runCommand(async ({ config, database }) => {
     maxAttempts: config.maxAttempts,
     retryBackoffMs: config.retryBackoffMs,
     definitions: selectSources(config.onlySources),
+    // En réel, 8 files en parallèle (2026-11-10 : la collecte séquentielle dépassait les 10 min de l'étape).
+    concurrence: fixture ? 1 : 8,
     hooks: hold > 0 ? { insideStoreTransaction: () => sleep(hold) } : undefined,
   });
 
