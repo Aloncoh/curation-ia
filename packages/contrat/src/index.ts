@@ -26,7 +26,7 @@ export const Bloc = z.discriminatedUnion('type', [
   z.object({ type: z.literal('paragraphe'), cle: z.string(), texte: z.string() }),
   z.object({ type: z.literal('point'), cle: z.string(), texte: z.string() }),
   /** Ressource d'une sélection : nom (jamais traduit), lien vérifié ou null, explication. */
-  z.object({ type: z.literal('element'), cle: z.string(), nom: z.string(), url: z.string().nullable(), hote: z.string(), texte: z.string() }),
+  z.object({ type: z.literal('element'), cle: z.string(), nom: z.string(), url: z.string().nullable(), hote: z.string(), texte: z.string(), etape: z.string().nullable().optional() }),
 ]);
 export type Bloc = z.infer<typeof Bloc>;
 

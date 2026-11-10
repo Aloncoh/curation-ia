@@ -17,7 +17,13 @@ export interface SiteSelection {
   hote: string;
   /** Vérification manuelle de l'URL canonique, datée ; null si l'URL donnée répondait directement. */
   verifiee_a_la_main: string | null;
+  /** Étape du dossier (sélection organisée par étapes, 2026-11-10) ; absente pour une liste simple. */
+  etape?: EtapeSelection;
 }
+
+/** Étapes d'un dossier, dans l'ordre de travail ; leurs intitulés sont dans packages/textes (fr, en, he). */
+export const ETAPES_SELECTION = ['storyboard', 'production', 'animation', 'effets', 'son', 'blender', 'web3d', 'images'] as const;
+export type EtapeSelection = (typeof ETAPES_SELECTION)[number];
 
 export type SujetSelection = 'design' | 'skills';
 
@@ -38,6 +44,8 @@ export const COMPTE_PAR_SUJET: Record<SujetSelection, CompteId> = { design: 'mov
 export const VERSION_SELECTIONS = 'selections-2026-11-02';
 
 const site = (slug: string, nom: string, url: string, verifiee_a_la_main: string | null = null): SiteSelection => ({ slug, nom, url, hote: new URL(url).hostname, verifiee_a_la_main });
+/** Ressource d'un dossier : un dépôt GitHub rangé à son étape. */
+const outil = (etape: EtapeSelection, slug: string, nom: string, depot: string, note: string | null = null): SiteSelection => ({ ...site(slug, nom, `https://github.com/${depot}`, note), etape });
 
 export const SELECTIONS: readonly EntreeSelection[] = [
   {
@@ -95,6 +103,56 @@ export const SELECTIONS: readonly EntreeSelection[] = [
       site('recent-design', 'Recent Design', 'https://recent.design/'),
       site('brandguidelines', 'Brand Guidelines', 'https://www.brandguidelines.net/', "2026-11-04 : https://brandguidelines.net/ répond 308 vers https://www.brandguidelines.net/ (en-têtes lus à la main, redirection non suivie par la collecte)"),
       site('deck-gallery', 'Deck Gallery', 'https://www.deck.gallery/', "2026-11-04 : https://deck.gallery/ répond 301 vers https://www.deck.gallery/ (en-têtes lus à la main, redirection non suivie par la collecte)"),
+    ],
+  },
+  {
+    // Dossier de Mova (demande de l'utilisateur du 2026-11-10 : « une boîte à outils pour créer une vidéo, organisée par
+    // étapes comme le storyboard, la production, les effets visuels et le son… Vérifie séparément les dépôts de ma liste
+    // et les pistes visibles sur la planche »). Chaque dépôt vérifié par l'API GitHub le 2026-11-10 (existe, non archivé).
+    // Liste de l'utilisateur : hyperframes, remotion skills, OpenMontage, video-shotcraft, gsap-skills, motionmaxxing.
+    // Planche (« 12 skills. One film crew. ») : hyperframes, remotion skills, claude-animated-shorts, cinematic director,
+    // pixelfx, shader-skills, webgpu skill, comfyui-mcp, elevenlabs skills, ai music skills ; les noms de la planche ont
+    // été rapprochés des dépôts par l'auteur affiché. Non retenus : drama-skills (zenstory-ai) et Seedance 2.0 Storyboard
+    // (liangdabiao), documentation en chinois, donc aucune explication citable mot pour mot. Mention « 12/12 installed »
+    // de la planche non reprise : aucun test d'installation n'a été fait.
+    slug: 'selection-boite-video',
+    nom: 'Boîte à outils vidéo pour agents',
+    sujet: 'design',
+    compte: COMPTE_PAR_SUJET.design,
+    decouverteVia:
+      "Liste de dépôts et planche « 12 skills. One film crew. » transmises par l'utilisateur le 2026-11-10, repérées sur X (contenu externe attribué ; affirmations non reprises)",
+    sites: [
+      outil('storyboard', 'directorskill', 'DirectorSKILL', 'wuwangzhang1216/DirectorSKILL', "2026-11-10 : « cinematic director » de la planche, rapproché du dépôt de l'auteur affiché (wuwangzhang1216)"),
+      outil('storyboard', 'claude-animated-shorts', 'Claude Animated Shorts', 'mromidev/claude-animated-shorts'),
+      outil('production', 'hyperframes', 'HyperFrames', 'heygen-com/hyperframes'),
+      outil('production', 'remotion-skills', 'Remotion Skills', 'remotion-dev/skills'),
+      outil('production', 'openmontage', 'OpenMontage', 'OpenMontageInc/OpenMontage', '2026-11-10 : transmis comme calesthio/OpenMontage, renommé OpenMontageInc/OpenMontage (API GitHub, 301)'),
+      outil('production', 'video-shotcraft', 'Video Shotcraft', 'Vincentwei1021/video-shotcraft'),
+      outil('animation', 'gsap-skills', 'GSAP Skills', 'greensock/gsap-skills'),
+      outil('animation', 'motionmaxxing', 'Motionmaxxing', 'Tejashmakwana/motionmaxxing'),
+      outil('effets', 'pixelfx', 'PixelFX', 'patch-gg/pixelfx'),
+      outil('effets', 'shader-skills', 'Shader Skills', 'gokayfem/shader-skills'),
+      outil('son', 'elevenlabs-skills', 'ElevenLabs Skills', 'elevenlabs/skills'),
+      outil('son', 'ai-music-skills', 'AI Music Skills', 'bitwize-music-studio/claude-ai-music-skills', "2026-11-10 : « ai music skills » de la planche, dépôt claude-ai-music-skills de l'auteur affiché"),
+    ],
+  },
+  {
+    // Second dossier de Mova (même demande) : 3D, Blender et rendu, depuis la liste de l'utilisateur et la planche.
+    slug: 'selection-boite-3d',
+    nom: 'Boîte à outils 3D et Blender pour agents',
+    sujet: 'design',
+    compte: COMPTE_PAR_SUJET.design,
+    decouverteVia:
+      "Liste de dépôts et planche transmises par l'utilisateur le 2026-11-10, repérées sur X (contenu externe attribué ; affirmations non reprises)",
+    sites: [
+      outil('blender', 'mcp-for-blender', 'MCP for Blender', 'ahujasid/mcp-for-blender'),
+      outil('blender', 'blender-skills', 'Blender Skills', 'arjun988/blender-skills'),
+      outil('blender', 'dream-loop', 'Dream Loop', 'achimala/dream-loop'),
+      outil('web3d', 'threejs-game-skills', 'Three.js Game Skills', 'majidmanzarpour/threejs-game-skills'),
+      outil('web3d', 'webgpu-claude-skill', 'WebGPU Claude Skill', 'dgreenheck/webgpu-claude-skill', "2026-11-10 : « webgpu skill » de la planche, dépôt de l'auteur affiché (dgreenheck)"),
+      outil('web3d', '3dviz-pro-max', '3DViz Pro Max', 'viettranx/3dviz-pro-max'),
+      outil('images', 'comfyui-mcp', 'ComfyUI MCP', 'artokun/comfyui-mcp'),
+      outil('images', 'anatomy', 'Anatomy', 'wheresryan22/anatomy'),
     ],
   },
 ];

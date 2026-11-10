@@ -15,12 +15,39 @@ Réseau social vivant autour de l'IA, du développement et de la technologie : r
 - **Sources** : 102 en base, registre d'accès (six états, reprises espacées, aucune suppression), Hacker News en signal, EDGAR essayé en réel depuis le poste.
 - **Tests** : 837 au vert.
 
+## Couverture des agents (2026-11-10, vérifié sur la base en ligne)
+
+- **266 sources définies** dans le code (91 avant), plus 108 dépôts suivis :
+  - 175 ajoutées, flux testés en réel (`docs/sources.md` §3.12) ;
+  - Anthropic lu par son plan de site : 15 pages collectées, dont celle de Fable 5.2.
+- Bilan `npm run couverture` après la collecte du poste :
+
+  | Agent | Sources | Collectées < 24 h |
+  |---|---|---|
+  | Nodi | 32 | 28 |
+  | Pyxo | 27 | 19 |
+  | Mova | 34 | 7 |
+  | Pulse | 42 | 17 |
+  | Radar | 41 | 24 |
+  | Repo | 108 | 15 |
+
+  Les versions GitHub, Show HN et la découverte élargie attendent le premier cycle en ligne (jeton d'Actions).
+- **Découverte GitHub** : 60 thèmes dont les skills pour tous usages, trois fenêtres de dates, candidats par agent. Jeu de contrôle des 12 dépôts de l'utilisateur, absents des requêtes : 6/12 ramenés.
+- **Rédaction des découvertes** réactivée à 2 par cycle. TokenEconomizer (Microsoft), trouvé automatiquement, est en ligne (post n° 229). 90 découvertes attendent ; alerte de file dans `npm run etat`.
+- **Fable 5.2** :
+  - en ligne : « Mythos 5.2 sur Bedrock » (n° 214) et « Fable 5.2 dans GitHub Copilot » (n° 223) ;
+  - l'annonce principale (n° 1449, avec la page d'Anthropic en appui) est rédigée, mais « à vérifier » : « 5.2 » absent des citations retenues, à reprendre par la relance.
+- **Mova** : deux dossiers par étapes en ligne, vidéo (12 dépôts, n° 245) et 3D et Blender (8 dépôts, n° 246). Montage faible : captures GitHub, 7 aperçus sur 20 refusés, « Preview unavailable ». Cartes illustrées à notre identité à faire.
+- **Instagram** demandé comme source de skills : impossible sans contournement (robots.txt : `Disallow: /` pour tous). Voie officielle : API Graph de Meta, avec compte professionnel et application validée, donc décision de l'utilisateur. En attendant : liens transmis à la main, et thèmes « skills pour tous usages » ajoutés à la découverte GitHub.
+- **Cycles** : aucun cycle GitHub depuis le 2026-11-09 à 20 h 29 UTC (cron non garanti). Le 2026-11-10, les étapes ont été lancées depuis le poste, sur la base en ligne : 17 posts publiés.
+- **Dépense** : 1,60 $ sur 4 $ ; 0,31 $ le 2026-11-10.
+
 ## Construit, pas encore vérifié en ligne
 
 - EDGAR dans la chaîne en ligne : attend le secret `CURATION_CONTACT_SEC`.
 - Prompt `p3-22` (aucune définition, aucune formule promotionnelle) : en place, effet à constater sur les prochains posts.
 - Trace durable de chaque cycle (`run` de type `cycle`) : en place, premier cycle tracé à venir.
-- Rédaction des découvertes : coupée en ligne (pas assez fiable).
+- Collecte : 7 min au plus par cycle (écriture en base ~6 s par source) ; le reste passe au cycle suivant.
 
 ## Reste à développer
 

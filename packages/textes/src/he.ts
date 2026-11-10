@@ -44,6 +44,8 @@ export const he: Textes = {
     voirMoins: 'הצג פחות',
     rubriqueUsage: 'מתי להשתמש:',
     rubriqueLimites: 'מגבלות:',
+    /** Étapes d'un dossier (sélection organisée par étapes, 2026-11-10). */
+    etapes: { storyboard: 'סטוריבורד ותסריט', production: 'הפקת וידאו', animation: 'אנימציה ותנועה', effets: 'אפקטים חזותיים', son: 'סאונד ומוזיקה', blender: 'Blender', web3d: 'תלת־ממד ברשת', images: 'תמונות ורינדור' },
     aucuneLimite: 'המקור לא מציין מגבלות.',
     mentionIA: 'ניתוח AI על סמך המקורות — לא נבדק על ידי הפלטפורמה',
     sources: 'מקורות',

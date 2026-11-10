@@ -13,7 +13,8 @@ export const CREDIT_CAPTURES = 'Captures des sites cités, © leurs auteurs';
 /** Une explication tient sur une ligne : un usage concret, sans définition ni remplissage. */
 export const LONGUEUR_MAX_EXPLICATION = 150;
 export const ELEMENTS_MIN = 3;
-export const ELEMENTS_MAX = 10;
+/** 12 depuis le 2026-11-10 : un dossier par étapes reprend une planche de référence de 12 outils. */
+export const ELEMENTS_MAX = 12;
 
 const cite = z.object({ texte: z.string().trim().min(1), passages: z.array(z.string()) }).strict();
 

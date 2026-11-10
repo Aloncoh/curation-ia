@@ -188,7 +188,7 @@ const blocsDe = (nature: Nature, item: Record<string, unknown>, elements: Maquet
     const element = /^ressources\.(\d+)\.explication$/.exec(c.cle);
     if (element) {
       const e = elements[Number(element[1])]!;
-      return { type: 'element', cle: c.cle, nom: e.nom, url: lienSur(e.url), hote: e.hote, texte: c.texte };
+      return { type: 'element', cle: c.cle, nom: e.nom, url: lienSur(e.url), hote: e.hote, texte: c.texte, etape: e.etape ?? null };
     }
     return { type: c.cle.startsWith('reperes.') ? 'point' : 'paragraphe', cle: c.cle, texte: c.texte };
   });

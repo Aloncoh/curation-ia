@@ -44,6 +44,13 @@ export const PLAN_DECOUVERTE: readonly RequeteDecouverte[] = [
   // Repo : skills, plugins, serveurs MCP, gabarits pour agents.
   sujet('repo', 'claude-skills'), sujet('repo', 'agent-skills'), sujet('repo', 'mcp-server'), sujet('repo', 'claude-code'),
   mots('repo', 'agent skill'), mots('repo', 'claude plugin'), mots('repo', 'mcp server', true), mots('repo', 'subagents'),
+  // Skills pour tous les usages (demande de l'utilisateur du 2026-11-10 : « tous les types de skills pour TOUT TYPE
+  // D'UTILISATION ») : familles de la planche « 27 skills » (notes, écriture, marketing, automatisation, construire) et
+  // usages courants. Thèmes, jamais des noms de dépôts.
+  mots('repo', 'notes skill'), mots('repo', 'obsidian skill'), mots('repo', 'writing skill'), mots('repo', 'copywriting skill'),
+  mots('repo', 'marketing skill'), mots('repo', 'seo skill'), mots('repo', 'n8n skill'), mots('repo', 'research skill'),
+  mots('repo', 'presentation skill'), mots('repo', 'spreadsheet skill'), mots('repo', 'email skill'), mots('repo', 'finance skill'),
+  mots('repo', 'legal skill'), mots('repo', 'education skill'), mots('repo', 'productivity skill'), mots('repo', 'security skill'),
   // Mova : vidéo, motion, design, Blender, 3D web, son.
   mots('mova', 'video skill'), mots('mova', 'video agent'), mots('mova', 'motion graphics'), mots('mova', 'html video'),
   mots('mova', 'blender', true), mots('mova', 'threejs skill'), mots('mova', 'three.js agent'), mots('mova', 'webgpu'),

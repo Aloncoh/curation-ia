@@ -1,0 +1,288 @@
+{
+  "format": "selection",
+  "slug": "selection-boite-video",
+  "consignes": "s1",
+  "accroche": {
+    "texte": "12 agent skills to make a video, from storyboard and production to effects and sound",
+    "passages": []
+  },
+  "ressources": [
+    {
+      "site": "directorskill",
+      "nom": "DirectorSKILL",
+      "url": "https://github.com/wuwangzhang1216/DirectorSKILL",
+      "libelle_lien": "DirectorSKILL",
+      "explication": {
+        "texte": "Turns a script or one keyframe into a shot-by-shot production plan with blocking, coverage and video prompts.",
+        "passages": [
+          "A Claude Code / Claude Agent skill that turns a script, a paragraph of prose, or a single keyframe into a complete production plan"
+        ]
+      },
+      "categorie": "storyboard",
+      "usages": [
+        {
+          "texte": "shot lists",
+          "passages": [
+            "Claude Code skill for AI filmmaking — shot lists, keyframe & video prompts"
+          ]
+        }
+      ],
+      "termes_proches": []
+    },
+    {
+      "site": "claude-animated-shorts",
+      "nom": "Claude Animated Shorts",
+      "url": "https://github.com/mromidev/claude-animated-shorts",
+      "libelle_lien": "Claude Animated Shorts",
+      "explication": {
+        "texte": "Builds 55 to 70 second vertical story shorts, 2D characters in a 3D town, rendered with three.js inside Remotion.",
+        "passages": [
+          "It makes 55-70 s vertical animated story shorts: 2D characters in a colourful 3D world"
+        ]
+      },
+      "categorie": "animated shorts",
+      "usages": [
+        {
+          "texte": "vertical shorts",
+          "passages": [
+            "It makes 55-70 s vertical animated story shorts"
+          ]
+        }
+      ],
+      "termes_proches": []
+    },
+    {
+      "site": "hyperframes",
+      "nom": "HyperFrames",
+      "url": "https://github.com/heygen-com/hyperframes",
+      "libelle_lien": "HyperFrames",
+      "explication": {
+        "texte": "Write a scene in HTML and CSS, then let your coding agent render it into a deterministic MP4.",
+        "passages": [
+          "HyperFrames is a free, open-source framework for turning HTML, CSS, media, and seekable animations into deterministic MP4 videos."
+        ]
+      },
+      "categorie": "html to video",
+      "usages": [
+        {
+          "texte": "html to video",
+          "passages": [
+            "HyperFrames is a free, open-source framework for turning HTML, CSS, media, and seekable animations into deterministic MP4 videos."
+          ]
+        }
+      ],
+      "termes_proches": []
+    },
+    {
+      "site": "remotion-skills",
+      "nom": "Remotion Skills",
+      "url": "https://github.com/remotion-dev/skills",
+      "libelle_lien": "Remotion Skills",
+      "explication": {
+        "texte": "The Remotion team’s best practices, packaged so Claude Code, Codex or Cursor build compositions the right way.",
+        "passages": [
+          "Remotion maintains a list of Agent Skills that define best practices for working in Remotion projects.",
+          "These skills are useful for AI agents like Claude Code, Codex, Kimi Code or Cursor."
+        ]
+      },
+      "categorie": "remotion",
+      "usages": [
+        {
+          "texte": "video compositions",
+          "passages": [
+            "Create a new Remotion project or composition."
+          ]
+        }
+      ],
+      "termes_proches": []
+    },
+    {
+      "site": "openmontage",
+      "nom": "OpenMontage",
+      "url": "https://github.com/OpenMontageInc/OpenMontage",
+      "libelle_lien": "OpenMontage",
+      "explication": {
+        "texte": "A whole production studio for your coding assistant: a dozen pipelines and over a hundred tools for agentic video.",
+        "passages": [
+          "World's first open-source, agentic video production system. 12 production pipelines, 100+ tools"
+        ]
+      },
+      "categorie": "video production",
+      "usages": [
+        {
+          "texte": "video pipelines",
+          "passages": [
+            "12 production pipelines, 100+ tools"
+          ]
+        }
+      ],
+      "termes_proches": []
+    },
+    {
+      "site": "video-shotcraft",
+      "nom": "Video Shotcraft",
+      "url": "https://github.com/Vincentwei1021/video-shotcraft",
+      "libelle_lien": "Video Shotcraft",
+      "explication": {
+        "texte": "Ask for a product promo: it captures your pages, picks tuned shots, cuts to the beat and adds sound in Remotion.",
+        "passages": [
+          "Tell Claude Code or Codex \"make a promo for my product\". The agent captures your real pages, picks shots",
+          "Remotion , cuts it to the beat, adds sound design, checks every frame and hands you"
+        ]
+      },
+      "categorie": "product promos",
+      "usages": [
+        {
+          "texte": "product promos",
+          "passages": [
+            "cinematic, editable product promos with Remotion"
+          ]
+        }
+      ],
+      "termes_proches": []
+    },
+    {
+      "site": "gsap-skills",
+      "nom": "GSAP Skills",
+      "url": "https://github.com/greensock/gsap-skills",
+      "libelle_lien": "GSAP Skills",
+      "explication": {
+        "texte": "Official GreenSock skills that teach your agent timelines, ScrollTrigger and plugin use the way GSAP intends.",
+        "passages": [
+          "Official AI skills for GSAP. These skills teach AI coding agents how to correctly use GSAP (GreenSock Animation Platform)"
+        ]
+      },
+      "categorie": "web animation",
+      "usages": [
+        {
+          "texte": "scroll animation",
+          "passages": [
+            "recommend GSAP for timelines, scroll-driven animation (ScrollTrigger)"
+          ]
+        }
+      ],
+      "termes_proches": []
+    },
+    {
+      "site": "motionmaxxing",
+      "nom": "Motionmaxxing",
+      "url": "https://github.com/Tejashmakwana/motionmaxxing",
+      "libelle_lien": "Motionmaxxing",
+      "explication": {
+        "texte": "An agent skill for launch films and promos that should look designed, not like default AI motion; early release.",
+        "passages": [
+          "An agent skill that turns AI slop videos into films that look made by a motion designer.",
+          "Early release. Still getting sharper, and more is coming soon."
+        ]
+      },
+      "categorie": "motion graphics",
+      "usages": [
+        {
+          "texte": "motion graphics",
+          "passages": [
+            "Looksmaxxing for motion graphics."
+          ]
+        }
+      ],
+      "termes_proches": []
+    },
+    {
+      "site": "pixelfx",
+      "nom": "PixelFX",
+      "url": "https://github.com/patch-gg/pixelfx",
+      "libelle_lien": "PixelFX",
+      "explication": {
+        "texte": "Fire, explosions, magic and weather as small code effects you can recolor, drop into a game or export as sprite sheets.",
+        "passages": [
+          "244 pixel art effects and animations, every one a small piece of code. Fire,",
+          "a browser game, or export sprite sheets for any engine. Plus a Claude Code skill that makes new ones the way a"
+        ]
+      },
+      "categorie": "pixel effects",
+      "usages": [
+        {
+          "texte": "sprite sheets",
+          "passages": [
+            "a browser game, or export sprite sheets for any engine."
+          ]
+        }
+      ],
+      "termes_proches": []
+    },
+    {
+      "site": "shader-skills",
+      "nom": "Shader Skills",
+      "url": "https://github.com/gokayfem/shader-skills",
+      "libelle_lien": "Shader Skills",
+      "explication": {
+        "texte": "GLSL functions plus a checker so your agent can code raymarched scenes, terrain, water and clouds for Shadertoy.",
+        "passages": [
+          "Shader Skills combines an agent skill with 186 GLSL functions in 20 modules , a dependency bundler, a checker",
+          "and 11 ready-to-run Shadertoy examples . Build SDF raymarched scenes, procedural textures, terrain, water,"
+        ]
+      },
+      "categorie": "shaders",
+      "usages": [
+        {
+          "texte": "glsl shaders",
+          "passages": [
+            "Shader Skills — GLSL & Shadertoy for AI coding agents"
+          ]
+        }
+      ],
+      "termes_proches": []
+    },
+    {
+      "site": "elevenlabs-skills",
+      "nom": "ElevenLabs Skills",
+      "url": "https://github.com/elevenlabs/skills",
+      "libelle_lien": "ElevenLabs Skills",
+      "explication": {
+        "texte": "Lets a coding assistant add voiceover, transcription and real-time voice to a project through ElevenLabs.",
+        "passages": [
+          "Agent skills for ElevenLabs developer products.",
+          "Convert text to lifelike speech using ElevenLabs' AI voices",
+          "Transcribe audio files to text with timestamps"
+        ]
+      },
+      "categorie": "voice and sound",
+      "usages": [
+        {
+          "texte": "text to speech",
+          "passages": [
+            "Convert text to lifelike speech using ElevenLabs' AI voices"
+          ]
+        }
+      ],
+      "termes_proches": []
+    },
+    {
+      "site": "ai-music-skills",
+      "nom": "AI Music Skills",
+      "url": "https://github.com/bitwize-music-studio/claude-ai-music-skills",
+      "libelle_lien": "AI Music Skills",
+      "explication": {
+        "texte": "A Claude Code plugin that takes an album idea through concept, lyrics and Suno prompts, with a person in the loop.",
+        "passages": [
+          "a Claude Code plugin that turns a conversation into a full album production pipeline.",
+          "Human + AI music production workflow for Suno - skills, templates, and tools"
+        ]
+      },
+      "categorie": "music production",
+      "usages": [
+        {
+          "texte": "album production",
+          "passages": [
+            "a Claude Code plugin that turns a conversation into a full album production pipeline."
+          ]
+        }
+      ],
+      "termes_proches": []
+    }
+  ],
+  "mots_cles": {
+    "nom": "Video toolkit for AI agents",
+    "categorie": "création visuelle",
+    "termes_proches": []
+  }
+}

@@ -39,6 +39,8 @@ export interface LibellesTexte {
   rubriqueUsage: string;
   rubriqueLimites: string;
   aucuneLimite: string;
+  /** Intitulés des étapes d'un dossier. */
+  etapes?: Record<string, string>;
 }
 
 /** Intitulé d'un bloc de ressource : le contexte d'usage et la première limite. */
@@ -90,17 +92,32 @@ export function TexteDuPost({ contenu, original, langue, langueOriginale, comple
       return <p key={b.cle}>{titre && <strong className="rubrique">{titre}</strong> }{texte}{fin(i, 0)}</p>;
     }
     if (g.type === 'point') return <ul key={g.blocs[0]!.cle} className="points">{g.blocs.map((b, j) => <li key={b.cle}>{b.texte}{fin(i, j)}</li>)}</ul>;
+    const element = (b: Bloc, j: number) => b.type === 'element' && (
+      <li key={b.cle}>
+        {hrefSur(b.url)
+          ? <a className="sel-nom" href={hrefSur(b.url)!} target="_blank" rel="noopener noreferrer" title={b.hote || undefined}><bdi>{b.nom}</bdi><span className="sr-only">{libelles.nouvelOnglet}</span></a>
+          : <bdi className="sel-nom">{b.nom}</bdi>}
+        {' — '}{b.texte}{fin(i, j)}
+      </li>
+    );
+    // Dossier par étapes (2026-11-10) : un intitulé par étape, la numérotation continue d'une étape à l'autre.
+    const parEtape: { etape: string | null; debut: number; blocs: Bloc[] }[] = [];
+    g.blocs.forEach((b, j) => {
+      const etape = b.type === 'element' ? (b.etape ?? null) : null;
+      const dernier = parEtape[parEtape.length - 1];
+      if (dernier && dernier.etape === etape) dernier.blocs.push(b);
+      else parEtape.push({ etape, debut: j, blocs: [b] });
+    });
+    if (parEtape.every((x) => x.etape === null)) return <ol key={g.blocs[0]!.cle} className="sel-liste">{g.blocs.map(element)}</ol>;
     return (
-      <ol key={g.blocs[0]!.cle} className="sel-liste">
-        {g.blocs.map((b, j) => b.type === 'element' && (
-          <li key={b.cle}>
-            {hrefSur(b.url)
-              ? <a className="sel-nom" href={hrefSur(b.url)!} target="_blank" rel="noopener noreferrer" title={b.hote || undefined}><bdi>{b.nom}</bdi><span className="sr-only">{libelles.nouvelOnglet}</span></a>
-              : <bdi className="sel-nom">{b.nom}</bdi>}
-            {' — '}{b.texte}{fin(i, j)}
-          </li>
+      <div key={g.blocs[0]!.cle} className="sel-dossier">
+        {parEtape.map((x) => (
+          <section key={x.blocs[0]!.cle} className="sel-etape">
+            {x.etape && <h3 className="sel-etape-titre">{libelles.etapes?.[x.etape] ?? x.etape}</h3>}
+            <ol className="sel-liste" start={x.debut + 1} style={{ counterReset: `sel ${x.debut}` }}>{x.blocs.map((b, k) => element(b, x.debut + k))}</ol>
+          </section>
         ))}
-      </ol>
+      </div>
     );
   });
 

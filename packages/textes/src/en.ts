@@ -44,6 +44,8 @@ export const en = {
     voirMoins: 'Show less',
     rubriqueUsage: 'When to use it:',
     rubriqueLimites: 'Limits:',
+    /** Étapes d'un dossier (sélection organisée par étapes, 2026-11-10). */
+    etapes: { storyboard: 'Storyboard and script', production: 'Video production', animation: 'Animation and motion', effets: 'Visual effects', son: 'Sound and music', blender: 'Blender', web3d: '3D on the web', images: 'Images and rendering' },
     aucuneLimite: 'No limits stated by the source.',
     mentionIA: 'AI analysis based on the sources — not tested by the platform',
     sources: 'Sources',

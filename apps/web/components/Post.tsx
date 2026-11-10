@@ -133,6 +133,7 @@ export function Post({ p, t, langue, complet = false, raison = null }: { p: Publ
             nouvelOnglet: t.commun.nouvelOnglet,
             rubriqueUsage: t.post.rubriqueUsage,
             rubriqueLimites: t.post.rubriqueLimites,
+            etapes: t.post.etapes,
             aucuneLimite: t.post.aucuneLimite,
           }}
         />

@@ -2,6 +2,32 @@
 
 Évolution datée des jalons et des vérifications **réellement faites**. L'état courant est dans [STATE.md](STATE.md) ; les traces d'exécution détaillées sont en base.
 
+## 2026-11-10 — Couverture élargie des six agents, chaîne rétablie jusqu'au fil
+
+- **Claude Fable 5.2** confirmé à la source primaire : page d'Anthropic du 9 novembre 2026, et `claude-fable-5-2` dans la documentation des modèles. Parcours retracé :
+  - collecté le 9 novembre vers 20 h 17 UTC, par AWS, GitHub Changelog et Hacker News (Anthropic n'a aucun flux) ;
+  - le post Mythos 5.2 sur Bedrock a été publié (n° 214) ;
+  - l'annonce principale est tombée en « sortie invalide », sans motif gardé (21 cas depuis le 7 novembre).
+
+  Corrections : motif noté sur l'appel, une nouvelle demande, reprise des sorties invalides récentes ; plan de site d'Anthropic lu par Nodi ; sujets repris par plusieurs sources traités d'abord.
+- **Cycles en échec** les 8 et 9 novembre :
+  - collecte tuée à 10 min ;
+  - découverte en échec pour un seul dépôt.
+
+  Mesure : l'écriture en base prend 6,3 s par source, le réseau 0,4 s. Un essai à 8 files en parallèle a échoué sur la base en ligne (écritures concurrentes refusées) et a été retiré aussitôt. Retenu : la collecte s'arrête à 7 min (le reste passe au cycle suivant), et l'étape n'échoue que si toutes les sources échouent.
+- **Sources** : 266 définies dans le code (91 avant). 175 ajoutées, flux testés en réel (`docs/sources.md` §3.12). Collecte réelle depuis le poste : 52 nouveaux flux collectés, 3 en échec, avec leur motif.
+- **Découverte GitHub** : 47 thèmes répartis sur les six agents, trois fenêtres de dates, 100 résultats par requête, jeton d'Actions (limites vérifiées dans la documentation GitHub ce jour). Jeu de contrôle des 12 dépôts de l'utilisateur, absents des requêtes : 0/12 avant, 4/12, puis 6/12. 1 869 dépôts trouvés, 18 candidats (3 par agent).
+- **Découvertes** : 90 en attente.
+  - Deux lots réels de 5 : 6 rédigées, 1 planifiée (`microsoft/TokenEconomizer`, post n° 229), les autres « à vérifier » (copie de plus de 8 mots du README, réserve de la source non reprise), 0,063 $.
+  - Élagage ajouté pour les éléments secondaires.
+  - Rédaction réactivée à 2 par cycle.
+  - Alerte « file qui vieillit » dans `npm run etat` ; bilan par agent : `npm run couverture`.
+- **Mova** : deux dossiers par étapes, « Boîte à outils vidéo pour agents » (12) et « 3D et Blender pour agents » (8).
+  - Dépôts vérifiés par l'API GitHub ; pistes de la planche rapprochées par auteur.
+  - Deux pistes en chinois non retenues ; mention « 12/12 installed » non reprise.
+  - Le site regroupe les ressources par étape (fr, en, he).
+- Tests : 851 au vert (11 nouveaux).
+
 ## 2026-11-05 — Cap « réseau social vivant » : consolidation, maquette en ligne, latence mesurée
 
 - Demande de l'utilisateur : pivot vers un réseau social vivant (SPEC §0), puis « le site actuellement ne donne pas envie » et « déploie la maquette aussi ».

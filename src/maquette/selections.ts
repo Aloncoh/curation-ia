@@ -14,6 +14,7 @@ import { texteOrigine } from '../ressources/chaine.ts';
 import { motsClesDesRevisions } from '../ressources/mots-cles.ts';
 import { jourParis } from '../ressources/planification.ts';
 import { liensValides } from '../ressources/selection/chaine.ts';
+import { SELECTIONS } from '../ressources/selection/liste.ts';
 import { CREDIT_CAPTURES, type LienVerifie } from '../ressources/selection/schemas.ts';
 
 interface Cite {
@@ -28,6 +29,8 @@ export interface ElementMaquette {
   url: string | null;
   libelle_lien: string;
   hote: string;
+  /** Étape du dossier, tirée de la liste de la sélection ; null pour une liste simple. */
+  etape: string | null;
   explication: Cite;
   lien: { resultat: string; motif: string; verifie_le: string } | null;
 }
@@ -120,7 +123,8 @@ export async function selectionsDeLaMaquette(executeur: Lecteur, generatedAt: st
       const lien = liens.find((l) => l.url === x.url) ?? null;
       const hote = lien?.hote ?? '';
       const affichable = lien !== null && liensValides([lien], maintenant, validite) ? lienSur(x.url, hote) : null;
-      return { site: String(x.site), nom: String(x.nom), url: affichable, libelle_lien: String(x.libelle_lien), hote, explication: x.explication, lien: lien ? { resultat: lien.resultat, motif: lien.motif, verifie_le: lien.verifie_le } : null };
+      const etape = SELECTIONS.find((s) => s.slug === String(contenu.slug))?.sites.find((s) => s.slug === String(x.site))?.etape ?? null;
+      return { site: String(x.site), nom: String(x.nom), url: affichable, libelle_lien: String(x.libelle_lien), hote, etape, explication: x.explication, lien: lien ? { resultat: lien.resultat, motif: lien.motif, verifie_le: lien.verifie_le } : null };
     });
     const media = await executeur.execute({ sql: 'select alt_text, notice, content from media_asset where post_id = ? order by id desc limit 1', args: [postId] });
     const m = media.rows[0];

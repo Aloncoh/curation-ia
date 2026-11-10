@@ -42,6 +42,8 @@ export const fr: Textes = {
     voirMoins: 'Voir moins',
     rubriqueUsage: 'Quand l’utiliser :',
     rubriqueLimites: 'Limites :',
+    /** Étapes d'un dossier (sélection organisée par étapes, 2026-11-10). */
+    etapes: { storyboard: 'Storyboard et scénario', production: 'Production vidéo', animation: 'Animation et motion', effets: 'Effets visuels', son: 'Son et musique', blender: 'Blender', web3d: '3D sur le web', images: 'Images et rendu' },
     aucuneLimite: 'Aucune limite indiquée par la source.',
     mentionIA: 'Analyse IA à partir des sources — non testé par la plateforme',
     sources: 'Sources',

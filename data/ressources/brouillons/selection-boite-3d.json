@@ -1,0 +1,199 @@
+{
+  "format": "selection",
+  "slug": "selection-boite-3d",
+  "consignes": "s1",
+  "accroche": {
+    "texte": "8 agent skills for Blender scenes, browser graphics and image rendering",
+    "passages": []
+  },
+  "ressources": [
+    {
+      "site": "mcp-for-blender",
+      "nom": "MCP for Blender",
+      "url": "https://github.com/ahujasid/mcp-for-blender",
+      "libelle_lien": "MCP for Blender",
+      "explication": {
+        "texte": "Lets any LLM model, build and change a Blender scene through MCP; a community plugin, not by the Blender Foundation.",
+        "passages": [
+          "Community plugin to control Blender 3D with any LLM of your choice. Not affiliated with the official Blender Foundation.",
+          "Prompt-assisted 3D modeling, scene creation, and manipulation — driven by AI."
+        ]
+      },
+      "categorie": "blender mcp",
+      "usages": [
+        {
+          "texte": "blender modeling",
+          "passages": [
+            "Prompt-assisted 3D modeling, scene creation, and manipulation — driven by AI."
+          ]
+        }
+      ],
+      "termes_proches": []
+    },
+    {
+      "site": "blender-skills",
+      "nom": "Blender Skills",
+      "url": "https://github.com/arjun988/blender-skills",
+      "libelle_lien": "Blender Skills",
+      "explication": {
+        "texte": "A pack of 94 Blender skills that takes an asset from blockout to engine export through Blender MCP.",
+        "passages": [
+          "94 specialist Blender skills for Cursor, Claude Code, Kiro & Codex -> MCP-powered production pipeline from blockout to engine export."
+        ]
+      },
+      "categorie": "blender pipeline",
+      "usages": [
+        {
+          "texte": "engine export",
+          "passages": [
+            "MCP-powered production pipeline from blockout to engine export."
+          ]
+        }
+      ],
+      "termes_proches": []
+    },
+    {
+      "site": "dream-loop",
+      "nom": "Dream Loop",
+      "url": "https://github.com/achimala/dream-loop",
+      "libelle_lien": "Dream Loop",
+      "explication": {
+        "texte": "Generates a target image first, then a critic compares each Blender render to it until the scene matches.",
+        "passages": [
+          "AI \"dreams\" up a high-quality target screenshot using image generation",
+          "A separate AI critic compares the live screenshot to the target and provides feedback"
+        ]
+      },
+      "categorie": "visual critique loop",
+      "usages": [
+        {
+          "texte": "blender visuals",
+          "passages": [
+            "Agent skill for impressive 3D visuals using Blender + image gen + subagent critic"
+          ]
+        }
+      ],
+      "termes_proches": []
+    },
+    {
+      "site": "threejs-game-skills",
+      "nom": "Three.js Game Skills",
+      "url": "https://github.com/majidmanzarpour/threejs-game-skills",
+      "libelle_lien": "Three.js Game Skills",
+      "explication": {
+        "texte": "Nine skills and a Vite scaffold so your agent ships a playable Three.js browser game with gameplay, UI and checks.",
+        "passages": [
+          "Agent skills for building playable, polished Three.js browser games with gameplay, AAA-style graphics, UI, QA, and optional AI-generated 3D, image, and audio assets.",
+          "One shared pack of nine skills serves Codex and Claude Code."
+        ]
+      },
+      "categorie": "browser games",
+      "usages": [
+        {
+          "texte": "threejs games",
+          "passages": [
+            "Agent skills for building playable, polished Three.js browser games"
+          ]
+        }
+      ],
+      "termes_proches": []
+    },
+    {
+      "site": "webgpu-claude-skill",
+      "nom": "WebGPU Claude Skill",
+      "url": "https://github.com/dgreenheck/webgpu-claude-skill",
+      "libelle_lien": "WebGPU Claude Skill",
+      "explication": {
+        "texte": "Teaches your agent WebGPU in Three.js, including shaders written in TSL; also ships as Cursor rules.",
+        "passages": [
+          "An Agent Skill for developing WebGPU-enabled Three.js applications using TSL (Three.js Shading Language).",
+          "Writing shaders using TSL (Three.js Shading Language)"
+        ]
+      },
+      "categorie": "webgpu",
+      "usages": [
+        {
+          "texte": "tsl shaders",
+          "passages": [
+            "Writing shaders using TSL (Three.js Shading Language)"
+          ]
+        }
+      ],
+      "termes_proches": []
+    },
+    {
+      "site": "3dviz-pro-max",
+      "nom": "3DViz Pro Max",
+      "url": "https://github.com/viettranx/3dviz-pro-max",
+      "libelle_lien": "3DViz Pro Max",
+      "explication": {
+        "texte": "Describe a world and get an explorable Three.js or Blender scene, built from a large catalog of tested recipes.",
+        "passages": [
+          "Agent skill for creative 3D visualization: turn an idea into a Three.js/Blender scene worth exploring.",
+          "223 recipes, 440 knowledge records, 22 proved kits, 37 runnable studies."
+        ]
+      },
+      "categorie": "scene visualization",
+      "usages": [
+        {
+          "texte": "explorable scenes",
+          "passages": [
+            "turn an idea into a Three.js/Blender scene worth exploring."
+          ]
+        }
+      ],
+      "termes_proches": []
+    },
+    {
+      "site": "comfyui-mcp",
+      "nom": "ComfyUI MCP",
+      "url": "https://github.com/artokun/comfyui-mcp",
+      "libelle_lien": "ComfyUI MCP",
+      "explication": {
+        "texte": "Drive a local ComfyUI in plain language: it wires the graph, frees VRAM and renders images, video or audio.",
+        "passages": [
+          "The Agent panel driving ComfyUI end to end. It reads what is installed locally,",
+          "wires the graph, frees VRAM, and runs the render."
+        ]
+      },
+      "categorie": "comfyui",
+      "usages": [
+        {
+          "texte": "image generation",
+          "passages": [
+            "MCP server + sidebar agent that generates images, video & audio"
+          ]
+        }
+      ],
+      "termes_proches": []
+    },
+    {
+      "site": "anatomy",
+      "nom": "Anatomy",
+      "url": "https://github.com/wheresryan22/anatomy",
+      "libelle_lien": "Anatomy",
+      "explication": {
+        "texte": "Explains a technical idea as an isometric machine with many small parts, drawn in SVG with optional WebGL.",
+        "passages": [
+          "An agent skill for creating detailed, interactive isometric illustrations of real-world machines and complex systems.",
+          "Crafted, interactive isometric figures with many small precise parts, in SVG, WebGL and 3D."
+        ]
+      },
+      "categorie": "isometric illustration",
+      "usages": [
+        {
+          "texte": "svg illustrations",
+          "passages": [
+            "Generates polished SVGs with optional WebGL shaders and 3D effects."
+          ]
+        }
+      ],
+      "termes_proches": []
+    }
+  ],
+  "mots_cles": {
+    "nom": "3D and Blender toolkit for AI agents",
+    "categorie": "création visuelle",
+    "termes_proches": []
+  }
+}
