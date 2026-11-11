@@ -29,6 +29,10 @@ export const ETAPES: readonly Etape[] = [
   { nom: 'brouillons', script: 'src/cli/brouillons.ts', args: ['--confirmer'], exige: ['CURATION_MODELE', 'DEEPSEEK_API_KEY', 'CURATION_MAX_ACTUALITES', 'CURATION_PLAFOND_EXECUTION_USD', 'CURATION_PLAFOND_TOTAL_USD', 'CURATION_PLAFOND_JOUR_USD'], payante: true },
   { nom: 'controles', script: 'src/cli/brouillons-recontroler.ts', args: [] },
   { nom: 'planification', script: 'src/cli/brouillons-planifier.ts', args: [] },
+  // Publication des posts déjà prévus dès la planification faite (2026-11-11) : du 10 au 11 novembre, les cinq cycles ont
+  // été arrêtés par la limite de durée de GitHub pendant la découverte, avant la publication finale ; plus rien ne sortait.
+  // Elle reste aussi en fin de cycle pour ce que la suite prépare.
+  { nom: 'publication', script: 'src/cli/publier.ts', args: ['--confirmer'] },
   // Découvertes (P6) : recherche GitHub toutes les 6 heures (plafond de l'API sans jeton), grille d1 et rédaction ensuite.
   { nom: 'decouverte', script: 'src/cli/ressources.ts', args: ['decouvrir', '--capturer'], cadenceMinutes: 360 },
   { nom: 'redaction_decouvertes', script: 'src/cli/ressources.ts', args: ['rediger', '--confirmer'], exige: ['CURATION_MODELE', 'DEEPSEEK_API_KEY', 'CURATION_MAX_DECOUVERTES', 'CURATION_PLAFOND_EXECUTION_USD', 'CURATION_PLAFOND_TOTAL_USD', 'CURATION_PLAFOND_JOUR_USD'], payante: true },
@@ -54,7 +58,8 @@ export interface ResultatEtape {
 export interface BilanCycle {
   debut: string;
   fin: string;
-  statut: 'termine' | 'pause' | 'refuse';
+  /** `en_cours` : bilan partiel enregistré après chaque étape, qui reste si le cycle est arrêté de l'extérieur. */
+  statut: 'termine' | 'pause' | 'refuse' | 'en_cours';
   sources_dues: string[];
   etapes: ResultatEtape[];
   /** Dernière exécution réelle de chaque étape, tous cycles confondus (cadences). */
@@ -114,6 +119,14 @@ export async function lancerCycle(o: OptionsCycle): Promise<BilanCycle> {
   if (!o.confirme) return { ...bilan, statut: 'refuse' };
   if (await isPaused(o.database.db)) return { ...bilan, statut: 'pause' };
   bilan.sources_dues = await sourcesDues(o.database.client, debut);
+  const enregistrer = async (statut: BilanCycle['statut']) => {
+    bilan.fin = now();
+    bilan.statut = statut;
+    // Garde la date de la dernière exécution réelle de chaque étape, pour les cadences.
+    bilan.dernieres = { ...(precedent?.dernieres ?? {}) };
+    for (const e of bilan.etapes) if (e.statut !== 'sautee' && e.debut) bilan.dernieres[e.nom] = e.debut;
+    await ecrireCycle(o.database.client, bilan);
+  };
 
   for (const etape of ETAPES) {
     const resultat = (statut: ResultatEtape['statut'], motif: string | null, code: number | null = null, depart: string | null = null, duree: number | null = null) =>
@@ -141,12 +154,11 @@ export async function lancerCycle(o: OptionsCycle): Promise<BilanCycle> {
     } catch (e) {
       resultat('echec', e instanceof Error ? e.message.slice(0, 200) : String(e), null, depart, Date.parse(now()) - Date.parse(depart));
     }
+    // Bilan partiel après chaque étape (2026-11-11) : un cycle arrêté par la limite de durée garde ses cadences, sinon
+    // la découverte (toutes les 6 h) recommençait à chaque cycle et le faisait dépasser de nouveau.
+    await enregistrer('en_cours');
   }
-  bilan.fin = now();
-  // Garde la date de la dernière exécution réelle de chaque étape, pour les cadences.
-  bilan.dernieres = { ...(precedent?.dernieres ?? {}) };
-  for (const e of bilan.etapes) if (e.statut !== 'sautee' && e.debut) bilan.dernieres[e.nom] = e.debut;
-  await ecrireCycle(o.database.client, bilan);
+  await enregistrer(bilan.statut === 'en_cours' ? 'termine' : bilan.statut);
   await tracerCycle(o.database.client, bilan, o.env.GITHUB_RUN_ID ? `github:${o.env.GITHUB_RUN_ID}` : `local:${process.pid}`);
   return bilan;
 }

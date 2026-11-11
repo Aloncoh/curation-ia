@@ -32,6 +32,17 @@ describe('cycle', () => {
     expect((await lireCycle(t.database.client))!.debut).toBe('2026-11-03T09:02:00.000Z');
   });
 
+  it('enregistre un bilan partiel après chaque étape : un cycle coupé garde la cadence de la découverte', async () => {
+    let pendantLaTraduction: Awaited<ReturnType<typeof lireCycle>> = null;
+    const executer = async (e: Etape) => {
+      if (e.nom === 'traduction') pendantLaTraduction = await lireCycle(t.database.client);
+      return { code: 0 };
+    };
+    await lancerCycle({ database: t.database, executer, env: PLAFONDS, confirme: true, maintenant: () => '2026-11-03T09:02:00.000Z' });
+    expect(pendantLaTraduction).toMatchObject({ statut: 'en_cours', dernieres: { decouverte: '2026-11-03T09:02:00.000Z', publication: '2026-11-03T09:02:00.000Z' } });
+    expect((await lireCycle(t.database.client))!.statut).toBe('termine');
+  });
+
   it('refuse sans --confirmer et ne fait rien pendant la pause', async () => {
     const f = faux();
     expect((await lancerCycle({ database: t.database, executer: f.executer, env: PLAFONDS, confirme: false })).statut).toBe('refuse');
@@ -43,7 +54,7 @@ describe('cycle', () => {
   it('saute les étapes payantes sans modèle, clé ou plafonds', async () => {
     const f = faux();
     const bilan = await lancerCycle({ database: t.database, executer: f.executer, env: { CURATION_MODELE: 'deepseek-flash' }, confirme: true });
-    expect(f.appels.map((a) => a.nom)).toEqual(['collecte', 'approfondissement', 'controles', 'planification', 'decouverte', 'videos', 'publication']);
+    expect(f.appels.map((a) => a.nom)).toEqual(['collecte', 'approfondissement', 'controles', 'planification', 'publication', 'decouverte', 'videos', 'publication']);
     expect(bilan.etapes.find((e) => e.nom === 'brouillons')!.motif).toContain('DEEPSEEK_API_KEY');
   });
 

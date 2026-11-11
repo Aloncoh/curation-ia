@@ -25,7 +25,9 @@ jobs:
   cycle:
     if: vars.CHAINE_ACTIVE == 'oui'
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    # 45 min (2026-11-11) : avec ~175 sources et la découverte GitHub, un cycle dépassait les 20 min et GitHub l'arrêtait
+    # avant la publication. Dépôt public : minutes sans quota ; un seul cycle à la fois (concurrency).
+    timeout-minutes: 45
     env:
       DATABASE_URL: ${{ secrets.TURSO_DATABASE_URL }}
       DATABASE_AUTH_TOKEN: ${{ secrets.TURSO_AUTH_TOKEN }}
