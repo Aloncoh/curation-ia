@@ -34,6 +34,7 @@ Réseau social vivant autour de l'IA, du développement et de la technologie : r
 
   Les versions GitHub, Show HN et la découverte élargie attendent le premier cycle en ligne (jeton d'Actions).
 - **Découverte GitHub** : 60 thèmes dont les skills pour tous usages, trois fenêtres de dates, candidats par agent. Jeu de contrôle des 12 dépôts de l'utilisateur, absents des requêtes : 6/12 ramenés.
+- **Higgsfield** (2026-11-11) : flux officiel du blog ajouté (`feed:higgsfield-blog`), filtré sur les titres d'annonce (nouveaux modèles, studios, MCP) ; guides et classements écartés. L'annonce « Fable 5.2 sur Higgsfield MCP » n'existe que sur X (non branché) : Fable 5.2 reste couvert par le post n° 239.
 - **Rédaction des découvertes** : 6 par cycle depuis le 2026-11-11 (2 auparavant), sous les plafonds 0,10 $ par cycle et 0,40 $ par jour. TokenEconomizer (Microsoft), trouvé automatiquement, est en ligne (post n° 229). 90 découvertes attendent ; alerte de file dans `npm run etat`.
 - **Fable 5.2** :
   - en ligne : « Mythos 5.2 sur Bedrock » (n° 214) et « Fable 5.2 dans GitHub Copilot » (n° 223) ;

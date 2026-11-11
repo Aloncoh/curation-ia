@@ -11,6 +11,10 @@ type FabriqueReleases = (owner: string, repo: string, perPage: number, product: 
 export const sourcesElargies = (githubReleases: FabriqueReleases): SourceDefinition[] => [
   // Anthropic : annonces, recherche, lancements (aucun flux officiel) — vérifié le 2026-11-10 : 20 entrées, dernière il y a 0 j
   { id: 'feed:anthropic-plan', kind: 'feed', name: 'Anthropic — plan du site officiel (news, research, engineering, pages de lancement)', config: { url: 'https://www.anthropic.com/sitemap.xml', maxItems: 15, linkHosts: ['www.anthropic.com'], plan: { prefixes: ['/news/', '/research/', '/engineering/', '/claude-'] } }, allowedHosts: ['www.anthropic.com'], fetchIntervalMinutes: 30, maxResponseBytes: 2 * 1024 * 1024, compte: 'nodi' },
+  // Higgsfield : modèles vidéo et image intégrés, MCP pour Claude et ChatGPT — vérifié le 2026-11-11 : 305 entrées, dernière
+  // il y a 1 j, /blog autorisé par robots.txt. Le blog mêle annonces et classements de référencement : seuls les titres
+  // d'annonce sont gardés (« Introducing… », « … on Higgsfield: », « Meet… », « Now on… », MCP), sauf guides et classements.
+  { id: 'feed:higgsfield-blog', kind: 'feed', name: 'Higgsfield — flux officiel du blog (annonces seulement)', config: { url: 'https://higgsfield.ai/blog/rss.xml', maxItems: 15, linkHosts: ['higgsfield.ai'], titres: '^(?!how to\\b|\\d|best\\b|top\\b).*(?:\\b(introducing|meet|announcing)\\b|\\bnow (live |available )?on higgsfield\\b|\\bon higgsfield( ai)?\\s*:|\\bhiggsfield mcp\\b)' }, allowedHosts: ['higgsfield.ai'], fetchIntervalMinutes: 360, compte: 'nodi' },
   // Ai2 : modèles ouverts OLMo, Tülu — vérifié le 2026-11-10 : 20 entrées, dernière il y a 4 j
   { id: 'feed:ai2-blog', kind: 'feed', name: 'Ai2 — flux officiel', config: { url: 'https://allenai.org/rss.xml', maxItems: 20, linkHosts: ['allenai.org'] }, allowedHosts: ['allenai.org'], fetchIntervalMinutes: 360, compte: 'nodi' },
   // Google Research : publications et modèles — vérifié le 2026-11-10 : 20 entrées, dernière il y a 0 j

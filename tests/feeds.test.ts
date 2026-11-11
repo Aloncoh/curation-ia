@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { MAX_FEED_ENTRIES, parseFeedItems } from '../src/collect/feeds.ts';
 import { SourceFormatError } from '../src/collect/github-releases.ts';
 import { fixture } from './helpers/db.ts';
+import { sourcesElargies } from '../src/sources-elargies.ts';
 
 const rss = (items: string, channelExtra = '') =>
   `<?xml version="1.0"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Test</title><link>https://example.org</link>${channelExtra}${items}</channel></rss>`;
@@ -129,6 +130,14 @@ describe('parseFeedItems', () => {
 
   it('limite le nombre d’entrées gardées', () => {
     expect(parseFeedItems(fixture('feed-openai-news.xml'), { ...openai, maxItems: 3 }).documents).toHaveLength(3);
+  });
+
+  it('motif de titres : garde les annonces, refuse et compte les autres entrées (blog mixte, 2026-11-11)', () => {
+    const item = (t: string, n: number) => `<item><title>${t}</title><link>https://example.org/b/${n}</link><pubDate>Mon, 0${n} Nov 2026 10:00:00 GMT</pubDate></item>`;
+    const corps = rss(item('Seedream 5.5 on Higgsfield AI: Features', 1) + item('8 Best CapCut Alternatives', 2) + item('How to Edit Photos on Higgsfield: Guide', 3) + item('Introducing Ad Multiplier', 4));
+    const r = parseFeedItems(corps, { ...config, titres: (sourcesElargies((() => ({})) as never).find((s) => s.id === 'feed:higgsfield-blog')!.config as { titres: string }).titres });
+    expect(r.documents.map((d) => d.title)).toEqual(['Introducing Ad Multiplier', 'Seedream 5.5 on Higgsfield AI: Features']);
+    expect(r.rejected).toEqual({ titre_hors_motif: 2 });
   });
 
   it.each([

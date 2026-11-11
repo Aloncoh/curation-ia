@@ -17,6 +17,11 @@ export interface FeedConfig {
    * dont le chemin commence par un des préfixes sont gardées, les plus récemment modifiées d'abord.
    */
   plan?: { prefixes: string[] };
+  /**
+   * Motif (expression régulière, sans casse) que le titre d'une entrée doit contenir, pour un blog officiel qui mêle
+   * annonces et articles de référencement (Higgsfield, 2026-11-11) : les autres entrées sont refusées et comptées.
+   */
+  titres?: string;
 }
 
 /**
@@ -161,7 +166,7 @@ function isoDate(date: Date | null | undefined): string | null {
  * diffère souvent du lien) ; une entrée sans lien https vers un hôte autorisé est refusée et comptée.
  * Le contenu reste une donnée, jamais une instruction.
  */
-export function parseFeedItems(body: string, config: Pick<FeedConfig, 'maxItems' | 'linkHosts' | 'plan'>): ParsedFeed {
+export function parseFeedItems(body: string, config: Pick<FeedConfig, 'maxItems' | 'linkHosts' | 'plan' | 'titres'>): ParsedFeed {
   if (config.plan) return parseSitemap(body, { ...config, plan: config.plan });
   const entries = body.match(/<(?:item|entry)[\s>/]/g)?.length ?? 0;
   if (entries > MAX_FEED_ENTRIES) throw new SourceFormatError(`Flux trop long : ${entries} entrées (maximum ${MAX_FEED_ENTRIES})`);
@@ -179,10 +184,15 @@ export function parseFeedItems(body: string, config: Pick<FeedConfig, 'maxItems'
   const rejected: Record<string, number> = {};
   const candidates: { item: FeedItem; url: string; externalId: string; announcedAt: string | null }[] = [];
   const seen = new Set<string>();
+  const motifTitre = config.titres ? new RegExp(config.titres, 'i') : null;
   for (const item of feed.items) {
     const link = checkLink(rawLink(item.element), config.linkHosts);
     if ('reason' in link) {
       rejected[link.reason] = (rejected[link.reason] ?? 0) + 1;
+      continue;
+    }
+    if (motifTitre && !motifTitre.test(plainText(text(item.element.findElementWithName('title'))))) {
+      rejected.titre_hors_motif = (rejected.titre_hors_motif ?? 0) + 1;
       continue;
     }
     const externalId = normalizeUrl(link.url);
