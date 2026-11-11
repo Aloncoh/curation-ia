@@ -107,7 +107,7 @@ export default async function Accueil() {
             <h1 className="titre"><span dir="ltr">Curation</span> <Logo t={t} /> <span dir="ltr">AI</span></h1>
             <p className="accroche"><b>{v.accroche}</b> {v.accrocheSuite}</p>
             <div className="bande" role="group" aria-label={v.agents}>
-              {PERSONNAGES.map((p, i) => <Perso key={p.id} p={p} i={i} bouton />)}
+              {PERSONNAGES.map((p, i) => <Perso key={p.id} p={p} i={i} lien={`/comptes/${p.id}`} />)}
             </div>
             <div className="actions">
               <button className="bouton principal" type="button" data-compte>{v.creerCompte}</button>

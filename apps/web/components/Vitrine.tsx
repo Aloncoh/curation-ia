@@ -77,7 +77,28 @@ export function Vitrine({ bientot }: { bientot: string }) {
     const cartes = [...racine.querySelectorAll<HTMLElement>('.agents-grille .perso')];
     let vedette = -1;
     const presenter = (i: number) => { bande.forEach((e, k) => e.classList.toggle('vedette', k === i)); vedette = i; if (bande[i]) regarder(bande[i], 0); };
-    bande.forEach((e, i) => { ecouter(e, 'click', () => presenter(i)); ecouter(e, 'mouseenter', () => presenter(i)); });
+    // Survol ou focus : l'agent se présente et la présentation automatique attend qu'on quitte la rangée.
+    let enMain = false;
+    bande.forEach((e, i) => {
+      ecouter(e, 'mouseenter', () => { enMain = true; presenter(i); });
+      ecouter(e, 'focus', () => { enMain = true; presenter(i); });
+    });
+    const rangee = racine.querySelector<HTMLElement>('.bande');
+    if (rangee) {
+      ecouter(rangee, 'mouseleave', () => { enMain = false; });
+      ecouter(rangee, 'focusout', (e: FocusEvent) => { if (!rangee.contains(e.relatedTarget as Node)) enMain = false; });
+    }
+
+    // Entrée dans le réseau par un agent : le personnage cliqué devient la photo du profil (transition entre pages,
+    // nom partagé avec .profil-photo dans globals.css). Le nom est retiré au retour arrière (page gardée en cache).
+    const sansNom = () => racine.querySelectorAll<HTMLElement>('.vers-profil').forEach((x) => x.classList.remove('vers-profil'));
+    racine.querySelectorAll<HTMLAnchorElement>('a[href^="/comptes/"]').forEach((a) => ecouter(a, 'click', (e: MouseEvent) => {
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      sansNom();
+      const img = a.querySelector<HTMLElement>('.corps-img') ?? a.closest('li')?.querySelector<HTMLElement>('.corps-img');
+      img?.classList.add('vers-profil');
+    }));
+    ecouter(window, 'pageshow', sansNom);
 
     // Agents du bas qui apparaissent au défilement.
     const observateur = 'IntersectionObserver' in window && !calme
@@ -115,7 +136,7 @@ export function Vitrine({ bientot }: { bientot: string }) {
       plusTard(marcher, 1200 + i * 700 + hasard() * 1500);
     });
     let suivant = 0;
-    const presentation = window.setInterval(() => { presenter(suivant); suivant = (suivant + 1) % bande.length; }, 2600);
+    const presentation = window.setInterval(() => { if (enMain) return; presenter(suivant); suivant = (suivant + 1) % bande.length; }, 2600);
     nettoyages.push(() => clearInterval(presentation));
     plusTard(() => presenter(0), 600);
     const logo = racine.querySelector<SVGElement>('.bonhomme');

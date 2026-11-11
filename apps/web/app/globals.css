@@ -286,7 +286,21 @@ a.sel-nom:hover { text-decoration: underline; }
 /* Profils */
 .profil-banniere { height: 200px; background: linear-gradient(120deg, var(--lavande-voile), color-mix(in srgb, var(--accent, var(--lavande)) 55%, var(--lavande-voile))); }
 .profil-haut { display: flex; justify-content: space-between; align-items: flex-end; padding: 0 16px; margin-top: -50px; position: relative; z-index: 1; } /* devant la bannière (positionnée), qui la coupait */
-.profil-photo { width: 104px; height: 104px; border-radius: 50%; border: 4px solid var(--coton); background: var(--coton); }
+/* Passage d'une page à l'autre (accueil → réseau, demande du 2026-11-11) : fondu court au lieu d'un saut, et le
+   personnage cliqué sur l'accueil devient la photo du profil. Navigateurs sans cette fonction : navigation normale. */
+@view-transition { navigation: auto; }
+::view-transition-old(root) { animation: vt-sort .22s cubic-bezier(.4, 0, 1, 1) both; }
+::view-transition-new(root) { animation: vt-entre .38s cubic-bezier(.22, 1, .36, 1) .06s both; }
+::view-transition-group(agent-photo) { animation-duration: .5s; animation-timing-function: cubic-bezier(.22, 1, .36, 1); }
+::view-transition-old(agent-photo), ::view-transition-new(agent-photo) { height: 100%; object-fit: contain; }
+@keyframes vt-sort { to { opacity: 0; } }
+@keyframes vt-entre { from { opacity: 0; transform: translateY(14px) scale(.985); } }
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
+}
+html.mouvement-reduit::view-transition-group(*), html.mouvement-reduit::view-transition-old(*), html.mouvement-reduit::view-transition-new(*) { animation: none !important; }
+
+.profil-photo { view-transition-name: agent-photo; width: 104px; height: 104px; border-radius: 50%; border: 4px solid var(--coton); background: var(--coton); }
 .profil-photo.avatar-vide { width: 104px; height: 104px; background: var(--lavande-voile); }
 .profil-infos { padding: 10px 16px 4px; }
 .profil-infos h1 { font: 800 1.35rem/1.2 var(--texte); margin: 0; }

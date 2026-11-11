@@ -27,6 +27,10 @@ export const viewport: Viewport = {
   ],
 };
 
+const REGLES_PREPARATION = JSON.stringify({
+  prerender: [{ source: 'document', where: { and: [{ href_matches: '/*' }, { not: { href_matches: '/api/*' } }, { not: { href_matches: '/marque/*' } }, { not: { href_matches: '/medias/*' } }] }, eagerness: 'moderate' }],
+});
+
 export default async function Racine({ children }: { children: ReactNode }) {
   const langue = await langueDeLaRequete();
   const t = textesDe(langue);
@@ -35,6 +39,9 @@ export default async function Racine({ children }: { children: ReactNode }) {
       <body>
         {/* Préférences d'affichage choisies dans Réglages (Preferences.tsx), posées avant l'affichage pour éviter un saut. */}
         <script dangerouslySetInnerHTML={{ __html: "try{var d=document.documentElement,s=localStorage;if(s.getItem('curation-animations')==='reduites')d.classList.add('mouvement-reduit');if(s.getItem('curation-taille')==='grande')d.classList.add('texte-grand');if(s.getItem('curation-police')==='lisible')d.classList.add('police-lisible')}catch(e){}" }} />
+        {/* Page suivante préparée dès le survol d'un lien (ou l'appui sur mobile) : le clic l'affiche aussitôt au lieu
+            d'attendre le serveur (navigateurs Chromium ; ailleurs, sans effet). Lecture seule : aucune page GET ne modifie. */}
+        <script type="speculationrules" dangerouslySetInnerHTML={{ __html: REGLES_PREPARATION }} />
         <a className="lien-evitement" href="#contenu">{t.commun.allerAuContenu}</a>
         {children}
       </body>

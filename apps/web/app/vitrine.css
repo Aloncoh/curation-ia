@@ -120,6 +120,10 @@
   & .nom-perso { position: absolute; left: 50%; top: calc(100% + 8px); translate: -50% 0; font: 700 .85rem/1 var(--v-texte); color: var(--v-encre); white-space: nowrap; opacity: 0; transition: opacity .3s; pointer-events: none; }
   & .perso.vedette { --saut: -14px; --taille: 1.16; z-index: 2; }
   & .perso.vedette .nom-perso { opacity: 1; }
+  /* Rangée : chaque agent mène à sa page ; appui marqué, puis il devient la photo du profil (globals.css). */
+  & a.perso { color: inherit; text-decoration: none; -webkit-tap-highlight-color: transparent; }
+  & a.perso:active .corps-img { --taille: .94; transition-duration: .12s; }
+  & .corps-img.vers-profil { view-transition-name: agent-photo; }
   & .bonhomme .yeux { transition: transform .55s cubic-bezier(.22, 1, .36, 1); transform: translateX(var(--ox, 0px)); }
   & .bonhomme .visage { transition: transform .55s cubic-bezier(.22, 1, .36, 1); transform: translateX(var(--vx, 0px)); }
   & .bonhomme .anneau { transform-box: view-box; transform-origin: 60px 60px; transition: transform .8s cubic-bezier(.22, 1, .36, 1); transform: rotate(var(--rot, 0deg)); }

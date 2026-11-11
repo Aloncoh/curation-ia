@@ -4,14 +4,35 @@
     {
       "name": "maquette",
       "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "4173", "--bind", "127.0.0.1"],
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "4173",
+        "--bind",
+        "127.0.0.1"
+      ],
       "port": 4173
     },
     {
       "name": "site",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "web:dev"],
+      "runtimeArgs": [
+        "run",
+        "web:dev"
+      ],
       "port": 3000
+    },
+    {
+      "name": "site-3100",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "next",
+        "dev",
+        "apps/web",
+        "--port",
+        "3100"
+      ],
+      "port": 3100
     }
   ]
 }

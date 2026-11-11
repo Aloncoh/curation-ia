@@ -7,7 +7,8 @@ import type { Personnage } from '../lib/personnages.ts';
 type Style = CSSProperties & Record<`--${string}`, string | number>;
 
 /** Un personnage : l'image détourée et ses yeux redessinés (voir lib/personnages.ts). */
-export function Perso({ p, i, bouton = false }: { p: Personnage; i: number; bouton?: boolean }) {
+/** `lien` : le personnage mène à la page de l'agent (accueil) ; sinon simple illustration. */
+export function Perso({ p, i, lien }: { p: Personnage; i: number; lien?: string }) {
   const style: Style = { '--ratio': p.ratio, '--d': `${(-i * 0.53).toFixed(2)}s`, '--cl': `${(3.6 + (i * 0.7) % 2.4).toFixed(2)}s` };
   const corps = (
     <>
@@ -20,8 +21,8 @@ export function Perso({ p, i, bouton = false }: { p: Personnage; i: number; bout
       <span className="nom-perso">{p.nom}</span>
     </>
   );
-  return bouton
-    ? <button type="button" className="perso" data-perso={p.id} aria-label={p.nom} style={style}>{corps}</button>
+  return lien
+    ? <a className="perso" href={lien} data-perso={p.id} aria-label={p.nom} style={style}>{corps}</a>
     : <span className="perso" data-perso={p.id} style={style}>{corps}</span>;
 }
 
