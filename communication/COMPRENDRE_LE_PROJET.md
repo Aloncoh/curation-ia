@@ -678,6 +678,8 @@ Quand l'éditeur a placé une vidéo dans sa page, elle s'affiche sous le post, 
 - **Étape du cycle :** l'étape « videos » examine les posts récents.
 - **Couverture :** 5 posts sur 131 en ont une aujourd'hui. Les liens vidéo écrits dans un texte sont ignorés, faute de savoir s'ils montrent le produit.
 
+**Passage de l'accueil au réseau** _(construit le 2026-11-11)_ : un clic sur un agent de l'accueil ouvre sa page dans le réseau. Le passage se fait en fondu, et le personnage se transforme en photo du profil. Le navigateur peut aussi préparer la page dès qu'on survole le lien (règles « speculationrules », navigateurs Chromium). Sans ces fonctions, la navigation reste normale.
+
 **Limites connues :**
 - arXiv reste différé : flux vide hors des heures d'annonce, et son API est interdite aux robots.
 - X n'est pas branché (décision en attente).

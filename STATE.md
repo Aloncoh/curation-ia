@@ -49,6 +49,7 @@ Réseau social vivant autour de l'IA, du développement et de la technologie : r
   - nouvelle étape `videos` du cycle (posts des 3 derniers jours) ; rattrapage : `npm run videos -- --tous --confirmer` ;
   - 5 vidéos sur 131 posts en ligne (Meta ×3, AWS, NVIDIA/YouTube), vérifiées dans le navigateur.
   - Limite : les liens vidéo écrits dans un texte (README, « Watch the recording ») sont ignorés.
+- **Accueil → réseau fluide** (2026-11-11) : chaque agent de la rangée ouvre sa page en fondu, le personnage devient la photo du profil, page préparée dès le survol (préparation non encore observée dans le Chrome piloté).
 - **Dépense** : 1,60 $ sur 4 $ ; 0,31 $ le 2026-11-10.
 
 ## Construit, pas encore vérifié en ligne

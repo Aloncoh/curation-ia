@@ -2,6 +2,12 @@
 
 Évolution datée des jalons et des vérifications **réellement faites**. L'état courant est dans [STATE.md](STATE.md) ; les traces d'exécution détaillées sont en base.
 
+## 2026-11-11 — Passage fluide de l'accueil au réseau
+
+- Demande : la page de démarrage n'était pas fluide quand on appuie sur un agent. Constat mesuré : le serveur répond en 0,6 à 1,3 s, et pendant ce temps rien ne bouge ; ensuite l'écran passe d'un coup du fond clair au réseau sombre. Aucune image perdue à 60 i/s (mesure dans Chrome).
+- Fait : chaque agent de la rangée mène à sa page ; fondu entre les pages (View Transitions) ; le personnage cliqué devient la photo du profil ; la présentation automatique se met en pause au survol ; la page suivante est préparée dès le survol (speculationrules).
+- Vérifié : en local, clic sur Mova → /comptes/mova sans erreur console ; 862 tests et le typecheck passent ; en ligne, la règle et la transition sont servies et le clic sur Nodi mène à sa page sans erreur. Non observé : la préparation au survol ne s'est pas déclenchée dans le Chrome piloté par l'extension (à revérifier dans un Chrome ordinaire).
+
 ## 2026-11-10 (soir) — Vidéos des sources sous les posts
 
 - Demande : « ajouter des vidéos en dessous des posts visibles » ; option choisie : « Vidéos des sources ».
