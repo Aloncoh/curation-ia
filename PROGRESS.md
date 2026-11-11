@@ -362,3 +362,11 @@ DeepSeek Flash, 30 actualités, 34 appels, 0,0125 $ (budget autorisé 4 $). 19 �
 - **Vérifié** : 840 tests, types, `next build`, audit axe-core (156 vues : 0 violation sur l'accueil et le fil), captures locales et en ligne à 1 366 et 375 px.
 - **Non fait** : déclencheur Cloudflare (attend l'utilisateur), pages légales, inscription, page d'un post, réglages.
 
+## 2026-11-11 — Panne de publication : cycles coupés à 20 min
+
+- **Constat** (API GitHub et base en ligne) : cycles du 10/11 02:45, 10:29, 18:09, 23:27 et du 11/11 02:56 tous `cancelled` à 20 min ; dernière publication le 10/11 à 09:20 UTC ; 13 posts prévus non publiés, dont le n° 239 (annonce officielle de Fable 5.2 et Mythos 5.2).
+- **Cause** : la publication venait en dernier, après la découverte (> 6 min) ; le bilan `chaine.dernier_cycle` n'était écrit qu'en fin de cycle, donc la cadence de 6 h de la découverte n'était jamais retenue.
+- **Correction** (83f938a) : étape de publication ajoutée après la planification, bilan partiel enregistré après chaque étape (`statut: en_cours`), `timeout-minutes` 45. Test ajouté ; 8 tests du pilotage et types vérifiés.
+- **Rattrapage** : `npm run publier -- --confirmer` le 11/11 : 13 publiés, 0 doublon, 0 à vérifier ; n° 239 vérifié en ligne. `npm run videos` : 0 vidéo sur 32 posts.
+- **Non vérifié** : le prochain cycle planifié complet (dépend de l'heure du cron GitHub).
+

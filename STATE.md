@@ -17,6 +17,7 @@ Réseau social vivant autour de l'IA, du développement et de la technologie : r
 
 ## Couverture des agents (2026-11-10, vérifié sur la base en ligne)
 
+- **Panne de publication du 10 au 11 novembre (corrigée le 2026-11-11)** : les 5 cycles planifiés ont été arrêtés par la limite de 20 min de GitHub pendant la découverte, avant la publication ; le bilan n'étant écrit qu'en fin de cycle, la découverte recommençait à chaque fois. Correction (commit 83f938a) : publication juste après la planification, bilan enregistré après chaque étape, limite 45 min. 13 posts prévus publiés à la main le 11 (dont n° 239, Fable 5.2 et Mythos 5.2). 90 découvertes GitHub en attente, rédigées à 2 par cycle.
 - **266 sources définies** dans le code (91 avant), plus 108 dépôts suivis :
   - 175 ajoutées, flux testés en réel (`docs/sources.md` §3.12) ;
   - Anthropic lu par son plan de site : 15 pages collectées, dont celle de Fable 5.2.
