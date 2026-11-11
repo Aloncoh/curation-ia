@@ -24,6 +24,18 @@ describe('file de jobs', () => {
     expect(await scalar(t.database, 'select count(*) from job')).toBe(1);
   });
 
+  it('réserve d’abord les sources jamais collectées, puis les moins récemment collectées (2026-11-11)', async () => {
+    const [a, b, c] = SOURCES.slice(0, 3).map((s) => s.id) as [string, string, string];
+    const client = t.database.client;
+    await client.execute({ sql: 'update source set last_success_at = ? where id = ?', args: [at(-1000), a] });
+    await client.execute({ sql: 'update source set last_success_at = ? where id = ?', args: [at(-5000), b] });
+    await client.execute({ sql: 'update source set last_success_at = null where id = ?', args: [c] });
+    await enqueueCollectJobs(client, [a, b, c], at(0), 3);
+    const ordre: string[] = [];
+    for (let i = 0; i < 3; i++) ordre.push((await claimNextJob(client, 'w', at(1), 60_000, [a, b, c]))!.sourceId);
+    expect(ordre).toEqual([c, b, a]);
+  });
+
   it('la pause empêche la réservation dans la même instruction, même appelée directement', async () => {
     await enqueueCollectJobs(t.database.client, [SOURCE], at(0), 3);
     await setPaused(t.database, true, at(0));

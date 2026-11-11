@@ -370,3 +370,10 @@ DeepSeek Flash, 30 actualités, 34 appels, 0,0125 $ (budget autorisé 4 $). 19 �
 - **Rattrapage** : `npm run publier -- --confirmer` le 11/11 : 13 publiés, 0 doublon, 0 à vérifier ; n° 239 vérifié en ligne. `npm run videos` : 0 vidéo sur 32 posts.
 - **Non vérifié** : le prochain cycle planifié complet (dépend de l'heure du cron GitHub).
 
+
+## 2026-11-11 — Premier cycle complet, Higgsfield, ordre de la file de collecte
+
+- Cycle planifié de 10:40 UTC (commit b149166) : statut « termine » en 28 min, 11 étapes réussies ; 7 posts publiés par le cycle lui-même (n° 266-269, 273, 275, 276). Vérifié dans `chaine.dernier_cycle` et la table `post` de production.
+- Source `feed:higgsfield-blog` ajoutée avec un filtre de titres (option `titres` des flux) : sur le flux réel, 15 annonces gardées, 281 articles refusés (`titre_hors_motif`). Enregistrée en base par le cycle, pas encore collectée : 179 jobs devant elle dans la file.
+- File de collecte : 207 jobs en attente, ~50 traités par cycle avant l'échéance. Ordre changé de « premier arrivé » à « jamais collectée, puis moins récemment collectée » (test ajouté). 865 tests, typecheck OK.
+- Rédaction des découvertes portée de 2 à 6 par cycle (demande de l'utilisateur).

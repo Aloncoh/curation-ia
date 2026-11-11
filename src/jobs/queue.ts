@@ -63,6 +63,9 @@ export async function recoverExpiredLeases(client: Client, now: string): Promise
  * Réserve le prochain job disponible en une seule instruction SQL : deux workers ne peuvent pas obtenir le même,
  * et aucun job n'est réservé si la pause est active au même instant. Avec `sourceIds`, seuls les jobs de ces
  * sources sont réservés (une collecte restreinte ne touche jamais au job en attente d'une autre source).
+ *
+ * Ordre (2026-11-11) : d'abord les sources jamais collectées, puis celles collectées il y a le plus longtemps. Un cycle
+ * ne traite qu'une partie de la file avant son échéance ; dans l'ordre d'arrivée, une source ajoutée attendait plusieurs cycles.
  */
 export async function claimNextJob(
   client: Client,
@@ -80,7 +83,9 @@ export async function claimNextJob(
       sql: `update job
             set status = 'leased', lease_owner = :owner, lease_until = :leaseUntil,
                 attempts = attempts + 1, updated_at = :now
-            where id = (select id from job where ${available} order by id limit 1)
+            where id = (select id from job where ${available}
+                        order by (select coalesce(last_success_at, '') from source where source.id = job.source_id), id
+                        limit 1)
               and ${available}
               and ${notPaused}
             returning id, source_id, attempts, max_attempts`,
