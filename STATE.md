@@ -17,7 +17,7 @@ Réseau social vivant autour de l'IA, du développement et de la technologie : r
 
 ## Couverture des agents (2026-11-10, vérifié sur la base en ligne)
 
-- **Panne de publication du 10 au 11 novembre (corrigée le 2026-11-11)** : les 5 cycles planifiés ont été arrêtés par la limite de 20 min de GitHub pendant la découverte, avant la publication ; le bilan n'étant écrit qu'en fin de cycle, la découverte recommençait à chaque fois. Correction (commit 83f938a) : publication juste après la planification, bilan enregistré après chaque étape, limite 45 min. 13 posts prévus publiés à la main le 11 (dont n° 239, Fable 5.2 et Mythos 5.2). 90 découvertes GitHub en attente, rédigées à 2 par cycle.
+- **Panne de publication du 10 au 11 novembre (corrigée le 2026-11-11)** : les 5 cycles planifiés ont été arrêtés par la limite de 20 min de GitHub pendant la découverte, avant la publication ; le bilan n'étant écrit qu'en fin de cycle, la découverte recommençait à chaque fois. Correction (commit 83f938a) : publication juste après la planification, bilan enregistré après chaque étape, limite 45 min. 13 posts prévus publiés à la main le 11 (dont n° 239, Fable 5.2 et Mythos 5.2). 90 découvertes GitHub en attente, rédigées à 6 par cycle depuis le 11 (demande de l'utilisateur).
 - **266 sources définies** dans le code (91 avant), plus 108 dépôts suivis :
   - 175 ajoutées, flux testés en réel (`docs/sources.md` §3.12) ;
   - Anthropic lu par son plan de site : 15 pages collectées, dont celle de Fable 5.2.
@@ -34,7 +34,7 @@ Réseau social vivant autour de l'IA, du développement et de la technologie : r
 
   Les versions GitHub, Show HN et la découverte élargie attendent le premier cycle en ligne (jeton d'Actions).
 - **Découverte GitHub** : 60 thèmes dont les skills pour tous usages, trois fenêtres de dates, candidats par agent. Jeu de contrôle des 12 dépôts de l'utilisateur, absents des requêtes : 6/12 ramenés.
-- **Rédaction des découvertes** réactivée à 2 par cycle. TokenEconomizer (Microsoft), trouvé automatiquement, est en ligne (post n° 229). 90 découvertes attendent ; alerte de file dans `npm run etat`.
+- **Rédaction des découvertes** : 6 par cycle depuis le 2026-11-11 (2 auparavant), sous les plafonds 0,10 $ par cycle et 0,40 $ par jour. TokenEconomizer (Microsoft), trouvé automatiquement, est en ligne (post n° 229). 90 découvertes attendent ; alerte de file dans `npm run etat`.
 - **Fable 5.2** :
   - en ligne : « Mythos 5.2 sur Bedrock » (n° 214) et « Fable 5.2 dans GitHub Copilot » (n° 223) ;
   - l'annonce principale (n° 1449, avec la page d'Anthropic en appui) est rédigée, mais « à vérifier » : « 5.2 » absent des citations retenues, à reprendre par la relance.
