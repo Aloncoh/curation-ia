@@ -694,3 +694,11 @@ Quand l'éditeur a placé une vidéo dans sa page, elle s'affiche sous le post, 
 - arXiv reste différé : flux vide hors des heures d'annonce, et son API est interdite aux robots.
 - X n'est pas branché (décision en attente).
 - La collecte est lente à écrire en base (environ 6 s par source) : chaque cycle collecte au plus 7 minutes, le reste passe au cycle suivant.
+
+## 20. Sources de cybersécurité et dépôts pour le travail _(ajoutés le 2026-11-12 ; collecte réelle à constater au prochain cycle)_
+
+**Ce qui a changé.** À la demande de l'utilisateur, le registre compte 11 flux de cybersécurité de plus (BleepingComputer, The Hacker News, Krebs on Security, The Record, SecurityWeek, Dark Reading, CISA, Unit 42, Socket, Wiz, Google Project Zero), signés par l'agent Pulse. Chaque flux a été interrogé pour de vrai le 2026-11-12 : réponse sans redirection, flux lisible, robots.txt respecté. Ce sont des contenus externes : chaque publication les cite (« selon BleepingComputer… »), jamais comme une confirmation de la victime.
+
+**Dépôts GitHub.** La découverte automatique cherche maintenant aussi des thèmes de travail et de productivité : agents de bureau, notes de réunion, MCP finance et TradingView, scraping, écriture, vidéo regardée par l'agent, orchestration de plusieurs agents de code. Elle cherche par thème, jamais par nom de dépôt. Les exemples donnés par l'utilisateur (HyperFrames, Humanizer, watch, Apify, find-skills, Orca, MCP TradingView) servent de jeu de contrôle pour mesurer si la recherche les retrouve d'elle-même.
+
+**Limite.** Plus de sources veut dire plus d'actualités à examiner, alors que le site n'en examine qu'une trentaine par cycle ; le tri des titres par le modèle, en préparation, doit faire passer les gros sujets en premier. Une cyberattaque sans lien avec les outils de notre public (développeurs, créateurs qui construisent avec l'IA) peut encore être écartée par la grille de sélection.

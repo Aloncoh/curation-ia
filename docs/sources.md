@@ -782,3 +782,27 @@ Demande de l'utilisateur : « élargis la couverture des six agents… pour chaq
 - `https://x.ai/news/rss.xml` (xAI : modèles Grok) : HTTP 404
 - arXiv : `rss.arxiv.org` sans entrée hors des heures d'annonce, environ 400 entrées par jour sans ordre d'intérêt ; `export.arxiv.org/api` interdit par robots.txt. Différé ; piste : Hugging Face Daily Papers, dont le flux répond 401.
 - `github.com/<dépôt>/releases.atom` : interdit par robots.txt de github.com (`Disallow: /*.atom$`) ; les versions passent par l'API.
+
+### 3.13 Cybersécurité et dépôts pour le travail (2026-11-12)
+
+Demande de l'utilisateur : « ajoute des sources [qui] parle[nt] des cyberattaques ; […] des repos pour le travail, pour agent IA, pour productivity, des MCP [comme] TradingView, pour l'écriture ; exemple HyperFrames, Humanizer, watch, Apify, find-skills, Orca ». SPEC §3 couvre déjà « incidents, sécurité » : pas de changement de périmètre. Pulse signe la sécurité ; chaque flux est un contenu externe attribué, jamais une confirmation de la victime ou de l'éditeur concerné.
+
+Flux interrogés depuis le poste le 2026-11-12, avec `safeGet` et notre analyseur : réponse 200 sans redirection, robots.txt lu (jokers compris ; absent = 404, aucune restriction).
+
+| Source | Apport | Vérification du 2026-11-12 |
+|---|---|---|
+| `https://www.bleepingcomputer.com/feed/` | BleepingComputer : attaques, rançongiciels, correctifs | 15 entrées, dernière il y a 0 j |
+| `https://feeds.feedburner.com/TheHackersNews` | The Hacker News (média de sécurité, sans lien avec Hacker News) | 50 entrées, dernière il y a 0 j ; robots.txt de thehackernews.com sans interdiction |
+| `https://krebsonsecurity.com/feed/` | Krebs on Security : enquêtes | 10 entrées, dernière il y a 1 j |
+| `https://therecord.media/feed` | The Record (Recorded Future News) | 5 entrées, dernière il y a 1 j ; `/feed/` redirige (308), l'adresse sans barre finale répond 200 |
+| `https://www.securityweek.com/feed/` | SecurityWeek | 10 entrées, dernière il y a 0 j |
+| `https://www.darkreading.com/rss.xml` | Dark Reading | 50 entrées, dernière il y a 0 j |
+| `https://www.cisa.gov/cybersecurity-advisories/all.xml` | CISA : avis et vulnérabilités exploitées | 30 entrées, dernière il y a 2 j |
+| `https://unit42.paloaltonetworks.com/feed/` | Unit 42 (Palo Alto Networks) : recherche sur les menaces, dont l'IA | 15 entrées, dernière il y a 1 j |
+| `https://socket.dev/api/blog/feed.atom` | Socket : paquets npm et PyPI piégés (chaîne d'approvisionnement) | 10 entrées, dernière il y a 3 j |
+| `https://www.wiz.io/feed/rss.xml` | Wiz : vulnérabilités du cloud et de l'IA | 50 entrées, dernière il y a 1 j |
+| `https://projectzero.google/feed.xml` | Google Project Zero | 10 entrées, dernière il y a 16 j ; l'ancienne adresse blogspot redirige (302) |
+
+Écarté le même jour : GitHub Security Lab (`github.blog/tag/github-security-lab/feed/`), dernière entrée il y a 45 jours et déjà couvert en partie par `feed:github-blog-ai`.
+
+Dépôts : la découverte GitHub (`PLAN_DECOUVERTE`, decouverte.ts) reçoit des thèmes, jamais des noms de dépôts : productivité et bureau, notes de réunion, MCP finance et TradingView, agents de trading, scraping, écriture IA, vidéo regardée par l'agent, places de marché de skills, orchestration de plusieurs agents de code. Les exemples de l'utilisateur rejoignent le jeu de contrôle (`DEPOTS_CONTROLE`) : `heygen-com/hyperframes` (déjà publié), `blader/humanizer` et `vercel-labs/skills` (find-skills, déjà publiés depuis la liste de l'utilisateur), `bradautomates/claude-video` (watch), `apify/apify-mcp-server`, `stablyai/orca`, `tradesdontlie/tradingview-mcp`, `atilaahmettaner/tradingview-mcp`. « rea » (message coupé) n'a pas été identifié.

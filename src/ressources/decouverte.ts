@@ -51,6 +51,15 @@ export const PLAN_DECOUVERTE: readonly RequeteDecouverte[] = [
   mots('repo', 'marketing skill'), mots('repo', 'seo skill'), mots('repo', 'n8n skill'), mots('repo', 'research skill'),
   mots('repo', 'presentation skill'), mots('repo', 'spreadsheet skill'), mots('repo', 'email skill'), mots('repo', 'finance skill'),
   mots('repo', 'legal skill'), mots('repo', 'education skill'), mots('repo', 'productivity skill'), mots('repo', 'security skill'),
+  // Travail, productivité, agents, MCP et écriture (demande de l'utilisateur du 2026-11-12 : « des repos pour le travail,
+  // pour agent IA, pour productivity, des MCP [comme] TradingView, pour l'écriture », exemples HyperFrames, Humanizer,
+  // watch, Apify, find-skills, Orca). Thèmes et produits reliés, jamais un nom de dépôt : les exemples servent de jeu de
+  // contrôle (controle-decouverte.ts).
+  mots('repo', 'productivity agent'), mots('repo', 'office agent'), mots('repo', 'meeting notes agent'),
+  mots('repo', 'tradingview mcp'), mots('repo', 'finance mcp'), mots('repo', 'trading agent'),
+  mots('repo', 'scraping mcp', true), mots('repo', 'web scraping agent'),
+  mots('repo', 'ai writing'), mots('repo', 'humanize text'), mots('repo', 'watch video'), mots('repo', 'video understanding'),
+  mots('repo', 'skills marketplace'),
   // Mova : vidéo, motion, design, Blender, 3D web, son.
   mots('mova', 'video skill'), mots('mova', 'video agent'), mots('mova', 'motion graphics'), mots('mova', 'html video'),
   mots('mova', 'blender', true), mots('mova', 'threejs skill'), mots('mova', 'three.js agent'), mots('mova', 'webgpu'),
@@ -60,6 +69,8 @@ export const PLAN_DECOUVERTE: readonly RequeteDecouverte[] = [
   // Pyxo : outils de développement assistés.
   sujet('pyxo', 'ai-coding'), mots('pyxo', 'coding agent'), mots('pyxo', 'cli agent'), mots('pyxo', 'code review agent'),
   sujet('pyxo', 'vscode-extension'), mots('pyxo', 'local llm'),
+  // Orchestration de plusieurs agents de code (2026-11-12, exemple Orca).
+  sujet('pyxo', 'agent-ide'), mots('pyxo', 'parallel agents'), mots('pyxo', 'agent orchestration'),
   // Nodi : modèles et inférence.
   mots('nodi', 'open weights model'), sujet('nodi', 'llm-inference'), mots('nodi', 'fine-tuning'), sujet('nodi', 'multimodal'),
   // Pulse : données, infrastructure, observabilité.

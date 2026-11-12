@@ -15,4 +15,13 @@ export const DEPOTS_CONTROLE: readonly string[] = [
   'majidmanzarpour/threejs-game-skills',
   'wheresryan22/anatomy',
   'viettranx/3dviz-pro-max',
+  // Exemples donnés par l'utilisateur le 2026-11-12 (« hyperframe humanizer watch apify findskills orca », et un MCP
+  // TradingView) ; noms relevés par l'API GitHub le même jour. Humanizer et find-skills sont déjà dans la liste de l'utilisateur.
+  'blader/humanizer',
+  'bradautomates/claude-video',
+  'apify/apify-mcp-server',
+  'vercel-labs/skills',
+  'stablyai/orca',
+  'tradesdontlie/tradingview-mcp',
+  'atilaahmettaner/tradingview-mcp',
 ];
