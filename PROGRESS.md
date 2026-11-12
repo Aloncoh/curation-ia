@@ -398,3 +398,10 @@ DeepSeek Flash, 30 actualités, 34 appels, 0,0125 $ (budget autorisé 4 $). 19 �
 - Source `feed:higgsfield-blog` ajoutée avec un filtre de titres (option `titres` des flux) : sur le flux réel, 15 annonces gardées, 281 articles refusés (`titre_hors_motif`). Enregistrée en base par le cycle, pas encore collectée : 179 jobs devant elle dans la file.
 - File de collecte : 207 jobs en attente, ~50 traités par cycle avant l'échéance. Ordre changé de « premier arrivé » à « jamais collectée, puis moins récemment collectée » (test ajouté). 865 tests, typecheck OK.
 - Rédaction des découvertes portée de 2 à 6 par cycle (demande de l'utilisateur).
+
+## 2026-11-12 — Sources de cybersécurité, thèmes de dépôts pour le travail
+
+- Demande de l'utilisateur : sources sur les cyberattaques ; dépôts pour le travail, les agents, la productivité, les MCP (TradingView) et l'écriture, exemples HyperFrames, Humanizer, watch, Apify, find-skills, Orca.
+- 11 flux de sécurité ajoutés (Pulse, contenus externes attribués), chacun interrogé en réel le 2026-11-12 avec `safeGet` et notre analyseur : 200 sans redirection, robots.txt lu jokers compris (docs/sources.md §3.13). Collecte par la chaîne : à constater au prochain cycle.
+- Découverte GitHub : 16 thèmes de plus (156 requêtes par passage). Essai réel `ressources decouvrir --controle`, sans capture ni écriture : 2 184 dépôts trouvés, 21 candidats (3 par agent), jeu de contrôle 10/19. Parmi les exemples de l'utilisateur : HyperFrames, Humanizer, find-skills (déjà publiés), Apify MCP (« mcp server », établis) et Orca (« agent orchestration », montants) ramenés ; claude-video (dernier push le 2026-09-25), tradesdontlie/tradingview-mcp (dernier push le 2026-10-21) et atilaahmettaner/tradingview-mcp (créé en 2025, 5 269 étoiles, sous le seuil de 10 000 des établis) écartés par les fenêtres de dates, pas par les thèmes.
+- Tests : 875 au vert (commit 61b70fa).
