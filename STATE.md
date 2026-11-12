@@ -36,6 +36,7 @@ Réseau social vivant autour de l'IA, du développement et de la technologie : r
 - **Découverte GitHub** : 60 thèmes dont les skills pour tous usages, trois fenêtres de dates, candidats par agent. Jeu de contrôle des 12 dépôts de l'utilisateur, absents des requêtes : 6/12 ramenés.
 - **Premier cycle complet après la correction** (2026-11-11, 10:40 UTC, commit b149166) : terminé en 28 min, les 11 étapes réussies, 7 posts publiés automatiquement (n° 266-269, 273, 275, 276, dont 4 dépôts découverts). La collecte s'arrête à son échéance (50 sources sur 402 ce cycle, 207 en file) : la file sert désormais d'abord les sources jamais collectées, puis les moins récemment collectées.
 - **Higgsfield** (2026-11-11) : flux officiel du blog ajouté (`feed:higgsfield-blog`), filtré sur les titres d'annonce (nouveaux modèles, studios, MCP) ; guides et classements écartés. L'annonce « Fable 5.2 sur Higgsfield MCP » n'existe que sur X (non branché) : Fable 5.2 reste couvert par le post n° 239.
+- **Débit de la sélection** (2026-11-12) : 2 203 actualités collectées depuis le 8 novembre n'ont jamais été examinées. Depuis l'élargissement, 500 à 1 650 arrivent par jour, contre 30 examinées par cycle (70 à 120 par jour), les plus récentes d'abord ; un gros sujet couvert par plusieurs articles (affaire d'espionnage chez NVIDIA, 7 articles) n'est pas reconnu comme tel. Un regroupement des titres sans modèle a été essayé sur ces 2 203 titres et abandonné, car il groupait surtout des expressions banales (« open source », « coding agent »). Piste à décider : tri des titres en lot par le modèle avant la sélection.
 - **Rédaction des découvertes** : 6 par cycle depuis le 2026-11-11 (2 auparavant), sous les plafonds 0,10 $ par cycle et 0,40 $ par jour. TokenEconomizer (Microsoft), trouvé automatiquement, est en ligne (post n° 229). 90 découvertes attendent ; alerte de file dans `npm run etat`.
 - **Fable 5.2** :
   - en ligne : « Mythos 5.2 sur Bedrock » (n° 214) et « Fable 5.2 dans GitHub Copilot » (n° 223) ;
@@ -94,6 +95,7 @@ Ordre, avec mise en ligne et vérification à chaque étape, sur ordinateur d'ab
 
 ## En attente de l'utilisateur
 
+0. **Solde DeepSeek épuisé (bloquant, 2026-11-12)** : toutes les réponses sont des 402 « Insufficient Balance » depuis le 2026-11-11 à 18:31 UTC ; plus aucun brouillon, découverte ni traduction. Recharger le compte sur la page « Top up » de DeepSeek (dépense : à faire par l'utilisateur). Dépense enregistrée à cette date : 1,86 $ sur le plafond de 4 $, qui ne correspond donc pas au solde réel du compte.
 1. **Méthode de connexion** des comptes (parcours communauté).
 2. **Migration** de la table des essais, au moment de l'essai.
 3. **Hébergement du cycle** : choisi le 2026-11-06, dépôt public + déclencheur Cloudflare toutes les 10 min (ADR 0006), objectif 20 min de l'annonce au fil. Reste à faire par l'utilisateur : passer le dépôt en public, créer le compte Cloudflare et le jeton GitHub.

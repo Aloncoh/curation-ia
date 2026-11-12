@@ -2,7 +2,7 @@
 // l'approfondissement, état et coûts. Faux exécuteur : aucune commande lancée, aucun réseau.
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { setPaused } from '../src/control/settings.ts';
-import { coutsReels, ETAPES, etatDeLaChaine, lancerCycle, lireCycle, sourcesDues, type Etape } from '../src/pilotage/pilotage.ts';
+import { coutsReels, ETAPES, etatDeLaChaine, lancerCycle, lireCycle, MOTIF_SOLDE_EPUISE, sourcesDues, type Etape } from '../src/pilotage/pilotage.ts';
 import { SOURCES } from '../src/sources.ts';
 import { createTestDb, type TestDb } from './helpers/db.ts';
 import { ajouterActualite, socle } from './helpers/publications.ts';
@@ -102,6 +102,31 @@ describe('plafond du jour', () => {
     const g = faux();
     await lancerCycle({ database: t.database, executer: g.executer, env: PLAFONDS, confirme: true, maintenant: () => '2026-11-04T09:00:00.000Z' });
     expect(g.appels.map((a) => a.nom)).toContain('traduction');
+  });
+});
+
+describe('solde du fournisseur épuisé', () => {
+  it('le bilan nomme le solde épuisé et saute les étapes payantes suivantes (2026-11-12)', async () => {
+    await ajouterActualite(t.database.client, 1);
+    const appels: string[] = [];
+    const executer = async (e: Etape) => {
+      appels.push(e.nom);
+      if (e.nom !== 'brouillons') return { code: 0 };
+      await t.database.client.execute(`insert into llm_call (run_id, news_item_id, stage, attempt, model, prompt_version, status, reserved_micro_usd, error, started_at) values ('r', 1, 'qualification', 1, 'deepseek-flash', 's5', 'erreur', 5000, 'DeepSeek a répondu 402', '2026-11-12T08:00:00.000Z')`);
+      return { code: 1 };
+    };
+    const bilan = await lancerCycle({ database: t.database, executer, env: PLAFONDS, confirme: true, maintenant: () => '2026-11-12T08:00:00.000Z' });
+    expect(bilan.etapes.find((e) => e.nom === 'brouillons')).toMatchObject({ statut: 'echec', motif: MOTIF_SOLDE_EPUISE });
+    for (const nom of ['redaction_decouvertes', 'traduction'] as const) expect(bilan.etapes.find((e) => e.nom === nom)).toMatchObject({ statut: 'sautee' });
+    expect(appels).not.toContain('traduction');
+    // Les étapes gratuites continuent : la publication du jour a bien lieu.
+    expect(appels.filter((n) => n === 'publication')).toHaveLength(2);
+  });
+
+  it('un échec sans refus de paiement garde le motif habituel', async () => {
+    const bilan = await lancerCycle({ database: t.database, executer: faux({ brouillons: 1 }).executer, env: PLAFONDS, confirme: true, maintenant: () => '2026-11-12T08:00:00.000Z' });
+    expect(bilan.etapes.find((e) => e.nom === 'brouillons')!.motif).toBe('code de sortie 1');
+    expect(bilan.etapes.find((e) => e.nom === 'traduction')!.statut).toBe('reussie');
   });
 });
 

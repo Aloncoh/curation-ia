@@ -128,8 +128,9 @@ export async function lancerCycle(o: OptionsCycle): Promise<BilanCycle> {
     await ecrireCycle(o.database.client, bilan);
   };
 
+  let soldeEpuise = false;
   for (const etape of ETAPES) {
-    const resultat = (statut: ResultatEtape['statut'], motif: string | null, code: number | null = null, depart: string | null = null, duree: number | null = null) =>
+    const resultat =(statut: ResultatEtape['statut'], motif: string | null, code: number | null = null, depart: string | null = null, duree: number | null = null) =>
       bilan.etapes.push({ nom: etape.nom, statut, motif, code, debut: depart, duree_ms: duree });
     if (await isPaused(o.database.db)) {
       bilan.statut = 'pause';
@@ -138,6 +139,7 @@ export async function lancerCycle(o: OptionsCycle): Promise<BilanCycle> {
     const manquantes = (etape.exige ?? []).filter((v) => !o.env[v]?.trim());
     if (manquantes.length) { resultat('sautee', `variables absentes : ${manquantes.join(', ')}`); continue; }
     if (etape.nom === 'collecte' && bilan.sources_dues.length === 0) { resultat('sautee', 'aucune source due'); continue; }
+    if (etape.payante && soldeEpuise) { resultat('sautee', `${MOTIF_SOLDE_EPUISE} (constaté plus tôt dans ce cycle)`); continue; }
     if (etape.payante) {
       const plafond = Math.floor(Number(o.env.CURATION_PLAFOND_JOUR_USD) * 1_000_000);
       const depense = await depenseDuJour(o.database.client, debut);
@@ -150,7 +152,10 @@ export async function lancerCycle(o: OptionsCycle): Promise<BilanCycle> {
     const env: Record<string, string> = etape.nom === 'collecte' ? { CURATION_ONLY_SOURCES: bilan.sources_dues.join(',') } : {};
     try {
       const { code } = await o.executer(etape, env);
-      resultat(code === 0 ? 'reussie' : 'echec', code === 0 ? null : `code de sortie ${code}`, code, depart, Date.parse(now()) - Date.parse(depart));
+      // Solde du fournisseur épuisé (2026-11-12) : le bilan le dit au lieu de « code de sortie 1 », et les étapes payantes
+      // suivantes du cycle sont sautées, puisque chaque appel recevrait le même refus.
+      if (code !== 0 && etape.payante && (await soldeEpuiseDepuis(o.database.client, depart))) soldeEpuise = true;
+      resultat(code === 0 ? 'reussie' : 'echec', code === 0 ? null : soldeEpuise && etape.payante ? MOTIF_SOLDE_EPUISE : `code de sortie ${code}`, code, depart, Date.parse(now()) - Date.parse(depart));
     } catch (e) {
       resultat('echec', e instanceof Error ? e.message.slice(0, 200) : String(e), null, depart, Date.parse(now()) - Date.parse(depart));
     }
@@ -161,6 +166,17 @@ export async function lancerCycle(o: OptionsCycle): Promise<BilanCycle> {
   await enregistrer(bilan.statut === 'en_cours' ? 'termine' : bilan.statut);
   await tracerCycle(o.database.client, bilan, o.env.GITHUB_RUN_ID ? `github:${o.env.GITHUB_RUN_ID}` : `local:${process.pid}`);
   return bilan;
+}
+
+/**
+ * Réponse 402 de DeepSeek : « Insufficient Balance », à recharger sur la page « Top up » du compte (documentation des codes
+ * d'erreur, consultée le 2026-11-12). Le rechargement est une dépense : il revient à l'utilisateur.
+ */
+export const MOTIF_SOLDE_EPUISE = 'solde DeepSeek épuisé (réponse 402) : rechargement du compte à faire par l’utilisateur';
+
+async function soldeEpuiseDepuis(client: Pick<Client, 'execute'>, depuis: string): Promise<boolean> {
+  const r = await client.execute({ sql: `select 1 from llm_call where status = 'erreur' and error = 'DeepSeek a répondu 402' and started_at >= ? limit 1`, args: [depuis] });
+  return r.rows.length > 0;
 }
 
 /**
