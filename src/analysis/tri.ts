@@ -9,7 +9,8 @@
 import { z } from 'zod';
 import { blocDonnees } from './prompts.ts';
 
-export const TRI_VERSION = 'tri-1';
+/** tri-2 (2026-11-12) : cyberattaques majeures, même sans lien avec l'IA (décision de l'utilisateur, consignes s6). */
+export const TRI_VERSION = 'tri-2';
 /** Titres envoyés au plus par appel, dans l'ordre de la file (sujets repris par plusieurs sources, puis les plus récents). */
 export const MAX_TITRES_TRI = 600;
 /** Seuls les titres vus pendant ces derniers jours sont triés : au-delà, une actualité n'est plus urgente et reste dans la file habituelle. */
@@ -25,7 +26,7 @@ export const systemeTri = (n: number) => `Tu tries des titres d'actualités coll
 
 Notre public : développeurs, étudiants et créateurs qui construisent avec l'IA, y compris des créateurs qui ne codent pas.
 
-Chaque ligne donne : numéro | source | date de première vue | titre. Choisis au plus ${n} sujets distincts, du plus important au moins important pour notre public : sortie d'un modèle ou d'un produit d'IA, nouvelle version ou fonction disponible, changement de prix ou d'accès, annonce d'une grande entreprise liée à l'IA (puces, calcul, produit), affaire qui touche tout le secteur de l'IA. Un fait repris par plusieurs titres passe avant un fait isolé : c'est un ordre d'examen, pas une note de qualité. À importance égale, le plus récent d'abord.
+Chaque ligne donne : numéro | source | date de première vue | titre. Choisis au plus ${n} sujets distincts, du plus important au moins important pour notre public : sortie d'un modèle ou d'un produit d'IA, nouvelle version ou fonction disponible, changement de prix ou d'accès, annonce d'une grande entreprise liée à l'IA (puces, calcul, produit), affaire qui touche tout le secteur de l'IA, cyberattaque majeure (grande organisation, service public, service très répandu, chaîne d'approvisionnement logicielle), même sans lien avec l'IA. Un fait repris par plusieurs titres passe avant un fait isolé : c'est un ordre d'examen, pas une note de qualité. À importance égale, le plus récent d'abord.
 
 Plusieurs titres sur le même fait forment un seul sujet : garde une seule ligne, de préférence celle de l'éditeur concerné (source d'origine), sinon le titre le plus précis. Ne retiens pas : tutoriel, liste, comparatif, tribune, recrutement, événement sans changement utilisable. La notoriété de l'éditeur et le ton promotionnel ne comptent pas.
 

@@ -105,11 +105,19 @@ describe('consignes versionnées', () => {
   });
   it('une version existante ne change jamais : toute retouche doit créer une nouvelle version', () => {
     const empreintes = Object.fromEntries(VERSIONS_CONSIGNES.map((v) => [v.version, createHash('sha256').update(texteConsignes(v)).digest('hex').slice(0, 16)]));
-    expect(empreintes).toEqual({ s1: '1a811916118e515c', s2: '567eb930e5f8a74f', s3: '2c448805d17fbcd3', s4: '1b96fae7f0e4ffee', s5: 'ed40f92af2ed970e' });
+    expect(empreintes).toEqual({ s1: '1a811916118e515c', s2: '567eb930e5f8a74f', s3: '2c448805d17fbcd3', s4: '1b96fae7f0e4ffee', s5: 'ed40f92af2ed970e', s6: '111a3825d75f4456' });
+  });
+  it('s6 (décision du 2026-11-12, « Oui, toutes ») : une cyberattaque majeure entre dans le périmètre sans lien avec l’IA', () => {
+    const texte = texteConsignes(consignesActuelles());
+    expect(texte).toContain("Une cyberattaque majeure est dans le périmètre même sans lien avec l'IA ni avec le développement.");
+    expect(texte).toContain('Un incident local ou de petite ampleur reste à 0.');
+    // Première révélation (2), sans conseil pratique (1), hors des outils de notre public (1), source nommée (2) : publiable.
+    expect(decisionDepuisNotes(notes(2, 1, 1, 2))).toBe('publier');
+    expect(decisionDepuisNotes(notes(2, 1, 0, 2))).toBe('ecarter');
   });
   it('s5 (décision du 2026-11-05) : la big tech entre dans le périmètre seulement liée à l’IA', () => {
     const texte = texteConsignes(consignesActuelles());
-    expect(consignesActuelles().version).toBe('s5');
+    expect(consignesActuelles().version).toBe('s6');
     expect(texte).toContain("Dans le périmètre seulement si le document relie explicitement le sujet à l'IA");
     expect(texte).toContain('Sans ce lien écrit dans le document (livraison, sport, mécénat, montre, investissement local, nomination), impact 0.');
     expect(texte).toContain('Le chiffre reste une affirmation de l\'entreprise.');

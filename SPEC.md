@@ -59,7 +59,7 @@ Le **catalogue** (produits, versions) et les **fiches détaillées** servent à 
 | Hébergement et solutions locales | plateformes de déploiement, bases de données, modèles exécutés en local | P6 |
 | Puces et matériel liés à l'IA | annonces de puces, accélérateurs | P6 |
 | Incidents et pannes technologiques importants | panne d'un service d'IA ou d'une plateforme de développement | P6 (pages d'état officielles) |
-| Sécurité | failles, correctifs, bonnes pratiques | P6 ; V1 pour ce que publient déjà les sources actives |
+| Sécurité | failles, correctifs, bonnes pratiques ; cyberattaques majeures, même sans lien avec l'IA ni le développement (décision de l'utilisateur du 2026-11-12, consignes `s6`) | P6 ; V1 pour ce que publient déjà les sources actives, dont 11 flux de sécurité depuis le 2026-11-12 |
 
 - **Noyau** inchangé : assistants et agents de code et leur écosystème ; s'y ajoute une sélection des nouveautés importantes des modèles et applications IA.
 - **Peu de publications, mais utiles** : la qualification rejette plus qu'elle ne publie ; une fréquence maximale est configurable (§7.4).

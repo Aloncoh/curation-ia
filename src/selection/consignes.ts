@@ -81,6 +81,17 @@ const PRECISIONS_S5 = `Précisions sur les grandes entreprises (Apple, NVIDIA, A
 - Impact 2 quand le sujet change la capacité de calcul, les puces disponibles ou le prix d'accès aux modèles dont dépend notre public ; sinon 1.
 - Résultats financiers : nouveauté 1 (chiffres datés), utilité 1 (ce que les chiffres disent de l'offre ou de la demande de calcul pour l'IA), jamais 2. Le chiffre reste une affirmation de l'entreprise.`;
 
+/**
+ * Décision de l'utilisateur du 2026-11-12 (« Oui, toutes » à « Faut-il publier toutes les grosses cyberattaques, même
+ * sans lien avec les outils IA ou dev ? »), prise le jour de l'ajout de 11 flux de sécurité (docs/sources.md §3.13).
+ */
+const PRECISIONS_S6 = `Précisions sur la sécurité (cyberattaques, fuites de données, failles exploitées) :
+- Une cyberattaque majeure est dans le périmètre même sans lien avec l'IA ni avec le développement. Majeure : elle touche une grande organisation, un service public ou une infrastructure, un produit ou un service très répandu, les données d'un grand nombre de personnes, ou la chaîne d'approvisionnement logicielle (paquet, dépôt, extension piégés). Cette précision prime sur celle des grandes entreprises : une attaque contre l'une d'elles n'a pas besoin de lien avec l'IA.
+- Impact : 2 si l'attaque touche des outils, services ou paquets utilisés par notre public (cloud, dépôts, gestionnaires de paquets, assistants d'IA, services en ligne courants), sinon 1. Un incident local ou de petite ampleur reste à 0.
+- Nouveauté : 2 pour la première révélation datée d'une attaque, d'une fuite ou d'une faille exploitée ; 1 pour un suivi qui apporte un fait nouveau (correctif, ampleur, revendication) ; 0 pour un récapitulatif ou un conseil général. Une attaque n'est pas un « événement » au sens des genres à 0.
+- Utilité : 2 si le document dit quoi faire (correctif ou version à installer, service à vérifier, indicateurs à rechercher) ; 1 s'il décrit seulement l'attaque.
+- Solidité : 2 si le document nomme la victime ou le produit touché, la date et l'origine de l'information (déclaration de la victime, avis officiel, chercheurs nommés) ; 1 sinon. Une attribution à un groupe ou à un État que le document ne présente pas comme confirmée rend l'information non confirmée.`;
+
 export const VERSIONS_CONSIGNES: VersionConsignes[] = [
   { version: 's1', date: '2026-10-31', texte: GRILLE, exemples: [], changements: [] },
   {
@@ -119,6 +130,17 @@ export const VERSIONS_CONSIGNES: VersionConsignes[] = [
       { titre: 'Webhook IP ranges added to the Meta API', decision: 'publier', raison: 'Changement d’infrastructure concret à appliquer par ceux qui filtrent les webhooks.', avis: 3 },
     ],
     changements: [{ regle: 'Grandes entreprises dans le périmètre quand le sujet touche l’IA (décision de l’utilisateur du 2026-11-05, « big tech liée à l’IA ») : aucun avis humain en jeu.', avis: [] }],
+  },
+  {
+    version: 's6',
+    date: '2026-11-12',
+    texte: `${GRILLE}\n\n${PRECISIONS_S2}\n\n${PRECISIONS_S3}\n\n${PRECISIONS_S5}\n\n${PRECISIONS_S6}`,
+    exemples: [
+      { titre: 'pull_request_target blocked by default December 2', decision: 'publier', raison: 'Changement de comportement par défaut daté, qui touche les dépôts publics de notre public.', avis: 1 },
+      { titre: 'Claude Code 2.1.314', decision: 'publier', raison: 'Version d’un assistant de code avec une nouvelle permission utilisable tout de suite.', avis: 2 },
+      { titre: 'Webhook IP ranges added to the Meta API', decision: 'publier', raison: 'Changement d’infrastructure concret à appliquer par ceux qui filtrent les webhooks.', avis: 3 },
+    ],
+    changements: [{ regle: 'Cyberattaques majeures dans le périmètre même sans lien avec l’IA ni le développement (décision de l’utilisateur du 2026-11-12, « Oui, toutes ») : aucun avis humain en jeu.', avis: [] }],
   },
 ];
 
