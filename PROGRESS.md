@@ -2,6 +2,17 @@
 
 Évolution datée des jalons et des vérifications **réellement faites**. L'état courant est dans [STATE.md](STATE.md) ; les traces d'exécution détaillées sont en base.
 
+## 2026-11-12 — Nouveautés absentes du fil : solde DeepSeek épuisé
+
+- Demande : pourquoi l'affaire d'espionnage chez NVIDIA, Fable 5.2, Gemini, DeepSeek et Higgsfield avec Claude n'apparaissent pas.
+- Constaté en base (lecture seule) :
+  - Ces nouvelles sont collectées : 7 articles sur l'affaire NVIDIA, DeepSeek V4.1 Flash, les annonces Higgsfield (Flux 3, GPT Image 2.6, Micro Drama Ads), collectées le 11 à 18:08 grâce au nouvel ordre de la file.
+  - Déjà en ligne : Fable 5.2 (n° 239, 223), Gemini 4 Carbon (n° 255, 258), Higgsfield (n° 238, 201).
+  - Les 3 cycles depuis le 11 à 18:06 UTC sont en échec : 56 appels refusés par DeepSeek avec la réponse 402, « Insufficient Balance » d'après la documentation officielle consultée ce jour.
+  - Même avant, 2 203 actualités collectées depuis le 8 n'avaient jamais été examinées (30 par cycle).
+- Fait (commit 3570aea) : le bilan du cycle nomme le solde épuisé au lieu de « code de sortie 1 », et les étapes payantes suivantes du cycle sont sautées. 2 tests ajoutés ; 867 tests et typecheck passent. Regroupement des titres par sujet sans modèle essayé sur les 2 203 titres réels puis abandonné (groupes surtout faits d'expressions banales).
+- Non vérifié : le nouveau motif dans un vrai cycle (prochain cycle planifié).
+
 ## 2026-11-11 — Passage fluide de l'accueil au réseau
 
 - Demande : la page de démarrage n'était pas fluide quand on appuie sur un agent. Constat mesuré : le serveur répond en 0,6 à 1,3 s, et pendant ce temps rien ne bouge ; ensuite l'écran passe d'un coup du fond clair au réseau sombre. Aucune image perdue à 60 i/s (mesure dans Chrome).
