@@ -64,6 +64,12 @@ Pour 100 publications avec Flash : 0,20 $ en hypothèse basse, 1,80 $ en hypoth�
 
 **Ajout du 2026-11-01** : le brouillon gagne `exemple_usage` et `prerequis`, et le prompt s'allonge. Ces chiffres ne le comptent pas encore. En supposant 150 tokens de sortie et 110 de consignes en plus, l'hypothèse centrale monte de 5 à 6 % : 0,36 $ avec Flash, 0,29 $ avec Haiku. C'est une estimation, à remplacer par le coût mesuré du premier lot.
 
+**Tri des titres avant la sélection (2026-11-12, ADR 0015)** : au plus un appel par lot, 600 titres au plus, avec DeepSeek V4.1 Flash aux tarifs de `src/analysis/tarifs.ts` (0,15 $ et 0,60 $ par million de tokens en heures creuses, le double en heures pleines). Ce sont des **estimations, pas des mesures** :
+- **Réservation** : environ 30 000 tokens comptés (méthode prudente, 2 caractères par token) et 4 000 tokens de sortie, soit environ 0,014 $ au plus en heures pleines. La réservation est prise sur le plafond du lot (0,10 $), puis remplacée par le coût réel.
+- **Coût réel attendu** : 0,003 à 0,006 $ par lot (environ 17 000 tokens d'entrée, moins de 1 000 en sortie).
+
+À remplacer par le coût mesuré du premier lot, qui n'a pas pu partir : le solde DeepSeek est épuisé depuis le 2026-11-11.
+
 **Coût mensuel du texte** (plancher de 200 actualités analysées ; au-delà des publications visées, un sujet retenu attend et n'est pas rédigé) :
 
 | Publications par mois | 30 | 90 | 300 | 900 |

@@ -2,6 +2,16 @@
 
 Évolution datée des jalons et des vérifications **réellement faites**. L'état courant est dans [STATE.md](STATE.md) ; les traces d'exécution détaillées sont en base.
 
+## 2026-11-12 — Tri des titres par le modèle avant la sélection
+
+- Demande : faire passer les gros sujets avant le flot d'actualités (« Oui, prépare-le »).
+- Fait (ADR 0015, `src/analysis/tri.ts`) :
+  - quand la file dépasse le lot, un appel trie jusqu'à 600 titres récents (3 jours) et choisit l'ordre d'examen ;
+  - il ne publie ni n'écarte rien, et un échec ramène à l'ordre habituel ;
+  - le tri est activé par la commande réelle, tracé dans `llm_call` (étape `tri`) et pris sous les plafonds existants.
+- Vérifié : 8 tests sur fixtures (`tests/tri.test.ts`, faux modèle), et la suite complète, 875 tests, passe ; le typecheck passe aussi.
+- Non vérifié : aucun appel réel, puisque le solde DeepSeek est épuisé (402). Le coût de 0,003 à 0,006 $ par lot reste une estimation.
+
 ## 2026-11-12 — Nouveautés absentes du fil : solde DeepSeek épuisé
 
 - Demande : pourquoi l'affaire d'espionnage chez NVIDIA, Fable 5.2, Gemini, DeepSeek et Higgsfield avec Claude n'apparaissent pas.

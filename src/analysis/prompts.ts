@@ -30,6 +30,9 @@ const INVISIBLES = /[\s/\p{Cf}\p{Cc}\p{Default_Ignorable_Code_Point}]/gu;
 const neutraliser = (texte: string) =>
   texte.replace(/<[^<]*/g, (suite) => (suite.slice(1).replace(INVISIBLES, '').toLowerCase().startsWith('document') ? `‹${suite.slice(1)}` : suite));
 
+/** Bloc de données collectées, neutralisé d'un seul tenant (utilisé par le tri des titres, ADR 0015). */
+export const blocDonnees = (texte: string) => `<document>\n${neutraliser(texte)}\n</document>`;
+
 /**
  * Le titre est collecté lui aussi : il reste dans le bloc de données. Le tout est neutralisé d'un seul tenant, pour
  * qu'aucune balise ne se forme à la jonction du titre et du texte. Le produit vient du catalogue, il n'est pas citable.

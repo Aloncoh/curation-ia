@@ -23,6 +23,8 @@ await runCommand(async ({ database }) => {
     database, modele: f.client(cle), nomModele, maxItems,
     // CURATION_SOURCES (facultatif) : identifiants séparés par des virgules, pour ne rédiger que ces sources.
     ...(process.env.CURATION_SOURCES ? { sources: process.env.CURATION_SOURCES.split(',').map((x) => x.trim()).filter(Boolean) } : {}), ageMaxJours: AGE_MAX_JOURS, estReprenable: f.reprenable,
+    // Tri des titres par le modèle avant la sélection (ADR 0015) ; CURATION_TRI=0 le coupe.
+    tri: process.env.CURATION_TRI !== '0',
     capRunMicroUsd: usd('CURATION_PLAFOND_EXECUTION_USD'), capTotalMicroUsd: usd('CURATION_PLAFOND_TOTAL_USD'),
   });
   console.log(JSON.stringify(r));

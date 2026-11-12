@@ -413,6 +413,16 @@ La popularité, les étoiles GitHub et le nom d'une grande entreprise ne compten
 
 Chaque décision garde ses notes, ses raisons, ses citations et la version des consignes. `npm run selection -- expliquer <actualité>` dit pourquoi un sujet a été retenu ou non.
 
+**Tri des titres avant la sélection** _(construit le 2026-11-12, testé sur fixtures, jamais lancé en réel : le solde DeepSeek est épuisé ; ADR 0015)_.
+
+Le problème : chaque jour arrivent 500 à 1 650 actualités, mais un lot n'en examine que 30, les plus récentes d'abord. Un gros sujet raconté par plusieurs articles différents, comme l'affaire d'espionnage chez NVIDIA, pouvait donc rester dans la file.
+
+Le tri : avant la sélection, un seul appel au modèle lit jusqu'à 600 titres récents. Il désigne les sujets à examiner en premier, un titre par fait.
+
+Ce qu'il ne fait pas : il ne publie ni n'écarte rien. Chaque sujet passe ensuite par la même qualification et les mêmes contrôles mot pour mot. Si le tri échoue, la file garde son ordre habituel.
+
+Coût estimé : 0,003 à 0,006 $ par lot. C'est une estimation, pas une mesure.
+
 ### Apprendre sans réentraîner
 
 Aucun modèle n'est réentraîné. La boucle repose sur des consignes, des exemples et un retour humain :

@@ -17,10 +17,11 @@ import { documentUtilisateur, messageRevision, PROMPT_VERSION, SYSTEME_QUALIFICA
 import { consignesActuelles, deciderSelection, passagesRetrouves, preselection, type Selection } from '../selection/consignes.ts';
 import { creerPublication, NIVEAU_PREUVE_V1, synchroniserComptes } from './publication.ts';
 import { Brouillon, DIAPOSITIVES, Qualification } from './schemas.ts';
+import { FENETRE_TRI_JOURS, listeTitres, MAX_TITRES_TRI, ordonner, retenus, systemeTri, Tri, TRI_VERSION, type TitreATrier } from './tri.ts';
 
 export const MAX_TENTATIVES = 2;
 /** La réflexion du modèle compte dans ces plafonds ; une réponse tronquée repart une fois avec le double. */
-export const MAX_TOKENS = { qualification: 4_000, redaction: 12_000, revision: 12_000, relance: 12_000 };
+export const MAX_TOKENS = { qualification: 4_000, redaction: 12_000, revision: 12_000, relance: 12_000, tri: 4_000 };
 /** Brouillons « à vérifier » relancés au plus par lot (une seule relance par brouillon, payée sur le plafond du lot). */
 export const MAX_RELANCES_PAR_LOT = 10;
 /** Renouvelé pendant chaque appel : un bail expiré signifie que le processus a disparu ou s'est arrêté, par exemple en veille. */
@@ -95,6 +96,8 @@ export interface OptionsBrouillons {
   estReprenable?: (e: unknown) => boolean;
   attente?: (ms: number) => Promise<unknown>;
   dureeBailMs?: number;
+  /** Tri des titres par le modèle avant la sélection (ADR 0015). Désactivé sans valeur : seule la commande réelle l'active. */
+  tri?: boolean;
 }
 
 /**
@@ -102,7 +105,7 @@ export interface OptionsBrouillons {
  * déjà qualifiées et payées. Un sujet à approfondir repasse quand une nouvelle capture arrive. Une capture de moins de trois mots ne permet aucune citation, une capture trop longue
  * coûterait trop cher : elles ne partent pas au modèle et ne figent rien, l'actualité repassera avec une autre capture.
  */
-async function aTraiter(client: Client, limite: number, sources?: readonly string[]) {
+async function aTraiter(client: Client, sources?: readonly string[]) {
   const r = await client.execute(
     `select n.id, n.title, n.announced_at, n.first_seen_at, v.version, pr.name as produit,
             c.id as snapshot_id, c.document_id, c.title as snapshot_title, c.content, c.content_format, src.id as source_id, src.name as source_nom,
@@ -131,7 +134,7 @@ async function aTraiter(client: Client, limite: number, sources?: readonly strin
   const lignesSource = sources?.length ? r.rows.filter((row) => sources.includes(String(row.source_id))) : r.rows;
   const tailleAdmise = lignesSource.filter((row) => String(row.content).length + String(row.snapshot_title).length <= LONGUEUR_MAX_CAPTURE);
   const avecTexte = tailleAdmise.filter((row) => !moinsDeTroisMots(toPlainText(String(row.content), String(row.content_format))));
-  return { lignes: avecTexte.slice(0, limite), sansTexte: tailleAdmise.length - avecTexte.length, tropLongues: lignesSource.length - tailleAdmise.length };
+  return { candidats: avecTexte, sansTexte: tailleAdmise.length - avecTexte.length, tropLongues: lignesSource.length - tailleAdmise.length };
 }
 
 /** Une qualification payée se réutilise tant que la capture, le prompt et le modèle sont les mêmes. */
@@ -234,7 +237,7 @@ export async function genererBrouillons(o: OptionsBrouillons) {
     }
   }
 
-  async function appeler<T>(newsItemId: number, stage: keyof typeof MAX_TOKENS, systeme: string, utilisateur: string, schema: z.ZodType<T>): Promise<Sortie<T>> {
+  async function appeler<T>(newsItemId: number, stage: keyof typeof MAX_TOKENS, systeme: string, utilisateur: string, schema: z.ZodType<T>, version = PROMPT_VERSION): Promise<Sortie<T>> {
     let maxTokens = MAX_TOKENS[stage];
     for (let attempt = 1; attempt <= MAX_TENTATIVES; attempt++) {
       if (await isPaused(o.database.db)) throw new ArretPause('pause active');
@@ -251,7 +254,7 @@ export async function genererBrouillons(o: OptionsBrouillons) {
       await renouvelerBail();
       let id: number;
       try {
-        id = await ecrire(() => reserver(client, plafonds, { newsItemId, stage, attempt, model: o.nomModele, promptVersion: PROMPT_VERSION, inputTokens, maxTokens }, now()));
+        id = await ecrire(() => reserver(client, plafonds, { newsItemId, stage, attempt, model: o.nomModele, promptVersion: version, inputTokens, maxTokens }, now()));
       } catch (e) {
         // Le premier essai tronqué est payé : sans marge pour le second, le résultat devient définitif, sinon chaque relance le repaierait.
         if (e instanceof BudgetInsuffisant && maxTokens > MAX_TOKENS[stage]) return { ok: false, statut: 'sortie_tronquee' };
@@ -286,7 +289,7 @@ export async function genererBrouillons(o: OptionsBrouillons) {
 
   let statut = 'terminee';
   let motif: string | null = null;
-  const bilan = { relances: 0, relances_publiables: 0, revisions_gardees: 0, ecartees: 0, anciennes: 0, a_approfondir: 0, invalides: 0, tronquees: 0, refus: 0, rejetees: 0, a_verifier: 0, controlees: 0, sans_texte: 0, trop_longues: 0, qualifications_reprises: 0 };
+  const bilan = { relances: 0, relances_publiables: 0, revisions_gardees: 0, ecartees: 0, anciennes: 0, a_approfondir: 0, invalides: 0, tronquees: 0, refus: 0, rejetees: 0, a_verifier: 0, controlees: 0, sans_texte: 0, trop_longues: 0, qualifications_reprises: 0, tri_titres: 0, tri_retenus: 0, tri_echec: null as string | null };
   try {
     // Relance (décision de l'utilisateur du 2026-11-05) : avant les nouveaux sujets, quelques brouillons restés « à
     // vérifier » reçoivent une seconde révision guidée par leurs écarts. Elle n'est gardée que si elle passe tous les
@@ -341,9 +344,39 @@ export async function genererBrouillons(o: OptionsBrouillons) {
       ], 'write'));
       bilan.relances_publiables++;
     }
-    const { lignes, sansTexte, tropLongues } = await aTraiter(client, o.maxItems, o.sources);
+    const { candidats, sansTexte, tropLongues } = await aTraiter(client, o.sources);
     bilan.sans_texte = sansTexte;
     bilan.trop_longues = tropLongues;
+    let file = candidats;
+    // Tri des titres (2026-11-12, ADR 0015) : quand la file dépasse le lot, un seul appel choisit l'ordre d'examen des
+    // nouveaux titres récents. Il ne décide rien d'autre ; s'il échoue, l'ordre habituel reste.
+    if (o.tri && candidats.length > o.maxItems) {
+      const connus = candidats.filter((row) => row.etat !== null);
+      const depuis = horloge().getTime() - FENETRE_TRI_JOURS * 86_400_000;
+      const nouveaux: TitreATrier[] = candidats
+        .filter((row) => row.etat === null && Date.parse(String(row.first_seen_at)) >= depuis
+          && (o.ageMaxJours === undefined || !preselection({ annonceLe: row.announced_at === null ? null : String(row.announced_at), vuLe: String(row.first_seen_at) }, o.ageMaxJours)))
+        .slice(0, MAX_TITRES_TRI)
+        .map((row) => ({ id: Number(row.id), titre: String(row.title), source: String(row.source_nom), vuLe: String(row.first_seen_at) }));
+      const places = o.maxItems - connus.length;
+      if (places > 0 && nouveaux.length > places) {
+        bilan.tri_titres = nouveaux.length;
+        let tri: Sortie<Tri>;
+        try {
+          tri = await appeler(nouveaux[0]!.id, 'tri', systemeTri(places), listeTitres(nouveaux), Tri, TRI_VERSION);
+        } catch (e) {
+          if (!(e instanceof BudgetInsuffisant)) throw e;
+          tri = { ok: false, statut: 'sortie_invalide' };
+          bilan.tri_echec = 'budget';
+        }
+        if (tri.ok) {
+          const choix = retenus(nouveaux, tri.valeur, places);
+          bilan.tri_retenus = choix.length;
+          file = ordonner(candidats, (row) => Number(row.id), [...connus.map((row) => Number(row.id)), ...choix.map((c) => c.id)]);
+        } else bilan.tri_echec ??= tri.statut;
+      }
+    }
+    const lignes = file.slice(0, o.maxItems);
     for (const row of lignes) {
       const id = Number(row.id);
       const titre = String(row.title);
