@@ -406,3 +406,16 @@ DeepSeek Flash, 30 actualités, 34 appels, 0,0125 $ (budget autorisé 4 $). 19 �
 - Découverte GitHub : 16 thèmes de plus (156 requêtes par passage). Essai réel `ressources decouvrir --controle`, sans capture ni écriture : 2 184 dépôts trouvés, 21 candidats (3 par agent), jeu de contrôle 10/19. Parmi les exemples de l'utilisateur : HyperFrames, Humanizer, find-skills (déjà publiés), Apify MCP (« mcp server », établis) et Orca (« agent orchestration », montants) ramenés ; claude-video (dernier push le 2026-09-25), tradesdontlie/tradingview-mcp (dernier push le 2026-10-21) et atilaahmettaner/tradingview-mcp (créé en 2025, 5 269 étoiles, sous le seuil de 10 000 des établis) écartés par les fenêtres de dates, pas par les thèmes.
 - Tests : 875 au vert (commit 61b70fa).
 - Consignes `s6` (décision de l'utilisateur du 2026-11-12, « Oui, toutes ») : cyberattaques majeures dans le périmètre même sans lien avec l'IA ; Pulse nommé pour la sécurité dans la répartition ; tri des titres `tri-2`. Versions s1 à s5 inchangées (empreintes vérifiées). 876 tests au vert. Aucun brouillon « qualifiee » en base : aucune qualification à repayer. Non essayé en réel : solde DeepSeek épuisé.
+
+## 2026-11-13 — Chaîne préparée pour Claude Haiku 5.5 (ADR 0016)
+
+- Décision de l'utilisateur (« Oui, prépare-le ») : passer la chaîne de DeepSeek, dont le solde est épuisé, à Claude, sur les crédits API de l'abonnement Max.
+- Tarifs revérifiés le 2026-11-13 sur la documentation officielle : identiques à `tarifs.ts`.
+- Changements :
+  - étapes payantes : elles exigent la clé du fournisseur de `CURATION_MODELE` ;
+  - traduction : elle passe par `fournisseur.ts` ;
+  - solde épuisé : il est reconnu aussi pour Claude (libellé non relevé en réel) ;
+  - `chaine.yml` : `CURATION_MODELE: claude-haiku-5-5` et le secret `ANTHROPIC_API_KEY`.
+- Tests : 878 au vert, dont un nouveau sur la clé exigée selon le modèle ; types vérifiés.
+- Aucun appel réel : la clé n'existe pas encore. La traduction, les découvertes et le tri n'ont jamais tourné avec Haiku.
+

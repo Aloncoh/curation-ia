@@ -32,12 +32,17 @@ jobs:
       DATABASE_URL: ${{ secrets.TURSO_DATABASE_URL }}
       DATABASE_AUTH_TOKEN: ${{ secrets.TURSO_AUTH_TOKEN }}
       DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+      # Clé Claude, créée par l'utilisateur dans la Console reliée à son abonnement Max (crédits API mensuels) ; absente :
+      # les étapes payantes sont sautées avec le motif « variables absentes : ANTHROPIC_API_KEY ».
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
       # Jeton intégré de l'exécution (lecture seule, permissions ci-dessus), envoyé seulement à api.github.com : 1 000
       # requêtes par heure au lieu de 60, recherche 30 par minute au lieu de 10 (documentation GitHub, 2026-11-10).
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # Adresse de contact exigée par la SEC pour déclarer le client EDGAR (2026-11-05) ; absente : sources EDGAR différées.
       CURATION_CONTACT_SEC: ${{ secrets.CURATION_CONTACT_SEC }}
-      CURATION_MODELE: deepseek-flash
+      # Claude Haiku 5.5 depuis le 2026-11-13 (décision de l'utilisateur, « Oui, prépare-le » ; ADR 0016) : le solde DeepSeek
+      # est épuisé depuis le 2026-11-11, et l'abonnement Max comprend des crédits API Claude. Retour possible : deepseek-flash.
+      CURATION_MODELE: claude-haiku-5-5
       # Plafonds explicites. Sans variable de dépôt pour le total et le jour, les étapes payantes sont sautées.
       # 30 par cycle (2026-11-05) : le cron de GitHub saute des heures entières (aucun cycle de 03:28 à 12:14 UTC), et 10
       # ne suffisaient pas à suivre ~150 actualités en attente. Les plafonds par exécution, jour et total restent inchangés.

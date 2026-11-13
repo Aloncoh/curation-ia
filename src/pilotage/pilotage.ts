@@ -6,6 +6,7 @@
 // - continue après l'échec d'une étape, pour que la publication du jour ne dépende pas d'une source en panne ;
 // - enregistre son bilan dans le réglage `chaine.dernier_cycle`, lu par `npm run etat`.
 import type { Client } from '@libsql/client';
+import { fournisseur } from '../analysis/fournisseur.ts';
 import { isPaused } from '../control/settings.ts';
 import type { Database } from '../db/client.ts';
 import { jourParis } from '../ressources/planification.ts';
@@ -23,10 +24,18 @@ export interface Etape {
   payante?: boolean;
 }
 
+/**
+ * Dans `exige`, la clé du fournisseur de CURATION_MODELE (ANTHROPIC_API_KEY pour un modèle Claude, DEEPSEEK_API_KEY pour
+ * DeepSeek) : changer de modèle ne demande plus de modifier les étapes (passage à Claude préparé le 2026-11-13).
+ */
+export const CLE_DU_MODELE = '<clé du modèle>';
+const variableExigee = (v: string, env: Record<string, string | undefined>) =>
+  v === CLE_DU_MODELE ? (fournisseur(env.CURATION_MODELE ?? '')?.cle ?? 'clé d’un fournisseur pris en charge (CURATION_MODELE inconnu)') : v;
+
 export const ETAPES: readonly Etape[] = [
   { nom: 'collecte', script: 'src/cli/collect.ts', args: [] },
   { nom: 'approfondissement', script: 'src/cli/approfondir.ts', args: [], cadenceMinutes: 60 },
-  { nom: 'brouillons', script: 'src/cli/brouillons.ts', args: ['--confirmer'], exige: ['CURATION_MODELE', 'DEEPSEEK_API_KEY', 'CURATION_MAX_ACTUALITES', 'CURATION_PLAFOND_EXECUTION_USD', 'CURATION_PLAFOND_TOTAL_USD', 'CURATION_PLAFOND_JOUR_USD'], payante: true },
+  { nom: 'brouillons', script: 'src/cli/brouillons.ts', args: ['--confirmer'], exige: ['CURATION_MODELE', CLE_DU_MODELE, 'CURATION_MAX_ACTUALITES', 'CURATION_PLAFOND_EXECUTION_USD', 'CURATION_PLAFOND_TOTAL_USD', 'CURATION_PLAFOND_JOUR_USD'], payante: true },
   { nom: 'controles', script: 'src/cli/brouillons-recontroler.ts', args: [] },
   { nom: 'planification', script: 'src/cli/brouillons-planifier.ts', args: [] },
   // Publication des posts déjà prévus dès la planification faite (2026-11-11) : du 10 au 11 novembre, les cinq cycles ont
@@ -35,8 +44,8 @@ export const ETAPES: readonly Etape[] = [
   { nom: 'publication', script: 'src/cli/publier.ts', args: ['--confirmer'] },
   // Découvertes (P6) : recherche GitHub toutes les 6 heures (plafond de l'API sans jeton), grille d1 et rédaction ensuite.
   { nom: 'decouverte', script: 'src/cli/ressources.ts', args: ['decouvrir', '--capturer'], cadenceMinutes: 360 },
-  { nom: 'redaction_decouvertes', script: 'src/cli/ressources.ts', args: ['rediger', '--confirmer'], exige: ['CURATION_MODELE', 'DEEPSEEK_API_KEY', 'CURATION_MAX_DECOUVERTES', 'CURATION_PLAFOND_EXECUTION_USD', 'CURATION_PLAFOND_TOTAL_USD', 'CURATION_PLAFOND_JOUR_USD'], payante: true },
-  { nom: 'traduction', script: 'src/cli/traduire.ts', args: ['--confirmer'], exige: ['CURATION_MODELE', 'DEEPSEEK_API_KEY', 'CURATION_MAX_TRADUCTIONS', 'CURATION_PLAFOND_EXECUTION_USD', 'CURATION_PLAFOND_TOTAL_USD', 'CURATION_PLAFOND_JOUR_USD'], payante: true },
+  { nom: 'redaction_decouvertes', script: 'src/cli/ressources.ts', args: ['rediger', '--confirmer'], exige: ['CURATION_MODELE', CLE_DU_MODELE, 'CURATION_MAX_DECOUVERTES', 'CURATION_PLAFOND_EXECUTION_USD', 'CURATION_PLAFOND_TOTAL_USD', 'CURATION_PLAFOND_JOUR_USD'], payante: true },
+  { nom: 'traduction', script: 'src/cli/traduire.ts', args: ['--confirmer'], exige: ['CURATION_MODELE', CLE_DU_MODELE, 'CURATION_MAX_TRADUCTIONS', 'CURATION_PLAFOND_EXECUTION_USD', 'CURATION_PLAFOND_TOTAL_USD', 'CURATION_PLAFOND_JOUR_USD'], payante: true },
   // Vidéo de la source rattachée aux posts récents (décision de l'utilisateur du 2026-11-10), avant leur publication.
   { nom: 'videos', script: 'src/cli/videos.ts', args: ['--confirmer'] },
   { nom: 'publication', script: 'src/cli/publier.ts', args: ['--confirmer'] },
@@ -136,7 +145,7 @@ export async function lancerCycle(o: OptionsCycle): Promise<BilanCycle> {
       bilan.statut = 'pause';
       break;
     }
-    const manquantes = (etape.exige ?? []).filter((v) => !o.env[v]?.trim());
+    const manquantes = (etape.exige ?? []).map((v) => variableExigee(v, o.env)).filter((v) => !o.env[v]?.trim());
     if (manquantes.length) { resultat('sautee', `variables absentes : ${manquantes.join(', ')}`); continue; }
     if (etape.nom === 'collecte' && bilan.sources_dues.length === 0) { resultat('sautee', 'aucune source due'); continue; }
     if (etape.payante && soldeEpuise) { resultat('sautee', `${MOTIF_SOLDE_EPUISE} (constaté plus tôt dans ce cycle)`); continue; }
@@ -172,10 +181,14 @@ export async function lancerCycle(o: OptionsCycle): Promise<BilanCycle> {
  * Réponse 402 de DeepSeek : « Insufficient Balance », à recharger sur la page « Top up » du compte (documentation des codes
  * d'erreur, consultée le 2026-11-12). Le rechargement est une dépense : il revient à l'utilisateur.
  */
-export const MOTIF_SOLDE_EPUISE = 'solde DeepSeek épuisé (réponse 402) : rechargement du compte à faire par l’utilisateur';
+export const MOTIF_SOLDE_EPUISE = 'solde du fournisseur épuisé (DeepSeek : réponse 402 ; Claude : crédits insuffisants) : rechargement ou crédits à faire par l’utilisateur';
 
+/**
+ * Claude (2026-11-13) : un compte sans crédit répond 400 avec « credit balance is too low » dans le message d'erreur. Ce
+ * libellé n'a pas été relevé sur une réponse réelle : sans lui, l'étape échoue comme avant, avec son code de sortie.
+ */
 async function soldeEpuiseDepuis(client: Pick<Client, 'execute'>, depuis: string): Promise<boolean> {
-  const r = await client.execute({ sql: `select 1 from llm_call where status = 'erreur' and error = 'DeepSeek a répondu 402' and started_at >= ? limit 1`, args: [depuis] });
+  const r = await client.execute({ sql: `select 1 from llm_call where status = 'erreur' and (error = 'DeepSeek a répondu 402' or error like '%credit balance is too low%') and started_at >= ? limit 1`, args: [depuis] });
   return r.rows.length > 0;
 }
 

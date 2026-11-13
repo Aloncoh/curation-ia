@@ -702,3 +702,21 @@ Quand l'éditeur a placé une vidéo dans sa page, elle s'affiche sous le post, 
 **Dépôts GitHub.** La découverte automatique cherche maintenant aussi des thèmes de travail et de productivité : agents de bureau, notes de réunion, MCP finance et TradingView, scraping, écriture, vidéo regardée par l'agent, orchestration de plusieurs agents de code. Elle cherche par thème, jamais par nom de dépôt. Les exemples donnés par l'utilisateur (HyperFrames, Humanizer, watch, Apify, find-skills, Orca, MCP TradingView) servent de jeu de contrôle pour mesurer si la recherche les retrouve d'elle-même.
 
 **Limite.** Plus de sources veut dire plus d'actualités à examiner, alors que le site n'en examine qu'une trentaine par cycle ; le tri des titres par le modèle, en préparation, doit faire passer les gros sujets en premier. Une cyberattaque sans lien avec les outils de notre public (développeurs, créateurs qui construisent avec l'IA) peut encore être écartée par la grille de sélection.
+
+## 21. Pourquoi une clé API, et le passage à Claude _(préparé le 2026-11-13 ; en attente de la clé de l'utilisateur)_
+
+Les six agents du site ne sont pas des programmes autonomes. Ce sont des étapes de code. Chaque heure, sur GitHub et sans personne, elles envoient un texte à un modèle (« note cette actualité », « rédige le post », « traduis-le ») et contrôlent sa réponse. Pour parler au modèle, ce programme a besoin de sa propre clé, et chaque appel est facturé au volume de texte.
+
+Un abonnement Claude (Max) paie l'usage interactif de la personne : l'application et Claude Code. Il ne couvre pas un programme qui tourne seul. En revanche, il comprend **100 $ de crédits API Claude par mois**, à réclamer dans claude.ai (Settings > Billing), qui expirent chaque mois (documentation officielle, lue le 2026-11-12).
+
+Du 1er au 12 novembre, la chaîne a tourné sur DeepSeek V4.1 Flash, le moins cher, pour environ 2 $ au total. Le solde est épuisé depuis le 11 novembre au soir. La chaîne est désormais réglée sur **Claude Haiku 5.5**, avec les crédits Max.
+
+D'après la comparaison réelle du 1er novembre (ADR 0009) :
+- Haiku invente moins : 3 éléments erronés contre 13 sur 19 sujets ;
+- Haiku coûte environ 3 fois plus par rédaction ;
+- à ce rythme, environ 14 $ par mois (estimation), bien en dessous des crédits.
+
+Ce qui reste à faire par le porteur du projet, car Claude ne crée ni compte ni clé : réclamer les crédits, créer la clé, la placer dans les secrets GitHub et dans `.env.local`, et fixer de nouveaux plafonds de dépense.
+
+Modèle local, sur le Mac : gratuit à l'appel. Il faudrait pourtant laisser le Mac allumé en permanence, ce serait plus lent, et les petits modèles respectent moins bien les citations mot pour mot qu'exigent nos contrôles.
+

@@ -58,6 +58,17 @@ describe('cycle', () => {
     expect(bilan.etapes.find((e) => e.nom === 'brouillons')!.motif).toContain('DEEPSEEK_API_KEY');
   });
 
+  it('exige la clé du fournisseur du modèle choisi', async () => {
+    const claude = { ...PLAFONDS, CURATION_MODELE: 'claude-haiku-5-5' };
+    const sans = faux();
+    const bilan = await lancerCycle({ database: t.database, executer: sans.executer, env: claude, confirme: true });
+    expect(bilan.etapes.find((e) => e.nom === 'brouillons')!.motif).toContain('ANTHROPIC_API_KEY');
+    expect(sans.appels.map((a) => a.nom)).not.toContain('brouillons');
+    const avec = faux();
+    await lancerCycle({ database: t.database, executer: avec.executer, env: { ...claude, ANTHROPIC_API_KEY: 'cle-de-test' }, confirme: true });
+    expect(avec.appels.map((a) => a.nom)).toEqual(expect.arrayContaining(['brouillons', 'redaction_decouvertes', 'traduction']));
+  });
+
   it('ne collecte que les sources dues et n\'approfondit qu\'une fois par heure', async () => {
     const c = t.database.client;
     // Les sources différées (registre d'accès) ne sont jamais dues ; toutes les autres le sont au premier cycle.
