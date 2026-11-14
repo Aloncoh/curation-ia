@@ -1,6 +1,6 @@
 # ADR-0016 : faire tourner la chaîne sur Claude Haiku 5.5, payé par les crédits API de l'abonnement Max
 
-**Statut :** Acceptée par l'utilisateur, en attente de sa clé
+**Statut :** Non appliquée. Le 2026-11-14, l'utilisateur garde DeepSeek (« On change rien ») : `chaine.yml` revient à `deepseek-flash`. Le code multi-fournisseur reste en place ; le passage tient en une ligne si l'utilisateur le décide un jour.
 **Date :** 2026-11-13
 **Décideurs :** l'utilisateur (fournisseur, crédits, clé, plafonds) ; Claude (mise en œuvre)
 
