@@ -3,6 +3,7 @@
 // Chaque changement d'état (début, fin réussie, échec) est écrit dans une seule transaction :
 // un arrêt brutal entre deux étapes ne laisse jamais de trace incohérente.
 import { HACKERNEWS_HEADERS, parseHackerNews } from '../collect/hackernews.ts';
+import { dernierNumero, parseLettre } from '../collect/lettre.ts';
 import { classerEchec, lireRetryAfter, prochainEssai } from '../collect/acces.ts';
 import { HUGGINGFACE_HEADERS, parseModelesTendance } from '../collect/huggingface.ts';
 import { randomUUID } from 'node:crypto';
@@ -74,7 +75,26 @@ export interface CollectSummary {
 const EMPTY_COUNTS = { newDocuments: 0, unchangedDocuments: 0, changedDocuments: 0, newNewsItems: 0, possibleGap: false };
 
 /** Ce qui change d'un type de source à l'autre : l'adresse interrogée, les en-têtes et la lecture de la réponse. */
-export function adapterFor(definition: SourceDefinition): { url: string; headers: Record<string, string>; parse: (body: string) => ParsedFeed } {
+export function adapterFor(definition: SourceDefinition): {
+  url: string;
+  headers: Record<string, string>;
+  parse: (body: string) => ParsedFeed;
+  /** Seconde lecture chez le même éditeur, décidée par la première réponse (lettre : flux, puis page du dernier numéro). */
+  suite?: (body: string) => { url: string; headers: Record<string, string>; parse: (body: string) => ParsedFeed };
+} {
+  if (definition.kind === 'feed' && definition.config.lettre) {
+    const { lettre, maxItems, linkHosts } = definition.config;
+    return {
+      url: definition.config.url,
+      headers: FEED_HEADERS,
+      // Le flux seul ne donne aucun document : les articles viennent de la page du numéro (suite).
+      parse: () => ({ documents: [], rejected: {} }),
+      suite: (corpsFlux) => {
+        const numero = dernierNumero(corpsFlux, { maxItems: 50, linkHosts });
+        return { url: numero.url, headers: { accept: 'text/html' }, parse: (html) => parseLettre(html, { nom: lettre.nom, numero: numero.url, paruLe: numero.paruLe, maxItems, hotesLettre: definition.allowedHosts }) };
+      },
+    };
+  }
   if (definition.kind === 'github_releases') {
     const parse = (body: string) => ({ documents: parseReleases(body, definition.config), rejected: {} });
     return { url: releasesUrl(definition.config), headers: GITHUB_API_HEADERS, parse };
@@ -191,8 +211,16 @@ async function processJob(
     const fetched = await options.fetcher(adapter.url, adapter.headers, definition.allowedHosts, { maxBytes: definition.maxResponseBytes });
     await recordStep('succeeded', { url: adapter.url, httpStatus: fetched.status, bytes: fetched.bytes, mode: options.mode });
 
+    let lecture = { corps: fetched.body, parse: adapter.parse };
+    if (adapter.suite) {
+      const suite = adapter.suite(fetched.body);
+      const page = await options.fetcher(suite.url, suite.headers, definition.allowedHosts, { maxBytes: definition.maxResponseBytes });
+      await recordStep('succeeded', { url: suite.url, httpStatus: page.status, bytes: page.bytes, mode: options.mode });
+      lecture = { corps: page.body, parse: suite.parse };
+    }
+
     stepName = 'parse';
-    const { documents, rejected } = adapter.parse(fetched.body);
+    const { documents, rejected } = lecture.parse(lecture.corps);
     await recordStep('succeeded', { documents: documents.length, rejected });
 
     // Fin réussie : documents, produits, versions, actualités, étape, job, exécution et source dans une seule transaction.

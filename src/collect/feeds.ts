@@ -22,6 +22,11 @@ export interface FeedConfig {
    * annonces et articles de référencement (Higgsfield, 2026-11-11) : les autres entrées sont refusées et comptées.
    */
   titres?: string;
+  /**
+   * Lettre d'information utilisée comme signal (TLDR AI, 2026-11-16) : le flux donne le dernier numéro, dont la page est
+   * lue pour en tirer les articles signalés (lettre.ts). Les entrées du flux ne deviennent pas des documents.
+   */
+  lettre?: { nom: string };
 }
 
 /**

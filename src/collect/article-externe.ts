@@ -22,7 +22,7 @@ interface Options {
   deps?: { resolve?: Resolver; transport?: Transport };
 }
 
-async function robotsDe(hote: string, o: Options): Promise<EtatRobots> {
+export async function robotsDe(hote: string, o: Pick<Options, 'userAgent' | 'timeoutMs' | 'deps'>): Promise<EtatRobots> {
   try {
     const r = await safeGet(`https://${hote}/robots.txt`, { allowedHosts: [hote], timeoutMs: o.timeoutMs, maxBytes: TAILLE_MAX_ROBOTS }, { 'user-agent': o.userAgent, accept: 'text/plain' }, o.deps);
     return { etat: 'lu', texte: r.body.toString('utf8') };

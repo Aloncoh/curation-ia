@@ -5,12 +5,18 @@
 import { lireReglageEntier } from '../../control/settings.ts';
 import { workerId } from '../../cli/shared.ts';
 import { executerCapture } from '../capture.ts';
-import { chercherPlan, JOURS_DEFAUT, MAX_CANDIDATS_PAR_COMPTE, MAX_CANDIDATS_REGISTRE, trierCandidats, versEntree } from '../decouverte.ts';
+import { chercherClassements } from '../classements.ts';
+import { chercherPlan, JOURS_DEFAUT, MAX_CANDIDATS_CLASSEMENTS, MAX_CANDIDATS_PAR_COMPTE, MAX_CANDIDATS_REGISTRE, trierCandidats, versEntree } from '../decouverte.ts';
 import { DEPOTS_CONTROLE } from '../controle-decouverte.ts';
 import { chercherRegistreMcp } from '../registre-mcp.ts';
 import { RESSOURCES, SOURCE_PREFIXE } from '../liste.ts';
 import { SELECTIONS } from '../selection/liste.ts';
 import type { ContexteCommande } from './contexte.ts';
+
+/** Budgets de temps des recherches, comptés depuis le début de la commande (l'étape du cycle est arrêtée à 10 min). */
+const BUDGET_PLAN_MS = 4 * 60_000;
+const ECHEANCE_REGISTRE_MS = 5.5 * 60_000;
+const ECHEANCE_CLASSEMENTS_MS = 6.75 * 60_000;
 
 export async function decouvrir(args: string[], ctx: ContexteCommande): Promise<number> {
   let jours = JOURS_DEFAUT;
@@ -34,7 +40,12 @@ export async function decouvrir(args: string[], ctx: ContexteCommande): Promise<
   const seuil = await lireReglageEntier(database.db, 'decouverte.seuil_etoiles');
   const depuis = new Date(Date.parse(maintenant) - jours * 86_400_000).toISOString().slice(0, 10);
 
-  const { trouves, erreurs, illisibles, requetes } = await chercherPlan({ userAgent: ctx.config.userAgent, seuil, maintenant, ...(ctx.transport ? { transport: ctx.transport } : {}), ...(ctx.resolve ? { resolve: ctx.resolve } : {}) });
+  // Budget de temps (2026-11-16) : le cycle arrête l'étape à 10 min. Les recherches s'arrêtent d'elles-mêmes avant, pour
+  // laisser le temps de capturer les candidats : plan par agent 4 min, registre jusqu'à 5 min 30, classements jusqu'à
+  // 6 min 45. Chaque passage part d'un autre point du plan (créneau de 6 h, la cadence de l'étape).
+  const debutRecherches = Date.now();
+  const decalage = Math.floor(Date.parse(maintenant) / (6 * 3_600_000)) * 67;
+  const { trouves, erreurs, illisibles, requetes, reportees } = await chercherPlan({ userAgent: ctx.config.userAgent, seuil, maintenant, budgetMs: BUDGET_PLAN_MS, decalage, ...(ctx.transport ? { transport: ctx.transport } : {}), ...(ctx.resolve ? { resolve: ctx.resolve } : {}) });
   const dejaCaptures = await database.client.execute({ sql: `select id from source where id like ?`, args: [`${SOURCE_PREFIXE}%`] });
   // Dépôts déjà présentés dans une sélection (liste de l'utilisateur) : connus aussi, pas redécouverts.
   const dansSelections = SELECTIONS.flatMap((x) => x.sites).filter((x) => x.hote === 'github.com').map((x) => new URL(x.url).pathname.split('/').filter(Boolean).slice(0, 2).join('/').toLowerCase());
@@ -51,17 +62,24 @@ export async function decouvrir(args: string[], ctx: ContexteCommande): Promise<
   }
   const parSujet = trierCandidats(trouves, { seuil, connus, max, releveLe: maintenant, maxParCompte: MAX_CANDIDATS_PAR_COMPTE });
   // Registre officiel MCP (bloc 3) : même seuil et même tri, candidats comptés à part pour ne pas être évincés.
-  const registre = await chercherRegistreMcp({ userAgent: ctx.config.userAgent, seuil, depuis: new Date(Date.parse(maintenant) - jours * 86_400_000).toISOString(), ...(ctx.transport ? { transport: ctx.transport } : {}), ...(ctx.resolve ? { resolve: ctx.resolve } : {}) });
+  const registre = await chercherRegistreMcp({ userAgent: ctx.config.userAgent, seuil, depuis: new Date(Date.parse(maintenant) - jours * 86_400_000).toISOString(), echeance: debutRecherches + ECHEANCE_REGISTRE_MS, ...(ctx.transport ? { transport: ctx.transport } : {}), ...(ctx.resolve ? { resolve: ctx.resolve } : {}) });
   for (const c of parSujet.candidats) connus.add(c.depot.full_name.toLowerCase());
   const parRegistre = trierCandidats(registre.trouves, { seuil, connus, max: MAX_CANDIDATS_REGISTRE, releveLe: maintenant });
-  const candidats = [...parSujet.candidats, ...parRegistre.candidats];
-  const ecartes = [...parSujet.ecartes, ...parRegistre.ecartes];
-  erreurs.push(...registre.erreurs);
+  // Classements publics (2026-11-16, classements.ts) : même seuil et même tri, comptés à part eux aussi.
+  const classements = await chercherClassements({ userAgent: ctx.config.userAgent, seuil, echeance: debutRecherches + ECHEANCE_CLASSEMENTS_MS, ...(ctx.transport ? { transport: ctx.transport, attendre: async () => {} } : {}), ...(ctx.resolve ? { resolve: ctx.resolve } : {}) });
+  for (const c of parRegistre.candidats) connus.add(c.depot.full_name.toLowerCase());
+  const parClassements = trierCandidats(classements.trouves, { seuil, connus, max: MAX_CANDIDATS_CLASSEMENTS, releveLe: maintenant });
+  const candidats = [...parSujet.candidats, ...parRegistre.candidats, ...parClassements.candidats];
+  const ecartes = [...parSujet.ecartes, ...parRegistre.ecartes, ...parClassements.ecartes];
+  erreurs.push(...registre.erreurs, ...classements.erreurs);
 
+  const reportes = [reportees ? `plan par agent ${reportees} sur ${requetes}` : '', registre.reportees ? `registre ${registre.reportees}` : '', classements.reportees ? `classements ${classements.reportees}` : ''].filter(Boolean);
+  if (reportes.length) console.log(`Budget de temps atteint, requêtes reportées au prochain passage : ${reportes.join(', ')}.`);
   console.log(`Plan par agent : ${requetes} requêtes ; seuil des nouveaux : ${seuil} étoiles (réglage decouverte.seuil_etoiles), créés depuis le ${depuis} ; montants et établis : voir FENETRES.`);
   const parAgent = parSujet.candidats.reduce<Record<string, number>>((n, c) => ({ ...n, [c.compte ?? 'repo']: (n[c.compte ?? 'repo'] ?? 0) + 1 }), {});
   console.log(`Candidats par agent : ${Object.entries(parAgent).map(([a, n]) => `${a} ${n}`).join(', ') || 'aucun'}.`);
   console.log(`Registre officiel MCP : ${registre.serveurs} serveur(s) récent(s) avec un dépôt GitHub, ${registre.trouves.length} au-dessus du seuil.`);
+  console.log(`Classements publics : ${classements.classements.map((c) => `${c.id} ${c.cites} dépôt(s) cité(s)`).join(', ') || 'aucun lu'} ; ${classements.trouves.length} au-dessus du seuil.`);
   console.log(`Trouvés : ${trouves.length} ; candidats : ${candidats.length} ; écartés : ${ecartes.length}${illisibles ? ` ; entrées illisibles : ${illisibles}` : ''}.`);
   for (const e of erreurs) console.log(`✗ sujet ${e.sujet} : ${e.message}`);
   for (const c of candidats) console.log(`· ${c.depot.full_name} — ${c.depot.stargazers_count} étoiles au ${maintenant.slice(0, 10)}, créé le ${c.depot.created_at?.slice(0, 10) ?? 'Non renseigné'} (${c.compte ?? 'repo'}, requête ${c.sujet}) : ${c.depot.description ?? 'sans description'}`);
@@ -69,7 +87,7 @@ export async function decouvrir(args: string[], ctx: ContexteCommande): Promise<
   if (ecartes.length) console.log(`Écartés par motif : ${Object.entries(parMotif).map(([m, n]) => `${m} ${n}`).join(', ')}.`);
 
   // Code 1 seulement si toutes les recherches ont échoué ; un sujet en échec parmi d'autres est signalé, pas bloquant.
-  if (!capturer || candidats.length === 0) return erreurs.length > 0 && trouves.length === 0 && registre.trouves.length === 0 ? 1 : 0;
+  if (!capturer || candidats.length === 0) return erreurs.length > 0 && trouves.length === 0 && registre.trouves.length === 0 && classements.trouves.length === 0 ? 1 : 0;
   const bilan = await executerCapture({
     database,
     userAgent: ctx.config.userAgent,

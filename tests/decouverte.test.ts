@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { REGLAGES_PAR_DEFAUT } from '../src/control/settings.ts';
-import { lireRecherche, trierCandidats, urlRecherche, versEntree, type DepotTrouve } from '../src/ressources/decouverte.ts';
+import type { Transport } from '../src/collect/safe-fetch.ts';
+import { chercherPlan, lireRecherche, trierCandidats, urlRecherche, versEntree, type DepotTrouve } from '../src/ressources/decouverte.ts';
 
 const depot = (nom: string, etoiles: number, extra: Partial<DepotTrouve> = {}): DepotTrouve => ({
   full_name: nom, html_url: `https://github.com/${nom}`, description: null, stargazers_count: etoiles,
@@ -47,5 +48,24 @@ describe('découverte automatique de dépôts', () => {
     expect(e).toMatchObject({ slug: 'gh-owner-my-repo', depot: 'Owner/My.Repo', chemins: ['README.md'], compte: 'repo', decouverteAuto: true });
     expect(e.decouverteVia).toContain('2400 étoiles relevées le 2026-11-05');
     expect(e.decouverteVia).toContain('pas un critère de qualité');
+  });
+
+  it('budget de temps : passé le budget, le reste du plan est reporté et compté ; le passage suivant part d’ailleurs', async () => {
+    const plan = ['a', 'b', 'c', 'd', 'e'].map((s) => ({ compte: 'repo' as const, q: `topic:${s}` }));
+    const lancer = async (decalage: number, budgetMs?: number) => {
+      const vues: string[] = [];
+      let t = 0;
+      const transport: Transport = async (req) => {
+        vues.push(/topic:([a-e]) stars:>=100 /.exec(decodeURIComponent(req.url.toString()))?.[1] ?? '');
+        t += 1000;
+        return { status: 200, headers: {}, body: Buffer.from(JSON.stringify({ items: [] })) };
+      };
+      const r = await chercherPlan({ userAgent: 'test', seuil: 100, maintenant: '2026-11-16T08:00:00.000Z', plan, decalage, transport, resolve: async () => [{ address: '93.184.216.34', family: 4 }], attendre: async () => {}, horloge: () => t, ...(budgetMs === undefined ? {} : { budgetMs }) });
+      return { vues: vues.filter(Boolean), requetes: r.requetes, reportees: r.reportees };
+    };
+    // Dix requêtes (deux fenêtres par thème, dont une seule au seuil de 100 étoiles) ; chacune « dure » une seconde.
+    expect(await lancer(0)).toMatchObject({ requetes: 10, reportees: 0, vues: ['a', 'b', 'c', 'd', 'e'] });
+    expect(await lancer(0, 3000)).toEqual({ requetes: 10, reportees: 7, vues: ['a', 'b'] });
+    expect(await lancer(4, 3000)).toEqual({ requetes: 10, reportees: 7, vues: ['c', 'd'] });
   });
 });

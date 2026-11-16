@@ -720,3 +720,19 @@ Ce qui reste à faire par le porteur du projet, car Claude ne crée ni compte ni
 
 Modèle local, sur le Mac : gratuit à l'appel. Il faudrait pourtant laisser le Mac allumé en permanence, ce serait plus lent, et les petits modèles respectent moins bien les citations mot pour mot qu'exigent nos contrôles.
 
+
+## 22. De nouvelles portes d'entrée : une lettre et deux classements _(construit le 2026-11-16 ; essais réels depuis le poste, premier passage en ligne à constater)_
+
+**Le besoin.** Le porteur du projet a transmis une liste de sources « au-delà de GitHub » : lettres d'information, chaînes YouTube, classements, réseaux sociaux. Chaque adresse a d'abord été testée en réel : le fichier `robots.txt` du site dit-il oui, le flux répond-il, notre code sait-il le lire ?
+
+**Ce qui est branché.**
+
+- **TLDR AI**, une lettre quotidienne. Elle sert de *signal*, comme Hacker News : le code lit le dernier numéro, garde seulement le lien et le titre de chaque article signalé, puis va lire l'article sur son site d'origine. Le résumé écrit par la lettre n'est jamais repris, et les annonces sponsorisées sont écartées. Essai réel : 16 articles tirés du numéro du 13 novembre.
+- **Deux classements de dépôts GitHub** : les skills en tendance de Selan, et les ajouts récents de la liste awesome-claude-code. Les dépôts qu'ils citent deviennent des candidats de la découverte, avec les mêmes règles que les autres (seuil d'étoiles, grille de notation). Être bien classé ne prouve rien : c'est une porte d'entrée, pas une note.
+
+**Ce qui est refusé, et pourquoi.**
+
+- Les flux des chaînes YouTube répondent, mais le `robots.txt` de YouTube les interdit aux robots. Le projet ne contourne aucun refus : ces chaînes sont différées. La voie officielle est une clé de l'API YouTube, que seul le porteur du projet peut créer.
+- Aspirer Facebook, Instagram, TikTok ou X avec des outils tiers est contraire aux conditions de ces plateformes. Ces sources restent hors de la collecte tant qu'il n'existe pas d'accès officiel.
+
+**Un défaut trouvé en chemin.** L'étape de découverte envoyait 156 recherches à GitHub à chaque passage. Le 16 novembre, elle a dépassé sa limite de 10 minutes et a été arrêtée avant d'enregistrer quoi que ce soit. Elle a maintenant un budget de temps : passé 4 minutes de recherche, le reste est reporté au passage suivant, qui repart d'un autre point de la liste.

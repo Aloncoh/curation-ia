@@ -75,8 +75,8 @@ export async function approfondir(
       continue;
     }
     let html: string;
-    if (source.kind === 'hackernews') {
-      // Article signalé par Hacker News : hôte quelconque, d'où des garde-fous propres (destination, robots.txt,
+    if (source.kind === 'hackernews' || (source.kind === 'feed' && source.config.lettre)) {
+      // Article signalé par Hacker News ou par une lettre (lettre.ts) : hôte quelconque, d'où des garde-fous propres (destination, robots.txt,
       // redirections revalidées) ; un échec ne laisse aucun texte, et rien n'est analysé.
       const article = await lireArticleExterne(url, { userAgent: o.userAgent, timeoutMs: o.timeoutMs, maxBytes: o.maxBytes, ...(o.deps ? { deps: o.deps } : {}) });
       if (!article.ok) {

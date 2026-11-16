@@ -64,6 +64,8 @@ export interface OptionsRegistre {
   /** Date ISO : serveurs publiés ou mis à jour depuis. */
   depuis: string;
   pagesMax?: number;
+  /** Moment (ms depuis l'époque) après lequel plus aucune recherche GitHub n'est envoyée. */
+  echeance?: number;
   transport?: Transport;
   resolve?: Resolver;
   attendre?: (ms: number) => Promise<void>;
@@ -73,7 +75,7 @@ export interface OptionsRegistre {
  * Serveurs récents du registre (dernière version de chacun), puis recherche GitHub de leurs dépôts au-dessus du seuil.
  * Une page ou une requête en échec n'arrête pas les autres ; chaque erreur est rendue.
  */
-export async function chercherRegistreMcp(o: OptionsRegistre): Promise<{ trouves: { depot: DepotTrouve; sujet: string }[]; serveurs: number; erreurs: { sujet: string; message: string }[]; illisibles: number }> {
+export async function chercherRegistreMcp(o: OptionsRegistre): Promise<{ trouves: { depot: DepotTrouve; sujet: string }[]; serveurs: number; erreurs: { sujet: string; message: string }[]; illisibles: number; reportees: number }> {
   const deps = { ...(o.transport ? { transport: o.transport } : {}), ...(o.resolve ? { resolve: o.resolve } : {}) };
   const attendre = o.attendre ?? ((ms: number) => new Promise<void>((r) => setTimeout(r, ms)));
   const erreurs: { sujet: string; message: string }[] = [];
@@ -94,9 +96,35 @@ export async function chercherRegistreMcp(o: OptionsRegistre): Promise<{ trouves
     }
     if (!curseur) break;
   }
-  const trouves: { depot: DepotTrouve; sujet: string }[] = [];
-  for (const [i, q] of requetesDepots([...nomParDepot.keys()], o.seuil).entries()) {
-    if (i > 0) await attendre(PAUSE_RECHERCHE_MS);
+  const recherche = await rechercherDepotsNommes([...nomParDepot.keys()], { ...o, attendre }, 'registre-mcp (recherche GitHub)');
+  erreurs.push(...recherche.erreurs);
+  const trouves = recherche.depots.map((depot) => ({ depot, sujet: `${PREFIXE_REGISTRE}${nomParDepot.get(depot.full_name.toLowerCase()) ?? depot.full_name}` }));
+  return { trouves, serveurs: nomParDepot.size, erreurs, illisibles: illisibles + recherche.illisibles, reportees: recherche.reportees };
+}
+
+/**
+ * Recherche GitHub de dépôts nommés, au-dessus du seuil d'étoiles, par requêtes groupées. Sert au registre MCP et aux
+ * classements publics (classements.ts). Une requête en échec n'arrête pas les autres ; chaque erreur est rendue.
+ * `pauseAvant` : attendre aussi avant la première requête, quand d'autres recherches viennent de partir.
+ */
+export async function rechercherDepotsNommes(
+  depots: readonly string[],
+  o: Pick<OptionsRegistre, 'userAgent' | 'seuil' | 'transport' | 'resolve' | 'attendre' | 'echeance'>,
+  etiquette: string,
+  pauseAvant = false,
+): Promise<{ depots: DepotTrouve[]; erreurs: { sujet: string; message: string }[]; illisibles: number; reportees: number }> {
+  const deps = { ...(o.transport ? { transport: o.transport } : {}), ...(o.resolve ? { resolve: o.resolve } : {}) };
+  const attendre = o.attendre ?? ((ms: number) => new Promise<void>((r) => setTimeout(r, ms)));
+  const trouves: DepotTrouve[] = [];
+  const erreurs: { sujet: string; message: string }[] = [];
+  let illisibles = 0;
+  const requetes = requetesDepots(depots, o.seuil);
+  let envoyees = 0;
+  for (const [i, q] of requetes.entries()) {
+    // Échéance de l'étape (2026-11-16) : passé ce moment, les requêtes restantes sont reportées, pas envoyées.
+    if (o.echeance !== undefined && Date.now() >= o.echeance) break;
+    envoyees++;
+    if (i > 0 || pauseAvant) await attendre(PAUSE_RECHERCHE_MS);
     try {
       const r = await safeGet(
         `https://api.github.com/search/repositories?q=${encodeURIComponent(q)}&per_page=100`,
@@ -106,10 +134,10 @@ export async function chercherRegistreMcp(o: OptionsRegistre): Promise<{ trouves
       );
       const lu = lireRecherche(r.body.toString('utf8'));
       illisibles += lu.illisibles;
-      for (const depot of lu.depots) trouves.push({ depot, sujet: `${PREFIXE_REGISTRE}${nomParDepot.get(depot.full_name.toLowerCase()) ?? depot.full_name}` });
+      trouves.push(...lu.depots);
     } catch (e) {
-      erreurs.push({ sujet: 'registre-mcp (recherche GitHub)', message: e instanceof Error ? e.message.slice(0, 200) : String(e) });
+      erreurs.push({ sujet: etiquette, message: e instanceof Error ? e.message.slice(0, 200) : String(e) });
     }
   }
-  return { trouves, serveurs: nomParDepot.size, erreurs, illisibles };
+  return { depots: trouves, erreurs, illisibles, reportees: requetes.length - envoyees };
 }

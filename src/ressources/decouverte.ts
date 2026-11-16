@@ -110,6 +110,16 @@ export const MAX_CANDIDATS_PAR_COMPTE = 3;
 export const MAX_CANDIDATS_REGISTRE = 4;
 /** Préfixe du sujet d'un candidat venu du registre officiel MCP : la mention de provenance le dit. */
 export const PREFIXE_REGISTRE = 'registre-mcp:';
+/** Préfixe du sujet d'un candidat venu d'un classement public (classements.ts), suivi du nom du classement. */
+export const PREFIXE_CLASSEMENT = 'classement:';
+/** Candidats venus des classements publics par passage, comptés à part comme ceux du registre. */
+export const MAX_CANDIDATS_CLASSEMENTS = 4;
+
+/** Mention de provenance d'un candidat, selon sa porte d'entrée : recherche par sujet, registre MCP ou classement public. */
+export const provenance = (sujet: string): string =>
+  sujet.startsWith(PREFIXE_REGISTRE) ? `registre officiel MCP (serveur « ${sujet.slice(PREFIXE_REGISTRE.length)} »)`
+    : sujet.startsWith(PREFIXE_CLASSEMENT) ? `classement public « ${sujet.slice(PREFIXE_CLASSEMENT.length)} »`
+      : `recherche GitHub sur le sujet « ${sujet} »`;
 
 const NOM_DEPOT = /^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/;
 
@@ -199,7 +209,7 @@ export function versEntree(c: Candidat): EntreeRessource {
     depot: c.depot.full_name,
     chemins: ['README.md'],
     compte: c.compte ?? 'repo',
-    decouverteVia: `Découverte automatique : ${c.sujet.startsWith(PREFIXE_REGISTRE) ? `registre officiel MCP (serveur « ${c.sujet.slice(PREFIXE_REGISTRE.length)} »)` : `recherche GitHub sur le sujet « ${c.sujet} »`}, ${c.depot.stargazers_count} étoiles relevées le ${c.releveLe.slice(0, 10)} (information, pas un critère de qualité)`,
+    decouverteVia: `Découverte automatique : ${provenance(c.sujet)}, ${c.depot.stargazers_count} étoiles relevées le ${c.releveLe.slice(0, 10)} (information, pas un critère de qualité)`,
     decouverteAuto: true,
   };
 }
@@ -244,13 +254,24 @@ export async function chercherDepots(o: OptionsRecherche): Promise<{ trouves: { 
  * Recherche du plan par agent (2026-11-10) : une requête par thème et par fenêtre, à la suite, avec la pause qui respecte
  * le plafond (plus courte avec le jeton d'Actions). Une requête en échec n'arrête pas les autres ; elle est comptée.
  */
-export async function chercherPlan(o: Omit<OptionsRecherche, 'sujets' | 'depuis'> & { maintenant: string; plan?: readonly RequeteDecouverte[] }): Promise<{ trouves: { depot: DepotTrouve; sujet: string; compte: CompteDecouverte }[]; erreurs: { sujet: string; message: string }[]; illisibles: number; requetes: number }> {
+export async function chercherPlan(o: Omit<OptionsRecherche, 'sujets' | 'depuis'> & { maintenant: string; plan?: readonly RequeteDecouverte[]; budgetMs?: number; decalage?: number; horloge?: () => number }): Promise<{ trouves: { depot: DepotTrouve; sujet: string; compte: CompteDecouverte }[]; erreurs: { sujet: string; message: string }[]; illisibles: number; requetes: number; reportees: number }> {
   const trouves: { depot: DepotTrouve; sujet: string; compte: CompteDecouverte }[] = [];
   const erreurs: { sujet: string; message: string }[] = [];
   let illisibles = 0;
   const requetes = requetesDuPlan(o.plan ?? PLAN_DECOUVERTE, o.seuil, o.maintenant);
   const pause = process.env.GITHUB_TOKEN && !o.transport ? PAUSE_RECHERCHE_JETON_MS : PAUSE_RECHERCHE_MS;
-  for (const [i, r] of requetes.entries()) {
+  // Budget de temps (2026-11-16) : 156 requêtes par passage dépassaient les 10 min de l'étape du cycle, arrêtée avant toute
+  // capture (cycle du 2026-11-16 à 07:10 UTC). Passé le budget, le reste est reporté ; `decalage` fait partir chaque
+  // passage d'un autre point du plan, pour que les requêtes reportées soient servies aux passages suivants.
+  const horloge = o.horloge ?? Date.now;
+  const fin = o.budgetMs === undefined ? null : horloge() + o.budgetMs;
+  const n = requetes.length;
+  const depart = n === 0 ? 0 : (((o.decalage ?? 0) % n) + n) % n;
+  let envoyees = 0;
+  for (let i = 0; i < n; i++) {
+    if (fin !== null && horloge() >= fin) break;
+    const r = requetes[(depart + i) % n]!;
+    envoyees++;
     if (i > 0) await (o.attendre ?? ((ms: number) => new Promise((res) => setTimeout(res, ms))))(pause);
     try {
       const reponse = await safeGet(
@@ -266,5 +287,5 @@ export async function chercherPlan(o: Omit<OptionsRecherche, 'sujets' | 'depuis'
       erreurs.push({ sujet: r.libelle, message: e instanceof Error ? e.message.slice(0, 200) : String(e) });
     }
   }
-  return { trouves, erreurs, illisibles, requetes: requetes.length };
+  return { trouves, erreurs, illisibles, requetes: n, reportees: n - envoyees };
 }

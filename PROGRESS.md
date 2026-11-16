@@ -432,3 +432,19 @@ DeepSeek Flash, 30 actualités, 34 appels, 0,0125 $ (budget autorisé 4 $). 19 �
   - code : `marquerErreur` enregistre 0 $ pour un refus pour solde épuisé (DeepSeek 402, Claude « credit balance is too low ») ; les autres erreurs gardent leur réservation ;
   - base en ligne : les 69 lignes sont passées à 0 $ (nombre et montant contrôlés avant l'écriture) ; total enregistré 2,14 $ au lieu de 2,55 $.
 - Tests : 878 au vert, dont un nouveau sur le refus pour solde épuisé ; types vérifiés.
+
+## 2026-11-16 — Sources de la liste de l'utilisateur : TLDR AI, deux classements, budget de temps de la découverte
+
+- Demande de l'utilisateur : une liste de sources et d'outils, puis « Oui, branche-les » pour celles qui ont un flux officiel. Tri, motifs et vérifications : docs/sources.md §3.14.
+- Essais réels depuis le poste (robots.txt lu, puis flux, avec `safeGet` et notre analyseur) :
+  - TLDR AI : autorisé, 20 numéros dans le flux, 16 articles tirés du numéro du 2026-11-13 ;
+  - Selan : autorisé (`ai-input=yes`), 15 dépôts ; awesome-claude-code par l'API GitHub : 239 dépôts ; 27 au-dessus du seuil ;
+  - chaînes YouTube : flux interdit par robots.txt, donc différées ; mcpmorning : autorisé, non branché (dépôt non donné).
+- Construit :
+  - `src/collect/lettre.ts` : une lettre comme signal, en deux lectures (flux, puis page du numéro) ; lien et titre seulement ; l'article est capturé à sa source comme pour Hacker News ; source `feed:tldr-ai` ;
+  - `src/ressources/classements.ts` : classements publics comme porte d'entrée de la découverte, mêmes seuil, tri et grille que le registre MCP ; robots.txt relu à chaque passage pour un site tiers ;
+  - budget de temps de la découverte : le cycle GitHub de 07:10 UTC a arrêté l'étape à 10 min, avant toute capture (156 recherches par passage). Recherches bornées (plan 4 min, registre 5 min 30, classements 6 min 45), requêtes reportées comptées et affichées, départ tournant d'un passage à l'autre.
+- Vérifié : 890 tests au vert (51 fichiers), types vérifiés ; collecte réelle de TLDR AI sur la base locale (16 nouvelles actualités) ; découverte réelle sans capture ni jeton : 6 min 12, 35 requêtes du plan envoyées sur 156, 10 candidats dont 4 venus des classements.
+- Non vérifié : premier passage en ligne de la découverte et première collecte en ligne de TLDR AI ; durée avec le jeton d'Actions.
+- Constat soumis à l'utilisateur : la source `feed:youtube-ai-search` (2026-11-04) lit la même adresse que le robots.txt de YouTube interdit.
+- Autre constat : au cycle de 07:10 UTC, l'étape des brouillons a échoué sur « fetch failed » (panne de réseau passagère, non reproduite).

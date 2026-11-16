@@ -385,6 +385,11 @@ export const sourcesElargies = (githubReleases: FabriqueReleases): SourceDefinit
   { id: 'feed:wiz-blog', kind: 'feed', name: 'Wiz — blog, contenu externe attribué', config: { url: 'https://www.wiz.io/feed/rss.xml', maxItems: 10, linkHosts: ['www.wiz.io'] }, allowedHosts: ['www.wiz.io'], fetchIntervalMinutes: 360, attribution: 'Wiz (éditeur de sécurité)', compte: 'pulse' },
   // Google Project Zero — vérifié : 10 entrées, dernière il y a 16 j ; robots.txt absent (404)
   { id: 'feed:project-zero', kind: 'feed', name: 'Google Project Zero — contenu externe attribué', config: { url: 'https://projectzero.google/feed.xml', maxItems: 10, linkHosts: ['projectzero.google'] }, allowedHosts: ['projectzero.google'], fetchIntervalMinutes: 720, attribution: 'Google Project Zero', compte: 'pulse' },
+  // TLDR AI (demande de l'utilisateur du 2026-11-16, « Oui, branche-les ») : lettre quotidienne utilisée comme signal, sur
+  // le modèle de Hacker News. Le flux donne le dernier numéro ; sa page donne les articles signalés (lien et titre
+  // seulement, entrées sponsorisées écartées) ; chaque article est ensuite capturé à sa source, robots.txt lu. Vérifié en
+  // réel le 2026-11-16 : robots.txt autorise, flux lisible (20 numéros), 20 liens dans le numéro du 2026-11-13.
+  { id: 'feed:tldr-ai', kind: 'feed', name: 'TLDR AI — articles signalés par la lettre quotidienne (signal de découverte)', config: { url: 'https://tldr.tech/api/rss/ai', maxItems: 20, linkHosts: ['tldr.tech'], lettre: { nom: 'TLDR AI' } }, allowedHosts: ['tldr.tech'], fetchIntervalMinutes: 360, attribution: 'un article externe signalé par la lettre TLDR AI (son site d’origine fait foi, pas une annonce officielle)' },
   // Histoires récentes à 80 points, hors page d'accueil — à vérifier à la première collecte en ligne
   { id: 'hackernews:recentes-ia', kind: 'hackernews', name: 'Hacker News — histoires récentes sur l’IA, 80 points (signal de découverte, API publique de recherche)', config: { url: 'https://hn.algolia.com/api/v1/search_by_date?tags=story&numericFilters=points%3E80&hitsPerPage=60', maxItems: 15, pointsMin: 80 }, allowedHosts: ['hn.algolia.com'], fetchIntervalMinutes: 60, attribution: 'un article externe signalé sur Hacker News (son site d’origine fait foi, pas une annonce officielle)' },
 ];

@@ -806,3 +806,31 @@ Flux interrogés depuis le poste le 2026-11-12, avec `safeGet` et notre analyseu
 Écarté le même jour : GitHub Security Lab (`github.blog/tag/github-security-lab/feed/`), dernière entrée il y a 45 jours et déjà couvert en partie par `feed:github-blog-ai`.
 
 Dépôts : la découverte GitHub (`PLAN_DECOUVERTE`, decouverte.ts) reçoit des thèmes, jamais des noms de dépôts : productivité et bureau, notes de réunion, MCP finance et TradingView, agents de trading, scraping, écriture IA, vidéo regardée par l'agent, places de marché de skills, orchestration de plusieurs agents de code. Les exemples de l'utilisateur rejoignent le jeu de contrôle (`DEPOTS_CONTROLE`) : `heygen-com/hyperframes` (déjà publié), `blader/humanizer` et `vercel-labs/skills` (find-skills, déjà publiés depuis la liste de l'utilisateur), `bradautomates/claude-video` (watch), `apify/apify-mcp-server`, `stablyai/orca`, `tradesdontlie/tradingview-mcp`, `atilaahmettaner/tradingview-mcp`. « rea » (message coupé) n'a pas été identifié.
+
+### 3.14 Liste de sources transmise par l'utilisateur (2026-11-16)
+
+Demande de l'utilisateur : une liste de sources « au-delà de GitHub, Reddit et Hugging Face » et d'outils de collecte, puis « Oui, branche-les » pour celles qui ont un flux officiel. Chaque adresse a été interrogée depuis le poste le 2026-11-16, avec `safeGet` et notre analyseur, robots.txt lu d'abord. Les conditions d'utilisation de tldr.tech et de selan.ai ont été parcourues par mots-clés (collecte automatique, robots, reproduction, IA) : aucune clause trouvée ; ce n'est pas un avis juridique.
+
+**Branchées**
+
+| Source | Forme | Vérification du 2026-11-16 |
+|---|---|---|
+| TLDR AI, `https://tldr.tech/api/rss/ai` | signal, comme Hacker News (`feed:tldr-ai`, `src/collect/lettre.ts`) : le flux donne le dernier numéro, sa page donne les articles signalés ; lien et titre seulement, résumé de la lettre jamais repris, entrées sponsorisées et annonces de la lettre écartées ; l'article est ensuite capturé à sa source, robots.txt de son hôte lu | robots.txt : `Allow: /` ; flux 200, 20 numéros, 0 caractère de contenu par entrée ; numéro du 2026-11-13 : 16 articles gardés, 4 sponsorisés écartés ; collecte réelle sur la base locale : 16 nouvelles actualités |
+| Selan, `https://selan.ai/top/claude-code-skills/this-week.md` | classement public, porte d'entrée de la découverte GitHub (`src/ressources/classements.ts`) | robots.txt : `Allow: /` et `Content-Signal: search=yes, ai-input=yes, ai-train=yes` ; version Markdown officielle, 15 dépôts cités |
+| awesome-claude-code, `THE_RESOURCES_TABLE_NEW.csv` par l'API GitHub | classement public : entrées actives, les plus récemment ajoutées d'abord, 25 par passage | 239 dépôts cités ; avec Selan, 27 dépôts au-dessus du seuil de 100 étoiles |
+
+Les dépôts cités par un classement passent par le même seuil d'étoiles, le même tri et la même grille `d1` que le reste de la découverte ; 4 candidats au plus par passage. Le rang dans un classement est une information d'entrée, jamais un critère de qualité ; la mention de provenance du post nomme le classement.
+
+**Différées, avec leur motif**
+
+- Chaînes YouTube (Anthropic, Matt Pocock, Fireship) : le robots.txt de youtube.com interdit `/feeds/videos.xml` (`Disallow`, groupe `*`). Les flux répondent 200 et sont lisibles (15 entrées chacun), mais ne sont pas collectés. Voie officielle : YouTube Data API v3 (compte Google, projet et clé : décision de l'utilisateur, §4.1). **La source existante `feed:youtube-ai-search` (2026-11-04) utilise la même adresse interdite : décision soumise à l'utilisateur le 2026-11-16.**
+- awesome-claude-code, flux des commits (`/commits/main.atom`) : interdit par le robots.txt de github.com (`Disallow: /*/*/commits/`) ; remplacé par le tableau CSV lu par l'API.
+- mcpmorning.com : robots.txt autorise, versions Markdown officielles (`/mcp/rising/index.md`), consigne de citation publiée. Non branché : le classement ne donne pas le nom du dépôt (identifiant `proprietaire-depot` ambigu), il faudrait une page par serveur ; le registre officiel MCP, dont il part, est déjà branché. Son flux `feed.xml` est une lettre quotidienne (33 numéros).
+- Import AI, Ben's Bites (Substack) : conditions contre la collecte (§3.10) ; `feed:thezvi`, autre flux Substack, répond 403.
+- arXiv, Hugging Face Papers, Lobsters, Reddit : inchangés (§3.12, §8.1, §3.7).
+
+**Écartées dans cette forme**
+
+- Facebook, Instagram et TikTok par Apify ; X par snscrape ; RSSHub pour ces réseaux : contraire aux conditions de ces plateformes et à notre règle (aucune source contournée) ; Apify est payant. Voies officielles : API Graph de Meta, API de X (décisions de l'utilisateur).
+- Discord : un bot ne lit qu'un serveur où un administrateur l'a invité ; un compte personnel automatisé est interdit par Discord.
+- AlphaSignal : aucun flux testé ; lettre par e-mail seulement.
