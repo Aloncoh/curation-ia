@@ -42,6 +42,11 @@ describe('lettre d’information comme signal', () => {
     expect(JSON.stringify(documents)).not.toContain('Résumé rédigé');
   });
 
+  it('un lien dont le « & » est encodé deux fois (relevé chez TLDR le 2026-11-16) perd quand même son paramètre de suivi', () => {
+    const { documents } = parseLettre('<a href="https://modele.example.org/blog?id=q4&amp;amp;utm_source=tldrai"><h3>Un modèle (5 minute read)</h3></a>', options);
+    expect(documents.map((d) => d.url)).toEqual(['https://modele.example.org/blog?id=q4']);
+  });
+
   it('une page sans article reconnu est une erreur de format, jamais une liste vide silencieuse', () => {
     expect(() => parseLettre('<html><body><p>Autre mise en page</p></body></html>', options)).toThrow(SourceFormatError);
   });

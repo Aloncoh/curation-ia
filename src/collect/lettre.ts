@@ -25,6 +25,20 @@ const SPONSOR = /\(\s*sponsor\s*\)/i;
 const DUREE = /\s*\(\s*\d+\s+minute\s+read\s*\)\s*$/i;
 const FORMULAIRE = /\(\s*\d+\s+minute\s+form\s*\)/i;
 
+/**
+ * Adresse d'un lien, entités HTML décodées jusqu'à stabilité (trois passes au plus). Relevé le 2026-11-16 : TLDR écrit
+ * parfois « &amp;amp; » ; décodé une seule fois, le paramètre de suivi devenait « amp;utm_source » et restait dans l'adresse.
+ */
+function lienDecode(brut: string): string {
+  let lien = brut;
+  for (let passe = 0; passe < 3; passe++) {
+    const decode = decodeHtmlEntities(lien);
+    if (decode === lien) break;
+    lien = decode;
+  }
+  return lien;
+}
+
 export interface OptionsLettre {
   /** Nom de la lettre, gardé dans les métadonnées. */
   nom: string;
@@ -50,7 +64,7 @@ export function parseLettre(html: string, o: OptionsLettre): ParsedFeed {
     if (SPONSOR.test(brut)) { compter('sponsorise'); continue; }
     // Annonce de la lettre pour elle-même (formulaire, ou son propre nom dans le titre) : pas un article signalé.
     if (FORMULAIRE.test(brut) || propre.test(brut)) { compter('promotion'); continue; }
-    const article = destinationValide(decodeHtmlEntities(m[1]!));
+    const article = destinationValide(lienDecode(m[1]!));
     if (!article) { compter('sans_article_valide'); continue; }
     if (o.hotesLettre.includes(article.hostname.toLowerCase())) { compter('lien_interne'); continue; }
     const title = brut.replace(DUREE, '').trim();

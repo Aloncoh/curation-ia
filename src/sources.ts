@@ -370,6 +370,24 @@ export async function syncSources(database: Database, definitions: SourceDefinit
   });
 }
 
+/**
+ * Écrit au registre les sources différées (2026-11-17). Le cycle ne transmet à la collecte que les sources dues, et une
+ * source différée ne l'est jamais : sans ce passage, elle restait au registre en ligne dans son dernier état (« active,
+ * en erreur »), ou n'y figurait pas. N'écrit que les lignes absentes ou différentes ; rend leur nombre.
+ */
+export async function syncDifferees(database: Database, now: string, definitions: SourceDefinition[] = SOURCES): Promise<number> {
+  const differees = definitions.filter((def) => def.differee);
+  if (differees.length === 0) return 0;
+  const r = await database.client.execute('select id, active, acces_etat, acces_detail from source');
+  const connues = new Map(r.rows.map((x) => [String(x.id), x]));
+  const aEcrire = differees.filter((def) => {
+    const ligne = connues.get(def.id);
+    return !ligne || Number(ligne.active) !== 0 || ligne.acces_etat !== def.differee!.etat || ligne.acces_detail !== def.differee!.motif;
+  });
+  if (aEcrire.length > 0) await syncSources(database, aEcrire, now);
+  return aEcrire.length;
+}
+
 export function findDefinition(id: string, definitions: SourceDefinition[] = SOURCES): SourceDefinition | undefined {
   return definitions.find((def) => def.id === id);
 }

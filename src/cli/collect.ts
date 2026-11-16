@@ -1,7 +1,7 @@
 // npm run collect — lance une collecte sur les sources actives.
 import { setTimeout as sleep } from 'node:timers/promises';
 import { createFixtureFetcher, createLiveFetcher } from '../collect/fetchers.ts';
-import { selectSources } from '../sources.ts';
+import { selectSources, syncDifferees } from '../sources.ts';
 import { runCollect } from '../worker/collect.ts';
 import { runCommand, workerId } from './shared.ts';
 
@@ -17,6 +17,13 @@ await runCommand(async ({ config, database }) => {
   }
   if (fixture) console.log(`MODE FIXTURE : données lues dans ${fixture}, aucune requête réseau.`);
   else console.log('Collecte en mode réel.');
+
+  // Les sources différées ne sont jamais « dues » : le cycle ne les transmet pas à cette commande. Elles sont écrites ici
+  // au registre (état, motif), seulement quand quelque chose a changé.
+  if (!fixture) {
+    const ecrites = await syncDifferees(database, new Date().toISOString());
+    if (ecrites > 0) console.log(`Registre : ${ecrites} source(s) différée(s) mise(s) à jour.`);
+  }
 
   const hold = config.testHoldInStoreMs;
   const summary = await runCollect({

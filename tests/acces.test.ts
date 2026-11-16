@@ -1,7 +1,8 @@
 // Registre d'accès des sources (2026-11-05) : classement de l'observé, Retry-After, reprises espacées, jamais d'abandon.
-import { describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { classerEchec, ECHECS_AVANT_SONDE_HEBDOMADAIRE, lireRetryAfter, prochainEssai } from '../src/collect/acces.ts';
-import { SOURCES } from '../src/sources.ts';
+import { SOURCES, syncDifferees, syncSources, type SourceDefinition } from '../src/sources.ts';
+import { createTestDb, type TestDb } from './helpers/db.ts';
 
 const T = Date.parse('2026-11-05T12:00:00.000Z');
 const dans = (iso: string) => (Date.parse(iso) - T) / 60_000;
@@ -48,5 +49,27 @@ describe('registre d’accès', () => {
     const s = SOURCES.find((x) => x.id === 'feed:youtube-ai-search')!;
     expect(s.differee).toMatchObject({ etat: 'refus_acces', depuis: '2026-11-16', motif: expect.stringContaining('robots.txt') });
     expect(s.differee!.alternative).toContain('YouTube Data API');
+  });
+});
+
+describe('registre : sources différées', () => {
+  let t: TestDb;
+  beforeEach(async () => { t = await createTestDb(); });
+  afterEach(() => t.cleanup());
+
+  it('une source différée est écrite au registre sans passer par la collecte, et seulement quand quelque chose a changé', async () => {
+    const differees = SOURCES.filter((s) => s.differee);
+    // Avant d'être différée, la chaîne AI Search était au registre, active.
+    const { differee: _avant, ...active } = SOURCES.find((s) => s.id === 'feed:youtube-ai-search')!;
+    await syncSources(t.database, [active as SourceDefinition], '2026-11-04T10:00:00.000Z');
+    const lire = async () => (await t.database.client.execute(`select active, acces_etat, acces_detail from source where id = 'feed:youtube-ai-search'`)).rows[0]!;
+    expect(Number((await lire()).active)).toBe(1);
+
+    expect(await syncDifferees(t.database, '2026-11-17T00:00:00.000Z')).toBe(differees.length);
+    expect(await lire()).toMatchObject({ active: 0, acces_etat: 'refus_acces', acces_detail: expect.stringContaining('robots.txt') });
+    const inactives = await t.database.client.execute('select count(*) as n from source where active = 0');
+    expect(Number(inactives.rows[0]!.n)).toBe(differees.length);
+    // Second passage : rien n'a changé, rien n'est écrit.
+    expect(await syncDifferees(t.database, '2026-11-17T01:00:00.000Z')).toBe(0);
   });
 });
