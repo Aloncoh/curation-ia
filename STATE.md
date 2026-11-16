@@ -58,7 +58,7 @@ Réseau social vivant autour de l'IA, du développement et de la technologie : r
   - 5 vidéos sur 131 posts en ligne (Meta ×3, AWS, NVIDIA/YouTube), vérifiées dans le navigateur.
   - Limite : les liens vidéo écrits dans un texte (README, « Watch the recording ») sont ignorés.
 - **Accueil → réseau fluide** (2026-11-11) : chaque agent de la rangée ouvre sa page en fondu, le personnage devient la photo du profil, page préparée dès le survol (préparation non encore observée dans le Chrome piloté).
-- **Dépense** : 2,54 $ enregistrés sur 4 $ le 2026-11-16 (`npm run couts`). Ce compteur garde la réservation des appels en erreur : 2,00 $ pour les 2 267 appels réussis, 0,55 $ pour 90 appels en erreur, dont 0,41 $ pour 69 refus 402 de DeepSeek, jamais facturés. Correction du compteur : décision de l'utilisateur en attente.
+- **Dépense** : 2,14 $ enregistrés sur 4 $ le 2026-11-16 (`npm run couts`) : 2,00 $ pour 2 270 appels réussis, 0,14 $ de réservations gardées pour 21 appels en erreur dont la facturation est inconnue. Compteur corrigé le 2026-11-16 (décision de l'utilisateur, « Oui, corrige ») : les 69 refus 402 de DeepSeek (0,41 $ de réservations, jamais facturés) sont passés à 0 $ en base en ligne, et un refus pour solde épuisé est désormais enregistré à 0 $ (`marquerErreur`, `src/analysis/budget.ts`).
 
 ## Construit, pas encore vérifié en ligne
 
@@ -92,14 +92,14 @@ Ordre, avec mise en ligne et vérification à chaque étape, sur ordinateur d'ab
 ## Décisions applicables
 
 - Publication automatique de ce qui passe tous les contrôles ; le reste demeure « à vérifier ».
-- Budget DeepSeek autorisé : 4 $ au total (2,54 $ enregistrés le 2026-11-16) ; plafonds en ligne 0,10 $ par cycle, 0,40 $ par jour (`chaine.yml`), 3,95 $ au total (variable de dépôt `CURATION_PLAFOND_TOTAL_USD`, illisible depuis le poste, valeur non revérifiée) ; prévenir avant d'approcher 4 $.
+- Budget DeepSeek autorisé : 4 $ au total (2,14 $ enregistrés le 2026-11-16, refus jamais facturés retirés) ; plafonds en ligne 0,10 $ par cycle, 0,40 $ par jour (`chaine.yml`), 3,95 $ au total (variable de dépôt `CURATION_PLAFOND_TOTAL_USD`, illisible depuis le poste, valeur non revérifiée) ; prévenir avant d'approcher 4 $.
 - Radar : big tech seulement quand le sujet touche l'IA (consignes `s5`). Presse et Hacker News toujours attribués, jamais confirmation primaire.
 - Aucune source contournée (403, 429, robots.txt, Medium) ; une source bloquée est différée avec son motif.
 - Migrations de la base en ligne : avec l'accord de l'utilisateur.
 
 ## En attente de l'utilisateur
 
-0. **Plafond total de dépense** (2026-11-16) : 2,54 $ enregistrés sur un plafond en ligne de 3,95 $ ; à 0,40 $ par jour au plus, il sera atteint en 4 jours environ (estimation) et la rédaction s'arrêtera d'elle-même. À décider : retirer du compteur les 0,41 $ de refus 402 jamais facturés, et relever ou non le plafond (dépense). Le plafond ne reflète pas le solde réel du compte DeepSeek.
+0. **Plafond total de dépense** (2026-11-16) : 2,14 $ enregistrés sur un plafond en ligne de 3,95 $ ; à 0,40 $ par jour au plus, il sera atteint en 4 à 5 jours (estimation) et la rédaction s'arrêtera d'elle-même. À décider : relever ou non le plafond (dépense). Le plafond ne reflète pas le solde réel du compte DeepSeek.
 1. **Méthode de connexion** des comptes (parcours communauté).
 2. **Migration** de la table des essais, au moment de l'essai.
 3. **Hébergement du cycle** : choisi le 2026-11-06, dépôt public + déclencheur Cloudflare toutes les 10 min (ADR 0006), objectif 20 min de l'annonce au fil. Reste à faire par l'utilisateur : passer le dépôt en public, créer le compte Cloudflare et le jeton GitHub.

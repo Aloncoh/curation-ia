@@ -503,6 +503,23 @@ describe('budget et pipeline, sans réseau', () => {
     expect(await depense(t.database.client)).toBe(MAX_TENTATIVES * coutMicroUsd('claude-opus-5-5', 100, MAX_TOKENS.qualification));
   });
 
+  it('refus pour solde épuisé : jamais facturé, donc rien de compté', async () => {
+    for (const message of ['DeepSeek a répondu 402', '400 {"type":"error","error":{"message":"Your credit balance is too low to access the Anthropic API."}}']) {
+      const m = faux(async () => { throw new Error(message); });
+      const r = await lancer(m);
+      expect(r.statut).toBe('echec');
+      expect(m.appels).toBeGreaterThan(0);
+      expect(await depense(t.database.client)).toBe(0);
+    }
+    const lignes = await t.database.client.execute(`select status, actual_micro_usd, reserved_micro_usd from llm_call`);
+    expect(lignes.rows.length).toBeGreaterThan(0);
+    for (const l of lignes.rows) {
+      expect(l.status).toBe('erreur');
+      expect(l.actual_micro_usd).toBe(0);
+      expect(Number(l.reserved_micro_usd)).toBeGreaterThan(0);
+    }
+  });
+
   it('le plafond total s’applique entre exécutions', async () => {
     await lancer(faux(async () => reponse(ecarte)));
     const m = faux(async () => reponse(ecarte));

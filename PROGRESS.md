@@ -419,3 +419,16 @@ DeepSeek Flash, 30 actualités, 34 appels, 0,0125 $ (budget autorisé 4 $). 19 �
 - Tests : 878 au vert, dont un nouveau sur la clé exigée selon le modèle ; types vérifiés.
 - Aucun appel réel : la clé n'existe pas encore. La traduction, les découvertes et le tri n'ont jamais tourné avec Haiku.
 
+
+## 2026-11-16 — Solde DeepSeek rechargé, cycle réussi, compteur de dépense corrigé
+
+- Solde rechargé par l'utilisateur. Le cycle GitHub de 00:25 UTC recevait encore le refus 402 ; aucun cycle ensuite jusqu'à 06:12 UTC.
+- Essai réel : cycle lancé depuis le poste sur la base en ligne, avec les plafonds du cycle en ligne (06:12 à 06:30 UTC). Toutes les étapes réussies, 80 appels au modèle réussis, 0,13 $.
+  - 6 posts publiés automatiquement (n° 289, 291, 293 à 296), vus dans le fil en ligne.
+  - Premier tri réel des titres (ADR 0015) : 479 titres triés, 17 retenus, 0,0057 $.
+- Limite constatée : le site sert les montages des dépôts depuis le dépôt git, et le cycle GitHub ne les y enregistre pas. Les 4 montages des posts n° 293 à 296 ont été poussés depuis le poste ; image du n° 296 vérifiée en ligne. Reste à corriger pour les cycles GitHub.
+- Compteur de dépense (décision de l'utilisateur, « Oui, corrige ») :
+  - constat mesuré sur la base en ligne : 69 appels refusés par DeepSeek (402) gardaient leur réservation, soit 0,41 $ jamais facturés ;
+  - code : `marquerErreur` enregistre 0 $ pour un refus pour solde épuisé (DeepSeek 402, Claude « credit balance is too low ») ; les autres erreurs gardent leur réservation ;
+  - base en ligne : les 69 lignes sont passées à 0 $ (nombre et montant contrôlés avant l'écriture) ; total enregistré 2,14 $ au lieu de 2,55 $.
+- Tests : 878 au vert, dont un nouveau sur le refus pour solde épuisé ; types vérifiés.

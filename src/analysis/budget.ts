@@ -66,7 +66,20 @@ export async function solder(client: Client, id: number, model: string, usage: {
   });
 }
 
-/** Erreur : la réservation reste comptée, car une requête partie peut avoir été facturée. */
+/**
+ * Refus pour solde épuisé (DeepSeek : 402 ; Claude : 400 « credit balance is too low ») : le fournisseur refuse la requête
+ * avant tout traitement, donc rien n'est facturé. Mêmes messages que `soldeEpuiseDepuis` (src/pilotage/pilotage.ts).
+ */
+export const estRefusSoldeEpuise = (erreur: string): boolean =>
+  erreur.startsWith('DeepSeek a répondu 402') || erreur.includes('credit balance is too low');
+
+/**
+ * Erreur : la réservation reste comptée, car une requête partie peut avoir été facturée. Exception (2026-11-16) : un refus
+ * pour solde épuisé n'est jamais facturé, son coût réel est donc 0 ; sinon 69 refus gonflaient le compteur de 0,41 $.
+ */
 export async function marquerErreur(client: Client, id: number, erreur: string, now: string): Promise<void> {
-  await client.execute({ sql: `update llm_call set status = 'erreur', error = ?, finished_at = ? where id = ?`, args: [erreur.slice(0, 500), now, id] });
+  await client.execute({
+    sql: `update llm_call set status = 'erreur', error = ?, finished_at = ?, actual_micro_usd = ? where id = ?`,
+    args: [erreur.slice(0, 500), now, estRefusSoldeEpuise(erreur) ? 0 : null, id],
+  });
 }
