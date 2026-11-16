@@ -448,3 +448,12 @@ DeepSeek Flash, 30 actualités, 34 appels, 0,0125 $ (budget autorisé 4 $). 19 �
 - Non vérifié : premier passage en ligne de la découverte et première collecte en ligne de TLDR AI ; durée avec le jeton d'Actions.
 - Constat soumis à l'utilisateur : la source `feed:youtube-ai-search` (2026-11-04) lit la même adresse que le robots.txt de YouTube interdit.
 - Autre constat : au cycle de 07:10 UTC, l'étape des brouillons a échoué sur « fetch failed » (panne de réseau passagère, non reproduite).
+
+## 2026-11-16 — Chaîne YouTube AI Search différée
+
+- Décision de l'utilisateur (« Oui, diffère-la ») : la source `feed:youtube-ai-search` est différée et gardée au registre. Motif : le robots.txt de youtube.com interdit `/feeds/videos.xml`.
+- Relevé en base de production avant la modification : dernière collecte réussie le 2026-11-05, 9 échecs depuis (HTTP 404, le dernier le 2026-11-10) ; 15 vidéos collectées, aucun post publié (10 sans brouillon, 4 écartées, 1 à approfondir) ; aucune page YouTube demandée par l'approfondissement.
+- Construit : champ `differee` sur la source (`src/sources.ts`) et un test (`tests/acces.test.ts`).
+- Vérifié : 891 tests au vert (51 fichiers), types vérifiés.
+- Non vérifié : passage de la ligne à « inactive » dans le registre en ligne, attendu au prochain cycle.
+- Constat soumis à l'utilisateur : la biographie publique de Nodi cite encore « les vidéos d'AI Search ».

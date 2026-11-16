@@ -732,7 +732,7 @@ Modèle local, sur le Mac : gratuit à l'appel. Il faudrait pourtant laisser le 
 
 **Ce qui est refusé, et pourquoi.**
 
-- Les flux des chaînes YouTube répondent, mais le `robots.txt` de YouTube les interdit aux robots. Le projet ne contourne aucun refus : ces chaînes sont différées. La voie officielle est une clé de l'API YouTube, que seul le porteur du projet peut créer.
+- Les flux des chaînes YouTube répondent, mais le `robots.txt` de YouTube les interdit aux robots. Le projet ne contourne aucun refus : ces chaînes sont différées. La chaîne AI Search, branchée le 4 novembre par la même adresse, l'est aussi depuis le 16 novembre, sur décision du porteur du projet ; aucun post n'en avait été publié. La voie officielle est une clé de l'API YouTube, que seul le porteur du projet peut créer.
 - Aspirer Facebook, Instagram, TikTok ou X avec des outils tiers est contraire aux conditions de ces plateformes. Ces sources restent hors de la collecte tant qu'il n'existe pas d'accès officiel.
 
 **Un défaut trouvé en chemin.** L'étape de découverte envoyait 156 recherches à GitHub à chaque passage. Le 16 novembre, elle a dépassé sa limite de 10 minutes et a été arrêtée avant d'enregistrer quoi que ce soit. Elle a maintenant un budget de temps : passé 4 minutes de recherche, le reste est reporté au passage suivant, qui repart d'un autre point de la liste.

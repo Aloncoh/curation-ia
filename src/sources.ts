@@ -152,6 +152,8 @@ export const SOURCES: SourceDefinition[] = [
   // Demande de l'utilisateur du 2026-11-04 : la chaîne YouTube AI Search devient une source de rédaction au même niveau
   // que les releases GitHub (un sujet par vidéo). Contenu externe : chaque post l'attribue à la chaîne, jamais comme
   // annonce officielle. Flux Atom public de la chaîne (200 le 2026-11-04 ; 404 le 2026-11-03), 15 dernières vidéos.
+  // Différée le 2026-11-16 (décision de l'utilisateur) : le robots.txt de youtube.com interdit `/feeds/videos.xml`. En
+  // ligne, le flux répondait déjà 404 depuis le 2026-11-05 ; 15 vidéos collectées, aucun post publié (docs/sources.md §3.14).
   {
     id: 'feed:youtube-ai-search',
     kind: 'feed',
@@ -161,6 +163,12 @@ export const SOURCES: SourceDefinition[] = [
     fetchIntervalMinutes: 60,
     attribution: 'AI Search (YouTube)',
     compte: 'nodi',
+    differee: {
+      etat: 'refus_acces',
+      motif: 'robots.txt de youtube.com : « Disallow: /feeds/videos.xml » pour tous les robots (relevé le 2026-11-16) : refus déclaré, non contourné',
+      depuis: '2026-11-16',
+      alternative: 'YouTube Data API v3, avec une clé créée par l’utilisateur',
+    },
   },
   // Grandes entreprises, signées par Radar (décision de l'utilisateur du 2026-11-05 : NVIDIA, Microsoft, Apple, Amazon et
   // Tesla obligatoires, liste ouverte). Flux officiels vérifiés le 2026-11-05 (200, 4 à 20 entrées). Tesla : aucun flux

@@ -43,4 +43,10 @@ describe('registre d’accès', () => {
       expect(s.differee!.depuis).toMatch(/^\d{4}-\d{2}-\d{2}$/);
     }
   });
+
+  it('la chaîne YouTube AI Search est différée : son flux est interdit par le robots.txt de YouTube (décision du 2026-11-16)', () => {
+    const s = SOURCES.find((x) => x.id === 'feed:youtube-ai-search')!;
+    expect(s.differee).toMatchObject({ etat: 'refus_acces', depuis: '2026-11-16', motif: expect.stringContaining('robots.txt') });
+    expect(s.differee!.alternative).toContain('YouTube Data API');
+  });
 });

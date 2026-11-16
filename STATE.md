@@ -13,7 +13,7 @@ Réseau social vivant autour de l'IA, du développement et de la technologie : r
 - **Chaîne automatique** (`chaine.yml`) : collecte, capture des pages, brouillons, contrôles avec élagage et relance, planification, traduction, publication sans relecture de ce qui passe tous les contrôles. Publications vues en ligne ce jour.
 - **Recherche** (FTS5 + lexique `l1`) : 94 % sur le jeu `r1`. Avis de validité (version plus récente, source mise à jour) affiché.
 - **Sources** : 253 actives au registre en ligne le 2026-11-15 (240 accessibles, 8 en erreur temporaire, 2 sans flux exploitable, 2 pages supprimées ou introuvables, 1 refus d'accès), plus 25 différées, gardées au registre ; registre d'accès (six états, reprises espacées, aucune suppression), Hacker News en signal, EDGAR essayé en réel depuis le poste.
-- **Tests** : 890 au vert (51 fichiers, mesuré le 2026-11-16).
+- **Tests** : 891 au vert (51 fichiers, mesuré le 2026-11-16).
 
 ## Couverture des agents (2026-11-10, vérifié sur la base en ligne)
 
@@ -44,7 +44,7 @@ Réseau social vivant autour de l'IA, du développement et de la technologie : r
 - **Sources de la liste de l'utilisateur** (2026-11-16, « Oui, branche-les » ; détail et motifs : docs/sources.md §3.14) : 279 sources définies dans le code.
   - **TLDR AI** branché comme signal, sur le modèle de Hacker News (`feed:tldr-ai`, `src/collect/lettre.ts`) : dernier numéro, lien et titre des articles, puis article lu à sa source. Essai réel sur la base locale : 16 articles du numéro du 2026-11-13, 4 sponsorisés écartés. Première collecte en ligne à constater.
   - **Classements publics** branchés sur la découverte GitHub (`src/ressources/classements.ts`) : Selan (skills en tendance) et awesome-claude-code (ajouts récents) ; 4 candidats au plus par passage. Essai réel : 15 et 239 dépôts cités, 27 au-dessus du seuil, 4 candidats.
-  - **Différées** : les trois chaînes YouTube (flux interdit par le robots.txt de YouTube), mcpmorning (le classement ne donne pas le dépôt), Substack, arXiv, Lobsters, Reddit. **Écartées** : Facebook, Instagram, TikTok, X et Discord par aspiration (contraire à leurs conditions).
+  - **Différées** : les trois chaînes YouTube (flux interdit par le robots.txt de YouTube) et, pour le même motif, la source existante AI Search (`feed:youtube-ai-search`, décision de l'utilisateur du 2026-11-16 ; en ligne, flux en 404 depuis le 2026-11-05, 15 vidéos collectées, aucun post publié ; passage à « inactive » au registre en ligne à constater au prochain cycle), mcpmorning (le classement ne donne pas le dépôt), Substack, arXiv, Lobsters, Reddit. **Écartées** : Facebook, Instagram, TikTok, X et Discord par aspiration (contraire à leurs conditions).
   - **Découverte : budget de temps** (2026-11-16). Le cycle GitHub de 07:10 UTC a arrêté l'étape à 10 min, avant toute capture : 156 recherches par passage. Désormais 4 min de recherche du plan, registre jusqu'à 5 min 30, classements jusqu'à 6 min 45, le reste reporté ; chaque passage part d'un autre point du plan. Essai réel sans jeton : 6 min 12, 35 requêtes du plan envoyées sur 156, 10 candidats. À constater au prochain passage en ligne.
 - **Rédaction des découvertes** : 6 par cycle depuis le 2026-11-11 (2 auparavant), sous les plafonds 0,10 $ par cycle et 0,40 $ par jour. TokenEconomizer (Microsoft), trouvé automatiquement, est en ligne (post n° 229). 239 découvertes attendent le 2026-11-16 (la plus ancienne du 2026-11-05 ; 6 notées dans le cycle du 16, dont 4 publiées) ; alerte de file dans `npm run etat`.
 - **Fable 5.2** :
@@ -111,7 +111,7 @@ Ordre, avec mise en ligne et vérification à chaque étape, sur ordinateur d'ab
 4. **Domaine** : disponibles le 2026-11-05 chez Vercel : `curationai.app` (9,99 $ la 1re année, 15 $ ensuite), `curationai.dev` (9,99 $, puis 13 $), `curationia.com` (12,03 $), `curationai.co` (29,99 $, puis 24,80 $), `getcuration.ai` (160 $ pour 2 ans) ; `curationai.fr`, `curationai.social`, `curation-ia.com`, `curationai.xyz` disponibles, prix non obtenus ; pris : `curationai.com`, `curation-ai.com`, `curationai.io`, `curationai.net`, `curation.ai`.
 5. **Droits** : mascotte, avatars, bannières, fonds ; logos au premier plan ([docs/droits.md](docs/droits.md) §4).
 6. Secret GitHub `CURATION_CONTACT_SEC` ; fonds en haute définition ; jeu de recherche non vu ; liste témoin « construire » ; X, Reddit, LMArena ; hébreu relu par un locuteur natif.
-7. **Chaîne YouTube AI Search** (2026-11-16) : la source `feed:youtube-ai-search`, ajoutée à la demande de l'utilisateur le 2026-11-04, lit `/feeds/videos.xml`, que le robots.txt de YouTube interdit. À décider : la différer comme les trois autres chaînes, ou créer une clé de l'API YouTube (compte Google, voie officielle).
+7. **Chaînes YouTube** (2026-11-16) : quatre chaînes différées (Anthropic, Matt Pocock, Fireship, AI Search), leur flux étant interdit par le robots.txt de YouTube. Pour les reprendre : une clé de l'API YouTube (compte Google, voie officielle), que seul l'utilisateur peut créer. **Biographie de Nodi** : elle cite encore « les vidéos d'AI Search » ; à retirer ou à garder, selon sa réponse.
 
 ## Repères techniques
 
