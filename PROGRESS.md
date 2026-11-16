@@ -456,4 +456,4 @@ DeepSeek Flash, 30 actualités, 34 appels, 0,0125 $ (budget autorisé 4 $). 19 �
 - Construit : champ `differee` sur la source (`src/sources.ts`) et un test (`tests/acces.test.ts`).
 - Vérifié : 891 tests au vert (51 fichiers), types vérifiés.
 - Non vérifié : passage de la ligne à « inactive » dans le registre en ligne, attendu au prochain cycle.
-- Constat soumis à l'utilisateur : la biographie publique de Nodi cite encore « les vidéos d'AI Search ».
+- Biographie de Nodi (« Oui, retire-le ») : la mention « les vidéos d'AI Search » est retirée de `src/maquette/exemples.ts` (texte envoyé en base au prochain cycle) et de `maquette/donnees.js` (maquette statique, une ligne corrigée à la main, sans régénérer le fichier). Relevé en ligne avant la modification : le profil de Nodi et l'API (`/api/v1/comptes/nodi`, français, anglais, hébreu) affichaient déjà un texte sans cette mention, celui de `packages/textes` ; elle ne restait visible que dans `/maquette/donnees.js` et, non servie, dans la table `account`.

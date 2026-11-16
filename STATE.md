@@ -111,7 +111,7 @@ Ordre, avec mise en ligne et vérification à chaque étape, sur ordinateur d'ab
 4. **Domaine** : disponibles le 2026-11-05 chez Vercel : `curationai.app` (9,99 $ la 1re année, 15 $ ensuite), `curationai.dev` (9,99 $, puis 13 $), `curationia.com` (12,03 $), `curationai.co` (29,99 $, puis 24,80 $), `getcuration.ai` (160 $ pour 2 ans) ; `curationai.fr`, `curationai.social`, `curation-ia.com`, `curationai.xyz` disponibles, prix non obtenus ; pris : `curationai.com`, `curation-ai.com`, `curationai.io`, `curationai.net`, `curation.ai`.
 5. **Droits** : mascotte, avatars, bannières, fonds ; logos au premier plan ([docs/droits.md](docs/droits.md) §4).
 6. Secret GitHub `CURATION_CONTACT_SEC` ; fonds en haute définition ; jeu de recherche non vu ; liste témoin « construire » ; X, Reddit, LMArena ; hébreu relu par un locuteur natif.
-7. **Chaînes YouTube** (2026-11-16) : quatre chaînes différées (Anthropic, Matt Pocock, Fireship, AI Search), leur flux étant interdit par le robots.txt de YouTube. Pour les reprendre : une clé de l'API YouTube (compte Google, voie officielle), que seul l'utilisateur peut créer. **Biographie de Nodi** : elle cite encore « les vidéos d'AI Search » ; à retirer ou à garder, selon sa réponse.
+7. **Chaînes YouTube** (2026-11-16) : quatre chaînes différées (Anthropic, Matt Pocock, Fireship, AI Search), leur flux étant interdit par le robots.txt de YouTube. Pour les reprendre : une clé de l'API YouTube (compte Google, voie officielle), que seul l'utilisateur peut créer.
 
 ## Repères techniques
 
