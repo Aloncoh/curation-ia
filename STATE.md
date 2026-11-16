@@ -13,7 +13,7 @@ Réseau social vivant autour de l'IA, du développement et de la technologie : r
 - **Chaîne automatique** (`chaine.yml`) : collecte, capture des pages, brouillons, contrôles avec élagage et relance, planification, traduction, publication sans relecture de ce qui passe tous les contrôles. Publications vues en ligne ce jour.
 - **Recherche** (FTS5 + lexique `l1`) : 94 % sur le jeu `r1`. Avis de validité (version plus récente, source mise à jour) affiché.
 - **Sources** : 253 actives au registre en ligne le 2026-11-15 (240 accessibles, 8 en erreur temporaire, 2 sans flux exploitable, 2 pages supprimées ou introuvables, 1 refus d'accès), plus 25 différées, gardées au registre ; registre d'accès (six états, reprises espacées, aucune suppression), Hacker News en signal, EDGAR essayé en réel depuis le poste.
-- **Tests** : 877 au vert (49 fichiers, mesuré le 2026-11-15).
+- **Tests** : 878 au vert (49 fichiers, mesuré le 2026-11-16).
 
 ## Couverture des agents (2026-11-10, vérifié sur la base en ligne)
 
