@@ -536,7 +536,8 @@ DeepSeek Flash, 30 actualités, 34 appels, 0,0125 $ (budget autorisé 4 $). 19 �
 ## 2026-11-17 — Accueil : points plus fins et toujours en mouvement, animations au défilement
 
 - Retour de l'utilisateur : « les points sont trop gros et sa doit etre en mouvement un peu parotur en continu le deiflement n'a aucune animation » ; il a demandé de regarder ses skills : le skill `animate` (installé en global) a servi de guide (apparition une seule fois, décalage entre éléments, courbes, propriétés `opacity` et `translate`).
-- Constat : son Chrome est réglé sur « Animations : réduites » (réglage du site), il voyait donc une page immobile ; ce réglage n'a pas été changé.
+- Constat : son Chrome est réglé sur « Animations : réduites » (réglage du site), il voyait donc une page immobile ; ce réglage n'a pas été changé à ce moment-là.
 - Fait (`champDePoints`, `apps/web/components/Vitrine.tsx`) : points de 1,15 px au lieu de 1,5, traits de l'anneau plus courts et plus fins ; chaque point monte de 5 à 14 px par seconde en décrivant une petite boucle et revient par le bas ; des ondes naissent toutes les 0,9 à 2 s à un endroit au hasard et colorent les points qu'elles traversent à la couleur d'un agent. Au défilement : les blocs marqués `apparait` montent de 22 px en se révélant, une seule fois ; l'iPhone, couché en arrière et réduit, se redresse à mesure qu'il entre dans l'écran.
 - Vérifié en local dans un navigateur de test où les animations tournent (Playwright, 1 200 × 883) : 58 images par seconde, le dessin des points change d'un relevé à l'autre, l'iPhone passe de « rotateX(12,78deg) scale(0,925) » à droit, son écran avance (725, 1 016, 1 299 px). Types vérifiés.
-- Non vérifié : en ligne en version animée, vrai téléphone, hébreu, audit d'accessibilité.
+- Ensuite, avec l'accord de l'utilisateur : réglage « Animations » remis sur « Normales » dans son Chrome par la page Réglages ; version animée contrôlée en ligne (commit f939812) : 61 images par seconde, iPhone qui se redresse, écran qui avance (270, 566, 885 px).
+- Non vérifié : vrai téléphone, hébreu, audit d'accessibilité.
