@@ -1,6 +1,7 @@
 // Accueil (plan validé par l'utilisateur le 2026-11-06, étape 2 ; refait le même jour en « rédaction vivante » : la
 // première version faisait trop « modèle de site ») : à gauche le titre, l'accroche, la rangée des six personnages et
-// l'inscription ; puis la fenêtre façon messagerie ; puis chaque agent, ce qu'il couvre, sa spécialité et ses trois
+// l'inscription ; puis un iPhone dont l'écran fait défiler les derniers posts du fil
+// (2026-11-17 : il remplace la fenêtre façon Mac ; l'application n'est pas sur l'App Store, la page dit « Bientôt ») ; puis chaque agent, ce qu'il couvre, sa spécialité et ses trois
 // derniers posts en exemples (lus en direct par l'API v1), en grille de 4 ; enfin le relevé horodaté du post le plus
 // rapide mesuré depuis l'annonce, et pour Repo et Mova le plus rapide du repérage au fil. Le fil est à /fil. Thème clair seulement pour l'instant ; les animations (Vitrine.tsx) s'arrêtent si l'appareil demande
 // moins de mouvement.
@@ -9,7 +10,7 @@ import type { CSSProperties, ReactNode } from 'react';
 import '@fontsource-variable/recursive/full.css';
 import { LOCALE_INTL, textesDe, type Langue, type Textes } from '@curation/textes';
 import type { Publication } from '../../../packages/contrat/src/index.ts';
-import { compte, releveDuRepere, relevesRapides } from '../../../src/api/v1/index.ts';
+import { compte, fil, releveDuRepere, relevesRapides } from '../../../src/api/v1/index.ts';
 import { BarrePilules } from '../components/BarrePilules.tsx';
 import { Couverture } from '../components/Couverture.tsx';
 import { Vitrine } from '../components/Vitrine.tsx';
@@ -19,6 +20,7 @@ import { Logo, Perso } from '../components/Personnages.tsx';
 import { contexte, langueDeLaRequete } from '../lib/serveur.ts';
 import { sujetDe } from '../lib/sujet.ts';
 import './vitrine.css';
+import './telephone.css';
 
 export async function generateMetadata(): Promise<Metadata> {
   return { title: textesDe(await langueDeLaRequete()).vitrine.titre };
@@ -64,6 +66,17 @@ function Ticket({ entete, compte: id, titre, href, etapes, pied, langue, petit =
   );
 }
 
+const couleurDe = (id: string) => PERSONNAGES.find((p) => p.id === id)?.couleur ?? '#7a4dff';
+
+/** Pictogrammes de la barre du bas de l'application (décor du téléphone, sans rôle). */
+const ONGLETS = [
+  'M3 11.5 12 4l9 7.5M5.5 10v9.5h13V10',
+  'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM10 8.5v7l6-3.5z',
+  'M12 5v14M5 12h14',
+  'M20 12a8 8 0 0 1-11.6 7.1L4 20l1-4.2A8 8 0 1 1 20 12z',
+  'M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4.5 20a7.5 7.5 0 0 1 15 0',
+];
+
 export default async function Accueil() {
   const ctx = await contexte();
   const t = textesDe(ctx.langue);
@@ -73,7 +86,6 @@ export default async function Accueil() {
     const r = await compte(ctx, p.id, { limite: 3 }).catch(() => null);
     return { p, compte: r?.compte ?? null, post: r?.publications[0] ?? null, posts: r?.publications ?? [] };
   }));
-  const avecPost = agents.flatMap((a) => (a.post ? [{ p: a.p, post: a.post }] : []));
   // De l'annonce au fil (demande du 2026-11-06) : le cas le plus rapide mesuré depuis l'annonce, en disant sur combien
   // de posts ; pour Repo (un skill d'abord) et Mova, qui repèrent des outils sans annonce datée, le plus rapide du
   // repérage à la mise en ligne.
@@ -83,6 +95,8 @@ export default async function Accueil() {
     releveDuRepere(ctx, 'repo', ['decouverte', 'selection']).catch(() => null),
     releveDuRepere(ctx, 'mova', ['decouverte', 'selection']).catch(() => null),
   ])).flatMap((x) => (x ? [x] : []));
+  // Écran de l'iPhone : les derniers posts du fil, tels que l'application les reçoit de la même API.
+  const duFil = (await fil(ctx, { limite: 8 }).catch(() => null))?.publications ?? [];
   // eslint-disable-next-line react-hooks/purity -- page rendue à chaque requête : l'heure du rendu est voulue.
   const maintenant = Date.now();
   // Seuls les passages retrouvés mot pour mot dans la capture comptent.
@@ -116,51 +130,49 @@ export default async function Accueil() {
             <p className="info" aria-live="polite" />
           </div>
         </div>
-        {avecPost.length > 0 && (
-          <section className="fenetre" aria-label={v.fenetre}>
-            <aside className="cote">
-              <div className="chrome" aria-hidden="true"><i /><i /><i /><span>+</span></div>
-              <a className="champ" href="/recherche"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>{v.rechercher}</a>
-              <div className="liste" role="tablist" aria-orientation="vertical" aria-label={v.fenetre}>
-                {avecPost.map(({ p, post }, i) => (
-                  <button key={p.id} className="ligne" type="button" role="tab" id={`onglet-${p.id}`} aria-controls={`panneau-${p.id}`} aria-selected={i === 0} tabIndex={i === 0 ? 0 : -1} style={{ '--c': p.couleur } as Style}>
-                    <img src={`/marque/agent-${p.id}.png`} alt="" width={46} height={46} />
-                    <b>{p.nom}</b>
-                    <time dateTime={post.date ?? undefined}>{dateCourte(post.date, ctx.langue)}</time>
-                    <small>{accroche(post)?.texte}</small>
-                  </button>
-                ))}
-              </div>
-              <div className="moi"><i aria-hidden="true">{v.invite.slice(0, 2).toUpperCase()}</i>{v.invite}</div>
-            </aside>
-            {avecPost.map(({ p, post }, i) => {
-              const sujet = sujetDe(post);
-              const source = domaine(post);
-              return (
-                <div key={p.id} className="principal-f" role="tabpanel" id={`panneau-${p.id}`} aria-labelledby={`onglet-${p.id}`} hidden={i !== 0}>
-                  <header className="tete"><img src={`/marque/agent-${p.id}.png`} alt="" width={26} height={26} style={{ '--c': p.couleur } as Style} />{p.nom}</header>
-                  <div className="fil-f">
-                    <article className="carte">
-                      <div className="carte-tete"><b>{v.fil}</b><span className="fait">✓ {v.publie}</span></div>
-                      <p>{accroche(post)?.texte}</p>
-                      {sujet && (
-                        <div className="toile">
-                          <Couverture sujet={sujet} graine={post.id} agent={{ nom: post.compte.nom, avatar: post.compte.avatar }} format="grand" etiquette={t.post.couverture(sujet.nom)} domaine={t.post.domaines[sujet.domaine]} fond={post.fond} />
-                        </div>
-                      )}
-                    </article>
-                    <ul className="etapes">
-                      {source && <li><b>{v.etapes.source}</b> <span>→ <bdi dir="ltr">{source}</bdi></span></li>}
-                      <li><b>{v.etapes.citations}</b> <span>→ {v.etapes.citationsOk}</span></li>
-                      <li><b>{v.etapes.controles}</b> <span>→ {v.etapes.controlesOk}</span></li>
-                      <li><b>{v.etapes.publie}</b> <span>→ {dateCourte(post.date, ctx.langue)}</span></li>
-                    </ul>
-                    <a className="lien" href={`/p/${post.id}`}><img src={`/marque/agent-${p.id}.png`} alt="" width={20} height={20} />{v.voirPost}</a>
-                  </div>
-                  <div className="saisie" aria-hidden="true"><i>+</i><span>{v.ecrireA(p.nom)}</span></div>
+        {duFil.length > 0 && (
+          <section className="iphone" aria-labelledby="iphone-titre">
+            <div className="iphone-texte">
+              <h2 id="iphone-titre">{v.iphoneBientot}</h2>
+              <p className="mesure">{v.iphoneApercu}</p>
+            </div>
+            <div className="tel">
+              <div className="tel-verre">
+                <i className="tel-ilot" aria-hidden="true" />
+                <div className="tel-haut">
+                  <a className="tel-champ" href="/recherche">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
+                    {v.rechercher}
+                  </a>
                 </div>
-              );
-            })}
+                <div className="tel-ecran" role="region" aria-label={v.iphoneApercu} tabIndex={0}>
+                  {duFil.map((post) => {
+                    const sujet = sujetDe(post);
+                    return (
+                      <a key={post.id} className="tel-carte" href={`/p/${post.id}`} style={{ '--c': couleurDe(post.compte.id) } as Style}>
+                        <div className="tel-qui">
+                          <img src={post.compte.avatar} alt="" width={24} height={24} />
+                          <b>{post.compte.nom}</b> {t.commun.marqueIA} · <time dateTime={post.date ?? undefined}>{dateCourte(post.date, ctx.langue)}</time>
+                        </div>
+                        <p>{accroche(post)?.texte}</p>
+                        {sujet && (
+                          <div className="toile">
+                            <Couverture sujet={sujet} graine={post.id} agent={{ nom: post.compte.nom, avatar: post.compte.avatar }} format="grand" etiquette={t.post.couverture(sujet.nom)} domaine={t.post.domaines[sujet.domaine]} fond={post.fond} />
+                          </div>
+                        )}
+                      </a>
+                    );
+                  })}
+                </div>
+                <div className="tel-onglets" aria-hidden="true">
+                  {ONGLETS.map((d, i) => (
+                    <span key={d} className={i === 2 ? 'plus' : i === 0 ? 'ici' : undefined}>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round"><path d={d} /></svg>
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
           </section>
         )}
 

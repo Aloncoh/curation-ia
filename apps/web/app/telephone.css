@@ -1,0 +1,45 @@
+/* iPhone de l'accueil (app/page.tsx, 2026-11-17) : il remplace la fenêtre façon Mac. Un téléphone dessiné en CSS, dont
+   l'écran montre les derniers posts du fil et avance tout seul d'un post à l'autre (components/Vitrine.tsx, classe
+   .joue) ; sans animation, l'écran se fait défiler à la main. Rangé sous .vitrine comme le reste de l'accueil. */
+
+.vitrine {
+  & .iphone { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; gap: clamp(20px, 5vw, 70px); }
+  & .iphone-texte { grid-column: 1; justify-self: end; max-width: 20rem; }
+  & .iphone h2 { margin: 0 0 12px; font: 800 clamp(1.9rem, 3.6vw, 2.6rem)/1.1 var(--v-texte); letter-spacing: -.01em; font-variation-settings: "CASL" 1, "CRSV" 1; text-wrap: balance; }
+
+  & .tel {
+    grid-column: 2; position: relative; height: min(660px, 82dvh); min-height: 460px; aspect-ratio: 9 / 19.3; padding: 9px; border-radius: 48px;
+    background: #15121f; box-shadow: 0 0 0 1px #2e2843 inset, 0 46px 70px -42px rgba(60, 30, 140, .6);
+  }
+  & .tel-verre { position: relative; height: 100%; display: grid; grid-template-rows: auto minmax(0, 1fr) auto; border-radius: 40px; overflow: hidden; background: #f3f1fa; color: var(--v-encre); }
+  & .tel-ilot { position: absolute; top: 9px; left: 50%; z-index: 2; width: 31%; height: 22px; translate: -50% 0; border-radius: 999px; background: #000; }
+  & .tel-haut { padding: 41px 11px 9px; background: #fff; border-bottom: 1px solid var(--v-trait); }
+  & .tel-champ { display: flex; align-items: center; gap: 8px; height: 32px; padding: 0 12px; border-radius: 999px; background: #f1eff6; color: var(--v-pied); font-size: .78rem; text-decoration: none; }
+  & .tel-ecran { position: relative; display: grid; align-content: start; gap: 9px; padding: 10px 9px 14px; overflow-y: auto; scrollbar-width: none; }
+  & .tel-ecran::-webkit-scrollbar { display: none; }
+  /* Pendant que l'écran avance seul, la molette au-dessus du téléphone continue de faire défiler la page. */
+  & .tel-ecran.joue { overflow-y: hidden; }
+  & .tel-ecran:focus-visible { outline-offset: -3px; }
+  & .tel-carte {
+    display: grid; gap: 8px; padding: 11px; border-radius: 17px; color: var(--v-encre); text-decoration: none;
+    background: color-mix(in srgb, var(--c) 9%, #fff); border: 1px solid color-mix(in srgb, var(--c) 34%, #fff);
+  }
+  & .tel-qui { display: flex; align-items: center; gap: 7px; min-width: 0; color: var(--v-pied); font-size: .68rem; white-space: nowrap; }
+  & .tel-qui img { flex: none; width: 24px; height: 24px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 1.5px var(--c); }
+  & .tel-qui b { color: var(--v-encre); font-size: .76rem; }
+  & .tel-qui time { overflow: hidden; text-overflow: ellipsis; }
+  & .tel-carte p { margin: 0; font-weight: 700; font-size: .84rem; line-height: 1.28; }
+  & .tel-carte .toile { border-radius: 11px; overflow: hidden; }
+  & .tel-carte .toile .couverture { margin: 0; border-radius: 11px; }
+  & .tel-onglets { display: flex; align-items: center; justify-content: space-around; padding: 8px 10px 15px; background: #fff; border-top: 1px solid var(--v-trait); color: var(--v-pied); }
+  & .tel-onglets svg { width: 21px; height: 21px; }
+  & .tel-onglets .plus { display: grid; place-items: center; width: 38px; height: 30px; border-radius: 11px; background: var(--v-violet-fonce); color: #fff; }
+  & .tel-onglets .ici { color: var(--v-encre); }
+
+  @media (max-width: 860px) {
+    & .iphone { grid-template-columns: minmax(0, 1fr); justify-items: center; gap: 22px; }
+    & .iphone-texte { grid-column: 1; justify-self: start; max-width: none; }
+    & .tel { grid-column: 1; height: min(600px, 76dvh); min-height: 420px; padding: 7px; border-radius: 40px; }
+    & .tel-verre { border-radius: 34px; }
+  }
+}

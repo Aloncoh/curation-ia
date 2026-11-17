@@ -486,5 +486,5 @@ html.curseur-actif .vitrine .curseur.visible { opacity: 1; }
 html.texte-grand { font-size: 112.5%; }
 html.police-lisible .vitrine, html.police-lisible .vitrine.cadre-vivant { --v-texte: "Atkinson Hyperlegible Next", system-ui, sans-serif; --texte: "Atkinson Hyperlegible Next", system-ui, sans-serif; }
 html.mouvement-reduit .vitrine *, html.mouvement-reduit .vitrine *::before, html.mouvement-reduit .vitrine *::after { animation: none !important; transition: none !important; }
-html.mouvement-reduit .vitrine .particules, html.mouvement-reduit .vitrine .curseur { display: none; }
+html.mouvement-reduit .vitrine .curseur { display: none; }
 html.mouvement-reduit, html.mouvement-reduit * { cursor: auto; }

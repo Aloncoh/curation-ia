@@ -1,11 +1,96 @@
 'use client';
-// Animations et interactions de l'accueil (app/page.tsx), reprises de la maquette `maquette/accueil.html` : champ de
-// particules autour du pointeur, curseur flèche, indicateur de la barre calé sur l'onglet, barre pleine au défilement,
+// Animations et interactions de l'accueil (app/page.tsx), reprises de la maquette `maquette/accueil.html` : fond en
+// petits points façon Antigravity (champDePoints), écran de l'iPhone qui défile seul, curseur flèche, indicateur de la barre calé sur l'onglet, barre pleine au défilement,
 // personnages qui regardent, se présentent tour à tour et se déplacent, onglets de la fenêtre, boutons de compte (bientôt).
 // Tout s'arrête si l'appareil demande moins de mouvement ; le curseur normal revient dès qu'on navigue au clavier.
 import { useEffect, useRef } from 'react';
 
 const hasard = Math.random;
+
+type Ecouter = (cible: EventTarget, type: string, f: (e: never) => void, o?: AddEventListenerOptions) => void;
+
+/** Couleurs des six agents (lib/personnages.ts), pour l'anneau autour du pointeur. */
+const TEINTES = ['31, 167, 122', '232, 115, 47', '47, 143, 216', '154, 92, 240', '217, 154, 18', '18, 166, 160'];
+const TOUR = Math.PI * 2;
+
+// Fond en petits points façon Antigravity (demande du 2026-11-17 : « animation en fond en petits points comme sur le
+// site antigravity ») : une grille irrégulière et serrée de points fins ; autour du pointeur, un large anneau les
+// écarte, les allonge en petits traits et leur donne les couleurs des six agents, par secteur. Sans souris, l'anneau se
+// promène seul. Dans le réseau (fond sombre, classe cadre-vivant), l'ancien réglage est gardé : points violets, pâles
+// et espacés. Mouvement réduit : les points restent affichés, immobiles.
+function champDePoints(racine: HTMLElement, ecouter: Ecouter, nettoyages: (() => void)[], calme: boolean) {
+  const toile = racine.querySelector<HTMLCanvasElement>('.particules');
+  const cx = toile?.getContext('2d');
+  if (!toile || !cx) return;
+  const sombre = racine.classList.contains('cadre-vivant');
+  let L = 0, H = 0;
+  let pts: { x: number; y: number; p: number; q: number }[] = [];
+  const construire = () => {
+    const dpr = Math.min(2, devicePixelRatio || 1);
+    L = innerWidth; H = innerHeight;
+    toile.width = L * dpr; toile.height = H * dpr;
+    cx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const pas = sombre ? (L < 700 ? 40 : 46) : L < 700 ? 30 : 32;
+    pts = [];
+    for (let y = pas / 2; y < H + pas; y += pas) for (let x = pas / 2; x < L + pas; x += pas) {
+      pts.push({ x: x + (hasard() - 0.5) * pas * 0.9, y: y + (hasard() - 0.5) * pas * 0.9, p: hasard() * 6.28, q: hasard() * 6.28 });
+    }
+  };
+  construire();
+  let mx = L * 0.5, my = H * 0.4, tx = mx, ty = my, actif = false, repos = 0;
+  const dessiner = (t: number) => {
+    if (!actif) { tx = L * 0.5 + Math.cos(t * 0.00021) * L * 0.3; ty = H * 0.42 + Math.sin(t * 0.00029) * H * 0.24; }
+    if (calme) { mx = tx; my = ty; } else { mx += (tx - mx) * 0.09; my += (ty - my) * 0.09; }
+    const R = (sombre ? (L < 700 ? 100 : 150) : L < 700 ? 100 : 220) + Math.sin(t * 0.0013) * 12;
+    const sigma = sombre ? 72 : 92, S2 = 2 * sigma * sigma;
+    cx.clearRect(0, 0, L, H);
+    cx.lineCap = 'round';
+    cx.beginPath();
+    cx.lineWidth = sombre ? 1.7 : 1.5;
+    cx.strokeStyle = sombre ? 'rgba(122, 77, 255, .16)' : 'rgba(28, 21, 48, .3)';
+    const proches: { x: number; y: number; ux: number; uy: number; w: number }[] = [];
+    for (const p of pts) {
+      const bx = p.x + Math.sin(t * 0.0004 + p.p) * 5, by = p.y + Math.cos(t * 0.00034 + p.q) * 5;
+      const dx = bx - mx, dy = by - my, d = Math.hypot(dx, dy) || 1;
+      const w = Math.exp(-((d - R) ** 2) / S2);
+      if (w < 0.06) { cx.moveTo(bx, by); cx.lineTo(bx + 0.01, by); continue; }
+      proches.push({ x: bx, y: by, ux: dx / d, uy: dy / d, w });
+    }
+    cx.stroke();
+    for (const { x: bx, y: by, ux, uy, w } of proches) {
+      const ecart = sombre ? 22 : 26;
+      const x = bx + ux * w * ecart, y = by + uy * w * ecart;
+      const l = 1 + w * (sombre ? 3.8 : 4.4);
+      if (sombre) {
+        const teinte = 252 + Math.sin(Math.atan2(uy, ux) + t * 0.0006) * 48;
+        cx.strokeStyle = `hsla(${teinte | 0}, 80%, 66%, ${(0.14 + w * 0.5).toFixed(2)})`;
+        cx.lineWidth = 1.5 + w * 0.5;
+      } else {
+        const tour = (Math.atan2(uy, ux) + t * 0.00012) / TOUR;
+        cx.strokeStyle = `rgba(${TEINTES[Math.floor((tour - Math.floor(tour)) * 6) % 6]}, ${((L < 700 ? 0.2 : 0.32) + w * (L < 700 ? 0.42 : 0.62)).toFixed(2)})`;
+        cx.lineWidth = 1.5 + w * 1.1;
+      }
+      cx.beginPath(); cx.moveTo(x - ux * l, y - uy * l); cx.lineTo(x + ux * l, y + uy * l); cx.stroke();
+    }
+  };
+  let dL = L, dH = H, image = 0;
+  if (calme) {
+    // Une image fixe, redessinée seulement si la fenêtre change de taille.
+    ecouter(window, 'resize', () => { construire(); dessiner(0); });
+    dessiner(0);
+    return;
+  }
+  ecouter(window, 'resize', () => { if (innerWidth !== dL || Math.abs(innerHeight - dH) > 140) { construire(); dL = L; dH = H; } });
+  ecouter(window, 'pointermove', (e: PointerEvent) => {
+    tx = e.clientX; ty = e.clientY; actif = true;
+    clearTimeout(repos);
+    if (e.pointerType !== 'mouse') repos = window.setTimeout(() => { actif = false; }, 1800);
+  }, { passive: true });
+  ecouter(document, 'pointerleave', () => { actif = false; });
+  const boucle = (t: number) => { dessiner(t); image = requestAnimationFrame(boucle); };
+  image = requestAnimationFrame(boucle);
+  nettoyages.push(() => cancelAnimationFrame(image));
+}
 
 export function Vitrine({ bientot }: { bientot: string }) {
   const ancre = useRef<HTMLSpanElement>(null);
@@ -107,6 +192,8 @@ export function Vitrine({ bientot }: { bientot: string }) {
     racine.querySelectorAll('.agents-grille li').forEach((a) => (observateur ? observateur.observe(a) : a.classList.add('vue')));
     if (observateur) nettoyages.push(() => observateur.disconnect());
 
+    champDePoints(racine, ecouter, nettoyages, calme);
+
     const fin = () => { nettoyages.forEach((f) => f()); minuteries.forEach((id) => clearTimeout(id)); };
     if (calme) return fin;
 
@@ -167,66 +254,38 @@ export function Vitrine({ bientot }: { bientot: string }) {
       nettoyages.push(() => html.classList.remove('curseur-actif'));
     }
 
-    // Champ de particules façon Antigravity : grille irrégulière de petits traits pâles ; autour du pointeur, un anneau
-    // les écarte, les allonge et les oriente vers l'extérieur. Sans souris, l'anneau se promène seul.
-    const toile = racine.querySelector<HTMLCanvasElement>('.particules');
-    const cx = toile?.getContext('2d');
-    if (toile && cx) {
-      let L = 0, H = 0;
-      let pts: { x: number; y: number; p: number; q: number }[] = [];
-      const construire = () => {
-        const dpr = Math.min(2, devicePixelRatio || 1);
-        L = innerWidth; H = innerHeight;
-        toile.width = L * dpr; toile.height = H * dpr;
-        cx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        const pas = L < 700 ? 40 : 46;
-        pts = [];
-        for (let y = pas / 2; y < H + pas; y += pas) for (let x = pas / 2; x < L + pas; x += pas) {
-          pts.push({ x: x + (hasard() - 0.5) * pas * 0.9, y: y + (hasard() - 0.5) * pas * 0.9, p: hasard() * 6.28, q: hasard() * 6.28 });
-        }
+    // iPhone de l'accueil : son écran avance tout seul d'un post à l'autre, comme une vidéo du réseau qu'on fait
+    // défiler ; il s'arrête au survol, au clavier et quand il sort de l'écran. Sans ce script (mouvement réduit),
+    // l'écran se fait défiler à la main.
+    const ecranTel = racine.querySelector<HTMLElement>('.tel-ecran');
+    const cartesTel = ecranTel ? [...ecranTel.querySelectorAll<HTMLElement>('.tel-carte')] : [];
+    if (ecranTel && cartesTel.length > 1) {
+      ecranTel.classList.add('joue');
+      let retenu = false, rang = 0, glisse = 0;
+      ecouter(ecranTel, 'pointerenter', (e: PointerEvent) => { if (e.pointerType === 'mouse') retenu = true; });
+      ecouter(ecranTel, 'pointerleave', () => { retenu = false; });
+      ecouter(ecranTel, 'focusin', () => { retenu = true; });
+      ecouter(ecranTel, 'focusout', () => { retenu = false; });
+      // Glissement vers un post, comme un coup de pouce : rapide au départ, doux à l'arrivée.
+      const aller = (haut: number) => {
+        const de = ecranTel.scrollTop, t0 = performance.now();
+        const pas = (t: number) => {
+          const k = Math.min(1, (t - t0) / 650);
+          ecranTel.scrollTop = de + (haut - de) * (1 - (1 - k) ** 3);
+          if (k < 1) glisse = requestAnimationFrame(pas);
+        };
+        cancelAnimationFrame(glisse);
+        glisse = requestAnimationFrame(pas);
       };
-      construire();
-      let dL = L, dH = H;
-      ecouter(window, 'resize', () => { if (innerWidth !== dL || Math.abs(innerHeight - dH) > 140) { construire(); dL = L; dH = H; } });
-      let mx = L * 0.5, my = H * 0.4, tx = mx, ty = my, actif = false, repos = 0;
-      ecouter(window, 'pointermove', (e: PointerEvent) => {
-        tx = e.clientX; ty = e.clientY; actif = true;
-        clearTimeout(repos);
-        if (e.pointerType !== 'mouse') repos = window.setTimeout(() => { actif = false; }, 1800);
-      }, { passive: true });
-      ecouter(document, 'pointerleave', () => { actif = false; });
-      let image = 0;
-      const dessiner = (t: number) => {
-        if (!actif) { tx = L * 0.5 + Math.cos(t * 0.00021) * L * 0.3; ty = H * 0.42 + Math.sin(t * 0.00029) * H * 0.24; }
-        mx += (tx - mx) * 0.09; my += (ty - my) * 0.09;
-        const R = (L < 700 ? 100 : 150) + Math.sin(t * 0.0013) * 12;
-        const S2 = 2 * 72 * 72;
-        cx.clearRect(0, 0, L, H);
-        cx.lineCap = 'round';
-        cx.beginPath();
-        cx.lineWidth = 1.7;
-        cx.strokeStyle = 'rgba(122, 77, 255, .16)';
-        const proches: { x: number; y: number; ux: number; uy: number; w: number }[] = [];
-        for (const p of pts) {
-          const bx = p.x + Math.sin(t * 0.0004 + p.p) * 5, by = p.y + Math.cos(t * 0.00034 + p.q) * 5;
-          const dx = bx - mx, dy = by - my, d = Math.hypot(dx, dy) || 1;
-          const w = Math.exp(-((d - R) ** 2) / S2);
-          if (w < 0.06) { cx.moveTo(bx, by); cx.lineTo(bx + 0.01, by); continue; }
-          proches.push({ x: bx, y: by, ux: dx / d, uy: dy / d, w });
-        }
-        cx.stroke();
-        for (const { x: bx, y: by, ux, uy, w } of proches) {
-          const x = bx + ux * w * 22, y = by + uy * w * 22;
-          const l = 1 + w * 3.8;
-          const teinte = 252 + Math.sin(Math.atan2(uy, ux) + t * 0.0006) * 48;
-          cx.strokeStyle = `hsla(${teinte | 0}, 80%, 66%, ${(0.14 + w * 0.5).toFixed(2)})`;
-          cx.lineWidth = 1.5 + w * 0.5;
-          cx.beginPath(); cx.moveTo(x - ux * l, y - uy * l); cx.lineTo(x + ux * l, y + uy * l); cx.stroke();
-        }
-      };
-      const boucle = (t: number) => { dessiner(t); image = requestAnimationFrame(boucle); };
-      image = requestAnimationFrame(boucle);
-      nettoyages.push(() => cancelAnimationFrame(image));
+      const avance = window.setInterval(() => {
+        const b = ecranTel.getBoundingClientRect();
+        if (retenu || document.hidden || b.bottom < innerHeight * 0.15 || b.top > innerHeight * 0.85) return;
+        const max = ecranTel.scrollHeight - ecranTel.clientHeight;
+        // Arrivé en bas, on repart du premier post.
+        rang = ecranTel.scrollTop >= max - 2 ? 0 : rang + 1;
+        aller(Math.min(max, Math.max(0, (cartesTel[rang % cartesTel.length]?.offsetTop ?? 0) - 10)));
+      }, 2400);
+      nettoyages.push(() => { clearInterval(avance); cancelAnimationFrame(glisse); ecranTel.classList.remove('joue'); });
     }
 
     return fin;

@@ -200,7 +200,6 @@ export const he: Textes = {
     sourcePrimaire: 'מקור ראשוני',
     totalVerifie: (duree: string) => `${duree} מהאיתור ועד פוסט שנבדק`,
     delaiTitre: 'מההכרזה לפיד',
-    plusRapideMesure: (n: number) => `המהיר ביותר מבין ${n} הפוסטים שנמדדו.`,
     iphoneBientot: 'בקרוב ב-iPhone',
     iphoneApercu: 'תצוגה מקדימה של האפליקציה, עם פוסטים מהפיד.',
   },
