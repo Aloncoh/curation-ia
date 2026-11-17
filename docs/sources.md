@@ -131,7 +131,7 @@ Sans flux exploitable :
 - **Anthropic** : `https://www.anthropic.com/news/rss.xml` 404 (de même `/rss.xml`, `/feed`, `/feed.xml` ; `/engineering/rss.xml` redirige vers une 404) ; `https://claude.com/blog/rss.xml` 308 puis 404. Piste : `https://www.anthropic.com/sitemap.xml` (200 ; `lastmod` est une date de modification, pas de publication) ; robots.txt autorise tout ([robots.txt](https://www.anthropic.com/robots.txt)). Des flux tiers existent, non officiels.
 - **Meta AI** : `https://ai.meta.com/blog/rss/` 404 ; le [robots.txt](https://ai.meta.com/robots.txt) d'ai.meta.com interdit la collecte automatisée sans permission écrite.
 - **Microsoft AI Blog** : `https://blogs.microsoft.com/ai/feed/` 410 (« This site has been archived or suspended. ») ; `https://microsoft.ai/feed/` est valide mais vide.
-- **xAI** : `https://x.ai/news`, `/rss.xml` et `/sitemap.xml` 403 (défi Cloudflare), `/news/rss.xml` 404 ; aucun contournement tenté.
+- **xAI** : `https://x.ai/news`, `/rss.xml` et `/sitemap.xml` 403 (défi Cloudflare), `/news/rss.xml` 404 ; aucun contournement tenté. Relevé du 2026-11-17 : robots.txt et plan du site accessibles, source branchée (§3.15).
 - **Cohere** : `https://cohere.com/blog/rss.xml` redirige (307) vers la page HTML ; sitemap de 866 URL, dont 442 sous `/blog/`.
 
 ### 3.3 Langages, frameworks et infrastructure (vérifié le 2026-10-30)
@@ -834,3 +834,24 @@ Les dépôts cités par un classement passent par le même seuil d'étoiles, le 
 - Facebook, Instagram et TikTok par Apify ; X par snscrape ; RSSHub pour ces réseaux : contraire aux conditions de ces plateformes et à notre règle (aucune source contournée) ; Apify est payant. Voies officielles : API Graph de Meta, API de X (décisions de l'utilisateur).
 - Discord : un bot ne lit qu'un serveur où un administrateur l'a invité ; un compte personnel automatisé est interdit par Discord.
 - AlphaSignal : aucun flux testé ; lettre par e-mail seulement.
+
+### 3.15 Seconde liste transmise par l'utilisateur (2026-11-17)
+
+Demande de l'utilisateur : un fil d'abord fait des nouveautés de l'IA (modèles, fonctionnalités), des sources encore élargies, des recherches et des posts automatiques. Chaque adresse nouvelle de la liste a été interrogée depuis le poste le 2026-11-17, avec `safeGet` et notre analyseur, robots.txt lu d'abord.
+
+**Déjà branchées avant cette liste** : OpenAI News, Anthropic (plan du site), Google DeepMind, Mistral, blog Hugging Face, Hacker News (par l'API de recherche, pas par hnrss.org), modèles en tendance sur Hugging Face, TLDR AI, TechCrunch IA, The Verge IA, MIT Technology Review IA.
+
+**Branchée**
+
+- xAI (`feed:xai-plan`) : robots.txt « Allow: / » avec `Content-Signal: ai-train=yes, search=yes, ai-input=yes` ; `https://x.ai/sitemap.xml` répond 200 (300 pages, 93 sous `/news/`) ; `/news/rss.xml` répond 404. Lu comme Anthropic, par le plan du site, rubrique `/news/` seulement, 15 pages les plus récemment modifiées. Deux pages d'annonce capturées en réel avec le lecteur du projet : 950 et 722 mots. Signée par Nodi. Les relevés précédents donnaient 403 (§3.2).
+
+**Différées, avec motif**
+
+- Last Week in AI : robots.txt autorise, flux lisible (20 entrées, la dernière du 2026-11-11), mais la lettre est hébergée par Substack : même motif qu'Import AI (§3.10).
+- Hugging Face Daily Papers : `https://huggingface.co/api/daily_papers` répond 200 (401 lors du relevé précédent, §3.12), robots.txt autorise. C'est une API JSON : elle demande un adaptateur, non écrit.
+- Artificial Analysis : robots.txt autorise, mais la page des modèles (1,3 Mo) est rendue par script ; l'API demande une clé, donc un compte (décision de l'utilisateur). Conditions d'utilisation non lues. Un classement reste attribué à son auteur.
+- LMArena : `lmarena.ai` répond par une redirection (301), que notre client ne suit pas par règle ; destination non lue.
+- arXiv cs.AI : flux lisible, au moins 50 entrées, sans ordre d'intérêt : inchangé (§3.12).
+- Meta AI : HTTP 400 pour notre client ; robots.txt interdisant la collecte sans permission écrite : inchangé (§3.2).
+- Reddit (r/LocalLLaMA, r/MachineLearning, r/singularity) : inchangé (§3.7).
+- Modèles Hugging Face triés par `likes7d` : l'API répond, non branchée : elle double la source des modèles en tendance, et son premier résultat du jour était hors sujet.

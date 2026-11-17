@@ -730,6 +730,8 @@ Modèle local, sur le Mac : gratuit à l'appel. Il faudrait pourtant laisser le 
 - **TLDR AI**, une lettre quotidienne. Elle sert de *signal*, comme Hacker News : le code lit le dernier numéro, garde seulement le lien et le titre de chaque article signalé, puis va lire l'article sur son site d'origine. Le résumé écrit par la lettre n'est jamais repris, et les annonces sponsorisées sont écartées. Essai réel : 16 articles tirés du numéro du 13 novembre.
 - **Deux classements de dépôts GitHub** : les skills en tendance de Selan, et les ajouts récents de la liste awesome-claude-code. Les dépôts qu'ils citent deviennent des candidats de la découverte, avec les mêmes règles que les autres (seuil d'étoiles, grille de notation). Être bien classé ne prouve rien : c'est une porte d'entrée, pas une note.
 
+- **xAI** (ajout du 17 novembre, seconde liste). Le site n'a pas de flux et refusait jusque-là notre collecteur. Il l'autorise maintenant dans son `robots.txt` : le code lit le plan du site, garde la rubrique des annonces, puis lit chaque page. Même méthode que pour Anthropic.
+
 **Ce qui est refusé, et pourquoi.**
 
 - Les flux des chaînes YouTube répondent, mais le `robots.txt` de YouTube les interdit aux robots. Le projet ne contourne aucun refus : ces chaînes sont différées. La chaîne AI Search, branchée le 4 novembre par la même adresse, l'est aussi depuis le 16 novembre, sur décision du porteur du projet ; aucun post n'en avait été publié. La voie officielle est une clé de l'API YouTube, que seul le porteur du projet peut créer.

@@ -467,3 +467,14 @@ DeepSeek Flash, 30 actualités, 34 appels, 0,0125 $ (budget autorisé 4 $). 19 �
 - Base de production, passage ponctuel depuis le poste : 14 lignes de sources différées écrites (second passage : 0), 15 sources inactives au lieu de 4, AI Search inactive avec son motif ; adresse de l'article corrigée sur 1 ligne de `source_document`. Les 12 flux SEC, différés sur le poste faute du contact exigé par la SEC, ont été laissés de côté : ils sont collectés en ligne.
 - Vérifié : 893 tests au vert (51 fichiers), types vérifiés, site compris ; essai du passage ponctuel sur la base locale avant la base en ligne.
 - Non vérifié : premier cycle GitHub avec ce code ; journal de l'étape de découverte du cycle de 17:07 UTC (non lu).
+- Constaté ensuite : le cycle GitHub du 2026-11-17, de 00:50 à 01:18 UTC, a réussi avec ce code.
+
+## 2026-11-17 — Seconde liste de sources : xAI branché, mesure du fil
+
+- Demande de l'utilisateur : un fil d'abord fait des nouveautés de l'IA (modèles, fonctionnalités), des sources encore élargies, tout automatique. Liste de 22 adresses collée.
+- Essais réels depuis le poste (robots.txt d'abord, détail docs/sources.md §3.15) : 11 sources déjà branchées ; xAI redevenu lisible (robots.txt « Allow: / », plan du site 200, deux pages capturées : 950 et 722 mots) ; Last Week in AI lisible mais hébergé par Substack ; Hugging Face Daily Papers lisible en JSON ; Artificial Analysis par clé d'API ; LMArena en redirection ; Meta AI en 400.
+- Construit : source `feed:xai-plan` (`src/sources-elargies.ts`), un test (`tests/couverture.test.ts`).
+- Mesure en base de production, posts publiés du 2026-11-10 au 2026-11-17 : 60, dont Nodi 9 (15 %) ; 40 posts « à vérifier ».
+- Vérifié : 894 tests au vert (51 fichiers), types vérifiés, site compris.
+- Non vérifié : première collecte en ligne de xAI.
+- Soumis à l'utilisateur : faire passer les modèles et les fonctionnalités en premier dans la rédaction de chaque cycle.

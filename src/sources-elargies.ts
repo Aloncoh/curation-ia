@@ -11,6 +11,10 @@ type FabriqueReleases = (owner: string, repo: string, perPage: number, product: 
 export const sourcesElargies = (githubReleases: FabriqueReleases): SourceDefinition[] => [
   // Anthropic : annonces, recherche, lancements (aucun flux officiel) — vérifié le 2026-11-10 : 20 entrées, dernière il y a 0 j
   { id: 'feed:anthropic-plan', kind: 'feed', name: 'Anthropic — plan du site officiel (news, research, engineering, pages de lancement)', config: { url: 'https://www.anthropic.com/sitemap.xml', maxItems: 15, linkHosts: ['www.anthropic.com'], plan: { prefixes: ['/news/', '/research/', '/engineering/', '/claude-'] } }, allowedHosts: ['www.anthropic.com'], fetchIntervalMinutes: 30, maxResponseBytes: 2 * 1024 * 1024, compte: 'nodi' },
+  // xAI : annonces (modèles Grok, voix, API), aucun flux officiel. Refusé lors des relevés précédents (403, défi Cloudflare,
+  // docs/sources.md §3.2). Relevé le 2026-11-17 (liste de l'utilisateur, §3.15) : robots.txt « Allow: / » avec
+  // « ai-input=yes », plan du site lisible (300 pages, 93 sous /news/), deux pages d'annonce capturées (950 et 722 mots).
+  { id: 'feed:xai-plan', kind: 'feed', name: 'xAI — plan du site officiel (news)', config: { url: 'https://x.ai/sitemap.xml', maxItems: 15, linkHosts: ['x.ai'], plan: { prefixes: ['/news/'] } }, allowedHosts: ['x.ai'], fetchIntervalMinutes: 60, maxResponseBytes: 2 * 1024 * 1024, compte: 'nodi' },
   // Higgsfield : modèles vidéo et image intégrés, MCP pour Claude et ChatGPT — vérifié le 2026-11-11 : 305 entrées, dernière
   // il y a 1 j, /blog autorisé par robots.txt. Le blog mêle annonces et classements de référencement : seuls les titres
   // d'annonce sont gardés (« Introducing… », « … on Higgsfield: », « Meet… », « Now on… », MCP), sauf guides et classements.

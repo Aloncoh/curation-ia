@@ -41,6 +41,12 @@ describe('plan de site (Anthropic, aucun flux officiel)', () => {
     const s = SOURCES.find((x) => x.id === 'feed:anthropic-plan');
     expect(s?.compte).toBe('nodi');
   });
+
+  it('la source xAI lit le plan du site officiel, rubrique des annonces seulement, signée par Nodi (2026-11-17)', () => {
+    const s = SOURCES.find((x) => x.id === 'feed:xai-plan');
+    expect(s).toMatchObject({ kind: 'feed', compte: 'nodi', allowedHosts: ['x.ai'], config: { url: 'https://x.ai/sitemap.xml', plan: { prefixes: ['/news/'] } } });
+    expect(s?.differee).toBeUndefined();
+  });
 });
 
 describe('sortie illisible du modèle', () => {
