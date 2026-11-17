@@ -697,7 +697,7 @@ Quand l'éditeur a placé une vidéo dans sa page, elle s'affiche sous le post, 
 - X n'est pas branché (décision en attente).
 - La collecte est lente à écrire en base (environ 6 s par source) : chaque cycle collecte au plus 7 minutes, le reste passe au cycle suivant.
 
-### 17 quater. La page de découverte refaite _(2026-11-17 ; vérifiée en local, contrôle en ligne à faire)_
+### 17 quater. La page de découverte refaite _(2026-11-17 ; en ligne, vérifiée en local et sur le site)_
 
 La page `/` suit maintenant la construction d'un modèle de site que l'utilisateur a choisi (« Vesper », de getlayers.ai), avec les couleurs du site. Le modèle est payant et son code n'est pas accessible : seule sa construction a servi de guide, tout le code est écrit pour ce projet.
 
