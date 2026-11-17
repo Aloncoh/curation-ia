@@ -515,3 +515,12 @@ DeepSeek Flash, 30 actualités, 34 appels, 0,0125 $ (budget autorisé 4 $). 19 �
 - Lire une page sans flux reste possible quand le site l'autorise (xAI, Anthropic). Les refus ne sont pas contournés : Meta AI, Reddit, Substack, Arena restent différés avec leur motif (docs/sources.md §3.15).
 - Vérifié : 899 tests au vert (51 fichiers), types vérifiés, site compris ; collecte réelle sur la base locale : 9 papiers Hugging Face, 15 pages xAI.
 - Non vérifié : première collecte en ligne des deux sources ; rédaction d'un post à partir d'un papier.
+
+## 2026-11-17 — Page de découverte refaite sur le modèle « Vesper »
+
+- Demande de l'utilisateur : adapter le modèle Vesper de getlayers.ai à la page de découverte (`/`), annoncer l'application iPhone, puis « quand on slide faut ajouter l'iphone format iphone avec scroll ». Ses choix : couleurs du site actuel, toute la page, mention « Bientôt sur iPhone » (l'application n'est pas sur l'App Store : rien ne dit « disponible »).
+- Le modèle est payant et son code verrouillé : rien n'en est repris, le code est écrit ici (`apps/web/app/page.tsx`, `apps/web/app/decouverte.css`, `apps/web/components/Nuage.tsx`).
+- Construit : nuage de points aux six couleurs des agents, qui forme l'anneau du logo, s'ouvre en spirale à six bras puis entoure le téléphone selon le défilement ; titre fin en grand ; six personnages et inscription sous un filet ; « Les six agents » en six colonnes (rôle, dernier post lu en direct) ; bloc sombre « De l'annonce au fil » (relevé du post le plus rapide mesuré, heures en grand) ; téléphone dont l'écran défile avec la page et montre les huit derniers posts du fil. La fenêtre façon messagerie et les tickets de Repo et Mova sont retirés de cette page.
+- Mouvement réduit : image fixe, section non fixée, écran du téléphone à faire défiler soi-même.
+- Vérifié en local : ordinateur (1 366 px) et mobile (375 px), console sans erreur, types vérifiés, tests des langues au vert. Le bloc « De l'annonce au fil » ne s'affiche pas en local (aucun relevé dans la base locale) : à contrôler en ligne.
+- Non vérifié : hébreu (droite à gauche), mouvement réduit dans un navigateur, fluidité sur un vrai téléphone, audit d'accessibilité.

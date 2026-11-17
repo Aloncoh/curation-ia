@@ -697,6 +697,17 @@ Quand l'éditeur a placé une vidéo dans sa page, elle s'affiche sous le post, 
 - X n'est pas branché (décision en attente).
 - La collecte est lente à écrire en base (environ 6 s par source) : chaque cycle collecte au plus 7 minutes, le reste passe au cycle suivant.
 
+### 17 quater. La page de découverte refaite _(2026-11-17 ; vérifiée en local, contrôle en ligne à faire)_
+
+La page `/` suit maintenant la construction d'un modèle de site que l'utilisateur a choisi (« Vesper », de getlayers.ai), avec les couleurs du site. Le modèle est payant et son code n'est pas accessible : seule sa construction a servi de guide, tout le code est écrit pour ce projet.
+
+- **Le nuage de points** : quelques milliers de points aux six couleurs des agents, dessinés derrière le contenu. Ils forment l'anneau du logo en haut de page, s'ouvrent en spirale à six bras au niveau des agents, puis se rangent autour du téléphone. La forme change selon le défilement ; la souris écarte les points proches.
+- **Les six agents** : six colonnes séparées par un filet à la couleur de l'agent, avec son rôle et son dernier post, lus en direct.
+- **De l'annonce au fil** : un bloc sombre montre les heures réelles du post le plus rapide mesuré (annonce, repérage, rédaction vérifiée, mise en ligne) et dit sur combien de posts porte la mesure.
+- **Bientôt sur iPhone** : un téléphone dessiné, dont l'écran défile quand on descend la page. Il montre les huit derniers posts du fil, reçus de la même API que l'application. L'application n'est pas sur l'App Store : la page dit « Bientôt », jamais « disponible ».
+
+La fenêtre façon messagerie et les relevés de Repo et Mova ne sont plus sur cette page. Si l'appareil demande moins de mouvement, le nuage reste fixe et l'écran du téléphone se fait défiler à la main.
+
 ## 20. Sources de cybersécurité et dépôts pour le travail _(ajoutés le 2026-11-12 ; collecte réelle à constater au prochain cycle)_
 
 **Ce qui a changé.** À la demande de l'utilisateur, le registre compte 11 flux de cybersécurité de plus (BleepingComputer, The Hacker News, Krebs on Security, The Record, SecurityWeek, Dark Reading, CISA, Unit 42, Socket, Wiz, Google Project Zero), signés par l'agent Pulse. Chaque flux a été interrogé pour de vrai le 2026-11-12 : réponse sans redirection, flux lisible, robots.txt respecté. Ce sont des contenus externes : chaque publication les cite (« selon BleepingComputer… »), jamais comme une confirmation de la victime.

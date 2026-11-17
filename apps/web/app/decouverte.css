@@ -1,0 +1,130 @@
+/* Page de découverte (app/page.tsx, 2026-11-17) : adaptation du modèle « Vesper » demandée par l'utilisateur, aux
+   couleurs du site (papier lilas, encre, six couleurs des agents). Grands titres fins, repères entre crochets en chasse
+   fixe, colonnes séparées par des filets, nuage de points (components/Nuage.tsx) derrière le contenu. Les styles
+   communs (barre, boutons, personnages, couverture) restent dans vitrine.css ; tout est rangé sous .vitrine.decouverte. */
+
+.vitrine.decouverte {
+  & .nuage { position: fixed; inset: 0; z-index: 0; width: 100%; height: 100%; pointer-events: none; }
+  & .decouverte-page { position: relative; z-index: 1; padding-bottom: clamp(56px, 10vh, 110px); }
+  & .decouverte-page:focus { outline: none; }
+  & .d-large { max-width: 1240px; margin-inline: auto; padding-inline: clamp(18px, 4vw, 40px); }
+  & .d-forme { pointer-events: none; }
+
+  /* Titres fins, à la manière du modèle ; la police reste Recursive. */
+  & .d-grand { margin: 0; font: 320 clamp(2.1rem, 5.2vw, 4.4rem)/1.03 var(--v-texte); letter-spacing: -.035em; font-variation-settings: "CASL" 0; text-wrap: balance; }
+  & .d-crochet { margin: 0 0 14px; color: var(--v-pied); font: 500 .78rem/1.2 var(--v-texte); font-variation-settings: "MONO" 1, "CASL" 0; letter-spacing: .08em; text-transform: uppercase; }
+  & .d-crochet::before { content: "[ "; }
+  & .d-crochet::after { content: " ]"; }
+
+  /* 1. Une : le titre en haut, l'anneau au centre, puis sous un filet les six agents et l'inscription. */
+  & .d-une { min-height: calc(100dvh - 70px); display: grid; grid-template-rows: auto minmax(0, 1fr) auto; padding-block: clamp(8px, 2.5vh, 26px) clamp(18px, 4vh, 34px); }
+  & .d-une .titre { font-weight: 320; font-size: clamp(2.9rem, 8.2vw, 7.2rem); letter-spacing: -.04em; font-variation-settings: "CASL" 0, "CRSV" .5; }
+  & .d-une .d-forme { justify-self: center; align-self: center; width: min(44vw, 47vh, 520px); aspect-ratio: 1; margin-block: clamp(-70px, -6vh, -12px) 6px; }
+  & .d-bas { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 24rem); align-items: end; gap: 28px; padding-top: 10px; border-top: 1px solid var(--v-trait); }
+  & .d-bas .bande { padding: 20px 0 30px; }
+  & .d-droite { gap: 18px; padding-bottom: 6px; }
+  & .d-accroche { margin: 0; color: var(--v-encre); font: 450 1.06rem/1.4 var(--v-texte); text-wrap: pretty; }
+  & .d-droite .info { margin: -6px 0 0; }
+  & .d-droite .info:empty { display: none; }
+
+  /* 2. Les six agents : titre centré, la spirale, puis six colonnes séparées par un filet à la couleur de l'agent. */
+  & .d-agents { padding-top: clamp(70px, 13vh, 140px); text-align: center; }
+  & .d-agents .d-forme { width: min(100%, 880px); height: clamp(220px, 38vh, 360px); margin: 14px auto 0; }
+  & .d-colonnes { list-style: none; margin: 34px 0 0; padding: 22px 0 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); row-gap: 26px; border-top: 1px solid var(--v-trait); text-align: start; }
+  & .d-colonnes > li { display: grid; align-content: start; gap: 7px; padding: 2px 16px 4px; border-inline-start: 2px solid var(--c); }
+  & .d-nom { justify-self: start; color: var(--v-encre); font: 320 1.9rem/1 var(--v-texte); letter-spacing: -.03em; text-decoration: none; }
+  & .d-nom:hover { color: var(--v-violet-fonce); }
+  & .d-colonnes em { color: var(--v-pied); font: 500 .74rem/1.3 var(--v-texte); font-style: normal; font-variation-settings: "MONO" 1, "CASL" 0; letter-spacing: .04em; text-transform: uppercase; }
+  & .d-dernier { display: grid; gap: 5px; margin-top: 6px; color: var(--v-encre); font-size: .9rem; line-height: 1.35; text-decoration: none; }
+  & .d-dernier span { display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+  & .d-dernier:hover span { text-decoration: underline; text-decoration-color: var(--c); text-underline-offset: 3px; }
+  & .d-dernier time { color: var(--v-pied); font-size: .76rem; }
+
+  /* 3. De l'annonce au fil : le bloc sombre du modèle, avec le relevé du post le plus rapide mesuré. */
+  & .d-carte {
+    margin-top: clamp(70px, 13vh, 140px); display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: clamp(22px, 4vw, 56px); align-items: end;
+    padding: clamp(22px, 4vw, 52px); border-radius: 28px; background: var(--f-fond); color: var(--f-texte);
+  }
+  & .d-carte .d-crochet, & .d-carte time small, & .d-carte .d-etapes span, & .d-total span { color: var(--f-pied); }
+  & .d-carte-post { display: flex; align-items: flex-start; gap: 12px; max-width: 30em; margin-top: 22px; color: var(--f-texte); font-size: 1.05rem; line-height: 1.4; text-decoration: none; }
+  & .d-carte-post img { flex: none; width: 30px; height: 30px; border-radius: 50%; object-fit: cover; background: #efe9e1; }
+  & .d-carte-post:hover span { text-decoration: underline; text-underline-offset: 4px; }
+  & .d-carte :is(a, button):focus-visible { outline-color: #b9a4ff; }
+  & .d-etapes { grid-column: 1 / -1; list-style: none; margin: 8px 0 0; padding: 22px 0 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); row-gap: 22px; border-top: 1px solid var(--f-trait); }
+  & .d-etapes li { display: grid; align-content: start; gap: 5px; padding: 0 16px; border-inline-start: 1px solid var(--f-trait); }
+  & .d-etapes time { display: grid; gap: 4px; font: 320 clamp(1.7rem, 3vw, 2.5rem)/1 var(--v-texte); letter-spacing: -.02em; font-variation-settings: "MONO" 0, "CASL" 0; }
+  & .d-etapes time small { font: 500 .74rem/1.2 var(--v-texte); font-variation-settings: "MONO" 1, "CASL" 0; letter-spacing: .04em; text-transform: uppercase; }
+  & .d-etapes b { margin-top: 6px; font-weight: 600; font-size: .98rem; }
+  & .d-etapes span { font-size: .86rem; line-height: 1.35; overflow-wrap: anywhere; }
+  & .d-etapes span a { color: #cdbcff; }
+  & .d-total { grid-column: 1 / -1; margin: 0; display: flex; flex-wrap: wrap; gap: 6px 18px; align-items: baseline; font-size: .92rem; font-variation-settings: "MONO" 1, "CASL" 0; }
+  & .d-total b { font-weight: 700; }
+
+  /* 4. Bientôt sur iPhone : la section reste fixée pendant que l'écran du téléphone défile (classe .pilote posée par
+     Nuage.tsx) ; sans script ou en mouvement réduit, l'écran se fait défiler à la main. */
+  & .d-iphone { margin-top: clamp(70px, 13vh, 140px); }
+  & .d-iphone.pilote { height: 260vh; }
+  & .d-iphone-fixe { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: clamp(20px, 4vw, 60px); padding-block: 84px 28px; }
+  & .d-iphone.pilote .d-iphone-fixe { position: sticky; top: 0; height: 100dvh; }
+  & .d-iphone-texte { display: grid; justify-items: start; }
+  & .d-iphone-texte .fin { margin-top: 30px; padding: 0; border: 0; }
+  & .d-iphone-texte .info:empty { display: none; }
+  & .d-note { margin: 22px 0 0; max-width: 24em; color: var(--v-pied); font: 500 .78rem/1.4 var(--v-texte); font-variation-settings: "MONO" 1, "CASL" 0; }
+  & .tel {
+    justify-self: center; position: relative; height: min(640px, calc(100dvh - 150px)); min-height: 430px; aspect-ratio: 9 / 19.3; padding: 9px; border-radius: 46px;
+    background: #15121f; box-shadow: 0 0 0 1px #2e2843 inset, 0 44px 70px -44px rgba(60, 30, 140, .6);
+  }
+  & .tel-verre { position: relative; height: 100%; display: grid; grid-template-rows: auto minmax(0, 1fr) auto; border-radius: 38px; overflow: hidden; background: #f3f1fa; color: var(--v-encre); }
+  & .tel-ilot { position: absolute; top: 9px; left: 50%; z-index: 2; width: 31%; height: 21px; translate: -50% 0; border-radius: 999px; background: #000; }
+  & .tel-haut { padding: 40px 11px 9px; background: #fff; border-bottom: 1px solid var(--v-trait); }
+  & .tel-champ { display: flex; align-items: center; gap: 8px; height: 32px; padding: 0 12px; border-radius: 999px; background: #f1eff6; color: var(--v-pied); font-size: .78rem; text-decoration: none; }
+  & .tel-ecran { display: grid; align-content: start; gap: 9px; padding: 10px 9px 14px; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: none; }
+  & .tel-ecran::-webkit-scrollbar { display: none; }
+  & .d-iphone.pilote .tel-ecran { overflow-y: hidden; }
+  & .tel-ecran:focus-visible { outline-offset: -3px; }
+  & .tel-carte {
+    display: grid; gap: 8px; padding: 11px; border-radius: 17px; color: var(--v-encre); text-decoration: none;
+    background: color-mix(in srgb, var(--c) 9%, #fff); border: 1px solid color-mix(in srgb, var(--c) 34%, #fff);
+  }
+  & .tel-qui { display: flex; align-items: center; gap: 7px; min-width: 0; color: var(--v-pied); font-size: .68rem; white-space: nowrap; }
+  & .tel-qui img { flex: none; width: 24px; height: 24px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 1.5px var(--c); }
+  & .tel-qui b { color: var(--v-encre); font-size: .76rem; }
+  & .tel-qui time { overflow: hidden; text-overflow: ellipsis; }
+  & .tel-carte p { margin: 0; font-weight: 700; font-size: .84rem; line-height: 1.28; }
+  & .tel-carte .toile { border-radius: 11px; overflow: hidden; }
+  & .tel-carte .toile .couverture { margin: 0; border-radius: 11px; }
+  & .tel-onglets { display: flex; align-items: center; justify-content: space-around; padding: 8px 10px 15px; background: #fff; border-top: 1px solid var(--v-trait); color: var(--v-pied); }
+  & .tel-onglets svg { width: 21px; height: 21px; }
+  & .tel-onglets .plus { display: grid; place-items: center; width: 38px; height: 30px; border-radius: 11px; background: var(--v-violet-fonce); color: #fff; }
+  & .tel-onglets .ici { color: var(--v-encre); }
+
+  @media (max-width: 1000px) {
+    & .d-colonnes { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    & .d-carte { grid-template-columns: minmax(0, 1fr); align-items: start; }
+    & .d-etapes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 860px) {
+    & .d-une { min-height: 0; row-gap: 4px; }
+    & .d-une .d-forme { width: min(78vw, 46vh); margin-block: 6px; }
+    & .d-bas { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+    & .d-bas .bande { justify-content: space-between; gap: 6px; }
+    & .d-agents .d-forme { height: 46vw; }
+    & .d-iphone-fixe { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); align-items: start; gap: 16px; padding-block: 96px 18px; }
+    & .d-iphone-texte .fin { margin-top: 16px; gap: 14px; }
+    & .d-iphone-texte .bouton { height: 46px; padding: 0 22px; font-size: .95rem; }
+    & .d-note { display: none; }
+    & .tel { height: min(560px, calc(100dvh - 318px)); min-height: 360px; padding: 7px; border-radius: 38px; }
+    & .tel-verre { border-radius: 32px; }
+  }
+  @media (max-width: 620px) {
+    & .d-colonnes { grid-template-columns: minmax(0, 1fr); row-gap: 0; padding-top: 0; }
+    & .d-colonnes > li { grid-template-columns: 7.6rem minmax(0, 1fr); column-gap: 14px; padding-block: 16px; padding-inline: 14px 0; border-bottom: 1px solid var(--v-trait); }
+    & .d-colonnes em { grid-column: 1; }
+    & .d-nom { font-size: 1.5rem; }
+    & .d-dernier { grid-column: 2; grid-row: 1 / span 2; margin-top: 0; }
+    & .d-etapes { grid-template-columns: minmax(0, 1fr); row-gap: 0; padding-top: 0; }
+    & .d-etapes li { grid-template-columns: 6.4rem minmax(0, 1fr); column-gap: 14px; padding: 14px 0; border-inline-start: 0; border-bottom: 1px solid var(--f-trait); }
+    & .d-etapes time { grid-row: span 2; font-size: 1.6rem; }
+    & .d-etapes b { margin-top: 0; }
+  }
+}

@@ -200,6 +200,10 @@ export const en = {
     sourcePrimaire: 'primary source',
     totalVerifie: (duree: string) => `${duree} from detection to checked post`,
     delaiTitre: 'From announcement to feed',
+    plusRapideMesure: (n: number) => `The fastest of the ${n} posts measured.`,
+    /** The app is not on the App Store yet (2026-11-17): do not write "available" before it is released. */
+    iphoneBientot: 'Coming soon to iPhone',
+    iphoneApercu: 'App preview, with posts from the feed.',
   },
   reglages: {
     titre: 'Settings',

@@ -199,6 +199,10 @@ export const fr: Textes = {
     sourcePrimaire: 'source primaire',
     totalVerifie: (duree: string) => `${duree} du repérage au post vérifié`,
     delaiTitre: 'De l’annonce au fil',
+    plusRapideMesure: (n: number) => `Le plus rapide des ${n} posts mesurés.`,
+    /** L'application n'est pas encore sur l'App Store (2026-11-17) : ne pas écrire « disponible » avant sa mise en ligne. */
+    iphoneBientot: 'Bientôt sur iPhone',
+    iphoneApercu: 'Aperçu de l’application, avec les posts du fil.',
   },
   reglages: {
     titre: 'Réglages',
