@@ -413,7 +413,9 @@ La popularité, les étoiles GitHub et le nom d'une grande entreprise ne compten
 
 Chaque décision garde ses notes, ses raisons, ses citations et la version des consignes. `npm run selection -- expliquer <actualité>` dit pourquoi un sujet a été retenu ou non.
 
-**Tri des titres avant la sélection** _(construit le 2026-11-12, testé sur fixtures, jamais lancé en réel : le solde DeepSeek est épuisé ; ADR 0015)_.
+**Tri des titres avant la sélection** _(construit le 2026-11-12 ; en service en ligne depuis le rechargement du solde, 3 lots réussis au 2026-11-17 ; ADR 0015)_.
+
+_Depuis le 17 novembre, sur décision du porteur du projet, ce tri place d'abord les sorties de modèles et les nouvelles fonctionnalités des produits d'IA, puis le reste. Une place sur six reste gardée aux sujets majeurs repris par plusieurs sources. L'effet réel sur le fil reste à mesurer._
 
 Le problème : chaque jour arrivent 500 à 1 650 actualités, mais un lot n'en examine que 30, les plus récentes d'abord. Un gros sujet raconté par plusieurs articles différents, comme l'affaire d'espionnage chez NVIDIA, pouvait donc rester dans la file.
 
@@ -516,7 +518,7 @@ Le code mesure ce qu'il peut mesurer : JSON valide, citations retrouvées, laten
 
 ### Volume et mobile (2026-11-02)
 
-Au plus 20 publications par jour, jamais pour remplir un quota : d'abord les nouveaux modèles, puis les ressources pour construire, les fonctionnalités importantes, enfin les autres actualités à fort impact. Construit : consignes et priorité testées. Prévu : application du plafond en P5 ; site installable sur téléphone en P4, application Android et iPhone en P9 bis (ADR 0010).
+Au plus 20 publications par jour, jamais pour remplir un quota : d'abord les nouveaux modèles, puis les ressources pour construire, les fonctionnalités importantes, enfin les autres actualités à fort impact. Construit : consignes et priorité testées. Prévu : application du plafond en P5 ; site installable sur téléphone en P4, application Android et iPhone en P9 bis (ADR 0010), commencée le 2026-11-17 (section 23).
 
 
 ### Ressources pour construire (2026-11-02)
@@ -738,3 +740,36 @@ Modèle local, sur le Mac : gratuit à l'appel. Il faudrait pourtant laisser le 
 - Aspirer Facebook, Instagram, TikTok ou X avec des outils tiers est contraire aux conditions de ces plateformes. Ces sources restent hors de la collecte tant qu'il n'existe pas d'accès officiel.
 
 **Un défaut trouvé en chemin.** L'étape de découverte envoyait 156 recherches à GitHub à chaque passage. Le 16 novembre, elle a dépassé sa limite de 10 minutes et a été arrêtée avant d'enregistrer quoi que ce soit. Elle a maintenant un budget de temps : passé 4 minutes de recherche, le reste est reporté au passage suivant, qui repart d'un autre point de la liste.
+
+## 23. L'application mobile : les actualités de l'IA dans la poche _(commencée le 2026-11-17 ; vérifiée dans un aperçu web, pas encore sur un téléphone)_
+
+**Ce que c'est.** Une application pour iPhone et Android, écrite en TypeScript comme le reste du projet, avec Expo et React Native : un seul code pour les deux systèmes. Elle vit dans `apps/mobile`.
+
+**Ce qu'elle affiche.** Les mêmes publications que le site, lues au même endroit : l'API v1 (`/api/v1`). L'application ne touche jamais la base de données ; elle demande au site « donne-moi le fil en français », et le site répond en JSON. Elle s'ouvre sur les **actualités de l'IA** (nouveaux modèles, nouvelles fonctionnalités, annonces). Les ressources pour construire (dépôts, skills) ont leur onglet à côté, et « Abonnements » attend les comptes.
+
+```mermaid
+flowchart LR
+  A[Application mobile] -- "GET /api/v1/fil?langue=he" --> S[Site Next.js sur Vercel]
+  S --> B[(Base Turso)]
+  S -- "JSON conforme au contrat" --> A
+  C[packages/contrat] -. "mêmes schémas" .-> A
+  C -. "mêmes schémas" .-> S
+  T[packages/textes] -. "mêmes mots, en fr he" .-> A
+  T -. "mêmes mots, en fr he" .-> S
+```
+
+**Ce qui est partagé avec le site.**
+- Le **contrat** (`packages/contrat`) : la description exacte de chaque réponse. L'application vérifie chaque réponse avec ; si le site renvoyait autre chose que prévu, elle affiche une erreur plutôt qu'un post à moitié rempli.
+- Les **textes** (`packages/textes`) : « Voir l'original », « Traduit automatiquement de l'anglais », les badges, l'origine d'un post. Les mêmes mots que le site, dans les trois langues.
+
+**Ce qui lui est propre.** Les écrans (ouverture animée avec les six agents, accueil, préférences, onglets, recherche), construits pendant les jalons M1 à M3 sur des exemples, puis branchés sur les vraies données en M4.
+
+**Les règles du projet y sont les mêmes.** Mention « Analyse IA à partir des sources — non testé par la plateforme » sous chaque post ; passages cités affichés avec leur état, « à vérifier » quand ils ne sont pas retrouvés ; une traduction est signalée et l'original reste accessible ; une information absente est masquée ; aucun compteur, aucun commentaire inventé.
+
+**Ce qui est vérifié.** 105 tests automatiques, dont 14 sur des réponses réelles de l'API relevées le 2026-11-17 ; un aperçu dans le navigateur à la taille d'un téléphone, branché sur le site en ligne, en français, en hébreu (de droite à gauche) et en anglais. Captures : `docs/mobile/preuves/m4-*.jpg`.
+
+**Ce qui ne l'est pas.** L'application n'a encore tourné ni dans un simulateur iPhone, ni dans un émulateur Android, ni sur un vrai téléphone : le Mac de développement n'a pas les outils (Xcode demande une version plus récente de macOS). C'est la prochaine étape, et elle dépend d'un choix de l'utilisateur.
+
+**Ce qui est prévu, pas construit.** Les comptes, les interactions et la modération (P9), puis seulement l'envoi à l'App Store et à Google Play. Apple refuse une application qui se contente d'afficher un fil, et les deux magasins exigent signalement, blocage et suppression du compte. Les comptes développeur (Apple : 99 USD par an ; Google Play : 25 USD une fois, tarifs lus le 2026-11-17) ne sont pas créés.
+
+**Qui a fait quoi.** L'utilisateur a décidé d'avancer l'application et de la centrer sur les actualités de l'IA. Claude Code a écrit le code, les tests et cette documentation. Les publications affichées sont rédigées par les agents du site, pas par l'application.

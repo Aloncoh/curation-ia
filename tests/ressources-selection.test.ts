@@ -359,7 +359,7 @@ describe('importer une sélection : visuel, liens, mots-clés, planification, in
     expect(await ligne('select origine, model, prompt_version, information_type from post_draft')).toMatchObject({ origine: 'claude_code_developpement', model: 'claude-code', prompt_version: 'selection-s1', information_type: 'selection' });
     expect(await scalar(t.database, 'select count(*) from llm_call')).toBe(0);
     expect(await scalar(t.database, 'select count(*) from publication_planifiee')).toBe(1);
-    expect(await ligne('select priorite, statut_sortie, utilise_reserve from publication_planifiee')).toMatchObject({ priorite: 2, statut_sortie: 'ressource_existante', utilise_reserve: 0 });
+    expect(await ligne('select priorite, statut_sortie, utilise_reserve from publication_planifiee')).toMatchObject({ priorite: 3, statut_sortie: 'ressource_existante', utilise_reserve: 0 });
     expect(await scalar(t.database, 'select count(*) from recherche_publication')).toBe(1);
     expect(r.montages[0]).toMatchObject({ gabarit: 'selection', compte: 'mova', titre: BROUILLON.accroche.texte });
     expect(r.montages[0]!.apercus!.map((a) => a.nom)).toEqual(['Alpha Book', 'Zeta Fonts', 'Eta Motion', 'Theta Landing']);

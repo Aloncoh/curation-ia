@@ -355,12 +355,13 @@ describe('registre de la sélection', () => {
 });
 
 describe('priorité éditoriale (SPEC §3.6)', () => {
-  it('classe modèles, ressources, fonctionnalités puis le reste, sans toucher aux notes', async () => {
+  it('classe modèles, fonctionnalités, ressources puis le reste (ordre du 2026-11-17), sans toucher aux notes', async () => {
     const { prioriteEditoriale } = await import('../src/selection/consignes.ts');
     expect(prioriteEditoriale('nouveau_modele', [])).toBe(1);
-    expect(prioriteEditoriale('ressource', [])).toBe(2);
-    expect(prioriteEditoriale('amelioration', ['MCP et skills'])).toBe(2);
-    expect(prioriteEditoriale('nouvelle_fonctionnalite', [])).toBe(3);
+    expect(prioriteEditoriale('nouvelle_fonctionnalite', [])).toBe(2);
+    expect(prioriteEditoriale('nouvelle_fonctionnalite', ['MCP et skills'])).toBe(2);
+    expect(prioriteEditoriale('ressource', [])).toBe(3);
+    expect(prioriteEditoriale('amelioration', ['MCP et skills'])).toBe(3);
     expect(prioriteEditoriale('incident', ['sécurité'])).toBe(4);
     expect(prioriteEditoriale(null, [])).toBe(4);
   });

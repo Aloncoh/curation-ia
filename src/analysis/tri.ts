@@ -9,8 +9,17 @@
 import { z } from 'zod';
 import { blocDonnees } from './prompts.ts';
 
-/** tri-2 (2026-11-12) : cyberattaques majeures, même sans lien avec l'IA (décision de l'utilisateur, consignes s6). */
-export const TRI_VERSION = 'tri-2';
+/**
+ * tri-2 (2026-11-12) : cyberattaques majeures, même sans lien avec l'IA (décision de l'utilisateur, consignes s6).
+ * tri-3 (2026-11-17) : modèles et fonctionnalités d'abord (décision de l'utilisateur, « Oui, en premier », SPEC §3.6).
+ * Mesure avant : 9 posts de Nodi sur 60 publiés en sept jours.
+ */
+export const TRI_VERSION = 'tri-3';
+/**
+ * Places gardées pour les sujets majeurs du second groupe repris par plusieurs titres (une sur six) : les cyberattaques
+ * majeures voulues le 2026-11-12 ne disparaissent pas quand les modèles et fonctionnalités rempliraient tout le lot.
+ */
+export const reserveTri = (n: number): number => Math.floor(n / 6);
 /** Titres envoyés au plus par appel, dans l'ordre de la file (sujets repris par plusieurs sources, puis les plus récents). */
 export const MAX_TITRES_TRI = 600;
 /** Seuls les titres vus pendant ces derniers jours sont triés : au-delà, une actualité n'est plus urgente et reste dans la file habituelle. */
@@ -26,7 +35,10 @@ export const systemeTri = (n: number) => `Tu tries des titres d'actualités coll
 
 Notre public : développeurs, étudiants et créateurs qui construisent avec l'IA, y compris des créateurs qui ne codent pas.
 
-Chaque ligne donne : numéro | source | date de première vue | titre. Choisis au plus ${n} sujets distincts, du plus important au moins important pour notre public : sortie d'un modèle ou d'un produit d'IA, nouvelle version ou fonction disponible, changement de prix ou d'accès, annonce d'une grande entreprise liée à l'IA (puces, calcul, produit), affaire qui touche tout le secteur de l'IA, cyberattaque majeure (grande organisation, service public, service très répandu, chaîne d'approvisionnement logicielle), même sans lien avec l'IA. Un fait repris par plusieurs titres passe avant un fait isolé : c'est un ordre d'examen, pas une note de qualité. À importance égale, le plus récent d'abord.
+Chaque ligne donne : numéro | source | date de première vue | titre. Choisis au plus ${n} sujets distincts, en deux groupes :
+1. D'abord les nouveautés des modèles et des produits d'IA : sortie d'un modèle, nouvelle fonctionnalité ou nouvelle version d'un assistant, d'un agent ou d'un outil d'IA, modèle ajouté à une plateforme, changement de prix ou d'accès.
+2. Ensuite le reste : annonce d'une grande entreprise liée à l'IA (puces, calcul, produit), affaire qui touche tout le secteur de l'IA, cyberattaque majeure (grande organisation, service public, service très répandu, chaîne d'approvisionnement logicielle), même sans lien avec l'IA.
+Un sujet du premier groupe passe avant tout sujet du second.${reserveTri(n) > 0 ? ` Seule exception : garde jusqu'à ${reserveTri(n)} places pour les sujets majeurs du second groupe repris par plusieurs titres, s'il y en a.` : ''} Dans chaque groupe, du plus important au moins important pour notre public ; un fait repris par plusieurs titres passe avant un fait isolé : c'est un ordre d'examen, pas une note de qualité. À importance égale, le plus récent d'abord.
 
 Plusieurs titres sur le même fait forment un seul sujet : garde une seule ligne, de préférence celle de l'éditeur concerné (source d'origine), sinon le titre le plus précis. Ne retiens pas : tutoriel, liste, comparatif, tribune, recrutement, événement sans changement utilisable. La notoriété de l'éditeur et le ton promotionnel ne comptent pas.
 

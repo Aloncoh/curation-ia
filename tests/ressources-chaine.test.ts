@@ -162,7 +162,7 @@ describe('importer : chaîne complète', () => {
     expect(await ligne('select origine, model, prompt_version, status from post_draft')).toMatchObject({ origine: 'claude_code_developpement', model: 'claude-code', prompt_version: 'ressources-r2', status: 'controle_automatique' });
     expect(await ligne('select status, max_items, cap_run_micro_usd, reason from llm_run')).toMatchObject({ status: 'terminee', max_items: 0, cap_run_micro_usd: 0, reason: 'import ressources, aucun appel au modèle' });
     expect(await scalar(t.database, 'select count(*) from llm_call')).toBe(0);
-    expect(await ligne('select jour, rang, priorite, statut_sortie, utilise_reserve, etat from publication_planifiee')).toMatchObject({ jour: '2026-11-02', rang: 1, priorite: 2, statut_sortie: 'ressource_existante', utilise_reserve: 0, etat: 'prevue' });
+    expect(await ligne('select jour, rang, priorite, statut_sortie, utilise_reserve, etat from publication_planifiee')).toMatchObject({ jour: '2026-11-02', rang: 1, priorite: 3, statut_sortie: 'ressource_existante', utilise_reserve: 0, etat: 'prevue' });
     expect(await scalar(t.database, 'select count(*) from recherche_publication')).toBe(1);
     // Captures de fixture : elles ne tiennent pas lieu de vérification ; le lien est vérifié par l'API (transport injecté).
     expect(await ligne('select libelle, destination, resultat, motif, statut_http from post_bouton')).toMatchObject({ libelle: 'Voir le dépôt', destination: 'depot', resultat: 'verifie', motif: 'reponse_api', statut_http: 200 });

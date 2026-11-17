@@ -2,6 +2,26 @@
 
 Évolution datée des jalons et des vérifications **réellement faites**. L'état courant est dans [STATE.md](STATE.md) ; les traces d'exécution détaillées sont en base.
 
+## 2026-11-17 — Application mobile : les vraies publications, actualités de l'IA d'abord
+
+- Demandes : « commence a coder l'appli pour telephone iphone et google palystore », puis « sa doit etre surtout pour les nouvelles de AI ce qui se passe nouveaux modeles nouvelles fonctionnaliters ».
+- Constats avant de coder :
+  - l'application était déjà au périmètre (ADR 0010, P9 bis après les comptes) ;
+  - les jalons mobiles M1 à M3 existaient dans le worktree `mobile`, sur des exemples, M2 et M3 non commités ;
+  - le Mac n'a ni Xcode ni SDK Android, et l'App Store refuse d'installer Xcode (macOS 26.6 requis, poste sous 15.7.4).
+- Fait (ADR 0017, `docs/mobile/M4.md`) :
+  - M1 à M3 copiés dans `apps/mobile` et `docs/mobile`, hors des workspaces de la racine ;
+  - source « api-v1 » validée par `@curation/contrat` : fil, post, profil, recherche lus sur le site en ligne ;
+  - fil ouvert sur « Actualités », onglets « Ressources » et « Abonnements » ;
+  - texte dans la langue de l'interface (en, fr, he), « Voir l'original », montages du site, sources d'un post.
+- Vérifié :
+  - `apps/mobile` : types OK, 105 tests (91 repris, 14 nouveaux sur des réponses réelles de l'API du 2026-11-17) ;
+  - aperçu web à 375 × 812 sur l'API en ligne, en français, hébreu (droite à gauche) et anglais, sans erreur de console ; captures `docs/mobile/preuves/m4-*.jpg` ;
+  - racine : `npm run typecheck` et `npm run web:typecheck` passent, `npm test` 894 au vert ; `npm run web:build` passe au second lancement.
+- Non vérifié : simulateur iPhone, émulateur Android, vrai téléphone ; sens de droite à gauche hors du web.
+- Constaté en passant : la construction du site s'arrête une première fois sur un avis de sécurité de Next.js 16.4.4 (« affected by a known security vulnerability »), puis passe au second lancement avec un avertissement. Non traité ici : la mise à jour de Next.js est une décision à part.
+- Rien n'est commité ni poussé ; aucun compte créé, aucune dépense.
+
 ## 2026-11-12 — Tri des titres par le modèle avant la sélection
 
 - Demande : faire passer les gros sujets avant le flot d'actualités (« Oui, prépare-le »).
@@ -478,3 +498,11 @@ DeepSeek Flash, 30 actualités, 34 appels, 0,0125 $ (budget autorisé 4 $). 19 �
 - Vérifié : 894 tests au vert (51 fichiers), types vérifiés, site compris.
 - Non vérifié : première collecte en ligne de xAI.
 - Soumis à l'utilisateur : faire passer les modèles et les fonctionnalités en premier dans la rédaction de chaque cycle.
+
+## 2026-11-17 — Modèles et fonctionnalités d'abord
+
+- Décision de l'utilisateur (« Oui, en premier »), SPEC §3.6 mis à jour.
+- Construit : consigne du tri des titres en `tri-3` (`src/analysis/tri.ts`) : modèles et fonctionnalités des produits d'IA d'abord, le reste ensuite, une place sur six (`reserveTri`) gardée aux sujets majeurs repris par plusieurs titres, pour ne pas perdre les cyberattaques majeures décidées le 2026-11-12 ; `prioriteEditoriale` (`src/selection/consignes.ts`) : fonctionnalités au rang 2, skills et ressources au rang 3.
+- Relevé en base de production : le tri tourne en ligne (3 lots réussis en `tri-2`, le dernier le 2026-11-17 à 01:01 UTC).
+- Vérifié : 895 tests au vert (51 fichiers), types vérifiés, site compris. La consigne elle-même n'est testée que sur son texte : son effet sur le modèle n'est pas mesuré.
+- Non vérifié : premier lot réel en `tri-3` ; part de Nodi après le changement (15 % avant). Non changé : les 6 rédactions de dépôts par cycle.

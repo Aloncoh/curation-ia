@@ -13,7 +13,7 @@ Réseau social vivant autour de l'IA, du développement et de la technologie : r
 - **Chaîne automatique** (`chaine.yml`) : collecte, capture des pages, brouillons, contrôles avec élagage et relance, planification, traduction, publication sans relecture de ce qui passe tous les contrôles. Publications vues en ligne ce jour.
 - **Recherche** (FTS5 + lexique `l1`) : 94 % sur le jeu `r1`. Avis de validité (version plus récente, source mise à jour) affiché.
 - **Sources** : 253 actives au registre en ligne le 2026-11-15 (240 accessibles, 8 en erreur temporaire, 2 sans flux exploitable, 2 pages supprimées ou introuvables, 1 refus d'accès), plus 25 différées, gardées au registre ; registre d'accès (six états, reprises espacées, aucune suppression), Hacker News en signal, EDGAR essayé en réel depuis le poste.
-- **Tests** : 894 au vert (51 fichiers, mesuré le 2026-11-17).
+- **Tests** : 895 au vert (51 fichiers, mesuré le 2026-11-17).
 
 ## Couverture des agents (2026-11-10, vérifié sur la base en ligne)
 
@@ -43,7 +43,7 @@ Réseau social vivant autour de l'IA, du développement et de la technologie : r
 - **Cybersécurité et dépôts pour le travail** (2026-11-12, demande de l'utilisateur) : 11 flux de sécurité ajoutés (BleepingComputer, The Hacker News, Krebs, The Record, SecurityWeek, Dark Reading, CISA, Unit 42, Socket, Wiz, Project Zero), signés Pulse, contenus externes attribués, interrogés en réel le 2026-11-12 (docs/sources.md §3.13). Découverte GitHub : 16 thèmes de plus (productivité, bureau, MCP finance et TradingView, scraping, écriture, vidéo regardée par l'agent, orchestration d'agents) ; exemples de l'utilisateur ajoutés au jeu de contrôle. Collecte réelle à constater au prochain cycle. Consignes `s6` (décision de l'utilisateur du 2026-11-12, « Oui, toutes ») : une cyberattaque majeure entre dans le périmètre même sans lien avec l'IA ni le développement (impact 1, ou 2 si elle touche les outils de notre public) ; un incident local reste écarté. Aucune qualification payée à refaire (0 brouillon « qualifiee »).
 - **Sources de la liste de l'utilisateur** (2026-11-16, « Oui, branche-les » ; détail et motifs : docs/sources.md §3.14) : 280 sources définies dans le code le 2026-11-17, dont 26 différées vues du poste.
   - **Seconde liste** (2026-11-17, docs/sources.md §3.15) : 11 de ses sources étaient déjà branchées. **xAI** branché par le plan de son site (`feed:xai-plan`, rubrique `/news/`, signé Nodi) : robots.txt autorise, deux pages d'annonce capturées en réel ; première collecte en ligne à constater. Différées : Last Week in AI (Substack), Hugging Face Daily Papers (API lisible, adaptateur à écrire), Artificial Analysis (clé d'API), LMArena (redirection), arXiv, Meta AI, Reddit.
-  - **Mesure du fil** (base en ligne, posts publiés du 2026-11-10 au 2026-11-17) : 60 posts, dont Pyxo 14, Repo 12, Pulse 11, Nodi 9, Radar 9, Mova 5 ; 40 posts « à vérifier ». Le fil n'est donc pas encore d'abord fait de modèles et de fonctionnalités (Nodi : 15 %). Changer l'ordre de rédaction ou de priorité (SPEC §3.6) est soumis à l'utilisateur.
+  - **Mesure du fil** (base en ligne, posts publiés du 2026-11-10 au 2026-11-17) : 60 posts, dont Pyxo 14, Repo 12, Pulse 11, Nodi 9, Radar 9, Mova 5 ; 40 posts « à vérifier ». Le fil n'est donc pas encore d'abord fait de modèles et de fonctionnalités (Nodi : 15 %). **Décision de l'utilisateur du 2026-11-17 (« Oui, en premier »)** : modèles et fonctionnalités d'abord. Tri des titres en `tri-3` (deux groupes, une place sur six gardée aux sujets majeurs repris par plusieurs sources) et ordre de priorité de SPEC §3.6 revu (fonctionnalités au rang 2, skills et ressources au rang 3). Les dépôts découverts gardent leurs 6 rédactions par cycle. À mesurer après quelques cycles : la part de Nodi dans les posts publiés.
   - **TLDR AI** branché comme signal, sur le modèle de Hacker News (`feed:tldr-ai`, `src/collect/lettre.ts`) : dernier numéro, lien et titre des articles, puis article lu à sa source. Essai réel sur la base locale : 16 articles du numéro du 2026-11-13, 4 sponsorisés écartés. Première collecte en ligne le 2026-11-16 à 17:08 UTC : 15 articles enregistrés, aucun post encore. Un lien gardait un paramètre de suivi (TLDR encode parfois deux fois le « & ») : décodage corrigé le 2026-11-17, et l'adresse de la ligne déjà en base aussi.
   - **Classements publics** branchés sur la découverte GitHub (`src/ressources/classements.ts`) : Selan (skills en tendance) et awesome-claude-code (ajouts récents) ; 4 candidats au plus par passage. Essai réel : 15 et 239 dépôts cités, 27 au-dessus du seuil, 4 candidats.
   - **Différées** : les trois chaînes YouTube (flux interdit par le robots.txt de YouTube) et, pour le même motif, la source existante AI Search (`feed:youtube-ai-search`, décision de l'utilisateur du 2026-11-16 ; en ligne, flux en 404 depuis le 2026-11-05, 15 vidéos collectées, aucun post publié ; inscrite « inactive » au registre en ligne le 2026-11-17), mcpmorning (le classement ne donne pas le dépôt), Substack, arXiv, Lobsters, Reddit. **Écartées** : Facebook, Instagram, TikTok, X et Discord par aspiration (contraire à leurs conditions).
@@ -67,6 +67,15 @@ Réseau social vivant autour de l'IA, du développement et de la technologie : r
   - Limite : les liens vidéo écrits dans un texte (README, « Watch the recording ») sont ignorés.
 - **Accueil → réseau fluide** (2026-11-11) : chaque agent de la rangée ouvre sa page en fondu, le personnage devient la photo du profil, page préparée dès le survol (préparation non encore observée dans le Chrome piloté).
 - **Dépense** : 2,25 $ enregistrés sur 4 $ le 2026-11-16 à 21:41 UTC, dont 0,26 $ ce jour (requête sur `llm_call`). Relevé de 07:00 UTC : 2,14 $, soit 2,00 $ pour 2 270 appels réussis, 0,14 $ de réservations gardées pour 21 appels en erreur dont la facturation est inconnue. Compteur corrigé le 2026-11-16 (décision de l'utilisateur, « Oui, corrige ») : les 69 refus 402 de DeepSeek (0,41 $ de réservations, jamais facturés) sont passés à 0 $ en base en ligne, et un refus pour solde épuisé est désormais enregistré à 0 $ (`marquerErreur`, `src/analysis/budget.ts`).
+
+## Application mobile (2026-11-17, ADR 0017)
+
+- **Avancée à la demande de l'utilisateur** : P9 bis commence avant P9, en lecture seule. L'application doit servir d'abord les actualités de l'IA (nouveaux modèles, nouvelles fonctionnalités).
+- **Construit** dans `apps/mobile` (Expo SDK 58, hors des workspaces de la racine) : reprise des jalons M1 à M3 du worktree `mobile`, puis M4 — fil, post, profil et recherche lus sur l'API v1 en ligne, onglets Actualités · Ressources · Abonnements, trois langues, « Voir l'original », montages du site, sources d'un post. Détail : [docs/mobile/M4.md](docs/mobile/M4.md).
+- **Vérifié** : 105 tests et types dans `apps/mobile` ; aperçu web à la taille d'un téléphone sur l'API en ligne, en français, hébreu et anglais (captures `docs/mobile/preuves/m4-*.jpg`).
+- **Non vérifié** : simulateur iPhone, émulateur Android, vrai téléphone. Le Mac n'a ni Xcode ni SDK Android ; l'App Store refuse Xcode (macOS 26.6 requis, poste sous 15.7.4).
+- **Non commité, non poussé** : `apps/mobile/`, `docs/mobile/`, ADR 0017 et les mises à jour de SPEC, ROADMAP, STATE, PROGRESS, `communication/`.
+- Aucun envoi aux magasins avant les comptes et la modération (ADR 0010). Comptes développeur revérifiés le 2026-11-17 : Apple 99 USD par an, Google Play 25 USD une fois ; aucun créé.
 
 ## Construit, pas encore vérifié en ligne
 
@@ -116,6 +125,9 @@ Ordre, avec mise en ligne et vérification à chaque étape, sur ordinateur d'ab
 6. Secret GitHub `CURATION_CONTACT_SEC` ; fonds en haute définition ; jeu de recherche non vu ; liste témoin « construire » ; X, Reddit, LMArena ; hébreu relu par un locuteur natif.
 7. **Chaînes YouTube** (2026-11-16) : quatre chaînes différées (Anthropic, Matt Pocock, Fireship, AI Search), leur flux étant interdit par le robots.txt de YouTube. Pour les reprendre : une clé de l'API YouTube (compte Google, voie officielle), que seul l'utilisateur peut créer.
 
+8. **Essai de l'application mobile** (2026-11-17) : choisir où l'essayer. Émulateur Android (installation de Java 17 et du SDK Android par Claude, 12 à 15 Go estimés, licences du SDK à accepter : attend un oui) ; simulateur iPhone (Xcode 26.3 à télécharger sur developer.apple.com avec son compte Apple, ou passage à macOS Tahoe) ; ou son téléphone avec Expo Go et un compte Expo gratuit.
+9. **Avis de sécurité de Next.js** (2026-11-17) : `next build` signale que la version 16.4.4 est touchée par une vulnérabilité connue et recommande une mise à jour ; la construction passe encore. À décider : mettre Next.js à jour.
+
 ## Repères techniques
 
 - **Base en ligne depuis le poste** : lignes `DATABASE_*` de `.env.local` commentées ; commande : `env $(sed -n 's/^# \(DATABASE_[A-Z_]*=[^ ]*\)$/\1/p' .env.local) npm run -s <commande>`, sans guillemets autour de `$(…)`. Ne jamais afficher `.env.local`.
@@ -123,7 +135,8 @@ Ordre, avec mise en ligne et vérification à chaque étape, sur ordinateur d'ab
 - Dépôt `git@github.com:Aloncoh/curation-ia.git` (privé), branche `p3-brouillons`, envoi par `git push origin HEAD:main` ; Vercel déploie `main`.
 - GateGuard refuse la première commande Bash et la première modification de chaque fichier par séance : donner les informations demandées puis relancer.
 - `npm run web:typecheck` (le build ne vérifie pas les types) ; `drizzle-kit generate` : une colonne qui disparaît et une qui apparaît se font en deux migrations.
-- Worktree `.worktrees/mobile` : ne pas y écrire.
+- Worktree `.worktrees/mobile` : ne pas y écrire. Son contenu (M1 à M3) a été copié dans `apps/mobile` le 2026-11-17 ; la suite s'écrit dans `apps/mobile`.
+- Application mobile : dépendances dans `apps/mobile` seulement (`npm ci --cache "$PWD/../../.npm-cache"` si le cache npm global refuse l'écriture) ; `npm run verifier` (types puis Jest) ; aperçu : configurations `mobile-relais` puis `mobile-web`.
 
 ## Reprise
 

@@ -147,8 +147,9 @@ export const VERSIONS_CONSIGNES: VersionConsignes[] = [
 /** Ordre de priorité éditoriale (SPEC §3.6) : 1 passe avant 4 quand le plafond quotidien oblige à choisir. Il ne change aucune note. */
 export function prioriteEditoriale(nature: string | null, categories: readonly string[]): 1 | 2 | 3 | 4 {
   if (nature === 'nouveau_modele') return 1;
-  if (nature === 'ressource' || categories.includes('MCP et skills')) return 2;
-  if (nature === 'nouvel_outil' || nature === 'nouvelle_fonctionnalite' || nature === 'integration' || nature === 'modele_ajoute_a_une_plateforme') return 3;
+  // Fonctionnalités avant les skills et ressources (décision de l'utilisateur du 2026-11-17 ; l'inverse depuis le 2026-11-02).
+  if (nature === 'nouvel_outil' || nature === 'nouvelle_fonctionnalite' || nature === 'integration' || nature === 'modele_ajoute_a_une_plateforme') return 2;
+  if (nature === 'ressource' || categories.includes('MCP et skills')) return 3;
   return 4;
 }
 

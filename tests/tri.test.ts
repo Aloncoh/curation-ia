@@ -4,7 +4,7 @@ import { releasesUrl } from '../src/collect/github-releases.ts';
 import type { Modele, RequeteModele } from '../src/analysis/modele.ts';
 import { genererBrouillons } from '../src/analysis/pipeline.ts';
 import { SYSTEME_QUALIFICATION } from '../src/analysis/prompts.ts';
-import { listeTitres, ordonner, retenus, TRI_VERSION, type TitreATrier } from '../src/analysis/tri.ts';
+import { listeTitres, ordonner, reserveTri, retenus, systemeTri, TRI_VERSION, type TitreATrier } from '../src/analysis/tri.ts';
 import { runCollect } from '../src/worker/collect.ts';
 import { CLAUDE_CODE, createTestDb, readFixture, routeFetcher, type TestDb } from './helpers/db.ts';
 
@@ -13,6 +13,21 @@ const titres: TitreATrier[] = [
   { id: 12, titre: 'DeepSeek V4.1 Flash released', source: 'DeepSeek', vuLe: '2026-11-12T07:00:00.000Z' },
   { id: 13, titre: 'Ten prompts for productivity', source: 'Blog', vuLe: '2026-11-11T07:00:00.000Z' },
 ];
+
+describe('tri des titres : consigne', () => {
+  it('place les modèles et les fonctionnalités avant le reste, et garde une place sur six aux sujets majeurs (tri-3)', () => {
+    const consigne = systemeTri(30);
+    expect(TRI_VERSION).toBe('tri-3');
+    expect(consigne.indexOf('sortie d\'un modèle')).toBeGreaterThan(0);
+    expect(consigne.indexOf('sortie d\'un modèle')).toBeLessThan(consigne.indexOf('cyberattaque majeure'));
+    expect(consigne).toContain('Un sujet du premier groupe passe avant tout sujet du second.');
+    expect(reserveTri(30)).toBe(5);
+    expect(consigne).toContain('garde jusqu\'à 5 places');
+    // Trop peu de places pour en réserver : la consigne n'en parle pas.
+    expect(reserveTri(4)).toBe(0);
+    expect(systemeTri(4)).not.toContain('Seule exception');
+  });
+});
 
 describe('tri des titres : fonctions', () => {
   it('ignore les numéros hors liste ou répétés, et s’arrête à n', () => {
