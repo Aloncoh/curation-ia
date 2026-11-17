@@ -13,62 +13,93 @@ type Ecouter = (cible: EventTarget, type: string, f: (e: never) => void, o?: Add
 const TEINTES = ['31, 167, 122', '232, 115, 47', '47, 143, 216', '154, 92, 240', '217, 154, 18', '18, 166, 160'];
 const TOUR = Math.PI * 2;
 
-// Fond en petits points façon Antigravity (demande du 2026-11-17 : « animation en fond en petits points comme sur le
-// site antigravity ») : une grille irrégulière et serrée de points fins ; autour du pointeur, un large anneau les
-// écarte, les allonge en petits traits et leur donne les couleurs des six agents, par secteur. Sans souris, l'anneau se
-// promène seul. Dans le réseau (fond sombre, classe cadre-vivant), l'ancien réglage est gardé : points violets, pâles
-// et espacés. Mouvement réduit : les points restent affichés, immobiles.
+// Fond en petits points façon Antigravity (demandes du 2026-11-17 : « animation en fond en petits points comme sur le
+// site antigravity », puis « les points sont trop gros et ça doit être en mouvement un peu partout en continu ») :
+// une grille irrégulière et serrée de points très fins, qui montent lentement en décrivant de petites boucles et
+// reviennent par le bas. Des ondes naissent sans arrêt un peu partout : en s'élargissant, chacune colore les points
+// qu'elle traverse à la couleur d'un agent. Autour du pointeur, un anneau les écarte et les allonge en petits traits
+// aux six couleurs. Dans le réseau (fond sombre, classe cadre-vivant), l'ancien réglage est gardé : points violets,
+// pâles et espacés, sans dérive ni ondes. Mouvement réduit : les points restent affichés, immobiles.
 function champDePoints(racine: HTMLElement, ecouter: Ecouter, nettoyages: (() => void)[], calme: boolean) {
   const toile = racine.querySelector<HTMLCanvasElement>('.particules');
   const cx = toile?.getContext('2d');
   if (!toile || !cx) return;
   const sombre = racine.classList.contains('cadre-vivant');
-  let L = 0, H = 0;
-  let pts: { x: number; y: number; p: number; q: number }[] = [];
+  let L = 0, H = 0, pas = 32;
+  let pts: { x: number; y: number; p: number; q: number; v: number; r: number }[] = [];
   const construire = () => {
     const dpr = Math.min(2, devicePixelRatio || 1);
     L = innerWidth; H = innerHeight;
     toile.width = L * dpr; toile.height = H * dpr;
     cx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    const pas = sombre ? (L < 700 ? 40 : 46) : L < 700 ? 30 : 32;
+    pas = sombre ? (L < 700 ? 40 : 46) : L < 700 ? 30 : 32;
     pts = [];
     for (let y = pas / 2; y < H + pas; y += pas) for (let x = pas / 2; x < L + pas; x += pas) {
-      pts.push({ x: x + (hasard() - 0.5) * pas * 0.9, y: y + (hasard() - 0.5) * pas * 0.9, p: hasard() * 6.28, q: hasard() * 6.28 });
+      pts.push({ x: x + (hasard() - 0.5) * pas * 0.9, y: y + (hasard() - 0.5) * pas * 0.9, p: hasard() * 6.28, q: hasard() * 6.28, v: 5 + hasard() * 9, r: 3 + hasard() * 5 });
     }
   };
   construire();
   let mx = L * 0.5, my = H * 0.4, tx = mx, ty = my, actif = false, repos = 0;
+  // Ondes : lieu et instant de naissance, couleur (rang d'un agent). Chacune vit 3,6 s.
+  const VIE = 3600;
+  const ondes: { x: number; y: number; n: number; k: number }[] = [];
+  let prochaine = 500;
   const dessiner = (t: number) => {
     if (!actif) { tx = L * 0.5 + Math.cos(t * 0.00021) * L * 0.3; ty = H * 0.42 + Math.sin(t * 0.00029) * H * 0.24; }
     if (calme) { mx = tx; my = ty; } else { mx += (tx - mx) * 0.09; my += (ty - my) * 0.09; }
-    const R = (sombre ? (L < 700 ? 100 : 150) : L < 700 ? 100 : 220) + Math.sin(t * 0.0013) * 12;
-    const sigma = sombre ? 72 : 92, S2 = 2 * sigma * sigma;
+    const R = (sombre ? (L < 700 ? 100 : 150) : L < 700 ? 90 : 180) + Math.sin(t * 0.0013) * 12;
+    const sigma = sombre ? 72 : 74, S2 = 2 * sigma * sigma;
+    if (!sombre && !calme) {
+      if (t > prochaine) { ondes.push({ x: hasard() * L, y: hasard() * H, n: t, k: Math.floor(hasard() * 6) }); prochaine = t + 900 + hasard() * 1100; }
+      while (ondes.length > 0 && t - ondes[0]!.n > VIE) ondes.shift();
+    }
     cx.clearRect(0, 0, L, H);
     cx.lineCap = 'round';
     cx.beginPath();
-    cx.lineWidth = sombre ? 1.7 : 1.5;
-    cx.strokeStyle = sombre ? 'rgba(122, 77, 255, .16)' : 'rgba(28, 21, 48, .3)';
+    cx.lineWidth = sombre ? 1.7 : 1.15;
+    cx.strokeStyle = sombre ? 'rgba(122, 77, 255, .16)' : 'rgba(28, 21, 48, .42)';
     const proches: { x: number; y: number; ux: number; uy: number; w: number }[] = [];
+    const colores: { x: number; y: number; k: number; w: number }[] = [];
+    const haut = H + pas;
     for (const p of pts) {
-      const bx = p.x + Math.sin(t * 0.0004 + p.p) * 5, by = p.y + Math.cos(t * 0.00034 + p.q) * 5;
+      let bx: number, by: number;
+      if (sombre) { bx = p.x + Math.sin(t * 0.0004 + p.p) * 5; by = p.y + Math.cos(t * 0.00034 + p.q) * 5; }
+      else {
+        // Dérive continue : le point monte (5 à 14 px par seconde) et tourne sur une petite boucle.
+        const y0 = p.y - ((t * 0.001 * p.v) % haut);
+        bx = p.x + Math.sin(t * 0.0009 + p.p) * p.r;
+        by = (y0 < -pas / 2 ? y0 + haut : y0) + Math.cos(t * 0.0011 + p.q) * p.r;
+      }
       const dx = bx - mx, dy = by - my, d = Math.hypot(dx, dy) || 1;
       const w = Math.exp(-((d - R) ** 2) / S2);
-      if (w < 0.06) { cx.moveTo(bx, by); cx.lineTo(bx + 0.01, by); continue; }
-      proches.push({ x: bx, y: by, ux: dx / d, uy: dy / d, w });
+      if (w >= 0.06) { proches.push({ x: bx, y: by, ux: dx / d, uy: dy / d, w }); continue; }
+      let fort = 0, k = 0, ox = 0, oy = 0;
+      for (const o of ondes) {
+        const age = (t - o.n) / VIE, ex = bx - o.x, ey = by - o.y, e = Math.hypot(ex, ey) || 1;
+        const f = Math.exp(-((e - age * 520) ** 2) / 1300) * (1 - age);
+        if (f > fort) { fort = f; k = o.k; ox = ex / e; oy = ey / e; }
+      }
+      if (fort > 0.08) { colores.push({ x: bx + ox * fort * 7, y: by + oy * fort * 7, k, w: fort }); continue; }
+      cx.moveTo(bx, by); cx.lineTo(bx + 0.01, by);
     }
     cx.stroke();
+    for (const c of colores) {
+      cx.strokeStyle = `rgba(${TEINTES[c.k]}, ${(0.35 + c.w * 0.6).toFixed(2)})`;
+      cx.lineWidth = 1.2 + c.w * 1.1;
+      cx.beginPath(); cx.moveTo(c.x, c.y); cx.lineTo(c.x + 0.01, c.y); cx.stroke();
+    }
     for (const { x: bx, y: by, ux, uy, w } of proches) {
-      const ecart = sombre ? 22 : 26;
+      const ecart = sombre ? 22 : 18;
       const x = bx + ux * w * ecart, y = by + uy * w * ecart;
-      const l = 1 + w * (sombre ? 3.8 : 4.4);
+      const l = 1 + w * (sombre ? 3.8 : 2.4);
       if (sombre) {
         const teinte = 252 + Math.sin(Math.atan2(uy, ux) + t * 0.0006) * 48;
         cx.strokeStyle = `hsla(${teinte | 0}, 80%, 66%, ${(0.14 + w * 0.5).toFixed(2)})`;
         cx.lineWidth = 1.5 + w * 0.5;
       } else {
         const tour = (Math.atan2(uy, ux) + t * 0.00012) / TOUR;
-        cx.strokeStyle = `rgba(${TEINTES[Math.floor((tour - Math.floor(tour)) * 6) % 6]}, ${((L < 700 ? 0.2 : 0.32) + w * (L < 700 ? 0.42 : 0.62)).toFixed(2)})`;
-        cx.lineWidth = 1.5 + w * 1.1;
+        cx.strokeStyle = `rgba(${TEINTES[Math.floor((tour - Math.floor(tour)) * 6) % 6]}, ${((L < 700 ? 0.22 : 0.34) + w * (L < 700 ? 0.42 : 0.6)).toFixed(2)})`;
+        cx.lineWidth = 1.15 + w * 0.65;
       }
       cx.beginPath(); cx.moveTo(x - ux * l, y - uy * l); cx.lineTo(x + ux * l, y + uy * l); cx.stroke();
     }
@@ -185,11 +216,11 @@ export function Vitrine({ bientot }: { bientot: string }) {
     }));
     ecouter(window, 'pageshow', sansNom);
 
-    // Agents du bas qui apparaissent au défilement.
+    // Apparition au défilement, une seule fois : les agents du bas et tout élément marqué « apparait ».
     const observateur = 'IntersectionObserver' in window && !calme
       ? new IntersectionObserver((entrees) => entrees.forEach((x) => { if (x.isIntersecting) { x.target.classList.add('vue'); observateur?.unobserve(x.target); } }), { rootMargin: '0px 0px -10% 0px' })
       : null;
-    racine.querySelectorAll('.agents-grille li').forEach((a) => (observateur ? observateur.observe(a) : a.classList.add('vue')));
+    racine.querySelectorAll('.agents-grille li, .apparait').forEach((a) => (observateur ? observateur.observe(a) : a.classList.add('vue')));
     if (observateur) nettoyages.push(() => observateur.disconnect());
 
     champDePoints(racine, ecouter, nettoyages, calme);
@@ -252,6 +283,25 @@ export function Vitrine({ bientot }: { bientot: string }) {
       ecouter(window, 'keydown', () => { html.classList.remove('curseur-actif'); fleche.classList.remove('visible'); });
       ecouter(document, 'pointerleave', () => fleche.classList.remove('visible'));
       nettoyages.push(() => html.classList.remove('curseur-actif'));
+    }
+
+    // iPhone de l'accueil, à l'arrivée dans l'écran : couché en arrière et un peu plus petit, il se redresse à mesure
+    // qu'on descend (lié au défilement, sans durée propre). La position se lit sur la section, que rien ne transforme.
+    const tel = racine.querySelector<HTMLElement>('.tel');
+    const sectionTel = tel?.closest<HTMLElement>('.iphone');
+    if (tel && sectionTel) {
+      let prevu = 0;
+      const redresser = () => {
+        prevu = 0;
+        const k = Math.min(1, Math.max(0, (innerHeight - sectionTel.getBoundingClientRect().top) / (innerHeight * 0.8)));
+        const e = 1 - (1 - k) ** 3;
+        tel.style.transform = e >= 1 ? '' : `perspective(1400px) translateY(${((1 - e) * 46).toFixed(1)}px) rotateX(${((1 - e) * 24).toFixed(2)}deg) scale(${(0.86 + 0.14 * e).toFixed(3)})`;
+      };
+      const demander = () => { if (!prevu) prevu = requestAnimationFrame(redresser); };
+      ecouter(window, 'scroll', demander, { passive: true });
+      ecouter(window, 'resize', demander);
+      redresser();
+      nettoyages.push(() => { cancelAnimationFrame(prevu); tel.style.transform = ''; });
     }
 
     // iPhone de l'accueil : son écran avance tout seul d'un post à l'autre, comme une vidéo du réseau qu'on fait

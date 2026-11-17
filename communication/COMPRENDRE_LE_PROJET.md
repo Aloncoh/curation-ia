@@ -701,8 +701,9 @@ Quand l'éditeur a placé une vidéo dans sa page, elle s'affiche sous le post, 
 
 Le 2026-11-17, une refonte de l'accueil sur le modèle d'un autre site (« Vesper ») a été mise en ligne, puis abandonnée le jour même : l'utilisateur l'a jugée ratée. L'accueil d'avant est revenu, avec deux changements qu'il a demandés.
 
-- **Le fond en petits points**, à la manière du site Antigravity de Google : une grille serrée de points fins sur toute la page. Autour de la souris, un large anneau transforme les points en petits traits aux six couleurs des agents. Sans souris (téléphone), l'anneau se promène seul.
+- **Le fond en petits points**, à la manière du site Antigravity de Google : une grille serrée de points fins sur toute la page. Autour de la souris, un large anneau transforme les points en petits traits aux six couleurs des agents. Sans souris (téléphone), l'anneau se promène seul. Les points, très fins, montent lentement en continu, et des ondes colorées naissent un peu partout sur la page.
 - **Un iPhone à la place de la fenêtre façon Mac** : un téléphone dessiné, dont l'écran avance tout seul d'un post à l'autre, comme une vidéo du réseau qu'on fait défiler. Il montre les huit derniers posts du fil, reçus de la même API que l'application. Ce n'est pas un enregistrement : ce sont les posts du moment. À côté, la mention « Bientôt sur iPhone » : l'application n'est pas sur l'App Store, la page ne dit donc jamais « disponible ».
+- **Des animations au défilement** : les blocs de la page apparaissent en montant quand on descend, et l'iPhone, d'abord couché en arrière, se redresse en entrant dans l'écran.
 
 Si l'appareil ou les Réglages du site demandent moins de mouvement, les points restent affichés mais immobiles, et l'écran du téléphone se fait défiler à la main.
 

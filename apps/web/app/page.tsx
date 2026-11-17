@@ -53,7 +53,7 @@ function domaine(p: Publication): string | null {
 /** Un relevé horodaté façon ticket : les heures de chaque étape d'un vrai post, au fuseau Europe/Paris. */
 function Ticket({ entete, compte: id, titre, href, etapes, pied, langue, petit = false }: { entete: string; compte: string; titre?: string; href: string; etapes: [string, string, ReactNode][]; pied: string; langue: Langue; petit?: boolean }) {
   return (
-    <article className={`releve${petit ? ' petit' : ''}`}>
+    <article className={`releve apparait${petit ? ' petit' : ''}`}>
       <header><span>{entete}</span><img src={`/marque/agent-${id}.png`} alt="" width={28} height={28} /></header>
       <a className="releve-titre" href={href}>{titre}</a>
       <ol>
@@ -132,7 +132,7 @@ export default async function Accueil() {
         </div>
         {duFil.length > 0 && (
           <section className="iphone" aria-labelledby="iphone-titre">
-            <div className="iphone-texte">
+            <div className="iphone-texte apparait">
               <h2 id="iphone-titre">{v.iphoneBientot}</h2>
               <p className="mesure">{v.iphoneApercu}</p>
             </div>
@@ -177,7 +177,7 @@ export default async function Accueil() {
         )}
 
         <section className="agents" aria-labelledby="agents-titre">
-          <h2 id="agents-titre">{v.lesSix}</h2>
+          <h2 id="agents-titre" className="apparait">{v.lesSix}</h2>
           <ul className="agents-grille">
             {agents.map(({ p, compte: c, posts }, i) => (
               <li key={p.id} style={{ '--c': p.couleur } as Style}>
@@ -203,7 +203,7 @@ export default async function Accueil() {
 
         {(r || reperes.length > 0) && (
           <section className="releve-section" aria-labelledby="delai-titre">
-            <div className="releve-texte">
+            <div className="releve-texte apparait">
               <h2 id="delai-titre">{v.delaiTitre}</h2>
               {r && <p className="mesure">{v.plusRapide(rapides.mesures)}</p>}
             </div>
@@ -236,7 +236,7 @@ export default async function Accueil() {
           </section>
         )}
 
-        <div className="fin">
+        <div className="fin apparait">
           <button className="bouton principal" type="button" data-compte>{v.creerCompte}</button>
           <a className="lien-fil" href="/fil">{v.voirFil} <span aria-hidden="true" className="fleche-sens">→</span></a>
           <p className="info" aria-live="polite" />

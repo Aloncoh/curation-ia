@@ -183,6 +183,10 @@
   & .agents-grille li { display: grid; grid-row: span 3; grid-template-rows: subgrid; align-content: start; row-gap: 10px; opacity: 0; translate: 0 20px; transition: opacity .6s, translate .7s cubic-bezier(.22, 1, .36, 1); }
   & .agents-grille li.vue { opacity: 1; translate: 0 0; }
   & .agents-grille li:nth-child(4n+2) { transition-delay: .06s; } & .agents-grille li:nth-child(4n+3) { transition-delay: .12s; } & .agents-grille li:nth-child(4n) { transition-delay: .18s; }
+  /* Apparition au défilement (une seule fois, Vitrine.tsx) : l'élément monte de 22 px en se révélant ; les tickets se suivent. */
+  & .apparait { opacity: 0; translate: 0 22px; transition: opacity .5s cubic-bezier(.23, 1, .32, 1), translate .7s cubic-bezier(.23, 1, .32, 1); }
+  & .apparait.vue { opacity: 1; translate: 0 0; }
+  & .tickets .apparait:nth-child(2) { transition-delay: .07s; } & .tickets .apparait:nth-child(3) { transition-delay: .14s; }
   & .agent-tete { display: flex; align-items: flex-end; gap: 10px; }
   & .agent-tete .perso { height: 58px; flex: none; cursor: default; animation: none; }
   & .agent-tete span { display: grid; gap: 4px; min-width: 0; }
@@ -281,7 +285,7 @@
   }
   @media (prefers-reduced-motion: reduce) {
     & *, & *::before, & *::after { animation: none !important; transition: none !important; }
-    & .agents-grille li { opacity: 1; translate: none; }
+    & .agents-grille li, & .apparait { opacity: 1; translate: none; }
   }
 }
 html.curseur-actif .vitrine .curseur.visible { opacity: 1; }
