@@ -1,0 +1,118 @@
+/* Accueil dans le style du site d'Apple, aux couleurs du projet épurées (demande du 2026-11-17 : « je veux design site
+   Apple mais avec mes couleurs épurées »). Repères repris d'apple.com et du skill apple-design : police du système,
+   lettres resserrées sur les grands titres, barre fine et translucide, tout centré, beaucoup de blanc, blocs en tuiles
+   arrondies sur un gris-lilas très clair, un seul accent (le violet du projet), boutons qui s'enfoncent au toucher.
+   Les couleurs des agents ne restent que sur leurs pastilles et dans le fond en petits points.
+   Ce fichier ne fait que surcharger vitrine.css, sous .vitrine.pomme (l'accueil seul ; le réseau n'est pas touché). */
+
+@keyframes p-pouls { 50% { transform: scale(.7); opacity: .5; } }
+
+.vitrine.pomme {
+  --v-texte: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --papier: #fff; --p-tuile: #f6f4fb; --p-gris: #6e6a7c; --p-filet: rgba(28, 21, 48, .1);
+  font: 400 1.0625rem/1.47 var(--v-texte); letter-spacing: -.01em;
+
+  & .aura::after { display: none; }
+  & .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+  /* Barre : une bande fine et translucide, le contenu passe dessous. */
+  & .barre { gap: 2px; padding: max(8px, env(safe-area-inset-top)) 16px 8px; background: rgba(255, 255, 255, .72); -webkit-backdrop-filter: saturate(180%) blur(20px); backdrop-filter: saturate(180%) blur(20px); box-shadow: 0 1px 0 var(--p-filet); }
+  & .barre.defilee { background: rgba(255, 255, 255, .72); box-shadow: 0 1px 0 var(--p-filet); }
+  & .pilule { padding: 0; border: 0; background: none; box-shadow: none; }
+  & .pilule a, & .pilule button { height: 32px; padding: 0 14px; color: rgba(28, 21, 48, .82); font: 400 .82rem/1 var(--v-texte); letter-spacing: -.01em; }
+  & .rail::before { display: none; }
+  & .compte button { height: 28px; padding: 0 14px; background: var(--v-violet-fonce); color: #fff; font-weight: 500; }
+  & .compte button:hover { background: #4a22c4; }
+
+  /* Mise en page : le haut de page sur blanc, puis les blocs en tuiles serrées. */
+  & .accueil { gap: 14px; max-width: 1180px; padding: 0 16px 80px; }
+  & .une { padding: clamp(44px, 10vh, 104px) 0 clamp(26px, 5vh, 52px); }
+  & .une-texte { justify-items: center; gap: 18px; text-align: center; }
+  & .titre { justify-content: center; font: 600 clamp(3rem, 7.6vw, 6rem)/1.05 var(--v-texte); letter-spacing: -.03em; }
+  & .titre .bonhomme { width: .82em; height: .82em; }
+
+  /* Accroche qui se réécrit (components/AccrocheEcrite.tsx) : toutes les couches dans la même case. */
+  & .accroche { display: grid; max-width: 24em; margin: 0; color: var(--p-gris); font: 600 clamp(1.25rem, 2.4vw, 1.75rem)/1.2 var(--v-texte); letter-spacing: -.012em; text-wrap: balance; }
+  & .une .accroche { max-width: 24em; }
+  & .accroche > * { grid-area: 1 / 1; }
+  & .accroche .fantome, & .accroche .a-venir { visibility: hidden; }
+  & .accroche .ecrit { transition: opacity .25s ease; }
+  & .accroche .ecrit.ecrit-efface { opacity: 0; }
+  & .accroche .point { position: relative; display: inline-block; width: 0; height: 0; }
+  & .accroche .point::after { content: ""; position: absolute; inset-inline-start: .2em; top: -.7em; width: .6em; height: .6em; border-radius: 50%; background: var(--v-encre); opacity: 0; }
+  & .accroche .ecrit-point .point::after { opacity: 1; animation: p-pouls 1s ease-in-out infinite; }
+
+  & .actions { justify-content: center; gap: 26px; }
+  & .bouton { height: 44px; padding: 0 22px; font: 400 1.0625rem/1 var(--v-texte); letter-spacing: -.01em; transition: transform .1s ease-out, background-color .2s; }
+  & .bouton.principal { box-shadow: none; }
+  & .bouton.principal:hover { background: #4a22c4; transform: none; }
+  & .bouton:active { transform: scale(.97); }
+  & .lien-fil { color: var(--v-violet-fonce); font: 400 1.0625rem/1 var(--v-texte); letter-spacing: -.01em; text-decoration: none; }
+  & .lien-fil:hover { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+  & .info { margin: -6px 0 0; font-weight: 400; }
+  & .info:empty { display: none; }
+
+  /* Les six personnages, en grand, comme une gamme de produits. */
+  & .bande { justify-content: center; gap: clamp(12px, 3vw, 44px); padding: clamp(18px, 4vh, 40px) 0 34px; }
+  & .bande .perso { height: clamp(92px, 12.5vw, 150px); }
+  & .nom-perso { font: 500 .88rem/1 var(--v-texte); color: var(--p-gris); }
+
+  /* Tuiles. */
+  & .iphone, & .agents, & .releve-section { padding: clamp(40px, 7vw, 84px) clamp(16px, 4vw, 56px); border-radius: 28px; background: var(--p-tuile); }
+  & .iphone h2, & .agents h2, & .releve-section h2 { margin: 0; text-align: center; font: 600 clamp(2rem, 4.8vw, 3.5rem)/1.07 var(--v-texte); letter-spacing: -.024em; text-wrap: balance; }
+  & .mesure { margin: 12px auto 0; max-width: 30em; color: var(--p-gris); font: 400 1.0625rem/1.4 var(--v-texte); text-align: center; }
+
+  & .iphone { grid-template-columns: minmax(0, 1fr); justify-items: center; gap: clamp(28px, 5vh, 48px); }
+  & .iphone-texte { grid-column: 1; justify-self: center; max-width: 34rem; }
+  & .tel { grid-column: 1; box-shadow: 0 0 0 1px #2e2843 inset, 0 40px 80px -50px rgba(28, 21, 48, .55); }
+
+  & .agents { display: grid; gap: clamp(26px, 5vh, 44px); }
+  & .agents-grille { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+  & .agents-grille > li { padding: 24px 22px 18px; border-radius: 22px; background: #fff; }
+  & .agent-tete { align-items: center; gap: 12px; }
+  & .agent-tete .perso { height: 62px; }
+  & .agent-tete a { font: 600 1.25rem/1.1 var(--v-texte); letter-spacing: -.015em; }
+  & .agent-tete em { padding: 3px 9px; font-size: .74rem; font-weight: 500; background: color-mix(in srgb, var(--c) 13%, #fff); }
+  & .specialite { font-size: .94rem; line-height: 1.4; color: var(--p-gris); }
+  /* Exemples : une simple liste séparée par des filets, sans cadre dans la carte. */
+  & .exemples { padding: 12px 0 0; border: 0; border-top: 1px solid var(--p-filet); border-radius: 0; background: none; box-shadow: none; }
+  & .exemples small { color: var(--p-gris); font-size: .74rem; letter-spacing: .02em; text-transform: none; }
+  & .exemples li + li { border-top: 1px solid var(--p-filet); }
+  & .exemples a { padding: 9px 0 8px; }
+  & .exemples a span { font-weight: 500; font-size: .92rem; letter-spacing: -.01em; }
+  & .exemples time { color: var(--p-gris); }
+
+  /* Relevés : des cartes nettes, sans perforations ni inclinaison. */
+  & .releve-section { gap: clamp(26px, 5vh, 44px); }
+  & .tickets { gap: 14px; }
+  & .releve { -webkit-mask: none; mask: none; padding: 26px 24px 22px; border-radius: 22px; background: #fff; box-shadow: none; }
+  & .tickets .releve { rotate: none; margin-top: 0; }
+  & .releve header { letter-spacing: 0; text-transform: none; font-size: .86rem; }
+  & .releve li { border-top: 1px solid var(--p-filet); }
+  & .releve footer { border-top: 1px solid var(--p-filet); font-weight: 600; }
+
+  & .fin { justify-content: center; padding: clamp(40px, 8vh, 84px) 0 0; border-top: 0; text-align: center; }
+
+  @media (max-width: 1000px) {
+    & .agents-grille { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 860px) {
+    & .accueil { padding: 0 10px 56px; gap: 10px; }
+    & .barre { gap: 0; padding-inline: 6px; }
+    & .pilule a, & .pilule button { height: 32px; padding: 0 10px; font-size: .8rem; }
+    & .bouton { flex: 0 0 auto; }
+    & .bande { gap: 4px; }
+    & .bande .perso { height: clamp(44px, 13.5vw, 92px); }
+    & .iphone, & .agents, & .releve-section { border-radius: 22px; }
+  }
+  @media (max-width: 620px) {
+    & .agents-grille { grid-template-columns: minmax(0, 1fr); }
+  }
+  @media (prefers-reduced-transparency: reduce) {
+    & .barre, & .barre.defilee { background: #fff; -webkit-backdrop-filter: none; backdrop-filter: none; }
+  }
+}
+
+/* Avant que le script ne prenne la main, la phrase n'est pas montrée : elle arrive en s'écrivant, sans éclair de
+   texte complet. La classe « js » est posée par app/layout.tsx ; sans script ou en mouvement réduit, le texte reste visible. */
+html.js:not(.mouvement-reduit) .vitrine.pomme .accroche:not(.ecrit-pret) .ecrit { visibility: hidden; }

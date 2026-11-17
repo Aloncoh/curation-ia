@@ -253,10 +253,15 @@ export function Vitrine({ bientot }: { bientot: string }) {
       };
       plusTard(marcher, 1200 + i * 700 + hasard() * 1500);
     });
-    let suivant = 0;
-    const presentation = window.setInterval(() => { if (enMain) return; presenter(suivant); suivant = (suivant + 1) % bande.length; }, 2600);
-    nettoyages.push(() => clearInterval(presentation));
-    plusTard(() => presenter(0), 600);
+    if (racine.querySelector('[data-accroche]')) {
+      // L'accroche qui se réécrit (AccrocheEcrite.tsx) mène la présentation : l'agent dont elle parle s'avance ; -1 : aucun.
+      ecouter(racine, 'accroche-agent', (e: CustomEvent<number>) => { if (!enMain) presenter(e.detail); });
+    } else {
+      let suivant = 0;
+      const presentation = window.setInterval(() => { if (enMain) return; presenter(suivant); suivant = (suivant + 1) % bande.length; }, 2600);
+      nettoyages.push(() => clearInterval(presentation));
+      plusTard(() => presenter(0), 600);
+    }
     const logo = racine.querySelector<SVGElement>('.bonhomme');
     const tourneLogo = () => {
       const r = [-1, 0, 1][Math.floor(hasard() * 3)] ?? 0;

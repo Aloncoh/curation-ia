@@ -38,7 +38,7 @@ export default async function Racine({ children }: { children: ReactNode }) {
     <html lang={langue} dir={sensDe(langue)} suppressHydrationWarning>
       <body>
         {/* Préférences d'affichage choisies dans Réglages (Preferences.tsx), posées avant l'affichage pour éviter un saut. */}
-        <script dangerouslySetInnerHTML={{ __html: "try{var d=document.documentElement,s=localStorage;if(s.getItem('curation-animations')==='reduites')d.classList.add('mouvement-reduit');if(s.getItem('curation-taille')==='grande')d.classList.add('texte-grand');if(s.getItem('curation-police')==='lisible')d.classList.add('police-lisible')}catch(e){}" }} />
+        <script dangerouslySetInnerHTML={{ __html: "try{var d=document.documentElement;d.classList.add('js');var s=localStorage;if(s.getItem('curation-animations')==='reduites')d.classList.add('mouvement-reduit');if(s.getItem('curation-taille')==='grande')d.classList.add('texte-grand');if(s.getItem('curation-police')==='lisible')d.classList.add('police-lisible')}catch(e){}" }} />
         {/* Page suivante préparée dès le survol d'un lien (ou l'appui sur mobile) : le clic l'affiche aussitôt au lieu
             d'attendre le serveur (navigateurs Chromium ; ailleurs, sans effet). Lecture seule : aucune page GET ne modifie. */}
         <script type="speculationrules" dangerouslySetInnerHTML={{ __html: REGLES_PREPARATION }} />

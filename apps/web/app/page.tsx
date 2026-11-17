@@ -1,3 +1,5 @@
+// Habillage du 2026-11-17 : style du site d'Apple aux couleurs du projet (pomme.css), accroche qui se réécrit comme dans
+// ChatGPT (AccrocheEcrite.tsx), personnages sous les boutons.
 // Accueil (plan validé par l'utilisateur le 2026-11-06, étape 2 ; refait le même jour en « rédaction vivante » : la
 // première version faisait trop « modèle de site ») : à gauche le titre, l'accroche, la rangée des six personnages et
 // l'inscription ; puis un iPhone dont l'écran fait défiler les derniers posts du fil
@@ -11,6 +13,7 @@ import '@fontsource-variable/recursive/full.css';
 import { LOCALE_INTL, textesDe, type Langue, type Textes } from '@curation/textes';
 import type { Publication } from '../../../packages/contrat/src/index.ts';
 import { compte, fil, releveDuRepere, relevesRapides } from '../../../src/api/v1/index.ts';
+import { AccrocheEcrite, type Phrase } from '../components/AccrocheEcrite.tsx';
 import { BarrePilules } from '../components/BarrePilules.tsx';
 import { Couverture } from '../components/Couverture.tsx';
 import { Vitrine } from '../components/Vitrine.tsx';
@@ -21,6 +24,7 @@ import { contexte, langueDeLaRequete } from '../lib/serveur.ts';
 import { sujetDe } from '../lib/sujet.ts';
 import './vitrine.css';
 import './telephone.css';
+import './pomme.css';
 
 export async function generateMetadata(): Promise<Metadata> {
   return { title: textesDe(await langueDeLaRequete()).vitrine.titre };
@@ -95,6 +99,14 @@ export default async function Accueil() {
     releveDuRepere(ctx, 'repo', ['decouverte', 'selection']).catch(() => null),
     releveDuRepere(ctx, 'mova', ['decouverte', 'selection']).catch(() => null),
   ])).flatMap((x) => (x ? [x] : []));
+  // Texte du haut, qui se réécrit : l'accroche du site, puis chaque agent et sa spécialité (textes déjà affichés plus bas).
+  const phrases: Phrase[] = [
+    { fort: v.accroche, suite: v.accrocheSuite },
+    ...agents.flatMap(({ p, compte: c }, i) => {
+      const specialite = c?.specialite ?? t.comptes[p.id]?.specialite;
+      return specialite ? [{ fort: `${p.nom}.`, suite: specialite, agent: i }] : [];
+    }),
+  ];
   // Écran de l'iPhone : les derniers posts du fil, tels que l'application les reçoit de la même API.
   const duFil = (await fil(ctx, { limite: 8 }).catch(() => null))?.publications ?? [];
   // eslint-disable-next-line react-hooks/purity -- page rendue à chaque requête : l'heure du rendu est voulue.
@@ -108,7 +120,7 @@ export default async function Accueil() {
   const enHeures = (m: number) => v.duree(Math.floor(m / 60), m % 60);
 
   return (
-    <div className="vitrine">
+    <div className="vitrine pomme">
       <div className="aura" aria-hidden="true" />
       <canvas className="particules" aria-hidden="true" />
       <i className="curseur" aria-hidden="true" />
@@ -119,15 +131,15 @@ export default async function Accueil() {
         <div className="une">
           <div className="une-texte">
             <h1 className="titre"><span dir="ltr">Curation</span> <Logo t={t} /> <span dir="ltr">AI</span></h1>
-            <p className="accroche"><b>{v.accroche}</b> {v.accrocheSuite}</p>
-            <div className="bande" role="group" aria-label={v.agents}>
-              {PERSONNAGES.map((p, i) => <Perso key={p.id} p={p} i={i} lien={`/comptes/${p.id}`} />)}
-            </div>
+            <AccrocheEcrite phrases={phrases} />
             <div className="actions">
               <button className="bouton principal" type="button" data-compte>{v.creerCompte}</button>
               <a className="lien-fil" href="/fil">{v.voirFil} <span aria-hidden="true" className="fleche-sens">→</span></a>
             </div>
             <p className="info" aria-live="polite" />
+            <div className="bande" role="group" aria-label={v.agents}>
+              {PERSONNAGES.map((p, i) => <Perso key={p.id} p={p} i={i} lien={`/comptes/${p.id}`} />)}
+            </div>
           </div>
         </div>
         {duFil.length > 0 && (
