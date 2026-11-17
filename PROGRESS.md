@@ -506,3 +506,12 @@ DeepSeek Flash, 30 actualités, 34 appels, 0,0125 $ (budget autorisé 4 $). 19 �
 - Relevé en base de production : le tri tourne en ligne (3 lots réussis en `tri-2`, le dernier le 2026-11-17 à 01:01 UTC).
 - Vérifié : 895 tests au vert (51 fichiers), types vérifiés, site compris. La consigne elle-même n'est testée que sur son texte : son effet sur le modèle n'est pas mesuré.
 - Non vérifié : premier lot réel en `tri-3` ; part de Nodi après le changement (15 % avant). Non changé : les 6 rédactions de dépôts par cycle.
+
+## 2026-11-17 — Hugging Face Papers branché
+
+- Demande de l'utilisateur : « branche hugging face et [la liste] scrappe si besoin ».
+- Essais réels depuis le poste : `api/daily_papers` répond 200 (50 papiers sur trois jours, 9 à 20 votes ou plus) ; `lmarena.ai` redirige vers `arena.ai`, dont la page du classement répond 403 malgré un robots.txt qui l'autorise ; `/terms` d'Artificial Analysis répond 404.
+- Construit : `parsePapiersDuJour` (`src/collect/huggingface.ts`) et la source `huggingface:papiers-du-jour` : seuil de 20 votes, 10 papiers au plus, résumé des auteurs en capture (jamais le résumé automatique de Hugging Face, jamais les votes), attribution aux auteurs ; `attributionDe` (`src/sources.ts`) remplace trois tests de type dans `pipeline.ts` et `recontrole.ts`.
+- Lire une page sans flux reste possible quand le site l'autorise (xAI, Anthropic). Les refus ne sont pas contournés : Meta AI, Reddit, Substack, Arena restent différés avec leur motif (docs/sources.md §3.15).
+- Vérifié : 899 tests au vert (51 fichiers), types vérifiés, site compris ; collecte réelle sur la base locale : 9 papiers Hugging Face, 15 pages xAI.
+- Non vérifié : première collecte en ligne des deux sources ; rédaction d'un post à partir d'un papier.

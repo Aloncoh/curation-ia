@@ -5,11 +5,16 @@
 // trop courte pour être citée, elle déclenche la capture de la page du modèle (approfondir.ts) avant toute analyse.
 import { z } from 'zod';
 import { SourceFormatError, type CollectedDocument } from './github-releases.ts';
-import { contentHash, normalizeUrl } from './normalize.ts';
+import { cleanTitle, contentHash, normalizeUrl } from './normalize.ts';
 
 export interface HuggingFaceModelsConfig {
   url: string;
   maxItems: number;
+  /**
+   * Papiers du jour (`api/daily_papers`, demande de l'utilisateur du 2026-11-17) au lieu des modèles : seuls les papiers
+   * ayant reçu au moins `votesMin` votes deviennent des documents (parsePapiersDuJour).
+   */
+  papiers?: { votesMin: number };
 }
 
 export const HUGGINGFACE_HEADERS: Record<string, string> = { accept: 'application/json' };
@@ -69,5 +74,68 @@ export function parseModelesTendance(body: string, config: Pick<HuggingFaceModel
     });
   }
   if (documents.length === 0) throw new SourceFormatError('Réponse Hugging Face sans modèle exploitable');
+  return { documents, rejected };
+}
+
+const ID_PAPIER = /^\d{4}\.\d{4,6}(v\d+)?$/;
+const Papier = z.object({
+  publishedAt: z.string().optional(),
+  paper: z.object({
+    id: z.string().regex(ID_PAPIER),
+    title: z.string().min(3).max(600),
+    summary: z.string().max(20_000).optional(),
+    publishedAt: z.string().optional(),
+    upvotes: z.number().optional(),
+  }),
+});
+
+/**
+ * Papiers du jour sur Hugging Face (relevé le 2026-11-17 : 200, robots.txt « Allow: / », 50 papiers sur trois jours) :
+ * un document par papier ayant reçu au moins `votesMin` votes, les plus votés d'abord. Le vote sert de seuil d'entrée,
+ * comme les points de Hacker News ; il reste en métadonnée et n'entre jamais dans la capture. La capture est le résumé
+ * écrit par les auteurs ; le résumé automatique de Hugging Face (`ai_summary`) n'est jamais repris.
+ */
+export function parsePapiersDuJour(body: string, config: Pick<HuggingFaceModelsConfig, 'maxItems'> & { votesMin: number }): { documents: CollectedDocument[]; rejected: Record<string, number> } {
+  let brut: unknown;
+  try {
+    brut = JSON.parse(body);
+  } catch {
+    throw new SourceFormatError('Réponse Hugging Face Papers illisible (JSON)');
+  }
+  if (!Array.isArray(brut) || brut.length === 0) throw new SourceFormatError('Réponse Hugging Face Papers sans aucun papier');
+  const rejected: Record<string, number> = {};
+  const compter = (motif: string) => void (rejected[motif] = (rejected[motif] ?? 0) + 1);
+  const retenus: z.infer<typeof Papier>[] = [];
+  const vus = new Set<string>();
+  let lisibles = 0;
+  for (const entree of brut) {
+    const p = Papier.safeParse(entree);
+    if (!p.success) { compter('illisible'); continue; }
+    lisibles++;
+    if ((p.data.paper.upvotes ?? 0) < config.votesMin) { compter('sous_le_seuil'); continue; }
+    if (vus.has(p.data.paper.id)) { compter('doublon'); continue; }
+    vus.add(p.data.paper.id);
+    retenus.push(p.data);
+  }
+  if (lisibles === 0) throw new SourceFormatError('Réponse Hugging Face Papers sans papier lisible');
+  retenus.sort((a, b) => (b.paper.upvotes ?? 0) - (a.paper.upvotes ?? 0));
+  const documents = retenus.slice(0, config.maxItems).map((p): CollectedDocument => {
+    const url = `https://huggingface.co/papers/${p.paper.id}`;
+    const title = cleanTitle(p.paper.title);
+    // Sans résumé, la capture reste trop courte pour être citée : la page du papier est capturée ensuite (approfondir.ts).
+    const content = p.paper.summary?.replace(/\s+/g, ' ').trim() || `Paper arXiv:${p.paper.id}, listed on Hugging Face Papers.`;
+    return {
+      externalId: normalizeUrl(url),
+      url,
+      normalizedUrl: normalizeUrl(url),
+      title,
+      version: null,
+      announcedAt: isoDate(p.paper.publishedAt) ?? isoDate(p.publishedAt),
+      content,
+      contentFormat: 'text',
+      contentHash: contentHash({ title, version: null, content }),
+      metadata: { signal: 'papiers_hf', votes: p.paper.upvotes ?? null, arxiv: `https://arxiv.org/abs/${p.paper.id}` },
+    };
+  });
   return { documents, rejected };
 }

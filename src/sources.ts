@@ -61,6 +61,8 @@ export interface FeedSource extends BaseSource {
 export interface HuggingFaceModelsSource extends BaseSource {
   kind: 'huggingface_models';
   config: HuggingFaceModelsConfig;
+  /** Papiers du jour (2026-11-17) : contenu externe, attribué aux auteurs du papier. Absent pour les modèles en tendance. */
+  attribution?: string;
 }
 
 /** Hacker News (2026-11-05) : signal de découverte ; l'article lié est récupéré à part, destination validée (article-externe.ts). */
@@ -72,6 +74,10 @@ export interface HackerNewsSource extends BaseSource {
 }
 
 export type SourceDefinition = GithubReleasesSource | FeedSource | HuggingFaceModelsSource | HackerNewsSource;
+
+/** Nom auquel la rédaction attribue les affirmations d'une source externe ; null pour une source officielle. */
+export const attributionDe = (def: SourceDefinition | undefined): string | null =>
+  def && def.kind !== 'github_releases' ? (def.attribution ?? null) : null;
 
 const githubReleases = (
   owner: string,
@@ -305,6 +311,18 @@ export const SOURCES: SourceDefinition[] = [
     allowedHosts: ['huggingface.co'],
     fetchIntervalMinutes: 360,
     compte: 'nodi',
+  },
+  // Papiers du jour sur Hugging Face (demande de l'utilisateur du 2026-11-17, « branche hugging face »). API publique
+  // relevée le 2026-11-17 : 200, robots.txt « Allow: / », 50 papiers sur trois jours, 9 à 20 votes ou plus. Seuls les
+  // papiers à 20 votes au moins, 10 au plus. Contenu externe : chaque affirmation est attribuée aux auteurs du papier.
+  {
+    id: 'huggingface:papiers-du-jour',
+    kind: 'huggingface_models',
+    name: 'Hugging Face Papers — papiers du jour les plus votés (API publique), contenu externe attribué',
+    config: { url: 'https://huggingface.co/api/daily_papers?limit=50', maxItems: 10, papiers: { votesMin: 20 } },
+    allowedHosts: ['huggingface.co'],
+    fetchIntervalMinutes: 360,
+    attribution: 'les auteurs d’un article de recherche signalé sur Hugging Face Papers (un travail de recherche, pas une annonce de produit)',
   },
   flux('mistral', 'Mistral AI — flux RSS officiel', 'https://mistral.ai/news/rss', 'mistral.ai'),
   flux('huggingface-blog', 'Hugging Face Blog — flux RSS officiel', 'https://huggingface.co/blog/feed.xml', 'huggingface.co'),

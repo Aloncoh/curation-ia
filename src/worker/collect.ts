@@ -5,7 +5,7 @@
 import { HACKERNEWS_HEADERS, parseHackerNews } from '../collect/hackernews.ts';
 import { dernierNumero, parseLettre } from '../collect/lettre.ts';
 import { classerEchec, lireRetryAfter, prochainEssai } from '../collect/acces.ts';
-import { HUGGINGFACE_HEADERS, parseModelesTendance } from '../collect/huggingface.ts';
+import { HUGGINGFACE_HEADERS, parseModelesTendance, parsePapiersDuJour } from '../collect/huggingface.ts';
 import { randomUUID } from 'node:crypto';
 import { eq } from 'drizzle-orm';
 import { linkDocuments } from '../catalog/link.ts';
@@ -103,6 +103,8 @@ export function adapterFor(definition: SourceDefinition): {
     return { url: definition.config.url, headers: HACKERNEWS_HEADERS, parse: (body) => parseHackerNews(body, definition.config) };
   }
   if (definition.kind === 'huggingface_models') {
+    const { papiers } = definition.config;
+    if (papiers) return { url: definition.config.url, headers: HUGGINGFACE_HEADERS, parse: (body) => parsePapiersDuJour(body, { maxItems: definition.config.maxItems, votesMin: papiers.votesMin }) };
     return { url: definition.config.url, headers: HUGGINGFACE_HEADERS, parse: (body) => parseModelesTendance(body, definition.config) };
   }
   return { url: definition.config.url, headers: definition.userAgent ? { ...FEED_HEADERS, 'user-agent': definition.userAgent } : FEED_HEADERS, parse: (body) => parseFeedItems(body, definition.config) };

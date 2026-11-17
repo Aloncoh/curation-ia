@@ -1,6 +1,6 @@
 // Qualification, attribution à un compte, brouillon, contrôles et publication non publiée. Rien ne part en ligne.
 import { randomUUID } from 'node:crypto';
-import { SOURCES } from '../sources.ts';
+import { attributionDe, SOURCES } from '../sources.ts';
 import { setTimeout as sleep } from 'node:timers/promises';
 import type { Client, Row } from '@libsql/client';
 import { z } from 'zod';
@@ -304,7 +304,7 @@ export async function genererBrouillons(o: OptionsBrouillons) {
       const produitCatalogue = row.produit === null ? null : String(row.produit);
       const version = row.version === null ? null : String(row.version);
       const def = SOURCES.find((x) => x.name === String(row.source_nom));
-      const attribution = def?.kind === 'feed' || def?.kind === 'hackernews' ? (def.attribution ?? null) : null;
+      const attribution = attributionDe(def);
       const doc = documentUtilisateur(titreCapture, texte, produitCatalogue, { source: String(row.source_nom), annonce: row.announced_at === null ? null : String(row.announced_at), attribution });
       const contexteControle = {
         typeInformation: row.information_type === null ? undefined : String(row.information_type),
@@ -386,7 +386,7 @@ export async function genererBrouillons(o: OptionsBrouillons) {
       const texte = toPlainText(String(row.content), String(row.content_format));
       const annonce = row.announced_at === null ? null : String(row.announced_at);
       const def = SOURCES.find((x) => x.name === String(row.source_nom));
-      const attribution = def?.kind === 'feed' || def?.kind === 'hackernews' ? (def.attribution ?? null) : null;
+      const attribution = attributionDe(def);
       const compteImpose = def?.compte ?? null;
       const doc = documentUtilisateur(titreCapture, texte, produit, { source: String(row.source_nom), annonce, attribution });
       const enregistrer = (status: string, q: Qualification | null, content: unknown, checks: unknown, motifRejet: string | null, diapositives?: DiapositiveResolue[], selection?: Selection) =>

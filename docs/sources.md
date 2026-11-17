@@ -848,9 +848,10 @@ Demande de l'utilisateur : un fil d'abord fait des nouveautés de l'IA (modèles
 **Différées, avec motif**
 
 - Last Week in AI : robots.txt autorise, flux lisible (20 entrées, la dernière du 2026-11-11), mais la lettre est hébergée par Substack : même motif qu'Import AI (§3.10).
-- Hugging Face Daily Papers : `https://huggingface.co/api/daily_papers` répond 200 (401 lors du relevé précédent, §3.12), robots.txt autorise. C'est une API JSON : elle demande un adaptateur, non écrit.
+- Hugging Face Daily Papers : branchée le 2026-11-17 à la demande de l'utilisateur (« branche hugging face »), source `huggingface:papiers-du-jour`. `https://huggingface.co/api/daily_papers?limit=50` répond 200 (401 lors du relevé précédent, §3.12), robots.txt autorise ; 50 papiers sur trois jours, 9 à 20 votes ou plus. Seuls les papiers à 20 votes au moins, 10 au plus par passage ; le vote est un seuil d'entrée gardé en métadonnée, jamais dans la capture ; la capture est le résumé des auteurs, jamais le résumé automatique de Hugging Face ; chaque affirmation est attribuée aux auteurs. Collecte réelle sur la base locale : 9 papiers.
 - Artificial Analysis : robots.txt autorise, mais la page des modèles (1,3 Mo) est rendue par script ; l'API demande une clé, donc un compte (décision de l'utilisateur). Conditions d'utilisation non lues. Un classement reste attribué à son auteur.
-- LMArena : `lmarena.ai` répond par une redirection (301), que notre client ne suit pas par règle ; destination non lue.
+- LMArena : `lmarena.ai` redirige (301) vers `arena.ai`. Le robots.txt d'arena.ai autorise `/leaderboard`, mais la page répond 403 à notre client : refus observé, non contourné.
+- Artificial Analysis, suite : `/terms` répond 404, conditions toujours non lues.
 - arXiv cs.AI : flux lisible, au moins 50 entrées, sans ordre d'intérêt : inchangé (§3.12).
 - Meta AI : HTTP 400 pour notre client ; robots.txt interdisant la collecte sans permission écrite : inchangé (§3.2).
 - Reddit (r/LocalLLaMA, r/MachineLearning, r/singularity) : inchangé (§3.7).

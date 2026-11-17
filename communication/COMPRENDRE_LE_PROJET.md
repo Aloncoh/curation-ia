@@ -733,6 +733,7 @@ Modèle local, sur le Mac : gratuit à l'appel. Il faudrait pourtant laisser le 
 - **Deux classements de dépôts GitHub** : les skills en tendance de Selan, et les ajouts récents de la liste awesome-claude-code. Les dépôts qu'ils citent deviennent des candidats de la découverte, avec les mêmes règles que les autres (seuil d'étoiles, grille de notation). Être bien classé ne prouve rien : c'est une porte d'entrée, pas une note.
 
 - **xAI** (ajout du 17 novembre, seconde liste). Le site n'a pas de flux et refusait jusque-là notre collecteur. Il l'autorise maintenant dans son `robots.txt` : le code lit le plan du site, garde la rubrique des annonces, puis lit chaque page. Même méthode que pour Anthropic.
+- **Hugging Face Papers** (ajout du 17 novembre). Chaque jour, des chercheurs y signalent des articles de recherche et la communauté vote. Le code lit la liste officielle, garde les papiers qui ont reçu au moins 20 votes, et enregistre le résumé écrit par les auteurs. Le vote n'est qu'un seuil d'entrée : il ne dit rien de la qualité et n'est jamais écrit dans le post. Le résumé automatique proposé par Hugging Face n'est pas repris.
 
 **Ce qui est refusé, et pourquoi.**
 
