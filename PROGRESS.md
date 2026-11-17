@@ -20,7 +20,7 @@
   - racine : `npm run typecheck` et `npm run web:typecheck` passent, `npm test` 894 au vert ; `npm run web:build` passe au second lancement.
 - Non vérifié : simulateur iPhone, émulateur Android, vrai téléphone ; sens de droite à gauche hors du web.
 - Constaté en passant : la construction du site s'arrête une première fois sur un avis de sécurité de Next.js 16.4.4 (« affected by a known security vulnerability »), puis passe au second lancement avec un avertissement. Non traité ici : la mise à jour de Next.js est une décision à part.
-- Rien n'est commité ni poussé ; aucun compte créé, aucune dépense.
+- Rien n'est commité ni poussé ; aucun compte créé, aucune dépense. Depuis : les mises à jour de SPEC, STATE, PROGRESS et `communication/` sont parties sur `main` avec le commit a762fce de la session des sources (fichiers ajoutés en entier, par erreur) ; le code de l'application reste non commité.
 
 ## 2026-11-12 — Tri des titres par le modèle avant la sélection
 

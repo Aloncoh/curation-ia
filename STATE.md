@@ -74,7 +74,7 @@ Réseau social vivant autour de l'IA, du développement et de la technologie : r
 - **Construit** dans `apps/mobile` (Expo SDK 58, hors des workspaces de la racine) : reprise des jalons M1 à M3 du worktree `mobile`, puis M4 — fil, post, profil et recherche lus sur l'API v1 en ligne, onglets Actualités · Ressources · Abonnements, trois langues, « Voir l'original », montages du site, sources d'un post. Détail : [docs/mobile/M4.md](docs/mobile/M4.md).
 - **Vérifié** : 105 tests et types dans `apps/mobile` ; aperçu web à la taille d'un téléphone sur l'API en ligne, en français, hébreu et anglais (captures `docs/mobile/preuves/m4-*.jpg`).
 - **Non vérifié** : simulateur iPhone, émulateur Android, vrai téléphone. Le Mac n'a ni Xcode ni SDK Android ; l'App Store refuse Xcode (macOS 26.6 requis, poste sous 15.7.4).
-- **Non commité, non poussé** : `apps/mobile/`, `docs/mobile/`, ADR 0017 et les mises à jour de SPEC, ROADMAP, STATE, PROGRESS, `communication/`.
+- **Non commité, non poussé** : `apps/mobile/`, `docs/mobile/`, ADR 0017, `ROADMAP.md` et `.claude/launch.json`. Les mises à jour de SPEC, STATE, PROGRESS et `communication/` sont parties sur `main` le 2026-11-17 avec le commit a762fce de la session des sources, qui a ajouté ces fichiers en entier par erreur : les documents décrivent donc une application dont le code n'est pas encore dans le dépôt.
 - Aucun envoi aux magasins avant les comptes et la modération (ADR 0010). Comptes développeur revérifiés le 2026-11-17 : Apple 99 USD par an, Google Play 25 USD une fois ; aucun créé.
 
 ## Construit, pas encore vérifié en ligne
