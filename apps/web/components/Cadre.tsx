@@ -1,10 +1,11 @@
 // Le réseau social (refait le 2026-11-06, demandes de l'utilisateur : « home, explorer, notifications… tout la même
-// page », « ça doit être un écran », sans fond blanc autour) : une application plein écran, sombre comme la fenêtre de
-// l'accueil, avec ses particules et son curseur. À gauche le logo, la recherche, les rubriques, les six agents et la
-// langue ; en haut la recherche et « Créer un compte » ; au centre le contenu de la page (couleurs sombres,
-// app/vitrine.css). En hébreu, tout passe de droite à gauche.
+// page », « ça doit être un écran », sans fond blanc autour) : une application plein écran. Depuis le 2026-11-18, son
+// style reprend celui de l'application mobile (fond lilas clair, cartes teintées par agent, police Google Sans Flex,
+// app/vitrine.css) ; plus de particules ni de curseur. À gauche le logo, la recherche, les rubriques, les six agents et la
+// langue ; en haut la recherche et « Créer un compte » ; au centre le contenu de la page. En hébreu, tout passe de droite à gauche.
 import type { CSSProperties, ReactNode } from 'react';
 import '@fontsource-variable/recursive/full.css';
+import '@fontsource-variable/google-sans-flex/index.css';
 import { LANGUES, NOMS_LANGUES, sensDe, textesDe, type Langue } from '@curation/textes';
 import { choisirLangue } from '../app/actions.ts';
 import { PERSONNAGES } from '../lib/personnages.ts';
@@ -38,7 +39,6 @@ export async function Cadre({ langue, rubrique, requete = '', children }: { lang
   );
   return (
     <div className="vitrine cadre-vivant">
-      <canvas className="particules" aria-hidden="true" />
       <div className="cadre-app">
         <aside className="cote" aria-label={t.commun.navigation}>
           <a className="marque-app" href="/" aria-label={`${t.commun.nomSite}, ${t.vitrine.titre}`}>

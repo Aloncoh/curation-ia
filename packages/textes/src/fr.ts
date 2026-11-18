@@ -201,6 +201,7 @@ export const fr: Textes = {
     delaiTitre: 'De l’annonce au fil',
     /** L'application n'est pas encore sur l'App Store (2026-11-17) : ne pas écrire « disponible » avant sa mise en ligne. */
     iphoneBientot: 'Bientôt sur iPhone',
+    dernierPost: 'Dernier post',
     iphoneApercu: 'Aperçu de l’application, avec les posts du fil.',
   },
   reglages: {

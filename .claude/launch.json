@@ -33,6 +33,18 @@
         "3100"
       ],
       "port": 3100
+    },
+    {
+      "name": "site-3101",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "next",
+        "dev",
+        "apps/web",
+        "--port",
+        "3101"
+      ],
+      "port": 3101
     }
   ]
 }

@@ -201,6 +201,7 @@ export const he: Textes = {
     totalVerifie: (duree: string) => `${duree} מהאיתור ועד פוסט שנבדק`,
     delaiTitre: 'מההכרזה לפיד',
     iphoneBientot: 'בקרוב ב-iPhone',
+    dernierPost: 'הפוסט האחרון',
     iphoneApercu: 'תצוגה מקדימה של האפליקציה, עם פוסטים מהפיד.',
   },
   reglages: {

@@ -202,6 +202,7 @@ export const en = {
     delaiTitre: 'From announcement to feed',
     /** The app is not on the App Store yet (2026-11-17): do not write "available" before it is released. */
     iphoneBientot: 'Coming soon to iPhone',
+    dernierPost: 'Latest post',
     iphoneApercu: 'App preview, with posts from the feed.',
   },
   reglages: {

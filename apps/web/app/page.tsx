@@ -119,6 +119,17 @@ export default async function Accueil() {
     return d ? <><bdi dir="ltr">{d}</bdi>{primaire ? ` · ${v.sourcePrimaire}` : null}</> : null;
   };
   const enHeures = (m: number) => v.duree(Math.floor(m / 60), m % 60);
+  // Widgets : le dernier post du fil, et les sujets des derniers posts avec leur nombre (sur les posts lus ci-dessus).
+  const dernier = duFil[0] ?? null;
+  const parSujet = new Map<string, { nom: string; compte: string; n: number }>();
+  for (const post of duFil) {
+    const s = sujetDe(post);
+    if (!s) continue;
+    const deja = parSujet.get(s.nom);
+    if (deja) deja.n++;
+    else parSujet.set(s.nom, { nom: s.nom, compte: post.compte.id, n: 1 });
+  }
+  const sujetsDuFil = [...parSujet.values()].sort((a, b) => b.n - a.n);
 
   return (
     <div className="vitrine pomme">
@@ -142,6 +153,47 @@ export default async function Accueil() {
             </div>
           </div>
         </div>
+        {/* Widgets façon écran d'accueil d'iPhone (demande du 2026-11-18 : « quelques widgets style Apple ») : seulement
+            des données réelles, lues comme le reste de la page — le dernier post du fil, les sujets des derniers posts,
+            les six agents et, quand un relevé existe, le délai le plus rapide mesuré de l'annonce au fil. */}
+        {dernier && (
+          <div className="widgets">
+            <a className="widget moyen apparait" href={`/p/${dernier.id}`} style={{ '--c': couleurDe(dernier.compte.id), '--i': 0 } as Style}>
+              <span className="w-libelle">{v.dernierPost}</span>
+              <span className="w-qui"><img src={dernier.compte.avatar} alt="" width={28} height={28} /><b>{dernier.compte.nom}</b><time dateTime={dernier.date ?? undefined}>{ilYa(dernier.date, ctx.langue, maintenant)}</time></span>
+              <strong className="w-titre" lang={dernier.langue}>{accroche(dernier)?.texte}</strong>
+            </a>
+            {sujetsDuFil.length > 0 && (
+              <div className="widget apparait" style={{ '--i': 1 } as Style}>
+                <span className="w-libelle">{v.sujetsPopulaires}</span>
+                <ul className="w-liste">
+                  {sujetsDuFil.slice(0, 3).map(({ nom, compte: id, n }) => (
+                    <li key={nom} style={{ '--c': couleurDe(id) } as Style}>
+                      <a href={`/recherche?${new URLSearchParams({ q: nom })}`}><i aria-hidden="true" /><span>{nom}</span><small>{v.nPosts(n)}</small></a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            <div className="widget apparait" style={{ '--i': 2 } as Style}>
+              <span className="w-libelle">{v.lesSix}</span>
+              <ul className="w-agents">
+                {PERSONNAGES.map((p) => (
+                  <li key={p.id} style={{ '--c': p.couleur } as Style}>
+                    <a href={`/comptes/${p.id}`} aria-label={p.nom}><img src={`/marque/agent-${p.id}.png`} alt="" width={44} height={44} /></a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            {r && (
+              <a className="widget apparait" href={`/p/${r.publication}`} style={{ '--c': couleurDe(r.compte), '--i': 3 } as Style}>
+                <span className="w-libelle">{v.delaiTitre}</span>
+                <strong className="w-chiffre">{enHeures(r.minutes)}</strong>
+                <span className="w-qui"><img src={`/marque/agent-${r.compte}.png`} alt="" width={22} height={22} /><b>{r.post.compte.nom}</b></span>
+              </a>
+            )}
+          </div>
+        )}
         {duFil.length > 0 && (
           <section className="iphone" aria-labelledby="iphone-titre">
             <div className="iphone-texte apparait">

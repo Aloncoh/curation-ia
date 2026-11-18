@@ -91,6 +91,39 @@
   & .releve li { border-top: 1px solid var(--p-filet); }
   & .releve footer { border-top: 1px solid var(--p-filet); font-weight: 600; }
 
+  /* Widgets façon écran d'accueil d'iPhone (2026-11-18) : carrés et rectangles à grands coins, blancs, un libellé de
+     couleur en haut, un contenu en gros dessous ; le dernier post est teinté par la couleur de son agent, comme dans
+     l'application. Ils s'enfoncent légèrement au toucher. */
+  /* Quatre colonnes ; centrées quand un widget manque (le délai mesuré n'existe que si un relevé existe). */
+  & .widgets { --g: 16px; display: flex; flex-wrap: wrap; justify-content: center; gap: var(--g); width: min(100%, 780px); margin: 0 auto clamp(26px, 5vh, 48px); }
+  & .widget {
+    position: relative; display: flex; flex: 0 0 calc((100% - 3 * var(--g)) / 4); flex-direction: column; gap: 8px; aspect-ratio: 1; min-width: 0; padding: 16px; border-radius: 24px;
+    background: #fff; color: var(--v-encre); text-decoration: none; overflow: hidden;
+    box-shadow: 0 1px 2px rgba(28, 21, 48, .05), 0 12px 32px -14px rgba(60, 40, 150, .28);
+    transition: opacity .5s cubic-bezier(.23, 1, .32, 1), translate .7s cubic-bezier(.23, 1, .32, 1), transform .16s ease-out;
+    transition-delay: calc(var(--i, 0) * 60ms), calc(var(--i, 0) * 60ms), 0s;
+  }
+  & a.widget:active, & .widget a:active { transform: scale(.97); }
+  & .widget.moyen { flex-basis: calc((100% - var(--g)) / 2); aspect-ratio: auto; background: color-mix(in srgb, var(--c) 13%, #fff); }
+  & .w-libelle { color: var(--c, var(--v-violet-fonce)); font: 600 .78rem/1.1 var(--v-texte); letter-spacing: -.005em; }
+  & .widget.moyen .w-libelle { color: color-mix(in srgb, var(--c) 70%, #000); }
+  & .w-qui { display: flex; align-items: center; gap: 7px; min-width: 0; color: var(--p-gris); font-size: .8rem; }
+  & .w-qui img { flex: none; border-radius: 50%; object-fit: cover; background: #efe9e1; box-shadow: 0 0 0 2px #fff, 0 0 0 3.5px var(--c); }
+  & .w-qui b { color: var(--v-encre); font-weight: 600; }
+  & .w-qui time { margin-inline-start: auto; white-space: nowrap; }
+  & .w-titre { margin-top: auto; font: 600 1.18rem/1.25 var(--v-texte); letter-spacing: -.016em; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; text-wrap: pretty; }
+  & .w-chiffre { margin-top: auto; font: 600 clamp(1.7rem, 3.4vw, 2.3rem)/1 var(--v-texte); letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
+  & .w-liste { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+  & .w-liste a { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; column-gap: 8px; padding: 3px 0; color: var(--v-encre); text-decoration: none; }
+  & .w-liste i { width: 9px; height: 9px; border-radius: 50%; background: var(--c); }
+  & .w-liste span { font-weight: 600; font-size: .9rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  & .w-liste small { grid-column: 2; color: var(--p-gris); font-size: .72rem; line-height: 1.1; }
+  & .w-liste a:hover span { text-decoration: underline; text-underline-offset: 3px; }
+  & .w-agents { list-style: none; flex: 1; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); place-items: center; }
+  & .w-agents a { display: block; border-radius: 50%; transition: transform .16s ease-out; }
+  & .w-agents a:hover { transform: translateY(-2px); }
+  & .w-agents img { display: block; width: clamp(30px, 4.6vw, 44px); height: auto; aspect-ratio: 1; border-radius: 50%; object-fit: cover; background: #efe9e1; box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--c); }
+
   & .fin { justify-content: center; padding: clamp(40px, 8vh, 84px) 0 0; border-top: 0; text-align: center; }
 
   @media (max-width: 1000px) {
@@ -107,6 +140,9 @@
   }
   @media (max-width: 620px) {
     & .agents-grille { grid-template-columns: minmax(0, 1fr); }
+    & .widgets { --g: 12px; }
+    & .widget { flex-basis: calc((100% - var(--g)) / 2); padding: 14px; border-radius: 22px; }
+    & .widget.moyen { flex-basis: 100%; }
   }
   @media (prefers-reduced-transparency: reduce) {
     & .barre, & .barre.defilee { background: #fff; -webkit-backdrop-filter: none; backdrop-filter: none; }

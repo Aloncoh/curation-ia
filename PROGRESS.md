@@ -557,3 +557,11 @@ DeepSeek Flash, 30 actualités, 34 appels, 0,0125 $ (budget autorisé 4 $). 19 �
 - Curseur en flèche retiré de l'accueil et du réseau (`page.tsx`, `Cadre.tsx`).
 - Vérifié en local dans Chrome, animations actives (fenêtre de 2 067 × 1 235) : la séquence complète relevée deux fois de suite (défilement, fiche ouverte, îlot à 209 px, « j'aime », retour) ; la page ne bouge pas pendant la séquence (60 relevés sur 24 s) ; plus d'élément curseur. Sur mobile (375 px, navigateur intégré) : iPhone de 304 × 630, aucun débordement, console sans erreur. Types vérifiés.
 - Non vérifié : vrai téléphone, hébreu, audit d'accessibilité.
+
+## 2026-11-18 — Accueil : widgets façon iPhone ; réseau au style de l'application mobile
+
+- Demande : « mettre quelques widgets style Apple » sur la page de découverte ; dans le fil, changer la police et le style d'écriture (« trop moche ») ; s'inspirer de l'application mobile pour le design du fil.
+- Accueil (`app/page.tsx`, `app/pomme.css`) : rangée de widgets façon écran d'accueil d'iPhone sous les personnages : dernier post du fil (teinté par son agent), sujets des derniers posts avec leur nombre, les six agents, délai le plus rapide mesuré (seulement si un relevé existe, donc en ligne). Données réelles uniquement. Nouveau texte `vitrine.dernierPost` (fr, en, he).
+- Réseau (`app/vitrine.css`, `components/Cadre.tsx`, `components/CartePost.tsx`) : thème clair repris de `apps/mobile/src/ui/theme.ts` (fond #f4f1fc, surfaces blanches, accent #5243c2), cartes teintées et filetées à la couleur de l'agent, en-tête « Nom IA @id · date » avec avatar à anneau, pastille « Publié » pleine. Police Google Sans Flex (paquet `@fontsource-variable/google-sans-flex` 5.3.2, licence OFL-1.1 lue sur npm le 2026-11-18) ; Recursive seulement sur le nom du site. Particules du réseau retirées. Menu réduit aux icônes entre 860 et 1 080 px.
+- Vérifié en local : Chrome (2 067 px) fil et accueil, police chargée, widgets centrés, aucune erreur de console ; navigateur intégré à 375 px, fil et widgets sans débordement. `npm run web:typecheck` au vert ; tests textes et site : 16 réussis.
+- Non vérifié : vrai téléphone, hébreu, réglages, notifications et recherche une par une (page d’un post et profil vus en clair dans Chrome), audit d'accessibilité.

@@ -36,12 +36,15 @@ export function CartePost({ p, t, langue, raison = null }: { p: Publication; t: 
   return (
     <article className="carte-post" data-compte={p.compte.id} aria-label={t.post.publicationDe(p.compte.nom)} style={{ '--c': couleur } as Style}>
       {raison && <p className="cp-raison">{raison}</p>}
+      {/* En-tête de l'application : avatar à l'anneau de l'agent, « Nom IA @id · date », pastille à sa couleur. */}
       <header className="cp-tete">
-        <a className="cp-agent" href={`/comptes/${p.compte.id}`}>
-          <img src={p.compte.avatar} alt="" width={30} height={30} />
-          <b>{p.compte.nom}</b>
+        <a className="cp-agent" href={`/comptes/${p.compte.id}`} tabIndex={-1} aria-hidden="true">
+          <img src={p.compte.avatar} alt="" width={40} height={40} />
         </a>
-        {date && <time dateTime={p.date ?? undefined}>{date}</time>}
+        <span className="cp-qui">
+          <a href={`/comptes/${p.compte.id}`}>{p.compte.nom}</a> {t.commun.marqueIA} <bdi dir="ltr">@{p.compte.id}</bdi>
+          {date && <> · <time dateTime={p.date ?? undefined}>{date}</time></>}
+        </span>
         <span className={`fait${publie ? '' : ' prevu'}`}>{publie ? `✓ ${v.publie}` : `${t.post.prevueLe} ${date ?? ''}`}</span>
       </header>
 
