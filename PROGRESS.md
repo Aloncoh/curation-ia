@@ -565,3 +565,14 @@ DeepSeek Flash, 30 actualités, 34 appels, 0,0125 $ (budget autorisé 4 $). 19 �
 - Réseau (`app/vitrine.css`, `components/Cadre.tsx`, `components/CartePost.tsx`) : thème clair repris de `apps/mobile/src/ui/theme.ts` (fond #f4f1fc, surfaces blanches, accent #5243c2), cartes teintées et filetées à la couleur de l'agent, en-tête « Nom IA @id · date » avec avatar à anneau, pastille « Publié » pleine. Police Google Sans Flex (paquet `@fontsource-variable/google-sans-flex` 5.3.2, licence OFL-1.1 lue sur npm le 2026-11-18) ; Recursive seulement sur le nom du site. Particules du réseau retirées. Menu réduit aux icônes entre 860 et 1 080 px.
 - Vérifié en local : Chrome (2 067 px) fil et accueil, police chargée, widgets centrés, aucune erreur de console ; navigateur intégré à 375 px, fil et widgets sans débordement. `npm run web:typecheck` au vert ; tests textes et site : 16 réussis.
 - Non vérifié : vrai téléphone, hébreu, réglages, notifications et recherche une par une (page d’un post et profil vus en clair dans Chrome), audit d'accessibilité.
+
+## 2026-11-18 — Modèles : rédaction dédiée, comparatifs rapportés, trois sources (ADR 0018)
+
+- Demande : « parler beaucoup plus des nouveaux modèles », « amélioration dans la rédaction » (Seedance, nouveaux Gemini), « faire même des posts modèles vs autres modèles ».
+- Rédaction (`src/analysis/prompts.ts`, `p3-23`) : `systemeRedaction` ajoute, après la consigne commune inchangée, un complément pour une sortie de modèle (version, capacités chiffrées de la source, accès, prix, limite ; comparaisons de l'éditeur en attributions) et un autre pour un comparatif (qui a comparé quoi, comment ; aucun vainqueur désigné à la place de l'auteur). Rédaction, révision et relance l'utilisent.
+- Sélection : consignes `s7` (nouvelle version de modèle à 2 en nouveauté ; comparatif de modèles admis s'il rapporte des résultats mesurés avec auteur et conditions, sinon 0), tri `tri-4`, nature `comparatif_de_modeles` (rang 2 des priorités, compte Nodi).
+- Contrôles (`controlerBrouillon`, contexte `comparatif`) : description attribuée, `verdict_sans_auteur`, `comparatif_sans_resultat` ; tout écart laisse le post « à vérifier ».
+- Sources par plan de site : ByteDance Seed, Black Forest Labs, Runway ; option `plan.langue` (version anglaise déclarée par le plan, aucune redirection suivie). Kling différé (docs/sources.md §3.16). 284 sources définies, 26 différées.
+- Vérifié : types OK ; 905 tests au vert (51 fichiers) ; collecte et capture réelles sur la base locale : 30 pages collectées, 29 capturées (Seedance 2.5 : 2 723 mots ; FLUX 3 : 1 304 ; Runway : 4 annonces et 6 pages de rubrique).
+- Non vérifié : aucun texte rédigé avec la nouvelle consigne (appel payant, laissé aux cycles en ligne) ; première collecte en ligne des trois sources ; nombre réel de comparatifs retenus.
+- Non construit : fiche « face à face » à partir de deux posts du site (nouveau format, décision de l'utilisateur).

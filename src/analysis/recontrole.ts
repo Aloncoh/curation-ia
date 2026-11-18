@@ -48,6 +48,7 @@ export async function recontroler(database: Database, o: { now: string } = { now
       autresCaptures: await autresCaptures(client, Number(row.news_item_id), Number(row.snapshot_id)),
       source: String(row.source_nom),
       externe: attributionDe(SOURCES.find((x) => x.name === String(row.source_nom))),
+      comparatif: (contenu as { nature?: string | null }).nature === 'comparatif_de_modeles',
     };
     const controler = (b: Brouillon) => controlerBrouillon(b, [String(row.snapshot_title), toPlainText(String(row.capture), String(row.content_format))], String(row.title), row.version === null ? null : String(row.version), contexte);
     const controles = controler(contenu);

@@ -47,6 +47,33 @@ describe('plan de site (Anthropic, aucun flux officiel)', () => {
     expect(s).toMatchObject({ kind: 'feed', compte: 'nodi', allowedHosts: ['x.ai'], config: { url: 'https://x.ai/sitemap.xml', plan: { prefixes: ['/news/'] } } });
     expect(s?.differee).toBeUndefined();
   });
+
+  it('Seedance, FLUX et Runway sont lus par le plan de leur site officiel (2026-11-18)', () => {
+    const plan = (id: string) => SOURCES.find((x) => x.id === id);
+    expect(plan('feed:bytedance-seed-plan')).toMatchObject({ kind: 'feed', compte: 'nodi', allowedHosts: ['seed.bytedance.com'], config: { url: 'https://seed.bytedance.com/sitemap.xml', plan: { prefixes: ['/blog/'], langue: 'en' } } });
+    expect(plan('feed:bfl-plan')).toMatchObject({ kind: 'feed', compte: 'nodi', allowedHosts: ['bfl.ai'], config: { url: 'https://bfl.ai/sitemap.xml', plan: { prefixes: ['/blog/'] } } });
+    // Runway : pas d'agent imposé, une sortie de modèle va à Nodi et un récit de création à Mova.
+    expect(plan('feed:runway-plan')).toMatchObject({ kind: 'feed', allowedHosts: ['runway.com'], config: { url: 'https://runway.com/sitemap.xml', plan: { prefixes: ['/news/'] } } });
+    expect(plan('feed:runway-plan')?.compte).toBeUndefined();
+  });
+
+  it('lit la version anglaise déclarée par le plan quand l’adresse principale redirige, sans suivre de redirection (ByteDance Seed)', () => {
+    const corps = `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+      <url><loc>https://seed.bytedance.com/blog/introducing-seedance</loc>
+        <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://seed.bytedance.com/zh/blog/introducing-seedance" />
+        <xhtml:link rel="alternate" hreflang="en"
+          href="https://seed.bytedance.com/en/blog/introducing-seedance" /><lastmod>2026-09-07T06:56:09.000Z</lastmod></url>
+      <url><loc>https://seed.bytedance.com/blog/chinois-seulement</loc><lastmod>2026-11-16T03:13:13.000Z</lastmod></url>
+      <url><loc>https://seed.bytedance.com/blog/ailleurs</loc><xhtml:link rel="alternate" hreflang="en" href="https://exemple.test/en/blog/ailleurs" /></url>
+      <url><loc>https://seed.bytedance.com/career</loc><xhtml:link rel="alternate" hreflang="en" href="https://seed.bytedance.com/en/career" /></url>
+    </urlset>`;
+    const { documents, rejected } = parseSitemap(corps, { maxItems: 10, linkHosts: ['seed.bytedance.com'], plan: { prefixes: ['/blog/'], langue: 'en' } });
+    expect(documents.map((d) => d.url)).toEqual(['https://seed.bytedance.com/en/blog/introducing-seedance']);
+    // Page sans version anglaise, ou dont la version anglaise est sur un autre hôte : écartée, jamais lue ailleurs.
+    expect(rejected).toMatchObject({ sans_version_langue: 2, hors_rubrique: 1 });
+    // Sans l'option, l'adresse principale est gardée telle quelle (Anthropic, xAI).
+    expect(parseSitemap(corps, { maxItems: 10, linkHosts: ['seed.bytedance.com'], plan: { prefixes: ['/blog/'] } }).documents).toHaveLength(3);
+  });
 });
 
 describe('sortie illisible du modèle', () => {

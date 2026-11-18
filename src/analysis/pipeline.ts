@@ -13,7 +13,7 @@ import { BudgetInsuffisant, marquerErreur, reserver, solder, type Plafonds } fro
 import { CODES_BLOQUANTS, controlerBrouillon, diapositivesDe, moinsDeTroisMots, type DiapositiveResolue } from './controles.ts';
 import { estReprenable, schemaSortie, type Modele, type RequeteModele } from './modele.ts';
 import { elaguer, revisionElaguee } from './elagage.ts';
-import { documentUtilisateur, messageRevision, PROMPT_VERSION, SYSTEME_QUALIFICATION, SYSTEME_REDACTION } from './prompts.ts';
+import { documentUtilisateur, messageRevision, PROMPT_VERSION, SYSTEME_QUALIFICATION, systemeRedaction } from './prompts.ts';
 import { consignesActuelles, deciderSelection, passagesRetrouves, preselection, type Selection } from '../selection/consignes.ts';
 import { creerPublication, NIVEAU_PREUVE_V1, synchroniserComptes } from './publication.ts';
 import { Brouillon, DIAPOSITIVES, Qualification } from './schemas.ts';
@@ -314,12 +314,13 @@ export async function genererBrouillons(o: OptionsBrouillons) {
         autresCaptures: await autresCaptures(client, newsItemId, Number(row.snapshot_id)),
         source: String(row.source_nom),
         externe: attribution,
+        comparatif: nature === 'comparatif_de_modeles',
       };
       const controler = (x: Brouillon) => controlerBrouillon(x, [titreCapture, texte], String(row.title), version, contexteControle);
       const controles = controler(lu.data);
       if (controles.length === 0 || controles.some((c) => CODES_BLOQUANTS.has(c.code))) continue;
       bilan.relances++;
-      const relance = await appeler(newsItemId, 'relance', SYSTEME_REDACTION, messageRevision(doc, lu.data, controles), Brouillon);
+      const relance = await appeler(newsItemId, 'relance', systemeRedaction(typeof nature === 'string' ? nature : null), messageRevision(doc, lu.data, controles), Brouillon);
       if (!relance.ok) continue;
       const apres = controler(relance.valeur);
       const elague = apres.length > 0 ? elaguer(relance.valeur, apres) : null;
@@ -466,7 +467,9 @@ export async function genererBrouillons(o: OptionsBrouillons) {
       if (choix.decision === 'approfondir') { await enregistrer('a_approfondir', q, { qualification: q }, null, choix.motif, undefined, choix); bilan.a_approfondir++; continue; }
       // Payée, donc conservée avant la rédaction : une interruption ne la fera pas repayer.
       if (!reprise) await enregistrer('qualifiee', q, { qualification: q }, null, null, undefined, choix);
-      const redaction = await appeler(id, 'redaction', SYSTEME_REDACTION, doc, Brouillon);
+      // Sorties de modèles et comparatifs de modèles : la consigne commune, plus un complément propre à la nature (2026-11-18).
+      const consigne = systemeRedaction(q.nature);
+      const redaction = await appeler(id, 'redaction', consigne, doc, Brouillon);
       if (!redaction.ok) { await enregistrer(redaction.statut, q, null, null, null); bilan[BILAN_ECHEC[redaction.statut]]++; continue; }
       // Le titre fait partie de la capture stockée : le modèle et le contrôle mot pour mot lisent le même texte.
       const contexteControle = {
@@ -477,6 +480,7 @@ export async function genererBrouillons(o: OptionsBrouillons) {
         autresCaptures: await autresCaptures(client, id, Number(row.snapshot_id)),
         source: String(row.source_nom),
         externe: attribution,
+        comparatif: q.nature === 'comparatif_de_modeles',
       };
       const controler = (x: Brouillon) => controlerBrouillon(x, [titreCapture, texte], titre, version, contexteControle);
       let b = redaction.valeur;
@@ -484,7 +488,7 @@ export async function genererBrouillons(o: OptionsBrouillons) {
       // Autocorrection (2026-11-03) : une seule reprise, guidée par les écarts du code. Elle n'est gardée que si elle en
       // compte moins ; un échec de la reprise laisse le premier brouillon tel quel.
       if (controles.length > 0 && !controles.some((c) => CODES_BLOQUANTS.has(c.code))) {
-        const revision = await appeler(id, 'revision', SYSTEME_REDACTION, messageRevision(doc, b, controles), Brouillon);
+        const revision = await appeler(id, 'revision', consigne, messageRevision(doc, b, controles), Brouillon);
         if (revision.ok) {
           const apres = controler(revision.valeur);
           if (apres.length < controles.length && !apres.some((c) => CODES_BLOQUANTS.has(c.code))) { b = revision.valeur; controles = apres; bilan.revisions_gardees++; }

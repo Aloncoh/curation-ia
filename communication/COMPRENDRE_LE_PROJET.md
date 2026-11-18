@@ -790,3 +790,19 @@ flowchart LR
 **Ce qui est prévu, pas construit.** Les comptes, les interactions et la modération (P9), puis seulement l'envoi à l'App Store et à Google Play. Apple refuse une application qui se contente d'afficher un fil, et les deux magasins exigent signalement, blocage et suppression du compte. Les comptes développeur (Apple : 99 USD par an ; Google Play : 25 USD une fois, tarifs lus le 2026-11-17) ne sont pas créés.
 
 **Qui a fait quoi.** L'utilisateur a décidé d'avancer l'application et de la centrer sur les actualités de l'IA. Claude Code a écrit le code, les tests et cette documentation. Les publications affichées sont rédigées par les agents du site, pas par l'application.
+
+## 24. Plus de modèles, mieux racontés, et les comparatifs _(construit le 2026-11-18 ; essais réels de collecte depuis le poste, effet sur les posts à constater en ligne)_
+
+**Le besoin.** Le porteur du projet veut un fil qui parle beaucoup plus des nouveaux modèles (il cite Seedance et les nouveaux Gemini), mieux rédigés, avec aussi des posts « un modèle contre un autre ».
+
+**Ce qui change dans la rédaction.** Jusqu'ici, une seule consigne servait à tous les sujets, et elle parlait d'« outil ». Quand la sélection reconnaît une sortie de modèle, la rédaction reçoit maintenant un complément : nommer le modèle avec sa version, dire ce qui change en capacités chiffrées écrites par la source (durée, résolution, fenêtre de contexte…) et non en adjectifs, dire où l'utiliser aujourd'hui et à quel prix, garder la limite qui compte. Toute comparaison que l'éditeur fait avec un autre modèle va dans un bloc à part, attribuée à l'éditeur, avec ses conditions.
+
+**Les comparatifs.** Avant, tout comparatif était écarté, à trois endroits du code. Désormais, un comparatif de modèles est retenu quand il rapporte des résultats mesurés, avec leur auteur et leurs conditions. Le site ne teste rien lui-même : le post dit qui a comparé quoi et comment, et ne désigne jamais un vainqueur à la place de l'auteur. Le code le vérifie : un jugement sans auteur (« bat », « meilleur que »), une description non attribuée ou l'absence d'un résultat repris avec ses conditions laisse le post « à vérifier », et il n'est pas publié seul. Un simple avis, une liste des « meilleurs modèles » ou un guide d'achat restent écartés.
+
+**Trois éditeurs de plus.** ByteDance Seed (Seedance, Seedream), Black Forest Labs (FLUX) et Runway n'ont pas de flux. Leur `robots.txt` autorise la lecture : le code lit le plan de leur site, garde la rubrique des annonces, puis lit chaque page, comme pour Anthropic et xAI. Essai réel depuis le poste : 30 pages collectées, 29 lues, dont l'annonce de Seedance 2.5 (2 723 mots). Kling est différé : son site n'offre ni flux ni plan lisible.
+
+**Ce qui n'est pas vérifié.** Aucun texte n'a encore été rédigé avec la nouvelle consigne : cela demande un appel payant, laissé aux cycles en ligne. Le nombre de comparatifs que les sources publient vraiment reste à mesurer ; les grands classements (Artificial Analysis, LMArena) ne sont pas branchés.
+
+**Ce qui est prévu, pas construit.** Une fiche « face à face » fabriquée par le site à partir de deux de ses propres posts (accès, prix, limites, affirmations de chaque éditeur côte à côte) : c'est un nouveau format, à décider par le porteur du projet.
+
+**Qui a fait quoi.** L'utilisateur a demandé cette ligne éditoriale. Claude Code a écrit les règles, la consigne, les contrôles, les tests et cette documentation. Les posts seront rédigés par les agents du site.

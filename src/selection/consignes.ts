@@ -92,6 +92,18 @@ const PRECISIONS_S6 = `Précisions sur la sécurité (cyberattaques, fuites de d
 - Utilité : 2 si le document dit quoi faire (correctif ou version à installer, service à vérifier, indicateurs à rechercher) ; 1 s'il décrit seulement l'attaque.
 - Solidité : 2 si le document nomme la victime ou le produit touché, la date et l'origine de l'information (déclaration de la victime, avis officiel, chercheurs nommés) ; 1 sinon. Une attribution à un groupe ou à un État que le document ne présente pas comme confirmée rend l'information non confirmée.`;
 
+/**
+ * Demande de l'utilisateur du 2026-11-18 (« parler beaucoup plus des nouveaux modèles », « faire même des posts modèles
+ * vs autres modèles »). Jusqu'à s6, tout comparatif valait 0 en nouveauté et n'était donc jamais publié. Seul un
+ * comparatif qui rapporte des résultats mesurés, avec leur auteur et leurs conditions, sort de ce genre : le site ne
+ * teste rien lui-même (règles produit, benchmarks attribués).
+ */
+const PRECISIONS_S7 = `Précisions sur les modèles d'IA (texte, image, vidéo, audio, voix, multimodal) :
+- Sortie ou nouvelle version d'un modèle annoncée par son éditeur : nouveauté 2, même quand elle succède de près à la précédente, dès que le document nomme la version et ce qu'elle change. Modèle seulement annoncé, sans accès nommé : utilité 1.
+- Comparatif de modèles : il sort des genres à 0 quand le document compare des modèles nommés par des résultats mesurés (benchmark, classement, essai sur les mêmes consignes), les siens ou ceux d'un auteur qu'il nomme. Nature comparatif_de_modeles. Nouveauté 1 ; 2 seulement si l'un des modèles comparés vient de sortir. Utilité 2 si le document donne les résultats et leurs conditions (jeu d'essai, versions comparées, réglages, date), sinon 1. Solidité 2 seulement si la méthode et les conditions sont écrites dans le document ; un classement sans méthode : 1.
+- Reste à 0 en nouveauté : comparatif sans résultat mesuré (avis, liste des « meilleurs modèles », tableau de prix recopié, guide d'achat), comparatif d'outils qui ne sont pas des modèles.
+- Un comparatif publié par l'éditeur de l'un des modèles comparés est une affirmation_commerciale ; celui d'un tiers est un resultat_independant. Jamais annonce_officielle.`;
+
 export const VERSIONS_CONSIGNES: VersionConsignes[] = [
   { version: 's1', date: '2026-10-31', texte: GRILLE, exemples: [], changements: [] },
   {
@@ -142,13 +154,25 @@ export const VERSIONS_CONSIGNES: VersionConsignes[] = [
     ],
     changements: [{ regle: 'Cyberattaques majeures dans le périmètre même sans lien avec l’IA ni le développement (décision de l’utilisateur du 2026-11-12, « Oui, toutes ») : aucun avis humain en jeu.', avis: [] }],
   },
+  {
+    version: 's7',
+    date: '2026-11-18',
+    texte: `${GRILLE}\n\n${PRECISIONS_S2}\n\n${PRECISIONS_S3}\n\n${PRECISIONS_S5}\n\n${PRECISIONS_S6}\n\n${PRECISIONS_S7}`,
+    exemples: [
+      { titre: 'pull_request_target blocked by default December 2', decision: 'publier', raison: 'Changement de comportement par défaut daté, qui touche les dépôts publics de notre public.', avis: 1 },
+      { titre: 'Claude Code 2.1.314', decision: 'publier', raison: 'Version d’un assistant de code avec une nouvelle permission utilisable tout de suite.', avis: 2 },
+      { titre: 'Webhook IP ranges added to the Meta API', decision: 'publier', raison: 'Changement d’infrastructure concret à appliquer par ceux qui filtrent les webhooks.', avis: 3 },
+    ],
+    changements: [{ regle: 'Nouvelles versions de modèles à 2 en nouveauté, et comparatifs de modèles admis quand ils rapportent des résultats mesurés avec auteur et conditions (demande de l’utilisateur du 2026-11-18) : aucun avis humain en jeu.', avis: [] }],
+  },
 ];
 
 /** Ordre de priorité éditoriale (SPEC §3.6) : 1 passe avant 4 quand le plafond quotidien oblige à choisir. Il ne change aucune note. */
 export function prioriteEditoriale(nature: string | null, categories: readonly string[]): 1 | 2 | 3 | 4 {
   if (nature === 'nouveau_modele') return 1;
   // Fonctionnalités avant les skills et ressources (décision de l'utilisateur du 2026-11-17 ; l'inverse depuis le 2026-11-02).
-  if (nature === 'nouvel_outil' || nature === 'nouvelle_fonctionnalite' || nature === 'integration' || nature === 'modele_ajoute_a_une_plateforme') return 2;
+  // Un comparatif de modèles passe avec les fonctionnalités (demande de l'utilisateur du 2026-11-18), après les sorties de modèles.
+  if (nature === 'nouvel_outil' || nature === 'nouvelle_fonctionnalite' || nature === 'integration' || nature === 'modele_ajoute_a_une_plateforme' || nature === 'comparatif_de_modeles') return 2;
   if (nature === 'ressource' || categories.includes('MCP et skills')) return 3;
   return 4;
 }

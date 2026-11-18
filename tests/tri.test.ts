@@ -17,9 +17,13 @@ const titres: TitreATrier[] = [
 describe('tri des titres : consigne', () => {
   it('place les modèles et les fonctionnalités avant le reste, et garde une place sur six aux sujets majeurs (tri-3)', () => {
     const consigne = systemeTri(30);
-    expect(TRI_VERSION).toBe('tri-3');
-    expect(consigne.indexOf('sortie d\'un modèle')).toBeGreaterThan(0);
-    expect(consigne.indexOf('sortie d\'un modèle')).toBeLessThan(consigne.indexOf('cyberattaque majeure'));
+    expect(TRI_VERSION).toBe('tri-4');
+    expect(consigne.indexOf('sortie ou nouvelle version d\'un modèle')).toBeGreaterThan(0);
+    expect(consigne.indexOf('sortie ou nouvelle version d\'un modèle')).toBeLessThan(consigne.indexOf('cyberattaque majeure'));
+    // tri-4 (2026-11-18) : un comparatif de modèles à résultats mesurés est examiné, après les sorties ; les autres comparatifs non.
+    expect(consigne.indexOf('un comparatif de modèles nommés qui annonce des résultats mesurés')).toBeGreaterThan(consigne.indexOf('sortie ou nouvelle version d\'un modèle'));
+    expect(consigne.indexOf('un comparatif de modèles nommés qui annonce des résultats mesurés')).toBeLessThan(consigne.indexOf('2. Ensuite le reste'));
+    expect(consigne).toContain('comparatif sans résultat mesuré');
     expect(consigne).toContain('Un sujet du premier groupe passe avant tout sujet du second.');
     expect(reserveTri(30)).toBe(5);
     expect(consigne).toContain('garde jusqu\'à 5 places');

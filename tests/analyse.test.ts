@@ -9,7 +9,7 @@ import { depense } from '../src/analysis/budget.ts';
 import { controlerBrouillon, enFrancais, NUANCE_TEXTE, diapositivesDe, LIBELLE_CONTROLE, moinsDeTroisMots } from '../src/analysis/controles.ts';
 import { estReprenable, modeleAnthropic, schemaSortie, type Modele, type RequeteModele } from '../src/analysis/modele.ts';
 import { DUREE_BAIL_MS, genererBrouillons, LONGUEUR_MAX_CAPTURE, LotEnCours, MAX_TENTATIVES, MAX_TOKENS } from '../src/analysis/pipeline.ts';
-import { documentUtilisateur, PROMPT_VERSION, SYSTEME_QUALIFICATION, SYSTEME_REDACTION } from '../src/analysis/prompts.ts';
+import { documentUtilisateur, PROMPT_VERSION, SYSTEME_QUALIFICATION, SYSTEME_REDACTION, systemeRedaction } from '../src/analysis/prompts.ts';
 import { consignesActuelles } from '../src/selection/consignes.ts';
 import { MENTION_ILLUSTRATION } from '../src/analysis/publication.ts';
 import { relectureMarkdown } from '../src/analysis/relecture.ts';
@@ -295,7 +295,7 @@ describe('tarifs', () => {
 
 describe('consigne de rédaction', () => {
   it('suit la règle de ton du 2026-11-02 : pairs, pas de définition des termes courants', () => {
-    expect(PROMPT_VERSION).toMatch(/^p3-22-/);
+    expect(PROMPT_VERSION).toMatch(/^p3-23-/);
     expect(SYSTEME_REDACTION).toContain("Ne définis jamais les termes courants (skill, MCP, agent, assistant de code, plugin, dépôt, open source, UX, UI, prompt, CLI, API, workflow, hook, LLM)");
     expect(SYSTEME_REDACTION).toContain('Commence directement par ce que le sujet permet de faire');
     expect(SYSTEME_REDACTION).not.toContain('tout terme technique');
@@ -306,6 +306,49 @@ describe('consigne de rédaction', () => {
     expect(SYSTEME_REDACTION).toContain('pas de rubrique systématique');
     expect(SYSTEME_REDACTION).toContain('seulement pour une limite qui compte pour décider');
     expect(SYSTEME_REDACTION).not.toContain('comment commencer, ses compatibilités et ses limites');
+  });
+  it('ajoute un complément propre aux sorties de modèles et aux comparatifs de modèles, après la consigne commune (2026-11-18)', () => {
+    expect(systemeRedaction('nouvel_outil')).toBe(SYSTEME_REDACTION);
+    expect(systemeRedaction(null)).toBe(SYSTEME_REDACTION);
+    for (const nature of ['nouveau_modele', 'modele_ajoute_a_une_plateforme']) {
+      const consigne = systemeRedaction(nature);
+      expect(consigne.startsWith(SYSTEME_REDACTION)).toBe(true);
+      expect(consigne).toContain('le nom du modèle avec sa version');
+      expect(consigne).toContain('en capacités concrètes écrites dans le document');
+      expect(consigne).toContain('toute comparaison que le document fait avec un autre modèle');
+    }
+    const comparatif = systemeRedaction('comparatif_de_modeles');
+    expect(comparatif.startsWith(SYSTEME_REDACTION)).toBe(true);
+    expect(comparatif).toContain('nous n\'avons testé aucun de ces modèles');
+    expect(comparatif).toContain('il ne désigne jamais un vainqueur à la place de l\'auteur');
+    expect(comparatif).toContain('Au moins une attribution de type benchmark');
+    expect(SYSTEME_QUALIFICATION).toContain('comparatif_de_modeles');
+  });
+});
+
+describe('comparatif de modèles : contrôles', () => {
+  const attribution = { type: 'benchmark' as const, auteur: 'Acme', texte: 'Acme reports offline mode in version 2.0.', passages: ['Acme Tool 2.0 adds offline mode.'], conditions: { texte: 'Not on Windows.', passages: ['It is not available on Windows.'] } };
+  const controler = (b: Brouillon, comparatif: boolean) => controlerBrouillon(b, CAPTURE, 'Acme Tool 2.0', '2.0', { comparatif }).map((c) => c.code);
+
+  it('laisse à vérifier un jugement sans auteur, une description non attribuée et l’absence de résultat mesuré', () => {
+    const b = brouillon('Acme Tool 2.0 beats the previous release.', ['Acme Tool 2.0 adds offline mode.']);
+    const trouves = controler(b, true);
+    expect(trouves).toContain('attribution_manquante');
+    expect(trouves).toContain('verdict_sans_auteur');
+    expect(trouves).toContain('comparatif_sans_resultat');
+    // Hors comparatif, ces contrôles ne s'appliquent pas.
+    expect(controler(b, false)).not.toContain('verdict_sans_auteur');
+    expect(controler(b, false)).not.toContain('comparatif_sans_resultat');
+  });
+  it('accepte un comparatif dont le jugement est attribué et le résultat repris avec auteur et conditions', () => {
+    const b = { ...brouillon('According to Acme, Tool 2.0 beats the previous release.', ['Acme Tool 2.0 adds offline mode.']), attributions: [attribution] };
+    const trouves = controler(b, true);
+    expect(trouves).not.toContain('attribution_manquante');
+    expect(trouves).not.toContain('verdict_sans_auteur');
+    expect(trouves).not.toContain('comparatif_sans_resultat');
+    expect(trouves).not.toContain('benchmark_sans_conditions');
+    // Un benchmark sans conditions reste un écart : le comparatif n'est pas publié seul.
+    expect(controler({ ...b, attributions: [{ ...attribution, conditions: null }] }, true)).toContain('benchmark_sans_conditions');
   });
 });
 

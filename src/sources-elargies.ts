@@ -15,6 +15,17 @@ export const sourcesElargies = (githubReleases: FabriqueReleases): SourceDefinit
   // docs/sources.md §3.2). Relevé le 2026-11-17 (liste de l'utilisateur, §3.15) : robots.txt « Allow: / » avec
   // « ai-input=yes », plan du site lisible (300 pages, 93 sous /news/), deux pages d'annonce capturées (950 et 722 mots).
   { id: 'feed:xai-plan', kind: 'feed', name: 'xAI — plan du site officiel (news)', config: { url: 'https://x.ai/sitemap.xml', maxItems: 15, linkHosts: ['x.ai'], plan: { prefixes: ['/news/'] } }, allowedHosts: ['x.ai'], fetchIntervalMinutes: 60, maxResponseBytes: 2 * 1024 * 1024, compte: 'nodi' },
+  // Éditeurs de modèles image et vidéo sans flux (demande de l'utilisateur du 2026-11-18, « parler beaucoup plus des
+  // nouveaux modèles », Seedance cité ; docs/sources.md §3.16). Relevés le 2026-11-18, lus par leur plan de site :
+  // ByteDance Seed (Seedance, Seedream) : robots.txt « Allow: / », 37 pages au plan, annonces sous /blog/. Chaque
+  // adresse /blog/… redirige (302) vers sa version /en/blog/…, et la collecte ne suit aucune redirection : on lit donc
+  // l'adresse anglaise que le plan déclare lui-même (hreflang="en").
+  { id: 'feed:bytedance-seed-plan', kind: 'feed', name: 'ByteDance Seed — plan du site officiel (blog)', config: { url: 'https://seed.bytedance.com/sitemap.xml', maxItems: 10, linkHosts: ['seed.bytedance.com'], plan: { prefixes: ['/blog/'], langue: 'en' } }, allowedHosts: ['seed.bytedance.com'], fetchIntervalMinutes: 120, maxResponseBytes: 2 * 1024 * 1024, compte: 'nodi' },
+  // Black Forest Labs (FLUX) : robots.txt « Allow: / » avec « ai-input=yes », /studio et /api interdits ; 78 pages, annonces sous /blog/.
+  { id: 'feed:bfl-plan', kind: 'feed', name: 'Black Forest Labs — plan du site officiel (blog)', config: { url: 'https://bfl.ai/sitemap.xml', maxItems: 10, linkHosts: ['bfl.ai'], plan: { prefixes: ['/blog/'] } }, allowedHosts: ['bfl.ai'], fetchIntervalMinutes: 120, maxResponseBytes: 2 * 1024 * 1024, compte: 'nodi' },
+  // Runway : robots.txt « Allow: / » (seul /api/gated-resource/ interdit) ; 372 pages, annonces sous /news/. Sans agent
+  // imposé : une sortie de modèle va à Nodi, un récit de création à Mova.
+  { id: 'feed:runway-plan', kind: 'feed', name: 'Runway — plan du site officiel (news)', config: { url: 'https://runway.com/sitemap.xml', maxItems: 10, linkHosts: ['runway.com'], plan: { prefixes: ['/news/'] } }, allowedHosts: ['runway.com'], fetchIntervalMinutes: 120, maxResponseBytes: 2 * 1024 * 1024 },
   // Higgsfield : modèles vidéo et image intégrés, MCP pour Claude et ChatGPT — vérifié le 2026-11-11 : 305 entrées, dernière
   // il y a 1 j, /blog autorisé par robots.txt. Le blog mêle annonces et classements de référencement : seuls les titres
   // d'annonce sont gardés (« Introducing… », « … on Higgsfield: », « Meet… », « Now on… », MCP), sauf guides et classements.

@@ -13,8 +13,10 @@ import { blocDonnees } from './prompts.ts';
  * tri-2 (2026-11-12) : cyberattaques majeures, même sans lien avec l'IA (décision de l'utilisateur, consignes s6).
  * tri-3 (2026-11-17) : modèles et fonctionnalités d'abord (décision de l'utilisateur, « Oui, en premier », SPEC §3.6).
  * Mesure avant : 9 posts de Nodi sur 60 publiés en sept jours.
+ * tri-4 (2026-11-18) : les comparatifs de modèles à résultats mesurés ne sont plus écartés du tri (demande de
+ * l'utilisateur, « posts modèles vs autres modèles », consignes s7) ; ils restent derrière les sorties de modèles.
  */
-export const TRI_VERSION = 'tri-3';
+export const TRI_VERSION = 'tri-4';
 /**
  * Places gardées pour les sujets majeurs du second groupe repris par plusieurs titres (une sur six) : les cyberattaques
  * majeures voulues le 2026-11-12 ne disparaissent pas quand les modèles et fonctionnalités rempliraient tout le lot.
@@ -36,11 +38,11 @@ export const systemeTri = (n: number) => `Tu tries des titres d'actualités coll
 Notre public : développeurs, étudiants et créateurs qui construisent avec l'IA, y compris des créateurs qui ne codent pas.
 
 Chaque ligne donne : numéro | source | date de première vue | titre. Choisis au plus ${n} sujets distincts, en deux groupes :
-1. D'abord les nouveautés des modèles et des produits d'IA : sortie d'un modèle, nouvelle fonctionnalité ou nouvelle version d'un assistant, d'un agent ou d'un outil d'IA, modèle ajouté à une plateforme, changement de prix ou d'accès.
+1. D'abord les nouveautés des modèles et des produits d'IA : sortie ou nouvelle version d'un modèle (texte, image, vidéo, audio, voix), nouvelle fonctionnalité ou nouvelle version d'un assistant, d'un agent ou d'un outil d'IA, modèle ajouté à une plateforme, changement de prix ou d'accès ; puis, dans ce même groupe mais après les sorties, un comparatif de modèles nommés qui annonce des résultats mesurés (benchmark, classement, essai côte à côte).
 2. Ensuite le reste : annonce d'une grande entreprise liée à l'IA (puces, calcul, produit), affaire qui touche tout le secteur de l'IA, cyberattaque majeure (grande organisation, service public, service très répandu, chaîne d'approvisionnement logicielle), même sans lien avec l'IA.
 Un sujet du premier groupe passe avant tout sujet du second.${reserveTri(n) > 0 ? ` Seule exception : garde jusqu'à ${reserveTri(n)} places pour les sujets majeurs du second groupe repris par plusieurs titres, s'il y en a.` : ''} Dans chaque groupe, du plus important au moins important pour notre public ; un fait repris par plusieurs titres passe avant un fait isolé : c'est un ordre d'examen, pas une note de qualité. À importance égale, le plus récent d'abord.
 
-Plusieurs titres sur le même fait forment un seul sujet : garde une seule ligne, de préférence celle de l'éditeur concerné (source d'origine), sinon le titre le plus précis. Ne retiens pas : tutoriel, liste, comparatif, tribune, recrutement, événement sans changement utilisable. La notoriété de l'éditeur et le ton promotionnel ne comptent pas.
+Plusieurs titres sur le même fait forment un seul sujet : garde une seule ligne, de préférence celle de l'éditeur concerné (source d'origine), sinon le titre le plus précis. Ne retiens pas : tutoriel, liste, comparatif sans résultat mesuré (avis, « les meilleurs… », guide d'achat) ou qui ne porte pas sur des modèles, tribune, recrutement, événement sans changement utilisable. La notoriété de l'éditeur et le ton promotionnel ne comptent pas.
 
 ligne : le numéro de la ligne retenue, tel qu'il est écrit. sujet : le fait en huit mots au plus, en français, pour le journal du lot. Si aucun titre ne convient, rends une liste vide.
 

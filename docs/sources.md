@@ -397,6 +397,25 @@ Six domaines recherchés puis contre-vérifiés par 12 agents ; toutes les recom
 | veille | arXiv, graphisme (cs.GR) | `https://rss.arxiv.org/rss/cs.GR` | rss |
 | veille | befores & afters | `https://beforesandafters.com/feed/` | rss |
 
+### 3.16 Éditeurs de modèles image et vidéo sans flux (2026-11-18)
+
+Demande de l'utilisateur : « parler beaucoup plus des nouveaux modèles », Seedance cité. Trois éditeurs n'avaient aucune source officielle. Chaque site a été interrogé depuis le poste le 2026-11-18 (robots.txt, plan du site, puis collecte et capture réelles sur la base locale). Tous sont lus comme Anthropic et xAI : par le plan du site, rubrique des annonces seulement, 10 pages au plus, toutes les 2 heures.
+
+**Branchées**
+
+- ByteDance Seed (`feed:bytedance-seed-plan`, signé Nodi) : robots.txt « Allow: / » ; `https://seed.bytedance.com/sitemap.xml` répond 200 (37 pages, annonces sous `/blog/`). Chaque adresse `/blog/…` répond 302 vers `/en/blog/…`, et la collecte ne suit aucune redirection : le lecteur de plan lit donc l'adresse anglaise que le plan déclare lui-même (`hreflang="en"`, option `plan.langue`). Essai réel : 10 pages collectées, 9 capturées (581 à 2 723 mots, dont l'annonce de Seedance 2.5 et celle de Seedream 5.5), 1 trop courte (page en chinois seulement).
+- Black Forest Labs (`feed:bfl-plan`, signé Nodi) : robots.txt « Allow: / » avec `Content-Signal: search=yes, ai-input=yes`, `/studio` et `/api` interdits ; `https://bfl.ai/sitemap.xml` répond 200 (78 pages, annonces sous `/blog/`). Essai réel : 10 pages collectées, 10 capturées (418 à 2 256 mots, dont FLUX 3).
+- Runway (`feed:runway-plan`, sans agent imposé) : `runwayml.com` redirige vers `runway.com` ; robots.txt « Allow: / », seul `/api/gated-resource/` interdit ; `https://runway.com/sitemap.xml` répond 200 (372 pages, annonces sous `/news/`). Essai réel : 10 pages collectées, 10 capturées, dont 6 pages de rubrique sans annonce (176 mots), que la sélection écartera.
+
+**Différée, avec motif**
+
+- Kling (Kuaishou) : `klingai.com/robots.txt` interdit une liste de robots nommés (le nôtre n'y figure pas), mais aucun plan de site n'est déclaré et `app.klingai.com` rend sa page par script : rien de lisible sans exécuter de code. À reprendre si un flux ou un plan apparaît.
+
+**Limites**
+
+- `lastmod` est une date de modification : les annonces anciennes de ces sites (plus de 14 jours à la détection) seront écartées par la présélection une fois leur date lue dans la page.
+- Première collecte en ligne à constater au prochain cycle.
+
 ## 4. Médias et intégrations (P7, P8)
 
 ### 4.1 Lecteurs intégrés (vérifié le 2026-10-30)

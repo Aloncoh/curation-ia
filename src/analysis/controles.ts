@@ -32,6 +32,11 @@ export interface ContexteControle {
    * primaire ; la description doit attribuer ce qu'elle rapporte (« according to… », « reports »).
    */
   externe?: string | null;
+  /**
+   * Comparatif de modèles (2026-11-18, consignes s7) : le site ne teste rien, chaque résultat et chaque jugement reste
+   * attribué à l'auteur de la comparaison, et au moins un résultat mesuré est repris avec ses conditions.
+   */
+  comparatif?: boolean;
 }
 
 export interface DiapositiveResolue {
@@ -54,6 +59,8 @@ export const ATTRIBUTION = /\bselon\b|d['’]après|\baffirme\b|\brevendique\b|\
 // Un pourcentage seul peut être une remise ou une part d'écran : seule une comparaison compte comme une performance.
 export const PERFORMANCE = /\bbenchmarks?\b|\bscores?\b|\bfois plus\b|\d\s*%\s*(?:de\s+)?(?:plus|moins|mieux)\b|\d\s*x\s+plus\b|\btimes (?:faster|better|more)\b|\d\s*%\s*(?:faster|better|more|less|fewer)\b|\d\s*x\s+(?:faster|better|more)\b/i;
 const SUPERLATIF = /\b(?:l[ea]s?|du|des) (?:plus|meilleur\w*)\b|\bmeilleur\w*|\bplus (?:rapide|puissant|précis|performant|fiable)\w*|\bfois plus\b|\b\d+\s*(?:%|fois)|\bleader\b|\bn°\s*1\b|\b(?:the )?(?:best(?! practices?\b)|fastest|most (?:powerful|accurate|reliable))\b|\bleading\b|\bnumber one\b|#1\b|\b\d+\s*x (?:faster|better)\b/i;
+// Comparatif de modèles : un classement ou un jugement entre modèles appartient à l'auteur de la comparaison.
+export const VERDICT = /\b(?:wins?|winner|beats?|outperforms?|outperformed|surpass\w*|(?:better|worse|faster|slower|cheaper|stronger|weaker) than|ahead of|behind|superior|inferior|tops|leads|lags|l['’]emporte|devance|surpasse|bat|meilleur que|moins bon que|plus (?:rapide|lent|cher) que)\b/i;
 // V1 : analyse documentaire seule. Un texte rédigé ne raconte pas un essai qui n'a pas eu lieu (SPEC §7.8).
 export const ESSAI_REVENDIQUE = /\b(?:nous avons|j['’]ai|on a)\s+(?:test|essay|mesur|obtenu|constaté)\w*|\b(?:testée?s?|essayée?s?) par (?:nos|notre|nous|la plateforme)\b|\b(?:d['’]après|selon) (?:nos|notre) (?:tests?|essais?|mesures?)\b|\b(?:we|I) (?:tested|tried|measured|benchmarked)\b|\btested by (?:us|our team|the platform)\b|\b(?:according to|in) our (?:tests?|testing|measurements?)\b/i;
 /** Types jamais publiables comme un fait : ils passent toujours en relecture. */
@@ -208,6 +215,16 @@ export function controlerBrouillon(b: Brouillon, capture: string | string[], tit
   if (typeInformation === 'affirmation_commerciale') {
     if (!ATTRIBUTION.test(b.description.texte)) resultats.push({ champ: 'description', code: 'attribution_manquante' });
     for (const [champ, c] of champs) if (SUPERLATIF.test(c.texte) && !ATTRIBUTION.test(c.texte)) resultats.push({ champ, code: 'attribution_manquante' });
+  }
+  // Comparatif de modèles : aucun résultat ni jugement sans auteur, et au moins un résultat mesuré repris avec ses
+  // conditions (benchmark_sans_conditions s'applique déjà). Tout écart laisse le post « à vérifier », jamais publié seul.
+  if (contexte.comparatif) {
+    if (!ATTRIBUTION.test(b.description.texte)) resultats.push({ champ: 'description', code: 'attribution_manquante' });
+    for (const [champ, c] of champs) {
+      if (champ.startsWith('attributions:')) continue;
+      if ((VERDICT.test(c.texte) || SUPERLATIF.test(c.texte)) && !ATTRIBUTION.test(c.texte)) resultats.push({ champ, code: 'verdict_sans_auteur' });
+    }
+    if (!b.attributions.some((x) => x.type === 'benchmark')) resultats.push({ champ: 'attributions', code: 'comparatif_sans_resultat' });
   }
   if (typeInformation && TYPES_A_RELIRE.includes(typeInformation)) resultats.push({ champ: 'type_information', code: 'type_a_relire', detail: typeInformation });
   return resultats;

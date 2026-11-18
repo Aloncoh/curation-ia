@@ -16,7 +16,15 @@ export interface FeedConfig {
    * Plan de site (sitemap.xml) au lieu d'un flux, pour un éditeur sans flux (Anthropic, 2026-11-10) : seules les pages
    * dont le chemin commence par un des préfixes sont gardées, les plus récemment modifiées d'abord.
    */
-  plan?: { prefixes: string[] };
+  plan?: {
+    prefixes: string[];
+    /**
+     * Langue à lire quand le plan déclare des versions par langue (`<xhtml:link rel="alternate" hreflang="…">`) et que
+     * l'adresse principale redirige vers l'une d'elles (ByteDance Seed, 2026-11-18) : l'adresse déclarée pour cette
+     * langue est lue directement, aucune redirection n'est suivie. Une page sans version dans cette langue est écartée.
+     */
+    langue?: string;
+  };
   /**
    * Motif (expression régulière, sans casse) que le titre d'une entrée doit contenir, pour un blog officiel qui mêle
    * annonces et articles de référencement (Higgsfield, 2026-11-11) : les autres entrées sont refusées et comptées.
@@ -34,7 +42,7 @@ export interface FeedConfig {
  * l'approfondissement). `lastmod` est une date de modification, pas de publication : elle est gardée en métadonnée et
  * la date d'annonce reste inconnue (null), lue plus tard dans la page.
  */
-export function parseSitemap(body: string, config: Pick<FeedConfig, 'maxItems' | 'linkHosts'> & { plan: { prefixes: string[] } }): ParsedFeed {
+export function parseSitemap(body: string, config: Pick<FeedConfig, 'maxItems' | 'linkHosts'> & { plan: NonNullable<FeedConfig['plan']> }): ParsedFeed {
   if (!/<urlset[\s>]/.test(body)) throw new SourceFormatError('Plan de site illisible (pas de <urlset>)');
   const entries = [...body.matchAll(/<url>([\s\S]*?)<\/url>/g)];
   if (entries.length > MAX_FEED_ENTRIES * 4) throw new SourceFormatError(`Plan de site trop long : ${entries.length} pages`);
@@ -43,15 +51,27 @@ export function parseSitemap(body: string, config: Pick<FeedConfig, 'maxItems' |
   const seen = new Set<string>();
   for (const [, bloc] of entries) {
     const loc = decodeHtmlEntities(/<loc>\s*([^<]+?)\s*<\/loc>/.exec(bloc ?? '')?.[1] ?? '');
-    const link = checkLink(loc || null, config.linkHosts);
-    if ('reason' in link) {
-      rejected[link.reason] = (rejected[link.reason] ?? 0) + 1;
+    const principal = checkLink(loc || null, config.linkHosts);
+    if ('reason' in principal) {
+      rejected[principal.reason] = (rejected[principal.reason] ?? 0) + 1;
       continue;
     }
-    const chemin = new URL(link.url).pathname;
+    // La rubrique se lit sur l'adresse principale : les versions par langue ajoutent un préfixe (/en/blog/…).
+    const chemin = new URL(principal.url).pathname;
     if (!config.plan.prefixes.some((p) => chemin.startsWith(p))) {
       rejected.hors_rubrique = (rejected.hors_rubrique ?? 0) + 1;
       continue;
+    }
+    let link = principal;
+    if (config.plan.langue) {
+      const versions = [...(bloc ?? '').matchAll(/<xhtml:link\b([^>]*)>/g)].map((m) => m[1] ?? '');
+      const voulue = versions.find((a) => /\brel\s*=\s*["']alternate["']/.test(a) && new RegExp(`\\bhreflang\\s*=\\s*["']${config.plan.langue}["']`, 'i').test(a));
+      const version = checkLink(voulue ? decodeHtmlEntities(/\bhref\s*=\s*["']([^"']+)["']/.exec(voulue)?.[1] ?? '') || null : null, config.linkHosts);
+      if ('reason' in version) {
+        rejected.sans_version_langue = (rejected.sans_version_langue ?? 0) + 1;
+        continue;
+      }
+      link = version;
     }
     const externalId = normalizeUrl(link.url);
     if (seen.has(externalId)) continue;

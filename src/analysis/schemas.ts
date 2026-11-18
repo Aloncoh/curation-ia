@@ -5,8 +5,11 @@ const cite = z.object({ texte: z.string().min(1), passages: z.array(z.string()) 
 
 export const COMPTES_IDS = ['nodi', 'repo', 'pyxo', 'mova', 'pulse', 'radar'] as const;
 
-/** Ce que l'actualité est : une création réalisée avec un outil n'est jamais une nouveauté produit. */
-export const NATURES = ['nouvel_outil', 'nouveau_modele', 'nouvelle_fonctionnalite', 'modele_ajoute_a_une_plateforme', 'integration', 'amelioration', 'changement_de_prix', 'disponibilite_elargie', 'creation_realisee', 'ressource', 'incident'] as const;
+/**
+ * Ce que l'actualité est : une création réalisée avec un outil n'est jamais une nouveauté produit.
+ * comparatif_de_modeles (2026-11-18, consignes s7) : résultats mesurés par un auteur nommé, jamais par le site.
+ */
+export const NATURES = ['nouvel_outil', 'nouveau_modele', 'nouvelle_fonctionnalite', 'modele_ajoute_a_une_plateforme', 'integration', 'amelioration', 'changement_de_prix', 'disponibilite_elargie', 'creation_realisee', 'ressource', 'incident', 'comparatif_de_modeles'] as const;
 
 /** Liste fermée, pour qu'une catégorie nouvelle soit relue avant d'être utilisée. */
 export const CATEGORIES = ['modèles', 'assistant de code', 'outil de développement', 'agents et automatisation', 'MCP et skills', 'création visuelle', 'audio et musique', 'design', 'projet GitHub', 'langages et infrastructures', 'hébergement et solutions locales', 'matériel', 'grandes entreprises', 'incident', 'sécurité'] as const;
