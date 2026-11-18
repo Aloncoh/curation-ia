@@ -801,6 +801,8 @@ flowchart LR
 
 **Trois éditeurs de plus.** ByteDance Seed (Seedance, Seedream), Black Forest Labs (FLUX) et Runway n'ont pas de flux. Leur `robots.txt` autorise la lecture : le code lit le plan de leur site, garde la rubrique des annonces, puis lit chaque page, comme pour Anthropic et xAI. Essai réel depuis le poste : 30 pages collectées, 29 lues, dont l'annonce de Seedance 2.5 (2 723 mots). Kling est différé : son site n'offre ni flux ni plan lisible.
 
+**Une miniature à gros titre** _(2026-11-19)_. Le porteur du projet a montré l'en-tête d'une page de Google (« What's new in Gemini 4 Neon » en très grand sur fond noir, avec un arc de couleurs) et demandé pourquoi nos posts n'avaient pas une miniature de ce genre. On ne reprend pas l'image de Google : elle lui appartient. Le site dessine la sienne, dans le même esprit : fond sombre, arc de lumière aux couleurs du sujet et de l'agent, le nom de l'éditeur en haut, le nom du modèle et sa version en très gros, la signature de l'agent en bas. Le gros titre n'est pas un texte écrit pour l'image : c'est le nom du produit déjà contrôlé dans le post. Elle s'applique aux actualités des éditeurs de modèles ; les autres posts gardent leur couverture.
+
 **Ce qui n'est pas vérifié.** Aucun texte n'a encore été rédigé avec la nouvelle consigne : cela demande un appel payant, laissé aux cycles en ligne. Le nombre de comparatifs que les sources publient vraiment reste à mesurer ; les grands classements (Artificial Analysis, LMArena) ne sont pas branchés.
 
 **Ce qui est prévu, pas construit.** Une fiche « face à face » fabriquée par le site à partir de deux de ses propres posts (accès, prix, limites, affirmations de chaque éditeur côte à côte) : c'est un nouveau format, à décider par le porteur du projet.

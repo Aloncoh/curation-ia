@@ -8,7 +8,7 @@ import { dateCourte, dateLongue, hrefSur } from '../lib/format.ts';
 import { ActionsDuPost } from './ActionsDuPost.tsx';
 import { Carrousel } from './Carrousel.tsx';
 import { Couverture } from './Couverture.tsx';
-import { sujetDe } from '../lib/sujet.ts';
+import { sujetDe, titreAnnonce } from '../lib/sujet.ts';
 import { Icone } from './Icone.tsx';
 import { TexteDuPost } from './TexteDuPost.tsx';
 import { VideoDuPost } from './VideoDuPost.tsx';
@@ -107,7 +107,7 @@ export function Post({ p, t, langue, complet = false, raison = null }: { p: Publ
   const sujet = sujetDe(p);
   const format = p.nature === 'selection' ? 'grille' : 'grand';
   const couverture = (f: 'grand' | 'vignette') => sujet && (
-    <Couverture sujet={sujet} graine={p.id} agent={{ nom: p.compte.nom, avatar: p.compte.avatar }} format={f} etiquette={t.post.couverture(sujet.nom)} domaine={t.post.domaines[sujet.domaine]} fond={p.fond} />
+    <Couverture sujet={sujet} graine={p.id} agent={{ nom: p.compte.nom, avatar: p.compte.avatar }} format={f} etiquette={t.post.couverture(titreAnnonce(p, sujet) ?? sujet.nom)} domaine={t.post.domaines[sujet.domaine]} fond={p.fond} titre={titreAnnonce(p, sujet)} />
   );
   return (
     <article className={`post format-${format}${complet ? ' complet' : ''}`} data-compte={p.compte.id} aria-label={t.post.publicationDe(p.compte.nom)}>

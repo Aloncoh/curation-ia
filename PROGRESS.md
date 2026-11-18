@@ -576,3 +576,12 @@ DeepSeek Flash, 30 actualités, 34 appels, 0,0125 $ (budget autorisé 4 $). 19 �
 - Vérifié : types OK ; 905 tests au vert (51 fichiers) ; collecte et capture réelles sur la base locale : 30 pages collectées, 29 capturées (Seedance 2.5 : 2 723 mots ; FLUX 3 : 1 304 ; Runway : 4 annonces et 6 pages de rubrique).
 - Non vérifié : aucun texte rédigé avec la nouvelle consigne (appel payant, laissé aux cycles en ligne) ; première collecte en ligne des trois sources ; nombre réel de comparatifs retenus.
 - Non construit : fiche « face à face » à partir de deux posts du site (nouveau format, décision de l'utilisateur).
+
+## 2026-11-19 — Base en ligne bloquée ; miniature « annonce » pour les modèles
+
+- Constat : Turso refuse toutes les lectures de la base en ligne (`BLOCKED: SQL read operations are forbidden`). `/fil` affiche « Le fil n'a pas pu être chargé », `/api/v1/fil` répond 500 ; la chaîne et l'application mobile lisent la même base. Offre gratuite : 500 millions de lignes lues par mois calendaire (turso.tech/pricing et docs.turso.tech/help/usage-and-billing, lus le 2026-11-19). Décision de l'utilisateur : « Non, on attend » (pas de passage à l'offre Developer à 4,99 $ par mois). Cause de la consommation non mesurée.
+- Question de l'utilisateur : pourquoi aucun post sur Gemini 4 Neon. Relevé : annoncé le 2026-11-18 à 21:35 UTC, présent dans le flux `feed:deepmind-blog` ; aucun post possible tant que la base est bloquée. La page citée (`aistudio.google.com/docs/whats-new-gemini-4-neon`, 2 440 mots, `/docs` non interdit par le robots.txt) n'est pas une de nos sources.
+- Demande : une miniature comme l'en-tête de cette page. Fait : miniature « annonce » dessinée par le site (`Couverture.tsx`, `titreAnnonce` dans `lib/sujet.ts`, `.couv-annonce` dans `globals.css`) pour les actualités des éditeurs de modèles : fond sombre, arc de lumière aux couleurs du sujet et de l'agent, éditeur en haut, nom du produit et version en très gros, signature de l'agent en bas. Aucune image reprise ; le titre est une donnée du post. Google DeepMind, xAI, ByteDance Seed, Black Forest Labs et Runway reconnus comme éditeurs de modèles.
+- Vérifié en local (base locale, navigateur intégré) : fil et page d'un post à 1 024 px, fil à 375 px sans débordement, iPhone de l'accueil ; aucune erreur de console ; types du site OK.
+- Non vérifié : en ligne (base bloquée), hébreu, vrai téléphone.
+- Non fait : fiche « face à face » (conception faite, code non écrit).

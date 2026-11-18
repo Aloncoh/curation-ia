@@ -82,6 +82,7 @@ Réseau social vivant autour de l'IA, du développement et de la technologie : r
 
 - EDGAR dans la chaîne en ligne : attend le secret `CURATION_CONTACT_SEC`.
 - Prompt `p3-22` (aucune définition, aucune formule promotionnelle) : en place, effet à constater sur les prochains posts.
+- **Miniature « annonce »** (2026-11-19, demande de l'utilisateur, d'après l'en-tête d'une page de documentation de Google) : pour une actualité d'un éditeur de modèles, la couverture devient une miniature sombre à arc de lumière, le sujet en haut, le nom du produit et sa version en très gros, la signature de l'agent en bas (`Couverture.tsx`, `titreAnnonce` dans `lib/sujet.ts`, `.couv-annonce`). Dessinée par le site, aucune image reprise ; le titre est une donnée du post. Google DeepMind, xAI, ByteDance Seed, Black Forest Labs et Runway sont reconnus comme éditeurs de modèles. Vu en local (fil, page d'un post, 375 px, iPhone de l'accueil) ; pas en ligne, la base étant bloquée. **Gemini 4 Neon** (annoncé le 2026-11-18 à 21:35 UTC, présent dans le flux `feed:deepmind-blog`) n'a pas de post : la chaîne ne peut rien lire ni publier tant que la base est bloquée. **Fiche « face à face »** : demandée (« Oui, construis-la »), conception faite, code non écrit.
 - Prompt `p3-23`, consignes `s7`, tri `tri-4` (modèles et comparatifs, 2026-11-18) : effet à constater sur les prochains posts de modèles ; à mesurer, la part de Nodi et le nombre de comparatifs retenus, publiés et « à vérifier ».
 - Trace durable de chaque cycle (`run` de type `cycle`) : en place, premier cycle tracé à venir.
 - Collecte : 7 min au plus par cycle (écriture en base ~6 s par source) ; le reste passe au cycle suivant.
@@ -117,6 +118,8 @@ Ordre, avec mise en ligne et vérification à chaque étape, sur ordinateur d'ab
 - Migrations de la base en ligne : avec l'accord de l'utilisateur.
 
 ## En attente de l'utilisateur
+
+- **URGENT — base en ligne bloquée, site en panne** (constaté le 2026-11-19 ; le site répondait encore le 2026-11-18 au soir). Turso refuse toutes les lectures (`BLOCKED: SQL read operations are forbidden`) : `/fil` affiche « Le fil n'a pas pu être chargé », `/api/v1/fil` répond 500. La chaîne et l'application mobile lisent la même base (cycles non vérifiés : `gh` n'est pas connecté sur le poste). Offre gratuite : 500 millions de lignes lues par mois calendaire, requête en échec avec le code BLOCKED au-delà (turso.tech/pricing et docs.turso.tech/help/usage-and-billing, lus le 2026-11-19). À décider par l'utilisateur, sur son compte Turso : passer à l'offre Developer (4,99 $ par mois, 2,5 milliards de lignes lues) ou attendre le mois suivant (la documentation ne dit pas quand le blocage est levé). Ensuite : lire le tableau d'usage Turso et réduire les parcours complets de tables (cause non mesurée).
 
 0. **Plafond total de dépense** (2026-11-16) : 2,14 $ enregistrés sur un plafond en ligne de 3,95 $ ; à 0,40 $ par jour au plus, il sera atteint en 4 à 5 jours (estimation) et la rédaction s'arrêtera d'elle-même. À décider : relever ou non le plafond (dépense). Le plafond ne reflète pas le solde réel du compte DeepSeek.
 1. **Méthode de connexion** des comptes (parcours communauté).

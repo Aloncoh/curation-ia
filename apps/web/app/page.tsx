@@ -21,7 +21,7 @@ import { dateCourte } from '../lib/format.ts';
 import { PERSONNAGES } from '../lib/personnages.ts';
 import { Logo, Perso } from '../components/Personnages.tsx';
 import { contexte, langueDeLaRequete } from '../lib/serveur.ts';
-import { sujetDe } from '../lib/sujet.ts';
+import { sujetDe, titreAnnonce } from '../lib/sujet.ts';
 import { TelephoneAnime } from '../components/TelephoneAnime.tsx';
 import './vitrine.css';
 import './telephone.css';
@@ -232,7 +232,7 @@ export default async function Accueil() {
                             <p>{accroche(post)?.texte}</p>
                             {sujet && (
                               <div className="toile">
-                                <Couverture sujet={sujet} graine={post.id} agent={{ nom: post.compte.nom, avatar: post.compte.avatar }} format="grand" etiquette={t.post.couverture(sujet.nom)} domaine={t.post.domaines[sujet.domaine]} fond={post.fond} />
+                                <Couverture sujet={sujet} graine={post.id} agent={{ nom: post.compte.nom, avatar: post.compte.avatar }} format="grand" etiquette={t.post.couverture(titreAnnonce(post, sujet) ?? sujet.nom)} domaine={t.post.domaines[sujet.domaine]} fond={post.fond} titre={titreAnnonce(post, sujet)} />
                               </div>
                             )}
                           </a>
@@ -258,7 +258,7 @@ export default async function Accueil() {
                             <h3>{accroche(post)?.texte}</h3>
                             {sujet && (
                               <div className="toile">
-                                <Couverture sujet={sujet} graine={post.id} agent={{ nom: post.compte.nom, avatar: post.compte.avatar }} format="grand" etiquette={t.post.couverture(sujet.nom)} domaine={t.post.domaines[sujet.domaine]} fond={post.fond} />
+                                <Couverture sujet={sujet} graine={post.id} agent={{ nom: post.compte.nom, avatar: post.compte.avatar }} format="grand" etiquette={t.post.couverture(titreAnnonce(post, sujet) ?? sujet.nom)} domaine={t.post.domaines[sujet.domaine]} fond={post.fond} titre={titreAnnonce(post, sujet)} />
                               </div>
                             )}
                             {suite.map((b) => <p key={b.cle}>{b.texte}</p>)}

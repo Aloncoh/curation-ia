@@ -14,6 +14,11 @@ interface Props {
   domaine: string;
   /** Fond fourni par l'utilisateur pour cet agent (lib/fonds.ts), avatar déjà dessiné dedans ; null : fond dessiné. */
   fond?: string | null;
+  /**
+   * Nouveauté à écrire en très gros (lib/sujet.ts, `titreAnnonce`) : la couverture devient une miniature « annonce »,
+   * fond sombre, arc de lumière, sujet en haut, signature de l'agent en bas. null : couverture habituelle.
+   */
+  titre?: string | null;
 }
 
 /** Illustration du domaine, dessinée en grand et en filigrane (traits sur une grille de 24). */
@@ -92,7 +97,20 @@ function Logo({ sujet }: { sujet: Sujet }) {
   return <span className="couv-monogramme" style={{ color: sujet.couleur }}>{l.lettres}</span>;
 }
 
-export function Couverture({ sujet, graine, agent, format, etiquette, domaine, fond = null }: Props) {
+export function Couverture({ sujet, graine, agent, format, etiquette, domaine, fond = null, titre = null }: Props) {
+  // Miniature « annonce » (demande de l'utilisateur du 2026-11-19, d'après l'en-tête d'une page de documentation de
+  // Google) : dessinée par le site, sans image ni logo repris en fond. Le titre est une donnée du post.
+  if (titre && format === 'grand') {
+    return (
+      <figure className="couverture couv-grand couv-annonce" dir="ltr" style={{ ['--sujet' as string]: sujet.couleur }} role="img" aria-label={etiquette}>
+        <span className="ca">
+          <span className="ca-sujet"><span className="ca-logo"><Logo sujet={sujet} /></span>{sujet.nom}</span>
+          <strong className={`ca-titre${titre.length > 44 ? ' tres-long' : titre.length > 20 ? ' long' : ''}`}>{titre}</strong>
+          <span className="ca-signe" aria-hidden="true"><img src={agent.avatar} alt="" width={28} height={28} />{agent.nom}<i>{domaine}</i></span>
+        </span>
+      </figure>
+    );
+  }
   return (
     <figure className={`couverture couv-${format}${fond ? ' avec-fond' : ''}`} dir="ltr" style={{ ['--sujet' as string]: sujet.couleur }} role="img" aria-label={etiquette}>
       {fond ? (

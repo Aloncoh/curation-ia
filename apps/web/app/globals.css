@@ -525,6 +525,32 @@ html.mouvement-reduit::view-transition-group(*), html.mouvement-reduit::view-tra
 .couv-agent { position: absolute; inset-block-end: 10px; inset-inline-end: 10px; padding: 3px; border-radius: 50%; background: #fff; box-shadow: 0 0 0 2px var(--agent), 0 6px 16px -6px rgba(0, 0, 0, .5); }
 .couv-agent img { width: 28px; height: 28px; border-radius: 50%; display: block; }
 
+/* Miniature « annonce » (demande de l'utilisateur du 2026-11-19, d'après l'en-tête d'une page de documentation de Google) :
+   fond sombre, arc de lumière aux couleurs du sujet, de l'agent et du violet signature, le sujet en petit en haut, la
+   nouveauté en très gros, la signature de l'agent en bas. Dessinée par le site, aucune image reprise. Tailles en unités
+   de conteneur (cqw) : justes dans le fil, sur la page d'un post et dans l'iPhone de l'accueil. */
+.couv-annonce { container-type: inline-size; background: #07060c; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .08); }
+.couv-annonce .ca { position: absolute; inset: 0; display: grid; grid-template-rows: auto 1fr auto; padding: 5.4cqw 6cqw 4.6cqw; }
+/* L'arc : une grande ellipse colorée qui monte du bas, nette sur son bord et fondue vers le bas, plus son halo. */
+.couv-annonce .ca::before, .couv-annonce .ca::after {
+  content: ""; position: absolute; z-index: -1; inset-inline: -34% -22%; inset-block-start: 66%; height: 150%; border-radius: 50%;
+  background: linear-gradient(98deg, color-mix(in srgb, var(--sujet) 80%, #3d7bff) 14%, color-mix(in srgb, var(--sujet) 45%, var(--agent, #6c47e8)) 44%, var(--agent, #6c47e8) 66%, #7a4dff 92%);
+  transform: rotate(-5deg);
+}
+.couv-annonce .ca::before { mask-image: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, .88) 10%, rgba(0, 0, 0, .5) 26%, rgba(0, 0, 0, .16) 44%, transparent 62%); }
+.couv-annonce .ca::after { filter: blur(8cqw); opacity: .55; inset-block-start: 61%; }
+.ca-sujet { display: flex; align-items: center; gap: 2.2cqw; font: 500 3.7cqw/1.1 var(--v-texte, var(--texte)); color: rgba(255, 255, 255, .92); }
+.ca-logo { display: grid; place-items: center; width: 6.6cqw; aspect-ratio: 1; border-radius: 28%; background: #fff; overflow: hidden; flex: none; }
+.ca-logo svg { width: 62%; height: 62%; }
+.ca-logo img { width: 66%; height: 66%; object-fit: contain; }
+.ca-logo .couv-monogramme { font-size: 3cqw; }
+.ca-titre { align-self: center; padding-block-end: 5cqw; font: 500 11cqw/1.03 var(--v-texte, var(--texte)); letter-spacing: -.025em; color: #fff; overflow-wrap: break-word; text-wrap: balance; }
+.ca-titre.long { font-size: 8cqw; line-height: 1.06; }
+.ca-titre.tres-long { font-size: 5.7cqw; line-height: 1.12; letter-spacing: -.015em; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; padding-block-end: 0; margin-block-end: 5cqw; }
+.ca-signe { display: flex; align-items: center; gap: 2cqw; font: 600 3.4cqw/1 var(--v-texte, var(--texte)); color: #fff; text-shadow: 0 1px 8px rgba(0, 0, 0, .45); }
+.ca-signe img { width: 6.2cqw; height: 6.2cqw; border-radius: 50%; background: #fff; box-shadow: 0 0 0 .5cqw rgba(255, 255, 255, .9); }
+.ca-signe i { margin-inline-start: auto; font-style: normal; font-weight: 500; opacity: .85; }
+
 /* Avis de validité (SPEC §7.16) : version plus récente publiée, source mise à jour après le post. */
 .avis-validite { margin: 8px 0 4px; padding: 8px 12px; border-radius: 12px; border: 1px solid color-mix(in srgb, #e0a100 45%, var(--trait)); background: color-mix(in srgb, #e0a100 12%, transparent); font-size: .9rem; line-height: 1.4; }
 .avis-validite a { font-weight: 600; }

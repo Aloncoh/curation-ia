@@ -28,6 +28,8 @@ const DOMAINE_PAR_HOTE: Record<string, Domaine> = {
   'samsung.com': 'appareils', 'lg.com': 'appareils', 'shopify.com': 'cloud', 'newsfilecorp.com': 'cloud', 'oracle.com': 'cloud', 'apple.com': 'appareils', 'tesla.com': 'appareils', 'microsoft.com': 'cloud',
   'aboutamazon.com': 'cloud', 'databricks.com': 'cloud', 'aws.amazon.com': 'cloud', 'blog.cloudflare.com': 'cloud', 'fb.com': 'social', 'mistral.ai': 'modele', 'blog.google': 'modele', 'openai.com': 'modele',
   'anthropic.com': 'modele', 'claude.com': 'modele', 'huggingface.co': 'modele', 'deepseek.com': 'modele', 'youtube.com': 'modele',
+  // Éditeurs de modèles suivis par leur site (2026-11-17 et 2026-11-18) : sans cette ligne, leur post tombait dans « code ».
+  'deepmind.google': 'modele', 'gemini.google': 'modele', 'x.ai': 'modele', 'seed.bytedance.com': 'modele', 'bfl.ai': 'modele', 'runway.com': 'modele',
   'figma.com': 'design', 'spline.design': 'design', 'blender.org': 'design', 'midjourney.com': 'design',
   'elevenlabs.io': 'audio', 'suno.com': 'audio', 'vapi.ai': 'audio',
 };
@@ -87,6 +89,12 @@ const EDITEURS: Record<string, Editeur> = {
   'sketch.com': { nom: 'Sketch', icone: null, couleur: '#f7b500' },
   'modelcontextprotocol.io': { nom: 'Model Context Protocol', icone: null, couleur: '#3a3a44' },
   'gemini.google': { nom: 'Gemini', icone: null, couleur: '#4285f4' },
+  // Éditeurs de modèles lus par leur site officiel. Google DeepMind (annonces Gemini, Genie…) : le « G » de Google.
+  'deepmind.google': { nom: 'Google DeepMind', icone: siGoogle },
+  'x.ai': { nom: 'xAI', icone: null },
+  'seed.bytedance.com': { nom: 'ByteDance Seed', icone: null },
+  'bfl.ai': { nom: 'Black Forest Labs', icone: null },
+  'runway.com': { nom: 'Runway', icone: null },
   // Sources de Pulse (2026-11-05).
   'databricks.com': { nom: 'Databricks', icone: siDatabricks },
   'aws.amazon.com': { nom: 'AWS', icone: null, couleur: '#ff9900' },
@@ -153,6 +161,18 @@ function hote(url: string): string | null {
   } catch {
     return null;
   }
+}
+
+/**
+ * Titre de la miniature « annonce » (demande de l'utilisateur du 2026-11-19) : pour une actualité d'un éditeur de
+ * modèles, le nom du produit et sa version, sinon le titre donné par la source. Une donnée, jamais un texte rédigé pour
+ * l'image. null ailleurs : la couverture habituelle (logo et nom du sujet) reste.
+ */
+export function titreAnnonce(p: Pick<Publication, 'nature' | 'media'>, sujet: Sujet | null): string | null {
+  if (!sujet || sujet.domaine !== 'modele' || p.nature !== 'actualite') return null;
+  const m = p.media;
+  const titre = m && (m.type === 'schema' || m.type === 'carrousel') ? m.titre.trim() : '';
+  return titre || null;
 }
 
 /** Sujet d'une publication, ou null (une sélection montre sa mosaïque, pas un sujet unique). */

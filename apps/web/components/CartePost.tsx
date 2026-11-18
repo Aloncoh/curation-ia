@@ -8,7 +8,7 @@ import type { Langue, Publication } from '@curation/contrat';
 import type { Textes } from '@curation/textes';
 import { dateCourte, hrefSur } from '../lib/format.ts';
 import { PERSONNAGES } from '../lib/personnages.ts';
-import { sujetDe } from '../lib/sujet.ts';
+import { sujetDe, titreAnnonce } from '../lib/sujet.ts';
 import { BarreActions } from './BarreActions.tsx';
 import { Couverture } from './Couverture.tsx';
 import { VideoDeLaSource } from './Post.tsx';
@@ -27,6 +27,7 @@ export function CartePost({ p, t, langue, raison = null }: { p: Publication; t: 
   const titre = paragraphe(p, 'accroche');
   const texte = paragraphe(p, 'description');
   const sujet = sujetDe(p);
+  const annonce = titreAnnonce(p, sujet);
   const publie = p.statut === 'publie';
   const date = dateCourte(p.date, langue);
   const bouton = p.bouton && hrefSur(p.bouton.url) ? p.bouton : null;
@@ -51,7 +52,7 @@ export function CartePost({ p, t, langue, raison = null }: { p: Publication; t: 
       <a className="cp-titre" href={lien} lang={p.langue}>{titre?.texte}</a>
       {sujet && (
         <a className="toile" href={lien} tabIndex={-1} aria-hidden="true">
-          <Couverture sujet={sujet} graine={p.id} agent={{ nom: p.compte.nom, avatar: p.compte.avatar }} format="grand" etiquette={t.post.couverture(sujet.nom)} domaine={t.post.domaines[sujet.domaine]} fond={p.fond} />
+          <Couverture sujet={sujet} graine={p.id} agent={{ nom: p.compte.nom, avatar: p.compte.avatar }} format="grand" etiquette={t.post.couverture(annonce ?? sujet.nom)} domaine={t.post.domaines[sujet.domaine]} fond={p.fond} titre={annonce} />
         </a>
       )}
       {texte && <p className="cp-texte" lang={p.langue}>{texte.texte}</p>}
