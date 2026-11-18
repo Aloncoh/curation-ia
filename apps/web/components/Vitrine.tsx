@@ -35,13 +35,15 @@ function champDePoints(racine: HTMLElement, ecouter: Ecouter, nettoyages: (() =>
     pas = sombre ? (L < 700 ? 40 : 46) : L < 700 ? 30 : 32;
     pts = [];
     for (let y = pas / 2; y < H + pas; y += pas) for (let x = pas / 2; x < L + pas; x += pas) {
-      pts.push({ x: x + (hasard() - 0.5) * pas * 0.9, y: y + (hasard() - 0.5) * pas * 0.9, p: hasard() * 6.28, q: hasard() * 6.28, v: 5 + hasard() * 9, r: 3 + hasard() * 5 });
+      pts.push({ x: x + (hasard() - 0.5) * pas * 0.9, y: y + (hasard() - 0.5) * pas * 0.9, p: hasard() * 6.28, q: hasard() * 6.28, v: 8 + hasard() * 14, r: 4 + hasard() * 6 });
     }
   };
   construire();
   let mx = L * 0.5, my = H * 0.4, tx = mx, ty = my, actif = false, repos = 0;
   // Ondes : lieu et instant de naissance, couleur (rang d'un agent). Chacune vit 3,6 s.
-  const VIE = 3600;
+  const VIE = 3800;
+  const telephone = sombre ? null : racine.querySelector<HTMLElement>('.tel');
+  let nees = 0;
   const ondes: { x: number; y: number; n: number; k: number }[] = [];
   let prochaine = 500;
   const dessiner = (t: number) => {
@@ -50,14 +52,20 @@ function champDePoints(racine: HTMLElement, ecouter: Ecouter, nettoyages: (() =>
     const R = (sombre ? (L < 700 ? 100 : 150) : L < 700 ? 90 : 180) + Math.sin(t * 0.0013) * 12;
     const sigma = sombre ? 72 : 74, S2 = 2 * sigma * sigma;
     if (!sombre && !calme) {
-      if (t > prochaine) { ondes.push({ x: hasard() * L, y: hasard() * H, n: t, k: Math.floor(hasard() * 6) }); prochaine = t + 900 + hasard() * 1100; }
+      if (t > prochaine) {
+        // Une onde sur deux part de derrière l'iPhone quand il est à l'écran : il semble émettre.
+        const b = nees++ % 2 === 0 ? telephone?.getBoundingClientRect() : undefined;
+        const duTel = b && b.bottom > 0 && b.top < H ? b : null;
+        ondes.push({ x: duTel ? duTel.left + duTel.width / 2 : hasard() * L, y: duTel ? duTel.top + duTel.height * (0.25 + hasard() * 0.5) : hasard() * H, n: t, k: Math.floor(hasard() * 6) });
+        prochaine = t + 500 + hasard() * 700;
+      }
       while (ondes.length > 0 && t - ondes[0]!.n > VIE) ondes.shift();
     }
     cx.clearRect(0, 0, L, H);
     cx.lineCap = 'round';
     cx.beginPath();
-    cx.lineWidth = sombre ? 1.7 : 1.15;
-    cx.strokeStyle = sombre ? 'rgba(122, 77, 255, .16)' : 'rgba(28, 21, 48, .42)';
+    cx.lineWidth = sombre ? 1.7 : 1.25;
+    cx.strokeStyle = sombre ? 'rgba(122, 77, 255, .16)' : 'rgba(28, 21, 48, .5)';
     const proches: { x: number; y: number; ux: number; uy: number; w: number }[] = [];
     const colores: { x: number; y: number; k: number; w: number }[] = [];
     const haut = H + pas;
@@ -76,16 +84,16 @@ function champDePoints(racine: HTMLElement, ecouter: Ecouter, nettoyages: (() =>
       let fort = 0, k = 0, ox = 0, oy = 0;
       for (const o of ondes) {
         const age = (t - o.n) / VIE, ex = bx - o.x, ey = by - o.y, e = Math.hypot(ex, ey) || 1;
-        const f = Math.exp(-((e - age * 520) ** 2) / 1300) * (1 - age);
+        const f = Math.exp(-((e - age * 640) ** 2) / 1700) * (1 - age);
         if (f > fort) { fort = f; k = o.k; ox = ex / e; oy = ey / e; }
       }
-      if (fort > 0.08) { colores.push({ x: bx + ox * fort * 7, y: by + oy * fort * 7, k, w: fort }); continue; }
+      if (fort > 0.08) { colores.push({ x: bx + ox * fort * 10, y: by + oy * fort * 10, k, w: fort }); continue; }
       cx.moveTo(bx, by); cx.lineTo(bx + 0.01, by);
     }
     cx.stroke();
     for (const c of colores) {
-      cx.strokeStyle = `rgba(${TEINTES[c.k]}, ${(0.35 + c.w * 0.6).toFixed(2)})`;
-      cx.lineWidth = 1.2 + c.w * 1.1;
+      cx.strokeStyle = `rgba(${TEINTES[c.k]}, ${(0.4 + c.w * 0.6).toFixed(2)})`;
+      cx.lineWidth = 1.3 + c.w * 1.3;
       cx.beginPath(); cx.moveTo(c.x, c.y); cx.lineTo(c.x + 0.01, c.y); cx.stroke();
     }
     for (const { x: bx, y: by, ux, uy, w } of proches) {
@@ -290,59 +298,7 @@ export function Vitrine({ bientot }: { bientot: string }) {
       nettoyages.push(() => html.classList.remove('curseur-actif'));
     }
 
-    // iPhone de l'accueil, à l'arrivée dans l'écran : couché en arrière et un peu plus petit, il se redresse à mesure
-    // qu'on descend (lié au défilement, sans durée propre). La position se lit sur la section, que rien ne transforme.
-    const tel = racine.querySelector<HTMLElement>('.tel');
-    const sectionTel = tel?.closest<HTMLElement>('.iphone');
-    if (tel && sectionTel) {
-      let prevu = 0;
-      const redresser = () => {
-        prevu = 0;
-        const k = Math.min(1, Math.max(0, (innerHeight - sectionTel.getBoundingClientRect().top) / (innerHeight * 0.8)));
-        const e = 1 - (1 - k) ** 3;
-        tel.style.transform = e >= 1 ? '' : `perspective(1400px) translateY(${((1 - e) * 46).toFixed(1)}px) rotateX(${((1 - e) * 24).toFixed(2)}deg) scale(${(0.86 + 0.14 * e).toFixed(3)})`;
-      };
-      const demander = () => { if (!prevu) prevu = requestAnimationFrame(redresser); };
-      ecouter(window, 'scroll', demander, { passive: true });
-      ecouter(window, 'resize', demander);
-      redresser();
-      nettoyages.push(() => { cancelAnimationFrame(prevu); tel.style.transform = ''; });
-    }
-
-    // iPhone de l'accueil : son écran avance tout seul d'un post à l'autre, comme une vidéo du réseau qu'on fait
-    // défiler ; il s'arrête au survol, au clavier et quand il sort de l'écran. Sans ce script (mouvement réduit),
-    // l'écran se fait défiler à la main.
-    const ecranTel = racine.querySelector<HTMLElement>('.tel-ecran');
-    const cartesTel = ecranTel ? [...ecranTel.querySelectorAll<HTMLElement>('.tel-carte')] : [];
-    if (ecranTel && cartesTel.length > 1) {
-      ecranTel.classList.add('joue');
-      let retenu = false, rang = 0, glisse = 0;
-      ecouter(ecranTel, 'pointerenter', (e: PointerEvent) => { if (e.pointerType === 'mouse') retenu = true; });
-      ecouter(ecranTel, 'pointerleave', () => { retenu = false; });
-      ecouter(ecranTel, 'focusin', () => { retenu = true; });
-      ecouter(ecranTel, 'focusout', () => { retenu = false; });
-      // Glissement vers un post, comme un coup de pouce : rapide au départ, doux à l'arrivée.
-      const aller = (haut: number) => {
-        const de = ecranTel.scrollTop, t0 = performance.now();
-        const pas = (t: number) => {
-          const k = Math.min(1, (t - t0) / 650);
-          ecranTel.scrollTop = de + (haut - de) * (1 - (1 - k) ** 3);
-          if (k < 1) glisse = requestAnimationFrame(pas);
-        };
-        cancelAnimationFrame(glisse);
-        glisse = requestAnimationFrame(pas);
-      };
-      const avance = window.setInterval(() => {
-        const b = ecranTel.getBoundingClientRect();
-        if (retenu || document.hidden || b.bottom < innerHeight * 0.15 || b.top > innerHeight * 0.85) return;
-        const max = ecranTel.scrollHeight - ecranTel.clientHeight;
-        // Arrivé en bas, on repart du premier post.
-        rang = ecranTel.scrollTop >= max - 2 ? 0 : rang + 1;
-        aller(Math.min(max, Math.max(0, (cartesTel[rang % cartesTel.length]?.offsetTop ?? 0) - 10)));
-      }, 2400);
-      nettoyages.push(() => { clearInterval(avance); cancelAnimationFrame(glisse); ecranTel.classList.remove('joue'); });
-    }
-
+    // L'iPhone de l'accueil (redressement, séquence d'utilisation) est animé par TelephoneAnime.tsx.
     return fin;
   }, [bientot]);
 

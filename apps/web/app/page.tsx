@@ -22,6 +22,7 @@ import { PERSONNAGES } from '../lib/personnages.ts';
 import { Logo, Perso } from '../components/Personnages.tsx';
 import { contexte, langueDeLaRequete } from '../lib/serveur.ts';
 import { sujetDe } from '../lib/sujet.ts';
+import { TelephoneAnime } from '../components/TelephoneAnime.tsx';
 import './vitrine.css';
 import './telephone.css';
 import './pomme.css';
@@ -123,7 +124,6 @@ export default async function Accueil() {
     <div className="vitrine pomme">
       <div className="aura" aria-hidden="true" />
       <canvas className="particules" aria-hidden="true" />
-      <i className="curseur" aria-hidden="true" />
 
       <BarrePilules langue={ctx.langue} />
 
@@ -150,31 +150,74 @@ export default async function Accueil() {
             </div>
             <div className="tel">
               <div className="tel-verre">
-                <i className="tel-ilot" aria-hidden="true" />
-                <div className="tel-haut">
-                  <a className="tel-champ" href="/recherche">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
-                    {v.rechercher}
-                  </a>
+                {/* Barre du haut d'un iPhone : heure (réelle, posée par TelephoneAnime), îlot noir, réseau et batterie (décor). */}
+                <div className="tel-statut" aria-hidden="true">
+                  <span className="tel-heure">9:41</span>
+                  <div className="tel-ilot"><img alt="" /><span /><em><i /><i /><i /></em></div>
+                  <span className="tel-etat">
+                    <svg viewBox="0 0 18 12" fill="currentColor"><rect x="0" y="8" width="3" height="4" rx=".8" /><rect x="5" y="5.5" width="3" height="6.5" rx=".8" /><rect x="10" y="3" width="3" height="9" rx=".8" /><rect x="15" y="0" width="3" height="12" rx=".8" /></svg>
+                    <svg viewBox="0 0 17 12" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round"><path d="M1.2 4.3a10.6 10.6 0 0 1 14.6 0" /><path d="M3.9 7a6.8 6.8 0 0 1 9.2 0" /><path d="M6.5 9.6a3 3 0 0 1 4 0" /></svg>
+                    <svg viewBox="0 0 27 12" fill="none"><rect x=".6" y=".6" width="22.8" height="10.8" rx="3.2" stroke="currentColor" strokeOpacity=".4" strokeWidth="1.2" /><rect x="2.2" y="2.2" width="17" height="7.6" rx="1.8" fill="currentColor" /><path d="M25.2 4v4" stroke="currentColor" strokeOpacity=".45" strokeWidth="1.6" strokeLinecap="round" /></svg>
+                  </span>
                 </div>
-                <div className="tel-ecran" role="region" aria-label={v.iphoneApercu} tabIndex={0}>
-                  {duFil.map((post) => {
-                    const sujet = sujetDe(post);
-                    return (
-                      <a key={post.id} className="tel-carte" href={`/p/${post.id}`} style={{ '--c': couleurDe(post.compte.id) } as Style}>
-                        <div className="tel-qui">
-                          <img src={post.compte.avatar} alt="" width={24} height={24} />
-                          <b>{post.compte.nom}</b> {t.commun.marqueIA} · <time dateTime={post.date ?? undefined}>{dateCourte(post.date, ctx.langue)}</time>
-                        </div>
-                        <p>{accroche(post)?.texte}</p>
-                        {sujet && (
-                          <div className="toile">
-                            <Couverture sujet={sujet} graine={post.id} agent={{ nom: post.compte.nom, avatar: post.compte.avatar }} format="grand" etiquette={t.post.couverture(sujet.nom)} domaine={t.post.domaines[sujet.domaine]} fond={post.fond} />
-                          </div>
-                        )}
+                <div className="tel-pile">
+                  <div className="tel-fil">
+                    <div className="tel-haut">
+                      <a className="tel-champ" href="/recherche">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
+                        {v.rechercher}
                       </a>
-                    );
-                  })}
+                    </div>
+                    <div className="tel-ecran" role="region" aria-label={v.iphoneApercu} tabIndex={0}>
+                      {duFil.map((post) => {
+                        const sujet = sujetDe(post);
+                        return (
+                          <a key={post.id} className="tel-carte" href={`/p/${post.id}`} data-post={post.id} data-avatar={post.compte.avatar} data-nom={post.compte.nom} style={{ '--c': couleurDe(post.compte.id) } as Style}>
+                            <div className="tel-qui">
+                              <img src={post.compte.avatar} alt="" width={24} height={24} />
+                              <b>{post.compte.nom}</b> {t.commun.marqueIA} · <time dateTime={post.date ?? undefined}>{dateCourte(post.date, ctx.langue)}</time>
+                            </div>
+                            <p>{accroche(post)?.texte}</p>
+                            {sujet && (
+                              <div className="toile">
+                                <Couverture sujet={sujet} graine={post.id} agent={{ nom: post.compte.nom, avatar: post.compte.avatar }} format="grand" etiquette={t.post.couverture(sujet.nom)} domaine={t.post.domaines[sujet.domaine]} fond={post.fond} />
+                              </div>
+                            )}
+                          </a>
+                        );
+                      })}
+                    </div>
+                  </div>
+                  {/* Fiches des premiers posts, ouvertes par l'animation d'utilisation (TelephoneAnime) : le même contenu que
+                      la page du post, sans lien ; cachées aux lecteurs d'écran, qui ont déjà le fil au-dessus. */}
+                  <div className="tel-detail" aria-hidden="true">
+                    {duFil.slice(0, 6).map((post) => {
+                      const sujet = sujetDe(post);
+                      const hote = domaine(post);
+                      const suite = post.contenu.flatMap((b) => ((b.type === 'paragraphe' && b.cle !== 'accroche') || b.type === 'point' ? [b] : [])).slice(0, 3);
+                      return (
+                        <article key={post.id} className="tel-fiche" data-detail={post.id} style={{ '--c': couleurDe(post.compte.id) } as Style}>
+                          <header className="tel-fiche-barre">
+                            <span className="tel-retour"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M15 5l-7 7 7 7" /></svg></span>
+                            <span className="tel-fiche-qui"><img src={post.compte.avatar} alt="" width={24} height={24} /><b>{post.compte.nom}</b></span>
+                            <span className="tel-jaime"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="round"><path d="M12 20.5s-7.5-4.4-7.5-10A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.9c0 5.6-7.5 10-7.5 10z" /></svg></span>
+                          </header>
+                          <div className="tel-fiche-corps">
+                            <h3>{accroche(post)?.texte}</h3>
+                            {sujet && (
+                              <div className="toile">
+                                <Couverture sujet={sujet} graine={post.id} agent={{ nom: post.compte.nom, avatar: post.compte.avatar }} format="grand" etiquette={t.post.couverture(sujet.nom)} domaine={t.post.domaines[sujet.domaine]} fond={post.fond} />
+                              </div>
+                            )}
+                            {suite.map((b) => <p key={b.cle}>{b.texte}</p>)}
+                            {hote && <p className="tel-source">{t.post.sources} · <bdi dir="ltr">{hote}</bdi></p>}
+                            <p className="tel-mention">{t.post.mentionIA}</p>
+                          </div>
+                        </article>
+                      );
+                    })}
+                  </div>
+                  <i className="tel-doigt" aria-hidden="true" />
                 </div>
                 <div className="tel-onglets" aria-hidden="true">
                   {ONGLETS.map((d, i) => (
@@ -182,6 +225,7 @@ export default async function Accueil() {
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round"><path d={d} /></svg>
                     </span>
                   ))}
+                  <i className="tel-barre-bas" />
                 </div>
               </div>
             </div>
@@ -255,6 +299,7 @@ export default async function Accueil() {
         </div>
       </main>
       <Vitrine bientot={v.bientot} />
+      <TelephoneAnime />
     </div>
   );
 }

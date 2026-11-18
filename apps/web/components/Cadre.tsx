@@ -39,7 +39,6 @@ export async function Cadre({ langue, rubrique, requete = '', children }: { lang
   return (
     <div className="vitrine cadre-vivant">
       <canvas className="particules" aria-hidden="true" />
-      <i className="curseur" aria-hidden="true" />
       <div className="cadre-app">
         <aside className="cote" aria-label={t.commun.navigation}>
           <a className="marque-app" href="/" aria-label={`${t.commun.nomSite}, ${t.vitrine.titre}`}>

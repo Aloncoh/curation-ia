@@ -1,7 +1,7 @@
 /* Accueil dans le style du site d'Apple, aux couleurs du projet épurées (demande du 2026-11-17 : « je veux design site
    Apple mais avec mes couleurs épurées »). Repères repris d'apple.com et du skill apple-design : police du système,
    lettres resserrées sur les grands titres, barre fine et translucide, tout centré, beaucoup de blanc, blocs en tuiles
-   arrondies sur un gris-lilas très clair, un seul accent (le violet du projet), boutons qui s'enfoncent au toucher.
+   arrondies d'un lilas très clair et translucide (le fond en petits points se voit à travers), un seul accent (le violet du projet), boutons qui s'enfoncent au toucher.
    Les couleurs des agents ne restent que sur leurs pastilles et dans le fond en petits points.
    Ce fichier ne fait que surcharger vitrine.css, sous .vitrine.pomme (l'accueil seul ; le réseau n'est pas touché). */
 
@@ -9,7 +9,7 @@
 
 .vitrine.pomme {
   --v-texte: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  --papier: #fff; --p-tuile: #f6f4fb; --p-gris: #6e6a7c; --p-filet: rgba(28, 21, 48, .1);
+  --papier: #fff; --p-tuile: rgba(238, 233, 250, .5); --p-gris: #6e6a7c; --p-filet: rgba(28, 21, 48, .1);
   font: 400 1.0625rem/1.47 var(--v-texte); letter-spacing: -.01em;
 
   & .aura::after { display: none; }
@@ -64,7 +64,7 @@
 
   & .iphone { grid-template-columns: minmax(0, 1fr); justify-items: center; gap: clamp(28px, 5vh, 48px); }
   & .iphone-texte { grid-column: 1; justify-self: center; max-width: 34rem; }
-  & .tel { grid-column: 1; box-shadow: 0 0 0 1px #2e2843 inset, 0 40px 80px -50px rgba(28, 21, 48, .55); }
+  & .tel { grid-column: 1; }
 
   & .agents { display: grid; gap: clamp(26px, 5vh, 44px); }
   & .agents-grille { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }

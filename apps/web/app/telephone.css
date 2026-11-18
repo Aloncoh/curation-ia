@@ -1,45 +1,107 @@
-/* iPhone de l'accueil (app/page.tsx, 2026-11-17) : il remplace la fenêtre façon Mac. Un téléphone dessiné en CSS, dont
-   l'écran montre les derniers posts du fil et avance tout seul d'un post à l'autre (components/Vitrine.tsx, classe
-   .joue) ; sans animation, l'écran se fait défiler à la main. Rangé sous .vitrine comme le reste de l'accueil. */
+/* iPhone de l'accueil (app/page.tsx) : un téléphone dessiné en CSS, en grand, avec sa barre du haut (heure, îlot noir,
+   réseau, batterie), le fil, une fiche de post qui glisse depuis le bord et la barre d'onglets. La séquence d'utilisation
+   (doigt, défilement, ouverture, « j'aime », retour) est jouée par components/TelephoneAnime.tsx ; sans animation,
+   l'écran se fait défiler à la main. Tout l'intérieur est en « em » d'une taille liée à la largeur du téléphone
+   (unité cqw) : il garde ses proportions à toutes les tailles. Rangé sous .vitrine comme le reste de l'accueil. */
+
+@keyframes tel-coeur { 0% { transform: scale(.9); } 55% { transform: scale(1.24); } 100% { transform: scale(1); } }
+@keyframes tel-onde { 50% { transform: scaleY(.3); } }
 
 .vitrine {
   & .iphone { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; gap: clamp(20px, 5vw, 70px); }
   & .iphone-texte { grid-column: 1; justify-self: end; max-width: 20rem; }
   & .iphone h2 { margin: 0 0 12px; font: 800 clamp(1.9rem, 3.6vw, 2.6rem)/1.1 var(--v-texte); letter-spacing: -.01em; font-variation-settings: "CASL" 1, "CRSV" 1; text-wrap: balance; }
 
+  /* Le boîtier : grand, bord sombre à double filet, boutons sur les côtés, ombre profonde. */
   & .tel {
-    grid-column: 2; position: relative; transform-origin: 50% 70%; will-change: transform; height: min(660px, 82dvh); min-height: 460px; aspect-ratio: 9 / 19.3; padding: 9px; border-radius: 48px;
-    background: #15121f; box-shadow: 0 0 0 1px #2e2843 inset, 0 46px 70px -42px rgba(60, 30, 140, .6);
+    grid-column: 2; position: relative; container-type: inline-size; transform-origin: 50% 70%; will-change: transform;
+    height: min(900px, 92dvh); min-height: 540px; aspect-ratio: 9 / 19.3; padding: 11px; border-radius: 60px; background: #0d0b14;
+    box-shadow: 0 0 0 1.5px #4d4863 inset, 0 0 0 5px #17141f inset, 0 70px 120px -60px rgba(28, 21, 48, .75), 0 26px 50px -34px rgba(28, 21, 48, .5);
   }
-  & .tel-verre { position: relative; height: 100%; display: grid; grid-template-rows: auto minmax(0, 1fr) auto; border-radius: 40px; overflow: hidden; background: #f3f1fa; color: var(--v-encre); }
-  & .tel-ilot { position: absolute; top: 9px; left: 50%; z-index: 2; width: 31%; height: 22px; translate: -50% 0; border-radius: 999px; background: #000; }
-  & .tel-haut { padding: 41px 11px 9px; background: #fff; border-bottom: 1px solid var(--v-trait); }
-  & .tel-champ { display: flex; align-items: center; gap: 8px; height: 32px; padding: 0 12px; border-radius: 999px; background: #f1eff6; color: var(--v-pied); font-size: .78rem; text-decoration: none; }
-  & .tel-ecran { position: relative; display: grid; align-content: start; gap: 9px; padding: 10px 9px 14px; overflow-y: auto; scrollbar-width: none; }
+  & .tel::before, & .tel::after { content: ""; position: absolute; width: 3px; border-radius: 2px; background: #211d2e; }
+  & .tel::before { inset-inline-start: -3px; top: 23%; height: 7.5%; box-shadow: 0 72px 0 #211d2e; }
+  & .tel::after { inset-inline-end: -3px; top: 30%; height: 12%; }
+  & .tel-verre { position: relative; height: 100%; display: grid; grid-template-rows: auto minmax(0, 1fr) auto; border-radius: 49px; overflow: hidden; background: #f3f1fa; color: var(--v-encre); font-size: clamp(10px, 3.6cqw, 15.5px); line-height: 1.3; }
+
+  /* Barre du haut : l'heure, l'îlot noir qui s'élargit quand un post est ouvert, le réseau et la batterie. */
+  & .tel-statut { position: relative; z-index: 4; display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; height: 3.9em; padding: .55em 1.7em 0; background: #fff; font-weight: 600; font-size: 1.08em; }
+  & .tel-heure { justify-self: start; padding-inline-start: .7em; letter-spacing: -.01em; font-variant-numeric: tabular-nums; }
+  & .tel-etat { justify-self: end; display: flex; align-items: center; gap: .36em; }
+  & .tel-etat svg { height: .8em; width: auto; }
+  & .tel-ilot { display: flex; align-items: center; gap: .5em; width: 27cqw; height: 2.1em; padding: 0 .42em; border-radius: 999px; background: #000; color: #fff; overflow: hidden; transition: width .5s cubic-bezier(.32, .72, 0, 1); }
+  & .tel-ilot > * { opacity: 0; transition: opacity .2s ease; }
+  & .tel-ilot img { flex: none; width: 1.4em; height: 1.4em; border-radius: 50%; object-fit: cover; }
+  & .tel-ilot span { flex: 1; min-width: 0; font-size: .76em; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  & .tel-ilot em { flex: none; display: flex; align-items: center; gap: .15em; height: .95em; margin-inline-end: .25em; }
+  & .tel-ilot em i { width: .17em; height: 100%; border-radius: 1px; background: color-mix(in srgb, var(--c, #9b7bff) 70%, #fff); }
+  & .tel-ilot.actif { width: 58cqw; }
+  & .tel-ilot.actif > * { opacity: 1; transition-delay: .2s; }
+  & .tel-ilot.actif em i { animation: tel-onde .9s ease-in-out infinite; }
+  & .tel-ilot.actif em i:nth-child(2) { animation-delay: -.3s; }
+  & .tel-ilot.actif em i:nth-child(3) { animation-delay: -.6s; }
+
+  /* Le fil et, par-dessus, la fiche d'un post : elle entre par le bord pendant que le fil recule, comme sur iOS. */
+  & .tel-pile { position: relative; overflow: hidden; }
+  & .tel-fil { height: 100%; display: grid; grid-template-rows: auto minmax(0, 1fr); transition: transform .46s cubic-bezier(.32, .72, 0, 1), filter .46s; }
+  & .tel-pile.detail .tel-fil { transform: translateX(-24%); filter: brightness(.93); }
+  & .tel-haut { padding: .2em .85em .7em; background: #fff; border-bottom: 1px solid var(--v-trait); }
+  & .tel-champ { display: flex; align-items: center; gap: .6em; height: 2.5em; padding: 0 .95em; border-radius: 999px; background: #f1eff6; color: var(--v-pied); font-size: .95em; text-decoration: none; }
+  & .tel-champ svg { width: 1.05em; height: 1.05em; }
+  & .tel-ecran { position: relative; display: grid; align-content: start; gap: .7em; padding: .75em .7em 1.1em; overflow-y: auto; scrollbar-width: none; }
   & .tel-ecran::-webkit-scrollbar { display: none; }
-  /* Pendant que l'écran avance seul, la molette au-dessus du téléphone continue de faire défiler la page. */
+  /* Pendant la séquence, la molette au-dessus du téléphone continue de faire défiler la page. */
   & .tel-ecran.joue { overflow-y: hidden; }
   & .tel-ecran:focus-visible { outline-offset: -3px; }
   & .tel-carte {
-    display: grid; gap: 8px; padding: 11px; border-radius: 17px; color: var(--v-encre); text-decoration: none;
+    display: grid; gap: .6em; padding: .85em; border-radius: 1.3em; color: var(--v-encre); text-decoration: none; transition: transform .1s ease-out;
     background: color-mix(in srgb, var(--c) 9%, #fff); border: 1px solid color-mix(in srgb, var(--c) 34%, #fff);
   }
-  & .tel-qui { display: flex; align-items: center; gap: 7px; min-width: 0; color: var(--v-pied); font-size: .68rem; white-space: nowrap; }
-  & .tel-qui img { flex: none; width: 24px; height: 24px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 1.5px var(--c); }
-  & .tel-qui b { color: var(--v-encre); font-size: .76rem; }
+  & .tel .presse { transform: scale(.96); }
+  & .tel-qui { display: flex; align-items: center; gap: .5em; min-width: 0; color: var(--v-pied); font-size: .84em; white-space: nowrap; }
+  & .tel-qui img { flex: none; width: 2.1em; height: 2.1em; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 1.5px var(--c); }
+  & .tel-qui b { color: var(--v-encre); font-size: 1.1em; }
   & .tel-qui time { overflow: hidden; text-overflow: ellipsis; }
-  & .tel-carte p { margin: 0; font-weight: 700; font-size: .84rem; line-height: 1.28; }
-  & .tel-carte .toile { border-radius: 11px; overflow: hidden; }
-  & .tel-carte .toile .couverture { margin: 0; border-radius: 11px; }
-  & .tel-onglets { display: flex; align-items: center; justify-content: space-around; padding: 8px 10px 15px; background: #fff; border-top: 1px solid var(--v-trait); color: var(--v-pied); }
-  & .tel-onglets svg { width: 21px; height: 21px; }
-  & .tel-onglets .plus { display: grid; place-items: center; width: 38px; height: 30px; border-radius: 11px; background: var(--v-violet-fonce); color: #fff; }
+  & .tel-carte p { margin: 0; font-weight: 700; font-size: 1.04em; line-height: 1.28; }
+  & .tel .toile { border-radius: .85em; overflow: hidden; }
+  & .tel .toile .couverture { margin: 0; border-radius: .85em; }
+
+  & .tel-detail { position: absolute; inset: 0; z-index: 2; background: #fff; transform: translateX(102%); transition: transform .46s cubic-bezier(.32, .72, 0, 1); box-shadow: -18px 0 40px -24px rgba(28, 21, 48, .5); }
+  & .tel-detail.ouvert { transform: none; }
+  &:dir(rtl) .tel-detail { transform: translateX(-102%); }
+  &:dir(rtl) .tel-detail.ouvert { transform: none; }
+  &:dir(rtl) .tel-pile.detail .tel-fil { transform: translateX(24%); }
+  & .tel-fiche { position: absolute; inset: 0; display: none; grid-template-rows: auto minmax(0, 1fr); }
+  & .tel-fiche.actif { display: grid; }
+  & .tel-fiche-barre { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: .5em; padding: .2em .6em .5em; border-bottom: 1px solid var(--v-trait); }
+  & .tel-retour, & .tel-jaime { display: grid; place-items: center; width: 2.5em; height: 2.5em; border-radius: 50%; transition: transform .1s ease-out; }
+  & .tel-retour { color: var(--v-violet-fonce); }
+  & .tel-jaime { color: var(--v-pied); }
+  & .tel-retour svg, & .tel-jaime svg { width: 1.5em; height: 1.5em; }
+  &:dir(rtl) .tel-retour svg { scale: -1 1; }
+  & .tel-jaime.aime { color: var(--v-violet); }
+  & .tel-jaime.aime svg { fill: currentColor; animation: tel-coeur .36s cubic-bezier(.23, 1, .32, 1); }
+  & .tel-fiche-qui { display: flex; align-items: center; justify-content: center; gap: .5em; min-width: 0; font-size: 1.02em; }
+  & .tel-fiche-qui img { flex: none; width: 1.8em; height: 1.8em; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 1.5px var(--c); }
+  & .tel-fiche-corps { display: grid; align-content: start; gap: .85em; padding: 1em .95em 1.4em; overflow: hidden; }
+  & .tel-fiche-corps h3 { margin: 0; font-weight: 800; font-size: 1.34em; line-height: 1.2; letter-spacing: -.015em; }
+  & .tel-fiche-corps p { margin: 0; color: #2c2540; font-size: 1em; line-height: 1.42; }
+  & .tel-fiche-corps .tel-source { color: var(--v-pied); font-size: .86em; }
+  & .tel-fiche-corps .tel-mention { padding: .6em .75em; border-radius: .8em; background: #f1eff6; color: var(--v-pied); font-size: .8em; }
+
+  /* Le doigt : une pastille translucide, déplacée par le script. */
+  & .tel-doigt { position: absolute; left: 0; top: 0; z-index: 3; width: 3em; height: 3em; margin: -1.5em 0 0 -1.5em; border-radius: 50%; background: rgba(28, 21, 48, .22); box-shadow: 0 0 0 1.5px rgba(255, 255, 255, .75) inset, 0 0 0 1px rgba(28, 21, 48, .28), 0 6px 14px -6px rgba(28, 21, 48, .5); opacity: 0; pointer-events: none; will-change: transform, opacity; }
+
+  & .tel-onglets { position: relative; display: flex; align-items: center; justify-content: space-around; padding: .65em .8em 1.75em; background: #fff; border-top: 1px solid var(--v-trait); color: var(--v-pied); }
+  & .tel-onglets svg { display: block; width: 1.75em; height: 1.75em; }
+  & .tel-onglets .plus { display: grid; place-items: center; width: 3.1em; height: 2.4em; border-radius: .9em; background: var(--v-violet-fonce); color: #fff; }
   & .tel-onglets .ici { color: var(--v-encre); }
+  & .tel-barre-bas { position: absolute; bottom: .5em; left: 50%; width: 36%; height: .34em; translate: -50% 0; border-radius: 999px; background: #15121f; }
 
   @media (max-width: 860px) {
     & .iphone { grid-template-columns: minmax(0, 1fr); justify-items: center; gap: 22px; }
     & .iphone-texte { grid-column: 1; justify-self: start; max-width: none; }
-    & .tel { grid-column: 1; height: min(600px, 76dvh); min-height: 420px; padding: 7px; border-radius: 40px; }
-    & .tel-verre { border-radius: 34px; }
+    & .tel { grid-column: 1; height: min(700px, 82dvh); min-height: 480px; padding: 9px; border-radius: 50px; }
+    & .tel-verre { border-radius: 41px; }
+    & .tel::before { box-shadow: 0 58px 0 #211d2e; }
   }
 }
