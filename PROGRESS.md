@@ -585,3 +585,23 @@ DeepSeek Flash, 30 actualités, 34 appels, 0,0125 $ (budget autorisé 4 $). 19 �
 - Vérifié en local (base locale, navigateur intégré) : fil et page d'un post à 1 024 px, fil à 375 px sans débordement, iPhone de l'accueil ; aucune erreur de console ; types du site OK.
 - Non vérifié : en ligne (base bloquée), hébreu, vrai téléphone.
 - Non fait : fiche « face à face » (conception faite, code non écrit).
+
+## 2026-11-19 — Lectures de la base : mesure, puis trois requêtes de la chaîne réécrites
+
+- Mesure (base locale, lecture seule, `docs/lectures-turso.md`) : la chaîne consomme bien plus que le site. Quatre requêtes dominent : pages à capturer, regroupement à la collecte, relances, file de la rédaction.
+- Accord de l'utilisateur (« Oui, corrige ») pour les trois réécritures sans migration ; décision et compromis dans l'ADR 0019.
+- Fait : `approfondir` lit une fois les pages refusées et les écarte en mémoire ; le regroupement lit les annonces récentes une fois par passage de collecte (mémoire complétée après validation de chaque transaction, relue après 5 minutes) ; la file de la rédaction ne lit plus les captures, le texte n'est lu que pour le lot examiné.
+- Mesuré en local, même méthode : pages à capturer 313 469 → 2 660 lignes par passage ; regroupement 2 002 lignes par nouveau document → 1 181 par passage ; file 10 623 lignes et 2 Mo de texte → 2 569 lignes sans texte, plus 330 par lot de 30.
+- Essai réel sur une copie de la base locale : collecte de trois sources jamais vues (Cloudflare, Google Research, Vercel), 60 nouveaux documents, 59 actualités, 1 regroupement, une seule lecture de regroupement au lieu de 60.
+- Vérifié : types OK (chaîne et site) ; 910 tests au vert (51 fichiers), dont 5 nouveaux.
+- Non vérifié : en ligne (base bloquée) ; `approfondir` et la rédaction n'ont pas été lancés pour de vrai, leurs requêtes ont été rejouées ; les montants en ligne restent des estimations.
+- Non fait : index (migration, accord requis), cache du site, boucle de recapture des pages lues par plan de site, fiche « face à face ».
+
+## 2026-11-20 — Boucle de recapture corrigée
+
+- Accord de l'utilisateur (« Oui, corrige »). Cause : la collecte comparait le contenu reçu à la dernière capture, quelle qu'elle soit ; après une page lue par `approfondir`, le flux repassait pour « modifié », son accroche était réenregistrée, puis la page relue, à chaque passage. Pas seulement les plans de site : au moins 7 sources touchées dans la base locale.
+- Fait : `storeDocuments` compare à la dernière capture venue de la source elle-même (`src/collect/store.ts`). Un flux réellement modifié donne toujours une nouvelle capture.
+- Vérifié : test écrit d'abord et en échec (« modifié : 1 »), puis au vert ; 912 tests au vert (51 fichiers) ; types OK. Essai réel sur une copie de la base locale : Black Forest Labs, 10 documents inchangés et 0 modifié, deux collectes de suite ; la base locale n'a pas été modifiée.
+- Non vérifié : en ligne (base bloquée). Les captures en double déjà écrites restent en base ; l'avis « la source a été mise à jour après ce post » n'a pas été revérifié sur ces documents.
+- Observé, non traité : les flux de Sketch et de Blender changent de contenu d'un jour à l'autre (19 documents sur 20 « modifiés » pour Sketch à cet essai).
+- Envoyé sur `main` le 2026-11-20, à la demande de l'utilisateur (« Envoie sur main »), avec les trois réécritures de la veille. Les fichiers de la session mobile ne sont pas dans cet envoi.

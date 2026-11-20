@@ -1,8 +1,8 @@
 // Enregistrement idempotent des documents collectés : nouveau, inchangé, ou modifié (nouvelle capture).
 // À appeler dans une transaction : tout est enregistré, ou rien.
-import { and, desc, eq } from 'drizzle-orm';
+import { and, desc, eq, isNull, ne, or } from 'drizzle-orm';
 import type { Executor } from '../db/client.ts';
-import { documentSnapshots, sourceDocuments } from '../db/schema.ts';
+import { documentSnapshots, runs, sourceDocuments } from '../db/schema.ts';
 import type { CollectedDocument } from './github-releases.ts';
 
 export interface StoreCounts {
@@ -61,7 +61,22 @@ export async function storeDocuments(
         .where(eq(documentSnapshots.documentId, documentId))
         .orderBy(desc(documentSnapshots.seq))
         .limit(1);
-      if (latest && latest.contentHash === doc.contentHash) {
+      let unchanged = latest !== undefined && latest.contentHash === doc.contentHash;
+      if (latest && !unchanged) {
+        // La dernière capture peut être la page de l'article, lue par `approfondir` : son empreinte diffère toujours de
+        // celle de la source. On compare alors à la dernière capture venue de la source elle-même. Sans cela, chaque
+        // collecte voyait « modifié », réenregistrait l'accroche, et la page était relue à chaque passage (2026-11-20,
+        // docs/lectures-turso.md, section 5).
+        const [fromSource] = await tx
+          .select({ contentHash: documentSnapshots.contentHash })
+          .from(documentSnapshots)
+          .leftJoin(runs, eq(runs.id, documentSnapshots.runId))
+          .where(and(eq(documentSnapshots.documentId, documentId), or(isNull(runs.kind), ne(runs.kind, 'approfondir'))))
+          .orderBy(desc(documentSnapshots.seq))
+          .limit(1);
+        unchanged = fromSource !== undefined && fromSource.contentHash === doc.contentHash;
+      }
+      if (unchanged) {
         counts.unchangedDocuments++;
         stored.push({ documentId, outcome: 'unchanged', doc });
         continue;

@@ -42,6 +42,41 @@ interface LinkableDocument {
   prerelease: boolean;
 }
 
+/** Annonce récente, telle que le regroupement la compare aux nouveaux documents. */
+export interface AnnonceRecente {
+  id: number;
+  title: string;
+  sourceId: string;
+  firstSeenAt: string;
+}
+
+/**
+ * Annonces récentes lues une fois, puis gardées en mémoire le temps d'un passage de collecte (2026-11-19,
+ * docs/lectures-turso.md) : relues pour chaque nouveau document, elles faisaient parcourir toutes les actualités à chaque
+ * fois. La mémoire est relue en base après DUREE_MEMOIRE_MS, pour voir ce qu'un autre processus aurait écrit entre-temps.
+ */
+export interface MemoireRegroupement {
+  annonces: AnnonceRecente[] | null;
+  chargeeLe: string | null;
+}
+
+export const memoireRegroupement = (): MemoireRegroupement => ({ annonces: null, chargeeLe: null });
+
+export const DUREE_MEMOIRE_MS = 5 * 60_000;
+
+/**
+ * `creees` reçoit les annonces créées par la transaction en cours. L'appelant ne les ajoute à la mémoire qu'une fois la
+ * transaction validée (`retenirAnnonces`) : une transaction annulée ne doit laisser aucune actualité fantôme en mémoire.
+ */
+export interface Regroupement {
+  memoire: MemoireRegroupement;
+  creees: AnnonceRecente[];
+}
+
+export function retenirAnnonces(memoire: MemoireRegroupement, creees: readonly AnnonceRecente[]): void {
+  memoire.annonces?.push(...creees);
+}
+
 const fromStored = (entry: StoredDocument): LinkableDocument => ({
   documentId: entry.documentId,
   title: entry.doc.title,
@@ -120,7 +155,7 @@ async function createNewsItem(
   tx: Executor,
   item: { kind: 'version' | 'annonce'; title: string; doc: LinkableDocument; runId: string },
   target?: { productId: number; productVersionId: number },
-): Promise<void> {
+): Promise<{ id: number; firstSeenAt: string }> {
   // « Vu pour la première fois » : date de première collecte du document (antérieure à ce rattachement en cas de rattrapage).
   const [document] = await tx
     .select({ firstCollectedAt: sourceDocuments.firstCollectedAt })
@@ -139,6 +174,7 @@ async function createNewsItem(
     .returning({ id: newsItems.id });
   await tx.insert(newsItemDocuments).values({ newsItemId: created!.id, documentId: item.doc.documentId, role: 'primary' });
   if (target) await tx.insert(newsItemTargets).values({ newsItemId: created!.id, ...target });
+  return { id: created!.id, firstSeenAt: document!.firstCollectedAt };
 }
 
 /** Le document renforce-t-il déjà une actualité (regroupé lors d'une collecte précédente) ? */
@@ -211,28 +247,35 @@ async function linkRelease(
 }
 
 /** Annonce récente d'une autre source sur le même sujet (regroupement.ts), ou null. */
-async function sameSubjectNewsItem(tx: Executor, sourceId: string, doc: LinkableDocument, now: string): Promise<number | null> {
+async function sameSubjectNewsItem(tx: Executor, sourceId: string, doc: LinkableDocument, now: string, memoire: MemoireRegroupement): Promise<number | null> {
   const since = new Date(Date.parse(now) - JOURS_REGROUPEMENT * 86_400_000).toISOString();
-  const candidates = await tx
-    .select({ id: newsItems.id, title: newsItems.title })
-    .from(newsItems)
-    .innerJoin(newsItemDocuments, and(eq(newsItemDocuments.newsItemId, newsItems.id), eq(newsItemDocuments.role, 'primary')))
-    .innerJoin(sourceDocuments, eq(sourceDocuments.id, newsItemDocuments.documentId))
-    .where(and(eq(newsItems.kind, 'annonce'), sql`${sourceDocuments.sourceId} <> ${sourceId}`, sql`${newsItems.firstSeenAt} >= ${since}`))
-    .orderBy(newsItems.id);
-  return candidates.find((c) => memeSujet(c.title, doc.title))?.id ?? null;
+  if (memoire.annonces === null) {
+    // Toutes sources confondues, par identifiant croissant : la source et la fenêtre exacte sont filtrées à l'usage.
+    // `cross join` : l'actualité est filtrée sur sa date avant toute lecture de ses documents.
+    const rows = await tx.all<{ id: number; title: string; source_id: string; first_seen_at: string }>(sql`
+      select n.id as id, n.title as title, doc.source_id as source_id, n.first_seen_at as first_seen_at
+      from news_item n
+      cross join news_item_document nd on nd.news_item_id = n.id and nd.role = 'primary'
+      join source_document doc on doc.id = nd.document_id
+      where n.kind = 'annonce' and n.first_seen_at >= ${since}
+      order by n.id`);
+    memoire.annonces = rows.map((row) => ({ id: Number(row.id), title: String(row.title), sourceId: String(row.source_id), firstSeenAt: String(row.first_seen_at) }));
+    memoire.chargeeLe = now;
+  }
+  return memoire.annonces.find((a) => a.sourceId !== sourceId && a.firstSeenAt >= since && memeSujet(a.title, doc.title))?.id ?? null;
 }
 
-async function linkAnnouncement(tx: Executor, sourceId: string, doc: LinkableDocument, counts: LinkCounts, now: string, runId: string): Promise<void> {
+async function linkAnnouncement(tx: Executor, sourceId: string, doc: LinkableDocument, counts: LinkCounts, now: string, runId: string, regroupement: Regroupement): Promise<void> {
   if ((await primaryNewsItem(tx, doc)) !== null) return;
   if (await supportingNewsItem(tx, doc)) return;
-  const same = await sameSubjectNewsItem(tx, sourceId, doc, now);
+  const same = await sameSubjectNewsItem(tx, sourceId, doc, now, regroupement.memoire);
   if (same !== null) {
     await tx.insert(newsItemDocuments).values({ newsItemId: same, documentId: doc.documentId, role: 'supporting' }).onConflictDoNothing();
     counts.groupedDocuments++;
     return;
   }
-  await createNewsItem(tx, { kind: 'annonce', title: doc.title, doc, runId });
+  const created = await createNewsItem(tx, { kind: 'annonce', title: doc.title, doc, runId });
+  regroupement.creees.push({ id: created.id, title: doc.title, sourceId, firstSeenAt: created.firstSeenAt });
   counts.newNewsItems++;
 }
 
@@ -242,7 +285,14 @@ export async function linkDocuments(
   stored: StoredDocument[],
   now: string,
   runId: string,
+  /** Sans valeur : les annonces récentes sont lues une fois pour cet appel, et rien n'est gardé ensuite. */
+  regroupement: Regroupement = { memoire: memoireRegroupement(), creees: [] },
 ): Promise<LinkCounts> {
+  const { memoire } = regroupement;
+  if (memoire.chargeeLe !== null && Math.abs(Date.parse(now) - Date.parse(memoire.chargeeLe)) > DUREE_MEMOIRE_MS) {
+    memoire.annonces = null;
+    memoire.chargeeLe = null;
+  }
   const counts: LinkCounts = { newProducts: 0, newVersions: 0, newNewsItems: 0, caughtUpDocuments: 0, groupedDocuments: 0 };
   const current = stored.map(fromStored);
   const caughtUp = await unlinkedDocuments(tx, source.id, current.map((doc) => doc.documentId));
@@ -260,9 +310,9 @@ export async function linkDocuments(
     return counts;
   }
   for (const doc of caughtUp) {
-    await linkAnnouncement(tx, source.id, doc, counts, now, runId);
+    await linkAnnouncement(tx, source.id, doc, counts, now, runId, regroupement);
     counts.caughtUpDocuments++;
   }
-  for (const doc of current) await linkAnnouncement(tx, source.id, doc, counts, now, runId);
+  for (const doc of current) await linkAnnouncement(tx, source.id, doc, counts, now, runId, regroupement);
   return counts;
 }

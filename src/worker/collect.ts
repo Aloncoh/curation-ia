@@ -8,7 +8,7 @@ import { classerEchec, lireRetryAfter, prochainEssai } from '../collect/acces.ts
 import { HUGGINGFACE_HEADERS, parseModelesTendance, parsePapiersDuJour } from '../collect/huggingface.ts';
 import { randomUUID } from 'node:crypto';
 import { eq } from 'drizzle-orm';
-import { linkDocuments } from '../catalog/link.ts';
+import { linkDocuments, memoireRegroupement, retenirAnnonces, type AnnonceRecente, type MemoireRegroupement } from '../catalog/link.ts';
 import { FEED_HEADERS, parseFeedItems, type ParsedFeed } from '../collect/feeds.ts';
 import { GITHUB_API_HEADERS, parseReleases, releasesUrl, SourceFormatError } from '../collect/github-releases.ts';
 import type { SourceFetcher } from '../collect/fetchers.ts';
@@ -39,6 +39,8 @@ export interface CollectOptions {
    * cycle s'arrête à la première étape en échec. Les sources non atteintes restent en file pour le cycle suivant.
    */
   dureeMaxMs?: number;
+  /** Annonces récentes partagées par les sources d'un même passage (link.ts) ; `runCollect` en crée une sans valeur. */
+  regroupement?: MemoireRegroupement;
   /** Points d'arrêt pour les tests d'arrêt brutal (jamais utilisés en mode réel). */
   hooks?: { insideStoreTransaction?: () => Promise<void> };
 }
@@ -131,6 +133,7 @@ export async function runCollect(options: CollectOptions): Promise<CollectSummar
 
   const enqueued = await enqueueCollectJobs(database.client, definitions.map((def) => def.id), now(), options.maxAttempts);
   const summaries: RunSummary[] = [];
+  const regroupement = options.regroupement ?? memoireRegroupement();
 
   // Plusieurs files de travail en parallèle (2026-11-10) : la collecte séquentielle de ~170 sources dépassait les 10 min
   // de l'étape (cycles en échec les 8 et 9 novembre), surtout à cause des allers-retours vers la base distante. Chaque
@@ -145,7 +148,7 @@ export async function runCollect(options: CollectOptions): Promise<CollectSummar
       // La réservation échoue d'elle-même si la pause est active (condition dans la même instruction SQL).
       const job = await claimNextJob(database.client, id, now(), options.leaseMs, definitions.map((def) => def.id));
       if (!job) break;
-      summaries.push(await processJob({ ...options, workerId: id }, job, findDefinition(job.sourceId, definitions), now));
+      summaries.push(await processJob({ ...options, workerId: id, regroupement }, job, findDefinition(job.sourceId, definitions), now));
     }
   }));
   const paused = await isPaused(database.db);
@@ -236,7 +239,9 @@ async function processJob(
         const { counts, stored } = await storeDocuments(tx, job.sourceId, documents, collectedAt, runId);
         // Fenêtre de la source dépassée depuis la dernière collecte réussie : signalé, jamais masqué.
         const possibleGap = Boolean(previous?.lastSuccessAt) && documents.length > 0 && counts.newDocuments === documents.length;
-        const links = await linkDocuments(tx, definition, stored, collectedAt, runId);
+        // Fraîche à chaque essai de la transaction : seules les annonces d'une transaction validée rejoignent la mémoire.
+        const creees: AnnonceRecente[] = [];
+        const links = await linkDocuments(tx, definition, stored, collectedAt, runId, { memoire: options.regroupement ?? memoireRegroupement(), creees });
         if (options.hooks?.insideStoreTransaction) await options.hooks.insideStoreTransaction();
         const finishedAt = now();
         await insertStep(tx, {
@@ -258,9 +263,10 @@ async function processJob(
           errorMessage: kept ? null : LEASE_LOST_MESSAGE,
         });
         if (kept) await tx.update(sources).set({ status: 'ok', lastSuccessAt: finishedAt, accesEtat: 'ok', accesDetail: null, echecsConsecutifs: 0, reessaiApres: null }).where(eq(sources.id, job.sourceId));
-        return { counts, links, kept, possibleGap };
+        return { counts, links, kept, possibleGap, creees };
       }),
     );
+    if (options.regroupement) retenirAnnonces(options.regroupement, outcome.creees);
     return {
       runId,
       sourceId: job.sourceId,

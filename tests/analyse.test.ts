@@ -1266,4 +1266,15 @@ describe('budget et pipeline, sans réseau', () => {
     expect(await lancer(m2)).toMatchObject({ ecartees: 2, sans_texte: 0 });
     expect(m2.appels).toBe(2);
   });
+
+  it('une capture sans texte en tête de file laisse sa place à la suivante', async () => {
+    const client = t.database.client;
+    const tete = (await client.execute(`select nd.document_id from news_item n join news_item_document nd on nd.news_item_id = n.id and nd.role = 'primary'
+      order by coalesce(n.announced_at, n.first_seen_at) desc, n.id desc limit 1`)).rows[0]!;
+    await client.execute({ sql: `update document_snapshot set content = 'TBD' where document_id = ?`, args: [Number(tete.document_id)] });
+    const m = faux(async () => reponse(ecarte));
+    // Lot de deux : la capture vide est lue, comptée, et deux autres actualités sont examinées.
+    expect(await lancer(m)).toMatchObject({ statut: 'terminee', sans_texte: 1, ecartees: 2 });
+    expect(m.appels).toBe(2);
+  });
 });

@@ -39,25 +39,37 @@ export async function approfondir(
   // Deux cas (demande de l'utilisateur du 2026-11-05, « capture les pages ») : une actualité déjà jugée « à approfondir »,
   // et, avant toute analyse, une actualité récente dont le flux ne donne qu'un titre ou une accroche (Intel, AMD, Hugging
   // Face, Higgsfield, Notion, résumés de TechCrunch ou d'Apple) : sans page, elle ne serait jamais analysée.
+  // Pages refusées depuis moins de REESSAI_APRES_HEURES : lues une seule fois, puis écartées en mémoire. Écrit dans la
+  // requête ci-dessous, ce contrôle relisait toute la table `run` pour chaque actualité (docs/lectures-turso.md, 2026-11-19).
+  const refus = await client.execute({
+    sql: `select error_message from run where kind = 'approfondir' and status = 'failed' and started_at >= ?`,
+    args: [reessai],
+  });
+  const refusees = new Set<string>();
+  for (const row of refus.rows) {
+    const message = row.error_message === null ? '' : String(row.error_message);
+    const fin = message.indexOf(' — ');
+    if (fin > 0) refusees.add(message.slice(0, fin));
+  }
+  // Le brouillon est lu juste après l'actualité : le tri sur l'état et la date précède ainsi la lecture des documents.
   const r = await client.execute({
     sql: `
     select n.id, doc.id as document_id, doc.url, doc.source_id, c.title, c.content, c.seq
     from news_item n
-    join news_item_document nd on nd.news_item_id = n.id and nd.role = 'primary'
+    left join post_draft d on d.news_item_id = n.id
+    cross join news_item_document nd on nd.news_item_id = n.id and nd.role = 'primary'
     join source_document doc on doc.id = nd.document_id
     join document_snapshot c on c.document_id = doc.id and c.seq = (select max(seq) from document_snapshot x where x.document_id = doc.id)
-    left join post_draft d on d.news_item_id = n.id
     where n.kind in ('annonce', 'version')
       and (d.status = 'a_approfondir' or (d.status = 'ecartee' and d.rejection_reason = 'source_insuffisante')
            or (d.id is null and coalesce(n.announced_at, n.first_seen_at) >= ?))
       and length(c.content) < ${TEXTE_MIN_CAPTURE}
-      and not exists (select 1 from run x where x.kind = 'approfondir' and x.status = 'failed' and x.started_at >= ? and x.error_message like doc.url || ' — %')
-    order by d.id is not null desc, coalesce(n.announced_at, n.first_seen_at) desc, n.id desc
-    limit ?`,
-    args: [depuis, reessai, o.max ?? MAX_PAGES_PAR_PASSAGE],
+    order by d.id is not null desc, coalesce(n.announced_at, n.first_seen_at) desc, n.id desc`,
+    args: [depuis],
   });
+  const aCapturer = r.rows.filter((row) => !refusees.has(String(row.url))).slice(0, o.max ?? MAX_PAGES_PAR_PASSAGE);
   const resultats: ResultatApprofondir[] = [];
-  for (const row of r.rows) {
+  for (const row of aCapturer) {
     const newsItemId = Number(row.id);
     const url = String(row.url);
     const source = SOURCES.find((s) => s.id === row.source_id);

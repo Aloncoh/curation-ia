@@ -3,7 +3,9 @@
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { approfondir } from '../src/collect/approfondir.ts';
 import type { Resolver, Transport } from '../src/collect/safe-fetch.ts';
-import { createTestDb, type TestDb } from './helpers/db.ts';
+import type { FeedSource } from '../src/sources.ts';
+import { runCollect } from '../src/worker/collect.ts';
+import { createTestDb, routeFetcher, type TestDb } from './helpers/db.ts';
 
 const MAINTENANT = '2026-11-05T12:00:00.000Z';
 const SOURCE = 'feed:intel-press'; // hôte autorisé : www.intc.com
@@ -86,5 +88,44 @@ describe('approfondir : capture des pages', () => {
     expect(String(trace.error_message)).toMatch(new RegExp(`^${url} — `));
     expect(await lancer(transport)).toEqual([]);
     expect(transport.appels).toEqual([url]);
+  });
+
+  it('une page refusée ne prend pas la place d’une autre au passage suivant', async () => {
+    // Même date : le plus grand identifiant passe en premier.
+    const autre = await actualite(1, { contenu: '' });
+    const refusee = await actualite(2, { contenu: '' });
+    const transport = faux({ [refusee]: { status: 403, body: 'Forbidden' }, [autre]: { body: ARTICLE } });
+    expect(await lancer(transport, 1)).toMatchObject([{ url: refusee, statut: 'refusee' }]);
+    expect(await lancer(transport, 1)).toMatchObject([{ url: autre, statut: 'capturee' }]);
+    expect(transport.appels).toEqual([refusee, autre]);
+  });
+});
+
+describe('collecte après la capture d’une page', () => {
+  const url = 'https://www.intc.com/news/accelerator';
+  const flux = (texte: string) => `<?xml version="1.0"?><rss version="2.0"><channel><title>t</title><item><title>Intel ships a new AI accelerator</title><link>${url}</link><pubDate>Wed, 04 Nov 2026 10:00:00 +0000</pubDate><description>${texte}</description></item></channel></rss>`;
+  const source: FeedSource = { id: SOURCE, kind: 'feed', name: 'Intel', config: { url: 'https://www.intc.com/feed', maxItems: 20, linkHosts: ['www.intc.com'] }, allowedHosts: ['www.intc.com'], fetchIntervalMinutes: 60 };
+  const collecte = async (texte: string) =>
+    (await runCollect({ database: t.database, fetcher: routeFetcher({ 'https://www.intc.com/feed': flux(texte) }), mode: 'live', workerId: 'w', leaseMs: 60_000, maxAttempts: 3, retryBackoffMs: 60_000, definitions: [source] })).runs[0];
+  const captures = async () => Number((await t.database.client.execute('select count(*) as n from document_snapshot')).rows[0]!.n);
+
+  it('le flux inchangé ne remplace pas la page capturée, et la page n’est pas redemandée', async () => {
+    expect(await collecte('Accroche.')).toMatchObject({ status: 'succeeded', newDocuments: 1 });
+    const transport = faux({ [url]: { body: ARTICLE } });
+    expect(await lancer(transport)).toMatchObject([{ url, statut: 'capturee' }]);
+    // Sans ce contrôle, la collecte voyait « modifié », réenregistrait l'accroche, et la page était relue à chaque passage.
+    expect(await collecte('Accroche.')).toMatchObject({ unchangedDocuments: 1, changedDocuments: 0 });
+    expect(await captures()).toBe(2);
+    expect(await lancer(transport)).toEqual([]);
+    expect(transport.appels).toEqual([url]);
+  });
+
+  it('un flux réellement modifié donne toujours une nouvelle capture', async () => {
+    await collecte('Accroche.');
+    await lancer(faux({ [url]: { body: ARTICLE } }));
+    expect(await collecte('Accroche corrigée par Intel.')).toMatchObject({ unchangedDocuments: 0, changedDocuments: 1 });
+    expect(await captures()).toBe(3);
+    // La même accroche corrigée, revue ensuite, ne crée plus rien.
+    expect(await collecte('Accroche corrigée par Intel.')).toMatchObject({ unchangedDocuments: 1, changedDocuments: 0 });
   });
 });

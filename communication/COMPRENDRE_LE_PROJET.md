@@ -808,3 +808,23 @@ flowchart LR
 **Ce qui est prévu, pas construit.** Une fiche « face à face » fabriquée par le site à partir de deux de ses propres posts (accès, prix, limites, affirmations de chaque éditeur côte à côte) : c'est un nouveau format, à décider par le porteur du projet.
 
 **Qui a fait quoi.** L'utilisateur a demandé cette ligne éditoriale. Claude Code a écrit les règles, la consigne, les contrôles, les tests et cette documentation. Les posts seront rédigés par les agents du site.
+
+## 25. La panne du 19 novembre : trop de lectures dans la base _(mesuré et corrigé en partie les 2026-11-19 et 20 sur la base locale ; code envoyé sur `main` le 2026-11-20, pas encore vérifié en ligne)_
+
+**Ce qui s'est passé.** Le site, la chaîne et l'application mobile lisent la même base en ligne, chez Turso, sur son offre gratuite. Cette offre compte les lignes lues : 500 millions par mois. Une ligne compte dès qu'une requête la parcourt, même si elle ne sert pas au résultat. Le 19 novembre, le quota du mois était épuisé : Turso a refusé toutes les lectures, et le site n'a plus rien affiché. Le porteur du projet a choisi d'attendre plutôt que de payer l'offre supérieure.
+
+**Ce que la mesure a montré.** Sur la base locale, chaque requête du vrai code a été rejouée en comptant les lignes parcourues. Le site n'est pas le premier responsable : c'est la chaîne. Quatre requêtes relisaient une table entière pour chaque ligne d'une autre, ou toute la file d'attente à chaque cycle. Leur coût grossissait donc bien plus vite que la base. Le passage de 91 à 281 sources, les 10 et 16 novembre, l'a fait exploser. Détail et méthode : [docs/lectures-turso.md](../docs/lectures-turso.md).
+
+**Ce qui est corrigé (trois requêtes, sans toucher à la base).**
+
+- *Choisir les pages à capturer.* Pour chaque actualité, le code relisait tout le journal des exécutions, pour savoir si la page avait déjà été refusée. Il lit maintenant la liste des refus une seule fois : 313 469 lignes par passage avant, 2 660 après.
+- *Regrouper les annonces d'un même sujet.* Pour chaque nouveau document, le code relisait toutes les annonces. Il les lit maintenant une fois par passage de collecte et les garde en mémoire : 2 002 lignes par document avant, 1 181 par passage après. Essai réel sur une copie de la base : 60 nouveaux documents, une seule lecture au lieu de 60.
+- *La file d'attente de la rédaction.* À chaque cycle, le code relisait toutes les actualités en attente avec le texte complet de leurs captures (2 Mo), pour n'en examiner que quelques dizaines. Il lit maintenant la file sans aucun texte, puis le texte du seul lot examiné : 10 623 lignes avant, 2 569 après.
+
+**Ce qui reste.** La file reste proportionnelle au nombre d'actualités : pour la borner, il faut des index, donc une modification de la base en ligne, qui demande l'accord du porteur du projet. Reste aussi un cache sur le site (aucune page n'est mise en cache aujourd'hui).
+
+**Un défaut trouvé en chemin, corrigé le 2026-11-20.** Quand un flux ne donne qu'une accroche, le site va lire la page de l'article. Mais à la collecte suivante, le code comparait l'accroche du flux à cette page : il concluait « modifié », réenregistrait l'accroche, et la page était relue. La boucle recommençait à chaque passage, pour au moins 7 sources dans la base locale. La collecte compare maintenant l'accroche à la précédente accroche. Essai réel sur une copie de la base : 10 documents de Black Forest Labs inchangés, aucun « modifié ». Décision et compromis : [ADR 0019](../docs/decisions/0019-lectures-de-la-base.md).
+
+**Ce qui n'est pas vérifié.** Tous les chiffres viennent de la base locale (941 actualités). Les montants en ligne sont des estimations : seul le tableau d'usage du compte Turso les donnerait. Rien n'a pu être essayé en ligne, la base étant bloquée.
+
+**Qui a fait quoi.** L'utilisateur a décidé d'attendre plutôt que de payer, puis a demandé la mesure et accepté les corrections. Claude Code a mesuré, réécrit les trois requêtes, écrit les tests et cette documentation. Les agents du site n'ont rien fait ici : la chaîne est à l'arrêt tant que la base est bloquée.

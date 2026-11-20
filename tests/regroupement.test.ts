@@ -1,4 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+import { DUREE_MEMOIRE_MS, memoireRegroupement, type MemoireRegroupement } from '../src/catalog/link.ts';
 import { memeSujet } from '../src/catalog/regroupement.ts';
 import type { FeedSource } from '../src/sources.ts';
 import { runCollect } from '../src/worker/collect.ts';
@@ -37,5 +38,44 @@ describe('regroupement à la collecte', () => {
     await collecte(); // une seconde collecte ne recrée rien
     const r = await t.database.client.execute(`select (select count(*) from news_item) n, (select group_concat(role, ',') from (select role from news_item_document order by role)) roles`);
     expect(r.rows[0]).toMatchObject({ n: 1, roles: 'primary,supporting' });
+  });
+
+  const APPLE = ["Apple's new smart home lineup includes a smart lock, thermostat, and video doorbells", 'The new Apple Home Collection includes a video doorbell, smart lock, and more'] as const;
+  const etat = async () => (await t.database.client.execute(`select (select count(*) from news_item) n, (select group_concat(role, ',') from (select role from news_item_document order by role)) roles`)).rows[0];
+
+  it('une collecte annulée ne laisse aucune actualité fantôme dans la mémoire du passage', async () => {
+    const a = flux('a', 'techcrunch.com');
+    const b = flux('b', 'www.theverge.com');
+    const routes = { 'https://techcrunch.com/feed': rss(APPLE[0], 'https://techcrunch.com/apple-home'), 'https://www.theverge.com/feed': rss(APPLE[1], 'https://www.theverge.com/apple-home') };
+    // La première transaction du passage crée son actualité puis échoue : la seconde source ne doit pas s'y rattacher.
+    let transactions = 0;
+    await runCollect({
+      database: t.database, fetcher: routeFetcher(routes), mode: 'fixture', workerId: 'w', leaseMs: 60_000, maxAttempts: 3, retryBackoffMs: 60_000, definitions: [a, b],
+      hooks: { insideStoreTransaction: async () => { if (++transactions === 1) throw new Error('arrêt simulé'); } },
+    });
+    expect(transactions).toBe(2);
+    expect(await etat()).toMatchObject({ n: 1, roles: 'primary' });
+  });
+
+  it('la mémoire du passage est relue après son délai, pour voir ce qu’un autre passage a écrit', async () => {
+    const a = flux('a', 'www.intc.com');
+    const b = flux('b', 'techcrunch.com');
+    const c = flux('c', 'www.theverge.com');
+    const routes = {
+      'https://www.intc.com/feed': rss('Intel Reports Third-Quarter 2026 Financial Results', 'https://www.intc.com/results'),
+      'https://techcrunch.com/feed': rss(APPLE[0], 'https://techcrunch.com/apple-home'),
+      'https://www.theverge.com/feed': rss(APPLE[1], 'https://www.theverge.com/apple-home'),
+    };
+    const debut = Date.parse('2026-11-05T10:00:00.000Z');
+    const collecte = (definitions: FeedSource[], minute: number, regroupement?: MemoireRegroupement) =>
+      runCollect({
+        database: t.database, fetcher: routeFetcher(routes), mode: 'fixture', workerId: 'w', leaseMs: 60_000, maxAttempts: 3, retryBackoffMs: 60_000, definitions,
+        clock: () => new Date(debut + minute * 60_000), ...(regroupement ? { regroupement } : {}),
+      });
+    const memoire = memoireRegroupement();
+    await collecte([a], 0, memoire); // la mémoire est lue ici
+    await collecte([b], 1); // un autre passage écrit l'annonce d'Apple
+    await collecte([c], 1 + DUREE_MEMOIRE_MS / 60_000, memoire);
+    expect(await etat()).toMatchObject({ n: 2, roles: 'primary,primary,supporting' });
   });
 });

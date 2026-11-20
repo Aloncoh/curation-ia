@@ -101,28 +101,25 @@ export interface OptionsBrouillons {
 }
 
 /**
- * Actualités sans résultat définitif, dont la dernière capture vient d'une collecte réelle, en commençant par celles
- * déjà qualifiées et payées. Un sujet à approfondir repasse quand une nouvelle capture arrive. Une capture de moins de trois mots ne permet aucune citation, une capture trop longue
- * coûterait trop cher : elles ne partent pas au modèle et ne figent rien, l'actualité repassera avec une autre capture.
+ * File d'attente : actualités sans résultat définitif, en commençant par celles déjà qualifiées et payées, puis les sujets
+ * repris par plusieurs sources, puis les plus récentes. Un sujet à approfondir repasse quand une nouvelle capture arrive.
+ * La file ne lit aucune capture (2026-11-19, docs/lectures-turso.md) : relue à chaque cycle, elle parcourait une dizaine
+ * de lignes par actualité en attente et rapatriait tout leur texte, pour n'en examiner que quelques dizaines. Les captures
+ * sont lues ensuite, pour les seules actualités utiles : `titresATrier` (titres proposés au tri) et `chargerLot` (lot examiné).
  */
-async function aTraiter(client: Client, sources?: readonly string[]) {
+async function fileAttente(client: Client, sources?: readonly string[]): Promise<Row[]> {
+  const parSource = Boolean(sources?.length);
   const r = await client.execute(
-    `select n.id, n.title, n.announced_at, n.first_seen_at, v.version, pr.name as produit,
-            c.id as snapshot_id, c.document_id, c.title as snapshot_title, c.content, c.content_format, src.id as source_id, src.name as source_nom,
-            d.status as etat, d.snapshot_id as snapshot_qualifie, d.prompt_version as prompt_qualifie, d.model as modele_qualifie, d.content as qualification
+    `select n.id, n.title, n.announced_at, n.first_seen_at, d.status as etat${parSource ? `,
+            (select doc.source_id from news_item_document nd join source_document doc on doc.id = nd.document_id
+              where nd.news_item_id = n.id and nd.role = 'primary') as source_id` : ''}
           from news_item n
-          join news_item_document nd on nd.news_item_id = n.id and nd.role = 'primary'
-          join document_snapshot c on c.document_id = nd.document_id
-            and c.seq = (select max(seq) from document_snapshot x where x.document_id = nd.document_id)
-          join run r on r.id = c.run_id and r.mode = 'live'
-          join source_document doc on doc.id = nd.document_id
-          join source src on src.id = doc.source_id
-          left join news_item_target t on t.news_item_id = n.id
-          left join product_version v on v.id = t.product_version_id
-          left join product pr on pr.id = t.product_id
           left join post_draft d on d.news_item_id = n.id
           -- Une découverte (liste de ressources, ADR 0011) n'est jamais qualifiée avec la grille des actualités.
-          where n.kind not in ('decouverte', 'selection') and (d.id is null or d.status = 'qualifiee' or (d.status = 'a_approfondir' and d.snapshot_id <> c.id)
+          where n.kind not in ('decouverte', 'selection') and (d.id is null or d.status = 'qualifiee'
+            or (d.status = 'a_approfondir' and d.snapshot_id <> (select c.id from news_item_document nd
+                  join document_snapshot c on c.document_id = nd.document_id
+                  where nd.news_item_id = n.id and nd.role = 'primary' order by c.seq desc limit 1))
             -- Sortie illisible récente : reprise tant que moins de 3 motifs sont notés (deux essais par passage).
             or (d.status = 'sortie_invalide' and d.created_at > strftime('%Y-%m-%dT%H:%M:%fZ', 'now', '-4 days')
                 and (select count(*) from llm_call l where l.news_item_id = n.id and l.error like 'sortie illisible%') < 3))
@@ -131,10 +128,93 @@ async function aTraiter(client: Client, sources?: readonly string[]) {
             (select count(*) from news_item_document x where x.news_item_id = n.id) > 1 desc,
             coalesce(n.announced_at, n.first_seen_at) desc, n.id desc`,
   );
-  const lignesSource = sources?.length ? r.rows.filter((row) => sources.includes(String(row.source_id))) : r.rows;
-  const tailleAdmise = lignesSource.filter((row) => String(row.content).length + String(row.snapshot_title).length <= LONGUEUR_MAX_CAPTURE);
-  const avecTexte = tailleAdmise.filter((row) => !moinsDeTroisMots(toPlainText(String(row.content), String(row.content_format))));
-  return { candidats: avecTexte, sansTexte: tailleAdmise.length - avecTexte.length, tropLongues: lignesSource.length - tailleAdmise.length };
+  return parSource ? r.rows.filter((row) => sources!.includes(String(row.source_id))) : r.rows;
+}
+
+/** Identifiants lus par requête quand la file est parcourue par tranches. */
+const TRANCHE_FILE = 200;
+
+/** Jusqu'à cette longueur, la capture est lue en entier pour le tri des titres ; au-delà, seule sa longueur l'est. */
+const CAPTURE_COURTE = 500;
+
+/**
+ * Titres à proposer au tri, dans l'ordre de la file, avec le nom de leur source : au plus `max`. Comme pour le lot, la
+ * dernière capture doit venir d'une collecte réelle et ne pas être trop longue. Une capture courte de moins de trois mots
+ * n'est pas proposée ; une capture plus longue n'est pas lue ici : `chargerLot` fait le contrôle exact avant tout appel.
+ */
+async function titresATrier(client: Client, attente: readonly Row[], max: number): Promise<TitreATrier[]> {
+  const titres: TitreATrier[] = [];
+  for (let debut = 0; debut < attente.length && titres.length < max; debut += TRANCHE_FILE) {
+    const tranche = attente.slice(debut, debut + TRANCHE_FILE);
+    const r = await client.execute({
+      sql: `select nd.news_item_id as id, src.name as source_nom, c.content_format, length(c.content) + length(c.title) as taille,
+              case when length(c.content) <= ${CAPTURE_COURTE} then c.content end as courte
+            from news_item_document nd
+            join document_snapshot c on c.document_id = nd.document_id
+              and c.seq = (select max(seq) from document_snapshot x where x.document_id = nd.document_id)
+            join run r on r.id = c.run_id and r.mode = 'live'
+            join source_document doc on doc.id = nd.document_id
+            join source src on src.id = doc.source_id
+            where nd.role = 'primary' and nd.news_item_id in (${tranche.map(() => '?').join(', ')})`,
+      args: tranche.map((row) => Number(row.id)),
+    });
+    const captures = new Map(r.rows.map((row) => [Number(row.id), row]));
+    for (const row of tranche) {
+      if (titres.length >= max) break;
+      const capture = captures.get(Number(row.id));
+      if (!capture || Number(capture.taille) > LONGUEUR_MAX_CAPTURE) continue;
+      if (capture.courte !== null && moinsDeTroisMots(toPlainText(String(capture.courte), String(capture.content_format)))) continue;
+      titres.push({ id: Number(row.id), titre: String(row.title), source: String(capture.source_nom), vuLe: String(row.first_seen_at) });
+    }
+  }
+  return titres;
+}
+
+/**
+ * Lit, dans l'ordre donné, de quoi remplir un lot : l'actualité, sa cible, son brouillon et sa dernière capture, qui doit
+ * venir d'une collecte réelle. Une capture de moins de trois mots ne permet aucune citation, une capture trop longue
+ * coûterait trop cher : elles ne partent pas au modèle et ne figent rien, l'actualité repassera avec une autre capture.
+ * Une capture trop longue n'est pas rapatriée. Les deux compteurs portent sur les actualités lues pour remplir ce lot.
+ */
+async function chargerLot(client: Client, ordre: readonly number[], max: number) {
+  const lignes: Row[] = [];
+  let sansTexte = 0;
+  let tropLongues = 0;
+  const tranche = Math.max(1, Math.min(max, TRANCHE_FILE));
+  for (let debut = 0; debut < ordre.length && lignes.length < max; debut += tranche) {
+    const ids = ordre.slice(debut, debut + tranche);
+    const r = await client.execute({
+      sql: `select n.id, n.title, n.announced_at, n.first_seen_at, v.version, pr.name as produit,
+              c.id as snapshot_id, c.document_id, c.content_format, src.id as source_id, src.name as source_nom,
+              case when length(c.content) + length(c.title) <= ${LONGUEUR_MAX_CAPTURE} then c.title end as snapshot_title,
+              case when length(c.content) + length(c.title) <= ${LONGUEUR_MAX_CAPTURE} then c.content end as content,
+              d.status as etat, d.snapshot_id as snapshot_qualifie, d.prompt_version as prompt_qualifie, d.model as modele_qualifie, d.content as qualification
+            from news_item n
+            join news_item_document nd on nd.news_item_id = n.id and nd.role = 'primary'
+            join document_snapshot c on c.document_id = nd.document_id
+              and c.seq = (select max(seq) from document_snapshot x where x.document_id = nd.document_id)
+            join run r on r.id = c.run_id and r.mode = 'live'
+            join source_document doc on doc.id = nd.document_id
+            join source src on src.id = doc.source_id
+            left join news_item_target t on t.news_item_id = n.id
+            left join product_version v on v.id = t.product_version_id
+            left join product pr on pr.id = t.product_id
+            left join post_draft d on d.news_item_id = n.id
+            where n.id in (${ids.map(() => '?').join(', ')})`,
+      args: [...ids],
+    });
+    const parId = new Map(r.rows.map((row) => [Number(row.id), row]));
+    for (const id of ids) {
+      if (lignes.length >= max) break;
+      const row = parId.get(id);
+      if (!row) continue;
+      // La base compte en caractères, le code en unités UTF-16 : le second contrôle garde la limite d'origine.
+      if (row.content === null || String(row.content).length + String(row.snapshot_title).length > LONGUEUR_MAX_CAPTURE) { tropLongues++; continue; }
+      if (moinsDeTroisMots(toPlainText(String(row.content), String(row.content_format)))) { sansTexte++; continue; }
+      lignes.push(row);
+    }
+  }
+  return { lignes, sansTexte, tropLongues };
 }
 
 /** Une qualification payée se réutilise tant que la capture, le prompt et le modèle sont les mêmes. */
@@ -345,21 +425,18 @@ export async function genererBrouillons(o: OptionsBrouillons) {
       ], 'write'));
       bilan.relances_publiables++;
     }
-    const { candidats, sansTexte, tropLongues } = await aTraiter(client, o.sources);
-    bilan.sans_texte = sansTexte;
-    bilan.trop_longues = tropLongues;
-    let file = candidats;
+    const attente = await fileAttente(client, o.sources);
+    let file = attente;
     // Tri des titres (2026-11-12, ADR 0015) : quand la file dépasse le lot, un seul appel choisit l'ordre d'examen des
     // nouveaux titres récents. Il ne décide rien d'autre ; s'il échoue, l'ordre habituel reste.
-    if (o.tri && candidats.length > o.maxItems) {
-      const connus = candidats.filter((row) => row.etat !== null);
+    if (o.tri && attente.length > o.maxItems) {
+      const connus = attente.filter((row) => row.etat !== null);
       const depuis = horloge().getTime() - FENETRE_TRI_JOURS * 86_400_000;
-      const nouveaux: TitreATrier[] = candidats
+      const recents = attente
         .filter((row) => row.etat === null && Date.parse(String(row.first_seen_at)) >= depuis
-          && (o.ageMaxJours === undefined || !preselection({ annonceLe: row.announced_at === null ? null : String(row.announced_at), vuLe: String(row.first_seen_at) }, o.ageMaxJours)))
-        .slice(0, MAX_TITRES_TRI)
-        .map((row) => ({ id: Number(row.id), titre: String(row.title), source: String(row.source_nom), vuLe: String(row.first_seen_at) }));
+          && (o.ageMaxJours === undefined || !preselection({ annonceLe: row.announced_at === null ? null : String(row.announced_at), vuLe: String(row.first_seen_at) }, o.ageMaxJours)));
       const places = o.maxItems - connus.length;
+      const nouveaux = places > 0 ? await titresATrier(client, recents, MAX_TITRES_TRI) : [];
       if (places > 0 && nouveaux.length > places) {
         bilan.tri_titres = nouveaux.length;
         let tri: Sortie<Tri>;
@@ -373,11 +450,13 @@ export async function genererBrouillons(o: OptionsBrouillons) {
         if (tri.ok) {
           const choix = retenus(nouveaux, tri.valeur, places);
           bilan.tri_retenus = choix.length;
-          file = ordonner(candidats, (row) => Number(row.id), [...connus.map((row) => Number(row.id)), ...choix.map((c) => c.id)]);
+          file = ordonner(attente, (row) => Number(row.id), [...connus.map((row) => Number(row.id)), ...choix.map((c) => c.id)]);
         } else bilan.tri_echec ??= tri.statut;
       }
     }
-    const lignes = file.slice(0, o.maxItems);
+    const { lignes, sansTexte, tropLongues } = await chargerLot(client, file.map((row) => Number(row.id)), o.maxItems);
+    bilan.sans_texte = sansTexte;
+    bilan.trop_longues = tropLongues;
     for (const row of lignes) {
       const id = Number(row.id);
       const titre = String(row.title);

@@ -102,6 +102,21 @@ describe('tri des titres : lot de brouillons', () => {
     expect(await qualifiee()).toBe(Number(attendu));
   });
 
+  it('une capture sans texte n’est pas proposée au tri', async () => {
+    const client = t.database.client;
+    const vide = (await client.execute(`select n.title, nd.document_id from news_item n join news_item_document nd on nd.news_item_id = n.id and nd.role = 'primary' order by n.id desc limit 1`)).rows[0]!;
+    await client.execute({ sql: `update document_snapshot set content = 'TBD' where document_id = ?`, args: [Number(vide.document_id)] });
+    let titres: string[] = [];
+    const { m } = espion(async (r) => {
+      titres = r.utilisateur.split('\n').filter((l) => /^\d+ \|/.test(l)).map((l) => l.split(' | ')[3]!);
+      return reponse(JSON.stringify({ sujets: [{ ligne: 1, sujet: 'premier titre' }] }));
+    });
+    const bilan = await lancer(m);
+    expect(bilan.tri_titres).toBe(titres.length);
+    expect(titres.length).toBeGreaterThan(1);
+    expect(titres).not.toContain(String(vide.title));
+  });
+
   it('pas de tri quand toute la file tient dans le lot', async () => {
     const n = Number((await t.database.client.execute(`select count(*) as n from news_item`)).rows[0]!.n);
     const { m, requetes } = espion(async () => reponse('{}'));
