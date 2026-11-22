@@ -1,6 +1,6 @@
 // GET /api/v1/recherche?q=motion+design&tri=pertinence&langue=fr : publications trouvées et raisons (SPEC §7.15).
 // La requête n'est jamais enregistrée.
-import { limiteValide, recherche, RequeteInvalide } from '../../../../../../src/api/v1/index.ts';
+import { limiteValide, recherche, RequeteInvalide } from '../../../../lib/lectures.ts';
 import { langueDeLAppel, repondre } from '../../../../lib/api.ts';
 import { contexte } from '../../../../lib/serveur.ts';
 

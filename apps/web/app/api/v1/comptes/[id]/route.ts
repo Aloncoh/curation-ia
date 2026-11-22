@@ -1,5 +1,5 @@
 // GET /api/v1/comptes/:id?langue=fr&curseur=… : un compte et une page de ses publications.
-import { compte, limiteValide } from '../../../../../../../src/api/v1/index.ts';
+import { compte, limiteValide } from '../../../../../lib/lectures.ts';
 import { langueDeLAppel, repondre } from '../../../../../lib/api.ts';
 import { contexte } from '../../../../../lib/serveur.ts';
 

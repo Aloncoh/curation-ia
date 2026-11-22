@@ -5,7 +5,7 @@ import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 import type { Fiche, SectionFiche } from '@curation/contrat';
 import { LOCALE_INTL, sensDe, textesDe, type Langue, type Textes } from '@curation/textes';
-import { fiche } from '../../../../../../src/api/v1/index.ts';
+import { fiche } from '../../../../lib/lectures.ts';
 import { BarreRetour, Cadre, Vide } from '../../../../components/Cadre.tsx';
 import { BasculeOriginal } from '../../../../components/TexteDuPost.tsx';
 import { dateLongue, hrefSur } from '../../../../lib/format.ts';

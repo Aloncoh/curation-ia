@@ -1,6 +1,6 @@
 // GET /api/v1/publications/:id?langue=he : une publication visible, original et traduction (packages/contrat).
 import { Publication } from '@curation/contrat';
-import { publication } from '../../../../../../../src/api/v1/index.ts';
+import { publication } from '../../../../../lib/lectures.ts';
 import { langueDeLAppel, repondre } from '../../../../../lib/api.ts';
 import { contexte } from '../../../../../lib/serveur.ts';
 

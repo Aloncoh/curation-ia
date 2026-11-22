@@ -2,7 +2,7 @@
 // « Sources ». Une publication non visible (brouillon, à vérifier, ou en attente en mode public) est introuvable.
 import type { Metadata } from 'next';
 import { textesDe } from '@curation/textes';
-import { publication } from '../../../../../src/api/v1/index.ts';
+import { publication } from '../../../lib/lectures.ts';
 import { BarreRetour, Cadre, Vide } from '../../../components/Cadre.tsx';
 import { Post } from '../../../components/Post.tsx';
 import { contexte } from '../../../lib/serveur.ts';

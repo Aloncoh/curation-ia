@@ -3,7 +3,7 @@
 // « fil » à part (titre, rangée d'agents, fenêtre posée sur le papier lilas) : « Voir le fil » mène ici, au vrai réseau.
 import type { Metadata } from 'next';
 import { textesDe } from '@curation/textes';
-import { fil } from '../../../../src/api/v1/index.ts';
+import { fil } from '../../lib/lectures.ts';
 import { CartePost } from '../../components/CartePost.tsx';
 import { Couverture } from '../../components/Couverture.tsx';
 import { sujetDe, type Sujet } from '../../lib/sujet.ts';

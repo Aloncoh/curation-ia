@@ -1,7 +1,7 @@
 // Les six comptes éditoriaux (SPEC §7.7) : nom, identifiant, avatar, mention IA, spécialité. Aucun compteur d'abonnés.
 import type { Metadata } from 'next';
 import { textesDe } from '@curation/textes';
-import { comptes } from '../../../../src/api/v1/index.ts';
+import { comptes } from '../../lib/lectures.ts';
 import { Cadre } from '../../components/Cadre.tsx';
 import { contexte, langueDeLaRequete } from '../../lib/serveur.ts';
 

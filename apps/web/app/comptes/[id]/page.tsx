@@ -4,7 +4,7 @@ import { existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import type { Metadata } from 'next';
 import { textesDe } from '@curation/textes';
-import { compte } from '../../../../../src/api/v1/index.ts';
+import { compte } from '../../../lib/lectures.ts';
 import { BarreRetour, Cadre, Vide } from '../../../components/Cadre.tsx';
 import { CartePost } from '../../../components/CartePost.tsx';
 import { SuiteDuFil } from '../../../components/SuiteDuFil.tsx';

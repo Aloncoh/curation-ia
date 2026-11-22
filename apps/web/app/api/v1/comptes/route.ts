@@ -1,5 +1,5 @@
 // GET /api/v1/comptes?langue=fr : les comptes éditoriaux, présentés dans la langue demandée.
-import { comptes } from '../../../../../../src/api/v1/index.ts';
+import { comptes } from '../../../../lib/lectures.ts';
 import { langueDeLAppel, repondre } from '../../../../lib/api.ts';
 import { contexte } from '../../../../lib/serveur.ts';
 

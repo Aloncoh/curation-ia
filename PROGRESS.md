@@ -605,3 +605,13 @@ DeepSeek Flash, 30 actualités, 34 appels, 0,0125 $ (budget autorisé 4 $). 19 �
 - Non vérifié : en ligne (base bloquée). Les captures en double déjà écrites restent en base ; l'avis « la source a été mise à jour après ce post » n'a pas été revérifié sur ces documents.
 - Observé, non traité : les flux de Sketch et de Blender changent de contenu d'un jour à l'autre (19 documents sur 20 « modifiés » pour Sketch à cet essai).
 - Envoyé sur `main` le 2026-11-20, à la demande de l'utilisateur (« Envoie sur main »), avec les trois réécritures de la veille. Les fichiers de la session mobile ne sont pas dans cet envoi.
+
+## 2026-11-20 — Cache des lectures du site
+
+- Demande de l'utilisateur : « je veux qu'on avance sur les etapes ». Étape E de `docs/lectures-turso.md`.
+- Fait : `apps/web/lib/lectures.ts` garde 60 secondes le résultat de chaque lecture de l'API v1, par mode, langue et paramètres ; les 7 pages et les 6 routes `/api/v1` passent par ce module. Réglage `CURATION_SITE_CACHE_S` (0 désactive). ADR 0019 complété.
+- Vérifié sur le serveur local, en comptant les requêtes envoyées à la base : accueil 87, fil 42, post 25, fiche 17 à la première vue ; 0 à la vue suivante. Trois langues distinctes, erreurs 400 et 404 inchangées, aucune erreur de console, `next build` abouti, 914 tests au vert (52 fichiers).
+- Non vérifié : sur Vercel (base en ligne bloquée).
+- Limite : la première vue coûte autant qu'avant ; l'accueil envoie toujours 87 requêtes.
+- Signalé par `next build` : Next.js 16.4.4 est touché par une faille connue, mise à niveau recommandée. Non faite : décision de l'utilisateur.
+- Envoyé sur `main` le 2026-11-22, à la demande de l'utilisateur (« Envoie sur main »). Construction chez Vercel non vérifiée.

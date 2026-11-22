@@ -4,7 +4,7 @@
 
 **Conclusion.** La chaîne consomme beaucoup plus que le site. Quatre requêtes de la chaîne relisent toute une table pour chaque ligne d'une autre, ou toute la file à chaque cycle : leur coût grossit bien plus vite que la base. Trois d'entre elles datent du 2026-11-05 ; le passage de 91 à 281 sources, les 10 et 16 novembre, a fait grossir les tables et donc ce coût. Les corriger demande trois réécritures et un index.
 
-**Mise à jour du 2026-11-19, même jour.** Les trois réécritures (A, B, D) sont faites et mesurées : section 7. La boucle de recapture est corrigée le 2026-11-20 (section 5). Restent les index (C) et le cache du site (E).
+**Mise à jour du 2026-11-19, même jour.** Les trois réécritures (A, B, D) sont faites et mesurées : section 7. La boucle de recapture est corrigée le 2026-11-20 (section 5), le cache du site (E) est fait le même jour (section 8). Restent les index (C).
 
 ## 1. Méthode
 
@@ -95,4 +95,23 @@ Code seul, aucune migration ([ADR 0019](decisions/0019-lectures-de-la-base.md)).
 - **B parcourt encore `news_item` une fois par passage** (jusqu'à une fois toutes les 5 minutes) ; le même index `news_item(first_seen_at)` le limiterait aux 3 derniers jours.
 - **A parcourt encore `run` et `news_item` une fois par heure** ; un index `run(kind, status, started_at)` supprimerait le premier parcours.
 - **Changements de comportement, voulus et limités** : le nombre de captures « sans texte » et « trop longues » du bilan compte désormais celles lues pour remplir le lot, plus celles de toute la file ; le tri des titres peut proposer un titre dont la capture, longue, n'a presque pas de mots (le lot l'écarte ensuite) ; une annonce écrite par un autre processus pendant un passage n'est vue par le regroupement qu'au bout de 5 minutes au plus.
-- Non faits : C (index `llm_call(news_item_id)`), E (cache du site), F. La boucle de recapture de la section 5 est corrigée le 2026-11-20.
+- Non faits : C (index `llm_call(news_item_id)`) et F. E (cache du site) est fait le 2026-11-20 (section 8). La boucle de recapture de la section 5 est corrigée le 2026-11-20.
+
+## 8. Cache des lectures du site (E), fait le 2026-11-20
+
+Les pages et les routes `/api/v1` passent par `apps/web/lib/lectures.ts`. Le résultat de chaque lecture de l'API v1 est gardé 60 secondes (`unstable_cache` de Next.js, documentation livrée avec la version 16.4.4 lue le 2026-11-20), par mode de visibilité, langue et paramètres. Pendant le rendu d'une page, une même lecture n'est faite qu'une fois. Le site n'écrit jamais dans la base : rien n'est à invalider.
+
+Mesuré sur le serveur local du site, en comptant les requêtes réellement envoyées à la base :
+
+| Page | Requêtes à la première vue | À la vue suivante, dans les 60 secondes |
+|---|---|---|
+| Accueil `/` | 87 | 0 |
+| `/fil` | 42 | 0 |
+| `/api/v1/fil?limite=5` | 13 | 0 |
+| Page d'un post | 25 | 0 |
+| Fiche d'un post (après la page du post) | 17 | 0 |
+
+- Avant, chaque vue coûtait le montant de la première colonne. Désormais une page coûte ce montant au plus une fois par minute, par langue, quel que soit le nombre de visites ou de robots.
+- Vérifié aussi : les trois langues ont chacune leur réponse ; une langue inconnue donne toujours 400, un post inconnu 404 ; aucune erreur dans la console du navigateur ; `next build` aboutit ; 914 tests au vert.
+- **Limites.** La première vue coûte autant qu'avant : l'accueil envoie toujours 87 requêtes, ce qui reste à réduire. Chaque recherche différente a sa propre entrée. Une nouveauté paraît sur le site avec 60 secondes de retard au plus ; `CURATION_SITE_CACHE_S` règle cette durée, 0 désactive le cache.
+- **Non vérifié** : le comportement sur Vercel (partage du cache entre les instances, annoncé par la documentation), la base en ligne étant bloquée.

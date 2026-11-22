@@ -45,6 +45,7 @@ Contrainte : une migration de la base en ligne demande l'accord de l'utilisateur
 
 - **Mémoire du regroupement.** Une annonce écrite par un autre processus pendant un passage n'est vue qu'au bout de 5 minutes au plus : deux actualités pourraient naître pour un même sujet au lieu d'une. Le risque est faible (la chaîne n'a qu'une collecte à la fois) et borné par le délai. Une transaction annulée ne laisse rien en mémoire : ses annonces n'y entrent qu'après validation.
 - **File en deux temps.** Les compteurs « sans texte » et « trop longues » du bilan portent désormais sur les captures lues pour remplir le lot, plus sur toute la file. Le tri peut proposer un titre dont la capture longue n'a presque pas de mots ; le contrôle exact reste fait avant tout appel payant, comme avant.
+- **Cache du site.** Une nouveauté paraît sur le site avec 60 secondes de retard au plus. La première vue d'une page coûte autant qu'avant ; seules les suivantes sont épargnées.
 - **Pages refusées.** La comparaison d'adresse est exacte ; elle était approximative (`like`).
 
 ## Conséquences
@@ -58,4 +59,4 @@ Contrainte : une migration de la base en ligne demande l'accord de l'utilisateur
 1. [x] Réécrire les trois requêtes, tests et mesure avant/après.
 2. [ ] Index (option B) : accord de l'utilisateur, puis migration.
 3. [x] Boucle de recapture (2026-11-20) : la collecte compare le contenu reçu à la dernière capture venue de la source, pas à la page lue par `approfondir` (docs/lectures-turso.md, section 5).
-4. [ ] Cache des lectures du site.
+4. [x] Cache des lectures du site (2026-11-20) : 60 secondes par mode, langue et paramètres (`apps/web/lib/lectures.ts`) ; une nouveauté paraît avec ce retard au plus, réglable par `CURATION_SITE_CACHE_S`.

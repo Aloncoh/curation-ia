@@ -1,5 +1,5 @@
 // GET /api/v1/fil?langue=fr&curseur=…&limite=20 : une page du fil (packages/contrat, PageFil).
-import { fil, limiteValide } from '../../../../../../src/api/v1/index.ts';
+import { fil, limiteValide } from '../../../../lib/lectures.ts';
 import { langueDeLAppel, repondre } from '../../../../lib/api.ts';
 import { contexte } from '../../../../lib/serveur.ts';
 

@@ -12,7 +12,7 @@ import type { CSSProperties, ReactNode } from 'react';
 import '@fontsource-variable/recursive/full.css';
 import { LOCALE_INTL, textesDe, type Langue, type Textes } from '@curation/textes';
 import type { Publication } from '../../../packages/contrat/src/index.ts';
-import { compte, fil, releveDuRepere, relevesRapides } from '../../../src/api/v1/index.ts';
+import { compte, fil, releveDuRepere, relevesRapides } from '../lib/lectures.ts';
 import { AccrocheEcrite, type Phrase } from '../components/AccrocheEcrite.tsx';
 import { BarrePilules } from '../components/BarrePilules.tsx';
 import { Couverture } from '../components/Couverture.tsx';

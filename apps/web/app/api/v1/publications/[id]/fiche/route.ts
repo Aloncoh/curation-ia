@@ -1,5 +1,5 @@
 // GET /api/v1/publications/:id/fiche?langue=fr : fiche d'approfondissement (packages/contrat, Fiche).
-import { fiche } from '../../../../../../../../src/api/v1/index.ts';
+import { fiche } from '../../../../../../lib/lectures.ts';
 import { langueDeLAppel, repondre } from '../../../../../../lib/api.ts';
 import { contexte } from '../../../../../../lib/serveur.ts';
 

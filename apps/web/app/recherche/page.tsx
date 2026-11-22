@@ -4,7 +4,7 @@
 import type { Metadata } from 'next';
 import { textesDe, type Textes } from '@curation/textes';
 import type { ResultatRecherche } from '@curation/contrat';
-import { fil, recherche, RequeteInvalide } from '../../../../src/api/v1/index.ts';
+import { fil, recherche, RequeteInvalide } from '../../lib/lectures.ts';
 import { Cadre, Vide } from '../../components/Cadre.tsx';
 import { CartePost } from '../../components/CartePost.tsx';
 import { RechercheVivante } from '../../components/RechercheVivante.tsx';
