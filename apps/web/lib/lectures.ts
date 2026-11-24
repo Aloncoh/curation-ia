@@ -21,12 +21,12 @@ export const DUREE_CACHE_S = dureeDepuis(process.env);
 
 type Lecture<A extends unknown[], R> = (ctx: Contexte, ...args: A) => Promise<R>;
 
-function enCache<A extends unknown[], R>(nom: string, lire: Lecture<A, R>): Lecture<A, R> {
+function enCache<A extends unknown[], R>(nom: string, lire: Lecture<A, R>, duree = DUREE_CACHE_S): Lecture<A, R> {
   if (DUREE_CACHE_S === 0) return lire;
   const partagee = unstable_cache(
     (mode: Mode, langue: Langue, args: string) => lire({ client: base(), mode, langue }, ...(JSON.parse(args) as A)),
     ['api-v1', nom],
-    { revalidate: DUREE_CACHE_S },
+    { revalidate: duree },
   );
   const parRendu = cache((mode: Mode, langue: Langue, args: string) => partagee(mode, langue, args));
   return (ctx, ...args) => parRendu(ctx.mode, ctx.langue, cleDe(args));
@@ -40,3 +40,9 @@ export const fiche = enCache('fiche', api.fiche);
 export const recherche = enCache('recherche', api.recherche);
 export const relevesRapides = enCache('relevesRapides', api.relevesRapides);
 export const releveDuRepere = enCache('releveDuRepere', api.releveDuRepere);
+// La liste des face à face parcourt toutes les publications et ne change qu'à la parution d'un modèle : elle est
+// gardée un quart d'heure au moins, sous une seule clé pour les trois langues (elle ne contient aucun texte traduit).
+// Un face à face, lui, ne lit que ses deux publications.
+const listeDesFaces = enCache('facesAFace', api.facesAFace, Math.max(DUREE_CACHE_S, 900));
+export const facesAFace = (ctx: Contexte) => listeDesFaces({ ...ctx, langue: 'en' });
+export const faceAFace = enCache('faceAFace', api.faceAFace);

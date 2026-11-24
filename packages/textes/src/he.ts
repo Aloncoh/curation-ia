@@ -147,6 +147,14 @@ export const he: Textes = {
     actuelle: 'נוכחית',
     introuvable: 'המידע המורחב לא נמצא',
   },
+  faceAFace: {
+    titre: 'זה מול זה',
+    lien: (autre) => `זה מול זה עם ${autre}`,
+    note: 'כל עמודה חוזרת על המידע המורחב של הפוסט שלה, לפי המקור שלו. הפלטפורמה לא בדקה ולא דירגה את המודלים האלה.',
+    annonceLe: (date) => `הוכרז ב-${date}`,
+    rapportes: 'תוצאות שדווחו',
+    introuvable: 'ההשוואה לא נמצאה',
+  },
   carrousel: {
     nom: 'קרוסלה',
     diapositive: (n, total) => `שקופית ${n} מתוך ${total}`,

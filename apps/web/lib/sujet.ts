@@ -178,7 +178,11 @@ export function titreAnnonce(p: Pick<Publication, 'nature' | 'media'>, sujet: Su
 /** Sujet d'une publication, ou null (une sélection montre sa mosaïque, pas un sujet unique). */
 export function sujetDe(p: Pick<Publication, 'bouton' | 'sources' | 'nature'>): Sujet | null {
   if (p.nature === 'selection') return null;
-  const url = p.bouton?.url ?? p.sources.documents.find((d) => d.url)?.url ?? null;
+  return sujetDeLAdresse(p.bouton?.url ?? p.sources.documents.find((d) => d.url)?.url ?? null);
+}
+
+/** Sujet déduit d'une adresse officielle seule (face à face : la source citée de chaque modèle). */
+export function sujetDeLAdresse(url: string | null): Sujet | null {
   if (!url) return null;
   const h = hote(url);
   if (!h) return null;

@@ -45,6 +45,7 @@
     "etat": "node src/cli/etat.ts",
     "couts": "node src/cli/couts.ts",
     "turso:copier": "node src/cli/turso-copier.ts",
+    "base:essai": "node src/cli/base-essai.ts",
     "web:dev": "next dev apps/web --port 3000",
     "web:build": "next build apps/web",
     "web:start": "next start apps/web --port 3000",

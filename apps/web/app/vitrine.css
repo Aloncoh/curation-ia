@@ -375,6 +375,17 @@ html.curseur-actif .vitrine .curseur.visible { opacity: 1; }
   & .tuile-sujet span { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; padding: 0 6px; }
   & .tuile-sujet b { font-weight: 600; font-size: .92rem; letter-spacing: -.005em; }
   & .tuile-sujet small { color: var(--f-pied); font-size: .78rem; white-space: nowrap; }
+  /* Face à face (2026-11-24) : une tuile par rapprochement de deux nouveaux modèles, les deux noms côte à côte. */
+  & .bande-faces { display: flex; gap: 12px; overflow-x: auto; scrollbar-width: none; margin-inline: -16px; padding: 0 16px 4px; }
+  & .tuile-face { flex: 1 0 260px; display: grid; gap: 8px; padding: 12px 14px; border-radius: 18px; background: var(--f-carte); border: 1px solid var(--f-trait); color: var(--f-texte); text-decoration: none; transition: border-color .2s; }
+  & .tuile-face:hover { border-color: color-mix(in srgb, var(--f-accent) 35%, var(--f-trait)); }
+  & .tuile-face small { color: var(--f-pied); font-size: .78rem; font-weight: 600; }
+  & .tf-cotes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  & .tf-cote { display: flex; align-items: center; gap: 8px; min-width: 0; }
+  & .tf-cote b { font-weight: 600; font-size: .92rem; line-height: 1.25; overflow-wrap: anywhere; }
+  & .tf-logo { flex: none; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 10px; background: var(--f-coton); }
+  & .tf-logo svg, & .tf-logo img { width: 20px; height: 20px; object-fit: contain; }
+  & .tf-logo .couv-monogramme { font: 800 .8rem/1 var(--v-texte); }
 
   /* Colonne de droite : rejoindre le réseau, puis les six agents. */
   & .colonne-droite { position: sticky; top: 0; height: 100dvh; overflow-y: auto; scrollbar-width: none; display: grid; align-content: start; gap: 14px; padding: 20px 18px 18px 4px; }

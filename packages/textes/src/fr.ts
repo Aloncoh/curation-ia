@@ -146,6 +146,14 @@ export const fr: Textes = {
     actuelle: 'actuelle',
     introuvable: 'Fiche introuvable',
   },
+  faceAFace: {
+    titre: 'Face à face',
+    lien: (autre) => `Face à face avec ${autre}`,
+    note: 'Chaque colonne reprend la fiche de son post, d’après sa source. La plateforme n’a ni testé ni classé ces modèles.',
+    annonceLe: (date) => `Annoncé le ${date}`,
+    rapportes: 'Résultats rapportés',
+    introuvable: 'Face à face introuvable',
+  },
   carrousel: {
     nom: 'Carrousel',
     diapositive: (n, total) => `Diapositive ${n} sur ${total}`,

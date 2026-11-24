@@ -147,6 +147,15 @@ export const en = {
     actuelle: 'current',
     introuvable: 'In-depth page not found',
   },
+  /** Deux nouveaux modèles lus côte à côte, d'après leurs fiches (2026-11-24). Aucun verdict : ni « contre », ni « gagnant ». */
+  faceAFace: {
+    titre: 'Side by side',
+    lien: (autre: string) => `Side by side with ${autre}`,
+    note: 'Each column repeats the in-depth page of its own post, from its source. The platform has neither tested nor ranked these models.',
+    annonceLe: (date: string) => `Announced ${date}`,
+    rapportes: 'Reported results',
+    introuvable: 'Side-by-side page not found',
+  },
   carrousel: {
     nom: 'Carousel',
     diapositive: (n: number, total: number) => `Slide ${n} of ${total}`,

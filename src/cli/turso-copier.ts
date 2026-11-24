@@ -1,6 +1,7 @@
 // npm run turso:copier : prépare la base en ligne (P5) à partir de la base locale.
 // - Cible : DATABASE_URL (libsql://…turso.io) et DATABASE_AUTH_TOKEN, saisis par l'utilisateur dans son environnement.
-// - Source : CURATION_SOURCE_DB (par défaut file:data/curation.db).
+// - Source : CURATION_SOURCE_DB (par défaut file:data/curation.db) ; si la source est elle-même une base distante
+//   (copie d'un hébergeur vers un autre, ADR 0020), son jeton se lit dans CURATION_SOURCE_AUTH_TOKEN.
 // Sans --confirmer, affiche seulement ce qui serait copié. Avec --confirmer : migrations sur la cible, puis copie de
 // toutes les tables (refusée si la cible contient déjà des publications). Jamais lancée par Claude sur Turso.
 import { describeDatabaseUrl } from '../config.ts';
@@ -12,7 +13,7 @@ import { runCommand } from './shared.ts';
 await runCommand(async ({ config, database }) => {
   const sourceUrl = process.env.CURATION_SOURCE_DB?.trim() || 'file:data/curation.db';
   if (sourceUrl === config.databaseUrl) { console.error('Refus : la cible (DATABASE_URL) est la base source. Indiquer la base Turso dans DATABASE_URL.'); return 1; }
-  const source = openDatabase(sourceUrl, config.dbBusyTimeoutMs);
+  const source = openDatabase(sourceUrl, config.dbBusyTimeoutMs, process.env.CURATION_SOURCE_AUTH_TOKEN?.trim() || null);
   try {
     console.log(`Source : ${describeDatabaseUrl(sourceUrl)} → cible : ${describeDatabaseUrl(config.databaseUrl)}`);
     if (!process.argv.includes('--confirmer')) {

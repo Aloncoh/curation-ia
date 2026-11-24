@@ -805,7 +805,11 @@ flowchart LR
 
 **Ce qui n'est pas vérifié.** Aucun texte n'a encore été rédigé avec la nouvelle consigne : cela demande un appel payant, laissé aux cycles en ligne. Le nombre de comparatifs que les sources publient vraiment reste à mesurer ; les grands classements (Artificial Analysis, LMArena) ne sont pas branchés.
 
-**Ce qui est prévu, pas construit.** Une fiche « face à face » fabriquée par le site à partir de deux de ses propres posts (accès, prix, limites, affirmations de chaque éditeur côte à côte) : c'est un nouveau format, à décider par le porteur du projet.
+**La fiche « face à face »** _(construite le 2026-11-24 ; code envoyé sur `main` le même jour ; pas encore vérifiée en ligne, la base étant bloquée)_. Le porteur du projet l'a demandée. Le site prend deux de ses propres posts de nouveaux modèles et les pose côte à côte sur une page : ce qui change, l'accès, le coût, les limites connues, puis les résultats rapportés, chacun avec son auteur et ses conditions. Rien n'est ajouté : chaque colonne recopie la fiche du post, donc ce que dit sa source. Une ligne que la source ne renseigne pas affiche « Non renseigné ». Il n'y a ni note, ni gagnant, ni appel à un modèle d'IA.
+
+Quels modèles sont rapprochés ? Une règle écrite dans le code : un modèle, et le plus proche modèle annoncé avant lui, de la même famille (texte, audio ou visuel), d'un autre éditeur, à 120 jours d'écart au plus. La famille et l'éditeur sont devinés à partir des catégories du post, de son titre et de l'adresse de sa source : c'est une déduction, qui peut se tromper, pas une donnée vérifiée. On arrive à la page par une tuile en haut du fil ou par un lien sous le post.
+
+Essai réel en local : une paire existe dans la base du poste, Mistral Large 4 (post 82) et Gemini 4 Carbon (post 84), affichée en français, en anglais et en hébreu, sur grand et petit écran. Ce qui n'est pas vérifié : le résultat en ligne, et la justesse des rapprochements sur les modèles publiés.
 
 **Qui a fait quoi.** L'utilisateur a demandé cette ligne éditoriale. Claude Code a écrit les règles, la consigne, les contrôles, les tests et cette documentation. Les posts seront rédigés par les agents du site.
 
@@ -826,6 +830,8 @@ flowchart LR
 **Un défaut trouvé en chemin, corrigé le 2026-11-20.** Quand un flux ne donne qu'une accroche, le site va lire la page de l'article. Mais à la collecte suivante, le code comparait l'accroche du flux à cette page : il concluait « modifié », réenregistrait l'accroche, et la page était relue. La boucle recommençait à chaque passage, pour au moins 7 sources dans la base locale. La collecte compare maintenant l'accroche à la précédente accroche. Essai réel sur une copie de la base : 10 documents de Black Forest Labs inchangés, aucun « modifié ». Décision et compromis : [ADR 0019](../docs/decisions/0019-lectures-de-la-base.md).
 
 **Ce qui n'est pas vérifié.** Tous les chiffres viennent de la base locale (941 actualités). Les montants en ligne sont des estimations : seul le tableau d'usage du compte Turso les donnerait. Rien n'a pu être essayé en ligne, la base étant bloquée.
+
+**Un hébergeur de repli, préparé le 2026-11-22 : Bunny Database.** Le porteur du projet a demandé s'il existait autre chose que Turso. Bunny Database accepte, d'après sa documentation, le même client que Turso : le code n'aurait pas à changer. Il est gratuit pendant sa préversion publique, puis facturé à l'usage. Rien n'est basculé. Ce qui est prêt : une commande, `npm run base:essai`, qui vérifie sur une base vide tout ce dont la chaîne et le site ont besoin, et un plan de bascule avec retour arrière ([ADR 0020](../docs/decisions/0020-bunny-database-plan-de-repli.md)). Ce qui manque : un compte, que seul le porteur du projet peut créer, et les données, qui restent chez Turso tant que ses lectures sont bloquées.
 
 **Qui a fait quoi.** L'utilisateur a décidé d'attendre plutôt que de payer, puis a demandé la mesure et accepté les corrections. Claude Code a mesuré, réécrit les trois requêtes, écrit les tests et cette documentation. Les agents du site n'ont rien fait ici : la chaîne est à l'arrêt tant que la base est bloquée.
 

@@ -79,7 +79,8 @@ export function limiteValide(limite: unknown): number {
   return n;
 }
 
-const visibles = (mode: Mode) => (mode === 'public' ? `p.status = 'publie'` : `(p.status = 'publie' or (p.status = 'en_attente' and pp.post_id is not null))`);
+/** Condition SQL de visibilité d'une publication `p` (et de son planning `pp`), partagée par toutes les lectures. */
+export const visibles = (mode: Mode) => (mode === 'public' ? `p.status = 'publie'` : `(p.status = 'publie' or (p.status = 'en_attente' and pp.post_id is not null))`);
 
 /**
  * Version dépassée (2026-11-05, « le site ne donne pas envie ») : le fil principal s'ouvrait sur Claude Code 2.1.309,

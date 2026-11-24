@@ -1,7 +1,8 @@
 // API v1 (ADR 0010) : fonctions de lecture utilisées par les routes /api/v1 et par les pages du site, sans accès propre
 // à la base côté site. Chaque réponse est validée par le contrat (packages/contrat) avant d'être servie.
 import type { Client } from '@libsql/client';
-import { Fiche, PageFil, ReponseCompte, ReponseComptes, ReponseRecherche, type Langue, type Publication } from '../../../packages/contrat/src/index.ts';
+import { FaceAFace, Fiche, PageFil, ReponseCompte, ReponseComptes, ReponseFacesAFace, ReponseRecherche, type Langue, type Publication } from '../../../packages/contrat/src/index.ts';
+import { faceAFaceParIds, pairesVisibles } from './face-a-face.ts';
 import { ficheParId } from './fiche.ts';
 import { rechercher } from '../../recherche/rechercher.ts';
 import { lireComptes, pageDuFil, publicationParId, publicationsParIds, type Contexte } from './publications.ts';
@@ -52,6 +53,17 @@ export async function recherche(ctx: Contexte, requete: unknown, o: { tri?: 'per
     }),
     curseur_suivant: r.curseur_suivant,
   });
+}
+
+/** Face à face visibles (src/api/v1/face-a-face.ts) : deux nouveaux modèles lus côte à côte, d'après nos publications. */
+export async function facesAFace(ctx: Contexte): Promise<ReponseFacesAFace> {
+  return ReponseFacesAFace.parse({ paires: await pairesVisibles(ctx) });
+}
+
+/** Le face à face de deux publications, la plus récente d'abord ; null s'il n'existe pas. */
+export async function faceAFace(ctx: Contexte, a: number, b: number): Promise<FaceAFace | null> {
+  const f = await faceAFaceParIds(ctx, a, b);
+  return f ? FaceAFace.parse(f) : null;
 }
 
 export type { Langue };

@@ -3,10 +3,10 @@
 // « fil » à part (titre, rangée d'agents, fenêtre posée sur le papier lilas) : « Voir le fil » mène ici, au vrai réseau.
 import type { Metadata } from 'next';
 import { textesDe } from '@curation/textes';
-import { fil } from '../../lib/lectures.ts';
+import { facesAFace, fil } from '../../lib/lectures.ts';
 import { CartePost } from '../../components/CartePost.tsx';
-import { Couverture } from '../../components/Couverture.tsx';
-import { sujetDe, type Sujet } from '../../lib/sujet.ts';
+import { Couverture, Logo } from '../../components/Couverture.tsx';
+import { sujetDe, sujetDeLAdresse, type Sujet } from '../../lib/sujet.ts';
 import type { Publication } from '../../../../packages/contrat/src/index.ts';
 import { Cadre, Vide } from '../../components/Cadre.tsx';
 import { SuiteDuFil } from '../../components/SuiteDuFil.tsx';
@@ -25,6 +25,7 @@ export default async function Fil() {
   });
   // Les sujets (anciennement la page Explorer, fusionnée ici le 2026-11-06) : un rendu par sujet, avec le nombre de posts.
   const recents = await fil(ctx, { limite: 50 }).catch(() => null);
+  const faces = await facesAFace(ctx).catch(() => null);
   const sujets = new Map<string, { sujet: Sujet; p: Publication; n: number }>();
   for (const p of recents?.publications ?? []) {
     const sujet = sujetDe(p);
@@ -42,6 +43,27 @@ export default async function Fil() {
             <a key={sujet.nom} className="tuile-sujet" href={`/recherche?${new URLSearchParams({ q: sujet.nom })}`} data-compte={p.compte.id}>
               <Couverture sujet={sujet} graine={p.id} agent={{ nom: p.compte.nom, avatar: p.compte.avatar }} format="grand" etiquette={t.post.couverture(sujet.nom)} domaine={t.post.domaines[sujet.domaine]} fond={p.fond} />
               <span><b>{sujet.nom}</b><small>{t.vitrine.nPosts(n)}</small></span>
+            </a>
+          ))}
+        </nav>
+      )}
+      {/* Face à face (2026-11-24) : les trois plus récents rapprochements de deux nouveaux modèles, d'après nos posts. */}
+      {faces && faces.paires.length > 0 && (
+        <nav className="bande-faces" aria-label={t.faceAFace.titre}>
+          {faces.paires.slice(0, 3).map((x) => (
+            <a key={x.paire} className="tuile-face" href={`/face-a-face/${x.paire}`}>
+              <small>{t.faceAFace.titre}</small>
+              <span className="tf-cotes">
+                {x.cotes.map((c) => {
+                  const sujet = sujetDeLAdresse(c.url);
+                  return (
+                    <span key={c.id} className="tf-cote">
+                      {sujet && <span className="tf-logo" aria-hidden="true"><Logo sujet={sujet} /></span>}
+                      <b><bdi dir="ltr">{c.produit}</bdi></b>
+                    </span>
+                  );
+                })}
+              </span>
             </a>
           ))}
         </nav>

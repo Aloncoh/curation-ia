@@ -630,3 +630,21 @@ DeepSeek Flash, 30 actualités, 34 appels, 0,0125 $ (budget autorisé 4 $). 19 �
 - Limite : la première vue coûte autant qu'avant ; l'accueil envoie toujours 87 requêtes.
 - Signalé par `next build` : Next.js 16.4.4 est touché par une faille connue, mise à niveau recommandée. Non faite : décision de l'utilisateur.
 - Envoyé sur `main` le 2026-11-22, à la demande de l'utilisateur (« Envoie sur main »). Construction chez Vercel non vérifiée.
+
+## 2026-11-22 — Hébergeur de repli pour la base : Bunny Database préparé, rien de basculé
+
+- Question de l'utilisateur : « y a pas autre chose que Turso ? ». Relevé le jour même sur les pages officielles : Bunny Database (même client libSQL, gratuit en préversion), serveur libSQL à héberger soi-même, Cloudflare D1 (5 millions de lignes lues par jour), Postgres chez Supabase ou Neon (réécriture complète). Son choix : « Prépare Bunny ».
+- Fait : `npm run base:essai` (`src/db/essai-compat.ts`, `src/cli/base-essai.ts`), qui vérifie sur une base vide ce que la chaîne et le site exigent (migrations, index partiels, FTS5, transactions interactives, lots, lecture après écriture, délais) et refuse la base du projet ; `npm run turso:copier` accepte une source distante ; plan de bascule et de retour arrière dans l'ADR 0020.
+- Vérifié : la commande sur un fichier SQLite vide (14 essais au vert), ses deux refus (variable absente, base du projet), 2 tests ajoutés.
+- Non vérifié : tout ce qui concerne Bunny lui-même. Aucun compte n'existe ; la compatibilité réelle reste une hypothèse tirée de sa documentation.
+- En attente de l'utilisateur : compte, base en région unique et jeton, puis `ESSAI_DATABASE_URL` et `ESSAI_DATABASE_AUTH_TOKEN` dans `.env.local`.
+
+## 2026-11-24 — Fiche « face à face » entre deux modèles (envoyée sur `main`, pas vérifiée en ligne)
+
+- Demande de l'utilisateur (« Oui, construis-la »), reprise après son « Pas maintenant » sur Bunny.
+- Fait : lectures `facesAFace` et `faceAFace` de l'API v1 (`src/api/v1/face-a-face.ts`, contrat `FaceAFace`), page `/face-a-face/[paire]`, bande de tuiles sur le fil, lien sous le post, libellés en trois langues. Aucun appel à un modèle, aucune écriture en base, aucune migration.
+- Règle : un modèle (nature `nouveau_modele`) est rapproché du plus proche modèle annoncé avant lui, de même famille (texte, audio, visuel), d'un autre éditeur et d'un autre nom, à 120 jours au plus. Famille et éditeur sont déduits (catégories, titre, adresse de la source).
+- Vérifié : 7 tests ajoutés (`tests/face-a-face.test.ts`), 928 tests au vert (54 fichiers), types du dépôt et du site. En local sur la base du poste : une paire (posts 82 et 84), rendue en français, anglais et hébreu, à 800 px et 375 px, sans débordement ni erreur de console ; paire inversée et adresse invalide donnent « introuvable ».
+- Mesuré : la liste des paires lit 219 lignes pour 72 publications en local (environ 3 par publication) ; le site la garde 15 minutes, sous une seule clé pour les trois langues.
+- Envoyé sur `main` le jour même, à la demande de l'utilisateur (« Oui, envoie »), avec la préparation Bunny du 2026-11-22.
+- Non vérifié : en ligne (base bloquée ; déploiement Vercel non constaté) ; une ligne « Non renseigné » sur de vraies données (couverte par test seulement) ; la justesse de la famille déduite sur les modèles publiés en ligne.

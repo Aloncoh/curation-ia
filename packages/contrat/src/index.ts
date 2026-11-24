@@ -178,3 +178,43 @@ export const Fiche = z.object({
   revisions: z.array(z.object({ seq: z.number().int().positive(), cree_le: z.string(), courante: z.boolean() })).min(1),
 });
 export type Fiche = z.infer<typeof Fiche>;
+
+/**
+ * Face à face (2026-11-24) : deux publications de nouveaux modèles lues côte à côte, d'après leur propre fiche. Aucune
+ * donnée nouvelle, aucun classement : chaque côté reprend ce que sa source dit, dans la langue servie pour sa fiche.
+ */
+export const CoteFaceAFace = z.object({
+  publication: Publication,
+  /** Nom du modèle, tel qu'il est écrit dans la source. */
+  produit: z.string(),
+  /** Date de l'annonce donnée par la source ; null si elle est inconnue. */
+  annonce_le: z.string().nullable(),
+  langue: Langue,
+  traduction: Traduction.nullable(),
+  /** Une ligne que la source ne renseigne pas vaut null : l'interface écrit « Non renseigné ». */
+  lignes: z.object({
+    nouveaute: z.array(ElementFiche).nullable(),
+    acces: z.array(ElementFiche).nullable(),
+    cout: z.array(ElementFiche).nullable(),
+    limites_connues: z.array(ElementFiche).nullable(),
+  }),
+  /** Résultats et témoignages rapportés : `titre` nomme leur auteur, `complement` leurs conditions. Jamais mesurés par le site. */
+  rapportes: z.array(ElementFiche),
+});
+export type CoteFaceAFace = z.infer<typeof CoteFaceAFace>;
+
+/** `paire` : les deux identifiants de publication, le modèle le plus récent d'abord (`84-82`). */
+export const FaceAFace = z.object({ paire: z.string(), cotes: z.tuple([CoteFaceAFace, CoteFaceAFace]) });
+export type FaceAFace = z.infer<typeof FaceAFace>;
+
+export const ResumeFaceAFace = z.object({
+  paire: z.string(),
+  cotes: z.tuple([
+    z.object({ id: z.number().int().positive(), produit: z.string(), url: z.string().nullable() }),
+    z.object({ id: z.number().int().positive(), produit: z.string(), url: z.string().nullable() }),
+  ]),
+});
+export type ResumeFaceAFace = z.infer<typeof ResumeFaceAFace>;
+
+export const ReponseFacesAFace = z.object({ paires: z.array(ResumeFaceAFace) });
+export type ReponseFacesAFace = z.infer<typeof ReponseFacesAFace>;
