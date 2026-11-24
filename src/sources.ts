@@ -345,6 +345,30 @@ export const SOURCES: SourceDefinition[] = [
   flux('siggraph', 'SIGGRAPH Blog — flux RSS officiel', 'https://blog.siggraph.org/feed/', 'blog.siggraph.org'),
   // Élargissement du 2026-11-10 (six agents, flux vérifiés en réel) : src/sources-elargies.ts.
   ...sourcesElargies(githubReleases),
+  // Liste de canaux de l'utilisateur du 2026-11-22 (« de nouveaux agents sur de nouveaux canaux », docs/sources.md §3.17).
+  // Chaque adresse a été relevée depuis le poste le 2026-11-22, robots.txt lu d'abord. La plupart étaient déjà branchées
+  // ou différées ; les deux classements nouveaux sont dans src/ressources/classements.ts.
+  // Google, rubrique IA du blog officiel : 200, 20 entrées, la dernière du 2026-11-20 ; 18 de ces 20 articles étaient
+  // absents du flux général (`feed:google-blog`) et du flux Gemini le même jour. Signée Nodi : modèles et recherche.
+  { ...flux('google-ia', 'Google, rubrique IA du blog officiel (Innovation & AI) — flux RSS officiel', 'https://blog.google/innovation-and-ai/rss/', 'blog.google'), compte: 'nodi' },
+  // Canaux de cette liste qui refusent la lecture automatique, ou n'offrent aucun flux sans clé : gardés au registre, non
+  // collectés, avec l'état constaté le 2026-11-22. Aucun n'est contourné.
+  ...([
+    ['lastweekin-ai', 'Last Week in AI (lettre)', 'https://lastweekin.ai/feed', 'lastweekin.ai', 'restriction_contractuelle', 'Lettre hébergée par Substack, dont les conditions interdisent de collecter ses pages (« crawls, scrapes, or spiders ») et d’en stocker une part notable (lues le 2026-11-22) ; le flux répond 200 (20 entrées)', 'feed:tldr-ai (lettre utilisée comme signal)'],
+    ['import-ai', 'Import AI (lettre)', 'https://importai.substack.com/feed', 'importai.substack.com', 'restriction_contractuelle', 'Lettre hébergée par Substack, dont les conditions interdisent de collecter ses pages (« crawls, scrapes, or spiders ») et d’en stocker une part notable (lues le 2026-11-22) ; le flux répond 200 (20 entrées)', 'feed:tldr-ai (lettre utilisée comme signal)'],
+    ['reddit-localllama', 'Reddit, r/LocalLLaMA', 'https://www.reddit.com/r/LocalLLaMA/.rss', 'www.reddit.com', 'refus_acces', 'robots.txt de reddit.com : « Disallow: / » pour tous les robots (relevé le 2026-11-22) ; l’API exige une approbation écrite', 'accord écrit de Reddit ou API approuvée (docs/sources.md §3.7) ; Hacker News pour le signal de communauté'],
+    ['reddit-machinelearning', 'Reddit, r/MachineLearning', 'https://www.reddit.com/r/MachineLearning/.rss', 'www.reddit.com', 'refus_acces', 'robots.txt de reddit.com : « Disallow: / » pour tous les robots (relevé le 2026-11-22) ; l’API exige une approbation écrite', 'accord écrit de Reddit ou API approuvée (docs/sources.md §3.7) ; Hacker News pour le signal de communauté'],
+    ['reddit-singularity', 'Reddit, r/singularity', 'https://www.reddit.com/r/singularity/.rss', 'www.reddit.com', 'refus_acces', 'robots.txt de reddit.com : « Disallow: / » pour tous les robots (relevé le 2026-11-22) ; l’API exige une approbation écrite', 'accord écrit de Reddit ou API approuvée (docs/sources.md §3.7) ; Hacker News pour le signal de communauté'],
+    ['arxiv-api', 'arXiv, API de recherche (cs.AI, cs.CL, cs.LG)', 'https://export.arxiv.org/api/query?search_query=cat:cs.AI&sortBy=submittedDate&sortOrder=descending&max_results=20', 'export.arxiv.org', 'refus_acces', 'robots.txt d’export.arxiv.org : « Disallow: / » pour tous les robots (relevé le 2026-11-22) ; les flux rss.arxiv.org restent lisibles, mais sans ordre d’intérêt', 'huggingface:papiers-du-jour (articles arXiv les plus votés du jour)'],
+    ['lmarena', 'LMArena, classement des modèles', 'https://arena.ai/leaderboard', 'arena.ai', 'refus_acces', 'HTTP 403 pour notre client déclaré, alors que robots.txt autorise /leaderboard ; lmarena.ai redirige vers arena.ai (relevé le 2026-11-22)', 'comparatifs publiés par leurs auteurs dans les flux déjà collectés'],
+    ['artificial-analysis', 'Artificial Analysis, comparatif des modèles', 'https://artificialanalysis.ai/models', 'artificialanalysis.ai', 'absence_de_flux', 'Aucun flux ; la page (1,3 Mo) est rendue par script ; l’API gratuite exige un compte, une clé et la mention de la source (référence lue le 2026-11-22)', 'API gratuite, avec une clé créée par l’utilisateur'],
+    ['meta-ai-blog', 'Meta AI, blog', 'https://ai.meta.com/blog/', 'ai.meta.com', 'refus_acces', 'HTTP 400 pour notre client déclaré, robots.txt compris (relevé le 2026-11-22)', 'feed:meta-newsroom, feed:meta-engineering'],
+    ['facebook-groupes', 'Facebook, groupes publics sur l’IA et Claude', 'https://www.facebook.com/groups/', 'www.facebook.com', 'refus_acces', 'HTTP 400 pour notre client déclaré, robots.txt et page des conditions compris (relevé le 2026-11-22)', 'API Graph de Meta, avec une application validée (décision de l’utilisateur)'],
+    ['github-trending', 'GitHub Trending, vues du jour et de la semaine', 'https://github.com/trending?since=daily', 'github.com', 'refus_acces', 'robots.txt de github.com : « Disallow: /*?since=* » pour tous les robots, et un en-tête qui renvoie vers l’API (relevé le 2026-11-22)', 'découverte par l’API de recherche GitHub (plan par thèmes, trois fenêtres de dates)'],
+  ] as const).map(([id, nom, url, hote, etat, motif, alternative]): FeedSource => ({
+    ...flux(id, `${nom} — gardé au registre, non collecté`, url, hote),
+    differee: { etat, motif, depuis: '2026-11-22', alternative },
+  })),
 ];
 
 /** Restreint les sources à une liste d'identifiants (variable CURATION_ONLY_SOURCES) ; toutes sinon. */

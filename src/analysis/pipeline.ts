@@ -260,8 +260,13 @@ async function ouvrirExecution(client: Client, o: OptionsBrouillons, runId: stri
   }
 }
 
-/** Brouillons « à vérifier » encore jamais relancés, dont la publication attend toujours : les plus récents d'abord. */
-async function aRelancer(client: Client, limite: number) {
+/**
+ * Brouillons « à vérifier » encore jamais relancés, dont la publication attend toujours : les plus récents d'abord.
+ * Avec `sources`, seulement ceux de ces sources (2026-11-22) : un lot restreint à quelques sources ne dépense plus son
+ * plafond à relancer les brouillons des autres.
+ */
+async function aRelancer(client: Client, limite: number, sources?: readonly string[]) {
+  const seulement = sources && sources.length > 0 ? `and doc.source_id in (${sources.map(() => '?').join(', ')})` : '';
   const r = await client.execute({
     sql: `select d.id, d.news_item_id, d.snapshot_id, d.information_type, d.content, n.title, n.announced_at, v.version, pr.name as produit,
             c.title as snapshot_title, c.content as capture, c.content_format, s.name as source_nom
@@ -276,9 +281,10 @@ async function aRelancer(client: Client, limite: number) {
           left join product pr on pr.id = t.product_id
           where d.status = 'a_verifier' and d.content is not null
             and not exists (select 1 from llm_call x where x.news_item_id = d.news_item_id and x.stage = 'relance')
+            ${seulement}
           order by d.created_at desc, d.id desc
           limit ?`,
-    args: [limite],
+    args: [...(seulement ? sources! : []), limite],
   });
   return r.rows;
 }
@@ -374,7 +380,7 @@ export async function genererBrouillons(o: OptionsBrouillons) {
     // Relance (décision de l'utilisateur du 2026-11-05) : avant les nouveaux sujets, quelques brouillons restés « à
     // vérifier » reçoivent une seconde révision guidée par leurs écarts. Elle n'est gardée que si elle passe tous les
     // contrôles, au besoin après élagage des champs secondaires ; sinon rien ne change. Un brouillon n'est relancé qu'une fois.
-    for (const row of await aRelancer(client, MAX_RELANCES_PAR_LOT)) {
+    for (const row of await aRelancer(client, MAX_RELANCES_PAR_LOT, o.sources)) {
       const newsItemId = Number(row.news_item_id);
       const { date_annonce, nature, categories, produit: produitBrouillon, version_cible, niveau_preuve, ...reste } = JSON.parse(String(row.content)) as Record<string, unknown>;
       const lu = Brouillon.safeParse(reste);

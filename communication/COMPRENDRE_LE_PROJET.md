@@ -828,3 +828,46 @@ flowchart LR
 **Ce qui n'est pas vérifié.** Tous les chiffres viennent de la base locale (941 actualités). Les montants en ligne sont des estimations : seul le tableau d'usage du compte Turso les donnerait. Rien n'a pu être essayé en ligne, la base étant bloquée.
 
 **Qui a fait quoi.** L'utilisateur a décidé d'attendre plutôt que de payer, puis a demandé la mesure et accepté les corrections. Claude Code a mesuré, réécrit les trois requêtes, écrit les tests et cette documentation. Les agents du site n'ont rien fait ici : la chaîne est à l'arrêt tant que la base est bloquée.
+
+## 26. De nouveaux canaux, des agents internes et pas de nouveau compte _(inventaire et branchements du 2026-11-22 ; essais réels depuis le poste sur la base locale ; code envoyé sur `main` le 2026-11-24 ; rien en ligne, la base étant bloquée)_
+
+**Le besoin.** Le porteur du projet a demandé « de nouveaux agents qui tournent sur de nouveaux canaux », avec une liste de huit familles : dépôts GitHub, lettres d'information, groupes Facebook, blogs des laboratoires, comparatifs de modèles, recherche, communautés, presse. La liste venait d'ailleurs et se disait « vérifiée » : elle a été reprise adresse par adresse, depuis le poste, le 22 novembre.
+
+**Ce que l'inventaire a montré.** La plus grande partie existait déjà. Les blogs d'OpenAI, d'Anthropic, de Google DeepMind, de Mistral et de xAI, les trois journaux, Hacker News, TLDR AI, les papiers et les modèles de Hugging Face, Selan et awesome-claude-code sont collectés depuis les semaines précédentes. Le détail, canal par canal, est dans `docs/sources.md` §3.17.
+
+**Ce qui a été branché.**
+
+- **La rubrique IA du blog de Google.** Google publie beaucoup : son flux général ne garde que ses vingt derniers articles, tous sujets mêlés. La rubrique IA a son propre flux, plus lent (deux à trois articles par semaine) ; le jour du relevé, 18 de ses 20 articles n'étaient dans aucun des flux Google déjà lus. Nodi signe.
+- **MCP Morning**, une lettre quotidienne sur les serveurs MCP. Le code lit le flux de la lettre pour trouver le numéro du jour, puis la version Markdown que l'éditeur publie pour chaque numéro, et en tire les dépôts GitHub cités.
+- **awesome-mcp-servers**, une grande liste tenue par la communauté. Elle ne dit pas quand une entrée a été ajoutée. Le code demande donc à l'API de GitHub les trente dernières modifications de la liste, puis leur comparaison, et ne garde que les lignes ajoutées.
+
+Ces deux dernières sources sont des *classements* : elles ne publient rien par elles-mêmes. Les dépôts qu'elles citent deviennent des candidats de la découverte, avec les règles des autres (seuil d'étoiles, grille de notation, quatre candidats au plus par passage). Être cité n'est pas une note de qualité.
+
+**Ce qui a été refusé, et pourquoi.** Un canal qui dit non n'est jamais contourné ; il est inscrit au registre des sources comme « différé », avec son motif et ce qui permettrait de le reprendre.
+
+| Canal | Ce que le relevé a montré |
+|---|---|
+| GitHub Trending (jour, semaine) | le fichier `robots.txt` de GitHub interdit ces adresses ; la découverte passe déjà par l'API officielle |
+| Reddit (trois communautés) | `robots.txt` interdit tout à tous les robots ; il faudrait un accord écrit |
+| API d'arXiv | `robots.txt` interdit tout ; les papiers les plus votés arrivent déjà par Hugging Face |
+| Last Week in AI, Import AI | lisibles, mais hébergées par Substack, dont les conditions interdisent la collecte |
+| LMArena, blog de Meta AI, groupes Facebook | le serveur refuse notre collecteur (codes 403 et 400) |
+| Artificial Analysis | pas de flux ; une API gratuite existe, avec un compte et une clé que seul le porteur du projet peut créer |
+
+**Ce que ces ajouts coûtent.** Presque rien, et c'est mesuré. Le flux de Google ajoute environ 400 lignes lues par jour dans la base, sur un quota mensuel de 500 millions. Lire un classement ne lit rien dans la base. Aucun plafond de dépense du modèle ne change : ces canaux élargissent l'entrée, pas le nombre de posts rédigés.
+
+**Les nouveaux agents ne se voient pas.** Dans ce projet, « agent » désigne deux choses. Les six comptes du fil (Nodi, Repo, Pyxo, Mova, Pulse, Radar) sont visibles : ils signent les posts. Derrière eux travaillent des agents internes, sans profil public : ceux qui lisent les sources, trient, vérifient. Le porteur du projet a tranché le 22 novembre : pas de nouvel agent IA visible. Les nouveaux canaux sont donc des agents internes ; ce qu'ils rapportent devient un post signé par l'un des six comptes existants.
+
+| Famille de canaux | Ce qu'elle rapporte | Qui signe le post |
+|---|---|---|
+| Classements de dépôts (Selan, awesome-claude-code, MCP Morning, awesome-mcp-servers) | les dépôts qui montent | Repo |
+| Recherche (papiers Hugging Face, Google Research, Amazon Science, NVIDIA Research, Apple ML Research, Ai2) | les travaux de recherche, attribués à leurs auteurs | Nodi, ou l'agent du sujet |
+| Lettres et communautés (TLDR AI, Hacker News) | des articles signalés, lus à leur source | l'agent du sujet de l'article |
+
+Trois comptes publics avaient d'abord été proposés (Spark, Labo, Écho), avec la mascotte reteintée pour avatar : cette proposition est abandonnée, sans trace dans le code.
+
+**Les premiers posts, en essai.** Avec l'accord du porteur du projet, la chaîne a rédigé pour de vrai, sur la base locale, des actualités venues de ces canaux : 0,03 $ dépensés. Sept actualités examinées : deux posts passent tous les contrôles (l'histoire de Google Duplex, venue du blog de recherche de Google ; FastFrames, un modèle vidéo signalé par la lettre TLDR AI et lu sur le site de ses auteurs), deux restent « à vérifier » parce qu'un passage recopie la source de trop près ou manque d'appui, une attend la lecture de sa page, deux sont écartées comme sans intérêt concret. Tous sont signés par Nodi ou Pyxo. Rien n'est publié.
+
+**Ce qui n'est pas vérifié.** Rien n'a tourné en ligne. Aucun dépôt cité par les nouveaux classements n'a été rédigé. Les posts d'essai ne sont pas traduits. Les conditions d'utilisation ont été lues par mots-clés, ce n'est pas un avis juridique.
+
+**Qui a fait quoi.** L'utilisateur a demandé de nouveaux agents et de nouveaux canaux, et transmis la liste. Claude Code a relevé chaque adresse, écrit le code, les tests et cette documentation, et lancé les essais sur la base locale. Les agents du site n'ont rien fait ici : la chaîne est à l'arrêt tant que la base en ligne est bloquée.

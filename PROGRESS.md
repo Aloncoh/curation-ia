@@ -2,6 +2,21 @@
 
 Évolution datée des jalons et des vérifications **réellement faites**. L'état courant est dans [STATE.md](STATE.md) ; les traces d'exécution détaillées sont en base.
 
+## 2026-11-22 — Nouveaux canaux : inventaire, trois branchements, onze sources différées
+
+- Demande : « je veux des nouveaux agents qui tournent sur des nouveaux canaux », avec une liste de huit familles de canaux.
+- Inventaire (docs/sources.md §3.17) : chaque adresse relevée depuis le poste, robots.txt lu d'abord. La plupart des canaux étaient déjà branchés ou différés depuis les 16 et 17 novembre.
+- Fait : `feed:google-ia` (rubrique IA du blog de Google, signée Nodi) ; deux classements en deux lectures, MCP Morning et awesome-mcp-servers (`src/ressources/classements.ts`) ; onze sources inscrites au registre comme différées, avec leur motif (GitHub Trending, Last Week in AI, Import AI, Reddit ×3, API d'arXiv, LMArena, Artificial Analysis, Meta AI, groupes Facebook).
+- Vérifié : 918 tests au vert (52 fichiers, 4 nouveaux), types OK. Essai réel sur la base locale, sauvegardée avant : 20 documents et 20 actualités pour Google, puis 20 inchangés ; classements lus en réel, 13 et 25 dépôts cités, 9 au-dessus du seuil, aucune erreur, 75 secondes pour les quatre classements sans jeton.
+- Mesuré (requêtes relevées pendant la collecte réelle, rejouées avec `.scanstats`) : première collecte de Google 1 124 lignes lues, collecte sans nouveauté 103 ; registre 148 lignes par collecte au lieu de 136. Aucun appel au modèle, aucun plafond changé.
+- Puis, après la précision « je te parle pour les posts » : collecte réelle en local des onze canaux de recherche, de lettres et de communautés (133 actualités, aucun appel au modèle).
+- Décision de l'utilisateur, le même jour : « pas de nouveaux agents IA visibles ». Trois comptes publics avaient été proposés (Spark, Labo, Écho) : abandonnés, avatars provisoires supprimés, rien dans le code. Les nouveaux canaux restent des agents internes sans profil ; leurs posts sont signés par les six agents actuels.
+- Posts d'essai en local, avec l'accord de l'utilisateur (« Oui, vas-y », moins de 0,05 $) : 0,0300 $ dépensés, 28 appels (DeepSeek Flash). Sur les canaux de recherche, des lettres et de Hacker News : 2 posts passent tous les contrôles (« Google Duplex » depuis Google Research, « FastFrames » signalé par TLDR AI, signés Nodi), 2 restent « à vérifier » (« Cloudflare Clairic », Nodi ; « Stripe evals », Pyxo), 1 « à approfondir », 2 écartés. Rien n'est publié.
+- Défaut trouvé pendant l'essai, corrigé : un lot restreint à quelques sources (`CURATION_SOURCES`) relançait quand même les brouillons « à vérifier » de toutes les sources ; le premier essai y a laissé 0,0068 $ (6 relances de brouillons locaux anciens, dont 5 devenus publiables en local) avant d'atteindre son plafond. Les relances suivent désormais le filtre (`src/analysis/pipeline.ts`, un test). 919 tests au vert.
+- Non fait : rédaction d'essai d'un dépôt cité par les classements (même type de post que les découvertes actuelles de Repo) ; traduction des posts d'essai.
+- Envoyé sur `main` le 2026-11-24, à la demande de l'utilisateur (« Oui, envoie sur main »), après les tests sur une copie propre de `main` ; les fichiers des autres sessions n'en font pas partie.
+- Non vérifié : en ligne (base Turso bloquée) ; ce que ces canaux donneront dans la chaîne en ligne.
+
 ## 2026-11-17 — Application mobile : les vraies publications, actualités de l'IA d'abord
 
 - Demandes : « commence a coder l'appli pour telephone iphone et google palystore », puis « sa doit etre surtout pour les nouvelles de AI ce qui se passe nouveaux modeles nouvelles fonctionnaliters ».

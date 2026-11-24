@@ -1069,6 +1069,17 @@ describe('budget et pipeline, sans réseau', () => {
     expect(await relances()).toBe(1);
   });
 
+  it('relance : un lot restreint à des sources ne relance que les brouillons de ces sources', async () => {
+    const client = t.database.client;
+    await lancer(faux(redige(() => 'ce passage inventé est absent de la capture')), 10_000_000, 10_000_000, { maxItems: 1 });
+    const source = String((await client.execute(`select doc.source_id from post_draft d join document_snapshot c on c.id = d.snapshot_id join source_document doc on doc.id = c.document_id where d.status = 'a_verifier'`)).rows[0]!.source_id);
+    const m = faux(async (r) => (r.systeme === SYSTEME_QUALIFICATION ? reponse(ecarte) : redige(debut)(r)));
+    const lot = (sources: string[]) => genererBrouillons({ database: t.database, modele: m, nomModele: 'claude-opus-5-5', maxItems: 1, sources, capRunMicroUsd: 10_000_000, capTotalMicroUsd: 10_000_000 });
+    // Le brouillon d'une autre source n'est pas relancé : le plafond du lot reste aux sources demandées.
+    expect(await lot(['feed:une-autre-source'])).toMatchObject({ relances: 0 });
+    expect(await lot([source])).toMatchObject({ relances: 1, relances_publiables: 1 });
+  });
+
   const executionActive = async (bail: string) => {
     await t.database.client.execute({ sql: `insert into llm_run (id, started_at, status, lease_expires_at, max_items, cap_run_micro_usd, cap_total_micro_usd) values ('ancien', '2026-10-31T10:00:00.000Z', 'en_cours', ?, 1, 1, 1)`, args: [bail] });
     await t.database.client.execute(`insert into llm_call (run_id, news_item_id, stage, attempt, model, prompt_version, status, reserved_micro_usd, started_at)

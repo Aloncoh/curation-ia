@@ -875,3 +875,58 @@ Demande de l'utilisateur : un fil d'abord fait des nouveautés de l'IA (modèles
 - Meta AI : HTTP 400 pour notre client ; robots.txt interdisant la collecte sans permission écrite : inchangé (§3.2).
 - Reddit (r/LocalLLaMA, r/MachineLearning, r/singularity) : inchangé (§3.7).
 - Modèles Hugging Face triés par `likes7d` : l'API répond, non branchée : elle double la source des modèles en tendance, et son premier résultat du jour était hors sujet.
+
+### 3.17 Liste de canaux transmise par l'utilisateur (2026-11-22)
+
+Demande de l'utilisateur : « je veux des nouveaux agents qui tournent sur des nouveaux canaux », avec une liste de huit familles de canaux collée depuis une autre source. Cette liste affirmait que ses adresses étaient vérifiées : rien n'en a été repris sans relevé. Chaque adresse a été interrogée depuis le poste le 2026-11-22 (un dimanche), avec `safeGet` et notre client déclaré, robots.txt lu d'abord ; une adresse interdite par robots.txt n'a pas été demandée. Les conditions d'utilisation de Substack, la politique d'usage de GitHub et la référence de l'API d'Artificial Analysis ont été parcourues par mots-clés : ce n'est pas un avis juridique.
+
+**Inventaire**
+
+| Canal de la liste | État au 2026-11-22 | Détail |
+|---|---|---|
+| GitHub Trending, `?since=daily` et `?since=weekly` | **différé** (`feed:github-trending`) | robots.txt de github.com : `Disallow: /*?since=*` pour tous les robots, et un en-tête qui renvoie vers l'API. La page sans paramètre répond (200) et n'est pas interdite par robots.txt, mais la politique d'usage de GitHub, lue ce jour, encadre l'usage des informations collectées automatiquement sur le site (elle cite la recherche à publications en accès ouvert) et distingue cette collecte de l'API : la page n'est pas lue non plus. Voie officielle déjà en place : la découverte par l'API de recherche (plan par thèmes, trois fenêtres de dates) |
+| Selan, skills en tendance | déjà branché (§3.14) | classement `selan` : 15 dépôts cités ce jour |
+| mcpmorning.com et `feed.xml` | **branché** (classement `mcpmorning`) | voir « Branchés » |
+| awesome-claude-code | déjà branché (§3.14) | tableau CSV par l'API, 239 dépôts cités ce jour ; la page des commits reste interdite par robots.txt |
+| awesome-mcp-servers, par ses commits | **branché** (classement `awesome-mcp-servers`) | voir « Branchés » |
+| `api.github.com/repos/…` pour vérifier une trouvaille | déjà en place | chaque dépôt cité repasse par l'API de recherche (étoiles, date de création, archivé ou non), puis par la capture du dépôt |
+| TLDR AI | déjà branché (§3.14) | signal, `feed:tldr-ai` |
+| Last Week in AI, Import AI | **différés** (`feed:lastweekin-ai`, `feed:import-ai`) | flux lisibles (200, 20 entrées chacun, dernières des 2026-11-21 et 2026-11-16), mais hébergés par Substack, dont les conditions lues ce jour interdisent de collecter ses pages (« crawls, scrapes, or spiders ») et d'en stocker une part notable |
+| Facebook, groupes publics | **différé** (`feed:facebook-groupes`) | facebook.com répond 400 à notre client, robots.txt et page des conditions compris ; conditions non relues ce jour (relevé précédent : §3.14) |
+| OpenAI News | déjà branché | `feed:openai-news` |
+| Anthropic, `/news` et `/research` | déjà branché | `feed:anthropic-plan` lit les deux rubriques |
+| Google DeepMind | déjà branché | `feed:deepmind-blog` |
+| Google, `blog.google/innovation-and-ai/` | **branché** (`feed:google-ia`) | voir « Branchés » |
+| Meta AI, blog | **différé** (`feed:meta-ai-blog`) | HTTP 400 pour notre client, robots.txt compris ; Meta reste couvert par `feed:meta-newsroom` et `feed:meta-engineering` |
+| Mistral, xAI | déjà branchés | `feed:mistral`, `feed:xai-plan` |
+| Artificial Analysis | **différé** (`feed:artificial-analysis`) | robots.txt autorise ; aucun flux, page de 1,3 Mo rendue par script, plan du site réduit à quatre adresses. Référence de l'API lue ce jour : API gratuite, compte et clé exigés (`x-api-key`), mention de la source obligatoire, soumise à leurs conditions. Reprise : une clé créée par l'utilisateur |
+| LMArena | **différé** (`feed:lmarena`) | lmarena.ai redirige vers arena.ai ; robots.txt d'arena.ai autorise `/leaderboard`, la page répond 403 à notre client |
+| arXiv, flux `rss.arxiv.org` (cs.AI, cs.CL, cs.LG) | non branché, inchangé (§3.12) | lisibles (200), sans entrée ce dimanche (arXiv n'annonce rien le week-end) ; environ 400 articles par jour en semaine, sans ordre d'intérêt |
+| arXiv, API `export.arxiv.org` | **différé** (`feed:arxiv-api`) | robots.txt : `Disallow: /` pour tous les robots |
+| Hugging Face Papers, blog, modèles | déjà branchés | `huggingface:papiers-du-jour`, `feed:huggingface-blog`, `huggingface:modeles-tendance` |
+| Modèles Hugging Face triés par `likes7d` | non branché | l'API répond ; ses 20 premiers résultats étaient ce jour les 20 modèles en tendance déjà collectés : doublon |
+| Hacker News | déjà branché | par l'API de recherche (trois sources) ; `hnrss.org/frontpage` répond (200, 20 entrées) mais redonne la même page d'accueil par un service tiers |
+| Reddit, r/LocalLLaMA, r/MachineLearning, r/singularity | **différés** (`feed:reddit-…`) | robots.txt de reddit.com : `Disallow: /` pour tous les robots ; conditions de reprise inchangées (§3.7) |
+| TechCrunch IA, The Verge IA, MIT Technology Review IA | déjà branchés | `feed:techcrunch-ai`, `feed:verge-ai`, `feed:mittr-ai` |
+
+**Branchés**
+
+| Canal | Forme | Vérification du 2026-11-22 |
+|---|---|---|
+| Google, rubrique IA du blog officiel, `https://blog.google/innovation-and-ai/rss/` | flux officiel, `feed:google-ia`, signé Nodi, toutes les 6 heures | robots.txt sans interdiction, 200, 20 entrées du 2026-09-24 au 2026-11-20 (deux à trois par semaine) ; 18 de ces 20 articles étaient absents du flux général de Google et du flux Gemini le même jour. Collecte réelle sur la base locale : 20 documents, 20 actualités ; seconde collecte : 20 inchangés |
+| MCP Morning, `https://mcpmorning.com/feed.xml` puis le numéro du jour en Markdown (`/archive/AAAA-MM-JJ/index.md`) | classement public en deux lectures (`src/ressources/classements.ts`) : le flux de la lettre donne le dernier numéro, sa version Markdown officielle cite les dépôts GitHub des serveurs MCP du jour | robots.txt : `Allow: /` ; flux 200, 40 numéros, un par jour ; numéro du 2026-11-22 : 13 dépôts cités, 8 au-dessus du seuil de 100 étoiles. Consigne de citation de l'éditeur (`llms.txt`) : nommer la page et sa date, et présenter son score comme un signal de popularité, pas comme une note de qualité |
+| awesome-mcp-servers (`punkpeye/awesome-mcp-servers`, 98 391 étoiles, licence MIT) | classement public en deux lectures par l'API GitHub : les 30 derniers commits du README, puis leur comparaison, dont seules les lignes ajoutées sont gardées (une entrée corrigée n'est pas un ajout) | deux appels à l'API ; 25 dépôts ajoutés lus, 1 au-dessus du seuil |
+
+Les deux classements suivent les règles de §3.14 : même seuil d'étoiles, même tri et même grille `d1` que le reste de la découverte, 4 candidats au plus par passage pour l'ensemble des classements, rang jamais présenté comme une qualité, provenance nommée dans le post. La seconde adresse d'un classement vient d'une réponse, donc d'une donnée non fiable : elle n'est lue que si elle reste en https sur l'hôte du classement, après le même robots.txt.
+
+**Mesures (base locale, 2026-11-22)**
+
+| Canal | Volume | Lectures de la base | Appels au modèle |
+|---|---|---|---|
+| `feed:google-ia` | 20 actualités à la première collecte, puis deux à trois par semaine | première collecte : 85 lectures, 1 124 lignes parcourues, dont 1 001 pour l'unique lecture de regroupement du passage (partagée par toutes les sources d'une collecte) ; collecte sans nouveauté : 64 lectures, 103 lignes. À quatre passages par jour, environ 400 lignes par jour | ses titres entrent dans le tri existant ; les plafonds ne changent pas |
+| Classements `mcpmorning` et `awesome-mcp-servers` | 13 et 25 dépôts cités, 9 au-dessus du seuil | aucune pour la lecture des classements ; les candidats gardent le plafond commun de 4 par passage | aucun de plus : la rédaction des découvertes reste à 6 par cycle |
+| Onze sources différées | aucune collecte | 12 lignes de plus dans la lecture du registre à chaque collecte (148 lignes au lieu de 136 en local) ; onze écritures, une seule fois | aucun |
+
+Lignes parcourues : requêtes relevées pendant une collecte réelle, puis rejouées en lecture seule avec `sqlite3` et `.scanstats on`, comme dans `docs/lectures-turso.md`. Durée des quatre classements ensemble depuis le poste, sans jeton : 75 secondes, soit toute la fenêtre que le budget de temps de l'étape leur garantit ; au-delà, les recherches restantes sont reportées au passage suivant.
+
+**Constat annexe, à trancher par l'utilisateur** : trois lettres déjà collectées, `feed:thezvi`, `feed:interconnects` et `feed:semianalysis`, sont elles aussi hébergées par Substack (leur robots.txt est celui de Substack, relevé ce jour). Elles relèvent des mêmes conditions que Last Week in AI et Import AI, différées pour ce motif. Rien n'a été changé pour elles.

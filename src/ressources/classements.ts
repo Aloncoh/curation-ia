@@ -7,6 +7,9 @@
 // Vérifié en réel le 2026-11-16 (docs/sources.md §3.14) :
 // - Selan : robots.txt autorise tout et déclare `ai-input=yes` ; la page a une version Markdown officielle (`.md`) ;
 // - awesome-claude-code : tableau CSV du dépôt, lu par l'API GitHub (la page des commits est interdite par robots.txt).
+// Vérifié en réel le 2026-11-22 (docs/sources.md §3.17), classements en deux lectures :
+// - MCP Morning : le flux de la lettre donne le numéro du jour, dont la version Markdown cite les dépôts ;
+// - awesome-mcp-servers : derniers commits du README par l'API GitHub, puis leur comparaison (lignes ajoutées).
 // Une page de site tiers n'est lue qu'après son robots.txt, à chaque passage ; l'API GitHub suit les règles du reste de
 // la découverte. Un classement illisible ou refusé est signalé, jamais deviné, et n'arrête pas les autres.
 import { robotsDe } from '../collect/article-externe.ts';
@@ -25,6 +28,12 @@ export interface Classement {
   accept: string;
   /** Dépôts cités, `propriétaire/dépôt`, dans l'ordre du classement ; liste vide si le format n'est pas reconnu. */
   lire: (corps: string) => string[];
+  /**
+   * Classement en deux lectures (2026-11-22) : `url` donne un index (flux d'une lettre, liste de commits) et `suite` en
+   * tire l'adresse de la page à lire ensuite, sur le même hôte ; null si l'index n'est pas reconnu. `lire` reçoit alors
+   * cette seconde page. robots.txt vaut pour les deux adresses.
+   */
+  suite?: (corps: string) => string | null;
 }
 
 /** Dépôts pris au plus par classement et par passage (en tête de liste) : borne le nombre de recherches GitHub. */
@@ -95,6 +104,58 @@ export function lireAwesomeClaudeCode(corps: string): string[] {
   return uniques(entrees.map((e) => e.depot));
 }
 
+/** Dépôts des liens GitHub écrits en Markdown (`](https://github.com/…)`) dans un texte, dans l'ordre, sans doublon. */
+const depotsDesLiens = (texte: string): string[] =>
+  uniques([...texte.matchAll(/\]\((https:\/\/github\.com\/[^)\s]+)\)/g)].map((m) => depotDuLien(m[1]!)).filter((d): d is string => d !== null));
+
+/**
+ * MCP Morning, flux de la lettre : adresse de la version Markdown officielle du numéro le plus récent
+ * (`https://mcpmorning.com/archive/AAAA-MM-JJ/index.md`) ; null si aucun numéro n'est reconnu.
+ */
+export function numeroMcpMorning(flux: string): string | null {
+  const numeros = [...flux.matchAll(/<link>\s*(https:\/\/mcpmorning\.com\/archive\/(\d{4}-\d{2}-\d{2})\/)\s*<\/link>/g)].map((m) => ({ url: m[1]!, jour: m[2]! }));
+  const dernier = numeros.sort((a, b) => b.jour.localeCompare(a.jour))[0];
+  return dernier ? `${dernier.url}index.md` : null;
+}
+
+/** MCP Morning, numéro en Markdown : un dépôt par puce `- **[nom](https://github.com/propriétaire/dépôt)**`. */
+export function lireMcpMorning(corps: string): string[] {
+  return depotsDesLiens(corps.split('\n').filter((l) => /^\s*[-*]\s+\*\*\[/.test(l)).join('\n'));
+}
+
+const SHA = /^[0-9a-f]{40}$/;
+const AWESOME_MCP = 'https://api.github.com/repos/punkpeye/awesome-mcp-servers';
+
+/**
+ * awesome-mcp-servers, derniers commits du README (API GitHub) : adresse de la comparaison entre le plus ancien et le
+ * plus récent de la page, qui rend en un appel les lignes ajoutées ; null si la liste n'est pas reconnue.
+ */
+export function comparaisonAwesomeMcp(corps: string): string | null {
+  let commits: unknown;
+  try { commits = JSON.parse(corps); } catch { return null; }
+  if (!Array.isArray(commits) || commits.length < 2) return null;
+  const sha = (c: unknown) => (typeof c === 'object' && c !== null && typeof (c as { sha?: unknown }).sha === 'string' ? (c as { sha: string }).sha : '');
+  const [recent, ancien] = [sha(commits[0]), sha(commits.at(-1))];
+  return SHA.test(recent) && SHA.test(ancien) && recent !== ancien ? `${AWESOME_MCP}/compare/${ancien}...${recent}` : null;
+}
+
+/**
+ * awesome-mcp-servers, comparaison de deux commits : dépôts des lignes ajoutées au README. Un dépôt qui figure aussi
+ * dans une ligne retirée est une entrée corrigée ou déplacée, pas un ajout : il est écarté.
+ */
+export function lireAwesomeMcp(corps: string): string[] {
+  let comparaison: unknown;
+  try { comparaison = JSON.parse(corps); } catch { return []; }
+  const fichiers = (comparaison as { files?: unknown } | null)?.files;
+  if (!Array.isArray(fichiers)) return [];
+  const patch = fichiers.find((f): f is { filename: string; patch: string } => f?.filename === 'README.md' && typeof f?.patch === 'string')?.patch;
+  if (!patch) return [];
+  const lignes = patch.split('\n');
+  const de = (signe: string) => depotsDesLiens(lignes.filter((l) => l.startsWith(signe) && !l.startsWith(signe.repeat(3))).join('\n'));
+  const retires = new Set(de('-').map((d) => d.toLowerCase()));
+  return de('+').filter((d) => !retires.has(d.toLowerCase()));
+}
+
 export const CLASSEMENTS: readonly Classement[] = [
   {
     id: 'selan',
@@ -109,6 +170,28 @@ export const CLASSEMENTS: readonly Classement[] = [
     url: 'https://api.github.com/repos/hesreallyhim/awesome-claude-code/contents/THE_RESOURCES_TABLE_NEW.csv',
     accept: 'application/vnd.github.raw+json',
     lire: lireAwesomeClaudeCode,
+  },
+  // Canaux de la liste de l'utilisateur du 2026-11-22 (docs/sources.md §3.17), relevés en réel le même jour.
+  // MCP Morning : robots.txt « Allow: / » ; chaque numéro de la lettre a une version Markdown officielle, qui cite les
+  // dépôts GitHub des serveurs MCP du jour. Consigne de citation de l'éditeur : nommer la page et sa date, et présenter
+  // son score comme un signal de popularité, pas comme une note de qualité.
+  {
+    id: 'mcpmorning',
+    nom: 'MCP Morning, serveurs MCP signalés par le numéro du jour',
+    url: 'https://mcpmorning.com/feed.xml',
+    accept: 'application/rss+xml, application/xml;q=0.9, text/markdown;q=0.8, text/plain;q=0.7',
+    suite: numeroMcpMorning,
+    lire: lireMcpMorning,
+  },
+  // awesome-mcp-servers : pas de date d'ajout dans la liste, et la page des commits est interdite par le robots.txt de
+  // github.com. L'API donne les 30 derniers commits du README, puis leur comparaison : les lignes ajoutées.
+  {
+    id: 'awesome-mcp-servers',
+    nom: 'awesome-mcp-servers, ajouts récents',
+    url: `${AWESOME_MCP}/commits?path=README.md&per_page=30`,
+    accept: 'application/vnd.github+json',
+    suite: comparaisonAwesomeMcp,
+    lire: lireAwesomeMcp,
   },
 ];
 
@@ -138,12 +221,28 @@ export async function chercherClassements(o: OptionsClassements): Promise<{ trou
     try {
       const url = new URL(c.url);
       const api = url.hostname === 'api.github.com';
-      if (!api) {
-        const acces = accesSelonRobots(await robotsDe(url.hostname, { userAgent: o.userAgent, timeoutMs: DELAI_MS, deps }), o.userAgent, `${url.pathname}${url.search}`);
-        if (!acces.autorise) { erreurs.push({ sujet, message: `non lu : ${acces.motif}` }); continue; }
+      // robots.txt du site tiers : lu une fois par passage, appliqué à chaque adresse lue chez lui.
+      const robots = api ? null : await robotsDe(url.hostname, { userAgent: o.userAgent, timeoutMs: DELAI_MS, deps });
+      const lirePage = async (page: URL): Promise<string | null> => {
+        if (robots) {
+          const acces = accesSelonRobots(robots, o.userAgent, `${page.pathname}${page.search}`);
+          if (!acces.autorise) { erreurs.push({ sujet, message: `non lu : ${acces.motif}` }); return null; }
+        }
+        const r = await safeGet(page.toString(), { allowedHosts: [url.hostname], timeoutMs: DELAI_MS, maxBytes: TAILLE_MAX }, { ...(api ? GITHUB_API_HEADERS : {}), accept: c.accept, 'user-agent': o.userAgent }, deps);
+        return r.body.toString('utf8');
+      };
+      let corps = await lirePage(url);
+      if (corps === null) continue;
+      if (c.suite) {
+        // Seconde lecture : l'adresse vient de la réponse, donc d'une donnée non fiable ; elle doit rester en https sur
+        // l'hôte du classement (la liste blanche de safeGet le refuserait de toute façon).
+        const adresse = c.suite(corps);
+        const page = adresse && URL.canParse(adresse) ? new URL(adresse) : null;
+        if (!page || page.protocol !== 'https:' || page.hostname !== url.hostname) { erreurs.push({ sujet, message: 'aucune page à lire : format inattendu' }); continue; }
+        corps = await lirePage(page);
+        if (corps === null) continue;
       }
-      const r = await safeGet(c.url, { allowedHosts: [url.hostname], timeoutMs: DELAI_MS, maxBytes: TAILLE_MAX }, { ...(api ? GITHUB_API_HEADERS : {}), accept: c.accept, 'user-agent': o.userAgent }, deps);
-      const cites = c.lire(r.body.toString('utf8'));
+      const cites = c.lire(corps);
       if (cites.length === 0) { erreurs.push({ sujet, message: 'aucun dépôt lu : format inattendu' }); continue; }
       bilan.push({ id: c.id, cites: cites.length });
       for (const d of cites.slice(0, o.maxParClassement ?? MAX_DEPOTS_PAR_CLASSEMENT)) if (!origine.has(d.toLowerCase())) origine.set(d.toLowerCase(), c.nom);
